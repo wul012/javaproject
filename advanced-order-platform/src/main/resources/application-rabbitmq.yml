@@ -5,6 +5,11 @@ spring:
     username: ${RABBITMQ_USERNAME:order_app}
     password: ${RABBITMQ_PASSWORD:order_app}
 
+management:
+  health:
+    rabbit:
+      enabled: true
+
 outbox:
   rabbitmq:
     enabled: true

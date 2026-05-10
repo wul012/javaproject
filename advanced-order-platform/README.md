@@ -35,6 +35,7 @@
 - 失败事件重放二次确认和 Payload 覆盖风险提示
 - 失败事件重放申请/审批/拒绝门禁
 - Actuator 健康检查
+- 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
 - H2 本地快速启动
 - PostgreSQL profile
@@ -74,6 +75,8 @@ http://localhost:8080
 ```powershell
 Invoke-RestMethod http://localhost:8080/actuator/health
 ```
+
+默认 H2 本地模式下，RabbitMQ 业务能力未启用，因此 RabbitMQ health indicator 也默认关闭，避免本地未启动 RabbitMQ 时根健康检查误报 `DOWN`。
 
 失败事件管理页面：
 
@@ -145,6 +148,11 @@ mvn spring-boot:run -Dspring-boot.run.profiles=postgres,rabbitmq
 RabbitMQ profile 会启用：
 
 ```yaml
+management:
+  health:
+    rabbit:
+      enabled: true
+
 outbox:
   rabbitmq:
     enabled: true
@@ -577,6 +585,7 @@ outbox
 notification
  -> RabbitMQ 订单事件消费者、通知消息、幂等落库、消费失败重试、死信记录、失败事件分页筛选查询、管理状态批量标记、管理状态变更流水查询、CSV 导出、重放接口、角色校验和重放审计分页筛选查询
  -> v25 增加重放审批状态、申请审批、审批通过/拒绝和重放前门禁
+ -> v26 对齐 RabbitMQ profile 和 Actuator Rabbit health，默认本地启动不再因为未启用 RabbitMQ 而 health DOWN
 
 common
  -> 业务异常和统一错误响应
