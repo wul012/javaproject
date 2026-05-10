@@ -200,7 +200,7 @@ textarea {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 1120px;
+    min-width: 1240px;
 }
 
 th,
@@ -309,6 +309,7 @@ th {
 
 .replay-actions {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
     gap: 10px;
     padding: 0 14px 14px;

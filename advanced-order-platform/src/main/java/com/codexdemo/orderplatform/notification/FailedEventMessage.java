@@ -23,6 +23,10 @@ import java.time.Instant;
                 @Index(
                         name = "idx_failed_event_messages_management",
                         columnList = "management_status, managed_at"
+                ),
+                @Index(
+                        name = "idx_failed_event_messages_replay_approval",
+                        columnList = "replay_approval_status, replay_approval_requested_at"
                 )
         }
 )
@@ -91,6 +95,28 @@ public class FailedEventMessage {
     @Column(name = "managed_at")
     private Instant managedAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "replay_approval_status", nullable = false, length = 32)
+    private FailedEventReplayApprovalStatus replayApprovalStatus;
+
+    @Column(name = "replay_approval_reason", length = 500)
+    private String replayApprovalReason;
+
+    @Column(name = "replay_approval_requested_by", length = 80)
+    private String replayApprovalRequestedBy;
+
+    @Column(name = "replay_approval_requested_at")
+    private Instant replayApprovalRequestedAt;
+
+    @Column(name = "replay_approval_reviewed_by", length = 80)
+    private String replayApprovalReviewedBy;
+
+    @Column(name = "replay_approval_reviewed_at")
+    private Instant replayApprovalReviewedAt;
+
+    @Column(name = "replay_approval_review_note", length = 500)
+    private String replayApprovalReviewNote;
+
     protected FailedEventMessage() {
     }
 
@@ -130,6 +156,7 @@ public class FailedEventMessage {
         this.status = FailedEventMessageStatus.RECORDED;
         this.replayCount = 0;
         this.managementStatus = FailedEventManagementStatus.OPEN;
+        this.replayApprovalStatus = FailedEventReplayApprovalStatus.NOT_REQUESTED;
     }
 
     public static FailedEventMessage record(
@@ -236,6 +263,65 @@ public class FailedEventMessage {
         return managedAt;
     }
 
+    public FailedEventReplayApprovalStatus getReplayApprovalStatus() {
+        return replayApprovalStatus;
+    }
+
+    public String getReplayApprovalReason() {
+        return replayApprovalReason;
+    }
+
+    public String getReplayApprovalRequestedBy() {
+        return replayApprovalRequestedBy;
+    }
+
+    public Instant getReplayApprovalRequestedAt() {
+        return replayApprovalRequestedAt;
+    }
+
+    public String getReplayApprovalReviewedBy() {
+        return replayApprovalReviewedBy;
+    }
+
+    public Instant getReplayApprovalReviewedAt() {
+        return replayApprovalReviewedAt;
+    }
+
+    public String getReplayApprovalReviewNote() {
+        return replayApprovalReviewNote;
+    }
+
+    public boolean isReplayApproved() {
+        return replayApprovalStatus == FailedEventReplayApprovalStatus.APPROVED;
+    }
+
+    public void requestReplayApproval(String reason, String requestedBy, Instant requestedAt) {
+        if (reason == null || reason.isBlank()) {
+            throw new IllegalArgumentException("replay approval reason is required");
+        }
+        if (requestedBy == null || requestedBy.isBlank()) {
+            throw new IllegalArgumentException("replay approval requestedBy is required");
+        }
+        if (requestedAt == null) {
+            throw new IllegalArgumentException("replay approval requestedAt is required");
+        }
+        this.replayApprovalStatus = FailedEventReplayApprovalStatus.PENDING;
+        this.replayApprovalReason = reason;
+        this.replayApprovalRequestedBy = requestedBy;
+        this.replayApprovalRequestedAt = requestedAt;
+        this.replayApprovalReviewedBy = null;
+        this.replayApprovalReviewedAt = null;
+        this.replayApprovalReviewNote = null;
+    }
+
+    public void approveReplay(String reviewedBy, String reviewNote, Instant reviewedAt) {
+        reviewReplayApproval(FailedEventReplayApprovalStatus.APPROVED, reviewedBy, reviewNote, reviewedAt);
+    }
+
+    public void rejectReplay(String reviewedBy, String reviewNote, Instant reviewedAt) {
+        reviewReplayApproval(FailedEventReplayApprovalStatus.REJECTED, reviewedBy, reviewNote, reviewedAt);
+    }
+
     public void markReplayed(String replayEventId, Instant replayedAt) {
         this.status = FailedEventMessageStatus.REPLAYED;
         this.replayCount++;
@@ -271,5 +357,27 @@ public class FailedEventMessage {
         this.managementNote = managementNote;
         this.managedBy = managedBy;
         this.managedAt = managedAt;
+    }
+
+    private void reviewReplayApproval(
+            FailedEventReplayApprovalStatus status,
+            String reviewedBy,
+            String reviewNote,
+            Instant reviewedAt
+    ) {
+        if (status != FailedEventReplayApprovalStatus.APPROVED
+                && status != FailedEventReplayApprovalStatus.REJECTED) {
+            throw new IllegalArgumentException("replay approval review status must be approved or rejected");
+        }
+        if (reviewedBy == null || reviewedBy.isBlank()) {
+            throw new IllegalArgumentException("replay approval reviewedBy is required");
+        }
+        if (reviewedAt == null) {
+            throw new IllegalArgumentException("replay approval reviewedAt is required");
+        }
+        this.replayApprovalStatus = status;
+        this.replayApprovalReviewedBy = reviewedBy;
+        this.replayApprovalReviewedAt = reviewedAt;
+        this.replayApprovalReviewNote = reviewNote;
     }
 }

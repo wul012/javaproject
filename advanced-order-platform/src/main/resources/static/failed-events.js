@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     [
         "statusFilter",
         "managementStatusFilter",
+        "replayApprovalStatusFilter",
         "eventTypeFilter",
         "aggregateTypeFilter",
         "aggregateIdFilter",
@@ -29,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "replayOperatorIdInput",
         "replayOperatorRoleInput",
         "replayReasonInput",
+        "replayApprovalReasonInput",
+        "replayApprovalReviewNoteInput",
         "replayEventIdInput",
         "replayEventTypeInput",
         "replayAggregateTypeInput",
@@ -61,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("previousPageButton").addEventListener("click", previousPage);
     document.getElementById("nextPageButton").addEventListener("click", nextPage);
     document.getElementById("markButton").addEventListener("click", markSelectedEvents);
+    document.getElementById("requestReplayApprovalButton").addEventListener("click", requestReplayApproval);
+    document.getElementById("approveReplayButton").addEventListener("click", () => reviewReplayApproval("APPROVED"));
+    document.getElementById("rejectReplayButton").addEventListener("click", () => reviewReplayApproval("REJECTED"));
     document.getElementById("replayButton").addEventListener("click", replayActiveEvent);
     document.getElementById("clearReplayOverrideButton").addEventListener("click", clearReplayOverrides);
     document.getElementById("refreshAttemptsButton").addEventListener("click", refreshActiveReplayAttempts);
@@ -79,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadFailedEvents() {
     try {
-        elements.failedEventsBody.innerHTML = '<tr><td colspan="10" class="empty-cell">加载中</td></tr>';
+        elements.failedEventsBody.innerHTML = '<tr><td colspan="11" class="empty-cell">加载中</td></tr>';
         const page = await fetchJson(`${apiBase}?${failedEventQueryParams(true)}`);
         state.totalPages = page.totalPages;
         state.selectedIds.clear();
@@ -96,6 +102,7 @@ function failedEventQueryParams(includePage) {
     const params = new URLSearchParams();
     addParam(params, "status", elements.statusFilter.value);
     addParam(params, "managementStatus", elements.managementStatusFilter.value);
+    addParam(params, "replayApprovalStatus", elements.replayApprovalStatusFilter.value);
     addParam(params, "eventType", elements.eventTypeFilter.value);
     addParam(params, "aggregateType", elements.aggregateTypeFilter.value);
     addParam(params, "aggregateId", elements.aggregateIdFilter.value);
@@ -125,6 +132,7 @@ function renderFailedEvents(page) {
                 <div class="row-title">#${escapeHtml(item.id)}</div>
                 <div class="muted">${escapeHtml(item.messageId || "")}</div>
             </td>
+            <td>${approvalSummary(item)}</td>
             <td>
                 <div>${escapeHtml(item.eventType || "")}</div>
                 <div class="muted">${escapeHtml(item.sourceQueue || "")}</div>
@@ -201,6 +209,7 @@ function renderReplayMeta(item) {
         <div class="row-title">#${escapeHtml(item.id)} ${escapeHtml(item.messageId || "")}</div>
         <div>${escapeHtml(item.eventType || "")} / ${escapeHtml(item.aggregateType || "")}:${escapeHtml(item.aggregateId || "")}</div>
         <div class="muted">${escapeHtml(item.status || "")}，重放 ${escapeHtml(item.replayCount)} 次</div>
+        <div>${approvalSummary(item)}</div>
     `;
 }
 
@@ -302,10 +311,84 @@ async function markSelectedEvents() {
     }
 }
 
+async function requestReplayApproval() {
+    const id = replayTargetId();
+    if (!id) {
+        showToast("请选择要申请审批的失败事件", true);
+        return;
+    }
+    const reason = elements.replayApprovalReasonInput.value.trim() || elements.replayReasonInput.value.trim();
+    if (!reason) {
+        showToast("请填写审批申请原因", true);
+        return;
+    }
+    try {
+        const response = await fetch(`${apiBase}/${id}/replay-approval`, {
+            method: "POST",
+            headers: replayOperatorHeaders(),
+            body: JSON.stringify({ reason })
+        });
+        if (!response.ok) {
+            throw new Error(await errorMessage(response));
+        }
+        await handleReplayApprovalResult(await response.json(), "审批申请已提交");
+    } catch (error) {
+        showToast(error.message, true);
+    }
+}
+
+async function reviewReplayApproval(status) {
+    const id = replayTargetId();
+    if (!id) {
+        showToast("请选择要审批的失败事件", true);
+        return;
+    }
+    const note = elements.replayApprovalReviewNoteInput.value.trim();
+    if (status === "REJECTED" && !note) {
+        showToast("拒绝审批需要填写原因", true);
+        return;
+    }
+    try {
+        const response = await fetch(`${apiBase}/${id}/replay-approval/review`, {
+            method: "POST",
+            headers: replayOperatorHeaders(),
+            body: JSON.stringify({ status, note })
+        });
+        if (!response.ok) {
+            throw new Error(await errorMessage(response));
+        }
+        await handleReplayApprovalResult(await response.json(), status === "APPROVED" ? "审批已通过" : "审批已拒绝");
+    } catch (error) {
+        showToast(error.message, true);
+    }
+}
+
+async function handleReplayApprovalResult(result, message) {
+    state.activeEvent = result;
+    state.activeEventId = result.id;
+    state.itemsById.set(result.id, result);
+    renderReplayMeta(result);
+    updateReplayPlaceholders(result);
+    showToast(`${message}: ${result.replayApprovalStatus}`);
+    await loadFailedEvents();
+}
+
+function replayOperatorHeaders() {
+    return {
+        "Content-Type": "application/json",
+        "X-Operator-Id": elements.replayOperatorIdInput.value,
+        "X-Operator-Role": elements.replayOperatorRoleInput.value
+    };
+}
+
 async function replayActiveEvent() {
     const id = replayTargetId();
     if (!id) {
         showToast("请选择要重放的失败事件", true);
+        return;
+    }
+    if ((state.activeEvent?.replayApprovalStatus || "NOT_REQUESTED") !== "APPROVED") {
+        showToast("重放前必须先审批通过", true);
         return;
     }
     const replayRequest = buildReplayRequest(id);
@@ -419,6 +502,10 @@ function replayConfirmSummary(replayRequest) {
                 <span>重放原因</span>
                 <strong>${escapeHtml(replayRequest.body.reason)}</strong>
             </div>
+            <div class="summary-item">
+                <span>Approval</span>
+                <strong>${escapeHtml(event.replayApprovalStatus || "NOT_REQUESTED")}</strong>
+            </div>
         </div>
     `;
 }
@@ -435,6 +522,13 @@ function replayRiskList(replayRequest) {
 function replayRisks(replayRequest) {
     const risks = [];
     const event = replayRequest.event || {};
+    if ((event.replayApprovalStatus || "NOT_REQUESTED") !== "APPROVED") {
+        risks.push({
+            level: "risk-high",
+            title: "Replay approval is not approved",
+            description: "后台会拒绝未审批通过的重放请求，请先完成申请和审批。"
+        });
+    }
     const overrideFields = ["eventId", "eventType", "aggregateType", "aggregateId", "payload"]
             .filter((field) => Object.prototype.hasOwnProperty.call(replayRequest.body, field));
     if (overrideFields.length === 0) {
@@ -572,6 +666,7 @@ function nextPage() {
 function resetFilters() {
     elements.statusFilter.value = "";
     elements.managementStatusFilter.value = "";
+    elements.replayApprovalStatusFilter.value = "";
     elements.eventTypeFilter.value = "";
     elements.aggregateTypeFilter.value = "";
     elements.aggregateIdFilter.value = "";
@@ -624,6 +719,21 @@ function statusPill(value, extraClass) {
     return `<span class="status-pill ${extraClass}">${escapeHtml(value || "")}</span>`;
 }
 
+function approvalSummary(item) {
+    const status = item.replayApprovalStatus || "NOT_REQUESTED";
+    const requested = item.replayApprovalRequestedBy
+            ? `req ${item.replayApprovalRequestedBy} ${formatDate(item.replayApprovalRequestedAt)}`
+            : "";
+    const reviewed = item.replayApprovalReviewedBy
+            ? `rev ${item.replayApprovalReviewedBy} ${formatDate(item.replayApprovalReviewedAt)}`
+            : "";
+    return `
+        <div>${statusPill(status, approvalStatusClass(status))}</div>
+        <div class="muted">${escapeHtml(requested)}</div>
+        <div class="muted">${escapeHtml(reviewed)}</div>
+    `;
+}
+
 function messageStatusClass(value) {
     switch (value) {
         case "REPLAYED":
@@ -647,6 +757,19 @@ function managementStatusClass(value) {
             return "status-ignored";
         default:
             return "";
+    }
+}
+
+function approvalStatusClass(value) {
+    switch (value) {
+        case "APPROVED":
+            return "status-resolved";
+        case "PENDING":
+            return "status-investigating";
+        case "REJECTED":
+            return "status-failed";
+        default:
+            return "status-open";
     }
 }
 
@@ -675,7 +798,7 @@ function formatDate(value) {
 }
 
 function renderTableMessage(message) {
-    elements.failedEventsBody.innerHTML = `<tr><td colspan="10" class="empty-cell">${escapeHtml(message)}</td></tr>`;
+    elements.failedEventsBody.innerHTML = `<tr><td colspan="11" class="empty-cell">${escapeHtml(message)}</td></tr>`;
     elements.pageMeta.textContent = "0 / 0";
 }
 

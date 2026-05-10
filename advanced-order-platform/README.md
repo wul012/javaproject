@@ -33,6 +33,7 @@
 - 失败事件管理静态页面
 - 失败事件管理页面内置重放工作台
 - 失败事件重放二次确认和 Payload 覆盖风险提示
+- 失败事件重放申请/审批/拒绝门禁
 - Actuator 健康检查
 - Flyway 数据库迁移
 - H2 本地快速启动
@@ -294,12 +295,19 @@ Invoke-RestMethod "http://localhost:8080/api/v1/failed-events?failedFrom=2026-05
 
 ```text
 id, failedAt, status, eventType, aggregateId, replayCount, managementStatus, managedAt
+replayApprovalStatus, replayApprovalRequestedAt, replayApprovalReviewedAt
 ```
 
 按管理状态查询失败事件：
 
 ```powershell
 Invoke-RestMethod "http://localhost:8080/api/v1/failed-events?managementStatus=INVESTIGATING&page=0&size=20&sort=managedAt,desc"
+```
+
+按重放审批状态查询失败事件：
+
+```powershell
+Invoke-RestMethod "http://localhost:8080/api/v1/failed-events?replayApprovalStatus=PENDING&page=0&size=20&sort=replayApprovalRequestedAt,desc"
 ```
 
 批量标记失败事件管理状态：
@@ -387,6 +395,44 @@ http://localhost:8080/failed-events.html
 Payload 覆盖风险提示
 下载失败事件 CSV
 下载管理状态流水 CSV
+申请/审批/拒绝失败事件重放
+```
+
+申请重放审批：
+
+```powershell
+$approvalBody = @{
+  reason = "DLQ payload and replay headers verified"
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Method Post `
+  -Uri http://localhost:8080/api/v1/failed-events/1/replay-approval `
+  -ContentType "application/json" `
+  -Headers @{
+    "X-Operator-Id" = "local-admin"
+    "X-Operator-Role" = "SRE"
+  } `
+  -Body $approvalBody
+```
+
+审批通过或拒绝：
+
+```powershell
+$reviewBody = @{
+  status = "APPROVED"
+  note = "checked failure reason and replay payload"
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Method Post `
+  -Uri http://localhost:8080/api/v1/failed-events/1/replay-approval/review `
+  -ContentType "application/json" `
+  -Headers @{
+    "X-Operator-Id" = "sre-lead"
+    "X-Operator-Role" = "SRE"
+  } `
+  -Body $reviewBody
 ```
 
 修复并重放失败事件消息：
@@ -451,6 +497,7 @@ src/main/resources/db/migration/h2/V6__failed_event_replay_authorization.sql
 src/main/resources/db/migration/h2/V7__failed_event_search_indexes.sql
 src/main/resources/db/migration/h2/V8__failed_event_management_status.sql
 src/main/resources/db/migration/h2/V9__failed_event_management_history.sql
+src/main/resources/db/migration/h2/V10__failed_event_replay_approval.sql
 ```
 
 PostgreSQL profile 执行：
@@ -465,6 +512,7 @@ src/main/resources/db/migration/postgresql/V6__failed_event_replay_authorization
 src/main/resources/db/migration/postgresql/V7__failed_event_search_indexes.sql
 src/main/resources/db/migration/postgresql/V8__failed_event_management_status.sql
 src/main/resources/db/migration/postgresql/V9__failed_event_management_history.sql
+src/main/resources/db/migration/postgresql/V10__failed_event_replay_approval.sql
 ```
 
 如果 Docker 未启动，Testcontainers 的 PostgreSQL / RabbitMQ 集成测试会自动跳过；启动 Docker 后重新执行 `mvn test` 即可跑真实中间件验证。
@@ -528,12 +576,13 @@ outbox
 
 notification
  -> RabbitMQ 订单事件消费者、通知消息、幂等落库、消费失败重试、死信记录、失败事件分页筛选查询、管理状态批量标记、管理状态变更流水查询、CSV 导出、重放接口、角色校验和重放审计分页筛选查询
+ -> v25 增加重放审批状态、申请审批、审批通过/拒绝和重放前门禁
 
 common
  -> 业务异常和统一错误响应
 
 static
- -> 失败事件管理静态页面、重放工作台、二次确认弹窗、风险提示、样式和浏览器端交互脚本
+ -> 失败事件管理静态页面、重放工作台、重放审批按钮、二次确认弹窗、风险提示、样式和浏览器端交互脚本
 ```
 
 后续建议升级顺序：

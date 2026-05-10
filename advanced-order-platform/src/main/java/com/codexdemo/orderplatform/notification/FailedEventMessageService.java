@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.notification;
 
+import static java.util.Map.entry;
+
 import com.codexdemo.orderplatform.common.PagedResponse;
 import com.codexdemo.orderplatform.outbox.OutboxRabbitMqProperties;
 import java.nio.charset.StandardCharsets;
@@ -35,15 +37,18 @@ public class FailedEventMessageService {
 
     private static final int MAX_EXPORT_LIMIT = 5000;
 
-    private static final Map<String, String> FAILED_MESSAGE_SORT_FIELDS = Map.of(
-            "id", "id",
-            "failedAt", "failedAt",
-            "status", "status",
-            "eventType", "eventType",
-            "aggregateId", "aggregateId",
-            "replayCount", "replayCount",
-            "managementStatus", "managementStatus",
-            "managedAt", "managedAt"
+    private static final Map<String, String> FAILED_MESSAGE_SORT_FIELDS = Map.ofEntries(
+            entry("id", "id"),
+            entry("failedAt", "failedAt"),
+            entry("status", "status"),
+            entry("eventType", "eventType"),
+            entry("aggregateId", "aggregateId"),
+            entry("replayCount", "replayCount"),
+            entry("managementStatus", "managementStatus"),
+            entry("managedAt", "managedAt"),
+            entry("replayApprovalStatus", "replayApprovalStatus"),
+            entry("replayApprovalRequestedAt", "replayApprovalRequestedAt"),
+            entry("replayApprovalReviewedAt", "replayApprovalReviewedAt")
     );
 
     private static final Map<String, String> REPLAY_ATTEMPT_SORT_FIELDS = Map.of(
@@ -196,6 +201,55 @@ public class FailedEventMessageService {
         );
     }
 
+    @Transactional
+    public FailedEventMessageResponse requestReplayApproval(
+            Long id,
+            RequestFailedEventReplayApprovalRequest request,
+            String operatorId,
+            String operatorRole
+    ) {
+        FailedEventMessage failedMessage = failedEventMessageRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found"));
+        String normalizedOperatorId = normalizeOperatorId(operatorId);
+        requireAllowedOperatorRole(operatorRole);
+        String reason = resolveReplayApprovalReason(request);
+        if (failedMessage.getStatus() == FailedEventMessageStatus.REPLAYED) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "failed event message has already been replayed");
+        }
+        if (failedMessage.getReplayApprovalStatus() == FailedEventReplayApprovalStatus.PENDING) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "replay approval is already pending");
+        }
+        if (failedMessage.getReplayApprovalStatus() == FailedEventReplayApprovalStatus.APPROVED) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "replay approval has already been approved");
+        }
+        failedMessage.requestReplayApproval(reason, normalizedOperatorId, Instant.now());
+        return FailedEventMessageResponse.from(failedMessage);
+    }
+
+    @Transactional
+    public FailedEventMessageResponse reviewReplayApproval(
+            Long id,
+            ReviewFailedEventReplayApprovalRequest request,
+            String operatorId,
+            String operatorRole
+    ) {
+        FailedEventMessage failedMessage = failedEventMessageRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found"));
+        String normalizedOperatorId = normalizeOperatorId(operatorId);
+        requireAllowedOperatorRole(operatorRole);
+        FailedEventReplayApprovalStatus reviewStatus = requireReplayApprovalReviewStatus(request);
+        String note = resolveReplayApprovalReviewNote(reviewStatus, request == null ? null : request.note());
+        if (failedMessage.getReplayApprovalStatus() != FailedEventReplayApprovalStatus.PENDING) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "replay approval is not pending");
+        }
+        if (reviewStatus == FailedEventReplayApprovalStatus.APPROVED) {
+            failedMessage.approveReplay(normalizedOperatorId, note, Instant.now());
+        } else {
+            failedMessage.rejectReplay(normalizedOperatorId, note, Instant.now());
+        }
+        return FailedEventMessageResponse.from(failedMessage);
+    }
+
     @Transactional(readOnly = true)
     public List<FailedEventManagementHistoryResponse> listManagementHistory(Long failedEventMessageId) {
         validateSearchId(failedEventMessageId, "failedEventMessageId");
@@ -328,6 +382,9 @@ public class FailedEventMessageService {
         String normalizedOperatorId = normalizeOperatorId(operatorId);
         String normalizedOperatorRole = requireAllowedOperatorRole(operatorRole);
         String reason = resolveReplayReason(request);
+        if (!failedMessage.isReplayApproved()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "failed event replay must be approved before replay");
+        }
         if (!outboxRabbitMqProperties.isEnabled()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "RabbitMQ outbox is disabled");
         }
@@ -493,6 +550,9 @@ public class FailedEventMessageService {
             if (criteria.managementStatus() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("managementStatus"), criteria.managementStatus()));
             }
+            if (criteria.replayApprovalStatus() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("replayApprovalStatus"), criteria.replayApprovalStatus()));
+            }
             addTextEquals(predicates, criteriaBuilder, root.get("eventType"), criteria.eventType());
             addTextEquals(predicates, criteriaBuilder, root.get("aggregateType"), criteria.aggregateType());
             addTextEquals(predicates, criteriaBuilder, root.get("aggregateId"), criteria.aggregateId());
@@ -621,6 +681,34 @@ public class FailedEventMessageService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "management note is required");
         }
         return truncate(note.strip(), 500);
+    }
+
+    private String resolveReplayApprovalReason(RequestFailedEventReplayApprovalRequest request) {
+        String reason = request == null ? null : request.reason();
+        if (reason == null || reason.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "replay approval reason is required");
+        }
+        return truncate(reason.strip(), 500);
+    }
+
+    private FailedEventReplayApprovalStatus requireReplayApprovalReviewStatus(
+            ReviewFailedEventReplayApprovalRequest request
+    ) {
+        FailedEventReplayApprovalStatus status = request == null ? null : request.status();
+        if (status != FailedEventReplayApprovalStatus.APPROVED && status != FailedEventReplayApprovalStatus.REJECTED) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "replay approval review status must be APPROVED or REJECTED"
+            );
+        }
+        return status;
+    }
+
+    private String resolveReplayApprovalReviewNote(FailedEventReplayApprovalStatus status, String note) {
+        if (status == FailedEventReplayApprovalStatus.REJECTED && (note == null || note.isBlank())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "replay approval rejection note is required");
+        }
+        return note == null || note.isBlank() ? null : truncate(note.strip(), 500);
     }
 
     private NormalizedPageRequest normalizePageRequest(

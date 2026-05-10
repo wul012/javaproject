@@ -22,7 +22,14 @@ public record FailedEventMessageResponse(
         FailedEventManagementStatus managementStatus,
         String managementNote,
         String managedBy,
-        Instant managedAt
+        Instant managedAt,
+        FailedEventReplayApprovalStatus replayApprovalStatus,
+        String replayApprovalReason,
+        String replayApprovalRequestedBy,
+        Instant replayApprovalRequestedAt,
+        String replayApprovalReviewedBy,
+        Instant replayApprovalReviewedAt,
+        String replayApprovalReviewNote
 ) {
 
     static FailedEventMessageResponse from(FailedEventMessage failedMessage) {
@@ -46,7 +53,14 @@ public record FailedEventMessageResponse(
                 failedMessage.getManagementStatus(),
                 failedMessage.getManagementNote(),
                 failedMessage.getManagedBy(),
-                failedMessage.getManagedAt()
+                failedMessage.getManagedAt(),
+                failedMessage.getReplayApprovalStatus(),
+                failedMessage.getReplayApprovalReason(),
+                failedMessage.getReplayApprovalRequestedBy(),
+                failedMessage.getReplayApprovalRequestedAt(),
+                failedMessage.getReplayApprovalReviewedBy(),
+                failedMessage.getReplayApprovalReviewedAt(),
+                failedMessage.getReplayApprovalReviewNote()
         );
     }
 }

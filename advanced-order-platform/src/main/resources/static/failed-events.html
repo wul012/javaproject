@@ -47,6 +47,16 @@
                 </select>
             </label>
             <label>
+                <span>Replay approval</span>
+                <select id="replayApprovalStatusFilter">
+                    <option value="">All</option>
+                    <option value="NOT_REQUESTED">NOT_REQUESTED</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="APPROVED">APPROVED</option>
+                    <option value="REJECTED">REJECTED</option>
+                </select>
+            </label>
+            <label>
                 <span>事件类型</span>
                 <input id="eventTypeFilter" type="text" placeholder="OrderCreated">
             </label>
@@ -65,6 +75,8 @@
                     <option value="managedAt,desc">managedAt,desc</option>
                     <option value="replayCount,desc">replayCount,desc</option>
                     <option value="managementStatus,asc">managementStatus,asc</option>
+                    <option value="replayApprovalStatus,asc">replayApprovalStatus,asc</option>
+                    <option value="replayApprovalRequestedAt,desc">replayApprovalRequestedAt,desc</option>
                     <option value="eventType,asc">eventType,asc</option>
                     <option value="aggregateId,asc">aggregateId,asc</option>
                 </select>
@@ -140,6 +152,7 @@
                     <tr>
                         <th class="select-col"><input id="selectAllCheckbox" type="checkbox" aria-label="全选"></th>
                         <th>ID</th>
+                        <th>Approval</th>
                         <th>事件</th>
                         <th>聚合</th>
                         <th>消息状态</th>
@@ -152,7 +165,7 @@
                     </thead>
                     <tbody id="failedEventsBody">
                     <tr>
-                        <td colspan="10" class="empty-cell">加载中</td>
+                        <td colspan="11" class="empty-cell">加载中</td>
                     </tr>
                     </tbody>
                 </table>
@@ -183,6 +196,14 @@
                         <span>重放原因</span>
                         <textarea id="replayReasonInput" rows="2">replay from management page</textarea>
                     </label>
+                    <label class="note-field">
+                        <span>Approval reason</span>
+                        <textarea id="replayApprovalReasonInput" rows="2">request replay approval after DLQ verification</textarea>
+                    </label>
+                    <label class="note-field">
+                        <span>Review note</span>
+                        <textarea id="replayApprovalReviewNoteInput" rows="2">checked failure reason and replay payload</textarea>
+                    </label>
                     <label>
                         <span>覆盖 Event ID</span>
                         <input id="replayEventIdInput" type="text" placeholder="UUID">
@@ -205,6 +226,9 @@
                     </label>
                 </div>
                 <div class="replay-actions">
+                    <button id="requestReplayApprovalButton" class="secondary-button" type="button">Request approval</button>
+                    <button id="approveReplayButton" class="secondary-button" type="button">Approve</button>
+                    <button id="rejectReplayButton" class="ghost-button" type="button">Reject</button>
                     <button id="replayButton" class="primary-button" type="button">提交重放</button>
                     <button id="clearReplayOverrideButton" class="ghost-button" type="button">清空覆盖</button>
                 </div>

@@ -20,8 +20,11 @@ import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptReposito
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptResponse;
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptSearchCriteria;
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptStatus;
+import com.codexdemo.orderplatform.notification.FailedEventReplayApprovalStatus;
 import com.codexdemo.orderplatform.notification.MarkFailedEventManagementRequest;
 import com.codexdemo.orderplatform.notification.ReplayFailedEventRequest;
+import com.codexdemo.orderplatform.notification.RequestFailedEventReplayApprovalRequest;
+import com.codexdemo.orderplatform.notification.ReviewFailedEventReplayApprovalRequest;
 import java.util.List;
 import java.time.Instant;
 import org.junit.jupiter.api.BeforeEach;
@@ -235,6 +238,117 @@ class FailedEventSearchIntegrationTests {
             assertThat(attempt.operatorRole()).isEqualTo("ORDER_SUPPORT");
             assertThat(attempt.status()).isEqualTo(FailedEventReplayAttemptStatus.SKIPPED_ALREADY_REPLAYED);
         });
+    }
+
+    @Test
+    void requestsReviewsAndSearchesReplayApprovalsBeforeReplay() {
+        FailedEventMessage failedMessage = failedEventMessageRepository.save(failedEventMessage(
+                "v25-message-001",
+                "25252525-2525-2525-2525-252525252501",
+                "OrderCreated",
+                "ORDER",
+                "2501"
+        ));
+        ReplayFailedEventRequest replayRequest = new ReplayFailedEventRequest(
+                null,
+                null,
+                null,
+                null,
+                null,
+                "replay after operator approval"
+        );
+
+        assertThatThrownBy(() -> failedEventMessageService.replay(
+                failedMessage.getId(),
+                replayRequest,
+                "ops-user",
+                "SRE"
+        ))
+                .isInstanceOfSatisfying(ResponseStatusException.class, ex -> {
+                    assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+                    assertThat(ex.getReason()).contains("approved before replay");
+                });
+
+        FailedEventMessageResponse pending = failedEventMessageService.requestReplayApproval(
+                failedMessage.getId(),
+                new RequestFailedEventReplayApprovalRequest("operator verified the fixed event headers"),
+                "ops-user",
+                "sre"
+        );
+        PagedResponse<FailedEventMessageResponse> pendingSearch = failedEventMessageService.searchFailedMessages(
+                new FailedEventMessageSearchCriteria(
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        FailedEventReplayApprovalStatus.PENDING,
+                        null,
+                        null,
+                        0,
+                        10,
+                        "replayApprovalRequestedAt,desc",
+                        null
+                )
+        );
+
+        assertThat(pending.replayApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.PENDING);
+        assertThat(pending.replayApprovalReason()).isEqualTo("operator verified the fixed event headers");
+        assertThat(pending.replayApprovalRequestedBy()).isEqualTo("ops-user");
+        assertThat(pending.replayApprovalRequestedAt()).isNotNull();
+        assertThat(pendingSearch.content()).extracting(FailedEventMessageResponse::id)
+                .containsExactly(failedMessage.getId());
+        assertThat(pendingSearch.sort()).isEqualTo("replayApprovalRequestedAt,desc");
+
+        assertThatThrownBy(() -> failedEventMessageService.requestReplayApproval(
+                failedMessage.getId(),
+                new RequestFailedEventReplayApprovalRequest("duplicate request"),
+                "ops-user",
+                "SRE"
+        ))
+                .isInstanceOfSatisfying(ResponseStatusException.class, ex ->
+                        assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.CONFLICT)
+                );
+
+        FailedEventMessageResponse rejected = failedEventMessageService.reviewReplayApproval(
+                failedMessage.getId(),
+                new ReviewFailedEventReplayApprovalRequest(
+                        FailedEventReplayApprovalStatus.REJECTED,
+                        "payload repair is incomplete"
+                ),
+                "sre-lead",
+                "SRE"
+        );
+        assertThat(rejected.replayApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.REJECTED);
+        assertThat(rejected.replayApprovalReviewedBy()).isEqualTo("sre-lead");
+        assertThat(rejected.replayApprovalReviewedAt()).isNotNull();
+        assertThat(rejected.replayApprovalReviewNote()).isEqualTo("payload repair is incomplete");
+
+        failedEventMessageService.requestReplayApproval(
+                failedMessage.getId(),
+                new RequestFailedEventReplayApprovalRequest("payload repair verified"),
+                "ops-user",
+                "ORDER_SUPPORT"
+        );
+        FailedEventMessageResponse approved = failedEventMessageService.reviewReplayApproval(
+                failedMessage.getId(),
+                new ReviewFailedEventReplayApprovalRequest(FailedEventReplayApprovalStatus.APPROVED, null),
+                "sre-lead",
+                "SRE"
+        );
+        assertThat(approved.replayApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.APPROVED);
+        assertThat(approved.replayApprovalReviewNote()).isNull();
+
+        assertThatThrownBy(() -> failedEventMessageService.replay(
+                failedMessage.getId(),
+                replayRequest,
+                "ops-user",
+                "ORDER_SUPPORT"
+        ))
+                .isInstanceOfSatisfying(ResponseStatusException.class, ex -> {
+                    assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+                    assertThat(ex.getReason()).contains("RabbitMQ outbox is disabled");
+                });
     }
 
     @Test
@@ -490,6 +604,7 @@ class FailedEventSearchIntegrationTests {
 
         assertThat(failedMessagesCsv.lines().toList()).hasSize(2);
         assertThat(failedMessagesCsv).startsWith("id,messageId,eventId,eventType,aggregateType,aggregateId");
+        assertThat(failedMessagesCsv).contains("replayApprovalStatus,replayApprovalReason");
         assertThat(failedMessagesCsv).contains("v21-message-001");
         assertThat(failedMessagesCsv).doesNotContain("v21-message-002");
         assertThat(failedMessagesCsv).contains("RESOLVED");

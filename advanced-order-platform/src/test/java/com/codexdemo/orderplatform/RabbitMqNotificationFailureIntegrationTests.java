@@ -9,11 +9,14 @@ import com.codexdemo.orderplatform.notification.FailedEventMessageResponse;
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttempt;
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptRepository;
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptStatus;
+import com.codexdemo.orderplatform.notification.FailedEventReplayApprovalStatus;
 import com.codexdemo.orderplatform.notification.FailedEventMessageService;
 import com.codexdemo.orderplatform.notification.FailedEventMessageStatus;
 import com.codexdemo.orderplatform.notification.NotificationMessage;
 import com.codexdemo.orderplatform.notification.NotificationMessageRepository;
 import com.codexdemo.orderplatform.notification.ReplayFailedEventRequest;
+import com.codexdemo.orderplatform.notification.RequestFailedEventReplayApprovalRequest;
+import com.codexdemo.orderplatform.notification.ReviewFailedEventReplayApprovalRequest;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
@@ -160,6 +163,43 @@ class RabbitMqNotificationFailureIntegrationTests {
                 .findByFailedEventMessageIdOrderByAttemptedAtDescIdDesc(failedMessage.getId()))
                 .isEmpty();
 
+        assertThatThrownBy(() -> failedEventMessageService.replay(
+                failedMessage.getId(),
+                replayRequest,
+                "qa-operator",
+                "ORDER_SUPPORT"
+        ))
+                .isInstanceOfSatisfying(ResponseStatusException.class, ex -> {
+                    assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+                    assertThat(ex.getReason()).contains("approved before replay");
+                });
+        assertThat(failedEventReplayAttemptRepository
+                .findByFailedEventMessageIdOrderByAttemptedAtDescIdDesc(failedMessage.getId()))
+                .isEmpty();
+
+        FailedEventMessageResponse pendingApproval = failedEventMessageService.requestReplayApproval(
+                failedMessage.getId(),
+                new RequestFailedEventReplayApprovalRequest("DLQ headers repaired and ready for replay"),
+                "qa-operator",
+                "ORDER_SUPPORT"
+        );
+        FailedEventMessageResponse approvedApproval = failedEventMessageService.reviewReplayApproval(
+                failedMessage.getId(),
+                new ReviewFailedEventReplayApprovalRequest(
+                        FailedEventReplayApprovalStatus.APPROVED,
+                        "approved after DLQ verification"
+                ),
+                "qa-lead",
+                "SRE"
+        );
+
+        assertThat(pendingApproval.replayApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.PENDING);
+        assertThat(pendingApproval.replayApprovalRequestedBy()).isEqualTo("qa-operator");
+        assertThat(pendingApproval.replayApprovalRequestedAt()).isNotNull();
+        assertThat(approvedApproval.replayApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.APPROVED);
+        assertThat(approvedApproval.replayApprovalReviewedBy()).isEqualTo("qa-lead");
+        assertThat(approvedApproval.replayApprovalReviewNote()).isEqualTo("approved after DLQ verification");
+
         FailedEventMessageResponse replayed = failedEventMessageService.replay(
                 failedMessage.getId(),
                 replayRequest,
@@ -176,6 +216,7 @@ class RabbitMqNotificationFailureIntegrationTests {
         assertThat(replayed.lastReplayEventId()).isEqualTo(REPLAY_EVENT_ID);
         assertThat(replayed.lastReplayedAt()).isNotNull();
         assertThat(replayed.lastReplayError()).isNull();
+        assertThat(replayed.replayApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.APPROVED);
         assertThat(notification.getEventId()).isEqualTo(UUID.fromString(REPLAY_EVENT_ID));
         assertThat(notification.getEventType()).isEqualTo("OrderCreated");
         assertThat(notification.getOrderId()).isEqualTo(404L);

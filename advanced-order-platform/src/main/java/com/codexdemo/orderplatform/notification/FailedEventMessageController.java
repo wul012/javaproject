@@ -35,6 +35,7 @@ public class FailedEventMessageController {
             @RequestParam(required = false) String aggregateType,
             @RequestParam(required = false) String aggregateId,
             @RequestParam(required = false) FailedEventManagementStatus managementStatus,
+            @RequestParam(required = false) FailedEventReplayApprovalStatus replayApprovalStatus,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant failedFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant failedTo,
             @RequestParam(required = false) Integer page,
@@ -48,6 +49,7 @@ public class FailedEventMessageController {
                 aggregateType,
                 aggregateId,
                 managementStatus,
+                replayApprovalStatus,
                 failedFrom,
                 failedTo,
                 page,
@@ -64,6 +66,7 @@ public class FailedEventMessageController {
             @RequestParam(required = false) String aggregateType,
             @RequestParam(required = false) String aggregateId,
             @RequestParam(required = false) FailedEventManagementStatus managementStatus,
+            @RequestParam(required = false) FailedEventReplayApprovalStatus replayApprovalStatus,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant failedFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant failedTo,
             @RequestParam(required = false) String sort,
@@ -75,6 +78,7 @@ public class FailedEventMessageController {
                 aggregateType,
                 aggregateId,
                 managementStatus,
+                replayApprovalStatus,
                 failedFrom,
                 failedTo,
                 null,
@@ -196,6 +200,26 @@ public class FailedEventMessageController {
             @RequestBody(required = false) ReplayFailedEventRequest request
     ) {
         return failedEventMessageService.replay(id, request, operatorId, operatorRole);
+    }
+
+    @PostMapping("/{id}/replay-approval")
+    public FailedEventMessageResponse requestReplayApproval(
+            @PathVariable Long id,
+            @RequestHeader(value = "X-Operator-Id", required = false) String operatorId,
+            @RequestHeader(value = "X-Operator-Role", required = false) String operatorRole,
+            @RequestBody(required = false) RequestFailedEventReplayApprovalRequest request
+    ) {
+        return failedEventMessageService.requestReplayApproval(id, request, operatorId, operatorRole);
+    }
+
+    @PostMapping("/{id}/replay-approval/review")
+    public FailedEventMessageResponse reviewReplayApproval(
+            @PathVariable Long id,
+            @RequestHeader(value = "X-Operator-Id", required = false) String operatorId,
+            @RequestHeader(value = "X-Operator-Role", required = false) String operatorRole,
+            @RequestBody(required = false) ReviewFailedEventReplayApprovalRequest request
+    ) {
+        return failedEventMessageService.reviewReplayApproval(id, request, operatorId, operatorRole);
     }
 
     private ResponseEntity<String> csvResponse(String filename, String csv) {
