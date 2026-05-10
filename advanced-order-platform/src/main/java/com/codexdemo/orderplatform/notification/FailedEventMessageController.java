@@ -173,6 +173,59 @@ public class FailedEventMessageController {
         return csvResponse("failed-event-management-history.csv", csv);
     }
 
+    @GetMapping("/replay-approval-history")
+    public PagedResponse<FailedEventReplayApprovalHistoryResponse> searchReplayApprovalHistory(
+            @RequestParam(required = false) Long failedEventMessageId,
+            @RequestParam(required = false) FailedEventReplayApprovalHistoryAction action,
+            @RequestParam(required = false) String operatorId,
+            @RequestParam(required = false) String operatorRole,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant changedFrom,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant changedTo,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size,
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) Integer limit
+    ) {
+        return failedEventMessageService.searchReplayApprovalHistory(new FailedEventReplayApprovalHistorySearchCriteria(
+                failedEventMessageId,
+                action,
+                operatorId,
+                operatorRole,
+                changedFrom,
+                changedTo,
+                page,
+                size,
+                sort,
+                limit
+        ));
+    }
+
+    @GetMapping(value = "/replay-approval-history/export", produces = "text/csv")
+    public ResponseEntity<String> exportReplayApprovalHistory(
+            @RequestParam(required = false) Long failedEventMessageId,
+            @RequestParam(required = false) FailedEventReplayApprovalHistoryAction action,
+            @RequestParam(required = false) String operatorId,
+            @RequestParam(required = false) String operatorRole,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant changedFrom,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant changedTo,
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) Integer limit
+    ) {
+        String csv = failedEventMessageService.exportReplayApprovalHistoryCsv(new FailedEventReplayApprovalHistorySearchCriteria(
+                failedEventMessageId,
+                action,
+                operatorId,
+                operatorRole,
+                changedFrom,
+                changedTo,
+                null,
+                null,
+                sort,
+                limit
+        ));
+        return csvResponse("failed-event-replay-approval-history.csv", csv);
+    }
+
     @GetMapping("/{id}/replay-attempts")
     public List<FailedEventReplayAttemptResponse> listReplayAttempts(@PathVariable Long id) {
         return failedEventMessageService.listReplayAttempts(id);
@@ -181,6 +234,11 @@ public class FailedEventMessageController {
     @GetMapping("/{id}/management-history")
     public List<FailedEventManagementHistoryResponse> listManagementHistory(@PathVariable Long id) {
         return failedEventMessageService.listManagementHistory(id);
+    }
+
+    @GetMapping("/{id}/replay-approval-history")
+    public List<FailedEventReplayApprovalHistoryResponse> listReplayApprovalHistory(@PathVariable Long id) {
+        return failedEventMessageService.listReplayApprovalHistory(id);
     }
 
     @PostMapping("/management-status")

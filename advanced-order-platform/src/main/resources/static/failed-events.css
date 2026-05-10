@@ -315,6 +315,50 @@ th {
     padding: 0 14px 14px;
 }
 
+.approval-history-block {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border-top: 1px solid var(--line);
+}
+
+.replay-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.replay-section-title h3 {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0;
+}
+
+.approval-history-list {
+    display: grid;
+    gap: 10px;
+    max-height: 240px;
+    overflow: auto;
+}
+
+.approval-history-item {
+    border: 1px solid var(--line);
+    border-left: 4px solid #7462e0;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fcfbff;
+}
+
+.approval-history-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
 .attempt-list {
     display: grid;
     gap: 10px;

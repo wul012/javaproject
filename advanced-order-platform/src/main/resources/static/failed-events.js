@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "historyList",
         "historyMeta",
         "replayMeta",
+        "approvalHistoryList",
         "attemptList",
         "replayConfirmOverlay",
         "replayConfirmSummary",
@@ -69,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("rejectReplayButton").addEventListener("click", () => reviewReplayApproval("REJECTED"));
     document.getElementById("replayButton").addEventListener("click", replayActiveEvent);
     document.getElementById("clearReplayOverrideButton").addEventListener("click", clearReplayOverrides);
+    document.getElementById("refreshApprovalHistoryButton").addEventListener("click", refreshActiveReplayApprovalHistory);
     document.getElementById("refreshAttemptsButton").addEventListener("click", refreshActiveReplayAttempts);
     document.getElementById("replayConfirmCancelButton").addEventListener("click", closeReplayConfirm);
     document.getElementById("replayConfirmBackButton").addEventListener("click", closeReplayConfirm);
@@ -189,6 +191,7 @@ async function prepareReplay(id) {
     setActiveEvent(id);
     await Promise.all([
         loadHistory(id),
+        loadReplayApprovalHistory(id),
         loadReplayAttempts(id)
     ]);
 }
@@ -255,6 +258,35 @@ async function loadReplayAttempts(id) {
         elements.attemptList.innerHTML = '<div class="attempt-item">加载失败</div>';
         showToast(error.message, true);
     }
+}
+
+async function loadReplayApprovalHistory(id) {
+    try {
+        setActiveEvent(id);
+        elements.approvalHistoryList.innerHTML = '<div class="approval-history-item">Loading...</div>';
+        const history = await fetchJson(`${apiBase}/${id}/replay-approval-history`);
+        renderReplayApprovalHistory(history);
+    } catch (error) {
+        elements.approvalHistoryList.innerHTML = '<div class="approval-history-item">Load failed</div>';
+        showToast(error.message, true);
+    }
+}
+
+function renderReplayApprovalHistory(history) {
+    if (!history || history.length === 0) {
+        elements.approvalHistoryList.innerHTML = '<div class="approval-history-item">No approval history</div>';
+        return;
+    }
+    elements.approvalHistoryList.innerHTML = history.map((item) => `
+        <article class="approval-history-item">
+            <div class="approval-history-line">
+                ${statusPill(item.action, replayApprovalActionClass(item.action))}
+                <span>${formatDate(item.changedAt)}</span>
+            </div>
+            <div class="muted">${escapeHtml(item.operatorId || "")} / ${escapeHtml(item.operatorRole || "")}</div>
+            <div class="history-note">${escapeHtml(item.note || "")}</div>
+        </article>
+    `).join("");
 }
 
 function renderReplayAttempts(attempts) {
@@ -371,6 +403,7 @@ async function handleReplayApprovalResult(result, message) {
     updateReplayPlaceholders(result);
     showToast(`${message}: ${result.replayApprovalStatus}`);
     await loadFailedEvents();
+    await loadReplayApprovalHistory(result.id);
 }
 
 function replayOperatorHeaders() {
@@ -589,6 +622,15 @@ function refreshActiveReplayAttempts() {
     loadReplayAttempts(id);
 }
 
+function refreshActiveReplayApprovalHistory() {
+    const id = replayTargetId();
+    if (!id) {
+        showToast("请选择失败事件", true);
+        return;
+    }
+    loadReplayApprovalHistory(id);
+}
+
 function clearReplayOverrides() {
     elements.replayEventIdInput.value = "";
     elements.replayEventTypeInput.value = "";
@@ -781,6 +823,19 @@ function replayAttemptStatusClass(value) {
             return "status-failed";
         case "SKIPPED_ALREADY_REPLAYED":
             return "status-skipped";
+        default:
+            return "";
+    }
+}
+
+function replayApprovalActionClass(value) {
+    switch (value) {
+        case "APPROVED":
+            return "status-resolved";
+        case "REJECTED":
+            return "status-failed";
+        case "REQUESTED":
+            return "status-investigating";
         default:
             return "";
     }

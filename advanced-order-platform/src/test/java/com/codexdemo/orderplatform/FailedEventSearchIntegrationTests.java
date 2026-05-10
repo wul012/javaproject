@@ -20,6 +20,10 @@ import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptReposito
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptResponse;
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptSearchCriteria;
 import com.codexdemo.orderplatform.notification.FailedEventReplayAttemptStatus;
+import com.codexdemo.orderplatform.notification.FailedEventReplayApprovalHistoryAction;
+import com.codexdemo.orderplatform.notification.FailedEventReplayApprovalHistoryRepository;
+import com.codexdemo.orderplatform.notification.FailedEventReplayApprovalHistoryResponse;
+import com.codexdemo.orderplatform.notification.FailedEventReplayApprovalHistorySearchCriteria;
 import com.codexdemo.orderplatform.notification.FailedEventReplayApprovalStatus;
 import com.codexdemo.orderplatform.notification.MarkFailedEventManagementRequest;
 import com.codexdemo.orderplatform.notification.ReplayFailedEventRequest;
@@ -52,8 +56,12 @@ class FailedEventSearchIntegrationTests {
     @Autowired
     private FailedEventManagementHistoryRepository failedEventManagementHistoryRepository;
 
+    @Autowired
+    private FailedEventReplayApprovalHistoryRepository failedEventReplayApprovalHistoryRepository;
+
     @BeforeEach
     void cleanFailedEventData() {
+        failedEventReplayApprovalHistoryRepository.deleteAll();
         failedEventManagementHistoryRepository.deleteAll();
         failedEventReplayAttemptRepository.deleteAll();
         failedEventMessageRepository.deleteAll();
@@ -299,6 +307,16 @@ class FailedEventSearchIntegrationTests {
         assertThat(pendingSearch.content()).extracting(FailedEventMessageResponse::id)
                 .containsExactly(failedMessage.getId());
         assertThat(pendingSearch.sort()).isEqualTo("replayApprovalRequestedAt,desc");
+        assertThat(failedEventMessageService.listReplayApprovalHistory(failedMessage.getId()))
+                .singleElement()
+                .satisfies(history -> {
+                    assertThat(history.failedEventMessageId()).isEqualTo(failedMessage.getId());
+                    assertThat(history.action()).isEqualTo(FailedEventReplayApprovalHistoryAction.REQUESTED);
+                    assertThat(history.operatorId()).isEqualTo("ops-user");
+                    assertThat(history.operatorRole()).isEqualTo("SRE");
+                    assertThat(history.note()).isEqualTo("operator verified the fixed event headers");
+                    assertThat(history.changedAt()).isNotNull();
+                });
 
         assertThatThrownBy(() -> failedEventMessageService.requestReplayApproval(
                 failedMessage.getId(),
@@ -338,6 +356,57 @@ class FailedEventSearchIntegrationTests {
         );
         assertThat(approved.replayApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.APPROVED);
         assertThat(approved.replayApprovalReviewNote()).isNull();
+
+        List<FailedEventReplayApprovalHistoryResponse> approvalHistory =
+                failedEventMessageService.listReplayApprovalHistory(failedMessage.getId());
+        PagedResponse<FailedEventReplayApprovalHistoryResponse> rejectedHistory =
+                failedEventMessageService.searchReplayApprovalHistory(new FailedEventReplayApprovalHistorySearchCriteria(
+                        failedMessage.getId(),
+                        FailedEventReplayApprovalHistoryAction.REJECTED,
+                        "sre-lead",
+                        "sre",
+                        pending.replayApprovalRequestedAt().minusSeconds(1),
+                        Instant.now().plusSeconds(5),
+                        0,
+                        10,
+                        "changedAt,desc",
+                        null
+                ));
+        String approvalHistoryCsv = failedEventMessageService.exportReplayApprovalHistoryCsv(
+                new FailedEventReplayApprovalHistorySearchCriteria(
+                        failedMessage.getId(),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "changedAt,desc",
+                        10
+                )
+        );
+
+        assertThat(approvalHistory).extracting(FailedEventReplayApprovalHistoryResponse::action)
+                .containsExactly(
+                        FailedEventReplayApprovalHistoryAction.APPROVED,
+                        FailedEventReplayApprovalHistoryAction.REQUESTED,
+                        FailedEventReplayApprovalHistoryAction.REJECTED,
+                        FailedEventReplayApprovalHistoryAction.REQUESTED
+                );
+        assertThat(rejectedHistory.content()).singleElement().satisfies(history -> {
+            assertThat(history.failedEventMessageId()).isEqualTo(failedMessage.getId());
+            assertThat(history.action()).isEqualTo(FailedEventReplayApprovalHistoryAction.REJECTED);
+            assertThat(history.operatorId()).isEqualTo("sre-lead");
+            assertThat(history.operatorRole()).isEqualTo("SRE");
+            assertThat(history.note()).isEqualTo("payload repair is incomplete");
+        });
+        assertThat(rejectedHistory.sort()).isEqualTo("changedAt,desc");
+        assertThat(approvalHistoryCsv.lines().toList()).hasSize(5);
+        assertThat(approvalHistoryCsv).startsWith("id,failedEventMessageId,action,operatorId,operatorRole,note,changedAt");
+        assertThat(approvalHistoryCsv).contains("APPROVED");
+        assertThat(approvalHistoryCsv).contains("REJECTED");
+        assertThat(approvalHistoryCsv).contains("payload repair is incomplete");
 
         assertThatThrownBy(() -> failedEventMessageService.replay(
                 failedMessage.getId(),
@@ -650,11 +719,20 @@ class FailedEventSearchIntegrationTests {
         assertBadRequest(() -> failedEventMessageService.searchManagementHistory(
                 new FailedEventManagementHistorySearchCriteria(null, null, null, null, null, null, null, 0, 50, "messageId,desc", null)
         ));
+        assertBadRequest(() -> failedEventMessageService.searchReplayApprovalHistory(
+                new FailedEventReplayApprovalHistorySearchCriteria(null, null, null, null, now, now.minusSeconds(1), 10)
+        ));
+        assertBadRequest(() -> failedEventMessageService.searchReplayApprovalHistory(
+                new FailedEventReplayApprovalHistorySearchCriteria(null, null, null, null, null, null, 0, 50, "messageId,desc", null)
+        ));
         assertBadRequest(() -> failedEventMessageService.exportFailedMessagesCsv(
                 new FailedEventMessageSearchCriteria(null, null, null, null, null, null, null, null, null, null, 5001)
         ));
         assertBadRequest(() -> failedEventMessageService.exportManagementHistoryCsv(
                 new FailedEventManagementHistorySearchCriteria(null, null, null, null, null, null, null, null, null, "messageId,desc", 10)
+        ));
+        assertBadRequest(() -> failedEventMessageService.exportReplayApprovalHistoryCsv(
+                new FailedEventReplayApprovalHistorySearchCriteria(null, null, null, null, null, null, null, null, "messageId,desc", 10)
         ));
         assertBadRequest(() -> failedEventMessageService.markManagementStatus(
                 new MarkFailedEventManagementRequest(

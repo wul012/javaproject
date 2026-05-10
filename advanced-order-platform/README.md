@@ -34,6 +34,7 @@
 - 失败事件管理页面内置重放工作台
 - 失败事件重放二次确认和 Payload 覆盖风险提示
 - 失败事件重放申请/审批/拒绝门禁
+- 失败事件重放审批历史流水查询和 CSV 导出
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -404,6 +405,7 @@ Payload 覆盖风险提示
 下载失败事件 CSV
 下载管理状态流水 CSV
 申请/审批/拒绝失败事件重放
+查看失败事件重放审批流水
 ```
 
 申请重放审批：
@@ -441,6 +443,32 @@ Invoke-RestMethod `
     "X-Operator-Role" = "SRE"
   } `
   -Body $reviewBody
+```
+
+查询单个失败事件的重放审批流水：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/replay-approval-history
+```
+
+全局筛选重放审批流水：
+
+```powershell
+Invoke-RestMethod "http://localhost:8080/api/v1/failed-events/replay-approval-history?failedEventMessageId=1&action=REJECTED&operatorRole=SRE&page=0&size=20&sort=changedAt,desc"
+```
+
+重放审批流水允许排序字段：
+
+```text
+id, changedAt, action, operatorId, operatorRole
+```
+
+导出重放审批流水 CSV：
+
+```powershell
+Invoke-WebRequest `
+  -Uri "http://localhost:8080/api/v1/failed-events/replay-approval-history/export?action=APPROVED&sort=changedAt,desc&limit=1000" `
+  -OutFile failed-event-replay-approval-history.csv
 ```
 
 修复并重放失败事件消息：
@@ -506,6 +534,7 @@ src/main/resources/db/migration/h2/V7__failed_event_search_indexes.sql
 src/main/resources/db/migration/h2/V8__failed_event_management_status.sql
 src/main/resources/db/migration/h2/V9__failed_event_management_history.sql
 src/main/resources/db/migration/h2/V10__failed_event_replay_approval.sql
+src/main/resources/db/migration/h2/V11__failed_event_replay_approval_history.sql
 ```
 
 PostgreSQL profile 执行：
@@ -521,6 +550,7 @@ src/main/resources/db/migration/postgresql/V7__failed_event_search_indexes.sql
 src/main/resources/db/migration/postgresql/V8__failed_event_management_status.sql
 src/main/resources/db/migration/postgresql/V9__failed_event_management_history.sql
 src/main/resources/db/migration/postgresql/V10__failed_event_replay_approval.sql
+src/main/resources/db/migration/postgresql/V11__failed_event_replay_approval_history.sql
 ```
 
 如果 Docker 未启动，Testcontainers 的 PostgreSQL / RabbitMQ 集成测试会自动跳过；启动 Docker 后重新执行 `mvn test` 即可跑真实中间件验证。
@@ -586,18 +616,19 @@ notification
  -> RabbitMQ 订单事件消费者、通知消息、幂等落库、消费失败重试、死信记录、失败事件分页筛选查询、管理状态批量标记、管理状态变更流水查询、CSV 导出、重放接口、角色校验和重放审计分页筛选查询
  -> v25 增加重放审批状态、申请审批、审批通过/拒绝和重放前门禁
  -> v26 对齐 RabbitMQ profile 和 Actuator Rabbit health，默认本地启动不再因为未启用 RabbitMQ 而 health DOWN
+ -> v27 增加重放审批历史流水，保留每次申请、拒绝和批准记录，并支持查询/导出
 
 common
  -> 业务异常和统一错误响应
 
 static
- -> 失败事件管理静态页面、重放工作台、重放审批按钮、二次确认弹窗、风险提示、样式和浏览器端交互脚本
+ -> 失败事件管理静态页面、重放工作台、重放审批按钮、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
 ```
 
 后续建议升级顺序：
 
-1. 给失败事件重放接口接入真实认证鉴权和重放审批流。
-2. 给失败事件管理页面增加真实登录态、权限控制和审批入口。
+1. 给失败事件重放接口接入真实认证鉴权，把 `X-Operator-*` 请求头替换成登录态和权限上下文。
+2. 给失败事件管理页面增加真实登录态、权限控制和审批人隔离。
 3. 接入 Redis，训练热点商品缓存、限流、幂等 token。
 4. 接入 OpenTelemetry、Prometheus、Grafana。
 5. 增加并发库存压测和更多 Testcontainers 多中间件集成测试。

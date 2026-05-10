@@ -110,6 +110,35 @@ final class FailedEventCsvExporter {
         return csv.toString();
     }
 
+    static String replayApprovalHistory(List<FailedEventReplayApprovalHistoryResponse> history) {
+        StringBuilder csv = new StringBuilder();
+        appendRow(
+                csv,
+                List.of(
+                        "id",
+                        "failedEventMessageId",
+                        "action",
+                        "operatorId",
+                        "operatorRole",
+                        "note",
+                        "changedAt"
+                )
+        );
+        history.forEach(item -> appendRow(
+                csv,
+                List.of(
+                        value(item.id()),
+                        value(item.failedEventMessageId()),
+                        value(item.action()),
+                        value(item.operatorId()),
+                        value(item.operatorRole()),
+                        value(item.note()),
+                        value(item.changedAt())
+                )
+        ));
+        return csv.toString();
+    }
+
     private static void appendRow(StringBuilder csv, List<String> values) {
         StringJoiner row = new StringJoiner(",");
         values.forEach(value -> row.add(escape(value)));

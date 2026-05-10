@@ -68,11 +68,21 @@ public class FailedEventMessageService {
             "operatorRole", "operatorRole"
     );
 
+    private static final Map<String, String> REPLAY_APPROVAL_HISTORY_SORT_FIELDS = Map.of(
+            "id", "id",
+            "changedAt", "changedAt",
+            "action", "action",
+            "operatorId", "operatorId",
+            "operatorRole", "operatorRole"
+    );
+
     private final FailedEventMessageRepository failedEventMessageRepository;
 
     private final FailedEventReplayAttemptRepository failedEventReplayAttemptRepository;
 
     private final FailedEventManagementHistoryRepository failedEventManagementHistoryRepository;
+
+    private final FailedEventReplayApprovalHistoryRepository failedEventReplayApprovalHistoryRepository;
 
     private final FailedEventReplayProperties failedEventReplayProperties;
 
@@ -84,6 +94,7 @@ public class FailedEventMessageService {
             FailedEventMessageRepository failedEventMessageRepository,
             FailedEventReplayAttemptRepository failedEventReplayAttemptRepository,
             FailedEventManagementHistoryRepository failedEventManagementHistoryRepository,
+            FailedEventReplayApprovalHistoryRepository failedEventReplayApprovalHistoryRepository,
             FailedEventReplayProperties failedEventReplayProperties,
             RabbitTemplate rabbitTemplate,
             OutboxRabbitMqProperties outboxRabbitMqProperties
@@ -91,6 +102,7 @@ public class FailedEventMessageService {
         this.failedEventMessageRepository = failedEventMessageRepository;
         this.failedEventReplayAttemptRepository = failedEventReplayAttemptRepository;
         this.failedEventManagementHistoryRepository = failedEventManagementHistoryRepository;
+        this.failedEventReplayApprovalHistoryRepository = failedEventReplayApprovalHistoryRepository;
         this.failedEventReplayProperties = failedEventReplayProperties;
         this.rabbitTemplate = rabbitTemplate;
         this.outboxRabbitMqProperties = outboxRabbitMqProperties;
@@ -211,7 +223,7 @@ public class FailedEventMessageService {
         FailedEventMessage failedMessage = failedEventMessageRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found"));
         String normalizedOperatorId = normalizeOperatorId(operatorId);
-        requireAllowedOperatorRole(operatorRole);
+        String normalizedOperatorRole = requireAllowedOperatorRole(operatorRole);
         String reason = resolveReplayApprovalReason(request);
         if (failedMessage.getStatus() == FailedEventMessageStatus.REPLAYED) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "failed event message has already been replayed");
@@ -222,7 +234,16 @@ public class FailedEventMessageService {
         if (failedMessage.getReplayApprovalStatus() == FailedEventReplayApprovalStatus.APPROVED) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "replay approval has already been approved");
         }
-        failedMessage.requestReplayApproval(reason, normalizedOperatorId, Instant.now());
+        Instant requestedAt = Instant.now();
+        failedMessage.requestReplayApproval(reason, normalizedOperatorId, requestedAt);
+        failedEventReplayApprovalHistoryRepository.save(FailedEventReplayApprovalHistory.record(
+                failedMessage,
+                FailedEventReplayApprovalHistoryAction.REQUESTED,
+                normalizedOperatorId,
+                normalizedOperatorRole,
+                reason,
+                requestedAt
+        ));
         return FailedEventMessageResponse.from(failedMessage);
     }
 
@@ -236,17 +257,26 @@ public class FailedEventMessageService {
         FailedEventMessage failedMessage = failedEventMessageRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found"));
         String normalizedOperatorId = normalizeOperatorId(operatorId);
-        requireAllowedOperatorRole(operatorRole);
+        String normalizedOperatorRole = requireAllowedOperatorRole(operatorRole);
         FailedEventReplayApprovalStatus reviewStatus = requireReplayApprovalReviewStatus(request);
         String note = resolveReplayApprovalReviewNote(reviewStatus, request == null ? null : request.note());
         if (failedMessage.getReplayApprovalStatus() != FailedEventReplayApprovalStatus.PENDING) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "replay approval is not pending");
         }
+        Instant reviewedAt = Instant.now();
         if (reviewStatus == FailedEventReplayApprovalStatus.APPROVED) {
-            failedMessage.approveReplay(normalizedOperatorId, note, Instant.now());
+            failedMessage.approveReplay(normalizedOperatorId, note, reviewedAt);
         } else {
-            failedMessage.rejectReplay(normalizedOperatorId, note, Instant.now());
+            failedMessage.rejectReplay(normalizedOperatorId, note, reviewedAt);
         }
+        failedEventReplayApprovalHistoryRepository.save(FailedEventReplayApprovalHistory.record(
+                failedMessage,
+                FailedEventReplayApprovalHistoryAction.valueOf(reviewStatus.name()),
+                normalizedOperatorId,
+                normalizedOperatorRole,
+                note,
+                reviewedAt
+        ));
         return FailedEventMessageResponse.from(failedMessage);
     }
 
@@ -318,6 +348,76 @@ public class FailedEventMessageService {
                 .map(FailedEventManagementHistoryResponse::from)
                 .toList();
         return FailedEventCsvExporter.managementHistory(history);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FailedEventReplayApprovalHistoryResponse> listReplayApprovalHistory(Long failedEventMessageId) {
+        validateSearchId(failedEventMessageId, "failedEventMessageId");
+        if (!failedEventMessageRepository.existsById(failedEventMessageId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found");
+        }
+        return failedEventReplayApprovalHistoryRepository
+                .findByFailedEventMessageIdOrderByChangedAtDescIdDesc(failedEventMessageId)
+                .stream()
+                .map(FailedEventReplayApprovalHistoryResponse::from)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public PagedResponse<FailedEventReplayApprovalHistoryResponse> searchReplayApprovalHistory(
+            FailedEventReplayApprovalHistorySearchCriteria criteria
+    ) {
+        FailedEventReplayApprovalHistorySearchCriteria normalizedCriteria = criteria == null
+                ? new FailedEventReplayApprovalHistorySearchCriteria(null, null, null, null, null, null, null, null, null, null)
+                : criteria;
+        validateSearchId(normalizedCriteria.failedEventMessageId(), "failedEventMessageId");
+        validateTimeRange(
+                normalizedCriteria.changedFrom(),
+                normalizedCriteria.changedTo(),
+                "changedFrom",
+                "changedTo"
+        );
+        NormalizedPageRequest pageRequest = normalizePageRequest(
+                normalizedCriteria.page(),
+                normalizedCriteria.size(),
+                normalizedCriteria.limit(),
+                normalizedCriteria.sort(),
+                REPLAY_APPROVAL_HISTORY_SORT_FIELDS,
+                "changedAt,desc"
+        );
+        Page<FailedEventReplayApprovalHistory> page = failedEventReplayApprovalHistoryRepository.findAll(
+                replayApprovalHistoryMatching(normalizedCriteria),
+                pageRequest.pageRequest()
+        );
+        return PagedResponse.from(page, FailedEventReplayApprovalHistoryResponse::from, pageRequest.sort());
+    }
+
+    @Transactional(readOnly = true)
+    public String exportReplayApprovalHistoryCsv(FailedEventReplayApprovalHistorySearchCriteria criteria) {
+        FailedEventReplayApprovalHistorySearchCriteria normalizedCriteria = criteria == null
+                ? new FailedEventReplayApprovalHistorySearchCriteria(null, null, null, null, null, null, null, null, null, null)
+                : criteria;
+        validateSearchId(normalizedCriteria.failedEventMessageId(), "failedEventMessageId");
+        validateTimeRange(
+                normalizedCriteria.changedFrom(),
+                normalizedCriteria.changedTo(),
+                "changedFrom",
+                "changedTo"
+        );
+        PageRequest pageRequest = normalizeExportPageRequest(
+                normalizedCriteria.limit(),
+                normalizedCriteria.sort(),
+                REPLAY_APPROVAL_HISTORY_SORT_FIELDS,
+                "changedAt,desc"
+        );
+        List<FailedEventReplayApprovalHistoryResponse> history = failedEventReplayApprovalHistoryRepository.findAll(
+                        replayApprovalHistoryMatching(normalizedCriteria),
+                        pageRequest
+                )
+                .stream()
+                .map(FailedEventReplayApprovalHistoryResponse::from)
+                .toList();
+        return FailedEventCsvExporter.replayApprovalHistory(history);
     }
 
     @Transactional(readOnly = true)
@@ -613,6 +713,37 @@ public class FailedEventMessageService {
             }
             if (criteria.newStatus() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("newStatus"), criteria.newStatus()));
+            }
+            addTextEquals(predicates, criteriaBuilder, root.get("operatorId"), criteria.operatorId());
+            addTextEquals(
+                    predicates,
+                    criteriaBuilder,
+                    root.get("operatorRole"),
+                    failedEventReplayProperties.normalize(criteria.operatorRole())
+            );
+            if (criteria.changedFrom() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("changedAt"), criteria.changedFrom()));
+            }
+            if (criteria.changedTo() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("changedAt"), criteria.changedTo()));
+            }
+            return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
+        };
+    }
+
+    private Specification<FailedEventReplayApprovalHistory> replayApprovalHistoryMatching(
+            FailedEventReplayApprovalHistorySearchCriteria criteria
+    ) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            if (criteria.failedEventMessageId() != null) {
+                predicates.add(criteriaBuilder.equal(
+                        root.get("failedEventMessage").get("id"),
+                        criteria.failedEventMessageId()
+                ));
+            }
+            if (criteria.action() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("action"), criteria.action()));
             }
             addTextEquals(predicates, criteriaBuilder, root.get("operatorId"), criteria.operatorId());
             addTextEquals(

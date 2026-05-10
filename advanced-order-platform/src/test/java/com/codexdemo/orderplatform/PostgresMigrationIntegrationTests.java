@@ -83,9 +83,10 @@ class PostgresMigrationIntegrationTests {
                               'notification_messages',
                               'failed_event_messages',
                               'failed_event_replay_attempts',
-                              'failed_event_management_history'
-                          )
-                        """,
+                              'failed_event_management_history',
+                              'failed_event_replay_approval_history'
+                           )
+                         """,
                 Integer.class
         );
         Product product = productRepository.findAll().getFirst();
@@ -94,13 +95,13 @@ class PostgresMigrationIntegrationTests {
                 List.of(new CreateOrderLineRequest(product.getId(), 2))
         );
 
-        CreateOrderResult created = orderApplicationService.createOrder("postgres-it-v10-001", request);
+        CreateOrderResult created = orderApplicationService.createOrder("postgres-it-v27-001", request);
         orderApplicationService.pay(created.order().id());
         var refunded = orderApplicationService.refund(created.order().id());
         List<InventoryMovementResponse> movements = inventoryService.listProductMovements(product.getId());
 
-        assertThat(appliedMigrations).isEqualTo(10);
-        assertThat(tableCount).isEqualTo(12);
+        assertThat(appliedMigrations).isEqualTo(11);
+        assertThat(tableCount).isEqualTo(13);
         assertThat(refunded.status()).isEqualTo(OrderStatus.REFUNDED);
         assertThat(movements.stream().map(InventoryMovementResponse::type).toList())
                 .containsExactly(
