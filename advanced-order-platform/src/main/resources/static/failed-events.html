@@ -225,6 +225,28 @@
     </section>
 </main>
 
+<div id="replayConfirmOverlay" class="modal-overlay" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="replayConfirmTitle">
+        <div class="modal-heading">
+            <div>
+                <h2 id="replayConfirmTitle">重放安全确认</h2>
+                <p>提交前核对目标事件、操作者和覆盖字段。</p>
+            </div>
+            <button id="replayConfirmCancelButton" class="icon-button" type="button" title="关闭">关闭</button>
+        </div>
+        <div id="replayConfirmSummary" class="confirm-summary"></div>
+        <div id="replayRiskList" class="risk-list"></div>
+        <label class="confirm-check">
+            <input id="replayConfirmCheckbox" type="checkbox">
+            <span>我已核对失败事件、重放原因和覆盖字段，确认提交本次重放。</span>
+        </label>
+        <div class="modal-actions">
+            <button id="replayConfirmBackButton" class="ghost-button" type="button">返回修改</button>
+            <button id="replayConfirmSubmitButton" class="primary-button" type="button" disabled>确认重放</button>
+        </div>
+    </section>
+</div>
+
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

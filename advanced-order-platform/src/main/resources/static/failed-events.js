@@ -6,7 +6,8 @@ const state = {
     selectedIds: new Set(),
     activeEventId: null,
     activeEvent: null,
-    itemsById: new Map()
+    itemsById: new Map(),
+    pendingReplay: null
 };
 
 const elements = {};
@@ -38,6 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "historyMeta",
         "replayMeta",
         "attemptList",
+        "replayConfirmOverlay",
+        "replayConfirmSummary",
+        "replayRiskList",
+        "replayConfirmCheckbox",
+        "replayConfirmSubmitButton",
         "pageMeta",
         "selectedCount",
         "selectAllCheckbox",
@@ -58,6 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("replayButton").addEventListener("click", replayActiveEvent);
     document.getElementById("clearReplayOverrideButton").addEventListener("click", clearReplayOverrides);
     document.getElementById("refreshAttemptsButton").addEventListener("click", refreshActiveReplayAttempts);
+    document.getElementById("replayConfirmCancelButton").addEventListener("click", closeReplayConfirm);
+    document.getElementById("replayConfirmBackButton").addEventListener("click", closeReplayConfirm);
+    document.getElementById("replayConfirmSubmitButton").addEventListener("click", confirmReplaySubmission);
+    elements.replayConfirmCheckbox.addEventListener("change", () => {
+        elements.replayConfirmSubmitButton.disabled = !elements.replayConfirmCheckbox.checked;
+    });
     document.getElementById("exportFailedButton").addEventListener("click", exportFailedEvents);
     document.getElementById("exportHistoryButton").addEventListener("click", exportActiveHistory);
     elements.selectAllCheckbox.addEventListener("change", toggleCurrentPageSelection);
@@ -296,10 +308,18 @@ async function replayActiveEvent() {
         showToast("请选择要重放的失败事件", true);
         return;
     }
+    const replayRequest = buildReplayRequest(id);
+    if (!replayRequest) {
+        return;
+    }
+    openReplayConfirm(replayRequest);
+}
+
+function buildReplayRequest(id) {
     const reason = elements.replayReasonInput.value.trim();
     if (!reason) {
         showToast("请填写重放原因", true);
-        return;
+        return null;
     }
     const body = { reason };
     addBodyField(body, "eventId", elements.replayEventIdInput.value);
@@ -307,14 +327,53 @@ async function replayActiveEvent() {
     addBodyField(body, "aggregateType", elements.replayAggregateTypeInput.value);
     addBodyField(body, "aggregateId", elements.replayAggregateIdInput.value);
     addBodyField(body, "payload", elements.replayPayloadInput.value);
+    return {
+        id,
+        body,
+        operatorId: elements.replayOperatorIdInput.value.trim(),
+        operatorRole: elements.replayOperatorRoleInput.value.trim(),
+        event: state.activeEvent
+    };
+}
 
+function openReplayConfirm(replayRequest) {
+    state.pendingReplay = replayRequest;
+    elements.replayConfirmCheckbox.checked = false;
+    elements.replayConfirmSubmitButton.disabled = true;
+    elements.replayConfirmSummary.innerHTML = replayConfirmSummary(replayRequest);
+    elements.replayRiskList.innerHTML = replayRiskList(replayRequest);
+    elements.replayConfirmOverlay.hidden = false;
+    elements.replayConfirmCheckbox.focus();
+}
+
+function closeReplayConfirm() {
+    state.pendingReplay = null;
+    elements.replayConfirmOverlay.hidden = true;
+}
+
+async function confirmReplaySubmission() {
+    if (!state.pendingReplay) {
+        closeReplayConfirm();
+        return;
+    }
+    if (!elements.replayConfirmCheckbox.checked) {
+        showToast("请先勾选确认项", true);
+        return;
+    }
+    const replayRequest = state.pendingReplay;
+    closeReplayConfirm();
+    await submitReplayRequest(replayRequest);
+}
+
+async function submitReplayRequest(replayRequest) {
+    const { id, body, operatorId, operatorRole } = replayRequest;
     try {
         const response = await fetch(`${apiBase}/${id}/replay`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-Operator-Id": elements.replayOperatorIdInput.value,
-                "X-Operator-Role": elements.replayOperatorRoleInput.value
+                "X-Operator-Id": operatorId,
+                "X-Operator-Role": operatorRole
             },
             body: JSON.stringify(body)
         });
@@ -330,6 +389,89 @@ async function replayActiveEvent() {
         showToast(error.message, true);
         await loadReplayAttempts(id);
     }
+}
+
+function replayConfirmSummary(replayRequest) {
+    const event = replayRequest.event || {};
+    return `
+        <div class="summary-grid">
+            <div class="summary-item">
+                <span>失败事件</span>
+                <strong>#${escapeHtml(replayRequest.id)} ${escapeHtml(event.messageId || "")}</strong>
+            </div>
+            <div class="summary-item">
+                <span>当前状态</span>
+                <strong>${escapeHtml(event.status || "")}，重放 ${escapeHtml(event.replayCount ?? "")} 次</strong>
+            </div>
+            <div class="summary-item">
+                <span>事件</span>
+                <strong>${escapeHtml(event.eventType || replayRequest.body.eventType || "")}</strong>
+            </div>
+            <div class="summary-item">
+                <span>聚合</span>
+                <strong>${escapeHtml(event.aggregateType || replayRequest.body.aggregateType || "")}:${escapeHtml(event.aggregateId || replayRequest.body.aggregateId || "")}</strong>
+            </div>
+            <div class="summary-item">
+                <span>操作者</span>
+                <strong>${escapeHtml(replayRequest.operatorId || "")} / ${escapeHtml(replayRequest.operatorRole || "")}</strong>
+            </div>
+            <div class="summary-item">
+                <span>重放原因</span>
+                <strong>${escapeHtml(replayRequest.body.reason)}</strong>
+            </div>
+        </div>
+    `;
+}
+
+function replayRiskList(replayRequest) {
+    return replayRisks(replayRequest).map((risk) => `
+        <article class="risk-item ${risk.level}">
+            <strong>${escapeHtml(risk.title)}</strong>
+            <div class="muted">${escapeHtml(risk.description)}</div>
+        </article>
+    `).join("");
+}
+
+function replayRisks(replayRequest) {
+    const risks = [];
+    const event = replayRequest.event || {};
+    const overrideFields = ["eventId", "eventType", "aggregateType", "aggregateId", "payload"]
+            .filter((field) => Object.prototype.hasOwnProperty.call(replayRequest.body, field));
+    if (overrideFields.length === 0) {
+        risks.push({
+            level: "",
+            title: "未覆盖消息字段",
+            description: "本次将使用失败事件原始字段重放，后端会在缺失 eventId 时生成新的 UUID。"
+        });
+    } else {
+        risks.push({
+            level: "risk-medium",
+            title: `覆盖字段：${overrideFields.join(", ")}`,
+            description: "覆盖字段会写入重放审计，请确认它们来自已核对的修复方案。"
+        });
+    }
+    if (Object.prototype.hasOwnProperty.call(replayRequest.body, "payload")) {
+        risks.push({
+            level: "risk-high",
+            title: "Payload 已被覆盖",
+            description: "Payload 变更会改变下游消费者收到的消息内容，请确认 JSON 和业务语义都正确。"
+        });
+    }
+    if (event.status === "REPLAYED") {
+        risks.push({
+            level: "risk-medium",
+            title: "当前事件已经重放成功",
+            description: "后端会保护性跳过再次投递，并记录 SKIPPED_ALREADY_REPLAYED 审计。"
+        });
+    }
+    if (!replayRequest.operatorId || !replayRequest.operatorRole) {
+        risks.push({
+            level: "risk-high",
+            title: "操作者信息不完整",
+            description: "后端会拒绝缺少 X-Operator-Id 或 X-Operator-Role 的重放请求。"
+        });
+    }
+    return risks;
 }
 
 function replayTargetId() {

@@ -25,7 +25,10 @@ class FailedEventManagementPageTests {
                 "replayButton",
                 "refreshAttemptsButton",
                 "attemptList",
-                "replayReasonInput"
+                "replayReasonInput",
+                "replayConfirmOverlay",
+                "replayConfirmCheckbox",
+                "replayConfirmSubmitButton"
         );
         assertThat(javascript).contains(
                 "const apiBase = \"/api/v1/failed-events\"",
@@ -36,6 +39,9 @@ class FailedEventManagementPageTests {
                 "/replay",
                 "/export",
                 "replayActiveEvent",
+                "openReplayConfirm",
+                "confirmReplaySubmission",
+                "replayRisks",
                 "loadReplayAttempts",
                 "X-Operator-Id",
                 "reason"
@@ -46,6 +52,9 @@ class FailedEventManagementPageTests {
                 ".side-column",
                 ".replay-panel",
                 ".attempt-list",
+                ".modal-overlay",
+                ".risk-high",
+                ".confirm-check",
                 ".history-panel",
                 "@media (max-width: 640px)"
         );

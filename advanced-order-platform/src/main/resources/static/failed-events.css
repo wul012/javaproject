@@ -346,6 +346,133 @@ th {
     word-break: break-word;
 }
 
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    background: rgba(16, 35, 51, 0.55);
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal {
+    width: min(720px, 100%);
+    max-height: calc(100vh - 36px);
+    overflow: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    box-shadow: 0 24px 60px rgba(17, 32, 51, 0.25);
+}
+
+.modal-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+}
+
+.modal-heading h2 {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.modal-heading p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.confirm-summary,
+.risk-list {
+    display: grid;
+    gap: 10px;
+    padding: 14px 16px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.summary-item,
+.risk-item {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+    background: #fbfdff;
+}
+
+.summary-item span {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.summary-item strong,
+.risk-item strong {
+    word-break: break-word;
+}
+
+.risk-item {
+    border-left: 4px solid var(--brand);
+}
+
+.risk-medium {
+    border-left-color: var(--accent);
+    background: #fffaf2;
+}
+
+.risk-high {
+    border-left-color: var(--danger);
+    background: #fff5f5;
+}
+
+.confirm-check {
+    display: flex;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 16px 14px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #f7fafc;
+}
+
+.confirm-check input {
+    width: auto;
+    min-height: auto;
+    margin-top: 3px;
+}
+
+.confirm-check span {
+    color: var(--ink);
+    font-size: 13px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0 16px 16px;
+}
+
+.primary-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
 .history-panel {
     min-height: 360px;
 }
@@ -444,8 +571,17 @@ th {
 
     .filter-actions,
     .replay-actions,
+    .modal-actions,
     .panel-heading {
         align-items: stretch;
+        flex-direction: column;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-heading {
         flex-direction: column;
     }
 
