@@ -24,8 +24,14 @@ public class FailedEventMessageController {
 
     private final FailedEventMessageService failedEventMessageService;
 
-    public FailedEventMessageController(FailedEventMessageService failedEventMessageService) {
+    private final FailedEventOperatorContextResolver operatorContextResolver;
+
+    public FailedEventMessageController(
+            FailedEventMessageService failedEventMessageService,
+            FailedEventOperatorContextResolver operatorContextResolver
+    ) {
         this.failedEventMessageService = failedEventMessageService;
+        this.operatorContextResolver = operatorContextResolver;
     }
 
     @GetMapping
@@ -241,43 +247,47 @@ public class FailedEventMessageController {
         return failedEventMessageService.listReplayApprovalHistory(id);
     }
 
+    @GetMapping("/operator-context")
+    public FailedEventOperatorContextResponse resolveOperatorContext(@RequestHeader HttpHeaders headers) {
+        return FailedEventOperatorContextResponse.from(
+                operatorContextResolver.resolve(headers),
+                operatorContextResolver.allowedRoles()
+        );
+    }
+
     @PostMapping("/management-status")
     public FailedEventManagementBatchResponse markManagementStatus(
-            @RequestHeader(value = "X-Operator-Id", required = false) String operatorId,
-            @RequestHeader(value = "X-Operator-Role", required = false) String operatorRole,
+            @RequestHeader HttpHeaders headers,
             @RequestBody MarkFailedEventManagementRequest request
     ) {
-        return failedEventMessageService.markManagementStatus(request, operatorId, operatorRole);
+        return failedEventMessageService.markManagementStatus(request, operatorContextResolver.resolve(headers));
     }
 
     @PostMapping("/{id}/replay")
     public FailedEventMessageResponse replayFailedMessage(
             @PathVariable Long id,
-            @RequestHeader(value = "X-Operator-Id", required = false) String operatorId,
-            @RequestHeader(value = "X-Operator-Role", required = false) String operatorRole,
+            @RequestHeader HttpHeaders headers,
             @RequestBody(required = false) ReplayFailedEventRequest request
     ) {
-        return failedEventMessageService.replay(id, request, operatorId, operatorRole);
+        return failedEventMessageService.replay(id, request, operatorContextResolver.resolve(headers));
     }
 
     @PostMapping("/{id}/replay-approval")
     public FailedEventMessageResponse requestReplayApproval(
             @PathVariable Long id,
-            @RequestHeader(value = "X-Operator-Id", required = false) String operatorId,
-            @RequestHeader(value = "X-Operator-Role", required = false) String operatorRole,
+            @RequestHeader HttpHeaders headers,
             @RequestBody(required = false) RequestFailedEventReplayApprovalRequest request
     ) {
-        return failedEventMessageService.requestReplayApproval(id, request, operatorId, operatorRole);
+        return failedEventMessageService.requestReplayApproval(id, request, operatorContextResolver.resolve(headers));
     }
 
     @PostMapping("/{id}/replay-approval/review")
     public FailedEventMessageResponse reviewReplayApproval(
             @PathVariable Long id,
-            @RequestHeader(value = "X-Operator-Id", required = false) String operatorId,
-            @RequestHeader(value = "X-Operator-Role", required = false) String operatorRole,
+            @RequestHeader HttpHeaders headers,
             @RequestBody(required = false) ReviewFailedEventReplayApprovalRequest request
     ) {
-        return failedEventMessageService.reviewReplayApproval(id, request, operatorId, operatorRole);
+        return failedEventMessageService.reviewReplayApproval(id, request, operatorContextResolver.resolve(headers));
     }
 
     private ResponseEntity<String> csvResponse(String filename, String csv) {

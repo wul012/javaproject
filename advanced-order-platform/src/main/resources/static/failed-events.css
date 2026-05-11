@@ -186,6 +186,22 @@ textarea {
     font-size: 13px;
 }
 
+.operator-context-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 7px 10px;
+    border: 1px dashed #c8d2df;
+    border-radius: 6px;
+    background: #f8fbfe;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.replay-actions .operator-context-status {
+    margin-right: auto;
+}
+
 .content-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 390px;

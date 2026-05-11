@@ -36,6 +36,7 @@
 - 失败事件重放申请/审批/拒绝门禁
 - 失败事件重放审批历史流水查询和 CSV 导出
 - 失败事件重放审批职责分离，申请人不能审批自己的申请
+- 失败事件写操作统一操作员上下文解析和页面身份校验
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -408,6 +409,28 @@ Payload 覆盖风险提示
 申请/审批/拒绝失败事件重放
 查看失败事件重放审批流水
 阻止申请人自提自审
+校验当前操作员身份和角色是否会被后端接受
+```
+
+校验失败事件操作员上下文：
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://localhost:8080/api/v1/failed-events/operator-context `
+  -Headers @{
+    "X-Operator-Id" = " local-admin "
+    "X-Operator-Role" = " sre "
+  }
+```
+
+响应会返回规范化后的操作员信息和当前允许角色：
+
+```json
+{
+  "operatorId": "local-admin",
+  "operatorRole": "SRE",
+  "allowedRoles": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+}
 ```
 
 申请重放审批：
@@ -628,18 +651,19 @@ notification
  -> v26 对齐 RabbitMQ profile 和 Actuator Rabbit health，默认本地启动不再因为未启用 RabbitMQ 而 health DOWN
  -> v27 增加重放审批历史流水，保留每次申请、拒绝和批准记录，并支持查询/导出
  -> v28 增加审批职责分离，禁止申请人审批自己的重放申请
+ -> v29 增加失败事件操作员上下文解析器，把 X-Operator-* 头统一解析为可替换的操作员上下文，并提供页面身份校验入口
 
 common
  -> 业务异常和统一错误响应
 
 static
- -> 失败事件管理静态页面、重放工作台、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
+ -> 失败事件管理静态页面、重放工作台、操作员身份校验、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
 ```
 
 后续建议升级顺序：
 
-1. 给失败事件重放接口接入真实认证鉴权，把 `X-Operator-*` 请求头替换成登录态和权限上下文。
-2. 给失败事件管理页面增加真实登录态和权限控制。
+1. 在 `FailedEventOperatorContextResolver` 后面接入真实认证鉴权，把 `X-Operator-*` 请求头替换成登录态和权限上下文。
+2. 给失败事件管理页面增加真实登录态、权限控制和当前用户展示。
 3. 接入 Redis，训练热点商品缓存、限流、幂等 token。
 4. 接入 OpenTelemetry、Prometheus、Grafana。
 5. 增加并发库存压测和更多 Testcontainers 多中间件集成测试。

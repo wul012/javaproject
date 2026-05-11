@@ -132,6 +132,8 @@
                 <span>备注</span>
                 <textarea id="managementNoteInput" rows="2">triage from management page</textarea>
             </label>
+            <button id="verifyOperatorButton" class="ghost-button" type="button">校验身份</button>
+            <span id="operatorContextStatus" class="operator-context-status">未校验</span>
             <button id="markButton" class="primary-button" type="button">提交标记</button>
         </div>
     </section>
@@ -226,6 +228,8 @@
                     </label>
                 </div>
                 <div class="replay-actions">
+                    <button id="verifyReplayOperatorButton" class="ghost-button" type="button">校验身份</button>
+                    <span id="replayOperatorContextStatus" class="operator-context-status">未校验</span>
                     <button id="requestReplayApprovalButton" class="secondary-button" type="button">Request approval</button>
                     <button id="approveReplayButton" class="secondary-button" type="button">Approve</button>
                     <button id="rejectReplayButton" class="ghost-button" type="button">Reject</button>

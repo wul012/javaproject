@@ -27,8 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "operatorRoleInput",
         "targetManagementStatusInput",
         "managementNoteInput",
+        "operatorContextStatus",
         "replayOperatorIdInput",
         "replayOperatorRoleInput",
+        "replayOperatorContextStatus",
         "replayReasonInput",
         "replayApprovalReasonInput",
         "replayApprovalReviewNoteInput",
@@ -65,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("previousPageButton").addEventListener("click", previousPage);
     document.getElementById("nextPageButton").addEventListener("click", nextPage);
     document.getElementById("markButton").addEventListener("click", markSelectedEvents);
+    document.getElementById("verifyOperatorButton").addEventListener("click", () => verifyOperatorContext("management"));
+    document.getElementById("verifyReplayOperatorButton").addEventListener("click", () => verifyOperatorContext("replay"));
     document.getElementById("requestReplayApprovalButton").addEventListener("click", requestReplayApproval);
     document.getElementById("approveReplayButton").addEventListener("click", () => reviewReplayApproval("APPROVED"));
     document.getElementById("rejectReplayButton").addEventListener("click", () => reviewReplayApproval("REJECTED"));
@@ -324,8 +328,7 @@ async function markSelectedEvents() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-Operator-Id": elements.operatorIdInput.value,
-                "X-Operator-Role": elements.operatorRoleInput.value
+                ...managementOperatorHeaders()
             },
             body: JSON.stringify(body)
         });
@@ -341,6 +344,30 @@ async function markSelectedEvents() {
     } catch (error) {
         showToast(error.message, true);
     }
+}
+
+async function verifyOperatorContext(scope) {
+    const statusElement = scope === "replay"
+            ? elements.replayOperatorContextStatus
+            : elements.operatorContextStatus;
+    const headers = scope === "replay" ? replayContextHeaders() : managementOperatorHeaders();
+    try {
+        statusElement.textContent = "校验中";
+        const result = await fetchJson(`${apiBase}/operator-context`, { headers });
+        const summary = `${result.operatorId} / ${result.operatorRole}`;
+        statusElement.textContent = summary;
+        showToast(`身份已通过: ${summary}`);
+    } catch (error) {
+        statusElement.textContent = "校验失败";
+        showToast(error.message, true);
+    }
+}
+
+function managementOperatorHeaders() {
+    return {
+        "X-Operator-Id": elements.operatorIdInput.value,
+        "X-Operator-Role": elements.operatorRoleInput.value
+    };
 }
 
 async function requestReplayApproval() {
@@ -413,6 +440,12 @@ async function handleReplayApprovalResult(result, message) {
 function replayOperatorHeaders() {
     return {
         "Content-Type": "application/json",
+        ...replayContextHeaders()
+    };
+}
+
+function replayContextHeaders() {
+    return {
         "X-Operator-Id": elements.replayOperatorIdInput.value,
         "X-Operator-Role": elements.replayOperatorRoleInput.value
     };
@@ -734,8 +767,8 @@ function updateSelectedCount() {
     elements.selectedCount.textContent = `${state.selectedIds.size} 已选`;
 }
 
-async function fetchJson(url) {
-    const response = await fetch(url);
+async function fetchJson(url, options = {}) {
+    const response = await fetch(url, options);
     if (!response.ok) {
         throw new Error(await errorMessage(response));
     }

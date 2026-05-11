@@ -84,6 +84,8 @@ public class FailedEventMessageService {
 
     private final FailedEventReplayApprovalHistoryRepository failedEventReplayApprovalHistoryRepository;
 
+    private final FailedEventOperatorContextResolver operatorContextResolver;
+
     private final FailedEventReplayProperties failedEventReplayProperties;
 
     private final RabbitTemplate rabbitTemplate;
@@ -95,6 +97,7 @@ public class FailedEventMessageService {
             FailedEventReplayAttemptRepository failedEventReplayAttemptRepository,
             FailedEventManagementHistoryRepository failedEventManagementHistoryRepository,
             FailedEventReplayApprovalHistoryRepository failedEventReplayApprovalHistoryRepository,
+            FailedEventOperatorContextResolver operatorContextResolver,
             FailedEventReplayProperties failedEventReplayProperties,
             RabbitTemplate rabbitTemplate,
             OutboxRabbitMqProperties outboxRabbitMqProperties
@@ -103,6 +106,7 @@ public class FailedEventMessageService {
         this.failedEventReplayAttemptRepository = failedEventReplayAttemptRepository;
         this.failedEventManagementHistoryRepository = failedEventManagementHistoryRepository;
         this.failedEventReplayApprovalHistoryRepository = failedEventReplayApprovalHistoryRepository;
+        this.operatorContextResolver = operatorContextResolver;
         this.failedEventReplayProperties = failedEventReplayProperties;
         this.rabbitTemplate = rabbitTemplate;
         this.outboxRabbitMqProperties = outboxRabbitMqProperties;
@@ -178,13 +182,22 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
+        return markManagementStatus(request, operatorContextResolver.resolve(operatorId, operatorRole));
+    }
+
+    @Transactional
+    public FailedEventManagementBatchResponse markManagementStatus(
+            MarkFailedEventManagementRequest request,
+            FailedEventOperatorContext operatorContext
+    ) {
         if (request == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "request body is required");
         }
         List<Long> ids = normalizeManagementIds(request.ids());
         FailedEventManagementStatus managementStatus = requireManagementStatus(request.status());
-        String normalizedOperatorId = normalizeOperatorId(operatorId);
-        String normalizedOperatorRole = requireAllowedOperatorRole(operatorRole);
+        FailedEventOperatorContext operator = requireOperatorContext(operatorContext);
+        String normalizedOperatorId = operator.operatorId();
+        String normalizedOperatorRole = operator.operatorRole();
         String note = resolveManagementNote(request.note());
         Instant managedAt = Instant.now();
         List<FailedEventMessage> failedMessages = failedEventMessageRepository.findAllById(ids);
@@ -220,10 +233,20 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
+        return requestReplayApproval(id, request, operatorContextResolver.resolve(operatorId, operatorRole));
+    }
+
+    @Transactional
+    public FailedEventMessageResponse requestReplayApproval(
+            Long id,
+            RequestFailedEventReplayApprovalRequest request,
+            FailedEventOperatorContext operatorContext
+    ) {
         FailedEventMessage failedMessage = failedEventMessageRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found"));
-        String normalizedOperatorId = normalizeOperatorId(operatorId);
-        String normalizedOperatorRole = requireAllowedOperatorRole(operatorRole);
+        FailedEventOperatorContext operator = requireOperatorContext(operatorContext);
+        String normalizedOperatorId = operator.operatorId();
+        String normalizedOperatorRole = operator.operatorRole();
         String reason = resolveReplayApprovalReason(request);
         if (failedMessage.getStatus() == FailedEventMessageStatus.REPLAYED) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "failed event message has already been replayed");
@@ -254,10 +277,20 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
+        return reviewReplayApproval(id, request, operatorContextResolver.resolve(operatorId, operatorRole));
+    }
+
+    @Transactional
+    public FailedEventMessageResponse reviewReplayApproval(
+            Long id,
+            ReviewFailedEventReplayApprovalRequest request,
+            FailedEventOperatorContext operatorContext
+    ) {
         FailedEventMessage failedMessage = failedEventMessageRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found"));
-        String normalizedOperatorId = normalizeOperatorId(operatorId);
-        String normalizedOperatorRole = requireAllowedOperatorRole(operatorRole);
+        FailedEventOperatorContext operator = requireOperatorContext(operatorContext);
+        String normalizedOperatorId = operator.operatorId();
+        String normalizedOperatorRole = operator.operatorRole();
         FailedEventReplayApprovalStatus reviewStatus = requireReplayApprovalReviewStatus(request);
         String note = resolveReplayApprovalReviewNote(reviewStatus, request == null ? null : request.note());
         if (failedMessage.getReplayApprovalStatus() != FailedEventReplayApprovalStatus.PENDING) {
@@ -463,12 +496,12 @@ public class FailedEventMessageService {
 
     @Transactional
     public FailedEventMessageResponse replay(Long id, ReplayFailedEventRequest request) {
-        return replay(id, request, "system", failedEventReplayProperties.getSystemRole());
+        return replay(id, request, operatorContextResolver.resolve("system", failedEventReplayProperties.getSystemRole()));
     }
 
     @Transactional
     public FailedEventMessageResponse replay(Long id, ReplayFailedEventRequest request, String operatorId) {
-        return replay(id, request, operatorId, failedEventReplayProperties.getSystemRole());
+        return replay(id, request, operatorContextResolver.resolve(operatorId, failedEventReplayProperties.getSystemRole()));
     }
 
     @Transactional
@@ -478,10 +511,20 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
+        return replay(id, request, operatorContextResolver.resolve(operatorId, operatorRole));
+    }
+
+    @Transactional
+    public FailedEventMessageResponse replay(
+            Long id,
+            ReplayFailedEventRequest request,
+            FailedEventOperatorContext operatorContext
+    ) {
         FailedEventMessage failedMessage = failedEventMessageRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "failed event message not found"));
-        String normalizedOperatorId = normalizeOperatorId(operatorId);
-        String normalizedOperatorRole = requireAllowedOperatorRole(operatorRole);
+        FailedEventOperatorContext operator = requireOperatorContext(operatorContext);
+        String normalizedOperatorId = operator.operatorId();
+        String normalizedOperatorRole = operator.operatorRole();
         String reason = resolveReplayReason(request);
         if (!failedMessage.isReplayApproved()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "failed event replay must be approved before replay");
@@ -970,23 +1013,11 @@ public class FailedEventMessageService {
         return value;
     }
 
-    private String normalizeOperatorId(String operatorId) {
-        if (operatorId == null || operatorId.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "X-Operator-Id header is required");
+    private FailedEventOperatorContext requireOperatorContext(FailedEventOperatorContext operatorContext) {
+        if (operatorContext == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "operator context is required");
         }
-        String normalized = operatorId.strip();
-        return truncate(normalized.strip(), 80);
-    }
-
-    private String requireAllowedOperatorRole(String operatorRole) {
-        if (operatorRole == null || operatorRole.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "X-Operator-Role header is required");
-        }
-        String normalizedRole = failedEventReplayProperties.normalize(operatorRole);
-        if (!failedEventReplayProperties.isAllowedRole(normalizedRole)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "operator role is not allowed to replay failed events");
-        }
-        return truncate(normalizedRole, 80);
+        return operatorContext;
     }
 
     private String resolveReplayReason(ReplayFailedEventRequest request) {
