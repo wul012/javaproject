@@ -356,11 +356,22 @@ async function verifyOperatorContext(scope) {
         const result = await fetchJson(`${apiBase}/operator-context`, { headers });
         const summary = `${result.operatorId} / ${result.operatorRole}`;
         statusElement.textContent = summary;
+        statusElement.title = actionRoleSummary(result.allowedRolesByAction);
         showToast(`身份已通过: ${summary}`);
     } catch (error) {
         statusElement.textContent = "校验失败";
+        statusElement.removeAttribute("title");
         showToast(error.message, true);
     }
+}
+
+function actionRoleSummary(rolesByAction) {
+    if (!rolesByAction) {
+        return "";
+    }
+    return Object.entries(rolesByAction)
+            .map(([action, roles]) => `${action}: ${(roles || []).join("/")}`)
+            .join(" | ");
 }
 
 function managementOperatorHeaders() {

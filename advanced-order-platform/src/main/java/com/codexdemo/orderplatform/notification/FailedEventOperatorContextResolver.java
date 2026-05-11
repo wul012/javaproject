@@ -1,6 +1,8 @@
 package com.codexdemo.orderplatform.notification;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -24,12 +26,34 @@ public class FailedEventOperatorContextResolver {
         return resolve(headers.getFirst(OPERATOR_ID_HEADER), headers.getFirst(OPERATOR_ROLE_HEADER));
     }
 
+    public FailedEventOperatorContext resolve(HttpHeaders headers, FailedEventOperatorAction action) {
+        return resolve(headers.getFirst(OPERATOR_ID_HEADER), headers.getFirst(OPERATOR_ROLE_HEADER), action);
+    }
+
     public FailedEventOperatorContext resolve(String operatorId, String operatorRole) {
         return new FailedEventOperatorContext(normalizeOperatorId(operatorId), requireAllowedOperatorRole(operatorRole));
     }
 
+    public FailedEventOperatorContext resolve(String operatorId, String operatorRole, FailedEventOperatorAction action) {
+        FailedEventOperatorContext operatorContext = resolve(operatorId, operatorRole);
+        requireAllowedForAction(operatorContext.operatorRole(), action);
+        return operatorContext;
+    }
+
     public List<String> allowedRoles() {
-        return failedEventReplayProperties.getAllowedRoles()
+        return normalizeRoles(failedEventReplayProperties.getAllowedRoles());
+    }
+
+    public Map<FailedEventOperatorAction, List<String>> allowedRolesByAction() {
+        Map<FailedEventOperatorAction, List<String>> rolesByAction = new EnumMap<>(FailedEventOperatorAction.class);
+        for (FailedEventOperatorAction action : FailedEventOperatorAction.values()) {
+            rolesByAction.put(action, normalizeRoles(failedEventReplayProperties.rolesFor(action)));
+        }
+        return rolesByAction;
+    }
+
+    private List<String> normalizeRoles(List<String> roles) {
+        return roles
                 .stream()
                 .filter(StringUtils::hasText)
                 .map(failedEventReplayProperties::normalize)
@@ -53,6 +77,15 @@ public class FailedEventOperatorContextResolver {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "operator role is not allowed to replay failed events");
         }
         return truncate(normalizedRole, 80);
+    }
+
+    private void requireAllowedForAction(String normalizedRole, FailedEventOperatorAction action) {
+        if (!failedEventReplayProperties.isAllowedFor(action, normalizedRole)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "operator role is not allowed for action: " + action.name()
+            );
+        }
     }
 
     private String truncate(String value, int maxLength) {

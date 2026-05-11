@@ -72,4 +72,19 @@ failed-event:
       - ORDER_SUPPORT
       - SRE
       - SYSTEM
+    management-roles:
+      - ORDER_SUPPORT
+      - SRE
+      - SYSTEM
+    replay-approval-request-roles:
+      - ORDER_SUPPORT
+      - SRE
+      - SYSTEM
+    replay-approval-review-roles:
+      - SRE
+      - SYSTEM
+    replay-roles:
+      - ORDER_SUPPORT
+      - SRE
+      - SYSTEM
     system-role: SYSTEM

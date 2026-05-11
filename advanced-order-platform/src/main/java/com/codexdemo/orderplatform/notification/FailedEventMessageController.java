@@ -251,7 +251,8 @@ public class FailedEventMessageController {
     public FailedEventOperatorContextResponse resolveOperatorContext(@RequestHeader HttpHeaders headers) {
         return FailedEventOperatorContextResponse.from(
                 operatorContextResolver.resolve(headers),
-                operatorContextResolver.allowedRoles()
+                operatorContextResolver.allowedRoles(),
+                operatorContextResolver.allowedRolesByAction()
         );
     }
 
@@ -260,7 +261,10 @@ public class FailedEventMessageController {
             @RequestHeader HttpHeaders headers,
             @RequestBody MarkFailedEventManagementRequest request
     ) {
-        return failedEventMessageService.markManagementStatus(request, operatorContextResolver.resolve(headers));
+        return failedEventMessageService.markManagementStatus(
+                request,
+                operatorContextResolver.resolve(headers, FailedEventOperatorAction.MANAGE_FAILED_EVENT)
+        );
     }
 
     @PostMapping("/{id}/replay")
@@ -269,7 +273,11 @@ public class FailedEventMessageController {
             @RequestHeader HttpHeaders headers,
             @RequestBody(required = false) ReplayFailedEventRequest request
     ) {
-        return failedEventMessageService.replay(id, request, operatorContextResolver.resolve(headers));
+        return failedEventMessageService.replay(
+                id,
+                request,
+                operatorContextResolver.resolve(headers, FailedEventOperatorAction.REPLAY_FAILED_EVENT)
+        );
     }
 
     @PostMapping("/{id}/replay-approval")
@@ -278,7 +286,11 @@ public class FailedEventMessageController {
             @RequestHeader HttpHeaders headers,
             @RequestBody(required = false) RequestFailedEventReplayApprovalRequest request
     ) {
-        return failedEventMessageService.requestReplayApproval(id, request, operatorContextResolver.resolve(headers));
+        return failedEventMessageService.requestReplayApproval(
+                id,
+                request,
+                operatorContextResolver.resolve(headers, FailedEventOperatorAction.REQUEST_REPLAY_APPROVAL)
+        );
     }
 
     @PostMapping("/{id}/replay-approval/review")
@@ -287,7 +299,11 @@ public class FailedEventMessageController {
             @RequestHeader HttpHeaders headers,
             @RequestBody(required = false) ReviewFailedEventReplayApprovalRequest request
     ) {
-        return failedEventMessageService.reviewReplayApproval(id, request, operatorContextResolver.resolve(headers));
+        return failedEventMessageService.reviewReplayApproval(
+                id,
+                request,
+                operatorContextResolver.resolve(headers, FailedEventOperatorAction.REVIEW_REPLAY_APPROVAL)
+        );
     }
 
     private ResponseEntity<String> csvResponse(String filename, String csv) {

@@ -1,21 +1,25 @@
 package com.codexdemo.orderplatform.notification;
 
 import java.util.List;
+import java.util.Map;
 
 public record FailedEventOperatorContextResponse(
         String operatorId,
         String operatorRole,
-        List<String> allowedRoles
+        List<String> allowedRoles,
+        Map<FailedEventOperatorAction, List<String>> allowedRolesByAction
 ) {
 
     public static FailedEventOperatorContextResponse from(
             FailedEventOperatorContext operatorContext,
-            List<String> allowedRoles
+            List<String> allowedRoles,
+            Map<FailedEventOperatorAction, List<String>> allowedRolesByAction
     ) {
         return new FailedEventOperatorContextResponse(
                 operatorContext.operatorId(),
                 operatorContext.operatorRole(),
-                allowedRoles
+                allowedRoles,
+                allowedRolesByAction
         );
     }
 }

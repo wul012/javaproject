@@ -182,7 +182,10 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
-        return markManagementStatus(request, operatorContextResolver.resolve(operatorId, operatorRole));
+        return markManagementStatus(
+                request,
+                operatorContextResolver.resolve(operatorId, operatorRole, FailedEventOperatorAction.MANAGE_FAILED_EVENT)
+        );
     }
 
     @Transactional
@@ -233,7 +236,11 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
-        return requestReplayApproval(id, request, operatorContextResolver.resolve(operatorId, operatorRole));
+        return requestReplayApproval(
+                id,
+                request,
+                operatorContextResolver.resolve(operatorId, operatorRole, FailedEventOperatorAction.REQUEST_REPLAY_APPROVAL)
+        );
     }
 
     @Transactional
@@ -277,7 +284,11 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
-        return reviewReplayApproval(id, request, operatorContextResolver.resolve(operatorId, operatorRole));
+        return reviewReplayApproval(
+                id,
+                request,
+                operatorContextResolver.resolve(operatorId, operatorRole, FailedEventOperatorAction.REVIEW_REPLAY_APPROVAL)
+        );
     }
 
     @Transactional
@@ -496,12 +507,28 @@ public class FailedEventMessageService {
 
     @Transactional
     public FailedEventMessageResponse replay(Long id, ReplayFailedEventRequest request) {
-        return replay(id, request, operatorContextResolver.resolve("system", failedEventReplayProperties.getSystemRole()));
+        return replay(
+                id,
+                request,
+                operatorContextResolver.resolve(
+                        "system",
+                        failedEventReplayProperties.getSystemRole(),
+                        FailedEventOperatorAction.REPLAY_FAILED_EVENT
+                )
+        );
     }
 
     @Transactional
     public FailedEventMessageResponse replay(Long id, ReplayFailedEventRequest request, String operatorId) {
-        return replay(id, request, operatorContextResolver.resolve(operatorId, failedEventReplayProperties.getSystemRole()));
+        return replay(
+                id,
+                request,
+                operatorContextResolver.resolve(
+                        operatorId,
+                        failedEventReplayProperties.getSystemRole(),
+                        FailedEventOperatorAction.REPLAY_FAILED_EVENT
+                )
+        );
     }
 
     @Transactional
@@ -511,7 +538,11 @@ public class FailedEventMessageService {
             String operatorId,
             String operatorRole
     ) {
-        return replay(id, request, operatorContextResolver.resolve(operatorId, operatorRole));
+        return replay(
+                id,
+                request,
+                operatorContextResolver.resolve(operatorId, operatorRole, FailedEventOperatorAction.REPLAY_FAILED_EVENT)
+        );
     }
 
     @Transactional

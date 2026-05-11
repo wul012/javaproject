@@ -37,6 +37,7 @@
 - 失败事件重放审批历史流水查询和 CSV 导出
 - 失败事件重放审批职责分离，申请人不能审批自己的申请
 - 失败事件写操作统一操作员上下文解析和页面身份校验
+- 失败事件写操作按动作区分允许角色，管理、申请、审批、重放可独立配置
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -410,6 +411,7 @@ Payload 覆盖风险提示
 查看失败事件重放审批流水
 阻止申请人自提自审
 校验当前操作员身份和角色是否会被后端接受
+查看当前角色在管理、申请、审批、重放动作上的允许范围
 ```
 
 校验失败事件操作员上下文：
@@ -429,9 +431,43 @@ Invoke-RestMethod `
 {
   "operatorId": "local-admin",
   "operatorRole": "SRE",
-  "allowedRoles": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+  "allowedRoles": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
+  "allowedRolesByAction": {
+    "MANAGE_FAILED_EVENT": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
+    "REQUEST_REPLAY_APPROVAL": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
+    "REVIEW_REPLAY_APPROVAL": ["SRE", "SYSTEM"],
+    "REPLAY_FAILED_EVENT": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+  }
 }
 ```
+
+失败事件动作级角色配置：
+
+```yaml
+failed-event:
+  replay:
+    allowed-roles:
+      - ORDER_SUPPORT
+      - SRE
+      - SYSTEM
+    management-roles:
+      - ORDER_SUPPORT
+      - SRE
+      - SYSTEM
+    replay-approval-request-roles:
+      - ORDER_SUPPORT
+      - SRE
+      - SYSTEM
+    replay-approval-review-roles:
+      - SRE
+      - SYSTEM
+    replay-roles:
+      - ORDER_SUPPORT
+      - SRE
+      - SYSTEM
+```
+
+默认策略里 `ORDER_SUPPORT` 可以管理失败事件、申请审批和执行重放，但不能审批重放申请；审批动作默认只允许 `SRE` 和 `SYSTEM`。
 
 申请重放审批：
 
@@ -652,12 +688,13 @@ notification
  -> v27 增加重放审批历史流水，保留每次申请、拒绝和批准记录，并支持查询/导出
  -> v28 增加审批职责分离，禁止申请人审批自己的重放申请
  -> v29 增加失败事件操作员上下文解析器，把 X-Operator-* 头统一解析为可替换的操作员上下文，并提供页面身份校验入口
+ -> v30 增加失败事件动作级角色策略，让管理、申请、审批、重放按不同角色集合独立授权
 
 common
  -> 业务异常和统一错误响应
 
 static
- -> 失败事件管理静态页面、重放工作台、操作员身份校验、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
+ -> 失败事件管理静态页面、重放工作台、操作员身份校验、动作级角色提示、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
 ```
 
 后续建议升级顺序：
