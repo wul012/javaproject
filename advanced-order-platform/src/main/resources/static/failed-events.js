@@ -380,6 +380,10 @@ async function reviewReplayApproval(status) {
         showToast("拒绝审批需要填写原因", true);
         return;
     }
+    if (isSelfReviewAttempt()) {
+        showToast("申请人不能审批自己的重放申请，请切换审批人", true);
+        return;
+    }
     try {
         const response = await fetch(`${apiBase}/${id}/replay-approval/review`, {
             method: "POST",
@@ -412,6 +416,13 @@ function replayOperatorHeaders() {
         "X-Operator-Id": elements.replayOperatorIdInput.value,
         "X-Operator-Role": elements.replayOperatorRoleInput.value
     };
+}
+
+function isSelfReviewAttempt() {
+    const event = state.activeEvent || {};
+    return event.replayApprovalStatus === "PENDING"
+            && event.replayApprovalRequestedBy
+            && event.replayApprovalRequestedBy === elements.replayOperatorIdInput.value.trim();
 }
 
 async function replayActiveEvent() {

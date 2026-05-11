@@ -328,6 +328,23 @@ class FailedEventSearchIntegrationTests {
                         assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.CONFLICT)
                 );
 
+        assertThatThrownBy(() -> failedEventMessageService.reviewReplayApproval(
+                failedMessage.getId(),
+                new ReviewFailedEventReplayApprovalRequest(
+                        FailedEventReplayApprovalStatus.APPROVED,
+                        "self approval should be blocked"
+                ),
+                "ops-user",
+                "SRE"
+        ))
+                .isInstanceOfSatisfying(ResponseStatusException.class, ex -> {
+                    assertThat(ex.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+                    assertThat(ex.getReason()).contains("cannot review own request");
+                });
+        assertThat(failedEventMessageService.listReplayApprovalHistory(failedMessage.getId()))
+                .extracting(FailedEventReplayApprovalHistoryResponse::action)
+                .containsExactly(FailedEventReplayApprovalHistoryAction.REQUESTED);
+
         FailedEventMessageResponse rejected = failedEventMessageService.reviewReplayApproval(
                 failedMessage.getId(),
                 new ReviewFailedEventReplayApprovalRequest(

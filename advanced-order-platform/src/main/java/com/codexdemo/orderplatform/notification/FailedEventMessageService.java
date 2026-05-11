@@ -263,6 +263,7 @@ public class FailedEventMessageService {
         if (failedMessage.getReplayApprovalStatus() != FailedEventReplayApprovalStatus.PENDING) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "replay approval is not pending");
         }
+        ensureReplayApprovalReviewerIsDifferent(failedMessage, normalizedOperatorId);
         Instant reviewedAt = Instant.now();
         if (reviewStatus == FailedEventReplayApprovalStatus.APPROVED) {
             failedMessage.approveReplay(normalizedOperatorId, note, reviewedAt);
@@ -840,6 +841,16 @@ public class FailedEventMessageService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "replay approval rejection note is required");
         }
         return note == null || note.isBlank() ? null : truncate(note.strip(), 500);
+    }
+
+    private void ensureReplayApprovalReviewerIsDifferent(FailedEventMessage failedMessage, String reviewerId) {
+        String requesterId = failedMessage.getReplayApprovalRequestedBy();
+        if (requesterId != null && requesterId.equals(reviewerId)) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "replay approval requester cannot review own request"
+            );
+        }
     }
 
     private NormalizedPageRequest normalizePageRequest(

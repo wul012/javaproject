@@ -51,6 +51,8 @@ class FailedEventManagementPageTests {
                 "/export",
                 "requestReplayApproval",
                 "reviewReplayApproval",
+                "isSelfReviewAttempt",
+                "申请人不能审批自己的重放申请",
                 "replayActiveEvent",
                 "openReplayConfirm",
                 "confirmReplaySubmission",
