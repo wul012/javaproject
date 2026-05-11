@@ -7,7 +7,11 @@ const state = {
     activeEventId: null,
     activeEvent: null,
     itemsById: new Map(),
-    pendingReplay: null
+    pendingReplay: null,
+    operatorPermissions: {
+        management: { checked: false, allowedActions: [] },
+        replay: { checked: false, allowedActions: [] }
+    }
 };
 
 const elements = {};
@@ -323,6 +327,9 @@ function renderReplayAttempts(attempts) {
 }
 
 async function markSelectedEvents() {
+    if (!ensureOperatorActionAllowed("management", "MANAGE_FAILED_EVENT")) {
+        return;
+    }
     if (state.selectedIds.size === 0) {
         showToast("请选择失败事件", true);
         return;
@@ -367,14 +374,35 @@ async function verifyOperatorContext(scope) {
         const ability = operatorAbilitySummary(result);
         statusElement.textContent = `${summary} | ${ability.short}`;
         statusElement.title = ability.long;
+        rememberOperatorPermissions(scope, result.allowedActions || []);
         applyOperatorPermissions(scope, result.allowedActions || []);
         showToast(`身份已通过: ${summary}，${ability.short}`);
     } catch (error) {
         statusElement.textContent = "校验失败";
         statusElement.removeAttribute("title");
+        rememberOperatorPermissions(scope, []);
         applyOperatorPermissions(scope, []);
         showToast(error.message, true);
     }
+}
+
+function rememberOperatorPermissions(scope, allowedActions) {
+    state.operatorPermissions[scope] = {
+        checked: true,
+        allowedActions: allowedActions || []
+    };
+}
+
+function ensureOperatorActionAllowed(scope, action) {
+    const permission = state.operatorPermissions[scope];
+    if (!permission || !permission.checked) {
+        return true;
+    }
+    if ((permission.allowedActions || []).includes(action)) {
+        return true;
+    }
+    showToast(`${actionLabel(action)} 未授权，请切换角色后重新校验身份`, true);
+    return false;
 }
 
 function applyOperatorPermissions(scope, allowedActions) {
@@ -397,6 +425,7 @@ function resetOperatorPermissions(scope) {
     const statusElement = scope === "replay"
             ? elements.replayOperatorContextStatus
             : elements.operatorContextStatus;
+    state.operatorPermissions[scope] = { checked: false, allowedActions: [] };
     statusElement.textContent = "未校验";
     statusElement.removeAttribute("title");
     actionControls(scope).forEach(({ buttons }) => {
@@ -482,6 +511,9 @@ function managementOperatorHeaders() {
 }
 
 async function requestReplayApproval() {
+    if (!ensureOperatorActionAllowed("replay", "REQUEST_REPLAY_APPROVAL")) {
+        return;
+    }
     const id = replayTargetId();
     if (!id) {
         showToast("请选择要申请审批的失败事件", true);
@@ -508,6 +540,9 @@ async function requestReplayApproval() {
 }
 
 async function reviewReplayApproval(status) {
+    if (!ensureOperatorActionAllowed("replay", "REVIEW_REPLAY_APPROVAL")) {
+        return;
+    }
     const id = replayTargetId();
     if (!id) {
         showToast("请选择要审批的失败事件", true);
@@ -570,6 +605,9 @@ function isSelfReviewAttempt() {
 }
 
 async function replayActiveEvent() {
+    if (!ensureOperatorActionAllowed("replay", "REPLAY_FAILED_EVENT")) {
+        return;
+    }
     const id = replayTargetId();
     if (!id) {
         showToast("请选择要重放的失败事件", true);
