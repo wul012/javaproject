@@ -16,4 +16,6 @@ public interface FailedEventReplayApprovalHistoryRepository
     Optional<FailedEventReplayApprovalHistory> findTopByFailedEventMessageIdOrderByChangedAtDescIdDesc(
             Long failedEventMessageId
     );
+
+    long countByFailedEventMessageId(Long failedEventMessageId);
 }
