@@ -47,6 +47,7 @@
 - 订单平台只读运行概览接口，汇总应用、订单、库存、Outbox 和失败事件风险信号
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
+- 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -787,6 +788,40 @@ Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/replay-readiness
 
 该接口只读取失败事件、审批历史和重放尝试，不执行 `POST /replay`，不创建审批，也不修改管理状态。`eligibleForReplay=false` 时，`blockedBy` 会说明硬阻断原因，例如审批未通过、RabbitMQ Outbox 未开启、事件关键字段缺失或已经重放；`nextAllowedActions` 给 Node 控制面展示下一步可走的预演动作。
 
+查询单个失败事件的重放 simulation：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/replay-simulation
+```
+
+返回结构示例：
+
+```json
+{
+  "sampledAt": "2026-05-12T13:20:00Z",
+  "failedEventId": 1,
+  "exists": true,
+  "eligibleForReplay": true,
+  "wouldReplay": true,
+  "wouldPublishOutbox": true,
+  "wouldChangeManagementStatus": false,
+  "requiredApprovalStatus": "APPROVED",
+  "idempotencyKeyHint": "failed-event-replay:1:1001",
+  "expectedAggregateId": "1001",
+  "expectedSideEffects": [
+    "PUBLISH_RABBITMQ_REPLAY_MESSAGE",
+    "SAVE_REPLAY_ATTEMPT_AUDIT",
+    "MARK_FAILED_EVENT_REPLAYED_ON_SUCCESS",
+    "MARK_FAILED_EVENT_REPLAY_FAILED_ON_BROKER_ERROR"
+  ],
+  "blockedBy": [],
+  "warnings": [],
+  "nextAllowedActions": ["REPLAY_FAILED_EVENT"]
+}
+```
+
+simulation 复用 readiness 的资格判断，再补充真实 replay 可能产生的影响。`wouldReplay=true` 表示如果此时调用真实重放接口，预计会进入 RabbitMQ Outbox 发布路径；`wouldChangeManagementStatus=false` 表示当前真实 replay 逻辑不会修改失败事件管理状态。该接口不调用 RabbitMQ，不写重放审计，不改变 `REPLAYED` / `REPLAY_FAILED` 状态，适合 Node 在 operation execution preview 里展示预计副作用。
+
 ## Database Migration
 
 第十版开始，项目使用 Flyway 管理数据库结构，Hibernate 只做结构校验：
@@ -906,6 +941,7 @@ notification
  -> v35 增加失败事件角色策略启动期一致性校验，提前发现动作角色越界和 system-role 不可重放
  -> v37 增加失败事件治理摘要接口，按只读方式汇总失败事件总量、审批状态、最近失败/审批活动和重放积压
  -> v38 增加失败事件重放 readiness 接口，按只读方式返回单条失败事件的重放资格、阻断原因、预警、积压位置和下一步动作
+ -> v39 增加失败事件重放 simulation 接口，复用 readiness 结果并只读预演真实重放可能产生的副作用
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
