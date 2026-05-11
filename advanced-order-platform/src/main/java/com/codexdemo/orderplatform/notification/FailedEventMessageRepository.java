@@ -11,5 +11,11 @@ public interface FailedEventMessageRepository
 
     long countByReplayApprovalStatus(FailedEventReplayApprovalStatus replayApprovalStatus);
 
+    long countByStatusNot(FailedEventMessageStatus status);
+
     Optional<FailedEventMessage> findTopByOrderByFailedAtDescIdDesc();
+
+    Optional<FailedEventMessage> findTopByReplayApprovalRequestedAtIsNotNullOrderByReplayApprovalRequestedAtDescIdDesc();
+
+    Optional<FailedEventMessage> findTopByReplayApprovalReviewedAtIsNotNullOrderByReplayApprovalReviewedAtDescIdDesc();
 }

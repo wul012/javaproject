@@ -45,6 +45,7 @@
 - 失败事件管理页面写操作本地权限守卫，防止绕过禁用按钮触发未授权动作
 - 失败事件管理页面可视化展示当前操作员动作权限决策
 - 订单平台只读运行概览接口，汇总应用、订单、库存、Outbox 和失败事件风险信号
+- 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -711,6 +712,29 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/overview
 
 该接口只做聚合读取，不触发重放，不修改订单、库存、Outbox 或失败事件状态，适合作为 Node 控制面的 Java 业务健康入口。
 
+查询失败事件治理摘要：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/failed-events/summary
+```
+
+返回结构示例：
+
+```json
+{
+  "sampledAt": "2026-05-11T10:40:00.000Z",
+  "totalFailedEvents": 4,
+  "pendingReplayApprovals": 1,
+  "approvedReplayApprovals": 1,
+  "rejectedReplayApprovals": 1,
+  "latestFailedAt": "2026-05-11T10:35:00.000Z",
+  "latestApprovalAt": "2026-05-11T10:38:00.000Z",
+  "replayBacklog": 3
+}
+```
+
+`replayBacklog` 表示尚未成功进入 `REPLAYED` 状态的失败事件数量。该接口只做聚合读取，不触发重放，不审批重放申请，也不修改失败事件状态。
+
 ## Database Migration
 
 第十版开始，项目使用 Flyway 管理数据库结构，Hibernate 只做结构校验：
@@ -828,6 +852,7 @@ notification
  -> v33 增加页面写操作本地权限守卫，防止禁用按钮被脚本绕过后继续触发未授权动作
  -> v34 增加动作权限决策明细，身份探针返回每个动作是否允许和允许角色
  -> v35 增加失败事件角色策略启动期一致性校验，提前发现动作角色越界和 system-role 不可重放
+ -> v37 增加失败事件治理摘要接口，按只读方式汇总失败事件总量、审批状态、最近失败/审批活动和重放积压
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
