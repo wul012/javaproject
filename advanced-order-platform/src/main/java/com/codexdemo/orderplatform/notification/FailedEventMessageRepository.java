@@ -8,4 +8,8 @@ public interface FailedEventMessageRepository
         extends JpaRepository<FailedEventMessage, Long>, JpaSpecificationExecutor<FailedEventMessage> {
 
     Optional<FailedEventMessage> findByMessageId(String messageId);
+
+    long countByReplayApprovalStatus(FailedEventReplayApprovalStatus replayApprovalStatus);
+
+    Optional<FailedEventMessage> findTopByOrderByFailedAtDescIdDesc();
 }
