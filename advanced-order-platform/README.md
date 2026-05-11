@@ -46,6 +46,7 @@
 - 失败事件管理页面可视化展示当前操作员动作权限决策
 - 订单平台只读运行概览接口，汇总应用、订单、库存、Outbox 和失败事件风险信号
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
+- 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -735,6 +736,57 @@ Invoke-RestMethod http://localhost:8080/api/v1/failed-events/summary
 
 `replayBacklog` 表示尚未成功进入 `REPLAYED` 状态的失败事件数量。该接口只做聚合读取，不触发重放，不审批重放申请，也不修改失败事件状态。
 
+查询单个失败事件的重放 readiness：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/replay-readiness
+```
+
+返回结构示例：
+
+```json
+{
+  "sampledAt": "2026-05-11T12:20:00Z",
+  "failedEventId": 1,
+  "exists": true,
+  "eventType": "OrderNotificationFailed",
+  "aggregateType": "ORDER",
+  "aggregateId": "1001",
+  "failedAt": "2026-05-11T12:00:00Z",
+  "managementStatus": "OPEN",
+  "replayApprovalStatus": "APPROVED",
+  "replayBacklogPosition": 3,
+  "eligibleForReplay": true,
+  "requiresApproval": false,
+  "blockedBy": [],
+  "warnings": [],
+  "nextAllowedActions": ["REPLAY_FAILED_EVENT"],
+  "latestReplayAttempt": null,
+  "latestApproval": {
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "operatorId": "sre-user",
+    "operatorRole": "SRE",
+    "note": "approved",
+    "changedAt": "2026-05-11T12:10:00Z"
+  }
+}
+```
+
+如果失败事件不存在，接口仍返回稳定 JSON：
+
+```json
+{
+  "failedEventId": 999999,
+  "exists": false,
+  "eligibleForReplay": false,
+  "blockedBy": ["FAILED_EVENT_NOT_FOUND"],
+  "nextAllowedActions": []
+}
+```
+
+该接口只读取失败事件、审批历史和重放尝试，不执行 `POST /replay`，不创建审批，也不修改管理状态。`eligibleForReplay=false` 时，`blockedBy` 会说明硬阻断原因，例如审批未通过、RabbitMQ Outbox 未开启、事件关键字段缺失或已经重放；`nextAllowedActions` 给 Node 控制面展示下一步可走的预演动作。
+
 ## Database Migration
 
 第十版开始，项目使用 Flyway 管理数据库结构，Hibernate 只做结构校验：
@@ -853,6 +905,7 @@ notification
  -> v34 增加动作权限决策明细，身份探针返回每个动作是否允许和允许角色
  -> v35 增加失败事件角色策略启动期一致性校验，提前发现动作角色越界和 system-role 不可重放
  -> v37 增加失败事件治理摘要接口，按只读方式汇总失败事件总量、审批状态、最近失败/审批活动和重放积压
+ -> v38 增加失败事件重放 readiness 接口，按只读方式返回单条失败事件的重放资格、阻断原因、预警、积压位置和下一步动作
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
