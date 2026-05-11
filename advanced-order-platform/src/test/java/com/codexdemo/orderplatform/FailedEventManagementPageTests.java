@@ -62,6 +62,10 @@ class FailedEventManagementPageTests {
                 "operatorAbilitySummary",
                 "actionLabelSummary",
                 "actionRoleSummary",
+                "applyOperatorPermissions",
+                "resetOperatorPermissions",
+                "actionControls",
+                "permission-denied",
                 "isSelfReviewAttempt",
                 "申请人不能审批自己的重放申请",
                 "replayActiveEvent",
@@ -87,6 +91,7 @@ class FailedEventManagementPageTests {
                 ".modal-overlay",
                 ".risk-high",
                 ".confirm-check",
+                ".permission-denied",
                 ".history-panel",
                 "@media (max-width: 640px)"
         );

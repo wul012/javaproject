@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "targetManagementStatusInput",
         "managementNoteInput",
         "operatorContextStatus",
+        "markButton",
         "replayOperatorIdInput",
         "replayOperatorRoleInput",
         "replayOperatorContextStatus",
@@ -39,6 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "replayAggregateTypeInput",
         "replayAggregateIdInput",
         "replayPayloadInput",
+        "requestReplayApprovalButton",
+        "approveReplayButton",
+        "rejectReplayButton",
+        "replayButton",
         "failedEventsBody",
         "historyList",
         "historyMeta",
@@ -66,13 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("resetButton").addEventListener("click", resetFilters);
     document.getElementById("previousPageButton").addEventListener("click", previousPage);
     document.getElementById("nextPageButton").addEventListener("click", nextPage);
-    document.getElementById("markButton").addEventListener("click", markSelectedEvents);
+    elements.markButton.addEventListener("click", markSelectedEvents);
     document.getElementById("verifyOperatorButton").addEventListener("click", () => verifyOperatorContext("management"));
     document.getElementById("verifyReplayOperatorButton").addEventListener("click", () => verifyOperatorContext("replay"));
-    document.getElementById("requestReplayApprovalButton").addEventListener("click", requestReplayApproval);
-    document.getElementById("approveReplayButton").addEventListener("click", () => reviewReplayApproval("APPROVED"));
-    document.getElementById("rejectReplayButton").addEventListener("click", () => reviewReplayApproval("REJECTED"));
-    document.getElementById("replayButton").addEventListener("click", replayActiveEvent);
+    elements.requestReplayApprovalButton.addEventListener("click", requestReplayApproval);
+    elements.approveReplayButton.addEventListener("click", () => reviewReplayApproval("APPROVED"));
+    elements.rejectReplayButton.addEventListener("click", () => reviewReplayApproval("REJECTED"));
+    elements.replayButton.addEventListener("click", replayActiveEvent);
     document.getElementById("clearReplayOverrideButton").addEventListener("click", clearReplayOverrides);
     document.getElementById("refreshApprovalHistoryButton").addEventListener("click", refreshActiveReplayApprovalHistory);
     document.getElementById("refreshAttemptsButton").addEventListener("click", refreshActiveReplayAttempts);
@@ -85,6 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("exportFailedButton").addEventListener("click", exportFailedEvents);
     document.getElementById("exportHistoryButton").addEventListener("click", exportActiveHistory);
     elements.selectAllCheckbox.addEventListener("change", toggleCurrentPageSelection);
+    elements.operatorIdInput.addEventListener("input", () => resetOperatorPermissions("management"));
+    elements.operatorRoleInput.addEventListener("change", () => resetOperatorPermissions("management"));
+    elements.replayOperatorIdInput.addEventListener("input", () => resetOperatorPermissions("replay"));
+    elements.replayOperatorRoleInput.addEventListener("change", () => resetOperatorPermissions("replay"));
 
     loadFailedEvents();
 });
@@ -358,12 +367,70 @@ async function verifyOperatorContext(scope) {
         const ability = operatorAbilitySummary(result);
         statusElement.textContent = `${summary} | ${ability.short}`;
         statusElement.title = ability.long;
+        applyOperatorPermissions(scope, result.allowedActions || []);
         showToast(`身份已通过: ${summary}，${ability.short}`);
     } catch (error) {
         statusElement.textContent = "校验失败";
         statusElement.removeAttribute("title");
+        applyOperatorPermissions(scope, []);
         showToast(error.message, true);
     }
+}
+
+function applyOperatorPermissions(scope, allowedActions) {
+    const allowedActionSet = new Set(allowedActions);
+    actionControls(scope).forEach(({ action, buttons }) => {
+        const enabled = allowedActionSet.has(action);
+        buttons.forEach((button) => {
+            button.disabled = !enabled;
+            button.classList.toggle("permission-denied", !enabled);
+            if (enabled) {
+                button.removeAttribute("title");
+            } else {
+                button.title = `${actionLabel(action)} 未授权，请切换角色后重新校验身份`;
+            }
+        });
+    });
+}
+
+function resetOperatorPermissions(scope) {
+    const statusElement = scope === "replay"
+            ? elements.replayOperatorContextStatus
+            : elements.operatorContextStatus;
+    statusElement.textContent = "未校验";
+    statusElement.removeAttribute("title");
+    actionControls(scope).forEach(({ buttons }) => {
+        buttons.forEach((button) => {
+            button.disabled = false;
+            button.classList.remove("permission-denied");
+            button.removeAttribute("title");
+        });
+    });
+}
+
+function actionControls(scope) {
+    if (scope === "management") {
+        return [
+            {
+                action: "MANAGE_FAILED_EVENT",
+                buttons: [elements.markButton]
+            }
+        ];
+    }
+    return [
+        {
+            action: "REQUEST_REPLAY_APPROVAL",
+            buttons: [elements.requestReplayApprovalButton]
+        },
+        {
+            action: "REVIEW_REPLAY_APPROVAL",
+            buttons: [elements.approveReplayButton, elements.rejectReplayButton]
+        },
+        {
+            action: "REPLAY_FAILED_EVENT",
+            buttons: [elements.replayButton]
+        }
+    ];
 }
 
 function operatorAbilitySummary(result) {
