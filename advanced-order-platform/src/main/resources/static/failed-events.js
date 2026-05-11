@@ -355,13 +355,46 @@ async function verifyOperatorContext(scope) {
         statusElement.textContent = "校验中";
         const result = await fetchJson(`${apiBase}/operator-context`, { headers });
         const summary = `${result.operatorId} / ${result.operatorRole}`;
-        statusElement.textContent = summary;
-        statusElement.title = actionRoleSummary(result.allowedRolesByAction);
-        showToast(`身份已通过: ${summary}`);
+        const ability = operatorAbilitySummary(result);
+        statusElement.textContent = `${summary} | ${ability.short}`;
+        statusElement.title = ability.long;
+        showToast(`身份已通过: ${summary}，${ability.short}`);
     } catch (error) {
         statusElement.textContent = "校验失败";
         statusElement.removeAttribute("title");
         showToast(error.message, true);
+    }
+}
+
+function operatorAbilitySummary(result) {
+    const allowedActions = result.allowedActions || [];
+    const deniedActions = result.deniedActions || [];
+    const policySummary = actionRoleSummary(result.allowedRolesByAction);
+    return {
+        short: `可${allowedActions.length} 禁${deniedActions.length}`,
+        long: `可执行: ${actionLabelSummary(allowedActions)} | 不可执行: ${actionLabelSummary(deniedActions)} | ${policySummary}`
+    };
+}
+
+function actionLabelSummary(actions) {
+    if (!actions || actions.length === 0) {
+        return "无";
+    }
+    return actions.map(actionLabel).join("/");
+}
+
+function actionLabel(action) {
+    switch (action) {
+        case "MANAGE_FAILED_EVENT":
+            return "管理";
+        case "REQUEST_REPLAY_APPROVAL":
+            return "申请";
+        case "REVIEW_REPLAY_APPROVAL":
+            return "审批";
+        case "REPLAY_FAILED_EVENT":
+            return "重放";
+        default:
+            return action;
     }
 }
 

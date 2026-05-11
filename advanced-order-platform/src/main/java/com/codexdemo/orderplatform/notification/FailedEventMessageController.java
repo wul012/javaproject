@@ -249,10 +249,13 @@ public class FailedEventMessageController {
 
     @GetMapping("/operator-context")
     public FailedEventOperatorContextResponse resolveOperatorContext(@RequestHeader HttpHeaders headers) {
+        FailedEventOperatorContext operatorContext = operatorContextResolver.resolve(headers);
         return FailedEventOperatorContextResponse.from(
-                operatorContextResolver.resolve(headers),
+                operatorContext,
                 operatorContextResolver.allowedRoles(),
-                operatorContextResolver.allowedRolesByAction()
+                operatorContextResolver.allowedRolesByAction(),
+                operatorContextResolver.allowedActionsFor(operatorContext.operatorRole()),
+                operatorContextResolver.deniedActionsFor(operatorContext.operatorRole())
         );
     }
 

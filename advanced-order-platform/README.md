@@ -38,6 +38,7 @@
 - 失败事件重放审批职责分离，申请人不能审批自己的申请
 - 失败事件写操作统一操作员上下文解析和页面身份校验
 - 失败事件写操作按动作区分允许角色，管理、申请、审批、重放可独立配置
+- 失败事件操作员上下文返回当前角色可执行和不可执行动作快照
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -412,6 +413,7 @@ Payload 覆盖风险提示
 阻止申请人自提自审
 校验当前操作员身份和角色是否会被后端接受
 查看当前角色在管理、申请、审批、重放动作上的允许范围
+查看当前角色可执行和不可执行动作摘要
 ```
 
 校验失败事件操作员上下文：
@@ -437,7 +439,30 @@ Invoke-RestMethod `
     "REQUEST_REPLAY_APPROVAL": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
     "REVIEW_REPLAY_APPROVAL": ["SRE", "SYSTEM"],
     "REPLAY_FAILED_EVENT": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
-  }
+  },
+  "allowedActions": [
+    "MANAGE_FAILED_EVENT",
+    "REQUEST_REPLAY_APPROVAL",
+    "REVIEW_REPLAY_APPROVAL",
+    "REPLAY_FAILED_EVENT"
+  ],
+  "deniedActions": []
+}
+```
+
+如果当前角色是 `ORDER_SUPPORT`，默认会返回：
+
+```json
+{
+  "operatorRole": "ORDER_SUPPORT",
+  "allowedActions": [
+    "MANAGE_FAILED_EVENT",
+    "REQUEST_REPLAY_APPROVAL",
+    "REPLAY_FAILED_EVENT"
+  ],
+  "deniedActions": [
+    "REVIEW_REPLAY_APPROVAL"
+  ]
 }
 ```
 
@@ -689,12 +714,13 @@ notification
  -> v28 增加审批职责分离，禁止申请人审批自己的重放申请
  -> v29 增加失败事件操作员上下文解析器，把 X-Operator-* 头统一解析为可替换的操作员上下文，并提供页面身份校验入口
  -> v30 增加失败事件动作级角色策略，让管理、申请、审批、重放按不同角色集合独立授权
+ -> v31 增加操作员动作权限快照，身份探针直接返回当前角色可执行和不可执行动作
 
 common
  -> 业务异常和统一错误响应
 
 static
- -> 失败事件管理静态页面、重放工作台、操作员身份校验、动作级角色提示、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
+ -> 失败事件管理静态页面、重放工作台、操作员身份校验、动作级角色提示、操作员动作权限摘要、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
 ```
 
 后续建议升级顺序：

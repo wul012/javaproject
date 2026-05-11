@@ -52,6 +52,22 @@ public class FailedEventOperatorContextResolver {
         return rolesByAction;
     }
 
+    public List<FailedEventOperatorAction> allowedActionsFor(String operatorRole) {
+        return actionsFor(operatorRole, true);
+    }
+
+    public List<FailedEventOperatorAction> deniedActionsFor(String operatorRole) {
+        return actionsFor(operatorRole, false);
+    }
+
+    private List<FailedEventOperatorAction> actionsFor(String operatorRole, boolean allowed) {
+        String normalizedRole = failedEventReplayProperties.normalize(operatorRole);
+        return List.of(FailedEventOperatorAction.values())
+                .stream()
+                .filter(action -> failedEventReplayProperties.isAllowedFor(action, normalizedRole) == allowed)
+                .toList();
+    }
+
     private List<String> normalizeRoles(List<String> roles) {
         return roles
                 .stream()
