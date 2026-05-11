@@ -8,6 +8,7 @@ public record FailedEventOperatorContextResponse(
         String operatorRole,
         List<String> allowedRoles,
         Map<FailedEventOperatorAction, List<String>> allowedRolesByAction,
+        Map<FailedEventOperatorAction, FailedEventOperatorActionDecision> actionDecisions,
         List<FailedEventOperatorAction> allowedActions,
         List<FailedEventOperatorAction> deniedActions
 ) {
@@ -16,6 +17,7 @@ public record FailedEventOperatorContextResponse(
             FailedEventOperatorContext operatorContext,
             List<String> allowedRoles,
             Map<FailedEventOperatorAction, List<String>> allowedRolesByAction,
+            Map<FailedEventOperatorAction, FailedEventOperatorActionDecision> actionDecisions,
             List<FailedEventOperatorAction> allowedActions,
             List<FailedEventOperatorAction> deniedActions
     ) {
@@ -24,6 +26,7 @@ public record FailedEventOperatorContextResponse(
                 operatorContext.operatorRole(),
                 allowedRoles,
                 allowedRolesByAction,
+                actionDecisions,
                 allowedActions,
                 deniedActions
         );

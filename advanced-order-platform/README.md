@@ -39,8 +39,10 @@
 - 失败事件写操作统一操作员上下文解析和页面身份校验
 - 失败事件写操作按动作区分允许角色，管理、申请、审批、重放可独立配置
 - 失败事件操作员上下文返回当前角色可执行和不可执行动作快照
+- 失败事件操作员上下文返回动作权限决策明细，包含每个动作是否允许和允许角色
 - 失败事件管理页面按校验后的动作权限禁用未授权写按钮
 - 失败事件管理页面写操作本地权限守卫，防止绕过禁用按钮触发未授权动作
+- 失败事件管理页面可视化展示当前操作员动作权限决策
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -418,6 +420,7 @@ Payload 覆盖风险提示
 查看当前角色可执行和不可执行动作摘要
 校验后自动禁用当前角色未授权的管理、申请、审批或重放按钮
 校验后写操作处理函数会再次校验本地动作权限，防止脚本绕过禁用按钮触发未授权动作
+校验后直接展示每个动作的允许/禁止决策和允许角色
 ```
 
 校验失败事件操作员上下文：
@@ -443,6 +446,28 @@ Invoke-RestMethod `
     "REQUEST_REPLAY_APPROVAL": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
     "REVIEW_REPLAY_APPROVAL": ["SRE", "SYSTEM"],
     "REPLAY_FAILED_EVENT": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+  },
+  "actionDecisions": {
+    "MANAGE_FAILED_EVENT": {
+      "action": "MANAGE_FAILED_EVENT",
+      "allowed": true,
+      "allowedRoles": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+    },
+    "REQUEST_REPLAY_APPROVAL": {
+      "action": "REQUEST_REPLAY_APPROVAL",
+      "allowed": true,
+      "allowedRoles": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+    },
+    "REVIEW_REPLAY_APPROVAL": {
+      "action": "REVIEW_REPLAY_APPROVAL",
+      "allowed": true,
+      "allowedRoles": ["SRE", "SYSTEM"]
+    },
+    "REPLAY_FAILED_EVENT": {
+      "action": "REPLAY_FAILED_EVENT",
+      "allowed": true,
+      "allowedRoles": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+    }
   },
   "allowedActions": [
     "MANAGE_FAILED_EVENT",
@@ -485,6 +510,14 @@ SRE 校验后：
 切换操作人或角色后，页面会恢复到“未校验”状态并重新放开按钮，提示操作者重新校验当前身份。
 
 v33 起，页面写操作处理函数也会读取本地校验结果；若当前身份已校验且不包含目标动作，即使按钮状态被脚本改回可点击，也会先提示未授权并停止发起请求。未校验时保留原兼容流程；切换操作人或角色会重置为未校验。
+
+v34 起，页面会优先读取 `actionDecisions`，把当前区域涉及的动作渲染成可见决策标签。例如 `ORDER_SUPPORT` 在重放工作台会显示：
+
+```text
+申请 允许 ORDER_SUPPORT/SRE/SYSTEM
+审批 禁止 SRE/SYSTEM
+重放 允许 ORDER_SUPPORT/SRE/SYSTEM
+```
 
 失败事件动作级角色配置：
 
@@ -737,12 +770,13 @@ notification
  -> v31 增加操作员动作权限快照，身份探针直接返回当前角色可执行和不可执行动作
  -> v32 增加页面动作权限预检，身份校验后禁用当前角色未授权的失败事件写按钮
  -> v33 增加页面写操作本地权限守卫，防止禁用按钮被脚本绕过后继续触发未授权动作
+ -> v34 增加动作权限决策明细，身份探针返回每个动作是否允许和允许角色
 
 common
  -> 业务异常和统一错误响应
 
 static
- -> 失败事件管理静态页面、重放工作台、操作员身份校验、动作级角色提示、操作员动作权限摘要、动作权限预检按钮禁用、写操作本地权限守卫、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
+ -> 失败事件管理静态页面、重放工作台、操作员身份校验、动作级角色提示、操作员动作权限摘要、动作权限决策标签、动作权限预检按钮禁用、写操作本地权限守卫、重放审批按钮、自提自审拦截提示、审批历史面板、二次确认弹窗、风险提示、样式和浏览器端交互脚本
 ```
 
 后续建议升级顺序：

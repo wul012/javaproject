@@ -135,6 +135,9 @@
             <button id="verifyOperatorButton" class="ghost-button" type="button">校验身份</button>
             <span id="operatorContextStatus" class="operator-context-status">未校验</span>
             <button id="markButton" class="primary-button" type="button">提交标记</button>
+            <div id="operatorActionDecisionList" class="action-decision-list" aria-live="polite">
+                <span class="action-decision-empty">未校验</span>
+            </div>
         </div>
     </section>
 
@@ -235,6 +238,9 @@
                     <button id="rejectReplayButton" class="ghost-button" type="button">Reject</button>
                     <button id="replayButton" class="primary-button" type="button">提交重放</button>
                     <button id="clearReplayOverrideButton" class="ghost-button" type="button">清空覆盖</button>
+                </div>
+                <div id="replayActionDecisionList" class="action-decision-list replay-action-decisions" aria-live="polite">
+                    <span class="action-decision-empty">未校验</span>
                 </div>
                 <div class="approval-history-block">
                     <div class="replay-section-title">

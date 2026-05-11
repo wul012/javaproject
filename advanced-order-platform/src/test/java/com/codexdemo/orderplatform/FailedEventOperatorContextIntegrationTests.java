@@ -67,6 +67,12 @@ class FailedEventOperatorContextIntegrationTests {
                         .value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
                 .andExpect(jsonPath("$.allowedRolesByAction.REVIEW_REPLAY_APPROVAL")
                         .value(containsInAnyOrder("SRE", "SYSTEM")))
+                .andExpect(jsonPath("$.actionDecisions.MANAGE_FAILED_EVENT.allowed").value(true))
+                .andExpect(jsonPath("$.actionDecisions.MANAGE_FAILED_EVENT.allowedRoles")
+                        .value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
+                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowed").value(true))
+                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowedRoles")
+                        .value(containsInAnyOrder("SRE", "SYSTEM")))
                 .andExpect(jsonPath("$.allowedActions").value(containsInAnyOrder(
                         "MANAGE_FAILED_EVENT",
                         "REQUEST_REPLAY_APPROVAL",
@@ -118,6 +124,12 @@ class FailedEventOperatorContextIntegrationTests {
                         "REQUEST_REPLAY_APPROVAL",
                         "REPLAY_FAILED_EVENT"
                 )))
+                .andExpect(jsonPath("$.actionDecisions.REQUEST_REPLAY_APPROVAL.allowed").value(true))
+                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.action")
+                        .value("REVIEW_REPLAY_APPROVAL"))
+                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowed").value(false))
+                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowedRoles")
+                        .value(containsInAnyOrder("SRE", "SYSTEM")))
                 .andExpect(jsonPath("$.deniedActions").value(containsInAnyOrder("REVIEW_REPLAY_APPROVAL")));
 
         mockMvc.perform(post("/api/v1/failed-events/{id}/replay-approval", failedMessage.getId())

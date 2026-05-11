@@ -254,6 +254,7 @@ public class FailedEventMessageController {
                 operatorContext,
                 operatorContextResolver.allowedRoles(),
                 operatorContextResolver.allowedRolesByAction(),
+                operatorContextResolver.actionDecisionsFor(operatorContext.operatorRole()),
                 operatorContextResolver.allowedActionsFor(operatorContext.operatorRole()),
                 operatorContextResolver.deniedActionsFor(operatorContext.operatorRole())
         );

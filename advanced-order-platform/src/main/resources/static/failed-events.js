@@ -32,10 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
         "targetManagementStatusInput",
         "managementNoteInput",
         "operatorContextStatus",
+        "operatorActionDecisionList",
         "markButton",
         "replayOperatorIdInput",
         "replayOperatorRoleInput",
         "replayOperatorContextStatus",
+        "replayActionDecisionList",
         "replayReasonInput",
         "replayApprovalReasonInput",
         "replayApprovalReviewNoteInput",
@@ -369,6 +371,7 @@ async function verifyOperatorContext(scope) {
     const headers = scope === "replay" ? replayContextHeaders() : managementOperatorHeaders();
     try {
         statusElement.textContent = "校验中";
+        renderOperatorActionDecisions(scope, null, "校验中");
         const result = await fetchJson(`${apiBase}/operator-context`, { headers });
         const summary = `${result.operatorId} / ${result.operatorRole}`;
         const ability = operatorAbilitySummary(result);
@@ -376,12 +379,14 @@ async function verifyOperatorContext(scope) {
         statusElement.title = ability.long;
         rememberOperatorPermissions(scope, result.allowedActions || []);
         applyOperatorPermissions(scope, result.allowedActions || []);
+        renderOperatorActionDecisions(scope, result);
         showToast(`身份已通过: ${summary}，${ability.short}`);
     } catch (error) {
         statusElement.textContent = "校验失败";
         statusElement.removeAttribute("title");
         rememberOperatorPermissions(scope, []);
         applyOperatorPermissions(scope, []);
+        renderOperatorActionDecisions(scope, null, "校验失败");
         showToast(error.message, true);
     }
 }
@@ -421,6 +426,37 @@ function applyOperatorPermissions(scope, allowedActions) {
     });
 }
 
+function renderOperatorActionDecisions(scope, result, fallbackText = "未校验") {
+    const listElement = actionDecisionListElement(scope);
+    if (!result) {
+        listElement.innerHTML = `<span class="action-decision-empty">${escapeHtml(fallbackText)}</span>`;
+        return;
+    }
+    const allowedActionSet = new Set(result.allowedActions || []);
+    const decisions = result.actionDecisions || {};
+    const rolesByAction = result.allowedRolesByAction || {};
+    listElement.innerHTML = actionControls(scope).map(({ action }) => {
+        const decision = decisions[action] || {};
+        const allowed = typeof decision.allowed === "boolean" ? decision.allowed : allowedActionSet.has(action);
+        const allowedRoles = decision.allowedRoles || rolesByAction[action] || [];
+        const roleText = allowedRoles.length > 0 ? allowedRoles.join("/") : "无角色";
+        const statusText = allowed ? "允许" : "禁止";
+        const stateClass = allowed ? "action-decision-allowed" : "action-decision-denied";
+        const title = `${actionLabel(action)} ${statusText} | 允许角色: ${roleText}`;
+        return `
+            <span class="action-decision ${stateClass}" title="${escapeHtml(title)}">
+                <strong>${escapeHtml(actionLabel(action))}</strong>
+                <span>${statusText}</span>
+                <small>${escapeHtml(roleText)}</small>
+            </span>
+        `;
+    }).join("");
+}
+
+function actionDecisionListElement(scope) {
+    return scope === "replay" ? elements.replayActionDecisionList : elements.operatorActionDecisionList;
+}
+
 function resetOperatorPermissions(scope) {
     const statusElement = scope === "replay"
             ? elements.replayOperatorContextStatus
@@ -428,6 +464,7 @@ function resetOperatorPermissions(scope) {
     state.operatorPermissions[scope] = { checked: false, allowedActions: [] };
     statusElement.textContent = "未校验";
     statusElement.removeAttribute("title");
+    renderOperatorActionDecisions(scope);
     actionControls(scope).forEach(({ buttons }) => {
         buttons.forEach((button) => {
             button.disabled = false;

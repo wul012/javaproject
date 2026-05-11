@@ -52,6 +52,20 @@ public class FailedEventOperatorContextResolver {
         return rolesByAction;
     }
 
+    public Map<FailedEventOperatorAction, FailedEventOperatorActionDecision> actionDecisionsFor(String operatorRole) {
+        String normalizedRole = failedEventReplayProperties.normalize(operatorRole);
+        Map<FailedEventOperatorAction, FailedEventOperatorActionDecision> decisions =
+                new EnumMap<>(FailedEventOperatorAction.class);
+        for (FailedEventOperatorAction action : FailedEventOperatorAction.values()) {
+            decisions.put(action, new FailedEventOperatorActionDecision(
+                    action,
+                    failedEventReplayProperties.isAllowedFor(action, normalizedRole),
+                    normalizeRoles(failedEventReplayProperties.rolesFor(action))
+            ));
+        }
+        return decisions;
+    }
+
     public List<FailedEventOperatorAction> allowedActionsFor(String operatorRole) {
         return actionsFor(operatorRole, true);
     }
