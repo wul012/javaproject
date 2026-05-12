@@ -1,6 +1,7 @@
 package com.codexdemo.orderplatform;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -123,6 +124,31 @@ class FailedEventReplayExecutionContractIntegrationTests {
                 .andExpect(jsonPath("$.blockedBy").isEmpty())
                 .andExpect(jsonPath("$.expectedSideEffects[0]").value("PUBLISH_RABBITMQ_REPLAY_MESSAGE"))
                 .andExpect(jsonPath("$.nextAllowedActions[0]").value("REPLAY_FAILED_EVENT"));
+    }
+
+    @Test
+    void staticReplayExecutionContractSampleCoversNodeFixtureFields() throws Exception {
+        mockMvc.perform(get("/contracts/failed-event-replay-execution-contract-approved.sample.json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andExpect(jsonPath("$.contractVersion").value("failed-event-replay-execution-contract.v1"))
+                .andExpect(jsonPath("$.contractDigest").value(
+                        "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+                ))
+                .andExpect(jsonPath("$.approvalDigest").value(
+                        "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                ))
+                .andExpect(jsonPath("$.replayEligibilityDigest").value(
+                        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                ))
+                .andExpect(jsonPath("$.replayPreconditionsSatisfied").value(true))
+                .andExpect(jsonPath("$.digestVerificationMode").value("CLIENT_PRECHECK_ONLY"))
+                .andExpect(jsonPath("$.expectedSideEffects[0]").value("PUBLISH_RABBITMQ_REPLAY_MESSAGE"))
+                .andExpect(jsonPath("$.expectedSideEffects[1]").value("SAVE_REPLAY_ATTEMPT_AUDIT"))
+                .andExpect(jsonPath("$.expectedSideEffects[2]").value("MARK_FAILED_EVENT_REPLAYED_ON_SUCCESS"))
+                .andExpect(jsonPath("$.expectedSideEffects[3]").value("MARK_FAILED_EVENT_REPLAY_FAILED_ON_BROKER_ERROR"))
+                .andExpect(jsonPath("$.executionChecks[1].checkId").value("REPLAY_APPROVAL_APPROVED"))
+                .andExpect(jsonPath("$.requestRequirements[0].field").value("reason"));
     }
 
     private FailedEventMessage failedEvent(String messageId, Instant failedAt) {

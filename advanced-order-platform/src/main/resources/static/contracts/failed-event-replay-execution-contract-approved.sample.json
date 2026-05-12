@@ -1,0 +1,173 @@
+{
+  "sampledAt": "2026-05-12T10:30:00Z",
+  "failedEventId": 42,
+  "exists": true,
+  "contractVersion": "failed-event-replay-execution-contract.v1",
+  "contractDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "approvalEvidenceVersion": "failed-event-approval-status.v1",
+  "approvalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "replayEligibilityDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "failedEventStatus": "RECORDED",
+  "managementStatus": "OPEN",
+  "approvalStatus": "APPROVED",
+  "requiredApprovalStatus": "APPROVED",
+  "replayPreconditionsSatisfied": true,
+  "realReplayEndpointEnforcesApprovalDigest": false,
+  "realReplayEndpointEnforcesReplayEligibilityDigest": false,
+  "digestVerificationMode": "CLIENT_PRECHECK_ONLY",
+  "realExecutionMethod": "POST",
+  "realExecutionPath": "/api/v1/failed-events/{id}/replay",
+  "requiredOperatorAction": "REPLAY_FAILED_EVENT",
+  "idempotencyKeyHint": "failed-event-replay:42:order-1001",
+  "expectedAggregateId": "order-1001",
+  "executionChecks": [
+    {
+      "checkId": "FAILED_EVENT_EXISTS",
+      "source": "FailedEventMessageRepository.findById",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "exists=true",
+      "currentValue": "exists=true",
+      "evidenceDigest": null,
+      "blockedBy": []
+    },
+    {
+      "checkId": "REPLAY_APPROVAL_APPROVED",
+      "source": "FailedEventMessageService.replay",
+      "category": "APPROVAL",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "approvalStatus=APPROVED",
+      "currentValue": "approvalStatus=APPROVED",
+      "evidenceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "blockedBy": []
+    },
+    {
+      "checkId": "REPLAY_ELIGIBILITY_DIGEST_AVAILABLE",
+      "source": "FailedEventReplayApprovalStatusService.approvalStatus",
+      "category": "DIGEST",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "replayEligibilityDigest starts with sha256:",
+      "currentValue": "replayEligibilityDigest=sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "evidenceDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "blockedBy": []
+    },
+    {
+      "checkId": "FAILED_EVENT_NOT_REPLAYED",
+      "source": "FailedEventMessageService.replay",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "failedEventStatus!=REPLAYED",
+      "currentValue": "current=RECORDED",
+      "evidenceDigest": null,
+      "blockedBy": []
+    },
+    {
+      "checkId": "RABBITMQ_OUTBOX_ENABLED",
+      "source": "FailedEventMessageService.replay",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "outbox.rabbitmq.enabled=true",
+      "currentValue": "RABBITMQ_OUTBOX_DISABLED=false",
+      "evidenceDigest": null,
+      "blockedBy": []
+    },
+    {
+      "checkId": "EVENT_TYPE_PRESENT",
+      "source": "FailedEventMessageService.replay",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "eventType present after request fallback",
+      "currentValue": "EVENT_TYPE_REQUIRED=false",
+      "evidenceDigest": null,
+      "blockedBy": []
+    },
+    {
+      "checkId": "AGGREGATE_TYPE_PRESENT",
+      "source": "FailedEventMessageService.replay",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "aggregateType present after request fallback",
+      "currentValue": "AGGREGATE_TYPE_REQUIRED=false",
+      "evidenceDigest": null,
+      "blockedBy": []
+    },
+    {
+      "checkId": "AGGREGATE_ID_PRESENT",
+      "source": "FailedEventMessageService.replay",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "aggregateId present after request fallback",
+      "currentValue": "AGGREGATE_ID_REQUIRED=false",
+      "evidenceDigest": null,
+      "blockedBy": []
+    },
+    {
+      "checkId": "PAYLOAD_PRESENT",
+      "source": "FailedEventMessageService.replay",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "payload present after request fallback",
+      "currentValue": "PAYLOAD_REQUIRED=false",
+      "evidenceDigest": null,
+      "blockedBy": []
+    }
+  ],
+  "requestRequirements": [
+    {
+      "field": "reason",
+      "requiredForPost": true,
+      "rule": "non-blank replay reason is required",
+      "fallback": null
+    },
+    {
+      "field": "eventId",
+      "requiredForPost": false,
+      "rule": "must be a UUID when supplied",
+      "fallback": "stored eventId, otherwise generated UUID"
+    },
+    {
+      "field": "eventType",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored eventType"
+    },
+    {
+      "field": "aggregateType",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored aggregateType"
+    },
+    {
+      "field": "aggregateId",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored aggregateId"
+    },
+    {
+      "field": "payload",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored payload"
+    }
+  ],
+  "blockedBy": [],
+  "warnings": [],
+  "expectedSideEffects": [
+    "PUBLISH_RABBITMQ_REPLAY_MESSAGE",
+    "SAVE_REPLAY_ATTEMPT_AUDIT",
+    "MARK_FAILED_EVENT_REPLAYED_ON_SUCCESS",
+    "MARK_FAILED_EVENT_REPLAY_FAILED_ON_BROKER_ERROR"
+  ],
+  "nextAllowedActions": [
+    "REPLAY_FAILED_EVENT"
+  ]
+}

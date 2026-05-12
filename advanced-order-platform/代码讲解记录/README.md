@@ -140,6 +140,9 @@
 
 46-version-42-replay-execution-contract.md
  -> 第四十二版失败事件重放 execution-contract，给 Node execution gate 提供 Java 执行前契约证据
+
+47-version-43-replay-execution-contract-sample.md
+ -> 第四十三版失败事件重放 execution-contract 稳定样本，给 Node fixture-driven smoke 提供真实格式参考
 ```
 
 ## 项目整体理解
@@ -325,8 +328,11 @@ README.md
 
 46-version-42-replay-execution-contract.md
  -> 理解 replay-execution-contract 如何只读说明真实 replay 前 Java 会检查哪些状态、审批、digest 和请求条件
+
+47-version-43-replay-execution-contract-sample.md
+ -> 理解静态 sample JSON 如何覆盖 Node v74 需要的 contract / digest / side effects 字段
 ```
 
 ## 一句话总览
 
-这个项目的核心不是“能创建订单”这么简单，而是用 Spring Boot 把下单幂等、库存一致性、库存流水、支付/退款流水、取消/过期/发货/完成状态流转、状态历史、Outbox 发布标记、RabbitMQ 真实消息投递、RabbitMQ 消费者、通知消息幂等落库、消费失败重试、死信队列、失败事件表、失败事件重放、失败事件重放 readiness、失败事件重放 simulation、失败事件重放 approval-status、失败事件重放 approval-status digest、失败事件重放 execution-contract、重放权限校验、统一操作员上下文、动作级角色策略、动作级角色策略启动期校验、操作员动作权限快照、动作权限决策明细、页面动作权限预检、页面写操作本地权限守卫、重放审计、重放审批门禁、重放审批历史流水、审批职责分离、失败事件分页筛选查询、失败事件治理摘要、失败事件管理状态、管理状态变更流水、失败事件 CSV 导出、失败事件管理页面、失败事件重放工作台、重放二次确认、订单平台只读运行概览、Actuator 健康检查、Flyway 数据库迁移和 Testcontainers 真实中间件验证串成一个可继续升级的后端系统。
+这个项目的核心不是“能创建订单”这么简单，而是用 Spring Boot 把下单幂等、库存一致性、库存流水、支付/退款流水、取消/过期/发货/完成状态流转、状态历史、Outbox 发布标记、RabbitMQ 真实消息投递、RabbitMQ 消费者、通知消息幂等落库、消费失败重试、死信队列、失败事件表、失败事件重放、失败事件重放 readiness、失败事件重放 simulation、失败事件重放 approval-status、失败事件重放 approval-status digest、失败事件重放 execution-contract、execution-contract 稳定样本、重放权限校验、统一操作员上下文、动作级角色策略、动作级角色策略启动期校验、操作员动作权限快照、动作权限决策明细、页面动作权限预检、页面写操作本地权限守卫、重放审计、重放审批门禁、重放审批历史流水、审批职责分离、失败事件分页筛选查询、失败事件治理摘要、失败事件管理状态、管理状态变更流水、失败事件 CSV 导出、失败事件管理页面、失败事件重放工作台、重放二次确认、订单平台只读运行概览、Actuator 健康检查、Flyway 数据库迁移和 Testcontainers 真实中间件验证串成一个可继续升级的后端系统。
