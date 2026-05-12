@@ -1,0 +1,119 @@
+{
+  "sampledAt": "2026-05-12T12:45:00Z",
+  "failedEventId": 43,
+  "exists": true,
+  "contractVersion": "failed-event-replay-execution-contract.v1",
+  "contractDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "approvalEvidenceVersion": "failed-event-approval-status.v1",
+  "approvalDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "replayEligibilityDigest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "failedEventStatus": "RECORDED",
+  "managementStatus": "OPEN",
+  "approvalStatus": "PENDING",
+  "requiredApprovalStatus": "APPROVED",
+  "replayPreconditionsSatisfied": false,
+  "realReplayEndpointEnforcesApprovalDigest": false,
+  "realReplayEndpointEnforcesReplayEligibilityDigest": false,
+  "digestVerificationMode": "CLIENT_PRECHECK_ONLY",
+  "realExecutionMethod": "POST",
+  "realExecutionPath": "/api/v1/failed-events/{id}/replay",
+  "requiredOperatorAction": "REPLAY_FAILED_EVENT",
+  "idempotencyKeyHint": "failed-event-replay:43:order-1002",
+  "expectedAggregateId": "order-1002",
+  "executionChecks": [
+    {
+      "checkId": "FAILED_EVENT_EXISTS",
+      "source": "FailedEventMessageRepository.findById",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "exists=true",
+      "currentValue": "exists=true",
+      "evidenceDigest": null,
+      "blockedBy": []
+    },
+    {
+      "checkId": "REPLAY_APPROVAL_APPROVED",
+      "source": "FailedEventMessageService.replay",
+      "category": "APPROVAL",
+      "required": true,
+      "status": "FAILED",
+      "requiredValue": "approvalStatus=APPROVED",
+      "currentValue": "approvalStatus=PENDING",
+      "evidenceDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "blockedBy": [
+        "REPLAY_APPROVAL_NOT_APPROVED"
+      ]
+    },
+    {
+      "checkId": "REPLAY_ELIGIBILITY_DIGEST_AVAILABLE",
+      "source": "FailedEventReplayApprovalStatusService.approvalStatus",
+      "category": "DIGEST",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "replayEligibilityDigest starts with sha256:",
+      "currentValue": "replayEligibilityDigest=sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "evidenceDigest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "blockedBy": []
+    },
+    {
+      "checkId": "FAILED_EVENT_NOT_REPLAYED",
+      "source": "FailedEventMessageService.replay",
+      "category": "STATUS",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "failedEventStatus!=REPLAYED",
+      "currentValue": "current=RECORDED",
+      "evidenceDigest": null,
+      "blockedBy": []
+    }
+  ],
+  "requestRequirements": [
+    {
+      "field": "reason",
+      "requiredForPost": true,
+      "rule": "non-blank replay reason is required",
+      "fallback": null
+    },
+    {
+      "field": "eventId",
+      "requiredForPost": false,
+      "rule": "must be a UUID when supplied",
+      "fallback": "stored eventId, otherwise generated UUID"
+    },
+    {
+      "field": "eventType",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored eventType"
+    },
+    {
+      "field": "aggregateType",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored aggregateType"
+    },
+    {
+      "field": "aggregateId",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored aggregateId"
+    },
+    {
+      "field": "payload",
+      "requiredForPost": false,
+      "rule": "must be present after request fallback",
+      "fallback": "stored payload"
+    }
+  ],
+  "blockedBy": [
+    "REPLAY_APPROVAL_NOT_APPROVED"
+  ],
+  "warnings": [
+    "replay approval must be APPROVED before real replay POST is allowed"
+  ],
+  "expectedSideEffects": [],
+  "nextAllowedActions": [
+    "REQUEST_REPLAY_APPROVAL"
+  ]
+}

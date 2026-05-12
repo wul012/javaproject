@@ -151,6 +151,24 @@ class FailedEventReplayExecutionContractIntegrationTests {
                 .andExpect(jsonPath("$.requestRequirements[0].field").value("reason"));
     }
 
+    @Test
+    void staticBlockedReplayExecutionContractSampleCoversNegativeScenarioFields() throws Exception {
+        mockMvc.perform(get("/contracts/failed-event-replay-execution-contract-blocked.sample.json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andExpect(jsonPath("$.contractVersion").value("failed-event-replay-execution-contract.v1"))
+                .andExpect(jsonPath("$.approvalStatus").value("PENDING"))
+                .andExpect(jsonPath("$.requiredApprovalStatus").value("APPROVED"))
+                .andExpect(jsonPath("$.replayPreconditionsSatisfied").value(false))
+                .andExpect(jsonPath("$.digestVerificationMode").value("CLIENT_PRECHECK_ONLY"))
+                .andExpect(jsonPath("$.executionChecks[1].checkId").value("REPLAY_APPROVAL_APPROVED"))
+                .andExpect(jsonPath("$.executionChecks[1].status").value("FAILED"))
+                .andExpect(jsonPath("$.executionChecks[1].blockedBy[0]").value("REPLAY_APPROVAL_NOT_APPROVED"))
+                .andExpect(jsonPath("$.blockedBy[0]").value("REPLAY_APPROVAL_NOT_APPROVED"))
+                .andExpect(jsonPath("$.expectedSideEffects").isEmpty())
+                .andExpect(jsonPath("$.nextAllowedActions[0]").value("REQUEST_REPLAY_APPROVAL"));
+    }
+
     private FailedEventMessage failedEvent(String messageId, Instant failedAt) {
         FailedEventMessage failedEvent = FailedEventMessage.record(
                 messageId,

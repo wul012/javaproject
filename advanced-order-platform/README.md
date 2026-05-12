@@ -51,7 +51,7 @@
 - 失败事件重放 approval-status 接口，只读暴露 Java 保存的审批状态、最近审批动作和下一步动作
 - 失败事件重放 approval-status digest，给 Node 上游证据校验提供稳定摘要
 - 失败事件重放 execution-contract 接口，只读说明真实重放前 Java 会检查的状态、审批、digest 和请求条件
-- 失败事件重放 execution-contract 稳定样本，给 Node fixture-driven smoke 提供真实格式参考
+- 失败事件重放 execution-contract 稳定样本，给 Node fixture-driven smoke 提供 approved / blocked 真实格式参考
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -989,7 +989,7 @@ digestVerificationMode=CLIENT_PRECHECK_ONLY
 
 这表示当前真实 replay POST 仍按 Java 内部状态做最终判断；digest 用于 Node 或人工操作台在执行前复核证据是否漂移，不会让 Java 自动执行，也不会绕过审批、角色或 RabbitMQ 前置条件。
 
-v43 起，应用随包提供一个稳定 execution-contract 样本：
+v43 起，应用随包提供一个稳定 execution-contract approved 样本：
 
 ```text
 src/main/resources/static/contracts/failed-event-replay-execution-contract-approved.sample.json
@@ -1013,7 +1013,30 @@ digestVerificationMode
 expectedSideEffects
 ```
 
-样本只用于测试、文档、Node smoke 和 diagnostics 对齐，不代表生产数据，不触发真实 replay，也不替代实时 `replay-execution-contract` 查询。
+v44 起，应用额外提供 blocked 样本：
+
+```text
+src/main/resources/static/contracts/failed-event-replay-execution-contract-blocked.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/failed-event-replay-execution-contract-blocked.sample.json
+```
+
+blocked 样本固定表达：
+
+```text
+replayPreconditionsSatisfied=false
+approvalStatus=PENDING
+blockedBy=["REPLAY_APPROVAL_NOT_APPROVED"]
+executionChecks 中 REPLAY_APPROVAL_APPROVED 为 FAILED
+expectedSideEffects=[]
+nextAllowedActions=["REQUEST_REPLAY_APPROVAL"]
+```
+
+两个样本只用于测试、文档、Node smoke 和 diagnostics 对齐，不代表生产数据，不触发真实 replay，也不替代实时 `replay-execution-contract` 查询。
 
 ## Database Migration
 
@@ -1139,6 +1162,7 @@ notification
  -> v41 增加 approval-status 证据版本和稳定 digest，便于 Node 校验 Java 上游审批证据是否漂移
  -> v42 增加失败事件重放 execution-contract，只读说明真实 replay 前 Java 会检查哪些状态、审批、digest 和请求条件
  -> v43 增加 execution-contract 稳定样本 JSON，给 Node fixture-driven smoke 使用真实格式参考
+ -> v44 增加 execution-contract blocked 稳定样本 JSON，给 Node 多场景矩阵提供负向样本
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
