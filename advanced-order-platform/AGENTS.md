@@ -1,5 +1,20 @@
 # advanced-order-platform Agent Notes
 
+## Runtime Archive Folder
+
+For future Java version work, put run/debug explanations and screenshots in `b/`, which is a sibling of the old `a/` archive folder.
+
+Use this shape:
+
+```text
+b/<version>/解释/说明.md
+b/<version>/图片/*.png
+```
+
+Keep the old `a/` folder as historical archive for earlier versions. Do not move old `a/<version>` records unless the user explicitly asks.
+
+When finishing a version, the final report should mention the `b/<version>` archive path.
+
 ## Docker Shutdown Fast Path
 
 When Docker was started only for this Java project validation, close it quickly during cleanup.
