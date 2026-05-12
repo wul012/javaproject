@@ -54,6 +54,7 @@
 - 失败事件重放 execution-contract 接口，只读说明真实重放前 Java 会检查的状态、审批、digest 和请求条件
 - 失败事件重放 execution-contract 稳定样本，给 Node fixture-driven smoke 提供 approved / blocked 真实格式参考
 - 失败事件重放 audit evidence 稳定样本，给控制面判断真实执行是否可追溯提供 approved / blocked 参考
+- 失败事件重放 evidence index 接口，只读汇总 live evidence、静态样本、审计身份字段和执行安全规则
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -1140,6 +1141,44 @@ relatedEvidence
 
 approved 样本表达真实 replay 通过后应该能追溯到审批申请、审批通过和 `FAILED_EVENT_REPLAY_ATTEMPT`；blocked 样本表达执行前审批未通过，只保留只读预检证据，不产生真实 replay attempt。两个样本仍然只用于证据对齐和 smoke，不代表生产数据，不执行 RabbitMQ 投递。
 
+v47 起，应用提供 replay evidence index 说明接口：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/failed-events/replay-evidence-index
+```
+
+返回结构示例：
+
+```json
+{
+  "evidenceVersion": "failed-event-replay-evidence-index.v1",
+  "readOnly": true,
+  "executionAllowed": false,
+  "liveEvidenceEndpoints": [
+    {
+      "name": "replay-execution-contract",
+      "method": "GET",
+      "path": "/api/v1/failed-events/{id}/replay-execution-contract",
+      "readOnly": true,
+      "changesReplayState": false
+    }
+  ],
+  "staticEvidenceSamples": [
+    {
+      "name": "replay-audit-approved",
+      "path": "/contracts/failed-event-replay-audit-approved.sample.json",
+      "scenario": "APPROVED_REPLAY_AUDIT",
+      "evidenceVersion": "failed-event-replay-audit-evidence.v1",
+      "requiredFields": ["operator", "requestId", "decisionId", "dryRun", "executionAllowed", "auditTrail"]
+    }
+  ],
+  "auditIdentityFields": ["operator.operatorId", "operator.operatorRole", "requestId", "decisionId"],
+  "executionSafetyRules": ["REAL_REPLAY_REQUIRES_APPROVED_STATUS", "BLOCKED_PRECHECK_MUST_NOT_CREATE_REPLAY_ATTEMPT"]
+}
+```
+
+这个接口只做说明索引，不读取具体失败事件，不创建审计，不执行 replay。它让控制面可以先知道 Java 提供了哪些 live evidence endpoint、哪些静态样本、哪些字段是审计身份字段，以及真实 replay 之前必须遵守哪些安全规则。
+
 ## Database Migration
 
 第十版开始，项目使用 Flyway 管理数据库结构，Hibernate 只做结构校验：
@@ -1266,6 +1305,7 @@ notification
  -> v43 增加 execution-contract 稳定样本 JSON，给 Node fixture-driven smoke 使用真实格式参考
  -> v44 增加 execution-contract blocked 稳定样本 JSON，给 Node 多场景矩阵提供负向样本
  -> v46 增加 replay audit evidence approved/blocked 稳定样本 JSON，给控制面判断 replay 执行是否可追溯
+ -> v47 增加 replay evidence index 说明接口，汇总 live evidence、静态样本、审计身份字段和执行安全规则
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号

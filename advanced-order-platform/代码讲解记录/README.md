@@ -152,6 +152,9 @@
 
 50-version-46-replay-audit-evidence-sample.md
  -> 第四十六版失败事件重放 audit evidence 稳定样本，给控制面判断 replay 执行是否可追溯
+
+51-version-47-replay-evidence-index.md
+ -> 第四十七版失败事件重放 evidence index，只读说明 live evidence、静态样本、审计字段和安全规则
 ```
 
 ## 项目整体理解
@@ -349,8 +352,11 @@ README.md
 
 50-version-46-replay-audit-evidence-sample.md
  -> 理解 replay audit evidence 样本如何描述 operator、requestId、decisionId、dryRun、executionAllowed 和 auditTrail
+
+51-version-47-replay-evidence-index.md
+ -> 理解 replay evidence index 如何给控制面提供 Java 侧证据目录、样本目录和执行安全边界
 ```
 
 ## 一句话总览
 
-这个项目的核心不是“能创建订单”这么简单，而是用 Spring Boot 把下单幂等、库存一致性、库存流水、支付/退款流水、取消/过期/发货/完成状态流转、状态历史、Outbox 发布标记、RabbitMQ 真实消息投递、RabbitMQ 消费者、通知消息幂等落库、消费失败重试、死信队列、失败事件表、失败事件重放、失败事件重放 readiness、失败事件重放 simulation、失败事件重放 approval-status、失败事件重放 approval-status digest、失败事件重放 execution-contract、execution-contract approved/blocked 稳定样本、重放审计证据样本、重放权限校验、统一操作员上下文、动作级角色策略、动作级角色策略启动期校验、操作员动作权限快照、动作权限决策明细、页面动作权限预检、页面写操作本地权限守卫、重放审计、重放审批门禁、重放审批历史流水、审批职责分离、失败事件分页筛选查询、失败事件治理摘要、失败事件管理状态、管理状态变更流水、失败事件 CSV 导出、失败事件管理页面、失败事件重放工作台、重放二次确认、订单平台只读运行概览、订单平台只读运行证据、Actuator 健康检查、Flyway 数据库迁移和 Testcontainers 真实中间件验证串成一个可继续升级的后端系统。
+这个项目的核心不是“能创建订单”这么简单，而是用 Spring Boot 把下单幂等、库存一致性、库存流水、支付/退款流水、取消/过期/发货/完成状态流转、状态历史、Outbox 发布标记、RabbitMQ 真实消息投递、RabbitMQ 消费者、通知消息幂等落库、消费失败重试、死信队列、失败事件表、失败事件重放、失败事件重放 readiness、失败事件重放 simulation、失败事件重放 approval-status、失败事件重放 approval-status digest、失败事件重放 execution-contract、execution-contract approved/blocked 稳定样本、重放审计证据样本、重放证据索引、重放权限校验、统一操作员上下文、动作级角色策略、动作级角色策略启动期校验、操作员动作权限快照、动作权限决策明细、页面动作权限预检、页面写操作本地权限守卫、重放审计、重放审批门禁、重放审批历史流水、审批职责分离、失败事件分页筛选查询、失败事件治理摘要、失败事件管理状态、管理状态变更流水、失败事件 CSV 导出、失败事件管理页面、失败事件重放工作台、重放二次确认、订单平台只读运行概览、订单平台只读运行证据、Actuator 健康检查、Flyway 数据库迁移和 Testcontainers 真实中间件验证串成一个可继续升级的后端系统。
