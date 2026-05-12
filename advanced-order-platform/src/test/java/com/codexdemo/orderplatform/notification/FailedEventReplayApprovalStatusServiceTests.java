@@ -29,6 +29,9 @@ class FailedEventReplayApprovalStatusServiceTests {
 
         assertThat(response.exists()).isFalse();
         assertThat(response.failedEventId()).isEqualTo(404L);
+        assertThat(response.evidenceVersion()).isEqualTo("failed-event-approval-status.v1");
+        assertThat(response.approvalDigest()).startsWith("sha256:");
+        assertThat(response.replayEligibilityDigest()).startsWith("sha256:");
         assertThat(response.requiredApprovalStatus()).isEqualTo(FailedEventReplayApprovalStatus.APPROVED);
         assertThat(response.approvedForReplay()).isFalse();
         assertThat(response.historyCount()).isZero();
@@ -60,6 +63,9 @@ class FailedEventReplayApprovalStatusServiceTests {
 
         assertThat(response.exists()).isTrue();
         assertThat(response.approvalStatus()).isEqualTo(FailedEventReplayApprovalStatus.APPROVED);
+        assertThat(response.evidenceVersion()).isEqualTo("failed-event-approval-status.v1");
+        assertThat(response.approvalDigest()).startsWith("sha256:");
+        assertThat(response.replayEligibilityDigest()).startsWith("sha256:");
         assertThat(response.approvalRequested()).isTrue();
         assertThat(response.approvedForReplay()).isTrue();
         assertThat(response.approvalBlockedBy()).isEmpty();
@@ -67,6 +73,10 @@ class FailedEventReplayApprovalStatusServiceTests {
         assertThat(response.historyCount()).isEqualTo(2L);
         assertThat(response.latestApproval().action()).isEqualTo(FailedEventReplayApprovalHistoryAction.APPROVED);
         assertThat(response.latestApproval().operatorRole()).isEqualTo("SRE");
+
+        FailedEventReplayApprovalStatusResponse repeated = service.approvalStatus(10L);
+        assertThat(repeated.approvalDigest()).isEqualTo(response.approvalDigest());
+        assertThat(repeated.replayEligibilityDigest()).isEqualTo(response.replayEligibilityDigest());
     }
 
     @Test
@@ -83,6 +93,8 @@ class FailedEventReplayApprovalStatusServiceTests {
         FailedEventReplayApprovalStatusResponse response = service.approvalStatus(11L);
 
         assertThat(response.approvalStatus()).isEqualTo(FailedEventReplayApprovalStatus.PENDING);
+        assertThat(response.approvalDigest()).startsWith("sha256:");
+        assertThat(response.replayEligibilityDigest()).startsWith("sha256:");
         assertThat(response.approvalPending()).isTrue();
         assertThat(response.approvalBlockedBy()).containsExactly("REPLAY_APPROVAL_PENDING");
         assertThat(response.nextAllowedActions()).containsExactly("REVIEW_REPLAY_APPROVAL");

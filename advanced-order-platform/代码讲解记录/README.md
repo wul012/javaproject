@@ -134,6 +134,9 @@
 
 44-version-40-replay-approval-status.md
  -> 第四十版失败事件重放 approval-status，给 Node approval evidence 提供 Java 侧审批状态只读核对入口
+
+45-version-41-replay-approval-status-digest.md
+ -> 第四十一版失败事件重放 approval-status digest，给 Node digest-aware verification 提供稳定上游证据摘要
 ```
 
 ## 项目整体理解
@@ -313,8 +316,11 @@ README.md
 
 44-version-40-replay-approval-status.md
  -> 理解失败事件重放审批如何从“流水查询”继续升级为“单条审批状态只读核对模型”
+
+45-version-41-replay-approval-status-digest.md
+ -> 理解 approval-status 如何增加 evidenceVersion、approvalDigest 和 replayEligibilityDigest，支持上游证据复核
 ```
 
 ## 一句话总览
 
-这个项目的核心不是“能创建订单”这么简单，而是用 Spring Boot 把下单幂等、库存一致性、库存流水、支付/退款流水、取消/过期/发货/完成状态流转、状态历史、Outbox 发布标记、RabbitMQ 真实消息投递、RabbitMQ 消费者、通知消息幂等落库、消费失败重试、死信队列、失败事件表、失败事件重放、失败事件重放 readiness、失败事件重放 simulation、失败事件重放 approval-status、重放权限校验、统一操作员上下文、动作级角色策略、动作级角色策略启动期校验、操作员动作权限快照、动作权限决策明细、页面动作权限预检、页面写操作本地权限守卫、重放审计、重放审批门禁、重放审批历史流水、审批职责分离、失败事件分页筛选查询、失败事件治理摘要、失败事件管理状态、管理状态变更流水、失败事件 CSV 导出、失败事件管理页面、失败事件重放工作台、重放二次确认、订单平台只读运行概览、Actuator 健康检查、Flyway 数据库迁移和 Testcontainers 真实中间件验证串成一个可继续升级的后端系统。
+这个项目的核心不是“能创建订单”这么简单，而是用 Spring Boot 把下单幂等、库存一致性、库存流水、支付/退款流水、取消/过期/发货/完成状态流转、状态历史、Outbox 发布标记、RabbitMQ 真实消息投递、RabbitMQ 消费者、通知消息幂等落库、消费失败重试、死信队列、失败事件表、失败事件重放、失败事件重放 readiness、失败事件重放 simulation、失败事件重放 approval-status、失败事件重放 approval-status digest、重放权限校验、统一操作员上下文、动作级角色策略、动作级角色策略启动期校验、操作员动作权限快照、动作权限决策明细、页面动作权限预检、页面写操作本地权限守卫、重放审计、重放审批门禁、重放审批历史流水、审批职责分离、失败事件分页筛选查询、失败事件治理摘要、失败事件管理状态、管理状态变更流水、失败事件 CSV 导出、失败事件管理页面、失败事件重放工作台、重放二次确认、订单平台只读运行概览、Actuator 健康检查、Flyway 数据库迁移和 Testcontainers 真实中间件验证串成一个可继续升级的后端系统。

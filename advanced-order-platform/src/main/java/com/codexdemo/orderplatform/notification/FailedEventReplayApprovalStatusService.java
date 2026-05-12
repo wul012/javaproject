@@ -41,28 +41,66 @@ public class FailedEventReplayApprovalStatusService {
             Instant sampledAt
     ) {
         FailedEventReplayApprovalStatus status = failedMessage.getReplayApprovalStatus();
+        boolean approvalRequested = status != FailedEventReplayApprovalStatus.NOT_REQUESTED;
+        boolean approvalPending = status == FailedEventReplayApprovalStatus.PENDING;
+        boolean approvedForReplay = status == FailedEventReplayApprovalStatus.APPROVED;
+        boolean rejected = status == FailedEventReplayApprovalStatus.REJECTED;
+        long historyCount = failedEventReplayApprovalHistoryRepository.countByFailedEventMessageId(failedMessage.getId());
+        FailedEventReplayApprovalStatusResponse.LatestApproval latestApproval = latestApproval(failedMessage);
+        List<String> approvalBlockedBy = approvalBlockedBy(status);
+        List<String> nextAllowedActions = nextAllowedActions(failedMessage, status);
         return new FailedEventReplayApprovalStatusResponse(
                 sampledAt,
                 failedMessage.getId(),
                 true,
+                FailedEventReplayApprovalEvidenceDigests.EVIDENCE_VERSION,
+                FailedEventReplayApprovalEvidenceDigests.approvalDigest(
+                        failedMessage.getId(),
+                        true,
+                        status,
+                        REQUIRED_APPROVAL_STATUS,
+                        approvalRequested,
+                        approvalPending,
+                        approvedForReplay,
+                        rejected,
+                        failedMessage.getReplayApprovalReason(),
+                        failedMessage.getReplayApprovalRequestedBy(),
+                        failedMessage.getReplayApprovalRequestedAt(),
+                        failedMessage.getReplayApprovalReviewedBy(),
+                        failedMessage.getReplayApprovalReviewedAt(),
+                        failedMessage.getReplayApprovalReviewNote(),
+                        historyCount,
+                        latestApproval
+                ),
+                FailedEventReplayApprovalEvidenceDigests.replayEligibilityDigest(
+                        failedMessage.getId(),
+                        true,
+                        failedMessage.getStatus(),
+                        failedMessage.getManagementStatus(),
+                        status,
+                        REQUIRED_APPROVAL_STATUS,
+                        approvedForReplay,
+                        approvalBlockedBy,
+                        nextAllowedActions
+                ),
                 failedMessage.getStatus(),
                 failedMessage.getManagementStatus(),
                 status,
                 REQUIRED_APPROVAL_STATUS,
-                status != FailedEventReplayApprovalStatus.NOT_REQUESTED,
-                status == FailedEventReplayApprovalStatus.PENDING,
-                status == FailedEventReplayApprovalStatus.APPROVED,
-                status == FailedEventReplayApprovalStatus.REJECTED,
+                approvalRequested,
+                approvalPending,
+                approvedForReplay,
+                rejected,
                 failedMessage.getReplayApprovalReason(),
                 failedMessage.getReplayApprovalRequestedBy(),
                 failedMessage.getReplayApprovalRequestedAt(),
                 failedMessage.getReplayApprovalReviewedBy(),
                 failedMessage.getReplayApprovalReviewedAt(),
                 failedMessage.getReplayApprovalReviewNote(),
-                failedEventReplayApprovalHistoryRepository.countByFailedEventMessageId(failedMessage.getId()),
-                latestApproval(failedMessage),
-                approvalBlockedBy(status),
-                nextAllowedActions(failedMessage, status)
+                historyCount,
+                latestApproval,
+                approvalBlockedBy,
+                nextAllowedActions
         );
     }
 

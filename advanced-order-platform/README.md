@@ -49,6 +49,7 @@
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
 - 失败事件重放 approval-status 接口，只读暴露 Java 保存的审批状态、最近审批动作和下一步动作
+- 失败事件重放 approval-status digest，给 Node 上游证据校验提供稳定摘要
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -836,6 +837,9 @@ Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/approval-status
   "sampledAt": "2026-05-12T13:30:00Z",
   "failedEventId": 1,
   "exists": true,
+  "evidenceVersion": "failed-event-approval-status.v1",
+  "approvalDigest": "sha256:...",
+  "replayEligibilityDigest": "sha256:...",
   "failedEventStatus": "RECORDED",
   "managementStatus": "OPEN",
   "approvalStatus": "APPROVED",
@@ -870,6 +874,9 @@ Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/approval-status
 {
   "failedEventId": 999999,
   "exists": false,
+  "evidenceVersion": "failed-event-approval-status.v1",
+  "approvalDigest": "sha256:...",
+  "replayEligibilityDigest": "sha256:...",
   "requiredApprovalStatus": "APPROVED",
   "approvedForReplay": false,
   "historyCount": 0,
@@ -879,6 +886,21 @@ Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/approval-status
 ```
 
 `approval-status` 只读取失败事件当前审批字段和最近审批流水，不申请审批、不审核审批、不执行重放，也不修改失败事件状态。它和 readiness / simulation 的边界是：readiness 判断整体是否可重放，simulation 预演真实重放副作用，approval-status 只回答 Java 当前保存的 replay approval 状态，方便 Node 后续核对审批证据链。
+
+v41 起，`approval-status` 增加三个证据字段：
+
+```text
+evidenceVersion
+ -> 当前响应证据格式版本，固定为 failed-event-approval-status.v1
+
+approvalDigest
+ -> 对审批证据字段计算的 SHA-256 摘要，不包含 sampledAt
+
+replayEligibilityDigest
+ -> 对审批层面的可重放判断字段计算的 SHA-256 摘要，不包含 sampledAt
+```
+
+两个 digest 都以 `sha256:` 开头。同一条失败事件在审批状态不变时重复读取，digest 应保持稳定；审批状态、请求/审核字段、审批历史数量、阻断原因或下一步动作变化时，digest 会变化。digest 只用于证据复核，不代表自动放行真实 replay。
 
 ## Database Migration
 
@@ -1001,6 +1023,7 @@ notification
  -> v38 增加失败事件重放 readiness 接口，按只读方式返回单条失败事件的重放资格、阻断原因、预警、积压位置和下一步动作
  -> v39 增加失败事件重放 simulation 接口，复用 readiness 结果并只读预演真实重放可能产生的副作用
  -> v40 增加失败事件重放 approval-status 接口，只读暴露 Java 自己保存的审批状态、最近审批流水和下一步动作
+ -> v41 增加 approval-status 证据版本和稳定 digest，便于 Node 校验 Java 上游审批证据是否漂移
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
