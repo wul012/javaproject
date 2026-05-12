@@ -124,11 +124,11 @@ PostgreSQL / RabbitMQ 的定期完整验证
 新版本讲解从这里继续追加：
 
 ```text
-52-version-48-待定主题.md
- -> 第四十八版代码讲解和生产雏形阶段进度说明
+52-version-48-replay-evidence-operator-auth-boundary.md
+ -> 第四十八版 replay evidence index 增强 operator/auth boundary，说明 Header 身份、动作角色策略和生产认证缺口
 ```
 
-实际推进 v48 时，再把 `待定主题` 替换为本版真实主题，并补齐具体讲解。
+后续推进 v49 时，从 `53-version-49-主题.md` 继续追加。
 
 ## 一句话总览
 

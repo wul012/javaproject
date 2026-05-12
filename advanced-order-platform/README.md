@@ -54,7 +54,7 @@
 - 失败事件重放 execution-contract 接口，只读说明真实重放前 Java 会检查的状态、审批、digest 和请求条件
 - 失败事件重放 execution-contract 稳定样本，给 Node fixture-driven smoke 提供 approved / blocked 真实格式参考
 - 失败事件重放 audit evidence 稳定样本，给控制面判断真实执行是否可追溯提供 approved / blocked 参考
-- 失败事件重放 evidence index 接口，只读汇总 live evidence、静态样本、审计身份字段和执行安全规则
+- 失败事件重放 evidence index 接口，只读汇总 live evidence、静态样本、operator/auth 边界、审计身份字段和执行安全规则
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -1151,7 +1151,7 @@ Invoke-RestMethod http://localhost:8080/api/v1/failed-events/replay-evidence-ind
 
 ```json
 {
-  "evidenceVersion": "failed-event-replay-evidence-index.v1",
+  "evidenceVersion": "failed-event-replay-evidence-index.v2",
   "readOnly": true,
   "executionAllowed": false,
   "liveEvidenceEndpoints": [
@@ -1172,12 +1172,46 @@ Invoke-RestMethod http://localhost:8080/api/v1/failed-events/replay-evidence-ind
       "requiredFields": ["operator", "requestId", "decisionId", "dryRun", "executionAllowed", "auditTrail"]
     }
   ],
+  "operatorAuthBoundary": {
+    "identitySource": "HEADER_DERIVED_OPERATOR_CONTEXT",
+    "requiredHeaders": ["X-Operator-Id", "X-Operator-Role"],
+    "anonymousAllowed": false,
+    "javaAuthenticatesCredentials": false,
+    "enforcementMode": "ROLE_POLICY_PRECHECK_AND_SERVICE_GATE",
+    "globalAllowedRoles": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
+    "allowedRolesByAction": {
+      "MANAGE_FAILED_EVENT": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
+      "REQUEST_REPLAY_APPROVAL": ["ORDER_SUPPORT", "SRE", "SYSTEM"],
+      "REVIEW_REPLAY_APPROVAL": ["SRE", "SYSTEM"],
+      "REPLAY_FAILED_EVENT": ["ORDER_SUPPORT", "SRE", "SYSTEM"]
+    },
+    "productionAuthGaps": [
+      "Java does not validate JWT, session cookies, or external identity-provider signatures yet.",
+      "Upstream gateway or control plane must prevent client-side spoofing of X-Operator-* headers."
+    ]
+  },
   "auditIdentityFields": ["operator.operatorId", "operator.operatorRole", "requestId", "decisionId"],
-  "executionSafetyRules": ["REAL_REPLAY_REQUIRES_APPROVED_STATUS", "BLOCKED_PRECHECK_MUST_NOT_CREATE_REPLAY_ATTEMPT"]
+  "executionSafetyRules": [
+    "REAL_REPLAY_REQUIRES_APPROVED_STATUS",
+    "OPERATOR_HEADERS_ARE_REQUIRED_BUT_NOT_CREDENTIAL_AUTHENTICATION",
+    "UPSTREAM_MUST_PREVENT_X_OPERATOR_HEADER_SPOOFING",
+    "BLOCKED_PRECHECK_MUST_NOT_CREATE_REPLAY_ATTEMPT"
+  ]
 }
 ```
 
 这个接口只做说明索引，不读取具体失败事件，不创建审计，不执行 replay。它让控制面可以先知道 Java 提供了哪些 live evidence endpoint、哪些静态样本、哪些字段是审计身份字段，以及真实 replay 之前必须遵守哪些安全规则。
+
+v48 起，`operatorAuthBoundary` 明确说明当前 Java 的身份边界：
+
+```text
+身份来源仍是 X-Operator-Id / X-Operator-Role Header
+Java 会校验必填、角色白名单和动作级角色策略
+Java 目前不校验 JWT、session cookie 或外部身份系统签名
+上游网关或控制面必须防止 X-Operator-* Header 被客户端伪造
+```
+
+这让 Node 生产 readiness 汇总可以把 Java 当前状态区分为“有 operator/role rehearsal 和服务端动作门禁”，但还不是“完整生产级认证”。
 
 ## Database Migration
 
@@ -1306,6 +1340,7 @@ notification
  -> v44 增加 execution-contract blocked 稳定样本 JSON，给 Node 多场景矩阵提供负向样本
  -> v46 增加 replay audit evidence approved/blocked 稳定样本 JSON，给控制面判断 replay 执行是否可追溯
  -> v47 增加 replay evidence index 说明接口，汇总 live evidence、静态样本、审计身份字段和执行安全规则
+ -> v48 增强 replay evidence index，补 operator/auth boundary 字段，说明 Header 身份、动作角色策略和生产认证缺口
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号

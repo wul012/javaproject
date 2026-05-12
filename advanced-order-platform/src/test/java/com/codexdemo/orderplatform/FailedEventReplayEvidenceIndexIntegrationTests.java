@@ -26,7 +26,7 @@ class FailedEventReplayEvidenceIndexIntegrationTests {
         mockMvc.perform(get("/api/v1/failed-events/replay-evidence-index"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.sampledAt").exists())
-                .andExpect(jsonPath("$.evidenceVersion").value("failed-event-replay-evidence-index.v1"))
+                .andExpect(jsonPath("$.evidenceVersion").value("failed-event-replay-evidence-index.v2"))
                 .andExpect(jsonPath("$.readOnly").value(true))
                 .andExpect(jsonPath("$.executionAllowed").value(false))
                 .andExpect(jsonPath("$.liveEvidenceEndpoints[0].name").value("failed-event-summary"))
@@ -39,11 +39,30 @@ class FailedEventReplayEvidenceIndexIntegrationTests {
                 .andExpect(jsonPath("$.staticEvidenceSamples[2].name").value("replay-audit-approved"))
                 .andExpect(jsonPath("$.staticEvidenceSamples[2].requiredFields", hasItem("auditTrail")))
                 .andExpect(jsonPath("$.staticEvidenceSamples[3].scenario").value("BLOCKED_REPLAY_AUDIT"))
+                .andExpect(jsonPath("$.operatorAuthBoundary.identitySource")
+                        .value("HEADER_DERIVED_OPERATOR_CONTEXT"))
+                .andExpect(jsonPath("$.operatorAuthBoundary.requiredHeaders", hasItem("X-Operator-Id")))
+                .andExpect(jsonPath("$.operatorAuthBoundary.requiredHeaders", hasItem("X-Operator-Role")))
+                .andExpect(jsonPath("$.operatorAuthBoundary.anonymousAllowed").value(false))
+                .andExpect(jsonPath("$.operatorAuthBoundary.javaAuthenticatesCredentials").value(false))
+                .andExpect(jsonPath("$.operatorAuthBoundary.enforcementMode")
+                        .value("ROLE_POLICY_PRECHECK_AND_SERVICE_GATE"))
+                .andExpect(jsonPath("$.operatorAuthBoundary.globalAllowedRoles", hasItem("ORDER_SUPPORT")))
+                .andExpect(jsonPath("$.operatorAuthBoundary.allowedRolesByAction.REVIEW_REPLAY_APPROVAL",
+                        hasItem("SRE")))
+                .andExpect(jsonPath("$.operatorAuthBoundary.allowedRolesByAction.REPLAY_FAILED_EVENT",
+                        hasItem("SYSTEM")))
+                .andExpect(jsonPath("$.operatorAuthBoundary.normalizationRules",
+                        hasItem("operator role must be present, stripped, upper-cased, allow-listed, and truncated to 80 characters")))
+                .andExpect(jsonPath("$.operatorAuthBoundary.productionAuthGaps",
+                        hasItem("Java does not validate JWT, session cookies, or external identity-provider signatures yet.")))
                 .andExpect(jsonPath("$.auditIdentityFields", hasItem("operator.operatorId")))
                 .andExpect(jsonPath("$.auditIdentityFields", hasItem("decisionId")))
                 .andExpect(jsonPath("$.executionSafetyRules", hasItem("REAL_REPLAY_REQUIRES_APPROVED_STATUS")))
+                .andExpect(jsonPath("$.executionSafetyRules",
+                        hasItem("OPERATOR_HEADERS_ARE_REQUIRED_BUT_NOT_CREDENTIAL_AUTHENTICATION")))
                 .andExpect(jsonPath("$.executionSafetyRules", hasItem("BLOCKED_PRECHECK_MUST_NOT_CREATE_REPLAY_ATTEMPT")))
-                .andExpect(jsonPath("$.productionReadinessNotes[0]")
-                        .value("This index is read-only and does not execute replay."));
+                .andExpect(jsonPath("$.productionReadinessNotes",
+                        hasItem("Operator/auth boundary data explains Java's current header-derived identity rehearsal model.")));
     }
 }

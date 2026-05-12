@@ -7,7 +7,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class FailedEventReplayEvidenceIndexService {
 
-    static final String EVIDENCE_VERSION = "failed-event-replay-evidence-index.v1";
+    static final String EVIDENCE_VERSION = "failed-event-replay-evidence-index.v2";
+
+    private final FailedEventOperatorContextResolver operatorContextResolver;
+
+    public FailedEventReplayEvidenceIndexService(FailedEventOperatorContextResolver operatorContextResolver) {
+        this.operatorContextResolver = operatorContextResolver;
+    }
 
     public FailedEventReplayEvidenceIndexResponse index() {
         return new FailedEventReplayEvidenceIndexResponse(
@@ -17,6 +23,7 @@ public class FailedEventReplayEvidenceIndexService {
                 false,
                 liveEvidenceEndpoints(),
                 staticEvidenceSamples(),
+                operatorAuthBoundary(),
                 auditIdentityFields(),
                 executionSafetyRules(),
                 productionReadinessNotes()
@@ -136,6 +143,33 @@ public class FailedEventReplayEvidenceIndexService {
         );
     }
 
+    private FailedEventReplayEvidenceIndexResponse.OperatorAuthBoundary operatorAuthBoundary() {
+        return new FailedEventReplayEvidenceIndexResponse.OperatorAuthBoundary(
+                "HEADER_DERIVED_OPERATOR_CONTEXT",
+                List.of(
+                        FailedEventOperatorContextResolver.OPERATOR_ID_HEADER,
+                        FailedEventOperatorContextResolver.OPERATOR_ROLE_HEADER
+                ),
+                false,
+                false,
+                "ROLE_POLICY_PRECHECK_AND_SERVICE_GATE",
+                operatorContextResolver.allowedRoles(),
+                operatorContextResolver.allowedRolesByAction(),
+                List.of(
+                        "operator id must be present, stripped, and truncated to 80 characters",
+                        "operator role must be present, stripped, upper-cased, allow-listed, and truncated to 80 characters",
+                        "action-specific role checks are evaluated after the global failed-event role allow-list",
+                        "the operator-context endpoint exposes allowed and denied actions for the supplied role"
+                ),
+                List.of(
+                        "Java does not validate JWT, session cookies, or external identity-provider signatures yet.",
+                        "Upstream gateway or control plane must prevent client-side spoofing of X-Operator-* headers.",
+                        "Header-derived identity is suitable for rehearsal and audit evidence, not final production authentication.",
+                        "Real replay still requires approval status, action role, non-blank reason, and RabbitMQ outbox readiness."
+                )
+        );
+    }
+
     private List<String> auditIdentityFields() {
         return List.of(
                 "operator.operatorId",
@@ -155,6 +189,8 @@ public class FailedEventReplayEvidenceIndexService {
                 "REAL_REPLAY_REQUIRES_OPERATOR_ACTION_REPLAY_FAILED_EVENT",
                 "REAL_REPLAY_REQUIRES_NON_BLANK_REASON",
                 "REAL_REPLAY_REQUIRES_RABBITMQ_OUTBOX_ENABLED",
+                "OPERATOR_HEADERS_ARE_REQUIRED_BUT_NOT_CREDENTIAL_AUTHENTICATION",
+                "UPSTREAM_MUST_PREVENT_X_OPERATOR_HEADER_SPOOFING",
                 "READ_ONLY_EVIDENCE_ENDPOINTS_MUST_NOT_CHANGE_REPLAY_STATE",
                 "BLOCKED_PRECHECK_MUST_NOT_CREATE_REPLAY_ATTEMPT"
         );
@@ -165,6 +201,7 @@ public class FailedEventReplayEvidenceIndexService {
                 "This index is read-only and does not execute replay.",
                 "Static samples are fixtures for smoke, diagnostics, and control-plane contract alignment.",
                 "Live endpoints should be queried before POST /api/v1/failed-events/{id}/replay.",
+                "Operator/auth boundary data explains Java's current header-derived identity rehearsal model.",
                 "The real replay POST still owns the final approval, role, request, and RabbitMQ checks."
         );
     }
