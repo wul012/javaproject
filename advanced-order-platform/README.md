@@ -50,6 +50,7 @@
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
 - 失败事件重放 approval-status 接口，只读暴露 Java 保存的审批状态、最近审批动作和下一步动作
 - 失败事件重放 approval-status digest，给 Node 上游证据校验提供稳定摘要
+- 失败事件重放 execution-contract 接口，只读说明真实重放前 Java 会检查的状态、审批、digest 和请求条件
 - Actuator 健康检查
 - 默认本地健康检查不依赖未启用的 RabbitMQ
 - Flyway 数据库迁移
@@ -902,6 +903,91 @@ replayEligibilityDigest
 
 两个 digest 都以 `sha256:` 开头。同一条失败事件在审批状态不变时重复读取，digest 应保持稳定；审批状态、请求/审核字段、审批历史数量、阻断原因或下一步动作变化时，digest 会变化。digest 只用于证据复核，不代表自动放行真实 replay。
 
+查询单个失败事件的重放执行契约：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/failed-events/1/replay-execution-contract
+```
+
+返回结构示例：
+
+```json
+{
+  "sampledAt": "2026-05-12T10:00:00Z",
+  "failedEventId": 1,
+  "exists": true,
+  "contractVersion": "failed-event-replay-execution-contract.v1",
+  "contractDigest": "sha256:...",
+  "approvalEvidenceVersion": "failed-event-approval-status.v1",
+  "approvalDigest": "sha256:...",
+  "replayEligibilityDigest": "sha256:...",
+  "failedEventStatus": "RECORDED",
+  "managementStatus": "OPEN",
+  "approvalStatus": "APPROVED",
+  "requiredApprovalStatus": "APPROVED",
+  "replayPreconditionsSatisfied": true,
+  "realReplayEndpointEnforcesApprovalDigest": false,
+  "realReplayEndpointEnforcesReplayEligibilityDigest": false,
+  "digestVerificationMode": "CLIENT_PRECHECK_ONLY",
+  "realExecutionMethod": "POST",
+  "realExecutionPath": "/api/v1/failed-events/{id}/replay",
+  "requiredOperatorAction": "REPLAY_FAILED_EVENT",
+  "idempotencyKeyHint": "failed-event-replay:1:1001",
+  "expectedAggregateId": "1001",
+  "executionChecks": [
+    {
+      "checkId": "REPLAY_APPROVAL_APPROVED",
+      "source": "FailedEventMessageService.replay",
+      "category": "APPROVAL",
+      "required": true,
+      "status": "PASSED",
+      "requiredValue": "approvalStatus=APPROVED",
+      "currentValue": "approvalStatus=APPROVED",
+      "evidenceDigest": "sha256:...",
+      "blockedBy": []
+    }
+  ],
+  "requestRequirements": [
+    {
+      "field": "reason",
+      "requiredForPost": true,
+      "rule": "non-blank replay reason is required"
+    }
+  ],
+  "blockedBy": [],
+  "warnings": [],
+  "expectedSideEffects": [
+    "PUBLISH_RABBITMQ_REPLAY_MESSAGE",
+    "SAVE_REPLAY_ATTEMPT_AUDIT",
+    "MARK_FAILED_EVENT_REPLAYED_ON_SUCCESS",
+    "MARK_FAILED_EVENT_REPLAY_FAILED_ON_BROKER_ERROR"
+  ],
+  "nextAllowedActions": ["REPLAY_FAILED_EVENT"]
+}
+```
+
+`replay-execution-contract` 只读组合 approval-status 与 readiness 的结论，用 `contractDigest` 固化当前执行前证据链。它明确暴露真实 `POST /api/v1/failed-events/{id}/replay` 会依赖的核心条件：
+
+```text
+失败事件存在
+approvalStatus 必须是 APPROVED
+失败事件不能已经 REPLAYED
+RabbitMQ Outbox 必须启用
+eventType / aggregateType / aggregateId / payload 必须在请求覆盖或原失败事件中存在
+请求 reason 必须非空
+eventId 如果由请求传入，必须是 UUID
+```
+
+边界说明：
+
+```text
+realReplayEndpointEnforcesApprovalDigest=false
+realReplayEndpointEnforcesReplayEligibilityDigest=false
+digestVerificationMode=CLIENT_PRECHECK_ONLY
+```
+
+这表示当前真实 replay POST 仍按 Java 内部状态做最终判断；digest 用于 Node 或人工操作台在执行前复核证据是否漂移，不会让 Java 自动执行，也不会绕过审批、角色或 RabbitMQ 前置条件。
+
 ## Database Migration
 
 第十版开始，项目使用 Flyway 管理数据库结构，Hibernate 只做结构校验：
@@ -1024,6 +1110,7 @@ notification
  -> v39 增加失败事件重放 simulation 接口，复用 readiness 结果并只读预演真实重放可能产生的副作用
  -> v40 增加失败事件重放 approval-status 接口，只读暴露 Java 自己保存的审批状态、最近审批流水和下一步动作
  -> v41 增加 approval-status 证据版本和稳定 digest，便于 Node 校验 Java 上游审批证据是否漂移
+ -> v42 增加失败事件重放 execution-contract，只读说明真实 replay 前 Java 会检查哪些状态、审批、digest 和请求条件
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
