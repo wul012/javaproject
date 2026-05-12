@@ -45,6 +45,7 @@
 - 失败事件管理页面写操作本地权限守卫，防止绕过禁用按钮触发未授权动作
 - 失败事件管理页面可视化展示当前操作员动作权限决策
 - 订单平台只读运行概览接口，汇总应用、订单、库存、Outbox 和失败事件风险信号
+- 订单平台只读运行证据接口，汇总 replay、审批、Outbox、版本和执行阻断信号
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -718,6 +719,71 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/overview
 
 该接口只做聚合读取，不触发重放，不修改订单、库存、Outbox 或失败事件状态，适合作为 Node 控制面的 Java 业务健康入口。
 
+查询订单平台只读运行证据：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
+```
+
+返回结构示例：
+
+```json
+{
+  "sampledAt": "2026-05-12T11:58:00.000Z",
+  "evidenceVersion": "java-ops-evidence.v1",
+  "service": {
+    "name": "advanced-order-platform",
+    "version": "0.1.0-SNAPSHOT",
+    "profiles": ["default"],
+    "startedAt": "2026-05-12T11:57:30.000Z",
+    "uptimeSeconds": 30
+  },
+  "readOnly": true,
+  "executionAllowed": false,
+  "failedEventReplay": {
+    "totalFailedEvents": 2,
+    "replayBacklog": 2,
+    "pendingReplayApprovals": 1,
+    "approvedReplayApprovals": 1,
+    "rejectedReplayApprovals": 0,
+    "latestFailedAt": "2026-05-12T11:57:45.000Z",
+    "latestApprovalAt": "2026-05-12T11:57:50.000Z",
+    "realReplayEndpoint": "/api/v1/failed-events/{id}/replay",
+    "realReplayAllowedByEvidence": false
+  },
+  "outbox": {
+    "pendingEvents": 0,
+    "publisherEnabled": false,
+    "rabbitMqEnabled": false,
+    "exchange": "order-platform.outbox",
+    "queue": "order-platform.outbox.events",
+    "deadLetterQueue": "order-platform.outbox.events.dlq",
+    "blockers": ["OUTBOX_PUBLISHER_DISABLED", "RABBITMQ_OUTBOX_DISABLED"]
+  },
+  "approvalExecution": {
+    "requiredApprovalStatus": "APPROVED",
+    "digestVerificationMode": "contractDigest must match latest approval-status/readiness evidence before POST /replay",
+    "approvalRequired": true,
+    "dryRun": true,
+    "executionBlockers": ["READ_ONLY_EVIDENCE_ENDPOINT", "REPLAY_APPROVAL_PENDING"],
+    "nextEvidenceActions": [
+      "GET /api/v1/failed-events/summary",
+      "GET /api/v1/failed-events/{id}/replay-readiness",
+      "GET /api/v1/failed-events/{id}/replay-execution-contract"
+    ]
+  },
+  "blockers": ["READ_ONLY_EVIDENCE_ENDPOINT", "OUTBOX_PUBLISHER_DISABLED", "RABBITMQ_OUTBOX_DISABLED"],
+  "warnings": ["APPROVED_REPLAY_REQUIRES_DIGEST_CHECK"],
+  "evidenceEndpoints": [
+    "/api/v1/ops/overview",
+    "/api/v1/failed-events/summary",
+    "/api/v1/failed-events/{id}/replay-execution-contract"
+  ]
+}
+```
+
+该接口服务于控制面读证据，不执行 replay，不申请/审批 replay approval，不写 Outbox，不改订单状态。`executionAllowed=false` 是接口自身的安全边界；真正执行仍必须走已有 `POST /api/v1/failed-events/{id}/replay`，并由 Java 的审批、digest 和 readiness 规则重新校验。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1166,6 +1232,7 @@ notification
 
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
+ -> v45 增加订单平台只读运行证据，汇总 service version、failed-event replay、审批、Outbox 和执行阻断信号
 
 common
  -> 业务异常和统一错误响应

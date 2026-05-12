@@ -10,12 +10,20 @@ public class OpsOverviewController {
 
     private final OpsOverviewService opsOverviewService;
 
-    public OpsOverviewController(OpsOverviewService opsOverviewService) {
+    private final OpsEvidenceService opsEvidenceService;
+
+    public OpsOverviewController(OpsOverviewService opsOverviewService, OpsEvidenceService opsEvidenceService) {
         this.opsOverviewService = opsOverviewService;
+        this.opsEvidenceService = opsEvidenceService;
     }
 
     @GetMapping("/overview")
     public OpsOverviewResponse overview() {
         return opsOverviewService.overview();
+    }
+
+    @GetMapping("/evidence")
+    public OpsEvidenceResponse evidence() {
+        return opsEvidenceService.evidence();
     }
 }
