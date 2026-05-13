@@ -60,8 +60,10 @@ public class OpsEvidenceService {
                 sampledAt,
                 EVIDENCE_VERSION,
                 service(sampledAt),
+                healthProbe(false),
                 true,
                 false,
+                readOnlyWindow(true),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -78,6 +80,51 @@ public class OpsEvidenceService {
                 profiles(),
                 startedAt,
                 Math.max(Duration.between(startedAt, sampledAt).toSeconds(), 0)
+        );
+    }
+
+    private OpsEvidenceResponse.HealthProbe healthProbe(boolean staticSampleOnly) {
+        return new OpsEvidenceResponse.HealthProbe(
+                "/actuator/health",
+                "GET",
+                "UP",
+                "/api/v1/ops/evidence",
+                List.of(
+                        "/api/v1/ops/overview",
+                        "/contracts/ops-read-only-evidence.sample.json"
+                ),
+                true,
+                staticSampleOnly
+        );
+    }
+
+    private OpsEvidenceResponse.ReadOnlyWindow readOnlyWindow(boolean readyForReadOnlyLiveProbe) {
+        return new OpsEvidenceResponse.ReadOnlyWindow(
+                "java-read-only-window.v1",
+                true,
+                false,
+                true,
+                false,
+                readyForReadOnlyLiveProbe,
+                false,
+                List.of(
+                        "GET /actuator/health",
+                        "GET /api/v1/ops/overview",
+                        "GET /api/v1/ops/evidence",
+                        "GET /contracts/ops-read-only-evidence.sample.json"
+                ),
+                List.of(
+                        "POST /api/v1/orders",
+                        "POST /api/v1/failed-events/{id}/replay",
+                        "RabbitMQ replay publish",
+                        "Outbox mutation",
+                        "Any non-GET Node upstream action"
+                ),
+                List.of(
+                        "UPSTREAM_PROBES_ENABLED=true",
+                        "UPSTREAM_ACTIONS_ENABLED=false"
+                ),
+                "Node real-read window must not call POST /api/v1/failed-events/{id}/replay"
         );
     }
 

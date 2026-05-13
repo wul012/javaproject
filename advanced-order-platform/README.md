@@ -740,8 +740,47 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "startedAt": "2026-05-12T11:57:30.000Z",
     "uptimeSeconds": 30
   },
+  "healthProbe": {
+    "endpoint": "/actuator/health",
+    "method": "GET",
+    "expectedStatus": "UP",
+    "evidenceEndpoint": "/api/v1/ops/evidence",
+    "additionalProbeEndpoints": [
+      "/api/v1/ops/overview",
+      "/contracts/ops-read-only-evidence.sample.json"
+    ],
+    "liveProbeRequiredForPass": true,
+    "staticSampleOnly": false
+  },
   "readOnly": true,
   "executionAllowed": false,
+  "readOnlyWindow": {
+    "windowVersion": "java-read-only-window.v1",
+    "operatorStartRequired": true,
+    "nodeAutoStartAllowed": false,
+    "upstreamProbesRequired": true,
+    "upstreamActionsAllowed": false,
+    "readyForReadOnlyLiveProbe": true,
+    "readyForProductionOperations": false,
+    "allowedProbeEndpoints": [
+      "GET /actuator/health",
+      "GET /api/v1/ops/overview",
+      "GET /api/v1/ops/evidence",
+      "GET /contracts/ops-read-only-evidence.sample.json"
+    ],
+    "forbiddenOperations": [
+      "POST /api/v1/orders",
+      "POST /api/v1/failed-events/{id}/replay",
+      "RabbitMQ replay publish",
+      "Outbox mutation",
+      "Any non-GET Node upstream action"
+    ],
+    "requiredNodeEnvironment": [
+      "UPSTREAM_PROBES_ENABLED=true",
+      "UPSTREAM_ACTIONS_ENABLED=false"
+    ],
+    "replayPostBoundary": "Node real-read window must not call POST /api/v1/failed-events/{id}/replay"
+  },
   "failedEventReplay": {
     "totalFailedEvents": 2,
     "replayBacklog": 2,
@@ -815,6 +854,24 @@ forbiddenOperations 明确禁止订单写操作、失败事件 replay POST 和 R
 ```
 
 它服务于 Node production pass evidence archive verification 的上游引用位，只证明 Java 只读 evidence 的稳定结构，不代表 live upstream pass，也不允许任何写操作。
+
+v50 起，动态 `/api/v1/ops/evidence` 补充真实只读窗口自描述：
+
+```text
+healthProbe.endpoint=/actuator/health
+healthProbe.expectedStatus=UP
+readOnlyWindow.windowVersion=java-read-only-window.v1
+readOnlyWindow.operatorStartRequired=true
+readOnlyWindow.nodeAutoStartAllowed=false
+readOnlyWindow.upstreamProbesRequired=true
+readOnlyWindow.upstreamActionsAllowed=false
+readOnlyWindow.readyForReadOnlyLiveProbe=true
+readOnlyWindow.readyForProductionOperations=false
+readOnlyWindow.requiredNodeEnvironment=UPSTREAM_PROBES_ENABLED=true + UPSTREAM_ACTIONS_ENABLED=false
+readOnlyWindow.forbiddenOperations 包含订单写入、失败事件 replay POST、RabbitMQ replay publish、Outbox mutation 和任何非 GET Node 上游动作
+```
+
+静态样本中的 `readOnlyWindow.readyForReadOnlyLiveProbe=false`，因为样本只证明字段形状；只有启动后的动态 `/api/v1/ops/evidence` 才能作为真实只读 probe 的 Java 侧输入。
 
 查询失败事件治理摘要：
 
@@ -1376,6 +1433,7 @@ ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
  -> v45 增加订单平台只读运行证据，汇总 service version、failed-event replay、审批、Outbox 和执行阻断信号
  -> v49 增加 ops read-only evidence 静态样本，给 Node production pass evidence verification 提供 Java 只读证据引用位
+ -> v50 增强 ops evidence 启动后自描述，固定 healthProbe 和 readOnlyWindow 字段，服务真实只读 live probe capture
 
 common
  -> 业务异常和统一错误响应

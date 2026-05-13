@@ -13,6 +13,18 @@
     "startedAt": "2026-05-13T11:15:00Z",
     "uptimeSeconds": 300
   },
+  "healthProbe": {
+    "endpoint": "/actuator/health",
+    "method": "GET",
+    "expectedStatus": "UP",
+    "evidenceEndpoint": "/api/v1/ops/evidence",
+    "additionalProbeEndpoints": [
+      "/api/v1/ops/overview",
+      "/contracts/ops-read-only-evidence.sample.json"
+    ],
+    "liveProbeRequiredForPass": true,
+    "staticSampleOnly": true
+  },
   "failedEventReplay": {
     "totalFailedEvents": 2,
     "replayBacklog": 2,
@@ -51,6 +63,33 @@
       "GET /api/v1/failed-events/{id}/replay-readiness",
       "GET /api/v1/failed-events/{id}/replay-execution-contract"
     ]
+  },
+  "readOnlyWindow": {
+    "windowVersion": "java-read-only-window.v1",
+    "operatorStartRequired": true,
+    "nodeAutoStartAllowed": false,
+    "upstreamProbesRequired": true,
+    "upstreamActionsAllowed": false,
+    "readyForReadOnlyLiveProbe": false,
+    "readyForProductionOperations": false,
+    "allowedProbeEndpoints": [
+      "GET /actuator/health",
+      "GET /api/v1/ops/overview",
+      "GET /api/v1/ops/evidence",
+      "GET /contracts/ops-read-only-evidence.sample.json"
+    ],
+    "forbiddenOperations": [
+      "POST /api/v1/orders",
+      "POST /api/v1/failed-events/{id}/replay",
+      "RabbitMQ replay publish",
+      "Outbox mutation",
+      "Any non-GET Node upstream action"
+    ],
+    "requiredNodeEnvironment": [
+      "UPSTREAM_PROBES_ENABLED=true",
+      "UPSTREAM_ACTIONS_ENABLED=false"
+    ],
+    "replayPostBoundary": "Node real-read window must not call POST /api/v1/failed-events/{id}/replay"
   },
   "blockers": [
     "READ_ONLY_EVIDENCE_ENDPOINT",

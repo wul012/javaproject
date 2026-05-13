@@ -7,8 +7,10 @@ public record OpsEvidenceResponse(
         Instant sampledAt,
         String evidenceVersion,
         Service service,
+        HealthProbe healthProbe,
         boolean readOnly,
         boolean executionAllowed,
+        ReadOnlyWindow readOnlyWindow,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -23,6 +25,32 @@ public record OpsEvidenceResponse(
             List<String> profiles,
             Instant startedAt,
             long uptimeSeconds
+    ) {
+    }
+
+    public record HealthProbe(
+            String endpoint,
+            String method,
+            String expectedStatus,
+            String evidenceEndpoint,
+            List<String> additionalProbeEndpoints,
+            boolean liveProbeRequiredForPass,
+            boolean staticSampleOnly
+    ) {
+    }
+
+    public record ReadOnlyWindow(
+            String windowVersion,
+            boolean operatorStartRequired,
+            boolean nodeAutoStartAllowed,
+            boolean upstreamProbesRequired,
+            boolean upstreamActionsAllowed,
+            boolean readyForReadOnlyLiveProbe,
+            boolean readyForProductionOperations,
+            List<String> allowedProbeEndpoints,
+            List<String> forbiddenOperations,
+            List<String> requiredNodeEnvironment,
+            String replayPostBoundary
     ) {
     }
 

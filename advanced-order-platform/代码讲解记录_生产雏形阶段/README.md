@@ -129,9 +129,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 53-version-49-ops-read-only-evidence-sample.md
  -> 第四十九版 ops read-only evidence 静态样本，给 Node production pass evidence verification 提供 Java 只读证据引用位
+
+54-version-50-ops-read-only-window-self-description.md
+ -> 第五十版 ops evidence 启动后自描述增强，固定 healthProbe、readOnlyWindow、Node 只读窗口环境开关和禁止写操作边界
 ```
 
-后续推进 v50 时，从 `54-version-50-主题.md` 继续追加。
+后续推进 v51 时，从 `55-version-51-主题.md` 继续追加。
 
 ## 一句话总览
 

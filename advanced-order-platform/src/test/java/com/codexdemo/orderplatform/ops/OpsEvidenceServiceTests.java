@@ -63,6 +63,37 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.service().name()).isEqualTo("advanced-order-platform");
         assertThat(evidence.service().version()).isEqualTo("0.1.0-test");
         assertThat(evidence.service().profiles()).containsExactly("local", "ops");
+        assertThat(evidence.healthProbe().endpoint()).isEqualTo("/actuator/health");
+        assertThat(evidence.healthProbe().method()).isEqualTo("GET");
+        assertThat(evidence.healthProbe().expectedStatus()).isEqualTo("UP");
+        assertThat(evidence.healthProbe().evidenceEndpoint()).isEqualTo("/api/v1/ops/evidence");
+        assertThat(evidence.healthProbe().additionalProbeEndpoints())
+                .containsExactly("/api/v1/ops/overview", "/contracts/ops-read-only-evidence.sample.json");
+        assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
+        assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
+        assertThat(evidence.readOnlyWindow().windowVersion()).isEqualTo("java-read-only-window.v1");
+        assertThat(evidence.readOnlyWindow().operatorStartRequired()).isTrue();
+        assertThat(evidence.readOnlyWindow().nodeAutoStartAllowed()).isFalse();
+        assertThat(evidence.readOnlyWindow().upstreamProbesRequired()).isTrue();
+        assertThat(evidence.readOnlyWindow().upstreamActionsAllowed()).isFalse();
+        assertThat(evidence.readOnlyWindow().readyForReadOnlyLiveProbe()).isTrue();
+        assertThat(evidence.readOnlyWindow().readyForProductionOperations()).isFalse();
+        assertThat(evidence.readOnlyWindow().allowedProbeEndpoints())
+                .containsExactly(
+                        "GET /actuator/health",
+                        "GET /api/v1/ops/overview",
+                        "GET /api/v1/ops/evidence",
+                        "GET /contracts/ops-read-only-evidence.sample.json"
+                );
+        assertThat(evidence.readOnlyWindow().forbiddenOperations())
+                .contains(
+                        "POST /api/v1/failed-events/{id}/replay",
+                        "Any non-GET Node upstream action"
+                );
+        assertThat(evidence.readOnlyWindow().requiredNodeEnvironment())
+                .containsExactly("UPSTREAM_PROBES_ENABLED=true", "UPSTREAM_ACTIONS_ENABLED=false");
+        assertThat(evidence.readOnlyWindow().replayPostBoundary())
+                .contains("must not call POST /api/v1/failed-events/{id}/replay");
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
