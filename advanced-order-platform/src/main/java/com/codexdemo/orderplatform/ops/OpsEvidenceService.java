@@ -226,6 +226,7 @@ public class OpsEvidenceService {
                 "/api/v1/ops/overview",
                 "/api/v1/ops/evidence",
                 "/contracts/ops-read-only-evidence.sample.json",
+                "/contracts/ops-evidence-field-guide.sample.json",
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

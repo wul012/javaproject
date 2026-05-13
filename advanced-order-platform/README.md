@@ -819,6 +819,7 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "/api/v1/ops/overview",
     "/api/v1/ops/evidence",
     "/contracts/ops-read-only-evidence.sample.json",
+    "/contracts/ops-evidence-field-guide.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/replay-execution-contract",
     "/api/v1/failed-events/replay-evidence-index"
@@ -872,6 +873,31 @@ readOnlyWindow.forbiddenOperations 包含订单写入、失败事件 replay POST
 ```
 
 静态样本中的 `readOnlyWindow.readyForReadOnlyLiveProbe=false`，因为样本只证明字段形状；只有启动后的动态 `/api/v1/ops/evidence` 才能作为真实只读 probe 的 Java 侧输入。
+
+v51 起，应用随包提供 ops evidence 字段说明样本：
+
+```text
+src/main/resources/static/contracts/ops-evidence-field-guide.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/ops-evidence-field-guide.sample.json
+```
+
+该说明固定表达：
+
+```text
+guideVersion=java-ops-evidence-field-guide.v1
+sourceEvidenceEndpoint=/api/v1/ops/evidence
+sourceSampleEndpoint=/contracts/ops-read-only-evidence.sample.json
+releaseReviewUse.mayBeUsedForProductionPass=false
+fieldGroups 覆盖 service、healthProbe、readOnlyWindow、executionBoundaries
+forbiddenOperations 继续包含订单写入、失败事件 replay POST、RabbitMQ replay publish、Outbox mutation 和任何非 GET Node 上游动作
+```
+
+它服务于 Node read-only capture release evidence review，只解释 Java 字段语义和稳定性，不代表 live upstream pass，也不授予生产操作权限。
 
 查询失败事件治理摘要：
 
@@ -1434,6 +1460,7 @@ ops
  -> v45 增加订单平台只读运行证据，汇总 service version、failed-event replay、审批、Outbox 和执行阻断信号
  -> v49 增加 ops read-only evidence 静态样本，给 Node production pass evidence verification 提供 Java 只读证据引用位
  -> v50 增强 ops evidence 启动后自描述，固定 healthProbe 和 readOnlyWindow 字段，服务真实只读 live probe capture
+ -> v51 增加 ops evidence 字段说明样本，解释 service、healthProbe、readOnlyWindow 和执行边界字段稳定性
 
 common
  -> 业务异常和统一错误响应

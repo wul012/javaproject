@@ -129,6 +129,7 @@ class OpsEvidenceServiceTests {
                 .contains(
                         "/api/v1/ops/evidence",
                         "/contracts/ops-read-only-evidence.sample.json",
+                        "/contracts/ops-evidence-field-guide.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

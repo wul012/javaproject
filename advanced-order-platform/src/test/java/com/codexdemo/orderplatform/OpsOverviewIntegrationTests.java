@@ -195,6 +195,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/evidence")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/contracts/ops-read-only-evidence.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/ops-evidence-field-guide.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/{id}/replay-execution-contract")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/replay-evidence-index")));
@@ -235,12 +237,47 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.warnings", hasItem("APPROVED_REPLAY_REQUIRES_DIGEST_CHECK")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/evidence")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/ops-evidence-field-guide.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/replay-evidence-index")))
                 .andExpect(jsonPath("$.productionPassBoundary.readyForProductionPassEvidence").value(false))
                 .andExpect(jsonPath("$.productionPassBoundary.allowedProbeEndpoints",
                         hasItem("GET /api/v1/ops/evidence")))
                 .andExpect(jsonPath("$.productionPassBoundary.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")));
+    }
+
+    @Test
+    void staticOpsEvidenceFieldGuideExplainsReadOnlyCaptureFields() throws Exception {
+        mockMvc.perform(get("/contracts/ops-evidence-field-guide.sample.json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.guideVersion").value("java-ops-evidence-field-guide.v1"))
+                .andExpect(jsonPath("$.evidenceVersion").value("java-ops-evidence.v1"))
+                .andExpect(jsonPath("$.scenario").value("OPS_EVIDENCE_FIELD_GUIDE_SAMPLE"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.sourceEvidenceEndpoint").value("/api/v1/ops/evidence"))
+                .andExpect(jsonPath("$.sourceSampleEndpoint")
+                        .value("/contracts/ops-read-only-evidence.sample.json"))
+                .andExpect(jsonPath("$.releaseReviewUse.intendedConsumer")
+                        .value("Node read-only capture release evidence review"))
+                .andExpect(jsonPath("$.releaseReviewUse.mayBeUsedForProductionPass").value(false))
+                .andExpect(jsonPath("$.releaseReviewUse.requiredLiveEvidence",
+                        hasItem("GET /actuator/health returns UP")))
+                .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("service")))
+                .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("healthProbe")))
+                .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("readOnlyWindow")))
+                .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("executionBoundaries")))
+                .andExpect(jsonPath("$.fieldGroups[1].fields[*].path",
+                        hasItem("healthProbe.staticSampleOnly")))
+                .andExpect(jsonPath("$.fieldGroups[2].fields[*].path",
+                        hasItem("readOnlyWindow.readyForReadOnlyLiveProbe")))
+                .andExpect(jsonPath("$.fieldGroups[3].fields[*].path",
+                        hasItem("failedEventReplay.realReplayAllowedByEvidence")))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("POST /api/v1/failed-events/{id}/replay")))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("Any non-GET Node upstream action")));
     }
 
     private void deleteFailedEventData() {

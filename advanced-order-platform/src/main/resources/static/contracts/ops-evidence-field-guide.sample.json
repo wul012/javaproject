@@ -1,0 +1,157 @@
+{
+  "guideVersion": "java-ops-evidence-field-guide.v1",
+  "evidenceVersion": "java-ops-evidence.v1",
+  "scenario": "OPS_EVIDENCE_FIELD_GUIDE_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
+  "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
+  "updatedAt": "2026-05-14T06:50:00Z",
+  "releaseReviewUse": {
+    "intendedConsumer": "Node read-only capture release evidence review",
+    "mayBeUsedForProductionPass": false,
+    "reason": "This guide explains field semantics only; it is not a live upstream probe result.",
+    "requiredLiveEvidence": [
+      "GET /actuator/health returns UP",
+      "GET /api/v1/ops/evidence returns readOnlyWindow.readyForReadOnlyLiveProbe=true"
+    ]
+  },
+  "fieldGroups": [
+    {
+      "name": "service",
+      "stability": "stable-shape-runtime-values",
+      "fields": [
+        {
+          "path": "service.name",
+          "meaning": "Java application name exposed to the control plane.",
+          "stability": "stable"
+        },
+        {
+          "path": "service.version",
+          "meaning": "Java application version string. Default is 0.1.0-SNAPSHOT unless build metadata overrides it.",
+          "stability": "stable"
+        },
+        {
+          "path": "service.profiles",
+          "meaning": "Active Spring profiles, or default profiles when no active profile is set.",
+          "stability": "runtime"
+        },
+        {
+          "path": "service.startedAt",
+          "meaning": "Current Java process start instant.",
+          "stability": "runtime"
+        },
+        {
+          "path": "service.uptimeSeconds",
+          "meaning": "Seconds from process start to sampling time; should be non-negative.",
+          "stability": "runtime"
+        }
+      ]
+    },
+    {
+      "name": "healthProbe",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "healthProbe.endpoint",
+          "meaning": "Primary Java health probe endpoint.",
+          "expectedValue": "/actuator/health"
+        },
+        {
+          "path": "healthProbe.method",
+          "meaning": "Required HTTP method for the health probe.",
+          "expectedValue": "GET"
+        },
+        {
+          "path": "healthProbe.expectedStatus",
+          "meaning": "Expected actuator health status value.",
+          "expectedValue": "UP"
+        },
+        {
+          "path": "healthProbe.staticSampleOnly",
+          "meaning": "false in live /api/v1/ops/evidence, true in static sample JSON.",
+          "stability": "stable-boundary"
+        }
+      ]
+    },
+    {
+      "name": "readOnlyWindow",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "readOnlyWindow.windowVersion",
+          "meaning": "Version for Java read-only live probe window semantics.",
+          "expectedValue": "java-read-only-window.v1"
+        },
+        {
+          "path": "readOnlyWindow.operatorStartRequired",
+          "meaning": "Java must be started by the operator before Node live probe capture.",
+          "expectedValue": true
+        },
+        {
+          "path": "readOnlyWindow.nodeAutoStartAllowed",
+          "meaning": "Node must not automatically start Java.",
+          "expectedValue": false
+        },
+        {
+          "path": "readOnlyWindow.upstreamProbesRequired",
+          "meaning": "Node must explicitly enable upstream read probes for live capture.",
+          "expectedValue": true
+        },
+        {
+          "path": "readOnlyWindow.upstreamActionsAllowed",
+          "meaning": "Node write actions are outside the read-only window.",
+          "expectedValue": false
+        },
+        {
+          "path": "readOnlyWindow.readyForReadOnlyLiveProbe",
+          "meaning": "true only in live /api/v1/ops/evidence; false in static samples.",
+          "stability": "runtime-boundary"
+        },
+        {
+          "path": "readOnlyWindow.readyForProductionOperations",
+          "meaning": "Java evidence does not grant production operations.",
+          "expectedValue": false
+        },
+        {
+          "path": "readOnlyWindow.requiredNodeEnvironment",
+          "meaning": "Node must use UPSTREAM_PROBES_ENABLED=true and UPSTREAM_ACTIONS_ENABLED=false.",
+          "stability": "stable"
+        }
+      ]
+    },
+    {
+      "name": "executionBoundaries",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "readOnly",
+          "meaning": "The evidence endpoint is read-only.",
+          "expectedValue": true
+        },
+        {
+          "path": "executionAllowed",
+          "meaning": "The evidence endpoint does not allow execution.",
+          "expectedValue": false
+        },
+        {
+          "path": "failedEventReplay.realReplayAllowedByEvidence",
+          "meaning": "The evidence endpoint does not authorize replay POST.",
+          "expectedValue": false
+        },
+        {
+          "path": "readOnlyWindow.forbiddenOperations",
+          "meaning": "Must include order writes, failed-event replay POST, RabbitMQ replay publish, Outbox mutation, and non-GET Node upstream actions.",
+          "stability": "stable"
+        }
+      ]
+    }
+  ],
+  "forbiddenOperations": [
+    "POST /api/v1/orders",
+    "POST /api/v1/failed-events/{id}/replay",
+    "RabbitMQ replay publish",
+    "Outbox mutation",
+    "Any non-GET Node upstream action"
+  ]
+}
