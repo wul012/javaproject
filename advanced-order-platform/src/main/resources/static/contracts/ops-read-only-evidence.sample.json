@@ -1,0 +1,91 @@
+{
+  "evidenceVersion": "java-ops-evidence.v1",
+  "scenario": "OPS_READ_ONLY_EVIDENCE_SAMPLE",
+  "sampledAt": "2026-05-13T11:20:00Z",
+  "readOnly": true,
+  "executionAllowed": false,
+  "service": {
+    "name": "advanced-order-platform",
+    "version": "0.1.0-SNAPSHOT",
+    "profiles": [
+      "default"
+    ],
+    "startedAt": "2026-05-13T11:15:00Z",
+    "uptimeSeconds": 300
+  },
+  "failedEventReplay": {
+    "totalFailedEvents": 2,
+    "replayBacklog": 2,
+    "pendingReplayApprovals": 1,
+    "approvedReplayApprovals": 1,
+    "rejectedReplayApprovals": 0,
+    "latestFailedAt": "2026-05-13T11:10:00Z",
+    "latestApprovalAt": "2026-05-13T11:12:00Z",
+    "realReplayEndpoint": "/api/v1/failed-events/{id}/replay",
+    "realReplayAllowedByEvidence": false
+  },
+  "outbox": {
+    "pendingEvents": 3,
+    "publisherEnabled": false,
+    "rabbitMqEnabled": false,
+    "exchange": "order-platform.outbox",
+    "queue": "order-platform.outbox.events",
+    "deadLetterQueue": "order-platform.outbox.events.dlq",
+    "blockers": [
+      "OUTBOX_PUBLISHER_DISABLED",
+      "RABBITMQ_OUTBOX_DISABLED"
+    ]
+  },
+  "approvalExecution": {
+    "requiredApprovalStatus": "APPROVED",
+    "digestVerificationMode": "contractDigest must match latest approval-status/readiness evidence before POST /replay",
+    "approvalRequired": true,
+    "dryRun": true,
+    "executionBlockers": [
+      "READ_ONLY_EVIDENCE_ENDPOINT",
+      "REPLAY_APPROVAL_PENDING",
+      "REPLAY_BACKLOG_PRESENT"
+    ],
+    "nextEvidenceActions": [
+      "GET /api/v1/failed-events/summary",
+      "GET /api/v1/failed-events/{id}/replay-readiness",
+      "GET /api/v1/failed-events/{id}/replay-execution-contract"
+    ]
+  },
+  "blockers": [
+    "READ_ONLY_EVIDENCE_ENDPOINT",
+    "REPLAY_APPROVAL_PENDING",
+    "REPLAY_BACKLOG_PRESENT",
+    "OUTBOX_PUBLISHER_DISABLED",
+    "RABBITMQ_OUTBOX_DISABLED"
+  ],
+  "warnings": [
+    "OUTBOX_PENDING_EVENTS",
+    "APPROVED_REPLAY_REQUIRES_DIGEST_CHECK"
+  ],
+  "evidenceEndpoints": [
+    "/api/v1/ops/overview",
+    "/api/v1/ops/evidence",
+    "/contracts/ops-read-only-evidence.sample.json",
+    "/api/v1/failed-events/summary",
+    "/api/v1/failed-events/{id}/approval-status",
+    "/api/v1/failed-events/{id}/replay-readiness",
+    "/api/v1/failed-events/{id}/replay-execution-contract",
+    "/api/v1/failed-events/replay-evidence-index"
+  ],
+  "productionPassBoundary": {
+    "readyForProductionPassEvidence": false,
+    "reason": "This sample proves Java read-only evidence shape only; it does not prove a live upstream pass.",
+    "allowedProbeEndpoints": [
+      "GET /actuator/health",
+      "GET /api/v1/ops/overview",
+      "GET /api/v1/ops/evidence"
+    ],
+    "forbiddenOperations": [
+      "POST /api/v1/orders",
+      "POST /api/v1/failed-events/{id}/replay",
+      "RabbitMQ replay publish",
+      "Any mutation through this sample"
+    ]
+  }
+}

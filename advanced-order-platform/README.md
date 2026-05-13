@@ -45,7 +45,7 @@
 - 失败事件管理页面写操作本地权限守卫，防止绕过禁用按钮触发未授权动作
 - 失败事件管理页面可视化展示当前操作员动作权限决策
 - 订单平台只读运行概览接口，汇总应用、订单、库存、Outbox 和失败事件风险信号
-- 订单平台只读运行证据接口，汇总 replay、审批、Outbox、版本和执行阻断信号
+- 订单平台只读运行证据接口和静态样本，汇总 replay、审批、Outbox、版本和执行阻断信号
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -778,13 +778,43 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
   "warnings": ["APPROVED_REPLAY_REQUIRES_DIGEST_CHECK"],
   "evidenceEndpoints": [
     "/api/v1/ops/overview",
+    "/api/v1/ops/evidence",
+    "/contracts/ops-read-only-evidence.sample.json",
     "/api/v1/failed-events/summary",
-    "/api/v1/failed-events/{id}/replay-execution-contract"
+    "/api/v1/failed-events/{id}/replay-execution-contract",
+    "/api/v1/failed-events/replay-evidence-index"
   ]
 }
 ```
 
 该接口服务于控制面读证据，不执行 replay，不申请/审批 replay approval，不写 Outbox，不改订单状态。`executionAllowed=false` 是接口自身的安全边界；真正执行仍必须走已有 `POST /api/v1/failed-events/{id}/replay`，并由 Java 的审批、digest 和 readiness 规则重新校验。
+
+v49 起，应用随包提供 ops read-only evidence 静态样本：
+
+```text
+src/main/resources/static/contracts/ops-read-only-evidence.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/ops-read-only-evidence.sample.json
+```
+
+该样本固定表达：
+
+```text
+readOnly=true
+executionAllowed=false
+realReplayAllowedByEvidence=false
+publisherEnabled=false
+rabbitMqEnabled=false
+productionPassBoundary.readyForProductionPassEvidence=false
+allowedProbeEndpoints 只列 GET /actuator/health、GET /api/v1/ops/overview、GET /api/v1/ops/evidence
+forbiddenOperations 明确禁止订单写操作、失败事件 replay POST 和 RabbitMQ replay publish
+```
+
+它服务于 Node production pass evidence archive verification 的上游引用位，只证明 Java 只读 evidence 的稳定结构，不代表 live upstream pass，也不允许任何写操作。
 
 查询失败事件治理摘要：
 
@@ -1345,6 +1375,7 @@ notification
 ops
  -> v36 增加订单平台只读运行概览，汇总 application、orders、inventory、outbox、failedEvents，为 Node 统一观察台提供稳定业务信号
  -> v45 增加订单平台只读运行证据，汇总 service version、failed-event replay、审批、Outbox 和执行阻断信号
+ -> v49 增加 ops read-only evidence 静态样本，给 Node production pass evidence verification 提供 Java 只读证据引用位
 
 common
  -> 业务异常和统一错误响应

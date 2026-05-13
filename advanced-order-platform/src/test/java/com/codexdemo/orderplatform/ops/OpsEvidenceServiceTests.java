@@ -95,6 +95,11 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.warnings())
                 .containsExactly("OUTBOX_PENDING_EVENTS", "APPROVED_REPLAY_REQUIRES_DIGEST_CHECK");
         assertThat(evidence.evidenceEndpoints())
-                .contains("/api/v1/failed-events/{id}/replay-execution-contract");
+                .contains(
+                        "/api/v1/ops/evidence",
+                        "/contracts/ops-read-only-evidence.sample.json",
+                        "/api/v1/failed-events/{id}/replay-execution-contract",
+                        "/api/v1/failed-events/replay-evidence-index"
+                );
     }
 }

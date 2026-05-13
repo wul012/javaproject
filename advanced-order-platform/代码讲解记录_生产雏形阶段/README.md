@@ -126,9 +126,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 ```text
 52-version-48-replay-evidence-operator-auth-boundary.md
  -> 第四十八版 replay evidence index 增强 operator/auth boundary，说明 Header 身份、动作角色策略和生产认证缺口
+
+53-version-49-ops-read-only-evidence-sample.md
+ -> 第四十九版 ops read-only evidence 静态样本，给 Node production pass evidence verification 提供 Java 只读证据引用位
 ```
 
-后续推进 v49 时，从 `53-version-49-主题.md` 继续追加。
+后续推进 v50 时，从 `54-version-50-主题.md` 继续追加。
 
 ## 一句话总览
 

@@ -177,10 +177,13 @@ public class OpsEvidenceService {
     private List<String> evidenceEndpoints() {
         return List.of(
                 "/api/v1/ops/overview",
+                "/api/v1/ops/evidence",
+                "/contracts/ops-read-only-evidence.sample.json",
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",
                 "/api/v1/failed-events/{id}/replay-execution-contract",
+                "/api/v1/failed-events/replay-evidence-index",
                 "/contracts/failed-event-replay-execution-contract-approved.sample.json",
                 "/contracts/failed-event-replay-execution-contract-blocked.sample.json"
         );

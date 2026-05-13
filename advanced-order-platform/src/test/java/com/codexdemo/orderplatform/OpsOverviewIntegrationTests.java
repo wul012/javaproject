@@ -163,8 +163,41 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.blockers", hasItem("RABBITMQ_OUTBOX_DISABLED")))
                 .andExpect(jsonPath("$.warnings", hasItem("APPROVED_REPLAY_REQUIRES_DIGEST_CHECK")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/overview")))
+                .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/evidence")))
+                .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/contracts/ops-read-only-evidence.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
-                        hasItem("/api/v1/failed-events/{id}/replay-execution-contract")));
+                        hasItem("/api/v1/failed-events/{id}/replay-execution-contract")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/api/v1/failed-events/replay-evidence-index")));
+    }
+
+    @Test
+    void staticOpsReadOnlyEvidenceSampleCoversProductionPassBoundary() throws Exception {
+        mockMvc.perform(get("/contracts/ops-read-only-evidence.sample.json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.evidenceVersion").value("java-ops-evidence.v1"))
+                .andExpect(jsonPath("$.scenario").value("OPS_READ_ONLY_EVIDENCE_SAMPLE"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.service.name").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.failedEventReplay.realReplayAllowedByEvidence").value(false))
+                .andExpect(jsonPath("$.failedEventReplay.realReplayEndpoint")
+                        .value("/api/v1/failed-events/{id}/replay"))
+                .andExpect(jsonPath("$.outbox.publisherEnabled").value(false))
+                .andExpect(jsonPath("$.outbox.rabbitMqEnabled").value(false))
+                .andExpect(jsonPath("$.approvalExecution.dryRun").value(true))
+                .andExpect(jsonPath("$.approvalExecution.executionBlockers",
+                        hasItem("READ_ONLY_EVIDENCE_ENDPOINT")))
+                .andExpect(jsonPath("$.blockers", hasItem("OUTBOX_PUBLISHER_DISABLED")))
+                .andExpect(jsonPath("$.warnings", hasItem("APPROVED_REPLAY_REQUIRES_DIGEST_CHECK")))
+                .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/evidence")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/api/v1/failed-events/replay-evidence-index")))
+                .andExpect(jsonPath("$.productionPassBoundary.readyForProductionPassEvidence").value(false))
+                .andExpect(jsonPath("$.productionPassBoundary.allowedProbeEndpoints",
+                        hasItem("GET /api/v1/ops/evidence")))
+                .andExpect(jsonPath("$.productionPassBoundary.forbiddenOperations",
+                        hasItem("POST /api/v1/failed-events/{id}/replay")));
     }
 
     private void deleteFailedEventData() {
