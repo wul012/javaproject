@@ -94,7 +94,8 @@ class OpsEvidenceServiceTests {
                         "/api/v1/ops/overview",
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
-                        "/contracts/order-idempotency-store-abstraction.sample.json"
+                        "/contracts/order-idempotency-store-abstraction.sample.json",
+                        "/contracts/release-verification-manifest.sample.json"
                 );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
@@ -112,7 +113,8 @@ class OpsEvidenceServiceTests {
                         "GET /api/v1/ops/evidence",
                         "GET /contracts/ops-read-only-evidence.sample.json",
                         "GET /contracts/order-idempotency-boundary.sample.json",
-                        "GET /contracts/order-idempotency-store-abstraction.sample.json"
+                        "GET /contracts/order-idempotency-store-abstraction.sample.json",
+                        "GET /contracts/release-verification-manifest.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -146,6 +148,29 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.orderIdempotency().miniKvConnected()).isFalse();
         assertThat(evidence.orderIdempotency().externalTokenStoreConnected()).isFalse();
         assertThat(evidence.orderIdempotency().changesPaymentOrInventoryTransaction()).isFalse();
+        assertThat(evidence.releaseVerification().manifestVersion())
+                .isEqualTo("java-release-verification-manifest.v1");
+        assertThat(evidence.releaseVerification().manifestEndpoint())
+                .isEqualTo("/contracts/release-verification-manifest.sample.json");
+        assertThat(evidence.releaseVerification().verificationMode())
+                .isEqualTo("LOCAL_OPERATOR_EXECUTES_AND_ARCHIVES_RESULTS");
+        assertThat(evidence.releaseVerification().requiredChecks())
+                .containsExactly(
+                        "focused-maven-tests",
+                        "non-docker-regression-tests",
+                        "maven-package",
+                        "http-smoke",
+                        "static-contract-json-validation"
+                );
+        assertThat(evidence.releaseVerification().staticContractEndpoints())
+                .contains(
+                        "/contracts/order-idempotency-store-abstraction.sample.json",
+                        "/contracts/release-verification-manifest.sample.json"
+                );
+        assertThat(evidence.releaseVerification().nodeMayExecuteBuild()).isFalse();
+        assertThat(evidence.releaseVerification().nodeMayTriggerWrites()).isFalse();
+        assertThat(evidence.releaseVerification().changesBusinessSemantics()).isFalse();
+        assertThat(evidence.releaseVerification().requiresProductionSecrets()).isFalse();
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
@@ -184,6 +209,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/ops-evidence-field-guide.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
+                        "/contracts/release-verification-manifest.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

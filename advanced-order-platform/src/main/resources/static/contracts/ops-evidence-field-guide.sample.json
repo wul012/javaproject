@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T09:10:00Z",
+  "updatedAt": "2026-05-14T10:05:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -199,6 +199,37 @@
           "path": "readOnlyWindow.forbiddenOperations",
           "meaning": "Must include order writes, failed-event replay POST, RabbitMQ replay publish, Outbox mutation, and non-GET Node upstream actions.",
           "stability": "stable"
+        }
+      ]
+    },
+    {
+      "name": "releaseVerification",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "releaseVerification.manifestVersion",
+          "meaning": "Version for the Java release verification manifest consumed by Node release gates.",
+          "expectedValue": "java-release-verification-manifest.v1"
+        },
+        {
+          "path": "releaseVerification.manifestEndpoint",
+          "meaning": "Static endpoint exposing the Maven, package, HTTP smoke, and contract verification manifest.",
+          "expectedValue": "/contracts/release-verification-manifest.sample.json"
+        },
+        {
+          "path": "releaseVerification.requiredChecks",
+          "meaning": "Stable names for local operator checks that must be archived before a Java release is handed to Node.",
+          "stability": "stable"
+        },
+        {
+          "path": "releaseVerification.staticContractEndpoints",
+          "meaning": "Static contract endpoints that should be parsed and listed in release evidence.",
+          "stability": "stable"
+        },
+        {
+          "path": "releaseVerification.nodeMayExecuteBuild",
+          "meaning": "Node release gate may consume Java evidence but must not run Maven for Java.",
+          "expectedValue": false
         }
       ]
     }

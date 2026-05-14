@@ -760,7 +760,8 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
       "/api/v1/ops/overview",
       "/contracts/ops-read-only-evidence.sample.json",
       "/contracts/order-idempotency-boundary.sample.json",
-      "/contracts/order-idempotency-store-abstraction.sample.json"
+      "/contracts/order-idempotency-store-abstraction.sample.json",
+      "/contracts/release-verification-manifest.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": false
@@ -781,7 +782,8 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
       "GET /api/v1/ops/evidence",
       "GET /contracts/ops-read-only-evidence.sample.json",
       "GET /contracts/order-idempotency-boundary.sample.json",
-      "GET /contracts/order-idempotency-store-abstraction.sample.json"
+      "GET /contracts/order-idempotency-store-abstraction.sample.json",
+      "GET /contracts/release-verification-manifest.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -831,6 +833,22 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "externalTokenStoreConnected": false,
     "changesPaymentOrInventoryTransaction": false
   },
+  "releaseVerification": {
+    "manifestVersion": "java-release-verification-manifest.v1",
+    "manifestEndpoint": "/contracts/release-verification-manifest.sample.json",
+    "verificationMode": "LOCAL_OPERATOR_EXECUTES_AND_ARCHIVES_RESULTS",
+    "requiredChecks": [
+      "focused-maven-tests",
+      "non-docker-regression-tests",
+      "maven-package",
+      "http-smoke",
+      "static-contract-json-validation"
+    ],
+    "nodeMayExecuteBuild": false,
+    "nodeMayTriggerWrites": false,
+    "changesBusinessSemantics": false,
+    "requiresProductionSecrets": false
+  },
   "failedEventReplay": {
     "totalFailedEvents": 2,
     "replayBacklog": 2,
@@ -872,6 +890,7 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "/contracts/ops-evidence-field-guide.sample.json",
     "/contracts/order-idempotency-boundary.sample.json",
     "/contracts/order-idempotency-store-abstraction.sample.json",
+    "/contracts/release-verification-manifest.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/replay-execution-contract",
     "/api/v1/failed-events/replay-evidence-index"
@@ -1007,6 +1026,33 @@ boundaries.nodeMayTriggerWrites=false
 ```
 
 它把 Java 内部幂等查找/保存封装成 `IdempotencyStore`，默认仍使用 `orders` 表；mini-kv 只作为后续短 TTL token 候选适配器被说明，不接入 `POST /api/v1/orders` 交易主链路。
+
+v54 起，应用随包提供发布验证 manifest 样本：
+
+```text
+src/main/resources/static/contracts/release-verification-manifest.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/release-verification-manifest.sample.json
+```
+
+该样本固定表达：
+
+```text
+manifestVersion=java-release-verification-manifest.v1
+verificationChecks 包含 focused-maven-tests、non-docker-regression-tests、maven-package、http-smoke、static-contract-json-validation
+staticContracts 列出 ops evidence、field guide、order idempotency boundary、idempotency store abstraction 和 release manifest
+releaseGate.nodeMayExecuteMaven=false
+releaseGate.nodeMayTriggerJavaWrites=false
+boundaries.changesOrderCreateSemantics=false
+boundaries.connectsMiniKv=false
+archiveExpectation.runtimeArchiveRoot=c/<version>
+```
+
+它服务于 Node cross-project release verification intake gate，只作为 Java 发布验证清单；Node 可以读取归档证据，但不替 Java 执行 Maven、不触发 Java 写接口。
 
 查询失败事件治理摘要：
 
@@ -1576,6 +1622,7 @@ ops
  -> v51 增加 ops evidence 字段说明样本，解释 service、healthProbe、readOnlyWindow 和执行边界字段稳定性
  -> v52 增加订单幂等边界 evidence 和静态样本，说明同 key 同请求重放、同 key 不同请求拒绝以及 mini-kv 未接入边界
  -> v53 增加订单幂等存储抽象 evidence 和静态样本，说明活动存储、候选适配器和 Node 不触发写操作边界
+ -> v54 增加 release verification manifest，固化 Maven 测试、打包、HTTP smoke 和静态 contracts 发布验证清单
 
 common
  -> 业务异常和统一错误响应

@@ -147,6 +147,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/order-idempotency-boundary.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/order-idempotency-store-abstraction.sample.json")))
+                .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
+                        hasItem("/contracts/release-verification-manifest.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.liveProbeRequiredForPass").value(true))
                 .andExpect(jsonPath("$.healthProbe.staticSampleOnly").value(false))
                 .andExpect(jsonPath("$.failedEventReplay.totalFailedEvents").value(2))
@@ -185,6 +187,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("GET /contracts/order-idempotency-boundary.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/order-idempotency-store-abstraction.sample.json")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /contracts/release-verification-manifest.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
@@ -217,6 +221,17 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.orderIdempotency.miniKvConnected").value(false))
                 .andExpect(jsonPath("$.orderIdempotency.externalTokenStoreConnected").value(false))
                 .andExpect(jsonPath("$.orderIdempotency.changesPaymentOrInventoryTransaction").value(false))
+                .andExpect(jsonPath("$.releaseVerification.manifestVersion")
+                        .value("java-release-verification-manifest.v1"))
+                .andExpect(jsonPath("$.releaseVerification.manifestEndpoint")
+                        .value("/contracts/release-verification-manifest.sample.json"))
+                .andExpect(jsonPath("$.releaseVerification.requiredChecks",
+                        hasItem("focused-maven-tests")))
+                .andExpect(jsonPath("$.releaseVerification.staticContractEndpoints",
+                        hasItem("/contracts/release-verification-manifest.sample.json")))
+                .andExpect(jsonPath("$.releaseVerification.nodeMayExecuteBuild").value(false))
+                .andExpect(jsonPath("$.releaseVerification.nodeMayTriggerWrites").value(false))
+                .andExpect(jsonPath("$.releaseVerification.changesBusinessSemantics").value(false))
                 .andExpect(jsonPath("$.blockers", hasItem("READ_ONLY_EVIDENCE_ENDPOINT")))
                 .andExpect(jsonPath("$.blockers", hasItem("OUTBOX_PUBLISHER_DISABLED")))
                 .andExpect(jsonPath("$.blockers", hasItem("RABBITMQ_OUTBOX_DISABLED")))
@@ -230,6 +245,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/order-idempotency-boundary.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/order-idempotency-store-abstraction.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/release-verification-manifest.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/{id}/replay-execution-contract")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
@@ -267,6 +284,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("GET /contracts/order-idempotency-boundary.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/order-idempotency-store-abstraction.sample.json")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /contracts/release-verification-manifest.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
                         hasItem("Any non-GET Node upstream action")))
                 .andExpect(jsonPath("$.readOnlyWindow.requiredNodeEnvironment",
@@ -282,6 +301,11 @@ class OpsOverviewIntegrationTests {
                         hasItem("mini-kv-ttl-token-adapter")))
                 .andExpect(jsonPath("$.orderIdempotency.storeCandidates[1].enabled").value(false))
                 .andExpect(jsonPath("$.orderIdempotency.miniKvConnected").value(false))
+                .andExpect(jsonPath("$.releaseVerification.manifestVersion")
+                        .value("java-release-verification-manifest.v1"))
+                .andExpect(jsonPath("$.releaseVerification.requiredChecks",
+                        hasItem("http-smoke")))
+                .andExpect(jsonPath("$.releaseVerification.nodeMayExecuteBuild").value(false))
                 .andExpect(jsonPath("$.blockers", hasItem("OUTBOX_PUBLISHER_DISABLED")))
                 .andExpect(jsonPath("$.warnings", hasItem("APPROVED_REPLAY_REQUIRES_DIGEST_CHECK")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/evidence")))
@@ -291,6 +315,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/order-idempotency-boundary.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/order-idempotency-store-abstraction.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/release-verification-manifest.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/replay-evidence-index")))
                 .andExpect(jsonPath("$.productionPassBoundary.readyForProductionPassEvidence").value(false))
@@ -322,6 +348,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("readOnlyWindow")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("orderIdempotency")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("executionBoundaries")))
+                .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("releaseVerification")))
                 .andExpect(jsonPath("$.fieldGroups[1].fields[*].path",
                         hasItem("healthProbe.staticSampleOnly")))
                 .andExpect(jsonPath("$.fieldGroups[2].fields[*].path",
@@ -334,6 +361,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("orderIdempotency.storeCandidates")))
                 .andExpect(jsonPath("$.fieldGroups[4].fields[*].path",
                         hasItem("failedEventReplay.realReplayAllowedByEvidence")))
+                .andExpect(jsonPath("$.fieldGroups[5].fields[*].path",
+                        hasItem("releaseVerification.manifestVersion")))
                 .andExpect(jsonPath("$.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")))
                 .andExpect(jsonPath("$.forbiddenOperations",
@@ -395,6 +424,36 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.boundaries.nodeMayTriggerWrites").value(false))
                 .andExpect(jsonPath("$.futureAdapterRules",
                         hasItem("Adapter must be introduced behind IdempotencyStore without changing create-order semantics")));
+    }
+
+    @Test
+    void staticReleaseVerificationManifestExplainsJavaReleaseGate() throws Exception {
+        mockMvc.perform(get("/contracts/release-verification-manifest.sample.json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.manifestVersion").value("java-release-verification-manifest.v1"))
+                .andExpect(jsonPath("$.scenario").value("JAVA_RELEASE_VERIFICATION_MANIFEST_SAMPLE"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.releaseSubject.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.releaseSubject.buildTool").value("Maven"))
+                .andExpect(jsonPath("$.verificationChecks[*].name",
+                        hasItem("focused-maven-tests")))
+                .andExpect(jsonPath("$.verificationChecks[*].name",
+                        hasItem("non-docker-regression-tests")))
+                .andExpect(jsonPath("$.verificationChecks[*].name",
+                        hasItem("maven-package")))
+                .andExpect(jsonPath("$.verificationChecks[*].name",
+                        hasItem("http-smoke")))
+                .andExpect(jsonPath("$.staticContracts[*].endpoint",
+                        hasItem("/contracts/release-verification-manifest.sample.json")))
+                .andExpect(jsonPath("$.releaseGate.intendedConsumer")
+                        .value("Node cross-project release verification intake gate"))
+                .andExpect(jsonPath("$.releaseGate.nodeMayExecuteMaven").value(false))
+                .andExpect(jsonPath("$.releaseGate.nodeMayTriggerJavaWrites").value(false))
+                .andExpect(jsonPath("$.releaseGate.requiresProductionSecrets").value(false))
+                .andExpect(jsonPath("$.boundaries.changesOrderCreateSemantics").value(false))
+                .andExpect(jsonPath("$.boundaries.connectsMiniKv").value(false))
+                .andExpect(jsonPath("$.archiveExpectation.runtimeArchiveRoot").value("c/<version>"));
     }
 
     private void deleteFailedEventData() {

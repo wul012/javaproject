@@ -22,7 +22,8 @@
       "/api/v1/ops/overview",
       "/contracts/ops-read-only-evidence.sample.json",
       "/contracts/order-idempotency-boundary.sample.json",
-      "/contracts/order-idempotency-store-abstraction.sample.json"
+      "/contracts/order-idempotency-store-abstraction.sample.json",
+      "/contracts/release-verification-manifest.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": true
@@ -80,7 +81,8 @@
       "GET /api/v1/ops/evidence",
       "GET /contracts/ops-read-only-evidence.sample.json",
       "GET /contracts/order-idempotency-boundary.sample.json",
-      "GET /contracts/order-idempotency-store-abstraction.sample.json"
+      "GET /contracts/order-idempotency-store-abstraction.sample.json",
+      "GET /contracts/release-verification-manifest.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -133,6 +135,29 @@
     "externalTokenStoreConnected": false,
     "changesPaymentOrInventoryTransaction": false
   },
+  "releaseVerification": {
+    "manifestVersion": "java-release-verification-manifest.v1",
+    "manifestEndpoint": "/contracts/release-verification-manifest.sample.json",
+    "verificationMode": "LOCAL_OPERATOR_EXECUTES_AND_ARCHIVES_RESULTS",
+    "requiredChecks": [
+      "focused-maven-tests",
+      "non-docker-regression-tests",
+      "maven-package",
+      "http-smoke",
+      "static-contract-json-validation"
+    ],
+    "staticContractEndpoints": [
+      "/contracts/ops-read-only-evidence.sample.json",
+      "/contracts/ops-evidence-field-guide.sample.json",
+      "/contracts/order-idempotency-boundary.sample.json",
+      "/contracts/order-idempotency-store-abstraction.sample.json",
+      "/contracts/release-verification-manifest.sample.json"
+    ],
+    "nodeMayExecuteBuild": false,
+    "nodeMayTriggerWrites": false,
+    "changesBusinessSemantics": false,
+    "requiresProductionSecrets": false
+  },
   "blockers": [
     "READ_ONLY_EVIDENCE_ENDPOINT",
     "REPLAY_APPROVAL_PENDING",
@@ -151,6 +176,7 @@
     "/contracts/ops-evidence-field-guide.sample.json",
     "/contracts/order-idempotency-boundary.sample.json",
     "/contracts/order-idempotency-store-abstraction.sample.json",
+    "/contracts/release-verification-manifest.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/approval-status",
     "/api/v1/failed-events/{id}/replay-readiness",

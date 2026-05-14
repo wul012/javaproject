@@ -22,6 +22,11 @@ public class OpsEvidenceService {
 
     static final String EVIDENCE_VERSION = "java-ops-evidence.v1";
 
+    static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
+
+    static final String RELEASE_VERIFICATION_MANIFEST_ENDPOINT =
+            "/contracts/release-verification-manifest.sample.json";
+
     private static final String REAL_REPLAY_ENDPOINT = "/api/v1/failed-events/{id}/replay";
 
     private final Instant startedAt = Instant.now();
@@ -72,6 +77,7 @@ public class OpsEvidenceService {
                 false,
                 readOnlyWindow(true),
                 orderIdempotency(),
+                releaseVerification(),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -101,7 +107,8 @@ public class OpsEvidenceService {
                         "/api/v1/ops/overview",
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
-                        "/contracts/order-idempotency-store-abstraction.sample.json"
+                        "/contracts/order-idempotency-store-abstraction.sample.json",
+                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT
                 ),
                 true,
                 staticSampleOnly
@@ -123,7 +130,8 @@ public class OpsEvidenceService {
                         "GET /api/v1/ops/evidence",
                         "GET /contracts/ops-read-only-evidence.sample.json",
                         "GET /contracts/order-idempotency-boundary.sample.json",
-                        "GET /contracts/order-idempotency-store-abstraction.sample.json"
+                        "GET /contracts/order-idempotency-store-abstraction.sample.json",
+                        "GET " + RELEASE_VERIFICATION_MANIFEST_ENDPOINT
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -180,6 +188,32 @@ public class OpsEvidenceService {
                 descriptor.miniKvConnected(),
                 descriptor.externalTokenStoreConnected(),
                 descriptor.changesPaymentOrInventoryTransaction()
+        );
+    }
+
+    private OpsEvidenceResponse.ReleaseVerification releaseVerification() {
+        return new OpsEvidenceResponse.ReleaseVerification(
+                RELEASE_VERIFICATION_MANIFEST_VERSION,
+                RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
+                "LOCAL_OPERATOR_EXECUTES_AND_ARCHIVES_RESULTS",
+                List.of(
+                        "focused-maven-tests",
+                        "non-docker-regression-tests",
+                        "maven-package",
+                        "http-smoke",
+                        "static-contract-json-validation"
+                ),
+                List.of(
+                        "/contracts/ops-read-only-evidence.sample.json",
+                        "/contracts/ops-evidence-field-guide.sample.json",
+                        "/contracts/order-idempotency-boundary.sample.json",
+                        "/contracts/order-idempotency-store-abstraction.sample.json",
+                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT
+                ),
+                false,
+                false,
+                false,
+                false
         );
     }
 
@@ -284,6 +318,7 @@ public class OpsEvidenceService {
                 "/contracts/ops-evidence-field-guide.sample.json",
                 "/contracts/order-idempotency-boundary.sample.json",
                 "/contracts/order-idempotency-store-abstraction.sample.json",
+                RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

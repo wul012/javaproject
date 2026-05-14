@@ -141,9 +141,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 57-version-53-idempotency-store-abstraction.md
  -> 第五十三版订单幂等存储抽象，新增 IdempotencyStore、JPA 默认实现和 mini-kv disabled candidate evidence
+
+58-version-54-release-verification-manifest.md
+ -> 第五十四版发布验证 manifest，固化 Maven 测试、打包、HTTP smoke、静态 contracts 清单和 Node 只读 release gate 边界
 ```
 
-后续推进 v54 时，从 `58-version-54-主题.md` 继续追加。
+后续推进 v55 时，从 `59-version-55-主题.md` 继续追加。
 
 ## 一句话总览
 

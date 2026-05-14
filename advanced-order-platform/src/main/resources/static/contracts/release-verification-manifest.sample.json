@@ -1,0 +1,119 @@
+{
+  "manifestVersion": "java-release-verification-manifest.v1",
+  "scenario": "JAVA_RELEASE_VERIFICATION_MANIFEST_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "releaseSubject": {
+    "project": "advanced-order-platform",
+    "buildTool": "Maven",
+    "javaVersion": "21",
+    "artifact": "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
+    "defaultProfiles": [
+      "default"
+    ]
+  },
+  "verificationChecks": [
+    {
+      "name": "focused-maven-tests",
+      "command": "mvn \"-Dtest=JpaIdempotencyStoreTests,OrderApplicationServiceTests,OrderIdempotencyBoundaryIntegrationTests,OpsOverviewIntegrationTests,OpsEvidenceServiceTests\" test",
+      "expectedEvidence": [
+        "BUILD SUCCESS",
+        "Tests run is greater than 0",
+        "Failures: 0",
+        "Errors: 0"
+      ],
+      "dockerRequired": false
+    },
+    {
+      "name": "non-docker-regression-tests",
+      "command": "mvn \"-Dtest=!PostgresMigrationIntegrationTests,!RabbitMqNotificationConsumerIntegrationTests,!RabbitMqNotificationFailureIntegrationTests,!RabbitMqOutboxPublisherIntegrationTests\" \"-DargLine=-XX:TieredStopAtLevel=1 -Xmx512m\" test",
+      "expectedEvidence": [
+        "BUILD SUCCESS",
+        "Failures: 0",
+        "Errors: 0"
+      ],
+      "dockerRequired": false
+    },
+    {
+      "name": "maven-package",
+      "command": "mvn \"-DskipTests\" package",
+      "expectedEvidence": [
+        "BUILD SUCCESS",
+        "target/advanced-order-platform-0.1.0-SNAPSHOT.jar exists"
+      ],
+      "dockerRequired": false
+    },
+    {
+      "name": "http-smoke",
+      "command": "Start the packaged jar on a local temporary port, then probe health, ops evidence, release manifest, and idempotent order create 201/200/409.",
+      "expectedEvidence": [
+        "GET /actuator/health returns UP",
+        "GET /api/v1/ops/evidence returns releaseVerification.manifestVersion=java-release-verification-manifest.v1",
+        "GET /contracts/release-verification-manifest.sample.json returns this manifest",
+        "POST /api/v1/orders returns 201 for first request, 200 for same request replay, and 409 for same key with different request"
+      ],
+      "dockerRequired": false
+    },
+    {
+      "name": "static-contract-json-validation",
+      "command": "Parse every listed staticContract endpoint source JSON as valid JSON before release.",
+      "expectedEvidence": [
+        "All static contract JSON files parse successfully"
+      ],
+      "dockerRequired": false
+    }
+  ],
+  "staticContracts": [
+    {
+      "endpoint": "/contracts/ops-read-only-evidence.sample.json",
+      "source": "src/main/resources/static/contracts/ops-read-only-evidence.sample.json",
+      "versionField": "evidenceVersion",
+      "expectedVersion": "java-ops-evidence.v1"
+    },
+    {
+      "endpoint": "/contracts/ops-evidence-field-guide.sample.json",
+      "source": "src/main/resources/static/contracts/ops-evidence-field-guide.sample.json",
+      "versionField": "guideVersion",
+      "expectedVersion": "java-ops-evidence-field-guide.v1"
+    },
+    {
+      "endpoint": "/contracts/order-idempotency-boundary.sample.json",
+      "source": "src/main/resources/static/contracts/order-idempotency-boundary.sample.json",
+      "versionField": "boundaryVersion",
+      "expectedVersion": "java-order-idempotency-boundary.v1"
+    },
+    {
+      "endpoint": "/contracts/order-idempotency-store-abstraction.sample.json",
+      "source": "src/main/resources/static/contracts/order-idempotency-store-abstraction.sample.json",
+      "versionField": "abstractionVersion",
+      "expectedVersion": "java-idempotency-store.v1"
+    },
+    {
+      "endpoint": "/contracts/release-verification-manifest.sample.json",
+      "source": "src/main/resources/static/contracts/release-verification-manifest.sample.json",
+      "versionField": "manifestVersion",
+      "expectedVersion": "java-release-verification-manifest.v1"
+    }
+  ],
+  "releaseGate": {
+    "intendedConsumer": "Node cross-project release verification intake gate",
+    "nodeMayConsume": true,
+    "nodeMayExecuteMaven": false,
+    "nodeMayTriggerJavaWrites": false,
+    "requiresLiveHttpSmoke": true,
+    "requiresArchivedEvidence": true,
+    "requiresProductionSecrets": false
+  },
+  "boundaries": {
+    "changesOrderCreateSemantics": false,
+    "changesPaymentOrInventoryTransaction": false,
+    "changesOutboxOrReplayExecution": false,
+    "connectsMiniKv": false,
+    "usesProductionDatabase": false
+  },
+  "archiveExpectation": {
+    "runtimeArchiveRoot": "c/<version>",
+    "explanation": "c/<version>/解释/说明.md",
+    "screenshots": "c/<version>/图片/*.png"
+  }
+}

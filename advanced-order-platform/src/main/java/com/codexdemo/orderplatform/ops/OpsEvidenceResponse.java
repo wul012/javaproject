@@ -12,6 +12,7 @@ public record OpsEvidenceResponse(
         boolean executionAllowed,
         ReadOnlyWindow readOnlyWindow,
         OrderIdempotency orderIdempotency,
+        ReleaseVerification releaseVerification,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -85,6 +86,19 @@ public record OpsEvidenceResponse(
             boolean connected,
             String mode,
             String reason
+    ) {
+    }
+
+    public record ReleaseVerification(
+            String manifestVersion,
+            String manifestEndpoint,
+            String verificationMode,
+            List<String> requiredChecks,
+            List<String> staticContractEndpoints,
+            boolean nodeMayExecuteBuild,
+            boolean nodeMayTriggerWrites,
+            boolean changesBusinessSemantics,
+            boolean requiresProductionSecrets
     ) {
     }
 
