@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T19:40:00Z",
+  "updatedAt": "2026-05-14T21:35:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -301,6 +301,52 @@
         {
           "path": "releaseBundle.nodeMayTriggerRollback",
           "meaning": "Node may consume rollback evidence but must not trigger Java rollback.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "releaseHandoffChecklistFixture",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "releaseHandoffChecklistFixture.fixtureVersion",
+          "meaning": "Version for the Java release handoff checklist fixture consumed by Node handoff readiness review.",
+          "expectedValue": "java-release-handoff-checklist-fixture.v1"
+        },
+        {
+          "path": "releaseHandoffChecklistFixture.fixtureEndpoint",
+          "meaning": "Static endpoint exposing release operator, rollback approver, artifact target, migration direction, and secret-source confirmation placeholders.",
+          "expectedValue": "/contracts/release-handoff-checklist.fixture.json"
+        },
+        {
+          "path": "releaseHandoffChecklistFixture.releaseOperator",
+          "meaning": "Manual placeholder for the operator responsible for the release handoff.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "releaseHandoffChecklistFixture.rollbackApprover",
+          "meaning": "Manual placeholder for the operator who can approve rollback during the release window.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "releaseHandoffChecklistFixture.artifactTarget",
+          "meaning": "Manual placeholder for the release tag or artifact version selected for handoff.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "releaseHandoffChecklistFixture.secretSourceConfirmation",
+          "meaning": "Secret source contract endpoint used as metadata only; secret values are not read or embedded.",
+          "expectedValue": "/contracts/production-secret-source-contract.sample.json"
+        },
+        {
+          "path": "releaseHandoffChecklistFixture.nodeMayTriggerDeployment",
+          "meaning": "Node may consume the fixture but must not trigger Java deployment.",
+          "expectedValue": false
+        },
+        {
+          "path": "releaseHandoffChecklistFixture.deploymentExecutionAllowed",
+          "meaning": "Deployment execution must not run from this checklist fixture.",
           "expectedValue": false
         }
       ]

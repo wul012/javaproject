@@ -165,9 +165,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 65-version-61-rollback-approval-record-fixture.md
  -> 第六十一版 rollback approval record fixture，固化 reviewer、approval timestamp placeholder、rollback target 和 no-secret-value 边界
+
+66-version-62-release-handoff-checklist-fixture.md
+ -> 第六十二版 release handoff checklist fixture，固化 release operator、rollback approver、artifact target、migration direction 和 secret source confirmation，并收口静态 contract endpoint helper
 ```
 
-后续推进 v62 时，从 `66-version-62-主题.md` 继续追加。
+后续推进 v63 时，从 `67-version-63-主题.md` 继续追加。
 
 ## 一句话总览
 

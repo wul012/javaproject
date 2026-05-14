@@ -37,6 +37,12 @@ public class OpsEvidenceService {
     static final String RELEASE_BUNDLE_MANIFEST_ENDPOINT =
             "/contracts/release-bundle-manifest.sample.json";
 
+    static final String RELEASE_HANDOFF_CHECKLIST_FIXTURE_VERSION =
+            "java-release-handoff-checklist-fixture.v1";
+
+    static final String RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT =
+            "/contracts/release-handoff-checklist.fixture.json";
+
     static final String ROLLBACK_APPROVAL_HANDOFF_VERSION = "java-rollback-approval-handoff.v1";
 
     static final String ROLLBACK_APPROVAL_HANDOFF_ENDPOINT =
@@ -117,6 +123,7 @@ public class OpsEvidenceService {
                 releaseVerification(),
                 deploymentRollback(),
                 releaseBundle(),
+                releaseHandoffChecklistFixture(),
                 rollbackApprovalHandoff(),
                 rollbackApprovalRecordFixture(),
                 rollbackSqlReviewGate(),
@@ -142,31 +149,28 @@ public class OpsEvidenceService {
     }
 
     private OpsEvidenceResponse.HealthProbe healthProbe(boolean staticSampleOnly) {
+        List<String> additionalProbeEndpoints = new ArrayList<>();
+        additionalProbeEndpoints.add("/api/v1/ops/overview");
+        additionalProbeEndpoints.addAll(staticContractEndpoints(false));
+
         return new OpsEvidenceResponse.HealthProbe(
                 "/actuator/health",
                 "GET",
                 "UP",
                 "/api/v1/ops/evidence",
-                List.of(
-                        "/api/v1/ops/overview",
-                        "/contracts/ops-read-only-evidence.sample.json",
-                        "/contracts/order-idempotency-boundary.sample.json",
-                        "/contracts/order-idempotency-store-abstraction.sample.json",
-                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
-                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
-                        RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                        ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                        ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
-                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
-                        PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
-                ),
+                List.copyOf(additionalProbeEndpoints),
                 true,
                 staticSampleOnly
         );
     }
 
     private OpsEvidenceResponse.ReadOnlyWindow readOnlyWindow(boolean readyForReadOnlyLiveProbe) {
+        List<String> allowedProbeEndpoints = new ArrayList<>();
+        allowedProbeEndpoints.add("GET /actuator/health");
+        allowedProbeEndpoints.add("GET /api/v1/ops/overview");
+        allowedProbeEndpoints.add("GET /api/v1/ops/evidence");
+        allowedProbeEndpoints.addAll(staticContractProbeEndpoints(false));
+
         return new OpsEvidenceResponse.ReadOnlyWindow(
                 "java-read-only-window.v1",
                 true,
@@ -175,22 +179,7 @@ public class OpsEvidenceService {
                 false,
                 readyForReadOnlyLiveProbe,
                 false,
-                List.of(
-                        "GET /actuator/health",
-                        "GET /api/v1/ops/overview",
-                        "GET /api/v1/ops/evidence",
-                        "GET /contracts/ops-read-only-evidence.sample.json",
-                        "GET /contracts/order-idempotency-boundary.sample.json",
-                        "GET /contracts/order-idempotency-store-abstraction.sample.json",
-                        "GET " + RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
-                        "GET " + DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
-                        "GET " + RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                        "GET " + ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                        "GET " + ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
-                        "GET " + ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                        "GET " + PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
-                        "GET " + PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
-                ),
+                List.copyOf(allowedProbeEndpoints),
                 List.of(
                         "POST /api/v1/orders",
                         "POST /api/v1/failed-events/{id}/replay",
@@ -261,20 +250,7 @@ public class OpsEvidenceService {
                         "http-smoke",
                         "static-contract-json-validation"
                 ),
-                List.of(
-                        "/contracts/ops-read-only-evidence.sample.json",
-                        "/contracts/ops-evidence-field-guide.sample.json",
-                        "/contracts/order-idempotency-boundary.sample.json",
-                        "/contracts/order-idempotency-store-abstraction.sample.json",
-                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
-                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
-                        RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                        ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                        ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
-                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
-                        PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
-                ),
+                staticContractEndpoints(true),
                 false,
                 false,
                 false,
@@ -301,6 +277,7 @@ public class OpsEvidenceService {
                         "production-secret-source-contract",
                         "production-deployment-runbook-contract",
                         "database-migration-direction",
+                        "release-handoff-checklist-fixture",
                         "rollback-approval-handoff",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate"
@@ -321,7 +298,7 @@ public class OpsEvidenceService {
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 "READ_ONLY_RELEASE_BUNDLE",
                 "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
-                staticContractEndpoints(),
+                staticContractEndpoints(true),
                 List.of(
                         "focused-maven-tests",
                         "non-docker-regression-tests",
@@ -330,6 +307,49 @@ public class OpsEvidenceService {
                         "static-contract-json-validation"
                 ),
                 true,
+                false,
+                false,
+                false,
+                false
+        );
+    }
+
+    private OpsEvidenceResponse.ReleaseHandoffChecklistFixture releaseHandoffChecklistFixture() {
+        return new OpsEvidenceResponse.ReleaseHandoffChecklistFixture(
+                RELEASE_HANDOFF_CHECKLIST_FIXTURE_VERSION,
+                RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
+                "READ_ONLY_RELEASE_HANDOFF_CHECKLIST_FIXTURE",
+                "release-operator-placeholder",
+                "rollback-approver-placeholder",
+                "release-tag-or-artifact-version-placeholder",
+                List.of(
+                        "forward-only",
+                        "rollback-script-reviewed",
+                        "no-database-change"
+                ),
+                "no-database-change",
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                List.of(
+                        "release-operator",
+                        "rollback-approver",
+                        "artifact-target",
+                        "database-migration-direction",
+                        "secret-source-confirmation",
+                        "deployment-runbook-contract",
+                        "rollback-approval-record-fixture",
+                        "no-secret-value-boundary"
+                ),
+                releaseHandoffChecklistArtifacts(),
+                List.of(
+                        "checklist-fixture-stores-metadata-only",
+                        "secret-values-must-not-be-read",
+                        "secret-values-must-not-be-embedded-in-handoff-checklist",
+                        "node-may-render-release-handoff-review-only"
+                ),
+                true,
+                false,
+                false,
+                false,
                 false,
                 false,
                 false,
@@ -351,12 +371,14 @@ public class OpsEvidenceService {
                         "production-secret-source-contract",
                         "production-deployment-runbook-contract",
                         "database-migration-direction",
+                        "release-handoff-checklist-fixture",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
                         "deployment-rollback-evidence"
                 ),
                 List.of(
+                        RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
@@ -446,20 +468,42 @@ public class OpsEvidenceService {
         );
     }
 
-    private List<String> staticContractEndpoints() {
-        return List.of(
-                "/contracts/ops-read-only-evidence.sample.json",
-                "/contracts/ops-evidence-field-guide.sample.json",
+    private List<String> staticContractEndpoints(boolean includeFieldGuide) {
+        List<String> endpoints = new ArrayList<>();
+        endpoints.add("/contracts/ops-read-only-evidence.sample.json");
+        if (includeFieldGuide) {
+            endpoints.add("/contracts/ops-evidence-field-guide.sample.json");
+        }
+        endpoints.addAll(List.of(
                 "/contracts/order-idempotency-boundary.sample.json",
                 "/contracts/order-idempotency-store-abstraction.sample.json",
                 RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                 DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
+                RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                 ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
                 ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
                 PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
                 PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
+        ));
+        return List.copyOf(endpoints);
+    }
+
+    private List<String> staticContractProbeEndpoints(boolean includeFieldGuide) {
+        return staticContractEndpoints(includeFieldGuide).stream()
+                .map(endpoint -> "GET " + endpoint)
+                .toList();
+    }
+
+    private List<String> releaseHandoffChecklistArtifacts() {
+        return List.of(
+                RELEASE_BUNDLE_MANIFEST_ENDPOINT,
+                RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
+                PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
+                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
         );
     }
 
@@ -523,6 +567,7 @@ public class OpsEvidenceService {
                 List.of(
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                        RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                         ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                         ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
                         ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
@@ -632,21 +677,11 @@ public class OpsEvidenceService {
     }
 
     private List<String> evidenceEndpoints() {
-        return List.of(
-                "/api/v1/ops/overview",
-                "/api/v1/ops/evidence",
-                "/contracts/ops-read-only-evidence.sample.json",
-                "/contracts/ops-evidence-field-guide.sample.json",
-                "/contracts/order-idempotency-boundary.sample.json",
-                "/contracts/order-idempotency-store-abstraction.sample.json",
-                RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
-                DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
-                RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
-                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
-                PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
+        List<String> endpoints = new ArrayList<>();
+        endpoints.add("/api/v1/ops/overview");
+        endpoints.add("/api/v1/ops/evidence");
+        endpoints.addAll(staticContractEndpoints(true));
+        endpoints.addAll(List.of(
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",
@@ -654,6 +689,7 @@ public class OpsEvidenceService {
                 "/api/v1/failed-events/replay-evidence-index",
                 "/contracts/failed-event-replay-execution-contract-approved.sample.json",
                 "/contracts/failed-event-replay-execution-contract-blocked.sample.json"
-        );
+        ));
+        return List.copyOf(endpoints);
     }
 }

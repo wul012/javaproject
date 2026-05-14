@@ -60,6 +60,14 @@
       "rollbackSqlExecutionAllowed": false
     },
     {
+      "name": "release-handoff-checklist-fixture",
+      "description": "Operator confirms the read-only release handoff checklist fixture used before Node renders the handoff review.",
+      "required": true,
+      "expectedEndpoint": "/contracts/release-handoff-checklist.fixture.json",
+      "nodeMayTriggerDeployment": false,
+      "nodeMayTriggerRollback": false
+    },
+    {
       "name": "rollback-approval-record-fixture",
       "description": "Operator confirms the read-only approval record fixture that captures reviewer, timestamp placeholder, rollback target, and no-secret-value boundary.",
       "required": true,
@@ -86,6 +94,7 @@
     }
   ],
   "handoffArtifacts": [
+    "/contracts/release-handoff-checklist.fixture.json",
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/rollback-approval-record.fixture.json",

@@ -26,6 +26,7 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
+      "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -92,6 +93,7 @@
       "GET /contracts/release-verification-manifest.sample.json",
       "GET /contracts/deployment-rollback-evidence.sample.json",
       "GET /contracts/release-bundle-manifest.sample.json",
+      "GET /contracts/release-handoff-checklist.fixture.json",
       "GET /contracts/rollback-approval-handoff.sample.json",
       "GET /contracts/rollback-approval-record.fixture.json",
       "GET /contracts/rollback-sql-review-gate.sample.json",
@@ -168,6 +170,7 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
+      "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -222,6 +225,7 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
+      "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -241,6 +245,53 @@
     "requiresProductionDatabase": false,
     "changesOrderTransactionSemantics": false
   },
+  "releaseHandoffChecklistFixture": {
+    "fixtureVersion": "java-release-handoff-checklist-fixture.v1",
+    "fixtureEndpoint": "/contracts/release-handoff-checklist.fixture.json",
+    "fixtureMode": "READ_ONLY_RELEASE_HANDOFF_CHECKLIST_FIXTURE",
+    "releaseOperator": "release-operator-placeholder",
+    "rollbackApprover": "rollback-approver-placeholder",
+    "artifactTarget": "release-tag-or-artifact-version-placeholder",
+    "migrationDirectionOptions": [
+      "forward-only",
+      "rollback-script-reviewed",
+      "no-database-change"
+    ],
+    "selectedMigrationDirection": "no-database-change",
+    "secretSourceConfirmation": "/contracts/production-secret-source-contract.sample.json",
+    "requiredChecklistFields": [
+      "release-operator",
+      "rollback-approver",
+      "artifact-target",
+      "database-migration-direction",
+      "secret-source-confirmation",
+      "deployment-runbook-contract",
+      "rollback-approval-record-fixture",
+      "no-secret-value-boundary"
+    ],
+    "checklistArtifacts": [
+      "/contracts/release-bundle-manifest.sample.json",
+      "/contracts/release-verification-manifest.sample.json",
+      "/contracts/production-deployment-runbook-contract.sample.json",
+      "/contracts/production-secret-source-contract.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
+      "/contracts/rollback-sql-review-gate.sample.json"
+    ],
+    "noSecretValueBoundaries": [
+      "checklist-fixture-stores-metadata-only",
+      "secret-values-must-not-be-read",
+      "secret-values-must-not-be-embedded-in-handoff-checklist",
+      "node-may-render-release-handoff-review-only"
+    ],
+    "nodeMayConsume": true,
+    "nodeMayTriggerDeployment": false,
+    "nodeMayTriggerRollback": false,
+    "deploymentExecutionAllowed": false,
+    "rollbackSqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderTransactionSemantics": false
+  },
   "rollbackApprovalHandoff": {
     "handoffVersion": "java-rollback-approval-handoff.v1",
     "handoffEndpoint": "/contracts/rollback-approval-handoff.sample.json",
@@ -254,12 +305,14 @@
       "production-secret-source-contract",
       "production-deployment-runbook-contract",
       "database-migration-direction",
+      "release-handoff-checklist-fixture",
       "rollback-approval-record-fixture",
       "rollback-sql-review-gate",
       "release-bundle-manifest",
       "deployment-rollback-evidence"
     ],
     "handoffArtifacts": [
+      "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
@@ -431,6 +484,7 @@
     "/contracts/release-verification-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/release-bundle-manifest.sample.json",
+    "/contracts/release-handoff-checklist.fixture.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",

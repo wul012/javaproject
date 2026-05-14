@@ -1300,6 +1300,41 @@ boundaries.requiresProductionDatabase=false
 
 它服务于后续 release window readiness packet：Java 只提供人工审批记录形状，记录 reviewer、审批时间占位、rollback target、迁移方向和 no-secret-value 边界；它不执行 rollback，不执行 SQL，不连接生产数据库，也不读取或嵌入 secret value。
 
+v62 起，应用随包提供 release handoff checklist fixture：
+
+```text
+src/main/resources/static/contracts/release-handoff-checklist.fixture.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/release-handoff-checklist.fixture.json
+```
+
+该样本固定表达：
+
+```text
+fixtureVersion=java-release-handoff-checklist-fixture.v1
+fixtureMode=READ_ONLY_RELEASE_HANDOFF_CHECKLIST_FIXTURE
+releaseChecklist.releaseOperator=release-operator-placeholder
+releaseChecklist.rollbackApprover=rollback-approver-placeholder
+releaseChecklist.artifactTarget=release-tag-or-artifact-version-placeholder
+databaseMigration.selectedDirection=no-database-change
+secretSourceConfirmation.endpoint=/contracts/production-secret-source-contract.sample.json
+requiredChecklistFields 包含 release-operator、rollback-approver、artifact-target、database-migration-direction、secret-source-confirmation、deployment-runbook-contract、rollback-approval-record-fixture、no-secret-value-boundary
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayTriggerDeployment=false
+nodeConsumption.nodeMayTriggerRollback=false
+boundaries.deploymentExecutionAllowed=false
+boundaries.rollbackSqlExecutionAllowed=false
+boundaries.requiresProductionDatabase=false
+```
+
+它服务于后续 Node v175 release handoff readiness review：Java 只记录发布执行前人工 checklist 的字段形状和证据引用，不执行部署、不执行回退、不执行 SQL、不连接生产数据库，也不读取或嵌入 secret value。
+
+同时 v62 对 ops evidence 的静态 contract endpoint 列表做了轻量收口：`healthProbe`、`readOnlyWindow`、`releaseVerification`、`releaseBundle` 和 `evidenceEndpoints` 共享 helper 生成静态 contract 清单，后续新增 fixture 时不需要在多处重复维护同一串 endpoint。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1876,6 +1911,7 @@ ops
   -> v59 增加 production secret source contract，固化 secret source、rotation owner、review cadence 和 secret value 访问边界
   -> v60 增加 production deployment runbook contract，固化 deployment window owner、rollback approver、migration direction 和 no-execution 边界
   -> v61 增加 rollback approval record fixture，固化 reviewer、approval timestamp placeholder、rollback target 和 no-secret-value 边界
+  -> v62 增加 release handoff checklist fixture，固化 release operator、rollback approver、artifact target、migration direction 和 secret source confirmation，并收口静态 contract endpoint helper
 
 common
  -> 业务异常和统一错误响应

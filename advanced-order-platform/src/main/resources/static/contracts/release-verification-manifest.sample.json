@@ -52,6 +52,7 @@
         "GET /contracts/release-verification-manifest.sample.json returns this manifest",
         "GET /contracts/deployment-rollback-evidence.sample.json returns rollback evidence boundaries",
         "GET /contracts/release-bundle-manifest.sample.json returns release bundle boundaries",
+        "GET /contracts/release-handoff-checklist.fixture.json returns release handoff checklist boundaries",
         "GET /contracts/rollback-approval-handoff.sample.json returns approval handoff boundaries",
         "GET /contracts/rollback-approval-record.fixture.json returns rollback approval record fixture boundaries",
         "GET /contracts/rollback-sql-review-gate.sample.json returns SQL review gate boundaries",
@@ -112,6 +113,12 @@
       "source": "src/main/resources/static/contracts/release-bundle-manifest.sample.json",
       "versionField": "manifestVersion",
       "expectedVersion": "java-release-bundle-manifest.v1"
+    },
+    {
+      "endpoint": "/contracts/release-handoff-checklist.fixture.json",
+      "source": "src/main/resources/static/contracts/release-handoff-checklist.fixture.json",
+      "versionField": "fixtureVersion",
+      "expectedVersion": "java-release-handoff-checklist-fixture.v1"
     },
     {
       "endpoint": "/contracts/rollback-approval-handoff.sample.json",

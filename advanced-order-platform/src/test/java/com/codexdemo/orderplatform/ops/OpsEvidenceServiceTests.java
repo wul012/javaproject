@@ -98,6 +98,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
@@ -124,6 +125,7 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/release-verification-manifest.sample.json",
                         "GET /contracts/deployment-rollback-evidence.sample.json",
                         "GET /contracts/release-bundle-manifest.sample.json",
+                        "GET /contracts/release-handoff-checklist.fixture.json",
                         "GET /contracts/rollback-approval-handoff.sample.json",
                         "GET /contracts/rollback-approval-record.fixture.json",
                         "GET /contracts/rollback-sql-review-gate.sample.json",
@@ -208,6 +210,7 @@ class OpsEvidenceServiceTests {
                         "production-secret-source-contract",
                         "production-deployment-runbook-contract",
                         "database-migration-direction",
+                        "release-handoff-checklist-fixture",
                         "rollback-approval-handoff",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate"
@@ -235,6 +238,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
@@ -254,6 +258,63 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.releaseBundle().nodeMayTriggerRollback()).isFalse();
         assertThat(evidence.releaseBundle().requiresProductionDatabase()).isFalse();
         assertThat(evidence.releaseBundle().changesOrderTransactionSemantics()).isFalse();
+        assertThat(evidence.releaseHandoffChecklistFixture().fixtureVersion())
+                .isEqualTo("java-release-handoff-checklist-fixture.v1");
+        assertThat(evidence.releaseHandoffChecklistFixture().fixtureEndpoint())
+                .isEqualTo("/contracts/release-handoff-checklist.fixture.json");
+        assertThat(evidence.releaseHandoffChecklistFixture().fixtureMode())
+                .isEqualTo("READ_ONLY_RELEASE_HANDOFF_CHECKLIST_FIXTURE");
+        assertThat(evidence.releaseHandoffChecklistFixture().releaseOperator())
+                .isEqualTo("release-operator-placeholder");
+        assertThat(evidence.releaseHandoffChecklistFixture().rollbackApprover())
+                .isEqualTo("rollback-approver-placeholder");
+        assertThat(evidence.releaseHandoffChecklistFixture().artifactTarget())
+                .isEqualTo("release-tag-or-artifact-version-placeholder");
+        assertThat(evidence.releaseHandoffChecklistFixture().migrationDirectionOptions())
+                .containsExactly(
+                        "forward-only",
+                        "rollback-script-reviewed",
+                        "no-database-change"
+                );
+        assertThat(evidence.releaseHandoffChecklistFixture().selectedMigrationDirection())
+                .isEqualTo("no-database-change");
+        assertThat(evidence.releaseHandoffChecklistFixture().secretSourceConfirmation())
+                .isEqualTo("/contracts/production-secret-source-contract.sample.json");
+        assertThat(evidence.releaseHandoffChecklistFixture().requiredChecklistFields())
+                .containsExactly(
+                        "release-operator",
+                        "rollback-approver",
+                        "artifact-target",
+                        "database-migration-direction",
+                        "secret-source-confirmation",
+                        "deployment-runbook-contract",
+                        "rollback-approval-record-fixture",
+                        "no-secret-value-boundary"
+                );
+        assertThat(evidence.releaseHandoffChecklistFixture().checklistArtifacts())
+                .containsExactly(
+                        "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/production-deployment-runbook-contract.sample.json",
+                        "/contracts/production-secret-source-contract.sample.json",
+                        "/contracts/rollback-approval-record.fixture.json",
+                        "/contracts/rollback-sql-review-gate.sample.json"
+                );
+        assertThat(evidence.releaseHandoffChecklistFixture().noSecretValueBoundaries())
+                .containsExactly(
+                        "checklist-fixture-stores-metadata-only",
+                        "secret-values-must-not-be-read",
+                        "secret-values-must-not-be-embedded-in-handoff-checklist",
+                        "node-may-render-release-handoff-review-only"
+                );
+        assertThat(evidence.releaseHandoffChecklistFixture().nodeMayConsume()).isTrue();
+        assertThat(evidence.releaseHandoffChecklistFixture().nodeMayTriggerDeployment()).isFalse();
+        assertThat(evidence.releaseHandoffChecklistFixture().nodeMayTriggerRollback()).isFalse();
+        assertThat(evidence.releaseHandoffChecklistFixture().deploymentExecutionAllowed()).isFalse();
+        assertThat(evidence.releaseHandoffChecklistFixture().rollbackSqlExecutionAllowed()).isFalse();
+        assertThat(evidence.releaseHandoffChecklistFixture().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.releaseHandoffChecklistFixture().requiresProductionSecrets()).isFalse();
+        assertThat(evidence.releaseHandoffChecklistFixture().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.rollbackApprovalHandoff().handoffVersion())
                 .isEqualTo("java-rollback-approval-handoff.v1");
         assertThat(evidence.rollbackApprovalHandoff().handoffEndpoint())
@@ -270,6 +331,7 @@ class OpsEvidenceServiceTests {
                         "production-secret-source-contract",
                         "production-deployment-runbook-contract",
                         "database-migration-direction",
+                        "release-handoff-checklist-fixture",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
@@ -277,6 +339,7 @@ class OpsEvidenceServiceTests {
                 );
         assertThat(evidence.rollbackApprovalHandoff().handoffArtifacts())
                 .containsExactly(
+                        "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
@@ -443,6 +506,7 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
@@ -496,6 +560,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",

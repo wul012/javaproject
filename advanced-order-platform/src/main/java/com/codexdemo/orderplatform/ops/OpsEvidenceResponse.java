@@ -15,6 +15,7 @@ public record OpsEvidenceResponse(
         ReleaseVerification releaseVerification,
         DeploymentRollback deploymentRollback,
         ReleaseBundle releaseBundle,
+        ReleaseHandoffChecklistFixture releaseHandoffChecklistFixture,
         RollbackApprovalHandoff rollbackApprovalHandoff,
         RollbackApprovalRecordFixture rollbackApprovalRecordFixture,
         RollbackSqlReviewGate rollbackSqlReviewGate,
@@ -136,6 +137,30 @@ public record OpsEvidenceResponse(
             boolean nodeMayExecuteBuild,
             boolean nodeMayTriggerRollback,
             boolean requiresProductionDatabase,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record ReleaseHandoffChecklistFixture(
+            String fixtureVersion,
+            String fixtureEndpoint,
+            String fixtureMode,
+            String releaseOperator,
+            String rollbackApprover,
+            String artifactTarget,
+            List<String> migrationDirectionOptions,
+            String selectedMigrationDirection,
+            String secretSourceConfirmation,
+            List<String> requiredChecklistFields,
+            List<String> checklistArtifacts,
+            List<String> noSecretValueBoundaries,
+            boolean nodeMayConsume,
+            boolean nodeMayTriggerDeployment,
+            boolean nodeMayTriggerRollback,
+            boolean deploymentExecutionAllowed,
+            boolean rollbackSqlExecutionAllowed,
+            boolean requiresProductionDatabase,
+            boolean requiresProductionSecrets,
             boolean changesOrderTransactionSemantics
     ) {
     }
