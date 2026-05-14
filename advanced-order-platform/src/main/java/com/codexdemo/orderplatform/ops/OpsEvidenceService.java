@@ -52,6 +52,12 @@ public class OpsEvidenceService {
     static final String PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT =
             "/contracts/production-secret-source-contract.sample.json";
 
+    static final String PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_VERSION =
+            "java-production-deployment-runbook-contract.v1";
+
+    static final String PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT =
+            "/contracts/production-deployment-runbook-contract.sample.json";
+
     private static final String REAL_REPLAY_ENDPOINT = "/api/v1/failed-events/{id}/replay";
 
     private final Instant startedAt = Instant.now();
@@ -108,6 +114,7 @@ public class OpsEvidenceService {
                 rollbackApprovalHandoff(),
                 rollbackSqlReviewGate(),
                 productionSecretSourceContract(),
+                productionDeploymentRunbookContract(),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -143,7 +150,8 @@ public class OpsEvidenceService {
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                         ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
+                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                        PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
                 ),
                 true,
                 staticSampleOnly
@@ -171,7 +179,8 @@ public class OpsEvidenceService {
                         "GET " + RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         "GET " + ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                         "GET " + ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                        "GET " + PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
+                        "GET " + PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                        "GET " + PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -253,7 +262,8 @@ public class OpsEvidenceService {
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                         ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
+                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                        PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
                 ),
                 false,
                 false,
@@ -275,8 +285,11 @@ public class OpsEvidenceService {
                 ),
                 List.of(
                         "artifact-version-target",
+                        "deployment-window-owner",
+                        "rollback-approver",
                         "configuration-secret-source",
                         "production-secret-source-contract",
+                        "production-deployment-runbook-contract",
                         "database-migration-direction",
                         "rollback-approval-handoff",
                         "rollback-sql-review-gate"
@@ -320,9 +333,12 @@ public class OpsEvidenceService {
                 "OPERATOR_CONFIRMATION_REQUIRED",
                 List.of(
                         "artifact-version-target",
+                        "deployment-window-owner",
+                        "rollback-approver",
                         "runtime-config-profile",
                         "configuration-secret-source",
                         "production-secret-source-contract",
+                        "production-deployment-runbook-contract",
                         "database-migration-direction",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
@@ -333,6 +349,7 @@ public class OpsEvidenceService {
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
                         PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                        PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
                         RELEASE_VERIFICATION_MANIFEST_ENDPOINT
                 ),
                 true,
@@ -382,7 +399,8 @@ public class OpsEvidenceService {
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                 ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
-                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
         );
     }
 
@@ -414,6 +432,45 @@ public class OpsEvidenceService {
                         "node-may-render-checklist-only"
                 ),
                 true,
+                false,
+                false,
+                false,
+                false
+        );
+    }
+
+    private OpsEvidenceResponse.ProductionDeploymentRunbookContract productionDeploymentRunbookContract() {
+        return new OpsEvidenceResponse.ProductionDeploymentRunbookContract(
+                PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_VERSION,
+                PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
+                "READ_ONLY_DEPLOYMENT_RUNBOOK_CONTRACT",
+                "release-window-owner",
+                "rollback-approval-owner",
+                List.of(
+                        "forward-only",
+                        "rollback-script-reviewed",
+                        "no-database-change"
+                ),
+                "no-database-change",
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                List.of(
+                        "deployment-window-owner",
+                        "rollback-approver",
+                        "database-migration-direction",
+                        "secret-source-confirmation",
+                        "rollback-sql-review-gate",
+                        "operator-approval-placeholder"
+                ),
+                List.of(
+                        RELEASE_BUNDLE_MANIFEST_ENDPOINT,
+                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                        ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
+                ),
+                true,
+                false,
+                false,
                 false,
                 false,
                 false,
@@ -528,6 +585,7 @@ public class OpsEvidenceService {
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                 ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
                 PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

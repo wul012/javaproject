@@ -18,6 +18,7 @@ public record OpsEvidenceResponse(
         RollbackApprovalHandoff rollbackApprovalHandoff,
         RollbackSqlReviewGate rollbackSqlReviewGate,
         ProductionSecretSourceContract productionSecretSourceContract,
+        ProductionDeploymentRunbookContract productionDeploymentRunbookContract,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -184,6 +185,27 @@ public record OpsEvidenceResponse(
             boolean nodeMayReadSecretValues,
             boolean requiresProductionSecrets,
             boolean requiresProductionDatabase,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record ProductionDeploymentRunbookContract(
+            String contractVersion,
+            String contractEndpoint,
+            String contractMode,
+            String deploymentWindowOwner,
+            String rollbackApprover,
+            List<String> databaseMigrationDirectionOptions,
+            String selectedDatabaseMigrationDirection,
+            String secretSourceConfirmation,
+            List<String> requiredConfirmationFields,
+            List<String> runbookArtifacts,
+            boolean nodeMayConsume,
+            boolean nodeMayTriggerDeployment,
+            boolean nodeMayTriggerRollback,
+            boolean sqlExecutionAllowed,
+            boolean requiresProductionDatabase,
+            boolean requiresProductionSecrets,
             boolean changesOrderTransactionSemantics
     ) {
     }

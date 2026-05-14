@@ -159,6 +159,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.liveProbeRequiredForPass").value(true))
                 .andExpect(jsonPath("$.healthProbe.staticSampleOnly").value(false))
                 .andExpect(jsonPath("$.failedEventReplay.totalFailedEvents").value(2))
@@ -209,6 +211,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("GET /contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
@@ -259,6 +263,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.releaseVerification.staticContractEndpoints",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.releaseVerification.staticContractEndpoints",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.releaseVerification.nodeMayExecuteBuild").value(false))
                 .andExpect(jsonPath("$.releaseVerification.nodeMayTriggerWrites").value(false))
                 .andExpect(jsonPath("$.releaseVerification.changesBusinessSemantics").value(false))
@@ -359,6 +365,33 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.productionSecretSourceContract.requiresProductionSecrets").value(false))
                 .andExpect(jsonPath("$.productionSecretSourceContract.requiresProductionDatabase").value(false))
                 .andExpect(jsonPath("$.productionSecretSourceContract.changesOrderTransactionSemantics").value(false))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.contractVersion")
+                        .value("java-production-deployment-runbook-contract.v1"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.contractEndpoint")
+                        .value("/contracts/production-deployment-runbook-contract.sample.json"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.contractMode")
+                        .value("READ_ONLY_DEPLOYMENT_RUNBOOK_CONTRACT"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.deploymentWindowOwner")
+                        .value("release-window-owner"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.rollbackApprover")
+                        .value("rollback-approval-owner"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.databaseMigrationDirectionOptions",
+                        hasItem("no-database-change")))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.selectedDatabaseMigrationDirection")
+                        .value("no-database-change"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.secretSourceConfirmation")
+                        .value("/contracts/production-secret-source-contract.sample.json"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.requiredConfirmationFields",
+                        hasItem("deployment-window-owner")))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.runbookArtifacts",
+                        hasItem("/contracts/rollback-sql-review-gate.sample.json")))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.nodeMayConsume").value(true))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.nodeMayTriggerDeployment").value(false))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.nodeMayTriggerRollback").value(false))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.sqlExecutionAllowed").value(false))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.requiresProductionDatabase").value(false))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.requiresProductionSecrets").value(false))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.changesOrderTransactionSemantics").value(false))
                 .andExpect(jsonPath("$.blockers", hasItem("READ_ONLY_EVIDENCE_ENDPOINT")))
                 .andExpect(jsonPath("$.blockers", hasItem("OUTBOX_PUBLISHER_DISABLED")))
                 .andExpect(jsonPath("$.blockers", hasItem("RABBITMQ_OUTBOX_DISABLED")))
@@ -384,6 +417,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/{id}/replay-execution-contract")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
@@ -433,6 +468,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("GET /contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
                         hasItem("Any non-GET Node upstream action")))
                 .andExpect(jsonPath("$.readOnlyWindow.requiredNodeEnvironment",
@@ -473,6 +510,9 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.productionSecretSourceContract.contractVersion")
                         .value("java-production-secret-source-contract.v1"))
                 .andExpect(jsonPath("$.productionSecretSourceContract.nodeMayReadSecretValues").value(false))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.contractVersion")
+                        .value("java-production-deployment-runbook-contract.v1"))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.nodeMayTriggerDeployment").value(false))
                 .andExpect(jsonPath("$.blockers", hasItem("OUTBOX_PUBLISHER_DISABLED")))
                 .andExpect(jsonPath("$.warnings", hasItem("APPROVED_REPLAY_REQUIRES_DIGEST_CHECK")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/evidence")))
@@ -494,6 +534,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/replay-evidence-index")))
                 .andExpect(jsonPath("$.productionPassBoundary.readyForProductionPassEvidence").value(false))
@@ -531,6 +573,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("rollbackApprovalHandoff")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("rollbackSqlReviewGate")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("productionSecretSourceContract")))
+                .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("productionDeploymentRunbookContract")))
                 .andExpect(jsonPath("$.fieldGroups[1].fields[*].path",
                         hasItem("healthProbe.staticSampleOnly")))
                 .andExpect(jsonPath("$.fieldGroups[2].fields[*].path",
@@ -565,6 +608,10 @@ class OpsOverviewIntegrationTests {
                         hasItem("productionSecretSourceContract.contractVersion")))
                 .andExpect(jsonPath("$.fieldGroups[10].fields[*].path",
                         hasItem("productionSecretSourceContract.nodeMayReadSecretValues")))
+                .andExpect(jsonPath("$.fieldGroups[11].fields[*].path",
+                        hasItem("productionDeploymentRunbookContract.contractVersion")))
+                .andExpect(jsonPath("$.fieldGroups[11].fields[*].path",
+                        hasItem("productionDeploymentRunbookContract.nodeMayTriggerDeployment")))
                 .andExpect(jsonPath("$.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")))
                 .andExpect(jsonPath("$.forbiddenOperations",
@@ -659,6 +706,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.staticContracts[*].endpoint",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
                 .andExpect(jsonPath("$.staticContracts[*].endpoint",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
+                .andExpect(jsonPath("$.staticContracts[*].endpoint",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.releaseGate.intendedConsumer")
                         .value("Node cross-project release verification intake gate"))
@@ -701,6 +750,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.staticContractRollback.contractEndpoints",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.staticContractRollback.contractEndpoints",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.requiresOperatorConfirmation",
                         hasItem("database-migration-direction")))
                 .andExpect(jsonPath("$.requiresOperatorConfirmation",
@@ -709,6 +760,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("rollback-sql-review-gate")))
                 .andExpect(jsonPath("$.requiresOperatorConfirmation",
                         hasItem("production-secret-source-contract")))
+                .andExpect(jsonPath("$.requiresOperatorConfirmation",
+                        hasItem("production-deployment-runbook-contract")))
                 .andExpect(jsonPath("$.boundaries.nodeMayTriggerRollback").value(false))
                 .andExpect(jsonPath("$.boundaries.nodeMayExecuteMaven").value(false))
                 .andExpect(jsonPath("$.boundaries.nodeMayTriggerJavaWrites").value(false))
@@ -743,6 +796,8 @@ class OpsOverviewIntegrationTests {
                         .value("/contracts/rollback-sql-review-gate.sample.json"))
                 .andExpect(jsonPath("$.bundleInputs.productionSecretSourceContract")
                         .value("/contracts/production-secret-source-contract.sample.json"))
+                .andExpect(jsonPath("$.bundleInputs.productionDeploymentRunbookContract")
+                        .value("/contracts/production-deployment-runbook-contract.sample.json"))
                 .andExpect(jsonPath("$.bundleInputs.runtimeArchiveRoot").value("c/<version>"))
                 .andExpect(jsonPath("$.artifactEvidence.packageDockerRequired").value(false))
                 .andExpect(jsonPath("$.verificationEvidence[*].name", hasItem("focused-maven-tests")))
@@ -759,6 +814,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.contractEndpoints",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.contractEndpoints",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.nodeConsumption.nodeMayConsume").value(true))
                 .andExpect(jsonPath("$.nodeConsumption.nodeMayExecuteMaven").value(false))
                 .andExpect(jsonPath("$.nodeConsumption.nodeMayTriggerJavaWrites").value(false))
@@ -794,6 +851,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
                         hasItem("production-secret-source-contract")))
                 .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
+                        hasItem("production-deployment-runbook-contract")))
+                .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
                         hasItem("database-migration-direction")))
                 .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
                         hasItem("rollback-sql-review-gate")))
@@ -809,6 +868,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.handoffArtifacts",
                         hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.handoffArtifacts",
+                        hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.nodeConsumption.nodeMayConsume").value(true))
                 .andExpect(jsonPath("$.nodeConsumption.nodeMayRenderChecklist").value(true))
                 .andExpect(jsonPath("$.nodeConsumption.nodeMayTriggerRollback").value(false))
@@ -863,6 +924,49 @@ class OpsOverviewIntegrationTests {
                         hasItem("Embedding secret values in static JSON samples")))
                 .andExpect(jsonPath("$.forbiddenOperations",
                         hasItem("Triggering Java runtime configuration changes from Node")));
+    }
+
+    @Test
+    void staticProductionDeploymentRunbookContractSampleExplainsNoExecutionBoundary() throws Exception {
+        mockMvc.perform(get("/contracts/production-deployment-runbook-contract.sample.json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.contractVersion")
+                        .value("java-production-deployment-runbook-contract.v1"))
+                .andExpect(jsonPath("$.scenario").value("PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_SAMPLE"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.sourceEvidenceEndpoint").value("/api/v1/ops/evidence"))
+                .andExpect(jsonPath("$.contractEndpoint")
+                        .value("/contracts/production-deployment-runbook-contract.sample.json"))
+                .andExpect(jsonPath("$.contractMode").value("READ_ONLY_DEPLOYMENT_RUNBOOK_CONTRACT"))
+                .andExpect(jsonPath("$.deploymentWindow.owner").value("release-window-owner"))
+                .andExpect(jsonPath("$.deploymentWindow.rollbackApprover").value("rollback-approval-owner"))
+                .andExpect(jsonPath("$.databaseMigration.directionOptions",
+                        hasItem("rollback-script-reviewed")))
+                .andExpect(jsonPath("$.databaseMigration.selectedDirection").value("no-database-change"))
+                .andExpect(jsonPath("$.secretSourceConfirmation.endpoint")
+                        .value("/contracts/production-secret-source-contract.sample.json"))
+                .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
+                        hasItem("deployment-window-owner")))
+                .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
+                        hasItem("rollback-approver")))
+                .andExpect(jsonPath("$.runbookArtifacts",
+                        hasItem("/contracts/rollback-sql-review-gate.sample.json")))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayConsume").value(true))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayTriggerDeployment").value(false))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayTriggerRollback").value(false))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayExecuteRollbackSql").value(false))
+                .andExpect(jsonPath("$.boundaries.sqlExecutionAllowed").value(false))
+                .andExpect(jsonPath("$.boundaries.requiresProductionDatabase").value(false))
+                .andExpect(jsonPath("$.boundaries.requiresProductionSecrets").value(false))
+                .andExpect(jsonPath("$.boundaries.changesOrderTransactionSemantics").value(false))
+                .andExpect(jsonPath("$.boundaries.connectsMiniKv").value(false))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("Executing Java deployment from this runbook contract")))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("Executing rollback SQL from this runbook contract")))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("Reading production secret values from this runbook contract")));
     }
 
     @Test

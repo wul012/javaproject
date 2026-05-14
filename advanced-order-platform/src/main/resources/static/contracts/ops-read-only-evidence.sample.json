@@ -28,7 +28,8 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-sql-review-gate.sample.json",
-      "/contracts/production-secret-source-contract.sample.json"
+      "/contracts/production-secret-source-contract.sample.json",
+      "/contracts/production-deployment-runbook-contract.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": true
@@ -92,7 +93,8 @@
       "GET /contracts/release-bundle-manifest.sample.json",
       "GET /contracts/rollback-approval-handoff.sample.json",
       "GET /contracts/rollback-sql-review-gate.sample.json",
-      "GET /contracts/production-secret-source-contract.sample.json"
+      "GET /contracts/production-secret-source-contract.sample.json",
+      "GET /contracts/production-deployment-runbook-contract.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -166,7 +168,8 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-sql-review-gate.sample.json",
-      "/contracts/production-secret-source-contract.sample.json"
+      "/contracts/production-secret-source-contract.sample.json",
+      "/contracts/production-deployment-runbook-contract.sample.json"
     ],
     "nodeMayExecuteBuild": false,
     "nodeMayTriggerWrites": false,
@@ -185,8 +188,11 @@
     ],
     "requiresOperatorConfirmation": [
       "artifact-version-target",
+      "deployment-window-owner",
+      "rollback-approver",
       "configuration-secret-source",
       "production-secret-source-contract",
+      "production-deployment-runbook-contract",
       "database-migration-direction",
       "rollback-approval-handoff",
       "rollback-sql-review-gate"
@@ -214,7 +220,8 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-sql-review-gate.sample.json",
-      "/contracts/production-secret-source-contract.sample.json"
+      "/contracts/production-secret-source-contract.sample.json",
+      "/contracts/production-deployment-runbook-contract.sample.json"
     ],
     "requiredEvidence": [
       "focused-maven-tests",
@@ -235,9 +242,12 @@
     "approvalMode": "OPERATOR_CONFIRMATION_REQUIRED",
     "requiredConfirmationFields": [
       "artifact-version-target",
+      "deployment-window-owner",
+      "rollback-approver",
       "runtime-config-profile",
       "configuration-secret-source",
       "production-secret-source-contract",
+      "production-deployment-runbook-contract",
       "database-migration-direction",
       "rollback-sql-review-gate",
       "release-bundle-manifest",
@@ -248,6 +258,7 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/production-secret-source-contract.sample.json",
+      "/contracts/production-deployment-runbook-contract.sample.json",
       "/contracts/release-verification-manifest.sample.json"
     ],
     "nodeMayConsume": true,
@@ -313,6 +324,42 @@
     "requiresProductionDatabase": false,
     "changesOrderTransactionSemantics": false
   },
+  "productionDeploymentRunbookContract": {
+    "contractVersion": "java-production-deployment-runbook-contract.v1",
+    "contractEndpoint": "/contracts/production-deployment-runbook-contract.sample.json",
+    "contractMode": "READ_ONLY_DEPLOYMENT_RUNBOOK_CONTRACT",
+    "deploymentWindowOwner": "release-window-owner",
+    "rollbackApprover": "rollback-approval-owner",
+    "databaseMigrationDirectionOptions": [
+      "forward-only",
+      "rollback-script-reviewed",
+      "no-database-change"
+    ],
+    "selectedDatabaseMigrationDirection": "no-database-change",
+    "secretSourceConfirmation": "/contracts/production-secret-source-contract.sample.json",
+    "requiredConfirmationFields": [
+      "deployment-window-owner",
+      "rollback-approver",
+      "database-migration-direction",
+      "secret-source-confirmation",
+      "rollback-sql-review-gate",
+      "operator-approval-placeholder"
+    ],
+    "runbookArtifacts": [
+      "/contracts/release-bundle-manifest.sample.json",
+      "/contracts/deployment-rollback-evidence.sample.json",
+      "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/production-secret-source-contract.sample.json"
+    ],
+    "nodeMayConsume": true,
+    "nodeMayTriggerDeployment": false,
+    "nodeMayTriggerRollback": false,
+    "sqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderTransactionSemantics": false
+  },
   "blockers": [
     "READ_ONLY_EVIDENCE_ENDPOINT",
     "REPLAY_APPROVAL_PENDING",
@@ -337,6 +384,7 @@
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-sql-review-gate.sample.json",
     "/contracts/production-secret-source-contract.sample.json",
+    "/contracts/production-deployment-runbook-contract.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/approval-status",
     "/api/v1/failed-events/{id}/replay-readiness",

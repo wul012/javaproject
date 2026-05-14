@@ -16,6 +16,18 @@
       "nodeMayInfer": false
     },
     {
+      "name": "deployment-window-owner",
+      "description": "Operator confirms who owns the production deployment window.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
+      "name": "rollback-approver",
+      "description": "Operator confirms who can approve rollback during the deployment window.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
       "name": "runtime-config-profile",
       "description": "Operator confirms the runtime profile and configuration source for the target environment.",
       "required": true,
@@ -33,6 +45,13 @@
       "required": true,
       "expectedEndpoint": "/contracts/production-secret-source-contract.sample.json",
       "nodeMayReadSecretValues": false
+    },
+    {
+      "name": "production-deployment-runbook-contract",
+      "description": "Operator confirms the read-only deployment runbook contract used by the release window intake gate.",
+      "required": true,
+      "expectedEndpoint": "/contracts/production-deployment-runbook-contract.sample.json",
+      "nodeMayTriggerDeployment": false
     },
     {
       "name": "database-migration-direction",
@@ -64,6 +83,7 @@
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/rollback-sql-review-gate.sample.json",
     "/contracts/production-secret-source-contract.sample.json",
+    "/contracts/production-deployment-runbook-contract.sample.json",
     "/contracts/release-verification-manifest.sample.json"
   ],
   "nodeConsumption": {
@@ -76,7 +96,9 @@
   },
   "operatorResponsibilities": [
     "Confirm selected artifact version before any rollback window.",
+    "Confirm deployment window owner and rollback approver.",
     "Confirm runtime configuration and secret source outside this sample.",
+    "Confirm deployment runbook contract without triggering deployment.",
     "Confirm production secret source contract without reading secret values.",
     "Confirm database migration direction without executing rollback SQL from this sample.",
     "Confirm Java rollback remains outside Node automated actions."

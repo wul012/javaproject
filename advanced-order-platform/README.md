@@ -1237,6 +1237,37 @@ boundaries.requiresProductionDatabase=false
 
 它服务于后续 production environment preflight checklist：Java 只记录生产密钥来源类型、负责人和轮换审查节奏，不读取 secret value，不写入 secret 名称或原始环境变量值，也不授权 Node 修改 Java 运行配置。
 
+v60 起，应用随包提供 production deployment runbook contract 样本：
+
+```text
+src/main/resources/static/contracts/production-deployment-runbook-contract.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/production-deployment-runbook-contract.sample.json
+```
+
+该样本固定表达：
+
+```text
+contractVersion=java-production-deployment-runbook-contract.v1
+contractMode=READ_ONLY_DEPLOYMENT_RUNBOOK_CONTRACT
+deploymentWindow.owner=release-window-owner
+deploymentWindow.rollbackApprover=rollback-approval-owner
+databaseMigration.selectedDirection=no-database-change
+secretSourceConfirmation.endpoint=/contracts/production-secret-source-contract.sample.json
+requiredConfirmationFields 包含 deployment-window-owner、rollback-approver、database-migration-direction、secret-source-confirmation、rollback-sql-review-gate、operator-approval-placeholder
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayTriggerDeployment=false
+nodeConsumption.nodeMayTriggerRollback=false
+boundaries.sqlExecutionAllowed=false
+boundaries.requiresProductionDatabase=false
+```
+
+它服务于后续 deployment evidence intake gate：Java 只说明部署窗口 owner、rollback approver、迁移方向和密钥来源确认，不执行部署、不执行 rollback SQL、不连接生产数据库，也不授权 Node 触发 Java 发布或回退。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1811,6 +1842,7 @@ ops
   -> v57 增加 rollback approval handoff，固化 artifact、runtime config、secret source 和 database migration direction 人工确认字段
   -> v58 增加 rollback SQL review gate，固化 SQL review owner、migration direction 和 operator approval placeholder
   -> v59 增加 production secret source contract，固化 secret source、rotation owner、review cadence 和 secret value 访问边界
+  -> v60 增加 production deployment runbook contract，固化 deployment window owner、rollback approver、migration direction 和 no-execution 边界
 
 common
  -> 业务异常和统一错误响应

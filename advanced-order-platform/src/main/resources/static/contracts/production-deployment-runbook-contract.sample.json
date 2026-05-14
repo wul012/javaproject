@@ -1,0 +1,109 @@
+{
+  "contractVersion": "java-production-deployment-runbook-contract.v1",
+  "scenario": "PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "sampledAt": "2026-05-14T17:20:00Z",
+  "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
+  "contractEndpoint": "/contracts/production-deployment-runbook-contract.sample.json",
+  "contractMode": "READ_ONLY_DEPLOYMENT_RUNBOOK_CONTRACT",
+  "contractGoal": "Record production deployment window ownership, rollback approver, migration direction, and secret source confirmation without executing deployment or rollback actions.",
+  "deploymentWindow": {
+    "owner": "release-window-owner",
+    "rollbackApprover": "rollback-approval-owner",
+    "operatorStartRequired": true,
+    "nodeMayScheduleWindow": false,
+    "nodeMayTriggerDeployment": false
+  },
+  "databaseMigration": {
+    "directionOptions": [
+      "forward-only",
+      "rollback-script-reviewed",
+      "no-database-change"
+    ],
+    "selectedDirection": "no-database-change",
+    "rollbackSqlExecutionAllowed": false,
+    "requiresProductionDatabase": false
+  },
+  "secretSourceConfirmation": {
+    "endpoint": "/contracts/production-secret-source-contract.sample.json",
+    "required": true,
+    "nodeMayReadSecretValues": false,
+    "secretValueRecorded": false
+  },
+  "requiredConfirmationFields": [
+    {
+      "name": "deployment-window-owner",
+      "description": "Operator confirms who owns the production deployment window.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
+      "name": "rollback-approver",
+      "description": "Operator confirms who can approve rollback during the deployment window.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
+      "name": "database-migration-direction",
+      "description": "Operator confirms whether the deployment has forward-only migration, reviewed rollback SQL, or no database change.",
+      "required": true,
+      "sqlExecutionAllowed": false
+    },
+    {
+      "name": "secret-source-confirmation",
+      "description": "Operator confirms the production secret source contract without reading secret values.",
+      "required": true,
+      "expectedEndpoint": "/contracts/production-secret-source-contract.sample.json",
+      "nodeMayReadSecretValues": false
+    },
+    {
+      "name": "rollback-sql-review-gate",
+      "description": "Operator confirms the SQL review gate before any rollback SQL can be considered outside this sample.",
+      "required": true,
+      "expectedEndpoint": "/contracts/rollback-sql-review-gate.sample.json"
+    },
+    {
+      "name": "operator-approval-placeholder",
+      "description": "Operator approval remains a manual placeholder and is not automated by Node.",
+      "required": true,
+      "nodeMayInfer": false
+    }
+  ],
+  "runbookArtifacts": [
+    "/contracts/release-bundle-manifest.sample.json",
+    "/contracts/deployment-rollback-evidence.sample.json",
+    "/contracts/rollback-approval-handoff.sample.json",
+    "/contracts/rollback-sql-review-gate.sample.json",
+    "/contracts/production-secret-source-contract.sample.json"
+  ],
+  "nodeConsumption": {
+    "nodeMayConsume": true,
+    "nodeMayRenderIntakeGate": true,
+    "nodeMayTriggerDeployment": false,
+    "nodeMayTriggerRollback": false,
+    "nodeMayExecuteRollbackSql": false,
+    "nodeMayModifyRuntimeConfig": false,
+    "requiresUpstreamActionsEnabled": false
+  },
+  "boundaries": {
+    "sqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderCreateSemantics": false,
+    "changesPaymentOrInventoryTransaction": false,
+    "changesOutboxOrReplayExecution": false,
+    "changesOrderTransactionSemantics": false,
+    "connectsMiniKv": false
+  },
+  "forbiddenOperations": [
+    "Executing Java deployment from this runbook contract",
+    "Triggering Java rollback from Node",
+    "Executing rollback SQL from this runbook contract",
+    "Connecting production database",
+    "Reading production secret values from this runbook contract",
+    "Modifying Java runtime configuration from Node",
+    "POST /api/v1/orders",
+    "POST /api/v1/failed-events/{id}/replay"
+  ]
+}

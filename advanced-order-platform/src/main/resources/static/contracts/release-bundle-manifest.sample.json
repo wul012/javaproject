@@ -18,6 +18,7 @@
     "rollbackApprovalHandoff": "/contracts/rollback-approval-handoff.sample.json",
     "rollbackSqlReviewGate": "/contracts/rollback-sql-review-gate.sample.json",
     "productionSecretSourceContract": "/contracts/production-secret-source-contract.sample.json",
+    "productionDeploymentRunbookContract": "/contracts/production-deployment-runbook-contract.sample.json",
     "opsEvidence": "/api/v1/ops/evidence",
     "runtimeArchiveRoot": "c/<version>"
   },
@@ -67,12 +68,14 @@
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-sql-review-gate.sample.json",
-    "/contracts/production-secret-source-contract.sample.json"
+    "/contracts/production-secret-source-contract.sample.json",
+    "/contracts/production-deployment-runbook-contract.sample.json"
   ],
   "nodeConsumption": {
     "nodeMayConsume": true,
     "nodeMayExecuteMaven": false,
     "nodeMayTriggerJavaWrites": false,
+    "nodeMayTriggerDeployment": false,
     "nodeMayTriggerRollback": false,
     "requiresUpstreamActionsEnabled": false
   },

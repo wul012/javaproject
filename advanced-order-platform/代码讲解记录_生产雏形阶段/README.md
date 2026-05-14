@@ -159,9 +159,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 63-version-59-production-secret-source-contract.md
  -> 第五十九版 production secret source contract，固化 secret source、rotation owner、review cadence 和 secret value 访问边界
+
+64-version-60-production-deployment-runbook-contract.md
+ -> 第六十版 production deployment runbook contract，固化 deployment window owner、rollback approver、migration direction 和 no-execution 边界
 ```
 
-后续推进 v60 时，从 `64-version-60-主题.md` 继续追加。
+后续推进 v61 时，从 `65-version-61-主题.md` 继续追加。
 
 ## 一句话总览
 
