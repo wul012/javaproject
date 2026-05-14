@@ -135,9 +135,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 55-version-51-ops-evidence-field-guide.md
  -> 第五十一版 ops evidence 字段说明样本，解释 service、healthProbe、readOnlyWindow 和 executionBoundaries 的字段稳定性
+
+56-version-52-order-idempotency-boundary.md
+ -> 第五十二版订单创建幂等边界，增加请求指纹、同 key 不同请求 409、ops evidence 和静态样本
 ```
 
-后续推进 v52 时，从 `56-version-52-主题.md` 继续追加。
+后续推进 v53 时，从 `57-version-53-主题.md` 继续追加。
 
 ## 一句话总览
 

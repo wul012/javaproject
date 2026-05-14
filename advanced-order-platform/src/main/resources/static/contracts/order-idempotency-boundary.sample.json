@@ -1,0 +1,61 @@
+{
+  "boundaryVersion": "java-order-idempotency-boundary.v1",
+  "scenario": "ORDER_IDEMPOTENCY_BOUNDARY_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "createOrderEndpoint": "/api/v1/orders",
+  "createOrderMethod": "POST",
+  "requiredHeader": "Idempotency-Key",
+  "maxKeyLength": 120,
+  "requestFingerprint": {
+    "version": "order-create-request-sha256.v1",
+    "algorithm": "SHA-256",
+    "scope": [
+      "customerId",
+      "items aggregated by productId",
+      "productId:quantity pairs sorted by productId"
+    ],
+    "storedColumn": "orders.idempotency_request_fingerprint"
+  },
+  "sameKeySameRequest": {
+    "httpStatus": 200,
+    "outcome": "REPLAY_EXISTING_ORDER",
+    "sideEffects": [
+      "NO_NEW_INVENTORY_RESERVATION",
+      "NO_NEW_OUTBOX_EVENT",
+      "NO_PAYMENT_OR_STATUS_CHANGE"
+    ]
+  },
+  "sameKeyDifferentRequest": {
+    "httpStatus": 409,
+    "errorCode": "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
+    "outcome": "REJECT_BEFORE_ORDER_MUTATION",
+    "sideEffects": [
+      "NO_NEW_INVENTORY_RESERVATION",
+      "NO_NEW_OUTBOX_EVENT",
+      "NO_PAYMENT_OR_STATUS_CHANGE"
+    ]
+  },
+  "storage": {
+    "authoritativeStore": "orders table",
+    "uniqueKey": "orders.idempotency_key",
+    "fingerprintColumn": "orders.idempotency_request_fingerprint",
+    "externalTokenStoreConnected": false,
+    "miniKvConnected": false,
+    "orderAuthoritativeStoreRemainsJavaDatabase": true
+  },
+  "verticalSliceBoundary": {
+    "intendedConsumer": "Node idempotency vertical readiness review",
+    "mayBeUsedForProductionPass": false,
+    "miniKvRole": "TTL token candidate only; not connected to Java order transaction in this version",
+    "requiredLiveEvidence": [
+      "POST /api/v1/orders with same Idempotency-Key and same body returns the existing order",
+      "POST /api/v1/orders with same Idempotency-Key and different body returns 409"
+    ]
+  },
+  "forbiddenOperationsForReadOnlyEvidence": [
+    "Treating this sample as a production write pass",
+    "Connecting mini-kv as the authoritative order store",
+    "Changing payment, inventory commit, or failed-event replay behavior from this sample"
+  ]
+}

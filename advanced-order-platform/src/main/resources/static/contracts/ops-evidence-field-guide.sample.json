@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T06:50:00Z",
+  "updatedAt": "2026-05-14T08:05:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -117,6 +117,42 @@
           "path": "readOnlyWindow.requiredNodeEnvironment",
           "meaning": "Node must use UPSTREAM_PROBES_ENABLED=true and UPSTREAM_ACTIONS_ENABLED=false.",
           "stability": "stable"
+        }
+      ]
+    },
+    {
+      "name": "orderIdempotency",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "orderIdempotency.boundaryVersion",
+          "meaning": "Version for Java create-order idempotency boundary semantics.",
+          "expectedValue": "java-order-idempotency-boundary.v1"
+        },
+        {
+          "path": "orderIdempotency.requiredHeader",
+          "meaning": "HTTP header required by POST /api/v1/orders.",
+          "expectedValue": "Idempotency-Key"
+        },
+        {
+          "path": "orderIdempotency.requestFingerprintVersion",
+          "meaning": "Canonical request fingerprint version used to compare same-key create-order requests.",
+          "expectedValue": "order-create-request-sha256.v1"
+        },
+        {
+          "path": "orderIdempotency.sameKeySameRequestOutcome",
+          "meaning": "Same key plus same request replays the existing order without a second inventory reservation or Outbox event.",
+          "stability": "stable"
+        },
+        {
+          "path": "orderIdempotency.sameKeyDifferentRequestErrorCode",
+          "meaning": "Same key plus different request is rejected with a stable conflict error code.",
+          "expectedValue": "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST"
+        },
+        {
+          "path": "orderIdempotency.miniKvConnected",
+          "meaning": "mini-kv is not connected to the Java order transaction in this version.",
+          "expectedValue": false
         }
       ]
     },

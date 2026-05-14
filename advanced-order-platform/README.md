@@ -5,7 +5,7 @@
 ## 当前能力
 
 - 商品目录查询
-- 幂等下单
+- 幂等下单，支持同 key 同请求重放和同 key 不同请求稳定拒绝
 - 库存预占、扣减、释放、退款回补
 - 库存变更流水查询
 - 订单支付模拟
@@ -224,6 +224,17 @@ Invoke-RestMethod `
   -ContentType "application/json" `
   -Headers @{ "Idempotency-Key" = "demo-order-001" } `
   -Body $body
+```
+
+下单幂等边界：
+
+```text
+同一个 Idempotency-Key + 相同 customerId/items
+ -> 返回已有订单，HTTP 200，不再次预占库存，不再次写 Outbox
+
+同一个 Idempotency-Key + 不同 customerId/items
+ -> 返回 HTTP 409，错误码 IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST
+ -> 在库存预占和 Outbox 写入之前拒绝
 ```
 
 支付订单：
@@ -747,7 +758,8 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "evidenceEndpoint": "/api/v1/ops/evidence",
     "additionalProbeEndpoints": [
       "/api/v1/ops/overview",
-      "/contracts/ops-read-only-evidence.sample.json"
+      "/contracts/ops-read-only-evidence.sample.json",
+      "/contracts/order-idempotency-boundary.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": false
@@ -766,7 +778,8 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
       "GET /actuator/health",
       "GET /api/v1/ops/overview",
       "GET /api/v1/ops/evidence",
-      "GET /contracts/ops-read-only-evidence.sample.json"
+      "GET /contracts/ops-read-only-evidence.sample.json",
+      "GET /contracts/order-idempotency-boundary.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -780,6 +793,20 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
       "UPSTREAM_ACTIONS_ENABLED=false"
     ],
     "replayPostBoundary": "Node real-read window must not call POST /api/v1/failed-events/{id}/replay"
+  },
+  "orderIdempotency": {
+    "boundaryVersion": "java-order-idempotency-boundary.v1",
+    "createOrderEndpoint": "/api/v1/orders",
+    "createOrderMethod": "POST",
+    "requiredHeader": "Idempotency-Key",
+    "maxKeyLength": 120,
+    "requestFingerprintVersion": "order-create-request-sha256.v1",
+    "sameKeySameRequestOutcome": "HTTP 200 replay of the existing order without a second inventory reservation or outbox event",
+    "sameKeyDifferentRequestOutcome": "HTTP 409 conflict before inventory reservation and before outbox mutation",
+    "sameKeyDifferentRequestErrorCode": "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
+    "miniKvConnected": false,
+    "externalTokenStoreConnected": false,
+    "changesPaymentOrInventoryTransaction": false
   },
   "failedEventReplay": {
     "totalFailedEvents": 2,
@@ -820,6 +847,7 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "/api/v1/ops/evidence",
     "/contracts/ops-read-only-evidence.sample.json",
     "/contracts/ops-evidence-field-guide.sample.json",
+    "/contracts/order-idempotency-boundary.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/replay-execution-contract",
     "/api/v1/failed-events/replay-evidence-index"
@@ -893,11 +921,37 @@ guideVersion=java-ops-evidence-field-guide.v1
 sourceEvidenceEndpoint=/api/v1/ops/evidence
 sourceSampleEndpoint=/contracts/ops-read-only-evidence.sample.json
 releaseReviewUse.mayBeUsedForProductionPass=false
-fieldGroups 覆盖 service、healthProbe、readOnlyWindow、executionBoundaries
+fieldGroups 覆盖 service、healthProbe、readOnlyWindow、orderIdempotency、executionBoundaries
 forbiddenOperations 继续包含订单写入、失败事件 replay POST、RabbitMQ replay publish、Outbox mutation 和任何非 GET Node 上游动作
 ```
 
 它服务于 Node read-only capture release evidence review，只解释 Java 字段语义和稳定性，不代表 live upstream pass，也不授予生产操作权限。
+
+v52 起，应用随包提供订单幂等边界样本：
+
+```text
+src/main/resources/static/contracts/order-idempotency-boundary.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/order-idempotency-boundary.sample.json
+```
+
+该样本固定表达：
+
+```text
+boundaryVersion=java-order-idempotency-boundary.v1
+requestFingerprint.version=order-create-request-sha256.v1
+sameKeySameRequest.httpStatus=200
+sameKeyDifferentRequest.httpStatus=409
+sameKeyDifferentRequest.errorCode=IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST
+storage.miniKvConnected=false
+storage.orderAuthoritativeStoreRemainsJavaDatabase=true
+```
+
+它服务于 Node idempotency vertical readiness review，只说明 Java 内部订单幂等边界；当前版本不接 mini-kv，不改变支付、库存或失败事件 replay 行为。
 
 查询失败事件治理摘要：
 
@@ -1353,6 +1407,7 @@ src/main/resources/db/migration/h2/V8__failed_event_management_status.sql
 src/main/resources/db/migration/h2/V9__failed_event_management_history.sql
 src/main/resources/db/migration/h2/V10__failed_event_replay_approval.sql
 src/main/resources/db/migration/h2/V11__failed_event_replay_approval_history.sql
+src/main/resources/db/migration/h2/V12__order_idempotency_request_fingerprint.sql
 ```
 
 PostgreSQL profile 执行：
@@ -1369,6 +1424,7 @@ src/main/resources/db/migration/postgresql/V8__failed_event_management_status.sq
 src/main/resources/db/migration/postgresql/V9__failed_event_management_history.sql
 src/main/resources/db/migration/postgresql/V10__failed_event_replay_approval.sql
 src/main/resources/db/migration/postgresql/V11__failed_event_replay_approval_history.sql
+src/main/resources/db/migration/postgresql/V12__order_idempotency_request_fingerprint.sql
 ```
 
 如果 Docker 未启动，Testcontainers 的 PostgreSQL / RabbitMQ 集成测试会自动跳过；启动 Docker 后重新执行 `mvn test` 即可跑真实中间件验证。
@@ -1423,6 +1479,7 @@ inventory
 
 order
  -> 订单模型、幂等下单、支付、退款、取消、发货、完成、状态历史、超时过期
+ -> v52 增加订单创建请求指纹，同 Idempotency-Key 不同请求稳定 409，避免误把不同订单当作重放
 
 payment
  -> 支付成功和退款交易流水
@@ -1461,6 +1518,7 @@ ops
  -> v49 增加 ops read-only evidence 静态样本，给 Node production pass evidence verification 提供 Java 只读证据引用位
  -> v50 增强 ops evidence 启动后自描述，固定 healthProbe 和 readOnlyWindow 字段，服务真实只读 live probe capture
  -> v51 增加 ops evidence 字段说明样本，解释 service、healthProbe、readOnlyWindow 和执行边界字段稳定性
+ -> v52 增加订单幂等边界 evidence 和静态样本，说明同 key 同请求重放、同 key 不同请求拒绝以及 mini-kv 未接入边界
 
 common
  -> 业务异常和统一错误响应

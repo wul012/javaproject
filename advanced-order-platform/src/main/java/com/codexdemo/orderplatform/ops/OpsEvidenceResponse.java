@@ -11,6 +11,7 @@ public record OpsEvidenceResponse(
         boolean readOnly,
         boolean executionAllowed,
         ReadOnlyWindow readOnlyWindow,
+        OrderIdempotency orderIdempotency,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -51,6 +52,24 @@ public record OpsEvidenceResponse(
             List<String> forbiddenOperations,
             List<String> requiredNodeEnvironment,
             String replayPostBoundary
+    ) {
+    }
+
+    public record OrderIdempotency(
+            String boundaryVersion,
+            String createOrderEndpoint,
+            String createOrderMethod,
+            String requiredHeader,
+            int maxKeyLength,
+            String requestFingerprintVersion,
+            String requestFingerprintScope,
+            String sameKeySameRequestOutcome,
+            String sameKeyDifferentRequestOutcome,
+            String sameKeyDifferentRequestErrorCode,
+            String authoritativeStore,
+            boolean miniKvConnected,
+            boolean externalTokenStoreConnected,
+            boolean changesPaymentOrInventoryTransaction
     ) {
     }
 

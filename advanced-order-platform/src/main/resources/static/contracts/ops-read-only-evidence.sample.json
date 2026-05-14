@@ -76,7 +76,8 @@
       "GET /actuator/health",
       "GET /api/v1/ops/overview",
       "GET /api/v1/ops/evidence",
-      "GET /contracts/ops-read-only-evidence.sample.json"
+      "GET /contracts/ops-read-only-evidence.sample.json",
+      "GET /contracts/order-idempotency-boundary.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -90,6 +91,22 @@
       "UPSTREAM_ACTIONS_ENABLED=false"
     ],
     "replayPostBoundary": "Node real-read window must not call POST /api/v1/failed-events/{id}/replay"
+  },
+  "orderIdempotency": {
+    "boundaryVersion": "java-order-idempotency-boundary.v1",
+    "createOrderEndpoint": "/api/v1/orders",
+    "createOrderMethod": "POST",
+    "requiredHeader": "Idempotency-Key",
+    "maxKeyLength": 120,
+    "requestFingerprintVersion": "order-create-request-sha256.v1",
+    "requestFingerprintScope": "customerId plus aggregated productId:quantity pairs sorted by productId",
+    "sameKeySameRequestOutcome": "HTTP 200 replay of the existing order without a second inventory reservation or outbox event",
+    "sameKeyDifferentRequestOutcome": "HTTP 409 conflict before inventory reservation and before outbox mutation",
+    "sameKeyDifferentRequestErrorCode": "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
+    "authoritativeStore": "orders.idempotency_key and orders.idempotency_request_fingerprint",
+    "miniKvConnected": false,
+    "externalTokenStoreConnected": false,
+    "changesPaymentOrInventoryTransaction": false
   },
   "blockers": [
     "READ_ONLY_EVIDENCE_ENDPOINT",
@@ -107,6 +124,7 @@
     "/api/v1/ops/evidence",
     "/contracts/ops-read-only-evidence.sample.json",
     "/contracts/ops-evidence-field-guide.sample.json",
+    "/contracts/order-idempotency-boundary.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/approval-status",
     "/api/v1/failed-events/{id}/replay-readiness",

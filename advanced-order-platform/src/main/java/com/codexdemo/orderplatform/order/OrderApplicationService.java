@@ -48,10 +48,11 @@ public class OrderApplicationService {
     @Transactional
     public CreateOrderResult createOrder(String idempotencyKey, CreateOrderRequest request) {
         requireIdempotencyKey(idempotencyKey);
+        String requestFingerprint = OrderIdempotencyFingerprint.create(request);
 
         return orderRepository.findByIdempotencyKey(idempotencyKey)
-                .map(existing -> new CreateOrderResult(OrderResponse.from(existing), true))
-                .orElseGet(() -> placeNewOrder(idempotencyKey, request));
+                .map(existing -> replayExistingOrder(existing, requestFingerprint))
+                .orElseGet(() -> placeNewOrder(idempotencyKey, request, requestFingerprint));
     }
 
     @Transactional(readOnly = true)
@@ -159,7 +160,20 @@ public class OrderApplicationService {
         return expired;
     }
 
-    private CreateOrderResult placeNewOrder(String idempotencyKey, CreateOrderRequest request) {
+    private CreateOrderResult replayExistingOrder(SalesOrder existing, String requestFingerprint) {
+        String existingFingerprint = existing.getIdempotencyRequestFingerprint();
+        if (StringUtils.hasText(existingFingerprint) && !existingFingerprint.equals(requestFingerprint)) {
+            throw new BusinessException(HttpStatus.CONFLICT, "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
+                    "Idempotency-Key was already used for a different create order request");
+        }
+        return new CreateOrderResult(OrderResponse.from(existing), true);
+    }
+
+    private CreateOrderResult placeNewOrder(
+            String idempotencyKey,
+            CreateOrderRequest request,
+            String requestFingerprint
+    ) {
         Map<Long, Integer> quantities = aggregateQuantities(request);
         Map<Long, Product> products = loadProducts(quantities);
         inventoryService.reserve(quantities);
@@ -171,7 +185,7 @@ public class OrderApplicationService {
                 })
                 .toList();
 
-        SalesOrder order = SalesOrder.place(request.customerId(), idempotencyKey, drafts);
+        SalesOrder order = SalesOrder.place(request.customerId(), idempotencyKey, requestFingerprint, drafts);
         SalesOrder saved = orderRepository.saveAndFlush(order);
         outboxRepository.save(OutboxEvent.orderCreated(saved));
         recordHistory(saved, null, "ORDER_CREATED");

@@ -64,6 +64,7 @@ public class OpsEvidenceService {
                 true,
                 false,
                 readOnlyWindow(true),
+                orderIdempotency(),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -91,7 +92,8 @@ public class OpsEvidenceService {
                 "/api/v1/ops/evidence",
                 List.of(
                         "/api/v1/ops/overview",
-                        "/contracts/ops-read-only-evidence.sample.json"
+                        "/contracts/ops-read-only-evidence.sample.json",
+                        "/contracts/order-idempotency-boundary.sample.json"
                 ),
                 true,
                 staticSampleOnly
@@ -111,7 +113,8 @@ public class OpsEvidenceService {
                         "GET /actuator/health",
                         "GET /api/v1/ops/overview",
                         "GET /api/v1/ops/evidence",
-                        "GET /contracts/ops-read-only-evidence.sample.json"
+                        "GET /contracts/ops-read-only-evidence.sample.json",
+                        "GET /contracts/order-idempotency-boundary.sample.json"
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -125,6 +128,25 @@ public class OpsEvidenceService {
                         "UPSTREAM_ACTIONS_ENABLED=false"
                 ),
                 "Node real-read window must not call POST /api/v1/failed-events/{id}/replay"
+        );
+    }
+
+    private OpsEvidenceResponse.OrderIdempotency orderIdempotency() {
+        return new OpsEvidenceResponse.OrderIdempotency(
+                "java-order-idempotency-boundary.v1",
+                "/api/v1/orders",
+                "POST",
+                "Idempotency-Key",
+                120,
+                "order-create-request-sha256.v1",
+                "customerId plus aggregated productId:quantity pairs sorted by productId",
+                "HTTP 200 replay of the existing order without a second inventory reservation or outbox event",
+                "HTTP 409 conflict before inventory reservation and before outbox mutation",
+                "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
+                "orders.idempotency_key and orders.idempotency_request_fingerprint",
+                false,
+                false,
+                false
         );
     }
 
@@ -227,6 +249,7 @@ public class OpsEvidenceService {
                 "/api/v1/ops/evidence",
                 "/contracts/ops-read-only-evidence.sample.json",
                 "/contracts/ops-evidence-field-guide.sample.json",
+                "/contracts/order-idempotency-boundary.sample.json",
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

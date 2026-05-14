@@ -35,6 +35,9 @@ public class SalesOrder {
     @Column(nullable = false, unique = true, length = 120)
     private String idempotencyKey;
 
+    @Column(length = 80)
+    private String idempotencyRequestFingerprint;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 32)
     private OrderStatus status;
@@ -64,20 +67,26 @@ public class SalesOrder {
     protected SalesOrder() {
     }
 
-    private SalesOrder(UUID customerId, String idempotencyKey) {
+    private SalesOrder(UUID customerId, String idempotencyKey, String idempotencyRequestFingerprint) {
         this.customerId = customerId;
         this.idempotencyKey = idempotencyKey;
+        this.idempotencyRequestFingerprint = idempotencyRequestFingerprint;
         this.status = OrderStatus.CREATED;
         this.createdAt = Instant.now();
         this.totalAmount = BigDecimal.ZERO;
     }
 
-    public static SalesOrder place(UUID customerId, String idempotencyKey, List<OrderLineDraft> drafts) {
+    public static SalesOrder place(
+            UUID customerId,
+            String idempotencyKey,
+            String idempotencyRequestFingerprint,
+            List<OrderLineDraft> drafts
+    ) {
         if (drafts.isEmpty()) {
             throw new BusinessException(HttpStatus.BAD_REQUEST, "EMPTY_ORDER", "Order must contain at least one item");
         }
 
-        SalesOrder order = new SalesOrder(customerId, idempotencyKey);
+        SalesOrder order = new SalesOrder(customerId, idempotencyKey, idempotencyRequestFingerprint);
         drafts.stream()
                 .map(draft -> OrderLine.from(draft, order))
                 .forEach(order.lines::add);
@@ -175,6 +184,10 @@ public class SalesOrder {
 
     public String getIdempotencyKey() {
         return idempotencyKey;
+    }
+
+    public String getIdempotencyRequestFingerprint() {
+        return idempotencyRequestFingerprint;
     }
 
     public OrderStatus getStatus() {

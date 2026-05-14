@@ -68,7 +68,11 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.healthProbe().expectedStatus()).isEqualTo("UP");
         assertThat(evidence.healthProbe().evidenceEndpoint()).isEqualTo("/api/v1/ops/evidence");
         assertThat(evidence.healthProbe().additionalProbeEndpoints())
-                .containsExactly("/api/v1/ops/overview", "/contracts/ops-read-only-evidence.sample.json");
+                .containsExactly(
+                        "/api/v1/ops/overview",
+                        "/contracts/ops-read-only-evidence.sample.json",
+                        "/contracts/order-idempotency-boundary.sample.json"
+                );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
         assertThat(evidence.readOnlyWindow().windowVersion()).isEqualTo("java-read-only-window.v1");
@@ -83,7 +87,8 @@ class OpsEvidenceServiceTests {
                         "GET /actuator/health",
                         "GET /api/v1/ops/overview",
                         "GET /api/v1/ops/evidence",
-                        "GET /contracts/ops-read-only-evidence.sample.json"
+                        "GET /contracts/ops-read-only-evidence.sample.json",
+                        "GET /contracts/order-idempotency-boundary.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -94,6 +99,16 @@ class OpsEvidenceServiceTests {
                 .containsExactly("UPSTREAM_PROBES_ENABLED=true", "UPSTREAM_ACTIONS_ENABLED=false");
         assertThat(evidence.readOnlyWindow().replayPostBoundary())
                 .contains("must not call POST /api/v1/failed-events/{id}/replay");
+        assertThat(evidence.orderIdempotency().boundaryVersion()).isEqualTo("java-order-idempotency-boundary.v1");
+        assertThat(evidence.orderIdempotency().createOrderEndpoint()).isEqualTo("/api/v1/orders");
+        assertThat(evidence.orderIdempotency().requiredHeader()).isEqualTo("Idempotency-Key");
+        assertThat(evidence.orderIdempotency().requestFingerprintVersion())
+                .isEqualTo("order-create-request-sha256.v1");
+        assertThat(evidence.orderIdempotency().sameKeyDifferentRequestErrorCode())
+                .isEqualTo("IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST");
+        assertThat(evidence.orderIdempotency().miniKvConnected()).isFalse();
+        assertThat(evidence.orderIdempotency().externalTokenStoreConnected()).isFalse();
+        assertThat(evidence.orderIdempotency().changesPaymentOrInventoryTransaction()).isFalse();
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
@@ -130,6 +145,7 @@ class OpsEvidenceServiceTests {
                         "/api/v1/ops/evidence",
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/ops-evidence-field-guide.sample.json",
+                        "/contracts/order-idempotency-boundary.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

@@ -81,6 +81,81 @@ class OrderApplicationServiceTests {
     }
 
     @Test
+    void createOrderReplaysSameCanonicalRequestWhenLinesAreReordered() {
+        List<Product> products = productRepository.findAll();
+        Product keyboard = products.get(0);
+        Product monitor = products.get(1);
+        InventoryItem keyboardBefore = inventoryRepository.findByProductId(keyboard.getId()).orElseThrow();
+        InventoryItem monitorBefore = inventoryRepository.findByProductId(monitor.getId()).orElseThrow();
+
+        CreateOrderRequest firstRequest = new CreateOrderRequest(
+                UUID.fromString("12121212-1212-1212-1212-121212121212"),
+                List.of(
+                        new CreateOrderLineRequest(keyboard.getId(), 1),
+                        new CreateOrderLineRequest(monitor.getId(), 2)
+                )
+        );
+        CreateOrderRequest sameCanonicalRequest = new CreateOrderRequest(
+                UUID.fromString("12121212-1212-1212-1212-121212121212"),
+                List.of(
+                        new CreateOrderLineRequest(monitor.getId(), 2),
+                        new CreateOrderLineRequest(keyboard.getId(), 1)
+                )
+        );
+
+        CreateOrderResult created = orderApplicationService.createOrder(
+                "test-idempotency-key-001-canonical",
+                firstRequest
+        );
+        long outboxAfterCreate = outboxRepository.count();
+        CreateOrderResult replayed = orderApplicationService.createOrder(
+                "test-idempotency-key-001-canonical",
+                sameCanonicalRequest
+        );
+        InventoryItem keyboardAfterReplay = inventoryRepository.findByProductId(keyboard.getId()).orElseThrow();
+        InventoryItem monitorAfterReplay = inventoryRepository.findByProductId(monitor.getId()).orElseThrow();
+
+        assertThat(created.replayed()).isFalse();
+        assertThat(replayed.replayed()).isTrue();
+        assertThat(replayed.order().id()).isEqualTo(created.order().id());
+        assertThat(keyboardAfterReplay.getAvailable()).isEqualTo(keyboardBefore.getAvailable() - 1);
+        assertThat(monitorAfterReplay.getAvailable()).isEqualTo(monitorBefore.getAvailable() - 2);
+        assertThat(outboxRepository.count()).isEqualTo(outboxAfterCreate);
+    }
+
+    @Test
+    void createOrderRejectsSameIdempotencyKeyForDifferentRequestBeforeSideEffects() {
+        Product product = productRepository.findAll().getFirst();
+        InventoryItem before = inventoryRepository.findByProductId(product.getId()).orElseThrow();
+        CreateOrderRequest firstRequest = new CreateOrderRequest(
+                UUID.fromString("13131313-1313-1313-1313-131313131313"),
+                List.of(new CreateOrderLineRequest(product.getId(), 1))
+        );
+        CreateOrderRequest differentRequest = new CreateOrderRequest(
+                UUID.fromString("13131313-1313-1313-1313-131313131313"),
+                List.of(new CreateOrderLineRequest(product.getId(), 2))
+        );
+
+        orderApplicationService.createOrder("test-idempotency-key-001-conflict", firstRequest);
+        InventoryItem afterFirstCreate = inventoryRepository.findByProductId(product.getId()).orElseThrow();
+        long outboxAfterFirstCreate = outboxRepository.count();
+
+        assertThatThrownBy(() -> orderApplicationService.createOrder(
+                "test-idempotency-key-001-conflict",
+                differentRequest
+        ))
+                .isInstanceOf(BusinessException.class)
+                .satisfies(exception -> assertThat(((BusinessException) exception).getCode())
+                        .isEqualTo("IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST"));
+
+        InventoryItem afterRejectedReplay = inventoryRepository.findByProductId(product.getId()).orElseThrow();
+        assertThat(afterFirstCreate.getAvailable()).isEqualTo(before.getAvailable() - 1);
+        assertThat(afterRejectedReplay.getAvailable()).isEqualTo(afterFirstCreate.getAvailable());
+        assertThat(afterRejectedReplay.getReserved()).isEqualTo(afterFirstCreate.getReserved());
+        assertThat(outboxRepository.count()).isEqualTo(outboxAfterFirstCreate);
+    }
+
+    @Test
     void inventoryMovementsTrackReserveCommitAndReturn() {
         Product product = productRepository.findAll().getFirst();
         int movementCountBefore = inventoryService.listProductMovements(product.getId()).size();

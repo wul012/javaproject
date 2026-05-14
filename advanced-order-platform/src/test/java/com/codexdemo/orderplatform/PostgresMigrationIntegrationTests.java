@@ -89,6 +89,16 @@ class PostgresMigrationIntegrationTests {
                          """,
                 Integer.class
         );
+        Integer idempotencyFingerprintColumnCount = jdbcTemplate.queryForObject(
+                """
+                        select count(*)
+                        from information_schema.columns
+                        where table_schema = 'public'
+                          and table_name = 'orders'
+                          and column_name = 'idempotency_request_fingerprint'
+                        """,
+                Integer.class
+        );
         Product product = productRepository.findAll().getFirst();
         CreateOrderRequest request = new CreateOrderRequest(
                 UUID.fromString("10101010-1010-1010-1010-101010101010"),
@@ -99,9 +109,16 @@ class PostgresMigrationIntegrationTests {
         orderApplicationService.pay(created.order().id());
         var refunded = orderApplicationService.refund(created.order().id());
         List<InventoryMovementResponse> movements = inventoryService.listProductMovements(product.getId());
+        String idempotencyRequestFingerprint = jdbcTemplate.queryForObject(
+                "select idempotency_request_fingerprint from orders where id = ?",
+                String.class,
+                created.order().id()
+        );
 
-        assertThat(appliedMigrations).isEqualTo(11);
+        assertThat(appliedMigrations).isEqualTo(12);
         assertThat(tableCount).isEqualTo(13);
+        assertThat(idempotencyFingerprintColumnCount).isEqualTo(1);
+        assertThat(idempotencyRequestFingerprint).startsWith("sha256:");
         assertThat(refunded.status()).isEqualTo(OrderStatus.REFUNDED);
         assertThat(movements.stream().map(InventoryMovementResponse::type).toList())
                 .containsExactly(
