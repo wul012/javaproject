@@ -99,7 +99,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
-                        "/contracts/rollback-sql-review-gate.sample.json"
+                        "/contracts/rollback-sql-review-gate.sample.json",
+                        "/contracts/production-secret-source-contract.sample.json"
                 );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
@@ -122,7 +123,8 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/deployment-rollback-evidence.sample.json",
                         "GET /contracts/release-bundle-manifest.sample.json",
                         "GET /contracts/rollback-approval-handoff.sample.json",
-                        "GET /contracts/rollback-sql-review-gate.sample.json"
+                        "GET /contracts/rollback-sql-review-gate.sample.json",
+                        "GET /contracts/production-secret-source-contract.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -197,6 +199,7 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "artifact-version-target",
                         "configuration-secret-source",
+                        "production-secret-source-contract",
                         "database-migration-direction",
                         "rollback-approval-handoff",
                         "rollback-sql-review-gate"
@@ -225,7 +228,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
-                        "/contracts/rollback-sql-review-gate.sample.json"
+                        "/contracts/rollback-sql-review-gate.sample.json",
+                        "/contracts/production-secret-source-contract.sample.json"
                 );
         assertThat(evidence.releaseBundle().requiredEvidence())
                 .containsExactly(
@@ -251,6 +255,7 @@ class OpsEvidenceServiceTests {
                         "artifact-version-target",
                         "runtime-config-profile",
                         "configuration-secret-source",
+                        "production-secret-source-contract",
                         "database-migration-direction",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
@@ -261,6 +266,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
+                        "/contracts/production-secret-source-contract.sample.json",
                         "/contracts/release-verification-manifest.sample.json"
                 );
         assertThat(evidence.rollbackApprovalHandoff().nodeMayConsume()).isTrue();
@@ -297,6 +303,46 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.rollbackSqlReviewGate().sqlExecutionAllowed()).isFalse();
         assertThat(evidence.rollbackSqlReviewGate().requiresProductionDatabase()).isFalse();
         assertThat(evidence.rollbackSqlReviewGate().changesOrderTransactionSemantics()).isFalse();
+        assertThat(evidence.productionSecretSourceContract().contractVersion())
+                .isEqualTo("java-production-secret-source-contract.v1");
+        assertThat(evidence.productionSecretSourceContract().contractEndpoint())
+                .isEqualTo("/contracts/production-secret-source-contract.sample.json");
+        assertThat(evidence.productionSecretSourceContract().contractMode())
+                .isEqualTo("READ_ONLY_SECRET_SOURCE_CONTRACT");
+        assertThat(evidence.productionSecretSourceContract().sourceTypes())
+                .containsExactly(
+                        "external-secret-manager",
+                        "environment-injected-secret",
+                        "platform-managed-secret"
+                );
+        assertThat(evidence.productionSecretSourceContract().selectedSourceType())
+                .isEqualTo("external-secret-manager");
+        assertThat(evidence.productionSecretSourceContract().secretManagerOwner())
+                .isEqualTo("platform-security-owner");
+        assertThat(evidence.productionSecretSourceContract().rotationOwner())
+                .isEqualTo("security-operations-owner");
+        assertThat(evidence.productionSecretSourceContract().reviewCadence())
+                .isEqualTo("quarterly-or-before-production-cutover");
+        assertThat(evidence.productionSecretSourceContract().requiredConfirmationFields())
+                .containsExactly(
+                        "secret-manager-or-source-type",
+                        "secret-manager-owner",
+                        "rotation-owner",
+                        "review-cadence",
+                        "secret-value-access-boundary"
+                );
+        assertThat(evidence.productionSecretSourceContract().secretValueBoundaries())
+                .containsExactly(
+                        "contract-records-source-metadata-only",
+                        "secret-values-must-not-be-read",
+                        "secret-values-must-not-be-embedded-in-static-contracts",
+                        "node-may-render-checklist-only"
+                );
+        assertThat(evidence.productionSecretSourceContract().nodeMayConsume()).isTrue();
+        assertThat(evidence.productionSecretSourceContract().nodeMayReadSecretValues()).isFalse();
+        assertThat(evidence.productionSecretSourceContract().requiresProductionSecrets()).isFalse();
+        assertThat(evidence.productionSecretSourceContract().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.productionSecretSourceContract().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
@@ -340,6 +386,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
+                        "/contracts/production-secret-source-contract.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

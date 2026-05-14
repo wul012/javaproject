@@ -47,6 +47,11 @@ public class OpsEvidenceService {
     static final String ROLLBACK_SQL_REVIEW_GATE_ENDPOINT =
             "/contracts/rollback-sql-review-gate.sample.json";
 
+    static final String PRODUCTION_SECRET_SOURCE_CONTRACT_VERSION = "java-production-secret-source-contract.v1";
+
+    static final String PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT =
+            "/contracts/production-secret-source-contract.sample.json";
+
     private static final String REAL_REPLAY_ENDPOINT = "/api/v1/failed-events/{id}/replay";
 
     private final Instant startedAt = Instant.now();
@@ -102,6 +107,7 @@ public class OpsEvidenceService {
                 releaseBundle(),
                 rollbackApprovalHandoff(),
                 rollbackSqlReviewGate(),
+                productionSecretSourceContract(),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -136,7 +142,8 @@ public class OpsEvidenceService {
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
+                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
                 ),
                 true,
                 staticSampleOnly
@@ -163,7 +170,8 @@ public class OpsEvidenceService {
                         "GET " + DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         "GET " + RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         "GET " + ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                        "GET " + ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
+                        "GET " + ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                        "GET " + PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -244,7 +252,8 @@ public class OpsEvidenceService {
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
+                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
                 ),
                 false,
                 false,
@@ -267,6 +276,7 @@ public class OpsEvidenceService {
                 List.of(
                         "artifact-version-target",
                         "configuration-secret-source",
+                        "production-secret-source-contract",
                         "database-migration-direction",
                         "rollback-approval-handoff",
                         "rollback-sql-review-gate"
@@ -312,6 +322,7 @@ public class OpsEvidenceService {
                         "artifact-version-target",
                         "runtime-config-profile",
                         "configuration-secret-source",
+                        "production-secret-source-contract",
                         "database-migration-direction",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
@@ -321,6 +332,7 @@ public class OpsEvidenceService {
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                        PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
                         RELEASE_VERIFICATION_MANIFEST_ENDPOINT
                 ),
                 true,
@@ -369,7 +381,43 @@ public class OpsEvidenceService {
                 DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
-                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
+                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
+        );
+    }
+
+    private OpsEvidenceResponse.ProductionSecretSourceContract productionSecretSourceContract() {
+        return new OpsEvidenceResponse.ProductionSecretSourceContract(
+                PRODUCTION_SECRET_SOURCE_CONTRACT_VERSION,
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                "READ_ONLY_SECRET_SOURCE_CONTRACT",
+                List.of(
+                        "external-secret-manager",
+                        "environment-injected-secret",
+                        "platform-managed-secret"
+                ),
+                "external-secret-manager",
+                "platform-security-owner",
+                "security-operations-owner",
+                "quarterly-or-before-production-cutover",
+                List.of(
+                        "secret-manager-or-source-type",
+                        "secret-manager-owner",
+                        "rotation-owner",
+                        "review-cadence",
+                        "secret-value-access-boundary"
+                ),
+                List.of(
+                        "contract-records-source-metadata-only",
+                        "secret-values-must-not-be-read",
+                        "secret-values-must-not-be-embedded-in-static-contracts",
+                        "node-may-render-checklist-only"
+                ),
+                true,
+                false,
+                false,
+                false,
+                false
         );
     }
 
@@ -479,6 +527,7 @@ public class OpsEvidenceService {
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                 ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

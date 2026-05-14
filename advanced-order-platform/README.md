@@ -1206,6 +1206,37 @@ boundaries.requiresProductionDatabase=false
 
 它服务于后续 rollback execution preflight contract：Java 只说明 SQL review owner、迁移方向和人工审批占位，不嵌入生产 SQL 明文，不执行 rollback SQL，不连接生产数据库，也不授权 Node 触发 Java 回退。
 
+v59 起，应用随包提供 production secret source contract 样本：
+
+```text
+src/main/resources/static/contracts/production-secret-source-contract.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/production-secret-source-contract.sample.json
+```
+
+该样本固定表达：
+
+```text
+contractVersion=java-production-secret-source-contract.v1
+contractMode=READ_ONLY_SECRET_SOURCE_CONTRACT
+selectedSourceType=external-secret-manager
+secretManagerOwner=platform-security-owner
+rotationOwner=security-operations-owner
+reviewCadence=quarterly-or-before-production-cutover
+requiredConfirmationFields 包含 secret-manager-or-source-type、secret-manager-owner、rotation-owner、review-cadence、secret-value-access-boundary
+secretValueBoundaries 明确不读取、不写入、不嵌入 secret value
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayReadSecretValues=false
+boundaries.requiresProductionSecrets=false
+boundaries.requiresProductionDatabase=false
+```
+
+它服务于后续 production environment preflight checklist：Java 只记录生产密钥来源类型、负责人和轮换审查节奏，不读取 secret value，不写入 secret 名称或原始环境变量值，也不授权 Node 修改 Java 运行配置。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1779,6 +1810,7 @@ ops
   -> v56 增加 release bundle manifest，把 jar、contracts、发布验证和回退证据收成 Node 可消费但不可执行的只读 bundle
   -> v57 增加 rollback approval handoff，固化 artifact、runtime config、secret source 和 database migration direction 人工确认字段
   -> v58 增加 rollback SQL review gate，固化 SQL review owner、migration direction 和 operator approval placeholder
+  -> v59 增加 production secret source contract，固化 secret source、rotation owner、review cadence 和 secret value 访问边界
 
 common
  -> 业务异常和统一错误响应

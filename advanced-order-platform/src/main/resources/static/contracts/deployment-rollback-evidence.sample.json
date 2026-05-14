@@ -28,6 +28,7 @@
     "requiredEvidence": [
       "operator confirms runtime profile",
       "operator confirms secret source outside this repository",
+      "operator confirms production secret source contract without reading values",
       "operator confirms UPSTREAM_ACTIONS_ENABLED=false during read-only probe"
     ],
     "requiresProductionSecrets": false,
@@ -54,12 +55,14 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
-      "/contracts/rollback-sql-review-gate.sample.json"
+      "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/production-secret-source-contract.sample.json"
     ]
   },
   "requiresOperatorConfirmation": [
     "artifact-version-target",
     "configuration-secret-source",
+    "production-secret-source-contract",
     "database-migration-direction",
     "rollback-approval-handoff",
     "rollback-sql-review-gate"
@@ -77,6 +80,7 @@
   "forbiddenOperations": [
     "Executing database rollback SQL from this sample",
     "Changing production runtime secrets from this sample",
+    "Reading production secret values from this sample",
     "Triggering rollback from Node",
     "POST /api/v1/orders",
     "POST /api/v1/failed-events/{id}/replay"

@@ -27,7 +27,8 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
-      "/contracts/rollback-sql-review-gate.sample.json"
+      "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/production-secret-source-contract.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": true
@@ -90,7 +91,8 @@
       "GET /contracts/deployment-rollback-evidence.sample.json",
       "GET /contracts/release-bundle-manifest.sample.json",
       "GET /contracts/rollback-approval-handoff.sample.json",
-      "GET /contracts/rollback-sql-review-gate.sample.json"
+      "GET /contracts/rollback-sql-review-gate.sample.json",
+      "GET /contracts/production-secret-source-contract.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -163,7 +165,8 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
-      "/contracts/rollback-sql-review-gate.sample.json"
+      "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/production-secret-source-contract.sample.json"
     ],
     "nodeMayExecuteBuild": false,
     "nodeMayTriggerWrites": false,
@@ -183,6 +186,7 @@
     "requiresOperatorConfirmation": [
       "artifact-version-target",
       "configuration-secret-source",
+      "production-secret-source-contract",
       "database-migration-direction",
       "rollback-approval-handoff",
       "rollback-sql-review-gate"
@@ -209,7 +213,8 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
-      "/contracts/rollback-sql-review-gate.sample.json"
+      "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/production-secret-source-contract.sample.json"
     ],
     "requiredEvidence": [
       "focused-maven-tests",
@@ -232,6 +237,7 @@
       "artifact-version-target",
       "runtime-config-profile",
       "configuration-secret-source",
+      "production-secret-source-contract",
       "database-migration-direction",
       "rollback-sql-review-gate",
       "release-bundle-manifest",
@@ -241,6 +247,7 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/production-secret-source-contract.sample.json",
       "/contracts/release-verification-manifest.sample.json"
     ],
     "nodeMayConsume": true,
@@ -274,6 +281,38 @@
     "requiresProductionDatabase": false,
     "changesOrderTransactionSemantics": false
   },
+  "productionSecretSourceContract": {
+    "contractVersion": "java-production-secret-source-contract.v1",
+    "contractEndpoint": "/contracts/production-secret-source-contract.sample.json",
+    "contractMode": "READ_ONLY_SECRET_SOURCE_CONTRACT",
+    "sourceTypes": [
+      "external-secret-manager",
+      "environment-injected-secret",
+      "platform-managed-secret"
+    ],
+    "selectedSourceType": "external-secret-manager",
+    "secretManagerOwner": "platform-security-owner",
+    "rotationOwner": "security-operations-owner",
+    "reviewCadence": "quarterly-or-before-production-cutover",
+    "requiredConfirmationFields": [
+      "secret-manager-or-source-type",
+      "secret-manager-owner",
+      "rotation-owner",
+      "review-cadence",
+      "secret-value-access-boundary"
+    ],
+    "secretValueBoundaries": [
+      "contract-records-source-metadata-only",
+      "secret-values-must-not-be-read",
+      "secret-values-must-not-be-embedded-in-static-contracts",
+      "node-may-render-checklist-only"
+    ],
+    "nodeMayConsume": true,
+    "nodeMayReadSecretValues": false,
+    "requiresProductionSecrets": false,
+    "requiresProductionDatabase": false,
+    "changesOrderTransactionSemantics": false
+  },
   "blockers": [
     "READ_ONLY_EVIDENCE_ENDPOINT",
     "REPLAY_APPROVAL_PENDING",
@@ -297,6 +336,7 @@
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-sql-review-gate.sample.json",
+    "/contracts/production-secret-source-contract.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/approval-status",
     "/api/v1/failed-events/{id}/replay-readiness",

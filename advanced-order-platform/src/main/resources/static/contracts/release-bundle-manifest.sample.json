@@ -17,6 +17,7 @@
     "deploymentRollbackEvidence": "/contracts/deployment-rollback-evidence.sample.json",
     "rollbackApprovalHandoff": "/contracts/rollback-approval-handoff.sample.json",
     "rollbackSqlReviewGate": "/contracts/rollback-sql-review-gate.sample.json",
+    "productionSecretSourceContract": "/contracts/production-secret-source-contract.sample.json",
     "opsEvidence": "/api/v1/ops/evidence",
     "runtimeArchiveRoot": "c/<version>"
   },
@@ -65,7 +66,8 @@
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/rollback-approval-handoff.sample.json",
-    "/contracts/rollback-sql-review-gate.sample.json"
+    "/contracts/rollback-sql-review-gate.sample.json",
+    "/contracts/production-secret-source-contract.sample.json"
   ],
   "nodeConsumption": {
     "nodeMayConsume": true,
@@ -77,6 +79,7 @@
   "boundaries": {
     "requiresProductionDatabase": false,
     "requiresProductionSecrets": false,
+    "nodeMayReadSecretValues": false,
     "changesOrderCreateSemantics": false,
     "changesPaymentOrInventoryTransaction": false,
     "changesOutboxOrReplayExecution": false,
@@ -88,6 +91,7 @@
     "Triggering Java rollback from Node",
     "Executing database rollback SQL",
     "Connecting production database",
+    "Reading production secret values",
     "POST /api/v1/orders",
     "POST /api/v1/failed-events/{id}/replay"
   ]

@@ -17,6 +17,7 @@ public record OpsEvidenceResponse(
         ReleaseBundle releaseBundle,
         RollbackApprovalHandoff rollbackApprovalHandoff,
         RollbackSqlReviewGate rollbackSqlReviewGate,
+        ProductionSecretSourceContract productionSecretSourceContract,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -163,6 +164,25 @@ public record OpsEvidenceResponse(
             boolean nodeMayConsume,
             boolean nodeMayTriggerRollback,
             boolean sqlExecutionAllowed,
+            boolean requiresProductionDatabase,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record ProductionSecretSourceContract(
+            String contractVersion,
+            String contractEndpoint,
+            String contractMode,
+            List<String> sourceTypes,
+            String selectedSourceType,
+            String secretManagerOwner,
+            String rotationOwner,
+            String reviewCadence,
+            List<String> requiredConfirmationFields,
+            List<String> secretValueBoundaries,
+            boolean nodeMayConsume,
+            boolean nodeMayReadSecretValues,
+            boolean requiresProductionSecrets,
             boolean requiresProductionDatabase,
             boolean changesOrderTransactionSemantics
     ) {

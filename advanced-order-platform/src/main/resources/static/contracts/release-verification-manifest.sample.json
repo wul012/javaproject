@@ -54,6 +54,7 @@
         "GET /contracts/release-bundle-manifest.sample.json returns release bundle boundaries",
         "GET /contracts/rollback-approval-handoff.sample.json returns approval handoff boundaries",
         "GET /contracts/rollback-sql-review-gate.sample.json returns SQL review gate boundaries",
+        "GET /contracts/production-secret-source-contract.sample.json returns secret source boundaries",
         "POST /api/v1/orders returns 201 for first request, 200 for same request replay, and 409 for same key with different request"
       ],
       "dockerRequired": false
@@ -121,6 +122,12 @@
       "source": "src/main/resources/static/contracts/rollback-sql-review-gate.sample.json",
       "versionField": "gateVersion",
       "expectedVersion": "java-rollback-sql-review-gate.v1"
+    },
+    {
+      "endpoint": "/contracts/production-secret-source-contract.sample.json",
+      "source": "src/main/resources/static/contracts/production-secret-source-contract.sample.json",
+      "versionField": "contractVersion",
+      "expectedVersion": "java-production-secret-source-contract.v1"
     }
   ],
   "releaseGate": {

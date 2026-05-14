@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T14:40:00Z",
+  "updatedAt": "2026-05-14T16:20:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -373,6 +373,42 @@
         {
           "path": "rollbackSqlReviewGate.sqlExecutionAllowed",
           "meaning": "Rollback SQL must not run from this review gate sample.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "productionSecretSourceContract",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "productionSecretSourceContract.contractVersion",
+          "meaning": "Version for the Java production secret source contract consumed by environment preflight checks.",
+          "expectedValue": "java-production-secret-source-contract.v1"
+        },
+        {
+          "path": "productionSecretSourceContract.contractEndpoint",
+          "meaning": "Static endpoint exposing secret source metadata and value-access boundaries.",
+          "expectedValue": "/contracts/production-secret-source-contract.sample.json"
+        },
+        {
+          "path": "productionSecretSourceContract.selectedSourceType",
+          "meaning": "Selected secret source type recorded as metadata only, without secret values.",
+          "expectedValue": "external-secret-manager"
+        },
+        {
+          "path": "productionSecretSourceContract.rotationOwner",
+          "meaning": "Team or role responsible for production secret rotation review.",
+          "expectedValue": "security-operations-owner"
+        },
+        {
+          "path": "productionSecretSourceContract.reviewCadence",
+          "meaning": "Review cadence expected before production cutover.",
+          "expectedValue": "quarterly-or-before-production-cutover"
+        },
+        {
+          "path": "productionSecretSourceContract.nodeMayReadSecretValues",
+          "meaning": "Node may consume the contract but must not read secret values.",
           "expectedValue": false
         }
       ]
