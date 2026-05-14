@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T14:10:00Z",
+  "updatedAt": "2026-05-14T14:40:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -337,6 +337,42 @@
         {
           "path": "rollbackApprovalHandoff.rollbackSqlExecutionAllowed",
           "meaning": "Rollback SQL must not run from the handoff sample.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "rollbackSqlReviewGate",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "rollbackSqlReviewGate.gateVersion",
+          "meaning": "Version for the Java rollback SQL review gate consumed by rollback execution preflight checks.",
+          "expectedValue": "java-rollback-sql-review-gate.v1"
+        },
+        {
+          "path": "rollbackSqlReviewGate.gateEndpoint",
+          "meaning": "Static endpoint exposing SQL review owner, migration direction, and operator approval placeholder fields.",
+          "expectedValue": "/contracts/rollback-sql-review-gate.sample.json"
+        },
+        {
+          "path": "rollbackSqlReviewGate.requiredReviewFields",
+          "meaning": "Fields that must be reviewed before any rollback SQL can be considered.",
+          "stability": "stable"
+        },
+        {
+          "path": "rollbackSqlReviewGate.migrationDirectionOptions",
+          "meaning": "Allowed review outcomes: forward-only, rollback-script-reviewed, or no-database-change.",
+          "stability": "stable"
+        },
+        {
+          "path": "rollbackSqlReviewGate.nodeMayTriggerRollback",
+          "meaning": "Node may consume the review gate but must not trigger Java rollback.",
+          "expectedValue": false
+        },
+        {
+          "path": "rollbackSqlReviewGate.sqlExecutionAllowed",
+          "meaning": "Rollback SQL must not run from this review gate sample.",
           "expectedValue": false
         }
       ]

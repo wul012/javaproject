@@ -153,9 +153,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 61-version-57-rollback-approval-handoff-sample.md
  -> 第五十七版 rollback approval handoff 样本，固化 Java 回退窗口前必须人工确认的包版本、运行配置、密钥来源和数据库迁移方向
+
+62-version-58-rollback-sql-review-gate-sample.md
+ -> 第五十八版 rollback SQL review gate 样本，固化 SQL review owner、迁移方向和 operator approval placeholder 的只读检查边界
 ```
 
-后续推进 v58 时，从 `62-version-58-主题.md` 继续追加。
+后续推进 v59 时，从 `63-version-59-主题.md` 继续追加。
 
 ## 一句话总览
 

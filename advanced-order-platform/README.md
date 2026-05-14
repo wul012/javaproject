@@ -1136,6 +1136,7 @@ bundleMode=READ_ONLY_RELEASE_BUNDLE
 releaseSubject.artifact=target/advanced-order-platform-0.1.0-SNAPSHOT.jar
 bundleInputs.releaseVerificationManifest=/contracts/release-verification-manifest.sample.json
 bundleInputs.deploymentRollbackEvidence=/contracts/deployment-rollback-evidence.sample.json
+bundleInputs.rollbackSqlReviewGate=/contracts/rollback-sql-review-gate.sample.json
 verificationEvidence 包含 focused-maven-tests、non-docker-regression-tests、maven-package、http-smoke、static-contract-json-validation
 nodeConsumption.nodeMayConsume=true
 nodeConsumption.nodeMayExecuteMaven=false
@@ -1174,6 +1175,36 @@ boundaries.requiresProductionSecrets=false
 ```
 
 它服务于后续 rollback window readiness checklist：Java 只提供人工审批交接字段和只读样本，不执行 rollback SQL，不读取生产密钥，不连接生产库，也不授权 Node 触发 Java 回退。
+
+v58 起，应用随包提供 rollback SQL review gate 样本：
+
+```text
+src/main/resources/static/contracts/rollback-sql-review-gate.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/rollback-sql-review-gate.sample.json
+```
+
+该样本固定表达：
+
+```text
+gateVersion=java-rollback-sql-review-gate.v1
+gateMode=READ_ONLY_SQL_REVIEW_GATE
+reviewOwner=database-release-owner
+requiredReviewFields 包含 rollback-sql-review-owner、migration-direction、operator-approval-placeholder、rollback-sql-artifact-reference、production-database-access-boundary
+migrationDirectionOptions 包含 forward-only、rollback-script-reviewed、no-database-change
+operatorApprovalPlaceholder=operator-approval-required-before-any-sql-execution
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayTriggerRollback=false
+nodeConsumption.nodeMayExecuteRollbackSql=false
+boundaries.sqlExecutionAllowed=false
+boundaries.requiresProductionDatabase=false
+```
+
+它服务于后续 rollback execution preflight contract：Java 只说明 SQL review owner、迁移方向和人工审批占位，不嵌入生产 SQL 明文，不执行 rollback SQL，不连接生产数据库，也不授权 Node 触发 Java 回退。
 
 查询失败事件治理摘要：
 
@@ -1747,6 +1778,7 @@ ops
   -> v55 增加 deployment rollback evidence，说明包、配置、数据库迁移和静态契约回退边界，Node 只读消费且不触发回退
   -> v56 增加 release bundle manifest，把 jar、contracts、发布验证和回退证据收成 Node 可消费但不可执行的只读 bundle
   -> v57 增加 rollback approval handoff，固化 artifact、runtime config、secret source 和 database migration direction 人工确认字段
+  -> v58 增加 rollback SQL review gate，固化 SQL review owner、migration direction 和 operator approval placeholder
 
 common
  -> 业务异常和统一错误响应

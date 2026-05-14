@@ -16,6 +16,7 @@ public record OpsEvidenceResponse(
         DeploymentRollback deploymentRollback,
         ReleaseBundle releaseBundle,
         RollbackApprovalHandoff rollbackApprovalHandoff,
+        RollbackSqlReviewGate rollbackSqlReviewGate,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -147,6 +148,22 @@ public record OpsEvidenceResponse(
             boolean rollbackSqlExecutionAllowed,
             boolean requiresProductionDatabase,
             boolean requiresProductionSecrets,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record RollbackSqlReviewGate(
+            String gateVersion,
+            String gateEndpoint,
+            String gateMode,
+            String reviewOwner,
+            List<String> requiredReviewFields,
+            List<String> migrationDirectionOptions,
+            String operatorApprovalPlaceholder,
+            boolean nodeMayConsume,
+            boolean nodeMayTriggerRollback,
+            boolean sqlExecutionAllowed,
+            boolean requiresProductionDatabase,
             boolean changesOrderTransactionSemantics
     ) {
     }

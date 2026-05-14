@@ -26,7 +26,8 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
-      "/contracts/rollback-approval-handoff.sample.json"
+      "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-sql-review-gate.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": true
@@ -88,7 +89,8 @@
       "GET /contracts/release-verification-manifest.sample.json",
       "GET /contracts/deployment-rollback-evidence.sample.json",
       "GET /contracts/release-bundle-manifest.sample.json",
-      "GET /contracts/rollback-approval-handoff.sample.json"
+      "GET /contracts/rollback-approval-handoff.sample.json",
+      "GET /contracts/rollback-sql-review-gate.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -160,7 +162,8 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
-      "/contracts/rollback-approval-handoff.sample.json"
+      "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-sql-review-gate.sample.json"
     ],
     "nodeMayExecuteBuild": false,
     "nodeMayTriggerWrites": false,
@@ -181,7 +184,8 @@
       "artifact-version-target",
       "configuration-secret-source",
       "database-migration-direction",
-      "rollback-approval-handoff"
+      "rollback-approval-handoff",
+      "rollback-sql-review-gate"
     ],
     "packageRollbackSupported": true,
     "configRollbackSupported": true,
@@ -204,7 +208,8 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
-      "/contracts/rollback-approval-handoff.sample.json"
+      "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-sql-review-gate.sample.json"
     ],
     "requiredEvidence": [
       "focused-maven-tests",
@@ -228,12 +233,14 @@
       "runtime-config-profile",
       "configuration-secret-source",
       "database-migration-direction",
+      "rollback-sql-review-gate",
       "release-bundle-manifest",
       "deployment-rollback-evidence"
     ],
     "handoffArtifacts": [
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
+      "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/release-verification-manifest.sample.json"
     ],
     "nodeMayConsume": true,
@@ -241,6 +248,30 @@
     "rollbackSqlExecutionAllowed": false,
     "requiresProductionDatabase": false,
     "requiresProductionSecrets": false,
+    "changesOrderTransactionSemantics": false
+  },
+  "rollbackSqlReviewGate": {
+    "gateVersion": "java-rollback-sql-review-gate.v1",
+    "gateEndpoint": "/contracts/rollback-sql-review-gate.sample.json",
+    "gateMode": "READ_ONLY_SQL_REVIEW_GATE",
+    "reviewOwner": "database-release-owner",
+    "requiredReviewFields": [
+      "rollback-sql-review-owner",
+      "migration-direction",
+      "operator-approval-placeholder",
+      "rollback-sql-artifact-reference",
+      "production-database-access-boundary"
+    ],
+    "migrationDirectionOptions": [
+      "forward-only",
+      "rollback-script-reviewed",
+      "no-database-change"
+    ],
+    "operatorApprovalPlaceholder": "operator-approval-required-before-any-sql-execution",
+    "nodeMayConsume": true,
+    "nodeMayTriggerRollback": false,
+    "sqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
     "changesOrderTransactionSemantics": false
   },
   "blockers": [
@@ -265,6 +296,7 @@
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/rollback-approval-handoff.sample.json",
+    "/contracts/rollback-sql-review-gate.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/approval-status",
     "/api/v1/failed-events/{id}/replay-readiness",

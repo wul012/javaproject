@@ -98,7 +98,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
-                        "/contracts/rollback-approval-handoff.sample.json"
+                        "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-sql-review-gate.sample.json"
                 );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
@@ -120,7 +121,8 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/release-verification-manifest.sample.json",
                         "GET /contracts/deployment-rollback-evidence.sample.json",
                         "GET /contracts/release-bundle-manifest.sample.json",
-                        "GET /contracts/rollback-approval-handoff.sample.json"
+                        "GET /contracts/rollback-approval-handoff.sample.json",
+                        "GET /contracts/rollback-sql-review-gate.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -196,7 +198,8 @@ class OpsEvidenceServiceTests {
                         "artifact-version-target",
                         "configuration-secret-source",
                         "database-migration-direction",
-                        "rollback-approval-handoff"
+                        "rollback-approval-handoff",
+                        "rollback-sql-review-gate"
                 );
         assertThat(evidence.deploymentRollback().packageRollbackSupported()).isTrue();
         assertThat(evidence.deploymentRollback().configRollbackSupported()).isTrue();
@@ -221,7 +224,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
-                        "/contracts/rollback-approval-handoff.sample.json"
+                        "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-sql-review-gate.sample.json"
                 );
         assertThat(evidence.releaseBundle().requiredEvidence())
                 .containsExactly(
@@ -248,6 +252,7 @@ class OpsEvidenceServiceTests {
                         "runtime-config-profile",
                         "configuration-secret-source",
                         "database-migration-direction",
+                        "rollback-sql-review-gate",
                         "release-bundle-manifest",
                         "deployment-rollback-evidence"
                 );
@@ -255,6 +260,7 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/rollback-sql-review-gate.sample.json",
                         "/contracts/release-verification-manifest.sample.json"
                 );
         assertThat(evidence.rollbackApprovalHandoff().nodeMayConsume()).isTrue();
@@ -263,6 +269,34 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.rollbackApprovalHandoff().requiresProductionDatabase()).isFalse();
         assertThat(evidence.rollbackApprovalHandoff().requiresProductionSecrets()).isFalse();
         assertThat(evidence.rollbackApprovalHandoff().changesOrderTransactionSemantics()).isFalse();
+        assertThat(evidence.rollbackSqlReviewGate().gateVersion())
+                .isEqualTo("java-rollback-sql-review-gate.v1");
+        assertThat(evidence.rollbackSqlReviewGate().gateEndpoint())
+                .isEqualTo("/contracts/rollback-sql-review-gate.sample.json");
+        assertThat(evidence.rollbackSqlReviewGate().gateMode())
+                .isEqualTo("READ_ONLY_SQL_REVIEW_GATE");
+        assertThat(evidence.rollbackSqlReviewGate().reviewOwner()).isEqualTo("database-release-owner");
+        assertThat(evidence.rollbackSqlReviewGate().requiredReviewFields())
+                .containsExactly(
+                        "rollback-sql-review-owner",
+                        "migration-direction",
+                        "operator-approval-placeholder",
+                        "rollback-sql-artifact-reference",
+                        "production-database-access-boundary"
+                );
+        assertThat(evidence.rollbackSqlReviewGate().migrationDirectionOptions())
+                .containsExactly(
+                        "forward-only",
+                        "rollback-script-reviewed",
+                        "no-database-change"
+                );
+        assertThat(evidence.rollbackSqlReviewGate().operatorApprovalPlaceholder())
+                .isEqualTo("operator-approval-required-before-any-sql-execution");
+        assertThat(evidence.rollbackSqlReviewGate().nodeMayConsume()).isTrue();
+        assertThat(evidence.rollbackSqlReviewGate().nodeMayTriggerRollback()).isFalse();
+        assertThat(evidence.rollbackSqlReviewGate().sqlExecutionAllowed()).isFalse();
+        assertThat(evidence.rollbackSqlReviewGate().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.rollbackSqlReviewGate().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
@@ -305,6 +339,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-sql-review-gate.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

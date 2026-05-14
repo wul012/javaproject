@@ -1,0 +1,84 @@
+{
+  "gateVersion": "java-rollback-sql-review-gate.v1",
+  "scenario": "ROLLBACK_SQL_REVIEW_GATE_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "sampledAt": "2026-05-14T14:40:00Z",
+  "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
+  "gateEndpoint": "/contracts/rollback-sql-review-gate.sample.json",
+  "gateMode": "READ_ONLY_SQL_REVIEW_GATE",
+  "reviewOwner": "database-release-owner",
+  "reviewGoal": "Capture SQL review, migration direction, and operator approval fields before any Java rollback SQL can be considered.",
+  "requiredReviewFields": [
+    {
+      "name": "rollback-sql-review-owner",
+      "description": "Human owner responsible for reviewing rollback SQL artifacts.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
+      "name": "migration-direction",
+      "description": "Operator-selected migration direction for the rollback window.",
+      "required": true,
+      "allowedValues": [
+        "forward-only",
+        "rollback-script-reviewed",
+        "no-database-change"
+      ]
+    },
+    {
+      "name": "operator-approval-placeholder",
+      "description": "Placeholder that must be replaced by a real operator approval record outside this sample.",
+      "required": true,
+      "placeholderOnly": true
+    },
+    {
+      "name": "rollback-sql-artifact-reference",
+      "description": "Reference to the reviewed SQL artifact or explicit no-op statement.",
+      "required": true,
+      "sqlTextEmbedded": false
+    },
+    {
+      "name": "production-database-access-boundary",
+      "description": "Confirms this sample does not connect to the production database.",
+      "required": true,
+      "requiresProductionDatabase": false
+    }
+  ],
+  "migrationDirectionOptions": [
+    "forward-only",
+    "rollback-script-reviewed",
+    "no-database-change"
+  ],
+  "operatorApprovalPlaceholder": "operator-approval-required-before-any-sql-execution",
+  "handoffArtifacts": [
+    "/contracts/rollback-approval-handoff.sample.json",
+    "/contracts/deployment-rollback-evidence.sample.json",
+    "/contracts/release-bundle-manifest.sample.json"
+  ],
+  "nodeConsumption": {
+    "nodeMayConsume": true,
+    "nodeMayRenderPreflight": true,
+    "nodeMayTriggerRollback": false,
+    "nodeMayExecuteRollbackSql": false,
+    "requiresUpstreamActionsEnabled": false
+  },
+  "boundaries": {
+    "sqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderCreateSemantics": false,
+    "changesPaymentOrInventoryTransaction": false,
+    "changesOutboxOrReplayExecution": false,
+    "changesOrderTransactionSemantics": false,
+    "connectsMiniKv": false
+  },
+  "forbiddenOperations": [
+    "Executing rollback SQL from this sample",
+    "Connecting to a production database from this sample",
+    "Embedding production SQL text with secret values",
+    "Triggering Java rollback from Node",
+    "POST /api/v1/orders",
+    "POST /api/v1/failed-events/{id}/replay"
+  ]
+}

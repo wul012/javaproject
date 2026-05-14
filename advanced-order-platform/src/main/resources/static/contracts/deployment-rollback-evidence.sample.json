@@ -53,14 +53,16 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
-      "/contracts/rollback-approval-handoff.sample.json"
+      "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-sql-review-gate.sample.json"
     ]
   },
   "requiresOperatorConfirmation": [
     "artifact-version-target",
     "configuration-secret-source",
     "database-migration-direction",
-    "rollback-approval-handoff"
+    "rollback-approval-handoff",
+    "rollback-sql-review-gate"
   ],
   "boundaries": {
     "nodeMayTriggerRollback": false,

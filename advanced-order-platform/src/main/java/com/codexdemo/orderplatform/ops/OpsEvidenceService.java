@@ -42,6 +42,11 @@ public class OpsEvidenceService {
     static final String ROLLBACK_APPROVAL_HANDOFF_ENDPOINT =
             "/contracts/rollback-approval-handoff.sample.json";
 
+    static final String ROLLBACK_SQL_REVIEW_GATE_VERSION = "java-rollback-sql-review-gate.v1";
+
+    static final String ROLLBACK_SQL_REVIEW_GATE_ENDPOINT =
+            "/contracts/rollback-sql-review-gate.sample.json";
+
     private static final String REAL_REPLAY_ENDPOINT = "/api/v1/failed-events/{id}/replay";
 
     private final Instant startedAt = Instant.now();
@@ -96,6 +101,7 @@ public class OpsEvidenceService {
                 deploymentRollback(),
                 releaseBundle(),
                 rollbackApprovalHandoff(),
+                rollbackSqlReviewGate(),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -129,7 +135,8 @@ public class OpsEvidenceService {
                         RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                        ROLLBACK_APPROVAL_HANDOFF_ENDPOINT
+                        ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
                 ),
                 true,
                 staticSampleOnly
@@ -155,7 +162,8 @@ public class OpsEvidenceService {
                         "GET " + RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                         "GET " + DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         "GET " + RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                        "GET " + ROLLBACK_APPROVAL_HANDOFF_ENDPOINT
+                        "GET " + ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                        "GET " + ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -235,7 +243,8 @@ public class OpsEvidenceService {
                         RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                        ROLLBACK_APPROVAL_HANDOFF_ENDPOINT
+                        ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
                 ),
                 false,
                 false,
@@ -259,7 +268,8 @@ public class OpsEvidenceService {
                         "artifact-version-target",
                         "configuration-secret-source",
                         "database-migration-direction",
-                        "rollback-approval-handoff"
+                        "rollback-approval-handoff",
+                        "rollback-sql-review-gate"
                 ),
                 true,
                 true,
@@ -303,16 +313,45 @@ public class OpsEvidenceService {
                         "runtime-config-profile",
                         "configuration-secret-source",
                         "database-migration-direction",
+                        "rollback-sql-review-gate",
                         "release-bundle-manifest",
                         "deployment-rollback-evidence"
                 ),
                 List.of(
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                        ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
                         RELEASE_VERIFICATION_MANIFEST_ENDPOINT
                 ),
                 true,
                 false,
+                false,
+                false,
+                false,
+                false
+        );
+    }
+
+    private OpsEvidenceResponse.RollbackSqlReviewGate rollbackSqlReviewGate() {
+        return new OpsEvidenceResponse.RollbackSqlReviewGate(
+                ROLLBACK_SQL_REVIEW_GATE_VERSION,
+                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                "READ_ONLY_SQL_REVIEW_GATE",
+                "database-release-owner",
+                List.of(
+                        "rollback-sql-review-owner",
+                        "migration-direction",
+                        "operator-approval-placeholder",
+                        "rollback-sql-artifact-reference",
+                        "production-database-access-boundary"
+                ),
+                List.of(
+                        "forward-only",
+                        "rollback-script-reviewed",
+                        "no-database-change"
+                ),
+                "operator-approval-required-before-any-sql-execution",
+                true,
                 false,
                 false,
                 false,
@@ -329,7 +368,8 @@ public class OpsEvidenceService {
                 RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                 DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
-                ROLLBACK_APPROVAL_HANDOFF_ENDPOINT
+                ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT
         );
     }
 
@@ -438,6 +478,7 @@ public class OpsEvidenceService {
                 DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

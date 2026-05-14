@@ -16,6 +16,7 @@
     "releaseVerificationManifest": "/contracts/release-verification-manifest.sample.json",
     "deploymentRollbackEvidence": "/contracts/deployment-rollback-evidence.sample.json",
     "rollbackApprovalHandoff": "/contracts/rollback-approval-handoff.sample.json",
+    "rollbackSqlReviewGate": "/contracts/rollback-sql-review-gate.sample.json",
     "opsEvidence": "/api/v1/ops/evidence",
     "runtimeArchiveRoot": "c/<version>"
   },
@@ -63,7 +64,8 @@
     "/contracts/release-verification-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/release-bundle-manifest.sample.json",
-    "/contracts/rollback-approval-handoff.sample.json"
+    "/contracts/rollback-approval-handoff.sample.json",
+    "/contracts/rollback-sql-review-gate.sample.json"
   ],
   "nodeConsumption": {
     "nodeMayConsume": true,

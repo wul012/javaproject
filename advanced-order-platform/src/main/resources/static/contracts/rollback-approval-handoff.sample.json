@@ -34,6 +34,12 @@
       "rollbackSqlExecutionAllowed": false
     },
     {
+      "name": "rollback-sql-review-gate",
+      "description": "Operator confirms the SQL review gate used before any rollback SQL can be considered.",
+      "required": true,
+      "expectedEndpoint": "/contracts/rollback-sql-review-gate.sample.json"
+    },
+    {
       "name": "release-bundle-manifest",
       "description": "Operator confirms the release bundle manifest used for the rollback window review.",
       "required": true,
@@ -49,6 +55,7 @@
   "handoffArtifacts": [
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
+    "/contracts/rollback-sql-review-gate.sample.json",
     "/contracts/release-verification-manifest.sample.json"
   ],
   "nodeConsumption": {
