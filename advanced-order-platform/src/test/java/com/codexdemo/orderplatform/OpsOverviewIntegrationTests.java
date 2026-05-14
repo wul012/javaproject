@@ -156,6 +156,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
+                .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/rollback-approval-record.fixture.json")))
@@ -211,6 +213,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("GET /contracts/release-bundle-manifest.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
@@ -268,6 +272,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.releaseVerification.staticContractEndpoints",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
                 .andExpect(jsonPath("$.releaseVerification.staticContractEndpoints",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
+                .andExpect(jsonPath("$.releaseVerification.staticContractEndpoints",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.releaseVerification.staticContractEndpoints",
                         hasItem("/contracts/rollback-approval-record.fixture.json")))
@@ -288,6 +294,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("database-migrations")))
                 .andExpect(jsonPath("$.deploymentRollback.requiresOperatorConfirmation",
                         hasItem("database-migration-direction")))
+                .andExpect(jsonPath("$.deploymentRollback.requiresOperatorConfirmation",
+                        hasItem("release-audit-retention-fixture")))
                 .andExpect(jsonPath("$.deploymentRollback.packageRollbackSupported").value(true))
                 .andExpect(jsonPath("$.deploymentRollback.configRollbackSupported").value(true))
                 .andExpect(jsonPath("$.deploymentRollback.databaseMigrationRollbackAutomatic").value(false))
@@ -308,6 +316,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
                 .andExpect(jsonPath("$.releaseBundle.contractEndpoints",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.releaseBundle.contractEndpoints",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.releaseBundle.requiredEvidence",
                         hasItem("http-smoke")))
                 .andExpect(jsonPath("$.releaseBundle.nodeMayConsume").value(true))
@@ -339,6 +349,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("secret-source-confirmation")))
                 .andExpect(jsonPath("$.releaseHandoffChecklistFixture.checklistArtifacts",
                         hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
+                .andExpect(jsonPath("$.releaseHandoffChecklistFixture.checklistArtifacts",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.releaseHandoffChecklistFixture.noSecretValueBoundaries",
                         hasItem("secret-values-must-not-be-read")))
                 .andExpect(jsonPath("$.releaseHandoffChecklistFixture.nodeMayConsume").value(true))
@@ -349,6 +361,36 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.releaseHandoffChecklistFixture.requiresProductionDatabase").value(false))
                 .andExpect(jsonPath("$.releaseHandoffChecklistFixture.requiresProductionSecrets").value(false))
                 .andExpect(jsonPath("$.releaseHandoffChecklistFixture.changesOrderTransactionSemantics").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.fixtureVersion")
+                        .value("java-release-audit-retention-fixture.v1"))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.fixtureEndpoint")
+                        .value("/contracts/release-audit-retention.fixture.json"))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.fixtureMode")
+                        .value("READ_ONLY_RELEASE_AUDIT_RETENTION_FIXTURE"))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.retentionId")
+                        .value("release-retention-record-placeholder"))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.releaseOperator")
+                        .value("release-operator-placeholder"))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.artifactTarget")
+                        .value("release-tag-or-artifact-version-placeholder"))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.retentionDays").value(180))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.evidenceEndpoints",
+                        hasItem("/api/v1/failed-events/replay-evidence-index")))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.auditExportFields",
+                        hasItem("audit-export-location-placeholder")))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.retainedArtifacts",
+                        hasItem("/contracts/release-bundle-manifest.sample.json")))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.noSecretValueBoundaries",
+                        hasItem("secret-values-must-not-be-read")))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.nodeMayConsume").value(true))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.nodeMayTriggerDeployment").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.nodeMayTriggerRollback").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.auditExportReadOnly").value(true))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.deploymentExecutionAllowed").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.rollbackSqlExecutionAllowed").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.requiresProductionDatabase").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.requiresProductionSecrets").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.changesOrderTransactionSemantics").value(false))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.handoffVersion")
                         .value("java-rollback-approval-handoff.v1"))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.handoffEndpoint")
@@ -360,11 +402,15 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.requiredConfirmationFields",
                         hasItem("release-handoff-checklist-fixture")))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.requiredConfirmationFields",
+                        hasItem("release-audit-retention-fixture")))
+                .andExpect(jsonPath("$.rollbackApprovalHandoff.requiredConfirmationFields",
                         hasItem("rollback-approval-record-fixture")))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.requiredConfirmationFields",
                         hasItem("release-bundle-manifest")))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.handoffArtifacts",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.rollbackApprovalHandoff.handoffArtifacts",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.handoffArtifacts",
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.handoffArtifacts",
@@ -468,8 +514,12 @@ class OpsOverviewIntegrationTests {
                         .value("/contracts/production-secret-source-contract.sample.json"))
                 .andExpect(jsonPath("$.productionDeploymentRunbookContract.requiredConfirmationFields",
                         hasItem("deployment-window-owner")))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.requiredConfirmationFields",
+                        hasItem("release-audit-retention-fixture")))
                 .andExpect(jsonPath("$.productionDeploymentRunbookContract.runbookArtifacts",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.productionDeploymentRunbookContract.runbookArtifacts",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.productionDeploymentRunbookContract.runbookArtifacts",
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.productionDeploymentRunbookContract.nodeMayConsume").value(true))
@@ -500,6 +550,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
@@ -590,6 +642,10 @@ class OpsOverviewIntegrationTests {
                         .value("java-release-bundle-manifest.v1"))
                 .andExpect(jsonPath("$.releaseBundle.nodeMayExecuteBuild").value(false))
                 .andExpect(jsonPath("$.releaseBundle.nodeMayTriggerRollback").value(false))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.fixtureVersion")
+                        .value("java-release-audit-retention-fixture.v1"))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.auditExportReadOnly").value(true))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.nodeMayTriggerDeployment").value(false))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.handoffVersion")
                         .value("java-rollback-approval-handoff.v1"))
                 .andExpect(jsonPath("$.rollbackApprovalHandoff.nodeMayTriggerRollback").value(false))
@@ -619,6 +675,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/deployment-rollback-evidence.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
@@ -662,6 +720,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("deploymentRollback")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("releaseBundle")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("releaseHandoffChecklistFixture")))
+                .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("releaseAuditRetentionFixture")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("rollbackApprovalHandoff")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("rollbackApprovalRecordFixture")))
                 .andExpect(jsonPath("$.fieldGroups[*].name", hasItem("rollbackSqlReviewGate")))
@@ -694,24 +753,28 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.fieldGroups[8].fields[*].path",
                         hasItem("releaseHandoffChecklistFixture.deploymentExecutionAllowed")))
                 .andExpect(jsonPath("$.fieldGroups[9].fields[*].path",
-                        hasItem("rollbackApprovalHandoff.handoffVersion")))
+                        hasItem("releaseAuditRetentionFixture.fixtureVersion")))
                 .andExpect(jsonPath("$.fieldGroups[9].fields[*].path",
+                        hasItem("releaseAuditRetentionFixture.auditExportReadOnly")))
+                .andExpect(jsonPath("$.fieldGroups[10].fields[*].path",
+                        hasItem("rollbackApprovalHandoff.handoffVersion")))
+                .andExpect(jsonPath("$.fieldGroups[10].fields[*].path",
                         hasItem("rollbackApprovalHandoff.rollbackSqlExecutionAllowed")))
-                .andExpect(jsonPath("$.fieldGroups[10].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[11].fields[*].path",
                         hasItem("rollbackApprovalRecordFixture.fixtureVersion")))
-                .andExpect(jsonPath("$.fieldGroups[10].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[11].fields[*].path",
                         hasItem("rollbackApprovalRecordFixture.rollbackExecutionAllowed")))
-                .andExpect(jsonPath("$.fieldGroups[11].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[12].fields[*].path",
                         hasItem("rollbackSqlReviewGate.gateVersion")))
-                .andExpect(jsonPath("$.fieldGroups[11].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[12].fields[*].path",
                         hasItem("rollbackSqlReviewGate.sqlExecutionAllowed")))
-                .andExpect(jsonPath("$.fieldGroups[12].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[13].fields[*].path",
                         hasItem("productionSecretSourceContract.contractVersion")))
-                .andExpect(jsonPath("$.fieldGroups[12].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[13].fields[*].path",
                         hasItem("productionSecretSourceContract.nodeMayReadSecretValues")))
-                .andExpect(jsonPath("$.fieldGroups[13].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[14].fields[*].path",
                         hasItem("productionDeploymentRunbookContract.contractVersion")))
-                .andExpect(jsonPath("$.fieldGroups[13].fields[*].path",
+                .andExpect(jsonPath("$.fieldGroups[14].fields[*].path",
                         hasItem("productionDeploymentRunbookContract.nodeMayTriggerDeployment")))
                 .andExpect(jsonPath("$.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")))
@@ -801,6 +864,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.staticContracts[*].endpoint",
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
                 .andExpect(jsonPath("$.staticContracts[*].endpoint",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
+                .andExpect(jsonPath("$.staticContracts[*].endpoint",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.staticContracts[*].endpoint",
                         hasItem("/contracts/rollback-approval-record.fixture.json")))
@@ -850,6 +915,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.staticContractRollback.contractEndpoints",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
                 .andExpect(jsonPath("$.staticContractRollback.contractEndpoints",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
+                .andExpect(jsonPath("$.staticContractRollback.contractEndpoints",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.staticContractRollback.contractEndpoints",
                         hasItem("/contracts/rollback-approval-record.fixture.json")))
@@ -863,6 +930,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("database-migration-direction")))
                 .andExpect(jsonPath("$.requiresOperatorConfirmation",
                         hasItem("release-handoff-checklist-fixture")))
+                .andExpect(jsonPath("$.requiresOperatorConfirmation",
+                        hasItem("release-audit-retention-fixture")))
                 .andExpect(jsonPath("$.requiresOperatorConfirmation",
                         hasItem("rollback-approval-handoff")))
                 .andExpect(jsonPath("$.requiresOperatorConfirmation",
@@ -903,6 +972,8 @@ class OpsOverviewIntegrationTests {
                         .value("/contracts/deployment-rollback-evidence.sample.json"))
                 .andExpect(jsonPath("$.bundleInputs.releaseHandoffChecklistFixture")
                         .value("/contracts/release-handoff-checklist.fixture.json"))
+                .andExpect(jsonPath("$.bundleInputs.releaseAuditRetentionFixture")
+                        .value("/contracts/release-audit-retention.fixture.json"))
                 .andExpect(jsonPath("$.bundleInputs.rollbackApprovalHandoff")
                         .value("/contracts/rollback-approval-handoff.sample.json"))
                 .andExpect(jsonPath("$.bundleInputs.rollbackApprovalRecordFixture")
@@ -925,6 +996,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
                 .andExpect(jsonPath("$.contractEndpoints",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.contractEndpoints",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.contractEndpoints",
                         hasItem("/contracts/rollback-approval-handoff.sample.json")))
                 .andExpect(jsonPath("$.contractEndpoints",
@@ -987,8 +1060,12 @@ class OpsOverviewIntegrationTests {
                         hasItem("deployment-runbook-contract")))
                 .andExpect(jsonPath("$.requiredChecklistFields[*].name",
                         hasItem("rollback-approval-record-fixture")))
+                .andExpect(jsonPath("$.requiredChecklistFields[*].name",
+                        hasItem("release-audit-retention-fixture")))
                 .andExpect(jsonPath("$.checklistArtifacts",
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
+                .andExpect(jsonPath("$.checklistArtifacts",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.checklistArtifacts",
                         hasItem("/contracts/production-deployment-runbook-contract.sample.json")))
                 .andExpect(jsonPath("$.checklistArtifacts",
@@ -1013,6 +1090,64 @@ class OpsOverviewIntegrationTests {
                         hasItem("Reading production secret values from this fixture")))
                 .andExpect(jsonPath("$.forbiddenOperations",
                         hasItem("Triggering Java deployment from Node")));
+    }
+
+    @Test
+    void staticReleaseAuditRetentionFixtureExplainsReadOnlyRetentionBoundary() throws Exception {
+        mockMvc.perform(get("/contracts/release-audit-retention.fixture.json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fixtureVersion")
+                        .value("java-release-audit-retention-fixture.v1"))
+                .andExpect(jsonPath("$.scenario").value("RELEASE_AUDIT_RETENTION_FIXTURE_SAMPLE"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.sourceEvidenceEndpoint").value("/api/v1/ops/evidence"))
+                .andExpect(jsonPath("$.fixtureEndpoint")
+                        .value("/contracts/release-audit-retention.fixture.json"))
+                .andExpect(jsonPath("$.fixtureMode")
+                        .value("READ_ONLY_RELEASE_AUDIT_RETENTION_FIXTURE"))
+                .andExpect(jsonPath("$.retentionRecord.retentionId")
+                        .value("release-retention-record-placeholder"))
+                .andExpect(jsonPath("$.retentionRecord.releaseOperator")
+                        .value("release-operator-placeholder"))
+                .andExpect(jsonPath("$.retentionRecord.artifactTarget")
+                        .value("release-tag-or-artifact-version-placeholder"))
+                .andExpect(jsonPath("$.retentionRecord.retentionDays").value(180))
+                .andExpect(jsonPath("$.retentionRecord.operatorMustReplacePlaceholders").value(true))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/api/v1/failed-events/replay-evidence-index")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.auditExportFields[*].name", hasItem("retention-id")))
+                .andExpect(jsonPath("$.auditExportFields[*].name",
+                        hasItem("audit-export-location-placeholder")))
+                .andExpect(jsonPath("$.auditExportFields[*].name",
+                        hasItem("no-secret-value-boundary")))
+                .andExpect(jsonPath("$.retainedArtifacts",
+                        hasItem("/contracts/release-bundle-manifest.sample.json")))
+                .andExpect(jsonPath("$.retainedArtifacts",
+                        hasItem("/contracts/production-secret-source-contract.sample.json")))
+                .andExpect(jsonPath("$.noSecretValueBoundaries",
+                        hasItem("Secret values must not be read by Java or Node when rendering this retention record")))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayConsume").value(true))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayRenderRetentionGate").value(true))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayTriggerDeployment").value(false))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayTriggerRollback").value(false))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayWriteAuditExport").value(false))
+                .andExpect(jsonPath("$.nodeConsumption.nodeMayReadSecretValues").value(false))
+                .andExpect(jsonPath("$.boundaries.auditExportReadOnly").value(true))
+                .andExpect(jsonPath("$.boundaries.deploymentExecutionAllowed").value(false))
+                .andExpect(jsonPath("$.boundaries.rollbackSqlExecutionAllowed").value(false))
+                .andExpect(jsonPath("$.boundaries.requiresProductionDatabase").value(false))
+                .andExpect(jsonPath("$.boundaries.requiresProductionSecrets").value(false))
+                .andExpect(jsonPath("$.boundaries.changesOrderTransactionSemantics").value(false))
+                .andExpect(jsonPath("$.boundaries.connectsMiniKv").value(false))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("Executing Java deployment from this fixture")))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("Writing audit export files from Node through this fixture")))
+                .andExpect(jsonPath("$.forbiddenOperations",
+                        hasItem("Reading production secret values from this fixture")));
     }
 
     @Test
@@ -1042,6 +1177,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
                         hasItem("release-handoff-checklist-fixture")))
                 .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
+                        hasItem("release-audit-retention-fixture")))
+                .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
                         hasItem("rollback-approval-record-fixture")))
                 .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
                         hasItem("rollback-sql-review-gate")))
@@ -1051,6 +1188,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("deployment-rollback-evidence")))
                 .andExpect(jsonPath("$.handoffArtifacts",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.handoffArtifacts",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.handoffArtifacts",
                         hasItem("/contracts/release-bundle-manifest.sample.json")))
                 .andExpect(jsonPath("$.handoffArtifacts",
@@ -1198,8 +1337,12 @@ class OpsOverviewIntegrationTests {
                         hasItem("deployment-window-owner")))
                 .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
                         hasItem("rollback-approver")))
+                .andExpect(jsonPath("$.requiredConfirmationFields[*].name",
+                        hasItem("release-audit-retention-fixture")))
                 .andExpect(jsonPath("$.runbookArtifacts",
                         hasItem("/contracts/release-handoff-checklist.fixture.json")))
+                .andExpect(jsonPath("$.runbookArtifacts",
+                        hasItem("/contracts/release-audit-retention.fixture.json")))
                 .andExpect(jsonPath("$.runbookArtifacts",
                         hasItem("/contracts/rollback-sql-review-gate.sample.json")))
                 .andExpect(jsonPath("$.nodeConsumption.nodeMayConsume").value(true))

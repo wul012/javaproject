@@ -168,9 +168,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 66-version-62-release-handoff-checklist-fixture.md
  -> 第六十二版 release handoff checklist fixture，固化 release operator、rollback approver、artifact target、migration direction 和 secret source confirmation，并收口静态 contract endpoint helper
+
+67-version-63-release-audit-retention-fixture.md
+ -> 第六十三版 release audit retention fixture，固化 release evidence retention id、operator placeholder、artifact target、retention days、audit export 字段和 no-secret-value 边界
 ```
 
-后续推进 v63 时，从 `67-version-63-主题.md` 继续追加。
+后续推进 v64 时，从 `68-version-64-主题.md` 继续追加。
 
 ## 一句话总览
 

@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T21:35:00Z",
+  "updatedAt": "2026-05-15T06:55:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -347,6 +347,52 @@
         {
           "path": "releaseHandoffChecklistFixture.deploymentExecutionAllowed",
           "meaning": "Deployment execution must not run from this checklist fixture.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "releaseAuditRetentionFixture",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "releaseAuditRetentionFixture.fixtureVersion",
+          "meaning": "Version for the Java release audit retention fixture consumed by the cross-project evidence retention gate.",
+          "expectedValue": "java-release-audit-retention-fixture.v1"
+        },
+        {
+          "path": "releaseAuditRetentionFixture.fixtureEndpoint",
+          "meaning": "Static endpoint exposing retention id, release operator, artifact target, retention days, and read-only evidence endpoints.",
+          "expectedValue": "/contracts/release-audit-retention.fixture.json"
+        },
+        {
+          "path": "releaseAuditRetentionFixture.retentionId",
+          "meaning": "Manual placeholder for the retained release evidence record id.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "releaseAuditRetentionFixture.retentionDays",
+          "meaning": "Number of days the release evidence should remain available for audit review.",
+          "expectedValue": 180
+        },
+        {
+          "path": "releaseAuditRetentionFixture.evidenceEndpoints",
+          "meaning": "Read-only Java endpoints whose evidence should be retained by the operator.",
+          "stability": "stable"
+        },
+        {
+          "path": "releaseAuditRetentionFixture.auditExportReadOnly",
+          "meaning": "Audit export is documented as a retained evidence location only; this fixture does not write exports.",
+          "expectedValue": true
+        },
+        {
+          "path": "releaseAuditRetentionFixture.nodeMayTriggerDeployment",
+          "meaning": "Node may consume the retention fixture but must not trigger Java deployment.",
+          "expectedValue": false
+        },
+        {
+          "path": "releaseAuditRetentionFixture.deploymentExecutionAllowed",
+          "meaning": "Deployment execution must not run from this retention fixture.",
           "expectedValue": false
         }
       ]

@@ -78,6 +78,14 @@
       "nodeMayTriggerRollback": false
     },
     {
+      "name": "release-audit-retention-fixture",
+      "description": "Operator confirms the release audit retention fixture used by the later retention gate.",
+      "required": true,
+      "expectedEndpoint": "/contracts/release-audit-retention.fixture.json",
+      "nodeMayTriggerDeployment": false,
+      "nodeMayTriggerRollback": false
+    },
+    {
       "name": "no-secret-value-boundary",
       "description": "Operator confirms this checklist stores metadata only and never embeds secret values.",
       "required": true,
@@ -87,6 +95,7 @@
   "checklistArtifacts": [
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/release-verification-manifest.sample.json",
+    "/contracts/release-audit-retention.fixture.json",
     "/contracts/production-deployment-runbook-contract.sample.json",
     "/contracts/production-secret-source-contract.sample.json",
     "/contracts/rollback-approval-record.fixture.json",

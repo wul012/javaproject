@@ -1912,6 +1912,7 @@ ops
   -> v60 增加 production deployment runbook contract，固化 deployment window owner、rollback approver、migration direction 和 no-execution 边界
   -> v61 增加 rollback approval record fixture，固化 reviewer、approval timestamp placeholder、rollback target 和 no-secret-value 边界
   -> v62 增加 release handoff checklist fixture，固化 release operator、rollback approver、artifact target、migration direction 和 secret source confirmation，并收口静态 contract endpoint helper
+  -> v63 增加 release audit retention fixture，固化 release evidence retention id、operator placeholder、artifact target、retention days、audit export 字段和 no-secret-value 边界
 
 common
  -> 业务异常和统一错误响应

@@ -68,12 +68,21 @@
       "description": "Operator approval remains a manual placeholder and is not automated by Node.",
       "required": true,
       "nodeMayInfer": false
+    },
+    {
+      "name": "release-audit-retention-fixture",
+      "description": "Operator confirms the read-only release audit retention fixture used before Node renders the cross-project retention gate.",
+      "required": true,
+      "expectedEndpoint": "/contracts/release-audit-retention.fixture.json",
+      "nodeMayTriggerDeployment": false,
+      "nodeMayTriggerRollback": false
     }
   ],
   "runbookArtifacts": [
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/release-handoff-checklist.fixture.json",
+    "/contracts/release-audit-retention.fixture.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",

@@ -16,6 +16,7 @@ public record OpsEvidenceResponse(
         DeploymentRollback deploymentRollback,
         ReleaseBundle releaseBundle,
         ReleaseHandoffChecklistFixture releaseHandoffChecklistFixture,
+        ReleaseAuditRetentionFixture releaseAuditRetentionFixture,
         RollbackApprovalHandoff rollbackApprovalHandoff,
         RollbackApprovalRecordFixture rollbackApprovalRecordFixture,
         RollbackSqlReviewGate rollbackSqlReviewGate,
@@ -157,6 +158,30 @@ public record OpsEvidenceResponse(
             boolean nodeMayConsume,
             boolean nodeMayTriggerDeployment,
             boolean nodeMayTriggerRollback,
+            boolean deploymentExecutionAllowed,
+            boolean rollbackSqlExecutionAllowed,
+            boolean requiresProductionDatabase,
+            boolean requiresProductionSecrets,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record ReleaseAuditRetentionFixture(
+            String fixtureVersion,
+            String fixtureEndpoint,
+            String fixtureMode,
+            String retentionId,
+            String releaseOperator,
+            String artifactTarget,
+            int retentionDays,
+            List<String> evidenceEndpoints,
+            List<String> auditExportFields,
+            List<String> retainedArtifacts,
+            List<String> noSecretValueBoundaries,
+            boolean nodeMayConsume,
+            boolean nodeMayTriggerDeployment,
+            boolean nodeMayTriggerRollback,
+            boolean auditExportReadOnly,
             boolean deploymentExecutionAllowed,
             boolean rollbackSqlExecutionAllowed,
             boolean requiresProductionDatabase,
