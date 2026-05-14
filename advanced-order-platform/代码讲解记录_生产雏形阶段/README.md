@@ -138,9 +138,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 56-version-52-order-idempotency-boundary.md
  -> 第五十二版订单创建幂等边界，增加请求指纹、同 key 不同请求 409、ops evidence 和静态样本
+
+57-version-53-idempotency-store-abstraction.md
+ -> 第五十三版订单幂等存储抽象，新增 IdempotencyStore、JPA 默认实现和 mini-kv disabled candidate evidence
 ```
 
-后续推进 v53 时，从 `57-version-53-主题.md` 继续追加。
+后续推进 v54 时，从 `58-version-54-主题.md` 继续追加。
 
 ## 一句话总览
 

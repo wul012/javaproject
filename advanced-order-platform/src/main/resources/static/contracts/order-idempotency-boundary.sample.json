@@ -38,6 +38,10 @@
   },
   "storage": {
     "authoritativeStore": "orders table",
+    "abstraction": "IdempotencyStore",
+    "activeStore": "jpa-order-idempotency-store",
+    "activeImplementation": "JpaIdempotencyStore",
+    "activeMode": "JPA_DATABASE",
     "uniqueKey": "orders.idempotency_key",
     "fingerprintColumn": "orders.idempotency_request_fingerprint",
     "externalTokenStoreConnected": false,
@@ -48,6 +52,7 @@
     "intendedConsumer": "Node idempotency vertical readiness review",
     "mayBeUsedForProductionPass": false,
     "miniKvRole": "TTL token candidate only; not connected to Java order transaction in this version",
+    "storeAbstractionEvidence": "/contracts/order-idempotency-store-abstraction.sample.json",
     "requiredLiveEvidence": [
       "POST /api/v1/orders with same Idempotency-Key and same body returns the existing order",
       "POST /api/v1/orders with same Idempotency-Key and different body returns 409"

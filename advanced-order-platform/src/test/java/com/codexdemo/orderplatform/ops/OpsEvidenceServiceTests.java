@@ -5,6 +5,8 @@ import static org.mockito.Mockito.when;
 
 import com.codexdemo.orderplatform.notification.FailedEventSummaryResponse;
 import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
+import com.codexdemo.orderplatform.order.IdempotencyStore;
+import com.codexdemo.orderplatform.order.IdempotencyStoreDescriptor;
 import com.codexdemo.orderplatform.outbox.OutboxPublisherProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRabbitMqProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRepository;
@@ -18,6 +20,8 @@ class OpsEvidenceServiceTests {
             org.mockito.Mockito.mock(FailedEventSummaryService.class);
 
     private final OutboxRepository outboxRepository = org.mockito.Mockito.mock(OutboxRepository.class);
+
+    private final IdempotencyStore idempotencyStore = org.mockito.Mockito.mock(IdempotencyStore.class);
 
     @Test
     void buildsReadOnlyEvidenceForControlPlane() {
@@ -34,6 +38,23 @@ class OpsEvidenceServiceTests {
                 3
         ));
         when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
 
         OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
         outboxPublisherProperties.setEnabled(false);
@@ -52,6 +73,7 @@ class OpsEvidenceServiceTests {
                 outboxRepository,
                 outboxPublisherProperties,
                 outboxRabbitMqProperties,
+                idempotencyStore,
                 environment
         );
 
@@ -71,7 +93,8 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "/api/v1/ops/overview",
                         "/contracts/ops-read-only-evidence.sample.json",
-                        "/contracts/order-idempotency-boundary.sample.json"
+                        "/contracts/order-idempotency-boundary.sample.json",
+                        "/contracts/order-idempotency-store-abstraction.sample.json"
                 );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
@@ -88,7 +111,8 @@ class OpsEvidenceServiceTests {
                         "GET /api/v1/ops/overview",
                         "GET /api/v1/ops/evidence",
                         "GET /contracts/ops-read-only-evidence.sample.json",
-                        "GET /contracts/order-idempotency-boundary.sample.json"
+                        "GET /contracts/order-idempotency-boundary.sample.json",
+                        "GET /contracts/order-idempotency-store-abstraction.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -100,12 +124,25 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.readOnlyWindow().replayPostBoundary())
                 .contains("must not call POST /api/v1/failed-events/{id}/replay");
         assertThat(evidence.orderIdempotency().boundaryVersion()).isEqualTo("java-order-idempotency-boundary.v1");
+        assertThat(evidence.orderIdempotency().storeAbstractionVersion()).isEqualTo("java-idempotency-store.v1");
         assertThat(evidence.orderIdempotency().createOrderEndpoint()).isEqualTo("/api/v1/orders");
         assertThat(evidence.orderIdempotency().requiredHeader()).isEqualTo("Idempotency-Key");
         assertThat(evidence.orderIdempotency().requestFingerprintVersion())
                 .isEqualTo("order-create-request-sha256.v1");
         assertThat(evidence.orderIdempotency().sameKeyDifferentRequestErrorCode())
                 .isEqualTo("IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST");
+        assertThat(evidence.orderIdempotency().activeStore()).isEqualTo("jpa-order-idempotency-store");
+        assertThat(evidence.orderIdempotency().activeStoreImplementation()).isEqualTo("JpaIdempotencyStore");
+        assertThat(evidence.orderIdempotency().activeStoreMode()).isEqualTo("JPA_DATABASE");
+        assertThat(evidence.orderIdempotency().authoritativeStore())
+                .isEqualTo("orders table via orders.idempotency_key and orders.idempotency_request_fingerprint");
+        assertThat(evidence.orderIdempotency().storeCandidates())
+                .extracting(OpsEvidenceResponse.IdempotencyStoreCandidate::name)
+                .containsExactly("jpa-order-idempotency-store", "mini-kv-ttl-token-adapter");
+        assertThat(evidence.orderIdempotency().storeCandidates().get(1).enabled()).isFalse();
+        assertThat(evidence.orderIdempotency().storeCandidates().get(1).connected()).isFalse();
+        assertThat(evidence.orderIdempotency().storeCandidates().get(1).mode())
+                .isEqualTo("DISABLED_CANDIDATE_ONLY");
         assertThat(evidence.orderIdempotency().miniKvConnected()).isFalse();
         assertThat(evidence.orderIdempotency().externalTokenStoreConnected()).isFalse();
         assertThat(evidence.orderIdempotency().changesPaymentOrInventoryTransaction()).isFalse();
@@ -146,6 +183,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/ops-evidence-field-guide.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
+                        "/contracts/order-idempotency-store-abstraction.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

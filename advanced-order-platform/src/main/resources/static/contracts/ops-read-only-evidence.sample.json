@@ -20,7 +20,9 @@
     "evidenceEndpoint": "/api/v1/ops/evidence",
     "additionalProbeEndpoints": [
       "/api/v1/ops/overview",
-      "/contracts/ops-read-only-evidence.sample.json"
+      "/contracts/ops-read-only-evidence.sample.json",
+      "/contracts/order-idempotency-boundary.sample.json",
+      "/contracts/order-idempotency-store-abstraction.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": true
@@ -77,7 +79,8 @@
       "GET /api/v1/ops/overview",
       "GET /api/v1/ops/evidence",
       "GET /contracts/ops-read-only-evidence.sample.json",
-      "GET /contracts/order-idempotency-boundary.sample.json"
+      "GET /contracts/order-idempotency-boundary.sample.json",
+      "GET /contracts/order-idempotency-store-abstraction.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -94,6 +97,7 @@
   },
   "orderIdempotency": {
     "boundaryVersion": "java-order-idempotency-boundary.v1",
+    "storeAbstractionVersion": "java-idempotency-store.v1",
     "createOrderEndpoint": "/api/v1/orders",
     "createOrderMethod": "POST",
     "requiredHeader": "Idempotency-Key",
@@ -103,7 +107,28 @@
     "sameKeySameRequestOutcome": "HTTP 200 replay of the existing order without a second inventory reservation or outbox event",
     "sameKeyDifferentRequestOutcome": "HTTP 409 conflict before inventory reservation and before outbox mutation",
     "sameKeyDifferentRequestErrorCode": "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
-    "authoritativeStore": "orders.idempotency_key and orders.idempotency_request_fingerprint",
+    "activeStore": "jpa-order-idempotency-store",
+    "activeStoreImplementation": "JpaIdempotencyStore",
+    "activeStoreMode": "JPA_DATABASE",
+    "authoritativeStore": "orders table via orders.idempotency_key and orders.idempotency_request_fingerprint",
+    "storeCandidates": [
+      {
+        "name": "jpa-order-idempotency-store",
+        "role": "ORDER_CREATE_IDEMPOTENCY_AUTHORITY",
+        "enabled": true,
+        "connected": true,
+        "mode": "JPA_DATABASE",
+        "reason": "Default Java database-backed idempotency store"
+      },
+      {
+        "name": "mini-kv-ttl-token-adapter",
+        "role": "TTL_TOKEN_CANDIDATE",
+        "enabled": false,
+        "connected": false,
+        "mode": "DISABLED_CANDIDATE_ONLY",
+        "reason": "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order."
+      }
+    ],
     "miniKvConnected": false,
     "externalTokenStoreConnected": false,
     "changesPaymentOrInventoryTransaction": false
@@ -125,6 +150,7 @@
     "/contracts/ops-read-only-evidence.sample.json",
     "/contracts/ops-evidence-field-guide.sample.json",
     "/contracts/order-idempotency-boundary.sample.json",
+    "/contracts/order-idempotency-store-abstraction.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/approval-status",
     "/api/v1/failed-events/{id}/replay-readiness",

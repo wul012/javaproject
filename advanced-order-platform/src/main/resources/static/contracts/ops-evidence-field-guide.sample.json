@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T08:05:00Z",
+  "updatedAt": "2026-05-14T09:10:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -130,6 +130,11 @@
           "expectedValue": "java-order-idempotency-boundary.v1"
         },
         {
+          "path": "orderIdempotency.storeAbstractionVersion",
+          "meaning": "Version for the Java IdempotencyStore abstraction that hides the active idempotency persistence implementation.",
+          "expectedValue": "java-idempotency-store.v1"
+        },
+        {
           "path": "orderIdempotency.requiredHeader",
           "meaning": "HTTP header required by POST /api/v1/orders.",
           "expectedValue": "Idempotency-Key"
@@ -148,6 +153,21 @@
           "path": "orderIdempotency.sameKeyDifferentRequestErrorCode",
           "meaning": "Same key plus different request is rejected with a stable conflict error code.",
           "expectedValue": "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST"
+        },
+        {
+          "path": "orderIdempotency.activeStore",
+          "meaning": "The currently active idempotency store. v53 keeps this on the Java JPA database path.",
+          "expectedValue": "jpa-order-idempotency-store"
+        },
+        {
+          "path": "orderIdempotency.activeStoreMode",
+          "meaning": "Execution mode for the active idempotency store implementation.",
+          "expectedValue": "JPA_DATABASE"
+        },
+        {
+          "path": "orderIdempotency.storeCandidates",
+          "meaning": "Ordered store list: the active Java database store plus disabled future candidates such as mini-kv TTL tokens.",
+          "stability": "stable-boundary"
         },
         {
           "path": "orderIdempotency.miniKvConnected",

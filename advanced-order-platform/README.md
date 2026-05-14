@@ -759,7 +759,8 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "additionalProbeEndpoints": [
       "/api/v1/ops/overview",
       "/contracts/ops-read-only-evidence.sample.json",
-      "/contracts/order-idempotency-boundary.sample.json"
+      "/contracts/order-idempotency-boundary.sample.json",
+      "/contracts/order-idempotency-store-abstraction.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": false
@@ -779,7 +780,8 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
       "GET /api/v1/ops/overview",
       "GET /api/v1/ops/evidence",
       "GET /contracts/ops-read-only-evidence.sample.json",
-      "GET /contracts/order-idempotency-boundary.sample.json"
+      "GET /contracts/order-idempotency-boundary.sample.json",
+      "GET /contracts/order-idempotency-store-abstraction.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -796,6 +798,7 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
   },
   "orderIdempotency": {
     "boundaryVersion": "java-order-idempotency-boundary.v1",
+    "storeAbstractionVersion": "java-idempotency-store.v1",
     "createOrderEndpoint": "/api/v1/orders",
     "createOrderMethod": "POST",
     "requiredHeader": "Idempotency-Key",
@@ -804,6 +807,26 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "sameKeySameRequestOutcome": "HTTP 200 replay of the existing order without a second inventory reservation or outbox event",
     "sameKeyDifferentRequestOutcome": "HTTP 409 conflict before inventory reservation and before outbox mutation",
     "sameKeyDifferentRequestErrorCode": "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
+    "activeStore": "jpa-order-idempotency-store",
+    "activeStoreImplementation": "JpaIdempotencyStore",
+    "activeStoreMode": "JPA_DATABASE",
+    "authoritativeStore": "orders table via orders.idempotency_key and orders.idempotency_request_fingerprint",
+    "storeCandidates": [
+      {
+        "name": "jpa-order-idempotency-store",
+        "role": "ORDER_CREATE_IDEMPOTENCY_AUTHORITY",
+        "enabled": true,
+        "connected": true,
+        "mode": "JPA_DATABASE"
+      },
+      {
+        "name": "mini-kv-ttl-token-adapter",
+        "role": "TTL_TOKEN_CANDIDATE",
+        "enabled": false,
+        "connected": false,
+        "mode": "DISABLED_CANDIDATE_ONLY"
+      }
+    ],
     "miniKvConnected": false,
     "externalTokenStoreConnected": false,
     "changesPaymentOrInventoryTransaction": false
@@ -848,6 +871,7 @@ Invoke-RestMethod http://localhost:8080/api/v1/ops/evidence
     "/contracts/ops-read-only-evidence.sample.json",
     "/contracts/ops-evidence-field-guide.sample.json",
     "/contracts/order-idempotency-boundary.sample.json",
+    "/contracts/order-idempotency-store-abstraction.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/replay-execution-contract",
     "/api/v1/failed-events/replay-evidence-index"
@@ -878,7 +902,7 @@ realReplayAllowedByEvidence=false
 publisherEnabled=false
 rabbitMqEnabled=false
 productionPassBoundary.readyForProductionPassEvidence=false
-allowedProbeEndpoints 只列 GET /actuator/health、GET /api/v1/ops/overview、GET /api/v1/ops/evidence
+allowedProbeEndpoints 只允许 GET 健康、ops 只读接口和随包静态契约样本
 forbiddenOperations 明确禁止订单写操作、失败事件 replay POST 和 RabbitMQ replay publish
 ```
 
@@ -949,9 +973,40 @@ sameKeyDifferentRequest.httpStatus=409
 sameKeyDifferentRequest.errorCode=IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST
 storage.miniKvConnected=false
 storage.orderAuthoritativeStoreRemainsJavaDatabase=true
+storage.abstraction=IdempotencyStore
+storage.activeStore=jpa-order-idempotency-store
 ```
 
 它服务于 Node idempotency vertical readiness review，只说明 Java 内部订单幂等边界；当前版本不接 mini-kv，不改变支付、库存或失败事件 replay 行为。
+
+v53 起，应用随包提供订单幂等存储抽象样本：
+
+```text
+src/main/resources/static/contracts/order-idempotency-store-abstraction.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/order-idempotency-store-abstraction.sample.json
+```
+
+该样本固定表达：
+
+```text
+abstractionVersion=java-idempotency-store.v1
+activeStore.name=jpa-order-idempotency-store
+activeStore.implementation=JpaIdempotencyStore
+activeStore.mode=JPA_DATABASE
+disabledCandidates[0].name=mini-kv-ttl-token-adapter
+disabledCandidates[0].enabled=false
+disabledCandidates[0].connected=false
+boundaries.orderAuthoritativeStoreRemainsJavaDatabase=true
+boundaries.changesPaymentOrInventoryTransaction=false
+boundaries.nodeMayTriggerWrites=false
+```
+
+它把 Java 内部幂等查找/保存封装成 `IdempotencyStore`，默认仍使用 `orders` 表；mini-kv 只作为后续短 TTL token 候选适配器被说明，不接入 `POST /api/v1/orders` 交易主链路。
 
 查询失败事件治理摘要：
 
@@ -1480,6 +1535,7 @@ inventory
 order
  -> 订单模型、幂等下单、支付、退款、取消、发货、完成、状态历史、超时过期
  -> v52 增加订单创建请求指纹，同 Idempotency-Key 不同请求稳定 409，避免误把不同订单当作重放
+ -> v53 增加 IdempotencyStore 抽象，默认仍走 JPA/DB 幂等存储，mini-kv 只作为 disabled candidate
 
 payment
  -> 支付成功和退款交易流水
@@ -1519,6 +1575,7 @@ ops
  -> v50 增强 ops evidence 启动后自描述，固定 healthProbe 和 readOnlyWindow 字段，服务真实只读 live probe capture
  -> v51 增加 ops evidence 字段说明样本，解释 service、healthProbe、readOnlyWindow 和执行边界字段稳定性
  -> v52 增加订单幂等边界 evidence 和静态样本，说明同 key 同请求重放、同 key 不同请求拒绝以及 mini-kv 未接入边界
+ -> v53 增加订单幂等存储抽象 evidence 和静态样本，说明活动存储、候选适配器和 Node 不触发写操作边界
 
 common
  -> 业务异常和统一错误响应
@@ -1531,6 +1588,6 @@ static
 
 1. 在 `FailedEventOperatorContextResolver` 后面接入真实认证鉴权，把 `X-Operator-*` 请求头替换成登录态和权限上下文。
 2. 给失败事件管理页面增加真实登录态、权限控制和当前用户展示。
-3. 接入 Redis，训练热点商品缓存、限流、幂等 token。
+3. 在 `IdempotencyStore` 后面实验 Redis / mini-kv TTL token candidate，先保持订单数据库为权威存储。
 4. 接入 OpenTelemetry、Prometheus、Grafana。
 5. 增加并发库存压测和更多 Testcontainers 多中间件集成测试。

@@ -2,6 +2,9 @@ package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.notification.FailedEventSummaryResponse;
 import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
+import com.codexdemo.orderplatform.order.IdempotencyStore;
+import com.codexdemo.orderplatform.order.IdempotencyStoreDescriptor;
+import com.codexdemo.orderplatform.order.JpaIdempotencyStore;
 import com.codexdemo.orderplatform.outbox.OutboxPublisherProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRabbitMqProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRepository;
@@ -31,6 +34,8 @@ public class OpsEvidenceService {
 
     private final OutboxRabbitMqProperties outboxRabbitMqProperties;
 
+    private final IdempotencyStore idempotencyStore;
+
     private final Environment environment;
 
     public OpsEvidenceService(
@@ -38,12 +43,14 @@ public class OpsEvidenceService {
             OutboxRepository outboxRepository,
             OutboxPublisherProperties outboxPublisherProperties,
             OutboxRabbitMqProperties outboxRabbitMqProperties,
+            IdempotencyStore idempotencyStore,
             Environment environment
     ) {
         this.failedEventSummaryService = failedEventSummaryService;
         this.outboxRepository = outboxRepository;
         this.outboxPublisherProperties = outboxPublisherProperties;
         this.outboxRabbitMqProperties = outboxRabbitMqProperties;
+        this.idempotencyStore = idempotencyStore;
         this.environment = environment;
     }
 
@@ -93,7 +100,8 @@ public class OpsEvidenceService {
                 List.of(
                         "/api/v1/ops/overview",
                         "/contracts/ops-read-only-evidence.sample.json",
-                        "/contracts/order-idempotency-boundary.sample.json"
+                        "/contracts/order-idempotency-boundary.sample.json",
+                        "/contracts/order-idempotency-store-abstraction.sample.json"
                 ),
                 true,
                 staticSampleOnly
@@ -114,7 +122,8 @@ public class OpsEvidenceService {
                         "GET /api/v1/ops/overview",
                         "GET /api/v1/ops/evidence",
                         "GET /contracts/ops-read-only-evidence.sample.json",
-                        "GET /contracts/order-idempotency-boundary.sample.json"
+                        "GET /contracts/order-idempotency-boundary.sample.json",
+                        "GET /contracts/order-idempotency-store-abstraction.sample.json"
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -132,8 +141,10 @@ public class OpsEvidenceService {
     }
 
     private OpsEvidenceResponse.OrderIdempotency orderIdempotency() {
+        IdempotencyStoreDescriptor descriptor = idempotencyStore.descriptor();
         return new OpsEvidenceResponse.OrderIdempotency(
                 "java-order-idempotency-boundary.v1",
+                descriptor.abstractionVersion(),
                 "/api/v1/orders",
                 "POST",
                 "Idempotency-Key",
@@ -143,10 +154,32 @@ public class OpsEvidenceService {
                 "HTTP 200 replay of the existing order without a second inventory reservation or outbox event",
                 "HTTP 409 conflict before inventory reservation and before outbox mutation",
                 "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
-                "orders.idempotency_key and orders.idempotency_request_fingerprint",
-                false,
-                false,
-                false
+                descriptor.activeStore(),
+                descriptor.activeImplementation(),
+                descriptor.activeMode(),
+                descriptor.authoritativeStore() + " via " + descriptor.keyColumn()
+                        + " and " + descriptor.fingerprintColumn(),
+                List.of(
+                        new OpsEvidenceResponse.IdempotencyStoreCandidate(
+                                descriptor.activeStore(),
+                                "ORDER_CREATE_IDEMPOTENCY_AUTHORITY",
+                                true,
+                                true,
+                                descriptor.activeMode(),
+                                "Default Java database-backed idempotency store"
+                        ),
+                        new OpsEvidenceResponse.IdempotencyStoreCandidate(
+                                JpaIdempotencyStore.MINI_KV_CANDIDATE,
+                                "TTL_TOKEN_CANDIDATE",
+                                descriptor.miniKvAdapterEnabled(),
+                                descriptor.miniKvConnected(),
+                                descriptor.miniKvCandidateMode(),
+                                descriptor.disabledCandidateReason()
+                        )
+                ),
+                descriptor.miniKvConnected(),
+                descriptor.externalTokenStoreConnected(),
+                descriptor.changesPaymentOrInventoryTransaction()
         );
     }
 
@@ -250,6 +283,7 @@ public class OpsEvidenceService {
                 "/contracts/ops-read-only-evidence.sample.json",
                 "/contracts/ops-evidence-field-guide.sample.json",
                 "/contracts/order-idempotency-boundary.sample.json",
+                "/contracts/order-idempotency-store-abstraction.sample.json",
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

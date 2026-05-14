@@ -23,6 +23,7 @@ import org.springframework.util.StringUtils;
 public class OrderApplicationService {
 
     private final OrderRepository orderRepository;
+    private final IdempotencyStore idempotencyStore;
     private final ProductRepository productRepository;
     private final InventoryService inventoryService;
     private final OutboxRepository outboxRepository;
@@ -31,6 +32,7 @@ public class OrderApplicationService {
 
     public OrderApplicationService(
             OrderRepository orderRepository,
+            IdempotencyStore idempotencyStore,
             ProductRepository productRepository,
             InventoryService inventoryService,
             OutboxRepository outboxRepository,
@@ -38,6 +40,7 @@ public class OrderApplicationService {
             PaymentService paymentService
     ) {
         this.orderRepository = orderRepository;
+        this.idempotencyStore = idempotencyStore;
         this.productRepository = productRepository;
         this.inventoryService = inventoryService;
         this.outboxRepository = outboxRepository;
@@ -50,7 +53,7 @@ public class OrderApplicationService {
         requireIdempotencyKey(idempotencyKey);
         String requestFingerprint = OrderIdempotencyFingerprint.create(request);
 
-        return orderRepository.findByIdempotencyKey(idempotencyKey)
+        return idempotencyStore.findByKey(idempotencyKey)
                 .map(existing -> replayExistingOrder(existing, requestFingerprint))
                 .orElseGet(() -> placeNewOrder(idempotencyKey, request, requestFingerprint));
     }
@@ -160,13 +163,13 @@ public class OrderApplicationService {
         return expired;
     }
 
-    private CreateOrderResult replayExistingOrder(SalesOrder existing, String requestFingerprint) {
-        String existingFingerprint = existing.getIdempotencyRequestFingerprint();
+    private CreateOrderResult replayExistingOrder(IdempotencyStoreEntry existing, String requestFingerprint) {
+        String existingFingerprint = existing.requestFingerprint();
         if (StringUtils.hasText(existingFingerprint) && !existingFingerprint.equals(requestFingerprint)) {
             throw new BusinessException(HttpStatus.CONFLICT, "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
                     "Idempotency-Key was already used for a different create order request");
         }
-        return new CreateOrderResult(OrderResponse.from(existing), true);
+        return new CreateOrderResult(OrderResponse.from(existing.order()), true);
     }
 
     private CreateOrderResult placeNewOrder(
@@ -186,7 +189,7 @@ public class OrderApplicationService {
                 .toList();
 
         SalesOrder order = SalesOrder.place(request.customerId(), idempotencyKey, requestFingerprint, drafts);
-        SalesOrder saved = orderRepository.saveAndFlush(order);
+        SalesOrder saved = idempotencyStore.saveNewOrder(order);
         outboxRepository.save(OutboxEvent.orderCreated(saved));
         recordHistory(saved, null, "ORDER_CREATED");
         return new CreateOrderResult(OrderResponse.from(saved), false);

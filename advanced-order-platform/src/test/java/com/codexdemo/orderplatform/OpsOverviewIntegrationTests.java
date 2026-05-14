@@ -145,6 +145,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/ops-read-only-evidence.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/order-idempotency-boundary.sample.json")))
+                .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
+                        hasItem("/contracts/order-idempotency-store-abstraction.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.liveProbeRequiredForPass").value(true))
                 .andExpect(jsonPath("$.healthProbe.staticSampleOnly").value(false))
                 .andExpect(jsonPath("$.failedEventReplay.totalFailedEvents").value(2))
@@ -181,6 +183,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints", hasItem("GET /api/v1/ops/evidence")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/order-idempotency-boundary.sample.json")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /contracts/order-idempotency-store-abstraction.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
@@ -193,12 +197,23 @@ class OpsOverviewIntegrationTests {
                         .value("Node real-read window must not call POST /api/v1/failed-events/{id}/replay"))
                 .andExpect(jsonPath("$.orderIdempotency.boundaryVersion")
                         .value("java-order-idempotency-boundary.v1"))
+                .andExpect(jsonPath("$.orderIdempotency.storeAbstractionVersion")
+                        .value("java-idempotency-store.v1"))
                 .andExpect(jsonPath("$.orderIdempotency.createOrderEndpoint").value("/api/v1/orders"))
                 .andExpect(jsonPath("$.orderIdempotency.requiredHeader").value("Idempotency-Key"))
                 .andExpect(jsonPath("$.orderIdempotency.requestFingerprintVersion")
                         .value("order-create-request-sha256.v1"))
                 .andExpect(jsonPath("$.orderIdempotency.sameKeyDifferentRequestErrorCode")
                         .value("IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST"))
+                .andExpect(jsonPath("$.orderIdempotency.activeStore").value("jpa-order-idempotency-store"))
+                .andExpect(jsonPath("$.orderIdempotency.activeStoreImplementation").value("JpaIdempotencyStore"))
+                .andExpect(jsonPath("$.orderIdempotency.activeStoreMode").value("JPA_DATABASE"))
+                .andExpect(jsonPath("$.orderIdempotency.storeCandidates[*].name",
+                        hasItem("mini-kv-ttl-token-adapter")))
+                .andExpect(jsonPath("$.orderIdempotency.storeCandidates[1].enabled").value(false))
+                .andExpect(jsonPath("$.orderIdempotency.storeCandidates[1].connected").value(false))
+                .andExpect(jsonPath("$.orderIdempotency.storeCandidates[1].mode")
+                        .value("DISABLED_CANDIDATE_ONLY"))
                 .andExpect(jsonPath("$.orderIdempotency.miniKvConnected").value(false))
                 .andExpect(jsonPath("$.orderIdempotency.externalTokenStoreConnected").value(false))
                 .andExpect(jsonPath("$.orderIdempotency.changesPaymentOrInventoryTransaction").value(false))
@@ -213,6 +228,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/ops-evidence-field-guide.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/order-idempotency-boundary.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/order-idempotency-store-abstraction.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/{id}/replay-execution-contract")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
@@ -248,14 +265,22 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints", hasItem("GET /actuator/health")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/order-idempotency-boundary.sample.json")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /contracts/order-idempotency-store-abstraction.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.forbiddenOperations",
                         hasItem("Any non-GET Node upstream action")))
                 .andExpect(jsonPath("$.readOnlyWindow.requiredNodeEnvironment",
                         hasItem("UPSTREAM_ACTIONS_ENABLED=false")))
                 .andExpect(jsonPath("$.orderIdempotency.boundaryVersion")
                         .value("java-order-idempotency-boundary.v1"))
+                .andExpect(jsonPath("$.orderIdempotency.storeAbstractionVersion")
+                        .value("java-idempotency-store.v1"))
                 .andExpect(jsonPath("$.orderIdempotency.sameKeyDifferentRequestErrorCode")
                         .value("IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST"))
+                .andExpect(jsonPath("$.orderIdempotency.activeStore").value("jpa-order-idempotency-store"))
+                .andExpect(jsonPath("$.orderIdempotency.storeCandidates[*].name",
+                        hasItem("mini-kv-ttl-token-adapter")))
+                .andExpect(jsonPath("$.orderIdempotency.storeCandidates[1].enabled").value(false))
                 .andExpect(jsonPath("$.orderIdempotency.miniKvConnected").value(false))
                 .andExpect(jsonPath("$.blockers", hasItem("OUTBOX_PUBLISHER_DISABLED")))
                 .andExpect(jsonPath("$.warnings", hasItem("APPROVED_REPLAY_REQUIRES_DIGEST_CHECK")))
@@ -264,6 +289,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("/contracts/ops-evidence-field-guide.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/order-idempotency-boundary.sample.json")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/contracts/order-idempotency-store-abstraction.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/replay-evidence-index")))
                 .andExpect(jsonPath("$.productionPassBoundary.readyForProductionPassEvidence").value(false))
@@ -301,6 +328,10 @@ class OpsOverviewIntegrationTests {
                         hasItem("readOnlyWindow.readyForReadOnlyLiveProbe")))
                 .andExpect(jsonPath("$.fieldGroups[3].fields[*].path",
                         hasItem("orderIdempotency.sameKeyDifferentRequestErrorCode")))
+                .andExpect(jsonPath("$.fieldGroups[3].fields[*].path",
+                        hasItem("orderIdempotency.storeAbstractionVersion")))
+                .andExpect(jsonPath("$.fieldGroups[3].fields[*].path",
+                        hasItem("orderIdempotency.storeCandidates")))
                 .andExpect(jsonPath("$.fieldGroups[4].fields[*].path",
                         hasItem("failedEventReplay.realReplayAllowedByEvidence")))
                 .andExpect(jsonPath("$.forbiddenOperations",
@@ -339,6 +370,31 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verticalSliceBoundary.mayBeUsedForProductionPass").value(false))
                 .andExpect(jsonPath("$.forbiddenOperationsForReadOnlyEvidence",
                         hasItem("Connecting mini-kv as the authoritative order store")));
+    }
+
+    @Test
+    void staticOrderIdempotencyStoreAbstractionSampleExplainsDisabledMiniKvCandidate() throws Exception {
+        mockMvc.perform(get("/contracts/order-idempotency-store-abstraction.sample.json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.abstractionVersion").value("java-idempotency-store.v1"))
+                .andExpect(jsonPath("$.scenario").value("ORDER_IDEMPOTENCY_STORE_ABSTRACTION_SAMPLE"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.activeStore.name").value("jpa-order-idempotency-store"))
+                .andExpect(jsonPath("$.activeStore.implementation").value("JpaIdempotencyStore"))
+                .andExpect(jsonPath("$.activeStore.mode").value("JPA_DATABASE"))
+                .andExpect(jsonPath("$.activeStore.orderAuthoritative").value(true))
+                .andExpect(jsonPath("$.activeStore.columns",
+                        hasItem("orders.idempotency_key")))
+                .andExpect(jsonPath("$.disabledCandidates[0].name").value("mini-kv-ttl-token-adapter"))
+                .andExpect(jsonPath("$.disabledCandidates[0].enabled").value(false))
+                .andExpect(jsonPath("$.disabledCandidates[0].connected").value(false))
+                .andExpect(jsonPath("$.disabledCandidates[0].mode").value("DISABLED_CANDIDATE_ONLY"))
+                .andExpect(jsonPath("$.boundaries.orderAuthoritativeStoreRemainsJavaDatabase").value(true))
+                .andExpect(jsonPath("$.boundaries.changesPaymentOrInventoryTransaction").value(false))
+                .andExpect(jsonPath("$.boundaries.nodeMayTriggerWrites").value(false))
+                .andExpect(jsonPath("$.futureAdapterRules",
+                        hasItem("Adapter must be introduced behind IdempotencyStore without changing create-order semantics")));
     }
 
     private void deleteFailedEventData() {

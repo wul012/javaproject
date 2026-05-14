@@ -1,0 +1,49 @@
+{
+  "abstractionVersion": "java-idempotency-store.v1",
+  "scenario": "ORDER_IDEMPOTENCY_STORE_ABSTRACTION_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "activeStore": {
+    "name": "jpa-order-idempotency-store",
+    "implementation": "JpaIdempotencyStore",
+    "mode": "JPA_DATABASE",
+    "orderAuthoritative": true,
+    "columns": [
+      "orders.idempotency_key",
+      "orders.idempotency_request_fingerprint"
+    ],
+    "role": "Find existing create-order request by Idempotency-Key and persist new order atomically through the Java transaction."
+  },
+  "disabledCandidates": [
+    {
+      "name": "mini-kv-ttl-token-adapter",
+      "role": "TTL_TOKEN_CANDIDATE",
+      "enabled": false,
+      "connected": false,
+      "mode": "DISABLED_CANDIDATE_ONLY",
+      "reason": "Documented for later short TTL token experiments only; not wired into POST /api/v1/orders."
+    }
+  ],
+  "boundaries": {
+    "orderAuthoritativeStoreRemainsJavaDatabase": true,
+    "miniKvConnected": false,
+    "externalTokenStoreConnected": false,
+    "changesPaymentOrInventoryTransaction": false,
+    "nodeMayTriggerWrites": false
+  },
+  "futureAdapterRules": [
+    "Adapter must be introduced behind IdempotencyStore without changing create-order semantics",
+    "mini-kv may hold short-lived tokens only after explicit feature work and tests",
+    "orders table remains the order authority unless a later plan explicitly changes that boundary",
+    "Node may read evidence but must not trigger upstream writes in read-only drill mode"
+  ],
+  "relatedEvidence": [
+    "/api/v1/ops/evidence",
+    "/contracts/order-idempotency-boundary.sample.json"
+  ],
+  "forbiddenOperationsForReadOnlyEvidence": [
+    "Treating mini-kv as the order authority",
+    "Using this sample as permission for Node upstream writes",
+    "Changing payment, inventory, Outbox, or replay transaction behavior from this abstraction"
+  ]
+}

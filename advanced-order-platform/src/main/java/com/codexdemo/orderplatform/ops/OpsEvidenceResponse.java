@@ -57,6 +57,7 @@ public record OpsEvidenceResponse(
 
     public record OrderIdempotency(
             String boundaryVersion,
+            String storeAbstractionVersion,
             String createOrderEndpoint,
             String createOrderMethod,
             String requiredHeader,
@@ -66,10 +67,24 @@ public record OpsEvidenceResponse(
             String sameKeySameRequestOutcome,
             String sameKeyDifferentRequestOutcome,
             String sameKeyDifferentRequestErrorCode,
+            String activeStore,
+            String activeStoreImplementation,
+            String activeStoreMode,
             String authoritativeStore,
+            List<IdempotencyStoreCandidate> storeCandidates,
             boolean miniKvConnected,
             boolean externalTokenStoreConnected,
             boolean changesPaymentOrInventoryTransaction
+    ) {
+    }
+
+    public record IdempotencyStoreCandidate(
+            String name,
+            String role,
+            boolean enabled,
+            boolean connected,
+            String mode,
+            String reason
     ) {
     }
 
