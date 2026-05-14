@@ -1268,6 +1268,38 @@ boundaries.requiresProductionDatabase=false
 
 它服务于后续 deployment evidence intake gate：Java 只说明部署窗口 owner、rollback approver、迁移方向和密钥来源确认，不执行部署、不执行 rollback SQL、不连接生产数据库，也不授权 Node 触发 Java 发布或回退。
 
+v61 起，应用随包提供 rollback approval record fixture：
+
+```text
+src/main/resources/static/contracts/rollback-approval-record.fixture.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/rollback-approval-record.fixture.json
+```
+
+该样本固定表达：
+
+```text
+fixtureVersion=java-rollback-approval-record-fixture.v1
+fixtureMode=READ_ONLY_APPROVAL_RECORD_FIXTURE
+approvalRecord.reviewer=rollback-reviewer-placeholder
+approvalRecord.approvalTimestampPlaceholder=approval-timestamp-placeholder
+approvalRecord.rollbackTarget=release-tag-or-artifact-version-placeholder
+databaseMigration.selectedDirection=no-database-change
+requiredRecordFields 包含 reviewer、approval-timestamp-placeholder、rollback-target、database-migration-direction、rollback-sql-review-gate、no-secret-value-boundary
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayTriggerRollback=false
+nodeConsumption.nodeMayExecuteRollbackSql=false
+boundaries.rollbackExecutionAllowed=false
+boundaries.rollbackSqlExecutionAllowed=false
+boundaries.requiresProductionDatabase=false
+```
+
+它服务于后续 release window readiness packet：Java 只提供人工审批记录形状，记录 reviewer、审批时间占位、rollback target、迁移方向和 no-secret-value 边界；它不执行 rollback，不执行 SQL，不连接生产数据库，也不读取或嵌入 secret value。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1843,6 +1875,7 @@ ops
   -> v58 增加 rollback SQL review gate，固化 SQL review owner、migration direction 和 operator approval placeholder
   -> v59 增加 production secret source contract，固化 secret source、rotation owner、review cadence 和 secret value 访问边界
   -> v60 增加 production deployment runbook contract，固化 deployment window owner、rollback approver、migration direction 和 no-execution 边界
+  -> v61 增加 rollback approval record fixture，固化 reviewer、approval timestamp placeholder、rollback target 和 no-secret-value 边界
 
 common
  -> 业务异常和统一错误响应

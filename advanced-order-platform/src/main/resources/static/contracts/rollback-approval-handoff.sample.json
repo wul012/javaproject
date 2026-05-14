@@ -60,6 +60,13 @@
       "rollbackSqlExecutionAllowed": false
     },
     {
+      "name": "rollback-approval-record-fixture",
+      "description": "Operator confirms the read-only approval record fixture that captures reviewer, timestamp placeholder, rollback target, and no-secret-value boundary.",
+      "required": true,
+      "expectedEndpoint": "/contracts/rollback-approval-record.fixture.json",
+      "nodeMayTriggerRollback": false
+    },
+    {
       "name": "rollback-sql-review-gate",
       "description": "Operator confirms the SQL review gate used before any rollback SQL can be considered.",
       "required": true,
@@ -81,6 +88,7 @@
   "handoffArtifacts": [
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
+    "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",
     "/contracts/production-secret-source-contract.sample.json",
     "/contracts/production-deployment-runbook-contract.sample.json",
@@ -99,6 +107,7 @@
     "Confirm deployment window owner and rollback approver.",
     "Confirm runtime configuration and secret source outside this sample.",
     "Confirm deployment runbook contract without triggering deployment.",
+    "Confirm rollback approval record fixture without executing rollback.",
     "Confirm production secret source contract without reading secret values.",
     "Confirm database migration direction without executing rollback SQL from this sample.",
     "Confirm Java rollback remains outside Node automated actions."

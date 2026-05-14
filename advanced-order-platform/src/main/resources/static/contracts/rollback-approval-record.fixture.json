@@ -1,0 +1,109 @@
+{
+  "fixtureVersion": "java-rollback-approval-record-fixture.v1",
+  "scenario": "ROLLBACK_APPROVAL_RECORD_FIXTURE_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "sampledAt": "2026-05-14T19:40:00Z",
+  "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
+  "fixtureEndpoint": "/contracts/rollback-approval-record.fixture.json",
+  "fixtureMode": "READ_ONLY_APPROVAL_RECORD_FIXTURE",
+  "fixtureGoal": "Capture the human rollback approval record shape for a release window packet without executing rollback or reading secret values.",
+  "approvalRecord": {
+    "reviewer": "rollback-reviewer-placeholder",
+    "approvalTimestampPlaceholder": "approval-timestamp-placeholder",
+    "rollbackTarget": "release-tag-or-artifact-version-placeholder",
+    "approvalStatus": "PENDING_OPERATOR_CONFIRMATION",
+    "operatorMustReplacePlaceholders": true
+  },
+  "databaseMigration": {
+    "directionOptions": [
+      "forward-only",
+      "rollback-script-reviewed",
+      "no-database-change"
+    ],
+    "selectedDirection": "no-database-change",
+    "rollbackSqlExecutionAllowed": false,
+    "requiresProductionDatabase": false
+  },
+  "requiredRecordFields": [
+    {
+      "name": "reviewer",
+      "description": "Operator records the human reviewer responsible for approving rollback.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
+      "name": "approval-timestamp-placeholder",
+      "description": "Operator replaces this placeholder with the real approval timestamp outside this fixture.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
+      "name": "rollback-target",
+      "description": "Operator records the release tag or artifact version selected for rollback review.",
+      "required": true,
+      "nodeMayInfer": false
+    },
+    {
+      "name": "database-migration-direction",
+      "description": "Operator records whether this release window is forward-only, rollback-script-reviewed, or no-database-change.",
+      "required": true,
+      "rollbackSqlExecutionAllowed": false
+    },
+    {
+      "name": "rollback-sql-review-gate",
+      "description": "Operator confirms the SQL review gate used before any rollback SQL can be considered outside this fixture.",
+      "required": true,
+      "expectedEndpoint": "/contracts/rollback-sql-review-gate.sample.json"
+    },
+    {
+      "name": "no-secret-value-boundary",
+      "description": "Operator confirms this approval record stores metadata only and never embeds secret values.",
+      "required": true,
+      "nodeMayReadSecretValues": false
+    }
+  ],
+  "recordArtifacts": [
+    "/contracts/rollback-approval-handoff.sample.json",
+    "/contracts/rollback-sql-review-gate.sample.json",
+    "/contracts/production-deployment-runbook-contract.sample.json",
+    "/contracts/production-secret-source-contract.sample.json",
+    "/contracts/release-bundle-manifest.sample.json"
+  ],
+  "noSecretValueBoundaries": [
+    "Record fixture stores metadata only",
+    "Secret values must not be read by Java or Node when rendering this record",
+    "Secret values must not be embedded in approval record JSON",
+    "Node may render the release window packet only"
+  ],
+  "nodeConsumption": {
+    "nodeMayConsume": true,
+    "nodeMayRenderReleaseWindowPacket": true,
+    "nodeMayTriggerRollback": false,
+    "nodeMayExecuteRollbackSql": false,
+    "nodeMayModifyRuntimeConfig": false,
+    "nodeMayReadSecretValues": false,
+    "requiresUpstreamActionsEnabled": false
+  },
+  "boundaries": {
+    "rollbackExecutionAllowed": false,
+    "rollbackSqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderCreateSemantics": false,
+    "changesPaymentOrInventoryTransaction": false,
+    "changesOutboxOrReplayExecution": false,
+    "changesOrderTransactionSemantics": false,
+    "connectsMiniKv": false
+  },
+  "forbiddenOperations": [
+    "Executing Java rollback from this fixture",
+    "Executing database rollback SQL from this fixture",
+    "Connecting production database from this fixture",
+    "Reading production secret values from this fixture",
+    "Embedding secret values in approval record JSON",
+    "Triggering Java rollback from Node",
+    "POST /api/v1/orders",
+    "POST /api/v1/failed-events/{id}/replay"
+  ]
+}

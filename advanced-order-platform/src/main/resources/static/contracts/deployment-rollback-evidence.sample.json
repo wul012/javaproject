@@ -57,6 +57,7 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/production-secret-source-contract.sample.json",
       "/contracts/production-deployment-runbook-contract.sample.json"
@@ -71,6 +72,7 @@
     "production-deployment-runbook-contract",
     "database-migration-direction",
     "rollback-approval-handoff",
+    "rollback-approval-record-fixture",
     "rollback-sql-review-gate"
   ],
   "boundaries": {

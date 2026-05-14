@@ -162,9 +162,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 64-version-60-production-deployment-runbook-contract.md
  -> 第六十版 production deployment runbook contract，固化 deployment window owner、rollback approver、migration direction 和 no-execution 边界
+
+65-version-61-rollback-approval-record-fixture.md
+ -> 第六十一版 rollback approval record fixture，固化 reviewer、approval timestamp placeholder、rollback target 和 no-secret-value 边界
 ```
 
-后续推进 v61 时，从 `65-version-61-主题.md` 继续追加。
+后续推进 v62 时，从 `66-version-62-主题.md` 继续追加。
 
 ## 一句话总览
 

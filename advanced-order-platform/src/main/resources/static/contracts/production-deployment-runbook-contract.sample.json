@@ -74,6 +74,7 @@
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/rollback-approval-handoff.sample.json",
+    "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",
     "/contracts/production-secret-source-contract.sample.json"
   ],

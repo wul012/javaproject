@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T17:20:00Z",
+  "updatedAt": "2026-05-14T19:40:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -337,6 +337,47 @@
         {
           "path": "rollbackApprovalHandoff.rollbackSqlExecutionAllowed",
           "meaning": "Rollback SQL must not run from the handoff sample.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "rollbackApprovalRecordFixture",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "rollbackApprovalRecordFixture.fixtureVersion",
+          "meaning": "Version for the Java rollback approval record fixture consumed by release window readiness packets.",
+          "expectedValue": "java-rollback-approval-record-fixture.v1"
+        },
+        {
+          "path": "rollbackApprovalRecordFixture.fixtureEndpoint",
+          "meaning": "Static endpoint exposing reviewer, approval timestamp placeholder, rollback target, migration direction, and no-secret-value boundary.",
+          "expectedValue": "/contracts/rollback-approval-record.fixture.json"
+        },
+        {
+          "path": "rollbackApprovalRecordFixture.approvalTimestampPlaceholder",
+          "meaning": "Operator-supplied timestamp placeholder; Java does not infer a real approval instant from this sample.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "rollbackApprovalRecordFixture.rollbackTarget",
+          "meaning": "Operator-supplied release tag or artifact version placeholder for rollback review.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "rollbackApprovalRecordFixture.noSecretValueBoundaries",
+          "meaning": "Approval record fixture stores metadata only and must not embed secret values.",
+          "stability": "stable-boundary"
+        },
+        {
+          "path": "rollbackApprovalRecordFixture.nodeMayTriggerRollback",
+          "meaning": "Node may consume the fixture but must not trigger Java rollback.",
+          "expectedValue": false
+        },
+        {
+          "path": "rollbackApprovalRecordFixture.rollbackExecutionAllowed",
+          "meaning": "Rollback execution must not run from this fixture.",
           "expectedValue": false
         }
       ]

@@ -99,6 +99,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
                         "/contracts/production-secret-source-contract.sample.json",
                         "/contracts/production-deployment-runbook-contract.sample.json"
@@ -124,6 +125,7 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/deployment-rollback-evidence.sample.json",
                         "GET /contracts/release-bundle-manifest.sample.json",
                         "GET /contracts/rollback-approval-handoff.sample.json",
+                        "GET /contracts/rollback-approval-record.fixture.json",
                         "GET /contracts/rollback-sql-review-gate.sample.json",
                         "GET /contracts/production-secret-source-contract.sample.json",
                         "GET /contracts/production-deployment-runbook-contract.sample.json"
@@ -207,6 +209,7 @@ class OpsEvidenceServiceTests {
                         "production-deployment-runbook-contract",
                         "database-migration-direction",
                         "rollback-approval-handoff",
+                        "rollback-approval-record-fixture",
                         "rollback-sql-review-gate"
                 );
         assertThat(evidence.deploymentRollback().packageRollbackSupported()).isTrue();
@@ -233,6 +236,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
                         "/contracts/production-secret-source-contract.sample.json",
                         "/contracts/production-deployment-runbook-contract.sample.json"
@@ -266,6 +270,7 @@ class OpsEvidenceServiceTests {
                         "production-secret-source-contract",
                         "production-deployment-runbook-contract",
                         "database-migration-direction",
+                        "rollback-approval-record-fixture",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
                         "deployment-rollback-evidence"
@@ -274,6 +279,7 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
                         "/contracts/production-secret-source-contract.sample.json",
                         "/contracts/production-deployment-runbook-contract.sample.json",
@@ -285,6 +291,57 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.rollbackApprovalHandoff().requiresProductionDatabase()).isFalse();
         assertThat(evidence.rollbackApprovalHandoff().requiresProductionSecrets()).isFalse();
         assertThat(evidence.rollbackApprovalHandoff().changesOrderTransactionSemantics()).isFalse();
+        assertThat(evidence.rollbackApprovalRecordFixture().fixtureVersion())
+                .isEqualTo("java-rollback-approval-record-fixture.v1");
+        assertThat(evidence.rollbackApprovalRecordFixture().fixtureEndpoint())
+                .isEqualTo("/contracts/rollback-approval-record.fixture.json");
+        assertThat(evidence.rollbackApprovalRecordFixture().fixtureMode())
+                .isEqualTo("READ_ONLY_APPROVAL_RECORD_FIXTURE");
+        assertThat(evidence.rollbackApprovalRecordFixture().reviewer())
+                .isEqualTo("rollback-reviewer-placeholder");
+        assertThat(evidence.rollbackApprovalRecordFixture().approvalTimestampPlaceholder())
+                .isEqualTo("approval-timestamp-placeholder");
+        assertThat(evidence.rollbackApprovalRecordFixture().rollbackTarget())
+                .isEqualTo("release-tag-or-artifact-version-placeholder");
+        assertThat(evidence.rollbackApprovalRecordFixture().migrationDirectionOptions())
+                .containsExactly(
+                        "forward-only",
+                        "rollback-script-reviewed",
+                        "no-database-change"
+                );
+        assertThat(evidence.rollbackApprovalRecordFixture().selectedMigrationDirection())
+                .isEqualTo("no-database-change");
+        assertThat(evidence.rollbackApprovalRecordFixture().requiredRecordFields())
+                .containsExactly(
+                        "reviewer",
+                        "approval-timestamp-placeholder",
+                        "rollback-target",
+                        "database-migration-direction",
+                        "rollback-sql-review-gate",
+                        "no-secret-value-boundary"
+                );
+        assertThat(evidence.rollbackApprovalRecordFixture().recordArtifacts())
+                .containsExactly(
+                        "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-sql-review-gate.sample.json",
+                        "/contracts/production-deployment-runbook-contract.sample.json",
+                        "/contracts/production-secret-source-contract.sample.json",
+                        "/contracts/release-bundle-manifest.sample.json"
+                );
+        assertThat(evidence.rollbackApprovalRecordFixture().noSecretValueBoundaries())
+                .containsExactly(
+                        "record-fixture-stores-metadata-only",
+                        "secret-values-must-not-be-read",
+                        "secret-values-must-not-be-embedded-in-approval-record",
+                        "node-may-render-release-window-packet-only"
+                );
+        assertThat(evidence.rollbackApprovalRecordFixture().nodeMayConsume()).isTrue();
+        assertThat(evidence.rollbackApprovalRecordFixture().nodeMayTriggerRollback()).isFalse();
+        assertThat(evidence.rollbackApprovalRecordFixture().rollbackExecutionAllowed()).isFalse();
+        assertThat(evidence.rollbackApprovalRecordFixture().rollbackSqlExecutionAllowed()).isFalse();
+        assertThat(evidence.rollbackApprovalRecordFixture().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.rollbackApprovalRecordFixture().requiresProductionSecrets()).isFalse();
+        assertThat(evidence.rollbackApprovalRecordFixture().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.rollbackSqlReviewGate().gateVersion())
                 .isEqualTo("java-rollback-sql-review-gate.v1");
         assertThat(evidence.rollbackSqlReviewGate().gateEndpoint())
@@ -387,6 +444,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
                         "/contracts/production-secret-source-contract.sample.json"
                 );
@@ -439,6 +497,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
                         "/contracts/production-secret-source-contract.sample.json",
                         "/contracts/production-deployment-runbook-contract.sample.json",

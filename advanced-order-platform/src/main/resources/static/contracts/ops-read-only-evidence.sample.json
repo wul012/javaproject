@@ -27,6 +27,7 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/production-secret-source-contract.sample.json",
       "/contracts/production-deployment-runbook-contract.sample.json"
@@ -92,6 +93,7 @@
       "GET /contracts/deployment-rollback-evidence.sample.json",
       "GET /contracts/release-bundle-manifest.sample.json",
       "GET /contracts/rollback-approval-handoff.sample.json",
+      "GET /contracts/rollback-approval-record.fixture.json",
       "GET /contracts/rollback-sql-review-gate.sample.json",
       "GET /contracts/production-secret-source-contract.sample.json",
       "GET /contracts/production-deployment-runbook-contract.sample.json"
@@ -167,6 +169,7 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/production-secret-source-contract.sample.json",
       "/contracts/production-deployment-runbook-contract.sample.json"
@@ -195,6 +198,7 @@
       "production-deployment-runbook-contract",
       "database-migration-direction",
       "rollback-approval-handoff",
+      "rollback-approval-record-fixture",
       "rollback-sql-review-gate"
     ],
     "packageRollbackSupported": true,
@@ -219,6 +223,7 @@
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/production-secret-source-contract.sample.json",
       "/contracts/production-deployment-runbook-contract.sample.json"
@@ -249,6 +254,7 @@
       "production-secret-source-contract",
       "production-deployment-runbook-contract",
       "database-migration-direction",
+      "rollback-approval-record-fixture",
       "rollback-sql-review-gate",
       "release-bundle-manifest",
       "deployment-rollback-evidence"
@@ -256,6 +262,7 @@
     "handoffArtifacts": [
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/production-secret-source-contract.sample.json",
       "/contracts/production-deployment-runbook-contract.sample.json",
@@ -263,6 +270,48 @@
     ],
     "nodeMayConsume": true,
     "nodeMayTriggerRollback": false,
+    "rollbackSqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderTransactionSemantics": false
+  },
+  "rollbackApprovalRecordFixture": {
+    "fixtureVersion": "java-rollback-approval-record-fixture.v1",
+    "fixtureEndpoint": "/contracts/rollback-approval-record.fixture.json",
+    "fixtureMode": "READ_ONLY_APPROVAL_RECORD_FIXTURE",
+    "reviewer": "rollback-reviewer-placeholder",
+    "approvalTimestampPlaceholder": "approval-timestamp-placeholder",
+    "rollbackTarget": "release-tag-or-artifact-version-placeholder",
+    "migrationDirectionOptions": [
+      "forward-only",
+      "rollback-script-reviewed",
+      "no-database-change"
+    ],
+    "selectedMigrationDirection": "no-database-change",
+    "requiredRecordFields": [
+      "reviewer",
+      "approval-timestamp-placeholder",
+      "rollback-target",
+      "database-migration-direction",
+      "rollback-sql-review-gate",
+      "no-secret-value-boundary"
+    ],
+    "recordArtifacts": [
+      "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/production-deployment-runbook-contract.sample.json",
+      "/contracts/production-secret-source-contract.sample.json",
+      "/contracts/release-bundle-manifest.sample.json"
+    ],
+    "noSecretValueBoundaries": [
+      "record-fixture-stores-metadata-only",
+      "secret-values-must-not-be-read",
+      "secret-values-must-not-be-embedded-in-approval-record",
+      "node-may-render-release-window-packet-only"
+    ],
+    "nodeMayConsume": true,
+    "nodeMayTriggerRollback": false,
+    "rollbackExecutionAllowed": false,
     "rollbackSqlExecutionAllowed": false,
     "requiresProductionDatabase": false,
     "requiresProductionSecrets": false,
@@ -349,6 +398,7 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
       "/contracts/production-secret-source-contract.sample.json"
     ],
@@ -382,6 +432,7 @@
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/rollback-approval-handoff.sample.json",
+    "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",
     "/contracts/production-secret-source-contract.sample.json",
     "/contracts/production-deployment-runbook-contract.sample.json",
