@@ -27,6 +27,11 @@ public class OpsEvidenceService {
     static final String RELEASE_VERIFICATION_MANIFEST_ENDPOINT =
             "/contracts/release-verification-manifest.sample.json";
 
+    static final String DEPLOYMENT_ROLLBACK_EVIDENCE_VERSION = "java-deployment-rollback-evidence.v1";
+
+    static final String DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT =
+            "/contracts/deployment-rollback-evidence.sample.json";
+
     private static final String REAL_REPLAY_ENDPOINT = "/api/v1/failed-events/{id}/replay";
 
     private final Instant startedAt = Instant.now();
@@ -78,6 +83,7 @@ public class OpsEvidenceService {
                 readOnlyWindow(true),
                 orderIdempotency(),
                 releaseVerification(),
+                deploymentRollback(),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -108,7 +114,8 @@ public class OpsEvidenceService {
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
-                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT
+                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
+                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT
                 ),
                 true,
                 staticSampleOnly
@@ -131,7 +138,8 @@ public class OpsEvidenceService {
                         "GET /contracts/ops-read-only-evidence.sample.json",
                         "GET /contracts/order-idempotency-boundary.sample.json",
                         "GET /contracts/order-idempotency-store-abstraction.sample.json",
-                        "GET " + RELEASE_VERIFICATION_MANIFEST_ENDPOINT
+                        "GET " + RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
+                        "GET " + DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -208,9 +216,36 @@ public class OpsEvidenceService {
                         "/contracts/ops-evidence-field-guide.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
-                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT
+                        RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
+                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT
                 ),
                 false,
+                false,
+                false,
+                false
+        );
+    }
+
+    private OpsEvidenceResponse.DeploymentRollback deploymentRollback() {
+        return new OpsEvidenceResponse.DeploymentRollback(
+                DEPLOYMENT_ROLLBACK_EVIDENCE_VERSION,
+                DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                "READ_ONLY_BOUNDARY_SAMPLE",
+                List.of(
+                        "java-package",
+                        "runtime-configuration",
+                        "database-migrations",
+                        "static-contracts"
+                ),
+                List.of(
+                        "artifact-version-target",
+                        "configuration-secret-source",
+                        "database-migration-direction"
+                ),
+                true,
+                true,
+                false,
+                true,
                 false,
                 false,
                 false
@@ -319,6 +354,7 @@ public class OpsEvidenceService {
                 "/contracts/order-idempotency-boundary.sample.json",
                 "/contracts/order-idempotency-store-abstraction.sample.json",
                 RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
+                DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

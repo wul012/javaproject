@@ -95,7 +95,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
-                        "/contracts/release-verification-manifest.sample.json"
+                        "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/deployment-rollback-evidence.sample.json"
                 );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
@@ -114,7 +115,8 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/ops-read-only-evidence.sample.json",
                         "GET /contracts/order-idempotency-boundary.sample.json",
                         "GET /contracts/order-idempotency-store-abstraction.sample.json",
-                        "GET /contracts/release-verification-manifest.sample.json"
+                        "GET /contracts/release-verification-manifest.sample.json",
+                        "GET /contracts/deployment-rollback-evidence.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -165,12 +167,38 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.releaseVerification().staticContractEndpoints())
                 .contains(
                         "/contracts/order-idempotency-store-abstraction.sample.json",
-                        "/contracts/release-verification-manifest.sample.json"
+                        "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/deployment-rollback-evidence.sample.json"
                 );
         assertThat(evidence.releaseVerification().nodeMayExecuteBuild()).isFalse();
         assertThat(evidence.releaseVerification().nodeMayTriggerWrites()).isFalse();
         assertThat(evidence.releaseVerification().changesBusinessSemantics()).isFalse();
         assertThat(evidence.releaseVerification().requiresProductionSecrets()).isFalse();
+        assertThat(evidence.deploymentRollback().evidenceVersion())
+                .isEqualTo("java-deployment-rollback-evidence.v1");
+        assertThat(evidence.deploymentRollback().evidenceEndpoint())
+                .isEqualTo("/contracts/deployment-rollback-evidence.sample.json");
+        assertThat(evidence.deploymentRollback().rollbackMode()).isEqualTo("READ_ONLY_BOUNDARY_SAMPLE");
+        assertThat(evidence.deploymentRollback().rollbackSubjects())
+                .containsExactly(
+                        "java-package",
+                        "runtime-configuration",
+                        "database-migrations",
+                        "static-contracts"
+                );
+        assertThat(evidence.deploymentRollback().requiresOperatorConfirmation())
+                .containsExactly(
+                        "artifact-version-target",
+                        "configuration-secret-source",
+                        "database-migration-direction"
+                );
+        assertThat(evidence.deploymentRollback().packageRollbackSupported()).isTrue();
+        assertThat(evidence.deploymentRollback().configRollbackSupported()).isTrue();
+        assertThat(evidence.deploymentRollback().databaseMigrationRollbackAutomatic()).isFalse();
+        assertThat(evidence.deploymentRollback().contractsRollbackByArtifactVersion()).isTrue();
+        assertThat(evidence.deploymentRollback().nodeMayTriggerRollback()).isFalse();
+        assertThat(evidence.deploymentRollback().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.deploymentRollback().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
@@ -210,6 +238,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/deployment-rollback-evidence.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T10:05:00Z",
+  "updatedAt": "2026-05-14T10:45:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -229,6 +229,42 @@
         {
           "path": "releaseVerification.nodeMayExecuteBuild",
           "meaning": "Node release gate may consume Java evidence but must not run Maven for Java.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "deploymentRollback",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "deploymentRollback.evidenceVersion",
+          "meaning": "Version for the Java deployment rollback evidence sample.",
+          "expectedValue": "java-deployment-rollback-evidence.v1"
+        },
+        {
+          "path": "deploymentRollback.evidenceEndpoint",
+          "meaning": "Static endpoint exposing package, configuration, migration, and contract rollback boundaries.",
+          "expectedValue": "/contracts/deployment-rollback-evidence.sample.json"
+        },
+        {
+          "path": "deploymentRollback.rollbackSubjects",
+          "meaning": "Rollback subjects covered by this evidence: package, runtime configuration, database migrations, and static contracts.",
+          "stability": "stable"
+        },
+        {
+          "path": "deploymentRollback.databaseMigrationRollbackAutomatic",
+          "meaning": "Database rollback must not run automatically from this evidence.",
+          "expectedValue": false
+        },
+        {
+          "path": "deploymentRollback.nodeMayTriggerRollback",
+          "meaning": "Node may consume the evidence but must not trigger Java rollback.",
+          "expectedValue": false
+        },
+        {
+          "path": "deploymentRollback.requiresProductionDatabase",
+          "meaning": "The sample and live evidence do not require a production database connection.",
           "expectedValue": false
         }
       ]

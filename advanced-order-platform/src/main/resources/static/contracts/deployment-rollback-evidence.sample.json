@@ -1,0 +1,79 @@
+{
+  "evidenceVersion": "java-deployment-rollback-evidence.v1",
+  "scenario": "DEPLOYMENT_ROLLBACK_EVIDENCE_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "sampledAt": "2026-05-14T10:45:00Z",
+  "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
+  "evidenceEndpoint": "/contracts/deployment-rollback-evidence.sample.json",
+  "rollbackMode": "READ_ONLY_BOUNDARY_SAMPLE",
+  "rollbackSubjects": [
+    "java-package",
+    "runtime-configuration",
+    "database-migrations",
+    "static-contracts"
+  ],
+  "packageRollback": {
+    "supported": true,
+    "artifact": "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
+    "requiredEvidence": [
+      "target artifact version selected by operator",
+      "maven package success for selected artifact",
+      "HTTP smoke evidence archived under c/<version>"
+    ],
+    "nodeMayTriggerRollback": false
+  },
+  "configurationRollback": {
+    "supported": true,
+    "requiredEvidence": [
+      "operator confirms runtime profile",
+      "operator confirms secret source outside this repository",
+      "operator confirms UPSTREAM_ACTIONS_ENABLED=false during read-only probe"
+    ],
+    "requiresProductionSecrets": false,
+    "nodeMayModifyRuntimeConfig": false
+  },
+  "databaseMigrationRollback": {
+    "automatic": false,
+    "requiresOperatorConfirmation": true,
+    "requiresProductionDatabase": false,
+    "requiredEvidence": [
+      "migration direction is selected by operator",
+      "no rollback SQL is executed from this sample",
+      "production database connection is outside this evidence"
+    ]
+  },
+  "staticContractRollback": {
+    "byArtifactVersion": true,
+    "contractEndpoints": [
+      "/contracts/ops-read-only-evidence.sample.json",
+      "/contracts/ops-evidence-field-guide.sample.json",
+      "/contracts/order-idempotency-boundary.sample.json",
+      "/contracts/order-idempotency-store-abstraction.sample.json",
+      "/contracts/release-verification-manifest.sample.json",
+      "/contracts/deployment-rollback-evidence.sample.json"
+    ]
+  },
+  "requiresOperatorConfirmation": [
+    "artifact-version-target",
+    "configuration-secret-source",
+    "database-migration-direction"
+  ],
+  "boundaries": {
+    "nodeMayTriggerRollback": false,
+    "nodeMayExecuteMaven": false,
+    "nodeMayTriggerJavaWrites": false,
+    "requiresProductionDatabase": false,
+    "changesOrderCreateSemantics": false,
+    "changesPaymentOrInventoryTransaction": false,
+    "changesOrderTransactionSemantics": false,
+    "connectsMiniKv": false
+  },
+  "forbiddenOperations": [
+    "Executing database rollback SQL from this sample",
+    "Changing production runtime secrets from this sample",
+    "Triggering rollback from Node",
+    "POST /api/v1/orders",
+    "POST /api/v1/failed-events/{id}/replay"
+  ]
+}

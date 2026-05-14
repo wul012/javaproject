@@ -144,9 +144,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 58-version-54-release-verification-manifest.md
  -> 第五十四版发布验证 manifest，固化 Maven 测试、打包、HTTP smoke、静态 contracts 清单和 Node 只读 release gate 边界
+
+59-version-55-deployment-rollback-evidence-sample.md
+ -> 第五十五版部署回退证据样本，说明 Java 包、运行配置、数据库迁移和静态契约的回退边界
 ```
 
-后续推进 v55 时，从 `59-version-55-主题.md` 继续追加。
+后续推进 v56 时，从 `60-version-56-主题.md` 继续追加。
 
 ## 一句话总览
 

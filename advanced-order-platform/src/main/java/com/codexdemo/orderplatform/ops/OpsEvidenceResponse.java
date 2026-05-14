@@ -13,6 +13,7 @@ public record OpsEvidenceResponse(
         ReadOnlyWindow readOnlyWindow,
         OrderIdempotency orderIdempotency,
         ReleaseVerification releaseVerification,
+        DeploymentRollback deploymentRollback,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -99,6 +100,22 @@ public record OpsEvidenceResponse(
             boolean nodeMayTriggerWrites,
             boolean changesBusinessSemantics,
             boolean requiresProductionSecrets
+    ) {
+    }
+
+    public record DeploymentRollback(
+            String evidenceVersion,
+            String evidenceEndpoint,
+            String rollbackMode,
+            List<String> rollbackSubjects,
+            List<String> requiresOperatorConfirmation,
+            boolean packageRollbackSupported,
+            boolean configRollbackSupported,
+            boolean databaseMigrationRollbackAutomatic,
+            boolean contractsRollbackByArtifactVersion,
+            boolean nodeMayTriggerRollback,
+            boolean requiresProductionDatabase,
+            boolean changesOrderTransactionSemantics
     ) {
     }
 
