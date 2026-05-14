@@ -1,5 +1,13 @@
 # advanced-order-platform Agent Notes
 
+## Context Compression Guard
+
+当上下文明显变长、即将进入压缩风险区时，停止当前推进节奏，不继续执行新的代码修改、文档修改、构建、测试、提交、tag 或 push。
+
+先用中文明确提醒用户：当前上下文已经接近压缩风险，建议先让用户压缩上下文后再继续。
+
+如果正在收尾已经完成的验证或清理，可以只做必要的安全清理；不要开启新的版本目标。
+
 ## Runtime Archive Folder
 
 For future Java version work, put run/debug explanations and screenshots in `c/`, which is a sibling of the old `a/` and `b/` archive folders.
