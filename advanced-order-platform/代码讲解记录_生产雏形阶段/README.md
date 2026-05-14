@@ -147,9 +147,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 59-version-55-deployment-rollback-evidence-sample.md
  -> 第五十五版部署回退证据样本，说明 Java 包、运行配置、数据库迁移和静态契约的回退边界
+
+60-version-56-release-bundle-manifest.md
+ -> 第五十六版发布包 bundle manifest，把 jar、contracts、发布验证和回退证据收成 Node 可读但不可执行的只读清单
 ```
 
-后续推进 v56 时，从 `60-version-56-主题.md` 继续追加。
+后续推进 v57 时，从 `61-version-57-主题.md` 继续追加。
 
 ## 一句话总览
 

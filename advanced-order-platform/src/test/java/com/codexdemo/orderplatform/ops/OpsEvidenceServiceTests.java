@@ -96,7 +96,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         "/contracts/release-verification-manifest.sample.json",
-                        "/contracts/deployment-rollback-evidence.sample.json"
+                        "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/release-bundle-manifest.sample.json"
                 );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
@@ -116,7 +117,8 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/order-idempotency-boundary.sample.json",
                         "GET /contracts/order-idempotency-store-abstraction.sample.json",
                         "GET /contracts/release-verification-manifest.sample.json",
-                        "GET /contracts/deployment-rollback-evidence.sample.json"
+                        "GET /contracts/deployment-rollback-evidence.sample.json",
+                        "GET /contracts/release-bundle-manifest.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -168,7 +170,8 @@ class OpsEvidenceServiceTests {
                 .contains(
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         "/contracts/release-verification-manifest.sample.json",
-                        "/contracts/deployment-rollback-evidence.sample.json"
+                        "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/release-bundle-manifest.sample.json"
                 );
         assertThat(evidence.releaseVerification().nodeMayExecuteBuild()).isFalse();
         assertThat(evidence.releaseVerification().nodeMayTriggerWrites()).isFalse();
@@ -199,6 +202,36 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.deploymentRollback().nodeMayTriggerRollback()).isFalse();
         assertThat(evidence.deploymentRollback().requiresProductionDatabase()).isFalse();
         assertThat(evidence.deploymentRollback().changesOrderTransactionSemantics()).isFalse();
+        assertThat(evidence.releaseBundle().manifestVersion())
+                .isEqualTo("java-release-bundle-manifest.v1");
+        assertThat(evidence.releaseBundle().manifestEndpoint())
+                .isEqualTo("/contracts/release-bundle-manifest.sample.json");
+        assertThat(evidence.releaseBundle().bundleMode()).isEqualTo("READ_ONLY_RELEASE_BUNDLE");
+        assertThat(evidence.releaseBundle().artifact())
+                .isEqualTo("target/advanced-order-platform-0.1.0-SNAPSHOT.jar");
+        assertThat(evidence.releaseBundle().contractEndpoints())
+                .containsExactly(
+                        "/contracts/ops-read-only-evidence.sample.json",
+                        "/contracts/ops-evidence-field-guide.sample.json",
+                        "/contracts/order-idempotency-boundary.sample.json",
+                        "/contracts/order-idempotency-store-abstraction.sample.json",
+                        "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/release-bundle-manifest.sample.json"
+                );
+        assertThat(evidence.releaseBundle().requiredEvidence())
+                .containsExactly(
+                        "focused-maven-tests",
+                        "non-docker-regression-tests",
+                        "maven-package",
+                        "http-smoke",
+                        "static-contract-json-validation"
+                );
+        assertThat(evidence.releaseBundle().nodeMayConsume()).isTrue();
+        assertThat(evidence.releaseBundle().nodeMayExecuteBuild()).isFalse();
+        assertThat(evidence.releaseBundle().nodeMayTriggerRollback()).isFalse();
+        assertThat(evidence.releaseBundle().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.releaseBundle().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
@@ -239,6 +272,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/release-bundle-manifest.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );

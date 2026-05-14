@@ -24,7 +24,8 @@
       "/contracts/order-idempotency-boundary.sample.json",
       "/contracts/order-idempotency-store-abstraction.sample.json",
       "/contracts/release-verification-manifest.sample.json",
-      "/contracts/deployment-rollback-evidence.sample.json"
+      "/contracts/deployment-rollback-evidence.sample.json",
+      "/contracts/release-bundle-manifest.sample.json"
     ],
     "liveProbeRequiredForPass": true,
     "staticSampleOnly": true
@@ -84,7 +85,8 @@
       "GET /contracts/order-idempotency-boundary.sample.json",
       "GET /contracts/order-idempotency-store-abstraction.sample.json",
       "GET /contracts/release-verification-manifest.sample.json",
-      "GET /contracts/deployment-rollback-evidence.sample.json"
+      "GET /contracts/deployment-rollback-evidence.sample.json",
+      "GET /contracts/release-bundle-manifest.sample.json"
     ],
     "forbiddenOperations": [
       "POST /api/v1/orders",
@@ -154,7 +156,8 @@
       "/contracts/order-idempotency-boundary.sample.json",
       "/contracts/order-idempotency-store-abstraction.sample.json",
       "/contracts/release-verification-manifest.sample.json",
-      "/contracts/deployment-rollback-evidence.sample.json"
+      "/contracts/deployment-rollback-evidence.sample.json",
+      "/contracts/release-bundle-manifest.sample.json"
     ],
     "nodeMayExecuteBuild": false,
     "nodeMayTriggerWrites": false,
@@ -184,6 +187,33 @@
     "requiresProductionDatabase": false,
     "changesOrderTransactionSemantics": false
   },
+  "releaseBundle": {
+    "manifestVersion": "java-release-bundle-manifest.v1",
+    "manifestEndpoint": "/contracts/release-bundle-manifest.sample.json",
+    "bundleMode": "READ_ONLY_RELEASE_BUNDLE",
+    "artifact": "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
+    "contractEndpoints": [
+      "/contracts/ops-read-only-evidence.sample.json",
+      "/contracts/ops-evidence-field-guide.sample.json",
+      "/contracts/order-idempotency-boundary.sample.json",
+      "/contracts/order-idempotency-store-abstraction.sample.json",
+      "/contracts/release-verification-manifest.sample.json",
+      "/contracts/deployment-rollback-evidence.sample.json",
+      "/contracts/release-bundle-manifest.sample.json"
+    ],
+    "requiredEvidence": [
+      "focused-maven-tests",
+      "non-docker-regression-tests",
+      "maven-package",
+      "http-smoke",
+      "static-contract-json-validation"
+    ],
+    "nodeMayConsume": true,
+    "nodeMayExecuteBuild": false,
+    "nodeMayTriggerRollback": false,
+    "requiresProductionDatabase": false,
+    "changesOrderTransactionSemantics": false
+  },
   "blockers": [
     "READ_ONLY_EVIDENCE_ENDPOINT",
     "REPLAY_APPROVAL_PENDING",
@@ -204,6 +234,7 @@
     "/contracts/order-idempotency-store-abstraction.sample.json",
     "/contracts/release-verification-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
+    "/contracts/release-bundle-manifest.sample.json",
     "/api/v1/failed-events/summary",
     "/api/v1/failed-events/{id}/approval-status",
     "/api/v1/failed-events/{id}/replay-readiness",

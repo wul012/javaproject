@@ -14,6 +14,7 @@ public record OpsEvidenceResponse(
         OrderIdempotency orderIdempotency,
         ReleaseVerification releaseVerification,
         DeploymentRollback deploymentRollback,
+        ReleaseBundle releaseBundle,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -113,6 +114,21 @@ public record OpsEvidenceResponse(
             boolean configRollbackSupported,
             boolean databaseMigrationRollbackAutomatic,
             boolean contractsRollbackByArtifactVersion,
+            boolean nodeMayTriggerRollback,
+            boolean requiresProductionDatabase,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record ReleaseBundle(
+            String manifestVersion,
+            String manifestEndpoint,
+            String bundleMode,
+            String artifact,
+            List<String> contractEndpoints,
+            List<String> requiredEvidence,
+            boolean nodeMayConsume,
+            boolean nodeMayExecuteBuild,
             boolean nodeMayTriggerRollback,
             boolean requiresProductionDatabase,
             boolean changesOrderTransactionSemantics

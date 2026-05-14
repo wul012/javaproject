@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T10:45:00Z",
+  "updatedAt": "2026-05-14T12:55:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -265,6 +265,42 @@
         {
           "path": "deploymentRollback.requiresProductionDatabase",
           "meaning": "The sample and live evidence do not require a production database connection.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "releaseBundle",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "releaseBundle.manifestVersion",
+          "meaning": "Version for the Java release bundle manifest consumed by the cross-project release bundle gate.",
+          "expectedValue": "java-release-bundle-manifest.v1"
+        },
+        {
+          "path": "releaseBundle.manifestEndpoint",
+          "meaning": "Static endpoint exposing the jar, contracts, release verification, rollback evidence, and archived check sources.",
+          "expectedValue": "/contracts/release-bundle-manifest.sample.json"
+        },
+        {
+          "path": "releaseBundle.contractEndpoints",
+          "meaning": "Static contracts included in the release bundle.",
+          "stability": "stable"
+        },
+        {
+          "path": "releaseBundle.requiredEvidence",
+          "meaning": "Operator-run evidence names required before handing the Java release bundle to Node.",
+          "stability": "stable"
+        },
+        {
+          "path": "releaseBundle.nodeMayExecuteBuild",
+          "meaning": "Node may consume the bundle but must not execute Maven for Java.",
+          "expectedValue": false
+        },
+        {
+          "path": "releaseBundle.nodeMayTriggerRollback",
+          "meaning": "Node may consume rollback evidence but must not trigger Java rollback.",
           "expectedValue": false
         }
       ]

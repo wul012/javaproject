@@ -1,0 +1,90 @@
+{
+  "manifestVersion": "java-release-bundle-manifest.v1",
+  "scenario": "JAVA_RELEASE_BUNDLE_MANIFEST_SAMPLE",
+  "readOnly": true,
+  "executionAllowed": false,
+  "sampledAt": "2026-05-14T12:55:00Z",
+  "releaseSubject": {
+    "project": "advanced-order-platform",
+    "buildTool": "Maven",
+    "javaVersion": "21",
+    "artifact": "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
+    "artifactType": "spring-boot-jar"
+  },
+  "bundleMode": "READ_ONLY_RELEASE_BUNDLE",
+  "bundleInputs": {
+    "releaseVerificationManifest": "/contracts/release-verification-manifest.sample.json",
+    "deploymentRollbackEvidence": "/contracts/deployment-rollback-evidence.sample.json",
+    "opsEvidence": "/api/v1/ops/evidence",
+    "runtimeArchiveRoot": "c/<version>"
+  },
+  "artifactEvidence": {
+    "jar": "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
+    "packageCommand": "mvn \"-DskipTests\" package",
+    "packageDockerRequired": false,
+    "expectedEvidence": [
+      "BUILD SUCCESS",
+      "target/advanced-order-platform-0.1.0-SNAPSHOT.jar exists"
+    ]
+  },
+  "verificationEvidence": [
+    {
+      "name": "focused-maven-tests",
+      "source": "release-verification-manifest.sample.json",
+      "archiveHint": "c/<version>/解释/说明.md"
+    },
+    {
+      "name": "non-docker-regression-tests",
+      "source": "release-verification-manifest.sample.json",
+      "archiveHint": "c/<version>/解释/说明.md"
+    },
+    {
+      "name": "maven-package",
+      "source": "release-verification-manifest.sample.json",
+      "archiveHint": "c/<version>/解释/说明.md"
+    },
+    {
+      "name": "http-smoke",
+      "source": "release-verification-manifest.sample.json",
+      "archiveHint": "c/<version>/解释/说明.md"
+    },
+    {
+      "name": "static-contract-json-validation",
+      "source": "release-verification-manifest.sample.json",
+      "archiveHint": "c/<version>/解释/说明.md"
+    }
+  ],
+  "contractEndpoints": [
+    "/contracts/ops-read-only-evidence.sample.json",
+    "/contracts/ops-evidence-field-guide.sample.json",
+    "/contracts/order-idempotency-boundary.sample.json",
+    "/contracts/order-idempotency-store-abstraction.sample.json",
+    "/contracts/release-verification-manifest.sample.json",
+    "/contracts/deployment-rollback-evidence.sample.json",
+    "/contracts/release-bundle-manifest.sample.json"
+  ],
+  "nodeConsumption": {
+    "nodeMayConsume": true,
+    "nodeMayExecuteMaven": false,
+    "nodeMayTriggerJavaWrites": false,
+    "nodeMayTriggerRollback": false,
+    "requiresUpstreamActionsEnabled": false
+  },
+  "boundaries": {
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderCreateSemantics": false,
+    "changesPaymentOrInventoryTransaction": false,
+    "changesOutboxOrReplayExecution": false,
+    "changesOrderTransactionSemantics": false,
+    "connectsMiniKv": false
+  },
+  "forbiddenOperations": [
+    "Executing Maven from Node",
+    "Triggering Java rollback from Node",
+    "Executing database rollback SQL",
+    "Connecting production database",
+    "POST /api/v1/orders",
+    "POST /api/v1/failed-events/{id}/replay"
+  ]
+}

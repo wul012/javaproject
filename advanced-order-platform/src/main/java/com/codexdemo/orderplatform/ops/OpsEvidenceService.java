@@ -32,6 +32,11 @@ public class OpsEvidenceService {
     static final String DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT =
             "/contracts/deployment-rollback-evidence.sample.json";
 
+    static final String RELEASE_BUNDLE_MANIFEST_VERSION = "java-release-bundle-manifest.v1";
+
+    static final String RELEASE_BUNDLE_MANIFEST_ENDPOINT =
+            "/contracts/release-bundle-manifest.sample.json";
+
     private static final String REAL_REPLAY_ENDPOINT = "/api/v1/failed-events/{id}/replay";
 
     private final Instant startedAt = Instant.now();
@@ -84,6 +89,7 @@ public class OpsEvidenceService {
                 orderIdempotency(),
                 releaseVerification(),
                 deploymentRollback(),
+                releaseBundle(),
                 failedEventReplay(failedEventSummary),
                 outbox(pendingOutboxEvents, outboxBlockers),
                 approvalExecution(executionBlockers),
@@ -115,7 +121,8 @@ public class OpsEvidenceService {
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
-                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT
+                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                        RELEASE_BUNDLE_MANIFEST_ENDPOINT
                 ),
                 true,
                 staticSampleOnly
@@ -139,7 +146,8 @@ public class OpsEvidenceService {
                         "GET /contracts/order-idempotency-boundary.sample.json",
                         "GET /contracts/order-idempotency-store-abstraction.sample.json",
                         "GET " + RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
-                        "GET " + DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT
+                        "GET " + DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                        "GET " + RELEASE_BUNDLE_MANIFEST_ENDPOINT
                 ),
                 List.of(
                         "POST /api/v1/orders",
@@ -217,7 +225,8 @@ public class OpsEvidenceService {
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
-                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT
+                        DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                        RELEASE_BUNDLE_MANIFEST_ENDPOINT
                 ),
                 false,
                 false,
@@ -249,6 +258,40 @@ public class OpsEvidenceService {
                 false,
                 false,
                 false
+        );
+    }
+
+    private OpsEvidenceResponse.ReleaseBundle releaseBundle() {
+        return new OpsEvidenceResponse.ReleaseBundle(
+                RELEASE_BUNDLE_MANIFEST_VERSION,
+                RELEASE_BUNDLE_MANIFEST_ENDPOINT,
+                "READ_ONLY_RELEASE_BUNDLE",
+                "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
+                staticContractEndpoints(),
+                List.of(
+                        "focused-maven-tests",
+                        "non-docker-regression-tests",
+                        "maven-package",
+                        "http-smoke",
+                        "static-contract-json-validation"
+                ),
+                true,
+                false,
+                false,
+                false,
+                false
+        );
+    }
+
+    private List<String> staticContractEndpoints() {
+        return List.of(
+                "/contracts/ops-read-only-evidence.sample.json",
+                "/contracts/ops-evidence-field-guide.sample.json",
+                "/contracts/order-idempotency-boundary.sample.json",
+                "/contracts/order-idempotency-store-abstraction.sample.json",
+                RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
+                DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                RELEASE_BUNDLE_MANIFEST_ENDPOINT
         );
     }
 
@@ -355,6 +398,7 @@ public class OpsEvidenceService {
                 "/contracts/order-idempotency-store-abstraction.sample.json",
                 RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                 DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
+                RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 "/api/v1/failed-events/summary",
                 "/api/v1/failed-events/{id}/approval-status",
                 "/api/v1/failed-events/{id}/replay-readiness",

@@ -51,6 +51,7 @@
         "GET /api/v1/ops/evidence returns releaseVerification.manifestVersion=java-release-verification-manifest.v1",
         "GET /contracts/release-verification-manifest.sample.json returns this manifest",
         "GET /contracts/deployment-rollback-evidence.sample.json returns rollback evidence boundaries",
+        "GET /contracts/release-bundle-manifest.sample.json returns release bundle boundaries",
         "POST /api/v1/orders returns 201 for first request, 200 for same request replay, and 409 for same key with different request"
       ],
       "dockerRequired": false
@@ -100,6 +101,12 @@
       "source": "src/main/resources/static/contracts/deployment-rollback-evidence.sample.json",
       "versionField": "evidenceVersion",
       "expectedVersion": "java-deployment-rollback-evidence.v1"
+    },
+    {
+      "endpoint": "/contracts/release-bundle-manifest.sample.json",
+      "source": "src/main/resources/static/contracts/release-bundle-manifest.sample.json",
+      "versionField": "manifestVersion",
+      "expectedVersion": "java-release-bundle-manifest.v1"
     }
   ],
   "releaseGate": {

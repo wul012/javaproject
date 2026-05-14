@@ -1078,7 +1078,7 @@ Invoke-RestMethod http://localhost:8080/contracts/release-verification-manifest.
 ```text
 manifestVersion=java-release-verification-manifest.v1
 verificationChecks 包含 focused-maven-tests、non-docker-regression-tests、maven-package、http-smoke、static-contract-json-validation
-staticContracts 列出 ops evidence、field guide、order idempotency boundary、idempotency store abstraction、release manifest 和 deployment rollback evidence
+staticContracts 列出 ops evidence、field guide、order idempotency boundary、idempotency store abstraction、release manifest、deployment rollback evidence 和 release bundle manifest
 releaseGate.nodeMayExecuteMaven=false
 releaseGate.nodeMayTriggerJavaWrites=false
 boundaries.changesOrderCreateSemantics=false
@@ -1115,6 +1115,36 @@ boundaries.changesOrderTransactionSemantics=false
 ```
 
 它服务于部署回退前的只读证据审查：说明包版本、运行配置、数据库迁移和静态契约各自需要哪些人工确认；Node 可以读取该样本作为操作台依据，但不能触发 Java 回退、不能执行 Maven、不能连接生产库，也不改变订单事务语义。
+
+v56 起，应用随包提供发布包 bundle manifest 样本：
+
+```text
+src/main/resources/static/contracts/release-bundle-manifest.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/release-bundle-manifest.sample.json
+```
+
+该样本固定表达：
+
+```text
+manifestVersion=java-release-bundle-manifest.v1
+bundleMode=READ_ONLY_RELEASE_BUNDLE
+releaseSubject.artifact=target/advanced-order-platform-0.1.0-SNAPSHOT.jar
+bundleInputs.releaseVerificationManifest=/contracts/release-verification-manifest.sample.json
+bundleInputs.deploymentRollbackEvidence=/contracts/deployment-rollback-evidence.sample.json
+verificationEvidence 包含 focused-maven-tests、non-docker-regression-tests、maven-package、http-smoke、static-contract-json-validation
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayExecuteMaven=false
+nodeConsumption.nodeMayTriggerRollback=false
+boundaries.requiresProductionDatabase=false
+boundaries.changesOrderTransactionSemantics=false
+```
+
+它服务于 Node v164 cross-project release bundle gate 的 Java 上游输入：把 jar、静态 contracts、发布验证清单、回退证据和本版归档要求收成一份只读 bundle。Node 可以读取 bundle，但不能替 Java 执行 Maven、不能触发 Java 写接口或回退，也不需要生产数据库。
 
 查询失败事件治理摘要：
 
@@ -1686,6 +1716,7 @@ ops
   -> v53 增加订单幂等存储抽象 evidence 和静态样本，说明活动存储、候选适配器和 Node 不触发写操作边界
   -> v54 增加 release verification manifest，固化 Maven 测试、打包、HTTP smoke 和静态 contracts 发布验证清单
   -> v55 增加 deployment rollback evidence，说明包、配置、数据库迁移和静态契约回退边界，Node 只读消费且不触发回退
+  -> v56 增加 release bundle manifest，把 jar、contracts、发布验证和回退证据收成 Node 可消费但不可执行的只读 bundle
 
 common
  -> 业务异常和统一错误响应
