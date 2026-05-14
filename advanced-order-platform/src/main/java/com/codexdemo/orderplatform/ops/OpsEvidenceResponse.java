@@ -15,6 +15,7 @@ public record OpsEvidenceResponse(
         ReleaseVerification releaseVerification,
         DeploymentRollback deploymentRollback,
         ReleaseBundle releaseBundle,
+        RollbackApprovalHandoff rollbackApprovalHandoff,
         FailedEventReplay failedEventReplay,
         Outbox outbox,
         ApprovalExecution approvalExecution,
@@ -131,6 +132,21 @@ public record OpsEvidenceResponse(
             boolean nodeMayExecuteBuild,
             boolean nodeMayTriggerRollback,
             boolean requiresProductionDatabase,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record RollbackApprovalHandoff(
+            String handoffVersion,
+            String handoffEndpoint,
+            String approvalMode,
+            List<String> requiredConfirmationFields,
+            List<String> handoffArtifacts,
+            boolean nodeMayConsume,
+            boolean nodeMayTriggerRollback,
+            boolean rollbackSqlExecutionAllowed,
+            boolean requiresProductionDatabase,
+            boolean requiresProductionSecrets,
             boolean changesOrderTransactionSemantics
     ) {
     }

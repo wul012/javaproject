@@ -150,9 +150,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 60-version-56-release-bundle-manifest.md
  -> 第五十六版发布包 bundle manifest，把 jar、contracts、发布验证和回退证据收成 Node 可读但不可执行的只读清单
+
+61-version-57-rollback-approval-handoff-sample.md
+ -> 第五十七版 rollback approval handoff 样本，固化 Java 回退窗口前必须人工确认的包版本、运行配置、密钥来源和数据库迁移方向
 ```
 
-后续推进 v57 时，从 `61-version-57-主题.md` 继续追加。
+后续推进 v58 时，从 `62-version-58-主题.md` 继续追加。
 
 ## 一句话总览
 

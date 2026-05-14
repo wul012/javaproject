@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-14T12:55:00Z",
+  "updatedAt": "2026-05-14T14:10:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -301,6 +301,42 @@
         {
           "path": "releaseBundle.nodeMayTriggerRollback",
           "meaning": "Node may consume rollback evidence but must not trigger Java rollback.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "rollbackApprovalHandoff",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "rollbackApprovalHandoff.handoffVersion",
+          "meaning": "Version for the Java rollback approval handoff consumed by rollback window readiness checks.",
+          "expectedValue": "java-rollback-approval-handoff.v1"
+        },
+        {
+          "path": "rollbackApprovalHandoff.handoffEndpoint",
+          "meaning": "Static endpoint exposing the human confirmation fields required before a Java rollback window.",
+          "expectedValue": "/contracts/rollback-approval-handoff.sample.json"
+        },
+        {
+          "path": "rollbackApprovalHandoff.requiredConfirmationFields",
+          "meaning": "Operator-confirmed fields for artifact version, runtime config, secret source, migration direction, release bundle, and rollback evidence.",
+          "stability": "stable"
+        },
+        {
+          "path": "rollbackApprovalHandoff.handoffArtifacts",
+          "meaning": "Static Java artifacts Node may consume when rendering a cross-project rollback window checklist.",
+          "stability": "stable"
+        },
+        {
+          "path": "rollbackApprovalHandoff.nodeMayTriggerRollback",
+          "meaning": "Node may consume the handoff but must not trigger Java rollback.",
+          "expectedValue": false
+        },
+        {
+          "path": "rollbackApprovalHandoff.rollbackSqlExecutionAllowed",
+          "meaning": "Rollback SQL must not run from the handoff sample.",
           "expectedValue": false
         }
       ]

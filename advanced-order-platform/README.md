@@ -1078,7 +1078,7 @@ Invoke-RestMethod http://localhost:8080/contracts/release-verification-manifest.
 ```text
 manifestVersion=java-release-verification-manifest.v1
 verificationChecks 包含 focused-maven-tests、non-docker-regression-tests、maven-package、http-smoke、static-contract-json-validation
-staticContracts 列出 ops evidence、field guide、order idempotency boundary、idempotency store abstraction、release manifest、deployment rollback evidence 和 release bundle manifest
+staticContracts 列出 ops evidence、field guide、order idempotency boundary、idempotency store abstraction、release manifest、deployment rollback evidence、release bundle manifest 和 rollback approval handoff
 releaseGate.nodeMayExecuteMaven=false
 releaseGate.nodeMayTriggerJavaWrites=false
 boundaries.changesOrderCreateSemantics=false
@@ -1145,6 +1145,35 @@ boundaries.changesOrderTransactionSemantics=false
 ```
 
 它服务于 Node v164 cross-project release bundle gate 的 Java 上游输入：把 jar、静态 contracts、发布验证清单、回退证据和本版归档要求收成一份只读 bundle。Node 可以读取 bundle，但不能替 Java 执行 Maven、不能触发 Java 写接口或回退，也不需要生产数据库。
+
+v57 起，应用随包提供 rollback approval handoff 样本：
+
+```text
+src/main/resources/static/contracts/rollback-approval-handoff.sample.json
+```
+
+启动应用后可直接读取：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/rollback-approval-handoff.sample.json
+```
+
+该样本固定表达：
+
+```text
+handoffVersion=java-rollback-approval-handoff.v1
+approvalMode=OPERATOR_CONFIRMATION_REQUIRED
+requiredConfirmationFields 包含 artifact-version-target、runtime-config-profile、configuration-secret-source、database-migration-direction、release-bundle-manifest、deployment-rollback-evidence
+handoffArtifacts 包含 release bundle manifest、deployment rollback evidence 和 release verification manifest
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayTriggerRollback=false
+nodeConsumption.nodeMayExecuteRollbackSql=false
+boundaries.rollbackSqlExecutionAllowed=false
+boundaries.requiresProductionDatabase=false
+boundaries.requiresProductionSecrets=false
+```
+
+它服务于后续 rollback window readiness checklist：Java 只提供人工审批交接字段和只读样本，不执行 rollback SQL，不读取生产密钥，不连接生产库，也不授权 Node 触发 Java 回退。
 
 查询失败事件治理摘要：
 
@@ -1717,6 +1746,7 @@ ops
   -> v54 增加 release verification manifest，固化 Maven 测试、打包、HTTP smoke 和静态 contracts 发布验证清单
   -> v55 增加 deployment rollback evidence，说明包、配置、数据库迁移和静态契约回退边界，Node 只读消费且不触发回退
   -> v56 增加 release bundle manifest，把 jar、contracts、发布验证和回退证据收成 Node 可消费但不可执行的只读 bundle
+  -> v57 增加 rollback approval handoff，固化 artifact、runtime config、secret source 和 database migration direction 人工确认字段
 
 common
  -> 业务异常和统一错误响应

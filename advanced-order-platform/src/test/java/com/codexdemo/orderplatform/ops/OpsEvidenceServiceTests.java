@@ -97,7 +97,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
-                        "/contracts/release-bundle-manifest.sample.json"
+                        "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/rollback-approval-handoff.sample.json"
                 );
         assertThat(evidence.healthProbe().liveProbeRequiredForPass()).isTrue();
         assertThat(evidence.healthProbe().staticSampleOnly()).isFalse();
@@ -118,7 +119,8 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/order-idempotency-store-abstraction.sample.json",
                         "GET /contracts/release-verification-manifest.sample.json",
                         "GET /contracts/deployment-rollback-evidence.sample.json",
-                        "GET /contracts/release-bundle-manifest.sample.json"
+                        "GET /contracts/release-bundle-manifest.sample.json",
+                        "GET /contracts/rollback-approval-handoff.sample.json"
                 );
         assertThat(evidence.readOnlyWindow().forbiddenOperations())
                 .contains(
@@ -193,7 +195,8 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "artifact-version-target",
                         "configuration-secret-source",
-                        "database-migration-direction"
+                        "database-migration-direction",
+                        "rollback-approval-handoff"
                 );
         assertThat(evidence.deploymentRollback().packageRollbackSupported()).isTrue();
         assertThat(evidence.deploymentRollback().configRollbackSupported()).isTrue();
@@ -217,7 +220,8 @@ class OpsEvidenceServiceTests {
                         "/contracts/order-idempotency-store-abstraction.sample.json",
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
-                        "/contracts/release-bundle-manifest.sample.json"
+                        "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/rollback-approval-handoff.sample.json"
                 );
         assertThat(evidence.releaseBundle().requiredEvidence())
                 .containsExactly(
@@ -232,6 +236,33 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.releaseBundle().nodeMayTriggerRollback()).isFalse();
         assertThat(evidence.releaseBundle().requiresProductionDatabase()).isFalse();
         assertThat(evidence.releaseBundle().changesOrderTransactionSemantics()).isFalse();
+        assertThat(evidence.rollbackApprovalHandoff().handoffVersion())
+                .isEqualTo("java-rollback-approval-handoff.v1");
+        assertThat(evidence.rollbackApprovalHandoff().handoffEndpoint())
+                .isEqualTo("/contracts/rollback-approval-handoff.sample.json");
+        assertThat(evidence.rollbackApprovalHandoff().approvalMode())
+                .isEqualTo("OPERATOR_CONFIRMATION_REQUIRED");
+        assertThat(evidence.rollbackApprovalHandoff().requiredConfirmationFields())
+                .containsExactly(
+                        "artifact-version-target",
+                        "runtime-config-profile",
+                        "configuration-secret-source",
+                        "database-migration-direction",
+                        "release-bundle-manifest",
+                        "deployment-rollback-evidence"
+                );
+        assertThat(evidence.rollbackApprovalHandoff().handoffArtifacts())
+                .containsExactly(
+                        "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/release-verification-manifest.sample.json"
+                );
+        assertThat(evidence.rollbackApprovalHandoff().nodeMayConsume()).isTrue();
+        assertThat(evidence.rollbackApprovalHandoff().nodeMayTriggerRollback()).isFalse();
+        assertThat(evidence.rollbackApprovalHandoff().rollbackSqlExecutionAllowed()).isFalse();
+        assertThat(evidence.rollbackApprovalHandoff().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.rollbackApprovalHandoff().requiresProductionSecrets()).isFalse();
+        assertThat(evidence.rollbackApprovalHandoff().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.failedEventReplay().totalFailedEvents()).isEqualTo(4);
         assertThat(evidence.failedEventReplay().pendingReplayApprovals()).isEqualTo(2);
         assertThat(evidence.failedEventReplay().approvedReplayApprovals()).isEqualTo(1);
@@ -273,6 +304,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/rollback-approval-handoff.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
                 );
