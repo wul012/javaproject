@@ -2,18 +2,18 @@
 
 ## Runtime Archive Folder
 
-For future Java version work, put run/debug explanations and screenshots in `b/`, which is a sibling of the old `a/` archive folder.
+For future Java version work, put run/debug explanations and screenshots in `c/`, which is a sibling of the old `a/` and `b/` archive folders.
 
 Use this shape:
 
 ```text
-b/<version>/解释/说明.md
-b/<version>/图片/*.png
+c/<version>/解释/说明.md
+c/<version>/图片/*.png
 ```
 
-Keep the old `a/` folder as historical archive for earlier versions. Do not move old `a/<version>` records unless the user explicitly asks.
+Keep the old `a/` and `b/` folders as historical archives for earlier versions. Do not move old `a/<version>` or `b/<version>` records unless the user explicitly asks.
 
-When finishing a version, the final report should mention the `b/<version>` archive path.
+When finishing a version, the final report should mention the `c/<version>` archive path.
 
 ## Docker Shutdown Fast Path
 
