@@ -8,10 +8,14 @@ import com.codexdemo.orderplatform.order.JpaIdempotencyStore;
 import com.codexdemo.orderplatform.outbox.OutboxPublisherProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRabbitMqProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRepository;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HexFormat;
 import java.util.List;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -31,6 +35,12 @@ public class OpsEvidenceService {
 
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
+
+    static final String RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION =
+            "java-release-approval-rehearsal-verification-hint.v1";
+
+    static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
+            "java-release-approval-rehearsal-response-schema.v3";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -184,6 +194,19 @@ public class OpsEvidenceService {
         String normalizedRequestId = normalizeHeaderValue(requestId);
         String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
         String normalizedAuditCorrelationId = normalizeHeaderValue(auditCorrelationId);
+        ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext = rehearsalRequestContext(
+                normalizedRequestId,
+                normalizedOperatorIdentity,
+                normalizedAuditCorrelationId
+        );
+        ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
+                releaseApprovalRehearsalFailureTaxonomy(
+                        evidence,
+                        normalizedRequestId,
+                        normalizedOperatorIdentity,
+                        normalizedAuditCorrelationId
+                );
+        ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries = executionBoundaries();
         return new ReleaseApprovalRehearsalResponse(
                 evidence.sampledAt(),
                 RELEASE_APPROVAL_REHEARSAL_VERSION,
@@ -191,24 +214,89 @@ public class OpsEvidenceService {
                 "READ_ONLY_RELEASE_APPROVAL_REHEARSAL",
                 true,
                 false,
-                rehearsalRequestContext(
-                        normalizedRequestId,
-                        normalizedOperatorIdentity,
-                        normalizedAuditCorrelationId
-                ),
-                releaseApprovalRehearsalFailureTaxonomy(
-                        evidence,
-                        normalizedRequestId,
-                        normalizedOperatorIdentity,
-                        normalizedAuditCorrelationId
-                ),
+                requestContext,
+                failureTaxonomy,
+                releaseApprovalVerificationHint(requestContext, failureTaxonomy, executionBoundaries),
                 releaseApprovalInputs(evidence),
                 liveSignals(evidence),
-                executionBoundaries(),
+                executionBoundaries,
                 releaseApprovalRehearsalBlockers(evidence),
                 evidence.readOnlyWindow().requiredNodeEnvironment(),
                 releaseApprovalNextEvidenceActions()
         );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalVerificationHint releaseApprovalVerificationHint(
+            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
+            ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
+    ) {
+        List<String> warningDigestInputs = List.of(
+                "contextWarnings",
+                "failureCategories",
+                "taxonomyWarnings",
+                "executionAllowed",
+                "approvalLedgerWritten",
+                "nodeMayWriteApprovalLedger"
+        );
+        List<String> proofClaims = List.of(
+                "executionAllowed=false",
+                "requestContext.approvalLedgerWritten=false",
+                "executionBoundaries.nodeMayCreateApprovalDecision=false",
+                "executionBoundaries.nodeMayWriteApprovalLedger=false",
+                "executionBoundaries.nodeMayTriggerDeployment=false",
+                "executionBoundaries.nodeMayTriggerRollback=false",
+                "executionBoundaries.nodeMayExecuteRollbackSql=false"
+        );
+        return new ReleaseApprovalRehearsalResponse.RehearsalVerificationHint(
+                RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION,
+                RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
+                warningDigest(requestContext, failureTaxonomy, executionBoundaries),
+                "NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS",
+                !requestContext.approvalLedgerWritten()
+                        && !executionBoundaries.nodeMayCreateApprovalDecision()
+                        && !executionBoundaries.nodeMayWriteApprovalLedger(),
+                false,
+                List.of(
+                        "sampledAt",
+                        "rehearsalVersion",
+                        "requestContext",
+                        "failureTaxonomy",
+                        "verificationHint",
+                        "releaseApprovalInputs",
+                        "liveSignals",
+                        "executionBoundaries",
+                        "rehearsalBlockers",
+                        "requiredNodeEnvironment",
+                        "nextEvidenceActions"
+                ),
+                warningDigestInputs,
+                proofClaims,
+                List.of(
+                        "Verify responseSchemaVersion before importing operator window results",
+                        "Compare warningDigest across closed-window and operator-window reads",
+                        "Require noLedgerWriteProved=true before treating the response as read-only evidence",
+                        "Keep UPSTREAM_ACTIONS_ENABLED=false"
+                )
+        );
+    }
+
+    private String warningDigest(
+            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
+            ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
+    ) {
+        return digest(List.of(
+                line("digestKind", "releaseApprovalRehearsalWarning"),
+                line("hintVersion", RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION),
+                line("responseSchemaVersion", RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION),
+                line("contextWarnings", requestContext.contextWarnings()),
+                line("failureCategories", failureTaxonomy.failureCategories()),
+                line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
+                line("executionAllowed", false),
+                line("approvalLedgerWritten", requestContext.approvalLedgerWritten()),
+                line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
+        ));
     }
 
     private ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy releaseApprovalRehearsalFailureTaxonomy(
@@ -320,6 +408,31 @@ public class OpsEvidenceService {
         if (value == null) {
             warnings.add(warning);
         }
+    }
+
+    private String digest(List<String> lines) {
+        String canonical = String.join("\n", lines) + "\n";
+        try {
+            byte[] bytes = MessageDigest.getInstance("SHA-256")
+                    .digest(canonical.getBytes(StandardCharsets.UTF_8));
+            return "sha256:" + HexFormat.of().formatHex(bytes);
+        } catch (NoSuchAlgorithmException ex) {
+            throw new IllegalStateException("SHA-256 digest algorithm is not available", ex);
+        }
+    }
+
+    private String line(String key, Object value) {
+        return key + "=" + value(value);
+    }
+
+    private String value(Object value) {
+        if (value == null) {
+            return "<null>";
+        }
+        if (value instanceof List<?> list) {
+            return "[" + String.join(",", list.stream().map(this::value).toList()) + "]";
+        }
+        return String.valueOf(value);
     }
 
     private OpsEvidenceResponse.Service service(Instant sampledAt) {

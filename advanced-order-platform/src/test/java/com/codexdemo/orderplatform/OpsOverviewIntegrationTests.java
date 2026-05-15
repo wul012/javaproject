@@ -932,6 +932,29 @@ class OpsOverviewIntegrationTests {
                         hasItem("AUDIT_CORRELATION_ID_MISSING")))
                 .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
                         hasItem("REHEARSAL_REMAINS_READ_ONLY")))
+                .andExpect(jsonPath("$.verificationHint.hintVersion")
+                        .value("java-release-approval-rehearsal-verification-hint.v1"))
+                .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v3"))
+                .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
+                .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
+                        .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
+                .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
+                .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("verificationHint")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("executionBoundaries")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("contextWarnings")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("nodeMayWriteApprovalLedger")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("executionAllowed=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("executionBoundaries.nodeMayWriteApprovalLedger=false")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Keep UPSTREAM_ACTIONS_ENABLED=false")))
                 .andExpect(jsonPath("$.releaseApprovalInputs.releaseOperatorSignoffFixtureEndpoint")
                         .value("/contracts/release-operator-signoff.fixture.json"))
                 .andExpect(jsonPath("$.releaseApprovalInputs.rollbackApproverEvidenceFixtureEndpoint")
@@ -1017,6 +1040,13 @@ class OpsOverviewIntegrationTests {
                         not(hasItem("REQUEST_ID_OR_OPERATOR_IDENTITY_MISSING"))))
                 .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
                         not(hasItem("AUDIT_CORRELATION_ID_MISSING"))))
+                .andExpect(jsonPath("$.verificationHint.hintVersion")
+                        .value("java-release-approval-rehearsal-verification-hint.v1"))
+                .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v3"))
+                .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
+                .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
+                .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
                 .andExpect(jsonPath("$.requestContext.operatorAuthenticatedByJava").value(false))
                 .andExpect(jsonPath("$.requestContext.persistedByJava").value(false))
                 .andExpect(jsonPath("$.requestContext.approvalLedgerWritten").value(false))

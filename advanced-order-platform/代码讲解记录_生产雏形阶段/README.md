@@ -186,9 +186,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 72-version-68-release-approval-failure-taxonomy.md
  -> 第六十八版 release approval rehearsal 只读失败分类，区分 upstream readiness、auth context warning 和 audit correlation warning，继续保持 no-write/no-execution 边界
+
+73-version-69-release-approval-verification-hint.md
+ -> 第六十九版 release approval rehearsal 只读验证提示，提供 response schema version、warning digest 和 no-ledger-write proof，供 Node 导入窗口结果前校验
 ```
 
-后续推进 v69 时，从 `73-version-69-主题.md` 继续追加。
+后续推进 v70 时，从 `74-version-70-主题.md` 继续追加。
 
 ## 一句话总览
 

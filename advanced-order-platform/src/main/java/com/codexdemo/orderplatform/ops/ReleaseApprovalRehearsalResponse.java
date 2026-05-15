@@ -12,6 +12,7 @@ public record ReleaseApprovalRehearsalResponse(
         boolean executionAllowed,
         RehearsalRequestContext requestContext,
         RehearsalFailureTaxonomy failureTaxonomy,
+        RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
         LiveSignals liveSignals,
         ExecutionBoundaries executionBoundaries,
@@ -49,6 +50,20 @@ public record ReleaseApprovalRehearsalResponse(
             boolean writeActionRequired,
             List<String> failureCategories,
             List<String> taxonomyWarnings
+    ) {
+    }
+
+    public record RehearsalVerificationHint(
+            String hintVersion,
+            String responseSchemaVersion,
+            String warningDigest,
+            String noLedgerWriteProof,
+            boolean noLedgerWriteProved,
+            boolean nodeMayTreatAsProductionAuthorization,
+            List<String> schemaFields,
+            List<String> warningDigestInputs,
+            List<String> proofClaims,
+            List<String> nodeVerificationActions
     ) {
     }
 

@@ -49,6 +49,7 @@
 - 订单平台 release approval rehearsal 只读聚合接口，汇总审批演练输入、live 信号和禁止执行边界
 - 订单平台 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源
 - 订单平台 release approval rehearsal 只读失败分类，区分上游就绪、身份上下文和审计关联 warning
+- 订单平台 release approval rehearsal 只读验证提示，提供响应 schema、warning digest 和 no-ledger-write proof
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -1476,6 +1477,21 @@ failureTaxonomy.taxonomyWarnings 包含 REQUEST_ID_OR_OPERATOR_IDENTITY_MISSING�
 
 当 `X-Rehearsal-Request-Id`、`X-Operator-Identity` 和 `X-Audit-Correlation-Id` 都存在时，`authContextReadiness` 与 `auditCorrelationReadiness` 会变成 `READY`，对应 warning 分类会消失；但 `READ_ONLY_EXECUTION_BLOCKED` 仍会保留，继续说明本接口只是 rehearsal evidence，不是审批、ledger、部署、回滚或 SQL 的执行授权。
 
+v69 起，release approval rehearsal 在只读响应中增加验证提示字段，给 Node 导入人工窗口结果前做 schema 与 warning 校验：
+
+```text
+verificationHint.hintVersion=java-release-approval-rehearsal-verification-hint.v1
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v3
+verificationHint.warningDigest=sha256:...
+verificationHint.noLedgerWriteProof=NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS
+verificationHint.noLedgerWriteProved=true
+verificationHint.nodeMayTreatAsProductionAuthorization=false
+verificationHint.warningDigestInputs 包含 contextWarnings、failureCategories、taxonomyWarnings、executionAllowed、approvalLedgerWritten、nodeMayWriteApprovalLedger
+verificationHint.proofClaims 包含 executionAllowed=false、requestContext.approvalLedgerWritten=false、executionBoundaries.nodeMayWriteApprovalLedger=false
+```
+
+`warningDigest` 只覆盖 warning 和 no-ledger 相关字段，不包含 `sampledAt`，因此同一类 closed-window / operator-window 读取在 warning 状态不变时 digest 稳定，warning 状态变化时 digest 会变化。该字段只用于 Node v196/v197 归档校验，不代表生产授权，也不允许 Node 打开 `UPSTREAM_ACTIONS_ENABLED=true`。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -2059,6 +2075,7 @@ ops
   -> v66 增加 release approval rehearsal 只读聚合入口，汇总审批演练输入、live replay/outbox 信号和禁止审批/ledger/deploy/rollback/SQL 的执行边界
   -> v67 增强 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源，但不认证、不持久化、不写 ledger
   -> v68 增强 release approval rehearsal 只读失败分类，区分 upstream readiness、auth context warning 和 audit correlation warning，继续禁止写入和执行
+  -> v69 增强 release approval rehearsal 只读验证提示，提供 response schema version、warning digest 和 no-ledger-write proof，供 Node 导入窗口结果前校验
 
 common
  -> 业务异常和统一错误响应

@@ -828,6 +828,42 @@ class OpsEvidenceServiceTests {
                         "AUDIT_CORRELATION_ID_MISSING",
                         "REHEARSAL_REMAINS_READ_ONLY"
                 );
+        assertThat(rehearsal.verificationHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
+        assertThat(rehearsal.verificationHint().responseSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v3");
+        assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
+        assertThat(rehearsal.verificationHint().noLedgerWriteProof())
+                .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
+        assertThat(rehearsal.verificationHint().noLedgerWriteProved()).isTrue();
+        assertThat(rehearsal.verificationHint().nodeMayTreatAsProductionAuthorization()).isFalse();
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains(
+                        "requestContext",
+                        "failureTaxonomy",
+                        "verificationHint",
+                        "executionBoundaries"
+                );
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .containsExactly(
+                        "contextWarnings",
+                        "failureCategories",
+                        "taxonomyWarnings",
+                        "executionAllowed",
+                        "approvalLedgerWritten",
+                        "nodeMayWriteApprovalLedger"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "executionAllowed=false",
+                        "requestContext.approvalLedgerWritten=false",
+                        "executionBoundaries.nodeMayWriteApprovalLedger=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Verify responseSchemaVersion before importing operator window results",
+                        "Keep UPSTREAM_ACTIONS_ENABLED=false"
+                );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
                 .isEqualTo("/contracts/release-operator-signoff.fixture.json");
         assertThat(rehearsal.releaseApprovalInputs().rollbackApproverEvidenceFixtureEndpoint())
@@ -910,6 +946,22 @@ class OpsEvidenceServiceTests {
                 .containsExactly("READ_ONLY_EXECUTION_BLOCKED");
         assertThat(headerBackedRehearsal.failureTaxonomy().taxonomyWarnings())
                 .containsExactly("REHEARSAL_REMAINS_READ_ONLY");
+        assertThat(headerBackedRehearsal.verificationHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
+        assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v3");
+        assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
+        assertThat(headerBackedRehearsal.verificationHint().warningDigest())
+                .isNotEqualTo(rehearsal.verificationHint().warningDigest());
+        ReleaseApprovalRehearsalResponse repeatedHeaderBackedRehearsal = service.releaseApprovalRehearsal(
+                "rehearsal-v67-001",
+                "release-operator@example.test",
+                "audit-correlation-v67"
+        );
+        assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())
+                .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());
+        assertThat(headerBackedRehearsal.verificationHint().noLedgerWriteProved()).isTrue();
+        assertThat(headerBackedRehearsal.verificationHint().nodeMayTreatAsProductionAuthorization()).isFalse();
         assertThat(headerBackedRehearsal.requestContext().operatorAuthenticatedByJava()).isFalse();
         assertThat(headerBackedRehearsal.requestContext().persistedByJava()).isFalse();
         assertThat(headerBackedRehearsal.requestContext().approvalLedgerWritten()).isFalse();
