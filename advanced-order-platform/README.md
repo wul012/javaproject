@@ -48,6 +48,7 @@
 - 订单平台只读运行证据接口和静态样本，汇总 replay、审批、Outbox、版本和执行阻断信号
 - 订单平台 release approval rehearsal 只读聚合接口，汇总审批演练输入、live 信号和禁止执行边界
 - 订单平台 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源
+- 订单平台 release approval rehearsal 只读 operator-window hint，回显 Node v198 真实只读窗口身份头和 approval correlation 头
 - 订单平台 release approval rehearsal 只读失败分类，区分上游就绪、身份上下文和审计关联 warning
 - 订单平台 release approval rehearsal 只读验证提示，提供响应 schema、warning digest 和 no-ledger-write proof
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
@@ -1492,6 +1493,44 @@ verificationHint.proofClaims 包含 executionAllowed=false、requestContext.appr
 
 `warningDigest` 只覆盖 warning 和 no-ledger 相关字段，不包含 `sampledAt`，因此同一类 closed-window / operator-window 读取在 warning 状态不变时 digest 稳定，warning 状态变化时 digest 会变化。该字段只用于 Node v196/v197 归档校验，不代表生产授权，也不允许 Node 打开 `UPSTREAM_ACTIONS_ENABLED=true`。
 
+v70 起，release approval rehearsal 在只读响应中增加 `operatorWindowHint`，专门回显 Node v198 real-read window operator identity binding 使用的请求头：
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://localhost:8080/api/v1/ops/release-approval-rehearsal `
+  -Headers @{
+    "X-Rehearsal-Request-Id" = "rehearsal-v70-001"
+    "X-Operator-Identity" = "release-operator@example.test"
+    "X-Audit-Correlation-Id" = "audit-correlation-v70"
+    "x-orderops-operator-id" = "operator-198"
+    "x-orderops-roles" = "operator,auditor"
+    "x-orderops-operator-verified" = "true"
+    "x-orderops-approval-correlation-id" = "approval-v198-operator-window"
+  }
+```
+
+响应中的关键字段：
+
+```text
+operatorWindowHint.hintVersion=java-release-approval-rehearsal-operator-window-hint.v1
+operatorWindowHint.operatorId=operator-198
+operatorWindowHint.operatorIdSource=x-orderops-operator-id
+operatorWindowHint.operatorRoles=operator,auditor
+operatorWindowHint.operatorRolesSource=x-orderops-roles
+operatorWindowHint.operatorVerifiedClaim=true
+operatorWindowHint.operatorVerifiedClaimSource=x-orderops-operator-verified
+operatorWindowHint.approvalCorrelationId=approval-v198-operator-window
+operatorWindowHint.approvalCorrelationIdSource=x-orderops-approval-correlation-id
+operatorWindowHint.operatorWindowContextComplete=true
+operatorWindowHint.productionIdpVerifiedByJava=false
+operatorWindowHint.persistedApprovalRecordByJava=false
+operatorWindowHint.nodeMayTreatAsProductionIdentity=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v4
+verificationHint.warningDigestInputs 包含 contextWarnings、operatorWindowEchoWarnings、failureCategories、taxonomyWarnings、executionAllowed、approvalLedgerWritten、nodeMayWriteApprovalLedger
+```
+
+这一步只证明 Java 只读响应“看见了” Node v198 的窗口身份和审批关联字段，不认证 operator，不连接生产 IdP，不持久化 approval record，不写 approval ledger，也不授权 Node 打开生产窗口或执行任何上游写操作。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -2076,6 +2115,7 @@ ops
   -> v67 增强 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源，但不认证、不持久化、不写 ledger
   -> v68 增强 release approval rehearsal 只读失败分类，区分 upstream readiness、auth context warning 和 audit correlation warning，继续禁止写入和执行
   -> v69 增强 release approval rehearsal 只读验证提示，提供 response schema version、warning digest 和 no-ledger-write proof，供 Node 导入窗口结果前校验
+  -> v70 增强 release approval rehearsal 只读 operator-window hint，回显 Node v198 窗口身份与 approval correlation 头，但不认证、不持久化、不授权生产身份
 
 common
  -> 业务异常和统一错误响应

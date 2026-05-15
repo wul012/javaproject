@@ -806,6 +806,45 @@ class OpsEvidenceServiceTests {
                         "OPERATOR_IDENTITY_MISSING",
                         "AUDIT_CORRELATION_ID_MISSING"
                 );
+        assertThat(rehearsal.operatorWindowHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-operator-window-hint.v1");
+        assertThat(rehearsal.operatorWindowHint().operatorId()).isEqualTo("orderops-operator-id-not-supplied");
+        assertThat(rehearsal.operatorWindowHint().operatorIdSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.operatorWindowHint().operatorRoles()).isEqualTo("orderops-roles-not-supplied");
+        assertThat(rehearsal.operatorWindowHint().operatorRolesSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.operatorWindowHint().operatorVerifiedClaim())
+                .isEqualTo("orderops-operator-verified-not-supplied");
+        assertThat(rehearsal.operatorWindowHint().operatorVerifiedClaimSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.operatorWindowHint().approvalCorrelationId())
+                .isEqualTo("orderops-approval-correlation-id-not-supplied");
+        assertThat(rehearsal.operatorWindowHint().approvalCorrelationIdSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.operatorWindowHint().operatorIdentityEchoed()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().operatorRolesEchoed()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().operatorVerifiedClaimEchoed()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().approvalCorrelationEchoed()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().operatorWindowContextComplete()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().productionIdpVerifiedByJava()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().persistedApprovalRecordByJava()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().nodeMayTreatAsProductionIdentity()).isFalse();
+        assertThat(rehearsal.operatorWindowHint().acceptedOperatorWindowHeaders())
+                .containsExactly(
+                        "x-orderops-operator-id",
+                        "x-orderops-roles",
+                        "x-orderops-operator-verified",
+                        "x-orderops-approval-correlation-id"
+                );
+        assertThat(rehearsal.operatorWindowHint().echoWarnings())
+                .containsExactly(
+                        "ORDEROPS_OPERATOR_ID_MISSING",
+                        "ORDEROPS_OPERATOR_ROLES_MISSING",
+                        "ORDEROPS_OPERATOR_VERIFIED_CLAIM_MISSING",
+                        "ORDEROPS_APPROVAL_CORRELATION_ID_MISSING"
+                );
+        assertThat(rehearsal.operatorWindowHint().nodeVerificationActions())
+                .contains(
+                        "Compare operatorWindowHint.operatorId with Node v198 operatorIdentity.operatorId",
+                        "Keep nodeMayTreatAsProductionIdentity=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -831,7 +870,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v3");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v4");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -840,6 +879,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains(
                         "requestContext",
+                        "operatorWindowHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -847,6 +887,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().warningDigestInputs())
                 .containsExactly(
                         "contextWarnings",
+                        "operatorWindowEchoWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -923,7 +964,11 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse headerBackedRehearsal = service.releaseApprovalRehearsal(
                 " rehearsal-v67-001 ",
                 " release-operator@example.test ",
-                " audit-correlation-v67 "
+                " audit-correlation-v67 ",
+                " operator-198 ",
+                " operator,auditor ",
+                " true ",
+                " approval-v198-operator-window "
         );
         assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
         assertThat(headerBackedRehearsal.requestContext().requestIdSource())
@@ -937,6 +982,28 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.requestContext().auditCorrelationSource())
                 .isEqualTo("X-Audit-Correlation-Id");
         assertThat(headerBackedRehearsal.requestContext().contextWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorId()).isEqualTo("operator-198");
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorIdSource())
+                .isEqualTo("x-orderops-operator-id");
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorRoles()).isEqualTo("operator,auditor");
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorRolesSource())
+                .isEqualTo("x-orderops-roles");
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorVerifiedClaim()).isEqualTo("true");
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorVerifiedClaimSource())
+                .isEqualTo("x-orderops-operator-verified");
+        assertThat(headerBackedRehearsal.operatorWindowHint().approvalCorrelationId())
+                .isEqualTo("approval-v198-operator-window");
+        assertThat(headerBackedRehearsal.operatorWindowHint().approvalCorrelationIdSource())
+                .isEqualTo("x-orderops-approval-correlation-id");
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorIdentityEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorRolesEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorVerifiedClaimEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.operatorWindowHint().approvalCorrelationEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.operatorWindowHint().operatorWindowContextComplete()).isTrue();
+        assertThat(headerBackedRehearsal.operatorWindowHint().productionIdpVerifiedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.operatorWindowHint().persistedApprovalRecordByJava()).isFalse();
+        assertThat(headerBackedRehearsal.operatorWindowHint().nodeMayTreatAsProductionIdentity()).isFalse();
+        assertThat(headerBackedRehearsal.operatorWindowHint().echoWarnings()).isEmpty();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -949,14 +1016,18 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v3");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v4");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
         ReleaseApprovalRehearsalResponse repeatedHeaderBackedRehearsal = service.releaseApprovalRehearsal(
                 "rehearsal-v67-001",
                 "release-operator@example.test",
-                "audit-correlation-v67"
+                "audit-correlation-v67",
+                "operator-198",
+                "operator,auditor",
+                "true",
+                "approval-v198-operator-window"
         );
         assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())
                 .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());

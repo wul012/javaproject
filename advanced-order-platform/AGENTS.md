@@ -51,7 +51,7 @@ Version completion expectations:
 
 - Preserve explicit read-only, approval, ledger, rollback, SQL, secret, and deployment boundaries.
 - Run focused tests and enough regression/package/smoke validation for the change size.
-- Commit, tag, and push completed Java versions to the Java remote.
+- Commit and tag completed Java versions. Do not push by default unless the user explicitly asks for push.
 - If the version direction becomes unclear, pause and ask for confirmation.
 
 ## Runtime Archive Folder

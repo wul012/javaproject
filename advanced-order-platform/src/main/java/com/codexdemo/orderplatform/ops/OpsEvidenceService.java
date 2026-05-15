@@ -33,6 +33,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_CONTEXT_VERSION =
             "java-release-approval-rehearsal-context.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_OPERATOR_WINDOW_HINT_VERSION =
+            "java-release-approval-rehearsal-operator-window-hint.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -40,7 +43,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v3";
+            "java-release-approval-rehearsal-response-schema.v4";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -181,7 +184,7 @@ public class OpsEvidenceService {
 
     @Transactional(readOnly = true)
     public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal() {
-        return releaseApprovalRehearsal(null, null, null);
+        return releaseApprovalRehearsal(null, null, null, null, null, null, null);
     }
 
     @Transactional(readOnly = true)
@@ -190,15 +193,40 @@ public class OpsEvidenceService {
             String operatorIdentity,
             String auditCorrelationId
     ) {
+        return releaseApprovalRehearsal(requestId, operatorIdentity, auditCorrelationId, null, null, null, null);
+    }
+
+    @Transactional(readOnly = true)
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId
+    ) {
         OpsEvidenceResponse evidence = evidence();
         String normalizedRequestId = normalizeHeaderValue(requestId);
         String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
         String normalizedAuditCorrelationId = normalizeHeaderValue(auditCorrelationId);
+        String normalizedOperatorWindowOperatorId = normalizeHeaderValue(operatorWindowOperatorId);
+        String normalizedOperatorWindowRoles = normalizeHeaderValue(operatorWindowRoles);
+        String normalizedOperatorWindowVerifiedClaim = normalizeHeaderValue(operatorWindowVerifiedClaim);
+        String normalizedOperatorWindowApprovalCorrelationId =
+                normalizeHeaderValue(operatorWindowApprovalCorrelationId);
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext = rehearsalRequestContext(
                 normalizedRequestId,
                 normalizedOperatorIdentity,
                 normalizedAuditCorrelationId
         );
+        ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint =
+                rehearsalOperatorWindowHint(
+                        normalizedOperatorWindowOperatorId,
+                        normalizedOperatorWindowRoles,
+                        normalizedOperatorWindowVerifiedClaim,
+                        normalizedOperatorWindowApprovalCorrelationId
+                );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -215,8 +243,14 @@ public class OpsEvidenceService {
                 true,
                 false,
                 requestContext,
+                operatorWindowHint,
                 failureTaxonomy,
-                releaseApprovalVerificationHint(requestContext, failureTaxonomy, executionBoundaries),
+                releaseApprovalVerificationHint(
+                        requestContext,
+                        operatorWindowHint,
+                        failureTaxonomy,
+                        executionBoundaries
+                ),
                 releaseApprovalInputs(evidence),
                 liveSignals(evidence),
                 executionBoundaries,
@@ -228,11 +262,13 @@ public class OpsEvidenceService {
 
     private ReleaseApprovalRehearsalResponse.RehearsalVerificationHint releaseApprovalVerificationHint(
             ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
         List<String> warningDigestInputs = List.of(
                 "contextWarnings",
+                "operatorWindowEchoWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -251,7 +287,7 @@ public class OpsEvidenceService {
         return new ReleaseApprovalRehearsalResponse.RehearsalVerificationHint(
                 RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION,
                 RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
-                warningDigest(requestContext, failureTaxonomy, executionBoundaries),
+                warningDigest(requestContext, operatorWindowHint, failureTaxonomy, executionBoundaries),
                 "NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS",
                 !requestContext.approvalLedgerWritten()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
@@ -261,6 +297,7 @@ public class OpsEvidenceService {
                         "sampledAt",
                         "rehearsalVersion",
                         "requestContext",
+                        "operatorWindowHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -283,6 +320,7 @@ public class OpsEvidenceService {
 
     private String warningDigest(
             ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -291,12 +329,89 @@ public class OpsEvidenceService {
                 line("hintVersion", RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION),
                 line("responseSchemaVersion", RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION),
                 line("contextWarnings", requestContext.contextWarnings()),
+                line("operatorWindowEchoWarnings", operatorWindowHint.echoWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
                 line("approvalLedgerWritten", requestContext.approvalLedgerWritten()),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint rehearsalOperatorWindowHint(
+            String normalizedOperatorWindowOperatorId,
+            String normalizedOperatorWindowRoles,
+            String normalizedOperatorWindowVerifiedClaim,
+            String normalizedOperatorWindowApprovalCorrelationId
+    ) {
+        List<String> warnings = new ArrayList<>();
+        addMissingContextWarning(
+                warnings,
+                normalizedOperatorWindowOperatorId,
+                "ORDEROPS_OPERATOR_ID_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedOperatorWindowRoles,
+                "ORDEROPS_OPERATOR_ROLES_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedOperatorWindowVerifiedClaim,
+                "ORDEROPS_OPERATOR_VERIFIED_CLAIM_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedOperatorWindowApprovalCorrelationId,
+                "ORDEROPS_APPROVAL_CORRELATION_ID_MISSING"
+        );
+        boolean operatorIdentityEchoed = normalizedOperatorWindowOperatorId != null;
+        boolean operatorRolesEchoed = normalizedOperatorWindowRoles != null;
+        boolean operatorVerifiedClaimEchoed = normalizedOperatorWindowVerifiedClaim != null;
+        boolean approvalCorrelationEchoed = normalizedOperatorWindowApprovalCorrelationId != null;
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint(
+                RELEASE_APPROVAL_REHEARSAL_OPERATOR_WINDOW_HINT_VERSION,
+                valueOrPlaceholder(normalizedOperatorWindowOperatorId, "orderops-operator-id-not-supplied"),
+                sourceFor(normalizedOperatorWindowOperatorId, "x-orderops-operator-id"),
+                valueOrPlaceholder(normalizedOperatorWindowRoles, "orderops-roles-not-supplied"),
+                sourceFor(normalizedOperatorWindowRoles, "x-orderops-roles"),
+                valueOrPlaceholder(normalizedOperatorWindowVerifiedClaim, "orderops-operator-verified-not-supplied"),
+                sourceFor(normalizedOperatorWindowVerifiedClaim, "x-orderops-operator-verified"),
+                valueOrPlaceholder(
+                        normalizedOperatorWindowApprovalCorrelationId,
+                        "orderops-approval-correlation-id-not-supplied"
+                ),
+                sourceFor(
+                        normalizedOperatorWindowApprovalCorrelationId,
+                        "x-orderops-approval-correlation-id"
+                ),
+                operatorIdentityEchoed,
+                operatorRolesEchoed,
+                operatorVerifiedClaimEchoed,
+                approvalCorrelationEchoed,
+                operatorIdentityEchoed
+                        && operatorRolesEchoed
+                        && operatorVerifiedClaimEchoed
+                        && approvalCorrelationEchoed,
+                false,
+                false,
+                false,
+                List.of(
+                        "x-orderops-operator-id",
+                        "x-orderops-roles",
+                        "x-orderops-operator-verified",
+                        "x-orderops-approval-correlation-id"
+                ),
+                List.copyOf(warnings),
+                List.of(
+                        "Compare operatorWindowHint.operatorId with Node v198 operatorIdentity.operatorId",
+                        "Compare operatorWindowHint.operatorRoles with Node v198 operatorIdentity.roles",
+                        "Compare operatorWindowHint.approvalCorrelationId with Node v198 approvalBinding.approvalCorrelationId",
+                        "Require productionIdpVerifiedByJava=false until real IdP integration exists",
+                        "Keep nodeMayTreatAsProductionIdentity=false"
+                )
+        );
     }
 
     private ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy releaseApprovalRehearsalFailureTaxonomy(

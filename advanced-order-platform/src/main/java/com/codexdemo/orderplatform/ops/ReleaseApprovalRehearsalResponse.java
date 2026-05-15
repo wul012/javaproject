@@ -11,6 +11,7 @@ public record ReleaseApprovalRehearsalResponse(
         boolean readOnly,
         boolean executionAllowed,
         RehearsalRequestContext requestContext,
+        RehearsalOperatorWindowHint operatorWindowHint,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -35,6 +36,30 @@ public record ReleaseApprovalRehearsalResponse(
             boolean requiresProductionIdentityProvider,
             List<String> acceptedReadOnlyHeaders,
             List<String> contextWarnings
+    ) {
+    }
+
+    public record RehearsalOperatorWindowHint(
+            String hintVersion,
+            String operatorId,
+            String operatorIdSource,
+            String operatorRoles,
+            String operatorRolesSource,
+            String operatorVerifiedClaim,
+            String operatorVerifiedClaimSource,
+            String approvalCorrelationId,
+            String approvalCorrelationIdSource,
+            boolean operatorIdentityEchoed,
+            boolean operatorRolesEchoed,
+            boolean operatorVerifiedClaimEchoed,
+            boolean approvalCorrelationEchoed,
+            boolean operatorWindowContextComplete,
+            boolean productionIdpVerifiedByJava,
+            boolean persistedApprovalRecordByJava,
+            boolean nodeMayTreatAsProductionIdentity,
+            List<String> acceptedOperatorWindowHeaders,
+            List<String> echoWarnings,
+            List<String> nodeVerificationActions
     ) {
     }
 

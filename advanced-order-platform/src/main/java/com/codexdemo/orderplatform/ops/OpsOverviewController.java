@@ -32,8 +32,21 @@ public class OpsOverviewController {
     public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
             @RequestHeader(name = "X-Rehearsal-Request-Id", required = false) String requestId,
             @RequestHeader(name = "X-Operator-Identity", required = false) String operatorIdentity,
-            @RequestHeader(name = "X-Audit-Correlation-Id", required = false) String auditCorrelationId
+            @RequestHeader(name = "X-Audit-Correlation-Id", required = false) String auditCorrelationId,
+            @RequestHeader(name = "x-orderops-operator-id", required = false) String operatorWindowOperatorId,
+            @RequestHeader(name = "x-orderops-roles", required = false) String operatorWindowRoles,
+            @RequestHeader(name = "x-orderops-operator-verified", required = false) String operatorWindowVerifiedClaim,
+            @RequestHeader(name = "x-orderops-approval-correlation-id", required = false)
+            String operatorWindowApprovalCorrelationId
     ) {
-        return opsEvidenceService.releaseApprovalRehearsal(requestId, operatorIdentity, auditCorrelationId);
+        return opsEvidenceService.releaseApprovalRehearsal(
+                requestId,
+                operatorIdentity,
+                auditCorrelationId,
+                operatorWindowOperatorId,
+                operatorWindowRoles,
+                operatorWindowVerifiedClaim,
+                operatorWindowApprovalCorrelationId
+        );
     }
 }
