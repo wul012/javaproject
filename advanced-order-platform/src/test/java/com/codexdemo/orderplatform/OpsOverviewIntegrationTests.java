@@ -882,6 +882,33 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.rehearsalMode").value("READ_ONLY_RELEASE_APPROVAL_REHEARSAL"))
                 .andExpect(jsonPath("$.readOnly").value(true))
                 .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.requestContext.contextVersion")
+                        .value("java-release-approval-rehearsal-context.v1"))
+                .andExpect(jsonPath("$.requestContext.requestId")
+                        .value("rehearsal-request-id-not-supplied"))
+                .andExpect(jsonPath("$.requestContext.requestIdSource").value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.requestContext.operatorIdentity")
+                        .value("operator-identity-not-supplied"))
+                .andExpect(jsonPath("$.requestContext.operatorIdentitySource").value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.requestContext.auditCorrelationId")
+                        .value("audit-correlation-id-not-supplied"))
+                .andExpect(jsonPath("$.requestContext.auditCorrelationSource").value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.requestContext.operatorAuthenticatedByJava").value(false))
+                .andExpect(jsonPath("$.requestContext.persistedByJava").value(false))
+                .andExpect(jsonPath("$.requestContext.approvalLedgerWritten").value(false))
+                .andExpect(jsonPath("$.requestContext.requiresProductionIdentityProvider").value(false))
+                .andExpect(jsonPath("$.requestContext.acceptedReadOnlyHeaders",
+                        hasItem("X-Rehearsal-Request-Id")))
+                .andExpect(jsonPath("$.requestContext.acceptedReadOnlyHeaders",
+                        hasItem("X-Operator-Identity")))
+                .andExpect(jsonPath("$.requestContext.acceptedReadOnlyHeaders",
+                        hasItem("X-Audit-Correlation-Id")))
+                .andExpect(jsonPath("$.requestContext.contextWarnings",
+                        hasItem("REHEARSAL_REQUEST_ID_MISSING")))
+                .andExpect(jsonPath("$.requestContext.contextWarnings",
+                        hasItem("OPERATOR_IDENTITY_MISSING")))
+                .andExpect(jsonPath("$.requestContext.contextWarnings",
+                        hasItem("AUDIT_CORRELATION_ID_MISSING")))
                 .andExpect(jsonPath("$.releaseApprovalInputs.releaseOperatorSignoffFixtureEndpoint")
                         .value("/contracts/release-operator-signoff.fixture.json"))
                 .andExpect(jsonPath("$.releaseApprovalInputs.rollbackApproverEvidenceFixtureEndpoint")
@@ -932,6 +959,29 @@ class OpsOverviewIntegrationTests {
                         hasItem("GET /api/v1/ops/release-approval-rehearsal")))
                 .andExpect(jsonPath("$.nextEvidenceActions",
                         hasItem("GET /contracts/rollback-approver-evidence.fixture.json")));
+
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal")
+                        .header("X-Rehearsal-Request-Id", "rehearsal-v67-001")
+                        .header("X-Operator-Identity", "release-operator@example.test")
+                        .header("X-Audit-Correlation-Id", "audit-correlation-v67"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.requestContext.requestId").value("rehearsal-v67-001"))
+                .andExpect(jsonPath("$.requestContext.requestIdSource")
+                        .value("X-Rehearsal-Request-Id"))
+                .andExpect(jsonPath("$.requestContext.operatorIdentity")
+                        .value("release-operator@example.test"))
+                .andExpect(jsonPath("$.requestContext.operatorIdentitySource")
+                        .value("X-Operator-Identity"))
+                .andExpect(jsonPath("$.requestContext.auditCorrelationId")
+                        .value("audit-correlation-v67"))
+                .andExpect(jsonPath("$.requestContext.auditCorrelationSource")
+                        .value("X-Audit-Correlation-Id"))
+                .andExpect(jsonPath("$.requestContext.contextWarnings").isEmpty())
+                .andExpect(jsonPath("$.requestContext.operatorAuthenticatedByJava").value(false))
+                .andExpect(jsonPath("$.requestContext.persistedByJava").value(false))
+                .andExpect(jsonPath("$.requestContext.approvalLedgerWritten").value(false))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.nodeMayWriteApprovalLedger").value(false));
     }
 
     @Test

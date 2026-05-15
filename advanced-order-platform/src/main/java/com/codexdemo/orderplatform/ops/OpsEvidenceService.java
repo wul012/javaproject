@@ -26,6 +26,9 @@ public class OpsEvidenceService {
 
     static final String RELEASE_APPROVAL_REHEARSAL_ENDPOINT = "/api/v1/ops/release-approval-rehearsal";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_CONTEXT_VERSION =
+            "java-release-approval-rehearsal-context.v1";
+
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
     static final String RELEASE_VERIFICATION_MANIFEST_ENDPOINT =
@@ -165,6 +168,15 @@ public class OpsEvidenceService {
 
     @Transactional(readOnly = true)
     public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal() {
+        return releaseApprovalRehearsal(null, null, null);
+    }
+
+    @Transactional(readOnly = true)
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId
+    ) {
         OpsEvidenceResponse evidence = evidence();
         return new ReleaseApprovalRehearsalResponse(
                 evidence.sampledAt(),
@@ -173,6 +185,7 @@ public class OpsEvidenceService {
                 "READ_ONLY_RELEASE_APPROVAL_REHEARSAL",
                 true,
                 false,
+                rehearsalRequestContext(requestId, operatorIdentity, auditCorrelationId),
                 releaseApprovalInputs(evidence),
                 liveSignals(evidence),
                 executionBoundaries(),
@@ -180,6 +193,68 @@ public class OpsEvidenceService {
                 evidence.readOnlyWindow().requiredNodeEnvironment(),
                 releaseApprovalNextEvidenceActions()
         );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalRequestContext rehearsalRequestContext(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId
+    ) {
+        String normalizedRequestId = normalizeHeaderValue(requestId);
+        String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
+        String normalizedAuditCorrelationId = normalizeHeaderValue(auditCorrelationId);
+
+        List<String> warnings = new ArrayList<>();
+        addMissingContextWarning(warnings, normalizedRequestId, "REHEARSAL_REQUEST_ID_MISSING");
+        addMissingContextWarning(warnings, normalizedOperatorIdentity, "OPERATOR_IDENTITY_MISSING");
+        addMissingContextWarning(warnings, normalizedAuditCorrelationId, "AUDIT_CORRELATION_ID_MISSING");
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalRequestContext(
+                RELEASE_APPROVAL_REHEARSAL_CONTEXT_VERSION,
+                valueOrPlaceholder(normalizedRequestId, "rehearsal-request-id-not-supplied"),
+                sourceFor(normalizedRequestId, "X-Rehearsal-Request-Id"),
+                valueOrPlaceholder(normalizedOperatorIdentity, "operator-identity-not-supplied"),
+                sourceFor(normalizedOperatorIdentity, "X-Operator-Identity"),
+                valueOrPlaceholder(normalizedAuditCorrelationId, "audit-correlation-id-not-supplied"),
+                sourceFor(normalizedAuditCorrelationId, "X-Audit-Correlation-Id"),
+                false,
+                false,
+                false,
+                false,
+                List.of(
+                        "X-Rehearsal-Request-Id",
+                        "X-Operator-Identity",
+                        "X-Audit-Correlation-Id"
+                ),
+                List.copyOf(warnings)
+        );
+    }
+
+    private String normalizeHeaderValue(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return value.trim();
+    }
+
+    private String valueOrPlaceholder(String value, String placeholder) {
+        if (value == null) {
+            return placeholder;
+        }
+        return value;
+    }
+
+    private String sourceFor(String value, String headerName) {
+        if (value == null) {
+            return "NOT_SUPPLIED";
+        }
+        return headerName;
+    }
+
+    private void addMissingContextWarning(List<String> warnings, String value, String warning) {
+        if (value == null) {
+            warnings.add(warning);
+        }
     }
 
     private OpsEvidenceResponse.Service service(Instant sampledAt) {

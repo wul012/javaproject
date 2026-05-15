@@ -10,6 +10,7 @@ public record ReleaseApprovalRehearsalResponse(
         String rehearsalMode,
         boolean readOnly,
         boolean executionAllowed,
+        RehearsalRequestContext requestContext,
         ReleaseApprovalInputs releaseApprovalInputs,
         LiveSignals liveSignals,
         ExecutionBoundaries executionBoundaries,
@@ -17,6 +18,23 @@ public record ReleaseApprovalRehearsalResponse(
         List<String> requiredNodeEnvironment,
         List<String> nextEvidenceActions
 ) {
+
+    public record RehearsalRequestContext(
+            String contextVersion,
+            String requestId,
+            String requestIdSource,
+            String operatorIdentity,
+            String operatorIdentitySource,
+            String auditCorrelationId,
+            String auditCorrelationSource,
+            boolean operatorAuthenticatedByJava,
+            boolean persistedByJava,
+            boolean approvalLedgerWritten,
+            boolean requiresProductionIdentityProvider,
+            List<String> acceptedReadOnlyHeaders,
+            List<String> contextWarnings
+    ) {
+    }
 
     public record ReleaseApprovalInputs(
             String releaseOperatorSignoffFixtureEndpoint,

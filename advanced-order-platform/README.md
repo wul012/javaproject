@@ -47,6 +47,7 @@
 - 订单平台只读运行概览接口，汇总应用、订单、库存、Outbox 和失败事件风险信号
 - 订单平台只读运行证据接口和静态样本，汇总 replay、审批、Outbox、版本和执行阻断信号
 - 订单平台 release approval rehearsal 只读聚合接口，汇总审批演练输入、live 信号和禁止执行边界
+- 订单平台 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -1425,6 +1426,37 @@ requiredNodeEnvironment 包含 UPSTREAM_PROBES_ENABLED=true、UPSTREAM_ACTIONS_E
 
 它服务于 Node v185 real-read rehearsal intake 前的 Java 侧真实运行纵深准备：Node 可以只读读取这个聚合响应，减少拼接多个 Java evidence 的成本；但 Java 仍不创建 approval decision，不写 approval ledger，不执行 deployment、rollback 或 rollback SQL，也不接触生产数据库和生产密钥。
 
+v67 起，release approval rehearsal 支持只读请求上下文头：
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://localhost:8080/api/v1/ops/release-approval-rehearsal `
+  -Headers @{
+    "X-Rehearsal-Request-Id" = "rehearsal-v67-001"
+    "X-Operator-Identity" = "release-operator@example.test"
+    "X-Audit-Correlation-Id" = "audit-correlation-v67"
+  }
+```
+
+响应中的 `requestContext` 会回显这些只读线索，并标明来源：
+
+```text
+requestContext.contextVersion=java-release-approval-rehearsal-context.v1
+requestContext.requestId=rehearsal-v67-001
+requestContext.requestIdSource=X-Rehearsal-Request-Id
+requestContext.operatorIdentity=release-operator@example.test
+requestContext.operatorIdentitySource=X-Operator-Identity
+requestContext.auditCorrelationId=audit-correlation-v67
+requestContext.auditCorrelationSource=X-Audit-Correlation-Id
+requestContext.operatorAuthenticatedByJava=false
+requestContext.persistedByJava=false
+requestContext.approvalLedgerWritten=false
+requestContext.requiresProductionIdentityProvider=false
+requestContext.acceptedReadOnlyHeaders 包含 X-Rehearsal-Request-Id、X-Operator-Identity、X-Audit-Correlation-Id
+```
+
+如果没有传入这些 header，接口会返回稳定占位值，并在 `contextWarnings` 中标出 `REHEARSAL_REQUEST_ID_MISSING`、`OPERATOR_IDENTITY_MISSING`、`AUDIT_CORRELATION_ID_MISSING`。这一步只是为后续真实认证、持久化审计和 Node real-read adapter 提供前置证据形状：Java 不认证该身份、不写数据库、不写 approval ledger，也不授权任何审批、部署、回滚或 SQL 执行。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -2006,6 +2038,7 @@ ops
   -> v64 增加 release operator signoff fixture，固化 release operator、rollback approver、release window、artifact target 和 operator signoff placeholder 的审批决定前置证据边界
   -> v65 增加 rollback approver evidence fixture，固化 rollback approver、migration direction、rollback SQL artifact reference 和 production database boundary 的只读证据边界
   -> v66 增加 release approval rehearsal 只读聚合入口，汇总审批演练输入、live replay/outbox 信号和禁止审批/ledger/deploy/rollback/SQL 的执行边界
+  -> v67 增强 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源，但不认证、不持久化、不写 ledger
 
 common
  -> 业务异常和统一错误响应

@@ -180,9 +180,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 70-version-66-release-approval-rehearsal.md
  -> 第六十六版 release approval rehearsal 只读聚合入口，汇总审批演练输入、live replay/outbox 信号和禁止审批/ledger/deploy/rollback/SQL 的执行边界
+
+71-version-67-release-approval-request-context.md
+ -> 第六十七版 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源，但不认证、不持久化、不写 ledger
 ```
 
-后续推进 v67 时，从 `71-version-67-主题.md` 继续追加。
+后续推进 v68 时，从 `72-version-68-主题.md` 继续追加。
 
 ## 一句话总览
 

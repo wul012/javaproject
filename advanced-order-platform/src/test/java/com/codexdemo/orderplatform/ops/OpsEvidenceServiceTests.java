@@ -782,6 +782,30 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.rehearsalMode()).isEqualTo("READ_ONLY_RELEASE_APPROVAL_REHEARSAL");
         assertThat(rehearsal.readOnly()).isTrue();
         assertThat(rehearsal.executionAllowed()).isFalse();
+        assertThat(rehearsal.requestContext().contextVersion())
+                .isEqualTo("java-release-approval-rehearsal-context.v1");
+        assertThat(rehearsal.requestContext().requestId()).isEqualTo("rehearsal-request-id-not-supplied");
+        assertThat(rehearsal.requestContext().requestIdSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.requestContext().operatorIdentity()).isEqualTo("operator-identity-not-supplied");
+        assertThat(rehearsal.requestContext().operatorIdentitySource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.requestContext().auditCorrelationId()).isEqualTo("audit-correlation-id-not-supplied");
+        assertThat(rehearsal.requestContext().auditCorrelationSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.requestContext().operatorAuthenticatedByJava()).isFalse();
+        assertThat(rehearsal.requestContext().persistedByJava()).isFalse();
+        assertThat(rehearsal.requestContext().approvalLedgerWritten()).isFalse();
+        assertThat(rehearsal.requestContext().requiresProductionIdentityProvider()).isFalse();
+        assertThat(rehearsal.requestContext().acceptedReadOnlyHeaders())
+                .containsExactly(
+                        "X-Rehearsal-Request-Id",
+                        "X-Operator-Identity",
+                        "X-Audit-Correlation-Id"
+                );
+        assertThat(rehearsal.requestContext().contextWarnings())
+                .containsExactly(
+                        "REHEARSAL_REQUEST_ID_MISSING",
+                        "OPERATOR_IDENTITY_MISSING",
+                        "AUDIT_CORRELATION_ID_MISSING"
+                );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
                 .isEqualTo("/contracts/release-operator-signoff.fixture.json");
         assertThat(rehearsal.releaseApprovalInputs().rollbackApproverEvidenceFixtureEndpoint())
@@ -837,5 +861,28 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/rollback-approval-record.fixture.json",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
+
+        ReleaseApprovalRehearsalResponse headerBackedRehearsal = service.releaseApprovalRehearsal(
+                " rehearsal-v67-001 ",
+                " release-operator@example.test ",
+                " audit-correlation-v67 "
+        );
+        assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
+        assertThat(headerBackedRehearsal.requestContext().requestIdSource())
+                .isEqualTo("X-Rehearsal-Request-Id");
+        assertThat(headerBackedRehearsal.requestContext().operatorIdentity())
+                .isEqualTo("release-operator@example.test");
+        assertThat(headerBackedRehearsal.requestContext().operatorIdentitySource())
+                .isEqualTo("X-Operator-Identity");
+        assertThat(headerBackedRehearsal.requestContext().auditCorrelationId())
+                .isEqualTo("audit-correlation-v67");
+        assertThat(headerBackedRehearsal.requestContext().auditCorrelationSource())
+                .isEqualTo("X-Audit-Correlation-Id");
+        assertThat(headerBackedRehearsal.requestContext().contextWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.requestContext().operatorAuthenticatedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.requestContext().persistedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.requestContext().approvalLedgerWritten()).isFalse();
+        assertThat(headerBackedRehearsal.executionAllowed()).isFalse();
+        assertThat(headerBackedRehearsal.executionBoundaries().nodeMayWriteApprovalLedger()).isFalse();
     }
 }
