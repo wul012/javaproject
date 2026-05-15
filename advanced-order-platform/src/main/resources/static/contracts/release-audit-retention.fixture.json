@@ -22,6 +22,7 @@
     "/contracts/release-verification-manifest.sample.json",
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/release-handoff-checklist.fixture.json",
+    "/contracts/release-operator-signoff.fixture.json",
     "/contracts/production-deployment-runbook-contract.sample.json"
   ],
   "auditExportFields": [
@@ -56,6 +57,13 @@
       "readOnly": true
     },
     {
+      "name": "release-operator-signoff-fixture",
+      "description": "Operator confirms release operator signoff metadata is available before approval decision rehearsal.",
+      "required": true,
+      "expectedEndpoint": "/contracts/release-operator-signoff.fixture.json",
+      "nodeMayCreateApprovalDecision": false
+    },
+    {
       "name": "audit-export-location-placeholder",
       "description": "Operator records where exported audit evidence will be stored outside this fixture.",
       "required": true,
@@ -72,6 +80,7 @@
     "/contracts/release-verification-manifest.sample.json",
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/release-handoff-checklist.fixture.json",
+    "/contracts/release-operator-signoff.fixture.json",
     "/contracts/production-deployment-runbook-contract.sample.json",
     "/contracts/production-secret-source-contract.sample.json"
   ],

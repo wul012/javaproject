@@ -1335,6 +1335,36 @@ boundaries.requiresProductionDatabase=false
 
 同时 v62 对 ops evidence 的静态 contract endpoint 列表做了轻量收口：`healthProbe`、`readOnlyWindow`、`releaseVerification`、`releaseBundle` 和 `evidenceEndpoints` 共享 helper 生成静态 contract 清单，后续新增 fixture 时不需要在多处重复维护同一串 endpoint。
 
+v64 起，应用随包提供 release operator signoff fixture：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/release-operator-signoff.fixture.json
+```
+
+该样本固定表达：
+
+```text
+fixtureVersion=java-release-operator-signoff-fixture.v1
+fixtureMode=READ_ONLY_RELEASE_OPERATOR_SIGNOFF_FIXTURE
+signoffRecord.releaseOperator=release-operator-placeholder
+signoffRecord.rollbackApprover=rollback-approver-placeholder
+signoffRecord.releaseWindow=release-window-placeholder
+signoffRecord.artifactTarget=release-tag-or-artifact-version-placeholder
+signoffRecord.operatorSignoffPlaceholder=operator-signoff-placeholder
+requiredSignoffFields 包含 release-operator、rollback-approver、release-window、artifact-target、operator-signoff-placeholder、release-audit-retention-fixture、no-secret-value-boundary
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayCreateApprovalDecision=false
+nodeConsumption.nodeMayTriggerDeployment=false
+nodeConsumption.nodeMayTriggerRollback=false
+boundaries.approvalDecisionCreated=false
+boundaries.approvalLedgerWriteAllowed=false
+boundaries.deploymentExecutionAllowed=false
+boundaries.rollbackSqlExecutionAllowed=false
+boundaries.requiresProductionDatabase=false
+```
+
+它服务于后续 Node v180 approval decision prerequisite gate：Java 只记录审批决定前需要人工确认的 release operator signoff 元数据，不创建 approval decision，不写 approval ledger，不执行部署、不执行回退、不执行 SQL，也不读取或嵌入 secret value。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1913,6 +1943,7 @@ ops
   -> v61 增加 rollback approval record fixture，固化 reviewer、approval timestamp placeholder、rollback target 和 no-secret-value 边界
   -> v62 增加 release handoff checklist fixture，固化 release operator、rollback approver、artifact target、migration direction 和 secret source confirmation，并收口静态 contract endpoint helper
   -> v63 增加 release audit retention fixture，固化 release evidence retention id、operator placeholder、artifact target、retention days、audit export 字段和 no-secret-value 边界
+  -> v64 增加 release operator signoff fixture，固化 release operator、rollback approver、release window、artifact target 和 operator signoff placeholder 的审批决定前置证据边界
 
 common
  -> 业务异常和统一错误响应

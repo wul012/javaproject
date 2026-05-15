@@ -76,6 +76,14 @@
       "expectedEndpoint": "/contracts/release-audit-retention.fixture.json",
       "nodeMayTriggerDeployment": false,
       "nodeMayTriggerRollback": false
+    },
+    {
+      "name": "release-operator-signoff-fixture",
+      "description": "Operator confirms release operator signoff evidence without creating an approval decision.",
+      "required": true,
+      "expectedEndpoint": "/contracts/release-operator-signoff.fixture.json",
+      "nodeMayCreateApprovalDecision": false,
+      "nodeMayTriggerDeployment": false
     }
   ],
   "runbookArtifacts": [
@@ -83,6 +91,7 @@
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/release-handoff-checklist.fixture.json",
     "/contracts/release-audit-retention.fixture.json",
+    "/contracts/release-operator-signoff.fixture.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",

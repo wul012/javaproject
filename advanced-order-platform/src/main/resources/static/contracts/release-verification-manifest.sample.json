@@ -54,6 +54,7 @@
         "GET /contracts/release-bundle-manifest.sample.json returns release bundle boundaries",
         "GET /contracts/release-handoff-checklist.fixture.json returns release handoff checklist boundaries",
         "GET /contracts/release-audit-retention.fixture.json returns release audit retention boundaries",
+        "GET /contracts/release-operator-signoff.fixture.json returns release operator signoff boundaries",
         "GET /contracts/rollback-approval-handoff.sample.json returns approval handoff boundaries",
         "GET /contracts/rollback-approval-record.fixture.json returns rollback approval record fixture boundaries",
         "GET /contracts/rollback-sql-review-gate.sample.json returns SQL review gate boundaries",
@@ -126,6 +127,12 @@
       "source": "src/main/resources/static/contracts/release-audit-retention.fixture.json",
       "versionField": "fixtureVersion",
       "expectedVersion": "java-release-audit-retention-fixture.v1"
+    },
+    {
+      "endpoint": "/contracts/release-operator-signoff.fixture.json",
+      "source": "src/main/resources/static/contracts/release-operator-signoff.fixture.json",
+      "versionField": "fixtureVersion",
+      "expectedVersion": "java-release-operator-signoff-fixture.v1"
     },
     {
       "endpoint": "/contracts/rollback-approval-handoff.sample.json",

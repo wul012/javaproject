@@ -76,6 +76,13 @@
       "nodeMayTriggerRollback": false
     },
     {
+      "name": "release-operator-signoff-fixture",
+      "description": "Operator confirms release operator signoff evidence before approval decision rehearsal.",
+      "required": true,
+      "expectedEndpoint": "/contracts/release-operator-signoff.fixture.json",
+      "nodeMayCreateApprovalDecision": false
+    },
+    {
       "name": "rollback-approval-record-fixture",
       "description": "Operator confirms the read-only approval record fixture that captures reviewer, timestamp placeholder, rollback target, and no-secret-value boundary.",
       "required": true,
@@ -104,6 +111,7 @@
   "handoffArtifacts": [
     "/contracts/release-handoff-checklist.fixture.json",
     "/contracts/release-audit-retention.fixture.json",
+    "/contracts/release-operator-signoff.fixture.json",
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/deployment-rollback-evidence.sample.json",
     "/contracts/rollback-approval-record.fixture.json",

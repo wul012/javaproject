@@ -100,6 +100,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/release-audit-retention.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
@@ -128,6 +129,7 @@ class OpsEvidenceServiceTests {
                         "GET /contracts/release-bundle-manifest.sample.json",
                         "GET /contracts/release-handoff-checklist.fixture.json",
                         "GET /contracts/release-audit-retention.fixture.json",
+                        "GET /contracts/release-operator-signoff.fixture.json",
                         "GET /contracts/rollback-approval-handoff.sample.json",
                         "GET /contracts/rollback-approval-record.fixture.json",
                         "GET /contracts/rollback-sql-review-gate.sample.json",
@@ -214,6 +216,7 @@ class OpsEvidenceServiceTests {
                         "database-migration-direction",
                         "release-handoff-checklist-fixture",
                         "release-audit-retention-fixture",
+                        "release-operator-signoff-fixture",
                         "rollback-approval-handoff",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate"
@@ -243,6 +246,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/release-audit-retention.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
@@ -294,6 +298,7 @@ class OpsEvidenceServiceTests {
                         "deployment-runbook-contract",
                         "rollback-approval-record-fixture",
                         "release-audit-retention-fixture",
+                        "release-operator-signoff-fixture",
                         "no-secret-value-boundary"
                 );
         assertThat(evidence.releaseHandoffChecklistFixture().checklistArtifacts())
@@ -301,6 +306,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/release-audit-retention.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/production-deployment-runbook-contract.sample.json",
                         "/contracts/production-secret-source-contract.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
@@ -341,6 +347,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/release-handoff-checklist.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/production-deployment-runbook-contract.sample.json"
                 );
         assertThat(evidence.releaseAuditRetentionFixture().auditExportFields())
@@ -350,6 +357,7 @@ class OpsEvidenceServiceTests {
                         "artifact-target",
                         "retention-days",
                         "evidence-endpoints",
+                        "release-operator-signoff-fixture",
                         "audit-export-location-placeholder",
                         "no-secret-value-boundary"
                 );
@@ -358,6 +366,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/release-handoff-checklist.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/production-deployment-runbook-contract.sample.json",
                         "/contracts/production-secret-source-contract.sample.json"
                 );
@@ -377,6 +386,57 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.releaseAuditRetentionFixture().requiresProductionDatabase()).isFalse();
         assertThat(evidence.releaseAuditRetentionFixture().requiresProductionSecrets()).isFalse();
         assertThat(evidence.releaseAuditRetentionFixture().changesOrderTransactionSemantics()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().fixtureVersion())
+                .isEqualTo("java-release-operator-signoff-fixture.v1");
+        assertThat(evidence.releaseOperatorSignoffFixture().fixtureEndpoint())
+                .isEqualTo("/contracts/release-operator-signoff.fixture.json");
+        assertThat(evidence.releaseOperatorSignoffFixture().fixtureMode())
+                .isEqualTo("READ_ONLY_RELEASE_OPERATOR_SIGNOFF_FIXTURE");
+        assertThat(evidence.releaseOperatorSignoffFixture().releaseOperator())
+                .isEqualTo("release-operator-placeholder");
+        assertThat(evidence.releaseOperatorSignoffFixture().rollbackApprover())
+                .isEqualTo("rollback-approver-placeholder");
+        assertThat(evidence.releaseOperatorSignoffFixture().releaseWindow())
+                .isEqualTo("release-window-placeholder");
+        assertThat(evidence.releaseOperatorSignoffFixture().artifactTarget())
+                .isEqualTo("release-tag-or-artifact-version-placeholder");
+        assertThat(evidence.releaseOperatorSignoffFixture().operatorSignoffPlaceholder())
+                .isEqualTo("operator-signoff-placeholder");
+        assertThat(evidence.releaseOperatorSignoffFixture().requiredSignoffFields())
+                .containsExactly(
+                        "release-operator",
+                        "rollback-approver",
+                        "release-window",
+                        "artifact-target",
+                        "operator-signoff-placeholder",
+                        "release-audit-retention-fixture",
+                        "no-secret-value-boundary"
+                );
+        assertThat(evidence.releaseOperatorSignoffFixture().signoffArtifacts())
+                .containsExactly(
+                        "/contracts/release-handoff-checklist.fixture.json",
+                        "/contracts/release-audit-retention.fixture.json",
+                        "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/production-deployment-runbook-contract.sample.json",
+                        "/contracts/rollback-approval-handoff.sample.json"
+                );
+        assertThat(evidence.releaseOperatorSignoffFixture().noSecretValueBoundaries())
+                .containsExactly(
+                        "signoff-fixture-stores-metadata-only",
+                        "secret-values-must-not-be-read",
+                        "secret-values-must-not-be-embedded-in-signoff",
+                        "node-may-render-approval-prerequisite-gate-only"
+                );
+        assertThat(evidence.releaseOperatorSignoffFixture().nodeMayConsume()).isTrue();
+        assertThat(evidence.releaseOperatorSignoffFixture().nodeMayCreateApprovalDecision()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().nodeMayTriggerDeployment()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().nodeMayTriggerRollback()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().deploymentExecutionAllowed()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().rollbackSqlExecutionAllowed()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().requiresProductionDatabase()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().requiresProductionSecrets()).isFalse();
+        assertThat(evidence.releaseOperatorSignoffFixture().changesOrderTransactionSemantics()).isFalse();
         assertThat(evidence.rollbackApprovalHandoff().handoffVersion())
                 .isEqualTo("java-rollback-approval-handoff.v1");
         assertThat(evidence.rollbackApprovalHandoff().handoffEndpoint())
@@ -395,6 +455,7 @@ class OpsEvidenceServiceTests {
                         "database-migration-direction",
                         "release-handoff-checklist-fixture",
                         "release-audit-retention-fixture",
+                        "release-operator-signoff-fixture",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
@@ -404,6 +465,7 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/release-audit-retention.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
@@ -565,7 +627,8 @@ class OpsEvidenceServiceTests {
                         "secret-source-confirmation",
                         "rollback-sql-review-gate",
                         "operator-approval-placeholder",
-                        "release-audit-retention-fixture"
+                        "release-audit-retention-fixture",
+                        "release-operator-signoff-fixture"
                 );
         assertThat(evidence.productionDeploymentRunbookContract().runbookArtifacts())
                 .containsExactly(
@@ -573,6 +636,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/deployment-rollback-evidence.sample.json",
                         "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/release-audit-retention.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",
@@ -628,6 +692,7 @@ class OpsEvidenceServiceTests {
                         "/contracts/release-bundle-manifest.sample.json",
                         "/contracts/release-handoff-checklist.fixture.json",
                         "/contracts/release-audit-retention.fixture.json",
+                        "/contracts/release-operator-signoff.fixture.json",
                         "/contracts/rollback-approval-handoff.sample.json",
                         "/contracts/rollback-approval-record.fixture.json",
                         "/contracts/rollback-sql-review-gate.sample.json",

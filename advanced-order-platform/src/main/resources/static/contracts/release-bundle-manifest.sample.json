@@ -23,7 +23,8 @@
     "productionSecretSourceContract": "/contracts/production-secret-source-contract.sample.json",
     "productionDeploymentRunbookContract": "/contracts/production-deployment-runbook-contract.sample.json",
     "opsEvidence": "/api/v1/ops/evidence",
-    "runtimeArchiveRoot": "c/<version>"
+    "runtimeArchiveRoot": "c/<version>",
+    "releaseOperatorSignoffFixture": "/contracts/release-operator-signoff.fixture.json"
   },
   "artifactEvidence": {
     "jar": "target/advanced-order-platform-0.1.0-SNAPSHOT.jar",
@@ -71,6 +72,7 @@
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/release-handoff-checklist.fixture.json",
     "/contracts/release-audit-retention.fixture.json",
+    "/contracts/release-operator-signoff.fixture.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",

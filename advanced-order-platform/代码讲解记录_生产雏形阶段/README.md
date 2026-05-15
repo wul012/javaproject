@@ -171,9 +171,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 67-version-63-release-audit-retention-fixture.md
  -> 第六十三版 release audit retention fixture，固化 release evidence retention id、operator placeholder、artifact target、retention days、audit export 字段和 no-secret-value 边界
+
+68-version-64-release-operator-signoff-fixture.md
+ -> 第六十四版 release operator signoff fixture，固化 release operator、rollback approver、release window、artifact target 和 operator signoff placeholder 的审批决定前置证据边界
 ```
 
-后续推进 v64 时，从 `68-version-64-主题.md` 继续追加。
+后续推进 v65 时，从 `69-version-65-主题.md` 继续追加。
 
 ## 一句话总览
 

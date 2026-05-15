@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-15T06:55:00Z",
+  "updatedAt": "2026-05-15T08:40:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -578,6 +578,47 @@
         {
           "path": "productionDeploymentRunbookContract.nodeMayTriggerDeployment",
           "meaning": "Node may consume the runbook but must not trigger Java deployment.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "releaseOperatorSignoffFixture",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "releaseOperatorSignoffFixture.fixtureVersion",
+          "meaning": "Version for the Java release operator signoff fixture consumed by approval decision prerequisite gates.",
+          "expectedValue": "java-release-operator-signoff-fixture.v1"
+        },
+        {
+          "path": "releaseOperatorSignoffFixture.fixtureEndpoint",
+          "meaning": "Static endpoint exposing release operator, rollback approver, release window, artifact target, and signoff placeholder fields.",
+          "expectedValue": "/contracts/release-operator-signoff.fixture.json"
+        },
+        {
+          "path": "releaseOperatorSignoffFixture.releaseOperator",
+          "meaning": "Operator-supplied release owner placeholder; Java does not infer a real operator identity from this fixture.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "releaseOperatorSignoffFixture.releaseWindow",
+          "meaning": "Operator-supplied release window placeholder for approval prerequisite review.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "releaseOperatorSignoffFixture.operatorSignoffPlaceholder",
+          "meaning": "Operator-supplied signoff reference placeholder; this fixture does not create an approval decision.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "releaseOperatorSignoffFixture.nodeMayCreateApprovalDecision",
+          "meaning": "Node may consume the signoff fixture but must not create a real approval decision.",
+          "expectedValue": false
+        },
+        {
+          "path": "releaseOperatorSignoffFixture.deploymentExecutionAllowed",
+          "meaning": "Deployment execution must not run from this signoff fixture.",
           "expectedValue": false
         }
       ]
