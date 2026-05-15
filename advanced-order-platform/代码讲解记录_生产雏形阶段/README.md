@@ -183,9 +183,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 71-version-67-release-approval-request-context.md
  -> 第六十七版 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源，但不认证、不持久化、不写 ledger
+
+72-version-68-release-approval-failure-taxonomy.md
+ -> 第六十八版 release approval rehearsal 只读失败分类，区分 upstream readiness、auth context warning 和 audit correlation warning，继续保持 no-write/no-execution 边界
 ```
 
-后续推进 v68 时，从 `72-version-68-主题.md` 继续追加。
+后续推进 v69 时，从 `73-version-69-主题.md` 继续追加。
 
 ## 一句话总览
 

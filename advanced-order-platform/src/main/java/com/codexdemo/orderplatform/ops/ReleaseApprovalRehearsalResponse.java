@@ -11,6 +11,7 @@ public record ReleaseApprovalRehearsalResponse(
         boolean readOnly,
         boolean executionAllowed,
         RehearsalRequestContext requestContext,
+        RehearsalFailureTaxonomy failureTaxonomy,
         ReleaseApprovalInputs releaseApprovalInputs,
         LiveSignals liveSignals,
         ExecutionBoundaries executionBoundaries,
@@ -33,6 +34,21 @@ public record ReleaseApprovalRehearsalResponse(
             boolean requiresProductionIdentityProvider,
             List<String> acceptedReadOnlyHeaders,
             List<String> contextWarnings
+    ) {
+    }
+
+    public record RehearsalFailureTaxonomy(
+            String taxonomyVersion,
+            String upstreamReadiness,
+            String authContextReadiness,
+            String auditCorrelationReadiness,
+            boolean javaReadOnlyUpstreamReady,
+            boolean authContextComplete,
+            boolean auditCorrelationPresent,
+            boolean retryableByReadOnlyAdapter,
+            boolean writeActionRequired,
+            List<String> failureCategories,
+            List<String> taxonomyWarnings
     ) {
     }
 

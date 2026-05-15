@@ -48,6 +48,7 @@
 - 订单平台只读运行证据接口和静态样本，汇总 replay、审批、Outbox、版本和执行阻断信号
 - 订单平台 release approval rehearsal 只读聚合接口，汇总审批演练输入、live 信号和禁止执行边界
 - 订单平台 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源
+- 订单平台 release approval rehearsal 只读失败分类，区分上游就绪、身份上下文和审计关联 warning
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -1457,6 +1458,24 @@ requestContext.acceptedReadOnlyHeaders 包含 X-Rehearsal-Request-Id、X-Operato
 
 如果没有传入这些 header，接口会返回稳定占位值，并在 `contextWarnings` 中标出 `REHEARSAL_REQUEST_ID_MISSING`、`OPERATOR_IDENTITY_MISSING`、`AUDIT_CORRELATION_ID_MISSING`。这一步只是为后续真实认证、持久化审计和 Node real-read adapter 提供前置证据形状：Java 不认证该身份、不写数据库、不写 approval ledger，也不授权任何审批、部署、回滚或 SQL 执行。
 
+v68 起，release approval rehearsal 在只读响应中增加失败分类字段，方便 Node real-read adapter 后续把读取失败或前置条件不足分成可操作原因：
+
+```text
+failureTaxonomy.taxonomyVersion=java-release-approval-rehearsal-failure-taxonomy.v1
+failureTaxonomy.upstreamReadiness=READY
+failureTaxonomy.authContextReadiness=WARNING
+failureTaxonomy.auditCorrelationReadiness=WARNING
+failureTaxonomy.javaReadOnlyUpstreamReady=true
+failureTaxonomy.authContextComplete=false
+failureTaxonomy.auditCorrelationPresent=false
+failureTaxonomy.retryableByReadOnlyAdapter=true
+failureTaxonomy.writeActionRequired=false
+failureTaxonomy.failureCategories 包含 AUTH_CONTEXT_WARNING、AUDIT_CORRELATION_WARNING、READ_ONLY_EXECUTION_BLOCKED
+failureTaxonomy.taxonomyWarnings 包含 REQUEST_ID_OR_OPERATOR_IDENTITY_MISSING、AUDIT_CORRELATION_ID_MISSING、REHEARSAL_REMAINS_READ_ONLY
+```
+
+当 `X-Rehearsal-Request-Id`、`X-Operator-Identity` 和 `X-Audit-Correlation-Id` 都存在时，`authContextReadiness` 与 `auditCorrelationReadiness` 会变成 `READY`，对应 warning 分类会消失；但 `READ_ONLY_EXECUTION_BLOCKED` 仍会保留，继续说明本接口只是 rehearsal evidence，不是审批、ledger、部署、回滚或 SQL 的执行授权。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -2039,6 +2058,7 @@ ops
   -> v65 增加 rollback approver evidence fixture，固化 rollback approver、migration direction、rollback SQL artifact reference 和 production database boundary 的只读证据边界
   -> v66 增加 release approval rehearsal 只读聚合入口，汇总审批演练输入、live replay/outbox 信号和禁止审批/ledger/deploy/rollback/SQL 的执行边界
   -> v67 增强 release approval rehearsal 只读请求上下文，回显 request id、operator identity 和 audit correlation 来源，但不认证、不持久化、不写 ledger
+  -> v68 增强 release approval rehearsal 只读失败分类，区分 upstream readiness、auth context warning 和 audit correlation warning，继续禁止写入和执行
 
 common
  -> 业务异常和统一错误响应

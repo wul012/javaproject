@@ -806,6 +806,28 @@ class OpsEvidenceServiceTests {
                         "OPERATOR_IDENTITY_MISSING",
                         "AUDIT_CORRELATION_ID_MISSING"
                 );
+        assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
+                .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
+        assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
+        assertThat(rehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("WARNING");
+        assertThat(rehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("WARNING");
+        assertThat(rehearsal.failureTaxonomy().javaReadOnlyUpstreamReady()).isTrue();
+        assertThat(rehearsal.failureTaxonomy().authContextComplete()).isFalse();
+        assertThat(rehearsal.failureTaxonomy().auditCorrelationPresent()).isFalse();
+        assertThat(rehearsal.failureTaxonomy().retryableByReadOnlyAdapter()).isTrue();
+        assertThat(rehearsal.failureTaxonomy().writeActionRequired()).isFalse();
+        assertThat(rehearsal.failureTaxonomy().failureCategories())
+                .containsExactly(
+                        "AUTH_CONTEXT_WARNING",
+                        "AUDIT_CORRELATION_WARNING",
+                        "READ_ONLY_EXECUTION_BLOCKED"
+                );
+        assertThat(rehearsal.failureTaxonomy().taxonomyWarnings())
+                .containsExactly(
+                        "REQUEST_ID_OR_OPERATOR_IDENTITY_MISSING",
+                        "AUDIT_CORRELATION_ID_MISSING",
+                        "REHEARSAL_REMAINS_READ_ONLY"
+                );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
                 .isEqualTo("/contracts/release-operator-signoff.fixture.json");
         assertThat(rehearsal.releaseApprovalInputs().rollbackApproverEvidenceFixtureEndpoint())
@@ -879,6 +901,15 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.requestContext().auditCorrelationSource())
                 .isEqualTo("X-Audit-Correlation-Id");
         assertThat(headerBackedRehearsal.requestContext().contextWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
+        assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
+        assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
+        assertThat(headerBackedRehearsal.failureTaxonomy().authContextComplete()).isTrue();
+        assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationPresent()).isTrue();
+        assertThat(headerBackedRehearsal.failureTaxonomy().failureCategories())
+                .containsExactly("READ_ONLY_EXECUTION_BLOCKED");
+        assertThat(headerBackedRehearsal.failureTaxonomy().taxonomyWarnings())
+                .containsExactly("REHEARSAL_REMAINS_READ_ONLY");
         assertThat(headerBackedRehearsal.requestContext().operatorAuthenticatedByJava()).isFalse();
         assertThat(headerBackedRehearsal.requestContext().persistedByJava()).isFalse();
         assertThat(headerBackedRehearsal.requestContext().approvalLedgerWritten()).isFalse();

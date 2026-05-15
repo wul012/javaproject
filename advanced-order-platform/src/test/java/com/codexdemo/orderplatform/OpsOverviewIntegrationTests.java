@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -909,6 +910,28 @@ class OpsOverviewIntegrationTests {
                         hasItem("OPERATOR_IDENTITY_MISSING")))
                 .andExpect(jsonPath("$.requestContext.contextWarnings",
                         hasItem("AUDIT_CORRELATION_ID_MISSING")))
+                .andExpect(jsonPath("$.failureTaxonomy.taxonomyVersion")
+                        .value("java-release-approval-rehearsal-failure-taxonomy.v1"))
+                .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
+                .andExpect(jsonPath("$.failureTaxonomy.authContextReadiness").value("WARNING"))
+                .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationReadiness").value("WARNING"))
+                .andExpect(jsonPath("$.failureTaxonomy.javaReadOnlyUpstreamReady").value(true))
+                .andExpect(jsonPath("$.failureTaxonomy.authContextComplete").value(false))
+                .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationPresent").value(false))
+                .andExpect(jsonPath("$.failureTaxonomy.retryableByReadOnlyAdapter").value(true))
+                .andExpect(jsonPath("$.failureTaxonomy.writeActionRequired").value(false))
+                .andExpect(jsonPath("$.failureTaxonomy.failureCategories",
+                        hasItem("AUTH_CONTEXT_WARNING")))
+                .andExpect(jsonPath("$.failureTaxonomy.failureCategories",
+                        hasItem("AUDIT_CORRELATION_WARNING")))
+                .andExpect(jsonPath("$.failureTaxonomy.failureCategories",
+                        hasItem("READ_ONLY_EXECUTION_BLOCKED")))
+                .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
+                        hasItem("REQUEST_ID_OR_OPERATOR_IDENTITY_MISSING")))
+                .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
+                        hasItem("AUDIT_CORRELATION_ID_MISSING")))
+                .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
+                        hasItem("REHEARSAL_REMAINS_READ_ONLY")))
                 .andExpect(jsonPath("$.releaseApprovalInputs.releaseOperatorSignoffFixtureEndpoint")
                         .value("/contracts/release-operator-signoff.fixture.json"))
                 .andExpect(jsonPath("$.releaseApprovalInputs.rollbackApproverEvidenceFixtureEndpoint")
@@ -977,6 +1000,23 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.requestContext.auditCorrelationSource")
                         .value("X-Audit-Correlation-Id"))
                 .andExpect(jsonPath("$.requestContext.contextWarnings").isEmpty())
+                .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
+                .andExpect(jsonPath("$.failureTaxonomy.authContextReadiness").value("READY"))
+                .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationReadiness").value("READY"))
+                .andExpect(jsonPath("$.failureTaxonomy.authContextComplete").value(true))
+                .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationPresent").value(true))
+                .andExpect(jsonPath("$.failureTaxonomy.failureCategories",
+                        hasItem("READ_ONLY_EXECUTION_BLOCKED")))
+                .andExpect(jsonPath("$.failureTaxonomy.failureCategories",
+                        not(hasItem("AUTH_CONTEXT_WARNING"))))
+                .andExpect(jsonPath("$.failureTaxonomy.failureCategories",
+                        not(hasItem("AUDIT_CORRELATION_WARNING"))))
+                .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
+                        hasItem("REHEARSAL_REMAINS_READ_ONLY")))
+                .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
+                        not(hasItem("REQUEST_ID_OR_OPERATOR_IDENTITY_MISSING"))))
+                .andExpect(jsonPath("$.failureTaxonomy.taxonomyWarnings",
+                        not(hasItem("AUDIT_CORRELATION_ID_MISSING"))))
                 .andExpect(jsonPath("$.requestContext.operatorAuthenticatedByJava").value(false))
                 .andExpect(jsonPath("$.requestContext.persistedByJava").value(false))
                 .andExpect(jsonPath("$.requestContext.approvalLedgerWritten").value(false))
