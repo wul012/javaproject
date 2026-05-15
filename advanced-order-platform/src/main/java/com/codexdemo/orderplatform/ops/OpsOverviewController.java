@@ -26,4 +26,9 @@ public class OpsOverviewController {
     public OpsEvidenceResponse evidence() {
         return opsEvidenceService.evidence();
     }
+
+    @GetMapping("/release-approval-rehearsal")
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal() {
+        return opsEvidenceService.releaseApprovalRehearsal();
+    }
 }

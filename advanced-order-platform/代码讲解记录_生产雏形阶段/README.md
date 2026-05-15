@@ -177,9 +177,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 69-version-65-rollback-approver-evidence-fixture.md
  -> 第六十五版 rollback approver evidence fixture，固化 rollback approver、migration direction、rollback SQL artifact reference 和 production database boundary 的只读证据边界
+
+70-version-66-release-approval-rehearsal.md
+ -> 第六十六版 release approval rehearsal 只读聚合入口，汇总审批演练输入、live replay/outbox 信号和禁止审批/ledger/deploy/rollback/SQL 的执行边界
 ```
 
-后续推进 v66 时，从 `70-version-66-主题.md` 继续追加。
+后续推进 v67 时，从 `71-version-67-主题.md` 继续追加。
 
 ## 一句话总览
 

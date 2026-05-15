@@ -46,6 +46,7 @@
 - 失败事件管理页面可视化展示当前操作员动作权限决策
 - 订单平台只读运行概览接口，汇总应用、订单、库存、Outbox 和失败事件风险信号
 - 订单平台只读运行证据接口和静态样本，汇总 replay、审批、Outbox、版本和执行阻断信号
+- 订单平台 release approval rehearsal 只读聚合接口，汇总审批演练输入、live 信号和禁止执行边界
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -1397,6 +1398,33 @@ boundaries.requiresProductionDatabase=false
 
 它服务于后续 Node v182 release approval decision rehearsal packet：Java 只记录 rollback approver、migration direction、rollback SQL artifact reference 和生产数据库边界的只读证据，不创建 approval decision，不写 approval ledger，不执行 rollback，不执行 rollback SQL，也不连接生产数据库。
 
+v66 起，应用提供 release approval rehearsal 只读聚合入口：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/ops/release-approval-rehearsal
+```
+
+该入口固定表达：
+
+```text
+rehearsalVersion=java-release-approval-rehearsal.v1
+rehearsalMode=READ_ONLY_RELEASE_APPROVAL_REHEARSAL
+sourceEvidenceEndpoint=/api/v1/ops/evidence
+releaseApprovalInputs 包含 release operator signoff、rollback approver evidence、approval record、release bundle、verification manifest、deployment rollback、runbook、secret source 和 rollback SQL review gate
+liveSignals 汇总 pending/approved/rejected replay approvals、replay backlog、pending outbox events 和 dry-run 状态
+executionBoundaries.nodeMayConsume=true
+executionBoundaries.nodeMayCreateApprovalDecision=false
+executionBoundaries.nodeMayWriteApprovalLedger=false
+executionBoundaries.nodeMayTriggerDeployment=false
+executionBoundaries.nodeMayTriggerRollback=false
+executionBoundaries.nodeMayExecuteRollbackSql=false
+executionBoundaries.requiresProductionDatabase=false
+executionBoundaries.requiresProductionSecrets=false
+requiredNodeEnvironment 包含 UPSTREAM_PROBES_ENABLED=true、UPSTREAM_ACTIONS_ENABLED=false
+```
+
+它服务于 Node v185 real-read rehearsal intake 前的 Java 侧真实运行纵深准备：Node 可以只读读取这个聚合响应，减少拼接多个 Java evidence 的成本；但 Java 仍不创建 approval decision，不写 approval ledger，不执行 deployment、rollback 或 rollback SQL，也不接触生产数据库和生产密钥。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1977,6 +2005,7 @@ ops
   -> v63 增加 release audit retention fixture，固化 release evidence retention id、operator placeholder、artifact target、retention days、audit export 字段和 no-secret-value 边界
   -> v64 增加 release operator signoff fixture，固化 release operator、rollback approver、release window、artifact target 和 operator signoff placeholder 的审批决定前置证据边界
   -> v65 增加 rollback approver evidence fixture，固化 rollback approver、migration direction、rollback SQL artifact reference 和 production database boundary 的只读证据边界
+  -> v66 增加 release approval rehearsal 只读聚合入口，汇总审批演练输入、live replay/outbox 信号和禁止审批/ledger/deploy/rollback/SQL 的执行边界
 
 common
  -> 业务异常和统一错误响应

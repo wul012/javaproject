@@ -92,6 +92,7 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.healthProbe().additionalProbeEndpoints())
                 .containsExactly(
                         "/api/v1/ops/overview",
+                        "/api/v1/ops/release-approval-rehearsal",
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
@@ -122,6 +123,7 @@ class OpsEvidenceServiceTests {
                         "GET /actuator/health",
                         "GET /api/v1/ops/overview",
                         "GET /api/v1/ops/evidence",
+                        "GET /api/v1/ops/release-approval-rehearsal",
                         "GET /contracts/ops-read-only-evidence.sample.json",
                         "GET /contracts/order-idempotency-boundary.sample.json",
                         "GET /contracts/order-idempotency-store-abstraction.sample.json",
@@ -349,6 +351,7 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.releaseAuditRetentionFixture().evidenceEndpoints())
                 .containsExactly(
                         "/api/v1/ops/evidence",
+                        "/api/v1/ops/release-approval-rehearsal",
                         "/api/v1/failed-events/replay-evidence-index",
                         "/contracts/release-verification-manifest.sample.json",
                         "/contracts/release-bundle-manifest.sample.json",
@@ -752,6 +755,7 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.evidenceEndpoints())
                 .contains(
                         "/api/v1/ops/evidence",
+                        "/api/v1/ops/release-approval-rehearsal",
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/ops-evidence-field-guide.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
@@ -770,6 +774,68 @@ class OpsEvidenceServiceTests {
                         "/contracts/production-deployment-runbook-contract.sample.json",
                         "/api/v1/failed-events/{id}/replay-execution-contract",
                         "/api/v1/failed-events/replay-evidence-index"
+                );
+
+        ReleaseApprovalRehearsalResponse rehearsal = service.releaseApprovalRehearsal();
+        assertThat(rehearsal.rehearsalVersion()).isEqualTo("java-release-approval-rehearsal.v1");
+        assertThat(rehearsal.sourceEvidenceEndpoint()).isEqualTo("/api/v1/ops/evidence");
+        assertThat(rehearsal.rehearsalMode()).isEqualTo("READ_ONLY_RELEASE_APPROVAL_REHEARSAL");
+        assertThat(rehearsal.readOnly()).isTrue();
+        assertThat(rehearsal.executionAllowed()).isFalse();
+        assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
+                .isEqualTo("/contracts/release-operator-signoff.fixture.json");
+        assertThat(rehearsal.releaseApprovalInputs().rollbackApproverEvidenceFixtureEndpoint())
+                .isEqualTo("/contracts/rollback-approver-evidence.fixture.json");
+        assertThat(rehearsal.releaseApprovalInputs().rollbackApprovalRecordFixtureEndpoint())
+                .isEqualTo("/contracts/rollback-approval-record.fixture.json");
+        assertThat(rehearsal.releaseApprovalInputs().releaseBundleManifestEndpoint())
+                .isEqualTo("/contracts/release-bundle-manifest.sample.json");
+        assertThat(rehearsal.releaseApprovalInputs().requiredEvidenceEndpoints())
+                .containsExactly(
+                        "/contracts/release-operator-signoff.fixture.json",
+                        "/contracts/rollback-approver-evidence.fixture.json",
+                        "/contracts/rollback-approval-record.fixture.json",
+                        "/contracts/release-bundle-manifest.sample.json",
+                        "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/deployment-rollback-evidence.sample.json",
+                        "/contracts/production-deployment-runbook-contract.sample.json",
+                        "/contracts/production-secret-source-contract.sample.json",
+                        "/contracts/rollback-sql-review-gate.sample.json"
+                );
+        assertThat(rehearsal.liveSignals().pendingReplayApprovals()).isEqualTo(2);
+        assertThat(rehearsal.liveSignals().approvedReplayApprovals()).isEqualTo(1);
+        assertThat(rehearsal.liveSignals().rejectedReplayApprovals()).isEqualTo(1);
+        assertThat(rehearsal.liveSignals().replayBacklog()).isEqualTo(3);
+        assertThat(rehearsal.liveSignals().pendingOutboxEvents()).isEqualTo(6);
+        assertThat(rehearsal.liveSignals().realReplayAllowedByEvidence()).isFalse();
+        assertThat(rehearsal.liveSignals().approvalExecutionDryRun()).isTrue();
+        assertThat(rehearsal.liveSignals().evidenceExecutionAllowed()).isFalse();
+        assertThat(rehearsal.executionBoundaries().nodeMayConsume()).isTrue();
+        assertThat(rehearsal.executionBoundaries().nodeMayCreateApprovalDecision()).isFalse();
+        assertThat(rehearsal.executionBoundaries().nodeMayWriteApprovalLedger()).isFalse();
+        assertThat(rehearsal.executionBoundaries().nodeMayTriggerDeployment()).isFalse();
+        assertThat(rehearsal.executionBoundaries().nodeMayTriggerRollback()).isFalse();
+        assertThat(rehearsal.executionBoundaries().nodeMayExecuteRollbackSql()).isFalse();
+        assertThat(rehearsal.executionBoundaries().requiresProductionDatabase()).isFalse();
+        assertThat(rehearsal.executionBoundaries().requiresProductionSecrets()).isFalse();
+        assertThat(rehearsal.executionBoundaries().changesOrderTransactionSemantics()).isFalse();
+        assertThat(rehearsal.rehearsalBlockers())
+                .contains(
+                        "READ_ONLY_RELEASE_APPROVAL_REHEARSAL",
+                        "APPROVAL_DECISION_CREATION_DISABLED",
+                        "ROLLBACK_SQL_EXECUTION_DISABLED",
+                        "REPLAY_APPROVAL_PENDING"
+                );
+        assertThat(rehearsal.requiredNodeEnvironment())
+                .containsExactly("UPSTREAM_PROBES_ENABLED=true", "UPSTREAM_ACTIONS_ENABLED=false");
+        assertThat(rehearsal.nextEvidenceActions())
+                .containsExactly(
+                        "GET /api/v1/ops/evidence",
+                        "GET /api/v1/ops/release-approval-rehearsal",
+                        "GET /contracts/release-operator-signoff.fixture.json",
+                        "GET /contracts/rollback-approver-evidence.fixture.json",
+                        "GET /contracts/rollback-approval-record.fixture.json",
+                        "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
     }
 }

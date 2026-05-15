@@ -142,6 +142,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/api/v1/ops/overview")))
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
+                        hasItem("/api/v1/ops/release-approval-rehearsal")))
+                .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/ops-read-only-evidence.sample.json")))
                 .andExpect(jsonPath("$.healthProbe.additionalProbeEndpoints",
                         hasItem("/contracts/order-idempotency-boundary.sample.json")))
@@ -205,6 +207,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.readOnlyWindow.readyForProductionOperations").value(false))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints", hasItem("GET /actuator/health")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints", hasItem("GET /api/v1/ops/evidence")))
+                .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
+                        hasItem("GET /api/v1/ops/release-approval-rehearsal")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
                         hasItem("GET /contracts/order-idempotency-boundary.sample.json")))
                 .andExpect(jsonPath("$.readOnlyWindow.allowedProbeEndpoints",
@@ -402,6 +406,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.releaseAuditRetentionFixture.artifactTarget")
                         .value("release-tag-or-artifact-version-placeholder"))
                 .andExpect(jsonPath("$.releaseAuditRetentionFixture.retentionDays").value(180))
+                .andExpect(jsonPath("$.releaseAuditRetentionFixture.evidenceEndpoints",
+                        hasItem("/api/v1/ops/release-approval-rehearsal")))
                 .andExpect(jsonPath("$.releaseAuditRetentionFixture.evidenceEndpoints",
                         hasItem("/api/v1/failed-events/replay-evidence-index")))
                 .andExpect(jsonPath("$.releaseAuditRetentionFixture.evidenceEndpoints",
@@ -656,6 +662,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.warnings", hasItem("APPROVED_REPLAY_REQUIRES_DIGEST_CHECK")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/overview")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/api/v1/ops/evidence")))
+                .andExpect(jsonPath("$.evidenceEndpoints",
+                        hasItem("/api/v1/ops/release-approval-rehearsal")))
                 .andExpect(jsonPath("$.evidenceEndpoints", hasItem("/contracts/ops-read-only-evidence.sample.json")))
                 .andExpect(jsonPath("$.evidenceEndpoints",
                         hasItem("/contracts/ops-evidence-field-guide.sample.json")))
@@ -834,6 +842,96 @@ class OpsOverviewIntegrationTests {
                         hasItem("GET /api/v1/ops/evidence")))
                 .andExpect(jsonPath("$.productionPassBoundary.forbiddenOperations",
                         hasItem("POST /api/v1/failed-events/{id}/replay")));
+    }
+
+    @Test
+    void releaseApprovalRehearsalReturnsReadOnlyLiveAggregation() throws Exception {
+        FailedEventMessage pendingApproval = FailedEventMessage.record(
+                "release-approval-rehearsal-pending",
+                "event-release-approval-rehearsal-1",
+                "OrderNotificationFailed",
+                "ORDER",
+                "6601",
+                "order-platform.outbox.events",
+                "order-platform.outbox.events.dlq",
+                "v66 pending approval",
+                "{\"orderId\":6601}"
+        );
+        pendingApproval.requestReplayApproval("needs release rehearsal review", "ops-user", Instant.now());
+        failedEventMessageRepository.save(pendingApproval);
+        FailedEventMessage approvedReplay = FailedEventMessage.record(
+                "release-approval-rehearsal-approved",
+                "event-release-approval-rehearsal-2",
+                "OrderNotificationFailed",
+                "ORDER",
+                "6602",
+                "order-platform.outbox.events",
+                "order-platform.outbox.events.dlq",
+                "v66 approved replay",
+                "{\"orderId\":6602}"
+        );
+        approvedReplay.requestReplayApproval("safe to rehearse", "ops-user", Instant.now());
+        approvedReplay.approveReplay("ops-reviewer", "approved for rehearsal", Instant.now());
+        failedEventMessageRepository.save(approvedReplay);
+
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.sampledAt").exists())
+                .andExpect(jsonPath("$.rehearsalVersion").value("java-release-approval-rehearsal.v1"))
+                .andExpect(jsonPath("$.sourceEvidenceEndpoint").value("/api/v1/ops/evidence"))
+                .andExpect(jsonPath("$.rehearsalMode").value("READ_ONLY_RELEASE_APPROVAL_REHEARSAL"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.releaseApprovalInputs.releaseOperatorSignoffFixtureEndpoint")
+                        .value("/contracts/release-operator-signoff.fixture.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.rollbackApproverEvidenceFixtureEndpoint")
+                        .value("/contracts/rollback-approver-evidence.fixture.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.rollbackApprovalRecordFixtureEndpoint")
+                        .value("/contracts/rollback-approval-record.fixture.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.releaseBundleManifestEndpoint")
+                        .value("/contracts/release-bundle-manifest.sample.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.releaseVerificationManifestEndpoint")
+                        .value("/contracts/release-verification-manifest.sample.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.deploymentRollbackEvidenceEndpoint")
+                        .value("/contracts/deployment-rollback-evidence.sample.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.productionDeploymentRunbookContractEndpoint")
+                        .value("/contracts/production-deployment-runbook-contract.sample.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.productionSecretSourceContractEndpoint")
+                        .value("/contracts/production-secret-source-contract.sample.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.rollbackSqlReviewGateEndpoint")
+                        .value("/contracts/rollback-sql-review-gate.sample.json"))
+                .andExpect(jsonPath("$.releaseApprovalInputs.requiredEvidenceEndpoints",
+                        hasItem("/contracts/release-operator-signoff.fixture.json")))
+                .andExpect(jsonPath("$.releaseApprovalInputs.requiredEvidenceEndpoints",
+                        hasItem("/contracts/rollback-approver-evidence.fixture.json")))
+                .andExpect(jsonPath("$.releaseApprovalInputs.requiredEvidenceEndpoints",
+                        hasItem("/contracts/rollback-approval-record.fixture.json")))
+                .andExpect(jsonPath("$.liveSignals.pendingReplayApprovals").value(1))
+                .andExpect(jsonPath("$.liveSignals.approvedReplayApprovals").value(1))
+                .andExpect(jsonPath("$.liveSignals.replayBacklog").value(2))
+                .andExpect(jsonPath("$.liveSignals.pendingOutboxEvents").value(greaterThanOrEqualTo(0)))
+                .andExpect(jsonPath("$.liveSignals.realReplayAllowedByEvidence").value(false))
+                .andExpect(jsonPath("$.liveSignals.approvalExecutionDryRun").value(true))
+                .andExpect(jsonPath("$.liveSignals.evidenceExecutionAllowed").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.nodeMayConsume").value(true))
+                .andExpect(jsonPath("$.executionBoundaries.nodeMayCreateApprovalDecision").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.nodeMayWriteApprovalLedger").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.nodeMayTriggerDeployment").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.nodeMayTriggerRollback").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.nodeMayExecuteRollbackSql").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.requiresProductionDatabase").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.requiresProductionSecrets").value(false))
+                .andExpect(jsonPath("$.executionBoundaries.changesOrderTransactionSemantics").value(false))
+                .andExpect(jsonPath("$.rehearsalBlockers", hasItem("READ_ONLY_RELEASE_APPROVAL_REHEARSAL")))
+                .andExpect(jsonPath("$.rehearsalBlockers", hasItem("APPROVAL_DECISION_CREATION_DISABLED")))
+                .andExpect(jsonPath("$.rehearsalBlockers", hasItem("ROLLBACK_SQL_EXECUTION_DISABLED")))
+                .andExpect(jsonPath("$.rehearsalBlockers", hasItem("REPLAY_APPROVAL_PENDING")))
+                .andExpect(jsonPath("$.requiredNodeEnvironment", hasItem("UPSTREAM_PROBES_ENABLED=true")))
+                .andExpect(jsonPath("$.requiredNodeEnvironment", hasItem("UPSTREAM_ACTIONS_ENABLED=false")))
+                .andExpect(jsonPath("$.nextEvidenceActions",
+                        hasItem("GET /api/v1/ops/release-approval-rehearsal")))
+                .andExpect(jsonPath("$.nextEvidenceActions",
+                        hasItem("GET /contracts/rollback-approver-evidence.fixture.json")));
     }
 
     @Test
