@@ -18,6 +18,7 @@ public record OpsEvidenceResponse(
         ReleaseHandoffChecklistFixture releaseHandoffChecklistFixture,
         ReleaseAuditRetentionFixture releaseAuditRetentionFixture,
         ReleaseOperatorSignoffFixture releaseOperatorSignoffFixture,
+        RollbackApproverEvidenceFixture rollbackApproverEvidenceFixture,
         RollbackApprovalHandoff rollbackApprovalHandoff,
         RollbackApprovalRecordFixture rollbackApprovalRecordFixture,
         RollbackSqlReviewGate rollbackSqlReviewGate,
@@ -223,6 +224,29 @@ public record OpsEvidenceResponse(
             List<String> handoffArtifacts,
             boolean nodeMayConsume,
             boolean nodeMayTriggerRollback,
+            boolean rollbackSqlExecutionAllowed,
+            boolean requiresProductionDatabase,
+            boolean requiresProductionSecrets,
+            boolean changesOrderTransactionSemantics
+    ) {
+    }
+
+    public record RollbackApproverEvidenceFixture(
+            String fixtureVersion,
+            String fixtureEndpoint,
+            String fixtureMode,
+            String rollbackApprover,
+            List<String> migrationDirectionOptions,
+            String selectedMigrationDirection,
+            String rollbackSqlArtifactReference,
+            String productionDatabaseBoundary,
+            List<String> requiredEvidenceFields,
+            List<String> evidenceArtifacts,
+            List<String> noSecretValueBoundaries,
+            boolean nodeMayConsume,
+            boolean nodeMayCreateApprovalDecision,
+            boolean nodeMayTriggerRollback,
+            boolean rollbackExecutionAllowed,
             boolean rollbackSqlExecutionAllowed,
             boolean requiresProductionDatabase,
             boolean requiresProductionSecrets,

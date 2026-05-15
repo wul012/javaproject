@@ -55,6 +55,12 @@ public class OpsEvidenceService {
     static final String RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT =
             "/contracts/release-operator-signoff.fixture.json";
 
+    static final String ROLLBACK_APPROVER_EVIDENCE_FIXTURE_VERSION =
+            "java-rollback-approver-evidence-fixture.v1";
+
+    static final String ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT =
+            "/contracts/rollback-approver-evidence.fixture.json";
+
     static final String ROLLBACK_APPROVAL_HANDOFF_VERSION = "java-rollback-approval-handoff.v1";
 
     static final String ROLLBACK_APPROVAL_HANDOFF_ENDPOINT =
@@ -138,6 +144,7 @@ public class OpsEvidenceService {
                 releaseHandoffChecklistFixture(),
                 releaseAuditRetentionFixture(),
                 releaseOperatorSignoffFixture(),
+                rollbackApproverEvidenceFixture(),
                 rollbackApprovalHandoff(),
                 rollbackApprovalRecordFixture(),
                 rollbackSqlReviewGate(),
@@ -294,6 +301,7 @@ public class OpsEvidenceService {
                         "release-handoff-checklist-fixture",
                         "release-audit-retention-fixture",
                         "release-operator-signoff-fixture",
+                        "rollback-approver-evidence-fixture",
                         "rollback-approval-handoff",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate"
@@ -355,6 +363,7 @@ public class OpsEvidenceService {
                         "rollback-approval-record-fixture",
                         "release-audit-retention-fixture",
                         "release-operator-signoff-fixture",
+                        "rollback-approver-evidence-fixture",
                         "no-secret-value-boundary"
                 ),
                 releaseHandoffChecklistArtifacts(),
@@ -392,6 +401,7 @@ public class OpsEvidenceService {
                         "retention-days",
                         "evidence-endpoints",
                         "release-operator-signoff-fixture",
+                        "rollback-approver-evidence-fixture",
                         "audit-export-location-placeholder",
                         "no-secret-value-boundary"
                 ),
@@ -431,6 +441,7 @@ public class OpsEvidenceService {
                         "artifact-target",
                         "operator-signoff-placeholder",
                         "release-audit-retention-fixture",
+                        "rollback-approver-evidence-fixture",
                         "no-secret-value-boundary"
                 ),
                 releaseOperatorSignoffArtifacts(),
@@ -442,6 +453,46 @@ public class OpsEvidenceService {
                 ),
                 true,
                 false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+        );
+    }
+
+    private OpsEvidenceResponse.RollbackApproverEvidenceFixture rollbackApproverEvidenceFixture() {
+        return new OpsEvidenceResponse.RollbackApproverEvidenceFixture(
+                ROLLBACK_APPROVER_EVIDENCE_FIXTURE_VERSION,
+                ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
+                "READ_ONLY_ROLLBACK_APPROVER_EVIDENCE_FIXTURE",
+                "rollback-approver-placeholder",
+                List.of(
+                        "forward-only",
+                        "rollback-script-reviewed",
+                        "no-database-change"
+                ),
+                "no-database-change",
+                "rollback-sql-artifact-reference-placeholder",
+                "production-database-connection-outside-this-fixture",
+                List.of(
+                        "rollback-approver",
+                        "database-migration-direction",
+                        "rollback-sql-artifact-reference",
+                        "production-database-access-boundary",
+                        "rollback-sql-review-gate",
+                        "no-secret-value-boundary"
+                ),
+                rollbackApproverEvidenceArtifacts(),
+                List.of(
+                        "rollback-approver-fixture-stores-metadata-only",
+                        "secret-values-must-not-be-read",
+                        "secret-values-must-not-be-embedded-in-approver-evidence",
+                        "node-may-render-decision-rehearsal-input-only"
+                ),
+                true,
                 false,
                 false,
                 false,
@@ -469,6 +520,7 @@ public class OpsEvidenceService {
                         "release-handoff-checklist-fixture",
                         "release-audit-retention-fixture",
                         "release-operator-signoff-fixture",
+                        "rollback-approver-evidence-fixture",
                         "rollback-approval-record-fixture",
                         "rollback-sql-review-gate",
                         "release-bundle-manifest",
@@ -478,6 +530,7 @@ public class OpsEvidenceService {
                         RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                         RELEASE_AUDIT_RETENTION_FIXTURE_ENDPOINT,
                         RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT,
+                        ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                         DEPLOYMENT_ROLLBACK_EVIDENCE_ENDPOINT,
                         ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
@@ -519,6 +572,7 @@ public class OpsEvidenceService {
                 ),
                 List.of(
                         ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                        ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                         ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
                         PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
                         PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
@@ -582,6 +636,7 @@ public class OpsEvidenceService {
                 RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                 RELEASE_AUDIT_RETENTION_FIXTURE_ENDPOINT,
                 RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT,
+                ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                 ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
                 ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
@@ -603,6 +658,7 @@ public class OpsEvidenceService {
                 RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                 RELEASE_AUDIT_RETENTION_FIXTURE_ENDPOINT,
                 RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT,
+                ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                 PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
                 PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
                 ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
@@ -618,6 +674,7 @@ public class OpsEvidenceService {
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                 RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT,
+                ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                 PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT
         );
     }
@@ -628,6 +685,7 @@ public class OpsEvidenceService {
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                 RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT,
+                ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                 PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
                 PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT
         );
@@ -640,7 +698,19 @@ public class OpsEvidenceService {
                 RELEASE_BUNDLE_MANIFEST_ENDPOINT,
                 RELEASE_VERIFICATION_MANIFEST_ENDPOINT,
                 PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
+                ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                 ROLLBACK_APPROVAL_HANDOFF_ENDPOINT
+        );
+    }
+
+    private List<String> rollbackApproverEvidenceArtifacts() {
+        return List.of(
+                ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,
+                ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
+                ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
+                PRODUCTION_DEPLOYMENT_RUNBOOK_CONTRACT_ENDPOINT,
+                PRODUCTION_SECRET_SOURCE_CONTRACT_ENDPOINT,
+                RELEASE_BUNDLE_MANIFEST_ENDPOINT
         );
     }
 
@@ -701,7 +771,8 @@ public class OpsEvidenceService {
                         "rollback-sql-review-gate",
                         "operator-approval-placeholder",
                         "release-audit-retention-fixture",
-                        "release-operator-signoff-fixture"
+                        "release-operator-signoff-fixture",
+                        "rollback-approver-evidence-fixture"
                 ),
                 List.of(
                         RELEASE_BUNDLE_MANIFEST_ENDPOINT,
@@ -709,6 +780,7 @@ public class OpsEvidenceService {
                         RELEASE_HANDOFF_CHECKLIST_FIXTURE_ENDPOINT,
                         RELEASE_AUDIT_RETENTION_FIXTURE_ENDPOINT,
                         RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT,
+                        ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
                         ROLLBACK_APPROVAL_HANDOFF_ENDPOINT,
                         ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
                         ROLLBACK_SQL_REVIEW_GATE_ENDPOINT,

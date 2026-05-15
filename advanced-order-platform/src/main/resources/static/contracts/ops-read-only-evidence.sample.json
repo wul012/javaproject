@@ -29,6 +29,7 @@
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-audit-retention.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -98,6 +99,7 @@
       "GET /contracts/release-handoff-checklist.fixture.json",
       "GET /contracts/release-audit-retention.fixture.json",
       "GET /contracts/release-operator-signoff.fixture.json",
+      "GET /contracts/rollback-approver-evidence.fixture.json",
       "GET /contracts/rollback-approval-handoff.sample.json",
       "GET /contracts/rollback-approval-record.fixture.json",
       "GET /contracts/rollback-sql-review-gate.sample.json",
@@ -177,6 +179,7 @@
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-audit-retention.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -206,6 +209,10 @@
       "production-secret-source-contract",
       "production-deployment-runbook-contract",
       "database-migration-direction",
+      "release-handoff-checklist-fixture",
+      "release-audit-retention-fixture",
+      "release-operator-signoff-fixture",
+      "rollback-approver-evidence-fixture",
       "rollback-approval-handoff",
       "rollback-approval-record-fixture",
       "rollback-sql-review-gate"
@@ -234,6 +241,7 @@
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-audit-retention.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -277,6 +285,7 @@
       "rollback-approval-record-fixture",
       "release-audit-retention-fixture",
       "release-operator-signoff-fixture",
+      "rollback-approver-evidence-fixture",
       "no-secret-value-boundary"
     ],
     "checklistArtifacts": [
@@ -284,6 +293,7 @@
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/release-audit-retention.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/production-deployment-runbook-contract.sample.json",
       "/contracts/production-secret-source-contract.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
@@ -319,6 +329,7 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/production-deployment-runbook-contract.sample.json"
     ],
     "auditExportFields": [
@@ -328,6 +339,7 @@
       "retention-days",
       "evidence-endpoints",
       "release-operator-signoff-fixture",
+      "rollback-approver-evidence-fixture",
       "audit-export-location-placeholder",
       "no-secret-value-boundary"
     ],
@@ -336,6 +348,7 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/production-deployment-runbook-contract.sample.json",
       "/contracts/production-secret-source-contract.sample.json"
     ],
@@ -371,6 +384,7 @@
       "release-handoff-checklist-fixture",
       "release-audit-retention-fixture",
       "release-operator-signoff-fixture",
+      "rollback-approver-evidence-fixture",
       "rollback-approval-record-fixture",
       "rollback-sql-review-gate",
       "release-bundle-manifest",
@@ -380,6 +394,7 @@
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-audit-retention.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/deployment-rollback-evidence.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
@@ -514,7 +529,8 @@
       "rollback-sql-review-gate",
       "operator-approval-placeholder",
       "release-audit-retention-fixture",
-      "release-operator-signoff-fixture"
+      "release-operator-signoff-fixture",
+      "rollback-approver-evidence-fixture"
     ],
     "runbookArtifacts": [
       "/contracts/release-bundle-manifest.sample.json",
@@ -522,6 +538,7 @@
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-audit-retention.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -559,6 +576,7 @@
     "/contracts/release-handoff-checklist.fixture.json",
     "/contracts/release-audit-retention.fixture.json",
     "/contracts/release-operator-signoff.fixture.json",
+    "/contracts/rollback-approver-evidence.fixture.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",
@@ -601,6 +619,7 @@
       "artifact-target",
       "operator-signoff-placeholder",
       "release-audit-retention-fixture",
+      "rollback-approver-evidence-fixture",
       "no-secret-value-boundary"
     ],
     "signoffArtifacts": [
@@ -609,6 +628,7 @@
       "/contracts/release-bundle-manifest.sample.json",
       "/contracts/release-verification-manifest.sample.json",
       "/contracts/production-deployment-runbook-contract.sample.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json"
     ],
     "noSecretValueBoundaries": [
@@ -622,6 +642,50 @@
     "nodeMayTriggerDeployment": false,
     "nodeMayTriggerRollback": false,
     "deploymentExecutionAllowed": false,
+    "rollbackSqlExecutionAllowed": false,
+    "requiresProductionDatabase": false,
+    "requiresProductionSecrets": false,
+    "changesOrderTransactionSemantics": false
+  },
+  "rollbackApproverEvidenceFixture": {
+    "fixtureVersion": "java-rollback-approver-evidence-fixture.v1",
+    "fixtureEndpoint": "/contracts/rollback-approver-evidence.fixture.json",
+    "fixtureMode": "READ_ONLY_ROLLBACK_APPROVER_EVIDENCE_FIXTURE",
+    "rollbackApprover": "rollback-approver-placeholder",
+    "migrationDirectionOptions": [
+      "forward-only",
+      "rollback-script-reviewed",
+      "no-database-change"
+    ],
+    "selectedMigrationDirection": "no-database-change",
+    "rollbackSqlArtifactReference": "rollback-sql-artifact-reference-placeholder",
+    "productionDatabaseBoundary": "production-database-connection-outside-this-fixture",
+    "requiredEvidenceFields": [
+      "rollback-approver",
+      "database-migration-direction",
+      "rollback-sql-artifact-reference",
+      "production-database-access-boundary",
+      "rollback-sql-review-gate",
+      "no-secret-value-boundary"
+    ],
+    "evidenceArtifacts": [
+      "/contracts/rollback-sql-review-gate.sample.json",
+      "/contracts/rollback-approval-handoff.sample.json",
+      "/contracts/rollback-approval-record.fixture.json",
+      "/contracts/production-deployment-runbook-contract.sample.json",
+      "/contracts/production-secret-source-contract.sample.json",
+      "/contracts/release-bundle-manifest.sample.json"
+    ],
+    "noSecretValueBoundaries": [
+      "rollback-approver-fixture-stores-metadata-only",
+      "secret-values-must-not-be-read",
+      "secret-values-must-not-be-embedded-in-approver-evidence",
+      "node-may-render-decision-rehearsal-input-only"
+    ],
+    "nodeMayConsume": true,
+    "nodeMayCreateApprovalDecision": false,
+    "nodeMayTriggerRollback": false,
+    "rollbackExecutionAllowed": false,
     "rollbackSqlExecutionAllowed": false,
     "requiresProductionDatabase": false,
     "requiresProductionSecrets": false,

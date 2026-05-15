@@ -6,7 +6,7 @@
   "executionAllowed": false,
   "sourceEvidenceEndpoint": "/api/v1/ops/evidence",
   "sourceSampleEndpoint": "/contracts/ops-read-only-evidence.sample.json",
-  "updatedAt": "2026-05-15T08:40:00Z",
+  "updatedAt": "2026-05-15T09:35:00Z",
   "releaseReviewUse": {
     "intendedConsumer": "Node read-only capture release evidence review",
     "mayBeUsedForProductionPass": false,
@@ -619,6 +619,47 @@
         {
           "path": "releaseOperatorSignoffFixture.deploymentExecutionAllowed",
           "meaning": "Deployment execution must not run from this signoff fixture.",
+          "expectedValue": false
+        }
+      ]
+    },
+    {
+      "name": "rollbackApproverEvidenceFixture",
+      "stability": "stable",
+      "fields": [
+        {
+          "path": "rollbackApproverEvidenceFixture.fixtureVersion",
+          "meaning": "Version for the Java rollback approver evidence fixture consumed by release approval decision rehearsal packets.",
+          "expectedValue": "java-rollback-approver-evidence-fixture.v1"
+        },
+        {
+          "path": "rollbackApproverEvidenceFixture.fixtureEndpoint",
+          "meaning": "Static endpoint exposing rollback approver, migration direction, SQL artifact reference, and production database boundary fields.",
+          "expectedValue": "/contracts/rollback-approver-evidence.fixture.json"
+        },
+        {
+          "path": "rollbackApproverEvidenceFixture.rollbackApprover",
+          "meaning": "Operator-supplied rollback approver placeholder; Java does not infer a real approver identity from this fixture.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "rollbackApproverEvidenceFixture.selectedMigrationDirection",
+          "meaning": "Selected migration direction for this sample; rollback SQL is not executed by this fixture.",
+          "expectedValue": "no-database-change"
+        },
+        {
+          "path": "rollbackApproverEvidenceFixture.rollbackSqlArtifactReference",
+          "meaning": "Operator-supplied artifact reference placeholder; SQL text is not embedded in the fixture.",
+          "stability": "manual-placeholder"
+        },
+        {
+          "path": "rollbackApproverEvidenceFixture.nodeMayCreateApprovalDecision",
+          "meaning": "Node may consume the evidence but must not create a real approval decision.",
+          "expectedValue": false
+        },
+        {
+          "path": "rollbackApproverEvidenceFixture.rollbackSqlExecutionAllowed",
+          "meaning": "Rollback SQL must not run from this evidence fixture.",
           "expectedValue": false
         }
       ]

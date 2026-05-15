@@ -59,6 +59,7 @@
       "/contracts/release-handoff-checklist.fixture.json",
       "/contracts/release-audit-retention.fixture.json",
       "/contracts/release-operator-signoff.fixture.json",
+      "/contracts/rollback-approver-evidence.fixture.json",
       "/contracts/rollback-approval-handoff.sample.json",
       "/contracts/rollback-approval-record.fixture.json",
       "/contracts/rollback-sql-review-gate.sample.json",
@@ -79,7 +80,8 @@
     "rollback-approval-handoff",
     "rollback-approval-record-fixture",
     "rollback-sql-review-gate",
-    "release-operator-signoff-fixture"
+    "release-operator-signoff-fixture",
+    "rollback-approver-evidence-fixture"
   ],
   "boundaries": {
     "nodeMayTriggerRollback": false,

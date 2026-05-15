@@ -174,9 +174,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 68-version-64-release-operator-signoff-fixture.md
  -> 第六十四版 release operator signoff fixture，固化 release operator、rollback approver、release window、artifact target 和 operator signoff placeholder 的审批决定前置证据边界
+
+69-version-65-rollback-approver-evidence-fixture.md
+ -> 第六十五版 rollback approver evidence fixture，固化 rollback approver、migration direction、rollback SQL artifact reference 和 production database boundary 的只读证据边界
 ```
 
-后续推进 v65 时，从 `69-version-65-主题.md` 继续追加。
+后续推进 v66 时，从 `70-version-66-主题.md` 继续追加。
 
 ## 一句话总览
 

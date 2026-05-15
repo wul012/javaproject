@@ -56,6 +56,14 @@
       "nodeMayWriteAuditExport": false
     },
     {
+      "name": "rollback-approver-evidence-fixture",
+      "description": "Operator confirms rollback approver evidence and SQL/no-SQL boundary before decision rehearsal.",
+      "required": true,
+      "expectedEndpoint": "/contracts/rollback-approver-evidence.fixture.json",
+      "nodeMayTriggerRollback": false,
+      "nodeMayExecuteRollbackSql": false
+    },
+    {
       "name": "no-secret-value-boundary",
       "description": "Operator confirms this signoff stores metadata only and never embeds secret values.",
       "required": true,
@@ -68,6 +76,7 @@
     "/contracts/release-bundle-manifest.sample.json",
     "/contracts/release-verification-manifest.sample.json",
     "/contracts/production-deployment-runbook-contract.sample.json",
+    "/contracts/rollback-approver-evidence.fixture.json",
     "/contracts/rollback-approval-handoff.sample.json"
   ],
   "noSecretValueBoundaries": [

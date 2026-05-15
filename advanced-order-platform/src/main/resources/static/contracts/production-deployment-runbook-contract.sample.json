@@ -84,6 +84,14 @@
       "expectedEndpoint": "/contracts/release-operator-signoff.fixture.json",
       "nodeMayCreateApprovalDecision": false,
       "nodeMayTriggerDeployment": false
+    },
+    {
+      "name": "rollback-approver-evidence-fixture",
+      "description": "Operator confirms rollback approver evidence and SQL/no-SQL boundary before rollback can be rehearsed.",
+      "required": true,
+      "expectedEndpoint": "/contracts/rollback-approver-evidence.fixture.json",
+      "nodeMayTriggerRollback": false,
+      "nodeMayExecuteRollbackSql": false
     }
   ],
   "runbookArtifacts": [
@@ -92,6 +100,7 @@
     "/contracts/release-handoff-checklist.fixture.json",
     "/contracts/release-audit-retention.fixture.json",
     "/contracts/release-operator-signoff.fixture.json",
+    "/contracts/rollback-approver-evidence.fixture.json",
     "/contracts/rollback-approval-handoff.sample.json",
     "/contracts/rollback-approval-record.fixture.json",
     "/contracts/rollback-sql-review-gate.sample.json",

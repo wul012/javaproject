@@ -1365,6 +1365,38 @@ boundaries.requiresProductionDatabase=false
 
 它服务于后续 Node v180 approval decision prerequisite gate：Java 只记录审批决定前需要人工确认的 release operator signoff 元数据，不创建 approval decision，不写 approval ledger，不执行部署、不执行回退、不执行 SQL，也不读取或嵌入 secret value。
 
+v65 起，应用随包提供 rollback approver evidence fixture：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/contracts/rollback-approver-evidence.fixture.json
+```
+
+该样本固定表达：
+
+```text
+fixtureVersion=java-rollback-approver-evidence-fixture.v1
+fixtureMode=READ_ONLY_ROLLBACK_APPROVER_EVIDENCE_FIXTURE
+approverEvidence.rollbackApprover=rollback-approver-placeholder
+approverEvidence.evidenceStatus=PENDING_OPERATOR_CONFIRMATION
+databaseMigration.selectedDirection=no-database-change
+databaseMigration.rollbackSqlArtifactReference=rollback-sql-artifact-reference-placeholder
+databaseMigration.rollbackSqlTextEmbedded=false
+databaseMigration.rollbackSqlExecutionAllowed=false
+databaseMigration.requiresProductionDatabase=false
+databaseMigration.productionDatabaseBoundary=production-database-connection-outside-this-fixture
+nodeConsumption.nodeMayConsume=true
+nodeConsumption.nodeMayCreateApprovalDecision=false
+nodeConsumption.nodeMayTriggerRollback=false
+nodeConsumption.nodeMayExecuteRollbackSql=false
+boundaries.approvalDecisionCreated=false
+boundaries.approvalLedgerWriteAllowed=false
+boundaries.rollbackExecutionAllowed=false
+boundaries.rollbackSqlExecutionAllowed=false
+boundaries.requiresProductionDatabase=false
+```
+
+它服务于后续 Node v182 release approval decision rehearsal packet：Java 只记录 rollback approver、migration direction、rollback SQL artifact reference 和生产数据库边界的只读证据，不创建 approval decision，不写 approval ledger，不执行 rollback，不执行 rollback SQL，也不连接生产数据库。
+
 查询失败事件治理摘要：
 
 ```powershell
@@ -1944,6 +1976,7 @@ ops
   -> v62 增加 release handoff checklist fixture，固化 release operator、rollback approver、artifact target、migration direction 和 secret source confirmation，并收口静态 contract endpoint helper
   -> v63 增加 release audit retention fixture，固化 release evidence retention id、operator placeholder、artifact target、retention days、audit export 字段和 no-secret-value 边界
   -> v64 增加 release operator signoff fixture，固化 release operator、rollback approver、release window、artifact target 和 operator signoff placeholder 的审批决定前置证据边界
+  -> v65 增加 rollback approver evidence fixture，固化 rollback approver、migration direction、rollback SQL artifact reference 和 production database boundary 的只读证据边界
 
 common
  -> 业务异常和统一错误响应
