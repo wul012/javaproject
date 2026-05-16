@@ -36,6 +36,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_OPERATOR_WINDOW_HINT_VERSION =
             "java-release-approval-rehearsal-operator-window-hint.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_CI_EVIDENCE_HINT_VERSION =
+            "java-release-approval-rehearsal-ci-evidence-hint.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -43,7 +46,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v4";
+            "java-release-approval-rehearsal-response-schema.v5";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -184,7 +187,7 @@ public class OpsEvidenceService {
 
     @Transactional(readOnly = true)
     public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal() {
-        return releaseApprovalRehearsal(null, null, null, null, null, null, null);
+        return releaseApprovalRehearsal(null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @Transactional(readOnly = true)
@@ -193,7 +196,20 @@ public class OpsEvidenceService {
             String operatorIdentity,
             String auditCorrelationId
     ) {
-        return releaseApprovalRehearsal(requestId, operatorIdentity, auditCorrelationId, null, null, null, null);
+        return releaseApprovalRehearsal(
+                requestId,
+                operatorIdentity,
+                auditCorrelationId,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
     }
 
     @Transactional(readOnly = true)
@@ -206,6 +222,37 @@ public class OpsEvidenceService {
             String operatorWindowVerifiedClaim,
             String operatorWindowApprovalCorrelationId
     ) {
+        return releaseApprovalRehearsal(
+                requestId,
+                operatorIdentity,
+                auditCorrelationId,
+                operatorWindowOperatorId,
+                operatorWindowRoles,
+                operatorWindowVerifiedClaim,
+                operatorWindowApprovalCorrelationId,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId,
+            String ciManifestVersion,
+            String ciManifestDigest,
+            String ciManifestEndpoint,
+            String ciArtifactRecordCount,
+            String ciApprovalCorrelationId
+    ) {
         OpsEvidenceResponse evidence = evidence();
         String normalizedRequestId = normalizeHeaderValue(requestId);
         String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
@@ -215,6 +262,11 @@ public class OpsEvidenceService {
         String normalizedOperatorWindowVerifiedClaim = normalizeHeaderValue(operatorWindowVerifiedClaim);
         String normalizedOperatorWindowApprovalCorrelationId =
                 normalizeHeaderValue(operatorWindowApprovalCorrelationId);
+        String normalizedCiManifestVersion = normalizeHeaderValue(ciManifestVersion);
+        String normalizedCiManifestDigest = normalizeHeaderValue(ciManifestDigest);
+        String normalizedCiManifestEndpoint = normalizeHeaderValue(ciManifestEndpoint);
+        String normalizedCiArtifactRecordCount = normalizeHeaderValue(ciArtifactRecordCount);
+        String normalizedCiApprovalCorrelationId = normalizeHeaderValue(ciApprovalCorrelationId);
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext = rehearsalRequestContext(
                 normalizedRequestId,
                 normalizedOperatorIdentity,
@@ -226,6 +278,14 @@ public class OpsEvidenceService {
                         normalizedOperatorWindowRoles,
                         normalizedOperatorWindowVerifiedClaim,
                         normalizedOperatorWindowApprovalCorrelationId
+                );
+        ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint =
+                rehearsalCiEvidenceHint(
+                        normalizedCiManifestVersion,
+                        normalizedCiManifestDigest,
+                        normalizedCiManifestEndpoint,
+                        normalizedCiArtifactRecordCount,
+                        normalizedCiApprovalCorrelationId
                 );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
@@ -244,10 +304,12 @@ public class OpsEvidenceService {
                 false,
                 requestContext,
                 operatorWindowHint,
+                ciEvidenceHint,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
                         operatorWindowHint,
+                        ciEvidenceHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -263,12 +325,14 @@ public class OpsEvidenceService {
     private ReleaseApprovalRehearsalResponse.RehearsalVerificationHint releaseApprovalVerificationHint(
             ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
             ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
+            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
         List<String> warningDigestInputs = List.of(
                 "contextWarnings",
                 "operatorWindowEchoWarnings",
+                "ciEvidenceEchoWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -278,6 +342,10 @@ public class OpsEvidenceService {
         List<String> proofClaims = List.of(
                 "executionAllowed=false",
                 "requestContext.approvalLedgerWritten=false",
+                "ciEvidenceHint.noLedgerWriteProved=true",
+                "ciEvidenceHint.ciArtifactUploadedByJava=false",
+                "ciEvidenceHint.githubArtifactAccessedByJava=false",
+                "ciEvidenceHint.productionWindowAllowedByJava=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -287,9 +355,10 @@ public class OpsEvidenceService {
         return new ReleaseApprovalRehearsalResponse.RehearsalVerificationHint(
                 RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION,
                 RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
-                warningDigest(requestContext, operatorWindowHint, failureTaxonomy, executionBoundaries),
+                warningDigest(requestContext, operatorWindowHint, ciEvidenceHint, failureTaxonomy, executionBoundaries),
                 "NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS",
                 !requestContext.approvalLedgerWritten()
+                        && ciEvidenceHint.noLedgerWriteProved()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -298,6 +367,7 @@ public class OpsEvidenceService {
                         "rehearsalVersion",
                         "requestContext",
                         "operatorWindowHint",
+                        "ciEvidenceHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -311,6 +381,9 @@ public class OpsEvidenceService {
                 proofClaims,
                 List.of(
                         "Verify responseSchemaVersion before importing operator window results",
+                        "Compare ciEvidenceHint.manifestProfileVersion with Node v200 manifest profileVersion",
+                        "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
+                        "Require ciEvidenceHint.ciArtifactUploadedByJava=false until CI artifact upload exists outside Java",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -321,6 +394,7 @@ public class OpsEvidenceService {
     private String warningDigest(
             ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
             ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
+            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -330,10 +404,13 @@ public class OpsEvidenceService {
                 line("responseSchemaVersion", RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION),
                 line("contextWarnings", requestContext.contextWarnings()),
                 line("operatorWindowEchoWarnings", operatorWindowHint.echoWarnings()),
+                line("ciEvidenceEchoWarnings", ciEvidenceHint.echoWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
                 line("approvalLedgerWritten", requestContext.approvalLedgerWritten()),
+                line("ciArtifactUploadedByJava", ciEvidenceHint.ciArtifactUploadedByJava()),
+                line("githubArtifactAccessedByJava", ciEvidenceHint.githubArtifactAccessedByJava()),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
     }
@@ -410,6 +487,91 @@ public class OpsEvidenceService {
                         "Compare operatorWindowHint.approvalCorrelationId with Node v198 approvalBinding.approvalCorrelationId",
                         "Require productionIdpVerifiedByJava=false until real IdP integration exists",
                         "Keep nodeMayTreatAsProductionIdentity=false"
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint rehearsalCiEvidenceHint(
+            String normalizedCiManifestVersion,
+            String normalizedCiManifestDigest,
+            String normalizedCiManifestEndpoint,
+            String normalizedCiArtifactRecordCount,
+            String normalizedCiApprovalCorrelationId
+    ) {
+        List<String> warnings = new ArrayList<>();
+        addMissingContextWarning(
+                warnings,
+                normalizedCiManifestVersion,
+                "ORDEROPS_CI_MANIFEST_VERSION_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiManifestDigest,
+                "ORDEROPS_CI_MANIFEST_DIGEST_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiManifestEndpoint,
+                "ORDEROPS_CI_MANIFEST_ENDPOINT_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiArtifactRecordCount,
+                "ORDEROPS_CI_ARTIFACT_RECORD_COUNT_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiApprovalCorrelationId,
+                "ORDEROPS_CI_APPROVAL_CORRELATION_ID_MISSING"
+        );
+        boolean manifestProfileVersionEchoed = normalizedCiManifestVersion != null;
+        boolean manifestDigestEchoed = normalizedCiManifestDigest != null;
+        boolean manifestEndpointEchoed = normalizedCiManifestEndpoint != null;
+        boolean artifactRecordCountEchoed = normalizedCiArtifactRecordCount != null;
+        boolean approvalCorrelationEchoed = normalizedCiApprovalCorrelationId != null;
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint(
+                RELEASE_APPROVAL_REHEARSAL_CI_EVIDENCE_HINT_VERSION,
+                valueOrPlaceholder(normalizedCiManifestVersion, "ci-manifest-profile-version-not-supplied"),
+                sourceFor(normalizedCiManifestVersion, "x-orderops-ci-manifest-version"),
+                valueOrPlaceholder(normalizedCiManifestDigest, "ci-manifest-digest-not-supplied"),
+                sourceFor(normalizedCiManifestDigest, "x-orderops-ci-manifest-digest"),
+                valueOrPlaceholder(normalizedCiManifestEndpoint, "ci-manifest-endpoint-not-supplied"),
+                sourceFor(normalizedCiManifestEndpoint, "x-orderops-ci-manifest-endpoint"),
+                valueOrPlaceholder(normalizedCiArtifactRecordCount, "ci-artifact-record-count-not-supplied"),
+                sourceFor(normalizedCiArtifactRecordCount, "x-orderops-ci-artifact-record-count"),
+                valueOrPlaceholder(normalizedCiApprovalCorrelationId, "ci-approval-correlation-id-not-supplied"),
+                sourceFor(normalizedCiApprovalCorrelationId, "x-orderops-ci-approval-correlation-id"),
+                manifestProfileVersionEchoed,
+                manifestDigestEchoed,
+                manifestEndpointEchoed,
+                artifactRecordCountEchoed,
+                approvalCorrelationEchoed,
+                manifestProfileVersionEchoed
+                        && manifestDigestEchoed
+                        && manifestEndpointEchoed
+                        && artifactRecordCountEchoed
+                        && approvalCorrelationEchoed,
+                "NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS",
+                true,
+                false,
+                false,
+                false,
+                false,
+                List.of(
+                        "x-orderops-ci-manifest-version",
+                        "x-orderops-ci-manifest-digest",
+                        "x-orderops-ci-manifest-endpoint",
+                        "x-orderops-ci-artifact-record-count",
+                        "x-orderops-ci-approval-correlation-id"
+                ),
+                List.copyOf(warnings),
+                List.of(
+                        "Compare ciEvidenceHint.manifestProfileVersion with Node v200 profileVersion",
+                        "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
+                        "Compare ciEvidenceHint.manifestEndpoint with Node v200 evidence endpoint",
+                        "Compare ciEvidenceHint.approvalCorrelationId with operatorWindowHint.approvalCorrelationId when both are supplied",
+                        "Keep ciArtifactUploadedByJava=false and githubArtifactAccessedByJava=false"
                 )
         );
     }

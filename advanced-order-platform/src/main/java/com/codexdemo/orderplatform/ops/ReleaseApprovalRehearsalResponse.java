@@ -12,6 +12,7 @@ public record ReleaseApprovalRehearsalResponse(
         boolean executionAllowed,
         RehearsalRequestContext requestContext,
         RehearsalOperatorWindowHint operatorWindowHint,
+        RehearsalCiEvidenceHint ciEvidenceHint,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -58,6 +59,36 @@ public record ReleaseApprovalRehearsalResponse(
             boolean persistedApprovalRecordByJava,
             boolean nodeMayTreatAsProductionIdentity,
             List<String> acceptedOperatorWindowHeaders,
+            List<String> echoWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalCiEvidenceHint(
+            String hintVersion,
+            String manifestProfileVersion,
+            String manifestProfileVersionSource,
+            String manifestDigest,
+            String manifestDigestSource,
+            String manifestEndpoint,
+            String manifestEndpointSource,
+            String artifactRecordCount,
+            String artifactRecordCountSource,
+            String approvalCorrelationId,
+            String approvalCorrelationIdSource,
+            boolean manifestProfileVersionEchoed,
+            boolean manifestDigestEchoed,
+            boolean manifestEndpointEchoed,
+            boolean artifactRecordCountEchoed,
+            boolean approvalCorrelationEchoed,
+            boolean ciEvidenceContextComplete,
+            String noLedgerWriteProof,
+            boolean noLedgerWriteProved,
+            boolean ciArtifactUploadedByJava,
+            boolean githubArtifactAccessedByJava,
+            boolean productionWindowAllowedByJava,
+            boolean nodeMayTreatAsCiArtifactPublication,
+            List<String> acceptedCiEvidenceHeaders,
             List<String> echoWarnings,
             List<String> nodeVerificationActions
     ) {

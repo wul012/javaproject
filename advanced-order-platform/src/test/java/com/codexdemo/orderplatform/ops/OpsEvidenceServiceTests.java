@@ -845,6 +845,55 @@ class OpsEvidenceServiceTests {
                         "Compare operatorWindowHint.operatorId with Node v198 operatorIdentity.operatorId",
                         "Keep nodeMayTreatAsProductionIdentity=false"
                 );
+        assertThat(rehearsal.ciEvidenceHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-ci-evidence-hint.v1");
+        assertThat(rehearsal.ciEvidenceHint().manifestProfileVersion())
+                .isEqualTo("ci-manifest-profile-version-not-supplied");
+        assertThat(rehearsal.ciEvidenceHint().manifestProfileVersionSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.ciEvidenceHint().manifestDigest()).isEqualTo("ci-manifest-digest-not-supplied");
+        assertThat(rehearsal.ciEvidenceHint().manifestDigestSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.ciEvidenceHint().manifestEndpoint()).isEqualTo("ci-manifest-endpoint-not-supplied");
+        assertThat(rehearsal.ciEvidenceHint().manifestEndpointSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.ciEvidenceHint().artifactRecordCount())
+                .isEqualTo("ci-artifact-record-count-not-supplied");
+        assertThat(rehearsal.ciEvidenceHint().artifactRecordCountSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.ciEvidenceHint().approvalCorrelationId())
+                .isEqualTo("ci-approval-correlation-id-not-supplied");
+        assertThat(rehearsal.ciEvidenceHint().approvalCorrelationIdSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.ciEvidenceHint().manifestProfileVersionEchoed()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().manifestDigestEchoed()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().manifestEndpointEchoed()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().artifactRecordCountEchoed()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().approvalCorrelationEchoed()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().ciEvidenceContextComplete()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().noLedgerWriteProof())
+                .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
+        assertThat(rehearsal.ciEvidenceHint().noLedgerWriteProved()).isTrue();
+        assertThat(rehearsal.ciEvidenceHint().ciArtifactUploadedByJava()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().githubArtifactAccessedByJava()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().productionWindowAllowedByJava()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().nodeMayTreatAsCiArtifactPublication()).isFalse();
+        assertThat(rehearsal.ciEvidenceHint().acceptedCiEvidenceHeaders())
+                .containsExactly(
+                        "x-orderops-ci-manifest-version",
+                        "x-orderops-ci-manifest-digest",
+                        "x-orderops-ci-manifest-endpoint",
+                        "x-orderops-ci-artifact-record-count",
+                        "x-orderops-ci-approval-correlation-id"
+                );
+        assertThat(rehearsal.ciEvidenceHint().echoWarnings())
+                .containsExactly(
+                        "ORDEROPS_CI_MANIFEST_VERSION_MISSING",
+                        "ORDEROPS_CI_MANIFEST_DIGEST_MISSING",
+                        "ORDEROPS_CI_MANIFEST_ENDPOINT_MISSING",
+                        "ORDEROPS_CI_ARTIFACT_RECORD_COUNT_MISSING",
+                        "ORDEROPS_CI_APPROVAL_CORRELATION_ID_MISSING"
+                );
+        assertThat(rehearsal.ciEvidenceHint().nodeVerificationActions())
+                .contains(
+                        "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
+                        "Keep ciArtifactUploadedByJava=false and githubArtifactAccessedByJava=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -870,7 +919,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v4");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v5");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -880,6 +929,7 @@ class OpsEvidenceServiceTests {
                 .contains(
                         "requestContext",
                         "operatorWindowHint",
+                        "ciEvidenceHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -888,6 +938,7 @@ class OpsEvidenceServiceTests {
                 .containsExactly(
                         "contextWarnings",
                         "operatorWindowEchoWarnings",
+                        "ciEvidenceEchoWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -898,11 +949,14 @@ class OpsEvidenceServiceTests {
                 .contains(
                         "executionAllowed=false",
                         "requestContext.approvalLedgerWritten=false",
+                        "ciEvidenceHint.noLedgerWriteProved=true",
+                        "ciEvidenceHint.ciArtifactUploadedByJava=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
                 .contains(
                         "Verify responseSchemaVersion before importing operator window results",
+                        "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -968,6 +1022,11 @@ class OpsEvidenceServiceTests {
                 " operator-198 ",
                 " operator,auditor ",
                 " true ",
+                " approval-v198-operator-window ",
+                " real-read-window-ci-archive-artifact-manifest.v1 ",
+                " sha256:node-v200-manifest-digest ",
+                " /api/v1/production/real-read-window-ci-archive-artifact-manifest ",
+                " 9 ",
                 " approval-v198-operator-window "
         );
         assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
@@ -1004,6 +1063,37 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.operatorWindowHint().persistedApprovalRecordByJava()).isFalse();
         assertThat(headerBackedRehearsal.operatorWindowHint().nodeMayTreatAsProductionIdentity()).isFalse();
         assertThat(headerBackedRehearsal.operatorWindowHint().echoWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestProfileVersion())
+                .isEqualTo("real-read-window-ci-archive-artifact-manifest.v1");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestProfileVersionSource())
+                .isEqualTo("x-orderops-ci-manifest-version");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestDigest())
+                .isEqualTo("sha256:node-v200-manifest-digest");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestDigestSource())
+                .isEqualTo("x-orderops-ci-manifest-digest");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestEndpoint())
+                .isEqualTo("/api/v1/production/real-read-window-ci-archive-artifact-manifest");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestEndpointSource())
+                .isEqualTo("x-orderops-ci-manifest-endpoint");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().artifactRecordCount()).isEqualTo("9");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().artifactRecordCountSource())
+                .isEqualTo("x-orderops-ci-artifact-record-count");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().approvalCorrelationId())
+                .isEqualTo("approval-v198-operator-window");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().approvalCorrelationIdSource())
+                .isEqualTo("x-orderops-ci-approval-correlation-id");
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestProfileVersionEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestDigestEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().manifestEndpointEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().artifactRecordCountEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().approvalCorrelationEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().ciEvidenceContextComplete()).isTrue();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().noLedgerWriteProved()).isTrue();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().ciArtifactUploadedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().githubArtifactAccessedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().productionWindowAllowedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().nodeMayTreatAsCiArtifactPublication()).isFalse();
+        assertThat(headerBackedRehearsal.ciEvidenceHint().echoWarnings()).isEmpty();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1016,7 +1106,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v4");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v5");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -1027,6 +1117,11 @@ class OpsEvidenceServiceTests {
                 "operator-198",
                 "operator,auditor",
                 "true",
+                "approval-v198-operator-window",
+                "real-read-window-ci-archive-artifact-manifest.v1",
+                "sha256:node-v200-manifest-digest",
+                "/api/v1/production/real-read-window-ci-archive-artifact-manifest",
+                "9",
                 "approval-v198-operator-window"
         );
         assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())

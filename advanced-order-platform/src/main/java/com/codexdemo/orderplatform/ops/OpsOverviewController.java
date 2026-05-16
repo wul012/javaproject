@@ -37,7 +37,14 @@ public class OpsOverviewController {
             @RequestHeader(name = "x-orderops-roles", required = false) String operatorWindowRoles,
             @RequestHeader(name = "x-orderops-operator-verified", required = false) String operatorWindowVerifiedClaim,
             @RequestHeader(name = "x-orderops-approval-correlation-id", required = false)
-            String operatorWindowApprovalCorrelationId
+            String operatorWindowApprovalCorrelationId,
+            @RequestHeader(name = "x-orderops-ci-manifest-version", required = false) String ciManifestVersion,
+            @RequestHeader(name = "x-orderops-ci-manifest-digest", required = false) String ciManifestDigest,
+            @RequestHeader(name = "x-orderops-ci-manifest-endpoint", required = false) String ciManifestEndpoint,
+            @RequestHeader(name = "x-orderops-ci-artifact-record-count", required = false)
+            String ciArtifactRecordCount,
+            @RequestHeader(name = "x-orderops-ci-approval-correlation-id", required = false)
+            String ciApprovalCorrelationId
     ) {
         return opsEvidenceService.releaseApprovalRehearsal(
                 requestId,
@@ -46,7 +53,12 @@ public class OpsOverviewController {
                 operatorWindowOperatorId,
                 operatorWindowRoles,
                 operatorWindowVerifiedClaim,
-                operatorWindowApprovalCorrelationId
+                operatorWindowApprovalCorrelationId,
+                ciManifestVersion,
+                ciManifestDigest,
+                ciManifestEndpoint,
+                ciArtifactRecordCount,
+                ciApprovalCorrelationId
         );
     }
 }

@@ -1531,6 +1531,53 @@ verificationHint.warningDigestInputs 包含 contextWarnings、operatorWindowEcho
 
 这一步只证明 Java 只读响应“看见了” Node v198 的窗口身份和审批关联字段，不认证 operator，不连接生产 IdP，不持久化 approval record，不写 approval ledger，也不授权 Node 打开生产窗口或执行任何上游写操作。
 
+v71 起，release approval rehearsal 在同一个只读响应中增加 `ciEvidenceHint`，给 Node v201 复核 Node v200 CI archive artifact manifest 时使用。调用方可以传入 Node v200 manifest 的只读摘要字段：
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://localhost:8080/api/v1/ops/release-approval-rehearsal `
+  -Headers @{
+    "X-Rehearsal-Request-Id" = "rehearsal-v71-001"
+    "X-Operator-Identity" = "release-operator@example.test"
+    "X-Audit-Correlation-Id" = "audit-correlation-v71"
+    "x-orderops-operator-id" = "operator-198"
+    "x-orderops-roles" = "operator,auditor"
+    "x-orderops-operator-verified" = "true"
+    "x-orderops-approval-correlation-id" = "approval-v198-operator-window"
+    "x-orderops-ci-manifest-version" = "real-read-window-ci-archive-artifact-manifest.v1"
+    "x-orderops-ci-manifest-digest" = "sha256:<node-v200-manifest-digest>"
+    "x-orderops-ci-manifest-endpoint" = "/api/v1/production/real-read-window-ci-archive-artifact-manifest"
+    "x-orderops-ci-artifact-record-count" = "9"
+    "x-orderops-ci-approval-correlation-id" = "approval-v198-operator-window"
+  }
+```
+
+响应中的关键字段：
+
+```text
+ciEvidenceHint.hintVersion=java-release-approval-rehearsal-ci-evidence-hint.v1
+ciEvidenceHint.manifestProfileVersion=real-read-window-ci-archive-artifact-manifest.v1
+ciEvidenceHint.manifestProfileVersionSource=x-orderops-ci-manifest-version
+ciEvidenceHint.manifestDigest=sha256:<node-v200-manifest-digest>
+ciEvidenceHint.manifestDigestSource=x-orderops-ci-manifest-digest
+ciEvidenceHint.manifestEndpoint=/api/v1/production/real-read-window-ci-archive-artifact-manifest
+ciEvidenceHint.manifestEndpointSource=x-orderops-ci-manifest-endpoint
+ciEvidenceHint.artifactRecordCount=9
+ciEvidenceHint.artifactRecordCountSource=x-orderops-ci-artifact-record-count
+ciEvidenceHint.approvalCorrelationId=approval-v198-operator-window
+ciEvidenceHint.approvalCorrelationIdSource=x-orderops-ci-approval-correlation-id
+ciEvidenceHint.ciEvidenceContextComplete=true
+ciEvidenceHint.noLedgerWriteProved=true
+ciEvidenceHint.ciArtifactUploadedByJava=false
+ciEvidenceHint.githubArtifactAccessedByJava=false
+ciEvidenceHint.productionWindowAllowedByJava=false
+ciEvidenceHint.nodeMayTreatAsCiArtifactPublication=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v5
+verificationHint.warningDigestInputs 包含 contextWarnings、operatorWindowEchoWarnings、ciEvidenceEchoWarnings、failureCategories、taxonomyWarnings、executionAllowed、approvalLedgerWritten、nodeMayWriteApprovalLedger
+```
+
+这一步只证明 Java 只读响应能回显 Node v200 manifest 相关字段，并继续证明 Java 没有上传 CI artifact、没有访问 GitHub artifact、没有写 approval ledger、没有打开生产窗口。真实 artifact 上传、artifact store 权限、GitHub secret 和生产窗口授权仍必须留在 Java 外部的后续 CI / Node gate 中处理。
+
 查询失败事件治理摘要：
 
 ```powershell
