@@ -70,6 +70,10 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_EXTERNAL_ADAPTER_MIGRATION_GUARD_RECEIPT_VERSION =
             "java-release-approval-rehearsal-managed-audit-external-adapter-migration-guard-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ADAPTER_APPROVAL_SCHEMA_GUARD_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-adapter-approval-schema-guard-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -88,6 +92,10 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_IMPLEMENTATION_GUARD_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v14";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_EXTERNAL_ADAPTER_MIGRATION_GUARD_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v15";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -95,7 +103,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v15";
+            "java-release-approval-rehearsal-response-schema.v16";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -764,6 +772,13 @@ public class OpsEvidenceService {
                 managedAuditExternalAdapterMigrationGuardReceipt =
                         new ReleaseApprovalManagedAuditExternalAdapterMigrationGuardReceiptBuilder()
                                 .build(managedAuditAdapterImplementationGuardReceipt);
+        ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
+                sandboxAdapterApprovalSchemaGuardReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder();
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+                managedAuditSandboxAdapterApprovalSchemaGuardReceipt =
+                        sandboxAdapterApprovalSchemaGuardReceiptBuilder
+                                .build(managedAuditExternalAdapterMigrationGuardReceipt);
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -792,6 +807,7 @@ public class OpsEvidenceService {
                 opsEvidenceServiceQualitySplitReceipt,
                 managedAuditAdapterImplementationGuardReceipt,
                 managedAuditExternalAdapterMigrationGuardReceipt,
+                managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -807,6 +823,8 @@ public class OpsEvidenceService {
                         opsEvidenceServiceQualitySplitReceipt,
                         managedAuditAdapterImplementationGuardReceipt,
                         managedAuditExternalAdapterMigrationGuardReceipt,
+                        managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+                        sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -839,10 +857,14 @@ public class OpsEvidenceService {
                     managedAuditAdapterImplementationGuardReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
                     managedAuditExternalAdapterMigrationGuardReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+                    managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+            ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
+                    sandboxAdapterApprovalSchemaGuardReceiptBuilder,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
-        List<String> warningDigestInputs = List.of(
+        List<String> warningDigestInputs = new ArrayList<>(List.of(
                 "contextWarnings",
                 "operatorWindowEchoWarnings",
                 "ciEvidenceEchoWarnings",
@@ -855,7 +877,12 @@ public class OpsEvidenceService {
                 "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
                 "opsEvidenceServiceQualitySplitReceiptWarnings",
                 "managedAuditAdapterImplementationGuardReceiptWarnings",
-                "managedAuditExternalAdapterMigrationGuardReceiptWarnings",
+                "managedAuditExternalAdapterMigrationGuardReceiptWarnings"
+        ));
+        warningDigestInputs.addAll(
+                sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestWarningInputNames()
+        );
+        warningDigestInputs.addAll(List.of(
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -898,10 +925,13 @@ public class OpsEvidenceService {
                 "externalAdapterMigrationJavaManagedAuditStoreWritten",
                 "externalAdapterMigrationJavaSqlExecuted",
                 "externalAdapterMigrationNodeV222SourceEndpointRerunPerformed",
-                "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed",
-                "nodeMayWriteApprovalLedger"
+                "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed"
+        ));
+        warningDigestInputs.addAll(
+                sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestBoundaryInputNames()
         );
-        List<String> proofClaims = List.of(
+        warningDigestInputs.add("nodeMayWriteApprovalLedger");
+        List<String> proofClaims = new ArrayList<>(List.of(
                 "executionAllowed=false",
                 "requestContext.approvalLedgerWritten=false",
                 "ciEvidenceHint.noLedgerWriteProved=true",
@@ -977,13 +1007,16 @@ public class OpsEvidenceService {
                 "managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditSchemaMigrated=false",
                 "managedAuditExternalAdapterMigrationGuardReceipt.javaApprovalLedgerWritten=false",
                 "managedAuditExternalAdapterMigrationGuardReceipt.javaManagedAuditStoreWritten=false",
-                "managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false",
+                "managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false"
+        ));
+        proofClaims.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.proofClaims());
+        proofClaims.addAll(List.of(
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
                 "executionBoundaries.nodeMayTriggerRollback=false",
                 "executionBoundaries.nodeMayExecuteRollbackSql=false"
-        );
+        ));
         return new ReleaseApprovalRehearsalResponse.RehearsalVerificationHint(
                 RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION,
                 RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
@@ -1001,6 +1034,8 @@ public class OpsEvidenceService {
                         opsEvidenceServiceQualitySplitReceipt,
                         managedAuditAdapterImplementationGuardReceipt,
                         managedAuditExternalAdapterMigrationGuardReceipt,
+                        managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+                        sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -1086,6 +1121,10 @@ public class OpsEvidenceService {
                         && !managedAuditExternalAdapterMigrationGuardReceipt.javaDeploymentTriggered()
                         && !managedAuditExternalAdapterMigrationGuardReceipt.javaRollbackTriggered()
                         && !managedAuditExternalAdapterMigrationGuardReceipt.javaRestoreExecuted()
+                        && sandboxAdapterApprovalSchemaGuardReceiptBuilder
+                                .noWriteCredentialConnectionOrSchemaEffectProved(
+                                        managedAuditSandboxAdapterApprovalSchemaGuardReceipt
+                                )
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -1105,6 +1144,7 @@ public class OpsEvidenceService {
                         "opsEvidenceServiceQualitySplitReceipt",
                         "managedAuditAdapterImplementationGuardReceipt",
                         "managedAuditExternalAdapterMigrationGuardReceipt",
+                        "managedAuditSandboxAdapterApprovalSchemaGuardReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -1116,7 +1156,15 @@ public class OpsEvidenceService {
                 ),
                 warningDigestInputs,
                 proofClaims,
-                List.of(
+                nodeVerificationActions(sandboxAdapterApprovalSchemaGuardReceiptBuilder)
+        );
+    }
+
+    private List<String> nodeVerificationActions(
+            ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
+                    sandboxAdapterApprovalSchemaGuardReceiptBuilder
+    ) {
+        List<String> actions = new ArrayList<>(List.of(
                         "Verify responseSchemaVersion before importing operator window results",
                         "Compare ciEvidenceHint.manifestProfileVersion with Node v200 manifest profileVersion",
                         "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
@@ -1156,12 +1204,18 @@ public class OpsEvidenceService {
                         "Require managedAuditExternalAdapterMigrationGuardReceipt.readyForNodeV223ExternalAdapterConnectionReadinessReview=true before Node v223",
                         "Keep managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava=false",
                         "Keep managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened=false",
-                        "Keep managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false",
+                        "Keep managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false"
+        ));
+        actions.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.nodeVerificationActions().stream()
+                .filter(action -> !("Verify managedAuditSandboxAdapterApprovalSchemaGuardReceipt"
+                        + ".qualityGateBoundary.builderOrHelperSplitApplied=true").equals(action))
+                .toList());
+        actions.addAll(List.of(
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
-                )
-        );
+        ));
+        return actions;
     }
 
     private String warningDigest(
@@ -1184,10 +1238,14 @@ public class OpsEvidenceService {
                     managedAuditAdapterImplementationGuardReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
                     managedAuditExternalAdapterMigrationGuardReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+                    managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+            ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
+                    sandboxAdapterApprovalSchemaGuardReceiptBuilder,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
-        return digest(List.of(
+        List<String> lines = new ArrayList<>(List.of(
                 line("digestKind", "releaseApprovalRehearsalWarning"),
                 line("hintVersion", RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION),
                 line("responseSchemaVersion", RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION),
@@ -1215,7 +1273,12 @@ public class OpsEvidenceService {
                 line(
                         "managedAuditExternalAdapterMigrationGuardReceiptWarnings",
                         managedAuditExternalAdapterMigrationGuardReceipt.guardWarnings()
-                ),
+                )
+        ));
+        lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestWarningLines(
+                managedAuditSandboxAdapterApprovalSchemaGuardReceipt
+        ));
+        lines.addAll(List.of(
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
@@ -1369,9 +1432,13 @@ public class OpsEvidenceService {
                 line(
                         "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed",
                         managedAuditExternalAdapterMigrationGuardReceipt.nodeV222AdditionalLocalDryRunWritePerformed()
-                ),
-                line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
+                )
         ));
+        lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestBoundaryLines(
+                managedAuditSandboxAdapterApprovalSchemaGuardReceipt
+        ));
+        lines.add(line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger()));
+        return digest(lines);
     }
 
     private ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint rehearsalOperatorWindowHint(

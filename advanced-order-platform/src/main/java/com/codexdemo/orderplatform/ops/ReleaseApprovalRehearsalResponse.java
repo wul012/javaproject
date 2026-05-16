@@ -26,6 +26,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditAdapterImplementationGuardReceipt,
         RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
                 managedAuditExternalAdapterMigrationGuardReceipt,
+        RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+                managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -512,6 +514,101 @@ public record ReleaseApprovalRehearsalResponse(
             List<String> nodeV223Prerequisites,
             List<String> guardWarnings,
             List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt(
+            String receiptVersion,
+            String sourceExternalAdapterMigrationGuardReceiptVersion,
+            String sourceExternalAdapterMigrationGuardSchemaVersion,
+            String consumedByNodeSandboxPlanVersion,
+            String consumedByNodeSandboxPlanProfile,
+            String consumedByNodeSandboxPlanEndpoint,
+            String consumedByNodeSandboxPlanState,
+            String nextNodePackageVersion,
+            String nextNodePackageProfile,
+            boolean nodeV225MayConsume,
+            RehearsalManagedAuditSandboxPlanEvidence nodeV224SandboxPlan,
+            RehearsalSandboxOwnerApprovalBoundary ownerApprovalBoundary,
+            RehearsalSandboxSchemaRehearsalBoundary schemaRehearsalBoundary,
+            RehearsalSandboxCredentialBoundary credentialBoundary,
+            RehearsalSandboxExecutionBoundary executionBoundary,
+            RehearsalSandboxQualityGateBoundary qualityGateBoundary,
+            boolean readyForNodeV225SandboxAdapterDryRunPackage,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String guardDigest,
+            List<String> requiredSandboxEvidence,
+            List<String> forbiddenSandboxOperations,
+            List<String> nodeV225Prerequisites,
+            List<String> guardWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxPlanEvidence(
+            boolean readyForManagedAuditSandboxAdapterDryRunPlan,
+            boolean readyForManagedAuditSandboxAdapterDryRunPackage,
+            boolean readOnlyPlan,
+            boolean connectsManagedAudit,
+            boolean readsManagedAuditCredential,
+            boolean storesManagedAuditCredential,
+            boolean schemaMigrationExecuted,
+            boolean localDryRunWritePerformed,
+            boolean automaticUpstreamStart,
+            boolean readyForProductionAudit
+    ) {
+    }
+
+    public record RehearsalSandboxOwnerApprovalBoundary(
+            boolean ownerApprovalArtifactRequired,
+            boolean ownerApprovalArtifactProvidedByJava,
+            boolean javaApprovalDecisionCreated,
+            boolean javaApprovalLedgerWritten
+    ) {
+    }
+
+    public record RehearsalSandboxSchemaRehearsalBoundary(
+            boolean schemaMigrationRehearsalRequired,
+            boolean schemaMigrationChecklistRequired,
+            boolean schemaMigrationExecutionAllowed,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean schemaMigrationAppliedByJava
+    ) {
+    }
+
+    public record RehearsalSandboxCredentialBoundary(
+            boolean sandboxCredentialHandleRequired,
+            String sandboxCredentialHandleName,
+            boolean productionCredentialAllowed,
+            boolean credentialValueRequired,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava
+    ) {
+    }
+
+    public record RehearsalSandboxExecutionBoundary(
+            boolean externalManagedAuditConnectionOpened,
+            boolean externalServiceStartedByJava,
+            boolean javaManagedAuditStoreWritten,
+            boolean javaSqlExecuted,
+            boolean javaDeploymentTriggered,
+            boolean javaRollbackTriggered,
+            boolean javaRestoreExecuted,
+            boolean productionAuditWindowOpened
+    ) {
+    }
+
+    public record RehearsalSandboxQualityGateBoundary(
+            boolean qualityGatesAreHardAcceptanceCriteria,
+            boolean opsEvidenceServiceBloatForbidden,
+            boolean builderOrHelperSplitApplied,
+            boolean longBooleanConstructorAvoided,
+            boolean receiptFieldsGroupedByBoundary,
+            boolean opsEvidenceServiceOnlyWiresReceipt,
+            String builderClassName,
+            List<String> enforcedQualityGates
     ) {
     }
 
