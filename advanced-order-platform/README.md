@@ -56,6 +56,7 @@
 - 订单平台 release approval rehearsal 只读 live-readiness hint，回显真实只读 runtime smoke 上下文
 - 订单平台 release approval rehearsal 只读 audit-persistence handoff hint，列出未来可进入 Node managed audit 的只读字段
 - 订单平台 release approval rehearsal 只读 approval-record handoff hint，标注可进入 Node audit record 的审批字段
+- 订单平台 release approval rehearsal 只读 approval-handoff verification marker，标注 Node v211 已消费 Java v75 handoff 的 dry-run packet 边界
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -1675,7 +1676,7 @@ Invoke-RestMethod `
 liveReadinessHint.hintVersion=java-release-approval-rehearsal-live-readiness-hint.v1
 liveReadinessHint.serverTimestamp=<sampledAt>
 liveReadinessHint.serverTimestampSource=sampledAt
-liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v9
+liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v10
 liveReadinessHint.readOnlyEndpoint=/api/v1/ops/release-approval-rehearsal
 liveReadinessHint.healthEndpoint=/actuator/health
 liveReadinessHint.sourcePreflightVersion=three-project-real-read-runtime-smoke-preflight.v1
@@ -1691,7 +1692,7 @@ liveReadinessHint.nodeMustRecordPidAndCleanup=true
 liveReadinessHint.javaStartedProcessForNode=false
 liveReadinessHint.processCleanupRecordedByJava=false
 liveReadinessHint.nodeMayTreatAsProductionAuthorization=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v9
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
 verificationHint.warningDigestInputs 包含 liveReadinessEchoWarnings
 ```
 
@@ -1754,7 +1755,7 @@ auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false
 auditPersistenceHandoffHint.javaExternalAuditSystemAccessed=false
 auditPersistenceHandoffHint.nodeMayUseAsManagedAuditInput=true
 auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v9
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
 verificationHint.warningDigestInputs 包含 auditPersistenceHandoffEchoWarnings
 ```
 
@@ -1810,11 +1811,48 @@ approvalRecordHandoffHint.javaApprovalRecordAuthenticated=false
 approvalRecordHandoffHint.productionApprovalStoreRequired=false
 approvalRecordHandoffHint.nodeMayUseAsAuditApprovalInput=true
 approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v9
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
 verificationHint.warningDigestInputs 包含 approvalRecordHandoffEchoWarnings、javaApprovalRecordPersisted、nodeMayTreatAsProductionApprovalRecord
 ```
 
 这一步只说明 Node 后续 dry-run audit packet 可读取哪些 Java 只读审批字段。Java 不创建 approval decision，不写 approval ledger，不持久化 approval record，不做生产身份认证，不连接生产 approval store，也不把该响应当作生产 approval record。
+
+v76 起，release approval rehearsal 增加 `approvalHandoffVerificationMarker`，用于把 Node v211 已经消费 Java v75 approval-record handoff 的结果回写成只读 marker，给后续 Node v213 restore drill plan 做前置核对。该 marker 不新增写入路径，也不代表生产 audit/approval 记录：
+
+```text
+approvalHandoffVerificationMarker.markerVersion=java-release-approval-rehearsal-approval-handoff-verification-marker.v1
+approvalHandoffVerificationMarker.sourceApprovalRecordHandoffHintVersion=java-release-approval-rehearsal-approval-record-handoff-hint.v1
+approvalHandoffVerificationMarker.sourceApprovalRecordHandoffSchemaVersion=java-release-approval-rehearsal-response-schema.v9
+approvalHandoffVerificationMarker.consumedByNodeProfileVersion=managed-audit-identity-approval-provenance-dry-run-packet.v1
+approvalHandoffVerificationMarker.consumedByNodePacketState=dry-run-packet-verified
+approvalHandoffVerificationMarker.consumedByNodeEndpoint=/api/v1/audit/managed-identity-approval-provenance-dry-run-packet
+approvalHandoffVerificationMarker.consumedByNodeRequestId=managed-audit-v211-identity-approval-provenance-request
+approvalHandoffVerificationMarker.consumedByNodePacketVersion=managed-audit-dry-run-record.v2-candidate
+approvalHandoffVerificationMarker.consumedByNodeBindingContractVersion=managed-audit-identity-approval-binding-contract.v1
+approvalHandoffVerificationMarker.consumedByNodeDryRunDirectoryLabel=.tmp
+approvalHandoffVerificationMarker.consumedByNodeDryRunDirectoryPrefix=managed-audit-v211-
+approvalHandoffVerificationMarker.consumedByNodeDryRunFileName=managed-audit-packet.jsonl
+approvalHandoffVerificationMarker.nodeV211HandoffAccepted=true
+approvalHandoffVerificationMarker.nodeV211NoWriteBoundaryAccepted=true
+approvalHandoffVerificationMarker.nodeV211PacketAppendCovered=true
+approvalHandoffVerificationMarker.nodeV211PacketQueryCovered=true
+approvalHandoffVerificationMarker.nodeV211PacketDigestCovered=true
+approvalHandoffVerificationMarker.nodeV211PacketCleanupCovered=true
+approvalHandoffVerificationMarker.nodeV211JavaWriteAttempted=false
+approvalHandoffVerificationMarker.nodeV211MiniKvWriteAttempted=false
+approvalHandoffVerificationMarker.nodeV211ExternalAuditSystemAccessed=false
+approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false
+approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten=false
+approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false
+approvalHandoffVerificationMarker.javaApprovalRecordPersisted=false
+approvalHandoffVerificationMarker.javaApprovalLedgerWritten=false
+approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan=true
+approvalHandoffVerificationMarker.nodeMayTreatAsProductionAuditRecord=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
+verificationHint.warningDigestInputs 包含 approvalHandoffVerificationMarkerWarnings、nodeV211ProductionAuditRecordAllowed、nodeV211RealApprovalDecisionCreated
+```
+
+没有传入完整 Node v210 approval binding header 时，`nodeV211HandoffAccepted=false` 且 `readyForNodeV213RestoreDrillPlan=false`，marker 会给出 `NODE_V211_APPROVAL_HANDOFF_CONTEXT_INCOMPLETE`。这一步只证明 Java v75 handoff 可被 Node v211 dry-run packet 读取并已保持 append/query/digest/cleanup 覆盖；Java 不创建真实 approval decision，不写 approval ledger，不写 approval record，不连接外部 audit system，不执行 restore，也不允许 Node 把它当生产 audit record。
 
 查询失败事件治理摘要：
 
@@ -2406,6 +2444,7 @@ ops
   -> v73 增强 release approval rehearsal 只读 live-readiness hint，回显 Node v204/v205 runtime smoke 上下文，不启动或清理 Node 进程
   -> v74 增强 release approval rehearsal 只读 audit-persistence handoff hint，列出未来可进入 Node managed audit 的字段，不写 Java ledger 或审计存储
   -> v75 增强 release approval rehearsal 只读 approval-record handoff hint，标注可进入 Node audit record 的审批字段，不创建或持久化 Java approval record
+  -> v76 增强 release approval rehearsal 只读 approval-handoff verification marker，标注 Node v211 已消费 Java v75 handoff 的 dry-run packet 覆盖和 no-write 边界
 
 common
  -> 业务异常和统一错误响应

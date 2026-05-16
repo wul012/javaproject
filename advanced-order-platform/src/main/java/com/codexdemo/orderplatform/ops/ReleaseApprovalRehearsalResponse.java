@@ -17,6 +17,7 @@ public record ReleaseApprovalRehearsalResponse(
         RehearsalLiveReadinessHint liveReadinessHint,
         RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
         RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
+        RehearsalApprovalHandoffVerificationMarker approvalHandoffVerificationMarker,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -249,6 +250,44 @@ public record ReleaseApprovalRehearsalResponse(
             List<String> handoffFieldPaths,
             List<String> sourceRecordArtifacts,
             List<String> echoWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalApprovalHandoffVerificationMarker(
+            String markerVersion,
+            String sourceApprovalRecordHandoffHintVersion,
+            String sourceApprovalRecordHandoffSchemaVersion,
+            String consumedByNodeProfileVersion,
+            String consumedByNodePacketState,
+            String consumedByNodeEndpoint,
+            String consumedByNodeRequestId,
+            String consumedByNodePacketVersion,
+            String consumedByNodeBindingContractVersion,
+            String consumedByNodeDryRunDirectoryLabel,
+            String consumedByNodeDryRunDirectoryPrefix,
+            String consumedByNodeDryRunFileName,
+            boolean nodeV211MayConsume,
+            boolean nodeV211HandoffAccepted,
+            boolean nodeV211NoWriteBoundaryAccepted,
+            boolean nodeV211PacketAppendCovered,
+            boolean nodeV211PacketQueryCovered,
+            boolean nodeV211PacketDigestCovered,
+            boolean nodeV211PacketCleanupCovered,
+            boolean nodeV211JavaWriteAttempted,
+            boolean nodeV211MiniKvWriteAttempted,
+            boolean nodeV211ExternalAuditSystemAccessed,
+            boolean nodeV211RealApprovalDecisionCreated,
+            boolean nodeV211RealApprovalLedgerWritten,
+            boolean nodeV211ProductionAuditRecordAllowed,
+            boolean javaApprovalRecordPersisted,
+            boolean javaApprovalLedgerWritten,
+            boolean readyForNodeV213RestoreDrillPlan,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            List<String> consumedHandoffFieldPaths,
+            List<String> nodeV211AcceptedChecks,
+            List<String> nodeV213Prerequisites,
+            List<String> markerWarnings,
             List<String> nodeVerificationActions
     ) {
     }

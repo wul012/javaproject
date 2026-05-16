@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v9"))
+                        .value("java-release-approval-rehearsal-response-schema.v10"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1177,6 +1177,71 @@ class OpsOverviewIntegrationTests {
                         hasItem("ORDEROPS_APPROVAL_RECORD_CORRELATION_ID_MISSING")))
                 .andExpect(jsonPath("$.approvalRecordHandoffHint.nodeVerificationActions",
                         hasItem("Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.markerVersion")
+                        .value("java-release-approval-rehearsal-approval-handoff-verification-marker.v1"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.sourceApprovalRecordHandoffHintVersion")
+                        .value("java-release-approval-rehearsal-approval-record-handoff-hint.v1"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.sourceApprovalRecordHandoffSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v9"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodeProfileVersion")
+                        .value("managed-audit-identity-approval-provenance-dry-run-packet.v1"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodePacketState")
+                        .value("dry-run-packet-verified"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodeEndpoint")
+                        .value("/api/v1/audit/managed-identity-approval-provenance-dry-run-packet"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodeRequestId")
+                        .value("managed-audit-v211-identity-approval-provenance-request"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodePacketVersion")
+                        .value("managed-audit-dry-run-record.v2-candidate"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodeBindingContractVersion")
+                        .value("managed-audit-identity-approval-binding-contract.v1"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodeDryRunDirectoryLabel")
+                        .value(".tmp"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodeDryRunDirectoryPrefix")
+                        .value("managed-audit-v211-"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedByNodeDryRunFileName")
+                        .value("managed-audit-packet.jsonl"))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211MayConsume").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211HandoffAccepted").value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211NoWriteBoundaryAccepted").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211PacketAppendCovered").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211PacketQueryCovered").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211PacketDigestCovered").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211PacketCleanupCovered").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211JavaWriteAttempted").value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211MiniKvWriteAttempted").value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211ExternalAuditSystemAccessed")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.javaApprovalRecordPersisted").value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.javaApprovalLedgerWritten").value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeMayTreatAsProductionAuditRecord")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedHandoffFieldPaths",
+                        hasItem("approvalRecordHandoffHint.approvalRequestId")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedHandoffFieldPaths",
+                        hasItem("approvalRecordHandoffHint.approvalTimestampPlaceholder")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.consumedHandoffFieldPaths",
+                        hasItem("verificationHint.warningDigest")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211AcceptedChecks",
+                        hasItem("javaV75HandoffAccepted")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211AcceptedChecks",
+                        hasItem("cleanupCovered")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV213Prerequisites",
+                        hasItem("Java v76 marker readyForNodeV213RestoreDrillPlan must be true")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV213Prerequisites",
+                        hasItem("UPSTREAM_ACTIONS_ENABLED must remain false")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.markerWarnings",
+                        hasItem("NODE_V211_APPROVAL_HANDOFF_CONTEXT_INCOMPLETE")))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeVerificationActions",
+                        hasItem("Keep approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false")))
                 .andExpect(jsonPath("$.failureTaxonomy.taxonomyVersion")
                         .value("java-release-approval-rehearsal-failure-taxonomy.v1"))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
@@ -1202,7 +1267,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v9"))
+                        .value("java-release-approval-rehearsal-response-schema.v10"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -1223,6 +1288,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("approvalRecordHandoffHint")))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("approvalHandoffVerificationMarker")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("executionBoundaries")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("contextWarnings")))
@@ -1239,11 +1306,17 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("approvalRecordHandoffEchoWarnings")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("approvalHandoffVerificationMarkerWarnings")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("javaManagedAuditWriteAllowed")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("javaApprovalRecordPersisted")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeMayTreatAsProductionApprovalRecord")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("nodeV211ProductionAuditRecordAllowed")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("nodeV211RealApprovalDecisionCreated")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeMayWriteApprovalLedger")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
@@ -1269,9 +1342,15 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("executionBoundaries.nodeMayWriteApprovalLedger=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 packet profile")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Keep UPSTREAM_ACTIONS_ENABLED=false")))
                 .andExpect(jsonPath("$.releaseApprovalInputs.releaseOperatorSignoffFixtureEndpoint")
@@ -1586,6 +1665,20 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord")
                         .value(false))
                 .andExpect(jsonPath("$.approvalRecordHandoffHint.echoWarnings").isEmpty())
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211HandoffAccepted").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211NoWriteBoundaryAccepted").value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan")
+                        .value(true))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.markerWarnings").isEmpty())
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.javaApprovalRecordPersisted").value(false))
+                .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeMayTreatAsProductionAuditRecord")
+                        .value(false))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.authContextReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationReadiness").value("READY"))
@@ -1606,7 +1699,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v9"))
+                        .value("java-release-approval-rehearsal-response-schema.v10"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))

@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v9");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v10");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -1186,6 +1186,81 @@ class OpsEvidenceServiceTests {
                         "Compare approvalRecordHandoffHint.approvalBindingContractDigest with Node v210 binding digest",
                         "Keep javaApprovalRecordPersisted=false and nodeMayTreatAsProductionApprovalRecord=false"
                 );
+        assertThat(rehearsal.approvalHandoffVerificationMarker().markerVersion())
+                .isEqualTo("java-release-approval-rehearsal-approval-handoff-verification-marker.v1");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().sourceApprovalRecordHandoffHintVersion())
+                .isEqualTo("java-release-approval-rehearsal-approval-record-handoff-hint.v1");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().sourceApprovalRecordHandoffSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v9");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodeProfileVersion())
+                .isEqualTo("managed-audit-identity-approval-provenance-dry-run-packet.v1");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodePacketState())
+                .isEqualTo("dry-run-packet-verified");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodeEndpoint())
+                .isEqualTo("/api/v1/audit/managed-identity-approval-provenance-dry-run-packet");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodeRequestId())
+                .isEqualTo("managed-audit-v211-identity-approval-provenance-request");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodePacketVersion())
+                .isEqualTo("managed-audit-dry-run-record.v2-candidate");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodeBindingContractVersion())
+                .isEqualTo("managed-audit-identity-approval-binding-contract.v1");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodeDryRunDirectoryLabel())
+                .isEqualTo(".tmp");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodeDryRunDirectoryPrefix())
+                .isEqualTo("managed-audit-v211-");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedByNodeDryRunFileName())
+                .isEqualTo("managed-audit-packet.jsonl");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211MayConsume()).isTrue();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211HandoffAccepted()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211NoWriteBoundaryAccepted()).isTrue();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211PacketAppendCovered()).isTrue();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211PacketQueryCovered()).isTrue();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211PacketDigestCovered()).isTrue();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211PacketCleanupCovered()).isTrue();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211JavaWriteAttempted()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211MiniKvWriteAttempted()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211ExternalAuditSystemAccessed()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211RealApprovalDecisionCreated()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211RealApprovalLedgerWritten()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211ProductionAuditRecordAllowed()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().javaApprovalRecordPersisted()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().javaApprovalLedgerWritten()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().readyForNodeV213RestoreDrillPlan()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(rehearsal.approvalHandoffVerificationMarker().consumedHandoffFieldPaths())
+                .containsExactly(
+                        "requestContext.requestId",
+                        "operatorWindowHint.operatorId",
+                        "operatorWindowHint.operatorRoles",
+                        "approvalRecordHandoffHint.approvalRequestId",
+                        "approvalRecordHandoffHint.approvalDecisionState",
+                        "approvalRecordHandoffHint.approvalRecordCorrelationId",
+                        "approvalRecordHandoffHint.reviewerPlaceholder",
+                        "approvalRecordHandoffHint.approvalTimestampPlaceholder",
+                        "verificationHint.warningDigest"
+                );
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV211AcceptedChecks())
+                .contains(
+                        "javaV75HandoffAccepted",
+                        "javaV75NoWriteBoundaryValid",
+                        "appendCovered",
+                        "cleanupCovered",
+                        "noRealApprovalDecisionCreated"
+                );
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeV213Prerequisites())
+                .contains(
+                        "Java v76 marker readyForNodeV213RestoreDrillPlan must be true",
+                        "mini-kv v85 retention provenance replay marker must be present",
+                        "UPSTREAM_ACTIONS_ENABLED must remain false"
+                );
+        assertThat(rehearsal.approvalHandoffVerificationMarker().markerWarnings())
+                .containsExactly("NODE_V211_APPROVAL_HANDOFF_CONTEXT_INCOMPLETE");
+        assertThat(rehearsal.approvalHandoffVerificationMarker().nodeVerificationActions())
+                .contains(
+                        "Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 profileVersion",
+                        "Require approvalHandoffVerificationMarker.nodeV211HandoffAccepted=true before Node v213 restore drill plan",
+                        "Keep approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -1211,7 +1286,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v9");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v10");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -1226,6 +1301,7 @@ class OpsEvidenceServiceTests {
                         "liveReadinessHint",
                         "auditPersistenceHandoffHint",
                         "approvalRecordHandoffHint",
+                        "approvalHandoffVerificationMarker",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -1239,6 +1315,7 @@ class OpsEvidenceServiceTests {
                         "liveReadinessEchoWarnings",
                         "auditPersistenceHandoffEchoWarnings",
                         "approvalRecordHandoffEchoWarnings",
+                        "approvalHandoffVerificationMarkerWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -1247,6 +1324,8 @@ class OpsEvidenceServiceTests {
                         "javaApprovalRecordPersisted",
                         "nodeMayTreatAsProductionApprovalRecord",
                         "nodeMayTreatAsProductionAuditRecord",
+                        "nodeV211ProductionAuditRecordAllowed",
+                        "nodeV211RealApprovalDecisionCreated",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -1265,6 +1344,9 @@ class OpsEvidenceServiceTests {
                         "approvalRecordHandoffHint.approvalRecordFixtureReadOnly=true",
                         "approvalRecordHandoffHint.javaApprovalRecordPersisted=false",
                         "approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false",
+                        "approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false",
+                        "approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false",
+                        "approvalHandoffVerificationMarker.javaApprovalRecordPersisted=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -1275,6 +1357,7 @@ class OpsEvidenceServiceTests {
                         "Compare liveReadinessHint.sourcePreflightVersion and runtimeSmokeSessionId with Node v204/v205 smoke context",
                         "Compare auditPersistenceHandoffHint.managedAuditCandidateVersion with Node v208 managed audit candidate",
                         "Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract",
+                        "Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 packet profile",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -1570,6 +1653,27 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.approvalRecordHandoffHint().nodeMayTreatAsProductionApprovalRecord())
                 .isFalse();
         assertThat(headerBackedRehearsal.approvalRecordHandoffHint().echoWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().nodeV211HandoffAccepted()).isTrue();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().nodeV211NoWriteBoundaryAccepted()).isTrue();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().readyForNodeV213RestoreDrillPlan())
+                .isTrue();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().markerWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().nodeV211ProductionAuditRecordAllowed())
+                .isFalse();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().nodeV211RealApprovalDecisionCreated())
+                .isFalse();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().nodeV211RealApprovalLedgerWritten())
+                .isFalse();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().javaApprovalRecordPersisted())
+                .isFalse();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().nodeMayTreatAsProductionAuditRecord())
+                .isFalse();
+        assertThat(headerBackedRehearsal.approvalHandoffVerificationMarker().consumedHandoffFieldPaths())
+                .contains(
+                        "approvalRecordHandoffHint.approvalRecordCorrelationId",
+                        "approvalRecordHandoffHint.approvalTimestampPlaceholder",
+                        "verificationHint.warningDigest"
+                );
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1582,7 +1686,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v9");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v10");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());

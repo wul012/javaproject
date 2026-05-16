@@ -51,6 +51,12 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_HINT_VERSION =
             "java-release-approval-rehearsal-approval-record-handoff-hint.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_VERIFICATION_MARKER_VERSION =
+            "java-release-approval-rehearsal-approval-handoff-verification-marker.v1";
+
+    static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
+            "java-release-approval-rehearsal-response-schema.v9";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -58,7 +64,24 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v9";
+            "java-release-approval-rehearsal-response-schema.v10";
+
+    static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
+            "managed-audit-identity-approval-provenance-dry-run-packet.v1";
+
+    static final String NODE_V211_MANAGED_AUDIT_PACKET_STATE = "dry-run-packet-verified";
+
+    static final String NODE_V211_MANAGED_AUDIT_ENDPOINT =
+            "/api/v1/audit/managed-identity-approval-provenance-dry-run-packet";
+
+    static final String NODE_V211_MANAGED_AUDIT_REQUEST_ID =
+            "managed-audit-v211-identity-approval-provenance-request";
+
+    static final String NODE_V211_MANAGED_AUDIT_PACKET_VERSION =
+            "managed-audit-dry-run-record.v2-candidate";
+
+    static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
+            "managed-audit-identity-approval-binding-contract.v1";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -621,6 +644,9 @@ public class OpsEvidenceService {
                         normalizedApprovalDecisionState,
                         normalizedApprovalRecordCorrelationId
                 );
+        ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+                approvalHandoffVerificationMarker =
+                        rehearsalApprovalHandoffVerificationMarker(approvalRecordHandoffHint);
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -643,6 +669,7 @@ public class OpsEvidenceService {
                 liveReadinessHint,
                 auditPersistenceHandoffHint,
                 approvalRecordHandoffHint,
+                approvalHandoffVerificationMarker,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -652,6 +679,7 @@ public class OpsEvidenceService {
                         liveReadinessHint,
                         auditPersistenceHandoffHint,
                         approvalRecordHandoffHint,
+                        approvalHandoffVerificationMarker,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -672,6 +700,8 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
             ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
+            ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+                    approvalHandoffVerificationMarker,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -683,6 +713,7 @@ public class OpsEvidenceService {
                 "liveReadinessEchoWarnings",
                 "auditPersistenceHandoffEchoWarnings",
                 "approvalRecordHandoffEchoWarnings",
+                "approvalHandoffVerificationMarkerWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -691,6 +722,8 @@ public class OpsEvidenceService {
                 "javaApprovalRecordPersisted",
                 "nodeMayTreatAsProductionApprovalRecord",
                 "nodeMayTreatAsProductionAuditRecord",
+                "nodeV211ProductionAuditRecordAllowed",
+                "nodeV211RealApprovalDecisionCreated",
                 "nodeMayWriteApprovalLedger"
         );
         List<String> proofClaims = List.of(
@@ -718,6 +751,10 @@ public class OpsEvidenceService {
                 "approvalRecordHandoffHint.javaApprovalLedgerWritten=false",
                 "approvalRecordHandoffHint.javaApprovalRecordPersisted=false",
                 "approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false",
+                "approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false",
+                "approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false",
+                "approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten=false",
+                "approvalHandoffVerificationMarker.javaApprovalRecordPersisted=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -735,6 +772,7 @@ public class OpsEvidenceService {
                         liveReadinessHint,
                         auditPersistenceHandoffHint,
                         approvalRecordHandoffHint,
+                        approvalHandoffVerificationMarker,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -755,6 +793,9 @@ public class OpsEvidenceService {
                         && !approvalRecordHandoffHint.javaApprovalDecisionCreated()
                         && !approvalRecordHandoffHint.javaApprovalLedgerWritten()
                         && !approvalRecordHandoffHint.javaApprovalRecordPersisted()
+                        && !approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated()
+                        && !approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten()
+                        && !approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -768,6 +809,7 @@ public class OpsEvidenceService {
                         "liveReadinessHint",
                         "auditPersistenceHandoffHint",
                         "approvalRecordHandoffHint",
+                        "approvalHandoffVerificationMarker",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -792,6 +834,9 @@ public class OpsEvidenceService {
                         "Require auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false until Node owns dry-run persistence",
                         "Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract",
                         "Require approvalRecordHandoffHint.javaApprovalRecordPersisted=false until a real approval store exists",
+                        "Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 packet profile",
+                        "Require approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan=true before Node v213 restore drill planning",
+                        "Keep approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -807,6 +852,8 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
             ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
+            ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+                    approvalHandoffVerificationMarker,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -821,6 +868,7 @@ public class OpsEvidenceService {
                 line("liveReadinessEchoWarnings", liveReadinessHint.echoWarnings()),
                 line("auditPersistenceHandoffEchoWarnings", auditPersistenceHandoffHint.echoWarnings()),
                 line("approvalRecordHandoffEchoWarnings", approvalRecordHandoffHint.echoWarnings()),
+                line("approvalHandoffVerificationMarkerWarnings", approvalHandoffVerificationMarker.markerWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
@@ -843,6 +891,14 @@ public class OpsEvidenceService {
                 line(
                         "nodeMayTreatAsProductionApprovalRecord",
                         approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord()
+                ),
+                line(
+                        "nodeV211ProductionAuditRecordAllowed",
+                        approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed()
+                ),
+                line(
+                        "nodeV211RealApprovalDecisionCreated",
+                        approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated()
                 ),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
@@ -1514,6 +1570,102 @@ public class OpsEvidenceService {
                         "Require approvalRecordHandoffHint.approvalRecordHandoffContextComplete=true before Node v211 audit packet",
                         "Persist only the listed handoffFieldPaths in Node managed audit dry-run storage",
                         "Keep javaApprovalRecordPersisted=false and nodeMayTreatAsProductionApprovalRecord=false"
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+            rehearsalApprovalHandoffVerificationMarker(
+                    ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint
+    ) {
+        boolean nodeV211HandoffAccepted =
+                RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_HINT_VERSION.equals(
+                        approvalRecordHandoffHint.hintVersion()
+                )
+                        && NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION.equals(
+                                approvalRecordHandoffHint.approvalBindingContractVersion()
+                        )
+                        && approvalRecordHandoffHint.approvalRecordHandoffContextComplete();
+        boolean nodeV211NoWriteBoundaryAccepted = approvalRecordHandoffHint.approvalRecordFixtureReadOnly()
+                && !approvalRecordHandoffHint.javaApprovalDecisionCreated()
+                && !approvalRecordHandoffHint.javaApprovalLedgerWritten()
+                && !approvalRecordHandoffHint.javaApprovalRecordPersisted()
+                && !approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord();
+        List<String> markerWarnings = new ArrayList<>();
+        if (!nodeV211HandoffAccepted) {
+            markerWarnings.add("NODE_V211_APPROVAL_HANDOFF_CONTEXT_INCOMPLETE");
+        }
+        if (!nodeV211NoWriteBoundaryAccepted) {
+            markerWarnings.add("NODE_V211_APPROVAL_HANDOFF_WRITE_BOUNDARY_INVALID");
+        }
+        boolean readyForNodeV213RestoreDrillPlan = nodeV211HandoffAccepted && nodeV211NoWriteBoundaryAccepted;
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker(
+                RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_VERIFICATION_MARKER_VERSION,
+                approvalRecordHandoffHint.hintVersion(),
+                RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION,
+                NODE_V211_MANAGED_AUDIT_PROFILE_VERSION,
+                NODE_V211_MANAGED_AUDIT_PACKET_STATE,
+                NODE_V211_MANAGED_AUDIT_ENDPOINT,
+                NODE_V211_MANAGED_AUDIT_REQUEST_ID,
+                NODE_V211_MANAGED_AUDIT_PACKET_VERSION,
+                NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION,
+                ".tmp",
+                "managed-audit-v211-",
+                "managed-audit-packet.jsonl",
+                true,
+                nodeV211HandoffAccepted,
+                nodeV211NoWriteBoundaryAccepted,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                approvalRecordHandoffHint.javaApprovalRecordPersisted(),
+                approvalRecordHandoffHint.javaApprovalLedgerWritten(),
+                readyForNodeV213RestoreDrillPlan,
+                false,
+                List.of(
+                        "requestContext.requestId",
+                        "operatorWindowHint.operatorId",
+                        "operatorWindowHint.operatorRoles",
+                        "approvalRecordHandoffHint.approvalRequestId",
+                        "approvalRecordHandoffHint.approvalDecisionState",
+                        "approvalRecordHandoffHint.approvalRecordCorrelationId",
+                        "approvalRecordHandoffHint.reviewerPlaceholder",
+                        "approvalRecordHandoffHint.approvalTimestampPlaceholder",
+                        "verificationHint.warningDigest"
+                ),
+                List.of(
+                        "javaV75HandoffAccepted",
+                        "javaV75NoWriteBoundaryValid",
+                        "packetShapeBoundToContract",
+                        "appendCovered",
+                        "queryCovered",
+                        "digestCovered",
+                        "cleanupCovered",
+                        "javaMiniKvWriteBlocked",
+                        "noRealApprovalDecisionCreated",
+                        "noExternalAuditAccessed"
+                ),
+                List.of(
+                        "Node v212 packet verification report must verify managed-audit-identity-approval-provenance-dry-run-packet.v1",
+                        "Java v76 marker readyForNodeV213RestoreDrillPlan must be true",
+                        "mini-kv v85 retention provenance replay marker must be present",
+                        "UPSTREAM_ACTIONS_ENABLED must remain false",
+                        "Node v213 must not execute restore or connect real managed audit"
+                ),
+                List.copyOf(markerWarnings),
+                List.of(
+                        "Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 profileVersion",
+                        "Require approvalHandoffVerificationMarker.nodeV211HandoffAccepted=true before Node v213 restore drill plan",
+                        "Keep approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false",
+                        "Keep approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false"
                 )
         );
     }
