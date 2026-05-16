@@ -62,7 +62,17 @@ public class OpsOverviewController {
             @RequestHeader(name = "x-orderops-runtime-read-target-id", required = false)
             String runtimeReadTargetId,
             @RequestHeader(name = "x-orderops-runtime-window-mode", required = false)
-            String runtimeWindowMode
+            String runtimeWindowMode,
+            @RequestHeader(name = "x-orderops-managed-audit-candidate-version", required = false)
+            String managedAuditCandidateVersion,
+            @RequestHeader(name = "x-orderops-managed-audit-candidate-digest", required = false)
+            String managedAuditCandidateDigest,
+            @RequestHeader(name = "x-orderops-managed-audit-sink-mode", required = false)
+            String managedAuditSinkMode,
+            @RequestHeader(name = "x-orderops-managed-audit-retention-days", required = false)
+            String managedAuditRetentionDays,
+            @RequestHeader(name = "x-orderops-managed-audit-rotation-policy", required = false)
+            String managedAuditRotationPolicy
     ) {
         return opsEvidenceService.releaseApprovalRehearsal(
                 requestId,
@@ -87,7 +97,12 @@ public class OpsOverviewController {
                 runtimePreflightDigest,
                 runtimeSmokeSessionId,
                 runtimeReadTargetId,
-                runtimeWindowMode
+                runtimeWindowMode,
+                managedAuditCandidateVersion,
+                managedAuditCandidateDigest,
+                managedAuditSinkMode,
+                managedAuditRetentionDays,
+                managedAuditRotationPolicy
         );
     }
 }

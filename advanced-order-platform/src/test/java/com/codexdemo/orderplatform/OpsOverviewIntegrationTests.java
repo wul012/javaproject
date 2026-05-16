@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v7"))
+                        .value("java-release-approval-rehearsal-response-schema.v8"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1079,6 +1079,49 @@ class OpsOverviewIntegrationTests {
                         hasItem("ORDEROPS_RUNTIME_PREFLIGHT_VERSION_MISSING")))
                 .andExpect(jsonPath("$.liveReadinessHint.echoWarnings",
                         hasItem("ORDEROPS_RUNTIME_WINDOW_MODE_MISSING")))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.hintVersion")
+                        .value("java-release-approval-rehearsal-audit-persistence-handoff-hint.v1"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.sourceRetentionFixtureVersion")
+                        .value("java-release-audit-retention-fixture.v1"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.sourceRetentionFixtureEndpoint")
+                        .value("/contracts/release-audit-retention.fixture.json"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaRetentionDays").value(180))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditCandidateVersion")
+                        .value("managed-audit-candidate-version-not-supplied"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditCandidateVersionSource")
+                        .value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditCandidateDigest")
+                        .value("managed-audit-candidate-digest-not-supplied"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditSinkMode")
+                        .value("managed-audit-sink-mode-not-supplied"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRetentionDays")
+                        .value("managed-audit-retention-days-not-supplied"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRotationPolicy")
+                        .value("managed-audit-rotation-policy-not-supplied"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.auditPersistenceHandoffContextComplete")
+                        .value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRetentionWithinJavaRetention")
+                        .value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaAuditSourceReadOnly").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaLedgerWriteAllowed").value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaManagedAuditWriteAllowed").value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaExternalAuditSystemAccessed").value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.productionAuditStoreRequired").value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.nodeMayUseAsManagedAuditInput").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord")
+                        .value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.acceptedAuditPersistenceHeaders",
+                        hasItem("x-orderops-managed-audit-candidate-version")))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.acceptedAuditPersistenceHeaders",
+                        hasItem("x-orderops-managed-audit-retention-days")))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.handoffFieldPaths",
+                        hasItem("verificationHint.warningDigest")))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.readOnlySourceEndpoints",
+                        hasItem("/api/v1/ops/release-approval-rehearsal")))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.echoWarnings",
+                        hasItem("ORDEROPS_MANAGED_AUDIT_CANDIDATE_VERSION_MISSING")))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.echoWarnings",
+                        hasItem("ORDEROPS_MANAGED_AUDIT_ROTATION_POLICY_MISSING")))
                 .andExpect(jsonPath("$.failureTaxonomy.taxonomyVersion")
                         .value("java-release-approval-rehearsal-failure-taxonomy.v1"))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
@@ -1104,7 +1147,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v7"))
+                        .value("java-release-approval-rehearsal-response-schema.v8"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -1121,6 +1164,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("liveReadinessHint")))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("auditPersistenceHandoffHint")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("executionBoundaries")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("contextWarnings")))
@@ -1132,6 +1177,10 @@ class OpsOverviewIntegrationTests {
                         hasItem("artifactRetentionEchoWarnings")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("liveReadinessEchoWarnings")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("auditPersistenceHandoffEchoWarnings")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("javaManagedAuditWriteAllowed")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeMayWriteApprovalLedger")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
@@ -1146,6 +1195,10 @@ class OpsOverviewIntegrationTests {
                         hasItem("liveReadinessHint.readOnlyEndpointReady=true")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("liveReadinessHint.javaStartedProcessForNode=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("executionBoundaries.nodeMayWriteApprovalLedger=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
@@ -1233,7 +1286,16 @@ class OpsOverviewIntegrationTests {
                         .header("x-orderops-runtime-read-target-id",
                                 "java-release-approval-rehearsal")
                         .header("x-orderops-runtime-window-mode",
-                                "manual-open-window-plan"))
+                                "manual-open-window-plan")
+                        .header("x-orderops-managed-audit-candidate-version",
+                                "managed-audit-persistence-boundary-candidate.v1")
+                        .header("x-orderops-managed-audit-candidate-digest",
+                                "sha256:node-v208-managed-audit-candidate-digest")
+                        .header("x-orderops-managed-audit-sink-mode",
+                                "file-or-sqlite-dry-run-candidate")
+                        .header("x-orderops-managed-audit-retention-days", "30")
+                        .header("x-orderops-managed-audit-rotation-policy",
+                                "size-and-age-rotation-candidate"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.requestContext.requestId").value("rehearsal-v67-001"))
                 .andExpect(jsonPath("$.requestContext.requestIdSource")
@@ -1369,6 +1431,43 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.processCleanupRecordedByJava").value(false))
                 .andExpect(jsonPath("$.liveReadinessHint.nodeMayTreatAsProductionAuthorization").value(false))
                 .andExpect(jsonPath("$.liveReadinessHint.echoWarnings").isEmpty())
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditCandidateVersion")
+                        .value("managed-audit-persistence-boundary-candidate.v1"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditCandidateVersionSource")
+                        .value("x-orderops-managed-audit-candidate-version"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditCandidateDigest")
+                        .value("sha256:node-v208-managed-audit-candidate-digest"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditCandidateDigestSource")
+                        .value("x-orderops-managed-audit-candidate-digest"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditSinkMode")
+                        .value("file-or-sqlite-dry-run-candidate"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditSinkModeSource")
+                        .value("x-orderops-managed-audit-sink-mode"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRetentionDays")
+                        .value("30"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRetentionDaysSource")
+                        .value("x-orderops-managed-audit-retention-days"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRotationPolicy")
+                        .value("size-and-age-rotation-candidate"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRotationPolicySource")
+                        .value("x-orderops-managed-audit-rotation-policy"))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.candidateVersionEchoed").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.candidateDigestEchoed").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.sinkModeEchoed").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.retentionDaysEchoed").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.rotationPolicyEchoed").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.auditPersistenceHandoffContextComplete")
+                        .value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.managedAuditRetentionWithinJavaRetention")
+                        .value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaAuditSourceReadOnly").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaLedgerWriteAllowed").value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaManagedAuditWriteAllowed").value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.javaExternalAuditSystemAccessed").value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.nodeMayUseAsManagedAuditInput").value(true))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord")
+                        .value(false))
+                .andExpect(jsonPath("$.auditPersistenceHandoffHint.echoWarnings").isEmpty())
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.authContextReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationReadiness").value("READY"))
@@ -1389,7 +1488,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v7"))
+                        .value("java-release-approval-rehearsal-response-schema.v8"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))

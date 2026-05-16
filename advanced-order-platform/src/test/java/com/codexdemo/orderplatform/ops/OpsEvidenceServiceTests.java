@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v7");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v8");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -1034,6 +1034,76 @@ class OpsEvidenceServiceTests {
                         "Require liveReadinessHint.readOnlyEndpointReady=true before counting Java read target as ready",
                         "Keep runtimeSmokeExecutedByJava=false and javaStartedProcessForNode=false"
                 );
+        assertThat(rehearsal.auditPersistenceHandoffHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-audit-persistence-handoff-hint.v1");
+        assertThat(rehearsal.auditPersistenceHandoffHint().sourceRetentionFixtureVersion())
+                .isEqualTo("java-release-audit-retention-fixture.v1");
+        assertThat(rehearsal.auditPersistenceHandoffHint().sourceRetentionFixtureEndpoint())
+                .isEqualTo("/contracts/release-audit-retention.fixture.json");
+        assertThat(rehearsal.auditPersistenceHandoffHint().javaRetentionDays()).isEqualTo(180);
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditCandidateVersion())
+                .isEqualTo("managed-audit-candidate-version-not-supplied");
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditCandidateVersionSource())
+                .isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditCandidateDigest())
+                .isEqualTo("managed-audit-candidate-digest-not-supplied");
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditCandidateDigestSource())
+                .isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditSinkMode())
+                .isEqualTo("managed-audit-sink-mode-not-supplied");
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditRetentionDays())
+                .isEqualTo("managed-audit-retention-days-not-supplied");
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditRotationPolicy())
+                .isEqualTo("managed-audit-rotation-policy-not-supplied");
+        assertThat(rehearsal.auditPersistenceHandoffHint().candidateVersionEchoed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().candidateDigestEchoed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().sinkModeEchoed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().retentionDaysEchoed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().rotationPolicyEchoed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().auditPersistenceHandoffContextComplete()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().managedAuditRetentionWithinJavaRetention()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().javaAuditSourceReadOnly()).isTrue();
+        assertThat(rehearsal.auditPersistenceHandoffHint().javaLedgerWriteAllowed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().javaManagedAuditWriteAllowed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().javaExternalAuditSystemAccessed()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().productionAuditStoreRequired()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().nodeMayUseAsManagedAuditInput()).isTrue();
+        assertThat(rehearsal.auditPersistenceHandoffHint().nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(rehearsal.auditPersistenceHandoffHint().acceptedAuditPersistenceHeaders())
+                .containsExactly(
+                        "x-orderops-managed-audit-candidate-version",
+                        "x-orderops-managed-audit-candidate-digest",
+                        "x-orderops-managed-audit-sink-mode",
+                        "x-orderops-managed-audit-retention-days",
+                        "x-orderops-managed-audit-rotation-policy"
+                );
+        assertThat(rehearsal.auditPersistenceHandoffHint().handoffFieldPaths())
+                .contains(
+                        "requestContext.requestId",
+                        "operatorWindowHint.operatorId",
+                        "verificationHint.warningDigest",
+                        "executionBoundaries.nodeMayWriteApprovalLedger"
+                );
+        assertThat(rehearsal.auditPersistenceHandoffHint().readOnlySourceEndpoints())
+                .containsExactly(
+                        "/api/v1/ops/release-approval-rehearsal",
+                        "/contracts/release-audit-retention.fixture.json",
+                        "/api/v1/ops/evidence"
+                );
+        assertThat(rehearsal.auditPersistenceHandoffHint().echoWarnings())
+                .containsExactly(
+                        "ORDEROPS_MANAGED_AUDIT_CANDIDATE_VERSION_MISSING",
+                        "ORDEROPS_MANAGED_AUDIT_CANDIDATE_DIGEST_MISSING",
+                        "ORDEROPS_MANAGED_AUDIT_SINK_MODE_MISSING",
+                        "ORDEROPS_MANAGED_AUDIT_RETENTION_DAYS_MISSING",
+                        "ORDEROPS_MANAGED_AUDIT_ROTATION_POLICY_MISSING"
+                );
+        assertThat(rehearsal.auditPersistenceHandoffHint().nodeVerificationActions())
+                .contains(
+                        "Compare auditPersistenceHandoffHint.managedAuditCandidateDigest with Node v208 adapter digest",
+                        "Persist only the listed handoffFieldPaths in Node managed audit dry-run storage",
+                        "Keep javaManagedAuditWriteAllowed=false and nodeMayTreatAsProductionAuditRecord=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -1059,7 +1129,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v7");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v8");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -1072,6 +1142,7 @@ class OpsEvidenceServiceTests {
                         "ciEvidenceHint",
                         "artifactRetentionHint",
                         "liveReadinessHint",
+                        "auditPersistenceHandoffHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -1083,10 +1154,13 @@ class OpsEvidenceServiceTests {
                         "ciEvidenceEchoWarnings",
                         "artifactRetentionEchoWarnings",
                         "liveReadinessEchoWarnings",
+                        "auditPersistenceHandoffEchoWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
                         "approvalLedgerWritten",
+                        "javaManagedAuditWriteAllowed",
+                        "nodeMayTreatAsProductionAuditRecord",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -1099,6 +1173,9 @@ class OpsEvidenceServiceTests {
                         "artifactRetentionHint.githubArtifactAccessedByJava=false",
                         "liveReadinessHint.readOnlyEndpointReady=true",
                         "liveReadinessHint.javaStartedProcessForNode=false",
+                        "auditPersistenceHandoffHint.javaAuditSourceReadOnly=true",
+                        "auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false",
+                        "auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -1107,6 +1184,7 @@ class OpsEvidenceServiceTests {
                         "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
                         "Compare artifactRetentionHint.ciArtifactName and ciRetentionDays with Node v202 dry-run contract",
                         "Compare liveReadinessHint.sourcePreflightVersion and runtimeSmokeSessionId with Node v204/v205 smoke context",
+                        "Compare auditPersistenceHandoffHint.managedAuditCandidateVersion with Node v208 managed audit candidate",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -1188,7 +1266,12 @@ class OpsEvidenceServiceTests {
                 " sha256:node-v204-preflight-digest ",
                 " runtime-smoke-v205-session-001 ",
                 " java-release-approval-rehearsal ",
-                " manual-open-window-plan "
+                " manual-open-window-plan ",
+                " managed-audit-persistence-boundary-candidate.v1 ",
+                " sha256:node-v208-managed-audit-candidate-digest ",
+                " file-or-sqlite-dry-run-candidate ",
+                " 30 ",
+                " size-and-age-rotation-candidate "
         );
         assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
         assertThat(headerBackedRehearsal.requestContext().requestIdSource())
@@ -1316,6 +1399,43 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.liveReadinessHint().javaStartedProcessForNode()).isFalse();
         assertThat(headerBackedRehearsal.liveReadinessHint().nodeMayTreatAsProductionAuthorization()).isFalse();
         assertThat(headerBackedRehearsal.liveReadinessHint().echoWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditCandidateVersion())
+                .isEqualTo("managed-audit-persistence-boundary-candidate.v1");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditCandidateVersionSource())
+                .isEqualTo("x-orderops-managed-audit-candidate-version");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditCandidateDigest())
+                .isEqualTo("sha256:node-v208-managed-audit-candidate-digest");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditCandidateDigestSource())
+                .isEqualTo("x-orderops-managed-audit-candidate-digest");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditSinkMode())
+                .isEqualTo("file-or-sqlite-dry-run-candidate");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditSinkModeSource())
+                .isEqualTo("x-orderops-managed-audit-sink-mode");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditRetentionDays())
+                .isEqualTo("30");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditRetentionDaysSource())
+                .isEqualTo("x-orderops-managed-audit-retention-days");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditRotationPolicy())
+                .isEqualTo("size-and-age-rotation-candidate");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditRotationPolicySource())
+                .isEqualTo("x-orderops-managed-audit-rotation-policy");
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().candidateVersionEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().candidateDigestEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().sinkModeEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().retentionDaysEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().rotationPolicyEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().auditPersistenceHandoffContextComplete())
+                .isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().managedAuditRetentionWithinJavaRetention())
+                .isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().javaAuditSourceReadOnly()).isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().javaLedgerWriteAllowed()).isFalse();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().javaManagedAuditWriteAllowed()).isFalse();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().javaExternalAuditSystemAccessed()).isFalse();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().nodeMayUseAsManagedAuditInput()).isTrue();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().nodeMayTreatAsProductionAuditRecord())
+                .isFalse();
+        assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().echoWarnings()).isEmpty();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1328,7 +1448,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v7");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v8");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -1355,7 +1475,12 @@ class OpsEvidenceServiceTests {
                 "sha256:node-v204-preflight-digest",
                 "runtime-smoke-v205-session-001",
                 "java-release-approval-rehearsal",
-                "manual-open-window-plan"
+                "manual-open-window-plan",
+                "managed-audit-persistence-boundary-candidate.v1",
+                "sha256:node-v208-managed-audit-candidate-digest",
+                "file-or-sqlite-dry-run-candidate",
+                "30",
+                "size-and-age-rotation-candidate"
         );
         assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())
                 .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());

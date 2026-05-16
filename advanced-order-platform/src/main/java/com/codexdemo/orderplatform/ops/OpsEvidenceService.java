@@ -45,6 +45,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_LIVE_READINESS_HINT_VERSION =
             "java-release-approval-rehearsal-live-readiness-hint.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_AUDIT_PERSISTENCE_HANDOFF_HINT_VERSION =
+            "java-release-approval-rehearsal-audit-persistence-handoff-hint.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -52,7 +55,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v7";
+            "java-release-approval-rehearsal-response-schema.v8";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -406,6 +409,69 @@ public class OpsEvidenceService {
             String runtimeReadTargetId,
             String runtimeWindowMode
     ) {
+        return releaseApprovalRehearsal(
+                requestId,
+                operatorIdentity,
+                auditCorrelationId,
+                operatorWindowOperatorId,
+                operatorWindowRoles,
+                operatorWindowVerifiedClaim,
+                operatorWindowApprovalCorrelationId,
+                ciManifestVersion,
+                ciManifestDigest,
+                ciManifestEndpoint,
+                ciArtifactRecordCount,
+                ciApprovalCorrelationId,
+                ciUploadContractVersion,
+                ciUploadContractDigest,
+                ciArtifactName,
+                ciArtifactRoot,
+                ciRetentionDays,
+                ciUploadMode,
+                runtimePreflightVersion,
+                runtimePreflightDigest,
+                runtimeSmokeSessionId,
+                runtimeReadTargetId,
+                runtimeWindowMode,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId,
+            String ciManifestVersion,
+            String ciManifestDigest,
+            String ciManifestEndpoint,
+            String ciArtifactRecordCount,
+            String ciApprovalCorrelationId,
+            String ciUploadContractVersion,
+            String ciUploadContractDigest,
+            String ciArtifactName,
+            String ciArtifactRoot,
+            String ciRetentionDays,
+            String ciUploadMode,
+            String runtimePreflightVersion,
+            String runtimePreflightDigest,
+            String runtimeSmokeSessionId,
+            String runtimeReadTargetId,
+            String runtimeWindowMode,
+            String managedAuditCandidateVersion,
+            String managedAuditCandidateDigest,
+            String managedAuditSinkMode,
+            String managedAuditRetentionDays,
+            String managedAuditRotationPolicy
+    ) {
         OpsEvidenceResponse evidence = evidence();
         String normalizedRequestId = normalizeHeaderValue(requestId);
         String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
@@ -431,6 +497,11 @@ public class OpsEvidenceService {
         String normalizedRuntimeSmokeSessionId = normalizeHeaderValue(runtimeSmokeSessionId);
         String normalizedRuntimeReadTargetId = normalizeHeaderValue(runtimeReadTargetId);
         String normalizedRuntimeWindowMode = normalizeHeaderValue(runtimeWindowMode);
+        String normalizedManagedAuditCandidateVersion = normalizeHeaderValue(managedAuditCandidateVersion);
+        String normalizedManagedAuditCandidateDigest = normalizeHeaderValue(managedAuditCandidateDigest);
+        String normalizedManagedAuditSinkMode = normalizeHeaderValue(managedAuditSinkMode);
+        String normalizedManagedAuditRetentionDays = normalizeHeaderValue(managedAuditRetentionDays);
+        String normalizedManagedAuditRotationPolicy = normalizeHeaderValue(managedAuditRotationPolicy);
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext = rehearsalRequestContext(
                 normalizedRequestId,
                 normalizedOperatorIdentity,
@@ -470,6 +541,15 @@ public class OpsEvidenceService {
                         normalizedRuntimeReadTargetId,
                         normalizedRuntimeWindowMode
                 );
+        ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint =
+                rehearsalAuditPersistenceHandoffHint(
+                        evidence.releaseAuditRetentionFixture(),
+                        normalizedManagedAuditCandidateVersion,
+                        normalizedManagedAuditCandidateDigest,
+                        normalizedManagedAuditSinkMode,
+                        normalizedManagedAuditRetentionDays,
+                        normalizedManagedAuditRotationPolicy
+                );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -490,6 +570,7 @@ public class OpsEvidenceService {
                 ciEvidenceHint,
                 artifactRetentionHint,
                 liveReadinessHint,
+                auditPersistenceHandoffHint,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -497,6 +578,7 @@ public class OpsEvidenceService {
                         ciEvidenceHint,
                         artifactRetentionHint,
                         liveReadinessHint,
+                        auditPersistenceHandoffHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -515,6 +597,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
             ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
             ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
+            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -524,10 +607,13 @@ public class OpsEvidenceService {
                 "ciEvidenceEchoWarnings",
                 "artifactRetentionEchoWarnings",
                 "liveReadinessEchoWarnings",
+                "auditPersistenceHandoffEchoWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
                 "approvalLedgerWritten",
+                "javaManagedAuditWriteAllowed",
+                "nodeMayTreatAsProductionAuditRecord",
                 "nodeMayWriteApprovalLedger"
         );
         List<String> proofClaims = List.of(
@@ -545,6 +631,11 @@ public class OpsEvidenceService {
                 "liveReadinessHint.runtimeSmokeExecutedByJava=false",
                 "liveReadinessHint.javaStartedProcessForNode=false",
                 "liveReadinessHint.nodeMayTreatAsProductionAuthorization=false",
+                "auditPersistenceHandoffHint.javaAuditSourceReadOnly=true",
+                "auditPersistenceHandoffHint.javaLedgerWriteAllowed=false",
+                "auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false",
+                "auditPersistenceHandoffHint.javaExternalAuditSystemAccessed=false",
+                "auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -560,6 +651,7 @@ public class OpsEvidenceService {
                         ciEvidenceHint,
                         artifactRetentionHint,
                         liveReadinessHint,
+                        auditPersistenceHandoffHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -572,6 +664,10 @@ public class OpsEvidenceService {
                         && liveReadinessHint.readOnlyEndpointReady()
                         && !liveReadinessHint.runtimeSmokeExecutedByJava()
                         && !liveReadinessHint.javaStartedProcessForNode()
+                        && auditPersistenceHandoffHint.javaAuditSourceReadOnly()
+                        && !auditPersistenceHandoffHint.javaLedgerWriteAllowed()
+                        && !auditPersistenceHandoffHint.javaManagedAuditWriteAllowed()
+                        && !auditPersistenceHandoffHint.javaExternalAuditSystemAccessed()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -583,6 +679,7 @@ public class OpsEvidenceService {
                         "ciEvidenceHint",
                         "artifactRetentionHint",
                         "liveReadinessHint",
+                        "auditPersistenceHandoffHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -603,6 +700,8 @@ public class OpsEvidenceService {
                         "Require artifactRetentionHint.nodeMayTreatAsRetentionAuthorization=false until Node v203 retention gate passes",
                         "Compare liveReadinessHint.sourcePreflightVersion and runtimeSmokeSessionId with Node v204/v205 smoke context",
                         "Require liveReadinessHint.runtimeSmokeExecutedByJava=false; Node owns v205 process/run evidence",
+                        "Compare auditPersistenceHandoffHint.managedAuditCandidateVersion with Node v208 managed audit candidate",
+                        "Require auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false until Node owns dry-run persistence",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -616,6 +715,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
             ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
             ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
+            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -628,6 +728,7 @@ public class OpsEvidenceService {
                 line("ciEvidenceEchoWarnings", ciEvidenceHint.echoWarnings()),
                 line("artifactRetentionEchoWarnings", artifactRetentionHint.echoWarnings()),
                 line("liveReadinessEchoWarnings", liveReadinessHint.echoWarnings()),
+                line("auditPersistenceHandoffEchoWarnings", auditPersistenceHandoffHint.echoWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
@@ -640,6 +741,12 @@ public class OpsEvidenceService {
                 line("runtimeSmokeExecutedByJava", liveReadinessHint.runtimeSmokeExecutedByJava()),
                 line("javaStartedProcessForNode", liveReadinessHint.javaStartedProcessForNode()),
                 line("nodeMayTreatAsProductionAuthorization", liveReadinessHint.nodeMayTreatAsProductionAuthorization()),
+                line("javaManagedAuditWriteAllowed", auditPersistenceHandoffHint.javaManagedAuditWriteAllowed()),
+                line("javaExternalAuditSystemAccessed", auditPersistenceHandoffHint.javaExternalAuditSystemAccessed()),
+                line(
+                        "nodeMayTreatAsProductionAuditRecord",
+                        auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord()
+                ),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
     }
@@ -1038,6 +1145,143 @@ public class OpsEvidenceService {
                         "Compare liveReadinessHint.runtimeSmokeSessionId with Node v205 smoke session id",
                         "Require liveReadinessHint.readOnlyEndpointReady=true before counting Java read target as ready",
                         "Keep runtimeSmokeExecutedByJava=false and javaStartedProcessForNode=false"
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint
+            rehearsalAuditPersistenceHandoffHint(
+                    OpsEvidenceResponse.ReleaseAuditRetentionFixture retentionFixture,
+                    String normalizedManagedAuditCandidateVersion,
+                    String normalizedManagedAuditCandidateDigest,
+                    String normalizedManagedAuditSinkMode,
+                    String normalizedManagedAuditRetentionDays,
+                    String normalizedManagedAuditRotationPolicy
+    ) {
+        List<String> warnings = new ArrayList<>();
+        addMissingContextWarning(
+                warnings,
+                normalizedManagedAuditCandidateVersion,
+                "ORDEROPS_MANAGED_AUDIT_CANDIDATE_VERSION_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedManagedAuditCandidateDigest,
+                "ORDEROPS_MANAGED_AUDIT_CANDIDATE_DIGEST_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedManagedAuditSinkMode,
+                "ORDEROPS_MANAGED_AUDIT_SINK_MODE_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedManagedAuditRetentionDays,
+                "ORDEROPS_MANAGED_AUDIT_RETENTION_DAYS_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedManagedAuditRotationPolicy,
+                "ORDEROPS_MANAGED_AUDIT_ROTATION_POLICY_MISSING"
+        );
+        boolean candidateVersionEchoed = normalizedManagedAuditCandidateVersion != null;
+        boolean candidateDigestEchoed = normalizedManagedAuditCandidateDigest != null;
+        boolean sinkModeEchoed = normalizedManagedAuditSinkMode != null;
+        boolean retentionDaysEchoed = normalizedManagedAuditRetentionDays != null;
+        boolean rotationPolicyEchoed = normalizedManagedAuditRotationPolicy != null;
+        boolean auditPersistenceHandoffContextComplete = candidateVersionEchoed
+                && candidateDigestEchoed
+                && sinkModeEchoed
+                && retentionDaysEchoed
+                && rotationPolicyEchoed;
+        boolean managedAuditRetentionWithinJavaRetention = retentionDaysWithinJavaRetention(
+                normalizedManagedAuditRetentionDays,
+                retentionFixture.retentionDays()
+        );
+        boolean javaAuditSourceReadOnly = retentionFixture.nodeMayConsume()
+                && retentionFixture.auditExportReadOnly()
+                && !retentionFixture.deploymentExecutionAllowed()
+                && !retentionFixture.rollbackSqlExecutionAllowed();
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint(
+                RELEASE_APPROVAL_REHEARSAL_AUDIT_PERSISTENCE_HANDOFF_HINT_VERSION,
+                retentionFixture.fixtureVersion(),
+                retentionFixture.fixtureEndpoint(),
+                retentionFixture.retentionDays(),
+                valueOrPlaceholder(
+                        normalizedManagedAuditCandidateVersion,
+                        "managed-audit-candidate-version-not-supplied"
+                ),
+                sourceFor(normalizedManagedAuditCandidateVersion, "x-orderops-managed-audit-candidate-version"),
+                valueOrPlaceholder(
+                        normalizedManagedAuditCandidateDigest,
+                        "managed-audit-candidate-digest-not-supplied"
+                ),
+                sourceFor(normalizedManagedAuditCandidateDigest, "x-orderops-managed-audit-candidate-digest"),
+                valueOrPlaceholder(
+                        normalizedManagedAuditSinkMode,
+                        "managed-audit-sink-mode-not-supplied"
+                ),
+                sourceFor(normalizedManagedAuditSinkMode, "x-orderops-managed-audit-sink-mode"),
+                valueOrPlaceholder(
+                        normalizedManagedAuditRetentionDays,
+                        "managed-audit-retention-days-not-supplied"
+                ),
+                sourceFor(normalizedManagedAuditRetentionDays, "x-orderops-managed-audit-retention-days"),
+                valueOrPlaceholder(
+                        normalizedManagedAuditRotationPolicy,
+                        "managed-audit-rotation-policy-not-supplied"
+                ),
+                sourceFor(normalizedManagedAuditRotationPolicy, "x-orderops-managed-audit-rotation-policy"),
+                candidateVersionEchoed,
+                candidateDigestEchoed,
+                sinkModeEchoed,
+                retentionDaysEchoed,
+                rotationPolicyEchoed,
+                auditPersistenceHandoffContextComplete,
+                managedAuditRetentionWithinJavaRetention,
+                javaAuditSourceReadOnly,
+                false,
+                false,
+                false,
+                false,
+                javaAuditSourceReadOnly,
+                false,
+                List.of(
+                        "x-orderops-managed-audit-candidate-version",
+                        "x-orderops-managed-audit-candidate-digest",
+                        "x-orderops-managed-audit-sink-mode",
+                        "x-orderops-managed-audit-retention-days",
+                        "x-orderops-managed-audit-rotation-policy"
+                ),
+                List.of(
+                        "sampledAt",
+                        "requestContext.requestId",
+                        "requestContext.operatorIdentity",
+                        "requestContext.auditCorrelationId",
+                        "operatorWindowHint.operatorId",
+                        "operatorWindowHint.operatorRoles",
+                        "operatorWindowHint.approvalCorrelationId",
+                        "ciEvidenceHint.manifestDigest",
+                        "artifactRetentionHint.sourceRetentionFixtureEndpoint",
+                        "artifactRetentionHint.javaRetentionDays",
+                        "liveReadinessHint.runtimeSmokeSessionId",
+                        "failureTaxonomy.failureCategories",
+                        "verificationHint.warningDigest",
+                        "executionBoundaries.nodeMayWriteApprovalLedger"
+                ),
+                List.of(
+                        RELEASE_APPROVAL_REHEARSAL_ENDPOINT,
+                        retentionFixture.fixtureEndpoint(),
+                        "/api/v1/ops/evidence"
+                ),
+                List.copyOf(warnings),
+                List.of(
+                        "Compare auditPersistenceHandoffHint.managedAuditCandidateVersion with Node v208 candidate contract",
+                        "Compare auditPersistenceHandoffHint.managedAuditCandidateDigest with Node v208 adapter digest",
+                        "Require auditPersistenceHandoffHint.managedAuditRetentionWithinJavaRetention=true before Node dry-run retention checks",
+                        "Persist only the listed handoffFieldPaths in Node managed audit dry-run storage",
+                        "Keep javaManagedAuditWriteAllowed=false and nodeMayTreatAsProductionAuditRecord=false"
                 )
         );
     }

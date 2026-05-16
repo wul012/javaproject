@@ -51,6 +51,10 @@
 - 订单平台 release approval rehearsal 只读 operator-window hint，回显 Node v198 真实只读窗口身份头和 approval correlation 头
 - 订单平台 release approval rehearsal 只读失败分类，区分上游就绪、身份上下文和审计关联 warning
 - 订单平台 release approval rehearsal 只读验证提示，提供响应 schema、warning digest 和 no-ledger-write proof
+- 订单平台 release approval rehearsal 只读 CI evidence hint，回显 Node CI manifest 摘要且不上传 artifact
+- 订单平台 release approval rehearsal 只读 artifact retention hint，回显 Node dry-run upload contract 与 Java retention fixture
+- 订单平台 release approval rehearsal 只读 live-readiness hint，回显真实只读 runtime smoke 上下文
+- 订单平台 release approval rehearsal 只读 audit-persistence handoff hint，列出未来可进入 Node managed audit 的只读字段
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -1670,7 +1674,7 @@ Invoke-RestMethod `
 liveReadinessHint.hintVersion=java-release-approval-rehearsal-live-readiness-hint.v1
 liveReadinessHint.serverTimestamp=<sampledAt>
 liveReadinessHint.serverTimestampSource=sampledAt
-liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v7
+liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v8
 liveReadinessHint.readOnlyEndpoint=/api/v1/ops/release-approval-rehearsal
 liveReadinessHint.healthEndpoint=/actuator/health
 liveReadinessHint.sourcePreflightVersion=three-project-real-read-runtime-smoke-preflight.v1
@@ -1686,11 +1690,74 @@ liveReadinessHint.nodeMustRecordPidAndCleanup=true
 liveReadinessHint.javaStartedProcessForNode=false
 liveReadinessHint.processCleanupRecordedByJava=false
 liveReadinessHint.nodeMayTreatAsProductionAuthorization=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v7
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v8
 verificationHint.warningDigestInputs 包含 liveReadinessEchoWarnings
 ```
 
 这一步只证明 Java 的只读 rehearsal 端点适合被 Node v205 纳入真实 HTTP smoke 读取目标，并回显 Node v204/v205 的运行上下文。Java 不启动 Node 的 smoke 流程，不记录 Node PID，不替 Node 做 cleanup 证据，也不把 runtime smoke 结果当作生产窗口授权。
+
+v74 起，release approval rehearsal 增加 `auditPersistenceHandoffHint`，用于给 Node v208 的 managed audit persistence boundary candidate 提供 Java 侧只读交接字段。调用方可以继续读取同一个只读端点，并额外传入 Node v208 候选 contract 摘要：
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://localhost:8080/api/v1/ops/release-approval-rehearsal `
+  -Headers @{
+    "X-Rehearsal-Request-Id" = "rehearsal-v74-001"
+    "X-Operator-Identity" = "release-operator@example.test"
+    "X-Audit-Correlation-Id" = "audit-correlation-v74"
+    "x-orderops-operator-id" = "operator-198"
+    "x-orderops-roles" = "operator,auditor"
+    "x-orderops-operator-verified" = "true"
+    "x-orderops-approval-correlation-id" = "approval-v198-operator-window"
+    "x-orderops-ci-manifest-version" = "real-read-window-ci-archive-artifact-manifest.v1"
+    "x-orderops-ci-manifest-digest" = "sha256:<node-v200-manifest-digest>"
+    "x-orderops-ci-manifest-endpoint" = "/api/v1/production/real-read-window-ci-archive-artifact-manifest"
+    "x-orderops-ci-artifact-record-count" = "9"
+    "x-orderops-ci-approval-correlation-id" = "approval-v198-operator-window"
+    "x-orderops-ci-upload-contract-version" = "real-read-window-ci-artifact-upload-dry-run-contract.v1"
+    "x-orderops-ci-upload-contract-digest" = "sha256:<node-v202-upload-contract-digest>"
+    "x-orderops-ci-artifact-name" = "orderops-real-read-window-evidence-v191-v201"
+    "x-orderops-ci-artifact-root" = "c/"
+    "x-orderops-ci-retention-days" = "30"
+    "x-orderops-ci-upload-mode" = "dry-run-contract-only"
+    "x-orderops-runtime-preflight-version" = "three-project-real-read-runtime-smoke-preflight.v1"
+    "x-orderops-runtime-preflight-digest" = "sha256:<node-v204-preflight-digest>"
+    "x-orderops-runtime-smoke-session-id" = "runtime-smoke-v205-session-001"
+    "x-orderops-runtime-read-target-id" = "java-release-approval-rehearsal"
+    "x-orderops-runtime-window-mode" = "manual-open-window-plan"
+    "x-orderops-managed-audit-candidate-version" = "managed-audit-persistence-boundary-candidate.v1"
+    "x-orderops-managed-audit-candidate-digest" = "sha256:<node-v208-managed-audit-candidate-digest>"
+    "x-orderops-managed-audit-sink-mode" = "file-or-sqlite-dry-run-candidate"
+    "x-orderops-managed-audit-retention-days" = "30"
+    "x-orderops-managed-audit-rotation-policy" = "size-and-age-rotation-candidate"
+  }
+```
+
+响应中的关键字段：
+
+```text
+auditPersistenceHandoffHint.hintVersion=java-release-approval-rehearsal-audit-persistence-handoff-hint.v1
+auditPersistenceHandoffHint.sourceRetentionFixtureVersion=java-release-audit-retention-fixture.v1
+auditPersistenceHandoffHint.sourceRetentionFixtureEndpoint=/contracts/release-audit-retention.fixture.json
+auditPersistenceHandoffHint.javaRetentionDays=180
+auditPersistenceHandoffHint.managedAuditCandidateVersion=managed-audit-persistence-boundary-candidate.v1
+auditPersistenceHandoffHint.managedAuditCandidateDigest=sha256:<node-v208-managed-audit-candidate-digest>
+auditPersistenceHandoffHint.managedAuditSinkMode=file-or-sqlite-dry-run-candidate
+auditPersistenceHandoffHint.managedAuditRetentionDays=30
+auditPersistenceHandoffHint.managedAuditRotationPolicy=size-and-age-rotation-candidate
+auditPersistenceHandoffHint.auditPersistenceHandoffContextComplete=true
+auditPersistenceHandoffHint.managedAuditRetentionWithinJavaRetention=true
+auditPersistenceHandoffHint.javaAuditSourceReadOnly=true
+auditPersistenceHandoffHint.javaLedgerWriteAllowed=false
+auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false
+auditPersistenceHandoffHint.javaExternalAuditSystemAccessed=false
+auditPersistenceHandoffHint.nodeMayUseAsManagedAuditInput=true
+auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v8
+verificationHint.warningDigestInputs 包含 auditPersistenceHandoffEchoWarnings
+```
+
+这一步只说明哪些 Java 只读字段未来可进入 Node managed audit dry-run 存储。Java 不写 approval ledger，不写 managed audit store，不连接外部生产审计系统，不创建真实 approval decision，也不把该响应当作生产审计记录。
 
 查询失败事件治理摘要：
 
@@ -2277,6 +2344,10 @@ ops
   -> v68 增强 release approval rehearsal 只读失败分类，区分 upstream readiness、auth context warning 和 audit correlation warning，继续禁止写入和执行
   -> v69 增强 release approval rehearsal 只读验证提示，提供 response schema version、warning digest 和 no-ledger-write proof，供 Node 导入窗口结果前校验
   -> v70 增强 release approval rehearsal 只读 operator-window hint，回显 Node v198 窗口身份与 approval correlation 头，但不认证、不持久化、不授权生产身份
+  -> v71 增强 release approval rehearsal 只读 CI evidence hint，回显 Node v200 manifest 摘要，不上传 GitHub artifact，不写 ledger
+  -> v72 增强 release approval rehearsal 只读 artifact retention hint，回显 Node v202 dry-run upload contract 与 Java retention fixture
+  -> v73 增强 release approval rehearsal 只读 live-readiness hint，回显 Node v204/v205 runtime smoke 上下文，不启动或清理 Node 进程
+  -> v74 增强 release approval rehearsal 只读 audit-persistence handoff hint，列出未来可进入 Node managed audit 的字段，不写 Java ledger 或审计存储
 
 common
  -> 业务异常和统一错误响应
