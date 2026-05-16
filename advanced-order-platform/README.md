@@ -57,6 +57,7 @@
 - 订单平台 release approval rehearsal 只读 audit-persistence handoff hint，列出未来可进入 Node managed audit 的只读字段
 - 订单平台 release approval rehearsal 只读 approval-record handoff hint，标注可进入 Node audit record 的审批字段
 - 订单平台 release approval rehearsal 只读 approval-handoff verification marker，标注 Node v211 已消费 Java v75 handoff 的 dry-run packet 边界
+- 订单平台 release approval rehearsal 只读 managed-audit adapter boundary receipt，标注 Node v215 只能写本地 dry-run 文件且不能触发 Java/审计/SQL/部署/回滚/restore
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
@@ -1676,7 +1677,7 @@ Invoke-RestMethod `
 liveReadinessHint.hintVersion=java-release-approval-rehearsal-live-readiness-hint.v1
 liveReadinessHint.serverTimestamp=<sampledAt>
 liveReadinessHint.serverTimestampSource=sampledAt
-liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v10
+liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v11
 liveReadinessHint.readOnlyEndpoint=/api/v1/ops/release-approval-rehearsal
 liveReadinessHint.healthEndpoint=/actuator/health
 liveReadinessHint.sourcePreflightVersion=three-project-real-read-runtime-smoke-preflight.v1
@@ -1692,7 +1693,7 @@ liveReadinessHint.nodeMustRecordPidAndCleanup=true
 liveReadinessHint.javaStartedProcessForNode=false
 liveReadinessHint.processCleanupRecordedByJava=false
 liveReadinessHint.nodeMayTreatAsProductionAuthorization=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v11
 verificationHint.warningDigestInputs 包含 liveReadinessEchoWarnings
 ```
 
@@ -1755,7 +1756,7 @@ auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false
 auditPersistenceHandoffHint.javaExternalAuditSystemAccessed=false
 auditPersistenceHandoffHint.nodeMayUseAsManagedAuditInput=true
 auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v11
 verificationHint.warningDigestInputs 包含 auditPersistenceHandoffEchoWarnings
 ```
 
@@ -1811,7 +1812,7 @@ approvalRecordHandoffHint.javaApprovalRecordAuthenticated=false
 approvalRecordHandoffHint.productionApprovalStoreRequired=false
 approvalRecordHandoffHint.nodeMayUseAsAuditApprovalInput=true
 approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v11
 verificationHint.warningDigestInputs 包含 approvalRecordHandoffEchoWarnings、javaApprovalRecordPersisted、nodeMayTreatAsProductionApprovalRecord
 ```
 
@@ -1848,11 +1849,50 @@ approvalHandoffVerificationMarker.javaApprovalRecordPersisted=false
 approvalHandoffVerificationMarker.javaApprovalLedgerWritten=false
 approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan=true
 approvalHandoffVerificationMarker.nodeMayTreatAsProductionAuditRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v10
-verificationHint.warningDigestInputs 包含 approvalHandoffVerificationMarkerWarnings、nodeV211ProductionAuditRecordAllowed、nodeV211RealApprovalDecisionCreated
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v11
+verificationHint.warningDigestInputs 包含 approvalHandoffVerificationMarkerWarnings、managedAuditAdapterBoundaryReceiptWarnings、nodeV211ProductionAuditRecordAllowed、nodeV211RealApprovalDecisionCreated
 ```
 
 没有传入完整 Node v210 approval binding header 时，`nodeV211HandoffAccepted=false` 且 `readyForNodeV213RestoreDrillPlan=false`，marker 会给出 `NODE_V211_APPROVAL_HANDOFF_CONTEXT_INCOMPLETE`。这一步只证明 Java v75 handoff 可被 Node v211 dry-run packet 读取并已保持 append/query/digest/cleanup 覆盖；Java 不创建真实 approval decision，不写 approval ledger，不写 approval record，不连接外部 audit system，不执行 restore，也不允许 Node 把它当生产 audit record。
+
+v77 起，release approval rehearsal 增加 `managedAuditAdapterBoundaryReceipt`，用于承接 Node v214 archive verification，并给 Node v215 managed audit dry-run adapter candidate 明确只读边界。该 receipt 允许 Node v215 消费响应、写 Node 本地 `.tmp` 或受控测试文件；不允许 Node 连接真实 managed audit，不允许创建 approval decision，不允许写 approval ledger，不允许持久化 approval record，不允许执行 Java SQL、部署、回滚或 restore：
+
+```text
+managedAuditAdapterBoundaryReceipt.receiptVersion=java-release-approval-rehearsal-managed-audit-adapter-boundary-receipt.v1
+managedAuditAdapterBoundaryReceipt.sourceApprovalHandoffMarkerVersion=java-release-approval-rehearsal-approval-handoff-verification-marker.v1
+managedAuditAdapterBoundaryReceipt.sourceApprovalHandoffSchemaVersion=java-release-approval-rehearsal-response-schema.v10
+managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationVersion=managed-audit-restore-drill-archive-verification.v1
+managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationState=verified-restore-drill-archive
+managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationEndpoint=/api/v1/audit/managed-audit-restore-drill-archive-verification
+managedAuditAdapterBoundaryReceipt.nextNodeCandidateVersion=Node v215
+managedAuditAdapterBoundaryReceipt.nextNodeCandidateProfile=managed-audit-dry-run-adapter-candidate.v1
+managedAuditAdapterBoundaryReceipt.nodeV215MayConsume=true
+managedAuditAdapterBoundaryReceipt.nodeV215MayWriteLocalDryRunFiles=true
+managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false
+managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision=false
+managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger=false
+managedAuditAdapterBoundaryReceipt.nodeV215MayPersistApprovalRecord=false
+managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql=false
+managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment=false
+managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback=false
+managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore=false
+managedAuditAdapterBoundaryReceipt.javaApprovalDecisionCreated=false
+managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten=false
+managedAuditAdapterBoundaryReceipt.javaApprovalRecordPersisted=false
+managedAuditAdapterBoundaryReceipt.javaManagedAuditWriteExecuted=false
+managedAuditAdapterBoundaryReceipt.javaRollbackSqlExecuted=false
+managedAuditAdapterBoundaryReceipt.javaDeploymentTriggered=false
+managedAuditAdapterBoundaryReceipt.javaRollbackTriggered=false
+managedAuditAdapterBoundaryReceipt.javaRestoreExecuted=false
+managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=true
+managedAuditAdapterBoundaryReceipt.readyForProductionAudit=false
+managedAuditAdapterBoundaryReceipt.readyForProductionWindow=false
+managedAuditAdapterBoundaryReceipt.nodeMayTreatAsProductionAuditRecord=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v11
+verificationHint.warningDigestInputs 包含 managedAuditAdapterBoundaryReceiptWarnings、nodeV215MayConnectManagedAudit、nodeV215MayCreateApprovalDecision、nodeV215MayWriteApprovalLedger、nodeV215MayExecuteSql、nodeV215MayTriggerDeployment、nodeV215MayTriggerRollback、nodeV215MayExecuteRestore
+```
+
+没有传入完整 Node v210 approval binding header 时，`managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=false` 且 `receiptWarnings` 包含 `NODE_V215_SOURCE_APPROVAL_HANDOFF_MARKER_NOT_READY`。这一步只证明 Node v215 可在 dry-run adapter candidate 中读取 Java v77 receipt，并只能落本地 dry-run/test evidence；Java 不写 audit store，不执行 SQL/部署/回滚/restore，也不把该响应当生产 audit record。
 
 查询失败事件治理摘要：
 
@@ -2445,6 +2485,7 @@ ops
   -> v74 增强 release approval rehearsal 只读 audit-persistence handoff hint，列出未来可进入 Node managed audit 的字段，不写 Java ledger 或审计存储
   -> v75 增强 release approval rehearsal 只读 approval-record handoff hint，标注可进入 Node audit record 的审批字段，不创建或持久化 Java approval record
   -> v76 增强 release approval rehearsal 只读 approval-handoff verification marker，标注 Node v211 已消费 Java v75 handoff 的 dry-run packet 覆盖和 no-write 边界
+  -> v77 增强 release approval rehearsal 只读 managed-audit adapter boundary receipt，标注 Node v215 只能写本地 dry-run 文件，不能连接真实审计、写审批 ledger、执行 SQL、部署、回滚或 restore
 
 common
  -> 业务异常和统一错误响应

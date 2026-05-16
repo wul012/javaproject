@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v10"))
+                        .value("java-release-approval-rehearsal-response-schema.v11"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1242,6 +1242,72 @@ class OpsOverviewIntegrationTests {
                         hasItem("NODE_V211_APPROVAL_HANDOFF_CONTEXT_INCOMPLETE")))
                 .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeVerificationActions",
                         hasItem("Keep approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.receiptVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-adapter-boundary-receipt.v1"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.sourceApprovalHandoffMarkerVersion")
+                        .value("java-release-approval-rehearsal-approval-handoff-verification-marker.v1"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.sourceApprovalHandoffSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v10"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationVersion")
+                        .value("managed-audit-restore-drill-archive-verification.v1"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationState")
+                        .value("verified-restore-drill-archive"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationEndpoint")
+                        .value("/api/v1/audit/managed-audit-restore-drill-archive-verification"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nextNodeCandidateVersion")
+                        .value("Node v215"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nextNodeCandidateProfile")
+                        .value("managed-audit-dry-run-adapter-candidate.v1"))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayConsume").value(true))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayWriteLocalDryRunFiles")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayPersistApprovalRecord")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql").value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.javaApprovalDecisionCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.javaApprovalRecordPersisted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.javaManagedAuditWriteExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.readyForProductionAudit").value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.readyForProductionWindow").value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeMayTreatAsProductionAuditRecord")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.acceptedSourceReceipts",
+                        hasItem("Node v214 managed audit restore drill archive verification")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.acceptedSourceReceipts",
+                        hasItem("mini-kv v86 managed audit adapter restore boundary receipt must be present before Node v215")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.adapterBoundaryClaims",
+                        hasItem("Node v215 must not connect real managed audit storage")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.adapterBoundaryClaims",
+                        hasItem("Node v215 must not write Java approval ledger")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.forbiddenAdapterOperations",
+                        hasItem("Execute Java SQL from Node v215")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.forbiddenAdapterOperations",
+                        hasItem("Set UPSTREAM_ACTIONS_ENABLED=true for Node v215")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215Prerequisites",
+                        hasItem("Java v77 managed audit adapter boundary receipt must be ready")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.receiptWarnings",
+                        hasItem("NODE_V215_SOURCE_APPROVAL_HANDOFF_MARKER_NOT_READY")))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeVerificationActions",
+                        hasItem("Keep managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false")))
                 .andExpect(jsonPath("$.failureTaxonomy.taxonomyVersion")
                         .value("java-release-approval-rehearsal-failure-taxonomy.v1"))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
@@ -1267,7 +1333,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v10"))
+                        .value("java-release-approval-rehearsal-response-schema.v11"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -1290,6 +1356,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("approvalHandoffVerificationMarker")))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("managedAuditAdapterBoundaryReceipt")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("executionBoundaries")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("contextWarnings")))
@@ -1308,6 +1376,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("approvalHandoffVerificationMarkerWarnings")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("managedAuditAdapterBoundaryReceiptWarnings")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("javaManagedAuditWriteAllowed")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("javaApprovalRecordPersisted")))
@@ -1317,6 +1387,14 @@ class OpsOverviewIntegrationTests {
                         hasItem("nodeV211ProductionAuditRecordAllowed")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeV211RealApprovalDecisionCreated")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("nodeV215MayConnectManagedAudit")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("nodeV215MayCreateApprovalDecision")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("nodeV215MayWriteApprovalLedger")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("nodeV215MayExecuteSql")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeMayWriteApprovalLedger")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
@@ -1346,11 +1424,21 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("executionBoundaries.nodeMayWriteApprovalLedger=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 packet profile")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationVersion with Node v214 profileVersion")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Keep UPSTREAM_ACTIONS_ENABLED=false")))
                 .andExpect(jsonPath("$.releaseApprovalInputs.releaseOperatorSignoffFixtureEndpoint")
@@ -1679,6 +1767,29 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.approvalHandoffVerificationMarker.javaApprovalRecordPersisted").value(false))
                 .andExpect(jsonPath("$.approvalHandoffVerificationMarker.nodeMayTreatAsProductionAuditRecord")
                         .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.receiptWarnings").isEmpty())
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql").value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.javaApprovalDecisionCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.javaManagedAuditWriteExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditAdapterBoundaryReceipt.readyForProductionAudit").value(false))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.authContextReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationReadiness").value("READY"))
@@ -1699,7 +1810,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v10"))
+                        .value("java-release-approval-rehearsal-response-schema.v11"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))

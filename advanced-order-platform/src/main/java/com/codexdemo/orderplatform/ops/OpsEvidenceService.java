@@ -54,8 +54,14 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_VERIFICATION_MARKER_VERSION =
             "java-release-approval-rehearsal-approval-handoff-verification-marker.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_VERSION =
+            "java-release-approval-rehearsal-managed-audit-adapter-boundary-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
+
+    static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_MARKER_SCHEMA_VERSION =
+            "java-release-approval-rehearsal-response-schema.v10";
 
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
@@ -64,7 +70,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v10";
+            "java-release-approval-rehearsal-response-schema.v11";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -79,6 +85,20 @@ public class OpsEvidenceService {
 
     static final String NODE_V211_MANAGED_AUDIT_PACKET_VERSION =
             "managed-audit-dry-run-record.v2-candidate";
+
+    static final String NODE_V214_RESTORE_DRILL_ARCHIVE_VERIFICATION_PROFILE_VERSION =
+            "managed-audit-restore-drill-archive-verification.v1";
+
+    static final String NODE_V214_RESTORE_DRILL_ARCHIVE_VERIFICATION_STATE =
+            "verified-restore-drill-archive";
+
+    static final String NODE_V214_RESTORE_DRILL_ARCHIVE_VERIFICATION_ENDPOINT =
+            "/api/v1/audit/managed-audit-restore-drill-archive-verification";
+
+    static final String NODE_V215_MANAGED_AUDIT_DRY_RUN_ADAPTER_CANDIDATE_VERSION = "Node v215";
+
+    static final String NODE_V215_MANAGED_AUDIT_DRY_RUN_ADAPTER_CANDIDATE_PROFILE =
+            "managed-audit-dry-run-adapter-candidate.v1";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";
@@ -647,6 +667,9 @@ public class OpsEvidenceService {
         ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
                 approvalHandoffVerificationMarker =
                         rehearsalApprovalHandoffVerificationMarker(approvalRecordHandoffHint);
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+                managedAuditAdapterBoundaryReceipt =
+                        rehearsalManagedAuditAdapterBoundaryReceipt(approvalHandoffVerificationMarker);
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -670,6 +693,7 @@ public class OpsEvidenceService {
                 auditPersistenceHandoffHint,
                 approvalRecordHandoffHint,
                 approvalHandoffVerificationMarker,
+                managedAuditAdapterBoundaryReceipt,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -680,6 +704,7 @@ public class OpsEvidenceService {
                         auditPersistenceHandoffHint,
                         approvalRecordHandoffHint,
                         approvalHandoffVerificationMarker,
+                        managedAuditAdapterBoundaryReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -702,6 +727,8 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
                     approvalHandoffVerificationMarker,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+                    managedAuditAdapterBoundaryReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -714,6 +741,7 @@ public class OpsEvidenceService {
                 "auditPersistenceHandoffEchoWarnings",
                 "approvalRecordHandoffEchoWarnings",
                 "approvalHandoffVerificationMarkerWarnings",
+                "managedAuditAdapterBoundaryReceiptWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -724,6 +752,13 @@ public class OpsEvidenceService {
                 "nodeMayTreatAsProductionAuditRecord",
                 "nodeV211ProductionAuditRecordAllowed",
                 "nodeV211RealApprovalDecisionCreated",
+                "nodeV215MayConnectManagedAudit",
+                "nodeV215MayCreateApprovalDecision",
+                "nodeV215MayWriteApprovalLedger",
+                "nodeV215MayExecuteSql",
+                "nodeV215MayTriggerDeployment",
+                "nodeV215MayTriggerRollback",
+                "nodeV215MayExecuteRestore",
                 "nodeMayWriteApprovalLedger"
         );
         List<String> proofClaims = List.of(
@@ -755,6 +790,15 @@ public class OpsEvidenceService {
                 "approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false",
                 "approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten=false",
                 "approvalHandoffVerificationMarker.javaApprovalRecordPersisted=false",
+                "managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false",
+                "managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision=false",
+                "managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger=false",
+                "managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql=false",
+                "managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment=false",
+                "managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback=false",
+                "managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore=false",
+                "managedAuditAdapterBoundaryReceipt.javaApprovalDecisionCreated=false",
+                "managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -773,6 +817,7 @@ public class OpsEvidenceService {
                         auditPersistenceHandoffHint,
                         approvalRecordHandoffHint,
                         approvalHandoffVerificationMarker,
+                        managedAuditAdapterBoundaryReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -796,6 +841,18 @@ public class OpsEvidenceService {
                         && !approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated()
                         && !approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten()
                         && !approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayPersistApprovalRecord()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore()
+                        && !managedAuditAdapterBoundaryReceipt.javaApprovalDecisionCreated()
+                        && !managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten()
+                        && !managedAuditAdapterBoundaryReceipt.javaApprovalRecordPersisted()
+                        && !managedAuditAdapterBoundaryReceipt.javaManagedAuditWriteExecuted()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -810,6 +867,7 @@ public class OpsEvidenceService {
                         "auditPersistenceHandoffHint",
                         "approvalRecordHandoffHint",
                         "approvalHandoffVerificationMarker",
+                        "managedAuditAdapterBoundaryReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -837,6 +895,11 @@ public class OpsEvidenceService {
                         "Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 packet profile",
                         "Require approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan=true before Node v213 restore drill planning",
                         "Keep approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false",
+                        "Compare managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationVersion with Node v214 profileVersion",
+                        "Require managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=true before Node v215",
+                        "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false",
+                        "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision=false",
+                        "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger=false",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -854,6 +917,8 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
                     approvalHandoffVerificationMarker,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+                    managedAuditAdapterBoundaryReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -869,6 +934,7 @@ public class OpsEvidenceService {
                 line("auditPersistenceHandoffEchoWarnings", auditPersistenceHandoffHint.echoWarnings()),
                 line("approvalRecordHandoffEchoWarnings", approvalRecordHandoffHint.echoWarnings()),
                 line("approvalHandoffVerificationMarkerWarnings", approvalHandoffVerificationMarker.markerWarnings()),
+                line("managedAuditAdapterBoundaryReceiptWarnings", managedAuditAdapterBoundaryReceipt.receiptWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
@@ -899,6 +965,34 @@ public class OpsEvidenceService {
                 line(
                         "nodeV211RealApprovalDecisionCreated",
                         approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated()
+                ),
+                line(
+                        "nodeV215MayConnectManagedAudit",
+                        managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit()
+                ),
+                line(
+                        "nodeV215MayCreateApprovalDecision",
+                        managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision()
+                ),
+                line(
+                        "nodeV215MayWriteApprovalLedger",
+                        managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger()
+                ),
+                line(
+                        "nodeV215MayExecuteSql",
+                        managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql()
+                ),
+                line(
+                        "nodeV215MayTriggerDeployment",
+                        managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment()
+                ),
+                line(
+                        "nodeV215MayTriggerRollback",
+                        managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback()
+                ),
+                line(
+                        "nodeV215MayExecuteRestore",
+                        managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore()
                 ),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
@@ -1666,6 +1760,101 @@ public class OpsEvidenceService {
                         "Require approvalHandoffVerificationMarker.nodeV211HandoffAccepted=true before Node v213 restore drill plan",
                         "Keep approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed=false",
                         "Keep approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated=false"
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+            rehearsalManagedAuditAdapterBoundaryReceipt(
+                    ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+                            approvalHandoffVerificationMarker
+    ) {
+        boolean sourceMarkerAccepted =
+                RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_VERIFICATION_MARKER_VERSION.equals(
+                        approvalHandoffVerificationMarker.markerVersion()
+                )
+                        && approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan()
+                        && !approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed()
+                        && !approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated()
+                        && !approvalHandoffVerificationMarker.nodeV211RealApprovalLedgerWritten()
+                        && !approvalHandoffVerificationMarker.javaApprovalRecordPersisted()
+                        && !approvalHandoffVerificationMarker.javaApprovalLedgerWritten()
+                        && !approvalHandoffVerificationMarker.nodeMayTreatAsProductionAuditRecord();
+        List<String> receiptWarnings = new ArrayList<>();
+        if (!sourceMarkerAccepted) {
+            receiptWarnings.add("NODE_V215_SOURCE_APPROVAL_HANDOFF_MARKER_NOT_READY");
+        }
+        boolean adapterWritesBlocked = true;
+        boolean readyForNodeV215DryRunAdapterCandidate = sourceMarkerAccepted && adapterWritesBlocked;
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt(
+                RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_VERSION,
+                approvalHandoffVerificationMarker.markerVersion(),
+                RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_MARKER_SCHEMA_VERSION,
+                NODE_V214_RESTORE_DRILL_ARCHIVE_VERIFICATION_PROFILE_VERSION,
+                NODE_V214_RESTORE_DRILL_ARCHIVE_VERIFICATION_STATE,
+                NODE_V214_RESTORE_DRILL_ARCHIVE_VERIFICATION_ENDPOINT,
+                NODE_V215_MANAGED_AUDIT_DRY_RUN_ADAPTER_CANDIDATE_VERSION,
+                NODE_V215_MANAGED_AUDIT_DRY_RUN_ADAPTER_CANDIDATE_PROFILE,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                readyForNodeV215DryRunAdapterCandidate,
+                false,
+                false,
+                false,
+                List.of(
+                        "Node v214 managed audit restore drill archive verification",
+                        "Java v76 approval handoff verification marker",
+                        "mini-kv v86 managed audit adapter restore boundary receipt must be present before Node v215"
+                ),
+                List.of(
+                        "Node v215 may only write Node local .tmp or controlled test files",
+                        "Node v215 must not connect real managed audit storage",
+                        "Node v215 must not create Java approval decision",
+                        "Node v215 must not write Java approval ledger",
+                        "Node v215 must not execute Java SQL deployment rollback or restore"
+                ),
+                List.of(
+                        "Connect real managed audit storage from Node v215",
+                        "Create Java approval decision from Node v215",
+                        "Write Java approval ledger from Node v215",
+                        "Persist Java approval record from Node v215",
+                        "Execute Java SQL from Node v215",
+                        "Trigger Java deployment from Node v215",
+                        "Trigger Java rollback from Node v215",
+                        "Execute restore from Node v215",
+                        "Set UPSTREAM_ACTIONS_ENABLED=true for Node v215"
+                ),
+                List.of(
+                        "Node v214 managed audit restore drill archive verification must be verified",
+                        "Java v77 managed audit adapter boundary receipt must be ready",
+                        "mini-kv v86 managed audit adapter restore boundary receipt must be present",
+                        "Node v215 writes only local .tmp or controlled test files",
+                        "UPSTREAM_ACTIONS_ENABLED must remain false"
+                ),
+                List.copyOf(receiptWarnings),
+                List.of(
+                        "Compare managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationVersion with Node v214 profileVersion",
+                        "Require managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=true before Node v215",
+                        "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false",
+                        "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision=false",
+                        "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger=false"
                 )
         );
     }
