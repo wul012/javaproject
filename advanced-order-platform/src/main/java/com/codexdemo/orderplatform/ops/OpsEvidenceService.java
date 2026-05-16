@@ -42,6 +42,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_ARTIFACT_RETENTION_HINT_VERSION =
             "java-release-approval-rehearsal-artifact-retention-hint.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_LIVE_READINESS_HINT_VERSION =
+            "java-release-approval-rehearsal-live-readiness-hint.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -49,7 +52,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v6";
+            "java-release-approval-rehearsal-response-schema.v7";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -208,6 +211,11 @@ public class OpsEvidenceService {
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null
         );
     }
@@ -222,6 +230,11 @@ public class OpsEvidenceService {
                 requestId,
                 operatorIdentity,
                 auditCorrelationId,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -273,6 +286,11 @@ public class OpsEvidenceService {
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null
         );
     }
@@ -295,6 +313,11 @@ public class OpsEvidenceService {
                 operatorWindowRoles,
                 operatorWindowVerifiedClaim,
                 operatorWindowApprovalCorrelationId,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -330,6 +353,59 @@ public class OpsEvidenceService {
             String ciRetentionDays,
             String ciUploadMode
     ) {
+        return releaseApprovalRehearsal(
+                requestId,
+                operatorIdentity,
+                auditCorrelationId,
+                operatorWindowOperatorId,
+                operatorWindowRoles,
+                operatorWindowVerifiedClaim,
+                operatorWindowApprovalCorrelationId,
+                ciManifestVersion,
+                ciManifestDigest,
+                ciManifestEndpoint,
+                ciArtifactRecordCount,
+                ciApprovalCorrelationId,
+                ciUploadContractVersion,
+                ciUploadContractDigest,
+                ciArtifactName,
+                ciArtifactRoot,
+                ciRetentionDays,
+                ciUploadMode,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId,
+            String ciManifestVersion,
+            String ciManifestDigest,
+            String ciManifestEndpoint,
+            String ciArtifactRecordCount,
+            String ciApprovalCorrelationId,
+            String ciUploadContractVersion,
+            String ciUploadContractDigest,
+            String ciArtifactName,
+            String ciArtifactRoot,
+            String ciRetentionDays,
+            String ciUploadMode,
+            String runtimePreflightVersion,
+            String runtimePreflightDigest,
+            String runtimeSmokeSessionId,
+            String runtimeReadTargetId,
+            String runtimeWindowMode
+    ) {
         OpsEvidenceResponse evidence = evidence();
         String normalizedRequestId = normalizeHeaderValue(requestId);
         String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
@@ -350,6 +426,11 @@ public class OpsEvidenceService {
         String normalizedCiArtifactRoot = normalizeHeaderValue(ciArtifactRoot);
         String normalizedCiRetentionDays = normalizeHeaderValue(ciRetentionDays);
         String normalizedCiUploadMode = normalizeHeaderValue(ciUploadMode);
+        String normalizedRuntimePreflightVersion = normalizeHeaderValue(runtimePreflightVersion);
+        String normalizedRuntimePreflightDigest = normalizeHeaderValue(runtimePreflightDigest);
+        String normalizedRuntimeSmokeSessionId = normalizeHeaderValue(runtimeSmokeSessionId);
+        String normalizedRuntimeReadTargetId = normalizeHeaderValue(runtimeReadTargetId);
+        String normalizedRuntimeWindowMode = normalizeHeaderValue(runtimeWindowMode);
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext = rehearsalRequestContext(
                 normalizedRequestId,
                 normalizedOperatorIdentity,
@@ -380,6 +461,15 @@ public class OpsEvidenceService {
                         normalizedCiRetentionDays,
                         normalizedCiUploadMode
                 );
+        ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint =
+                rehearsalLiveReadinessHint(
+                        evidence,
+                        normalizedRuntimePreflightVersion,
+                        normalizedRuntimePreflightDigest,
+                        normalizedRuntimeSmokeSessionId,
+                        normalizedRuntimeReadTargetId,
+                        normalizedRuntimeWindowMode
+                );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -399,12 +489,14 @@ public class OpsEvidenceService {
                 operatorWindowHint,
                 ciEvidenceHint,
                 artifactRetentionHint,
+                liveReadinessHint,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
                         operatorWindowHint,
                         ciEvidenceHint,
                         artifactRetentionHint,
+                        liveReadinessHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -422,6 +514,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
             ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
             ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
+            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -430,6 +523,7 @@ public class OpsEvidenceService {
                 "operatorWindowEchoWarnings",
                 "ciEvidenceEchoWarnings",
                 "artifactRetentionEchoWarnings",
+                "liveReadinessEchoWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -447,6 +541,10 @@ public class OpsEvidenceService {
                 "artifactRetentionHint.ciArtifactUploadedByJava=false",
                 "artifactRetentionHint.githubArtifactAccessedByJava=false",
                 "artifactRetentionHint.nodeMayTreatAsRetentionAuthorization=false",
+                "liveReadinessHint.readOnlyEndpointReady=true",
+                "liveReadinessHint.runtimeSmokeExecutedByJava=false",
+                "liveReadinessHint.javaStartedProcessForNode=false",
+                "liveReadinessHint.nodeMayTreatAsProductionAuthorization=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -461,6 +559,7 @@ public class OpsEvidenceService {
                         operatorWindowHint,
                         ciEvidenceHint,
                         artifactRetentionHint,
+                        liveReadinessHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -470,6 +569,9 @@ public class OpsEvidenceService {
                         && artifactRetentionHint.javaRetentionFixtureReadOnly()
                         && !artifactRetentionHint.ciArtifactUploadedByJava()
                         && !artifactRetentionHint.githubArtifactAccessedByJava()
+                        && liveReadinessHint.readOnlyEndpointReady()
+                        && !liveReadinessHint.runtimeSmokeExecutedByJava()
+                        && !liveReadinessHint.javaStartedProcessForNode()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -480,6 +582,7 @@ public class OpsEvidenceService {
                         "operatorWindowHint",
                         "ciEvidenceHint",
                         "artifactRetentionHint",
+                        "liveReadinessHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -498,6 +601,8 @@ public class OpsEvidenceService {
                         "Require ciEvidenceHint.ciArtifactUploadedByJava=false until CI artifact upload exists outside Java",
                         "Compare artifactRetentionHint.ciArtifactName and ciRetentionDays with Node v202 dry-run contract",
                         "Require artifactRetentionHint.nodeMayTreatAsRetentionAuthorization=false until Node v203 retention gate passes",
+                        "Compare liveReadinessHint.sourcePreflightVersion and runtimeSmokeSessionId with Node v204/v205 smoke context",
+                        "Require liveReadinessHint.runtimeSmokeExecutedByJava=false; Node owns v205 process/run evidence",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -510,6 +615,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
             ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
             ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
+            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -521,6 +627,7 @@ public class OpsEvidenceService {
                 line("operatorWindowEchoWarnings", operatorWindowHint.echoWarnings()),
                 line("ciEvidenceEchoWarnings", ciEvidenceHint.echoWarnings()),
                 line("artifactRetentionEchoWarnings", artifactRetentionHint.echoWarnings()),
+                line("liveReadinessEchoWarnings", liveReadinessHint.echoWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
@@ -530,6 +637,9 @@ public class OpsEvidenceService {
                 line("retentionCiArtifactUploadedByJava", artifactRetentionHint.ciArtifactUploadedByJava()),
                 line("retentionGithubArtifactAccessedByJava", artifactRetentionHint.githubArtifactAccessedByJava()),
                 line("retentionAuthorization", artifactRetentionHint.nodeMayTreatAsRetentionAuthorization()),
+                line("runtimeSmokeExecutedByJava", liveReadinessHint.runtimeSmokeExecutedByJava()),
+                line("javaStartedProcessForNode", liveReadinessHint.javaStartedProcessForNode()),
+                line("nodeMayTreatAsProductionAuthorization", liveReadinessHint.nodeMayTreatAsProductionAuthorization()),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
     }
@@ -803,6 +913,131 @@ public class OpsEvidenceService {
                         "Compare artifactRetentionHint.ciArtifactName with Node v202 dryRunContract.artifactName",
                         "Require artifactRetentionHint.retentionDaysWithinJavaRetention=true before Node v203 retention gate",
                         "Keep ciArtifactUploadedByJava=false and githubArtifactAccessedByJava=false"
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint rehearsalLiveReadinessHint(
+            OpsEvidenceResponse evidence,
+            String normalizedRuntimePreflightVersion,
+            String normalizedRuntimePreflightDigest,
+            String normalizedRuntimeSmokeSessionId,
+            String normalizedRuntimeReadTargetId,
+            String normalizedRuntimeWindowMode
+    ) {
+        List<String> warnings = new ArrayList<>();
+        addMissingContextWarning(
+                warnings,
+                normalizedRuntimePreflightVersion,
+                "ORDEROPS_RUNTIME_PREFLIGHT_VERSION_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedRuntimePreflightDigest,
+                "ORDEROPS_RUNTIME_PREFLIGHT_DIGEST_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedRuntimeSmokeSessionId,
+                "ORDEROPS_RUNTIME_SMOKE_SESSION_ID_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedRuntimeReadTargetId,
+                "ORDEROPS_RUNTIME_READ_TARGET_ID_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedRuntimeWindowMode,
+                "ORDEROPS_RUNTIME_WINDOW_MODE_MISSING"
+        );
+        boolean sourcePreflightVersionEchoed = normalizedRuntimePreflightVersion != null;
+        boolean sourcePreflightDigestEchoed = normalizedRuntimePreflightDigest != null;
+        boolean runtimeSmokeSessionIdEchoed = normalizedRuntimeSmokeSessionId != null;
+        boolean runtimeReadTargetIdEchoed = normalizedRuntimeReadTargetId != null;
+        boolean runtimeWindowModeEchoed = normalizedRuntimeWindowMode != null;
+        boolean liveReadinessContextComplete = sourcePreflightVersionEchoed
+                && sourcePreflightDigestEchoed
+                && runtimeSmokeSessionIdEchoed
+                && runtimeReadTargetIdEchoed
+                && runtimeWindowModeEchoed;
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint(
+                RELEASE_APPROVAL_REHEARSAL_LIVE_READINESS_HINT_VERSION,
+                evidence.sampledAt(),
+                "sampledAt",
+                RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
+                RELEASE_APPROVAL_REHEARSAL_ENDPOINT,
+                "/actuator/health",
+                valueOrPlaceholder(
+                        normalizedRuntimePreflightVersion,
+                        "runtime-preflight-version-not-supplied"
+                ),
+                sourceFor(normalizedRuntimePreflightVersion, "x-orderops-runtime-preflight-version"),
+                valueOrPlaceholder(
+                        normalizedRuntimePreflightDigest,
+                        "runtime-preflight-digest-not-supplied"
+                ),
+                sourceFor(normalizedRuntimePreflightDigest, "x-orderops-runtime-preflight-digest"),
+                valueOrPlaceholder(
+                        normalizedRuntimeSmokeSessionId,
+                        "runtime-smoke-session-id-not-supplied"
+                ),
+                sourceFor(normalizedRuntimeSmokeSessionId, "x-orderops-runtime-smoke-session-id"),
+                valueOrPlaceholder(
+                        normalizedRuntimeReadTargetId,
+                        "runtime-read-target-id-not-supplied"
+                ),
+                sourceFor(normalizedRuntimeReadTargetId, "x-orderops-runtime-read-target-id"),
+                valueOrPlaceholder(
+                        normalizedRuntimeWindowMode,
+                        "runtime-window-mode-not-supplied"
+                ),
+                sourceFor(normalizedRuntimeWindowMode, "x-orderops-runtime-window-mode"),
+                sourcePreflightVersionEchoed,
+                sourcePreflightDigestEchoed,
+                runtimeSmokeSessionIdEchoed,
+                runtimeReadTargetIdEchoed,
+                runtimeWindowModeEchoed,
+                liveReadinessContextComplete,
+                evidence.readOnly()
+                        && !evidence.executionAllowed()
+                        && evidence.readOnlyWindow().readyForReadOnlyLiveProbe(),
+                evidence.readOnly()
+                        && !evidence.executionAllowed()
+                        && evidence.readOnlyWindow().allowedProbeEndpoints()
+                        .contains("GET " + RELEASE_APPROVAL_REHEARSAL_ENDPOINT),
+                false,
+                true,
+                false,
+                false,
+                false,
+                List.of(
+                        "x-orderops-runtime-preflight-version",
+                        "x-orderops-runtime-preflight-digest",
+                        "x-orderops-runtime-smoke-session-id",
+                        "x-orderops-runtime-read-target-id",
+                        "x-orderops-runtime-window-mode"
+                ),
+                List.of(
+                        "GET /actuator/health",
+                        "GET " + RELEASE_APPROVAL_REHEARSAL_ENDPOINT
+                ),
+                List.of(
+                        "POST /api/v1/orders",
+                        "POST /api/v1/failed-events/{id}/replay",
+                        "PUT /api/v1/*",
+                        "PATCH /api/v1/*",
+                        "DELETE /api/v1/*",
+                        "Java process start/stop is owned by Node v205 smoke orchestration"
+                ),
+                List.copyOf(warnings),
+                List.of(
+                        "Compare liveReadinessHint.sourcePreflightVersion with Node v204 profileVersion",
+                        "Compare liveReadinessHint.sourcePreflightDigest with Node v204 runtimeWindow.preflightDigest",
+                        "Compare liveReadinessHint.runtimeSmokeSessionId with Node v205 smoke session id",
+                        "Require liveReadinessHint.readOnlyEndpointReady=true before counting Java read target as ready",
+                        "Keep runtimeSmokeExecutedByJava=false and javaStartedProcessForNode=false"
                 )
         );
     }

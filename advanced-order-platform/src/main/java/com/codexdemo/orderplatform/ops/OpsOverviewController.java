@@ -52,7 +52,17 @@ public class OpsOverviewController {
             @RequestHeader(name = "x-orderops-ci-artifact-name", required = false) String ciArtifactName,
             @RequestHeader(name = "x-orderops-ci-artifact-root", required = false) String ciArtifactRoot,
             @RequestHeader(name = "x-orderops-ci-retention-days", required = false) String ciRetentionDays,
-            @RequestHeader(name = "x-orderops-ci-upload-mode", required = false) String ciUploadMode
+            @RequestHeader(name = "x-orderops-ci-upload-mode", required = false) String ciUploadMode,
+            @RequestHeader(name = "x-orderops-runtime-preflight-version", required = false)
+            String runtimePreflightVersion,
+            @RequestHeader(name = "x-orderops-runtime-preflight-digest", required = false)
+            String runtimePreflightDigest,
+            @RequestHeader(name = "x-orderops-runtime-smoke-session-id", required = false)
+            String runtimeSmokeSessionId,
+            @RequestHeader(name = "x-orderops-runtime-read-target-id", required = false)
+            String runtimeReadTargetId,
+            @RequestHeader(name = "x-orderops-runtime-window-mode", required = false)
+            String runtimeWindowMode
     ) {
         return opsEvidenceService.releaseApprovalRehearsal(
                 requestId,
@@ -72,7 +82,12 @@ public class OpsOverviewController {
                 ciArtifactName,
                 ciArtifactRoot,
                 ciRetentionDays,
-                ciUploadMode
+                ciUploadMode,
+                runtimePreflightVersion,
+                runtimePreflightDigest,
+                runtimeSmokeSessionId,
+                runtimeReadTargetId,
+                runtimeWindowMode
         );
     }
 }

@@ -967,6 +967,73 @@ class OpsEvidenceServiceTests {
                         "Require artifactRetentionHint.retentionDaysWithinJavaRetention=true before Node v203 retention gate",
                         "Keep ciArtifactUploadedByJava=false and githubArtifactAccessedByJava=false"
                 );
+        assertThat(rehearsal.liveReadinessHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-live-readiness-hint.v1");
+        assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
+        assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
+        assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v7");
+        assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
+                .isEqualTo("/api/v1/ops/release-approval-rehearsal");
+        assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
+        assertThat(rehearsal.liveReadinessHint().sourcePreflightVersion())
+                .isEqualTo("runtime-preflight-version-not-supplied");
+        assertThat(rehearsal.liveReadinessHint().sourcePreflightVersionSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.liveReadinessHint().sourcePreflightDigest())
+                .isEqualTo("runtime-preflight-digest-not-supplied");
+        assertThat(rehearsal.liveReadinessHint().sourcePreflightDigestSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.liveReadinessHint().runtimeSmokeSessionId())
+                .isEqualTo("runtime-smoke-session-id-not-supplied");
+        assertThat(rehearsal.liveReadinessHint().runtimeReadTargetId())
+                .isEqualTo("runtime-read-target-id-not-supplied");
+        assertThat(rehearsal.liveReadinessHint().runtimeWindowMode())
+                .isEqualTo("runtime-window-mode-not-supplied");
+        assertThat(rehearsal.liveReadinessHint().sourcePreflightVersionEchoed()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().sourcePreflightDigestEchoed()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().runtimeSmokeSessionIdEchoed()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().runtimeReadTargetIdEchoed()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().runtimeWindowModeEchoed()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().liveReadinessContextComplete()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().readyForRuntimeSmokeRead()).isTrue();
+        assertThat(rehearsal.liveReadinessHint().readOnlyEndpointReady()).isTrue();
+        assertThat(rehearsal.liveReadinessHint().runtimeSmokeExecutedByJava()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().nodeMustRecordPidAndCleanup()).isTrue();
+        assertThat(rehearsal.liveReadinessHint().javaStartedProcessForNode()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().processCleanupRecordedByJava()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().nodeMayTreatAsProductionAuthorization()).isFalse();
+        assertThat(rehearsal.liveReadinessHint().acceptedLiveReadinessHeaders())
+                .containsExactly(
+                        "x-orderops-runtime-preflight-version",
+                        "x-orderops-runtime-preflight-digest",
+                        "x-orderops-runtime-smoke-session-id",
+                        "x-orderops-runtime-read-target-id",
+                        "x-orderops-runtime-window-mode"
+                );
+        assertThat(rehearsal.liveReadinessHint().allowedReadTargets())
+                .containsExactly(
+                        "GET /actuator/health",
+                        "GET /api/v1/ops/release-approval-rehearsal"
+                );
+        assertThat(rehearsal.liveReadinessHint().forbiddenRuntimeOperations())
+                .contains(
+                        "POST /api/v1/orders",
+                        "POST /api/v1/failed-events/{id}/replay",
+                        "Java process start/stop is owned by Node v205 smoke orchestration"
+                );
+        assertThat(rehearsal.liveReadinessHint().echoWarnings())
+                .containsExactly(
+                        "ORDEROPS_RUNTIME_PREFLIGHT_VERSION_MISSING",
+                        "ORDEROPS_RUNTIME_PREFLIGHT_DIGEST_MISSING",
+                        "ORDEROPS_RUNTIME_SMOKE_SESSION_ID_MISSING",
+                        "ORDEROPS_RUNTIME_READ_TARGET_ID_MISSING",
+                        "ORDEROPS_RUNTIME_WINDOW_MODE_MISSING"
+                );
+        assertThat(rehearsal.liveReadinessHint().nodeVerificationActions())
+                .contains(
+                        "Compare liveReadinessHint.sourcePreflightDigest with Node v204 runtimeWindow.preflightDigest",
+                        "Require liveReadinessHint.readOnlyEndpointReady=true before counting Java read target as ready",
+                        "Keep runtimeSmokeExecutedByJava=false and javaStartedProcessForNode=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -992,7 +1059,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v6");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v7");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -1004,6 +1071,7 @@ class OpsEvidenceServiceTests {
                         "operatorWindowHint",
                         "ciEvidenceHint",
                         "artifactRetentionHint",
+                        "liveReadinessHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -1014,6 +1082,7 @@ class OpsEvidenceServiceTests {
                         "operatorWindowEchoWarnings",
                         "ciEvidenceEchoWarnings",
                         "artifactRetentionEchoWarnings",
+                        "liveReadinessEchoWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -1028,6 +1097,8 @@ class OpsEvidenceServiceTests {
                         "ciEvidenceHint.ciArtifactUploadedByJava=false",
                         "artifactRetentionHint.javaRetentionFixtureReadOnly=true",
                         "artifactRetentionHint.githubArtifactAccessedByJava=false",
+                        "liveReadinessHint.readOnlyEndpointReady=true",
+                        "liveReadinessHint.javaStartedProcessForNode=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -1035,6 +1106,7 @@ class OpsEvidenceServiceTests {
                         "Verify responseSchemaVersion before importing operator window results",
                         "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
                         "Compare artifactRetentionHint.ciArtifactName and ciRetentionDays with Node v202 dry-run contract",
+                        "Compare liveReadinessHint.sourcePreflightVersion and runtimeSmokeSessionId with Node v204/v205 smoke context",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -1111,7 +1183,12 @@ class OpsEvidenceServiceTests {
                 " orderops-real-read-window-evidence-v191-v201 ",
                 " c/ ",
                 " 30 ",
-                " dry-run-contract-only "
+                " dry-run-contract-only ",
+                " three-project-real-read-runtime-smoke-preflight.v1 ",
+                " sha256:node-v204-preflight-digest ",
+                " runtime-smoke-v205-session-001 ",
+                " java-release-approval-rehearsal ",
+                " manual-open-window-plan "
         );
         assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
         assertThat(headerBackedRehearsal.requestContext().requestIdSource())
@@ -1208,6 +1285,37 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.artifactRetentionHint().productionWindowAllowedByJava()).isFalse();
         assertThat(headerBackedRehearsal.artifactRetentionHint().nodeMayTreatAsRetentionAuthorization()).isFalse();
         assertThat(headerBackedRehearsal.artifactRetentionHint().echoWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.liveReadinessHint().sourcePreflightVersion())
+                .isEqualTo("three-project-real-read-runtime-smoke-preflight.v1");
+        assertThat(headerBackedRehearsal.liveReadinessHint().sourcePreflightVersionSource())
+                .isEqualTo("x-orderops-runtime-preflight-version");
+        assertThat(headerBackedRehearsal.liveReadinessHint().sourcePreflightDigest())
+                .isEqualTo("sha256:node-v204-preflight-digest");
+        assertThat(headerBackedRehearsal.liveReadinessHint().sourcePreflightDigestSource())
+                .isEqualTo("x-orderops-runtime-preflight-digest");
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeSmokeSessionId())
+                .isEqualTo("runtime-smoke-v205-session-001");
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeSmokeSessionIdSource())
+                .isEqualTo("x-orderops-runtime-smoke-session-id");
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeReadTargetId())
+                .isEqualTo("java-release-approval-rehearsal");
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeReadTargetIdSource())
+                .isEqualTo("x-orderops-runtime-read-target-id");
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeWindowMode())
+                .isEqualTo("manual-open-window-plan");
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeWindowModeSource())
+                .isEqualTo("x-orderops-runtime-window-mode");
+        assertThat(headerBackedRehearsal.liveReadinessHint().sourcePreflightVersionEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.liveReadinessHint().sourcePreflightDigestEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeSmokeSessionIdEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeReadTargetIdEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeWindowModeEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.liveReadinessHint().liveReadinessContextComplete()).isTrue();
+        assertThat(headerBackedRehearsal.liveReadinessHint().readyForRuntimeSmokeRead()).isTrue();
+        assertThat(headerBackedRehearsal.liveReadinessHint().runtimeSmokeExecutedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.liveReadinessHint().javaStartedProcessForNode()).isFalse();
+        assertThat(headerBackedRehearsal.liveReadinessHint().nodeMayTreatAsProductionAuthorization()).isFalse();
+        assertThat(headerBackedRehearsal.liveReadinessHint().echoWarnings()).isEmpty();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1220,7 +1328,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v6");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v7");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -1242,7 +1350,12 @@ class OpsEvidenceServiceTests {
                 "orderops-real-read-window-evidence-v191-v201",
                 "c/",
                 "30",
-                "dry-run-contract-only"
+                "dry-run-contract-only",
+                "three-project-real-read-runtime-smoke-preflight.v1",
+                "sha256:node-v204-preflight-digest",
+                "runtime-smoke-v205-session-001",
+                "java-release-approval-rehearsal",
+                "manual-open-window-plan"
         );
         assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())
                 .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());

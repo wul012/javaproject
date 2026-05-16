@@ -1021,6 +1021,64 @@ class OpsOverviewIntegrationTests {
                         hasItem("ORDEROPS_CI_UPLOAD_CONTRACT_VERSION_MISSING")))
                 .andExpect(jsonPath("$.artifactRetentionHint.echoWarnings",
                         hasItem("ORDEROPS_CI_RETENTION_DAYS_MISSING")))
+                .andExpect(jsonPath("$.liveReadinessHint.hintVersion")
+                        .value("java-release-approval-rehearsal-live-readiness-hint.v1"))
+                .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
+                .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
+                .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v7"))
+                .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
+                        .value("/api/v1/ops/release-approval-rehearsal"))
+                .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightVersion")
+                        .value("runtime-preflight-version-not-supplied"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightVersionSource")
+                        .value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightDigest")
+                        .value("runtime-preflight-digest-not-supplied"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightDigestSource")
+                        .value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeSessionId")
+                        .value("runtime-smoke-session-id-not-supplied"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeSessionIdSource")
+                        .value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeReadTargetId")
+                        .value("runtime-read-target-id-not-supplied"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeReadTargetIdSource")
+                        .value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeWindowMode")
+                        .value("runtime-window-mode-not-supplied"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeWindowModeSource")
+                        .value("NOT_SUPPLIED"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightVersionEchoed").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightDigestEchoed").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeSessionIdEchoed").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeReadTargetIdEchoed").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeWindowModeEchoed").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.liveReadinessContextComplete").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.readyForRuntimeSmokeRead").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointReady").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeExecutedByJava").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.nodeMustRecordPidAndCleanup").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.javaStartedProcessForNode").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.processCleanupRecordedByJava").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.nodeMayTreatAsProductionAuthorization").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.acceptedLiveReadinessHeaders",
+                        hasItem("x-orderops-runtime-preflight-version")))
+                .andExpect(jsonPath("$.liveReadinessHint.acceptedLiveReadinessHeaders",
+                        hasItem("x-orderops-runtime-smoke-session-id")))
+                .andExpect(jsonPath("$.liveReadinessHint.allowedReadTargets",
+                        hasItem("GET /actuator/health")))
+                .andExpect(jsonPath("$.liveReadinessHint.allowedReadTargets",
+                        hasItem("GET /api/v1/ops/release-approval-rehearsal")))
+                .andExpect(jsonPath("$.liveReadinessHint.forbiddenRuntimeOperations",
+                        hasItem("POST /api/v1/orders")))
+                .andExpect(jsonPath("$.liveReadinessHint.forbiddenRuntimeOperations",
+                        hasItem("Java process start/stop is owned by Node v205 smoke orchestration")))
+                .andExpect(jsonPath("$.liveReadinessHint.echoWarnings",
+                        hasItem("ORDEROPS_RUNTIME_PREFLIGHT_VERSION_MISSING")))
+                .andExpect(jsonPath("$.liveReadinessHint.echoWarnings",
+                        hasItem("ORDEROPS_RUNTIME_WINDOW_MODE_MISSING")))
                 .andExpect(jsonPath("$.failureTaxonomy.taxonomyVersion")
                         .value("java-release-approval-rehearsal-failure-taxonomy.v1"))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
@@ -1046,7 +1104,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v6"))
+                        .value("java-release-approval-rehearsal-response-schema.v7"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -1061,6 +1119,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("artifactRetentionHint")))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("liveReadinessHint")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("executionBoundaries")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("contextWarnings")))
@@ -1071,6 +1131,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("artifactRetentionEchoWarnings")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("liveReadinessEchoWarnings")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeMayWriteApprovalLedger")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("executionAllowed=false")))
@@ -1080,6 +1142,10 @@ class OpsOverviewIntegrationTests {
                         hasItem("artifactRetentionHint.javaRetentionFixtureReadOnly=true")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("artifactRetentionHint.githubArtifactAccessedByJava=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("liveReadinessHint.readOnlyEndpointReady=true")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("liveReadinessHint.javaStartedProcessForNode=false")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("executionBoundaries.nodeMayWriteApprovalLedger=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
@@ -1157,7 +1223,17 @@ class OpsOverviewIntegrationTests {
                         .header("x-orderops-ci-artifact-name", "orderops-real-read-window-evidence-v191-v201")
                         .header("x-orderops-ci-artifact-root", "c/")
                         .header("x-orderops-ci-retention-days", "30")
-                        .header("x-orderops-ci-upload-mode", "dry-run-contract-only"))
+                        .header("x-orderops-ci-upload-mode", "dry-run-contract-only")
+                        .header("x-orderops-runtime-preflight-version",
+                                "three-project-real-read-runtime-smoke-preflight.v1")
+                        .header("x-orderops-runtime-preflight-digest",
+                                "sha256:node-v204-preflight-digest")
+                        .header("x-orderops-runtime-smoke-session-id",
+                                "runtime-smoke-v205-session-001")
+                        .header("x-orderops-runtime-read-target-id",
+                                "java-release-approval-rehearsal")
+                        .header("x-orderops-runtime-window-mode",
+                                "manual-open-window-plan"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.requestContext.requestId").value("rehearsal-v67-001"))
                 .andExpect(jsonPath("$.requestContext.requestIdSource")
@@ -1259,6 +1335,40 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.artifactRetentionHint.productionWindowAllowedByJava").value(false))
                 .andExpect(jsonPath("$.artifactRetentionHint.nodeMayTreatAsRetentionAuthorization").value(false))
                 .andExpect(jsonPath("$.artifactRetentionHint.echoWarnings").isEmpty())
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightVersion")
+                        .value("three-project-real-read-runtime-smoke-preflight.v1"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightVersionSource")
+                        .value("x-orderops-runtime-preflight-version"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightDigest")
+                        .value("sha256:node-v204-preflight-digest"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightDigestSource")
+                        .value("x-orderops-runtime-preflight-digest"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeSessionId")
+                        .value("runtime-smoke-v205-session-001"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeSessionIdSource")
+                        .value("x-orderops-runtime-smoke-session-id"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeReadTargetId")
+                        .value("java-release-approval-rehearsal"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeReadTargetIdSource")
+                        .value("x-orderops-runtime-read-target-id"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeWindowMode")
+                        .value("manual-open-window-plan"))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeWindowModeSource")
+                        .value("x-orderops-runtime-window-mode"))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightVersionEchoed").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.sourcePreflightDigestEchoed").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeSessionIdEchoed").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeReadTargetIdEchoed").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeWindowModeEchoed").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.liveReadinessContextComplete").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.readyForRuntimeSmokeRead").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointReady").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.runtimeSmokeExecutedByJava").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.nodeMustRecordPidAndCleanup").value(true))
+                .andExpect(jsonPath("$.liveReadinessHint.javaStartedProcessForNode").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.processCleanupRecordedByJava").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.nodeMayTreatAsProductionAuthorization").value(false))
+                .andExpect(jsonPath("$.liveReadinessHint.echoWarnings").isEmpty())
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.authContextReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationReadiness").value("READY"))
@@ -1279,7 +1389,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v6"))
+                        .value("java-release-approval-rehearsal-response-schema.v7"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))

@@ -1632,6 +1632,66 @@ verificationHint.warningDigestInputs 包含 artifactRetentionEchoWarnings
 
 这一步只证明 Java 能把 Node v202 dry-run upload contract 的 artifact name、artifact root、retention days 和 upload mode 回显到只读响应，并把这些字段与 Java 现有 release audit retention fixture 放在同一个证据面里。它不上传 GitHub artifact，不读取 GitHub token，不写 audit export，不创建 approval decision，不写 approval ledger，也不授权真实生产窗口。
 
+v73 起，release approval rehearsal 增加 `liveReadinessHint`，用于给 Node v205 的 three-project real-read runtime smoke 做 Java 侧只读运行提示。调用方可以把 Node v204 preflight 和 Node v205 smoke session 的上下文字段传入：
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://localhost:8080/api/v1/ops/release-approval-rehearsal `
+  -Headers @{
+    "X-Rehearsal-Request-Id" = "rehearsal-v73-001"
+    "X-Operator-Identity" = "release-operator@example.test"
+    "X-Audit-Correlation-Id" = "audit-correlation-v73"
+    "x-orderops-operator-id" = "operator-198"
+    "x-orderops-roles" = "operator,auditor"
+    "x-orderops-operator-verified" = "true"
+    "x-orderops-approval-correlation-id" = "approval-v198-operator-window"
+    "x-orderops-ci-manifest-version" = "real-read-window-ci-archive-artifact-manifest.v1"
+    "x-orderops-ci-manifest-digest" = "sha256:<node-v200-manifest-digest>"
+    "x-orderops-ci-manifest-endpoint" = "/api/v1/production/real-read-window-ci-archive-artifact-manifest"
+    "x-orderops-ci-artifact-record-count" = "9"
+    "x-orderops-ci-approval-correlation-id" = "approval-v198-operator-window"
+    "x-orderops-ci-upload-contract-version" = "real-read-window-ci-artifact-upload-dry-run-contract.v1"
+    "x-orderops-ci-upload-contract-digest" = "sha256:<node-v202-upload-contract-digest>"
+    "x-orderops-ci-artifact-name" = "orderops-real-read-window-evidence-v191-v201"
+    "x-orderops-ci-artifact-root" = "c/"
+    "x-orderops-ci-retention-days" = "30"
+    "x-orderops-ci-upload-mode" = "dry-run-contract-only"
+    "x-orderops-runtime-preflight-version" = "three-project-real-read-runtime-smoke-preflight.v1"
+    "x-orderops-runtime-preflight-digest" = "sha256:<node-v204-preflight-digest>"
+    "x-orderops-runtime-smoke-session-id" = "runtime-smoke-v205-session-001"
+    "x-orderops-runtime-read-target-id" = "java-release-approval-rehearsal"
+    "x-orderops-runtime-window-mode" = "manual-open-window-plan"
+  }
+```
+
+响应中的关键字段：
+
+```text
+liveReadinessHint.hintVersion=java-release-approval-rehearsal-live-readiness-hint.v1
+liveReadinessHint.serverTimestamp=<sampledAt>
+liveReadinessHint.serverTimestampSource=sampledAt
+liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v7
+liveReadinessHint.readOnlyEndpoint=/api/v1/ops/release-approval-rehearsal
+liveReadinessHint.healthEndpoint=/actuator/health
+liveReadinessHint.sourcePreflightVersion=three-project-real-read-runtime-smoke-preflight.v1
+liveReadinessHint.sourcePreflightDigest=sha256:<node-v204-preflight-digest>
+liveReadinessHint.runtimeSmokeSessionId=runtime-smoke-v205-session-001
+liveReadinessHint.runtimeReadTargetId=java-release-approval-rehearsal
+liveReadinessHint.runtimeWindowMode=manual-open-window-plan
+liveReadinessHint.liveReadinessContextComplete=true
+liveReadinessHint.readyForRuntimeSmokeRead=true
+liveReadinessHint.readOnlyEndpointReady=true
+liveReadinessHint.runtimeSmokeExecutedByJava=false
+liveReadinessHint.nodeMustRecordPidAndCleanup=true
+liveReadinessHint.javaStartedProcessForNode=false
+liveReadinessHint.processCleanupRecordedByJava=false
+liveReadinessHint.nodeMayTreatAsProductionAuthorization=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v7
+verificationHint.warningDigestInputs 包含 liveReadinessEchoWarnings
+```
+
+这一步只证明 Java 的只读 rehearsal 端点适合被 Node v205 纳入真实 HTTP smoke 读取目标，并回显 Node v204/v205 的运行上下文。Java 不启动 Node 的 smoke 流程，不记录 Node PID，不替 Node 做 cleanup 证据，也不把 runtime smoke 结果当作生产窗口授权。
+
 查询失败事件治理摘要：
 
 ```powershell
