@@ -44,7 +44,15 @@ public class OpsOverviewController {
             @RequestHeader(name = "x-orderops-ci-artifact-record-count", required = false)
             String ciArtifactRecordCount,
             @RequestHeader(name = "x-orderops-ci-approval-correlation-id", required = false)
-            String ciApprovalCorrelationId
+            String ciApprovalCorrelationId,
+            @RequestHeader(name = "x-orderops-ci-upload-contract-version", required = false)
+            String ciUploadContractVersion,
+            @RequestHeader(name = "x-orderops-ci-upload-contract-digest", required = false)
+            String ciUploadContractDigest,
+            @RequestHeader(name = "x-orderops-ci-artifact-name", required = false) String ciArtifactName,
+            @RequestHeader(name = "x-orderops-ci-artifact-root", required = false) String ciArtifactRoot,
+            @RequestHeader(name = "x-orderops-ci-retention-days", required = false) String ciRetentionDays,
+            @RequestHeader(name = "x-orderops-ci-upload-mode", required = false) String ciUploadMode
     ) {
         return opsEvidenceService.releaseApprovalRehearsal(
                 requestId,
@@ -58,7 +66,13 @@ public class OpsOverviewController {
                 ciManifestDigest,
                 ciManifestEndpoint,
                 ciArtifactRecordCount,
-                ciApprovalCorrelationId
+                ciApprovalCorrelationId,
+                ciUploadContractVersion,
+                ciUploadContractDigest,
+                ciArtifactName,
+                ciArtifactRoot,
+                ciRetentionDays,
+                ciUploadMode
         );
     }
 }

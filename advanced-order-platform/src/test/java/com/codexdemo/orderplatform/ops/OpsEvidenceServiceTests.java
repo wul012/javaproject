@@ -894,6 +894,79 @@ class OpsEvidenceServiceTests {
                         "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
                         "Keep ciArtifactUploadedByJava=false and githubArtifactAccessedByJava=false"
                 );
+        assertThat(rehearsal.artifactRetentionHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-artifact-retention-hint.v1");
+        assertThat(rehearsal.artifactRetentionHint().sourceRetentionFixtureVersion())
+                .isEqualTo("java-release-audit-retention-fixture.v1");
+        assertThat(rehearsal.artifactRetentionHint().sourceRetentionFixtureEndpoint())
+                .isEqualTo("/contracts/release-audit-retention.fixture.json");
+        assertThat(rehearsal.artifactRetentionHint().retentionId())
+                .isEqualTo("release-retention-record-placeholder");
+        assertThat(rehearsal.artifactRetentionHint().artifactTarget())
+                .isEqualTo("release-tag-or-artifact-version-placeholder");
+        assertThat(rehearsal.artifactRetentionHint().javaRetentionDays()).isEqualTo(180);
+        assertThat(rehearsal.artifactRetentionHint().ciUploadContractVersion())
+                .isEqualTo("ci-upload-contract-version-not-supplied");
+        assertThat(rehearsal.artifactRetentionHint().ciUploadContractVersionSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.artifactRetentionHint().ciUploadContractDigest())
+                .isEqualTo("ci-upload-contract-digest-not-supplied");
+        assertThat(rehearsal.artifactRetentionHint().ciUploadContractDigestSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.artifactRetentionHint().ciArtifactName())
+                .isEqualTo("ci-artifact-name-not-supplied");
+        assertThat(rehearsal.artifactRetentionHint().ciArtifactNameSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.artifactRetentionHint().ciArtifactRoot())
+                .isEqualTo("ci-artifact-root-not-supplied");
+        assertThat(rehearsal.artifactRetentionHint().ciArtifactRootSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.artifactRetentionHint().ciRetentionDays())
+                .isEqualTo("ci-retention-days-not-supplied");
+        assertThat(rehearsal.artifactRetentionHint().ciRetentionDaysSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.artifactRetentionHint().ciUploadMode())
+                .isEqualTo("ci-upload-mode-not-supplied");
+        assertThat(rehearsal.artifactRetentionHint().ciUploadModeSource()).isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.artifactRetentionHint().uploadContractVersionEchoed()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().uploadContractDigestEchoed()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().artifactNameEchoed()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().artifactRootEchoed()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().retentionDaysEchoed()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().uploadModeEchoed()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().artifactRetentionContextComplete()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().retentionDaysWithinJavaRetention()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().javaRetentionFixtureReadOnly()).isTrue();
+        assertThat(rehearsal.artifactRetentionHint().auditExportReadOnly()).isTrue();
+        assertThat(rehearsal.artifactRetentionHint().ciArtifactUploadedByJava()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().githubArtifactAccessedByJava()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().productionWindowAllowedByJava()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().nodeMayTreatAsRetentionAuthorization()).isFalse();
+        assertThat(rehearsal.artifactRetentionHint().acceptedArtifactRetentionHeaders())
+                .containsExactly(
+                        "x-orderops-ci-upload-contract-version",
+                        "x-orderops-ci-upload-contract-digest",
+                        "x-orderops-ci-artifact-name",
+                        "x-orderops-ci-artifact-root",
+                        "x-orderops-ci-retention-days",
+                        "x-orderops-ci-upload-mode"
+                );
+        assertThat(rehearsal.artifactRetentionHint().releaseEvidenceEndpoints())
+                .contains(
+                        "/api/v1/ops/evidence",
+                        "/contracts/release-verification-manifest.sample.json",
+                        "/contracts/release-bundle-manifest.sample.json"
+                );
+        assertThat(rehearsal.artifactRetentionHint().echoWarnings())
+                .containsExactly(
+                        "ORDEROPS_CI_UPLOAD_CONTRACT_VERSION_MISSING",
+                        "ORDEROPS_CI_UPLOAD_CONTRACT_DIGEST_MISSING",
+                        "ORDEROPS_CI_ARTIFACT_NAME_MISSING",
+                        "ORDEROPS_CI_ARTIFACT_ROOT_MISSING",
+                        "ORDEROPS_CI_RETENTION_DAYS_MISSING",
+                        "ORDEROPS_CI_UPLOAD_MODE_MISSING"
+                );
+        assertThat(rehearsal.artifactRetentionHint().nodeVerificationActions())
+                .contains(
+                        "Compare artifactRetentionHint.ciUploadContractDigest with Node v202 dryRunContract.contractDigest",
+                        "Require artifactRetentionHint.retentionDaysWithinJavaRetention=true before Node v203 retention gate",
+                        "Keep ciArtifactUploadedByJava=false and githubArtifactAccessedByJava=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -919,7 +992,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v5");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v6");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -930,6 +1003,7 @@ class OpsEvidenceServiceTests {
                         "requestContext",
                         "operatorWindowHint",
                         "ciEvidenceHint",
+                        "artifactRetentionHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -939,6 +1013,7 @@ class OpsEvidenceServiceTests {
                         "contextWarnings",
                         "operatorWindowEchoWarnings",
                         "ciEvidenceEchoWarnings",
+                        "artifactRetentionEchoWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -951,12 +1026,15 @@ class OpsEvidenceServiceTests {
                         "requestContext.approvalLedgerWritten=false",
                         "ciEvidenceHint.noLedgerWriteProved=true",
                         "ciEvidenceHint.ciArtifactUploadedByJava=false",
+                        "artifactRetentionHint.javaRetentionFixtureReadOnly=true",
+                        "artifactRetentionHint.githubArtifactAccessedByJava=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
                 .contains(
                         "Verify responseSchemaVersion before importing operator window results",
                         "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
+                        "Compare artifactRetentionHint.ciArtifactName and ciRetentionDays with Node v202 dry-run contract",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -1027,7 +1105,13 @@ class OpsEvidenceServiceTests {
                 " sha256:node-v200-manifest-digest ",
                 " /api/v1/production/real-read-window-ci-archive-artifact-manifest ",
                 " 9 ",
-                " approval-v198-operator-window "
+                " approval-v198-operator-window ",
+                " real-read-window-ci-artifact-upload-dry-run-contract.v1 ",
+                " sha256:node-v202-upload-contract-digest ",
+                " orderops-real-read-window-evidence-v191-v201 ",
+                " c/ ",
+                " 30 ",
+                " dry-run-contract-only "
         );
         assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
         assertThat(headerBackedRehearsal.requestContext().requestIdSource())
@@ -1094,6 +1178,36 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.ciEvidenceHint().productionWindowAllowedByJava()).isFalse();
         assertThat(headerBackedRehearsal.ciEvidenceHint().nodeMayTreatAsCiArtifactPublication()).isFalse();
         assertThat(headerBackedRehearsal.ciEvidenceHint().echoWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciUploadContractVersion())
+                .isEqualTo("real-read-window-ci-artifact-upload-dry-run-contract.v1");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciUploadContractVersionSource())
+                .isEqualTo("x-orderops-ci-upload-contract-version");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciUploadContractDigest())
+                .isEqualTo("sha256:node-v202-upload-contract-digest");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciUploadContractDigestSource())
+                .isEqualTo("x-orderops-ci-upload-contract-digest");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciArtifactName())
+                .isEqualTo("orderops-real-read-window-evidence-v191-v201");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciArtifactNameSource())
+                .isEqualTo("x-orderops-ci-artifact-name");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciArtifactRoot()).isEqualTo("c/");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciArtifactRootSource())
+                .isEqualTo("x-orderops-ci-artifact-root");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciRetentionDays()).isEqualTo("30");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciRetentionDaysSource())
+                .isEqualTo("x-orderops-ci-retention-days");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciUploadMode())
+                .isEqualTo("dry-run-contract-only");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciUploadModeSource())
+                .isEqualTo("x-orderops-ci-upload-mode");
+        assertThat(headerBackedRehearsal.artifactRetentionHint().artifactRetentionContextComplete()).isTrue();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().retentionDaysWithinJavaRetention()).isTrue();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().javaRetentionFixtureReadOnly()).isTrue();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().ciArtifactUploadedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().githubArtifactAccessedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().productionWindowAllowedByJava()).isFalse();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().nodeMayTreatAsRetentionAuthorization()).isFalse();
+        assertThat(headerBackedRehearsal.artifactRetentionHint().echoWarnings()).isEmpty();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1106,7 +1220,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v5");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v6");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -1122,7 +1236,13 @@ class OpsEvidenceServiceTests {
                 "sha256:node-v200-manifest-digest",
                 "/api/v1/production/real-read-window-ci-archive-artifact-manifest",
                 "9",
-                "approval-v198-operator-window"
+                "approval-v198-operator-window",
+                "real-read-window-ci-artifact-upload-dry-run-contract.v1",
+                "sha256:node-v202-upload-contract-digest",
+                "orderops-real-read-window-evidence-v191-v201",
+                "c/",
+                "30",
+                "dry-run-contract-only"
         );
         assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())
                 .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());

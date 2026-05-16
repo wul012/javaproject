@@ -39,6 +39,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_CI_EVIDENCE_HINT_VERSION =
             "java-release-approval-rehearsal-ci-evidence-hint.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_ARTIFACT_RETENTION_HINT_VERSION =
+            "java-release-approval-rehearsal-artifact-retention-hint.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -46,7 +49,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v5";
+            "java-release-approval-rehearsal-response-schema.v6";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -187,7 +190,26 @@ public class OpsEvidenceService {
 
     @Transactional(readOnly = true)
     public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal() {
-        return releaseApprovalRehearsal(null, null, null, null, null, null, null, null, null, null, null, null);
+        return releaseApprovalRehearsal(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
     }
 
     @Transactional(readOnly = true)
@@ -203,6 +225,49 @@ public class OpsEvidenceService {
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId,
+            String ciManifestVersion,
+            String ciManifestDigest,
+            String ciManifestEndpoint,
+            String ciArtifactRecordCount,
+            String ciApprovalCorrelationId
+    ) {
+        return releaseApprovalRehearsal(
+                requestId,
+                operatorIdentity,
+                auditCorrelationId,
+                operatorWindowOperatorId,
+                operatorWindowRoles,
+                operatorWindowVerifiedClaim,
+                operatorWindowApprovalCorrelationId,
+                ciManifestVersion,
+                ciManifestDigest,
+                ciManifestEndpoint,
+                ciArtifactRecordCount,
+                ciApprovalCorrelationId,
                 null,
                 null,
                 null,
@@ -234,6 +299,12 @@ public class OpsEvidenceService {
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null
         );
     }
@@ -251,7 +322,13 @@ public class OpsEvidenceService {
             String ciManifestDigest,
             String ciManifestEndpoint,
             String ciArtifactRecordCount,
-            String ciApprovalCorrelationId
+            String ciApprovalCorrelationId,
+            String ciUploadContractVersion,
+            String ciUploadContractDigest,
+            String ciArtifactName,
+            String ciArtifactRoot,
+            String ciRetentionDays,
+            String ciUploadMode
     ) {
         OpsEvidenceResponse evidence = evidence();
         String normalizedRequestId = normalizeHeaderValue(requestId);
@@ -267,6 +344,12 @@ public class OpsEvidenceService {
         String normalizedCiManifestEndpoint = normalizeHeaderValue(ciManifestEndpoint);
         String normalizedCiArtifactRecordCount = normalizeHeaderValue(ciArtifactRecordCount);
         String normalizedCiApprovalCorrelationId = normalizeHeaderValue(ciApprovalCorrelationId);
+        String normalizedCiUploadContractVersion = normalizeHeaderValue(ciUploadContractVersion);
+        String normalizedCiUploadContractDigest = normalizeHeaderValue(ciUploadContractDigest);
+        String normalizedCiArtifactName = normalizeHeaderValue(ciArtifactName);
+        String normalizedCiArtifactRoot = normalizeHeaderValue(ciArtifactRoot);
+        String normalizedCiRetentionDays = normalizeHeaderValue(ciRetentionDays);
+        String normalizedCiUploadMode = normalizeHeaderValue(ciUploadMode);
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext = rehearsalRequestContext(
                 normalizedRequestId,
                 normalizedOperatorIdentity,
@@ -287,6 +370,16 @@ public class OpsEvidenceService {
                         normalizedCiArtifactRecordCount,
                         normalizedCiApprovalCorrelationId
                 );
+        ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint =
+                rehearsalArtifactRetentionHint(
+                        evidence.releaseAuditRetentionFixture(),
+                        normalizedCiUploadContractVersion,
+                        normalizedCiUploadContractDigest,
+                        normalizedCiArtifactName,
+                        normalizedCiArtifactRoot,
+                        normalizedCiRetentionDays,
+                        normalizedCiUploadMode
+                );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -305,11 +398,13 @@ public class OpsEvidenceService {
                 requestContext,
                 operatorWindowHint,
                 ciEvidenceHint,
+                artifactRetentionHint,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
                         operatorWindowHint,
                         ciEvidenceHint,
+                        artifactRetentionHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -326,6 +421,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
             ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
             ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
+            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -333,6 +429,7 @@ public class OpsEvidenceService {
                 "contextWarnings",
                 "operatorWindowEchoWarnings",
                 "ciEvidenceEchoWarnings",
+                "artifactRetentionEchoWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -346,6 +443,10 @@ public class OpsEvidenceService {
                 "ciEvidenceHint.ciArtifactUploadedByJava=false",
                 "ciEvidenceHint.githubArtifactAccessedByJava=false",
                 "ciEvidenceHint.productionWindowAllowedByJava=false",
+                "artifactRetentionHint.javaRetentionFixtureReadOnly=true",
+                "artifactRetentionHint.ciArtifactUploadedByJava=false",
+                "artifactRetentionHint.githubArtifactAccessedByJava=false",
+                "artifactRetentionHint.nodeMayTreatAsRetentionAuthorization=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -355,10 +456,20 @@ public class OpsEvidenceService {
         return new ReleaseApprovalRehearsalResponse.RehearsalVerificationHint(
                 RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION,
                 RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
-                warningDigest(requestContext, operatorWindowHint, ciEvidenceHint, failureTaxonomy, executionBoundaries),
+                warningDigest(
+                        requestContext,
+                        operatorWindowHint,
+                        ciEvidenceHint,
+                        artifactRetentionHint,
+                        failureTaxonomy,
+                        executionBoundaries
+                ),
                 "NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS",
                 !requestContext.approvalLedgerWritten()
                         && ciEvidenceHint.noLedgerWriteProved()
+                        && artifactRetentionHint.javaRetentionFixtureReadOnly()
+                        && !artifactRetentionHint.ciArtifactUploadedByJava()
+                        && !artifactRetentionHint.githubArtifactAccessedByJava()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -368,6 +479,7 @@ public class OpsEvidenceService {
                         "requestContext",
                         "operatorWindowHint",
                         "ciEvidenceHint",
+                        "artifactRetentionHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -384,6 +496,8 @@ public class OpsEvidenceService {
                         "Compare ciEvidenceHint.manifestProfileVersion with Node v200 manifest profileVersion",
                         "Compare ciEvidenceHint.manifestDigest with Node v200 manifest.manifestDigest",
                         "Require ciEvidenceHint.ciArtifactUploadedByJava=false until CI artifact upload exists outside Java",
+                        "Compare artifactRetentionHint.ciArtifactName and ciRetentionDays with Node v202 dry-run contract",
+                        "Require artifactRetentionHint.nodeMayTreatAsRetentionAuthorization=false until Node v203 retention gate passes",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -395,6 +509,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
             ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
             ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
+            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -405,12 +520,16 @@ public class OpsEvidenceService {
                 line("contextWarnings", requestContext.contextWarnings()),
                 line("operatorWindowEchoWarnings", operatorWindowHint.echoWarnings()),
                 line("ciEvidenceEchoWarnings", ciEvidenceHint.echoWarnings()),
+                line("artifactRetentionEchoWarnings", artifactRetentionHint.echoWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
                 line("approvalLedgerWritten", requestContext.approvalLedgerWritten()),
                 line("ciArtifactUploadedByJava", ciEvidenceHint.ciArtifactUploadedByJava()),
                 line("githubArtifactAccessedByJava", ciEvidenceHint.githubArtifactAccessedByJava()),
+                line("retentionCiArtifactUploadedByJava", artifactRetentionHint.ciArtifactUploadedByJava()),
+                line("retentionGithubArtifactAccessedByJava", artifactRetentionHint.githubArtifactAccessedByJava()),
+                line("retentionAuthorization", artifactRetentionHint.nodeMayTreatAsRetentionAuthorization()),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
     }
@@ -576,6 +695,118 @@ public class OpsEvidenceService {
         );
     }
 
+    private ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint rehearsalArtifactRetentionHint(
+            OpsEvidenceResponse.ReleaseAuditRetentionFixture retentionFixture,
+            String normalizedCiUploadContractVersion,
+            String normalizedCiUploadContractDigest,
+            String normalizedCiArtifactName,
+            String normalizedCiArtifactRoot,
+            String normalizedCiRetentionDays,
+            String normalizedCiUploadMode
+    ) {
+        List<String> warnings = new ArrayList<>();
+        addMissingContextWarning(
+                warnings,
+                normalizedCiUploadContractVersion,
+                "ORDEROPS_CI_UPLOAD_CONTRACT_VERSION_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiUploadContractDigest,
+                "ORDEROPS_CI_UPLOAD_CONTRACT_DIGEST_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiArtifactName,
+                "ORDEROPS_CI_ARTIFACT_NAME_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiArtifactRoot,
+                "ORDEROPS_CI_ARTIFACT_ROOT_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiRetentionDays,
+                "ORDEROPS_CI_RETENTION_DAYS_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedCiUploadMode,
+                "ORDEROPS_CI_UPLOAD_MODE_MISSING"
+        );
+        boolean uploadContractVersionEchoed = normalizedCiUploadContractVersion != null;
+        boolean uploadContractDigestEchoed = normalizedCiUploadContractDigest != null;
+        boolean artifactNameEchoed = normalizedCiArtifactName != null;
+        boolean artifactRootEchoed = normalizedCiArtifactRoot != null;
+        boolean retentionDaysEchoed = normalizedCiRetentionDays != null;
+        boolean uploadModeEchoed = normalizedCiUploadMode != null;
+        boolean retentionDaysWithinJavaRetention = retentionDaysWithinJavaRetention(
+                normalizedCiRetentionDays,
+                retentionFixture.retentionDays()
+        );
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint(
+                RELEASE_APPROVAL_REHEARSAL_ARTIFACT_RETENTION_HINT_VERSION,
+                retentionFixture.fixtureVersion(),
+                retentionFixture.fixtureEndpoint(),
+                retentionFixture.retentionId(),
+                retentionFixture.artifactTarget(),
+                retentionFixture.retentionDays(),
+                valueOrPlaceholder(normalizedCiUploadContractVersion, "ci-upload-contract-version-not-supplied"),
+                sourceFor(normalizedCiUploadContractVersion, "x-orderops-ci-upload-contract-version"),
+                valueOrPlaceholder(normalizedCiUploadContractDigest, "ci-upload-contract-digest-not-supplied"),
+                sourceFor(normalizedCiUploadContractDigest, "x-orderops-ci-upload-contract-digest"),
+                valueOrPlaceholder(normalizedCiArtifactName, "ci-artifact-name-not-supplied"),
+                sourceFor(normalizedCiArtifactName, "x-orderops-ci-artifact-name"),
+                valueOrPlaceholder(normalizedCiArtifactRoot, "ci-artifact-root-not-supplied"),
+                sourceFor(normalizedCiArtifactRoot, "x-orderops-ci-artifact-root"),
+                valueOrPlaceholder(normalizedCiRetentionDays, "ci-retention-days-not-supplied"),
+                sourceFor(normalizedCiRetentionDays, "x-orderops-ci-retention-days"),
+                valueOrPlaceholder(normalizedCiUploadMode, "ci-upload-mode-not-supplied"),
+                sourceFor(normalizedCiUploadMode, "x-orderops-ci-upload-mode"),
+                uploadContractVersionEchoed,
+                uploadContractDigestEchoed,
+                artifactNameEchoed,
+                artifactRootEchoed,
+                retentionDaysEchoed,
+                uploadModeEchoed,
+                uploadContractVersionEchoed
+                        && uploadContractDigestEchoed
+                        && artifactNameEchoed
+                        && artifactRootEchoed
+                        && retentionDaysEchoed
+                        && uploadModeEchoed,
+                retentionDaysWithinJavaRetention,
+                retentionFixture.nodeMayConsume()
+                        && retentionFixture.auditExportReadOnly()
+                        && !retentionFixture.deploymentExecutionAllowed()
+                        && !retentionFixture.rollbackSqlExecutionAllowed(),
+                retentionFixture.auditExportReadOnly(),
+                false,
+                false,
+                false,
+                false,
+                List.of(
+                        "x-orderops-ci-upload-contract-version",
+                        "x-orderops-ci-upload-contract-digest",
+                        "x-orderops-ci-artifact-name",
+                        "x-orderops-ci-artifact-root",
+                        "x-orderops-ci-retention-days",
+                        "x-orderops-ci-upload-mode"
+                ),
+                retentionFixture.evidenceEndpoints(),
+                List.copyOf(warnings),
+                List.of(
+                        "Compare artifactRetentionHint.ciUploadContractVersion with Node v202 profileVersion",
+                        "Compare artifactRetentionHint.ciUploadContractDigest with Node v202 dryRunContract.contractDigest",
+                        "Compare artifactRetentionHint.ciArtifactName with Node v202 dryRunContract.artifactName",
+                        "Require artifactRetentionHint.retentionDaysWithinJavaRetention=true before Node v203 retention gate",
+                        "Keep ciArtifactUploadedByJava=false and githubArtifactAccessedByJava=false"
+                )
+        );
+    }
+
     private ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy releaseApprovalRehearsalFailureTaxonomy(
             OpsEvidenceResponse evidence,
             String normalizedRequestId,
@@ -679,6 +910,18 @@ public class OpsEvidenceService {
             return "NOT_SUPPLIED";
         }
         return headerName;
+    }
+
+    private boolean retentionDaysWithinJavaRetention(String value, int javaRetentionDays) {
+        if (value == null) {
+            return false;
+        }
+        try {
+            int retentionDays = Integer.parseInt(value);
+            return retentionDays > 0 && retentionDays <= javaRetentionDays;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     private void addMissingContextWarning(List<String> warnings, String value, String warning) {

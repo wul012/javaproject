@@ -1578,6 +1578,60 @@ verificationHint.warningDigestInputs 包含 contextWarnings、operatorWindowEcho
 
 这一步只证明 Java 只读响应能回显 Node v200 manifest 相关字段，并继续证明 Java 没有上传 CI artifact、没有访问 GitHub artifact、没有写 approval ledger、没有打开生产窗口。真实 artifact 上传、artifact store 权限、GitHub secret 和生产窗口授权仍必须留在 Java 外部的后续 CI / Node gate 中处理。
 
+v72 起，release approval rehearsal 继续增加 `artifactRetentionHint`，用于给 Node v203 的 cross-project CI artifact retention gate 提供 Java 侧只读保留期证据。调用方可把 Node v202 upload dry-run contract 的摘要字段传入：
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://localhost:8080/api/v1/ops/release-approval-rehearsal `
+  -Headers @{
+    "X-Rehearsal-Request-Id" = "rehearsal-v72-001"
+    "X-Operator-Identity" = "release-operator@example.test"
+    "X-Audit-Correlation-Id" = "audit-correlation-v72"
+    "x-orderops-operator-id" = "operator-198"
+    "x-orderops-roles" = "operator,auditor"
+    "x-orderops-operator-verified" = "true"
+    "x-orderops-approval-correlation-id" = "approval-v198-operator-window"
+    "x-orderops-ci-manifest-version" = "real-read-window-ci-archive-artifact-manifest.v1"
+    "x-orderops-ci-manifest-digest" = "sha256:<node-v200-manifest-digest>"
+    "x-orderops-ci-manifest-endpoint" = "/api/v1/production/real-read-window-ci-archive-artifact-manifest"
+    "x-orderops-ci-artifact-record-count" = "9"
+    "x-orderops-ci-approval-correlation-id" = "approval-v198-operator-window"
+    "x-orderops-ci-upload-contract-version" = "real-read-window-ci-artifact-upload-dry-run-contract.v1"
+    "x-orderops-ci-upload-contract-digest" = "sha256:<node-v202-upload-contract-digest>"
+    "x-orderops-ci-artifact-name" = "orderops-real-read-window-evidence-v191-v201"
+    "x-orderops-ci-artifact-root" = "c/"
+    "x-orderops-ci-retention-days" = "30"
+    "x-orderops-ci-upload-mode" = "dry-run-contract-only"
+  }
+```
+
+响应中的关键字段：
+
+```text
+artifactRetentionHint.hintVersion=java-release-approval-rehearsal-artifact-retention-hint.v1
+artifactRetentionHint.sourceRetentionFixtureVersion=java-release-audit-retention-fixture.v1
+artifactRetentionHint.sourceRetentionFixtureEndpoint=/contracts/release-audit-retention.fixture.json
+artifactRetentionHint.javaRetentionDays=180
+artifactRetentionHint.ciUploadContractVersion=real-read-window-ci-artifact-upload-dry-run-contract.v1
+artifactRetentionHint.ciUploadContractDigest=sha256:<node-v202-upload-contract-digest>
+artifactRetentionHint.ciArtifactName=orderops-real-read-window-evidence-v191-v201
+artifactRetentionHint.ciArtifactRoot=c/
+artifactRetentionHint.ciRetentionDays=30
+artifactRetentionHint.ciUploadMode=dry-run-contract-only
+artifactRetentionHint.artifactRetentionContextComplete=true
+artifactRetentionHint.retentionDaysWithinJavaRetention=true
+artifactRetentionHint.javaRetentionFixtureReadOnly=true
+artifactRetentionHint.auditExportReadOnly=true
+artifactRetentionHint.ciArtifactUploadedByJava=false
+artifactRetentionHint.githubArtifactAccessedByJava=false
+artifactRetentionHint.productionWindowAllowedByJava=false
+artifactRetentionHint.nodeMayTreatAsRetentionAuthorization=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v6
+verificationHint.warningDigestInputs 包含 artifactRetentionEchoWarnings
+```
+
+这一步只证明 Java 能把 Node v202 dry-run upload contract 的 artifact name、artifact root、retention days 和 upload mode 回显到只读响应，并把这些字段与 Java 现有 release audit retention fixture 放在同一个证据面里。它不上传 GitHub artifact，不读取 GitHub token，不写 audit export，不创建 approval decision，不写 approval ledger，也不授权真实生产窗口。
+
 查询失败事件治理摘要：
 
 ```powershell
