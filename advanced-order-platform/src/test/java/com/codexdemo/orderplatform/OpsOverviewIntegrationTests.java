@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v12"))
+                        .value("java-release-approval-rehearsal-response-schema.v13"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1381,6 +1381,76 @@ class OpsOverviewIntegrationTests {
                         hasItem("NODE_V217_SOURCE_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_NOT_READY")))
                 .andExpect(jsonPath("$.managedAuditProductionAdapterPrerequisiteReceipt.nodeVerificationActions",
                         hasItem("Keep managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false")))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.receiptVersion")
+                        .value("java-release-approval-rehearsal-ops-evidence-service-quality-split-receipt.v1"))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.sourceProductionAdapterPrerequisiteReceiptVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-production-adapter-prerequisite-receipt.v1"))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.sourceProductionAdapterPrerequisiteSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v12"))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassVersion")
+                        .value("Node v218"))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassProfile")
+                        .value("audit-route-managed-audit-helper-quality-pass.v1"))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.nextNodePrecheckVersion")
+                        .value("Node v219"))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.nextNodePrecheckProfile")
+                        .value("managed-audit-adapter-implementation-precheck-packet.v1"))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.nodeV219MayConsume")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.receiptResponsibilityDocumented")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.digestResponsibilityDocumented")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.hintResponsibilityDocumented")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.renderResponsibilityDocumented")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.recordResponsibilityDocumented")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.firstSafeSplitApplied")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.broadServiceSplitDeferred")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.apiShapeChanged")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.approvalDecisionCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.approvalRecordPersisted")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.managedAuditStoreWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.sqlExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.deploymentTriggered")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.rollbackTriggered")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.restoreExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.readyForProductionAudit")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.readyForProductionWindow")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.nodeMayTreatAsProductionAuditRecord")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.responsibilityBoundaries",
+                        hasItem("receipt builders own Node-facing handoff and prerequisite response blocks")))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.safeSplitSequence",
+                        hasItem("Extract receipt builders after Node v219 has consumed v79 schema v13")))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.deferredSplitReasons",
+                        hasItem("Receipt extraction must not change warningDigest ordering or response field names")))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.forbiddenQualityPassOperations",
+                        hasItem("Write approval ledger during Java v79 quality pass")))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.nodeV219Prerequisites",
+                        hasItem("mini-kv v88 command dispatch quality receipt must be present before Node v219")))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.receiptWarnings",
+                        hasItem("NODE_V219_SOURCE_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_NOT_READY")))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.nodeVerificationActions",
+                        hasItem("Keep opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false")))
                 .andExpect(jsonPath("$.failureTaxonomy.taxonomyVersion")
                         .value("java-release-approval-rehearsal-failure-taxonomy.v1"))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
@@ -1406,7 +1476,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v12"))
+                        .value("java-release-approval-rehearsal-response-schema.v13"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -1433,6 +1503,8 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("managedAuditProductionAdapterPrerequisiteReceipt")))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("opsEvidenceServiceQualitySplitReceipt")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("executionBoundaries")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("contextWarnings")))
@@ -1454,6 +1526,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("managedAuditAdapterBoundaryReceiptWarnings")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("managedAuditProductionAdapterPrerequisiteReceiptWarnings")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("opsEvidenceServiceQualitySplitReceiptWarnings")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("javaManagedAuditWriteAllowed")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
@@ -1478,6 +1552,12 @@ class OpsOverviewIntegrationTests {
                         hasItem("nodeV217MayWriteApprovalLedger")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeV217MayExecuteSql")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("qualitySplitApiShapeChanged")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("qualitySplitApprovalLedgerWritten")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("qualitySplitSqlExecuted")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
                         hasItem("nodeMayWriteApprovalLedger")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
@@ -1523,6 +1603,12 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false")))
                 .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("opsEvidenceServiceQualitySplitReceipt.sqlExecuted=false")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
                         hasItem("executionBoundaries.nodeMayWriteApprovalLedger=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract")))
@@ -1532,6 +1618,8 @@ class OpsOverviewIntegrationTests {
                         hasItem("Compare managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationVersion with Node v214 profileVersion")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare managedAuditProductionAdapterPrerequisiteReceipt.consumedByNodeArchiveVerificationVersion with Node v216 profileVersion")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassVersion with Node v218")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Keep UPSTREAM_ACTIONS_ENABLED=false")))
                 .andExpect(jsonPath("$.releaseApprovalInputs.releaseOperatorSignoffFixtureEndpoint")
@@ -1919,6 +2007,29 @@ class OpsOverviewIntegrationTests {
                         .value(false))
                 .andExpect(jsonPath("$.managedAuditProductionAdapterPrerequisiteReceipt.nodeMayTreatAsProductionAuditRecord")
                         .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.receiptWarnings").isEmpty())
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.nodeV219MayConsume")
+                        .value(true))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.apiShapeChanged")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.approvalDecisionCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.managedAuditStoreWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.sqlExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.deploymentTriggered")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.rollbackTriggered")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.restoreExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.opsEvidenceServiceQualitySplitReceipt.readyForProductionAudit")
+                        .value(false))
                 .andExpect(jsonPath("$.failureTaxonomy.upstreamReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.authContextReadiness").value("READY"))
                 .andExpect(jsonPath("$.failureTaxonomy.auditCorrelationReadiness").value("READY"))
@@ -1939,7 +2050,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v12"))
+                        .value("java-release-approval-rehearsal-response-schema.v13"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))

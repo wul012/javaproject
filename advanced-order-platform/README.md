@@ -1677,7 +1677,7 @@ Invoke-RestMethod `
 liveReadinessHint.hintVersion=java-release-approval-rehearsal-live-readiness-hint.v1
 liveReadinessHint.serverTimestamp=<sampledAt>
 liveReadinessHint.serverTimestampSource=sampledAt
-liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v12
+liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v13
 liveReadinessHint.readOnlyEndpoint=/api/v1/ops/release-approval-rehearsal
 liveReadinessHint.healthEndpoint=/actuator/health
 liveReadinessHint.sourcePreflightVersion=three-project-real-read-runtime-smoke-preflight.v1
@@ -1693,7 +1693,7 @@ liveReadinessHint.nodeMustRecordPidAndCleanup=true
 liveReadinessHint.javaStartedProcessForNode=false
 liveReadinessHint.processCleanupRecordedByJava=false
 liveReadinessHint.nodeMayTreatAsProductionAuthorization=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v12
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v13
 verificationHint.warningDigestInputs 包含 liveReadinessEchoWarnings
 ```
 
@@ -1756,7 +1756,7 @@ auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false
 auditPersistenceHandoffHint.javaExternalAuditSystemAccessed=false
 auditPersistenceHandoffHint.nodeMayUseAsManagedAuditInput=true
 auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v12
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v13
 verificationHint.warningDigestInputs 包含 auditPersistenceHandoffEchoWarnings
 ```
 
@@ -1812,7 +1812,7 @@ approvalRecordHandoffHint.javaApprovalRecordAuthenticated=false
 approvalRecordHandoffHint.productionApprovalStoreRequired=false
 approvalRecordHandoffHint.nodeMayUseAsAuditApprovalInput=true
 approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v12
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v13
 verificationHint.warningDigestInputs 包含 approvalRecordHandoffEchoWarnings、javaApprovalRecordPersisted、nodeMayTreatAsProductionApprovalRecord
 ```
 
@@ -1849,7 +1849,7 @@ approvalHandoffVerificationMarker.javaApprovalRecordPersisted=false
 approvalHandoffVerificationMarker.javaApprovalLedgerWritten=false
 approvalHandoffVerificationMarker.readyForNodeV213RestoreDrillPlan=true
 approvalHandoffVerificationMarker.nodeMayTreatAsProductionAuditRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v12
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v13
 verificationHint.warningDigestInputs 包含 approvalHandoffVerificationMarkerWarnings、managedAuditAdapterBoundaryReceiptWarnings、nodeV211ProductionAuditRecordAllowed、nodeV211RealApprovalDecisionCreated
 ```
 
@@ -1888,7 +1888,7 @@ managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=true
 managedAuditAdapterBoundaryReceipt.readyForProductionAudit=false
 managedAuditAdapterBoundaryReceipt.readyForProductionWindow=false
 managedAuditAdapterBoundaryReceipt.nodeMayTreatAsProductionAuditRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v12
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v13
 verificationHint.warningDigestInputs 包含 managedAuditAdapterBoundaryReceiptWarnings、nodeV215MayConnectManagedAudit、nodeV215MayCreateApprovalDecision、nodeV215MayWriteApprovalLedger、nodeV215MayExecuteSql、nodeV215MayTriggerDeployment、nodeV215MayTriggerRollback、nodeV215MayExecuteRestore
 ```
 
@@ -1931,11 +1931,47 @@ managedAuditProductionAdapterPrerequisiteReceipt.readyForProductionAudit=false
 managedAuditProductionAdapterPrerequisiteReceipt.readyForProductionWindow=false
 managedAuditProductionAdapterPrerequisiteReceipt.readyForProductionOperations=false
 managedAuditProductionAdapterPrerequisiteReceipt.nodeMayTreatAsProductionAuditRecord=false
-verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v12
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v13
 verificationHint.warningDigestInputs includes managedAuditProductionAdapterPrerequisiteReceiptWarnings, nodeV217MayConnectManagedAudit, nodeV217MayWriteApprovalLedger, nodeV217MayExecuteSql, nodeV217MayTriggerDeployment, nodeV217MayTriggerRollback, nodeV217MayExecuteRestore
 ```
 
 没有传入完整 Node v210 approval binding header 时，上游 v77 receipt 还未 ready，`managedAuditProductionAdapterPrerequisiteReceipt.readyForNodeV217ProductionHardeningReadinessGate=false` 且 `receiptWarnings` 包含 `NODE_V217_SOURCE_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_NOT_READY`。传入完整 header 后该 ready 字段可为 true，但仍不代表生产 audit/window/operations 授权，只允许 Node v217 继续做 production-hardening readiness gate。
+
+v79 起，release approval rehearsal 增加 `opsEvidenceServiceQualitySplitReceipt`，用于承接 Node v218 audit route + managed-audit helper quality pass，并给 Node v219 managed audit adapter implementation precheck 标注 Java 侧 `OpsEvidenceService` 的 receipt / digest / hint / render / record 职责边界。该 receipt 是质量收口回执，不是大规模拆分类结果；Java 仍不创建 approval decision、不写 approval ledger、不持久化 approval record、不写 managed audit store、不执行 SQL、部署、回滚或 restore：
+```text
+opsEvidenceServiceQualitySplitReceipt.receiptVersion=java-release-approval-rehearsal-ops-evidence-service-quality-split-receipt.v1
+opsEvidenceServiceQualitySplitReceipt.sourceProductionAdapterPrerequisiteReceiptVersion=java-release-approval-rehearsal-managed-audit-production-adapter-prerequisite-receipt.v1
+opsEvidenceServiceQualitySplitReceipt.sourceProductionAdapterPrerequisiteSchemaVersion=java-release-approval-rehearsal-response-schema.v12
+opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassVersion=Node v218
+opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassProfile=audit-route-managed-audit-helper-quality-pass.v1
+opsEvidenceServiceQualitySplitReceipt.nextNodePrecheckVersion=Node v219
+opsEvidenceServiceQualitySplitReceipt.nextNodePrecheckProfile=managed-audit-adapter-implementation-precheck-packet.v1
+opsEvidenceServiceQualitySplitReceipt.nodeV219MayConsume=true
+opsEvidenceServiceQualitySplitReceipt.receiptResponsibilityDocumented=true
+opsEvidenceServiceQualitySplitReceipt.digestResponsibilityDocumented=true
+opsEvidenceServiceQualitySplitReceipt.hintResponsibilityDocumented=true
+opsEvidenceServiceQualitySplitReceipt.renderResponsibilityDocumented=true
+opsEvidenceServiceQualitySplitReceipt.recordResponsibilityDocumented=true
+opsEvidenceServiceQualitySplitReceipt.firstSafeSplitApplied=false
+opsEvidenceServiceQualitySplitReceipt.broadServiceSplitDeferred=true
+opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false
+opsEvidenceServiceQualitySplitReceipt.approvalDecisionCreated=false
+opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten=false
+opsEvidenceServiceQualitySplitReceipt.approvalRecordPersisted=false
+opsEvidenceServiceQualitySplitReceipt.managedAuditStoreWritten=false
+opsEvidenceServiceQualitySplitReceipt.sqlExecuted=false
+opsEvidenceServiceQualitySplitReceipt.deploymentTriggered=false
+opsEvidenceServiceQualitySplitReceipt.rollbackTriggered=false
+opsEvidenceServiceQualitySplitReceipt.restoreExecuted=false
+opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=true
+opsEvidenceServiceQualitySplitReceipt.readyForProductionAudit=false
+opsEvidenceServiceQualitySplitReceipt.readyForProductionWindow=false
+opsEvidenceServiceQualitySplitReceipt.nodeMayTreatAsProductionAuditRecord=false
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v13
+verificationHint.warningDigestInputs includes opsEvidenceServiceQualitySplitReceiptWarnings, qualitySplitApiShapeChanged, qualitySplitApprovalDecisionCreated, qualitySplitApprovalLedgerWritten, qualitySplitManagedAuditStoreWritten, qualitySplitSqlExecuted
+```
+
+没有传入完整 Node v210 approval binding header 时，上游 v78 receipt 还未 ready，`opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=false` 且 `receiptWarnings` 包含 `NODE_V219_SOURCE_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_NOT_READY`。传入完整 header 后该 ready 字段可为 true，但仍只允许 Node v219 做 implementation precheck；真实 managed audit adapter wiring、生产审计写入和生产窗口仍然关闭。
 查询失败事件治理摘要：
 
 ```powershell
@@ -2529,6 +2565,7 @@ ops
   -> v76 增强 release approval rehearsal 只读 approval-handoff verification marker，标注 Node v211 已消费 Java v75 handoff 的 dry-run packet 覆盖和 no-write 边界
   -> v77 增强 release approval rehearsal 只读 managed-audit adapter boundary receipt，标注 Node v215 只能写本地 dry-run 文件，不能连接真实审计、写审批 ledger、执行 SQL、部署、回滚或 restore
   -> v78 增强 release approval rehearsal 只读 managed-audit production adapter prerequisite receipt，承接 Node v216 archive verification，给 Node v217 production-hardening readiness gate 标注前置条件和 no-production-operation 边界
+  -> v79 增强 release approval rehearsal 只读 OpsEvidenceService quality split receipt，承接 Node v218 质量收口，给 Node v219 implementation precheck 标注 receipt/digest/hint/render/record 职责拆分边界
 
 common
  -> 业务异常和统一错误响应

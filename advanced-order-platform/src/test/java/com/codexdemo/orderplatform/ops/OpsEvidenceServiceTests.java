@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v12");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v13");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -1456,6 +1456,89 @@ class OpsEvidenceServiceTests {
                         "Require managedAuditProductionAdapterPrerequisiteReceipt.readyForNodeV217ProductionHardeningReadinessGate=true before Node v217",
                         "Keep managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false"
                 );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().receiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-ops-evidence-service-quality-split-receipt.v1"
+                );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt()
+                .sourceProductionAdapterPrerequisiteReceiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-production-adapter-prerequisite-receipt.v1"
+                );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt()
+                .sourceProductionAdapterPrerequisiteSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v12");
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().consumedByNodeQualityPassVersion())
+                .isEqualTo("Node v218");
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().consumedByNodeQualityPassProfile())
+                .isEqualTo("audit-route-managed-audit-helper-quality-pass.v1");
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().nextNodePrecheckVersion())
+                .isEqualTo("Node v219");
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().nextNodePrecheckProfile())
+                .isEqualTo("managed-audit-adapter-implementation-precheck-packet.v1");
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().nodeV219MayConsume()).isTrue();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().receiptResponsibilityDocumented()).isTrue();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().digestResponsibilityDocumented()).isTrue();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().hintResponsibilityDocumented()).isTrue();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().renderResponsibilityDocumented()).isTrue();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().recordResponsibilityDocumented()).isTrue();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().firstSafeSplitApplied()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().broadServiceSplitDeferred()).isTrue();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().apiShapeChanged()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().approvalDecisionCreated()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().approvalLedgerWritten()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().approvalRecordPersisted()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().managedAuditStoreWritten()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().sqlExecuted()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().deploymentTriggered()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().rollbackTriggered()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().restoreExecuted()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().readyForNodeV219ImplementationPrecheck())
+                .isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().readyForProductionAudit()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().readyForProductionWindow()).isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().nodeMayTreatAsProductionAuditRecord())
+                .isFalse();
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().responsibilityBoundaries())
+                .contains(
+                        "receipt builders own Node-facing handoff and prerequisite response blocks",
+                        "digest helpers own warningDigestInputs and proofClaims stability",
+                        "hint builders own request/header echo and read-only readiness hints",
+                        "record types own response shape and schema-versioned field names"
+                );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().safeSplitSequence())
+                .contains(
+                        "Extract receipt builders after Node v219 has consumed v79 schema v13",
+                        "Extract digest helpers only after warningDigest repeatability tests stay green",
+                        "Run focused release approval rehearsal tests after each split"
+                );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().deferredSplitReasons())
+                .contains(
+                        "OpsEvidenceService still coordinates many evidence families, so broad split is deferred",
+                        "Receipt extraction must not change warningDigest ordering or response field names"
+                );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().forbiddenQualityPassOperations())
+                .contains(
+                        "Create approval decision during Java v79 quality pass",
+                        "Write approval ledger during Java v79 quality pass",
+                        "Execute SQL during Java v79 quality pass",
+                        "Change release approval rehearsal API path during Java v79 quality pass"
+                );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().nodeV219Prerequisites())
+                .contains(
+                        "Node v218 audit route and managed audit helper quality pass must be complete",
+                        "Java v79 quality split receipt must expose receipt digest hint render record boundaries",
+                        "mini-kv v88 command dispatch quality receipt must be present before Node v219",
+                        "UPSTREAM_ACTIONS_ENABLED must remain false"
+                );
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().receiptWarnings())
+                .containsExactly("NODE_V219_SOURCE_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_NOT_READY");
+        assertThat(rehearsal.opsEvidenceServiceQualitySplitReceipt().nodeVerificationActions())
+                .contains(
+                        "Compare opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassVersion with Node v218",
+                        "Require opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=true before Node v219",
+                        "Keep opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -1481,7 +1564,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v12");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v13");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -1499,6 +1582,7 @@ class OpsEvidenceServiceTests {
                         "approvalHandoffVerificationMarker",
                         "managedAuditAdapterBoundaryReceipt",
                         "managedAuditProductionAdapterPrerequisiteReceipt",
+                        "opsEvidenceServiceQualitySplitReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -1515,6 +1599,7 @@ class OpsEvidenceServiceTests {
                         "approvalHandoffVerificationMarkerWarnings",
                         "managedAuditAdapterBoundaryReceiptWarnings",
                         "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
+                        "opsEvidenceServiceQualitySplitReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -1538,6 +1623,11 @@ class OpsEvidenceServiceTests {
                         "nodeV217MayTriggerDeployment",
                         "nodeV217MayTriggerRollback",
                         "nodeV217MayExecuteRestore",
+                        "qualitySplitApiShapeChanged",
+                        "qualitySplitApprovalDecisionCreated",
+                        "qualitySplitApprovalLedgerWritten",
+                        "qualitySplitManagedAuditStoreWritten",
+                        "qualitySplitSqlExecuted",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -1571,6 +1661,9 @@ class OpsEvidenceServiceTests {
                         "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false",
                         "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayWriteApprovalLedger=false",
                         "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteSql=false",
+                        "opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false",
+                        "opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten=false",
+                        "opsEvidenceServiceQualitySplitReceipt.sqlExecuted=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -1586,6 +1679,8 @@ class OpsEvidenceServiceTests {
                         "Require managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=true before Node v215",
                         "Compare managedAuditProductionAdapterPrerequisiteReceipt.consumedByNodeArchiveVerificationVersion with Node v216 profileVersion",
                         "Require managedAuditProductionAdapterPrerequisiteReceipt.readyForNodeV217ProductionHardeningReadinessGate=true before Node v217",
+                        "Compare opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassVersion with Node v218",
+                        "Require opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=true before Node v219",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -1985,6 +2080,26 @@ class OpsEvidenceServiceTests {
                 .readyForProductionOperations()).isFalse();
         assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
                 .nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt()
+                .readyForNodeV219ImplementationPrecheck()).isTrue();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().receiptWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().nodeV219MayConsume()).isTrue();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().firstSafeSplitApplied()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().broadServiceSplitDeferred()).isTrue();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().apiShapeChanged()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().approvalDecisionCreated()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().approvalLedgerWritten()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().approvalRecordPersisted()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().managedAuditStoreWritten()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().sqlExecuted()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().deploymentTriggered()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().rollbackTriggered()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().restoreExecuted()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().readyForProductionAudit()).isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt().readyForProductionWindow())
+                .isFalse();
+        assertThat(headerBackedRehearsal.opsEvidenceServiceQualitySplitReceipt()
+                .nodeMayTreatAsProductionAuditRecord()).isFalse();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1997,7 +2112,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v12");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v13");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());

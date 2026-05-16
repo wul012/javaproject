@@ -21,6 +21,7 @@ public record ReleaseApprovalRehearsalResponse(
         RehearsalManagedAuditAdapterBoundaryReceipt managedAuditAdapterBoundaryReceipt,
         RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
                 managedAuditProductionAdapterPrerequisiteReceipt,
+        RehearsalOpsEvidenceServiceQualitySplitReceipt opsEvidenceServiceQualitySplitReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -381,6 +382,45 @@ public record ReleaseApprovalRehearsalResponse(
             List<String> prerequisiteEvidenceRequired,
             List<String> forbiddenProductionAdapterOperations,
             List<String> nodeV217Prerequisites,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalOpsEvidenceServiceQualitySplitReceipt(
+            String receiptVersion,
+            String sourceProductionAdapterPrerequisiteReceiptVersion,
+            String sourceProductionAdapterPrerequisiteSchemaVersion,
+            String consumedByNodeQualityPassVersion,
+            String consumedByNodeQualityPassProfile,
+            String nextNodePrecheckVersion,
+            String nextNodePrecheckProfile,
+            boolean nodeV219MayConsume,
+            boolean receiptResponsibilityDocumented,
+            boolean digestResponsibilityDocumented,
+            boolean hintResponsibilityDocumented,
+            boolean renderResponsibilityDocumented,
+            boolean recordResponsibilityDocumented,
+            boolean firstSafeSplitApplied,
+            boolean broadServiceSplitDeferred,
+            boolean apiShapeChanged,
+            boolean approvalDecisionCreated,
+            boolean approvalLedgerWritten,
+            boolean approvalRecordPersisted,
+            boolean managedAuditStoreWritten,
+            boolean sqlExecuted,
+            boolean deploymentTriggered,
+            boolean rollbackTriggered,
+            boolean restoreExecuted,
+            boolean readyForNodeV219ImplementationPrecheck,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            List<String> responsibilityBoundaries,
+            List<String> safeSplitSequence,
+            List<String> deferredSplitReasons,
+            List<String> forbiddenQualityPassOperations,
+            List<String> nodeV219Prerequisites,
             List<String> receiptWarnings,
             List<String> nodeVerificationActions
     ) {

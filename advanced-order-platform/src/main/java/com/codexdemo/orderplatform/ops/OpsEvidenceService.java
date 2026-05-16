@@ -61,6 +61,9 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_VERSION =
                     "java-release-approval-rehearsal-managed-audit-production-adapter-prerequisite-receipt.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_OPS_EVIDENCE_SERVICE_QUALITY_SPLIT_RECEIPT_VERSION =
+            "java-release-approval-rehearsal-ops-evidence-service-quality-split-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -70,6 +73,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_BOUNDARY_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v11";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_PRODUCTION_ADAPTER_PREREQUISITE_SCHEMA_VERSION =
+            "java-release-approval-rehearsal-response-schema.v12";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -77,7 +83,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v12";
+            "java-release-approval-rehearsal-response-schema.v13";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -120,6 +126,16 @@ public class OpsEvidenceService {
 
     static final String NODE_V217_PRODUCTION_HARDENING_READINESS_GATE_PROFILE =
             "managed-audit-adapter-production-hardening-readiness-gate.v1";
+
+    static final String NODE_V218_AUDIT_ROUTE_MANAGED_AUDIT_HELPER_QUALITY_PASS_VERSION = "Node v218";
+
+    static final String NODE_V218_AUDIT_ROUTE_MANAGED_AUDIT_HELPER_QUALITY_PASS_PROFILE =
+            "audit-route-managed-audit-helper-quality-pass.v1";
+
+    static final String NODE_V219_MANAGED_AUDIT_ADAPTER_IMPLEMENTATION_PRECHECK_VERSION = "Node v219";
+
+    static final String NODE_V219_MANAGED_AUDIT_ADAPTER_IMPLEMENTATION_PRECHECK_PROFILE =
+            "managed-audit-adapter-implementation-precheck-packet.v1";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";
@@ -696,6 +712,11 @@ public class OpsEvidenceService {
                         rehearsalManagedAuditProductionAdapterPrerequisiteReceipt(
                                 managedAuditAdapterBoundaryReceipt
                         );
+        ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
+                opsEvidenceServiceQualitySplitReceipt =
+                        rehearsalOpsEvidenceServiceQualitySplitReceipt(
+                                managedAuditProductionAdapterPrerequisiteReceipt
+                        );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -721,6 +742,7 @@ public class OpsEvidenceService {
                 approvalHandoffVerificationMarker,
                 managedAuditAdapterBoundaryReceipt,
                 managedAuditProductionAdapterPrerequisiteReceipt,
+                opsEvidenceServiceQualitySplitReceipt,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -733,6 +755,7 @@ public class OpsEvidenceService {
                         approvalHandoffVerificationMarker,
                         managedAuditAdapterBoundaryReceipt,
                         managedAuditProductionAdapterPrerequisiteReceipt,
+                        opsEvidenceServiceQualitySplitReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -759,6 +782,8 @@ public class OpsEvidenceService {
                     managedAuditAdapterBoundaryReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
                     managedAuditProductionAdapterPrerequisiteReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
+                    opsEvidenceServiceQualitySplitReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -773,6 +798,7 @@ public class OpsEvidenceService {
                 "approvalHandoffVerificationMarkerWarnings",
                 "managedAuditAdapterBoundaryReceiptWarnings",
                 "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
+                "opsEvidenceServiceQualitySplitReceiptWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -796,6 +822,11 @@ public class OpsEvidenceService {
                 "nodeV217MayTriggerDeployment",
                 "nodeV217MayTriggerRollback",
                 "nodeV217MayExecuteRestore",
+                "qualitySplitApiShapeChanged",
+                "qualitySplitApprovalDecisionCreated",
+                "qualitySplitApprovalLedgerWritten",
+                "qualitySplitManagedAuditStoreWritten",
+                "qualitySplitSqlExecuted",
                 "nodeMayWriteApprovalLedger"
         );
         List<String> proofClaims = List.of(
@@ -850,6 +881,14 @@ public class OpsEvidenceService {
                 "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerDeployment=false",
                 "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerRollback=false",
                 "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore=false",
+                "opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false",
+                "opsEvidenceServiceQualitySplitReceipt.approvalDecisionCreated=false",
+                "opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten=false",
+                "opsEvidenceServiceQualitySplitReceipt.managedAuditStoreWritten=false",
+                "opsEvidenceServiceQualitySplitReceipt.sqlExecuted=false",
+                "opsEvidenceServiceQualitySplitReceipt.deploymentTriggered=false",
+                "opsEvidenceServiceQualitySplitReceipt.rollbackTriggered=false",
+                "opsEvidenceServiceQualitySplitReceipt.restoreExecuted=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -870,6 +909,7 @@ public class OpsEvidenceService {
                         approvalHandoffVerificationMarker,
                         managedAuditAdapterBoundaryReceipt,
                         managedAuditProductionAdapterPrerequisiteReceipt,
+                        opsEvidenceServiceQualitySplitReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -919,6 +959,15 @@ public class OpsEvidenceService {
                         && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerDeployment()
                         && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerRollback()
                         && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore()
+                        && !opsEvidenceServiceQualitySplitReceipt.apiShapeChanged()
+                        && !opsEvidenceServiceQualitySplitReceipt.approvalDecisionCreated()
+                        && !opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten()
+                        && !opsEvidenceServiceQualitySplitReceipt.approvalRecordPersisted()
+                        && !opsEvidenceServiceQualitySplitReceipt.managedAuditStoreWritten()
+                        && !opsEvidenceServiceQualitySplitReceipt.sqlExecuted()
+                        && !opsEvidenceServiceQualitySplitReceipt.deploymentTriggered()
+                        && !opsEvidenceServiceQualitySplitReceipt.rollbackTriggered()
+                        && !opsEvidenceServiceQualitySplitReceipt.restoreExecuted()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -935,6 +984,7 @@ public class OpsEvidenceService {
                         "approvalHandoffVerificationMarker",
                         "managedAuditAdapterBoundaryReceipt",
                         "managedAuditProductionAdapterPrerequisiteReceipt",
+                        "opsEvidenceServiceQualitySplitReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -972,6 +1022,11 @@ public class OpsEvidenceService {
                         "Keep managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false",
                         "Keep managedAuditProductionAdapterPrerequisiteReceipt.javaWritesApprovalLedger=false",
                         "Keep managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql=false",
+                        "Compare opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassVersion with Node v218",
+                        "Require opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=true before Node v219",
+                        "Keep opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false",
+                        "Keep opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten=false",
+                        "Keep opsEvidenceServiceQualitySplitReceipt.sqlExecuted=false",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -993,6 +1048,8 @@ public class OpsEvidenceService {
                     managedAuditAdapterBoundaryReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
                     managedAuditProductionAdapterPrerequisiteReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
+                    opsEvidenceServiceQualitySplitReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -1012,6 +1069,10 @@ public class OpsEvidenceService {
                 line(
                         "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
                         managedAuditProductionAdapterPrerequisiteReceipt.receiptWarnings()
+                ),
+                line(
+                        "opsEvidenceServiceQualitySplitReceiptWarnings",
+                        opsEvidenceServiceQualitySplitReceipt.receiptWarnings()
                 ),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
@@ -1096,6 +1157,20 @@ public class OpsEvidenceService {
                         "nodeV217MayExecuteRestore",
                         managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore()
                 ),
+                line("qualitySplitApiShapeChanged", opsEvidenceServiceQualitySplitReceipt.apiShapeChanged()),
+                line(
+                        "qualitySplitApprovalDecisionCreated",
+                        opsEvidenceServiceQualitySplitReceipt.approvalDecisionCreated()
+                ),
+                line(
+                        "qualitySplitApprovalLedgerWritten",
+                        opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten()
+                ),
+                line(
+                        "qualitySplitManagedAuditStoreWritten",
+                        opsEvidenceServiceQualitySplitReceipt.managedAuditStoreWritten()
+                ),
+                line("qualitySplitSqlExecuted", opsEvidenceServiceQualitySplitReceipt.sqlExecuted()),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
     }
@@ -2078,6 +2153,119 @@ public class OpsEvidenceService {
                                 "Keep managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql=false"
                         )
                 );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
+            rehearsalOpsEvidenceServiceQualitySplitReceipt(
+                    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+                            managedAuditProductionAdapterPrerequisiteReceipt
+    ) {
+        boolean sourceReceiptAccepted =
+                RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_VERSION.equals(
+                        managedAuditProductionAdapterPrerequisiteReceipt.receiptVersion()
+                )
+                        && managedAuditProductionAdapterPrerequisiteReceipt
+                                .readyForNodeV217ProductionHardeningReadinessGate()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaCreatesApprovalDecision()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaWritesApprovalLedger()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaPersistsApprovalRecord()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaWritesManagedAuditStore()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaTriggersDeployment()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaTriggersRollback()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesRestore()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayWriteApprovalLedger()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteSql()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerDeployment()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerRollback()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeMayTreatAsProductionAuditRecord();
+        List<String> receiptWarnings = new ArrayList<>();
+        if (!sourceReceiptAccepted) {
+            receiptWarnings.add("NODE_V219_SOURCE_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_NOT_READY");
+        }
+
+        boolean responsibilitiesDocumented = true;
+        boolean firstSafeSplitApplied = false;
+        boolean readyForNodeV219ImplementationPrecheck =
+                sourceReceiptAccepted && responsibilitiesDocumented;
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt(
+                RELEASE_APPROVAL_REHEARSAL_OPS_EVIDENCE_SERVICE_QUALITY_SPLIT_RECEIPT_VERSION,
+                managedAuditProductionAdapterPrerequisiteReceipt.receiptVersion(),
+                RELEASE_APPROVAL_REHEARSAL_PRODUCTION_ADAPTER_PREREQUISITE_SCHEMA_VERSION,
+                NODE_V218_AUDIT_ROUTE_MANAGED_AUDIT_HELPER_QUALITY_PASS_VERSION,
+                NODE_V218_AUDIT_ROUTE_MANAGED_AUDIT_HELPER_QUALITY_PASS_PROFILE,
+                NODE_V219_MANAGED_AUDIT_ADAPTER_IMPLEMENTATION_PRECHECK_VERSION,
+                NODE_V219_MANAGED_AUDIT_ADAPTER_IMPLEMENTATION_PRECHECK_PROFILE,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                firstSafeSplitApplied,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                readyForNodeV219ImplementationPrecheck,
+                false,
+                false,
+                false,
+                List.of(
+                        "receipt builders own Node-facing handoff and prerequisite response blocks",
+                        "digest helpers own warningDigestInputs and proofClaims stability",
+                        "hint builders own request/header echo and read-only readiness hints",
+                        "render responsibilities remain outside Java API response assembly",
+                        "record types own response shape and schema-versioned field names"
+                ),
+                List.of(
+                        "Extract receipt builders after Node v219 has consumed v79 schema v13",
+                        "Extract digest helpers only after warningDigest repeatability tests stay green",
+                        "Extract hint builders in small groups without changing endpoint paths",
+                        "Keep record declarations schema-first until Node v220 adapter wiring plan is clear",
+                        "Run focused release approval rehearsal tests after each split"
+                ),
+                List.of(
+                        "OpsEvidenceService still coordinates many evidence families, so broad split is deferred",
+                        "Node v219 needs a stable schema v13 before Java moves helper classes",
+                        "Receipt extraction must not change warningDigest ordering or response field names",
+                        "No real adapter wiring exists yet, so quality work must stay read-only"
+                ),
+                List.of(
+                        "Create approval decision during Java v79 quality pass",
+                        "Write approval ledger during Java v79 quality pass",
+                        "Persist production approval record during Java v79 quality pass",
+                        "Write managed audit store during Java v79 quality pass",
+                        "Execute SQL during Java v79 quality pass",
+                        "Trigger deployment or rollback during Java v79 quality pass",
+                        "Execute restore during Java v79 quality pass",
+                        "Change release approval rehearsal API path during Java v79 quality pass"
+                ),
+                List.of(
+                        "Node v218 audit route and managed audit helper quality pass must be complete",
+                        "Java v79 quality split receipt must expose receipt digest hint render record boundaries",
+                        "mini-kv v88 command dispatch quality receipt must be present before Node v219",
+                        "Node v219 must remain an implementation precheck and not connect real managed audit",
+                        "UPSTREAM_ACTIONS_ENABLED must remain false"
+                ),
+                List.copyOf(receiptWarnings),
+                List.of(
+                        "Compare opsEvidenceServiceQualitySplitReceipt.consumedByNodeQualityPassVersion with Node v218",
+                        "Require opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=true before Node v219",
+                        "Keep opsEvidenceServiceQualitySplitReceipt.apiShapeChanged=false",
+                        "Keep opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten=false",
+                        "Keep opsEvidenceServiceQualitySplitReceipt.sqlExecuted=false"
+                )
+        );
     }
 
     private ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy releaseApprovalRehearsalFailureTaxonomy(
