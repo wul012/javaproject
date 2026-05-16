@@ -2099,6 +2099,8 @@ verificationHint.warningDigestInputs includes managedAuditSandboxAdapterApproval
 ```
 
 没有传入完整 Node v210 approval binding header 时，上游 v81 receipt 还未 ready，`managedAuditSandboxAdapterApprovalSchemaGuardReceipt.readyForNodeV225SandboxAdapterDryRunPackage=false` 且 `guardWarnings` 包含 `NODE_V225_SOURCE_EXTERNAL_ADAPTER_MIGRATION_GUARD_RECEIPT_NOT_READY`。传入完整 header 后该 ready 字段可为 true，但仍只允许 Node v225 生成 sandbox adapter dry-run package；owner approval artifact、schema rehearsal checklist、sandbox credential handle 和 mini-kv v91 evidence 必须由后续只读证据链提供，Java 不执行任何连接、SQL、部署、回滚或 restore。
+
+v83 起，release approval rehearsal 继续做 contract-preserving refactor，把 `verificationHint` 的构造与 `warningDigest` / `proofClaims` / `nodeVerificationActions` 从 `OpsEvidenceService` 抽到 `ReleaseApprovalVerificationHintBuilder`。这次拆分不改任何响应字段名、不改 digest 顺序、不改 proof claims、不改 read-only 边界；`OpsEvidenceService` 只保留一层转发，避免继续在主服务里堆 verification hint 的长方法。
 查询失败事件治理摘要：
 
 ```powershell
