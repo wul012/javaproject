@@ -72,7 +72,17 @@ public class OpsOverviewController {
             @RequestHeader(name = "x-orderops-managed-audit-retention-days", required = false)
             String managedAuditRetentionDays,
             @RequestHeader(name = "x-orderops-managed-audit-rotation-policy", required = false)
-            String managedAuditRotationPolicy
+            String managedAuditRotationPolicy,
+            @RequestHeader(name = "x-orderops-approval-binding-contract-version", required = false)
+            String approvalBindingContractVersion,
+            @RequestHeader(name = "x-orderops-approval-binding-contract-digest", required = false)
+            String approvalBindingContractDigest,
+            @RequestHeader(name = "x-orderops-approval-request-id", required = false)
+            String approvalRequestId,
+            @RequestHeader(name = "x-orderops-approval-decision-state", required = false)
+            String approvalDecisionState,
+            @RequestHeader(name = "x-orderops-approval-record-correlation-id", required = false)
+            String approvalRecordCorrelationId
     ) {
         return opsEvidenceService.releaseApprovalRehearsal(
                 requestId,
@@ -102,7 +112,12 @@ public class OpsOverviewController {
                 managedAuditCandidateDigest,
                 managedAuditSinkMode,
                 managedAuditRetentionDays,
-                managedAuditRotationPolicy
+                managedAuditRotationPolicy,
+                approvalBindingContractVersion,
+                approvalBindingContractDigest,
+                approvalRequestId,
+                approvalDecisionState,
+                approvalRecordCorrelationId
         );
     }
 }

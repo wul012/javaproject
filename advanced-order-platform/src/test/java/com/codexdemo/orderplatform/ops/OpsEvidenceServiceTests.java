@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v8");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v9");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -1104,6 +1104,88 @@ class OpsEvidenceServiceTests {
                         "Persist only the listed handoffFieldPaths in Node managed audit dry-run storage",
                         "Keep javaManagedAuditWriteAllowed=false and nodeMayTreatAsProductionAuditRecord=false"
                 );
+        assertThat(rehearsal.approvalRecordHandoffHint().hintVersion())
+                .isEqualTo("java-release-approval-rehearsal-approval-record-handoff-hint.v1");
+        assertThat(rehearsal.approvalRecordHandoffHint().sourceApprovalRecordFixtureVersion())
+                .isEqualTo("java-rollback-approval-record-fixture.v1");
+        assertThat(rehearsal.approvalRecordHandoffHint().sourceApprovalRecordFixtureEndpoint())
+                .isEqualTo("/contracts/rollback-approval-record.fixture.json");
+        assertThat(rehearsal.approvalRecordHandoffHint().reviewerPlaceholder())
+                .isEqualTo("rollback-reviewer-placeholder");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalTimestampPlaceholder())
+                .isEqualTo("approval-timestamp-placeholder");
+        assertThat(rehearsal.approvalRecordHandoffHint().rollbackTarget())
+                .isEqualTo("release-tag-or-artifact-version-placeholder");
+        assertThat(rehearsal.approvalRecordHandoffHint().selectedMigrationDirection())
+                .isEqualTo("no-database-change");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalBindingContractVersion())
+                .isEqualTo("approval-binding-contract-version-not-supplied");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalBindingContractVersionSource())
+                .isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalBindingContractDigest())
+                .isEqualTo("approval-binding-contract-digest-not-supplied");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalBindingContractDigestSource())
+                .isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRequestId())
+                .isEqualTo("approval-request-id-not-supplied");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRequestIdSource())
+                .isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalDecisionState())
+                .isEqualTo("approval-decision-state-not-supplied");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalDecisionStateSource())
+                .isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRecordCorrelationId())
+                .isEqualTo("approval-record-correlation-id-not-supplied");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRecordCorrelationIdSource())
+                .isEqualTo("NOT_SUPPLIED");
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalBindingContractVersionEchoed()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalBindingContractDigestEchoed()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRequestIdEchoed()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalDecisionStateEchoed()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRecordCorrelationEchoed()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRecordHandoffContextComplete()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().approvalRecordFixtureReadOnly()).isTrue();
+        assertThat(rehearsal.approvalRecordHandoffHint().javaApprovalDecisionCreated()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().javaApprovalLedgerWritten()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().javaApprovalRecordPersisted()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().javaApprovalRecordAuthenticated()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().productionApprovalStoreRequired()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().nodeMayUseAsAuditApprovalInput()).isTrue();
+        assertThat(rehearsal.approvalRecordHandoffHint().nodeMayTreatAsProductionApprovalRecord()).isFalse();
+        assertThat(rehearsal.approvalRecordHandoffHint().acceptedApprovalRecordHeaders())
+                .containsExactly(
+                        "x-orderops-approval-binding-contract-version",
+                        "x-orderops-approval-binding-contract-digest",
+                        "x-orderops-approval-request-id",
+                        "x-orderops-approval-decision-state",
+                        "x-orderops-approval-record-correlation-id"
+                );
+        assertThat(rehearsal.approvalRecordHandoffHint().handoffFieldPaths())
+                .contains(
+                        "operatorWindowHint.operatorId",
+                        "approvalRecordHandoffHint.approvalRequestId",
+                        "verificationHint.warningDigest"
+                );
+        assertThat(rehearsal.approvalRecordHandoffHint().sourceRecordArtifacts())
+                .contains(
+                        "/contracts/rollback-approval-handoff.sample.json",
+                        "/contracts/rollback-approver-evidence.fixture.json",
+                        "/contracts/rollback-sql-review-gate.sample.json"
+                );
+        assertThat(rehearsal.approvalRecordHandoffHint().echoWarnings())
+                .containsExactly(
+                        "ORDEROPS_APPROVAL_BINDING_CONTRACT_VERSION_MISSING",
+                        "ORDEROPS_APPROVAL_BINDING_CONTRACT_DIGEST_MISSING",
+                        "ORDEROPS_APPROVAL_REQUEST_ID_MISSING",
+                        "ORDEROPS_APPROVAL_DECISION_STATE_MISSING",
+                        "ORDEROPS_APPROVAL_RECORD_CORRELATION_ID_MISSING"
+                );
+        assertThat(rehearsal.approvalRecordHandoffHint().nodeVerificationActions())
+                .contains(
+                        "Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract",
+                        "Compare approvalRecordHandoffHint.approvalBindingContractDigest with Node v210 binding digest",
+                        "Keep javaApprovalRecordPersisted=false and nodeMayTreatAsProductionApprovalRecord=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -1129,7 +1211,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v8");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v9");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -1143,6 +1225,7 @@ class OpsEvidenceServiceTests {
                         "artifactRetentionHint",
                         "liveReadinessHint",
                         "auditPersistenceHandoffHint",
+                        "approvalRecordHandoffHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -1155,11 +1238,14 @@ class OpsEvidenceServiceTests {
                         "artifactRetentionEchoWarnings",
                         "liveReadinessEchoWarnings",
                         "auditPersistenceHandoffEchoWarnings",
+                        "approvalRecordHandoffEchoWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
                         "approvalLedgerWritten",
                         "javaManagedAuditWriteAllowed",
+                        "javaApprovalRecordPersisted",
+                        "nodeMayTreatAsProductionApprovalRecord",
                         "nodeMayTreatAsProductionAuditRecord",
                         "nodeMayWriteApprovalLedger"
                 );
@@ -1176,6 +1262,9 @@ class OpsEvidenceServiceTests {
                         "auditPersistenceHandoffHint.javaAuditSourceReadOnly=true",
                         "auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false",
                         "auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false",
+                        "approvalRecordHandoffHint.approvalRecordFixtureReadOnly=true",
+                        "approvalRecordHandoffHint.javaApprovalRecordPersisted=false",
+                        "approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -1185,6 +1274,7 @@ class OpsEvidenceServiceTests {
                         "Compare artifactRetentionHint.ciArtifactName and ciRetentionDays with Node v202 dry-run contract",
                         "Compare liveReadinessHint.sourcePreflightVersion and runtimeSmokeSessionId with Node v204/v205 smoke context",
                         "Compare auditPersistenceHandoffHint.managedAuditCandidateVersion with Node v208 managed audit candidate",
+                        "Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -1271,7 +1361,12 @@ class OpsEvidenceServiceTests {
                 " sha256:node-v208-managed-audit-candidate-digest ",
                 " file-or-sqlite-dry-run-candidate ",
                 " 30 ",
-                " size-and-age-rotation-candidate "
+                " size-and-age-rotation-candidate ",
+                " managed-audit-identity-approval-binding-contract.v1 ",
+                " sha256:node-v210-approval-binding-digest ",
+                " approval-request-v210-001 ",
+                " APPROVED_DRY_RUN_ONLY ",
+                " approval-record-correlation-v210 "
         );
         assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
         assertThat(headerBackedRehearsal.requestContext().requestIdSource())
@@ -1436,6 +1531,45 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().nodeMayTreatAsProductionAuditRecord())
                 .isFalse();
         assertThat(headerBackedRehearsal.auditPersistenceHandoffHint().echoWarnings()).isEmpty();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalBindingContractVersion())
+                .isEqualTo("managed-audit-identity-approval-binding-contract.v1");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalBindingContractVersionSource())
+                .isEqualTo("x-orderops-approval-binding-contract-version");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalBindingContractDigest())
+                .isEqualTo("sha256:node-v210-approval-binding-digest");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalBindingContractDigestSource())
+                .isEqualTo("x-orderops-approval-binding-contract-digest");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRequestId())
+                .isEqualTo("approval-request-v210-001");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRequestIdSource())
+                .isEqualTo("x-orderops-approval-request-id");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalDecisionState())
+                .isEqualTo("APPROVED_DRY_RUN_ONLY");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalDecisionStateSource())
+                .isEqualTo("x-orderops-approval-decision-state");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRecordCorrelationId())
+                .isEqualTo("approval-record-correlation-v210");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRecordCorrelationIdSource())
+                .isEqualTo("x-orderops-approval-record-correlation-id");
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalBindingContractVersionEchoed())
+                .isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalBindingContractDigestEchoed())
+                .isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRequestIdEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalDecisionStateEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRecordCorrelationEchoed()).isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRecordHandoffContextComplete())
+                .isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().approvalRecordFixtureReadOnly()).isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().javaApprovalDecisionCreated()).isFalse();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().javaApprovalLedgerWritten()).isFalse();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().javaApprovalRecordPersisted()).isFalse();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().javaApprovalRecordAuthenticated()).isFalse();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().productionApprovalStoreRequired()).isFalse();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().nodeMayUseAsAuditApprovalInput()).isTrue();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().nodeMayTreatAsProductionApprovalRecord())
+                .isFalse();
+        assertThat(headerBackedRehearsal.approvalRecordHandoffHint().echoWarnings()).isEmpty();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1448,7 +1582,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v8");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v9");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -1480,7 +1614,12 @@ class OpsEvidenceServiceTests {
                 "sha256:node-v208-managed-audit-candidate-digest",
                 "file-or-sqlite-dry-run-candidate",
                 "30",
-                "size-and-age-rotation-candidate"
+                "size-and-age-rotation-candidate",
+                "managed-audit-identity-approval-binding-contract.v1",
+                "sha256:node-v210-approval-binding-digest",
+                "approval-request-v210-001",
+                "APPROVED_DRY_RUN_ONLY",
+                "approval-record-correlation-v210"
         );
         assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())
                 .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());

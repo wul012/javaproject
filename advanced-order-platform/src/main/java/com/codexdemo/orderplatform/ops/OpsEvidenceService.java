@@ -48,6 +48,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_AUDIT_PERSISTENCE_HANDOFF_HINT_VERSION =
             "java-release-approval-rehearsal-audit-persistence-handoff-hint.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_HINT_VERSION =
+            "java-release-approval-rehearsal-approval-record-handoff-hint.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -55,7 +58,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v8";
+            "java-release-approval-rehearsal-response-schema.v9";
 
     static final String RELEASE_VERIFICATION_MANIFEST_VERSION = "java-release-verification-manifest.v1";
 
@@ -196,31 +199,7 @@ public class OpsEvidenceService {
 
     @Transactional(readOnly = true)
     public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal() {
-        return releaseApprovalRehearsal(
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
+        return releaseApprovalRehearsal(null, null, null);
     }
 
     @Transactional(readOnly = true)
@@ -437,6 +416,11 @@ public class OpsEvidenceService {
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null
         );
     }
@@ -472,6 +456,79 @@ public class OpsEvidenceService {
             String managedAuditRetentionDays,
             String managedAuditRotationPolicy
     ) {
+        return releaseApprovalRehearsal(
+                requestId,
+                operatorIdentity,
+                auditCorrelationId,
+                operatorWindowOperatorId,
+                operatorWindowRoles,
+                operatorWindowVerifiedClaim,
+                operatorWindowApprovalCorrelationId,
+                ciManifestVersion,
+                ciManifestDigest,
+                ciManifestEndpoint,
+                ciArtifactRecordCount,
+                ciApprovalCorrelationId,
+                ciUploadContractVersion,
+                ciUploadContractDigest,
+                ciArtifactName,
+                ciArtifactRoot,
+                ciRetentionDays,
+                ciUploadMode,
+                runtimePreflightVersion,
+                runtimePreflightDigest,
+                runtimeSmokeSessionId,
+                runtimeReadTargetId,
+                runtimeWindowMode,
+                managedAuditCandidateVersion,
+                managedAuditCandidateDigest,
+                managedAuditSinkMode,
+                managedAuditRetentionDays,
+                managedAuditRotationPolicy,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public ReleaseApprovalRehearsalResponse releaseApprovalRehearsal(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId,
+            String ciManifestVersion,
+            String ciManifestDigest,
+            String ciManifestEndpoint,
+            String ciArtifactRecordCount,
+            String ciApprovalCorrelationId,
+            String ciUploadContractVersion,
+            String ciUploadContractDigest,
+            String ciArtifactName,
+            String ciArtifactRoot,
+            String ciRetentionDays,
+            String ciUploadMode,
+            String runtimePreflightVersion,
+            String runtimePreflightDigest,
+            String runtimeSmokeSessionId,
+            String runtimeReadTargetId,
+            String runtimeWindowMode,
+            String managedAuditCandidateVersion,
+            String managedAuditCandidateDigest,
+            String managedAuditSinkMode,
+            String managedAuditRetentionDays,
+            String managedAuditRotationPolicy,
+            String approvalBindingContractVersion,
+            String approvalBindingContractDigest,
+            String approvalRequestId,
+            String approvalDecisionState,
+            String approvalRecordCorrelationId
+    ) {
         OpsEvidenceResponse evidence = evidence();
         String normalizedRequestId = normalizeHeaderValue(requestId);
         String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
@@ -502,6 +559,11 @@ public class OpsEvidenceService {
         String normalizedManagedAuditSinkMode = normalizeHeaderValue(managedAuditSinkMode);
         String normalizedManagedAuditRetentionDays = normalizeHeaderValue(managedAuditRetentionDays);
         String normalizedManagedAuditRotationPolicy = normalizeHeaderValue(managedAuditRotationPolicy);
+        String normalizedApprovalBindingContractVersion = normalizeHeaderValue(approvalBindingContractVersion);
+        String normalizedApprovalBindingContractDigest = normalizeHeaderValue(approvalBindingContractDigest);
+        String normalizedApprovalRequestId = normalizeHeaderValue(approvalRequestId);
+        String normalizedApprovalDecisionState = normalizeHeaderValue(approvalDecisionState);
+        String normalizedApprovalRecordCorrelationId = normalizeHeaderValue(approvalRecordCorrelationId);
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext = rehearsalRequestContext(
                 normalizedRequestId,
                 normalizedOperatorIdentity,
@@ -550,6 +612,15 @@ public class OpsEvidenceService {
                         normalizedManagedAuditRetentionDays,
                         normalizedManagedAuditRotationPolicy
                 );
+        ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint =
+                rehearsalApprovalRecordHandoffHint(
+                        evidence.rollbackApprovalRecordFixture(),
+                        normalizedApprovalBindingContractVersion,
+                        normalizedApprovalBindingContractDigest,
+                        normalizedApprovalRequestId,
+                        normalizedApprovalDecisionState,
+                        normalizedApprovalRecordCorrelationId
+                );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -571,6 +642,7 @@ public class OpsEvidenceService {
                 artifactRetentionHint,
                 liveReadinessHint,
                 auditPersistenceHandoffHint,
+                approvalRecordHandoffHint,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -579,6 +651,7 @@ public class OpsEvidenceService {
                         artifactRetentionHint,
                         liveReadinessHint,
                         auditPersistenceHandoffHint,
+                        approvalRecordHandoffHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -598,6 +671,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
             ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
             ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
+            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -608,11 +682,14 @@ public class OpsEvidenceService {
                 "artifactRetentionEchoWarnings",
                 "liveReadinessEchoWarnings",
                 "auditPersistenceHandoffEchoWarnings",
+                "approvalRecordHandoffEchoWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
                 "approvalLedgerWritten",
                 "javaManagedAuditWriteAllowed",
+                "javaApprovalRecordPersisted",
+                "nodeMayTreatAsProductionApprovalRecord",
                 "nodeMayTreatAsProductionAuditRecord",
                 "nodeMayWriteApprovalLedger"
         );
@@ -636,6 +713,11 @@ public class OpsEvidenceService {
                 "auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false",
                 "auditPersistenceHandoffHint.javaExternalAuditSystemAccessed=false",
                 "auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord=false",
+                "approvalRecordHandoffHint.approvalRecordFixtureReadOnly=true",
+                "approvalRecordHandoffHint.javaApprovalDecisionCreated=false",
+                "approvalRecordHandoffHint.javaApprovalLedgerWritten=false",
+                "approvalRecordHandoffHint.javaApprovalRecordPersisted=false",
+                "approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -652,6 +734,7 @@ public class OpsEvidenceService {
                         artifactRetentionHint,
                         liveReadinessHint,
                         auditPersistenceHandoffHint,
+                        approvalRecordHandoffHint,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -668,6 +751,10 @@ public class OpsEvidenceService {
                         && !auditPersistenceHandoffHint.javaLedgerWriteAllowed()
                         && !auditPersistenceHandoffHint.javaManagedAuditWriteAllowed()
                         && !auditPersistenceHandoffHint.javaExternalAuditSystemAccessed()
+                        && approvalRecordHandoffHint.approvalRecordFixtureReadOnly()
+                        && !approvalRecordHandoffHint.javaApprovalDecisionCreated()
+                        && !approvalRecordHandoffHint.javaApprovalLedgerWritten()
+                        && !approvalRecordHandoffHint.javaApprovalRecordPersisted()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -680,6 +767,7 @@ public class OpsEvidenceService {
                         "artifactRetentionHint",
                         "liveReadinessHint",
                         "auditPersistenceHandoffHint",
+                        "approvalRecordHandoffHint",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -702,6 +790,8 @@ public class OpsEvidenceService {
                         "Require liveReadinessHint.runtimeSmokeExecutedByJava=false; Node owns v205 process/run evidence",
                         "Compare auditPersistenceHandoffHint.managedAuditCandidateVersion with Node v208 managed audit candidate",
                         "Require auditPersistenceHandoffHint.javaManagedAuditWriteAllowed=false until Node owns dry-run persistence",
+                        "Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract",
+                        "Require approvalRecordHandoffHint.javaApprovalRecordPersisted=false until a real approval store exists",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -716,6 +806,7 @@ public class OpsEvidenceService {
             ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
             ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
             ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
+            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -729,6 +820,7 @@ public class OpsEvidenceService {
                 line("artifactRetentionEchoWarnings", artifactRetentionHint.echoWarnings()),
                 line("liveReadinessEchoWarnings", liveReadinessHint.echoWarnings()),
                 line("auditPersistenceHandoffEchoWarnings", auditPersistenceHandoffHint.echoWarnings()),
+                line("approvalRecordHandoffEchoWarnings", approvalRecordHandoffHint.echoWarnings()),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
@@ -746,6 +838,11 @@ public class OpsEvidenceService {
                 line(
                         "nodeMayTreatAsProductionAuditRecord",
                         auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord()
+                ),
+                line("javaApprovalRecordPersisted", approvalRecordHandoffHint.javaApprovalRecordPersisted()),
+                line(
+                        "nodeMayTreatAsProductionApprovalRecord",
+                        approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord()
                 ),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
@@ -1282,6 +1379,141 @@ public class OpsEvidenceService {
                         "Require auditPersistenceHandoffHint.managedAuditRetentionWithinJavaRetention=true before Node dry-run retention checks",
                         "Persist only the listed handoffFieldPaths in Node managed audit dry-run storage",
                         "Keep javaManagedAuditWriteAllowed=false and nodeMayTreatAsProductionAuditRecord=false"
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint
+            rehearsalApprovalRecordHandoffHint(
+                    OpsEvidenceResponse.RollbackApprovalRecordFixture approvalRecordFixture,
+                    String normalizedApprovalBindingContractVersion,
+                    String normalizedApprovalBindingContractDigest,
+                    String normalizedApprovalRequestId,
+                    String normalizedApprovalDecisionState,
+                    String normalizedApprovalRecordCorrelationId
+    ) {
+        List<String> warnings = new ArrayList<>();
+        addMissingContextWarning(
+                warnings,
+                normalizedApprovalBindingContractVersion,
+                "ORDEROPS_APPROVAL_BINDING_CONTRACT_VERSION_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedApprovalBindingContractDigest,
+                "ORDEROPS_APPROVAL_BINDING_CONTRACT_DIGEST_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedApprovalRequestId,
+                "ORDEROPS_APPROVAL_REQUEST_ID_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedApprovalDecisionState,
+                "ORDEROPS_APPROVAL_DECISION_STATE_MISSING"
+        );
+        addMissingContextWarning(
+                warnings,
+                normalizedApprovalRecordCorrelationId,
+                "ORDEROPS_APPROVAL_RECORD_CORRELATION_ID_MISSING"
+        );
+        boolean approvalBindingContractVersionEchoed = normalizedApprovalBindingContractVersion != null;
+        boolean approvalBindingContractDigestEchoed = normalizedApprovalBindingContractDigest != null;
+        boolean approvalRequestIdEchoed = normalizedApprovalRequestId != null;
+        boolean approvalDecisionStateEchoed = normalizedApprovalDecisionState != null;
+        boolean approvalRecordCorrelationEchoed = normalizedApprovalRecordCorrelationId != null;
+        boolean approvalRecordHandoffContextComplete = approvalBindingContractVersionEchoed
+                && approvalBindingContractDigestEchoed
+                && approvalRequestIdEchoed
+                && approvalDecisionStateEchoed
+                && approvalRecordCorrelationEchoed;
+        boolean approvalRecordFixtureReadOnly = approvalRecordFixture.nodeMayConsume()
+                && !approvalRecordFixture.nodeMayTriggerRollback()
+                && !approvalRecordFixture.rollbackExecutionAllowed()
+                && !approvalRecordFixture.rollbackSqlExecutionAllowed();
+
+        return new ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint(
+                RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_HINT_VERSION,
+                approvalRecordFixture.fixtureVersion(),
+                approvalRecordFixture.fixtureEndpoint(),
+                approvalRecordFixture.reviewer(),
+                approvalRecordFixture.approvalTimestampPlaceholder(),
+                approvalRecordFixture.rollbackTarget(),
+                approvalRecordFixture.selectedMigrationDirection(),
+                valueOrPlaceholder(
+                        normalizedApprovalBindingContractVersion,
+                        "approval-binding-contract-version-not-supplied"
+                ),
+                sourceFor(
+                        normalizedApprovalBindingContractVersion,
+                        "x-orderops-approval-binding-contract-version"
+                ),
+                valueOrPlaceholder(
+                        normalizedApprovalBindingContractDigest,
+                        "approval-binding-contract-digest-not-supplied"
+                ),
+                sourceFor(
+                        normalizedApprovalBindingContractDigest,
+                        "x-orderops-approval-binding-contract-digest"
+                ),
+                valueOrPlaceholder(normalizedApprovalRequestId, "approval-request-id-not-supplied"),
+                sourceFor(normalizedApprovalRequestId, "x-orderops-approval-request-id"),
+                valueOrPlaceholder(normalizedApprovalDecisionState, "approval-decision-state-not-supplied"),
+                sourceFor(normalizedApprovalDecisionState, "x-orderops-approval-decision-state"),
+                valueOrPlaceholder(
+                        normalizedApprovalRecordCorrelationId,
+                        "approval-record-correlation-id-not-supplied"
+                ),
+                sourceFor(
+                        normalizedApprovalRecordCorrelationId,
+                        "x-orderops-approval-record-correlation-id"
+                ),
+                approvalBindingContractVersionEchoed,
+                approvalBindingContractDigestEchoed,
+                approvalRequestIdEchoed,
+                approvalDecisionStateEchoed,
+                approvalRecordCorrelationEchoed,
+                approvalRecordHandoffContextComplete,
+                approvalRecordFixtureReadOnly,
+                false,
+                false,
+                false,
+                false,
+                false,
+                approvalRecordFixtureReadOnly,
+                false,
+                List.of(
+                        "x-orderops-approval-binding-contract-version",
+                        "x-orderops-approval-binding-contract-digest",
+                        "x-orderops-approval-request-id",
+                        "x-orderops-approval-decision-state",
+                        "x-orderops-approval-record-correlation-id"
+                ),
+                List.of(
+                        "requestContext.requestId",
+                        "requestContext.operatorIdentity",
+                        "operatorWindowHint.operatorId",
+                        "operatorWindowHint.operatorRoles",
+                        "operatorWindowHint.operatorVerifiedClaim",
+                        "operatorWindowHint.approvalCorrelationId",
+                        "approvalRecordHandoffHint.approvalRequestId",
+                        "approvalRecordHandoffHint.approvalDecisionState",
+                        "approvalRecordHandoffHint.approvalRecordCorrelationId",
+                        "approvalRecordHandoffHint.reviewerPlaceholder",
+                        "approvalRecordHandoffHint.approvalTimestampPlaceholder",
+                        "approvalRecordHandoffHint.rollbackTarget",
+                        "approvalRecordHandoffHint.selectedMigrationDirection",
+                        "verificationHint.warningDigest"
+                ),
+                approvalRecordFixture.recordArtifacts(),
+                List.copyOf(warnings),
+                List.of(
+                        "Compare approvalRecordHandoffHint.approvalBindingContractVersion with Node v210 binding contract",
+                        "Compare approvalRecordHandoffHint.approvalBindingContractDigest with Node v210 binding digest",
+                        "Require approvalRecordHandoffHint.approvalRecordHandoffContextComplete=true before Node v211 audit packet",
+                        "Persist only the listed handoffFieldPaths in Node managed audit dry-run storage",
+                        "Keep javaApprovalRecordPersisted=false and nodeMayTreatAsProductionApprovalRecord=false"
                 )
         );
     }
