@@ -22,6 +22,8 @@ public record ReleaseApprovalRehearsalResponse(
         RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
                 managedAuditProductionAdapterPrerequisiteReceipt,
         RehearsalOpsEvidenceServiceQualitySplitReceipt opsEvidenceServiceQualitySplitReceipt,
+        RehearsalManagedAuditAdapterImplementationGuardReceipt
+                managedAuditAdapterImplementationGuardReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -422,6 +424,45 @@ public record ReleaseApprovalRehearsalResponse(
             List<String> forbiddenQualityPassOperations,
             List<String> nodeV219Prerequisites,
             List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalManagedAuditAdapterImplementationGuardReceipt(
+            String receiptVersion,
+            String sourceQualitySplitReceiptVersion,
+            String sourceQualitySplitSchemaVersion,
+            String consumedByNodeDisabledShellVersion,
+            String consumedByNodeDisabledShellProfile,
+            String consumedByNodeDisabledShellEndpoint,
+            String consumedByNodeDisabledShellState,
+            String nextNodeCandidateVersion,
+            String nextNodeCandidateProfile,
+            boolean nodeV221MayConsume,
+            boolean nodeV220DisabledShellReady,
+            boolean nodeV220SelectedAdapterDisabled,
+            boolean nodeV220LocalDryRunOnlyDeclared,
+            boolean nodeV220AppendWritten,
+            boolean nodeV220QueryReturnedRecords,
+            boolean nodeV220ExternalManagedAuditAccessed,
+            boolean nodeV220LocalDryRunWritePerformed,
+            boolean javaApprovalDecisionCreated,
+            boolean javaApprovalLedgerWritten,
+            boolean javaApprovalRecordPersisted,
+            boolean javaManagedAuditStoreWritten,
+            boolean javaSqlExecuted,
+            boolean javaDeploymentTriggered,
+            boolean javaRollbackTriggered,
+            boolean javaRestoreExecuted,
+            boolean readyForNodeV221LocalAdapterCandidateDryRun,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String guardDigest,
+            List<String> acceptedAdapterShellChecks,
+            List<String> forbiddenImplementationOperations,
+            List<String> nodeV221Prerequisites,
+            List<String> guardWarnings,
             List<String> nodeVerificationActions
     ) {
     }

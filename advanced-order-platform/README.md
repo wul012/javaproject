@@ -1677,7 +1677,7 @@ Invoke-RestMethod `
 liveReadinessHint.hintVersion=java-release-approval-rehearsal-live-readiness-hint.v1
 liveReadinessHint.serverTimestamp=<sampledAt>
 liveReadinessHint.serverTimestampSource=sampledAt
-liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v13
+liveReadinessHint.readOnlyEndpointVersion=java-release-approval-rehearsal-response-schema.v14
 liveReadinessHint.readOnlyEndpoint=/api/v1/ops/release-approval-rehearsal
 liveReadinessHint.healthEndpoint=/actuator/health
 liveReadinessHint.sourcePreflightVersion=three-project-real-read-runtime-smoke-preflight.v1
@@ -1972,6 +1972,44 @@ verificationHint.warningDigestInputs includes opsEvidenceServiceQualitySplitRece
 ```
 
 没有传入完整 Node v210 approval binding header 时，上游 v78 receipt 还未 ready，`opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=false` 且 `receiptWarnings` 包含 `NODE_V219_SOURCE_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_NOT_READY`。传入完整 header 后该 ready 字段可为 true，但仍只允许 Node v219 做 implementation precheck；真实 managed audit adapter wiring、生产审计写入和生产窗口仍然关闭。
+
+v80 起，release approval rehearsal 增加 `managedAuditAdapterImplementationGuardReceipt`，用于承接 Node v220 managed audit adapter disabled shell，并给 Node v221 local file/sqlite adapter candidate dry-run 提供 Java 侧只读 guard digest。该 receipt 只确认 Java 在 adapter shell 存在后仍不创建 approval decision、不写 approval ledger、不持久化 approval record、不写 managed audit store、不执行 SQL、部署、回滚或 restore；Node v220 仍保持 disabled adapter，local-dry-run 只被声明为后续候选：
+```text
+managedAuditAdapterImplementationGuardReceipt.receiptVersion=java-release-approval-rehearsal-managed-audit-adapter-implementation-guard-receipt.v1
+managedAuditAdapterImplementationGuardReceipt.sourceQualitySplitReceiptVersion=java-release-approval-rehearsal-ops-evidence-service-quality-split-receipt.v1
+managedAuditAdapterImplementationGuardReceipt.sourceQualitySplitSchemaVersion=java-release-approval-rehearsal-response-schema.v13
+managedAuditAdapterImplementationGuardReceipt.consumedByNodeDisabledShellVersion=Node v220
+managedAuditAdapterImplementationGuardReceipt.consumedByNodeDisabledShellProfile=managed-audit-adapter-disabled-shell.v1
+managedAuditAdapterImplementationGuardReceipt.consumedByNodeDisabledShellEndpoint=/api/v1/audit/managed-audit-adapter-disabled-shell
+managedAuditAdapterImplementationGuardReceipt.consumedByNodeDisabledShellState=disabled-shell-ready
+managedAuditAdapterImplementationGuardReceipt.nextNodeCandidateVersion=Node v221
+managedAuditAdapterImplementationGuardReceipt.nextNodeCandidateProfile=managed-audit-local-adapter-candidate-dry-run.v1
+managedAuditAdapterImplementationGuardReceipt.nodeV221MayConsume=true
+managedAuditAdapterImplementationGuardReceipt.nodeV220DisabledShellReady=true
+managedAuditAdapterImplementationGuardReceipt.nodeV220SelectedAdapterDisabled=true
+managedAuditAdapterImplementationGuardReceipt.nodeV220LocalDryRunOnlyDeclared=true
+managedAuditAdapterImplementationGuardReceipt.nodeV220AppendWritten=false
+managedAuditAdapterImplementationGuardReceipt.nodeV220QueryReturnedRecords=false
+managedAuditAdapterImplementationGuardReceipt.nodeV220ExternalManagedAuditAccessed=false
+managedAuditAdapterImplementationGuardReceipt.nodeV220LocalDryRunWritePerformed=false
+managedAuditAdapterImplementationGuardReceipt.javaApprovalDecisionCreated=false
+managedAuditAdapterImplementationGuardReceipt.javaApprovalLedgerWritten=false
+managedAuditAdapterImplementationGuardReceipt.javaApprovalRecordPersisted=false
+managedAuditAdapterImplementationGuardReceipt.javaManagedAuditStoreWritten=false
+managedAuditAdapterImplementationGuardReceipt.javaSqlExecuted=false
+managedAuditAdapterImplementationGuardReceipt.javaDeploymentTriggered=false
+managedAuditAdapterImplementationGuardReceipt.javaRollbackTriggered=false
+managedAuditAdapterImplementationGuardReceipt.javaRestoreExecuted=false
+managedAuditAdapterImplementationGuardReceipt.readyForNodeV221LocalAdapterCandidateDryRun=true
+managedAuditAdapterImplementationGuardReceipt.readyForProductionAudit=false
+managedAuditAdapterImplementationGuardReceipt.readyForProductionWindow=false
+managedAuditAdapterImplementationGuardReceipt.nodeMayTreatAsProductionAuditRecord=false
+managedAuditAdapterImplementationGuardReceipt.guardDigest=sha256:<stable-java-v80-guard-digest>
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v14
+verificationHint.warningDigestInputs includes managedAuditAdapterImplementationGuardReceiptWarnings, implementationGuardDigest, implementationGuardJavaApprovalLedgerWritten, implementationGuardJavaManagedAuditStoreWritten, implementationGuardJavaSqlExecuted, implementationGuardNodeV220AppendWritten, implementationGuardNodeV220ExternalManagedAuditAccessed, implementationGuardNodeV220LocalDryRunWritePerformed
+```
+
+没有传入完整 Node v210 approval binding header 时，上游 v79 receipt 还未 ready，`managedAuditAdapterImplementationGuardReceipt.readyForNodeV221LocalAdapterCandidateDryRun=false` 且 `guardWarnings` 包含 `NODE_V221_SOURCE_OPS_EVIDENCE_SERVICE_QUALITY_SPLIT_RECEIPT_NOT_READY`。传入完整 header 后该 ready 字段可为 true，但仍只允许 Node v221 做本地 file/sqlite candidate dry-run；真实外部 managed audit、生产审计写入和生产窗口仍然关闭。
 查询失败事件治理摘要：
 
 ```powershell
@@ -2566,6 +2604,7 @@ ops
   -> v77 增强 release approval rehearsal 只读 managed-audit adapter boundary receipt，标注 Node v215 只能写本地 dry-run 文件，不能连接真实审计、写审批 ledger、执行 SQL、部署、回滚或 restore
   -> v78 增强 release approval rehearsal 只读 managed-audit production adapter prerequisite receipt，承接 Node v216 archive verification，给 Node v217 production-hardening readiness gate 标注前置条件和 no-production-operation 边界
   -> v79 增强 release approval rehearsal 只读 OpsEvidenceService quality split receipt，承接 Node v218 质量收口，给 Node v219 implementation precheck 标注 receipt/digest/hint/render/record 职责拆分边界
+  -> v80 增强 release approval rehearsal 只读 managed-audit adapter implementation guard receipt，承接 Node v220 disabled shell，给 Node v221 local adapter candidate dry-run 提供 guard digest 和 no-write 边界
 
 common
  -> 业务异常和统一错误响应
