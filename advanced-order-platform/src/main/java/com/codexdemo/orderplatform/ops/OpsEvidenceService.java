@@ -67,6 +67,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_IMPLEMENTATION_GUARD_RECEIPT_VERSION =
             "java-release-approval-rehearsal-managed-audit-adapter-implementation-guard-receipt.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_EXTERNAL_ADAPTER_MIGRATION_GUARD_RECEIPT_VERSION =
+            "java-release-approval-rehearsal-managed-audit-external-adapter-migration-guard-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -82,6 +85,9 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_OPS_EVIDENCE_SERVICE_QUALITY_SPLIT_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v13";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_IMPLEMENTATION_GUARD_SCHEMA_VERSION =
+            "java-release-approval-rehearsal-response-schema.v14";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -89,7 +95,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v14";
+            "java-release-approval-rehearsal-response-schema.v15";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -155,6 +161,19 @@ public class OpsEvidenceService {
 
     static final String NODE_V221_MANAGED_AUDIT_LOCAL_ADAPTER_CANDIDATE_DRY_RUN_PROFILE =
             "managed-audit-local-adapter-candidate-dry-run.v1";
+
+    static final String NODE_V222_MANAGED_AUDIT_LOCAL_ADAPTER_CANDIDATE_VERIFICATION_REPORT_VERSION = "Node v222";
+
+    static final String NODE_V222_MANAGED_AUDIT_LOCAL_ADAPTER_CANDIDATE_VERIFICATION_REPORT_PROFILE =
+            "managed-audit-local-adapter-candidate-verification-report.v1";
+
+    static final String NODE_V222_MANAGED_AUDIT_LOCAL_ADAPTER_CANDIDATE_VERIFICATION_REPORT_ENDPOINT =
+            "/api/v1/audit/managed-audit-local-adapter-candidate-verification-report";
+
+    static final String NODE_V223_MANAGED_AUDIT_EXTERNAL_ADAPTER_CONNECTION_READINESS_REVIEW_VERSION = "Node v223";
+
+    static final String NODE_V223_MANAGED_AUDIT_EXTERNAL_ADAPTER_CONNECTION_READINESS_REVIEW_PROFILE =
+            "managed-audit-external-adapter-connection-readiness-review.v1";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";
@@ -741,6 +760,10 @@ public class OpsEvidenceService {
                         rehearsalManagedAuditAdapterImplementationGuardReceipt(
                                 opsEvidenceServiceQualitySplitReceipt
                         );
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
+                managedAuditExternalAdapterMigrationGuardReceipt =
+                        new ReleaseApprovalManagedAuditExternalAdapterMigrationGuardReceiptBuilder()
+                                .build(managedAuditAdapterImplementationGuardReceipt);
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -768,6 +791,7 @@ public class OpsEvidenceService {
                 managedAuditProductionAdapterPrerequisiteReceipt,
                 opsEvidenceServiceQualitySplitReceipt,
                 managedAuditAdapterImplementationGuardReceipt,
+                managedAuditExternalAdapterMigrationGuardReceipt,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -782,6 +806,7 @@ public class OpsEvidenceService {
                         managedAuditProductionAdapterPrerequisiteReceipt,
                         opsEvidenceServiceQualitySplitReceipt,
                         managedAuditAdapterImplementationGuardReceipt,
+                        managedAuditExternalAdapterMigrationGuardReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -812,6 +837,8 @@ public class OpsEvidenceService {
                     opsEvidenceServiceQualitySplitReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
                     managedAuditAdapterImplementationGuardReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
+                    managedAuditExternalAdapterMigrationGuardReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -828,6 +855,7 @@ public class OpsEvidenceService {
                 "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
                 "opsEvidenceServiceQualitySplitReceiptWarnings",
                 "managedAuditAdapterImplementationGuardReceiptWarnings",
+                "managedAuditExternalAdapterMigrationGuardReceiptWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -863,6 +891,14 @@ public class OpsEvidenceService {
                 "implementationGuardNodeV220AppendWritten",
                 "implementationGuardNodeV220ExternalManagedAuditAccessed",
                 "implementationGuardNodeV220LocalDryRunWritePerformed",
+                "externalAdapterMigrationGuardDigest",
+                "externalAdapterMigrationCredentialValueReadByJava",
+                "externalAdapterMigrationConnectionOpened",
+                "externalAdapterMigrationSchemaMigrated",
+                "externalAdapterMigrationJavaManagedAuditStoreWritten",
+                "externalAdapterMigrationJavaSqlExecuted",
+                "externalAdapterMigrationNodeV222SourceEndpointRerunPerformed",
+                "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed",
                 "nodeMayWriteApprovalLedger"
         );
         List<String> proofClaims = List.of(
@@ -933,6 +969,15 @@ public class OpsEvidenceService {
                 "managedAuditAdapterImplementationGuardReceipt.javaSqlExecuted=false",
                 "managedAuditAdapterImplementationGuardReceipt.javaDeploymentTriggered=false",
                 "managedAuditAdapterImplementationGuardReceipt.javaRollbackTriggered=false",
+                "managedAuditExternalAdapterMigrationGuardReceipt.ownerApprovalRequiredBeforeConnection=true",
+                "managedAuditExternalAdapterMigrationGuardReceipt.schemaMigrationReviewRequired=true",
+                "managedAuditExternalAdapterMigrationGuardReceipt.credentialReviewRequired=true",
+                "managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava=false",
+                "managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened=false",
+                "managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditSchemaMigrated=false",
+                "managedAuditExternalAdapterMigrationGuardReceipt.javaApprovalLedgerWritten=false",
+                "managedAuditExternalAdapterMigrationGuardReceipt.javaManagedAuditStoreWritten=false",
+                "managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -955,6 +1000,7 @@ public class OpsEvidenceService {
                         managedAuditProductionAdapterPrerequisiteReceipt,
                         opsEvidenceServiceQualitySplitReceipt,
                         managedAuditAdapterImplementationGuardReceipt,
+                        managedAuditExternalAdapterMigrationGuardReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -1025,6 +1071,21 @@ public class OpsEvidenceService {
                         && !managedAuditAdapterImplementationGuardReceipt.javaDeploymentTriggered()
                         && !managedAuditAdapterImplementationGuardReceipt.javaRollbackTriggered()
                         && !managedAuditAdapterImplementationGuardReceipt.javaRestoreExecuted()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.nodeV222SourceEndpointRerunPerformed()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.nodeV222AdditionalLocalDryRunWritePerformed()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.nodeV222ConnectsManagedAudit()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.credentialValueStoredByJava()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditSchemaMigrated()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaApprovalDecisionCreated()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaApprovalLedgerWritten()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaApprovalRecordPersisted()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaManagedAuditStoreWritten()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaDeploymentTriggered()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaRollbackTriggered()
+                        && !managedAuditExternalAdapterMigrationGuardReceipt.javaRestoreExecuted()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -1043,6 +1104,7 @@ public class OpsEvidenceService {
                         "managedAuditProductionAdapterPrerequisiteReceipt",
                         "opsEvidenceServiceQualitySplitReceipt",
                         "managedAuditAdapterImplementationGuardReceipt",
+                        "managedAuditExternalAdapterMigrationGuardReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -1090,6 +1152,11 @@ public class OpsEvidenceService {
                         "Keep managedAuditAdapterImplementationGuardReceipt.javaApprovalLedgerWritten=false",
                         "Keep managedAuditAdapterImplementationGuardReceipt.nodeV220AppendWritten=false",
                         "Keep managedAuditAdapterImplementationGuardReceipt.nodeV220ExternalManagedAuditAccessed=false",
+                        "Compare managedAuditExternalAdapterMigrationGuardReceipt.consumedByNodeVerificationReportProfile with Node v222",
+                        "Require managedAuditExternalAdapterMigrationGuardReceipt.readyForNodeV223ExternalAdapterConnectionReadinessReview=true before Node v223",
+                        "Keep managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava=false",
+                        "Keep managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened=false",
+                        "Keep managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -1115,6 +1182,8 @@ public class OpsEvidenceService {
                     opsEvidenceServiceQualitySplitReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
                     managedAuditAdapterImplementationGuardReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
+                    managedAuditExternalAdapterMigrationGuardReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -1142,6 +1211,10 @@ public class OpsEvidenceService {
                 line(
                         "managedAuditAdapterImplementationGuardReceiptWarnings",
                         managedAuditAdapterImplementationGuardReceipt.guardWarnings()
+                ),
+                line(
+                        "managedAuditExternalAdapterMigrationGuardReceiptWarnings",
+                        managedAuditExternalAdapterMigrationGuardReceipt.guardWarnings()
                 ),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
@@ -1264,6 +1337,38 @@ public class OpsEvidenceService {
                 line(
                         "implementationGuardNodeV220LocalDryRunWritePerformed",
                         managedAuditAdapterImplementationGuardReceipt.nodeV220LocalDryRunWritePerformed()
+                ),
+                line(
+                        "externalAdapterMigrationGuardDigest",
+                        managedAuditExternalAdapterMigrationGuardReceipt.guardDigest()
+                ),
+                line(
+                        "externalAdapterMigrationCredentialValueReadByJava",
+                        managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava()
+                ),
+                line(
+                        "externalAdapterMigrationConnectionOpened",
+                        managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened()
+                ),
+                line(
+                        "externalAdapterMigrationSchemaMigrated",
+                        managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditSchemaMigrated()
+                ),
+                line(
+                        "externalAdapterMigrationJavaManagedAuditStoreWritten",
+                        managedAuditExternalAdapterMigrationGuardReceipt.javaManagedAuditStoreWritten()
+                ),
+                line(
+                        "externalAdapterMigrationJavaSqlExecuted",
+                        managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted()
+                ),
+                line(
+                        "externalAdapterMigrationNodeV222SourceEndpointRerunPerformed",
+                        managedAuditExternalAdapterMigrationGuardReceipt.nodeV222SourceEndpointRerunPerformed()
+                ),
+                line(
+                        "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed",
+                        managedAuditExternalAdapterMigrationGuardReceipt.nodeV222AdditionalLocalDryRunWritePerformed()
                 ),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));

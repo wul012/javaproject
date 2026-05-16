@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v14");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v15");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -1626,6 +1626,120 @@ class OpsEvidenceServiceTests {
                         "Keep managedAuditAdapterImplementationGuardReceipt.javaApprovalLedgerWritten=false",
                         "Keep managedAuditAdapterImplementationGuardReceipt.nodeV220AppendWritten=false"
                 );
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().receiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-external-adapter-migration-guard-receipt.v1"
+                );
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .sourceImplementationGuardReceiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-adapter-implementation-guard-receipt.v1"
+                );
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .sourceImplementationGuardSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v14");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .consumedByNodeVerificationReportVersion()).isEqualTo("Node v222");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .consumedByNodeVerificationReportProfile())
+                .isEqualTo("managed-audit-local-adapter-candidate-verification-report.v1");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .consumedByNodeVerificationReportEndpoint())
+                .isEqualTo("/api/v1/audit/managed-audit-local-adapter-candidate-verification-report");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .consumedByNodeVerificationReportState())
+                .isEqualTo("local-adapter-candidate-verification-ready");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nextNodeReviewVersion())
+                .isEqualTo("Node v223");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nextNodeReviewProfile())
+                .isEqualTo("managed-audit-external-adapter-connection-readiness-review.v1");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nodeV223MayConsume()).isTrue();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nodeV222VerificationReportReady())
+                .isTrue();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nodeV222ReadOnlyReport())
+                .isTrue();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeV222SourceEndpointRerunPerformed()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeV222AdditionalLocalDryRunWritePerformed()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nodeV222ConnectsManagedAudit())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeV222ReadyForProductionAudit()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .ownerApprovalRequiredBeforeConnection()).isTrue();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .schemaMigrationReviewRequired()).isTrue();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().credentialReviewRequired())
+                .isTrue();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().credentialValueReadByJava())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().credentialValueStoredByJava())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .externalManagedAuditConnectionOpened()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .externalManagedAuditSchemaMigrated()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaApprovalDecisionCreated())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaApprovalLedgerWritten())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaApprovalRecordPersisted())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaManagedAuditStoreWritten())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaSqlExecuted()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaDeploymentTriggered())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaRollbackTriggered())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().javaRestoreExecuted())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .readyForNodeV223ExternalAdapterConnectionReadinessReview()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().readyForProductionAudit())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().readyForProductionWindow())
+                .isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().guardDigest())
+                .startsWith("sha256:");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().requiredPreConnectionReviews())
+                .contains(
+                        "external managed audit owner approval",
+                        "external managed audit schema migration review",
+                        "external managed audit credential review"
+                );
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().credentialBoundaryClaims())
+                .contains(
+                        "Java v81 must not read credential values",
+                        "Java v81 must not store credential values",
+                        "Java v81 must not open an external managed audit connection"
+                );
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .forbiddenExternalAdapterOperations())
+                .contains(
+                        "Open external managed audit connection during Java v81 migration guard",
+                        "Execute schema migration SQL during Java v81 migration guard",
+                        "Write managed audit store during Java v81 migration guard"
+                );
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nodeV223Prerequisites())
+                .contains(
+                        "Node v222 verification report must be ready and read-only",
+                        "Java v81 external adapter migration guard receipt must be ready",
+                        "mini-kv v90 external adapter non-participation receipt must be present before Node v223",
+                        "UPSTREAM_ACTIONS_ENABLED must remain false"
+                );
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().guardWarnings())
+                .containsExactly("NODE_V223_SOURCE_IMPLEMENTATION_GUARD_RECEIPT_NOT_READY");
+        assertThat(rehearsal.managedAuditExternalAdapterMigrationGuardReceipt().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditExternalAdapterMigrationGuardReceipt.consumedByNodeVerificationReportProfile with Node v222",
+                        "Require managedAuditExternalAdapterMigrationGuardReceipt.readyForNodeV223ExternalAdapterConnectionReadinessReview=true before Node v223",
+                        "Keep managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava=false",
+                        "Keep managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -1651,7 +1765,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v14");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v15");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -1671,6 +1785,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditProductionAdapterPrerequisiteReceipt",
                         "opsEvidenceServiceQualitySplitReceipt",
                         "managedAuditAdapterImplementationGuardReceipt",
+                        "managedAuditExternalAdapterMigrationGuardReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -1689,6 +1804,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
                         "opsEvidenceServiceQualitySplitReceiptWarnings",
                         "managedAuditAdapterImplementationGuardReceiptWarnings",
+                        "managedAuditExternalAdapterMigrationGuardReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -1724,6 +1840,14 @@ class OpsEvidenceServiceTests {
                         "implementationGuardNodeV220AppendWritten",
                         "implementationGuardNodeV220ExternalManagedAuditAccessed",
                         "implementationGuardNodeV220LocalDryRunWritePerformed",
+                        "externalAdapterMigrationGuardDigest",
+                        "externalAdapterMigrationCredentialValueReadByJava",
+                        "externalAdapterMigrationConnectionOpened",
+                        "externalAdapterMigrationSchemaMigrated",
+                        "externalAdapterMigrationJavaManagedAuditStoreWritten",
+                        "externalAdapterMigrationJavaSqlExecuted",
+                        "externalAdapterMigrationNodeV222SourceEndpointRerunPerformed",
+                        "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -1764,6 +1888,10 @@ class OpsEvidenceServiceTests {
                         "managedAuditAdapterImplementationGuardReceipt.nodeV220AppendWritten=false",
                         "managedAuditAdapterImplementationGuardReceipt.javaApprovalLedgerWritten=false",
                         "managedAuditAdapterImplementationGuardReceipt.javaSqlExecuted=false",
+                        "managedAuditExternalAdapterMigrationGuardReceipt.ownerApprovalRequiredBeforeConnection=true",
+                        "managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava=false",
+                        "managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened=false",
+                        "managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -1783,6 +1911,8 @@ class OpsEvidenceServiceTests {
                         "Require opsEvidenceServiceQualitySplitReceipt.readyForNodeV219ImplementationPrecheck=true before Node v219",
                         "Compare managedAuditAdapterImplementationGuardReceipt.consumedByNodeDisabledShellProfile with Node v220",
                         "Require managedAuditAdapterImplementationGuardReceipt.readyForNodeV221LocalAdapterCandidateDryRun=true before Node v221",
+                        "Compare managedAuditExternalAdapterMigrationGuardReceipt.consumedByNodeVerificationReportProfile with Node v222",
+                        "Require managedAuditExternalAdapterMigrationGuardReceipt.readyForNodeV223ExternalAdapterConnectionReadinessReview=true before Node v223",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -2243,6 +2373,47 @@ class OpsEvidenceServiceTests {
                 .nodeMayTreatAsProductionAuditRecord()).isFalse();
         assertThat(headerBackedRehearsal.managedAuditAdapterImplementationGuardReceipt().guardDigest())
                 .startsWith("sha256:");
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .readyForNodeV223ExternalAdapterConnectionReadinessReview()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt().guardWarnings())
+                .isEmpty();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .consumedByNodeVerificationReportProfile())
+                .isEqualTo("managed-audit-local-adapter-candidate-verification-report.v1");
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeV222ReadOnlyReport()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeV222SourceEndpointRerunPerformed()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeV222AdditionalLocalDryRunWritePerformed()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeV222ConnectsManagedAudit()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .ownerApprovalRequiredBeforeConnection()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .schemaMigrationReviewRequired()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .credentialReviewRequired()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .credentialValueReadByJava()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .externalManagedAuditConnectionOpened()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .externalManagedAuditSchemaMigrated()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .javaApprovalLedgerWritten()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .javaManagedAuditStoreWritten()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .javaSqlExecuted()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .readyForProductionAudit()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .readyForProductionWindow()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt()
+                .nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt().guardDigest())
+                .startsWith("sha256:");
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -2255,7 +2426,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v14");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v15");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -2298,6 +2469,8 @@ class OpsEvidenceServiceTests {
                 .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());
         assertThat(repeatedHeaderBackedRehearsal.managedAuditAdapterImplementationGuardReceipt().guardDigest())
                 .isEqualTo(headerBackedRehearsal.managedAuditAdapterImplementationGuardReceipt().guardDigest());
+        assertThat(repeatedHeaderBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt().guardDigest())
+                .isEqualTo(headerBackedRehearsal.managedAuditExternalAdapterMigrationGuardReceipt().guardDigest());
         assertThat(headerBackedRehearsal.verificationHint().noLedgerWriteProved()).isTrue();
         assertThat(headerBackedRehearsal.verificationHint().nodeMayTreatAsProductionAuthorization()).isFalse();
         assertThat(headerBackedRehearsal.requestContext().operatorAuthenticatedByJava()).isFalse();
