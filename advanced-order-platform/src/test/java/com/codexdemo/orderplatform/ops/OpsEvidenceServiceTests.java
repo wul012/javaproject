@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v11");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v12");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -1338,6 +1338,124 @@ class OpsEvidenceServiceTests {
                         "Require managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=true before Node v215",
                         "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false"
                 );
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().receiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-production-adapter-prerequisite-receipt.v1"
+                );
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .sourceManagedAuditAdapterBoundaryReceiptVersion())
+                .isEqualTo("java-release-approval-rehearsal-managed-audit-adapter-boundary-receipt.v1");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .sourceManagedAuditAdapterBoundarySchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v11");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .consumedByNodeArchiveVerificationVersion())
+                .isEqualTo("managed-audit-dry-run-adapter-archive-verification.v1");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .consumedByNodeArchiveVerificationState())
+                .isEqualTo("verified-dry-run-adapter-archive");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .consumedByNodeArchiveVerificationEndpoint())
+                .isEqualTo("/api/v1/audit/managed-audit-dry-run-adapter-archive-verification");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nextNodeGateVersion())
+                .isEqualTo("Node v217");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nextNodeGateProfile())
+                .isEqualTo("managed-audit-adapter-production-hardening-readiness-gate.v1");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217MayConsume()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .operatorIdentityPrerequisiteDocumented()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .approvalDecisionSourcePrerequisiteDocumented()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .ledgerHandoffPrerequisiteDocumented()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .retentionOwnerPrerequisiteDocumented()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .failureHandlingPrerequisiteDocumented()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .rollbackReviewPrerequisiteDocumented()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .externalManagedAuditStorageConfigRequired()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .productionIdentityProviderRequired()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .approvalDecisionSourceRequired()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().ledgerHandoffRequired()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().retentionOwnerRequired()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().failureHandlingRequired()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().rollbackReviewRequired()).isTrue();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaCreatesApprovalDecision())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaWritesApprovalLedger())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaPersistsApprovalRecord())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaWritesManagedAuditStore())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaExecutesSql()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaTriggersDeployment())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaTriggersRollback()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaExecutesRestore()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217MayConnectManagedAudit())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217MayWriteApprovalLedger())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217MayExecuteSql()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217MayTriggerDeployment())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217MayTriggerRollback())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217MayExecuteRestore())
+                .isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .readyForNodeV217ProductionHardeningReadinessGate()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().readyForProductionAudit()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().readyForProductionWindow()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .readyForProductionOperations()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().prerequisiteCategories())
+                .contains(
+                        "operator identity",
+                        "approval decision source",
+                        "ledger handoff",
+                        "retention owner",
+                        "failure handling",
+                        "rollback review"
+                );
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .prerequisiteEvidenceRequired())
+                .contains(
+                        "Production operator identity must be bound by a real IdP outside Java v78",
+                        "Approval decision source must be a real approval workflow outside Java v78",
+                        "Approval ledger handoff must define ownership and append semantics outside Java v78",
+                        "Rollback review evidence must exist before production adapter work"
+                );
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .forbiddenProductionAdapterOperations())
+                .contains(
+                        "Connect real managed audit storage from Java v78 or Node v217",
+                        "Write approval ledger from Java v78 or Node v217",
+                        "Execute Java SQL from Java v78 or Node v217",
+                        "Open production audit window from this receipt"
+                );
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeV217Prerequisites())
+                .contains(
+                        "Node v216 managed audit dry-run adapter archive verification must be verified",
+                        "Java v78 managed audit production adapter prerequisite receipt must be ready",
+                        "mini-kv v87 managed audit adapter non-authoritative storage receipt must be present",
+                        "UPSTREAM_ACTIONS_ENABLED must remain false"
+                );
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().receiptWarnings())
+                .containsExactly("NODE_V217_SOURCE_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_NOT_READY");
+        assertThat(rehearsal.managedAuditProductionAdapterPrerequisiteReceipt().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditProductionAdapterPrerequisiteReceipt.consumedByNodeArchiveVerificationVersion with Node v216 profileVersion",
+                        "Require managedAuditProductionAdapterPrerequisiteReceipt.readyForNodeV217ProductionHardeningReadinessGate=true before Node v217",
+                        "Keep managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false"
+                );
         assertThat(rehearsal.failureTaxonomy().taxonomyVersion())
                 .isEqualTo("java-release-approval-rehearsal-failure-taxonomy.v1");
         assertThat(rehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
@@ -1363,7 +1481,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v11");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v12");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -1380,6 +1498,7 @@ class OpsEvidenceServiceTests {
                         "approvalRecordHandoffHint",
                         "approvalHandoffVerificationMarker",
                         "managedAuditAdapterBoundaryReceipt",
+                        "managedAuditProductionAdapterPrerequisiteReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -1395,6 +1514,7 @@ class OpsEvidenceServiceTests {
                         "approvalRecordHandoffEchoWarnings",
                         "approvalHandoffVerificationMarkerWarnings",
                         "managedAuditAdapterBoundaryReceiptWarnings",
+                        "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -1412,6 +1532,12 @@ class OpsEvidenceServiceTests {
                         "nodeV215MayTriggerDeployment",
                         "nodeV215MayTriggerRollback",
                         "nodeV215MayExecuteRestore",
+                        "nodeV217MayConnectManagedAudit",
+                        "nodeV217MayWriteApprovalLedger",
+                        "nodeV217MayExecuteSql",
+                        "nodeV217MayTriggerDeployment",
+                        "nodeV217MayTriggerRollback",
+                        "nodeV217MayExecuteRestore",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -1439,6 +1565,12 @@ class OpsEvidenceServiceTests {
                         "managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql=false",
                         "managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment=false",
                         "managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore=false",
+                        "managedAuditProductionAdapterPrerequisiteReceipt.javaCreatesApprovalDecision=false",
+                        "managedAuditProductionAdapterPrerequisiteReceipt.javaWritesApprovalLedger=false",
+                        "managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql=false",
+                        "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false",
+                        "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayWriteApprovalLedger=false",
+                        "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteSql=false",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -1452,6 +1584,8 @@ class OpsEvidenceServiceTests {
                         "Compare approvalHandoffVerificationMarker.consumedByNodeProfileVersion with Node v211 packet profile",
                         "Compare managedAuditAdapterBoundaryReceipt.consumedByNodeArchiveVerificationVersion with Node v214 profileVersion",
                         "Require managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate=true before Node v215",
+                        "Compare managedAuditProductionAdapterPrerequisiteReceipt.consumedByNodeArchiveVerificationVersion with Node v216 profileVersion",
+                        "Require managedAuditProductionAdapterPrerequisiteReceipt.readyForNodeV217ProductionHardeningReadinessGate=true before Node v217",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -1801,6 +1935,56 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.managedAuditAdapterBoundaryReceipt().readyForProductionWindow()).isFalse();
         assertThat(headerBackedRehearsal.managedAuditAdapterBoundaryReceipt()
                 .nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .readyForNodeV217ProductionHardeningReadinessGate()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt().receiptWarnings())
+                .isEmpty();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .operatorIdentityPrerequisiteDocumented()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .approvalDecisionSourcePrerequisiteDocumented()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .ledgerHandoffPrerequisiteDocumented()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .retentionOwnerPrerequisiteDocumented()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .failureHandlingPrerequisiteDocumented()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .rollbackReviewPrerequisiteDocumented()).isTrue();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .javaCreatesApprovalDecision()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .javaWritesApprovalLedger()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .javaWritesManagedAuditStore()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt().javaExecutesSql())
+                .isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .javaTriggersDeployment()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .javaTriggersRollback()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .javaExecutesRestore()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeV217MayConnectManagedAudit()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeV217MayWriteApprovalLedger()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeV217MayExecuteSql()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeV217MayTriggerDeployment()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeV217MayTriggerRollback()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeV217MayExecuteRestore()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt().readyForProductionAudit())
+                .isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt().readyForProductionWindow())
+                .isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .readyForProductionOperations()).isFalse();
+        assertThat(headerBackedRehearsal.managedAuditProductionAdapterPrerequisiteReceipt()
+                .nodeMayTreatAsProductionAuditRecord()).isFalse();
         assertThat(headerBackedRehearsal.failureTaxonomy().upstreamReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().authContextReadiness()).isEqualTo("READY");
         assertThat(headerBackedRehearsal.failureTaxonomy().auditCorrelationReadiness()).isEqualTo("READY");
@@ -1813,7 +1997,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v11");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v12");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());

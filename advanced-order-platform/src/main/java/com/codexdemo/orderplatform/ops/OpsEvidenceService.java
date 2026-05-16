@@ -57,11 +57,18 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_VERSION =
             "java-release-approval-rehearsal-managed-audit-adapter-boundary-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-production-adapter-prerequisite-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_MARKER_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v10";
+
+    static final String RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_BOUNDARY_SCHEMA_VERSION =
+            "java-release-approval-rehearsal-response-schema.v11";
 
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
@@ -70,7 +77,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v11";
+            "java-release-approval-rehearsal-response-schema.v12";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -99,6 +106,20 @@ public class OpsEvidenceService {
 
     static final String NODE_V215_MANAGED_AUDIT_DRY_RUN_ADAPTER_CANDIDATE_PROFILE =
             "managed-audit-dry-run-adapter-candidate.v1";
+
+    static final String NODE_V216_DRY_RUN_ADAPTER_ARCHIVE_VERIFICATION_PROFILE_VERSION =
+            "managed-audit-dry-run-adapter-archive-verification.v1";
+
+    static final String NODE_V216_DRY_RUN_ADAPTER_ARCHIVE_VERIFICATION_STATE =
+            "verified-dry-run-adapter-archive";
+
+    static final String NODE_V216_DRY_RUN_ADAPTER_ARCHIVE_VERIFICATION_ENDPOINT =
+            "/api/v1/audit/managed-audit-dry-run-adapter-archive-verification";
+
+    static final String NODE_V217_PRODUCTION_HARDENING_READINESS_GATE_VERSION = "Node v217";
+
+    static final String NODE_V217_PRODUCTION_HARDENING_READINESS_GATE_PROFILE =
+            "managed-audit-adapter-production-hardening-readiness-gate.v1";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";
@@ -670,6 +691,11 @@ public class OpsEvidenceService {
         ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
                 managedAuditAdapterBoundaryReceipt =
                         rehearsalManagedAuditAdapterBoundaryReceipt(approvalHandoffVerificationMarker);
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+                managedAuditProductionAdapterPrerequisiteReceipt =
+                        rehearsalManagedAuditProductionAdapterPrerequisiteReceipt(
+                                managedAuditAdapterBoundaryReceipt
+                        );
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 releaseApprovalRehearsalFailureTaxonomy(
                         evidence,
@@ -694,6 +720,7 @@ public class OpsEvidenceService {
                 approvalRecordHandoffHint,
                 approvalHandoffVerificationMarker,
                 managedAuditAdapterBoundaryReceipt,
+                managedAuditProductionAdapterPrerequisiteReceipt,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -705,6 +732,7 @@ public class OpsEvidenceService {
                         approvalRecordHandoffHint,
                         approvalHandoffVerificationMarker,
                         managedAuditAdapterBoundaryReceipt,
+                        managedAuditProductionAdapterPrerequisiteReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -729,6 +757,8 @@ public class OpsEvidenceService {
                     approvalHandoffVerificationMarker,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
                     managedAuditAdapterBoundaryReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+                    managedAuditProductionAdapterPrerequisiteReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -742,6 +772,7 @@ public class OpsEvidenceService {
                 "approvalRecordHandoffEchoWarnings",
                 "approvalHandoffVerificationMarkerWarnings",
                 "managedAuditAdapterBoundaryReceiptWarnings",
+                "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
                 "failureCategories",
                 "taxonomyWarnings",
                 "executionAllowed",
@@ -759,6 +790,12 @@ public class OpsEvidenceService {
                 "nodeV215MayTriggerDeployment",
                 "nodeV215MayTriggerRollback",
                 "nodeV215MayExecuteRestore",
+                "nodeV217MayConnectManagedAudit",
+                "nodeV217MayWriteApprovalLedger",
+                "nodeV217MayExecuteSql",
+                "nodeV217MayTriggerDeployment",
+                "nodeV217MayTriggerRollback",
+                "nodeV217MayExecuteRestore",
                 "nodeMayWriteApprovalLedger"
         );
         List<String> proofClaims = List.of(
@@ -799,6 +836,20 @@ public class OpsEvidenceService {
                 "managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore=false",
                 "managedAuditAdapterBoundaryReceipt.javaApprovalDecisionCreated=false",
                 "managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaCreatesApprovalDecision=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaWritesApprovalLedger=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaPersistsApprovalRecord=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaWritesManagedAuditStore=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaTriggersDeployment=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaTriggersRollback=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesRestore=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayWriteApprovalLedger=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteSql=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerDeployment=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerRollback=false",
+                "managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore=false",
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
                 "executionBoundaries.nodeMayTriggerDeployment=false",
@@ -818,6 +869,7 @@ public class OpsEvidenceService {
                         approvalRecordHandoffHint,
                         approvalHandoffVerificationMarker,
                         managedAuditAdapterBoundaryReceipt,
+                        managedAuditProductionAdapterPrerequisiteReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -853,6 +905,20 @@ public class OpsEvidenceService {
                         && !managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten()
                         && !managedAuditAdapterBoundaryReceipt.javaApprovalRecordPersisted()
                         && !managedAuditAdapterBoundaryReceipt.javaManagedAuditWriteExecuted()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaCreatesApprovalDecision()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaWritesApprovalLedger()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaPersistsApprovalRecord()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaWritesManagedAuditStore()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaTriggersDeployment()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaTriggersRollback()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesRestore()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayWriteApprovalLedger()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteSql()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerDeployment()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerRollback()
+                        && !managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore()
                         && !executionBoundaries.nodeMayCreateApprovalDecision()
                         && !executionBoundaries.nodeMayWriteApprovalLedger(),
                 false,
@@ -868,6 +934,7 @@ public class OpsEvidenceService {
                         "approvalRecordHandoffHint",
                         "approvalHandoffVerificationMarker",
                         "managedAuditAdapterBoundaryReceipt",
+                        "managedAuditProductionAdapterPrerequisiteReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "releaseApprovalInputs",
@@ -900,6 +967,11 @@ public class OpsEvidenceService {
                         "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit=false",
                         "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision=false",
                         "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger=false",
+                        "Compare managedAuditProductionAdapterPrerequisiteReceipt.consumedByNodeArchiveVerificationVersion with Node v216 profileVersion",
+                        "Require managedAuditProductionAdapterPrerequisiteReceipt.readyForNodeV217ProductionHardeningReadinessGate=true before Node v217",
+                        "Keep managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false",
+                        "Keep managedAuditProductionAdapterPrerequisiteReceipt.javaWritesApprovalLedger=false",
+                        "Keep managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql=false",
                         "Compare warningDigest across closed-window and operator-window reads",
                         "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
@@ -919,6 +991,8 @@ public class OpsEvidenceService {
                     approvalHandoffVerificationMarker,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
                     managedAuditAdapterBoundaryReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+                    managedAuditProductionAdapterPrerequisiteReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -935,6 +1009,10 @@ public class OpsEvidenceService {
                 line("approvalRecordHandoffEchoWarnings", approvalRecordHandoffHint.echoWarnings()),
                 line("approvalHandoffVerificationMarkerWarnings", approvalHandoffVerificationMarker.markerWarnings()),
                 line("managedAuditAdapterBoundaryReceiptWarnings", managedAuditAdapterBoundaryReceipt.receiptWarnings()),
+                line(
+                        "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
+                        managedAuditProductionAdapterPrerequisiteReceipt.receiptWarnings()
+                ),
                 line("failureCategories", failureTaxonomy.failureCategories()),
                 line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
                 line("executionAllowed", false),
@@ -993,6 +1071,30 @@ public class OpsEvidenceService {
                 line(
                         "nodeV215MayExecuteRestore",
                         managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore()
+                ),
+                line(
+                        "nodeV217MayConnectManagedAudit",
+                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit()
+                ),
+                line(
+                        "nodeV217MayWriteApprovalLedger",
+                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayWriteApprovalLedger()
+                ),
+                line(
+                        "nodeV217MayExecuteSql",
+                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteSql()
+                ),
+                line(
+                        "nodeV217MayTriggerDeployment",
+                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerDeployment()
+                ),
+                line(
+                        "nodeV217MayTriggerRollback",
+                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerRollback()
+                ),
+                line(
+                        "nodeV217MayExecuteRestore",
+                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore()
                 ),
                 line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger())
         ));
@@ -1857,6 +1959,125 @@ public class OpsEvidenceService {
                         "Keep managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger=false"
                 )
         );
+    }
+
+    private ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+            rehearsalManagedAuditProductionAdapterPrerequisiteReceipt(
+                    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+                            managedAuditAdapterBoundaryReceipt
+    ) {
+        boolean sourceReceiptAccepted =
+                RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_VERSION.equals(
+                        managedAuditAdapterBoundaryReceipt.receiptVersion()
+                )
+                        && managedAuditAdapterBoundaryReceipt.readyForNodeV215DryRunAdapterCandidate()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayPersistApprovalRecord()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback()
+                        && !managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore()
+                        && !managedAuditAdapterBoundaryReceipt.javaApprovalDecisionCreated()
+                        && !managedAuditAdapterBoundaryReceipt.javaApprovalLedgerWritten()
+                        && !managedAuditAdapterBoundaryReceipt.javaApprovalRecordPersisted()
+                        && !managedAuditAdapterBoundaryReceipt.javaManagedAuditWriteExecuted()
+                        && !managedAuditAdapterBoundaryReceipt.nodeMayTreatAsProductionAuditRecord();
+        List<String> receiptWarnings = new ArrayList<>();
+        if (!sourceReceiptAccepted) {
+            receiptWarnings.add("NODE_V217_SOURCE_MANAGED_AUDIT_ADAPTER_BOUNDARY_RECEIPT_NOT_READY");
+        }
+        boolean prerequisitesDocumented = true;
+        boolean readyForNodeV217ProductionHardeningReadinessGate =
+                sourceReceiptAccepted && prerequisitesDocumented;
+
+        return new ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditProductionAdapterPrerequisiteReceipt(
+                        RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_PRODUCTION_ADAPTER_PREREQUISITE_RECEIPT_VERSION,
+                        managedAuditAdapterBoundaryReceipt.receiptVersion(),
+                        RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_ADAPTER_BOUNDARY_SCHEMA_VERSION,
+                        NODE_V216_DRY_RUN_ADAPTER_ARCHIVE_VERIFICATION_PROFILE_VERSION,
+                        NODE_V216_DRY_RUN_ADAPTER_ARCHIVE_VERIFICATION_STATE,
+                        NODE_V216_DRY_RUN_ADAPTER_ARCHIVE_VERIFICATION_ENDPOINT,
+                        NODE_V217_PRODUCTION_HARDENING_READINESS_GATE_VERSION,
+                        NODE_V217_PRODUCTION_HARDENING_READINESS_GATE_PROFILE,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        readyForNodeV217ProductionHardeningReadinessGate,
+                        false,
+                        false,
+                        false,
+                        false,
+                        List.of(
+                                "operator identity",
+                                "approval decision source",
+                                "ledger handoff",
+                                "retention owner",
+                                "failure handling",
+                                "rollback review"
+                        ),
+                        List.of(
+                                "Production operator identity must be bound by a real IdP outside Java v78",
+                                "Approval decision source must be a real approval workflow outside Java v78",
+                                "Approval ledger handoff must define ownership and append semantics outside Java v78",
+                                "Managed audit retention owner must be assigned before production adapter work",
+                                "Managed audit failure handling taxonomy must be reviewed before production adapter work",
+                                "Rollback review evidence must exist before production adapter work"
+                        ),
+                        List.of(
+                                "Connect real managed audit storage from Java v78 or Node v217",
+                                "Create real approval decision from Java v78",
+                                "Write approval ledger from Java v78 or Node v217",
+                                "Persist production approval record from Java v78",
+                                "Execute Java SQL from Java v78 or Node v217",
+                                "Trigger deployment from Java v78 or Node v217",
+                                "Trigger rollback from Java v78 or Node v217",
+                                "Execute restore from Java v78 or Node v217",
+                                "Open production audit window from this receipt"
+                        ),
+                        List.of(
+                                "Node v216 managed audit dry-run adapter archive verification must be verified",
+                                "Java v78 managed audit production adapter prerequisite receipt must be ready",
+                                "mini-kv v87 managed audit adapter non-authoritative storage receipt must be present",
+                                "Node v217 must remain a production-hardening readiness gate",
+                                "UPSTREAM_ACTIONS_ENABLED must remain false"
+                        ),
+                        List.copyOf(receiptWarnings),
+                        List.of(
+                                "Compare managedAuditProductionAdapterPrerequisiteReceipt.consumedByNodeArchiveVerificationVersion with Node v216 profileVersion",
+                                "Require managedAuditProductionAdapterPrerequisiteReceipt.readyForNodeV217ProductionHardeningReadinessGate=true before Node v217",
+                                "Keep managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit=false",
+                                "Keep managedAuditProductionAdapterPrerequisiteReceipt.javaWritesApprovalLedger=false",
+                                "Keep managedAuditProductionAdapterPrerequisiteReceipt.javaExecutesSql=false"
+                        )
+                );
     }
 
     private ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy releaseApprovalRehearsalFailureTaxonomy(
