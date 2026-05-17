@@ -34,6 +34,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionPreflightEchoMarker,
         RehearsalManagedAuditSandboxConnectionPreconditionReceipt
                 managedAuditSandboxConnectionPreconditionReceipt,
+        RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
+                managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -899,6 +901,82 @@ public record ReleaseApprovalRehearsalResponse(
             boolean javaStartsManagedAuditService,
             boolean nodeAutoStartAllowed,
             boolean actualConnectionAttemptedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt(
+            String receiptVersion,
+            String sourceSandboxConnectionPreconditionReceiptVersion,
+            String sourceSandboxConnectionPreconditionReceiptSchemaVersion,
+            String consumedByNodeDryRunRequestEnvelopeVersion,
+            String consumedByNodeDryRunRequestEnvelopeProfile,
+            String consumedByNodeDryRunRequestEnvelopeEndpoint,
+            String consumedByNodeDryRunRequestEnvelopeState,
+            String nextNodeReadinessGateVersion,
+            String nextNodeReadinessGateProfile,
+            boolean nodeV237MayConsume,
+            RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary envelopeFieldBoundary,
+            RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary credentialBoundary,
+            RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary javaExecutionBoundary,
+            boolean allEnvelopeFieldsEchoed,
+            boolean credentialValueExcluded,
+            boolean readyForNodeV237ManualSandboxConnectionReadinessGate,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> echoedEnvelopeFieldNames,
+            List<String> forbiddenEnvelopeOperations,
+            List<String> nodeV237Prerequisites,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary(
+            String ownerApprovalArtifactIdField,
+            String credentialHandleNameField,
+            String schemaRehearsalIdField,
+            String rollbackPathIdField,
+            String timeoutBudgetField,
+            String manualAbortMarkerField,
+            boolean ownerApprovalArtifactIdFieldEchoed,
+            boolean credentialHandleNameFieldEchoed,
+            boolean schemaRehearsalIdFieldEchoed,
+            boolean rollbackPathIdFieldEchoed,
+            boolean timeoutBudgetFieldEchoed,
+            boolean manualAbortMarkerFieldEchoed,
+            boolean operatorReviewFieldsComplete,
+            boolean dryRunEnvelopeReadOnly,
+            boolean envelopeCreatesConnectionCommand
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary(
+            String credentialHandleNameField,
+            boolean credentialHandleOnly,
+            boolean credentialValueIncludedInEnvelope,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean productionCredentialAllowed
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary(
+            boolean actualConnectionAttemptedByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean schemaMigrationRequestedByJava,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava,
+            boolean javaStartsManagedAuditService,
+            boolean nodeAutoStartAllowed,
+            boolean miniKvPermissionRequestedByJava
     ) {
     }
 

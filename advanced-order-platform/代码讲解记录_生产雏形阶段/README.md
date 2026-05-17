@@ -205,4 +205,6 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 94-version-91-release-approval-sandbox-connection-precondition-receipt.md
  -> 第九十一版 release approval sandbox connection precondition receipt，列出真实 sandbox connection 前置条件，但不打开连接、不读取 credential value、不执行 SQL
+95-version-92-release-approval-sandbox-connection-dry-run-envelope-echo-receipt.md
+ -> 第九十二版 release approval sandbox connection dry-run envelope echo receipt，只读回显 Node v236 envelope 六个字段名，证明不含 credential value、不连接、不执行 SQL、不写 ledger
 ```
