@@ -28,6 +28,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditExternalAdapterMigrationGuardReceipt,
         RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                 managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+        RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+                managedAuditSandboxConnectionOperatorHandoffMarker,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -609,6 +611,104 @@ public record ReleaseApprovalRehearsalResponse(
             boolean opsEvidenceServiceOnlyWiresReceipt,
             String builderClassName,
             List<String> enforcedQualityGates
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker(
+            String markerVersion,
+            String sourceSandboxAdapterApprovalSchemaGuardReceiptVersion,
+            String sourceSandboxAdapterApprovalSchemaGuardSchemaVersion,
+            String consumedByNodeEvidenceChecklistVersion,
+            String consumedByNodeEvidenceChecklistProfile,
+            String consumedByNodeOperatorPacketVersion,
+            String consumedByNodeOperatorPacketProfile,
+            String consumedByNodeOperatorPacketEndpoint,
+            String consumedByNodeOperatorPacketState,
+            String nextNodePacketVerificationVersion,
+            String nextNodePacketVerificationProfile,
+            boolean nodeV229MayConsume,
+            RehearsalSandboxConnectionWindowBoundary sandboxConnectionWindowBoundary,
+            RehearsalSandboxConnectionOperatorPacketBoundary operatorPacketBoundary,
+            RehearsalSandboxConnectionCredentialBoundary credentialBoundary,
+            RehearsalSandboxConnectionSchemaRehearsalBoundary schemaRehearsalBoundary,
+            RehearsalSandboxConnectionRollbackPathBoundary rollbackPathBoundary,
+            RehearsalSandboxConnectionJavaExecutionBoundary javaExecutionBoundary,
+            boolean readyForNodeV229ManualSandboxConnectionPacketVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String markerDigest,
+            List<String> acceptedOperatorPacketFields,
+            List<String> forbiddenHandoffOperations,
+            List<String> nodeV229Prerequisites,
+            List<String> markerWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionWindowBoundary(
+            boolean manualSandboxConnectionWindowRequired,
+            boolean manualSandboxConnectionWindowOpenedByJava,
+            boolean javaStartsManagedAuditService,
+            boolean nodeAutoStartAllowed,
+            boolean connectionExecutionAllowed,
+            boolean readyForManagedAuditSandboxAdapterConnection
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionOperatorPacketBoundary(
+            String ownerApprovalArtifactIdField,
+            String schemaRehearsalIdField,
+            String packetMode,
+            boolean operatorPacketReadOnly,
+            boolean manualReviewRequired,
+            boolean ownerApprovalArtifactIdFieldRecognizedByJava,
+            boolean schemaRehearsalIdFieldRecognizedByJava,
+            boolean packetCreatesApprovalDecision
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionCredentialBoundary(
+            String credentialHandleNameField,
+            boolean credentialHandleNameRecognizedByJava,
+            boolean credentialValueRequiredByJava,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean productionCredentialAllowed
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionSchemaRehearsalBoundary(
+            String schemaRehearsalIdField,
+            boolean schemaRehearsalIdRequired,
+            boolean schemaMigrationExecutionAllowed,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean schemaMigrationAppliedByJava
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionRollbackPathBoundary(
+            String rollbackPathIdField,
+            String manualAbortMarkerField,
+            int timeoutBudgetMs,
+            boolean rollbackPathIdRequired,
+            boolean manualAbortMarkerRequired,
+            boolean rollbackExecutionAllowedByJava,
+            boolean restoreExecutionAllowedByJava
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionJavaExecutionBoundary(
+            boolean approvalDecisionCreatedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean approvalRecordPersistedByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava
     ) {
     }
 

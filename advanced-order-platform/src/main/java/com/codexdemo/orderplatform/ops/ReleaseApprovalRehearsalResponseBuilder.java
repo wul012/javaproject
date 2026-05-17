@@ -168,6 +168,13 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditSandboxAdapterApprovalSchemaGuardReceipt =
                         sandboxAdapterApprovalSchemaGuardReceiptBuilder
                                 .build(managedAuditExternalAdapterMigrationGuardReceipt);
+        ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
+                sandboxConnectionOperatorHandoffMarkerBuilder =
+                        new ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder();
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+                managedAuditSandboxConnectionOperatorHandoffMarker =
+                        sandboxConnectionOperatorHandoffMarkerBuilder
+                                .build(managedAuditSandboxAdapterApprovalSchemaGuardReceipt);
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 failureTaxonomyBuilder.build(
                         evidence,
@@ -197,6 +204,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditAdapterImplementationGuardReceipt,
                 managedAuditExternalAdapterMigrationGuardReceipt,
                 managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+                managedAuditSandboxConnectionOperatorHandoffMarker,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -214,6 +222,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         managedAuditExternalAdapterMigrationGuardReceipt,
                         managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
                         sandboxAdapterApprovalSchemaGuardReceiptBuilder,
+                        managedAuditSandboxConnectionOperatorHandoffMarker,
+                        sandboxConnectionOperatorHandoffMarkerBuilder,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -250,10 +260,17 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                     managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
                     sandboxAdapterApprovalSchemaGuardReceiptBuilder,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+                    managedAuditSandboxConnectionOperatorHandoffMarker,
+            ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
+                    sandboxConnectionOperatorHandoffMarkerBuilder,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
-        return new ReleaseApprovalVerificationHintBuilder(sandboxAdapterApprovalSchemaGuardReceiptBuilder)
+        return new ReleaseApprovalVerificationHintBuilder(
+                sandboxAdapterApprovalSchemaGuardReceiptBuilder,
+                sandboxConnectionOperatorHandoffMarkerBuilder
+        )
                 .build(
                         requestContext,
                         operatorWindowHint,
@@ -269,6 +286,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         managedAuditAdapterImplementationGuardReceipt,
                         managedAuditExternalAdapterMigrationGuardReceipt,
                         managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+                        managedAuditSandboxConnectionOperatorHandoffMarker,
                         failureTaxonomy,
                         executionBoundaries
                 );

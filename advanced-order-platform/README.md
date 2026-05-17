@@ -2106,6 +2106,47 @@ v84 起，release approval rehearsal 继续做 contract-preserving refactor，�
 
 v85 起，release approval rehearsal 继续做更大幅度的 contract-preserving refactor，把 response 组装、header 归一化、request/operator/CI/artifact/live hint、audit/approval handoff hint、approval handoff marker 和 failure taxonomy 拆到专用 builder。该版本不新增响应字段，不修改 schema version、warning digest 输入、proof claims 或 read-only 边界；`OpsEvidenceService` 从 2605 行降到 1443 行，主服务只保留对外重载和 evidence 编排。
 v86 起，继续收口 builder 内部残留的裸布尔位置参数，把 request / operator / CI / artifact / live / handoff / marker 的内部状态改成语义 record / flags helper。该版本不改 response 契约，不改 schema version，不改 warning digest 输入顺序；`OpsEvidenceService` 仍保持 1443 行，外部可读路径不变，只是 builder 内部不再直接散落长串 `true/false`。
+v87 起，release approval rehearsal 新增 `managedAuditSandboxConnectionOperatorHandoffMarker`，用于承接 Node v228 `managed-audit-manual-sandbox-connection-operator-packet.v1`，并给 Node v229 packet verification 提供 Java 侧只读 handoff marker。该 marker 按 sandbox window、operator packet、credential、schema rehearsal、rollback path、Java execution 分组，说明 Java 只识别 owner artifact / schema rehearsal / credential handle / rollback / timeout / abort marker 字段；Java 仍不打开 sandbox connection，不读取 credential value，不执行 schema migration SQL，不写 approval ledger 或 managed audit store：
+
+```text
+managedAuditSandboxConnectionOperatorHandoffMarker.markerVersion=java-release-approval-rehearsal-managed-audit-sandbox-connection-operator-handoff-marker.v1
+managedAuditSandboxConnectionOperatorHandoffMarker.sourceSandboxAdapterApprovalSchemaGuardReceiptVersion=java-release-approval-rehearsal-managed-audit-sandbox-adapter-approval-schema-guard-receipt.v1
+managedAuditSandboxConnectionOperatorHandoffMarker.sourceSandboxAdapterApprovalSchemaGuardSchemaVersion=java-release-approval-rehearsal-response-schema.v16
+managedAuditSandboxConnectionOperatorHandoffMarker.consumedByNodeEvidenceChecklistVersion=Node v227
+managedAuditSandboxConnectionOperatorHandoffMarker.consumedByNodeEvidenceChecklistProfile=managed-audit-manual-sandbox-connection-evidence-checklist.v1
+managedAuditSandboxConnectionOperatorHandoffMarker.consumedByNodeOperatorPacketVersion=Node v228
+managedAuditSandboxConnectionOperatorHandoffMarker.consumedByNodeOperatorPacketProfile=managed-audit-manual-sandbox-connection-operator-packet.v1
+managedAuditSandboxConnectionOperatorHandoffMarker.consumedByNodeOperatorPacketEndpoint=/api/v1/audit/managed-audit-manual-sandbox-connection-operator-packet
+managedAuditSandboxConnectionOperatorHandoffMarker.nextNodePacketVerificationVersion=Node v229
+managedAuditSandboxConnectionOperatorHandoffMarker.nextNodePacketVerificationProfile=managed-audit-manual-sandbox-connection-packet-verification.v1
+managedAuditSandboxConnectionOperatorHandoffMarker.nodeV229MayConsume=true
+managedAuditSandboxConnectionOperatorHandoffMarker.sandboxConnectionWindowBoundary.manualSandboxConnectionWindowRequired=true
+managedAuditSandboxConnectionOperatorHandoffMarker.sandboxConnectionWindowBoundary.manualSandboxConnectionWindowOpenedByJava=false
+managedAuditSandboxConnectionOperatorHandoffMarker.sandboxConnectionWindowBoundary.connectionExecutionAllowed=false
+managedAuditSandboxConnectionOperatorHandoffMarker.operatorPacketBoundary.ownerApprovalArtifactIdField=ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID
+managedAuditSandboxConnectionOperatorHandoffMarker.operatorPacketBoundary.schemaRehearsalIdField=ORDEROPS_MANAGED_AUDIT_SCHEMA_REHEARSAL_ID
+managedAuditSandboxConnectionOperatorHandoffMarker.operatorPacketBoundary.operatorPacketReadOnly=true
+managedAuditSandboxConnectionOperatorHandoffMarker.operatorPacketBoundary.packetCreatesApprovalDecision=false
+managedAuditSandboxConnectionOperatorHandoffMarker.credentialBoundary.credentialHandleNameField=ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE
+managedAuditSandboxConnectionOperatorHandoffMarker.credentialBoundary.credentialValueReadByJava=false
+managedAuditSandboxConnectionOperatorHandoffMarker.schemaRehearsalBoundary.schemaMigrationSqlExecutedByJava=false
+managedAuditSandboxConnectionOperatorHandoffMarker.rollbackPathBoundary.rollbackPathIdField=ORDEROPS_MANAGED_AUDIT_ROLLBACK_PATH_ID
+managedAuditSandboxConnectionOperatorHandoffMarker.rollbackPathBoundary.manualAbortMarkerField=ORDEROPS_MANAGED_AUDIT_MANUAL_ABORT
+managedAuditSandboxConnectionOperatorHandoffMarker.rollbackPathBoundary.timeoutBudgetMs=15000
+managedAuditSandboxConnectionOperatorHandoffMarker.rollbackPathBoundary.rollbackExecutionAllowedByJava=false
+managedAuditSandboxConnectionOperatorHandoffMarker.javaExecutionBoundary.externalManagedAuditConnectionOpenedByJava=false
+managedAuditSandboxConnectionOperatorHandoffMarker.javaExecutionBoundary.approvalLedgerWrittenByJava=false
+managedAuditSandboxConnectionOperatorHandoffMarker.javaExecutionBoundary.sqlExecutedByJava=false
+managedAuditSandboxConnectionOperatorHandoffMarker.readyForNodeV229ManualSandboxConnectionPacketVerification=true
+managedAuditSandboxConnectionOperatorHandoffMarker.readyForManagedAuditSandboxAdapterConnection=false
+managedAuditSandboxConnectionOperatorHandoffMarker.readyForProductionAudit=false
+managedAuditSandboxConnectionOperatorHandoffMarker.nodeMayTreatAsProductionAuditRecord=false
+managedAuditSandboxConnectionOperatorHandoffMarker.markerDigest=sha256:<stable-java-v87-marker-digest>
+verificationHint.responseSchemaVersion=java-release-approval-rehearsal-response-schema.v17
+verificationHint.warningDigestInputs includes managedAuditSandboxConnectionOperatorHandoffMarkerWarnings, sandboxConnectionOperatorHandoffMarkerDigest, sandboxConnectionOperatorWindowOpenedByJava, sandboxConnectionCredentialValueReadByJava, sandboxConnectionSchemaMigrationSqlExecutedByJava, sandboxConnectionRollbackTriggeredByJava, sandboxConnectionExternalManagedAuditConnectionOpenedByJava
+```
+
+没有传入完整 Node v210 approval binding header 时，上游 v82 sandbox guard 还未 ready，`managedAuditSandboxConnectionOperatorHandoffMarker.readyForNodeV229ManualSandboxConnectionPacketVerification=false` 且 `markerWarnings` 包含 `NODE_V229_SOURCE_SANDBOX_ADAPTER_APPROVAL_SCHEMA_GUARD_RECEIPT_NOT_READY`。传入完整 header 后该 ready 字段可为 true，但仍只允许 Node v229 做 packet verification；Java 不执行连接、credential value 读取、SQL、部署、回滚或 restore。
 查询失败事件治理摘要：
 
 ```powershell
@@ -2708,6 +2749,7 @@ ops
   -> v84 contract-preserving refactor: extract managed-audit receipt builders, verification warning digest builder, and shared digest support; OpsEvidenceService now only wires the receipt chain
   -> v85 contract-preserving refactor: extract release approval rehearsal response, hint, handoff hint, and failure taxonomy builders; OpsEvidenceService now keeps the public overloads and evidence entry point at 1443 lines
   -> v86 contract-preserving refactor: wrap the remaining positional booleans inside release approval rehearsal builder internals with semantic record/flags helpers; OpsEvidenceService remains at 1443 lines
+  -> v87 adds release approval rehearsal managed-audit sandbox connection operator handoff marker for Node v228/v229 while keeping Java no-connection, no-credential-value, no-SQL, and no-ledger boundaries
 
 common
  -> 业务异常和统一错误响应

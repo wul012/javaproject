@@ -7,13 +7,19 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
 
     private final ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
             sandboxAdapterApprovalSchemaGuardReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
+            sandboxConnectionOperatorHandoffMarkerBuilder;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
-                    sandboxAdapterApprovalSchemaGuardReceiptBuilder
+                    sandboxAdapterApprovalSchemaGuardReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
+                    sandboxConnectionOperatorHandoffMarkerBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
+        this.sandboxConnectionOperatorHandoffMarkerBuilder =
+                sandboxConnectionOperatorHandoffMarkerBuilder;
     }
 
     String build(
@@ -38,6 +44,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                     managedAuditExternalAdapterMigrationGuardReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                     managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+                    managedAuditSandboxConnectionOperatorHandoffMarker,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -91,6 +99,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestWarningLines(
                 managedAuditSandboxAdapterApprovalSchemaGuardReceipt
+        ));
+        lines.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestWarningLines(
+                managedAuditSandboxConnectionOperatorHandoffMarker
         ));
         lines.addAll(List.of(
                 ReleaseApprovalDigestSupport.line("failureCategories", failureTaxonomy.failureCategories()),
@@ -286,6 +297,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestBoundaryLines(
                 managedAuditSandboxAdapterApprovalSchemaGuardReceipt
+        ));
+        lines.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestBoundaryLines(
+                managedAuditSandboxConnectionOperatorHandoffMarker
         ));
         lines.add(ReleaseApprovalDigestSupport.line(
                 "nodeMayWriteApprovalLedger",
