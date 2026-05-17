@@ -2103,6 +2103,8 @@ verificationHint.warningDigestInputs includes managedAuditSandboxAdapterApproval
 v83 起，release approval rehearsal 继续做 contract-preserving refactor，把 `verificationHint` 的构造与 `warningDigest` / `proofClaims` / `nodeVerificationActions` 从 `OpsEvidenceService` 抽到 `ReleaseApprovalVerificationHintBuilder`。这次拆分不改任何响应字段名、不改 digest 顺序、不改 proof claims、不改 read-only 边界；`OpsEvidenceService` 只保留一层转发，避免继续在主服务里堆 verification hint 的长方法。
 
 v84 起，release approval rehearsal 继续做 contract-preserving refactor，把 v77-v80 managed-audit receipt 构造链、verification warning digest 和共用 digest helper 从 `OpsEvidenceService` / `ReleaseApprovalVerificationHintBuilder` 拆到专用 builder。该版本不新增响应字段，不修改 schema version、warning digest 输入、proof claims 或 Node verification action；`OpsEvidenceService` 只负责串联 receipt builder。
+
+v85 起，release approval rehearsal 继续做更大幅度的 contract-preserving refactor，把 response 组装、header 归一化、request/operator/CI/artifact/live hint、audit/approval handoff hint、approval handoff marker 和 failure taxonomy 拆到专用 builder。该版本不新增响应字段，不修改 schema version、warning digest 输入、proof claims 或 read-only 边界；`OpsEvidenceService` 从 2605 行降到 1443 行，主服务只保留对外重载和 evidence 编排。
 查询失败事件治理摘要：
 
 ```powershell
@@ -2703,6 +2705,8 @@ ops
 
   -> v83 contract-preserving refactor: extract release approval verification hint builder from OpsEvidenceService without changing response fields, digest order, proof claims, or read-only boundaries
   -> v84 contract-preserving refactor: extract managed-audit receipt builders, verification warning digest builder, and shared digest support; OpsEvidenceService now only wires the receipt chain
+
+  -> v85 contract-preserving refactor: extract release approval rehearsal response, hint, handoff hint, and failure taxonomy builders; OpsEvidenceService now keeps the public overloads and evidence entry point at 1443 lines
 
 common
  -> 业务异常和统一错误响应
