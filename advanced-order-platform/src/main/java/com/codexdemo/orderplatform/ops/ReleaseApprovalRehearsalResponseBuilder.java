@@ -46,40 +46,41 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 new ReleaseApprovalRehearsalHandoffHintBuilder();
         ReleaseApprovalRehearsalFailureTaxonomyBuilder failureTaxonomyBuilder =
                 new ReleaseApprovalRehearsalFailureTaxonomyBuilder();
-        String normalizedRequestId = normalizeHeaderValue(requestId);
-        String normalizedOperatorIdentity = normalizeHeaderValue(operatorIdentity);
-        String normalizedAuditCorrelationId = normalizeHeaderValue(auditCorrelationId);
-        String normalizedOperatorWindowOperatorId = normalizeHeaderValue(operatorWindowOperatorId);
-        String normalizedOperatorWindowRoles = normalizeHeaderValue(operatorWindowRoles);
-        String normalizedOperatorWindowVerifiedClaim = normalizeHeaderValue(operatorWindowVerifiedClaim);
+        String normalizedRequestId = ContextHeaderField.normalizeValue(requestId);
+        String normalizedOperatorIdentity = ContextHeaderField.normalizeValue(operatorIdentity);
+        String normalizedAuditCorrelationId = ContextHeaderField.normalizeValue(auditCorrelationId);
+        String normalizedOperatorWindowOperatorId = ContextHeaderField.normalizeValue(operatorWindowOperatorId);
+        String normalizedOperatorWindowRoles = ContextHeaderField.normalizeValue(operatorWindowRoles);
+        String normalizedOperatorWindowVerifiedClaim = ContextHeaderField.normalizeValue(operatorWindowVerifiedClaim);
         String normalizedOperatorWindowApprovalCorrelationId =
-                normalizeHeaderValue(operatorWindowApprovalCorrelationId);
-        String normalizedCiManifestVersion = normalizeHeaderValue(ciManifestVersion);
-        String normalizedCiManifestDigest = normalizeHeaderValue(ciManifestDigest);
-        String normalizedCiManifestEndpoint = normalizeHeaderValue(ciManifestEndpoint);
-        String normalizedCiArtifactRecordCount = normalizeHeaderValue(ciArtifactRecordCount);
-        String normalizedCiApprovalCorrelationId = normalizeHeaderValue(ciApprovalCorrelationId);
-        String normalizedCiUploadContractVersion = normalizeHeaderValue(ciUploadContractVersion);
-        String normalizedCiUploadContractDigest = normalizeHeaderValue(ciUploadContractDigest);
-        String normalizedCiArtifactName = normalizeHeaderValue(ciArtifactName);
-        String normalizedCiArtifactRoot = normalizeHeaderValue(ciArtifactRoot);
-        String normalizedCiRetentionDays = normalizeHeaderValue(ciRetentionDays);
-        String normalizedCiUploadMode = normalizeHeaderValue(ciUploadMode);
-        String normalizedRuntimePreflightVersion = normalizeHeaderValue(runtimePreflightVersion);
-        String normalizedRuntimePreflightDigest = normalizeHeaderValue(runtimePreflightDigest);
-        String normalizedRuntimeSmokeSessionId = normalizeHeaderValue(runtimeSmokeSessionId);
-        String normalizedRuntimeReadTargetId = normalizeHeaderValue(runtimeReadTargetId);
-        String normalizedRuntimeWindowMode = normalizeHeaderValue(runtimeWindowMode);
-        String normalizedManagedAuditCandidateVersion = normalizeHeaderValue(managedAuditCandidateVersion);
-        String normalizedManagedAuditCandidateDigest = normalizeHeaderValue(managedAuditCandidateDigest);
-        String normalizedManagedAuditSinkMode = normalizeHeaderValue(managedAuditSinkMode);
-        String normalizedManagedAuditRetentionDays = normalizeHeaderValue(managedAuditRetentionDays);
-        String normalizedManagedAuditRotationPolicy = normalizeHeaderValue(managedAuditRotationPolicy);
-        String normalizedApprovalBindingContractVersion = normalizeHeaderValue(approvalBindingContractVersion);
-        String normalizedApprovalBindingContractDigest = normalizeHeaderValue(approvalBindingContractDigest);
-        String normalizedApprovalRequestId = normalizeHeaderValue(approvalRequestId);
-        String normalizedApprovalDecisionState = normalizeHeaderValue(approvalDecisionState);
-        String normalizedApprovalRecordCorrelationId = normalizeHeaderValue(approvalRecordCorrelationId);
+                ContextHeaderField.normalizeValue(operatorWindowApprovalCorrelationId);
+        String normalizedCiManifestVersion = ContextHeaderField.normalizeValue(ciManifestVersion);
+        String normalizedCiManifestDigest = ContextHeaderField.normalizeValue(ciManifestDigest);
+        String normalizedCiManifestEndpoint = ContextHeaderField.normalizeValue(ciManifestEndpoint);
+        String normalizedCiArtifactRecordCount = ContextHeaderField.normalizeValue(ciArtifactRecordCount);
+        String normalizedCiApprovalCorrelationId = ContextHeaderField.normalizeValue(ciApprovalCorrelationId);
+        String normalizedCiUploadContractVersion = ContextHeaderField.normalizeValue(ciUploadContractVersion);
+        String normalizedCiUploadContractDigest = ContextHeaderField.normalizeValue(ciUploadContractDigest);
+        String normalizedCiArtifactName = ContextHeaderField.normalizeValue(ciArtifactName);
+        String normalizedCiArtifactRoot = ContextHeaderField.normalizeValue(ciArtifactRoot);
+        String normalizedCiRetentionDays = ContextHeaderField.normalizeValue(ciRetentionDays);
+        String normalizedCiUploadMode = ContextHeaderField.normalizeValue(ciUploadMode);
+        String normalizedRuntimePreflightVersion = ContextHeaderField.normalizeValue(runtimePreflightVersion);
+        String normalizedRuntimePreflightDigest = ContextHeaderField.normalizeValue(runtimePreflightDigest);
+        String normalizedRuntimeSmokeSessionId = ContextHeaderField.normalizeValue(runtimeSmokeSessionId);
+        String normalizedRuntimeReadTargetId = ContextHeaderField.normalizeValue(runtimeReadTargetId);
+        String normalizedRuntimeWindowMode = ContextHeaderField.normalizeValue(runtimeWindowMode);
+        String normalizedManagedAuditCandidateVersion = ContextHeaderField.normalizeValue(managedAuditCandidateVersion);
+        String normalizedManagedAuditCandidateDigest = ContextHeaderField.normalizeValue(managedAuditCandidateDigest);
+        String normalizedManagedAuditSinkMode = ContextHeaderField.normalizeValue(managedAuditSinkMode);
+        String normalizedManagedAuditRetentionDays = ContextHeaderField.normalizeValue(managedAuditRetentionDays);
+        String normalizedManagedAuditRotationPolicy = ContextHeaderField.normalizeValue(managedAuditRotationPolicy);
+        String normalizedApprovalBindingContractVersion =
+                ContextHeaderField.normalizeValue(approvalBindingContractVersion);
+        String normalizedApprovalBindingContractDigest = ContextHeaderField.normalizeValue(approvalBindingContractDigest);
+        String normalizedApprovalRequestId = ContextHeaderField.normalizeValue(approvalRequestId);
+        String normalizedApprovalDecisionState = ContextHeaderField.normalizeValue(approvalDecisionState);
+        String normalizedApprovalRecordCorrelationId = ContextHeaderField.normalizeValue(approvalRecordCorrelationId);
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext =
                 rehearsalHintBuilder.rehearsalRequestContext(
                         normalizedRequestId,
@@ -306,13 +307,6 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         failureTaxonomy,
                         executionBoundaries
                 );
-    }
-
-    private String normalizeHeaderValue(String value) {
-        if (value == null || value.isBlank()) {
-            return null;
-        }
-        return value.trim();
     }
 
     private ReleaseApprovalRehearsalResponse.ReleaseApprovalInputs releaseApprovalInputs(

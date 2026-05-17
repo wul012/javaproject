@@ -15,42 +15,41 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                     String normalizedManagedAuditRotationPolicy
     ) {
         List<String> warnings = new ArrayList<>();
-        ContextHeaderField managedAuditCandidateVersion = ContextHeaderField.from(
+        ContextHeaderField managedAuditCandidateVersion = ContextHeaderField.normalized(
+                warnings,
                 normalizedManagedAuditCandidateVersion,
                 "x-orderops-managed-audit-candidate-version",
-                "managed-audit-candidate-version-not-supplied"
-        );
-        ContextHeaderField managedAuditCandidateDigest = ContextHeaderField.from(
-                normalizedManagedAuditCandidateDigest,
-                "x-orderops-managed-audit-candidate-digest",
-                "managed-audit-candidate-digest-not-supplied"
-        );
-        ContextHeaderField managedAuditSinkMode = ContextHeaderField.from(
-                normalizedManagedAuditSinkMode,
-                "x-orderops-managed-audit-sink-mode",
-                "managed-audit-sink-mode-not-supplied"
-        );
-        ContextHeaderField managedAuditRetentionDays = ContextHeaderField.from(
-                normalizedManagedAuditRetentionDays,
-                "x-orderops-managed-audit-retention-days",
-                "managed-audit-retention-days-not-supplied"
-        );
-        ContextHeaderField managedAuditRotationPolicy = ContextHeaderField.from(
-                normalizedManagedAuditRotationPolicy,
-                "x-orderops-managed-audit-rotation-policy",
-                "managed-audit-rotation-policy-not-supplied"
-        );
-        managedAuditCandidateVersion.addMissingWarning(
-                warnings,
+                "managed-audit-candidate-version-not-supplied",
                 "ORDEROPS_MANAGED_AUDIT_CANDIDATE_VERSION_MISSING"
         );
-        managedAuditCandidateDigest.addMissingWarning(
+        ContextHeaderField managedAuditCandidateDigest = ContextHeaderField.normalized(
                 warnings,
+                normalizedManagedAuditCandidateDigest,
+                "x-orderops-managed-audit-candidate-digest",
+                "managed-audit-candidate-digest-not-supplied",
                 "ORDEROPS_MANAGED_AUDIT_CANDIDATE_DIGEST_MISSING"
         );
-        managedAuditSinkMode.addMissingWarning(warnings, "ORDEROPS_MANAGED_AUDIT_SINK_MODE_MISSING");
-        managedAuditRetentionDays.addMissingWarning(warnings, "ORDEROPS_MANAGED_AUDIT_RETENTION_DAYS_MISSING");
-        managedAuditRotationPolicy.addMissingWarning(warnings, "ORDEROPS_MANAGED_AUDIT_ROTATION_POLICY_MISSING");
+        ContextHeaderField managedAuditSinkMode = ContextHeaderField.normalized(
+                warnings,
+                normalizedManagedAuditSinkMode,
+                "x-orderops-managed-audit-sink-mode",
+                "managed-audit-sink-mode-not-supplied",
+                "ORDEROPS_MANAGED_AUDIT_SINK_MODE_MISSING"
+        );
+        ContextHeaderField managedAuditRetentionDays = ContextHeaderField.normalized(
+                warnings,
+                normalizedManagedAuditRetentionDays,
+                "x-orderops-managed-audit-retention-days",
+                "managed-audit-retention-days-not-supplied",
+                "ORDEROPS_MANAGED_AUDIT_RETENTION_DAYS_MISSING"
+        );
+        ContextHeaderField managedAuditRotationPolicy = ContextHeaderField.normalized(
+                warnings,
+                normalizedManagedAuditRotationPolicy,
+                "x-orderops-managed-audit-rotation-policy",
+                "managed-audit-rotation-policy-not-supplied",
+                "ORDEROPS_MANAGED_AUDIT_ROTATION_POLICY_MISSING"
+        );
         boolean auditPersistenceHandoffContextComplete = ContextHeaderField.allEchoed(
                 managedAuditCandidateVersion,
                 managedAuditCandidateDigest,
@@ -155,43 +154,39 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                     String normalizedApprovalRecordCorrelationId
     ) {
         List<String> warnings = new ArrayList<>();
-        ContextHeaderField approvalBindingContractVersion = ContextHeaderField.from(
+        ContextHeaderField approvalBindingContractVersion = ContextHeaderField.normalized(
+                warnings,
                 normalizedApprovalBindingContractVersion,
                 "x-orderops-approval-binding-contract-version",
-                "approval-binding-contract-version-not-supplied"
-        );
-        ContextHeaderField approvalBindingContractDigest = ContextHeaderField.from(
-                normalizedApprovalBindingContractDigest,
-                "x-orderops-approval-binding-contract-digest",
-                "approval-binding-contract-digest-not-supplied"
-        );
-        ContextHeaderField approvalRequestId = ContextHeaderField.from(
-                normalizedApprovalRequestId,
-                "x-orderops-approval-request-id",
-                "approval-request-id-not-supplied"
-        );
-        ContextHeaderField approvalDecisionState = ContextHeaderField.from(
-                normalizedApprovalDecisionState,
-                "x-orderops-approval-decision-state",
-                "approval-decision-state-not-supplied"
-        );
-        ContextHeaderField approvalRecordCorrelationId = ContextHeaderField.from(
-                normalizedApprovalRecordCorrelationId,
-                "x-orderops-approval-record-correlation-id",
-                "approval-record-correlation-id-not-supplied"
-        );
-        approvalBindingContractVersion.addMissingWarning(
-                warnings,
+                "approval-binding-contract-version-not-supplied",
                 "ORDEROPS_APPROVAL_BINDING_CONTRACT_VERSION_MISSING"
         );
-        approvalBindingContractDigest.addMissingWarning(
+        ContextHeaderField approvalBindingContractDigest = ContextHeaderField.normalized(
                 warnings,
+                normalizedApprovalBindingContractDigest,
+                "x-orderops-approval-binding-contract-digest",
+                "approval-binding-contract-digest-not-supplied",
                 "ORDEROPS_APPROVAL_BINDING_CONTRACT_DIGEST_MISSING"
         );
-        approvalRequestId.addMissingWarning(warnings, "ORDEROPS_APPROVAL_REQUEST_ID_MISSING");
-        approvalDecisionState.addMissingWarning(warnings, "ORDEROPS_APPROVAL_DECISION_STATE_MISSING");
-        approvalRecordCorrelationId.addMissingWarning(
+        ContextHeaderField approvalRequestId = ContextHeaderField.normalized(
                 warnings,
+                normalizedApprovalRequestId,
+                "x-orderops-approval-request-id",
+                "approval-request-id-not-supplied",
+                "ORDEROPS_APPROVAL_REQUEST_ID_MISSING"
+        );
+        ContextHeaderField approvalDecisionState = ContextHeaderField.normalized(
+                warnings,
+                normalizedApprovalDecisionState,
+                "x-orderops-approval-decision-state",
+                "approval-decision-state-not-supplied",
+                "ORDEROPS_APPROVAL_DECISION_STATE_MISSING"
+        );
+        ContextHeaderField approvalRecordCorrelationId = ContextHeaderField.normalized(
+                warnings,
+                normalizedApprovalRecordCorrelationId,
+                "x-orderops-approval-record-correlation-id",
+                "approval-record-correlation-id-not-supplied",
                 "ORDEROPS_APPROVAL_RECORD_CORRELATION_ID_MISSING"
         );
         boolean approvalRecordHandoffContextComplete = ContextHeaderField.allEchoed(

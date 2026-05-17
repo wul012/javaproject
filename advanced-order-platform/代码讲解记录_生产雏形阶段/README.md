@@ -196,3 +196,10 @@ PostgreSQL / RabbitMQ 的定期完整验证
 ## 一句话总览
 
 旧目录记录“项目如何一步步长到 v47”，本目录从 v48 开始继续记录“每版代码怎么实现、生产雏形阶段推进到哪里、成熟度发生了什么变化”。
+
+## 新增版本入口
+
+```text
+93-version-90-release-approval-context-normalization-helper.md
+ -> 第九十版 release approval context normalization helper，收敛 ContextHeaderField 的 normalize / missing warning 入口，保持只读边界不变
+```

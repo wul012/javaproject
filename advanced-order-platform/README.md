@@ -2794,6 +2794,7 @@ ops
   -> v87 adds release approval rehearsal managed-audit sandbox connection operator handoff marker for Node v228/v229 while keeping Java no-connection, no-credential-value, no-SQL, and no-ledger boundaries
   -> v88 adds release approval rehearsal managed-audit sandbox connection preflight echo marker for Node v230/v231 while keeping manual window closed by default, no auto-start, no credential-value read, no connection, no SQL, and no ledger boundaries
   -> v89 contract-preserving refactor: add ContextHeaderField record to group header value/source/echoed triples in release approval rehearsal hint builders; response fields and read-only boundaries are unchanged
+  -> v90 contract-preserving refactor: centralize release approval context normalization and missing-warning attachment in ContextHeaderField; response fields and read-only boundaries are unchanged
 
 common
  -> 业务异常和统一错误响应
