@@ -32,6 +32,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionOperatorHandoffMarker,
         RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
                 managedAuditSandboxConnectionPreflightEchoMarker,
+        RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+                managedAuditSandboxConnectionPreconditionReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -808,6 +810,95 @@ public record ReleaseApprovalRehearsalResponse(
             boolean deploymentTriggeredByJava,
             boolean rollbackTriggeredByJava,
             boolean restoreExecutedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionPreconditionReceipt(
+            String receiptVersion,
+            String sourceSandboxConnectionPreflightEchoMarkerVersion,
+            String sourceSandboxConnectionPreflightEchoMarkerSchemaVersion,
+            String consumedByNodeBlockedExecutionRehearsalVersion,
+            String consumedByNodeBlockedExecutionRehearsalProfile,
+            String consumedByNodeBlockedExecutionRehearsalEndpoint,
+            String consumedByNodeBlockedExecutionRehearsalState,
+            String nextNodePreconditionIntakeVersion,
+            String nextNodePreconditionIntakeProfile,
+            boolean nodeV235MayConsume,
+            RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary ownerApprovalBoundary,
+            RehearsalSandboxConnectionPreconditionCredentialBoundary credentialBoundary,
+            RehearsalSandboxConnectionPreconditionSchemaBoundary schemaRehearsalBoundary,
+            RehearsalSandboxConnectionPreconditionRollbackBoundary rollbackPathBoundary,
+            RehearsalSandboxConnectionPreconditionExecutionBoundary javaExecutionBoundary,
+            boolean allPreconditionsDocumented,
+            boolean readyForNodeV235ManualSandboxConnectionPreconditionIntake,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> requiredPreconditionEvidence,
+            List<String> forbiddenPreconditionOperations,
+            List<String> nodeV235Prerequisites,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary(
+            String ownerApprovalArtifactIdField,
+            boolean ownerApprovalArtifactRequired,
+            boolean ownerApprovalArtifactProvidedByJava,
+            boolean ownerApprovalArtifactReviewedByJava,
+            boolean javaApprovalDecisionCreated,
+            boolean javaApprovalLedgerWritten
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreconditionCredentialBoundary(
+            String credentialHandleNameField,
+            boolean credentialHandleReviewRequired,
+            boolean credentialHandleNameRecognizedByJava,
+            boolean credentialValueRequiredByJava,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean productionCredentialAllowed
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreconditionSchemaBoundary(
+            String schemaRehearsalIdField,
+            boolean schemaRehearsalEvidenceRequired,
+            boolean schemaMigrationExecutionAllowed,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean schemaMigrationAppliedByJava
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreconditionRollbackBoundary(
+            String rollbackPathIdField,
+            String manualAbortMarkerField,
+            int timeoutBudgetMs,
+            boolean rollbackPathRequired,
+            boolean timeoutBudgetRequired,
+            boolean manualAbortMarkerRequired,
+            boolean rollbackExecutionAllowedByJava,
+            boolean restoreExecutionAllowedByJava
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreconditionExecutionBoundary(
+            boolean approvalDecisionCreatedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean approvalRecordPersistedByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava,
+            boolean javaStartsManagedAuditService,
+            boolean nodeAutoStartAllowed,
+            boolean actualConnectionAttemptedByJava
     ) {
     }
 

@@ -202,4 +202,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 ```text
 93-version-90-release-approval-context-normalization-helper.md
  -> 第九十版 release approval context normalization helper，收敛 ContextHeaderField 的 normalize / missing warning 入口，保持只读边界不变
+
+94-version-91-release-approval-sandbox-connection-precondition-receipt.md
+ -> 第九十一版 release approval sandbox connection precondition receipt，列出真实 sandbox connection 前置条件，但不打开连接、不读取 credential value、不执行 SQL
 ```

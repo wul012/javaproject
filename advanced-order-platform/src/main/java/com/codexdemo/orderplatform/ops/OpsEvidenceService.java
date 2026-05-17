@@ -78,6 +78,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PREFLIGHT_ECHO_MARKER_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-connection-preflight-echo-marker.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PRECONDITION_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-connection-precondition-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -108,6 +112,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_OPERATOR_HANDOFF_MARKER_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v17";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PREFLIGHT_ECHO_MARKER_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v18";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -115,7 +123,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v18";
+            "java-release-approval-rehearsal-response-schema.v19";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -231,6 +239,22 @@ public class OpsEvidenceService {
 
     static final String NODE_V231_MANUAL_SANDBOX_CONNECTION_PREFLIGHT_VERIFICATION_PROFILE =
             "managed-audit-manual-sandbox-connection-preflight-verification.v1";
+
+    static final String NODE_V234_MANUAL_SANDBOX_CONNECTION_BLOCKED_EXECUTION_REHEARSAL_VERSION = "Node v234";
+
+    static final String NODE_V234_MANUAL_SANDBOX_CONNECTION_BLOCKED_EXECUTION_REHEARSAL_PROFILE =
+            "managed-audit-manual-sandbox-connection-blocked-execution-rehearsal.v1";
+
+    static final String NODE_V234_MANUAL_SANDBOX_CONNECTION_BLOCKED_EXECUTION_REHEARSAL_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-blocked-execution-rehearsal";
+
+    static final String NODE_V234_MANUAL_SANDBOX_CONNECTION_BLOCKED_EXECUTION_REHEARSAL_STATE =
+            "manual-sandbox-connection-blocked-execution-rehearsal-ready";
+
+    static final String NODE_V235_MANUAL_SANDBOX_CONNECTION_PRECONDITION_INTAKE_VERSION = "Node v235";
+
+    static final String NODE_V235_MANUAL_SANDBOX_CONNECTION_PRECONDITION_INTAKE_PROFILE =
+            "managed-audit-manual-sandbox-connection-precondition-intake.v1";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";

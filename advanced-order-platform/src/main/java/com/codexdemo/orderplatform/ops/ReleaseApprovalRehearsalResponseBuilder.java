@@ -183,6 +183,13 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditSandboxConnectionPreflightEchoMarker =
                         sandboxConnectionPreflightEchoMarkerBuilder
                                 .build(managedAuditSandboxConnectionOperatorHandoffMarker);
+        ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuilder
+                sandboxConnectionPreconditionReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuilder();
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+                managedAuditSandboxConnectionPreconditionReceipt =
+                        sandboxConnectionPreconditionReceiptBuilder
+                                .build(managedAuditSandboxConnectionPreflightEchoMarker);
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 failureTaxonomyBuilder.build(
                         evidence,
@@ -214,6 +221,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
                 managedAuditSandboxConnectionOperatorHandoffMarker,
                 managedAuditSandboxConnectionPreflightEchoMarker,
+                managedAuditSandboxConnectionPreconditionReceipt,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -235,6 +243,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         sandboxConnectionOperatorHandoffMarkerBuilder,
                         managedAuditSandboxConnectionPreflightEchoMarker,
                         sandboxConnectionPreflightEchoMarkerBuilder,
+                        managedAuditSandboxConnectionPreconditionReceipt,
+                        sandboxConnectionPreconditionReceiptBuilder,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -279,13 +289,18 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                     managedAuditSandboxConnectionPreflightEchoMarker,
             ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuilder
                     sandboxConnectionPreflightEchoMarkerBuilder,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+                    managedAuditSandboxConnectionPreconditionReceipt,
+            ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuilder
+                    sandboxConnectionPreconditionReceiptBuilder,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
         return new ReleaseApprovalVerificationHintBuilder(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                 sandboxConnectionOperatorHandoffMarkerBuilder,
-                sandboxConnectionPreflightEchoMarkerBuilder
+                sandboxConnectionPreflightEchoMarkerBuilder,
+                sandboxConnectionPreconditionReceiptBuilder
         )
                 .build(
                         requestContext,
@@ -304,6 +319,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
                         managedAuditSandboxConnectionOperatorHandoffMarker,
                         managedAuditSandboxConnectionPreflightEchoMarker,
+                        managedAuditSandboxConnectionPreconditionReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 );
