@@ -58,6 +58,16 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 && retentionFixture.auditExportReadOnly()
                 && !retentionFixture.deploymentExecutionAllowed()
                 && !retentionFixture.rollbackSqlExecutionAllowed();
+        AuditPersistenceHandoffFlags auditPersistenceHandoffFlags = AuditPersistenceHandoffFlags.fromReadOnly(
+                candidateVersionEchoed,
+                candidateDigestEchoed,
+                sinkModeEchoed,
+                retentionDaysEchoed,
+                rotationPolicyEchoed,
+                auditPersistenceHandoffContextComplete,
+                managedAuditRetentionWithinJavaRetention,
+                javaAuditSourceReadOnly
+        );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_AUDIT_PERSISTENCE_HANDOFF_HINT_VERSION,
@@ -89,20 +99,20 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                         "managed-audit-rotation-policy-not-supplied"
                 ),
                 sourceFor(normalizedManagedAuditRotationPolicy, "x-orderops-managed-audit-rotation-policy"),
-                candidateVersionEchoed,
-                candidateDigestEchoed,
-                sinkModeEchoed,
-                retentionDaysEchoed,
-                rotationPolicyEchoed,
-                auditPersistenceHandoffContextComplete,
-                managedAuditRetentionWithinJavaRetention,
-                javaAuditSourceReadOnly,
-                false,
-                false,
-                false,
-                false,
-                javaAuditSourceReadOnly,
-                false,
+                auditPersistenceHandoffFlags.candidateVersionEchoed(),
+                auditPersistenceHandoffFlags.candidateDigestEchoed(),
+                auditPersistenceHandoffFlags.sinkModeEchoed(),
+                auditPersistenceHandoffFlags.retentionDaysEchoed(),
+                auditPersistenceHandoffFlags.rotationPolicyEchoed(),
+                auditPersistenceHandoffFlags.auditPersistenceHandoffContextComplete(),
+                auditPersistenceHandoffFlags.managedAuditRetentionWithinJavaRetention(),
+                auditPersistenceHandoffFlags.javaAuditSourceReadOnly(),
+                auditPersistenceHandoffFlags.javaLedgerWriteAllowed(),
+                auditPersistenceHandoffFlags.javaManagedAuditWriteAllowed(),
+                auditPersistenceHandoffFlags.javaExternalAuditSystemAccessed(),
+                auditPersistenceHandoffFlags.productionAuditStoreRequired(),
+                auditPersistenceHandoffFlags.nodeMayUseAsManagedAuditInput(),
+                auditPersistenceHandoffFlags.nodeMayTreatAsProductionAuditRecord(),
                 List.of(
                         "x-orderops-managed-audit-candidate-version",
                         "x-orderops-managed-audit-candidate-digest",
@@ -191,6 +201,15 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 && !approvalRecordFixture.nodeMayTriggerRollback()
                 && !approvalRecordFixture.rollbackExecutionAllowed()
                 && !approvalRecordFixture.rollbackSqlExecutionAllowed();
+        ApprovalRecordHandoffFlags approvalRecordHandoffFlags = ApprovalRecordHandoffFlags.fromReadOnly(
+                approvalBindingContractVersionEchoed,
+                approvalBindingContractDigestEchoed,
+                approvalRequestIdEchoed,
+                approvalDecisionStateEchoed,
+                approvalRecordCorrelationEchoed,
+                approvalRecordHandoffContextComplete,
+                approvalRecordFixtureReadOnly
+        );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_HINT_VERSION,
@@ -228,20 +247,20 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                         normalizedApprovalRecordCorrelationId,
                         "x-orderops-approval-record-correlation-id"
                 ),
-                approvalBindingContractVersionEchoed,
-                approvalBindingContractDigestEchoed,
-                approvalRequestIdEchoed,
-                approvalDecisionStateEchoed,
-                approvalRecordCorrelationEchoed,
-                approvalRecordHandoffContextComplete,
-                approvalRecordFixtureReadOnly,
-                false,
-                false,
-                false,
-                false,
-                false,
-                approvalRecordFixtureReadOnly,
-                false,
+                approvalRecordHandoffFlags.approvalBindingContractVersionEchoed(),
+                approvalRecordHandoffFlags.approvalBindingContractDigestEchoed(),
+                approvalRecordHandoffFlags.approvalRequestIdEchoed(),
+                approvalRecordHandoffFlags.approvalDecisionStateEchoed(),
+                approvalRecordHandoffFlags.approvalRecordCorrelationEchoed(),
+                approvalRecordHandoffFlags.approvalRecordHandoffContextComplete(),
+                approvalRecordHandoffFlags.approvalRecordFixtureReadOnly(),
+                approvalRecordHandoffFlags.javaApprovalDecisionCreated(),
+                approvalRecordHandoffFlags.javaApprovalLedgerWritten(),
+                approvalRecordHandoffFlags.javaApprovalRecordPersisted(),
+                approvalRecordHandoffFlags.javaApprovalRecordAuthenticated(),
+                approvalRecordHandoffFlags.productionApprovalStoreRequired(),
+                approvalRecordHandoffFlags.nodeMayUseAsAuditApprovalInput(),
+                approvalRecordHandoffFlags.nodeMayTreatAsProductionApprovalRecord(),
                 List.of(
                         "x-orderops-approval-binding-contract-version",
                         "x-orderops-approval-binding-contract-digest",
@@ -302,6 +321,14 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
             markerWarnings.add("NODE_V211_APPROVAL_HANDOFF_WRITE_BOUNDARY_INVALID");
         }
         boolean readyForNodeV213RestoreDrillPlan = nodeV211HandoffAccepted && nodeV211NoWriteBoundaryAccepted;
+        ApprovalHandoffVerificationMarkerFlags verificationMarkerFlags =
+                ApprovalHandoffVerificationMarkerFlags.fromReadOnly(
+                        nodeV211HandoffAccepted,
+                        nodeV211NoWriteBoundaryAccepted,
+                        approvalRecordHandoffHint.javaApprovalRecordPersisted(),
+                        approvalRecordHandoffHint.javaApprovalLedgerWritten(),
+                        readyForNodeV213RestoreDrillPlan
+                );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_VERIFICATION_MARKER_VERSION,
@@ -316,23 +343,23 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 ".tmp",
                 "managed-audit-v211-",
                 "managed-audit-packet.jsonl",
-                true,
-                nodeV211HandoffAccepted,
-                nodeV211NoWriteBoundaryAccepted,
-                true,
-                true,
-                true,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                approvalRecordHandoffHint.javaApprovalRecordPersisted(),
-                approvalRecordHandoffHint.javaApprovalLedgerWritten(),
-                readyForNodeV213RestoreDrillPlan,
-                false,
+                verificationMarkerFlags.nodeV211MayConsume(),
+                verificationMarkerFlags.nodeV211HandoffAccepted(),
+                verificationMarkerFlags.nodeV211NoWriteBoundaryAccepted(),
+                verificationMarkerFlags.nodeV211PacketAppendCovered(),
+                verificationMarkerFlags.nodeV211PacketQueryCovered(),
+                verificationMarkerFlags.nodeV211PacketDigestCovered(),
+                verificationMarkerFlags.nodeV211PacketCleanupCovered(),
+                verificationMarkerFlags.nodeV211JavaWriteAttempted(),
+                verificationMarkerFlags.nodeV211MiniKvWriteAttempted(),
+                verificationMarkerFlags.nodeV211ExternalAuditSystemAccessed(),
+                verificationMarkerFlags.nodeV211RealApprovalDecisionCreated(),
+                verificationMarkerFlags.nodeV211RealApprovalLedgerWritten(),
+                verificationMarkerFlags.nodeV211ProductionAuditRecordAllowed(),
+                verificationMarkerFlags.javaApprovalRecordPersisted(),
+                verificationMarkerFlags.javaApprovalLedgerWritten(),
+                verificationMarkerFlags.readyForNodeV213RestoreDrillPlan(),
+                verificationMarkerFlags.nodeMayTreatAsProductionAuditRecord(),
                 List.of(
                         "requestContext.requestId",
                         "operatorWindowHint.operatorId",
@@ -402,6 +429,146 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
     private void addMissingContextWarning(List<String> warnings, String value, String warning) {
         if (value == null) {
             warnings.add(warning);
+        }
+    }
+
+    private record AuditPersistenceHandoffFlags(
+            boolean candidateVersionEchoed,
+            boolean candidateDigestEchoed,
+            boolean sinkModeEchoed,
+            boolean retentionDaysEchoed,
+            boolean rotationPolicyEchoed,
+            boolean auditPersistenceHandoffContextComplete,
+            boolean managedAuditRetentionWithinJavaRetention,
+            boolean javaAuditSourceReadOnly,
+            boolean javaLedgerWriteAllowed,
+            boolean javaManagedAuditWriteAllowed,
+            boolean javaExternalAuditSystemAccessed,
+            boolean productionAuditStoreRequired,
+            boolean nodeMayUseAsManagedAuditInput,
+            boolean nodeMayTreatAsProductionAuditRecord
+    ) {
+
+        static AuditPersistenceHandoffFlags fromReadOnly(
+                boolean candidateVersionEchoed,
+                boolean candidateDigestEchoed,
+                boolean sinkModeEchoed,
+                boolean retentionDaysEchoed,
+                boolean rotationPolicyEchoed,
+                boolean auditPersistenceHandoffContextComplete,
+                boolean managedAuditRetentionWithinJavaRetention,
+                boolean javaAuditSourceReadOnly
+        ) {
+            return new AuditPersistenceHandoffFlags(
+                    candidateVersionEchoed,
+                    candidateDigestEchoed,
+                    sinkModeEchoed,
+                    retentionDaysEchoed,
+                    rotationPolicyEchoed,
+                    auditPersistenceHandoffContextComplete,
+                    managedAuditRetentionWithinJavaRetention,
+                    javaAuditSourceReadOnly,
+                    false,
+                    false,
+                    false,
+                    false,
+                    javaAuditSourceReadOnly,
+                    false
+            );
+        }
+    }
+
+    private record ApprovalRecordHandoffFlags(
+            boolean approvalBindingContractVersionEchoed,
+            boolean approvalBindingContractDigestEchoed,
+            boolean approvalRequestIdEchoed,
+            boolean approvalDecisionStateEchoed,
+            boolean approvalRecordCorrelationEchoed,
+            boolean approvalRecordHandoffContextComplete,
+            boolean approvalRecordFixtureReadOnly,
+            boolean javaApprovalDecisionCreated,
+            boolean javaApprovalLedgerWritten,
+            boolean javaApprovalRecordPersisted,
+            boolean javaApprovalRecordAuthenticated,
+            boolean productionApprovalStoreRequired,
+            boolean nodeMayUseAsAuditApprovalInput,
+            boolean nodeMayTreatAsProductionApprovalRecord
+    ) {
+
+        static ApprovalRecordHandoffFlags fromReadOnly(
+                boolean approvalBindingContractVersionEchoed,
+                boolean approvalBindingContractDigestEchoed,
+                boolean approvalRequestIdEchoed,
+                boolean approvalDecisionStateEchoed,
+                boolean approvalRecordCorrelationEchoed,
+                boolean approvalRecordHandoffContextComplete,
+                boolean approvalRecordFixtureReadOnly
+        ) {
+            return new ApprovalRecordHandoffFlags(
+                    approvalBindingContractVersionEchoed,
+                    approvalBindingContractDigestEchoed,
+                    approvalRequestIdEchoed,
+                    approvalDecisionStateEchoed,
+                    approvalRecordCorrelationEchoed,
+                    approvalRecordHandoffContextComplete,
+                    approvalRecordFixtureReadOnly,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    approvalRecordFixtureReadOnly,
+                    false
+            );
+        }
+    }
+
+    private record ApprovalHandoffVerificationMarkerFlags(
+            boolean nodeV211MayConsume,
+            boolean nodeV211HandoffAccepted,
+            boolean nodeV211NoWriteBoundaryAccepted,
+            boolean nodeV211PacketAppendCovered,
+            boolean nodeV211PacketQueryCovered,
+            boolean nodeV211PacketDigestCovered,
+            boolean nodeV211PacketCleanupCovered,
+            boolean nodeV211JavaWriteAttempted,
+            boolean nodeV211MiniKvWriteAttempted,
+            boolean nodeV211ExternalAuditSystemAccessed,
+            boolean nodeV211RealApprovalDecisionCreated,
+            boolean nodeV211RealApprovalLedgerWritten,
+            boolean nodeV211ProductionAuditRecordAllowed,
+            boolean javaApprovalRecordPersisted,
+            boolean javaApprovalLedgerWritten,
+            boolean readyForNodeV213RestoreDrillPlan,
+            boolean nodeMayTreatAsProductionAuditRecord
+    ) {
+
+        static ApprovalHandoffVerificationMarkerFlags fromReadOnly(
+                boolean nodeV211HandoffAccepted,
+                boolean nodeV211NoWriteBoundaryAccepted,
+                boolean javaApprovalRecordPersisted,
+                boolean javaApprovalLedgerWritten,
+                boolean readyForNodeV213RestoreDrillPlan
+        ) {
+            return new ApprovalHandoffVerificationMarkerFlags(
+                    true,
+                    nodeV211HandoffAccepted,
+                    nodeV211NoWriteBoundaryAccepted,
+                    true,
+                    true,
+                    true,
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    javaApprovalRecordPersisted,
+                    javaApprovalLedgerWritten,
+                    readyForNodeV213RestoreDrillPlan,
+                    false
+            );
         }
     }
 }

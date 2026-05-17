@@ -14,6 +14,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
         addMissingContextWarning(warnings, normalizedRequestId, "REHEARSAL_REQUEST_ID_MISSING");
         addMissingContextWarning(warnings, normalizedOperatorIdentity, "OPERATOR_IDENTITY_MISSING");
         addMissingContextWarning(warnings, normalizedAuditCorrelationId, "AUDIT_CORRELATION_ID_MISSING");
+        RequestContextFlags requestContextFlags = RequestContextFlags.readOnlyRehearsal();
 
         return new ReleaseApprovalRehearsalResponse.RehearsalRequestContext(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_CONTEXT_VERSION,
@@ -23,10 +24,10 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 sourceFor(normalizedOperatorIdentity, "X-Operator-Identity"),
                 valueOrPlaceholder(normalizedAuditCorrelationId, "audit-correlation-id-not-supplied"),
                 sourceFor(normalizedAuditCorrelationId, "X-Audit-Correlation-Id"),
-                false,
-                false,
-                false,
-                false,
+                requestContextFlags.operatorAuthenticatedByJava(),
+                requestContextFlags.persistedByJava(),
+                requestContextFlags.approvalLedgerWritten(),
+                requestContextFlags.requiresProductionIdentityProvider(),
                 List.of(
                         "X-Rehearsal-Request-Id",
                         "X-Operator-Identity",
@@ -67,6 +68,12 @@ final class ReleaseApprovalRehearsalHintBuilder {
         boolean operatorRolesEchoed = normalizedOperatorWindowRoles != null;
         boolean operatorVerifiedClaimEchoed = normalizedOperatorWindowVerifiedClaim != null;
         boolean approvalCorrelationEchoed = normalizedOperatorWindowApprovalCorrelationId != null;
+        OperatorWindowFlags operatorWindowFlags = OperatorWindowFlags.fromEchoes(
+                operatorIdentityEchoed,
+                operatorRolesEchoed,
+                operatorVerifiedClaimEchoed,
+                approvalCorrelationEchoed
+        );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_OPERATOR_WINDOW_HINT_VERSION,
@@ -84,17 +91,14 @@ final class ReleaseApprovalRehearsalHintBuilder {
                         normalizedOperatorWindowApprovalCorrelationId,
                         "x-orderops-approval-correlation-id"
                 ),
-                operatorIdentityEchoed,
-                operatorRolesEchoed,
-                operatorVerifiedClaimEchoed,
-                approvalCorrelationEchoed,
-                operatorIdentityEchoed
-                        && operatorRolesEchoed
-                        && operatorVerifiedClaimEchoed
-                        && approvalCorrelationEchoed,
-                false,
-                false,
-                false,
+                operatorWindowFlags.operatorIdentityEchoed(),
+                operatorWindowFlags.operatorRolesEchoed(),
+                operatorWindowFlags.operatorVerifiedClaimEchoed(),
+                operatorWindowFlags.approvalCorrelationEchoed(),
+                operatorWindowFlags.operatorWindowContextComplete(),
+                operatorWindowFlags.productionIdpVerifiedByJava(),
+                operatorWindowFlags.persistedApprovalRecordByJava(),
+                operatorWindowFlags.nodeMayTreatAsProductionIdentity(),
                 List.of(
                         "x-orderops-operator-id",
                         "x-orderops-roles",
@@ -150,6 +154,13 @@ final class ReleaseApprovalRehearsalHintBuilder {
         boolean manifestEndpointEchoed = normalizedCiManifestEndpoint != null;
         boolean artifactRecordCountEchoed = normalizedCiArtifactRecordCount != null;
         boolean approvalCorrelationEchoed = normalizedCiApprovalCorrelationId != null;
+        CiEvidenceFlags ciEvidenceFlags = CiEvidenceFlags.fromEchoes(
+                manifestProfileVersionEchoed,
+                manifestDigestEchoed,
+                manifestEndpointEchoed,
+                artifactRecordCountEchoed,
+                approvalCorrelationEchoed
+        );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_CI_EVIDENCE_HINT_VERSION,
@@ -163,22 +174,18 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 sourceFor(normalizedCiArtifactRecordCount, "x-orderops-ci-artifact-record-count"),
                 valueOrPlaceholder(normalizedCiApprovalCorrelationId, "ci-approval-correlation-id-not-supplied"),
                 sourceFor(normalizedCiApprovalCorrelationId, "x-orderops-ci-approval-correlation-id"),
-                manifestProfileVersionEchoed,
-                manifestDigestEchoed,
-                manifestEndpointEchoed,
-                artifactRecordCountEchoed,
-                approvalCorrelationEchoed,
-                manifestProfileVersionEchoed
-                        && manifestDigestEchoed
-                        && manifestEndpointEchoed
-                        && artifactRecordCountEchoed
-                        && approvalCorrelationEchoed,
-                "NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS",
-                true,
-                false,
-                false,
-                false,
-                false,
+                ciEvidenceFlags.manifestProfileVersionEchoed(),
+                ciEvidenceFlags.manifestDigestEchoed(),
+                ciEvidenceFlags.manifestEndpointEchoed(),
+                ciEvidenceFlags.artifactRecordCountEchoed(),
+                ciEvidenceFlags.approvalCorrelationEchoed(),
+                ciEvidenceFlags.ciEvidenceContextComplete(),
+                ciEvidenceFlags.noLedgerWriteProof(),
+                ciEvidenceFlags.noLedgerWriteProved(),
+                ciEvidenceFlags.ciArtifactUploadedByJava(),
+                ciEvidenceFlags.githubArtifactAccessedByJava(),
+                ciEvidenceFlags.productionWindowAllowedByJava(),
+                ciEvidenceFlags.nodeMayTreatAsCiArtifactPublication(),
                 List.of(
                         "x-orderops-ci-manifest-version",
                         "x-orderops-ci-manifest-digest",
@@ -247,6 +254,20 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 normalizedCiRetentionDays,
                 retentionFixture.retentionDays()
         );
+        ArtifactRetentionFlags artifactRetentionFlags = ArtifactRetentionFlags.fromEchoes(
+                uploadContractVersionEchoed,
+                uploadContractDigestEchoed,
+                artifactNameEchoed,
+                artifactRootEchoed,
+                retentionDaysEchoed,
+                uploadModeEchoed,
+                retentionDaysWithinJavaRetention,
+                retentionFixture.nodeMayConsume()
+                        && retentionFixture.auditExportReadOnly()
+                        && !retentionFixture.deploymentExecutionAllowed()
+                        && !retentionFixture.rollbackSqlExecutionAllowed(),
+                retentionFixture.auditExportReadOnly()
+        );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_ARTIFACT_RETENTION_HINT_VERSION,
@@ -267,28 +288,20 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 sourceFor(normalizedCiRetentionDays, "x-orderops-ci-retention-days"),
                 valueOrPlaceholder(normalizedCiUploadMode, "ci-upload-mode-not-supplied"),
                 sourceFor(normalizedCiUploadMode, "x-orderops-ci-upload-mode"),
-                uploadContractVersionEchoed,
-                uploadContractDigestEchoed,
-                artifactNameEchoed,
-                artifactRootEchoed,
-                retentionDaysEchoed,
-                uploadModeEchoed,
-                uploadContractVersionEchoed
-                        && uploadContractDigestEchoed
-                        && artifactNameEchoed
-                        && artifactRootEchoed
-                        && retentionDaysEchoed
-                        && uploadModeEchoed,
-                retentionDaysWithinJavaRetention,
-                retentionFixture.nodeMayConsume()
-                        && retentionFixture.auditExportReadOnly()
-                        && !retentionFixture.deploymentExecutionAllowed()
-                        && !retentionFixture.rollbackSqlExecutionAllowed(),
-                retentionFixture.auditExportReadOnly(),
-                false,
-                false,
-                false,
-                false,
+                artifactRetentionFlags.uploadContractVersionEchoed(),
+                artifactRetentionFlags.uploadContractDigestEchoed(),
+                artifactRetentionFlags.artifactNameEchoed(),
+                artifactRetentionFlags.artifactRootEchoed(),
+                artifactRetentionFlags.retentionDaysEchoed(),
+                artifactRetentionFlags.uploadModeEchoed(),
+                artifactRetentionFlags.artifactRetentionContextComplete(),
+                artifactRetentionFlags.retentionDaysWithinJavaRetention(),
+                artifactRetentionFlags.javaRetentionFixtureReadOnly(),
+                artifactRetentionFlags.auditExportReadOnly(),
+                artifactRetentionFlags.ciArtifactUploadedByJava(),
+                artifactRetentionFlags.githubArtifactAccessedByJava(),
+                artifactRetentionFlags.productionWindowAllowedByJava(),
+                artifactRetentionFlags.nodeMayTreatAsRetentionAuthorization(),
                 List.of(
                         "x-orderops-ci-upload-contract-version",
                         "x-orderops-ci-upload-contract-digest",
@@ -353,6 +366,21 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 && runtimeSmokeSessionIdEchoed
                 && runtimeReadTargetIdEchoed
                 && runtimeWindowModeEchoed;
+        LiveReadinessFlags liveReadinessFlags = LiveReadinessFlags.fromEchoes(
+                sourcePreflightVersionEchoed,
+                sourcePreflightDigestEchoed,
+                runtimeSmokeSessionIdEchoed,
+                runtimeReadTargetIdEchoed,
+                runtimeWindowModeEchoed,
+                liveReadinessContextComplete,
+                evidence.readOnly()
+                        && !evidence.executionAllowed()
+                        && evidence.readOnlyWindow().readyForReadOnlyLiveProbe(),
+                evidence.readOnly()
+                        && !evidence.executionAllowed()
+                        && evidence.readOnlyWindow().allowedProbeEndpoints()
+                        .contains("GET " + OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_ENDPOINT)
+        );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_LIVE_READINESS_HINT_VERSION,
@@ -386,24 +414,19 @@ final class ReleaseApprovalRehearsalHintBuilder {
                         "runtime-window-mode-not-supplied"
                 ),
                 sourceFor(normalizedRuntimeWindowMode, "x-orderops-runtime-window-mode"),
-                sourcePreflightVersionEchoed,
-                sourcePreflightDigestEchoed,
-                runtimeSmokeSessionIdEchoed,
-                runtimeReadTargetIdEchoed,
-                runtimeWindowModeEchoed,
-                liveReadinessContextComplete,
-                evidence.readOnly()
-                        && !evidence.executionAllowed()
-                        && evidence.readOnlyWindow().readyForReadOnlyLiveProbe(),
-                evidence.readOnly()
-                        && !evidence.executionAllowed()
-                        && evidence.readOnlyWindow().allowedProbeEndpoints()
-                        .contains("GET " + OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_ENDPOINT),
-                false,
-                true,
-                false,
-                false,
-                false,
+                liveReadinessFlags.sourcePreflightVersionEchoed(),
+                liveReadinessFlags.sourcePreflightDigestEchoed(),
+                liveReadinessFlags.runtimeSmokeSessionIdEchoed(),
+                liveReadinessFlags.runtimeReadTargetIdEchoed(),
+                liveReadinessFlags.runtimeWindowModeEchoed(),
+                liveReadinessFlags.liveReadinessContextComplete(),
+                liveReadinessFlags.readyForRuntimeSmokeRead(),
+                liveReadinessFlags.readOnlyEndpointReady(),
+                liveReadinessFlags.runtimeSmokeExecutedByJava(),
+                liveReadinessFlags.nodeMustRecordPidAndCleanup(),
+                liveReadinessFlags.javaStartedProcessForNode(),
+                liveReadinessFlags.processCleanupRecordedByJava(),
+                liveReadinessFlags.nodeMayTreatAsProductionAuthorization(),
                 List.of(
                         "x-orderops-runtime-preflight-version",
                         "x-orderops-runtime-preflight-digest",
@@ -463,6 +486,192 @@ final class ReleaseApprovalRehearsalHintBuilder {
     private void addMissingContextWarning(List<String> warnings, String value, String warning) {
         if (value == null) {
             warnings.add(warning);
+        }
+    }
+
+    private record RequestContextFlags(
+            boolean operatorAuthenticatedByJava,
+            boolean persistedByJava,
+            boolean approvalLedgerWritten,
+            boolean requiresProductionIdentityProvider
+    ) {
+
+        static RequestContextFlags readOnlyRehearsal() {
+            return new RequestContextFlags(false, false, false, false);
+        }
+    }
+
+    private record OperatorWindowFlags(
+            boolean operatorIdentityEchoed,
+            boolean operatorRolesEchoed,
+            boolean operatorVerifiedClaimEchoed,
+            boolean approvalCorrelationEchoed,
+            boolean operatorWindowContextComplete,
+            boolean productionIdpVerifiedByJava,
+            boolean persistedApprovalRecordByJava,
+            boolean nodeMayTreatAsProductionIdentity
+    ) {
+
+        static OperatorWindowFlags fromEchoes(
+                boolean operatorIdentityEchoed,
+                boolean operatorRolesEchoed,
+                boolean operatorVerifiedClaimEchoed,
+                boolean approvalCorrelationEchoed
+        ) {
+            return new OperatorWindowFlags(
+                    operatorIdentityEchoed,
+                    operatorRolesEchoed,
+                    operatorVerifiedClaimEchoed,
+                    approvalCorrelationEchoed,
+                    operatorIdentityEchoed
+                            && operatorRolesEchoed
+                            && operatorVerifiedClaimEchoed
+                            && approvalCorrelationEchoed,
+                    false,
+                    false,
+                    false
+            );
+        }
+    }
+
+    private record CiEvidenceFlags(
+            boolean manifestProfileVersionEchoed,
+            boolean manifestDigestEchoed,
+            boolean manifestEndpointEchoed,
+            boolean artifactRecordCountEchoed,
+            boolean approvalCorrelationEchoed,
+            boolean ciEvidenceContextComplete,
+            String noLedgerWriteProof,
+            boolean noLedgerWriteProved,
+            boolean ciArtifactUploadedByJava,
+            boolean githubArtifactAccessedByJava,
+            boolean productionWindowAllowedByJava,
+            boolean nodeMayTreatAsCiArtifactPublication
+    ) {
+
+        static CiEvidenceFlags fromEchoes(
+                boolean manifestProfileVersionEchoed,
+                boolean manifestDigestEchoed,
+                boolean manifestEndpointEchoed,
+                boolean artifactRecordCountEchoed,
+                boolean approvalCorrelationEchoed
+        ) {
+            boolean ciEvidenceContextComplete = manifestProfileVersionEchoed
+                    && manifestDigestEchoed
+                    && manifestEndpointEchoed
+                    && artifactRecordCountEchoed
+                    && approvalCorrelationEchoed;
+            return new CiEvidenceFlags(
+                    manifestProfileVersionEchoed,
+                    manifestDigestEchoed,
+                    manifestEndpointEchoed,
+                    artifactRecordCountEchoed,
+                    approvalCorrelationEchoed,
+                    ciEvidenceContextComplete,
+                    "NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS",
+                    true,
+                    false,
+                    false,
+                    false,
+                    false
+            );
+        }
+    }
+
+    private record ArtifactRetentionFlags(
+            boolean uploadContractVersionEchoed,
+            boolean uploadContractDigestEchoed,
+            boolean artifactNameEchoed,
+            boolean artifactRootEchoed,
+            boolean retentionDaysEchoed,
+            boolean uploadModeEchoed,
+            boolean artifactRetentionContextComplete,
+            boolean retentionDaysWithinJavaRetention,
+            boolean javaRetentionFixtureReadOnly,
+            boolean auditExportReadOnly,
+            boolean ciArtifactUploadedByJava,
+            boolean githubArtifactAccessedByJava,
+            boolean productionWindowAllowedByJava,
+            boolean nodeMayTreatAsRetentionAuthorization
+    ) {
+
+        static ArtifactRetentionFlags fromEchoes(
+                boolean uploadContractVersionEchoed,
+                boolean uploadContractDigestEchoed,
+                boolean artifactNameEchoed,
+                boolean artifactRootEchoed,
+                boolean retentionDaysEchoed,
+                boolean uploadModeEchoed,
+                boolean retentionDaysWithinJavaRetention,
+                boolean javaRetentionFixtureReadOnly,
+                boolean auditExportReadOnly
+        ) {
+            boolean artifactRetentionContextComplete = uploadContractVersionEchoed
+                    && uploadContractDigestEchoed
+                    && artifactNameEchoed
+                    && artifactRootEchoed
+                    && retentionDaysEchoed
+                    && uploadModeEchoed;
+            return new ArtifactRetentionFlags(
+                    uploadContractVersionEchoed,
+                    uploadContractDigestEchoed,
+                    artifactNameEchoed,
+                    artifactRootEchoed,
+                    retentionDaysEchoed,
+                    uploadModeEchoed,
+                    artifactRetentionContextComplete,
+                    retentionDaysWithinJavaRetention,
+                    javaRetentionFixtureReadOnly,
+                    auditExportReadOnly,
+                    false,
+                    false,
+                    false,
+                    false
+            );
+        }
+    }
+
+    private record LiveReadinessFlags(
+            boolean sourcePreflightVersionEchoed,
+            boolean sourcePreflightDigestEchoed,
+            boolean runtimeSmokeSessionIdEchoed,
+            boolean runtimeReadTargetIdEchoed,
+            boolean runtimeWindowModeEchoed,
+            boolean liveReadinessContextComplete,
+            boolean readyForRuntimeSmokeRead,
+            boolean readOnlyEndpointReady,
+            boolean runtimeSmokeExecutedByJava,
+            boolean nodeMustRecordPidAndCleanup,
+            boolean javaStartedProcessForNode,
+            boolean processCleanupRecordedByJava,
+            boolean nodeMayTreatAsProductionAuthorization
+    ) {
+
+        static LiveReadinessFlags fromEchoes(
+                boolean sourcePreflightVersionEchoed,
+                boolean sourcePreflightDigestEchoed,
+                boolean runtimeSmokeSessionIdEchoed,
+                boolean runtimeReadTargetIdEchoed,
+                boolean runtimeWindowModeEchoed,
+                boolean liveReadinessContextComplete,
+                boolean readyForRuntimeSmokeRead,
+                boolean readOnlyEndpointReady
+        ) {
+            return new LiveReadinessFlags(
+                    sourcePreflightVersionEchoed,
+                    sourcePreflightDigestEchoed,
+                    runtimeSmokeSessionIdEchoed,
+                    runtimeReadTargetIdEchoed,
+                    runtimeWindowModeEchoed,
+                    liveReadinessContextComplete,
+                    readyForRuntimeSmokeRead,
+                    readOnlyEndpointReady,
+                    false,
+                    true,
+                    false,
+                    false,
+                    false
+            );
         }
     }
 }

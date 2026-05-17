@@ -322,17 +322,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
     }
 
     private ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries() {
-        return new ReleaseApprovalRehearsalResponse.ExecutionBoundaries(
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false
-        );
+        return ExecutionBoundaryFlags.readOnlyRehearsal().toExecutionBoundaries();
     }
 
     private List<String> releaseApprovalRehearsalBlockers(OpsEvidenceResponse evidence) {
@@ -363,5 +353,46 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 "GET " + OpsEvidenceService.ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
                 "Keep UPSTREAM_ACTIONS_ENABLED=false"
         );
+    }
+
+    private record ExecutionBoundaryFlags(
+            boolean nodeMayConsume,
+            boolean nodeMayCreateApprovalDecision,
+            boolean nodeMayWriteApprovalLedger,
+            boolean nodeMayTriggerDeployment,
+            boolean nodeMayTriggerRollback,
+            boolean nodeMayExecuteRollbackSql,
+            boolean requiresProductionDatabase,
+            boolean requiresProductionSecrets,
+            boolean changesOrderTransactionSemantics
+    ) {
+
+        static ExecutionBoundaryFlags readOnlyRehearsal() {
+            return new ExecutionBoundaryFlags(
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+            );
+        }
+
+        ReleaseApprovalRehearsalResponse.ExecutionBoundaries toExecutionBoundaries() {
+            return new ReleaseApprovalRehearsalResponse.ExecutionBoundaries(
+                    nodeMayConsume,
+                    nodeMayCreateApprovalDecision,
+                    nodeMayWriteApprovalLedger,
+                    nodeMayTriggerDeployment,
+                    nodeMayTriggerRollback,
+                    nodeMayExecuteRollbackSql,
+                    requiresProductionDatabase,
+                    requiresProductionSecrets,
+                    changesOrderTransactionSemantics
+            );
+        }
     }
 }
