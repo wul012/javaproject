@@ -1,10 +1,6 @@
 package com.codexdemo.orderplatform.ops;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HexFormat;
 import java.util.List;
 
 final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder {
@@ -155,28 +151,58 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
                         && qualityGateBoundary.receiptFieldsGroupedByBoundary()
                         && qualityGateBoundary.opsEvidenceServiceOnlyWiresReceipt();
 
-        String guardDigest = digest(List.of(
-                line("receiptVersion", RECEIPT_VERSION),
-                line("sourceExternalAdapterMigrationGuardReceiptVersion", migrationGuardReceipt.receiptVersion()),
-                line("sourceExternalAdapterMigrationGuardSchemaVersion", SOURCE_SCHEMA_VERSION),
-                line("consumedByNodeSandboxPlanVersion", NODE_V224_VERSION),
-                line("consumedByNodeSandboxPlanProfile", NODE_V224_PROFILE),
-                line("consumedByNodeSandboxPlanState", NODE_V224_STATE),
-                line("nodeV224ReadyForPlan", nodeV224SandboxPlan.readyForManagedAuditSandboxAdapterDryRunPlan()),
-                line("nodeV224ConnectsManagedAudit", nodeV224SandboxPlan.connectsManagedAudit()),
-                line("ownerApprovalArtifactRequired", ownerApprovalBoundary.ownerApprovalArtifactRequired()),
-                line("ownerApprovalArtifactProvidedByJava", ownerApprovalBoundary.ownerApprovalArtifactProvidedByJava()),
-                line("schemaMigrationRehearsalRequired", schemaRehearsalBoundary.schemaMigrationRehearsalRequired()),
-                line("schemaMigrationSqlExecutedByJava", schemaRehearsalBoundary.schemaMigrationSqlExecutedByJava()),
-                line("sandboxCredentialHandleRequired", credentialBoundary.sandboxCredentialHandleRequired()),
-                line("sandboxCredentialHandleName", credentialBoundary.sandboxCredentialHandleName()),
-                line("credentialValueReadByJava", credentialBoundary.credentialValueReadByJava()),
-                line("externalManagedAuditConnectionOpened", executionBoundary.externalManagedAuditConnectionOpened()),
-                line("javaManagedAuditStoreWritten", executionBoundary.javaManagedAuditStoreWritten()),
-                line("javaSqlExecuted", executionBoundary.javaSqlExecuted()),
-                line("qualityGateBuilderOrHelperSplitApplied", qualityGateBoundary.builderOrHelperSplitApplied()),
-                line("qualityGateLongBooleanConstructorAvoided", qualityGateBoundary.longBooleanConstructorAvoided()),
-                line("readyForNodeV225SandboxAdapterDryRunPackage", readyForNodeV225SandboxAdapterDryRunPackage)
+        String guardDigest = ReleaseApprovalDigestSupport.digest(List.of(
+                ReleaseApprovalDigestSupport.line("receiptVersion", RECEIPT_VERSION),
+                ReleaseApprovalDigestSupport.line(
+                        "sourceExternalAdapterMigrationGuardReceiptVersion",
+                        migrationGuardReceipt.receiptVersion()
+                ),
+                ReleaseApprovalDigestSupport.line("sourceExternalAdapterMigrationGuardSchemaVersion", SOURCE_SCHEMA_VERSION),
+                ReleaseApprovalDigestSupport.line("consumedByNodeSandboxPlanVersion", NODE_V224_VERSION),
+                ReleaseApprovalDigestSupport.line("consumedByNodeSandboxPlanProfile", NODE_V224_PROFILE),
+                ReleaseApprovalDigestSupport.line("consumedByNodeSandboxPlanState", NODE_V224_STATE),
+                ReleaseApprovalDigestSupport.line(
+                        "nodeV224ReadyForPlan",
+                        nodeV224SandboxPlan.readyForManagedAuditSandboxAdapterDryRunPlan()
+                ),
+                ReleaseApprovalDigestSupport.line("nodeV224ConnectsManagedAudit", nodeV224SandboxPlan.connectsManagedAudit()),
+                ReleaseApprovalDigestSupport.line(
+                        "ownerApprovalArtifactRequired",
+                        ownerApprovalBoundary.ownerApprovalArtifactRequired()
+                ),
+                ReleaseApprovalDigestSupport.line(
+                        "ownerApprovalArtifactProvidedByJava",
+                        ownerApprovalBoundary.ownerApprovalArtifactProvidedByJava()
+                ),
+                ReleaseApprovalDigestSupport.line(
+                        "schemaMigrationRehearsalRequired",
+                        schemaRehearsalBoundary.schemaMigrationRehearsalRequired()
+                ),
+                ReleaseApprovalDigestSupport.line(
+                        "schemaMigrationSqlExecutedByJava",
+                        schemaRehearsalBoundary.schemaMigrationSqlExecutedByJava()
+                ),
+                ReleaseApprovalDigestSupport.line("sandboxCredentialHandleRequired", credentialBoundary.sandboxCredentialHandleRequired()),
+                ReleaseApprovalDigestSupport.line("sandboxCredentialHandleName", credentialBoundary.sandboxCredentialHandleName()),
+                ReleaseApprovalDigestSupport.line("credentialValueReadByJava", credentialBoundary.credentialValueReadByJava()),
+                ReleaseApprovalDigestSupport.line(
+                        "externalManagedAuditConnectionOpened",
+                        executionBoundary.externalManagedAuditConnectionOpened()
+                ),
+                ReleaseApprovalDigestSupport.line("javaManagedAuditStoreWritten", executionBoundary.javaManagedAuditStoreWritten()),
+                ReleaseApprovalDigestSupport.line("javaSqlExecuted", executionBoundary.javaSqlExecuted()),
+                ReleaseApprovalDigestSupport.line(
+                        "qualityGateBuilderOrHelperSplitApplied",
+                        qualityGateBoundary.builderOrHelperSplitApplied()
+                ),
+                ReleaseApprovalDigestSupport.line(
+                        "qualityGateLongBooleanConstructorAvoided",
+                        qualityGateBoundary.longBooleanConstructorAvoided()
+                ),
+                ReleaseApprovalDigestSupport.line(
+                        "readyForNodeV225SandboxAdapterDryRunPackage",
+                        readyForNodeV225SandboxAdapterDryRunPackage
+                )
         ));
 
         return new ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt(
@@ -250,7 +276,10 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
                     receipt
     ) {
         return List.of(
-                line("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings", receipt.guardWarnings())
+                ReleaseApprovalDigestSupport.line(
+                        "managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings",
+                        receipt.guardWarnings()
+                )
         );
     }
 
@@ -259,29 +288,29 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
                     receipt
     ) {
         return List.of(
-                line("sandboxAdapterApprovalSchemaGuardDigest", receipt.guardDigest()),
-                line(
+                ReleaseApprovalDigestSupport.line("sandboxAdapterApprovalSchemaGuardDigest", receipt.guardDigest()),
+                ReleaseApprovalDigestSupport.line(
                         "sandboxAdapterOwnerApprovalArtifactProvidedByJava",
                         receipt.ownerApprovalBoundary().ownerApprovalArtifactProvidedByJava()
                 ),
-                line(
+                ReleaseApprovalDigestSupport.line(
                         "sandboxAdapterSchemaMigrationSqlExecutedByJava",
                         receipt.schemaRehearsalBoundary().schemaMigrationSqlExecutedByJava()
                 ),
-                line(
+                ReleaseApprovalDigestSupport.line(
                         "sandboxAdapterCredentialValueReadByJava",
                         receipt.credentialBoundary().credentialValueReadByJava()
                 ),
-                line(
+                ReleaseApprovalDigestSupport.line(
                         "sandboxAdapterExternalManagedAuditConnectionOpened",
                         receipt.executionBoundary().externalManagedAuditConnectionOpened()
                 ),
-                line(
+                ReleaseApprovalDigestSupport.line(
                         "sandboxAdapterJavaManagedAuditStoreWritten",
                         receipt.executionBoundary().javaManagedAuditStoreWritten()
                 ),
-                line("sandboxAdapterJavaSqlExecuted", receipt.executionBoundary().javaSqlExecuted()),
-                line(
+                ReleaseApprovalDigestSupport.line("sandboxAdapterJavaSqlExecuted", receipt.executionBoundary().javaSqlExecuted()),
+                ReleaseApprovalDigestSupport.line(
                         "sandboxAdapterQualityGateBuilderOrHelperSplitApplied",
                         receipt.qualityGateBoundary().builderOrHelperSplitApplied()
                 )
@@ -390,30 +419,4 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
         );
     }
 
-    private static String digest(List<String> lines) {
-        String canonical = String.join("\n", lines) + "\n";
-        try {
-            byte[] bytes = MessageDigest.getInstance("SHA-256")
-                    .digest(canonical.getBytes(StandardCharsets.UTF_8));
-            return "sha256:" + HexFormat.of().formatHex(bytes);
-        } catch (NoSuchAlgorithmException ex) {
-            throw new IllegalStateException("SHA-256 digest algorithm is not available", ex);
-        }
-    }
-
-    private static String line(String key, Object value) {
-        return key + "=" + value(value);
-    }
-
-    private static String value(Object value) {
-        if (value == null) {
-            return "<null>";
-        }
-        if (value instanceof List<?> list) {
-            return "[" + String.join(",", list.stream()
-                    .map(ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder::value)
-                    .toList()) + "]";
-        }
-        return String.valueOf(value);
-    }
 }

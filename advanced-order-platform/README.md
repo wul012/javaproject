@@ -2101,6 +2101,8 @@ verificationHint.warningDigestInputs includes managedAuditSandboxAdapterApproval
 没有传入完整 Node v210 approval binding header 时，上游 v81 receipt 还未 ready，`managedAuditSandboxAdapterApprovalSchemaGuardReceipt.readyForNodeV225SandboxAdapterDryRunPackage=false` 且 `guardWarnings` 包含 `NODE_V225_SOURCE_EXTERNAL_ADAPTER_MIGRATION_GUARD_RECEIPT_NOT_READY`。传入完整 header 后该 ready 字段可为 true，但仍只允许 Node v225 生成 sandbox adapter dry-run package；owner approval artifact、schema rehearsal checklist、sandbox credential handle 和 mini-kv v91 evidence 必须由后续只读证据链提供，Java 不执行任何连接、SQL、部署、回滚或 restore。
 
 v83 起，release approval rehearsal 继续做 contract-preserving refactor，把 `verificationHint` 的构造与 `warningDigest` / `proofClaims` / `nodeVerificationActions` 从 `OpsEvidenceService` 抽到 `ReleaseApprovalVerificationHintBuilder`。这次拆分不改任何响应字段名、不改 digest 顺序、不改 proof claims、不改 read-only 边界；`OpsEvidenceService` 只保留一层转发，避免继续在主服务里堆 verification hint 的长方法。
+
+v84 起，release approval rehearsal 继续做 contract-preserving refactor，把 v77-v80 managed-audit receipt 构造链、verification warning digest 和共用 digest helper 从 `OpsEvidenceService` / `ReleaseApprovalVerificationHintBuilder` 拆到专用 builder。该版本不新增响应字段，不修改 schema version、warning digest 输入、proof claims 或 Node verification action；`OpsEvidenceService` 只负责串联 receipt builder。
 查询失败事件治理摘要：
 
 ```powershell
@@ -2698,6 +2700,9 @@ ops
   -> v80 增强 release approval rehearsal 只读 managed-audit adapter implementation guard receipt，承接 Node v220 disabled shell，给 Node v221 local adapter candidate dry-run 提供 guard digest 和 no-write 边界
   -> v81 增强 release approval rehearsal 只读 managed-audit external adapter migration guard receipt，承接 Node v222 verification report，给 Node v223 connection readiness review 标注 owner approval、schema migration review、credential review 和 no-credential/no-connection/no-SQL 边界
   -> v82 增强 release approval rehearsal 只读 managed-audit sandbox adapter approval/schema guard receipt，承接 Node v224 sandbox plan，给 Node v225 dry-run package 标注 owner approval artifact、schema rehearsal checklist、sandbox credential handle 和 helper split 质量门禁
+
+  -> v83 contract-preserving refactor: extract release approval verification hint builder from OpsEvidenceService without changing response fields, digest order, proof claims, or read-only boundaries
+  -> v84 contract-preserving refactor: extract managed-audit receipt builders, verification warning digest builder, and shared digest support; OpsEvidenceService now only wires the receipt chain
 
 common
  -> 业务异常和统一错误响应

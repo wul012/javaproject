@@ -1,16 +1,13 @@
 package com.codexdemo.orderplatform.ops;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HexFormat;
 import java.util.List;
 
 final class ReleaseApprovalVerificationHintBuilder {
 
     private final ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
             sandboxAdapterApprovalSchemaGuardReceiptBuilder;
+    private final ReleaseApprovalVerificationWarningDigestBuilder warningDigestBuilder;
 
     ReleaseApprovalVerificationHintBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
@@ -18,6 +15,9 @@ final class ReleaseApprovalVerificationHintBuilder {
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
+        this.warningDigestBuilder = new ReleaseApprovalVerificationWarningDigestBuilder(
+                sandboxAdapterApprovalSchemaGuardReceiptBuilder
+        );
     }
 
     ReleaseApprovalRehearsalResponse.RehearsalVerificationHint build(
@@ -48,7 +48,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         return new ReleaseApprovalRehearsalResponse.RehearsalVerificationHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION,
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
-                warningDigest(
+                warningDigestBuilder.build(
                         requestContext,
                         operatorWindowHint,
                         ciEvidenceHint,
@@ -441,253 +441,5 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "Keep UPSTREAM_ACTIONS_ENABLED=false"
         ));
         return actions;
-    }
-
-    private String warningDigest(
-            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
-            ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
-            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
-            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
-            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
-            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
-                    approvalHandoffVerificationMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
-                    managedAuditAdapterBoundaryReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
-                    managedAuditProductionAdapterPrerequisiteReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
-                    opsEvidenceServiceQualitySplitReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
-                    managedAuditAdapterImplementationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
-                    managedAuditExternalAdapterMigrationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
-                    managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
-            ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
-    ) {
-        List<String> lines = new ArrayList<>(List.of(
-                line("digestKind", "releaseApprovalRehearsalWarning"),
-                line("hintVersion", OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION),
-                line("responseSchemaVersion", OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION),
-                line("contextWarnings", requestContext.contextWarnings()),
-                line("operatorWindowEchoWarnings", operatorWindowHint.echoWarnings()),
-                line("ciEvidenceEchoWarnings", ciEvidenceHint.echoWarnings()),
-                line("artifactRetentionEchoWarnings", artifactRetentionHint.echoWarnings()),
-                line("liveReadinessEchoWarnings", liveReadinessHint.echoWarnings()),
-                line("auditPersistenceHandoffEchoWarnings", auditPersistenceHandoffHint.echoWarnings()),
-                line("approvalRecordHandoffEchoWarnings", approvalRecordHandoffHint.echoWarnings()),
-                line("approvalHandoffVerificationMarkerWarnings", approvalHandoffVerificationMarker.markerWarnings()),
-                line("managedAuditAdapterBoundaryReceiptWarnings", managedAuditAdapterBoundaryReceipt.receiptWarnings()),
-                line(
-                        "managedAuditProductionAdapterPrerequisiteReceiptWarnings",
-                        managedAuditProductionAdapterPrerequisiteReceipt.receiptWarnings()
-                ),
-                line(
-                        "opsEvidenceServiceQualitySplitReceiptWarnings",
-                        opsEvidenceServiceQualitySplitReceipt.receiptWarnings()
-                ),
-                line(
-                        "managedAuditAdapterImplementationGuardReceiptWarnings",
-                        managedAuditAdapterImplementationGuardReceipt.guardWarnings()
-                ),
-                line(
-                        "managedAuditExternalAdapterMigrationGuardReceiptWarnings",
-                        managedAuditExternalAdapterMigrationGuardReceipt.guardWarnings()
-                )
-        ));
-        lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxAdapterApprovalSchemaGuardReceipt
-        ));
-        lines.addAll(List.of(
-                line("failureCategories", failureTaxonomy.failureCategories()),
-                line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
-                line("executionAllowed", false),
-                line("approvalLedgerWritten", requestContext.approvalLedgerWritten()),
-                line("ciArtifactUploadedByJava", ciEvidenceHint.ciArtifactUploadedByJava()),
-                line("githubArtifactAccessedByJava", ciEvidenceHint.githubArtifactAccessedByJava()),
-                line("retentionCiArtifactUploadedByJava", artifactRetentionHint.ciArtifactUploadedByJava()),
-                line("retentionGithubArtifactAccessedByJava", artifactRetentionHint.githubArtifactAccessedByJava()),
-                line("retentionAuthorization", artifactRetentionHint.nodeMayTreatAsRetentionAuthorization()),
-                line("runtimeSmokeExecutedByJava", liveReadinessHint.runtimeSmokeExecutedByJava()),
-                line("javaStartedProcessForNode", liveReadinessHint.javaStartedProcessForNode()),
-                line("nodeMayTreatAsProductionAuthorization", liveReadinessHint.nodeMayTreatAsProductionAuthorization()),
-                line("javaManagedAuditWriteAllowed", auditPersistenceHandoffHint.javaManagedAuditWriteAllowed()),
-                line("javaExternalAuditSystemAccessed", auditPersistenceHandoffHint.javaExternalAuditSystemAccessed()),
-                line(
-                        "nodeMayTreatAsProductionAuditRecord",
-                        auditPersistenceHandoffHint.nodeMayTreatAsProductionAuditRecord()
-                ),
-                line("javaApprovalRecordPersisted", approvalRecordHandoffHint.javaApprovalRecordPersisted()),
-                line(
-                        "nodeMayTreatAsProductionApprovalRecord",
-                        approvalRecordHandoffHint.nodeMayTreatAsProductionApprovalRecord()
-                ),
-                line(
-                        "nodeV211ProductionAuditRecordAllowed",
-                        approvalHandoffVerificationMarker.nodeV211ProductionAuditRecordAllowed()
-                ),
-                line(
-                        "nodeV211RealApprovalDecisionCreated",
-                        approvalHandoffVerificationMarker.nodeV211RealApprovalDecisionCreated()
-                ),
-                line(
-                        "nodeV215MayConnectManagedAudit",
-                        managedAuditAdapterBoundaryReceipt.nodeV215MayConnectManagedAudit()
-                ),
-                line(
-                        "nodeV215MayCreateApprovalDecision",
-                        managedAuditAdapterBoundaryReceipt.nodeV215MayCreateApprovalDecision()
-                ),
-                line(
-                        "nodeV215MayWriteApprovalLedger",
-                        managedAuditAdapterBoundaryReceipt.nodeV215MayWriteApprovalLedger()
-                ),
-                line(
-                        "nodeV215MayExecuteSql",
-                        managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteSql()
-                ),
-                line(
-                        "nodeV215MayTriggerDeployment",
-                        managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerDeployment()
-                ),
-                line(
-                        "nodeV215MayTriggerRollback",
-                        managedAuditAdapterBoundaryReceipt.nodeV215MayTriggerRollback()
-                ),
-                line(
-                        "nodeV215MayExecuteRestore",
-                        managedAuditAdapterBoundaryReceipt.nodeV215MayExecuteRestore()
-                ),
-                line(
-                        "nodeV217MayConnectManagedAudit",
-                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayConnectManagedAudit()
-                ),
-                line(
-                        "nodeV217MayWriteApprovalLedger",
-                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayWriteApprovalLedger()
-                ),
-                line(
-                        "nodeV217MayExecuteSql",
-                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteSql()
-                ),
-                line(
-                        "nodeV217MayTriggerDeployment",
-                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerDeployment()
-                ),
-                line(
-                        "nodeV217MayTriggerRollback",
-                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayTriggerRollback()
-                ),
-                line(
-                        "nodeV217MayExecuteRestore",
-                        managedAuditProductionAdapterPrerequisiteReceipt.nodeV217MayExecuteRestore()
-                ),
-                line("qualitySplitApiShapeChanged", opsEvidenceServiceQualitySplitReceipt.apiShapeChanged()),
-                line(
-                        "qualitySplitApprovalDecisionCreated",
-                        opsEvidenceServiceQualitySplitReceipt.approvalDecisionCreated()
-                ),
-                line(
-                        "qualitySplitApprovalLedgerWritten",
-                        opsEvidenceServiceQualitySplitReceipt.approvalLedgerWritten()
-                ),
-                line(
-                        "qualitySplitManagedAuditStoreWritten",
-                        opsEvidenceServiceQualitySplitReceipt.managedAuditStoreWritten()
-                ),
-                line("qualitySplitSqlExecuted", opsEvidenceServiceQualitySplitReceipt.sqlExecuted()),
-                line("implementationGuardDigest", managedAuditAdapterImplementationGuardReceipt.guardDigest()),
-                line(
-                        "implementationGuardJavaApprovalLedgerWritten",
-                        managedAuditAdapterImplementationGuardReceipt.javaApprovalLedgerWritten()
-                ),
-                line(
-                        "implementationGuardJavaManagedAuditStoreWritten",
-                        managedAuditAdapterImplementationGuardReceipt.javaManagedAuditStoreWritten()
-                ),
-                line(
-                        "implementationGuardJavaSqlExecuted",
-                        managedAuditAdapterImplementationGuardReceipt.javaSqlExecuted()
-                ),
-                line(
-                        "implementationGuardNodeV220AppendWritten",
-                        managedAuditAdapterImplementationGuardReceipt.nodeV220AppendWritten()
-                ),
-                line(
-                        "implementationGuardNodeV220ExternalManagedAuditAccessed",
-                        managedAuditAdapterImplementationGuardReceipt.nodeV220ExternalManagedAuditAccessed()
-                ),
-                line(
-                        "implementationGuardNodeV220LocalDryRunWritePerformed",
-                        managedAuditAdapterImplementationGuardReceipt.nodeV220LocalDryRunWritePerformed()
-                ),
-                line(
-                        "externalAdapterMigrationGuardDigest",
-                        managedAuditExternalAdapterMigrationGuardReceipt.guardDigest()
-                ),
-                line(
-                        "externalAdapterMigrationCredentialValueReadByJava",
-                        managedAuditExternalAdapterMigrationGuardReceipt.credentialValueReadByJava()
-                ),
-                line(
-                        "externalAdapterMigrationConnectionOpened",
-                        managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened()
-                ),
-                line(
-                        "externalAdapterMigrationSchemaMigrated",
-                        managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditSchemaMigrated()
-                ),
-                line(
-                        "externalAdapterMigrationJavaManagedAuditStoreWritten",
-                        managedAuditExternalAdapterMigrationGuardReceipt.javaManagedAuditStoreWritten()
-                ),
-                line(
-                        "externalAdapterMigrationJavaSqlExecuted",
-                        managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted()
-                ),
-                line(
-                        "externalAdapterMigrationNodeV222SourceEndpointRerunPerformed",
-                        managedAuditExternalAdapterMigrationGuardReceipt.nodeV222SourceEndpointRerunPerformed()
-                ),
-                line(
-                        "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed",
-                        managedAuditExternalAdapterMigrationGuardReceipt.nodeV222AdditionalLocalDryRunWritePerformed()
-                )
-        ));
-        lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxAdapterApprovalSchemaGuardReceipt
-        ));
-        lines.add(line("nodeMayWriteApprovalLedger", executionBoundaries.nodeMayWriteApprovalLedger()));
-        return digest(lines);
-    }
-
-    private static String digest(List<String> lines) {
-        String canonical = String.join("\n", lines) + "\n";
-        try {
-            byte[] bytes = MessageDigest.getInstance("SHA-256")
-                    .digest(canonical.getBytes(StandardCharsets.UTF_8));
-            return "sha256:" + HexFormat.of().formatHex(bytes);
-        } catch (NoSuchAlgorithmException ex) {
-            throw new IllegalStateException("SHA-256 digest algorithm is not available", ex);
-        }
-    }
-
-    private static String line(String key, Object value) {
-        return key + "=" + value(value);
-    }
-
-    private static String value(Object value) {
-        if (value == null) {
-            return "<null>";
-        }
-        if (value instanceof List<?> list) {
-            return "[" + String.join(",", list.stream()
-                    .map(ReleaseApprovalVerificationHintBuilder::value)
-                    .toList()) + "]";
-        }
-        return String.valueOf(value);
     }
 }
