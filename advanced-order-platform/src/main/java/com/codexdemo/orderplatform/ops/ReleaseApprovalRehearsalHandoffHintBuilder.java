@@ -15,41 +15,49 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                     String normalizedManagedAuditRotationPolicy
     ) {
         List<String> warnings = new ArrayList<>();
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField managedAuditCandidateVersion = ContextHeaderField.from(
                 normalizedManagedAuditCandidateVersion,
+                "x-orderops-managed-audit-candidate-version",
+                "managed-audit-candidate-version-not-supplied"
+        );
+        ContextHeaderField managedAuditCandidateDigest = ContextHeaderField.from(
+                normalizedManagedAuditCandidateDigest,
+                "x-orderops-managed-audit-candidate-digest",
+                "managed-audit-candidate-digest-not-supplied"
+        );
+        ContextHeaderField managedAuditSinkMode = ContextHeaderField.from(
+                normalizedManagedAuditSinkMode,
+                "x-orderops-managed-audit-sink-mode",
+                "managed-audit-sink-mode-not-supplied"
+        );
+        ContextHeaderField managedAuditRetentionDays = ContextHeaderField.from(
+                normalizedManagedAuditRetentionDays,
+                "x-orderops-managed-audit-retention-days",
+                "managed-audit-retention-days-not-supplied"
+        );
+        ContextHeaderField managedAuditRotationPolicy = ContextHeaderField.from(
+                normalizedManagedAuditRotationPolicy,
+                "x-orderops-managed-audit-rotation-policy",
+                "managed-audit-rotation-policy-not-supplied"
+        );
+        managedAuditCandidateVersion.addMissingWarning(
+                warnings,
                 "ORDEROPS_MANAGED_AUDIT_CANDIDATE_VERSION_MISSING"
         );
-        addMissingContextWarning(
+        managedAuditCandidateDigest.addMissingWarning(
                 warnings,
-                normalizedManagedAuditCandidateDigest,
                 "ORDEROPS_MANAGED_AUDIT_CANDIDATE_DIGEST_MISSING"
         );
-        addMissingContextWarning(
-                warnings,
-                normalizedManagedAuditSinkMode,
-                "ORDEROPS_MANAGED_AUDIT_SINK_MODE_MISSING"
+        managedAuditSinkMode.addMissingWarning(warnings, "ORDEROPS_MANAGED_AUDIT_SINK_MODE_MISSING");
+        managedAuditRetentionDays.addMissingWarning(warnings, "ORDEROPS_MANAGED_AUDIT_RETENTION_DAYS_MISSING");
+        managedAuditRotationPolicy.addMissingWarning(warnings, "ORDEROPS_MANAGED_AUDIT_ROTATION_POLICY_MISSING");
+        boolean auditPersistenceHandoffContextComplete = ContextHeaderField.allEchoed(
+                managedAuditCandidateVersion,
+                managedAuditCandidateDigest,
+                managedAuditSinkMode,
+                managedAuditRetentionDays,
+                managedAuditRotationPolicy
         );
-        addMissingContextWarning(
-                warnings,
-                normalizedManagedAuditRetentionDays,
-                "ORDEROPS_MANAGED_AUDIT_RETENTION_DAYS_MISSING"
-        );
-        addMissingContextWarning(
-                warnings,
-                normalizedManagedAuditRotationPolicy,
-                "ORDEROPS_MANAGED_AUDIT_ROTATION_POLICY_MISSING"
-        );
-        boolean candidateVersionEchoed = normalizedManagedAuditCandidateVersion != null;
-        boolean candidateDigestEchoed = normalizedManagedAuditCandidateDigest != null;
-        boolean sinkModeEchoed = normalizedManagedAuditSinkMode != null;
-        boolean retentionDaysEchoed = normalizedManagedAuditRetentionDays != null;
-        boolean rotationPolicyEchoed = normalizedManagedAuditRotationPolicy != null;
-        boolean auditPersistenceHandoffContextComplete = candidateVersionEchoed
-                && candidateDigestEchoed
-                && sinkModeEchoed
-                && retentionDaysEchoed
-                && rotationPolicyEchoed;
         boolean managedAuditRetentionWithinJavaRetention = retentionDaysWithinJavaRetention(
                 normalizedManagedAuditRetentionDays,
                 retentionFixture.retentionDays()
@@ -59,11 +67,11 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 && !retentionFixture.deploymentExecutionAllowed()
                 && !retentionFixture.rollbackSqlExecutionAllowed();
         AuditPersistenceHandoffFlags auditPersistenceHandoffFlags = AuditPersistenceHandoffFlags.fromReadOnly(
-                candidateVersionEchoed,
-                candidateDigestEchoed,
-                sinkModeEchoed,
-                retentionDaysEchoed,
-                rotationPolicyEchoed,
+                managedAuditCandidateVersion.echoed(),
+                managedAuditCandidateDigest.echoed(),
+                managedAuditSinkMode.echoed(),
+                managedAuditRetentionDays.echoed(),
+                managedAuditRotationPolicy.echoed(),
                 auditPersistenceHandoffContextComplete,
                 managedAuditRetentionWithinJavaRetention,
                 javaAuditSourceReadOnly
@@ -74,31 +82,16 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 retentionFixture.fixtureVersion(),
                 retentionFixture.fixtureEndpoint(),
                 retentionFixture.retentionDays(),
-                valueOrPlaceholder(
-                        normalizedManagedAuditCandidateVersion,
-                        "managed-audit-candidate-version-not-supplied"
-                ),
-                sourceFor(normalizedManagedAuditCandidateVersion, "x-orderops-managed-audit-candidate-version"),
-                valueOrPlaceholder(
-                        normalizedManagedAuditCandidateDigest,
-                        "managed-audit-candidate-digest-not-supplied"
-                ),
-                sourceFor(normalizedManagedAuditCandidateDigest, "x-orderops-managed-audit-candidate-digest"),
-                valueOrPlaceholder(
-                        normalizedManagedAuditSinkMode,
-                        "managed-audit-sink-mode-not-supplied"
-                ),
-                sourceFor(normalizedManagedAuditSinkMode, "x-orderops-managed-audit-sink-mode"),
-                valueOrPlaceholder(
-                        normalizedManagedAuditRetentionDays,
-                        "managed-audit-retention-days-not-supplied"
-                ),
-                sourceFor(normalizedManagedAuditRetentionDays, "x-orderops-managed-audit-retention-days"),
-                valueOrPlaceholder(
-                        normalizedManagedAuditRotationPolicy,
-                        "managed-audit-rotation-policy-not-supplied"
-                ),
-                sourceFor(normalizedManagedAuditRotationPolicy, "x-orderops-managed-audit-rotation-policy"),
+                managedAuditCandidateVersion.value(),
+                managedAuditCandidateVersion.source(),
+                managedAuditCandidateDigest.value(),
+                managedAuditCandidateDigest.source(),
+                managedAuditSinkMode.value(),
+                managedAuditSinkMode.source(),
+                managedAuditRetentionDays.value(),
+                managedAuditRetentionDays.source(),
+                managedAuditRotationPolicy.value(),
+                managedAuditRotationPolicy.source(),
                 auditPersistenceHandoffFlags.candidateVersionEchoed(),
                 auditPersistenceHandoffFlags.candidateDigestEchoed(),
                 auditPersistenceHandoffFlags.sinkModeEchoed(),
@@ -162,51 +155,62 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                     String normalizedApprovalRecordCorrelationId
     ) {
         List<String> warnings = new ArrayList<>();
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField approvalBindingContractVersion = ContextHeaderField.from(
                 normalizedApprovalBindingContractVersion,
+                "x-orderops-approval-binding-contract-version",
+                "approval-binding-contract-version-not-supplied"
+        );
+        ContextHeaderField approvalBindingContractDigest = ContextHeaderField.from(
+                normalizedApprovalBindingContractDigest,
+                "x-orderops-approval-binding-contract-digest",
+                "approval-binding-contract-digest-not-supplied"
+        );
+        ContextHeaderField approvalRequestId = ContextHeaderField.from(
+                normalizedApprovalRequestId,
+                "x-orderops-approval-request-id",
+                "approval-request-id-not-supplied"
+        );
+        ContextHeaderField approvalDecisionState = ContextHeaderField.from(
+                normalizedApprovalDecisionState,
+                "x-orderops-approval-decision-state",
+                "approval-decision-state-not-supplied"
+        );
+        ContextHeaderField approvalRecordCorrelationId = ContextHeaderField.from(
+                normalizedApprovalRecordCorrelationId,
+                "x-orderops-approval-record-correlation-id",
+                "approval-record-correlation-id-not-supplied"
+        );
+        approvalBindingContractVersion.addMissingWarning(
+                warnings,
                 "ORDEROPS_APPROVAL_BINDING_CONTRACT_VERSION_MISSING"
         );
-        addMissingContextWarning(
+        approvalBindingContractDigest.addMissingWarning(
                 warnings,
-                normalizedApprovalBindingContractDigest,
                 "ORDEROPS_APPROVAL_BINDING_CONTRACT_DIGEST_MISSING"
         );
-        addMissingContextWarning(
+        approvalRequestId.addMissingWarning(warnings, "ORDEROPS_APPROVAL_REQUEST_ID_MISSING");
+        approvalDecisionState.addMissingWarning(warnings, "ORDEROPS_APPROVAL_DECISION_STATE_MISSING");
+        approvalRecordCorrelationId.addMissingWarning(
                 warnings,
-                normalizedApprovalRequestId,
-                "ORDEROPS_APPROVAL_REQUEST_ID_MISSING"
-        );
-        addMissingContextWarning(
-                warnings,
-                normalizedApprovalDecisionState,
-                "ORDEROPS_APPROVAL_DECISION_STATE_MISSING"
-        );
-        addMissingContextWarning(
-                warnings,
-                normalizedApprovalRecordCorrelationId,
                 "ORDEROPS_APPROVAL_RECORD_CORRELATION_ID_MISSING"
         );
-        boolean approvalBindingContractVersionEchoed = normalizedApprovalBindingContractVersion != null;
-        boolean approvalBindingContractDigestEchoed = normalizedApprovalBindingContractDigest != null;
-        boolean approvalRequestIdEchoed = normalizedApprovalRequestId != null;
-        boolean approvalDecisionStateEchoed = normalizedApprovalDecisionState != null;
-        boolean approvalRecordCorrelationEchoed = normalizedApprovalRecordCorrelationId != null;
-        boolean approvalRecordHandoffContextComplete = approvalBindingContractVersionEchoed
-                && approvalBindingContractDigestEchoed
-                && approvalRequestIdEchoed
-                && approvalDecisionStateEchoed
-                && approvalRecordCorrelationEchoed;
+        boolean approvalRecordHandoffContextComplete = ContextHeaderField.allEchoed(
+                approvalBindingContractVersion,
+                approvalBindingContractDigest,
+                approvalRequestId,
+                approvalDecisionState,
+                approvalRecordCorrelationId
+        );
         boolean approvalRecordFixtureReadOnly = approvalRecordFixture.nodeMayConsume()
                 && !approvalRecordFixture.nodeMayTriggerRollback()
                 && !approvalRecordFixture.rollbackExecutionAllowed()
                 && !approvalRecordFixture.rollbackSqlExecutionAllowed();
         ApprovalRecordHandoffFlags approvalRecordHandoffFlags = ApprovalRecordHandoffFlags.fromReadOnly(
-                approvalBindingContractVersionEchoed,
-                approvalBindingContractDigestEchoed,
-                approvalRequestIdEchoed,
-                approvalDecisionStateEchoed,
-                approvalRecordCorrelationEchoed,
+                approvalBindingContractVersion.echoed(),
+                approvalBindingContractDigest.echoed(),
+                approvalRequestId.echoed(),
+                approvalDecisionState.echoed(),
+                approvalRecordCorrelationId.echoed(),
                 approvalRecordHandoffContextComplete,
                 approvalRecordFixtureReadOnly
         );
@@ -219,34 +223,16 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 approvalRecordFixture.approvalTimestampPlaceholder(),
                 approvalRecordFixture.rollbackTarget(),
                 approvalRecordFixture.selectedMigrationDirection(),
-                valueOrPlaceholder(
-                        normalizedApprovalBindingContractVersion,
-                        "approval-binding-contract-version-not-supplied"
-                ),
-                sourceFor(
-                        normalizedApprovalBindingContractVersion,
-                        "x-orderops-approval-binding-contract-version"
-                ),
-                valueOrPlaceholder(
-                        normalizedApprovalBindingContractDigest,
-                        "approval-binding-contract-digest-not-supplied"
-                ),
-                sourceFor(
-                        normalizedApprovalBindingContractDigest,
-                        "x-orderops-approval-binding-contract-digest"
-                ),
-                valueOrPlaceholder(normalizedApprovalRequestId, "approval-request-id-not-supplied"),
-                sourceFor(normalizedApprovalRequestId, "x-orderops-approval-request-id"),
-                valueOrPlaceholder(normalizedApprovalDecisionState, "approval-decision-state-not-supplied"),
-                sourceFor(normalizedApprovalDecisionState, "x-orderops-approval-decision-state"),
-                valueOrPlaceholder(
-                        normalizedApprovalRecordCorrelationId,
-                        "approval-record-correlation-id-not-supplied"
-                ),
-                sourceFor(
-                        normalizedApprovalRecordCorrelationId,
-                        "x-orderops-approval-record-correlation-id"
-                ),
+                approvalBindingContractVersion.value(),
+                approvalBindingContractVersion.source(),
+                approvalBindingContractDigest.value(),
+                approvalBindingContractDigest.source(),
+                approvalRequestId.value(),
+                approvalRequestId.source(),
+                approvalDecisionState.value(),
+                approvalDecisionState.source(),
+                approvalRecordCorrelationId.value(),
+                approvalRecordCorrelationId.source(),
                 approvalRecordHandoffFlags.approvalBindingContractVersionEchoed(),
                 approvalRecordHandoffFlags.approvalBindingContractDigestEchoed(),
                 approvalRecordHandoffFlags.approvalRequestIdEchoed(),
@@ -400,20 +386,6 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
         );
     }
 
-    private String valueOrPlaceholder(String value, String placeholder) {
-        if (value == null) {
-            return placeholder;
-        }
-        return value;
-    }
-
-    private String sourceFor(String value, String headerName) {
-        if (value == null) {
-            return "NOT_SUPPLIED";
-        }
-        return headerName;
-    }
-
     private boolean retentionDaysWithinJavaRetention(String value, int javaRetentionDays) {
         if (value == null) {
             return false;
@@ -423,12 +395,6 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
             return retentionDays > 0 && retentionDays <= javaRetentionDays;
         } catch (NumberFormatException ex) {
             return false;
-        }
-    }
-
-    private void addMissingContextWarning(List<String> warnings, String value, String warning) {
-        if (value == null) {
-            warnings.add(warning);
         }
     }
 

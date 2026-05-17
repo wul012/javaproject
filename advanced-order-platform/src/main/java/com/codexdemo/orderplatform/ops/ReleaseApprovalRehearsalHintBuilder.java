@@ -11,19 +11,34 @@ final class ReleaseApprovalRehearsalHintBuilder {
             String normalizedAuditCorrelationId
     ) {
         List<String> warnings = new ArrayList<>();
-        addMissingContextWarning(warnings, normalizedRequestId, "REHEARSAL_REQUEST_ID_MISSING");
-        addMissingContextWarning(warnings, normalizedOperatorIdentity, "OPERATOR_IDENTITY_MISSING");
-        addMissingContextWarning(warnings, normalizedAuditCorrelationId, "AUDIT_CORRELATION_ID_MISSING");
+        ContextHeaderField requestId = ContextHeaderField.from(
+                normalizedRequestId,
+                "X-Rehearsal-Request-Id",
+                "rehearsal-request-id-not-supplied"
+        );
+        ContextHeaderField operatorIdentity = ContextHeaderField.from(
+                normalizedOperatorIdentity,
+                "X-Operator-Identity",
+                "operator-identity-not-supplied"
+        );
+        ContextHeaderField auditCorrelationId = ContextHeaderField.from(
+                normalizedAuditCorrelationId,
+                "X-Audit-Correlation-Id",
+                "audit-correlation-id-not-supplied"
+        );
+        requestId.addMissingWarning(warnings, "REHEARSAL_REQUEST_ID_MISSING");
+        operatorIdentity.addMissingWarning(warnings, "OPERATOR_IDENTITY_MISSING");
+        auditCorrelationId.addMissingWarning(warnings, "AUDIT_CORRELATION_ID_MISSING");
         RequestContextFlags requestContextFlags = RequestContextFlags.readOnlyRehearsal();
 
         return new ReleaseApprovalRehearsalResponse.RehearsalRequestContext(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_CONTEXT_VERSION,
-                valueOrPlaceholder(normalizedRequestId, "rehearsal-request-id-not-supplied"),
-                sourceFor(normalizedRequestId, "X-Rehearsal-Request-Id"),
-                valueOrPlaceholder(normalizedOperatorIdentity, "operator-identity-not-supplied"),
-                sourceFor(normalizedOperatorIdentity, "X-Operator-Identity"),
-                valueOrPlaceholder(normalizedAuditCorrelationId, "audit-correlation-id-not-supplied"),
-                sourceFor(normalizedAuditCorrelationId, "X-Audit-Correlation-Id"),
+                requestId.value(),
+                requestId.source(),
+                operatorIdentity.value(),
+                operatorIdentity.source(),
+                auditCorrelationId.value(),
+                auditCorrelationId.source(),
                 requestContextFlags.operatorAuthenticatedByJava(),
                 requestContextFlags.persistedByJava(),
                 requestContextFlags.approvalLedgerWritten(),
@@ -44,53 +59,47 @@ final class ReleaseApprovalRehearsalHintBuilder {
             String normalizedOperatorWindowApprovalCorrelationId
     ) {
         List<String> warnings = new ArrayList<>();
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField operatorId = ContextHeaderField.from(
                 normalizedOperatorWindowOperatorId,
-                "ORDEROPS_OPERATOR_ID_MISSING"
+                "x-orderops-operator-id",
+                "orderops-operator-id-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField operatorRoles = ContextHeaderField.from(
                 normalizedOperatorWindowRoles,
-                "ORDEROPS_OPERATOR_ROLES_MISSING"
+                "x-orderops-roles",
+                "orderops-roles-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField operatorVerifiedClaim = ContextHeaderField.from(
                 normalizedOperatorWindowVerifiedClaim,
-                "ORDEROPS_OPERATOR_VERIFIED_CLAIM_MISSING"
+                "x-orderops-operator-verified",
+                "orderops-operator-verified-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField approvalCorrelationId = ContextHeaderField.from(
                 normalizedOperatorWindowApprovalCorrelationId,
-                "ORDEROPS_APPROVAL_CORRELATION_ID_MISSING"
+                "x-orderops-approval-correlation-id",
+                "orderops-approval-correlation-id-not-supplied"
         );
-        boolean operatorIdentityEchoed = normalizedOperatorWindowOperatorId != null;
-        boolean operatorRolesEchoed = normalizedOperatorWindowRoles != null;
-        boolean operatorVerifiedClaimEchoed = normalizedOperatorWindowVerifiedClaim != null;
-        boolean approvalCorrelationEchoed = normalizedOperatorWindowApprovalCorrelationId != null;
+        operatorId.addMissingWarning(warnings, "ORDEROPS_OPERATOR_ID_MISSING");
+        operatorRoles.addMissingWarning(warnings, "ORDEROPS_OPERATOR_ROLES_MISSING");
+        operatorVerifiedClaim.addMissingWarning(warnings, "ORDEROPS_OPERATOR_VERIFIED_CLAIM_MISSING");
+        approvalCorrelationId.addMissingWarning(warnings, "ORDEROPS_APPROVAL_CORRELATION_ID_MISSING");
         OperatorWindowFlags operatorWindowFlags = OperatorWindowFlags.fromEchoes(
-                operatorIdentityEchoed,
-                operatorRolesEchoed,
-                operatorVerifiedClaimEchoed,
-                approvalCorrelationEchoed
+                operatorId.echoed(),
+                operatorRoles.echoed(),
+                operatorVerifiedClaim.echoed(),
+                approvalCorrelationId.echoed()
         );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_OPERATOR_WINDOW_HINT_VERSION,
-                valueOrPlaceholder(normalizedOperatorWindowOperatorId, "orderops-operator-id-not-supplied"),
-                sourceFor(normalizedOperatorWindowOperatorId, "x-orderops-operator-id"),
-                valueOrPlaceholder(normalizedOperatorWindowRoles, "orderops-roles-not-supplied"),
-                sourceFor(normalizedOperatorWindowRoles, "x-orderops-roles"),
-                valueOrPlaceholder(normalizedOperatorWindowVerifiedClaim, "orderops-operator-verified-not-supplied"),
-                sourceFor(normalizedOperatorWindowVerifiedClaim, "x-orderops-operator-verified"),
-                valueOrPlaceholder(
-                        normalizedOperatorWindowApprovalCorrelationId,
-                        "orderops-approval-correlation-id-not-supplied"
-                ),
-                sourceFor(
-                        normalizedOperatorWindowApprovalCorrelationId,
-                        "x-orderops-approval-correlation-id"
-                ),
+                operatorId.value(),
+                operatorId.source(),
+                operatorRoles.value(),
+                operatorRoles.source(),
+                operatorVerifiedClaim.value(),
+                operatorVerifiedClaim.source(),
+                approvalCorrelationId.value(),
+                approvalCorrelationId.source(),
                 operatorWindowFlags.operatorIdentityEchoed(),
                 operatorWindowFlags.operatorRolesEchoed(),
                 operatorWindowFlags.operatorVerifiedClaimEchoed(),
@@ -124,56 +133,56 @@ final class ReleaseApprovalRehearsalHintBuilder {
             String normalizedCiApprovalCorrelationId
     ) {
         List<String> warnings = new ArrayList<>();
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField manifestVersion = ContextHeaderField.from(
                 normalizedCiManifestVersion,
-                "ORDEROPS_CI_MANIFEST_VERSION_MISSING"
+                "x-orderops-ci-manifest-version",
+                "ci-manifest-profile-version-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField manifestDigest = ContextHeaderField.from(
                 normalizedCiManifestDigest,
-                "ORDEROPS_CI_MANIFEST_DIGEST_MISSING"
+                "x-orderops-ci-manifest-digest",
+                "ci-manifest-digest-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField manifestEndpoint = ContextHeaderField.from(
                 normalizedCiManifestEndpoint,
-                "ORDEROPS_CI_MANIFEST_ENDPOINT_MISSING"
+                "x-orderops-ci-manifest-endpoint",
+                "ci-manifest-endpoint-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField artifactRecordCount = ContextHeaderField.from(
                 normalizedCiArtifactRecordCount,
-                "ORDEROPS_CI_ARTIFACT_RECORD_COUNT_MISSING"
+                "x-orderops-ci-artifact-record-count",
+                "ci-artifact-record-count-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField approvalCorrelationId = ContextHeaderField.from(
                 normalizedCiApprovalCorrelationId,
-                "ORDEROPS_CI_APPROVAL_CORRELATION_ID_MISSING"
+                "x-orderops-ci-approval-correlation-id",
+                "ci-approval-correlation-id-not-supplied"
         );
-        boolean manifestProfileVersionEchoed = normalizedCiManifestVersion != null;
-        boolean manifestDigestEchoed = normalizedCiManifestDigest != null;
-        boolean manifestEndpointEchoed = normalizedCiManifestEndpoint != null;
-        boolean artifactRecordCountEchoed = normalizedCiArtifactRecordCount != null;
-        boolean approvalCorrelationEchoed = normalizedCiApprovalCorrelationId != null;
+        manifestVersion.addMissingWarning(warnings, "ORDEROPS_CI_MANIFEST_VERSION_MISSING");
+        manifestDigest.addMissingWarning(warnings, "ORDEROPS_CI_MANIFEST_DIGEST_MISSING");
+        manifestEndpoint.addMissingWarning(warnings, "ORDEROPS_CI_MANIFEST_ENDPOINT_MISSING");
+        artifactRecordCount.addMissingWarning(warnings, "ORDEROPS_CI_ARTIFACT_RECORD_COUNT_MISSING");
+        approvalCorrelationId.addMissingWarning(warnings, "ORDEROPS_CI_APPROVAL_CORRELATION_ID_MISSING");
         CiEvidenceFlags ciEvidenceFlags = CiEvidenceFlags.fromEchoes(
-                manifestProfileVersionEchoed,
-                manifestDigestEchoed,
-                manifestEndpointEchoed,
-                artifactRecordCountEchoed,
-                approvalCorrelationEchoed
+                manifestVersion.echoed(),
+                manifestDigest.echoed(),
+                manifestEndpoint.echoed(),
+                artifactRecordCount.echoed(),
+                approvalCorrelationId.echoed()
         );
 
         return new ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_CI_EVIDENCE_HINT_VERSION,
-                valueOrPlaceholder(normalizedCiManifestVersion, "ci-manifest-profile-version-not-supplied"),
-                sourceFor(normalizedCiManifestVersion, "x-orderops-ci-manifest-version"),
-                valueOrPlaceholder(normalizedCiManifestDigest, "ci-manifest-digest-not-supplied"),
-                sourceFor(normalizedCiManifestDigest, "x-orderops-ci-manifest-digest"),
-                valueOrPlaceholder(normalizedCiManifestEndpoint, "ci-manifest-endpoint-not-supplied"),
-                sourceFor(normalizedCiManifestEndpoint, "x-orderops-ci-manifest-endpoint"),
-                valueOrPlaceholder(normalizedCiArtifactRecordCount, "ci-artifact-record-count-not-supplied"),
-                sourceFor(normalizedCiArtifactRecordCount, "x-orderops-ci-artifact-record-count"),
-                valueOrPlaceholder(normalizedCiApprovalCorrelationId, "ci-approval-correlation-id-not-supplied"),
-                sourceFor(normalizedCiApprovalCorrelationId, "x-orderops-ci-approval-correlation-id"),
+                manifestVersion.value(),
+                manifestVersion.source(),
+                manifestDigest.value(),
+                manifestDigest.source(),
+                manifestEndpoint.value(),
+                manifestEndpoint.source(),
+                artifactRecordCount.value(),
+                artifactRecordCount.source(),
+                approvalCorrelationId.value(),
+                approvalCorrelationId.source(),
                 ciEvidenceFlags.manifestProfileVersionEchoed(),
                 ciEvidenceFlags.manifestDigestEchoed(),
                 ciEvidenceFlags.manifestEndpointEchoed(),
@@ -214,53 +223,53 @@ final class ReleaseApprovalRehearsalHintBuilder {
             String normalizedCiUploadMode
     ) {
         List<String> warnings = new ArrayList<>();
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField uploadContractVersion = ContextHeaderField.from(
                 normalizedCiUploadContractVersion,
-                "ORDEROPS_CI_UPLOAD_CONTRACT_VERSION_MISSING"
+                "x-orderops-ci-upload-contract-version",
+                "ci-upload-contract-version-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField uploadContractDigest = ContextHeaderField.from(
                 normalizedCiUploadContractDigest,
-                "ORDEROPS_CI_UPLOAD_CONTRACT_DIGEST_MISSING"
+                "x-orderops-ci-upload-contract-digest",
+                "ci-upload-contract-digest-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField artifactName = ContextHeaderField.from(
                 normalizedCiArtifactName,
-                "ORDEROPS_CI_ARTIFACT_NAME_MISSING"
+                "x-orderops-ci-artifact-name",
+                "ci-artifact-name-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField artifactRoot = ContextHeaderField.from(
                 normalizedCiArtifactRoot,
-                "ORDEROPS_CI_ARTIFACT_ROOT_MISSING"
+                "x-orderops-ci-artifact-root",
+                "ci-artifact-root-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField retentionDays = ContextHeaderField.from(
                 normalizedCiRetentionDays,
-                "ORDEROPS_CI_RETENTION_DAYS_MISSING"
+                "x-orderops-ci-retention-days",
+                "ci-retention-days-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField uploadMode = ContextHeaderField.from(
                 normalizedCiUploadMode,
-                "ORDEROPS_CI_UPLOAD_MODE_MISSING"
+                "x-orderops-ci-upload-mode",
+                "ci-upload-mode-not-supplied"
         );
-        boolean uploadContractVersionEchoed = normalizedCiUploadContractVersion != null;
-        boolean uploadContractDigestEchoed = normalizedCiUploadContractDigest != null;
-        boolean artifactNameEchoed = normalizedCiArtifactName != null;
-        boolean artifactRootEchoed = normalizedCiArtifactRoot != null;
-        boolean retentionDaysEchoed = normalizedCiRetentionDays != null;
-        boolean uploadModeEchoed = normalizedCiUploadMode != null;
+        uploadContractVersion.addMissingWarning(warnings, "ORDEROPS_CI_UPLOAD_CONTRACT_VERSION_MISSING");
+        uploadContractDigest.addMissingWarning(warnings, "ORDEROPS_CI_UPLOAD_CONTRACT_DIGEST_MISSING");
+        artifactName.addMissingWarning(warnings, "ORDEROPS_CI_ARTIFACT_NAME_MISSING");
+        artifactRoot.addMissingWarning(warnings, "ORDEROPS_CI_ARTIFACT_ROOT_MISSING");
+        retentionDays.addMissingWarning(warnings, "ORDEROPS_CI_RETENTION_DAYS_MISSING");
+        uploadMode.addMissingWarning(warnings, "ORDEROPS_CI_UPLOAD_MODE_MISSING");
         boolean retentionDaysWithinJavaRetention = retentionDaysWithinJavaRetention(
                 normalizedCiRetentionDays,
                 retentionFixture.retentionDays()
         );
         ArtifactRetentionFlags artifactRetentionFlags = ArtifactRetentionFlags.fromEchoes(
-                uploadContractVersionEchoed,
-                uploadContractDigestEchoed,
-                artifactNameEchoed,
-                artifactRootEchoed,
-                retentionDaysEchoed,
-                uploadModeEchoed,
+                uploadContractVersion.echoed(),
+                uploadContractDigest.echoed(),
+                artifactName.echoed(),
+                artifactRoot.echoed(),
+                retentionDays.echoed(),
+                uploadMode.echoed(),
                 retentionDaysWithinJavaRetention,
                 retentionFixture.nodeMayConsume()
                         && retentionFixture.auditExportReadOnly()
@@ -276,18 +285,18 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 retentionFixture.retentionId(),
                 retentionFixture.artifactTarget(),
                 retentionFixture.retentionDays(),
-                valueOrPlaceholder(normalizedCiUploadContractVersion, "ci-upload-contract-version-not-supplied"),
-                sourceFor(normalizedCiUploadContractVersion, "x-orderops-ci-upload-contract-version"),
-                valueOrPlaceholder(normalizedCiUploadContractDigest, "ci-upload-contract-digest-not-supplied"),
-                sourceFor(normalizedCiUploadContractDigest, "x-orderops-ci-upload-contract-digest"),
-                valueOrPlaceholder(normalizedCiArtifactName, "ci-artifact-name-not-supplied"),
-                sourceFor(normalizedCiArtifactName, "x-orderops-ci-artifact-name"),
-                valueOrPlaceholder(normalizedCiArtifactRoot, "ci-artifact-root-not-supplied"),
-                sourceFor(normalizedCiArtifactRoot, "x-orderops-ci-artifact-root"),
-                valueOrPlaceholder(normalizedCiRetentionDays, "ci-retention-days-not-supplied"),
-                sourceFor(normalizedCiRetentionDays, "x-orderops-ci-retention-days"),
-                valueOrPlaceholder(normalizedCiUploadMode, "ci-upload-mode-not-supplied"),
-                sourceFor(normalizedCiUploadMode, "x-orderops-ci-upload-mode"),
+                uploadContractVersion.value(),
+                uploadContractVersion.source(),
+                uploadContractDigest.value(),
+                uploadContractDigest.source(),
+                artifactName.value(),
+                artifactName.source(),
+                artifactRoot.value(),
+                artifactRoot.source(),
+                retentionDays.value(),
+                retentionDays.source(),
+                uploadMode.value(),
+                uploadMode.source(),
                 artifactRetentionFlags.uploadContractVersionEchoed(),
                 artifactRetentionFlags.uploadContractDigestEchoed(),
                 artifactRetentionFlags.artifactNameEchoed(),
@@ -331,47 +340,49 @@ final class ReleaseApprovalRehearsalHintBuilder {
             String normalizedRuntimeWindowMode
     ) {
         List<String> warnings = new ArrayList<>();
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField runtimePreflightVersion = ContextHeaderField.from(
                 normalizedRuntimePreflightVersion,
-                "ORDEROPS_RUNTIME_PREFLIGHT_VERSION_MISSING"
+                "x-orderops-runtime-preflight-version",
+                "runtime-preflight-version-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField runtimePreflightDigest = ContextHeaderField.from(
                 normalizedRuntimePreflightDigest,
-                "ORDEROPS_RUNTIME_PREFLIGHT_DIGEST_MISSING"
+                "x-orderops-runtime-preflight-digest",
+                "runtime-preflight-digest-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField runtimeSmokeSessionId = ContextHeaderField.from(
                 normalizedRuntimeSmokeSessionId,
-                "ORDEROPS_RUNTIME_SMOKE_SESSION_ID_MISSING"
+                "x-orderops-runtime-smoke-session-id",
+                "runtime-smoke-session-id-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField runtimeReadTargetId = ContextHeaderField.from(
                 normalizedRuntimeReadTargetId,
-                "ORDEROPS_RUNTIME_READ_TARGET_ID_MISSING"
+                "x-orderops-runtime-read-target-id",
+                "runtime-read-target-id-not-supplied"
         );
-        addMissingContextWarning(
-                warnings,
+        ContextHeaderField runtimeWindowMode = ContextHeaderField.from(
                 normalizedRuntimeWindowMode,
-                "ORDEROPS_RUNTIME_WINDOW_MODE_MISSING"
+                "x-orderops-runtime-window-mode",
+                "runtime-window-mode-not-supplied"
         );
-        boolean sourcePreflightVersionEchoed = normalizedRuntimePreflightVersion != null;
-        boolean sourcePreflightDigestEchoed = normalizedRuntimePreflightDigest != null;
-        boolean runtimeSmokeSessionIdEchoed = normalizedRuntimeSmokeSessionId != null;
-        boolean runtimeReadTargetIdEchoed = normalizedRuntimeReadTargetId != null;
-        boolean runtimeWindowModeEchoed = normalizedRuntimeWindowMode != null;
-        boolean liveReadinessContextComplete = sourcePreflightVersionEchoed
-                && sourcePreflightDigestEchoed
-                && runtimeSmokeSessionIdEchoed
-                && runtimeReadTargetIdEchoed
-                && runtimeWindowModeEchoed;
+        runtimePreflightVersion.addMissingWarning(warnings, "ORDEROPS_RUNTIME_PREFLIGHT_VERSION_MISSING");
+        runtimePreflightDigest.addMissingWarning(warnings, "ORDEROPS_RUNTIME_PREFLIGHT_DIGEST_MISSING");
+        runtimeSmokeSessionId.addMissingWarning(warnings, "ORDEROPS_RUNTIME_SMOKE_SESSION_ID_MISSING");
+        runtimeReadTargetId.addMissingWarning(warnings, "ORDEROPS_RUNTIME_READ_TARGET_ID_MISSING");
+        runtimeWindowMode.addMissingWarning(warnings, "ORDEROPS_RUNTIME_WINDOW_MODE_MISSING");
+        boolean liveReadinessContextComplete = ContextHeaderField.allEchoed(
+                runtimePreflightVersion,
+                runtimePreflightDigest,
+                runtimeSmokeSessionId,
+                runtimeReadTargetId,
+                runtimeWindowMode
+        );
         LiveReadinessFlags liveReadinessFlags = LiveReadinessFlags.fromEchoes(
-                sourcePreflightVersionEchoed,
-                sourcePreflightDigestEchoed,
-                runtimeSmokeSessionIdEchoed,
-                runtimeReadTargetIdEchoed,
-                runtimeWindowModeEchoed,
+                runtimePreflightVersion.echoed(),
+                runtimePreflightDigest.echoed(),
+                runtimeSmokeSessionId.echoed(),
+                runtimeReadTargetId.echoed(),
+                runtimeWindowMode.echoed(),
                 liveReadinessContextComplete,
                 evidence.readOnly()
                         && !evidence.executionAllowed()
@@ -389,31 +400,16 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_ENDPOINT,
                 "/actuator/health",
-                valueOrPlaceholder(
-                        normalizedRuntimePreflightVersion,
-                        "runtime-preflight-version-not-supplied"
-                ),
-                sourceFor(normalizedRuntimePreflightVersion, "x-orderops-runtime-preflight-version"),
-                valueOrPlaceholder(
-                        normalizedRuntimePreflightDigest,
-                        "runtime-preflight-digest-not-supplied"
-                ),
-                sourceFor(normalizedRuntimePreflightDigest, "x-orderops-runtime-preflight-digest"),
-                valueOrPlaceholder(
-                        normalizedRuntimeSmokeSessionId,
-                        "runtime-smoke-session-id-not-supplied"
-                ),
-                sourceFor(normalizedRuntimeSmokeSessionId, "x-orderops-runtime-smoke-session-id"),
-                valueOrPlaceholder(
-                        normalizedRuntimeReadTargetId,
-                        "runtime-read-target-id-not-supplied"
-                ),
-                sourceFor(normalizedRuntimeReadTargetId, "x-orderops-runtime-read-target-id"),
-                valueOrPlaceholder(
-                        normalizedRuntimeWindowMode,
-                        "runtime-window-mode-not-supplied"
-                ),
-                sourceFor(normalizedRuntimeWindowMode, "x-orderops-runtime-window-mode"),
+                runtimePreflightVersion.value(),
+                runtimePreflightVersion.source(),
+                runtimePreflightDigest.value(),
+                runtimePreflightDigest.source(),
+                runtimeSmokeSessionId.value(),
+                runtimeSmokeSessionId.source(),
+                runtimeReadTargetId.value(),
+                runtimeReadTargetId.source(),
+                runtimeWindowMode.value(),
+                runtimeWindowMode.source(),
                 liveReadinessFlags.sourcePreflightVersionEchoed(),
                 liveReadinessFlags.sourcePreflightDigestEchoed(),
                 liveReadinessFlags.runtimeSmokeSessionIdEchoed(),
@@ -457,20 +453,6 @@ final class ReleaseApprovalRehearsalHintBuilder {
         );
     }
 
-    private String valueOrPlaceholder(String value, String placeholder) {
-        if (value == null) {
-            return placeholder;
-        }
-        return value;
-    }
-
-    private String sourceFor(String value, String headerName) {
-        if (value == null) {
-            return "NOT_SUPPLIED";
-        }
-        return headerName;
-    }
-
     private boolean retentionDaysWithinJavaRetention(String value, int javaRetentionDays) {
         if (value == null) {
             return false;
@@ -480,12 +462,6 @@ final class ReleaseApprovalRehearsalHintBuilder {
             return retentionDays > 0 && retentionDays <= javaRetentionDays;
         } catch (NumberFormatException ex) {
             return false;
-        }
-    }
-
-    private void addMissingContextWarning(List<String> warnings, String value, String warning) {
-        if (value == null) {
-            warnings.add(warning);
         }
     }
 
