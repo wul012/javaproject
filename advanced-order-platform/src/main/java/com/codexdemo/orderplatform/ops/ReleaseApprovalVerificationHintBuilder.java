@@ -9,21 +9,28 @@ final class ReleaseApprovalVerificationHintBuilder {
             sandboxAdapterApprovalSchemaGuardReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
             sandboxConnectionOperatorHandoffMarkerBuilder;
+    private final ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuilder
+            sandboxConnectionPreflightEchoMarkerBuilder;
     private final ReleaseApprovalVerificationWarningDigestBuilder warningDigestBuilder;
 
     ReleaseApprovalVerificationHintBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
                     sandboxAdapterApprovalSchemaGuardReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
-                    sandboxConnectionOperatorHandoffMarkerBuilder
+                    sandboxConnectionOperatorHandoffMarkerBuilder,
+            ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuilder
+                    sandboxConnectionPreflightEchoMarkerBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
         this.sandboxConnectionOperatorHandoffMarkerBuilder =
                 sandboxConnectionOperatorHandoffMarkerBuilder;
+        this.sandboxConnectionPreflightEchoMarkerBuilder =
+                sandboxConnectionPreflightEchoMarkerBuilder;
         this.warningDigestBuilder = new ReleaseApprovalVerificationWarningDigestBuilder(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
-                sandboxConnectionOperatorHandoffMarkerBuilder
+                sandboxConnectionOperatorHandoffMarkerBuilder,
+                sandboxConnectionPreflightEchoMarkerBuilder
         );
     }
 
@@ -51,6 +58,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
                     managedAuditSandboxConnectionOperatorHandoffMarker,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
+                    managedAuditSandboxConnectionPreflightEchoMarker,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -73,6 +82,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditExternalAdapterMigrationGuardReceipt,
                         managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
                         managedAuditSandboxConnectionOperatorHandoffMarker,
+                        managedAuditSandboxConnectionPreflightEchoMarker,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -92,6 +102,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditExternalAdapterMigrationGuardReceipt,
                         managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
                         managedAuditSandboxConnectionOperatorHandoffMarker,
+                        managedAuditSandboxConnectionPreflightEchoMarker,
                         executionBoundaries
                 ),
                 false,
@@ -120,6 +131,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         ));
         inputs.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestWarningInputNames());
         inputs.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestWarningInputNames());
+        inputs.addAll(sandboxConnectionPreflightEchoMarkerBuilder.warningDigestWarningInputNames());
         inputs.addAll(List.of(
                 "failureCategories",
                 "taxonomyWarnings",
@@ -167,6 +179,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         ));
         inputs.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestBoundaryInputNames());
         inputs.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestBoundaryInputNames());
+        inputs.addAll(sandboxConnectionPreflightEchoMarkerBuilder.warningDigestBoundaryInputNames());
         inputs.add("nodeMayWriteApprovalLedger");
         return inputs;
     }
@@ -252,6 +265,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         ));
         claims.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.proofClaims());
         claims.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.proofClaims());
+        claims.addAll(sandboxConnectionPreflightEchoMarkerBuilder.proofClaims());
         claims.addAll(List.of(
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
@@ -285,6 +299,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
                     managedAuditSandboxConnectionOperatorHandoffMarker,
+            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
+                    managedAuditSandboxConnectionPreflightEchoMarker,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
         return !requestContext.approvalLedgerWritten()
@@ -375,6 +391,10 @@ final class ReleaseApprovalVerificationHintBuilder {
                 .noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
                         managedAuditSandboxConnectionOperatorHandoffMarker
                 )
+                && sandboxConnectionPreflightEchoMarkerBuilder
+                .noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
+                        managedAuditSandboxConnectionPreflightEchoMarker
+                )
                 && !executionBoundaries.nodeMayCreateApprovalDecision()
                 && !executionBoundaries.nodeMayWriteApprovalLedger();
     }
@@ -398,6 +418,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "managedAuditExternalAdapterMigrationGuardReceipt",
                 "managedAuditSandboxAdapterApprovalSchemaGuardReceipt",
                 "managedAuditSandboxConnectionOperatorHandoffMarker",
+                "managedAuditSandboxConnectionPreflightEchoMarker",
                 "failureTaxonomy",
                 "verificationHint",
                 "releaseApprovalInputs",
@@ -457,6 +478,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         + ".qualityGateBoundary.builderOrHelperSplitApplied=true").equals(action))
                 .toList());
         actions.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.nodeVerificationActions());
+        actions.addAll(sandboxConnectionPreflightEchoMarkerBuilder.nodeVerificationActions());
         actions.addAll(List.of(
                 "Compare warningDigest across closed-window and operator-window reads",
                 "Require noLedgerWriteProved=true before treating the response as read-only evidence",

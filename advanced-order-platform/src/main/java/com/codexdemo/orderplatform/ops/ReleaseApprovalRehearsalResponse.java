@@ -30,6 +30,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
         RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
                 managedAuditSandboxConnectionOperatorHandoffMarker,
+        RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
+                managedAuditSandboxConnectionPreflightEchoMarker,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -700,6 +702,103 @@ public record ReleaseApprovalRehearsalResponse(
     }
 
     public record RehearsalSandboxConnectionJavaExecutionBoundary(
+            boolean approvalDecisionCreatedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean approvalRecordPersistedByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionPreflightEchoMarker(
+            String markerVersion,
+            String sourceSandboxConnectionOperatorHandoffMarkerVersion,
+            String sourceSandboxConnectionOperatorHandoffSchemaVersion,
+            String consumedByNodePreflightGateVersion,
+            String consumedByNodePreflightGateProfile,
+            String consumedByNodePreflightGateEndpoint,
+            String consumedByNodePreflightGateState,
+            String nextNodePreflightVerificationVersion,
+            String nextNodePreflightVerificationProfile,
+            boolean nodeV231MayConsume,
+            RehearsalSandboxConnectionPreflightWindowBoundary sandboxConnectionWindowBoundary,
+            RehearsalSandboxConnectionPreflightFieldBoundary preflightFieldBoundary,
+            RehearsalSandboxConnectionPreflightCredentialBoundary credentialBoundary,
+            RehearsalSandboxConnectionPreflightSchemaBoundary schemaRehearsalBoundary,
+            RehearsalSandboxConnectionPreflightRollbackBoundary rollbackPathBoundary,
+            RehearsalSandboxConnectionPreflightJavaExecutionBoundary javaExecutionBoundary,
+            boolean readyForNodeV231ManualSandboxConnectionPreflightVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String markerDigest,
+            List<String> requiredPreflightFields,
+            List<String> forbiddenPreflightOperations,
+            List<String> nodeV231Prerequisites,
+            List<String> markerWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreflightWindowBoundary(
+            String manualWindowFlagName,
+            boolean manualWindowFlagRequired,
+            boolean manualWindowOpenByDefault,
+            boolean manualWindowOpenedByJava,
+            boolean connectionExecutionAllowed,
+            boolean nodeAutoStartAllowed,
+            boolean javaStartsManagedAuditService
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreflightFieldBoundary(
+            String ownerApprovalArtifactIdField,
+            String schemaRehearsalIdField,
+            String rollbackPathIdField,
+            int timeoutBudgetMs,
+            String manualAbortMarkerField,
+            boolean allRequiredPreflightFieldsRecognizedByJava,
+            boolean preflightGateReadOnly,
+            boolean gateCreatesConnectionCommand
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreflightCredentialBoundary(
+            String credentialHandleNameField,
+            boolean credentialHandleNameRecognizedByJava,
+            boolean credentialValueRequiredByJava,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean productionCredentialAllowed
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreflightSchemaBoundary(
+            String schemaRehearsalIdField,
+            boolean schemaRehearsalIdRequired,
+            boolean schemaMigrationExecutionAllowed,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean schemaMigrationAppliedByJava
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreflightRollbackBoundary(
+            String rollbackPathIdField,
+            String manualAbortMarkerField,
+            int timeoutBudgetMs,
+            boolean rollbackPathIdRequired,
+            boolean manualAbortMarkerRequired,
+            boolean rollbackExecutionAllowedByJava,
+            boolean restoreExecutionAllowedByJava
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPreflightJavaExecutionBoundary(
             boolean approvalDecisionCreatedByJava,
             boolean approvalLedgerWrittenByJava,
             boolean approvalRecordPersistedByJava,
