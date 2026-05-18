@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v21");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v22");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2376,7 +2376,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v21");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v22");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2428,6 +2428,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxConnectionPreconditionReceiptWarnings",
                         "managedAuditSandboxConnectionDryRunEnvelopeEchoReceiptWarnings",
                         "managedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptWarnings",
+                        "managedAuditSandboxConnectionDryRunCommandPackageEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -2517,6 +2518,18 @@ class OpsEvidenceServiceTests {
                         "sandboxConnectionOperatorWindowChecklistManagedAuditStateWriteRequestedByJava",
                         "sandboxConnectionOperatorWindowChecklistNodeAutoStartAllowed",
                         "sandboxConnectionOperatorWindowChecklistProductionWindowOpenedByJava",
+                        "sandboxConnectionDryRunCommandPackageEchoReceiptDigest",
+                        "sandboxConnectionDryRunCommandPackageCommandCount",
+                        "sandboxConnectionDryRunCommandPackageDisabledByDefault",
+                        "sandboxConnectionDryRunCommandPackageDryRunOnly",
+                        "sandboxConnectionDryRunCommandPackageCarriesCredentialValue",
+                        "sandboxConnectionDryRunCommandPackageCredentialValueReadByJava",
+                        "sandboxConnectionDryRunCommandPackageActualConnectionAttemptedByJava",
+                        "sandboxConnectionDryRunCommandPackageSchemaMigrationSqlExecutedByJava",
+                        "sandboxConnectionDryRunCommandPackageApprovalLedgerWrittenByJava",
+                        "sandboxConnectionDryRunCommandPackageManagedAuditStateWriteRequestedByJava",
+                        "sandboxConnectionDryRunCommandPackageUpstreamServiceAutoStartRequestedByJava",
+                        "sandboxConnectionDryRunCommandPackageMiniKvWritePermissionRequestedByJava",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -3304,7 +3317,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v21");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v22");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -3331,6 +3344,127 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.requestContext().approvalLedgerWritten()).isFalse();
         assertThat(headerBackedRehearsal.executionAllowed()).isFalse();
         assertThat(headerBackedRehearsal.executionBoundaries().nodeMayWriteApprovalLedger()).isFalse();
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesDryRunCommandPackageEchoReceipt() {
+        when(failedEventSummaryService.summary()).thenReturn(new FailedEventSummaryResponse(
+                Instant.parse("2026-05-12T01:10:00Z"),
+                4,
+                2,
+                1,
+                1,
+                Instant.parse("2026-05-12T01:00:00Z"),
+                Instant.parse("2026-05-12T01:05:00Z"),
+                3
+        ));
+        when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
+        OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
+        outboxPublisherProperties.setEnabled(false);
+        OutboxRabbitMqProperties outboxRabbitMqProperties = new OutboxRabbitMqProperties();
+        outboxRabbitMqProperties.setEnabled(false);
+        outboxRabbitMqProperties.setExchange("order-platform.outbox");
+        outboxRabbitMqProperties.setQueue("order-platform.outbox.events");
+        outboxRabbitMqProperties.setDeadLetterQueue("order-platform.outbox.events.dlq");
+        MockEnvironment environment = new MockEnvironment()
+                .withProperty("spring.application.name", "advanced-order-platform")
+                .withProperty("info.app.version", "0.1.0-test");
+        environment.setActiveProfiles("local", "ops");
+        OpsEvidenceService service = new OpsEvidenceService(
+                failedEventSummaryService,
+                outboxRepository,
+                outboxPublisherProperties,
+                outboxRabbitMqProperties,
+                idempotencyStore,
+                environment
+        );
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+                receipt = rehearsal.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt();
+        assertThat(receipt.receiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-connection-dry-run-command-package-echo-receipt.v1"
+                );
+        assertThat(receipt.sourceSandboxConnectionOperatorWindowChecklistEchoReceiptSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v21");
+        assertThat(receipt.consumedByNodeDryRunCommandPackageVersion()).isEqualTo("Node v241");
+        assertThat(receipt.consumedByNodeDryRunCommandPackageProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-dry-run-command-package.v1");
+        assertThat(receipt.nextNodeUpstreamEchoVerificationVersion()).isEqualTo("Node v244");
+        assertThat(receipt.packageShape().commandCount()).isEqualTo(6);
+        assertThat(receipt.packageShape().disabledByDefault()).isTrue();
+        assertThat(receipt.packageShape().dryRunOnly()).isTrue();
+        assertThat(receipt.fieldEcho().credentialHandleCommandId()).isEqualTo("verify-credential-handle");
+        assertThat(receipt.fieldEcho().schemaRehearsalCommandId()).isEqualTo("review-schema-rehearsal");
+        assertThat(receipt.fieldEcho().rollbackPathCommandId()).isEqualTo("review-rollback-path");
+        assertThat(receipt.fieldEcho().timeoutBudgetCommandId()).isEqualTo("confirm-timeout-budget");
+        assertThat(receipt.fieldEcho().manualAbortCommandId()).isEqualTo("confirm-manual-abort-marker");
+        assertThat(receipt.fieldEcho().timeoutBudgetMs()).isEqualTo(15000);
+        assertThat(receipt.fieldEcho().credentialValueEchoed()).isFalse();
+        assertThat(receipt.echoedCommandIds())
+                .containsExactly(
+                        "review-owner-approval-artifact",
+                        "verify-credential-handle",
+                        "review-schema-rehearsal",
+                        "review-rollback-path",
+                        "confirm-timeout-budget",
+                        "confirm-manual-abort-marker"
+                );
+        assertThat(receipt.javaExecutionBoundary().carriesCredentialValue()).isFalse();
+        assertThat(receipt.javaExecutionBoundary().credentialValueReadByJava()).isFalse();
+        assertThat(receipt.javaExecutionBoundary().actualConnectionAttemptedByJava()).isFalse();
+        assertThat(receipt.javaExecutionBoundary().schemaMigrationSqlExecutedByJava()).isFalse();
+        assertThat(receipt.javaExecutionBoundary().approvalLedgerWrittenByJava()).isFalse();
+        assertThat(receipt.javaExecutionBoundary().managedAuditStateWriteRequestedByJava()).isFalse();
+        assertThat(receipt.javaExecutionBoundary().upstreamServiceAutoStartRequestedByJava()).isFalse();
+        assertThat(receipt.javaExecutionBoundary().miniKvWritePermissionRequestedByJava()).isFalse();
+        assertThat(receipt.readyForNodeV244ManualSandboxDryRunCommandUpstreamEchoVerification()).isTrue();
+        assertThat(receipt.readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(receipt.receiptWarnings()).isEmpty();
+        assertThat(receipt.receiptDigest()).startsWith("sha256:");
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxConnectionDryRunCommandPackageEchoReceiptWarnings",
+                        "sandboxConnectionDryRunCommandPackageEchoReceiptDigest",
+                        "sandboxConnectionDryRunCommandPackageApprovalLedgerWrittenByJava"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt.packageShape.commandCount=6",
+                        "managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt.consumedByNodeDryRunCommandPackageProfile with Node v241",
+                        "Require managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt.readyForNodeV244ManualSandboxDryRunCommandUpstreamEchoVerification=true before Node v244"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt().receiptDigest())
+                .isEqualTo(receipt.receiptDigest());
     }
 
     private ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {

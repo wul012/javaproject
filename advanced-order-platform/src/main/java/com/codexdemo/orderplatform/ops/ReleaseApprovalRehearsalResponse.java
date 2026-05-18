@@ -38,6 +38,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
         RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
                 managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
+        RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+                managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -1084,6 +1086,94 @@ public record ReleaseApprovalRehearsalResponse(
             boolean javaStartsManagedAuditService,
             boolean nodeAutoStartAllowed,
             boolean miniKvPermissionRequestedByJava,
+            boolean productionWindowOpenedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(
+            String receiptVersion,
+            String sourceSandboxConnectionOperatorWindowChecklistEchoReceiptVersion,
+            String sourceSandboxConnectionOperatorWindowChecklistEchoReceiptSchemaVersion,
+            String consumedByNodeDryRunCommandPackageVersion,
+            String consumedByNodeDryRunCommandPackageProfile,
+            String consumedByNodeDryRunCommandPackageEndpoint,
+            String consumedByNodeDryRunCommandPackageState,
+            String nextNodeUpstreamEchoVerificationVersion,
+            String nextNodeUpstreamEchoVerificationProfile,
+            boolean nodeV244MayConsume,
+            RehearsalSandboxConnectionDryRunCommandPackageShape packageShape,
+            RehearsalSandboxConnectionDryRunCommandPackageFieldEcho fieldEcho,
+            RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary javaExecutionBoundary,
+            boolean commandShapeEchoed,
+            boolean fieldEchoComplete,
+            boolean disabledDryRunBoundaryEchoed,
+            boolean readyForNodeV244ManualSandboxDryRunCommandUpstreamEchoVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> echoedCommandIds,
+            List<String> echoedCommandPackageFields,
+            List<String> forbiddenCommandPackageOperations,
+            List<String> nodeV244Prerequisites,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDryRunCommandPackageShape(
+            String packageMode,
+            String sourceSpan,
+            int commandCount,
+            boolean disabledByDefault,
+            boolean dryRunOnly,
+            boolean readOnlyCommandPackage,
+            boolean operatorReviewRequiredForEveryCommand,
+            boolean readyForOperatorReview,
+            boolean packageCreatesConnectionCommand
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDryRunCommandPackageFieldEcho(
+            String ownerApprovalArtifactCommandId,
+            String credentialHandleCommandId,
+            String schemaRehearsalCommandId,
+            String rollbackPathCommandId,
+            String timeoutBudgetCommandId,
+            String manualAbortCommandId,
+            String credentialHandleNameField,
+            String schemaRehearsalIdField,
+            String rollbackPathIdField,
+            String timeoutBudgetField,
+            int timeoutBudgetMs,
+            String manualAbortMarkerField,
+            boolean credentialHandleEchoed,
+            boolean schemaRehearsalIdEchoed,
+            boolean rollbackPathEchoed,
+            boolean timeoutBudgetEchoed,
+            boolean manualAbortMarkerEchoed,
+            boolean credentialValueEchoed
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary(
+            boolean carriesCredentialValue,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean actualConnectionAttemptedByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean schemaMigrationRequestedByJava,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean managedAuditStateWriteRequestedByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava,
+            boolean upstreamServiceAutoStartRequestedByJava,
+            boolean miniKvWritePermissionRequestedByJava,
             boolean productionWindowOpenedByJava
     ) {
     }

@@ -59,6 +59,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.managedAuditSandboxConnectionPreconditionReceipt(),
                 managedAuditReceiptChain.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt(),
                 managedAuditReceiptChain.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -162,7 +163,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.sandboxConnectionPreflightEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxConnectionPreconditionReceiptBuilder(),
                 managedAuditReceiptChain.sandboxConnectionDryRunEnvelopeEchoReceiptBuilder(),
-                managedAuditReceiptChain.sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder()
+                managedAuditReceiptChain.sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder(),
+                managedAuditReceiptChain.sandboxConnectionDryRunCommandPackageEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -184,6 +186,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         managedAuditReceiptChain.managedAuditSandboxConnectionPreconditionReceipt(),
                         managedAuditReceiptChain.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt(),
                         managedAuditReceiptChain.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(),
+                        managedAuditReceiptChain.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );

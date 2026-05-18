@@ -72,6 +72,14 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt =
                         sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
                                 .build(managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt);
+        ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceiptBuilder
+                sandboxConnectionDryRunCommandPackageEchoReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceiptBuilder();
+        ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+                managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt =
+                        sandboxConnectionDryRunCommandPackageEchoReceiptBuilder
+                                .build(managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -91,7 +99,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
                 sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
                 managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
-                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
+                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
+                managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+                sandboxConnectionDryRunCommandPackageEchoReceiptBuilder
         );
     }
 
@@ -132,7 +142,12 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                     .RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
                     managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
             ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
-                    sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
+                    sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+                    managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+            ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceiptBuilder
+                    sandboxConnectionDryRunCommandPackageEchoReceiptBuilder
     ) {
     }
 }

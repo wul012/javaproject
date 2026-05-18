@@ -66,4 +66,7 @@ c/96/解释/说明.md
 
 c/97/解释/说明.md
  -> Java v97 release approval rehearsal builder chain 重构，拆出 managed-audit receipt chain 和 normalized request/sections 上下文
+
+c/98/解释/说明.md
+ -> Java v98 manual sandbox dry-run command package echo receipt，只读回显 Node v241 六条 disabled command，并继续阻断 credential value、连接、SQL、ledger、auto-start 和 mini-kv 写权限
 ```

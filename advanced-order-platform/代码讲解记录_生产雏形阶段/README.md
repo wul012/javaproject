@@ -222,4 +222,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 100-version-97-release-approval-rehearsal-builder-chain-refactor.md
  -> 第九十七版 release approval rehearsal builder chain 重构，拆出 managed-audit receipt chain 和 normalized request/sections 上下文，外部契约不变
+
+101-version-98-release-approval-sandbox-dry-run-command-package-echo-receipt.md
+ -> 第九十八版 release approval sandbox dry-run command package echo receipt，只读回显 Node v241 六条 disabled command，供 Node v244 核对字段和 no-write / no-start 边界
 ```
