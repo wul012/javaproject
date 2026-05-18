@@ -75,4 +75,7 @@ c/99/解释/说明.md
 
 c/100/解释/说明.md
  -> Java v100 CI bootstrap + large-file guard，新增 GitHub Actions Maven CI 基线，并记录 ReleaseApprovalRehearsalResponse / OpsEvidenceService 后续拆分目标
+
+c/101/解释/说明.md
+ -> Java v101 Dependabot/security maintenance，覆盖 Maven + GitHub Actions，不升级依赖、不改业务契约、不打开 managed-audit 边界
 ```

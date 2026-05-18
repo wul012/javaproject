@@ -231,4 +231,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 103-version-100-ci-bootstrap-large-file-guard.md
  -> 第一百版 CI bootstrap + large-file guard，新增 GitHub Actions Maven CI 基线，并记录大文件后续拆分目标，业务契约不变
+
+104-version-101-dependabot-security-maintenance.md
+ -> 第一百零一版 Dependabot/security maintenance，覆盖 Maven + GitHub Actions，不升级依赖、不改业务契约、不打开 managed-audit 边界
 ```
