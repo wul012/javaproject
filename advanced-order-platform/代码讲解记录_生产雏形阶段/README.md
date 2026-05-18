@@ -213,4 +213,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 97-version-94-ops-evidence-service-dispatch-table-refactor.md
  -> 第九十四版 OpsEvidenceService dispatch table 重构，把 release/static evidence 构建迁移到分发表，外部契约不变，主文件降到 1032 行
+
+98-version-95-ops-evidence-static-release-artifact-enum-refactor.md
+ -> 第九十五版 OpsEvidence 静态 release 字符串常量收敛为 enum，继续压缩 OpsEvidenceService 的常量噪音，外部契约不变
 ```

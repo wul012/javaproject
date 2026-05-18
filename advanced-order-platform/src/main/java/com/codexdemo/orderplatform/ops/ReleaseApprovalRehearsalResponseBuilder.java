@@ -1,5 +1,9 @@
 package com.codexdemo.orderplatform.ops;
 
+import static com.codexdemo.orderplatform.ops.OpsEvidenceStaticReleaseArtifact.RELEASE_OPERATOR_SIGNOFF_FIXTURE;
+import static com.codexdemo.orderplatform.ops.OpsEvidenceStaticReleaseArtifact.ROLLBACK_APPROVAL_RECORD_FIXTURE;
+import static com.codexdemo.orderplatform.ops.OpsEvidenceStaticReleaseArtifact.ROLLBACK_APPROVER_EVIDENCE_FIXTURE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -426,9 +430,9 @@ final class ReleaseApprovalRehearsalResponseBuilder {
         return List.of(
                 "GET /api/v1/ops/evidence",
                 "GET " + OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_ENDPOINT,
-                "GET " + OpsEvidenceService.RELEASE_OPERATOR_SIGNOFF_FIXTURE_ENDPOINT,
-                "GET " + OpsEvidenceService.ROLLBACK_APPROVER_EVIDENCE_FIXTURE_ENDPOINT,
-                "GET " + OpsEvidenceService.ROLLBACK_APPROVAL_RECORD_FIXTURE_ENDPOINT,
+                "GET " + RELEASE_OPERATOR_SIGNOFF_FIXTURE.endpoint(),
+                "GET " + ROLLBACK_APPROVER_EVIDENCE_FIXTURE.endpoint(),
+                "GET " + ROLLBACK_APPROVAL_RECORD_FIXTURE.endpoint(),
                 "Keep UPSTREAM_ACTIONS_ENABLED=false"
         );
     }

@@ -57,4 +57,7 @@ c/93/解释/说明.md
 
 c/94/解释/说明.md
  -> Java v94 OpsEvidenceService dispatch table 重构，把 release/static evidence 构建移出主类，外部契约不变
+
+c/95/解释/说明.md
+ -> Java v95 静态 release 字符串常量收敛为 enum，继续压缩 OpsEvidenceService 的常量噪音
 ```
