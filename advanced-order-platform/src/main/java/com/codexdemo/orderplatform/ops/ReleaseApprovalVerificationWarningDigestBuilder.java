@@ -19,6 +19,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceiptBuilder
             sandboxConnectionDryRunCommandPackageEchoReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxConnectionPrecheckPacketEchoReceiptBuilder
+            sandboxConnectionPrecheckPacketEchoReceiptBuilder;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
@@ -34,7 +36,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
                     sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceiptBuilder
-                    sandboxConnectionDryRunCommandPackageEchoReceiptBuilder
+                    sandboxConnectionDryRunCommandPackageEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxConnectionPrecheckPacketEchoReceiptBuilder
+                    sandboxConnectionPrecheckPacketEchoReceiptBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -50,6 +54,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder;
         this.sandboxConnectionDryRunCommandPackageEchoReceiptBuilder =
                 sandboxConnectionDryRunCommandPackageEchoReceiptBuilder;
+        this.sandboxConnectionPrecheckPacketEchoReceiptBuilder =
+                sandboxConnectionPrecheckPacketEchoReceiptBuilder;
     }
 
     String build(
@@ -88,6 +94,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalRehearsalResponse
                     .RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                     managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+                    managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -159,6 +168,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestWarningLines(
                 managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+        ));
+        lines.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestWarningLines(
+                managedAuditSandboxConnectionPrecheckPacketEchoReceipt
         ));
         lines.addAll(List.of(
                 ReleaseApprovalDigestSupport.line("failureCategories", failureTaxonomy.failureCategories()),
@@ -372,6 +384,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestBoundaryLines(
                 managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+        ));
+        lines.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestBoundaryLines(
+                managedAuditSandboxConnectionPrecheckPacketEchoReceipt
         ));
         lines.add(ReleaseApprovalDigestSupport.line(
                 "nodeMayWriteApprovalLedger",

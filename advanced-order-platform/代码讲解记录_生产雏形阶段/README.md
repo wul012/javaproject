@@ -225,4 +225,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 101-version-98-release-approval-sandbox-dry-run-command-package-echo-receipt.md
  -> 第九十八版 release approval sandbox dry-run command package echo receipt，只读回显 Node v241 六条 disabled command，供 Node v244 核对字段和 no-write / no-start 边界
+
+102-version-99-release-approval-sandbox-precheck-packet-echo-receipt.md
+ -> 第九十九版 release approval sandbox precheck packet echo receipt，只读回显 Node v245 七个 precheck item，供 Node v246 核对字段和 no-write / no-start 边界
 ```

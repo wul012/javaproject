@@ -19,6 +19,8 @@ final class ReleaseApprovalVerificationHintBuilder {
             sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceiptBuilder
             sandboxConnectionDryRunCommandPackageEchoReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxConnectionPrecheckPacketEchoReceiptBuilder
+            sandboxConnectionPrecheckPacketEchoReceiptBuilder;
     private final ReleaseApprovalVerificationWarningDigestBuilder warningDigestBuilder;
 
     ReleaseApprovalVerificationHintBuilder(
@@ -35,7 +37,9 @@ final class ReleaseApprovalVerificationHintBuilder {
             ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
                     sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceiptBuilder
-                    sandboxConnectionDryRunCommandPackageEchoReceiptBuilder
+                    sandboxConnectionDryRunCommandPackageEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxConnectionPrecheckPacketEchoReceiptBuilder
+                    sandboxConnectionPrecheckPacketEchoReceiptBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -51,6 +55,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder;
         this.sandboxConnectionDryRunCommandPackageEchoReceiptBuilder =
                 sandboxConnectionDryRunCommandPackageEchoReceiptBuilder;
+        this.sandboxConnectionPrecheckPacketEchoReceiptBuilder =
+                sandboxConnectionPrecheckPacketEchoReceiptBuilder;
         this.warningDigestBuilder = new ReleaseApprovalVerificationWarningDigestBuilder(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                 sandboxConnectionOperatorHandoffMarkerBuilder,
@@ -58,7 +64,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxConnectionPreconditionReceiptBuilder,
                 sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
                 sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
-                sandboxConnectionDryRunCommandPackageEchoReceiptBuilder
+                sandboxConnectionDryRunCommandPackageEchoReceiptBuilder,
+                sandboxConnectionPrecheckPacketEchoReceiptBuilder
         );
     }
 
@@ -98,6 +105,9 @@ final class ReleaseApprovalVerificationHintBuilder {
             ReleaseApprovalRehearsalResponse
                     .RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                     managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+                    managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -125,6 +135,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
                         managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
                         managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+                        managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -149,6 +160,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
                         managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
                         managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+                        managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
                         executionBoundaries
                 ),
                 false,
@@ -182,6 +194,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         inputs.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.warningDigestWarningInputNames());
         inputs.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.warningDigestWarningInputNames());
         inputs.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestWarningInputNames());
+        inputs.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestWarningInputNames());
         inputs.addAll(List.of(
                 "failureCategories",
                 "taxonomyWarnings",
@@ -234,6 +247,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         inputs.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.warningDigestBoundaryInputNames());
         inputs.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.warningDigestBoundaryInputNames());
         inputs.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestBoundaryInputNames());
+        inputs.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestBoundaryInputNames());
         inputs.add("nodeMayWriteApprovalLedger");
         return inputs;
     }
@@ -324,6 +338,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         claims.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.proofClaims());
         claims.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.proofClaims());
         claims.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.proofClaims());
+        claims.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.proofClaims());
         claims.addAll(List.of(
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
@@ -369,6 +384,9 @@ final class ReleaseApprovalVerificationHintBuilder {
             ReleaseApprovalRehearsalResponse
                     .RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                     managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+                    managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
         return !requestContext.approvalLedgerWritten()
@@ -479,6 +497,10 @@ final class ReleaseApprovalVerificationHintBuilder {
                 .noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
                         managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                 )
+                && sandboxConnectionPrecheckPacketEchoReceiptBuilder
+                .noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
+                        managedAuditSandboxConnectionPrecheckPacketEchoReceipt
+                )
                 && !executionBoundaries.nodeMayCreateApprovalDecision()
                 && !executionBoundaries.nodeMayWriteApprovalLedger();
     }
@@ -507,6 +529,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt",
                 "managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt",
                 "managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt",
+                "managedAuditSandboxConnectionPrecheckPacketEchoReceipt",
                 "failureTaxonomy",
                 "verificationHint",
                 "releaseApprovalInputs",
@@ -571,6 +594,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         actions.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.nodeVerificationActions());
         actions.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.nodeVerificationActions());
         actions.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.nodeVerificationActions());
+        actions.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.nodeVerificationActions());
         actions.addAll(List.of(
                 "Compare warningDigest across closed-window and operator-window reads",
                 "Require noLedgerWriteProved=true before treating the response as read-only evidence",

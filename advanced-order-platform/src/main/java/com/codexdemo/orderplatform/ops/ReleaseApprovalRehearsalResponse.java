@@ -40,6 +40,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
         RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                 managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+        RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+                managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -1158,6 +1160,99 @@ public record ReleaseApprovalRehearsalResponse(
     }
 
     public record RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary(
+            boolean carriesCredentialValue,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean actualConnectionAttemptedByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean schemaMigrationRequestedByJava,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean managedAuditStateWriteRequestedByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava,
+            boolean upstreamServiceAutoStartRequestedByJava,
+            boolean miniKvWritePermissionRequestedByJava,
+            boolean productionWindowOpenedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt(
+            String receiptVersion,
+            String sourceDryRunCommandPackageEchoReceiptVersion,
+            String sourceDryRunCommandPackageEchoReceiptSchemaVersion,
+            String consumedByNodePrecheckPacketVersion,
+            String consumedByNodePrecheckPacketProfile,
+            String consumedByNodePrecheckPacketEndpoint,
+            String consumedByNodePrecheckPacketState,
+            String nextNodePrecheckUpstreamReceiptVerificationVersion,
+            String nextNodePrecheckUpstreamReceiptVerificationProfile,
+            boolean nodeV246MayConsume,
+            RehearsalSandboxConnectionPrecheckPacketShape packetShape,
+            RehearsalSandboxConnectionPrecheckPacketFieldEcho fieldEcho,
+            RehearsalSandboxConnectionPrecheckPacketExecutionBoundary javaExecutionBoundary,
+            boolean packetShapeEchoed,
+            boolean fieldEchoComplete,
+            boolean readOnlyPrecheckBoundaryEchoed,
+            boolean readyForNodeV246ManualSandboxConnectionPrecheckUpstreamReceiptVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> echoedPrecheckItemIds,
+            List<String> echoedPrecheckPacketFields,
+            List<String> forbiddenPrecheckPacketOperations,
+            List<String> nodeV246Prerequisites,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPrecheckPacketShape(
+            String packetMode,
+            String sourceSpan,
+            int precheckItemCount,
+            boolean disabledByDefault,
+            boolean dryRunOnly,
+            boolean readOnlyPrecheckPacket,
+            boolean operatorReviewRequiredForEveryItem,
+            boolean readyForOperatorReview,
+            boolean packetCreatesConnectionCommand
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPrecheckPacketFieldEcho(
+            String ownerApprovalArtifactItemId,
+            String credentialHandleReviewItemId,
+            String schemaMigrationRehearsalItemId,
+            String operatorWindowItemId,
+            String rollbackPathItemId,
+            String abortMarkerItemId,
+            String timeoutPolicyItemId,
+            String ownerApprovalArtifactField,
+            String credentialHandleReviewField,
+            String schemaMigrationRehearsalIdField,
+            String operatorWindowField,
+            String rollbackPathField,
+            String abortMarkerField,
+            String timeoutPolicyField,
+            int timeoutBudgetMs,
+            boolean ownerApprovalArtifactEchoed,
+            boolean credentialHandleReviewEchoed,
+            boolean schemaMigrationRehearsalEchoed,
+            boolean operatorWindowEchoed,
+            boolean rollbackPathEchoed,
+            boolean abortMarkerEchoed,
+            boolean timeoutPolicyEchoed,
+            boolean credentialValueEchoed
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionPrecheckPacketExecutionBoundary(
             boolean carriesCredentialValue,
             boolean credentialValueReadByJava,
             boolean credentialValueStoredByJava,
