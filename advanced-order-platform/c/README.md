@@ -60,4 +60,7 @@ c/94/解释/说明.md
 
 c/95/解释/说明.md
  -> Java v95 静态 release 字符串常量收敛为 enum，继续压缩 OpsEvidenceService 的常量噪音
+
+c/96/解释/说明.md
+ -> Java v96 release approval rehearsal request record 重构，消除多层 null overload，外部 HTTP 契约不变
 ```

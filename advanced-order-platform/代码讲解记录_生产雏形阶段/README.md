@@ -216,4 +216,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 98-version-95-ops-evidence-static-release-artifact-enum-refactor.md
  -> 第九十五版 OpsEvidence 静态 release 字符串常量收敛为 enum，继续压缩 OpsEvidenceService 的常量噪音，外部契约不变
+
+99-version-96-release-approval-rehearsal-request-record-refactor.md
+ -> 第九十六版 release approval rehearsal request record 重构，消除多层 null overload，主文件降到 606 行，外部 HTTP 契约不变
 ```

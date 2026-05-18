@@ -85,39 +85,127 @@ public class OpsOverviewController {
             String approvalRecordCorrelationId
     ) {
         return opsEvidenceService.releaseApprovalRehearsal(
-                requestId,
-                operatorIdentity,
-                auditCorrelationId,
-                operatorWindowOperatorId,
-                operatorWindowRoles,
-                operatorWindowVerifiedClaim,
-                operatorWindowApprovalCorrelationId,
-                ciManifestVersion,
-                ciManifestDigest,
-                ciManifestEndpoint,
-                ciArtifactRecordCount,
-                ciApprovalCorrelationId,
-                ciUploadContractVersion,
-                ciUploadContractDigest,
-                ciArtifactName,
-                ciArtifactRoot,
-                ciRetentionDays,
-                ciUploadMode,
-                runtimePreflightVersion,
-                runtimePreflightDigest,
-                runtimeSmokeSessionId,
-                runtimeReadTargetId,
-                runtimeWindowMode,
-                managedAuditCandidateVersion,
-                managedAuditCandidateDigest,
-                managedAuditSinkMode,
-                managedAuditRetentionDays,
-                managedAuditRotationPolicy,
-                approvalBindingContractVersion,
-                approvalBindingContractDigest,
-                approvalRequestId,
-                approvalDecisionState,
-                approvalRecordCorrelationId
+                releaseApprovalRehearsalRequest(
+                        requestId,
+                        operatorIdentity,
+                        auditCorrelationId,
+                        operatorWindowOperatorId,
+                        operatorWindowRoles,
+                        operatorWindowVerifiedClaim,
+                        operatorWindowApprovalCorrelationId,
+                        ciManifestVersion,
+                        ciManifestDigest,
+                        ciManifestEndpoint,
+                        ciArtifactRecordCount,
+                        ciApprovalCorrelationId,
+                        ciUploadContractVersion,
+                        ciUploadContractDigest,
+                        ciArtifactName,
+                        ciArtifactRoot,
+                        ciRetentionDays,
+                        ciUploadMode,
+                        runtimePreflightVersion,
+                        runtimePreflightDigest,
+                        runtimeSmokeSessionId,
+                        runtimeReadTargetId,
+                        runtimeWindowMode,
+                        managedAuditCandidateVersion,
+                        managedAuditCandidateDigest,
+                        managedAuditSinkMode,
+                        managedAuditRetentionDays,
+                        managedAuditRotationPolicy,
+                        approvalBindingContractVersion,
+                        approvalBindingContractDigest,
+                        approvalRequestId,
+                        approvalDecisionState,
+                        approvalRecordCorrelationId
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalRequest releaseApprovalRehearsalRequest(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId,
+            String ciManifestVersion,
+            String ciManifestDigest,
+            String ciManifestEndpoint,
+            String ciArtifactRecordCount,
+            String ciApprovalCorrelationId,
+            String ciUploadContractVersion,
+            String ciUploadContractDigest,
+            String ciArtifactName,
+            String ciArtifactRoot,
+            String ciRetentionDays,
+            String ciUploadMode,
+            String runtimePreflightVersion,
+            String runtimePreflightDigest,
+            String runtimeSmokeSessionId,
+            String runtimeReadTargetId,
+            String runtimeWindowMode,
+            String managedAuditCandidateVersion,
+            String managedAuditCandidateDigest,
+            String managedAuditSinkMode,
+            String managedAuditRetentionDays,
+            String managedAuditRotationPolicy,
+            String approvalBindingContractVersion,
+            String approvalBindingContractDigest,
+            String approvalRequestId,
+            String approvalDecisionState,
+            String approvalRecordCorrelationId
+    ) {
+        return new ReleaseApprovalRehearsalRequest(
+                new ReleaseApprovalRehearsalRequest.Context(
+                        requestId,
+                        operatorIdentity,
+                        auditCorrelationId
+                ),
+                new ReleaseApprovalRehearsalRequest.OperatorWindow(
+                        operatorWindowOperatorId,
+                        operatorWindowRoles,
+                        operatorWindowVerifiedClaim,
+                        operatorWindowApprovalCorrelationId
+                ),
+                new ReleaseApprovalRehearsalRequest.CiEvidence(
+                        ciManifestVersion,
+                        ciManifestDigest,
+                        ciManifestEndpoint,
+                        ciArtifactRecordCount,
+                        ciApprovalCorrelationId
+                ),
+                new ReleaseApprovalRehearsalRequest.ArtifactRetention(
+                        ciUploadContractVersion,
+                        ciUploadContractDigest,
+                        ciArtifactName,
+                        ciArtifactRoot,
+                        ciRetentionDays,
+                        ciUploadMode
+                ),
+                new ReleaseApprovalRehearsalRequest.RuntimeReadiness(
+                        runtimePreflightVersion,
+                        runtimePreflightDigest,
+                        runtimeSmokeSessionId,
+                        runtimeReadTargetId,
+                        runtimeWindowMode
+                ),
+                new ReleaseApprovalRehearsalRequest.ManagedAudit(
+                        managedAuditCandidateVersion,
+                        managedAuditCandidateDigest,
+                        managedAuditSinkMode,
+                        managedAuditRetentionDays,
+                        managedAuditRotationPolicy
+                ),
+                new ReleaseApprovalRehearsalRequest.ApprovalBinding(
+                        approvalBindingContractVersion,
+                        approvalBindingContractDigest,
+                        approvalRequestId,
+                        approvalDecisionState,
+                        approvalRecordCorrelationId
+                )
         );
     }
 }

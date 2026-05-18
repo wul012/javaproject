@@ -9,82 +9,62 @@ import java.util.List;
 
 final class ReleaseApprovalRehearsalResponseBuilder {
 
-    ReleaseApprovalRehearsalResponse build(
-            OpsEvidenceResponse evidence,
-            String requestId,
-            String operatorIdentity,
-            String auditCorrelationId,
-            String operatorWindowOperatorId,
-            String operatorWindowRoles,
-            String operatorWindowVerifiedClaim,
-            String operatorWindowApprovalCorrelationId,
-            String ciManifestVersion,
-            String ciManifestDigest,
-            String ciManifestEndpoint,
-            String ciArtifactRecordCount,
-            String ciApprovalCorrelationId,
-            String ciUploadContractVersion,
-            String ciUploadContractDigest,
-            String ciArtifactName,
-            String ciArtifactRoot,
-            String ciRetentionDays,
-            String ciUploadMode,
-            String runtimePreflightVersion,
-            String runtimePreflightDigest,
-            String runtimeSmokeSessionId,
-            String runtimeReadTargetId,
-            String runtimeWindowMode,
-            String managedAuditCandidateVersion,
-            String managedAuditCandidateDigest,
-            String managedAuditSinkMode,
-            String managedAuditRetentionDays,
-            String managedAuditRotationPolicy,
-            String approvalBindingContractVersion,
-            String approvalBindingContractDigest,
-            String approvalRequestId,
-            String approvalDecisionState,
-            String approvalRecordCorrelationId
-    ) {
+    ReleaseApprovalRehearsalResponse build(OpsEvidenceResponse evidence, ReleaseApprovalRehearsalRequest request) {
         ReleaseApprovalRehearsalHintBuilder rehearsalHintBuilder = new ReleaseApprovalRehearsalHintBuilder();
         ReleaseApprovalRehearsalHandoffHintBuilder handoffHintBuilder =
                 new ReleaseApprovalRehearsalHandoffHintBuilder();
         ReleaseApprovalRehearsalFailureTaxonomyBuilder failureTaxonomyBuilder =
                 new ReleaseApprovalRehearsalFailureTaxonomyBuilder();
-        String normalizedRequestId = ContextHeaderField.normalizeValue(requestId);
-        String normalizedOperatorIdentity = ContextHeaderField.normalizeValue(operatorIdentity);
-        String normalizedAuditCorrelationId = ContextHeaderField.normalizeValue(auditCorrelationId);
-        String normalizedOperatorWindowOperatorId = ContextHeaderField.normalizeValue(operatorWindowOperatorId);
-        String normalizedOperatorWindowRoles = ContextHeaderField.normalizeValue(operatorWindowRoles);
-        String normalizedOperatorWindowVerifiedClaim = ContextHeaderField.normalizeValue(operatorWindowVerifiedClaim);
+        ReleaseApprovalRehearsalRequest normalizedRequest =
+                request == null ? ReleaseApprovalRehearsalRequest.empty() : request;
+        ReleaseApprovalRehearsalRequest.Context context = normalizedRequest.context();
+        ReleaseApprovalRehearsalRequest.OperatorWindow operatorWindow = normalizedRequest.operatorWindow();
+        ReleaseApprovalRehearsalRequest.CiEvidence ciEvidence = normalizedRequest.ciEvidence();
+        ReleaseApprovalRehearsalRequest.ArtifactRetention artifactRetention = normalizedRequest.artifactRetention();
+        ReleaseApprovalRehearsalRequest.RuntimeReadiness runtimeReadiness = normalizedRequest.runtimeReadiness();
+        ReleaseApprovalRehearsalRequest.ManagedAudit managedAudit = normalizedRequest.managedAudit();
+        ReleaseApprovalRehearsalRequest.ApprovalBinding approvalBinding = normalizedRequest.approvalBinding();
+        String normalizedRequestId = ContextHeaderField.normalizeValue(context.requestId());
+        String normalizedOperatorIdentity = ContextHeaderField.normalizeValue(context.operatorIdentity());
+        String normalizedAuditCorrelationId = ContextHeaderField.normalizeValue(context.auditCorrelationId());
+        String normalizedOperatorWindowOperatorId = ContextHeaderField.normalizeValue(operatorWindow.operatorId());
+        String normalizedOperatorWindowRoles = ContextHeaderField.normalizeValue(operatorWindow.roles());
+        String normalizedOperatorWindowVerifiedClaim = ContextHeaderField.normalizeValue(operatorWindow.verifiedClaim());
         String normalizedOperatorWindowApprovalCorrelationId =
-                ContextHeaderField.normalizeValue(operatorWindowApprovalCorrelationId);
-        String normalizedCiManifestVersion = ContextHeaderField.normalizeValue(ciManifestVersion);
-        String normalizedCiManifestDigest = ContextHeaderField.normalizeValue(ciManifestDigest);
-        String normalizedCiManifestEndpoint = ContextHeaderField.normalizeValue(ciManifestEndpoint);
-        String normalizedCiArtifactRecordCount = ContextHeaderField.normalizeValue(ciArtifactRecordCount);
-        String normalizedCiApprovalCorrelationId = ContextHeaderField.normalizeValue(ciApprovalCorrelationId);
-        String normalizedCiUploadContractVersion = ContextHeaderField.normalizeValue(ciUploadContractVersion);
-        String normalizedCiUploadContractDigest = ContextHeaderField.normalizeValue(ciUploadContractDigest);
-        String normalizedCiArtifactName = ContextHeaderField.normalizeValue(ciArtifactName);
-        String normalizedCiArtifactRoot = ContextHeaderField.normalizeValue(ciArtifactRoot);
-        String normalizedCiRetentionDays = ContextHeaderField.normalizeValue(ciRetentionDays);
-        String normalizedCiUploadMode = ContextHeaderField.normalizeValue(ciUploadMode);
-        String normalizedRuntimePreflightVersion = ContextHeaderField.normalizeValue(runtimePreflightVersion);
-        String normalizedRuntimePreflightDigest = ContextHeaderField.normalizeValue(runtimePreflightDigest);
-        String normalizedRuntimeSmokeSessionId = ContextHeaderField.normalizeValue(runtimeSmokeSessionId);
-        String normalizedRuntimeReadTargetId = ContextHeaderField.normalizeValue(runtimeReadTargetId);
-        String normalizedRuntimeWindowMode = ContextHeaderField.normalizeValue(runtimeWindowMode);
-        String normalizedManagedAuditCandidateVersion = ContextHeaderField.normalizeValue(managedAuditCandidateVersion);
-        String normalizedManagedAuditCandidateDigest = ContextHeaderField.normalizeValue(managedAuditCandidateDigest);
-        String normalizedManagedAuditSinkMode = ContextHeaderField.normalizeValue(managedAuditSinkMode);
-        String normalizedManagedAuditRetentionDays = ContextHeaderField.normalizeValue(managedAuditRetentionDays);
-        String normalizedManagedAuditRotationPolicy = ContextHeaderField.normalizeValue(managedAuditRotationPolicy);
+                ContextHeaderField.normalizeValue(operatorWindow.approvalCorrelationId());
+        String normalizedCiManifestVersion = ContextHeaderField.normalizeValue(ciEvidence.manifestVersion());
+        String normalizedCiManifestDigest = ContextHeaderField.normalizeValue(ciEvidence.manifestDigest());
+        String normalizedCiManifestEndpoint = ContextHeaderField.normalizeValue(ciEvidence.manifestEndpoint());
+        String normalizedCiArtifactRecordCount = ContextHeaderField.normalizeValue(ciEvidence.artifactRecordCount());
+        String normalizedCiApprovalCorrelationId = ContextHeaderField.normalizeValue(ciEvidence.approvalCorrelationId());
+        String normalizedCiUploadContractVersion =
+                ContextHeaderField.normalizeValue(artifactRetention.uploadContractVersion());
+        String normalizedCiUploadContractDigest =
+                ContextHeaderField.normalizeValue(artifactRetention.uploadContractDigest());
+        String normalizedCiArtifactName = ContextHeaderField.normalizeValue(artifactRetention.artifactName());
+        String normalizedCiArtifactRoot = ContextHeaderField.normalizeValue(artifactRetention.artifactRoot());
+        String normalizedCiRetentionDays = ContextHeaderField.normalizeValue(artifactRetention.retentionDays());
+        String normalizedCiUploadMode = ContextHeaderField.normalizeValue(artifactRetention.uploadMode());
+        String normalizedRuntimePreflightVersion =
+                ContextHeaderField.normalizeValue(runtimeReadiness.preflightVersion());
+        String normalizedRuntimePreflightDigest = ContextHeaderField.normalizeValue(runtimeReadiness.preflightDigest());
+        String normalizedRuntimeSmokeSessionId = ContextHeaderField.normalizeValue(runtimeReadiness.smokeSessionId());
+        String normalizedRuntimeReadTargetId = ContextHeaderField.normalizeValue(runtimeReadiness.readTargetId());
+        String normalizedRuntimeWindowMode = ContextHeaderField.normalizeValue(runtimeReadiness.windowMode());
+        String normalizedManagedAuditCandidateVersion =
+                ContextHeaderField.normalizeValue(managedAudit.candidateVersion());
+        String normalizedManagedAuditCandidateDigest = ContextHeaderField.normalizeValue(managedAudit.candidateDigest());
+        String normalizedManagedAuditSinkMode = ContextHeaderField.normalizeValue(managedAudit.sinkMode());
+        String normalizedManagedAuditRetentionDays = ContextHeaderField.normalizeValue(managedAudit.retentionDays());
+        String normalizedManagedAuditRotationPolicy = ContextHeaderField.normalizeValue(managedAudit.rotationPolicy());
         String normalizedApprovalBindingContractVersion =
-                ContextHeaderField.normalizeValue(approvalBindingContractVersion);
-        String normalizedApprovalBindingContractDigest = ContextHeaderField.normalizeValue(approvalBindingContractDigest);
-        String normalizedApprovalRequestId = ContextHeaderField.normalizeValue(approvalRequestId);
-        String normalizedApprovalDecisionState = ContextHeaderField.normalizeValue(approvalDecisionState);
-        String normalizedApprovalRecordCorrelationId = ContextHeaderField.normalizeValue(approvalRecordCorrelationId);
+                ContextHeaderField.normalizeValue(approvalBinding.contractVersion());
+        String normalizedApprovalBindingContractDigest =
+                ContextHeaderField.normalizeValue(approvalBinding.contractDigest());
+        String normalizedApprovalRequestId = ContextHeaderField.normalizeValue(approvalBinding.requestId());
+        String normalizedApprovalDecisionState = ContextHeaderField.normalizeValue(approvalBinding.decisionState());
+        String normalizedApprovalRecordCorrelationId =
+                ContextHeaderField.normalizeValue(approvalBinding.recordCorrelationId());
         ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext =
                 rehearsalHintBuilder.rehearsalRequestContext(
                         normalizedRequestId,

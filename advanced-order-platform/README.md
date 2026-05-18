@@ -2854,6 +2854,7 @@ ops
   -> v93 adds release approval rehearsal managed-audit sandbox connection operator window checklist echo receipt for Node v238/v239 while echoing checklist fields/counts/ids and keeping connection, credential values, SQL, ledger, and auto-start blocked
   -> v94 contract-preserving refactor: move OpsEvidenceService release/static evidence builders into a dispatch table, keeping response contracts unchanged while reducing OpsEvidenceService to 1032 lines
   -> v95 contract-preserving refactor: move static release version/endpoint strings into OpsEvidenceStaticReleaseArtifact enum, keeping response contracts unchanged while reducing OpsEvidenceService to 966 lines
+  -> v96 contract-preserving refactor: replace release approval rehearsal null overload chain with ReleaseApprovalRehearsalRequest records, keeping HTTP headers and response contracts unchanged while reducing OpsEvidenceService to 606 lines
 
 common
  -> 业务异常和统一错误响应

@@ -2687,41 +2687,8 @@ class OpsEvidenceServiceTests {
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
 
-        ReleaseApprovalRehearsalResponse headerBackedRehearsal = service.releaseApprovalRehearsal(
-                " rehearsal-v67-001 ",
-                " release-operator@example.test ",
-                " audit-correlation-v67 ",
-                " operator-198 ",
-                " operator,auditor ",
-                " true ",
-                " approval-v198-operator-window ",
-                " real-read-window-ci-archive-artifact-manifest.v1 ",
-                " sha256:node-v200-manifest-digest ",
-                " /api/v1/production/real-read-window-ci-archive-artifact-manifest ",
-                " 9 ",
-                " approval-v198-operator-window ",
-                " real-read-window-ci-artifact-upload-dry-run-contract.v1 ",
-                " sha256:node-v202-upload-contract-digest ",
-                " orderops-real-read-window-evidence-v191-v201 ",
-                " c/ ",
-                " 30 ",
-                " dry-run-contract-only ",
-                " three-project-real-read-runtime-smoke-preflight.v1 ",
-                " sha256:node-v204-preflight-digest ",
-                " runtime-smoke-v205-session-001 ",
-                " java-release-approval-rehearsal ",
-                " manual-open-window-plan ",
-                " managed-audit-persistence-boundary-candidate.v1 ",
-                " sha256:node-v208-managed-audit-candidate-digest ",
-                " file-or-sqlite-dry-run-candidate ",
-                " 30 ",
-                " size-and-age-rotation-candidate ",
-                " managed-audit-identity-approval-binding-contract.v1 ",
-                " sha256:node-v210-approval-binding-digest ",
-                " approval-request-v210-001 ",
-                " APPROVED_DRY_RUN_ONLY ",
-                " approval-record-correlation-v210 "
-        );
+        ReleaseApprovalRehearsalResponse headerBackedRehearsal =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(headerBackedRehearsal.requestContext().requestId()).isEqualTo("rehearsal-v67-001");
         assertThat(headerBackedRehearsal.requestContext().requestIdSource())
                 .isEqualTo("X-Rehearsal-Request-Id");
@@ -3341,41 +3308,8 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
-        ReleaseApprovalRehearsalResponse repeatedHeaderBackedRehearsal = service.releaseApprovalRehearsal(
-                "rehearsal-v67-001",
-                "release-operator@example.test",
-                "audit-correlation-v67",
-                "operator-198",
-                "operator,auditor",
-                "true",
-                "approval-v198-operator-window",
-                "real-read-window-ci-archive-artifact-manifest.v1",
-                "sha256:node-v200-manifest-digest",
-                "/api/v1/production/real-read-window-ci-archive-artifact-manifest",
-                "9",
-                "approval-v198-operator-window",
-                "real-read-window-ci-artifact-upload-dry-run-contract.v1",
-                "sha256:node-v202-upload-contract-digest",
-                "orderops-real-read-window-evidence-v191-v201",
-                "c/",
-                "30",
-                "dry-run-contract-only",
-                "three-project-real-read-runtime-smoke-preflight.v1",
-                "sha256:node-v204-preflight-digest",
-                "runtime-smoke-v205-session-001",
-                "java-release-approval-rehearsal",
-                "manual-open-window-plan",
-                "managed-audit-persistence-boundary-candidate.v1",
-                "sha256:node-v208-managed-audit-candidate-digest",
-                "file-or-sqlite-dry-run-candidate",
-                "30",
-                "size-and-age-rotation-candidate",
-                "managed-audit-identity-approval-binding-contract.v1",
-                "sha256:node-v210-approval-binding-digest",
-                "approval-request-v210-001",
-                "APPROVED_DRY_RUN_ONLY",
-                "approval-record-correlation-v210"
-        );
+        ReleaseApprovalRehearsalResponse repeatedHeaderBackedRehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
         assertThat(repeatedHeaderBackedRehearsal.verificationHint().warningDigest())
                 .isEqualTo(headerBackedRehearsal.verificationHint().warningDigest());
         assertThat(repeatedHeaderBackedRehearsal.managedAuditAdapterImplementationGuardReceipt().guardDigest())
@@ -3397,5 +3331,109 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.requestContext().approvalLedgerWritten()).isFalse();
         assertThat(headerBackedRehearsal.executionAllowed()).isFalse();
         assertThat(headerBackedRehearsal.executionBoundaries().nodeMayWriteApprovalLedger()).isFalse();
+    }
+
+    private ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {
+        return new ReleaseApprovalRehearsalRequest(
+                new ReleaseApprovalRehearsalRequest.Context(
+                        " rehearsal-v67-001 ",
+                        " release-operator@example.test ",
+                        " audit-correlation-v67 "
+                ),
+                new ReleaseApprovalRehearsalRequest.OperatorWindow(
+                        " operator-198 ",
+                        " operator,auditor ",
+                        " true ",
+                        " approval-v198-operator-window "
+                ),
+                new ReleaseApprovalRehearsalRequest.CiEvidence(
+                        " real-read-window-ci-archive-artifact-manifest.v1 ",
+                        " sha256:node-v200-manifest-digest ",
+                        " /api/v1/production/real-read-window-ci-archive-artifact-manifest ",
+                        " 9 ",
+                        " approval-v198-operator-window "
+                ),
+                new ReleaseApprovalRehearsalRequest.ArtifactRetention(
+                        " real-read-window-ci-artifact-upload-dry-run-contract.v1 ",
+                        " sha256:node-v202-upload-contract-digest ",
+                        " orderops-real-read-window-evidence-v191-v201 ",
+                        " c/ ",
+                        " 30 ",
+                        " dry-run-contract-only "
+                ),
+                new ReleaseApprovalRehearsalRequest.RuntimeReadiness(
+                        " three-project-real-read-runtime-smoke-preflight.v1 ",
+                        " sha256:node-v204-preflight-digest ",
+                        " runtime-smoke-v205-session-001 ",
+                        " java-release-approval-rehearsal ",
+                        " manual-open-window-plan "
+                ),
+                new ReleaseApprovalRehearsalRequest.ManagedAudit(
+                        " managed-audit-persistence-boundary-candidate.v1 ",
+                        " sha256:node-v208-managed-audit-candidate-digest ",
+                        " file-or-sqlite-dry-run-candidate ",
+                        " 30 ",
+                        " size-and-age-rotation-candidate "
+                ),
+                new ReleaseApprovalRehearsalRequest.ApprovalBinding(
+                        " managed-audit-identity-approval-binding-contract.v1 ",
+                        " sha256:node-v210-approval-binding-digest ",
+                        " approval-request-v210-001 ",
+                        " APPROVED_DRY_RUN_ONLY ",
+                        " approval-record-correlation-v210 "
+                )
+        );
+    }
+
+    private ReleaseApprovalRehearsalRequest headerBackedRehearsalRequest() {
+        return new ReleaseApprovalRehearsalRequest(
+                new ReleaseApprovalRehearsalRequest.Context(
+                        "rehearsal-v67-001",
+                        "release-operator@example.test",
+                        "audit-correlation-v67"
+                ),
+                new ReleaseApprovalRehearsalRequest.OperatorWindow(
+                        "operator-198",
+                        "operator,auditor",
+                        "true",
+                        "approval-v198-operator-window"
+                ),
+                new ReleaseApprovalRehearsalRequest.CiEvidence(
+                        "real-read-window-ci-archive-artifact-manifest.v1",
+                        "sha256:node-v200-manifest-digest",
+                        "/api/v1/production/real-read-window-ci-archive-artifact-manifest",
+                        "9",
+                        "approval-v198-operator-window"
+                ),
+                new ReleaseApprovalRehearsalRequest.ArtifactRetention(
+                        "real-read-window-ci-artifact-upload-dry-run-contract.v1",
+                        "sha256:node-v202-upload-contract-digest",
+                        "orderops-real-read-window-evidence-v191-v201",
+                        "c/",
+                        "30",
+                        "dry-run-contract-only"
+                ),
+                new ReleaseApprovalRehearsalRequest.RuntimeReadiness(
+                        "three-project-real-read-runtime-smoke-preflight.v1",
+                        "sha256:node-v204-preflight-digest",
+                        "runtime-smoke-v205-session-001",
+                        "java-release-approval-rehearsal",
+                        "manual-open-window-plan"
+                ),
+                new ReleaseApprovalRehearsalRequest.ManagedAudit(
+                        "managed-audit-persistence-boundary-candidate.v1",
+                        "sha256:node-v208-managed-audit-candidate-digest",
+                        "file-or-sqlite-dry-run-candidate",
+                        "30",
+                        "size-and-age-rotation-candidate"
+                ),
+                new ReleaseApprovalRehearsalRequest.ApprovalBinding(
+                        "managed-audit-identity-approval-binding-contract.v1",
+                        "sha256:node-v210-approval-binding-digest",
+                        "approval-request-v210-001",
+                        "APPROVED_DRY_RUN_ONLY",
+                        "approval-record-correlation-v210"
+                )
+        );
     }
 }
