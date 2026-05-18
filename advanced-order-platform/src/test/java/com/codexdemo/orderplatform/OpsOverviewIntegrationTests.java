@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v23"))
+                        .value("java-release-approval-rehearsal-response-schema.v24"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1833,7 +1833,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v23"))
+                        .value("java-release-approval-rehearsal-response-schema.v24"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -2658,7 +2658,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v23"))
+                        .value("java-release-approval-rehearsal-response-schema.v24"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
@@ -3089,6 +3089,116 @@ class OpsOverviewIntegrationTests {
                         hasItem("managedAuditSandboxConnectionPrecheckPacketEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare managedAuditSandboxConnectionPrecheckPacketEchoReceipt.consumedByNodePrecheckPacketProfile with Node v245")));
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesDisabledAdapterClientPrecheckEchoReceipt() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal")
+                        .header("X-Rehearsal-Request-Id", "rehearsal-v67-001")
+                        .header("X-Operator-Identity", "release-operator@example.test")
+                        .header("X-Audit-Correlation-Id", "audit-correlation-v67")
+                        .header("x-orderops-operator-id", "operator-198")
+                        .header("x-orderops-roles", "operator,auditor")
+                        .header("x-orderops-operator-verified", "true")
+                        .header("x-orderops-approval-correlation-id", "approval-v198-operator-window")
+                        .header("x-orderops-ci-manifest-version",
+                                "real-read-window-ci-archive-artifact-manifest.v1")
+                        .header("x-orderops-ci-manifest-digest", "sha256:node-v200-manifest-digest")
+                        .header("x-orderops-ci-manifest-endpoint",
+                                "/api/v1/production/real-read-window-ci-archive-artifact-manifest")
+                        .header("x-orderops-ci-artifact-record-count", "9")
+                        .header("x-orderops-ci-approval-correlation-id", "approval-v198-operator-window")
+                        .header("x-orderops-ci-upload-contract-version",
+                                "real-read-window-ci-artifact-upload-dry-run-contract.v1")
+                        .header("x-orderops-ci-upload-contract-digest",
+                                "sha256:node-v202-upload-contract-digest")
+                        .header("x-orderops-ci-artifact-name", "orderops-real-read-window-evidence-v191-v201")
+                        .header("x-orderops-ci-artifact-root", "c/")
+                        .header("x-orderops-ci-retention-days", "30")
+                        .header("x-orderops-ci-upload-mode", "dry-run-contract-only")
+                        .header("x-orderops-runtime-preflight-version",
+                                "three-project-real-read-runtime-smoke-preflight.v1")
+                        .header("x-orderops-runtime-preflight-digest",
+                                "sha256:node-v204-preflight-digest")
+                        .header("x-orderops-runtime-smoke-session-id",
+                                "runtime-smoke-v205-session-001")
+                        .header("x-orderops-runtime-read-target-id",
+                                "java-release-approval-rehearsal")
+                        .header("x-orderops-runtime-window-mode",
+                                "manual-open-window-plan")
+                        .header("x-orderops-managed-audit-candidate-version",
+                                "managed-audit-persistence-boundary-candidate.v1")
+                        .header("x-orderops-managed-audit-candidate-digest",
+                                "sha256:node-v208-managed-audit-candidate-digest")
+                        .header("x-orderops-managed-audit-sink-mode",
+                                "file-or-sqlite-dry-run-candidate")
+                        .header("x-orderops-managed-audit-retention-days", "30")
+                        .header("x-orderops-managed-audit-rotation-policy",
+                                "size-and-age-rotation-candidate")
+                        .header("x-orderops-approval-binding-contract-version",
+                                "managed-audit-identity-approval-binding-contract.v1")
+                        .header("x-orderops-approval-binding-contract-digest",
+                                "sha256:node-v210-approval-binding-digest")
+                        .header("x-orderops-approval-request-id", "approval-request-v210-001")
+                        .header("x-orderops-approval-decision-state", "APPROVED_DRY_RUN_ONLY")
+                        .header("x-orderops-approval-record-correlation-id",
+                                "approval-record-correlation-v210"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.receiptVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-sandbox-connection-disabled-adapter-client-precheck-echo-receipt.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.sourcePrecheckPacketEchoReceiptSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v23"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.consumedByNodeDisabledAdapterClientPrecheckVersion")
+                        .value("Node v252"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.consumedByNodeDisabledAdapterClientPrecheckProfile")
+                        .value("managed-audit-manual-sandbox-connection-disabled-adapter-client-precheck.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.consumedByNodeTestOnlyAdapterShellContractVersion")
+                        .value("Node v253"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.nextNodeDisabledAdapterClientUpstreamEchoVerificationVersion")
+                        .value("Node v254"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.precheckShape.requiredEnvHandleCount")
+                        .value(5))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.precheckShape.failureClassCount")
+                        .value(6))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.precheckShape.dryRunResponseFieldCount")
+                        .value(10))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.precheckShape.precheckCreatesRealClient")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.clientBoundary.clientImplementationStatus")
+                        .value("not-implemented"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.clientBoundary.clientMayBeInstantiated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.clientBoundary.externalRequestMayBeSent")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.clientBoundary.credentialValueMayBeLoaded")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.optInGate.gateName")
+                        .value("ORDEROPS_MANAGED_AUDIT_ADAPTER_CLIENT_ENABLED"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.optInGate.currentDefault")
+                        .value("false"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.optInGate.precheckTreatsEnabledAsBlocked")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.javaExecutionBoundary.externalRequestSentByJava")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.readyForNodeV254DisabledAdapterClientUpstreamEchoVerification")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.readyForManagedAuditSandboxAdapterConnection")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.receiptWarnings").isEmpty())
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.echoedRequiredEnvHandles",
+                        hasItem("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE")))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.echoedFailureClassCodes",
+                        hasItem("CREDENTIAL_VALUE_REQUESTED")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptDigest")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.consumedByNodeDisabledAdapterClientPrecheckProfile with Node v252")));
     }
 
     @Test

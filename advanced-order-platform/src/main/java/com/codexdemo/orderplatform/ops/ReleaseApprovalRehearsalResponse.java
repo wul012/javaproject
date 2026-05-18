@@ -42,6 +42,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
         RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
                 managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
+        RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+                managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -1270,6 +1272,102 @@ public record ReleaseApprovalRehearsalResponse(
             boolean upstreamServiceAutoStartRequestedByJava,
             boolean miniKvWritePermissionRequestedByJava,
             boolean productionWindowOpenedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt(
+            String receiptVersion,
+            String sourcePrecheckPacketEchoReceiptVersion,
+            String sourcePrecheckPacketEchoReceiptSchemaVersion,
+            String consumedByNodeDisabledAdapterClientPrecheckVersion,
+            String consumedByNodeDisabledAdapterClientPrecheckProfile,
+            String consumedByNodeDisabledAdapterClientPrecheckEndpoint,
+            String consumedByNodeDisabledAdapterClientPrecheckState,
+            String consumedByNodeTestOnlyAdapterShellContractVersion,
+            String consumedByNodeTestOnlyAdapterShellContractProfile,
+            String nextNodeDisabledAdapterClientUpstreamEchoVerificationVersion,
+            String nextNodeDisabledAdapterClientUpstreamEchoVerificationProfile,
+            boolean nodeV254MayConsume,
+            RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape precheckShape,
+            RehearsalSandboxConnectionDisabledAdapterClientBoundary clientBoundary,
+            RehearsalSandboxConnectionDisabledAdapterClientOptInGate optInGate,
+            RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary javaExecutionBoundary,
+            boolean envHandlesEchoed,
+            boolean failureTaxonomyEchoed,
+            boolean dryRunResponseShapeEchoed,
+            boolean disabledClientBoundaryEchoed,
+            boolean readOnlyPrecheckBoundaryEchoed,
+            boolean readyForNodeV254DisabledAdapterClientUpstreamEchoVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> echoedRequiredEnvHandles,
+            List<String> echoedFailureClassCodes,
+            List<String> echoedDryRunResponseFields,
+            List<String> reusedNoGoConditions,
+            List<String> forbiddenPrecheckOperations,
+            List<String> nodeV254Prerequisites,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape(
+            String adapterMode,
+            String sourceSpan,
+            String precheckState,
+            int requiredEnvHandleCount,
+            int failureClassCount,
+            int dryRunResponseFieldCount,
+            int reusedNoGoConditionCount,
+            boolean envHandlesRemainHandleOnly,
+            boolean noEnvValueReadForPrecheck,
+            boolean dryRunResponseReadOnly,
+            boolean precheckCreatesRealClient
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDisabledAdapterClientBoundary(
+            String clientImplementationStatus,
+            boolean clientMayBeInstantiated,
+            boolean externalRequestMayBeSent,
+            boolean credentialValueMayBeLoaded,
+            boolean optInGateRequired,
+            boolean productionEndpointAllowed,
+            boolean realTransportAllowed,
+            boolean realAdapterClientImplemented
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDisabledAdapterClientOptInGate(
+            String gateName,
+            String requiredValueForFutureConnection,
+            String currentDefault,
+            boolean precheckTreatsEnabledAsBlocked,
+            boolean operatorApprovalRequired
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary(
+            boolean carriesCredentialValue,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean actualConnectionAttemptedByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean externalRequestSentByJava,
+            boolean schemaMigrationRequestedByJava,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean managedAuditStateWriteRequestedByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava,
+            boolean upstreamServiceAutoStartRequestedByJava,
+            boolean miniKvWritePermissionRequestedByJava
     ) {
     }
 

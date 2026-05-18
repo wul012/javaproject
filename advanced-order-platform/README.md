@@ -2860,6 +2860,7 @@ ops
   -> v99 adds release approval rehearsal managed-audit sandbox connection precheck packet echo receipt for Node v245/v246 while echoing owner approval artifact, credential handle review, schema migration rehearsal, operator window, rollback path, abort marker, and timeout policy only; Java still blocks credential values, managed audit connections, SQL, ledger writes, auto-start, and mini-kv writes
   -> v100 adds GitHub Actions Maven CI bootstrap and documents large-file split guards for ReleaseApprovalRehearsalResponse/OpsEvidenceService without changing business semantics or managed-audit boundaries
   -> v101 adds Dependabot security maintenance for Maven and GitHub Actions while leaving dependency versions, business semantics, and managed-audit boundaries unchanged
+  -> v102 adds release approval rehearsal disabled adapter client precheck echo receipt for Node v252/v254 while keeping credential values, real client instantiation, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv writes blocked
 
 common
  -> 业务异常和统一错误响应

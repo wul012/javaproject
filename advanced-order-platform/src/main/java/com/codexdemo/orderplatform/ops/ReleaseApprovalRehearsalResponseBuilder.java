@@ -61,6 +61,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(),
                 managedAuditReceiptChain.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(),
                 managedAuditReceiptChain.managedAuditSandboxConnectionPrecheckPacketEchoReceipt(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -166,7 +167,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.sandboxConnectionDryRunEnvelopeEchoReceiptBuilder(),
                 managedAuditReceiptChain.sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder(),
                 managedAuditReceiptChain.sandboxConnectionDryRunCommandPackageEchoReceiptBuilder(),
-                managedAuditReceiptChain.sandboxConnectionPrecheckPacketEchoReceiptBuilder()
+                managedAuditReceiptChain.sandboxConnectionPrecheckPacketEchoReceiptBuilder(),
+                managedAuditReceiptChain.sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -190,6 +192,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         managedAuditReceiptChain.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(),
                         managedAuditReceiptChain.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(),
                         managedAuditReceiptChain.managedAuditSandboxConnectionPrecheckPacketEchoReceipt(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );

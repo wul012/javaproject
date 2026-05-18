@@ -234,4 +234,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 104-version-101-dependabot-security-maintenance.md
  -> 第一百零一版 Dependabot/security maintenance，覆盖 Maven + GitHub Actions，不升级依赖、不改业务契约、不打开 managed-audit 边界
+
+105-version-102-disabled-adapter-client-precheck-echo-receipt.md
+ -> 第一百零二版 disabled adapter client precheck echo receipt，只读回显 Node v252 adapter client 前置检查形状，供 Node v254 校验，并继续阻断 credential value、真实 client、外部请求、连接、SQL、ledger、auto-start 和 mini-kv 写权限
 ```

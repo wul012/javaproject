@@ -78,4 +78,7 @@ c/100/解释/说明.md
 
 c/101/解释/说明.md
  -> Java v101 Dependabot/security maintenance，覆盖 Maven + GitHub Actions，不升级依赖、不改业务契约、不打开 managed-audit 边界
+
+c/102/解释/说明.md
+ -> Java v102 disabled adapter client precheck echo receipt，只读回显 Node v252 env handles / opt-in gate / failure taxonomy / dry-run response shape，并继续阻断 credential value、真实 client、外部请求、连接、SQL、ledger、auto-start 和 mini-kv 写权限
 ```
