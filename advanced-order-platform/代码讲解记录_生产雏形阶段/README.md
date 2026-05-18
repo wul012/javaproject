@@ -219,4 +219,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 99-version-96-release-approval-rehearsal-request-record-refactor.md
  -> 第九十六版 release approval rehearsal request record 重构，消除多层 null overload，主文件降到 606 行，外部 HTTP 契约不变
+
+100-version-97-release-approval-rehearsal-builder-chain-refactor.md
+ -> 第九十七版 release approval rehearsal builder chain 重构，拆出 managed-audit receipt chain 和 normalized request/sections 上下文，外部契约不变
 ```

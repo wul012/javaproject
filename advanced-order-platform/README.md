@@ -2855,6 +2855,7 @@ ops
   -> v94 contract-preserving refactor: move OpsEvidenceService release/static evidence builders into a dispatch table, keeping response contracts unchanged while reducing OpsEvidenceService to 1032 lines
   -> v95 contract-preserving refactor: move static release version/endpoint strings into OpsEvidenceStaticReleaseArtifact enum, keeping response contracts unchanged while reducing OpsEvidenceService to 966 lines
   -> v96 contract-preserving refactor: replace release approval rehearsal null overload chain with ReleaseApprovalRehearsalRequest records, keeping HTTP headers and response contracts unchanged while reducing OpsEvidenceService to 606 lines
+  -> v97 contract-preserving refactor: split release approval rehearsal builder into normalized request, rehearsal sections, and managed-audit receipt chain contexts while keeping digest and response contracts unchanged
 
 common
  -> 业务异常和统一错误响应

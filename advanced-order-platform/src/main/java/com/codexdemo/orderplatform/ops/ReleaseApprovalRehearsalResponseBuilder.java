@@ -15,186 +15,22 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 new ReleaseApprovalRehearsalHandoffHintBuilder();
         ReleaseApprovalRehearsalFailureTaxonomyBuilder failureTaxonomyBuilder =
                 new ReleaseApprovalRehearsalFailureTaxonomyBuilder();
-        ReleaseApprovalRehearsalRequest normalizedRequest =
-                request == null ? ReleaseApprovalRehearsalRequest.empty() : request;
-        ReleaseApprovalRehearsalRequest.Context context = normalizedRequest.context();
-        ReleaseApprovalRehearsalRequest.OperatorWindow operatorWindow = normalizedRequest.operatorWindow();
-        ReleaseApprovalRehearsalRequest.CiEvidence ciEvidence = normalizedRequest.ciEvidence();
-        ReleaseApprovalRehearsalRequest.ArtifactRetention artifactRetention = normalizedRequest.artifactRetention();
-        ReleaseApprovalRehearsalRequest.RuntimeReadiness runtimeReadiness = normalizedRequest.runtimeReadiness();
-        ReleaseApprovalRehearsalRequest.ManagedAudit managedAudit = normalizedRequest.managedAudit();
-        ReleaseApprovalRehearsalRequest.ApprovalBinding approvalBinding = normalizedRequest.approvalBinding();
-        String normalizedRequestId = ContextHeaderField.normalizeValue(context.requestId());
-        String normalizedOperatorIdentity = ContextHeaderField.normalizeValue(context.operatorIdentity());
-        String normalizedAuditCorrelationId = ContextHeaderField.normalizeValue(context.auditCorrelationId());
-        String normalizedOperatorWindowOperatorId = ContextHeaderField.normalizeValue(operatorWindow.operatorId());
-        String normalizedOperatorWindowRoles = ContextHeaderField.normalizeValue(operatorWindow.roles());
-        String normalizedOperatorWindowVerifiedClaim = ContextHeaderField.normalizeValue(operatorWindow.verifiedClaim());
-        String normalizedOperatorWindowApprovalCorrelationId =
-                ContextHeaderField.normalizeValue(operatorWindow.approvalCorrelationId());
-        String normalizedCiManifestVersion = ContextHeaderField.normalizeValue(ciEvidence.manifestVersion());
-        String normalizedCiManifestDigest = ContextHeaderField.normalizeValue(ciEvidence.manifestDigest());
-        String normalizedCiManifestEndpoint = ContextHeaderField.normalizeValue(ciEvidence.manifestEndpoint());
-        String normalizedCiArtifactRecordCount = ContextHeaderField.normalizeValue(ciEvidence.artifactRecordCount());
-        String normalizedCiApprovalCorrelationId = ContextHeaderField.normalizeValue(ciEvidence.approvalCorrelationId());
-        String normalizedCiUploadContractVersion =
-                ContextHeaderField.normalizeValue(artifactRetention.uploadContractVersion());
-        String normalizedCiUploadContractDigest =
-                ContextHeaderField.normalizeValue(artifactRetention.uploadContractDigest());
-        String normalizedCiArtifactName = ContextHeaderField.normalizeValue(artifactRetention.artifactName());
-        String normalizedCiArtifactRoot = ContextHeaderField.normalizeValue(artifactRetention.artifactRoot());
-        String normalizedCiRetentionDays = ContextHeaderField.normalizeValue(artifactRetention.retentionDays());
-        String normalizedCiUploadMode = ContextHeaderField.normalizeValue(artifactRetention.uploadMode());
-        String normalizedRuntimePreflightVersion =
-                ContextHeaderField.normalizeValue(runtimeReadiness.preflightVersion());
-        String normalizedRuntimePreflightDigest = ContextHeaderField.normalizeValue(runtimeReadiness.preflightDigest());
-        String normalizedRuntimeSmokeSessionId = ContextHeaderField.normalizeValue(runtimeReadiness.smokeSessionId());
-        String normalizedRuntimeReadTargetId = ContextHeaderField.normalizeValue(runtimeReadiness.readTargetId());
-        String normalizedRuntimeWindowMode = ContextHeaderField.normalizeValue(runtimeReadiness.windowMode());
-        String normalizedManagedAuditCandidateVersion =
-                ContextHeaderField.normalizeValue(managedAudit.candidateVersion());
-        String normalizedManagedAuditCandidateDigest = ContextHeaderField.normalizeValue(managedAudit.candidateDigest());
-        String normalizedManagedAuditSinkMode = ContextHeaderField.normalizeValue(managedAudit.sinkMode());
-        String normalizedManagedAuditRetentionDays = ContextHeaderField.normalizeValue(managedAudit.retentionDays());
-        String normalizedManagedAuditRotationPolicy = ContextHeaderField.normalizeValue(managedAudit.rotationPolicy());
-        String normalizedApprovalBindingContractVersion =
-                ContextHeaderField.normalizeValue(approvalBinding.contractVersion());
-        String normalizedApprovalBindingContractDigest =
-                ContextHeaderField.normalizeValue(approvalBinding.contractDigest());
-        String normalizedApprovalRequestId = ContextHeaderField.normalizeValue(approvalBinding.requestId());
-        String normalizedApprovalDecisionState = ContextHeaderField.normalizeValue(approvalBinding.decisionState());
-        String normalizedApprovalRecordCorrelationId =
-                ContextHeaderField.normalizeValue(approvalBinding.recordCorrelationId());
-        ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext =
-                rehearsalHintBuilder.rehearsalRequestContext(
-                        normalizedRequestId,
-                        normalizedOperatorIdentity,
-                        normalizedAuditCorrelationId
-                );
-        ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint =
-                rehearsalHintBuilder.rehearsalOperatorWindowHint(
-                        normalizedOperatorWindowOperatorId,
-                        normalizedOperatorWindowRoles,
-                        normalizedOperatorWindowVerifiedClaim,
-                        normalizedOperatorWindowApprovalCorrelationId
-                );
-        ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint =
-                rehearsalHintBuilder.rehearsalCiEvidenceHint(
-                        normalizedCiManifestVersion,
-                        normalizedCiManifestDigest,
-                        normalizedCiManifestEndpoint,
-                        normalizedCiArtifactRecordCount,
-                        normalizedCiApprovalCorrelationId
-                );
-        ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint =
-                rehearsalHintBuilder.rehearsalArtifactRetentionHint(
-                        evidence.releaseAuditRetentionFixture(),
-                        normalizedCiUploadContractVersion,
-                        normalizedCiUploadContractDigest,
-                        normalizedCiArtifactName,
-                        normalizedCiArtifactRoot,
-                        normalizedCiRetentionDays,
-                        normalizedCiUploadMode
-                );
-        ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint =
-                rehearsalHintBuilder.rehearsalLiveReadinessHint(
-                        evidence,
-                        normalizedRuntimePreflightVersion,
-                        normalizedRuntimePreflightDigest,
-                        normalizedRuntimeSmokeSessionId,
-                        normalizedRuntimeReadTargetId,
-                        normalizedRuntimeWindowMode
+        NormalizedRequest normalizedRequest = NormalizedRequest.from(request);
+        RehearsalSections sections = rehearsalSections(
+                evidence,
+                normalizedRequest,
+                rehearsalHintBuilder,
+                handoffHintBuilder
         );
-        ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint =
-                handoffHintBuilder.rehearsalAuditPersistenceHandoffHint(
-                        evidence.releaseAuditRetentionFixture(),
-                        normalizedManagedAuditCandidateVersion,
-                        normalizedManagedAuditCandidateDigest,
-                        normalizedManagedAuditSinkMode,
-                        normalizedManagedAuditRetentionDays,
-                        normalizedManagedAuditRotationPolicy
-                );
-        ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint =
-                handoffHintBuilder.rehearsalApprovalRecordHandoffHint(
-                        evidence.rollbackApprovalRecordFixture(),
-                        normalizedApprovalBindingContractVersion,
-                        normalizedApprovalBindingContractDigest,
-                        normalizedApprovalRequestId,
-                        normalizedApprovalDecisionState,
-                        normalizedApprovalRecordCorrelationId
-        );
-        ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
-                approvalHandoffVerificationMarker =
-                        handoffHintBuilder.rehearsalApprovalHandoffVerificationMarker(approvalRecordHandoffHint);
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
-                managedAuditAdapterBoundaryReceipt =
-                        new ReleaseApprovalManagedAuditAdapterBoundaryReceiptBuilder()
-                                .build(approvalHandoffVerificationMarker);
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
-                managedAuditProductionAdapterPrerequisiteReceipt =
-                        new ReleaseApprovalManagedAuditProductionAdapterPrerequisiteReceiptBuilder()
-                                .build(managedAuditAdapterBoundaryReceipt);
-        ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
-                opsEvidenceServiceQualitySplitReceipt =
-                        new ReleaseApprovalOpsEvidenceServiceQualitySplitReceiptBuilder()
-                                .build(managedAuditProductionAdapterPrerequisiteReceipt);
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
-                managedAuditAdapterImplementationGuardReceipt =
-                        new ReleaseApprovalManagedAuditAdapterImplementationGuardReceiptBuilder()
-                                .build(opsEvidenceServiceQualitySplitReceipt);
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
-                managedAuditExternalAdapterMigrationGuardReceipt =
-                        new ReleaseApprovalManagedAuditExternalAdapterMigrationGuardReceiptBuilder()
-                                .build(managedAuditAdapterImplementationGuardReceipt);
-        ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
-                sandboxAdapterApprovalSchemaGuardReceiptBuilder =
-                        new ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder();
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
-                managedAuditSandboxAdapterApprovalSchemaGuardReceipt =
-                        sandboxAdapterApprovalSchemaGuardReceiptBuilder
-                                .build(managedAuditExternalAdapterMigrationGuardReceipt);
-        ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
-                sandboxConnectionOperatorHandoffMarkerBuilder =
-                        new ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder();
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
-                managedAuditSandboxConnectionOperatorHandoffMarker =
-                        sandboxConnectionOperatorHandoffMarkerBuilder
-                                .build(managedAuditSandboxAdapterApprovalSchemaGuardReceipt);
-        ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuilder
-                sandboxConnectionPreflightEchoMarkerBuilder =
-                        new ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuilder();
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
-                managedAuditSandboxConnectionPreflightEchoMarker =
-                        sandboxConnectionPreflightEchoMarkerBuilder
-                                .build(managedAuditSandboxConnectionOperatorHandoffMarker);
-        ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuilder
-                sandboxConnectionPreconditionReceiptBuilder =
-                        new ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuilder();
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
-                managedAuditSandboxConnectionPreconditionReceipt =
-                        sandboxConnectionPreconditionReceiptBuilder
-                                .build(managedAuditSandboxConnectionPreflightEchoMarker);
-        ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceiptBuilder
-                sandboxConnectionDryRunEnvelopeEchoReceiptBuilder =
-                        new ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceiptBuilder();
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
-                managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt =
-                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder
-                                .build(managedAuditSandboxConnectionPreconditionReceipt);
-        ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
-                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder =
-                        new ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder();
-        ReleaseApprovalRehearsalResponse
-                .RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
-                managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt =
-                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
-                                .build(managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt);
+        ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder.ReceiptChain managedAuditReceiptChain =
+                new ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder()
+                        .build(sections.approvalRecordHandoffHint());
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 failureTaxonomyBuilder.build(
                         evidence,
-                        normalizedRequestId,
-                        normalizedOperatorIdentity,
-                        normalizedAuditCorrelationId
+                        normalizedRequest.requestId(),
+                        normalizedRequest.operatorIdentity(),
+                        normalizedRequest.auditCorrelationId()
                 );
         ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries = executionBoundaries();
         return new ReleaseApprovalRehearsalResponse(
@@ -204,52 +40,29 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 "READ_ONLY_RELEASE_APPROVAL_REHEARSAL",
                 true,
                 false,
-                requestContext,
-                operatorWindowHint,
-                ciEvidenceHint,
-                artifactRetentionHint,
-                liveReadinessHint,
-                auditPersistenceHandoffHint,
-                approvalRecordHandoffHint,
-                approvalHandoffVerificationMarker,
-                managedAuditAdapterBoundaryReceipt,
-                managedAuditProductionAdapterPrerequisiteReceipt,
-                opsEvidenceServiceQualitySplitReceipt,
-                managedAuditAdapterImplementationGuardReceipt,
-                managedAuditExternalAdapterMigrationGuardReceipt,
-                managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-                managedAuditSandboxConnectionOperatorHandoffMarker,
-                managedAuditSandboxConnectionPreflightEchoMarker,
-                managedAuditSandboxConnectionPreconditionReceipt,
-                managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
-                managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
+                sections.requestContext(),
+                sections.operatorWindowHint(),
+                sections.ciEvidenceHint(),
+                sections.artifactRetentionHint(),
+                sections.liveReadinessHint(),
+                sections.auditPersistenceHandoffHint(),
+                sections.approvalRecordHandoffHint(),
+                managedAuditReceiptChain.approvalHandoffVerificationMarker(),
+                managedAuditReceiptChain.managedAuditAdapterBoundaryReceipt(),
+                managedAuditReceiptChain.managedAuditProductionAdapterPrerequisiteReceipt(),
+                managedAuditReceiptChain.opsEvidenceServiceQualitySplitReceipt(),
+                managedAuditReceiptChain.managedAuditAdapterImplementationGuardReceipt(),
+                managedAuditReceiptChain.managedAuditExternalAdapterMigrationGuardReceipt(),
+                managedAuditReceiptChain.managedAuditSandboxAdapterApprovalSchemaGuardReceipt(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionOperatorHandoffMarker(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionPreflightEchoMarker(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionPreconditionReceipt(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
-                        requestContext,
-                        operatorWindowHint,
-                        ciEvidenceHint,
-                        artifactRetentionHint,
-                        liveReadinessHint,
-                        auditPersistenceHandoffHint,
-                        approvalRecordHandoffHint,
-                        approvalHandoffVerificationMarker,
-                        managedAuditAdapterBoundaryReceipt,
-                        managedAuditProductionAdapterPrerequisiteReceipt,
-                        opsEvidenceServiceQualitySplitReceipt,
-                        managedAuditAdapterImplementationGuardReceipt,
-                        managedAuditExternalAdapterMigrationGuardReceipt,
-                        managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-                        sandboxAdapterApprovalSchemaGuardReceiptBuilder,
-                        managedAuditSandboxConnectionOperatorHandoffMarker,
-                        sandboxConnectionOperatorHandoffMarkerBuilder,
-                        managedAuditSandboxConnectionPreflightEchoMarker,
-                        sandboxConnectionPreflightEchoMarkerBuilder,
-                        managedAuditSandboxConnectionPreconditionReceipt,
-                        sandboxConnectionPreconditionReceiptBuilder,
-                        managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
-                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
-                        managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
-                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
+                        sections,
+                        managedAuditReceiptChain,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -262,82 +75,115 @@ final class ReleaseApprovalRehearsalResponseBuilder {
         );
     }
 
+    private RehearsalSections rehearsalSections(
+            OpsEvidenceResponse evidence,
+            NormalizedRequest normalizedRequest,
+            ReleaseApprovalRehearsalHintBuilder rehearsalHintBuilder,
+            ReleaseApprovalRehearsalHandoffHintBuilder handoffHintBuilder
+    ) {
+        ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext =
+                rehearsalHintBuilder.rehearsalRequestContext(
+                        normalizedRequest.requestId(),
+                        normalizedRequest.operatorIdentity(),
+                        normalizedRequest.auditCorrelationId()
+                );
+        ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint =
+                rehearsalHintBuilder.rehearsalOperatorWindowHint(
+                        normalizedRequest.operatorWindowOperatorId(),
+                        normalizedRequest.operatorWindowRoles(),
+                        normalizedRequest.operatorWindowVerifiedClaim(),
+                        normalizedRequest.operatorWindowApprovalCorrelationId()
+                );
+        ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint =
+                rehearsalHintBuilder.rehearsalCiEvidenceHint(
+                        normalizedRequest.ciManifestVersion(),
+                        normalizedRequest.ciManifestDigest(),
+                        normalizedRequest.ciManifestEndpoint(),
+                        normalizedRequest.ciArtifactRecordCount(),
+                        normalizedRequest.ciApprovalCorrelationId()
+                );
+        ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint =
+                rehearsalHintBuilder.rehearsalArtifactRetentionHint(
+                        evidence.releaseAuditRetentionFixture(),
+                        normalizedRequest.ciUploadContractVersion(),
+                        normalizedRequest.ciUploadContractDigest(),
+                        normalizedRequest.ciArtifactName(),
+                        normalizedRequest.ciArtifactRoot(),
+                        normalizedRequest.ciRetentionDays(),
+                        normalizedRequest.ciUploadMode()
+                );
+        ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint =
+                rehearsalHintBuilder.rehearsalLiveReadinessHint(
+                        evidence,
+                        normalizedRequest.runtimePreflightVersion(),
+                        normalizedRequest.runtimePreflightDigest(),
+                        normalizedRequest.runtimeSmokeSessionId(),
+                        normalizedRequest.runtimeReadTargetId(),
+                        normalizedRequest.runtimeWindowMode()
+                );
+        ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint =
+                handoffHintBuilder.rehearsalAuditPersistenceHandoffHint(
+                        evidence.releaseAuditRetentionFixture(),
+                        normalizedRequest.managedAuditCandidateVersion(),
+                        normalizedRequest.managedAuditCandidateDigest(),
+                        normalizedRequest.managedAuditSinkMode(),
+                        normalizedRequest.managedAuditRetentionDays(),
+                        normalizedRequest.managedAuditRotationPolicy()
+                );
+        ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint =
+                handoffHintBuilder.rehearsalApprovalRecordHandoffHint(
+                        evidence.rollbackApprovalRecordFixture(),
+                        normalizedRequest.approvalBindingContractVersion(),
+                        normalizedRequest.approvalBindingContractDigest(),
+                        normalizedRequest.approvalRequestId(),
+                        normalizedRequest.approvalDecisionState(),
+                        normalizedRequest.approvalRecordCorrelationId()
+                );
+        return new RehearsalSections(
+                requestContext,
+                operatorWindowHint,
+                ciEvidenceHint,
+                artifactRetentionHint,
+                liveReadinessHint,
+                auditPersistenceHandoffHint,
+                approvalRecordHandoffHint
+        );
+    }
+
     private ReleaseApprovalRehearsalResponse.RehearsalVerificationHint releaseApprovalVerificationHint(
-            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
-            ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
-            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
-            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
-            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
-            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
-                    approvalHandoffVerificationMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
-                    managedAuditAdapterBoundaryReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
-                    managedAuditProductionAdapterPrerequisiteReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
-                    opsEvidenceServiceQualitySplitReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
-                    managedAuditAdapterImplementationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
-                    managedAuditExternalAdapterMigrationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
-                    managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-            ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
-                    sandboxAdapterApprovalSchemaGuardReceiptBuilder,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
-                    managedAuditSandboxConnectionOperatorHandoffMarker,
-            ReleaseApprovalManagedAuditSandboxConnectionOperatorHandoffMarkerBuilder
-                    sandboxConnectionOperatorHandoffMarkerBuilder,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
-                    managedAuditSandboxConnectionPreflightEchoMarker,
-            ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuilder
-                    sandboxConnectionPreflightEchoMarkerBuilder,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
-                    managedAuditSandboxConnectionPreconditionReceipt,
-            ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuilder
-                    sandboxConnectionPreconditionReceiptBuilder,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
-                    managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
-            ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceiptBuilder
-                    sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
-                    managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
-            ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
-                    sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
+            RehearsalSections sections,
+            ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder.ReceiptChain managedAuditReceiptChain,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
         return new ReleaseApprovalVerificationHintBuilder(
-                sandboxAdapterApprovalSchemaGuardReceiptBuilder,
-                sandboxConnectionOperatorHandoffMarkerBuilder,
-                sandboxConnectionPreflightEchoMarkerBuilder,
-                sandboxConnectionPreconditionReceiptBuilder,
-                sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
-                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
+                managedAuditReceiptChain.sandboxAdapterApprovalSchemaGuardReceiptBuilder(),
+                managedAuditReceiptChain.sandboxConnectionOperatorHandoffMarkerBuilder(),
+                managedAuditReceiptChain.sandboxConnectionPreflightEchoMarkerBuilder(),
+                managedAuditReceiptChain.sandboxConnectionPreconditionReceiptBuilder(),
+                managedAuditReceiptChain.sandboxConnectionDryRunEnvelopeEchoReceiptBuilder(),
+                managedAuditReceiptChain.sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder()
         )
                 .build(
-                        requestContext,
-                        operatorWindowHint,
-                        ciEvidenceHint,
-                        artifactRetentionHint,
-                        liveReadinessHint,
-                        auditPersistenceHandoffHint,
-                        approvalRecordHandoffHint,
-                        approvalHandoffVerificationMarker,
-                        managedAuditAdapterBoundaryReceipt,
-                        managedAuditProductionAdapterPrerequisiteReceipt,
-                        opsEvidenceServiceQualitySplitReceipt,
-                        managedAuditAdapterImplementationGuardReceipt,
-                        managedAuditExternalAdapterMigrationGuardReceipt,
-                        managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-                        managedAuditSandboxConnectionOperatorHandoffMarker,
-                        managedAuditSandboxConnectionPreflightEchoMarker,
-                        managedAuditSandboxConnectionPreconditionReceipt,
-                        managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
-                        managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
+                        sections.requestContext(),
+                        sections.operatorWindowHint(),
+                        sections.ciEvidenceHint(),
+                        sections.artifactRetentionHint(),
+                        sections.liveReadinessHint(),
+                        sections.auditPersistenceHandoffHint(),
+                        sections.approvalRecordHandoffHint(),
+                        managedAuditReceiptChain.approvalHandoffVerificationMarker(),
+                        managedAuditReceiptChain.managedAuditAdapterBoundaryReceipt(),
+                        managedAuditReceiptChain.managedAuditProductionAdapterPrerequisiteReceipt(),
+                        managedAuditReceiptChain.opsEvidenceServiceQualitySplitReceipt(),
+                        managedAuditReceiptChain.managedAuditAdapterImplementationGuardReceipt(),
+                        managedAuditReceiptChain.managedAuditExternalAdapterMigrationGuardReceipt(),
+                        managedAuditReceiptChain.managedAuditSandboxAdapterApprovalSchemaGuardReceipt(),
+                        managedAuditReceiptChain.managedAuditSandboxConnectionOperatorHandoffMarker(),
+                        managedAuditReceiptChain.managedAuditSandboxConnectionPreflightEchoMarker(),
+                        managedAuditReceiptChain.managedAuditSandboxConnectionPreconditionReceipt(),
+                        managedAuditReceiptChain.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt(),
+                        managedAuditReceiptChain.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );
@@ -415,6 +261,108 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 "GET " + ROLLBACK_APPROVAL_RECORD_FIXTURE.endpoint(),
                 "Keep UPSTREAM_ACTIONS_ENABLED=false"
         );
+    }
+
+    private record RehearsalSections(
+            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
+            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
+            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
+            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
+            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
+            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint
+    ) {
+    }
+
+    private record NormalizedRequest(
+            String requestId,
+            String operatorIdentity,
+            String auditCorrelationId,
+            String operatorWindowOperatorId,
+            String operatorWindowRoles,
+            String operatorWindowVerifiedClaim,
+            String operatorWindowApprovalCorrelationId,
+            String ciManifestVersion,
+            String ciManifestDigest,
+            String ciManifestEndpoint,
+            String ciArtifactRecordCount,
+            String ciApprovalCorrelationId,
+            String ciUploadContractVersion,
+            String ciUploadContractDigest,
+            String ciArtifactName,
+            String ciArtifactRoot,
+            String ciRetentionDays,
+            String ciUploadMode,
+            String runtimePreflightVersion,
+            String runtimePreflightDigest,
+            String runtimeSmokeSessionId,
+            String runtimeReadTargetId,
+            String runtimeWindowMode,
+            String managedAuditCandidateVersion,
+            String managedAuditCandidateDigest,
+            String managedAuditSinkMode,
+            String managedAuditRetentionDays,
+            String managedAuditRotationPolicy,
+            String approvalBindingContractVersion,
+            String approvalBindingContractDigest,
+            String approvalRequestId,
+            String approvalDecisionState,
+            String approvalRecordCorrelationId
+    ) {
+
+        static NormalizedRequest from(ReleaseApprovalRehearsalRequest request) {
+            ReleaseApprovalRehearsalRequest normalizedRequest =
+                    request == null ? ReleaseApprovalRehearsalRequest.empty() : request;
+            ReleaseApprovalRehearsalRequest.Context context = normalizedRequest.context();
+            ReleaseApprovalRehearsalRequest.OperatorWindow operatorWindow = normalizedRequest.operatorWindow();
+            ReleaseApprovalRehearsalRequest.CiEvidence ciEvidence = normalizedRequest.ciEvidence();
+            ReleaseApprovalRehearsalRequest.ArtifactRetention artifactRetention =
+                    normalizedRequest.artifactRetention();
+            ReleaseApprovalRehearsalRequest.RuntimeReadiness runtimeReadiness =
+                    normalizedRequest.runtimeReadiness();
+            ReleaseApprovalRehearsalRequest.ManagedAudit managedAudit = normalizedRequest.managedAudit();
+            ReleaseApprovalRehearsalRequest.ApprovalBinding approvalBinding = normalizedRequest.approvalBinding();
+
+            return new NormalizedRequest(
+                    normalized(context.requestId()),
+                    normalized(context.operatorIdentity()),
+                    normalized(context.auditCorrelationId()),
+                    normalized(operatorWindow.operatorId()),
+                    normalized(operatorWindow.roles()),
+                    normalized(operatorWindow.verifiedClaim()),
+                    normalized(operatorWindow.approvalCorrelationId()),
+                    normalized(ciEvidence.manifestVersion()),
+                    normalized(ciEvidence.manifestDigest()),
+                    normalized(ciEvidence.manifestEndpoint()),
+                    normalized(ciEvidence.artifactRecordCount()),
+                    normalized(ciEvidence.approvalCorrelationId()),
+                    normalized(artifactRetention.uploadContractVersion()),
+                    normalized(artifactRetention.uploadContractDigest()),
+                    normalized(artifactRetention.artifactName()),
+                    normalized(artifactRetention.artifactRoot()),
+                    normalized(artifactRetention.retentionDays()),
+                    normalized(artifactRetention.uploadMode()),
+                    normalized(runtimeReadiness.preflightVersion()),
+                    normalized(runtimeReadiness.preflightDigest()),
+                    normalized(runtimeReadiness.smokeSessionId()),
+                    normalized(runtimeReadiness.readTargetId()),
+                    normalized(runtimeReadiness.windowMode()),
+                    normalized(managedAudit.candidateVersion()),
+                    normalized(managedAudit.candidateDigest()),
+                    normalized(managedAudit.sinkMode()),
+                    normalized(managedAudit.retentionDays()),
+                    normalized(managedAudit.rotationPolicy()),
+                    normalized(approvalBinding.contractVersion()),
+                    normalized(approvalBinding.contractDigest()),
+                    normalized(approvalBinding.requestId()),
+                    normalized(approvalBinding.decisionState()),
+                    normalized(approvalBinding.recordCorrelationId())
+            );
+        }
+
+        private static String normalized(String value) {
+            return ContextHeaderField.normalizeValue(value);
+        }
     }
 
     private record ExecutionBoundaryFlags(

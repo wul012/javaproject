@@ -63,4 +63,7 @@ c/95/解释/说明.md
 
 c/96/解释/说明.md
  -> Java v96 release approval rehearsal request record 重构，消除多层 null overload，外部 HTTP 契约不变
+
+c/97/解释/说明.md
+ -> Java v97 release approval rehearsal builder chain 重构，拆出 managed-audit receipt chain 和 normalized request/sections 上下文
 ```
