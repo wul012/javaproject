@@ -72,4 +72,7 @@ c/98/解释/说明.md
 
 c/99/解释/说明.md
  -> Java v99 manual sandbox connection precheck packet echo receipt，只读回显 Node v245 七个 precheck item，并继续阻断 credential value、连接、SQL、ledger、auto-start 和 mini-kv 写权限
+
+c/100/解释/说明.md
+ -> Java v100 CI bootstrap + large-file guard，新增 GitHub Actions Maven CI 基线，并记录 ReleaseApprovalRehearsalResponse / OpsEvidenceService 后续拆分目标
 ```

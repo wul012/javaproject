@@ -228,4 +228,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 102-version-99-release-approval-sandbox-precheck-packet-echo-receipt.md
  -> 第九十九版 release approval sandbox precheck packet echo receipt，只读回显 Node v245 七个 precheck item，供 Node v246 核对字段和 no-write / no-start 边界
+
+103-version-100-ci-bootstrap-large-file-guard.md
+ -> 第一百版 CI bootstrap + large-file guard，新增 GitHub Actions Maven CI 基线，并记录大文件后续拆分目标，业务契约不变
 ```
