@@ -2852,6 +2852,7 @@ ops
   -> v91 adds release approval rehearsal managed-audit sandbox connection precondition receipt for Node v235 intake while keeping no connection, no credential-value read, no SQL, no ledger, and no auto-start boundaries
   -> v92 adds release approval rehearsal managed-audit sandbox connection dry-run envelope echo receipt for Node v236/v237 while echoing only field names and keeping credential values, connection, SQL, ledger, and auto-start blocked
   -> v93 adds release approval rehearsal managed-audit sandbox connection operator window checklist echo receipt for Node v238/v239 while echoing checklist fields/counts/ids and keeping connection, credential values, SQL, ledger, and auto-start blocked
+  -> v94 contract-preserving refactor: move OpsEvidenceService release/static evidence builders into a dispatch table, keeping response contracts unchanged while reducing OpsEvidenceService to 1032 lines
 
 common
  -> 业务异常和统一错误响应

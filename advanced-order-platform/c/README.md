@@ -54,4 +54,7 @@ c/54/图片/05-cleanup.png
 ```text
 c/93/解释/说明.md
  -> Java v93 operator window checklist echo receipt，只读回显 Node v238 checklist 字段并继续阻断连接、credential value、SQL、ledger 和 auto-start
+
+c/94/解释/说明.md
+ -> Java v94 OpsEvidenceService dispatch table 重构，把 release/static evidence 构建移出主类，外部契约不变
 ```

@@ -210,4 +210,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 96-version-93-release-approval-sandbox-connection-operator-window-checklist-echo-receipt.md
  -> 第九十三版 release approval sandbox connection operator window checklist echo receipt，只读回显 Node v238 checklist 字段、数量、approval item id 和 pause code，继续阻断连接、credential value、SQL、ledger 和 auto-start
+
+97-version-94-ops-evidence-service-dispatch-table-refactor.md
+ -> 第九十四版 OpsEvidenceService dispatch table 重构，把 release/static evidence 构建迁移到分发表，外部契约不变，主文件降到 1032 行
 ```
