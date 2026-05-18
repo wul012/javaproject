@@ -36,6 +36,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionPreconditionReceipt,
         RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
                 managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
+        RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
+                managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -977,6 +979,112 @@ public record ReleaseApprovalRehearsalResponse(
             boolean javaStartsManagedAuditService,
             boolean nodeAutoStartAllowed,
             boolean miniKvPermissionRequestedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(
+            String receiptVersion,
+            String sourceSandboxConnectionDryRunEnvelopeEchoReceiptVersion,
+            String sourceSandboxConnectionDryRunEnvelopeEchoReceiptSchemaVersion,
+            String consumedByNodeOperatorWindowChecklistVersion,
+            String consumedByNodeOperatorWindowChecklistProfile,
+            String consumedByNodeOperatorWindowChecklistEndpoint,
+            String consumedByNodeOperatorWindowChecklistState,
+            String nextNodeEvidenceVerificationVersion,
+            String nextNodeEvidenceVerificationProfile,
+            boolean nodeV239MayConsume,
+            RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary checklistFieldBoundary,
+            RehearsalSandboxConnectionOperatorWindowApprovalBoundary approvalBoundary,
+            RehearsalSandboxConnectionOperatorWindowCredentialBoundary credentialBoundary,
+            RehearsalSandboxConnectionOperatorWindowExecutionBoundary javaExecutionBoundary,
+            boolean allChecklistFieldsEchoed,
+            boolean approvalChecklistEchoComplete,
+            boolean credentialValueExcluded,
+            boolean readyForNodeV239ManualSandboxConnectionEvidenceVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> echoedChecklistFieldNames,
+            List<String> echoedApprovalItemIds,
+            List<String> echoedChecklistStepPhases,
+            List<String> echoedPauseConditionCodes,
+            List<String> forbiddenChecklistOperations,
+            List<String> nodeV239Prerequisites,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary(
+            String ownerApprovalArtifactIdField,
+            String credentialHandleNameField,
+            String schemaRehearsalIdField,
+            String rollbackPathIdField,
+            String timeoutBudgetField,
+            String manualAbortMarkerField,
+            int timeoutBudgetMs,
+            int windowDurationMinutes,
+            int requiredApprovalCount,
+            int checklistStepCount,
+            int pauseConditionCount,
+            int forbiddenOperationCount,
+            boolean ownerApprovalArtifactIdFieldEchoed,
+            boolean credentialHandleNameFieldEchoed,
+            boolean schemaRehearsalIdFieldEchoed,
+            boolean rollbackPathIdFieldEchoed,
+            boolean timeoutBudgetFieldEchoed,
+            boolean manualAbortMarkerFieldEchoed,
+            boolean windowDurationEchoed,
+            boolean manualReviewRequired,
+            boolean operatorChecklistReadOnly,
+            boolean checklistCreatesConnectionCommand,
+            boolean windowOpenByDefault
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionOperatorWindowApprovalBoundary(
+            int approvalItemCount,
+            boolean releaseOwnerApprovalItemEchoed,
+            boolean securityReviewerApprovalItemEchoed,
+            boolean operationsOwnerApprovalItemEchoed,
+            boolean allApprovalItemsRequired,
+            boolean blocksConnectionIfMissing,
+            boolean artifactIdOnly,
+            boolean attestationOnly,
+            boolean windowRecordOnly,
+            boolean javaCreatesApprovalDecision,
+            boolean approvalLedgerWrittenByJava
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionOperatorWindowCredentialBoundary(
+            String credentialHandleNameField,
+            boolean credentialHandleOnly,
+            boolean credentialValueIncludedInChecklist,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean productionCredentialAllowed
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionOperatorWindowExecutionBoundary(
+            boolean actualConnectionAttemptedByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean schemaMigrationRequestedByJava,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean managedAuditStateWriteRequestedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava,
+            boolean javaStartsManagedAuditService,
+            boolean nodeAutoStartAllowed,
+            boolean miniKvPermissionRequestedByJava,
+            boolean productionWindowOpenedByJava
     ) {
     }
 

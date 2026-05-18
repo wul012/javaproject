@@ -197,6 +197,14 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt =
                         sandboxConnectionDryRunEnvelopeEchoReceiptBuilder
                                 .build(managedAuditSandboxConnectionPreconditionReceipt);
+        ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
+                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder();
+        ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
+                managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt =
+                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
+                                .build(managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt);
         ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
                 failureTaxonomyBuilder.build(
                         evidence,
@@ -230,6 +238,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditSandboxConnectionPreflightEchoMarker,
                 managedAuditSandboxConnectionPreconditionReceipt,
                 managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
+                managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         requestContext,
@@ -255,6 +264,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         sandboxConnectionPreconditionReceiptBuilder,
                         managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
                         sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
+                        managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
+                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -307,6 +318,11 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                     managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
             ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceiptBuilder
                     sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
+                    managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
+            ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
+                    sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -315,7 +331,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 sandboxConnectionOperatorHandoffMarkerBuilder,
                 sandboxConnectionPreflightEchoMarkerBuilder,
                 sandboxConnectionPreconditionReceiptBuilder,
-                sandboxConnectionDryRunEnvelopeEchoReceiptBuilder
+                sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
+                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder
         )
                 .build(
                         requestContext,
@@ -336,6 +353,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         managedAuditSandboxConnectionPreflightEchoMarker,
                         managedAuditSandboxConnectionPreconditionReceipt,
                         managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
+                        managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 );

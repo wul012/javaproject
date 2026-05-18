@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v20"))
+                        .value("java-release-approval-rehearsal-response-schema.v21"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1833,7 +1833,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v20"))
+                        .value("java-release-approval-rehearsal-response-schema.v21"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -2658,7 +2658,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v20"))
+                        .value("java-release-approval-rehearsal-response-schema.v21"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
@@ -2816,6 +2816,71 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.readyForManagedAuditSandboxAdapterConnection")
                         .value(false))
                 .andExpect(jsonPath("$.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.receiptDigest").exists());
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesSandboxConnectionOperatorWindowChecklistEchoReceipt() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.receiptVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-sandbox-connection-operator-window-checklist-echo-receipt.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.sourceSandboxConnectionDryRunEnvelopeEchoReceiptSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v20"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.consumedByNodeOperatorWindowChecklistVersion")
+                        .value("Node v238"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.consumedByNodeOperatorWindowChecklistProfile")
+                        .value("managed-audit-manual-sandbox-connection-operator-window-checklist.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.nextNodeEvidenceVerificationVersion")
+                        .value("Node v239"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.checklistFieldBoundary.requiredApprovalCount")
+                        .value(3))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.checklistFieldBoundary.checklistStepCount")
+                        .value(8))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.checklistFieldBoundary.pauseConditionCount")
+                        .value(8))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.checklistFieldBoundary.forbiddenOperationCount")
+                        .value(6))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.checklistFieldBoundary.operatorChecklistReadOnly")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.checklistFieldBoundary.checklistCreatesConnectionCommand")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.approvalBoundary.approvalItemCount")
+                        .value(3))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.approvalBoundary.approvalLedgerWrittenByJava")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.credentialBoundary.credentialHandleOnly")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.credentialBoundary.credentialValueIncludedInChecklist")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.credentialBoundary.credentialValueReadByJava")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.javaExecutionBoundary.actualConnectionAttemptedByJava")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.javaExecutionBoundary.schemaMigrationSqlExecutedByJava")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.readyForNodeV239ManualSandboxConnectionEvidenceVerification")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.readyForManagedAuditSandboxAdapterConnection")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.receiptDigest").exists())
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.echoedApprovalItemIds",
+                        hasItem("security-reviewer")))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.echoedChecklistStepPhases",
+                        hasItem("final-stop-gate")))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.echoedPauseConditionCodes",
+                        hasItem("UPSTREAM_ACTIONS_ENABLED")))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.receiptWarnings",
+                        hasItem("NODE_V239_SOURCE_SANDBOX_CONNECTION_DRY_RUN_ENVELOPE_ECHO_RECEIPT_NOT_READY")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("managedAuditSandboxConnectionOperatorWindowChecklistEchoReceiptWarnings")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.credentialBoundary.credentialValueIncludedInChecklist=false")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.consumedByNodeOperatorWindowChecklistProfile with Node v238")));
     }
 
     @Test

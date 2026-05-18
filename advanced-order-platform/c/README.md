@@ -48,3 +48,10 @@ c/54/图片/05-cleanup.png
 ## 一句话总览
 
 `a/` 和 `b/` 作为历史归档保留；后续运行截图和解释统一写入 `c/<版本>/`。
+
+## 最新说明
+
+```text
+c/93/解释/说明.md
+ -> Java v93 operator window checklist echo receipt，只读回显 Node v238 checklist 字段并继续阻断连接、credential value、SQL、ledger 和 auto-start
+```

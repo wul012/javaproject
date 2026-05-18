@@ -319,54 +319,17 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
 
     private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary
             envelopeFieldBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary(
-                OWNER_APPROVAL_ARTIFACT_ID_FIELD,
-                CREDENTIAL_HANDLE_NAME_FIELD,
-                SCHEMA_REHEARSAL_ID_FIELD,
-                ROLLBACK_PATH_ID_FIELD,
-                TIMEOUT_BUDGET_FIELD,
-                MANUAL_ABORT_MARKER_FIELD,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                false
-        );
+        return EnvelopeFieldBoundaryFields.nodeV236EnvelopeFields().toBoundary();
     }
 
     private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary
             credentialBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary(
-                CREDENTIAL_HANDLE_NAME_FIELD,
-                true,
-                false,
-                false,
-                false,
-                false
-        );
+        return CredentialBoundaryFlags.handleOnly().toBoundary(CREDENTIAL_HANDLE_NAME_FIELD);
     }
 
     private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary
             javaExecutionBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary(
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false
-        );
+        return ExecutionBoundaryFlags.noExecutionEffects().toBoundary();
     }
 
     private static List<String> echoedEnvelopeFieldNames() {
@@ -399,5 +362,143 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
                 "Node v237 must read envelope field names and marker ids only",
                 "Credential values, SQL, ledger writes, and service auto-start must remain absent"
         );
+    }
+
+    private record EnvelopeFieldBoundaryFields(
+            String ownerApprovalArtifactIdField,
+            String credentialHandleNameField,
+            String schemaRehearsalIdField,
+            String rollbackPathIdField,
+            String timeoutBudgetField,
+            String manualAbortMarkerField,
+            boolean ownerApprovalArtifactIdFieldEchoed,
+            boolean credentialHandleNameFieldEchoed,
+            boolean schemaRehearsalIdFieldEchoed,
+            boolean rollbackPathIdFieldEchoed,
+            boolean timeoutBudgetFieldEchoed,
+            boolean manualAbortMarkerFieldEchoed,
+            boolean operatorReviewFieldsComplete,
+            boolean dryRunEnvelopeReadOnly,
+            boolean envelopeCreatesConnectionCommand
+    ) {
+
+        static EnvelopeFieldBoundaryFields nodeV236EnvelopeFields() {
+            return new EnvelopeFieldBoundaryFields(
+                    OWNER_APPROVAL_ARTIFACT_ID_FIELD,
+                    CREDENTIAL_HANDLE_NAME_FIELD,
+                    SCHEMA_REHEARSAL_ID_FIELD,
+                    ROLLBACK_PATH_ID_FIELD,
+                    TIMEOUT_BUDGET_FIELD,
+                    MANUAL_ABORT_MARKER_FIELD,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    false
+            );
+        }
+
+        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary(
+                    ownerApprovalArtifactIdField,
+                    credentialHandleNameField,
+                    schemaRehearsalIdField,
+                    rollbackPathIdField,
+                    timeoutBudgetField,
+                    manualAbortMarkerField,
+                    ownerApprovalArtifactIdFieldEchoed,
+                    credentialHandleNameFieldEchoed,
+                    schemaRehearsalIdFieldEchoed,
+                    rollbackPathIdFieldEchoed,
+                    timeoutBudgetFieldEchoed,
+                    manualAbortMarkerFieldEchoed,
+                    operatorReviewFieldsComplete,
+                    dryRunEnvelopeReadOnly,
+                    envelopeCreatesConnectionCommand
+            );
+        }
+    }
+
+    private record CredentialBoundaryFlags(
+            boolean credentialHandleOnly,
+            boolean credentialValueIncludedInEnvelope,
+            boolean credentialValueReadByJava,
+            boolean credentialValueStoredByJava,
+            boolean productionCredentialAllowed
+    ) {
+
+        static CredentialBoundaryFlags handleOnly() {
+            return new CredentialBoundaryFlags(true, false, false, false, false);
+        }
+
+        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary toBoundary(
+                String credentialHandleNameField
+        ) {
+            return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary(
+                    credentialHandleNameField,
+                    credentialHandleOnly,
+                    credentialValueIncludedInEnvelope,
+                    credentialValueReadByJava,
+                    credentialValueStoredByJava,
+                    productionCredentialAllowed
+            );
+        }
+    }
+
+    private record ExecutionBoundaryFlags(
+            boolean actualConnectionAttemptedByJava,
+            boolean externalManagedAuditConnectionOpenedByJava,
+            boolean schemaMigrationRequestedByJava,
+            boolean schemaMigrationSqlExecutedByJava,
+            boolean approvalLedgerWrittenByJava,
+            boolean managedAuditStoreWrittenByJava,
+            boolean sqlExecutedByJava,
+            boolean deploymentTriggeredByJava,
+            boolean rollbackTriggeredByJava,
+            boolean restoreExecutedByJava,
+            boolean javaStartsManagedAuditService,
+            boolean nodeAutoStartAllowed,
+            boolean miniKvPermissionRequestedByJava
+    ) {
+
+        static ExecutionBoundaryFlags noExecutionEffects() {
+            return new ExecutionBoundaryFlags(
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+            );
+        }
+
+        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary(
+                    actualConnectionAttemptedByJava,
+                    externalManagedAuditConnectionOpenedByJava,
+                    schemaMigrationRequestedByJava,
+                    schemaMigrationSqlExecutedByJava,
+                    approvalLedgerWrittenByJava,
+                    managedAuditStoreWrittenByJava,
+                    sqlExecutedByJava,
+                    deploymentTriggeredByJava,
+                    rollbackTriggeredByJava,
+                    restoreExecutedByJava,
+                    javaStartsManagedAuditService,
+                    nodeAutoStartAllowed,
+                    miniKvPermissionRequestedByJava
+            );
+        }
     }
 }
