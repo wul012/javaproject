@@ -11,7 +11,6 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
         .RehearsalSandboxEndpointCredentialResolverTestOnlyShellSourceEcho;
 
-import java.util.ArrayList;
 import java.util.List;
 
 final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder {
@@ -45,9 +44,8 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnly
             "mini-kv v116 sandbox endpoint credential resolver test-only shell non-participation receipt"
     );
 
-    private static final List<String> WARNING_DIGEST_WARNING_INPUT_NAMES = List.of(
-            "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerWarnings"
-    );
+    private static final String WARNING_DIGEST_WARNING_INPUT_NAME =
+            "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerWarnings";
 
     private static final List<String> WARNING_DIGEST_BOUNDARY_INPUT_NAMES = List.of(
             "sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerDigest",
@@ -198,7 +196,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnly
     }
 
     List<String> warningDigestWarningInputNames() {
-        return WARNING_DIGEST_WARNING_INPUT_NAMES;
+        return ReleaseApprovalEchoMarkerSupport.warningInputNames(WARNING_DIGEST_WARNING_INPUT_NAME);
     }
 
     List<String> warningDigestBoundaryInputNames() {
@@ -216,11 +214,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnly
     List<String> warningDigestWarningLines(
             RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker marker
     ) {
-        return List.of(
-                ReleaseApprovalDigestSupport.line(
-                        "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerWarnings",
-                        marker.markerWarnings()
-                )
+        return ReleaseApprovalEchoMarkerSupport.warningLines(
+                WARNING_DIGEST_WARNING_INPUT_NAME,
+                marker.markerWarnings()
         );
     }
 
@@ -414,17 +410,20 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnly
     }
 
     private static List<String> markerWarnings(EchoReadiness readiness) {
-        List<String> warnings = new ArrayList<>();
-        if (!readiness.sourceNodeV263Echoed()) {
-            warnings.add("NODE_V264_SOURCE_DISABLED_PRECHECK_UPSTREAM_ECHO_NOT_READY");
-        }
-        if (!readiness.requestShapeEchoed() || !readiness.responseShapeEchoed()) {
-            warnings.add("NODE_V264_TEST_ONLY_SHELL_SHAPE_MISMATCH");
-        }
-        if (!readiness.sideEffectBoundaryEchoed()) {
-            warnings.add("NODE_V264_TEST_ONLY_SHELL_SIDE_EFFECT_BOUNDARY_OPEN");
-        }
-        return List.copyOf(warnings);
+        return ReleaseApprovalEchoMarkerSupport.warnings(
+                ReleaseApprovalEchoMarkerSupport.warningIf(
+                        !readiness.sourceNodeV263Echoed(),
+                        "NODE_V264_SOURCE_DISABLED_PRECHECK_UPSTREAM_ECHO_NOT_READY"
+                ),
+                ReleaseApprovalEchoMarkerSupport.warningIf(
+                        !readiness.requestShapeEchoed() || !readiness.responseShapeEchoed(),
+                        "NODE_V264_TEST_ONLY_SHELL_SHAPE_MISMATCH"
+                ),
+                ReleaseApprovalEchoMarkerSupport.warningIf(
+                        !readiness.sideEffectBoundaryEchoed(),
+                        "NODE_V264_TEST_ONLY_SHELL_SIDE_EFFECT_BOUNDARY_OPEN"
+                )
+        );
     }
 
     private record SourceGate(boolean sourceAccepted) {

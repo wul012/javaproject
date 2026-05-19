@@ -7,6 +7,7 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 final class ReleaseApprovalVerificationHintBuilder {
 
@@ -38,6 +39,7 @@ final class ReleaseApprovalVerificationHintBuilder {
             sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
             sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder;
+    private final List<VerificationContribution> verificationContributions;
     private final ReleaseApprovalVerificationWarningDigestBuilder warningDigestBuilder;
 
     ReleaseApprovalVerificationHintBuilder(
@@ -98,6 +100,79 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder;
         this.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder =
                 sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder;
+        this.verificationContributions = List.of(
+                contribution(
+                        sandboxAdapterApprovalSchemaGuardReceiptBuilder::warningDigestWarningInputNames,
+                        sandboxAdapterApprovalSchemaGuardReceiptBuilder::warningDigestBoundaryInputNames,
+                        sandboxAdapterApprovalSchemaGuardReceiptBuilder::proofClaims,
+                        () -> sandboxAdapterApprovalSchemaGuardReceiptBuilder.nodeVerificationActions().stream()
+                                .filter(action -> !("Verify managedAuditSandboxAdapterApprovalSchemaGuardReceipt"
+                                        + ".qualityGateBoundary.builderOrHelperSplitApplied=true").equals(action))
+                                .toList()
+                ),
+                contribution(sandboxConnectionOperatorHandoffMarkerBuilder::warningDigestWarningInputNames,
+                        sandboxConnectionOperatorHandoffMarkerBuilder::warningDigestBoundaryInputNames,
+                        sandboxConnectionOperatorHandoffMarkerBuilder::proofClaims,
+                        sandboxConnectionOperatorHandoffMarkerBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionPreflightEchoMarkerBuilder::warningDigestWarningInputNames,
+                        sandboxConnectionPreflightEchoMarkerBuilder::warningDigestBoundaryInputNames,
+                        sandboxConnectionPreflightEchoMarkerBuilder::proofClaims,
+                        sandboxConnectionPreflightEchoMarkerBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionPreconditionReceiptBuilder::warningDigestWarningInputNames,
+                        sandboxConnectionPreconditionReceiptBuilder::warningDigestBoundaryInputNames,
+                        sandboxConnectionPreconditionReceiptBuilder::proofClaims,
+                        sandboxConnectionPreconditionReceiptBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::warningDigestWarningInputNames,
+                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::warningDigestBoundaryInputNames,
+                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::proofClaims,
+                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::warningDigestWarningInputNames,
+                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::warningDigestBoundaryInputNames,
+                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::proofClaims,
+                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::warningDigestWarningInputNames,
+                        sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::warningDigestBoundaryInputNames,
+                        sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::proofClaims,
+                        sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionPrecheckPacketEchoReceiptBuilder::warningDigestWarningInputNames,
+                        sandboxConnectionPrecheckPacketEchoReceiptBuilder::warningDigestBoundaryInputNames,
+                        sandboxConnectionPrecheckPacketEchoReceiptBuilder::proofClaims,
+                        sandboxConnectionPrecheckPacketEchoReceiptBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder::proofClaims,
+                        sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder::nodeVerificationActions),
+                contribution(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder::proofClaims,
+                        sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder::nodeVerificationActions),
+                contribution(sandboxEndpointHandlePreflightEchoMarkerBuilder::warningDigestWarningInputNames,
+                        sandboxEndpointHandlePreflightEchoMarkerBuilder::warningDigestBoundaryInputNames,
+                        sandboxEndpointHandlePreflightEchoMarkerBuilder::proofClaims,
+                        sandboxEndpointHandlePreflightEchoMarkerBuilder::nodeVerificationActions),
+                contribution(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder::proofClaims,
+                        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder::nodeVerificationActions),
+                contribution(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder::proofClaims,
+                        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder::nodeVerificationActions),
+                contribution(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder::proofClaims,
+                        sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder::nodeVerificationActions)
+        );
         this.warningDigestBuilder = new ReleaseApprovalVerificationWarningDigestBuilder(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                 sandboxConnectionOperatorHandoffMarkerBuilder,
@@ -262,22 +337,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "managedAuditAdapterImplementationGuardReceiptWarnings",
                 "managedAuditExternalAdapterMigrationGuardReceiptWarnings"
         ));
-        inputs.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionPreflightEchoMarkerBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionPreconditionReceiptBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestWarningInputNames());
-        inputs.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                .warningDigestWarningInputNames());
-        inputs.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
-                .warningDigestWarningInputNames());
+        verificationContributions.forEach(contribution ->
+                inputs.addAll(contribution.warningDigestWarningInputValues()));
         inputs.addAll(List.of(
                 "failureCategories",
                 "taxonomyWarnings",
@@ -323,22 +384,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "externalAdapterMigrationNodeV222SourceEndpointRerunPerformed",
                 "externalAdapterMigrationNodeV222AdditionalLocalDryRunWritePerformed"
         ));
-        inputs.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionPreflightEchoMarkerBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionPreconditionReceiptBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                .warningDigestBoundaryInputNames());
-        inputs.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
-                .warningDigestBoundaryInputNames());
+        verificationContributions.forEach(contribution ->
+                inputs.addAll(contribution.warningDigestBoundaryInputValues()));
         inputs.add("nodeMayWriteApprovalLedger");
         return inputs;
     }
@@ -422,20 +469,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "managedAuditExternalAdapterMigrationGuardReceipt.javaManagedAuditStoreWritten=false",
                 "managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false"
         ));
-        claims.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.proofClaims());
-        claims.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.proofClaims());
-        claims.addAll(sandboxConnectionPreflightEchoMarkerBuilder.proofClaims());
-        claims.addAll(sandboxConnectionPreconditionReceiptBuilder.proofClaims());
-        claims.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.proofClaims());
-        claims.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.proofClaims());
-        claims.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.proofClaims());
-        claims.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.proofClaims());
-        claims.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.proofClaims());
-        claims.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.proofClaims());
-        claims.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.proofClaims());
-        claims.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.proofClaims());
-        claims.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.proofClaims());
-        claims.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder.proofClaims());
+        verificationContributions.forEach(contribution -> claims.addAll(contribution.proofClaimValues()));
         claims.addAll(List.of(
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
@@ -727,28 +761,50 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "Keep managedAuditExternalAdapterMigrationGuardReceipt.externalManagedAuditConnectionOpened=false",
                 "Keep managedAuditExternalAdapterMigrationGuardReceipt.javaSqlExecuted=false"
         ));
-        actions.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.nodeVerificationActions().stream()
-                .filter(action -> !("Verify managedAuditSandboxAdapterApprovalSchemaGuardReceipt"
-                        + ".qualityGateBoundary.builderOrHelperSplitApplied=true").equals(action))
-                .toList());
-        actions.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionPreflightEchoMarkerBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionPreconditionReceiptBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.nodeVerificationActions());
-        actions.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.nodeVerificationActions());
-        actions.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.nodeVerificationActions());
-        actions.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.nodeVerificationActions());
-        actions.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.nodeVerificationActions());
-        actions.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder.nodeVerificationActions());
+        verificationContributions.forEach(contribution ->
+                actions.addAll(contribution.nodeVerificationActionValues()));
         actions.addAll(List.of(
                 "Compare warningDigest across closed-window and operator-window reads",
                 "Require noLedgerWriteProved=true before treating the response as read-only evidence",
                 "Keep UPSTREAM_ACTIONS_ENABLED=false"
         ));
         return actions;
+    }
+
+    private static VerificationContribution contribution(
+            Supplier<List<String>> warningDigestWarningInputNames,
+            Supplier<List<String>> warningDigestBoundaryInputNames,
+            Supplier<List<String>> proofClaims,
+            Supplier<List<String>> nodeVerificationActions
+    ) {
+        return new VerificationContribution(
+                warningDigestWarningInputNames,
+                warningDigestBoundaryInputNames,
+                proofClaims,
+                nodeVerificationActions
+        );
+    }
+
+    private record VerificationContribution(
+            Supplier<List<String>> warningDigestWarningInputNames,
+            Supplier<List<String>> warningDigestBoundaryInputNames,
+            Supplier<List<String>> proofClaims,
+            Supplier<List<String>> nodeVerificationActions
+    ) {
+        List<String> warningDigestWarningInputValues() {
+            return warningDigestWarningInputNames.get();
+        }
+
+        List<String> warningDigestBoundaryInputValues() {
+            return warningDigestBoundaryInputNames.get();
+        }
+
+        List<String> proofClaimValues() {
+            return proofClaims.get();
+        }
+
+        List<String> nodeVerificationActionValues() {
+            return nodeVerificationActions.get();
+        }
     }
 }

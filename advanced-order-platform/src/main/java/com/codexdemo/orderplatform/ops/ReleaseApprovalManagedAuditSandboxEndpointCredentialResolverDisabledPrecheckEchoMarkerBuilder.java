@@ -17,7 +17,6 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
         .RehearsalSandboxEndpointCredentialResolverOptInGate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder {
@@ -104,9 +103,8 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
             "mini-kv v115 sandbox endpoint credential resolver disabled precheck non-participation receipt"
     );
 
-    private static final List<String> WARNING_DIGEST_WARNING_INPUT_NAMES = List.of(
-            "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerWarnings"
-    );
+    private static final String WARNING_DIGEST_WARNING_INPUT_NAME =
+            "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerWarnings";
 
     private static final List<String> WARNING_DIGEST_BOUNDARY_INPUT_NAMES = List.of(
             "sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerDigest",
@@ -253,7 +251,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
     }
 
     List<String> warningDigestWarningInputNames() {
-        return WARNING_DIGEST_WARNING_INPUT_NAMES;
+        return ReleaseApprovalEchoMarkerSupport.warningInputNames(WARNING_DIGEST_WARNING_INPUT_NAME);
     }
 
     List<String> warningDigestBoundaryInputNames() {
@@ -271,11 +269,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
     List<String> warningDigestWarningLines(
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker marker
     ) {
-        return List.of(
-                ReleaseApprovalDigestSupport.line(
-                        "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerWarnings",
-                        marker.markerWarnings()
-                )
+        return ReleaseApprovalEchoMarkerSupport.warningLines(
+                WARNING_DIGEST_WARNING_INPUT_NAME,
+                marker.markerWarnings()
         );
     }
 
@@ -595,17 +591,20 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
     }
 
     private static List<String> markerWarnings(EchoReadiness readiness) {
-        List<String> warnings = new ArrayList<>();
-        if (!readiness.sourceNodeV261Echoed()) {
-            warnings.add("NODE_V262_SOURCE_CREDENTIAL_RESOLVER_UPSTREAM_ECHO_NOT_READY");
-        }
-        if (!readiness.envHandlesEchoed() || !readiness.optInGatesEchoed()) {
-            warnings.add("NODE_V262_DISABLED_PRECHECK_HANDLE_OR_GATE_MISMATCH");
-        }
-        if (!readiness.sideEffectBoundaryEchoed()) {
-            warnings.add("NODE_V262_DISABLED_PRECHECK_SIDE_EFFECT_BOUNDARY_OPEN");
-        }
-        return List.copyOf(warnings);
+        return ReleaseApprovalEchoMarkerSupport.warnings(
+                ReleaseApprovalEchoMarkerSupport.warningIf(
+                        !readiness.sourceNodeV261Echoed(),
+                        "NODE_V262_SOURCE_CREDENTIAL_RESOLVER_UPSTREAM_ECHO_NOT_READY"
+                ),
+                ReleaseApprovalEchoMarkerSupport.warningIf(
+                        !readiness.envHandlesEchoed() || !readiness.optInGatesEchoed(),
+                        "NODE_V262_DISABLED_PRECHECK_HANDLE_OR_GATE_MISMATCH"
+                ),
+                ReleaseApprovalEchoMarkerSupport.warningIf(
+                        !readiness.sideEffectBoundaryEchoed(),
+                        "NODE_V262_DISABLED_PRECHECK_SIDE_EFFECT_BOUNDARY_OPEN"
+                )
+        );
     }
 
     private record SourceGate(boolean sourceAccepted) {

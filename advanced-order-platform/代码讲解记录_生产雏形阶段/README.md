@@ -249,6 +249,13 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> 第一百零七版 sandbox endpoint credential resolver test-only shell echo marker：只读回显 Node v264 fake-only request、response、failure mapping、guard、probe 和 no-side-effect 边界；继续阻断真实 resolver 实现、secret provider、credential value、raw endpoint、外部请求、managed-audit connection、SQL、ledger、auto-start 和 mini-kv 托管存储
 ```
 
+## v108 update
+
+```text
+111-version-108-echo-marker-support-optimization.md
+ -> 第一百零八版 echo marker support 优化：把 v104-v107 的 warning 输入、warning 行和条件 warning 收集收口到小型 support；不改 contract、schema 或 managed-audit 边界
+```
+
 ## v106 update
 
 ```text

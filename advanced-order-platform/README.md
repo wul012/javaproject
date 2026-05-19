@@ -2866,6 +2866,7 @@ ops
   -> v105 adds release approval rehearsal sandbox endpoint credential resolver decision echo marker for Node v260/v261 while echoing only handles, policy markers, no-go conditions, and read-only boundaries; Java still blocks resolver execution, credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv managed-audit storage
   -> v106 adds release approval rehearsal sandbox endpoint credential resolver disabled precheck echo marker for Node v262/v263 while echoing env handles, opt-in gates, failure classes, dry-run response shape, inherited no-go conditions, and side-effect boundaries; Java still blocks resolver implementation, secret providers, credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv managed-audit storage
   -> v107 adds release approval rehearsal sandbox endpoint credential resolver test-only shell echo marker for Node v264/v265 while echoing fake-only request/response/failure mapping/guard/probe and no-side-effect boundaries; Java still blocks real resolver implementation, secret providers, credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv managed-audit storage
+  -> v108 adds echo marker support optimization for v104-v107 so warning inputs / warning lines / conditional warning collection share a small helper; no contract, schema, or managed-audit boundary changes
 
 common
  -> 业务异常和统一错误响应

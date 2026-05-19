@@ -1,6 +1,5 @@
 package com.codexdemo.orderplatform.ops;
 
-import java.util.ArrayList;
 import java.util.List;
 
 final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder {
@@ -48,9 +47,8 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
             "mini-kv v113 sandbox endpoint handle non-participation receipt"
     );
 
-    private static final List<String> WARNING_DIGEST_WARNING_INPUT_NAMES = List.of(
-            "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings"
-    );
+    private static final String WARNING_DIGEST_WARNING_INPUT_NAME =
+            "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings";
 
     private static final List<String> WARNING_DIGEST_BOUNDARY_INPUT_NAMES = List.of(
             "sandboxEndpointHandlePreflightEchoMarkerDigest",
@@ -121,10 +119,12 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
         ReleaseApprovalRehearsalResponse.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary
                 sideEffectBoundary = sideEffectBoundary();
 
-        List<String> markerWarnings = new ArrayList<>();
-        if (!sourceAccepted) {
-            markerWarnings.add("NODE_V259_SOURCE_FAKE_TRANSPORT_DRY_RUN_PACKET_ECHO_MARKER_NOT_READY");
-        }
+        List<String> markerWarnings = ReleaseApprovalEchoMarkerSupport.warnings(
+                ReleaseApprovalEchoMarkerSupport.warningIf(
+                        !sourceAccepted,
+                        "NODE_V259_SOURCE_FAKE_TRANSPORT_DRY_RUN_PACKET_ECHO_MARKER_NOT_READY"
+                )
+        );
 
         boolean sourceNodeV257Echoed = sourceAccepted && sourceNodeV257Ready(sourceNodeV257);
         boolean endpointHandleReviewEchoed = endpointHandleReviewEchoed(preflightReview);
@@ -226,13 +226,13 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
                 REQUIRED_REVIEW_ITEMS,
                 FORBIDDEN_OPERATIONS,
                 NEXT_REQUIRED_ECHO_VERSIONS,
-                List.copyOf(markerWarnings),
+                markerWarnings,
                 NODE_VERIFICATION_ACTIONS
         );
     }
 
     List<String> warningDigestWarningInputNames() {
-        return WARNING_DIGEST_WARNING_INPUT_NAMES;
+        return ReleaseApprovalEchoMarkerSupport.warningInputNames(WARNING_DIGEST_WARNING_INPUT_NAME);
     }
 
     List<String> warningDigestBoundaryInputNames() {
@@ -251,11 +251,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
             ReleaseApprovalRehearsalResponse
                     .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
     ) {
-        return List.of(
-                ReleaseApprovalDigestSupport.line(
-                        "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings",
-                        marker.markerWarnings()
-                )
+        return ReleaseApprovalEchoMarkerSupport.warningLines(
+                WARNING_DIGEST_WARNING_INPUT_NAME,
+                marker.markerWarnings()
         );
     }
 
