@@ -85,3 +85,10 @@ c/102/解释/说明.md
 c/103/解释/说明.md
  -> Java v103 fake transport dry-run packet echo marker，只读回显 Node v255/v256 fake transport packet 的 request / response / timeout / cleanup / side-effect 边界，并继续阻断 credential value、raw endpoint、真实连接、SQL、ledger、临时文件、auto-start 和 mini-kv 写权限
 ```
+
+## v104 update
+
+```text
+c/104/解释/说明.md
+ -> Java v104 sandbox endpoint handle preflight echo marker，只读回显 Node v258 endpoint/credential handle review、network/TLS/redaction/operator-window 边界，并继续阻断 credential value、raw endpoint、真实请求、SQL、ledger、auto-start 和 mini-kv 托管存储
+```

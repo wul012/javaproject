@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v25");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v26");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2376,7 +2376,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v25");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v26");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2436,6 +2436,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxConnectionPrecheckPacketEchoReceiptWarnings",
                         "managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptWarnings",
                         "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerWarnings",
+                        "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -2575,6 +2576,21 @@ class OpsEvidenceServiceTests {
                         "sandboxConnectionFakeTransportDryRunPacketJavaStarted",
                         "sandboxConnectionFakeTransportDryRunPacketMiniKvStarted",
                         "sandboxConnectionFakeTransportDryRunPacketExternalAuditServiceStarted",
+                        "sandboxEndpointHandlePreflightEchoMarkerDigest",
+                        "sandboxEndpointHandlePreflightRequiredReviewItemCount",
+                        "sandboxEndpointHandlePreflightCompletedReviewItemCount",
+                        "sandboxEndpointHandlePreflightForbiddenOperationCount",
+                        "sandboxEndpointHandlePreflightEndpointHandleOnly",
+                        "sandboxEndpointHandlePreflightCredentialHandleOnly",
+                        "sandboxEndpointHandlePreflightRawEndpointUrlParsed",
+                        "sandboxEndpointHandlePreflightRawEndpointUrlIncluded",
+                        "sandboxEndpointHandlePreflightCredentialValueRead",
+                        "sandboxEndpointHandlePreflightExternalRequestSent",
+                        "sandboxEndpointHandlePreflightSchemaMigrationExecuted",
+                        "sandboxEndpointHandlePreflightAutomaticUpstreamStart",
+                        "sandboxEndpointHandlePreflightConnectsManagedAudit",
+                        "sandboxEndpointHandlePreflightJavaStarted",
+                        "sandboxEndpointHandlePreflightMiniKvStarted",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -3368,7 +3384,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v25");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v26");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -4041,6 +4057,242 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse repeated =
                 service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(repeated.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker().markerDigest())
+                .isEqualTo(marker.markerDigest());
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesSandboxEndpointHandlePreflightEchoMarker() {
+        when(failedEventSummaryService.summary()).thenReturn(new FailedEventSummaryResponse(
+                Instant.parse("2026-05-12T01:10:00Z"),
+                4,
+                2,
+                1,
+                1,
+                Instant.parse("2026-05-12T01:00:00Z"),
+                Instant.parse("2026-05-12T01:05:00Z"),
+                3
+        ));
+        when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
+        OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
+        outboxPublisherProperties.setEnabled(false);
+        OutboxRabbitMqProperties outboxRabbitMqProperties = new OutboxRabbitMqProperties();
+        outboxRabbitMqProperties.setEnabled(false);
+        outboxRabbitMqProperties.setExchange("order-platform.outbox");
+        outboxRabbitMqProperties.setQueue("order-platform.outbox.events");
+        outboxRabbitMqProperties.setDeadLetterQueue("order-platform.outbox.events.dlq");
+        MockEnvironment environment = new MockEnvironment()
+                .withProperty("spring.application.name", "advanced-order-platform")
+                .withProperty("info.app.version", "0.1.0-test");
+        environment.setActiveProfiles("local", "ops");
+        OpsEvidenceService service = new OpsEvidenceService(
+                failedEventSummaryService,
+                outboxRepository,
+                outboxPublisherProperties,
+                outboxRabbitMqProperties,
+                idempotencyStore,
+                environment
+        );
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+
+        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+                marker = rehearsal.managedAuditSandboxEndpointHandlePreflightEchoMarker();
+        assertThat(marker.markerVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-handle-preflight-echo-marker.v1"
+                );
+        assertThat(marker.sourceFakeTransportDryRunPacketEchoMarkerSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v25");
+        assertThat(marker.consumedByNodeSandboxEndpointHandlePreflightReviewVersion()).isEqualTo("Node v258");
+        assertThat(marker.consumedByNodeSandboxEndpointHandlePreflightReviewProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-handle-preflight-review.v1"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointHandlePreflightReviewEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-handle-preflight-review"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointHandlePreflightReviewMarkdownEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-handle-preflight-review?format=markdown"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointHandlePreflightReviewState())
+                .isEqualTo("sandbox-endpoint-handle-preflight-review-ready");
+        assertThat(marker.sourceNodeFakeTransportPacketUpstreamEchoVerificationVersion()).isEqualTo("Node v257");
+        assertThat(marker.sourceNodeFakeTransportPacketUpstreamEchoVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-fake-transport-packet-upstream-echo-verification.v1"
+                );
+        assertThat(marker.sourceNodeFakeTransportPacketUpstreamEchoVerificationEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-fake-transport-packet-upstream-echo-verification"
+                );
+        assertThat(marker.sourceNodeFakeTransportPacketUpstreamEchoVerificationState())
+                .isEqualTo("fake-transport-packet-upstream-echo-verification-ready");
+        assertThat(marker.nextNodeSandboxEndpointHandleUpstreamEchoVerificationVersion()).isEqualTo("Node v259");
+        assertThat(marker.nextNodeSandboxEndpointHandleUpstreamEchoVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-handle-upstream-echo-verification.v1"
+                );
+        assertThat(marker.nodeV259MayConsume()).isTrue();
+        assertThat(marker.reviewMode()).isEqualTo("sandbox-endpoint-handle-preflight-review-only");
+        assertThat(marker.sourceSpan()).isEqualTo("Node v257");
+        assertThat(marker.sourceNodeV257().readyForUpstreamEchoVerification()).isTrue();
+        assertThat(marker.sourceNodeV257().requestShapeAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().responseShapeAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().timeoutBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().failureMappingAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().cleanupBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().archiveNoRerunAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().credentialBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().connectionBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().writeBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().autoStartBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV257().upstreamActionsStillDisabled()).isTrue();
+        assertThat(marker.sourceNodeV257().readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(marker.sourceNodeV257().connectsManagedAudit()).isFalse();
+        assertThat(marker.sourceNodeV257().readsManagedAuditCredential()).isFalse();
+        assertThat(marker.sourceNodeV257().storesManagedAuditCredential()).isFalse();
+        assertThat(marker.sourceNodeV257().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.sourceNodeV257().automaticUpstreamStart()).isFalse();
+        assertThat(marker.sourceNodeV257().evidenceFileCount()).isEqualTo(6);
+        assertThat(marker.sourceNodeV257().matchedSnippetCount()).isEqualTo(33);
+        assertThat(marker.sourceNodeV257().readyForNodeV258PreflightReview()).isTrue();
+        assertThat(marker.preflightReview().endpointHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_ENDPOINT_HANDLE");
+        assertThat(marker.preflightReview().credentialHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE");
+        assertThat(marker.preflightReview().ownerApprovalArtifactId())
+                .isEqualTo("owner-approval-artifact-review-only");
+        assertThat(marker.preflightReview().schemaRehearsalId())
+                .isEqualTo("schema-migration-rehearsal-review-only");
+        assertThat(marker.preflightReview().operatorWindowMarker())
+                .isEqualTo("manual-sandbox-endpoint-window-review-only");
+        assertThat(marker.preflightReview().requiredReviewItemCount()).isEqualTo(7);
+        assertThat(marker.preflightReview().completedReviewItemCount()).isEqualTo(7);
+        assertThat(marker.preflightReview().forbiddenOperationCount()).isEqualTo(7);
+        assertThat(marker.preflightReview().readOnlyPreflightReview()).isTrue();
+        assertThat(marker.preflightReview().endpointHandleOnly()).isTrue();
+        assertThat(marker.preflightReview().credentialHandleOnly()).isTrue();
+        assertThat(marker.networkAllowlistReview().allowlistHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_NETWORK_ALLOWLIST_HANDLE");
+        assertThat(marker.networkAllowlistReview().rawHostIncluded()).isFalse();
+        assertThat(marker.networkAllowlistReview().cidrIncluded()).isFalse();
+        assertThat(marker.networkAllowlistReview().reviewed()).isTrue();
+        assertThat(marker.tlsPolicyReview().policyHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_TLS_POLICY_HANDLE");
+        assertThat(marker.tlsPolicyReview().certificateMaterialIncluded()).isFalse();
+        assertThat(marker.tlsPolicyReview().privateKeyIncluded()).isFalse();
+        assertThat(marker.tlsPolicyReview().reviewed()).isTrue();
+        assertThat(marker.redactionPolicy().policyHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_REDACTION_POLICY_HANDLE");
+        assertThat(marker.redactionPolicy().credentialValueRedacted()).isTrue();
+        assertThat(marker.redactionPolicy().rawEndpointUrlRedacted()).isTrue();
+        assertThat(marker.redactionPolicy().payloadSecretRedacted()).isTrue();
+        assertThat(marker.redactionPolicy().reviewed()).isTrue();
+        assertThat(marker.operatorWindow().manualWindowRequired()).isTrue();
+        assertThat(marker.operatorWindow().windowOpen()).isFalse();
+        assertThat(marker.operatorWindow().executionBlockedUntilWindowOpen()).isTrue();
+        assertThat(marker.operatorWindow().operatorIdentityRequired()).isTrue();
+        assertThat(marker.operatorWindow().approvalCorrelationRequired()).isTrue();
+        assertThat(marker.operatorWindow().reviewed()).isTrue();
+        assertThat(marker.sideEffectBoundary().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.sideEffectBoundary().rawEndpointUrlIncluded()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueRead()).isFalse();
+        assertThat(marker.sideEffectBoundary().externalRequestSent()).isFalse();
+        assertThat(marker.sideEffectBoundary().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.sideEffectBoundary().automaticUpstreamStart()).isFalse();
+        assertThat(marker.sideEffectBoundary().connectsManagedAudit()).isFalse();
+        assertThat(marker.sideEffectBoundary().readsManagedAuditCredential()).isFalse();
+        assertThat(marker.sideEffectBoundary().storesManagedAuditCredential()).isFalse();
+        assertThat(marker.sideEffectBoundary().executionAllowed()).isFalse();
+        assertThat(marker.sideEffectBoundary().approvalLedgerWritten()).isFalse();
+        assertThat(marker.sideEffectBoundary().javaStarted()).isFalse();
+        assertThat(marker.sideEffectBoundary().miniKvStarted()).isFalse();
+        assertThat(marker.sideEffectBoundary().externalAuditServiceStarted()).isFalse();
+        assertThat(marker.sideEffectBoundary().productionAuditAllowed()).isFalse();
+        assertThat(marker.sideEffectBoundary().productionWindowAllowed()).isFalse();
+        assertThat(marker.sourceNodeV257Echoed()).isTrue();
+        assertThat(marker.endpointHandleReviewEchoed()).isTrue();
+        assertThat(marker.credentialHandleReviewEchoed()).isTrue();
+        assertThat(marker.ownerApprovalArtifactReviewEchoed()).isTrue();
+        assertThat(marker.networkAllowlistReviewEchoed()).isTrue();
+        assertThat(marker.tlsPolicyReviewEchoed()).isTrue();
+        assertThat(marker.redactionPolicyEchoed()).isTrue();
+        assertThat(marker.operatorWindowReviewEchoed()).isTrue();
+        assertThat(marker.sideEffectBoundaryEchoed()).isTrue();
+        assertThat(marker.readyForNodeV259SandboxEndpointHandleUpstreamEchoVerification()).isTrue();
+        assertThat(marker.readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(marker.readyForProductionAudit()).isFalse();
+        assertThat(marker.readyForProductionWindow()).isFalse();
+        assertThat(marker.nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(marker.requiredReviewItems())
+                .containsExactly(
+                        "endpoint handle review",
+                        "credential handle review",
+                        "owner approval artifact review",
+                        "network allowlist review",
+                        "TLS policy review",
+                        "redaction policy review",
+                        "operator window review"
+                );
+        assertThat(marker.forbiddenOperations())
+                .contains(
+                        "read credential value",
+                        "parse raw endpoint URL",
+                        "send real managed audit request",
+                        "write approval ledger",
+                        "start Java or mini-kv"
+                );
+        assertThat(marker.nextRequiredEchoVersions())
+                .contains(
+                        "Java v104 sandbox endpoint handle preflight echo marker",
+                        "mini-kv v113 sandbox endpoint handle non-participation receipt"
+                );
+        assertThat(marker.markerWarnings()).isEmpty();
+        assertThat(marker.markerDigest()).startsWith("sha256:");
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxEndpointHandlePreflightEchoMarker");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings",
+                        "sandboxEndpointHandlePreflightEchoMarkerDigest",
+                        "sandboxEndpointHandlePreflightRawEndpointUrlParsed"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxEndpointHandlePreflightEchoMarker.preflightReview.requiredReviewItemCount=7",
+                        "managedAuditSandboxEndpointHandlePreflightEchoMarker.sideEffectBoundary.rawEndpointUrlParsed=false",
+                        "managedAuditSandboxEndpointHandlePreflightEchoMarker.readyForManagedAuditSandboxAdapterConnection=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxEndpointHandlePreflightEchoMarker.consumedByNodeSandboxEndpointHandlePreflightReviewProfile with Node v258",
+                        "Require managedAuditSandboxEndpointHandlePreflightEchoMarker.readyForNodeV259SandboxEndpointHandleUpstreamEchoVerification=true before Node v259",
+                        "Keep managedAuditSandboxEndpointHandlePreflightEchoMarker.sideEffectBoundary.externalRequestSent=false"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxEndpointHandlePreflightEchoMarker().markerDigest())
                 .isEqualTo(marker.markerDigest());
     }
 

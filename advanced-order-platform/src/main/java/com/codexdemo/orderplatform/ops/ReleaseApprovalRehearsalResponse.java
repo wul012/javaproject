@@ -46,6 +46,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
         RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
+        RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+                managedAuditSandboxEndpointHandlePreflightEchoMarker,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -1496,6 +1498,160 @@ public record ReleaseApprovalRehearsalResponse(
             boolean javaStarted,
             boolean miniKvStarted,
             boolean externalAuditServiceStarted
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker(
+            String markerVersion,
+            String sourceFakeTransportDryRunPacketEchoMarkerVersion,
+            String sourceFakeTransportDryRunPacketEchoMarkerSchemaVersion,
+            String consumedByNodeSandboxEndpointHandlePreflightReviewVersion,
+            String consumedByNodeSandboxEndpointHandlePreflightReviewProfile,
+            String consumedByNodeSandboxEndpointHandlePreflightReviewEndpoint,
+            String consumedByNodeSandboxEndpointHandlePreflightReviewMarkdownEndpoint,
+            String consumedByNodeSandboxEndpointHandlePreflightReviewState,
+            String sourceNodeFakeTransportPacketUpstreamEchoVerificationVersion,
+            String sourceNodeFakeTransportPacketUpstreamEchoVerificationProfile,
+            String sourceNodeFakeTransportPacketUpstreamEchoVerificationEndpoint,
+            String sourceNodeFakeTransportPacketUpstreamEchoVerificationState,
+            String nextNodeSandboxEndpointHandleUpstreamEchoVerificationVersion,
+            String nextNodeSandboxEndpointHandleUpstreamEchoVerificationProfile,
+            boolean nodeV259MayConsume,
+            String reviewMode,
+            String sourceSpan,
+            RehearsalSandboxEndpointHandlePreflightSourceEcho sourceNodeV257,
+            RehearsalSandboxEndpointHandlePreflightReviewShape preflightReview,
+            RehearsalSandboxEndpointHandleNetworkAllowlistReview networkAllowlistReview,
+            RehearsalSandboxEndpointHandleTlsPolicyReview tlsPolicyReview,
+            RehearsalSandboxEndpointHandleRedactionPolicyReview redactionPolicy,
+            RehearsalSandboxEndpointHandleOperatorWindowReview operatorWindow,
+            RehearsalSandboxEndpointHandlePreflightSideEffectBoundary sideEffectBoundary,
+            boolean sourceNodeV257Echoed,
+            boolean endpointHandleReviewEchoed,
+            boolean credentialHandleReviewEchoed,
+            boolean ownerApprovalArtifactReviewEchoed,
+            boolean networkAllowlistReviewEchoed,
+            boolean tlsPolicyReviewEchoed,
+            boolean redactionPolicyEchoed,
+            boolean operatorWindowReviewEchoed,
+            boolean sideEffectBoundaryEchoed,
+            boolean readyForNodeV259SandboxEndpointHandleUpstreamEchoVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String markerDigest,
+            List<String> requiredReviewItems,
+            List<String> forbiddenOperations,
+            List<String> nextRequiredEchoVersions,
+            List<String> markerWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointHandlePreflightSourceEcho(
+            String sourceVersion,
+            String profileVersion,
+            String verificationState,
+            boolean readyForUpstreamEchoVerification,
+            boolean requestShapeAligned,
+            boolean responseShapeAligned,
+            boolean timeoutBoundaryAligned,
+            boolean failureMappingAligned,
+            boolean cleanupBoundaryAligned,
+            boolean archiveNoRerunAligned,
+            boolean credentialBoundaryAligned,
+            boolean connectionBoundaryAligned,
+            boolean writeBoundaryAligned,
+            boolean autoStartBoundaryAligned,
+            boolean upstreamActionsStillDisabled,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean connectsManagedAudit,
+            boolean readsManagedAuditCredential,
+            boolean storesManagedAuditCredential,
+            boolean schemaMigrationExecuted,
+            boolean automaticUpstreamStart,
+            int evidenceFileCount,
+            int matchedSnippetCount,
+            boolean readyForNodeV258PreflightReview
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointHandlePreflightReviewShape(
+            String reviewMode,
+            String sourceSpan,
+            String endpointHandle,
+            String credentialHandle,
+            String ownerApprovalArtifactId,
+            String schemaRehearsalId,
+            String operatorWindowMarker,
+            boolean endpointHandleReviewed,
+            boolean credentialHandleReviewed,
+            boolean ownerApprovalArtifactReviewed,
+            int requiredReviewItemCount,
+            int completedReviewItemCount,
+            int forbiddenOperationCount,
+            boolean readOnlyPreflightReview,
+            boolean endpointHandleOnly,
+            boolean credentialHandleOnly
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointHandleNetworkAllowlistReview(
+            boolean reviewRequired,
+            String allowlistHandle,
+            boolean rawHostIncluded,
+            boolean cidrIncluded,
+            boolean reviewed
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointHandleTlsPolicyReview(
+            boolean reviewRequired,
+            String policyHandle,
+            boolean certificateMaterialIncluded,
+            boolean privateKeyIncluded,
+            boolean reviewed
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointHandleRedactionPolicyReview(
+            boolean reviewRequired,
+            String policyHandle,
+            boolean credentialValueRedacted,
+            boolean rawEndpointUrlRedacted,
+            boolean payloadSecretRedacted,
+            boolean reviewed
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointHandleOperatorWindowReview(
+            boolean manualWindowRequired,
+            boolean windowOpen,
+            boolean executionBlockedUntilWindowOpen,
+            boolean operatorIdentityRequired,
+            boolean approvalCorrelationRequired,
+            boolean reviewed
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointHandlePreflightSideEffectBoundary(
+            boolean rawEndpointUrlParsed,
+            boolean rawEndpointUrlIncluded,
+            boolean credentialValueRead,
+            boolean externalRequestSent,
+            boolean schemaMigrationExecuted,
+            boolean automaticUpstreamStart,
+            boolean connectsManagedAudit,
+            boolean readsManagedAuditCredential,
+            boolean storesManagedAuditCredential,
+            boolean executionAllowed,
+            boolean approvalLedgerWritten,
+            boolean javaStarted,
+            boolean miniKvStarted,
+            boolean externalAuditServiceStarted,
+            boolean productionAuditAllowed,
+            boolean productionWindowAllowed
     ) {
     }
 

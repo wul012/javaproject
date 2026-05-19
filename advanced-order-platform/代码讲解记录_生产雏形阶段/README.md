@@ -241,3 +241,10 @@ PostgreSQL / RabbitMQ 的定期完整验证
 106-version-103-fake-transport-dry-run-packet-echo-marker.md
  -> 第一百零三版 fake transport dry-run packet echo marker，只读回显 Node v255/v256 fake transport packet 的 request、response、timeout、cleanup 和 side-effect 边界，供 Node v257 校验，并继续阻断 credential value、真实连接、SQL、ledger、临时文件和 auto-start
 ```
+
+## v104 update
+
+```text
+107-version-104-sandbox-endpoint-handle-preflight-echo-marker.md
+ -> 第一百零四版 sandbox endpoint handle preflight echo marker，只读回显 Node v258 endpoint/credential handle、network/TLS/redaction/operator-window review，供 Node v259 校验，并继续阻断 credential value、raw endpoint、真实连接、SQL、ledger 和 auto-start
+```

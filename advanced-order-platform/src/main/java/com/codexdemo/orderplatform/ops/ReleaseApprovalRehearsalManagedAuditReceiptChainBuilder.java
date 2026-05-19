@@ -104,6 +104,14 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker =
                         sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
                                 .build(managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt);
+        ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
+                sandboxEndpointHandlePreflightEchoMarkerBuilder =
+                        new ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder();
+        ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+                managedAuditSandboxEndpointHandlePreflightEchoMarker =
+                        sandboxEndpointHandlePreflightEchoMarkerBuilder
+                                .build(managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -131,7 +139,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
                 sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
-                sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
+                managedAuditSandboxEndpointHandlePreflightEchoMarker,
+                sandboxEndpointHandlePreflightEchoMarkerBuilder
         );
     }
 
@@ -192,7 +202,12 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                     .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                     managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
             ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
-                    sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                    sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+                    managedAuditSandboxEndpointHandlePreflightEchoMarker,
+            ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
+                    sandboxEndpointHandlePreflightEchoMarkerBuilder
     ) {
     }
 }
