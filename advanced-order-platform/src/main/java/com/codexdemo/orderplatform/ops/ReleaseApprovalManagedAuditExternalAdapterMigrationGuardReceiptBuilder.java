@@ -31,9 +31,9 @@ final class ReleaseApprovalManagedAuditExternalAdapterMigrationGuardReceiptBuild
     private static final String NODE_V223_PROFILE =
             "managed-audit-external-adapter-connection-readiness-review.v1";
 
-    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
+    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
             build(
-                    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
+                    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterImplementationGuardReceipt
                             implementationGuardReceipt
     ) {
         boolean sourceReceiptAccepted =
@@ -127,7 +127,7 @@ final class ReleaseApprovalManagedAuditExternalAdapterMigrationGuardReceiptBuild
                         readyForNodeV223ExternalAdapterConnectionReadinessReview)
         ));
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt(
                 RECEIPT_VERSION,
                 implementationGuardReceipt.receiptVersion(),
                 SOURCE_SCHEMA_VERSION,

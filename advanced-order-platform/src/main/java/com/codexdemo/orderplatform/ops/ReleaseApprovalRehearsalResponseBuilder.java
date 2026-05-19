@@ -25,14 +25,14 @@ final class ReleaseApprovalRehearsalResponseBuilder {
         ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder.ReceiptChain managedAuditReceiptChain =
                 new ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder()
                         .build(sections.approvalRecordHandoffHint());
-        ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy =
                 failureTaxonomyBuilder.build(
                         evidence,
                         normalizedRequest.requestId(),
                         normalizedRequest.operatorIdentity(),
                         normalizedRequest.auditCorrelationId()
                 );
-        ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries = executionBoundaries();
+        ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries = executionBoundaries();
         return new ReleaseApprovalRehearsalResponse(
                 evidence.sampledAt(),
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_VERSION,
@@ -89,20 +89,20 @@ final class ReleaseApprovalRehearsalResponseBuilder {
             ReleaseApprovalRehearsalHintBuilder rehearsalHintBuilder,
             ReleaseApprovalRehearsalHandoffHintBuilder handoffHintBuilder
     ) {
-        ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalRequestContext requestContext =
                 rehearsalHintBuilder.rehearsalRequestContext(
                         normalizedRequest.requestId(),
                         normalizedRequest.operatorIdentity(),
                         normalizedRequest.auditCorrelationId()
                 );
-        ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalOperatorWindowHint operatorWindowHint =
                 rehearsalHintBuilder.rehearsalOperatorWindowHint(
                         normalizedRequest.operatorWindowOperatorId(),
                         normalizedRequest.operatorWindowRoles(),
                         normalizedRequest.operatorWindowVerifiedClaim(),
                         normalizedRequest.operatorWindowApprovalCorrelationId()
                 );
-        ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalCiEvidenceHint ciEvidenceHint =
                 rehearsalHintBuilder.rehearsalCiEvidenceHint(
                         normalizedRequest.ciManifestVersion(),
                         normalizedRequest.ciManifestDigest(),
@@ -110,7 +110,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         normalizedRequest.ciArtifactRecordCount(),
                         normalizedRequest.ciApprovalCorrelationId()
                 );
-        ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalArtifactRetentionHint artifactRetentionHint =
                 rehearsalHintBuilder.rehearsalArtifactRetentionHint(
                         evidence.releaseAuditRetentionFixture(),
                         normalizedRequest.ciUploadContractVersion(),
@@ -120,7 +120,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         normalizedRequest.ciRetentionDays(),
                         normalizedRequest.ciUploadMode()
                 );
-        ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalLiveReadinessHint liveReadinessHint =
                 rehearsalHintBuilder.rehearsalLiveReadinessHint(
                         evidence,
                         normalizedRequest.runtimePreflightVersion(),
@@ -129,7 +129,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         normalizedRequest.runtimeReadTargetId(),
                         normalizedRequest.runtimeWindowMode()
                 );
-        ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint =
                 handoffHintBuilder.rehearsalAuditPersistenceHandoffHint(
                         evidence.releaseAuditRetentionFixture(),
                         normalizedRequest.managedAuditCandidateVersion(),
@@ -138,7 +138,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         normalizedRequest.managedAuditRetentionDays(),
                         normalizedRequest.managedAuditRotationPolicy()
                 );
-        ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint =
                 handoffHintBuilder.rehearsalApprovalRecordHandoffHint(
                         evidence.rollbackApprovalRecordFixture(),
                         normalizedRequest.approvalBindingContractVersion(),
@@ -158,11 +158,11 @@ final class ReleaseApprovalRehearsalResponseBuilder {
         );
     }
 
-    private ReleaseApprovalRehearsalResponse.RehearsalVerificationHint releaseApprovalVerificationHint(
+    private ReleaseApprovalRehearsalResponseRecords.RehearsalVerificationHint releaseApprovalVerificationHint(
             RehearsalSections sections,
             ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder.ReceiptChain managedAuditReceiptChain,
-            ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
-            ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
+            ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
+            ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
         return new ReleaseApprovalVerificationHintBuilder(
                 managedAuditReceiptChain.sandboxAdapterApprovalSchemaGuardReceiptBuilder(),
@@ -219,10 +219,10 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 );
     }
 
-    private ReleaseApprovalRehearsalResponse.ReleaseApprovalInputs releaseApprovalInputs(
+    private ReleaseApprovalRehearsalResponseRecords.ReleaseApprovalInputs releaseApprovalInputs(
             OpsEvidenceResponse evidence
     ) {
-        return new ReleaseApprovalRehearsalResponse.ReleaseApprovalInputs(
+        return new ReleaseApprovalRehearsalResponseRecords.ReleaseApprovalInputs(
                 evidence.releaseOperatorSignoffFixture().fixtureEndpoint(),
                 evidence.rollbackApproverEvidenceFixture().fixtureEndpoint(),
                 evidence.rollbackApprovalRecordFixture().fixtureEndpoint(),
@@ -246,8 +246,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
         );
     }
 
-    private ReleaseApprovalRehearsalResponse.LiveSignals liveSignals(OpsEvidenceResponse evidence) {
-        return new ReleaseApprovalRehearsalResponse.LiveSignals(
+    private ReleaseApprovalRehearsalResponseRecords.LiveSignals liveSignals(OpsEvidenceResponse evidence) {
+        return new ReleaseApprovalRehearsalResponseRecords.LiveSignals(
                 evidence.failedEventReplay().pendingReplayApprovals(),
                 evidence.failedEventReplay().approvedReplayApprovals(),
                 evidence.failedEventReplay().rejectedReplayApprovals(),
@@ -259,7 +259,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
         );
     }
 
-    private ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries() {
+    private ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries() {
         return ExecutionBoundaryFlags.readOnlyRehearsal().toExecutionBoundaries();
     }
 
@@ -294,13 +294,13 @@ final class ReleaseApprovalRehearsalResponseBuilder {
     }
 
     private record RehearsalSections(
-            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
-            ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
-            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
-            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
-            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
-            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint
+            ReleaseApprovalRehearsalResponseRecords.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalOperatorWindowHint operatorWindowHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalCiEvidenceHint ciEvidenceHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalArtifactRetentionHint artifactRetentionHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalLiveReadinessHint liveReadinessHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint
     ) {
     }
 
@@ -421,8 +421,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
             );
         }
 
-        ReleaseApprovalRehearsalResponse.ExecutionBoundaries toExecutionBoundaries() {
-            return new ReleaseApprovalRehearsalResponse.ExecutionBoundaries(
+        ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries toExecutionBoundaries() {
+            return new ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries(
                     nodeMayConsume,
                     nodeMayCreateApprovalDecision,
                     nodeMayWriteApprovalLedger,

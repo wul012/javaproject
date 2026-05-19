@@ -5,7 +5,7 @@ import java.util.List;
 
 final class ReleaseApprovalRehearsalFailureTaxonomyBuilder {
 
-    ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy build(
+    ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy build(
             OpsEvidenceResponse evidence,
             String normalizedRequestId,
             String normalizedOperatorIdentity,
@@ -36,7 +36,7 @@ final class ReleaseApprovalRehearsalFailureTaxonomyBuilder {
         failureCategories.add("READ_ONLY_EXECUTION_BLOCKED");
         taxonomyWarnings.add("REHEARSAL_REMAINS_READ_ONLY");
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION,
                 readinessStatus(upstreamReady),
                 readinessStatus(authContextComplete),

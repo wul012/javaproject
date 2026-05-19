@@ -5,7 +5,7 @@ import java.util.List;
 
 final class ReleaseApprovalRehearsalHintBuilder {
 
-    ReleaseApprovalRehearsalResponse.RehearsalRequestContext rehearsalRequestContext(
+    ReleaseApprovalRehearsalResponseRecords.RehearsalRequestContext rehearsalRequestContext(
             String normalizedRequestId,
             String normalizedOperatorIdentity,
             String normalizedAuditCorrelationId
@@ -34,7 +34,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
         );
         RequestContextFlags requestContextFlags = RequestContextFlags.readOnlyRehearsal();
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalRequestContext(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalRequestContext(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_CONTEXT_VERSION,
                 requestId.value(),
                 requestId.source(),
@@ -55,7 +55,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
         );
     }
 
-    ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint rehearsalOperatorWindowHint(
+    ReleaseApprovalRehearsalResponseRecords.RehearsalOperatorWindowHint rehearsalOperatorWindowHint(
             String normalizedOperatorWindowOperatorId,
             String normalizedOperatorWindowRoles,
             String normalizedOperatorWindowVerifiedClaim,
@@ -97,7 +97,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 approvalCorrelationId.echoed()
         );
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalOperatorWindowHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_OPERATOR_WINDOW_HINT_VERSION,
                 operatorId.value(),
                 operatorId.source(),
@@ -132,7 +132,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
         );
     }
 
-    ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint rehearsalCiEvidenceHint(
+    ReleaseApprovalRehearsalResponseRecords.RehearsalCiEvidenceHint rehearsalCiEvidenceHint(
             String normalizedCiManifestVersion,
             String normalizedCiManifestDigest,
             String normalizedCiManifestEndpoint,
@@ -183,7 +183,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 approvalCorrelationId.echoed()
         );
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalCiEvidenceHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_CI_EVIDENCE_HINT_VERSION,
                 manifestVersion.value(),
                 manifestVersion.source(),
@@ -225,7 +225,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
         );
     }
 
-    ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint rehearsalArtifactRetentionHint(
+    ReleaseApprovalRehearsalResponseRecords.RehearsalArtifactRetentionHint rehearsalArtifactRetentionHint(
             OpsEvidenceResponse.ReleaseAuditRetentionFixture retentionFixture,
             String normalizedCiUploadContractVersion,
             String normalizedCiUploadContractDigest,
@@ -296,7 +296,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
                 retentionFixture.auditExportReadOnly()
         );
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalArtifactRetentionHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_ARTIFACT_RETENTION_HINT_VERSION,
                 retentionFixture.fixtureVersion(),
                 retentionFixture.fixtureEndpoint(),
@@ -349,7 +349,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
         );
     }
 
-    ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint rehearsalLiveReadinessHint(
+    ReleaseApprovalRehearsalResponseRecords.RehearsalLiveReadinessHint rehearsalLiveReadinessHint(
             OpsEvidenceResponse evidence,
             String normalizedRuntimePreflightVersion,
             String normalizedRuntimePreflightDigest,
@@ -416,7 +416,7 @@ final class ReleaseApprovalRehearsalHintBuilder {
                         .contains("GET " + OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_ENDPOINT)
         );
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalLiveReadinessHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_LIVE_READINESS_HINT_VERSION,
                 evidence.sampledAt(),
                 "sampledAt",

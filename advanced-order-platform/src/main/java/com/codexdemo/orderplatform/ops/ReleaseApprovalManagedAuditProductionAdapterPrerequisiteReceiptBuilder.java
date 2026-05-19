@@ -25,8 +25,8 @@ final class ReleaseApprovalManagedAuditProductionAdapterPrerequisiteReceiptBuild
     private static final String NODE_V217_PROFILE =
             "managed-audit-adapter-production-hardening-readiness-gate.v1";
 
-    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt build(
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt build(
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterBoundaryReceipt
                     managedAuditAdapterBoundaryReceipt
     ) {
         boolean sourceReceiptAccepted =
@@ -55,8 +55,7 @@ final class ReleaseApprovalManagedAuditProductionAdapterPrerequisiteReceiptBuild
         boolean readyForNodeV217ProductionHardeningReadinessGate =
                 sourceReceiptAccepted && prerequisitesDocumented;
 
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalManagedAuditProductionAdapterPrerequisiteReceipt(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt(
                         RECEIPT_VERSION,
                         managedAuditAdapterBoundaryReceipt.receiptVersion(),
                         SOURCE_SCHEMA_VERSION,

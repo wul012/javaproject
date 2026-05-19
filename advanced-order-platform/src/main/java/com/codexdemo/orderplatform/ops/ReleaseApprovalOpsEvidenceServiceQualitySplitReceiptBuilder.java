@@ -21,8 +21,8 @@ final class ReleaseApprovalOpsEvidenceServiceQualitySplitReceiptBuilder {
     private static final String NODE_V219_PROFILE =
             "managed-audit-adapter-implementation-precheck-packet.v1";
 
-    ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt build(
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+    ReleaseApprovalRehearsalResponseRecords.RehearsalOpsEvidenceServiceQualitySplitReceipt build(
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
                     managedAuditProductionAdapterPrerequisiteReceipt
     ) {
         boolean sourceReceiptAccepted =
@@ -56,7 +56,7 @@ final class ReleaseApprovalOpsEvidenceServiceQualitySplitReceiptBuilder {
         boolean readyForNodeV219ImplementationPrecheck =
                 sourceReceiptAccepted && responsibilitiesDocumented;
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalOpsEvidenceServiceQualitySplitReceipt(
                 RECEIPT_VERSION,
                 managedAuditProductionAdapterPrerequisiteReceipt.receiptVersion(),
                 SOURCE_SCHEMA_VERSION,

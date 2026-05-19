@@ -98,20 +98,19 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
             "Keep managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false"
     );
 
-    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
     build(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
                     precheckPacketEchoReceipt
     ) {
         boolean sourceReceiptAccepted = sourceReceiptAccepted(precheckPacketEchoReceipt);
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape
                 precheckShape = precheckShape();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientBoundary
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientBoundary
                 clientBoundary = clientBoundary();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientOptInGate
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientOptInGate
                 optInGate = optInGate();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary
                 javaExecutionBoundary = javaExecutionBoundary();
 
         List<String> receiptWarnings = new ArrayList<>();
@@ -201,8 +200,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_DISABLED_ADAPTER_CLIENT_PRECHECK_ECHO_RECEIPT_VERSION,
                 precheckPacketEchoReceipt.receiptVersion(),
@@ -260,8 +258,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -272,8 +269,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -328,8 +324,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
     ) {
         return noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(receipt.javaExecutionBoundary())
                 && !receipt.clientBoundary().clientMayBeInstantiated()
@@ -342,8 +337,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     private static boolean sourceReceiptAccepted(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt receipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt receipt
     ) {
         return receipt.readyForNodeV246ManualSandboxConnectionPrecheckUpstreamReceiptVerification()
                 && receipt.receiptWarnings().isEmpty()
@@ -353,10 +347,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
                 && !receipt.readyForManagedAuditSandboxAdapterConnection();
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape
     precheckShape() {
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape(
                 ADAPTER_MODE,
                 SOURCE_SPAN,
                 PRECHECK_STATE,
@@ -371,9 +364,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientBoundary
     clientBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientBoundary(
                 CLIENT_IMPLEMENTATION_STATUS,
                 false,
                 false,
@@ -385,9 +378,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientOptInGate
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientOptInGate
     optInGate() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientOptInGate(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientOptInGate(
                 "ORDEROPS_MANAGED_AUDIT_ADAPTER_CLIENT_ENABLED",
                 "true",
                 "false",
@@ -396,10 +389,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary
     javaExecutionBoundary() {
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary(
                 false,
                 false,
                 false,
@@ -421,8 +413,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     private static boolean envHandlesEchoed(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape precheckShape
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape precheckShape
     ) {
         return precheckShape.requiredEnvHandleCount() == REQUIRED_ENV_HANDLE_COUNT
                 && precheckShape.envHandlesRemainHandleOnly()
@@ -430,15 +421,13 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     private static boolean failureTaxonomyEchoed(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape precheckShape
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape precheckShape
     ) {
         return precheckShape.failureClassCount() == FAILURE_CLASS_COUNT;
     }
 
     private static boolean dryRunResponseShapeEchoed(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape precheckShape
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientPrecheckShape precheckShape
     ) {
         return precheckShape.dryRunResponseFieldCount() == DRY_RUN_RESPONSE_FIELD_COUNT
                 && precheckShape.dryRunResponseReadOnly()
@@ -446,8 +435,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     private static boolean disabledClientBoundaryEchoed(
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientBoundary clientBoundary,
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionDisabledAdapterClientOptInGate optInGate
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientBoundary clientBoundary,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientOptInGate optInGate
     ) {
         return CLIENT_IMPLEMENTATION_STATUS.equals(clientBoundary.clientImplementationStatus())
                 && !clientBoundary.clientMayBeInstantiated()
@@ -465,8 +454,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     private static boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary javaExecutionBoundary
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDisabledAdapterClientExecutionBoundary javaExecutionBoundary
     ) {
         return !javaExecutionBoundary.carriesCredentialValue()
                 && !javaExecutionBoundary.credentialValueReadByJava()

@@ -5,7 +5,7 @@ import java.util.List;
 
 final class ReleaseApprovalRehearsalHandoffHintBuilder {
 
-    ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint
+    ReleaseApprovalRehearsalResponseRecords.RehearsalAuditPersistenceHandoffHint
             rehearsalAuditPersistenceHandoffHint(
                     OpsEvidenceResponse.ReleaseAuditRetentionFixture retentionFixture,
                     String normalizedManagedAuditCandidateVersion,
@@ -76,7 +76,7 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 javaAuditSourceReadOnly
         );
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalAuditPersistenceHandoffHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_AUDIT_PERSISTENCE_HANDOFF_HINT_VERSION,
                 retentionFixture.fixtureVersion(),
                 retentionFixture.fixtureEndpoint(),
@@ -144,7 +144,7 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
         );
     }
 
-    ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint
+    ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalRecordHandoffHint
             rehearsalApprovalRecordHandoffHint(
                     OpsEvidenceResponse.RollbackApprovalRecordFixture approvalRecordFixture,
                     String normalizedApprovalBindingContractVersion,
@@ -210,7 +210,7 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                 approvalRecordFixtureReadOnly
         );
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalRecordHandoffHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_HINT_VERSION,
                 approvalRecordFixture.fixtureVersion(),
                 approvalRecordFixture.fixtureEndpoint(),
@@ -277,9 +277,9 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
         );
     }
 
-    ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+    ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalHandoffVerificationMarker
             rehearsalApprovalHandoffVerificationMarker(
-                    ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint
+                    ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint
     ) {
         boolean nodeV211HandoffAccepted =
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_HINT_VERSION.equals(
@@ -311,7 +311,7 @@ final class ReleaseApprovalRehearsalHandoffHintBuilder {
                         readyForNodeV213RestoreDrillPlan
                 );
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalHandoffVerificationMarker(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_APPROVAL_HANDOFF_VERIFICATION_MARKER_VERSION,
                 approvalRecordHandoffHint.hintVersion(),
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION,

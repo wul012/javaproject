@@ -102,24 +102,23 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
             "Keep managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.sideEffectBoundary.miniKvStarted=false"
     );
 
-    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
     build(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                     disabledAdapterClientPrecheckEchoReceipt
     ) {
         boolean sourceReceiptAccepted = sourceReceiptAccepted(disabledAdapterClientPrecheckEchoReceipt);
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportDryRunRequestShape
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunRequestShape
                 requestShape = requestShape();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportDryRunResponseShape
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunResponseShape
                 responseShape = responseShape();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportTimeoutBoundary
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportTimeoutBoundary
                 timeoutBoundary = timeoutBoundary();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportFailureMappingShape
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportFailureMappingShape
                 failureMappingShape = failureMappingShape();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportCleanupBoundary
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportCleanupBoundary
                 cleanupBoundary = cleanupBoundary();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportSideEffectBoundary
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportSideEffectBoundary
                 sideEffectBoundary = sideEffectBoundary();
 
         List<String> markerWarnings = new ArrayList<>();
@@ -176,8 +175,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_FAKE_TRANSPORT_DRY_RUN_PACKET_ECHO_MARKER_VERSION,
                 disabledAdapterClientPrecheckEchoReceipt.receiptVersion(),
@@ -242,8 +240,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -254,8 +251,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -318,8 +314,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     boolean noCredentialConnectionWriteOrAutoStartProved(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
     ) {
         return requestShapeEchoed(marker.requestShape())
                 && responseShapeEchoed(marker.responseShape())
@@ -334,8 +329,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     private static boolean sourceReceiptAccepted(
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt receipt
     ) {
         return receipt.readyForNodeV254DisabledAdapterClientUpstreamEchoVerification()
                 && receipt.receiptWarnings().isEmpty()
@@ -347,10 +341,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
                 && !receipt.readyForManagedAuditSandboxAdapterConnection();
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportDryRunRequestShape
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunRequestShape
     requestShape() {
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalSandboxConnectionFakeTransportDryRunRequestShape(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunRequestShape(
                 REQUEST_ID,
                 OPERATION,
                 TRANSPORT_KIND,
@@ -367,10 +360,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportDryRunResponseShape
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunResponseShape
     responseShape() {
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalSandboxConnectionFakeTransportDryRunResponseShape(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunResponseShape(
                 REQUEST_ID,
                 RESPONSE_STATUS,
                 RESPONSE_CODE,
@@ -385,10 +377,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportTimeoutBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportTimeoutBoundary
     timeoutBoundary() {
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalSandboxConnectionFakeTransportTimeoutBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportTimeoutBoundary(
                 TIMEOUT_BUDGET_MS,
                 true,
                 "operator-review-field",
@@ -398,10 +389,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportFailureMappingShape
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportFailureMappingShape
     failureMappingShape() {
-        return new ReleaseApprovalRehearsalResponse
-                .RehearsalSandboxConnectionFakeTransportFailureMappingShape(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportFailureMappingShape(
                 FAILURE_MAPPING_COUNT,
                 FAILURE_MAPPING_COUNT,
                 GUARD_CONDITION_COUNT,
@@ -412,9 +402,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportCleanupBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportCleanupBoundary
     cleanupBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportCleanupBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportCleanupBoundary(
                 true,
                 false,
                 false,
@@ -425,9 +415,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportSideEffectBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportSideEffectBoundary
     sideEffectBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportSideEffectBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportSideEffectBoundary(
                 false,
                 false,
                 false,
@@ -444,7 +434,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     private static boolean requestShapeEchoed(
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportDryRunRequestShape requestShape
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunRequestShape requestShape
     ) {
         return REQUEST_ID.equals(requestShape.requestId())
                 && OPERATION.equals(requestShape.operation())
@@ -461,7 +451,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     private static boolean responseShapeEchoed(
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportDryRunResponseShape responseShape
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportDryRunResponseShape responseShape
     ) {
         return REQUEST_ID.equals(responseShape.requestId())
                 && RESPONSE_STATUS.equals(responseShape.status())
@@ -477,7 +467,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     private static boolean timeoutBoundaryEchoed(
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportTimeoutBoundary timeoutBoundary
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportTimeoutBoundary timeoutBoundary
     ) {
         return timeoutBoundary.timeoutBudgetMs() == TIMEOUT_BUDGET_MS
                 && timeoutBoundary.finiteBudget()
@@ -488,7 +478,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     private static boolean failureMappingEchoed(
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportFailureMappingShape
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportFailureMappingShape
                     failureMappingShape
     ) {
         return failureMappingShape.sourceFailureMappingCount() == FAILURE_MAPPING_COUNT
@@ -501,7 +491,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     private static boolean cleanupBoundaryEchoed(
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportCleanupBoundary cleanupBoundary
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportCleanupBoundary cleanupBoundary
     ) {
         return cleanupBoundary.inMemoryOnly()
                 && !cleanupBoundary.temporaryDirectoryCreated()
@@ -513,7 +503,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacke
     }
 
     private static boolean noCredentialConnectionWriteOrAutoStart(
-            ReleaseApprovalRehearsalResponse.RehearsalSandboxConnectionFakeTransportSideEffectBoundary
+            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionFakeTransportSideEffectBoundary
                     sideEffectBoundary
     ) {
         return !sideEffectBoundary.connectionAttempted()

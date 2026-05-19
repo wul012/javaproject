@@ -65,9 +65,9 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
     private static final String NODE_V225_PROFILE =
             "managed-audit-sandbox-adapter-dry-run-package.v1";
 
-    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
             build(
-                    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
+                    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
                             migrationGuardReceipt
     ) {
         boolean sourceReceiptAccepted =
@@ -92,17 +92,17 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
                         && !migrationGuardReceipt.javaRestoreExecuted()
                         && !migrationGuardReceipt.nodeMayTreatAsProductionAuditRecord();
 
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxPlanEvidence nodeV224SandboxPlan =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxPlanEvidence nodeV224SandboxPlan =
                 nodeV224SandboxPlan();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxOwnerApprovalBoundary ownerApprovalBoundary =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxOwnerApprovalBoundary ownerApprovalBoundary =
                 ownerApprovalBoundary();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxSchemaRehearsalBoundary schemaRehearsalBoundary =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxSchemaRehearsalBoundary schemaRehearsalBoundary =
                 schemaRehearsalBoundary();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxCredentialBoundary credentialBoundary =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxCredentialBoundary credentialBoundary =
                 credentialBoundary();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxExecutionBoundary executionBoundary =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxExecutionBoundary executionBoundary =
                 executionBoundary();
-        ReleaseApprovalRehearsalResponse.RehearsalSandboxQualityGateBoundary qualityGateBoundary =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxQualityGateBoundary qualityGateBoundary =
                 qualityGateBoundary();
 
         List<String> guardWarnings = new ArrayList<>();
@@ -205,7 +205,7 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt(
                 RECEIPT_VERSION,
                 migrationGuardReceipt.receiptVersion(),
                 SOURCE_SCHEMA_VERSION,
@@ -272,7 +272,7 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                     receipt
     ) {
         return List.of(
@@ -284,7 +284,7 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                     receipt
     ) {
         return List.of(
@@ -318,7 +318,7 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
     }
 
     boolean noWriteCredentialConnectionOrSchemaEffectProved(
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                     receipt
     ) {
         return !receipt.ownerApprovalBoundary().ownerApprovalArtifactProvidedByJava()
@@ -338,8 +338,8 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
                 && !receipt.executionBoundary().javaRestoreExecuted();
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxPlanEvidence nodeV224SandboxPlan() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxPlanEvidence(
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxPlanEvidence nodeV224SandboxPlan() {
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxPlanEvidence(
                 true,
                 false,
                 true,
@@ -353,9 +353,9 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxOwnerApprovalBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxOwnerApprovalBoundary
             ownerApprovalBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxOwnerApprovalBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxOwnerApprovalBoundary(
                 true,
                 false,
                 false,
@@ -363,9 +363,9 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxSchemaRehearsalBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxSchemaRehearsalBoundary
             schemaRehearsalBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxSchemaRehearsalBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxSchemaRehearsalBoundary(
                 true,
                 true,
                 false,
@@ -374,9 +374,9 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxCredentialBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxCredentialBoundary
             credentialBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxCredentialBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxCredentialBoundary(
                 true,
                 "ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE",
                 false,
@@ -386,9 +386,9 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxExecutionBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxExecutionBoundary
             executionBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxExecutionBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxExecutionBoundary(
                 false,
                 false,
                 false,
@@ -400,9 +400,9 @@ final class ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponse.RehearsalSandboxQualityGateBoundary
+    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxQualityGateBoundary
             qualityGateBoundary() {
-        return new ReleaseApprovalRehearsalResponse.RehearsalSandboxQualityGateBoundary(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxQualityGateBoundary(
                 true,
                 true,
                 true,

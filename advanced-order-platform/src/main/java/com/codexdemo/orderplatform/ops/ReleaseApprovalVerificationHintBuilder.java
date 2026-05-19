@@ -191,65 +191,58 @@ final class ReleaseApprovalVerificationHintBuilder {
         );
     }
 
-    ReleaseApprovalRehearsalResponse.RehearsalVerificationHint build(
-            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
-            ReleaseApprovalRehearsalResponse.RehearsalOperatorWindowHint operatorWindowHint,
-            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
-            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
-            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
-            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+    ReleaseApprovalRehearsalResponseRecords.RehearsalVerificationHint build(
+            ReleaseApprovalRehearsalResponseRecords.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalOperatorWindowHint operatorWindowHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalCiEvidenceHint ciEvidenceHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalArtifactRetentionHint artifactRetentionHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalLiveReadinessHint liveReadinessHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalHandoffVerificationMarker
                     approvalHandoffVerificationMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterBoundaryReceipt
                     managedAuditAdapterBoundaryReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
                     managedAuditProductionAdapterPrerequisiteReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalOpsEvidenceServiceQualitySplitReceipt
                     opsEvidenceServiceQualitySplitReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterImplementationGuardReceipt
                     managedAuditAdapterImplementationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
                     managedAuditExternalAdapterMigrationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                     managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
                     managedAuditSandboxConnectionOperatorHandoffMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
                     managedAuditSandboxConnectionPreflightEchoMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
                     managedAuditSandboxConnectionPreconditionReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
                     managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
                     managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                     managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
                     managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                     managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                     managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     managedAuditSandboxEndpointHandlePreflightEchoMarker,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
                     managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
-            ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
+            ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
+            ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
-        return new ReleaseApprovalRehearsalResponse.RehearsalVerificationHint(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalVerificationHint(
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION,
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION,
                 warningDigestBuilder.build(
@@ -481,60 +474,53 @@ final class ReleaseApprovalVerificationHintBuilder {
     }
 
     private boolean noLedgerWriteProved(
-            ReleaseApprovalRehearsalResponse.RehearsalRequestContext requestContext,
-            ReleaseApprovalRehearsalResponse.RehearsalCiEvidenceHint ciEvidenceHint,
-            ReleaseApprovalRehearsalResponse.RehearsalArtifactRetentionHint artifactRetentionHint,
-            ReleaseApprovalRehearsalResponse.RehearsalLiveReadinessHint liveReadinessHint,
-            ReleaseApprovalRehearsalResponse.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalRequestContext requestContext,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalCiEvidenceHint ciEvidenceHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalArtifactRetentionHint artifactRetentionHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalLiveReadinessHint liveReadinessHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalAuditPersistenceHandoffHint auditPersistenceHandoffHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalRecordHandoffHint approvalRecordHandoffHint,
+            ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalHandoffVerificationMarker
                     approvalHandoffVerificationMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterBoundaryReceipt
                     managedAuditAdapterBoundaryReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditProductionAdapterPrerequisiteReceipt
                     managedAuditProductionAdapterPrerequisiteReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalOpsEvidenceServiceQualitySplitReceipt
                     opsEvidenceServiceQualitySplitReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterImplementationGuardReceipt
                     managedAuditAdapterImplementationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditExternalAdapterMigrationGuardReceipt
                     managedAuditExternalAdapterMigrationGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                     managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
                     managedAuditSandboxConnectionOperatorHandoffMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
                     managedAuditSandboxConnectionPreflightEchoMarker,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
                     managedAuditSandboxConnectionPreconditionReceipt,
-            ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
                     managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
                     managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                     managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
                     managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                     managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                     managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     managedAuditSandboxEndpointHandlePreflightEchoMarker,
-            ReleaseApprovalRehearsalResponse
-                    .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
                     managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
-            ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
+            ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
         return !requestContext.approvalLedgerWritten()
                 && ciEvidenceHint.noLedgerWriteProved()

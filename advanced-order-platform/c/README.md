@@ -93,6 +93,14 @@ c/107/解释/说明.md
  -> Java v107 sandbox endpoint credential resolver test-only shell echo marker：只读回显 Node v264 fake-only request / response / failure mapping / guard / probe 和 no-side-effect 边界；继续阻断真实 resolver 实现、secret provider、credential value、raw endpoint、外部请求、managed-audit connection、SQL、ledger、auto-start 和 mini-kv 托管存储。
 ```
 
+
+## v109 update
+
+```text
+c/109/解释/说明.md
+ -> Java v109 release approval rehearsal response records split: 把 1798 行的 `ReleaseApprovalRehearsalResponse` nested records 迁入 `ReleaseApprovalRehearsalResponseRecords` 容器，让主响应文件只保留顶层壳；不改业务 contract、schema 或 managed-audit 边界。
+```
+
 ## v108 update
 
 ```text

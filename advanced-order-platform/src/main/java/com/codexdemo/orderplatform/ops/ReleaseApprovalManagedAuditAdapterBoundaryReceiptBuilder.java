@@ -25,8 +25,8 @@ final class ReleaseApprovalManagedAuditAdapterBoundaryReceiptBuilder {
     private static final String NODE_V215_PROFILE =
             "managed-audit-dry-run-adapter-candidate.v1";
 
-    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt build(
-            ReleaseApprovalRehearsalResponse.RehearsalApprovalHandoffVerificationMarker
+    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterBoundaryReceipt build(
+            ReleaseApprovalRehearsalResponseRecords.RehearsalApprovalHandoffVerificationMarker
                     approvalHandoffVerificationMarker
     ) {
         boolean sourceMarkerAccepted =
@@ -47,7 +47,7 @@ final class ReleaseApprovalManagedAuditAdapterBoundaryReceiptBuilder {
         boolean adapterWritesBlocked = true;
         boolean readyForNodeV215DryRunAdapterCandidate = sourceMarkerAccepted && adapterWritesBlocked;
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterBoundaryReceipt(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterBoundaryReceipt(
                 RECEIPT_VERSION,
                 approvalHandoffVerificationMarker.markerVersion(),
                 SOURCE_SCHEMA_VERSION,

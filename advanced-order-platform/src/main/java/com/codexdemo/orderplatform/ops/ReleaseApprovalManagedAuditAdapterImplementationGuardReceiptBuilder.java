@@ -24,9 +24,9 @@ final class ReleaseApprovalManagedAuditAdapterImplementationGuardReceiptBuilder 
     private static final String NODE_V221_PROFILE =
             "managed-audit-local-adapter-candidate-dry-run.v1";
 
-    ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt
+    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterImplementationGuardReceipt
             build(
-                    ReleaseApprovalRehearsalResponse.RehearsalOpsEvidenceServiceQualitySplitReceipt
+                    ReleaseApprovalRehearsalResponseRecords.RehearsalOpsEvidenceServiceQualitySplitReceipt
                             opsEvidenceServiceQualitySplitReceipt
     ) {
         boolean sourceReceiptAccepted =
@@ -111,7 +111,7 @@ final class ReleaseApprovalManagedAuditAdapterImplementationGuardReceiptBuilder 
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponse.RehearsalManagedAuditAdapterImplementationGuardReceipt(
+        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditAdapterImplementationGuardReceipt(
                 RECEIPT_VERSION,
                 opsEvidenceServiceQualitySplitReceipt.receiptVersion(),
                 SOURCE_SCHEMA_VERSION,

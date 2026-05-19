@@ -3519,7 +3519,7 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                 receipt = rehearsal.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt();
         assertThat(receipt.receiptVersion())
                 .isEqualTo(
@@ -3640,7 +3640,7 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
                 receipt = rehearsal.managedAuditSandboxConnectionPrecheckPacketEchoReceipt();
         assertThat(receipt.receiptVersion())
                 .isEqualTo(
@@ -3764,8 +3764,7 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponse
-                .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                 receipt = rehearsal.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt();
         assertThat(receipt.receiptVersion())
                 .isEqualTo(
@@ -3958,8 +3957,7 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponse
-                .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                 marker = rehearsal.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker();
         assertThat(marker.markerVersion())
                 .isEqualTo(
@@ -4166,7 +4164,7 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponse.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                 marker = rehearsal.managedAuditSandboxEndpointHandlePreflightEchoMarker();
         assertThat(marker.markerVersion())
                 .isEqualTo(
@@ -4402,8 +4400,7 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponse
-                .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker =
+        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker =
                 rehearsal.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker();
         assertThat(marker.markerVersion())
                 .isEqualTo(
@@ -4496,8 +4493,7 @@ class OpsEvidenceServiceTests {
         assertThat(marker.decisionRecord().requiredDecisionFieldCount()).isEqualTo(8);
         assertThat(marker.decisionRecord().explicitNoGoConditionCount()).isEqualTo(9);
         assertThat(marker.decisionRecord().requiredDecisionFields())
-                .extracting(ReleaseApprovalRehearsalResponse
-                        .RehearsalSandboxEndpointCredentialResolverDecisionField::id)
+                .extracting(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
                 .containsExactly(
                         "endpoint-handle",
                         "credential-handle",
@@ -4511,8 +4507,7 @@ class OpsEvidenceServiceTests {
         assertThat(marker.decisionRecord().requiredDecisionFields())
                 .allMatch(field -> field.required() && !field.nodeMayReadValue());
         assertThat(marker.decisionRecord().explicitNoGoConditions())
-                .extracting(ReleaseApprovalRehearsalResponse
-                        .RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
+                .extracting(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
                 .containsExactly(
                         "CREDENTIAL_VALUE_REQUIRED",
                         "RAW_ENDPOINT_URL_REQUIRED",
@@ -4569,14 +4564,12 @@ class OpsEvidenceServiceTests {
         assertThat(marker.nodeMayTreatAsProductionAuditRecord()).isFalse();
         assertThat(marker.requiredDecisionFieldIds()).containsExactlyElementsOf(
                 marker.decisionRecord().requiredDecisionFields().stream()
-                        .map(ReleaseApprovalRehearsalResponse
-                                .RehearsalSandboxEndpointCredentialResolverDecisionField::id)
+                        .map(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
                         .toList()
         );
         assertThat(marker.explicitNoGoConditionCodes()).containsExactlyElementsOf(
                 marker.decisionRecord().explicitNoGoConditions().stream()
-                        .map(ReleaseApprovalRehearsalResponse
-                                .RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
+                        .map(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
                         .toList()
         );
         assertThat(marker.nodeWarningCodes())
