@@ -10,6 +10,12 @@ import com.codexdemo.orderplatform.order.IdempotencyStoreDescriptor;
 import com.codexdemo.orderplatform.outbox.OutboxPublisherProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRabbitMqProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRepository;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
+        .RehearsalSandboxEndpointCredentialResolverEnvHandle;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
+        .RehearsalSandboxEndpointCredentialResolverFailureClass;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.env.MockEnvironment;
@@ -972,7 +978,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v27");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v28");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2376,7 +2382,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v27");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v28");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2438,6 +2444,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerWarnings",
                         "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings",
                         "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -2604,6 +2611,20 @@ class OpsEvidenceServiceTests {
                         "sandboxEndpointCredentialResolverDecisionSchemaMigrationMayExecute",
                         "sandboxEndpointCredentialResolverDecisionApprovalLedgerMayBeWritten",
                         "sandboxEndpointCredentialResolverDecisionJavaOrMiniKvStartAllowed",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerDigest",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckRequiredEnvHandleCount",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckOptInGateCount",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckFailureClassCount",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckDryRunResponseFieldCount",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckInheritedNoGoConditionCount",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckResolverClientMayBeInstantiated",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckSecretProviderMayBeInstantiated",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckCredentialValueMayBeLoaded",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckRawEndpointUrlMayBeParsed",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckExternalRequestMayBeSent",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckSideEffectCredentialValueRead",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckSideEffectRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckSideEffectExternalRequestSent",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -3397,7 +3418,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v27");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v28");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -4574,6 +4595,276 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse repeated =
                 service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(repeated.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker().markerDigest())
+                .isEqualTo(marker.markerDigest());
+    }
+
+    @Test
+    void releaseApprovalRehearsalAddsSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker() {
+        Instant latestFailedAt = Instant.parse("2026-05-12T01:00:00Z");
+        Instant latestApprovalAt = Instant.parse("2026-05-12T01:05:00Z");
+        when(failedEventSummaryService.summary()).thenReturn(new FailedEventSummaryResponse(
+                Instant.parse("2026-05-12T01:10:00Z"),
+                4,
+                2,
+                1,
+                1,
+                latestFailedAt,
+                latestApprovalAt,
+                3
+        ));
+        when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
+        OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
+        outboxPublisherProperties.setEnabled(false);
+        OutboxRabbitMqProperties outboxRabbitMqProperties = new OutboxRabbitMqProperties();
+        outboxRabbitMqProperties.setEnabled(false);
+        outboxRabbitMqProperties.setExchange("order-platform.outbox");
+        outboxRabbitMqProperties.setQueue("order-platform.outbox.events");
+        outboxRabbitMqProperties.setDeadLetterQueue("order-platform.outbox.events.dlq");
+        MockEnvironment environment = new MockEnvironment()
+                .withProperty("spring.application.name", "advanced-order-platform")
+                .withProperty("info.app.version", "0.1.0-test");
+        environment.setActiveProfiles("local", "ops");
+        OpsEvidenceService service = new OpsEvidenceService(
+                failedEventSummaryService,
+                outboxRepository,
+                outboxPublisherProperties,
+                outboxRabbitMqProperties,
+                idempotencyStore,
+                environment
+        );
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+
+        RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker marker =
+                rehearsal.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker();
+        assertThat(marker.markerVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-disabled-precheck-echo-marker.v1"
+                );
+        assertThat(marker.sourceCredentialResolverDecisionEchoMarkerSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v27");
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckVersion())
+                .isEqualTo("Node v262");
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck.v1"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckMarkdownEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck?format=markdown"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckState())
+                .isEqualTo("sandbox-endpoint-credential-resolver-disabled-precheck-ready");
+        assertThat(marker.sourceNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v261");
+        assertThat(marker.sourceNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-upstream-echo-verification.v1"
+                );
+        assertThat(marker.sourceNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationState())
+                .isEqualTo("sandbox-endpoint-credential-resolver-upstream-echo-verification-ready");
+        assertThat(marker.nextNodeSandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v263");
+        assertThat(marker.nodeV263MayConsume()).isTrue();
+        assertThat(marker.precheckMode()).isEqualTo("sandbox-endpoint-credential-resolver-disabled-precheck-only");
+        assertThat(marker.sourceSpan()).isEqualTo("Node v261 credential resolver upstream echo verification");
+        assertThat(marker.sourceNodeV261().sourceVersion()).isEqualTo("Node v261");
+        assertThat(marker.sourceNodeV261().verificationMode())
+                .isEqualTo("java-v105-plus-mini-kv-v114-credential-resolver-upstream-echo-verification-only");
+        assertThat(marker.sourceNodeV261().sourceSpan()).isEqualTo("Node v260 + Java v105 + mini-kv v114");
+        assertThat(marker.sourceNodeV261().sourceNodeV260Ready()).isTrue();
+        assertThat(marker.sourceNodeV261().javaV105EchoReady()).isTrue();
+        assertThat(marker.sourceNodeV261().miniKvV114NonParticipationReady()).isTrue();
+        assertThat(marker.sourceNodeV261().decisionRecordAligned()).isTrue();
+        assertThat(marker.sourceNodeV261().credentialBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV261().rawEndpointBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV261().connectionBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV261().writeBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV261().autoStartBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV261().upstreamActionsStillDisabled()).isTrue();
+        assertThat(marker.sourceNodeV261().credentialResolverExecutionAllowed()).isFalse();
+        assertThat(marker.sourceNodeV261().credentialValueRead()).isFalse();
+        assertThat(marker.sourceNodeV261().credentialValueLoaded()).isFalse();
+        assertThat(marker.sourceNodeV261().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.sourceNodeV261().externalRequestSent()).isFalse();
+        assertThat(marker.sourceNodeV261().connectsManagedAudit()).isFalse();
+        assertThat(marker.sourceNodeV261().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.sourceNodeV261().automaticUpstreamStart()).isFalse();
+        assertThat(marker.sourceNodeV261().checkCount()).isEqualTo(20);
+        assertThat(marker.sourceNodeV261().passedCheckCount()).isEqualTo(20);
+        assertThat(marker.sourceNodeV261().productionBlockerCount()).isZero();
+        assertThat(marker.sourceNodeV261().warningCount()).isEqualTo(2);
+        assertThat(marker.sourceNodeV261().recommendationCount()).isEqualTo(2);
+        assertThat(marker.sourceNodeV261().readyForNodeV262CredentialResolverDisabledPrecheck()).isTrue();
+        assertThat(marker.disabledPrecheck().precheckDigest()).startsWith("sha256:");
+        assertThat(marker.disabledPrecheck().precheckMode())
+                .isEqualTo("sandbox-endpoint-credential-resolver-disabled-precheck-only");
+        assertThat(marker.disabledPrecheck().resolverImplementationStatus()).isEqualTo("not-implemented");
+        assertThat(marker.disabledPrecheck().secretProviderImplementationStatus()).isEqualTo("not-implemented");
+        assertThat(marker.disabledPrecheck().resolverClientMayBeInstantiated()).isFalse();
+        assertThat(marker.disabledPrecheck().secretProviderMayBeInstantiated()).isFalse();
+        assertThat(marker.disabledPrecheck().credentialValueMayBeLoaded()).isFalse();
+        assertThat(marker.disabledPrecheck().rawEndpointUrlMayBeParsed()).isFalse();
+        assertThat(marker.disabledPrecheck().externalRequestMayBeSent()).isFalse();
+        assertThat(marker.disabledPrecheck().optInGateRequired()).isTrue();
+        assertThat(marker.disabledPrecheck().requiredEnvHandleCount()).isEqualTo(6);
+        assertThat(marker.disabledPrecheck().optInGateCount()).isEqualTo(2);
+        assertThat(marker.disabledPrecheck().failureClassCount()).isEqualTo(7);
+        assertThat(marker.disabledPrecheck().dryRunResponseFieldCount()).isEqualTo(12);
+        assertThat(marker.disabledPrecheck().inheritedNoGoConditionCount()).isEqualTo(9);
+        assertThat(marker.disabledPrecheck().requiredEnvHandles())
+                .extracting(RehearsalSandboxEndpointCredentialResolverEnvHandle::name)
+                .containsExactly(
+                        "ORDEROPS_MANAGED_AUDIT_CREDENTIAL_RESOLVER_ENABLED",
+                        "ORDEROPS_MANAGED_AUDIT_SANDBOX_ENDPOINT_RESOLUTION_ENABLED",
+                        "ORDEROPS_MANAGED_AUDIT_SANDBOX_ENDPOINT_HANDLE",
+                        "ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE",
+                        "ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_RESOLVER_POLICY_HANDLE",
+                        "ORDEROPS_MANAGED_AUDIT_CREDENTIAL_RESOLVER_APPROVAL_MARKER"
+                );
+        assertThat(marker.disabledPrecheck().requiredEnvHandles())
+                .allMatch(handle -> !handle.valueRequiredForPrecheck()
+                        && !handle.credentialValue()
+                        && !handle.rawEndpointValue());
+        assertThat(marker.disabledPrecheck().optInGates())
+                .allMatch(gate -> "true".equals(gate.requiredValueForFutureResolver())
+                        && "false".equals(gate.currentDefault())
+                        && gate.precheckTreatsEnabledAsBlocked()
+                        && gate.operatorApprovalRequired());
+        assertThat(marker.disabledPrecheck().failureTaxonomy())
+                .extracting(RehearsalSandboxEndpointCredentialResolverFailureClass::code)
+                .containsExactly(
+                        "RESOLVER_DISABLED",
+                        "APPROVAL_MARKER_MISSING",
+                        "CREDENTIAL_HANDLE_MISSING",
+                        "CREDENTIAL_VALUE_REQUESTED",
+                        "RAW_ENDPOINT_URL_REQUESTED",
+                        "EXTERNAL_REQUEST_REQUESTED",
+                        "SCHEMA_MIGRATION_REQUESTED"
+                );
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().fields())
+                .containsExactly(
+                        "readyState",
+                        "resolverMode",
+                        "resolverClientInstantiated",
+                        "secretProviderInstantiated",
+                        "credentialValueRead",
+                        "credentialValueLoaded",
+                        "rawEndpointUrlParsed",
+                        "externalRequestSent",
+                        "connectsManagedAudit",
+                        "schemaMigrationExecuted",
+                        "failureClassCount",
+                        "nextAction"
+                );
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().readyState())
+                .isEqualTo("sandbox-endpoint-credential-resolver-disabled-precheck-ready");
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().resolverClientInstantiated()).isFalse();
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().secretProviderInstantiated()).isFalse();
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().credentialValueRead()).isFalse();
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().credentialValueLoaded()).isFalse();
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().externalRequestSent()).isFalse();
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().connectsManagedAudit()).isFalse();
+        assertThat(marker.disabledPrecheck().dryRunResponseShape().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.disabledPrecheck().inheritedNoGoConditions())
+                .containsExactly(
+                        "CREDENTIAL_VALUE_REQUIRED",
+                        "RAW_ENDPOINT_URL_REQUIRED",
+                        "REAL_CONNECTION_REQUIRED",
+                        "EXTERNAL_REQUEST_REQUIRED",
+                        "SCHEMA_MIGRATION_REQUIRED",
+                        "UPSTREAM_WRITE_REQUIRED",
+                        "AUTO_START_REQUIRED",
+                        "MINI_KV_BACKEND_REQUIRED",
+                        "PRODUCTION_WINDOW_REQUIRED"
+                );
+        assertThat(marker.sideEffectBoundary().readOnlyDisabledPrecheck()).isTrue();
+        assertThat(marker.sideEffectBoundary().disabledCredentialResolverPrecheckOnly()).isTrue();
+        assertThat(marker.sideEffectBoundary().credentialResolverExecutionAllowed()).isFalse();
+        assertThat(marker.sideEffectBoundary().connectsManagedAudit()).isFalse();
+        assertThat(marker.sideEffectBoundary().readsManagedAuditCredential()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueRead()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueLoaded()).isFalse();
+        assertThat(marker.sideEffectBoundary().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.sideEffectBoundary().externalRequestSent()).isFalse();
+        assertThat(marker.sideEffectBoundary().secretProviderInstantiated()).isFalse();
+        assertThat(marker.sideEffectBoundary().resolverClientInstantiated()).isFalse();
+        assertThat(marker.sideEffectBoundary().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.sideEffectBoundary().automaticUpstreamStart()).isFalse();
+        assertThat(marker.sourceNodeV261Echoed()).isTrue();
+        assertThat(marker.envHandlesEchoed()).isTrue();
+        assertThat(marker.optInGatesEchoed()).isTrue();
+        assertThat(marker.failureTaxonomyEchoed()).isTrue();
+        assertThat(marker.dryRunResponseShapeEchoed()).isTrue();
+        assertThat(marker.inheritedNoGoConditionsEchoed()).isTrue();
+        assertThat(marker.resolverImplementationAbsentEchoed()).isTrue();
+        assertThat(marker.secretProviderAbsentEchoed()).isTrue();
+        assertThat(marker.sideEffectBoundaryEchoed()).isTrue();
+        assertThat(marker.upstreamActionsStillDisabledEchoed()).isTrue();
+        assertThat(marker.readyForNodeV263SandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerification())
+                .isTrue();
+        assertThat(marker.readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(marker.readyForProductionAudit()).isFalse();
+        assertThat(marker.readyForProductionWindow()).isFalse();
+        assertThat(marker.nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(marker.nodeWarningCodes())
+                .containsExactly("DISABLED_PRECHECK_ONLY", "UPSTREAM_ECHO_REQUIRED_NEXT");
+        assertThat(marker.nodeRecommendationCodes())
+                .containsExactly("ASK_JAVA_MINI_KV_FOR_ECHO_NEXT", "KEEP_REAL_RESOLVER_OUT_OF_SCOPE");
+        assertThat(marker.nextRequiredEchoVersions())
+                .contains(
+                        "Java v106 sandbox endpoint credential resolver disabled precheck echo marker",
+                        "mini-kv v115 sandbox endpoint credential resolver disabled precheck non-participation receipt"
+                );
+        assertThat(marker.markerWarnings()).isEmpty();
+        assertThat(marker.markerDigest()).startsWith("sha256:");
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerWarnings",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerDigest",
+                        "sandboxEndpointCredentialResolverDisabledPrecheckRawEndpointUrlMayBeParsed"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.requiredEnvHandleCount=6",
+                        "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.resolverClientMayBeInstantiated=false",
+                        "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.readyForManagedAuditSandboxAdapterConnection=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckProfile with Node v262",
+                        "Require managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.readyForNodeV263SandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerification=true before Node v263",
+                        "Keep managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sideEffectBoundary.externalRequestSent=false"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker().markerDigest())
                 .isEqualTo(marker.markerDigest());
     }
 

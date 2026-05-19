@@ -1,5 +1,8 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker;
+
 import java.time.Instant;
 import java.util.List;
 
@@ -50,6 +53,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxEndpointHandlePreflightEchoMarker,
         RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                 managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
+        RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
+                managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,

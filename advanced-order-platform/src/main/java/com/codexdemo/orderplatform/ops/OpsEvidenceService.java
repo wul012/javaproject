@@ -114,6 +114,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DECISION_ECHO_MARKER_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-decision-echo-marker.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_ECHO_MARKER_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-disabled-precheck-echo-marker.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -180,6 +184,14 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_HANDLE_PREFLIGHT_ECHO_MARKER_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v26";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DECISION_ECHO_MARKER_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v27";
+
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_ECHO_MARKER_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v28";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -187,7 +199,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v27";
+            "java-release-approval-rehearsal-response-schema.v28";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -485,6 +497,30 @@ public class OpsEvidenceService {
 
     static final String NODE_V261_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_UPSTREAM_ECHO_VERIFICATION_PROFILE =
             "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-upstream-echo-verification.v1";
+
+    static final String NODE_V261_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_UPSTREAM_ECHO_VERIFICATION_STATE =
+            "sandbox-endpoint-credential-resolver-upstream-echo-verification-ready";
+
+    static final String NODE_V262_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_VERSION =
+            "Node v262";
+
+    static final String NODE_V262_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_PROFILE =
+            "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck.v1";
+
+    static final String NODE_V262_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck";
+
+    static final String NODE_V262_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_MARKDOWN_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck?format=markdown";
+
+    static final String NODE_V262_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_STATE =
+            "sandbox-endpoint-credential-resolver-disabled-precheck-ready";
+
+    static final String NODE_V263_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_UPSTREAM_ECHO_VERIFICATION_VERSION =
+            "Node v263";
+
+    static final String NODE_V263_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_PRECHECK_UPSTREAM_ECHO_VERIFICATION_PROFILE =
+            "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck-upstream-echo-verification.v1";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";

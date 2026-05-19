@@ -1,5 +1,8 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             sandboxEndpointHandlePreflightEchoMarkerBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
             sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder;
+    private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+            sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
@@ -54,7 +59,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
                     sandboxEndpointHandlePreflightEchoMarkerBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-                    sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
+                    sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+                    sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -80,6 +87,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxEndpointHandlePreflightEchoMarkerBuilder;
         this.sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder =
                 sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder;
+        this.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder =
+                sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder;
     }
 
     String build(
@@ -133,6 +142,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalRehearsalResponse
                     .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
+                    managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -219,6 +230,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestWarningLines(
                 managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+        ));
+        lines.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.warningDigestWarningLines(
+                managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
         ));
         lines.addAll(List.of(
                 ReleaseApprovalDigestSupport.line("failureCategories", failureTaxonomy.failureCategories()),
@@ -447,6 +461,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestBoundaryLines(
                 managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+        ));
+        lines.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.warningDigestBoundaryLines(
+                managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
         ));
         lines.add(ReleaseApprovalDigestSupport.line(
                 "nodeMayWriteApprovalLedger",

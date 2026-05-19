@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v27"))
+                        .value("java-release-approval-rehearsal-response-schema.v28"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1833,7 +1833,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v27"))
+                        .value("java-release-approval-rehearsal-response-schema.v28"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -2658,7 +2658,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v27"))
+                        .value("java-release-approval-rehearsal-response-schema.v28"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
@@ -3573,6 +3573,135 @@ class OpsOverviewIntegrationTests {
                         hasItem("managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.credentialValueMayBeRead=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordProfile with Node v260")));
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal")
+                        .header("x-orderops-request-id", "rehearsal-v106-disabled-precheck")
+                        .header("x-orderops-operator-id", "auditor-v106")
+                        .header("x-orderops-roles", "auditor,operator,viewer")
+                        .header("x-orderops-operator-verified", "true")
+                        .header("x-orderops-approval-correlation-id",
+                                "approval-v106-credential-resolver-disabled-precheck")
+                        .header("x-orderops-ci-manifest-version",
+                                "real-read-window-ci-archive-artifact-manifest.v1")
+                        .header("x-orderops-ci-manifest-digest", "sha256:node-v200-manifest-digest")
+                        .header("x-orderops-ci-manifest-endpoint",
+                                "/api/v1/production/real-read-window-ci-archive-artifact-manifest")
+                        .header("x-orderops-ci-artifact-record-count", "9")
+                        .header("x-orderops-ci-approval-correlation-id",
+                                "approval-v106-credential-resolver-disabled-precheck")
+                        .header("x-orderops-ci-upload-contract-version",
+                                "real-read-window-ci-artifact-upload-dry-run-contract.v1")
+                        .header("x-orderops-ci-upload-contract-digest",
+                                "sha256:node-v202-upload-contract-digest")
+                        .header("x-orderops-ci-artifact-name", "orderops-real-read-window-evidence-v191-v201")
+                        .header("x-orderops-ci-artifact-root", "c/")
+                        .header("x-orderops-ci-retention-days", "30")
+                        .header("x-orderops-ci-upload-mode", "dry-run-contract-only")
+                        .header("x-orderops-runtime-preflight-version",
+                                "three-project-real-read-runtime-smoke-preflight.v1")
+                        .header("x-orderops-runtime-preflight-digest",
+                                "sha256:node-v204-preflight-digest")
+                        .header("x-orderops-runtime-smoke-session-id",
+                                "runtime-smoke-v205-session-001")
+                        .header("x-orderops-runtime-read-target-id",
+                                "java-release-approval-rehearsal")
+                        .header("x-orderops-runtime-window-mode",
+                                "manual-open-window-plan")
+                        .header("x-orderops-managed-audit-candidate-version",
+                                "managed-audit-persistence-boundary-candidate.v1")
+                        .header("x-orderops-managed-audit-candidate-digest",
+                                "sha256:node-v208-managed-audit-candidate-digest")
+                        .header("x-orderops-managed-audit-sink-mode",
+                                "file-or-sqlite-dry-run-candidate")
+                        .header("x-orderops-managed-audit-retention-days", "30")
+                        .header("x-orderops-managed-audit-rotation-policy",
+                                "size-and-age-rotation-candidate")
+                        .header("x-orderops-approval-binding-contract-version",
+                                "managed-audit-identity-approval-binding-contract.v1")
+                        .header("x-orderops-approval-binding-contract-digest",
+                                "sha256:node-v210-approval-binding-digest")
+                        .header("x-orderops-approval-request-id", "approval-request-v210-001")
+                        .header("x-orderops-approval-decision-state", "APPROVED_DRY_RUN_ONLY")
+                        .header("x-orderops-approval-record-correlation-id",
+                                "approval-record-correlation-v210"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.markerVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-disabled-precheck-echo-marker.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sourceCredentialResolverDecisionEchoMarkerSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v27"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckVersion")
+                        .value("Node v262"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckProfile")
+                        .value("managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckEndpoint")
+                        .value("/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckMarkdownEndpoint")
+                        .value("/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-disabled-precheck?format=markdown"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckState")
+                        .value("sandbox-endpoint-credential-resolver-disabled-precheck-ready"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sourceNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationVersion")
+                        .value("Node v261"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sourceNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationState")
+                        .value("sandbox-endpoint-credential-resolver-upstream-echo-verification-ready"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.nextNodeSandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerificationVersion")
+                        .value("Node v263"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sourceNodeV261.checkCount")
+                        .value(20))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sourceNodeV261.passedCheckCount")
+                        .value(20))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sourceNodeV261.readyForNodeV262CredentialResolverDisabledPrecheck")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.requiredEnvHandleCount")
+                        .value(6))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.optInGateCount")
+                        .value(2))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.failureClassCount")
+                        .value(7))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseFieldCount")
+                        .value(12))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.inheritedNoGoConditionCount")
+                        .value(9))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.requiredEnvHandles[*].name",
+                        hasItem("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_RESOLVER_POLICY_HANDLE")))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.failureTaxonomy[*].code",
+                        hasItem("CREDENTIAL_VALUE_REQUESTED")))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseShape.fields",
+                        hasItem("resolverClientInstantiated")))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseShape.resolverClientInstantiated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseShape.secretProviderInstantiated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseShape.credentialValueRead")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseShape.rawEndpointUrlParsed")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseShape.externalRequestSent")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.dryRunResponseShape.connectsManagedAudit")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sideEffectBoundary.secretProviderInstantiated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sideEffectBoundary.resolverClientInstantiated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.sideEffectBoundary.externalRequestSent")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.readyForNodeV263SandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerification")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.readyForManagedAuditSandboxAdapterConnection")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.markerWarnings").isEmpty())
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerDigest")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.disabledPrecheck.resolverClientMayBeInstantiated=false")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDisabledPrecheckProfile with Node v262")));
     }
 
     @Test
