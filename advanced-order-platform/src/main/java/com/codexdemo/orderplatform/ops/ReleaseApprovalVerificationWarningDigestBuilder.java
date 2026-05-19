@@ -23,6 +23,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             sandboxConnectionPrecheckPacketEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
             sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+            sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
@@ -42,7 +44,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalManagedAuditSandboxConnectionPrecheckPacketEchoReceiptBuilder
                     sandboxConnectionPrecheckPacketEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
-                    sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
+                    sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                    sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -62,6 +66,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxConnectionPrecheckPacketEchoReceiptBuilder;
         this.sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder =
                 sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder;
+        this.sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder =
+                sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder;
     }
 
     String build(
@@ -106,6 +112,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalRehearsalResponse
                     .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                     managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+                    managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -183,6 +192,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.warningDigestWarningLines(
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+        ));
+        lines.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.warningDigestWarningLines(
+                managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
         ));
         lines.addAll(List.of(
                 ReleaseApprovalDigestSupport.line("failureCategories", failureTaxonomy.failureCategories()),
@@ -402,6 +414,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         ));
         lines.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.warningDigestBoundaryLines(
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+        ));
+        lines.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.warningDigestBoundaryLines(
+                managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
         ));
         lines.add(ReleaseApprovalDigestSupport.line(
                 "nodeMayWriteApprovalLedger",

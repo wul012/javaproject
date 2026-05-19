@@ -62,6 +62,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(),
                 managedAuditReceiptChain.managedAuditSandboxConnectionPrecheckPacketEchoReceipt(),
                 managedAuditReceiptChain.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt(),
+                managedAuditReceiptChain.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -168,7 +169,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder(),
                 managedAuditReceiptChain.sandboxConnectionDryRunCommandPackageEchoReceiptBuilder(),
                 managedAuditReceiptChain.sandboxConnectionPrecheckPacketEchoReceiptBuilder(),
-                managedAuditReceiptChain.sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder()
+                managedAuditReceiptChain.sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder(),
+                managedAuditReceiptChain.sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -194,6 +196,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         managedAuditReceiptChain.managedAuditSandboxConnectionPrecheckPacketEchoReceipt(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker(),
                         failureTaxonomy,
                         executionBoundaries
                 );

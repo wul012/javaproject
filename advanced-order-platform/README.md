@@ -2861,6 +2861,7 @@ ops
   -> v100 adds GitHub Actions Maven CI bootstrap and documents large-file split guards for ReleaseApprovalRehearsalResponse/OpsEvidenceService without changing business semantics or managed-audit boundaries
   -> v101 adds Dependabot security maintenance for Maven and GitHub Actions while leaving dependency versions, business semantics, and managed-audit boundaries unchanged
   -> v102 adds release approval rehearsal disabled adapter client precheck echo receipt for Node v252/v254 while keeping credential values, real client instantiation, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv writes blocked
+  -> v103 adds release approval rehearsal fake transport dry-run packet echo marker for Node v255/v257 while keeping credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, temp files, auto-start, and mini-kv writes blocked
 
 common
  -> 业务异常和统一错误响应

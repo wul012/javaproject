@@ -44,6 +44,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
         RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
+        RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+                managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
         RehearsalFailureTaxonomy failureTaxonomy,
         RehearsalVerificationHint verificationHint,
         ReleaseApprovalInputs releaseApprovalInputs,
@@ -1368,6 +1370,132 @@ public record ReleaseApprovalRehearsalResponse(
             boolean restoreExecutedByJava,
             boolean upstreamServiceAutoStartRequestedByJava,
             boolean miniKvWritePermissionRequestedByJava
+    ) {
+    }
+
+    public record RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker(
+            String markerVersion,
+            String sourceDisabledAdapterClientPrecheckEchoReceiptVersion,
+            String sourceDisabledAdapterClientPrecheckEchoReceiptSchemaVersion,
+            String consumedByNodeFakeTransportDryRunPacketVersion,
+            String consumedByNodeFakeTransportDryRunPacketProfile,
+            String consumedByNodeFakeTransportDryRunPacketEndpoint,
+            String consumedByNodeFakeTransportDryRunPacketState,
+            String consumedByNodeFakeTransportPacketArchiveVerificationVersion,
+            String consumedByNodeFakeTransportPacketArchiveVerificationProfile,
+            String consumedByNodeFakeTransportPacketArchiveVerificationEndpoint,
+            String consumedByNodeFakeTransportPacketArchiveVerificationState,
+            String nextNodeFakeTransportPacketUpstreamEchoVerificationVersion,
+            String nextNodeFakeTransportPacketUpstreamEchoVerificationProfile,
+            boolean nodeV257MayConsume,
+            String packetMode,
+            String sourceSpan,
+            RehearsalSandboxConnectionFakeTransportDryRunRequestShape requestShape,
+            RehearsalSandboxConnectionFakeTransportDryRunResponseShape responseShape,
+            RehearsalSandboxConnectionFakeTransportTimeoutBoundary timeoutBoundary,
+            RehearsalSandboxConnectionFakeTransportFailureMappingShape failureMappingShape,
+            RehearsalSandboxConnectionFakeTransportCleanupBoundary cleanupBoundary,
+            RehearsalSandboxConnectionFakeTransportSideEffectBoundary sideEffectBoundary,
+            boolean sourcePacketEchoed,
+            boolean requestShapeEchoed,
+            boolean responseShapeEchoed,
+            boolean timeoutBoundaryEchoed,
+            boolean failureMappingEchoed,
+            boolean cleanupBoundaryEchoed,
+            boolean sideEffectBoundaryEchoed,
+            boolean readyForNodeV257FakeTransportPacketUpstreamEchoVerification,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String markerDigest,
+            List<String> echoedRequestFieldNames,
+            List<String> echoedResponseFieldNames,
+            List<String> echoedFailureMappingCodes,
+            List<String> forbiddenFakeTransportOperations,
+            List<String> nodeV257Prerequisites,
+            List<String> markerWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionFakeTransportDryRunRequestShape(
+            String requestId,
+            String operation,
+            String transportKind,
+            String credentialHandle,
+            String endpointHandle,
+            String ownerApprovalArtifactId,
+            int timeoutBudgetMs,
+            boolean dryRun,
+            boolean fakeTransportOnly,
+            boolean credentialValueIncluded,
+            boolean rawEndpointUrlIncluded,
+            boolean payloadMayContainSecrets,
+            int requestShapeFieldCount
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionFakeTransportDryRunResponseShape(
+            String requestId,
+            String status,
+            String code,
+            boolean fakeTransportOnly,
+            int timeoutBudgetMs,
+            boolean connectionAttempted,
+            boolean externalRequestSent,
+            boolean credentialValueRead,
+            boolean schemaMigrationExecuted,
+            boolean productionRecordWritten,
+            int responseShapeFieldCount
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionFakeTransportTimeoutBoundary(
+            int timeoutBudgetMs,
+            boolean finiteBudget,
+            String budgetSource,
+            boolean budgetSpent,
+            boolean timerStarted,
+            boolean timeoutClassifiable
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionFakeTransportFailureMappingShape(
+            int sourceFailureMappingCount,
+            int mappedFailureCount,
+            int guardConditionCount,
+            boolean allFailuresNonRetryable,
+            boolean credentialValueRequestStillBlocked,
+            boolean manualWindowClosedStillBlocked,
+            boolean failureMappingCovered
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionFakeTransportCleanupBoundary(
+            boolean inMemoryOnly,
+            boolean temporaryDirectoryCreated,
+            boolean temporaryFileCreated,
+            boolean cleanupRequired,
+            int cleanupArtifactCount,
+            boolean cleanupVerified,
+            boolean nodeServiceStartedByPacket
+    ) {
+    }
+
+    public record RehearsalSandboxConnectionFakeTransportSideEffectBoundary(
+            boolean connectionAttempted,
+            boolean externalRequestSent,
+            boolean credentialValueRead,
+            boolean credentialValueStored,
+            boolean schemaMigrationExecuted,
+            boolean productionRecordWritten,
+            boolean approvalLedgerWritten,
+            boolean managedAuditStateWritten,
+            boolean sqlExecuted,
+            boolean javaStarted,
+            boolean miniKvStarted,
+            boolean externalAuditServiceStarted
     ) {
     }
 

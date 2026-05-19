@@ -96,6 +96,14 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt =
                         sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
                                 .build(managedAuditSandboxConnectionPrecheckPacketEchoReceipt);
+        ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder =
+                        new ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder();
+        ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+                managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker =
+                        sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                                .build(managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -121,7 +129,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
                 sandboxConnectionPrecheckPacketEchoReceiptBuilder,
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
-                sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
+                sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
+                managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
+                sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
         );
     }
 
@@ -177,7 +187,12 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                     .RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                     managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
             ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
-                    sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
+                    sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+                    managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
+            ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
+                    sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
     ) {
     }
 }

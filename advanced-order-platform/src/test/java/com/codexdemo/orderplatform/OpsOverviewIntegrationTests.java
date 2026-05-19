@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v24"))
+                        .value("java-release-approval-rehearsal-response-schema.v25"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1833,7 +1833,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v24"))
+                        .value("java-release-approval-rehearsal-response-schema.v25"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -2658,7 +2658,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v24"))
+                        .value("java-release-approval-rehearsal-response-schema.v25"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
@@ -3199,6 +3199,128 @@ class OpsOverviewIntegrationTests {
                         hasItem("managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.consumedByNodeDisabledAdapterClientPrecheckProfile with Node v252")));
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesFakeTransportDryRunPacketEchoMarker() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal")
+                        .header("X-Rehearsal-Request-Id", "rehearsal-v67-001")
+                        .header("X-Operator-Identity", "release-operator@example.test")
+                        .header("X-Audit-Correlation-Id", "audit-correlation-v67")
+                        .header("x-orderops-operator-id", "operator-198")
+                        .header("x-orderops-roles", "operator,auditor")
+                        .header("x-orderops-operator-verified", "true")
+                        .header("x-orderops-approval-correlation-id", "approval-v198-operator-window")
+                        .header("x-orderops-ci-manifest-version",
+                                "real-read-window-ci-archive-artifact-manifest.v1")
+                        .header("x-orderops-ci-manifest-digest", "sha256:node-v200-manifest-digest")
+                        .header("x-orderops-ci-manifest-endpoint",
+                                "/api/v1/production/real-read-window-ci-archive-artifact-manifest")
+                        .header("x-orderops-ci-artifact-record-count", "9")
+                        .header("x-orderops-ci-approval-correlation-id", "approval-v198-operator-window")
+                        .header("x-orderops-ci-upload-contract-version",
+                                "real-read-window-ci-artifact-upload-dry-run-contract.v1")
+                        .header("x-orderops-ci-upload-contract-digest",
+                                "sha256:node-v202-upload-contract-digest")
+                        .header("x-orderops-ci-artifact-name", "orderops-real-read-window-evidence-v191-v201")
+                        .header("x-orderops-ci-artifact-root", "c/")
+                        .header("x-orderops-ci-retention-days", "30")
+                        .header("x-orderops-ci-upload-mode", "dry-run-contract-only")
+                        .header("x-orderops-runtime-preflight-version",
+                                "three-project-real-read-runtime-smoke-preflight.v1")
+                        .header("x-orderops-runtime-preflight-digest",
+                                "sha256:node-v204-preflight-digest")
+                        .header("x-orderops-runtime-smoke-session-id",
+                                "runtime-smoke-v205-session-001")
+                        .header("x-orderops-runtime-read-target-id",
+                                "java-release-approval-rehearsal")
+                        .header("x-orderops-runtime-window-mode",
+                                "manual-open-window-plan")
+                        .header("x-orderops-managed-audit-candidate-version",
+                                "managed-audit-persistence-boundary-candidate.v1")
+                        .header("x-orderops-managed-audit-candidate-digest",
+                                "sha256:node-v208-managed-audit-candidate-digest")
+                        .header("x-orderops-managed-audit-sink-mode",
+                                "file-or-sqlite-dry-run-candidate")
+                        .header("x-orderops-managed-audit-retention-days", "30")
+                        .header("x-orderops-managed-audit-rotation-policy",
+                                "size-and-age-rotation-candidate")
+                        .header("x-orderops-approval-binding-contract-version",
+                                "managed-audit-identity-approval-binding-contract.v1")
+                        .header("x-orderops-approval-binding-contract-digest",
+                                "sha256:node-v210-approval-binding-digest")
+                        .header("x-orderops-approval-request-id", "approval-request-v210-001")
+                        .header("x-orderops-approval-decision-state", "APPROVED_DRY_RUN_ONLY")
+                        .header("x-orderops-approval-record-correlation-id",
+                                "approval-record-correlation-v210"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.markerVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-sandbox-connection-fake-transport-dry-run-packet-echo-marker.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.sourceDisabledAdapterClientPrecheckEchoReceiptSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v24"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.consumedByNodeFakeTransportDryRunPacketProfile")
+                        .value("managed-audit-manual-sandbox-connection-fake-transport-adapter-dry-run-verification-packet.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.consumedByNodeFakeTransportDryRunPacketState")
+                        .value("fake-transport-adapter-dry-run-verification-packet-ready"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.consumedByNodeFakeTransportPacketArchiveVerificationVersion")
+                        .value("Node v256"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.consumedByNodeFakeTransportPacketArchiveVerificationProfile")
+                        .value("managed-audit-manual-sandbox-connection-fake-transport-packet-archive-verification.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.nextNodeFakeTransportPacketUpstreamEchoVerificationVersion")
+                        .value("Node v257"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.requestShape.credentialValueIncluded")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.requestShape.rawEndpointUrlIncluded")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.requestShape.payloadMayContainSecrets")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.requestShape.requestShapeFieldCount")
+                        .value(8))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.requestShape.timeoutBudgetMs")
+                        .value(15000))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.status")
+                        .value("fake-transport-dry-run-accepted"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.code")
+                        .value("TEST_ONLY_FAKE_TRANSPORT_DRY_RUN"))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.connectionAttempted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.externalRequestSent")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.credentialValueRead")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.schemaMigrationExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.productionRecordWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.responseShapeFieldCount")
+                        .value(9))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.timeoutBoundary.budgetSpent")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.timeoutBoundary.timerStarted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.cleanupBoundary.cleanupArtifactCount")
+                        .value(0))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.cleanupBoundary.temporaryDirectoryCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.cleanupBoundary.temporaryFileCreated")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.sideEffectBoundary.javaStarted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.sideEffectBoundary.miniKvStarted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.readyForNodeV257FakeTransportPacketUpstreamEchoVerification")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.readyForManagedAuditSandboxAdapterConnection")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.markerWarnings").isEmpty())
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("sandboxConnectionFakeTransportDryRunPacketEchoMarkerDigest")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.cleanupBoundary.cleanupArtifactCount=0")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.consumedByNodeFakeTransportDryRunPacketProfile with Node v255")));
     }
 
     @Test

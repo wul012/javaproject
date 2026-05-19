@@ -237,4 +237,7 @@ PostgreSQL / RabbitMQ 的定期完整验证
 
 105-version-102-disabled-adapter-client-precheck-echo-receipt.md
  -> 第一百零二版 disabled adapter client precheck echo receipt，只读回显 Node v252 adapter client 前置检查形状，供 Node v254 校验，并继续阻断 credential value、真实 client、外部请求、连接、SQL、ledger、auto-start 和 mini-kv 写权限
+
+106-version-103-fake-transport-dry-run-packet-echo-marker.md
+ -> 第一百零三版 fake transport dry-run packet echo marker，只读回显 Node v255/v256 fake transport packet 的 request、response、timeout、cleanup 和 side-effect 边界，供 Node v257 校验，并继续阻断 credential value、真实连接、SQL、ledger、临时文件和 auto-start
 ```

@@ -102,6 +102,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_DISABLED_ADAPTER_CLIENT_PRECHECK_ECHO_RECEIPT_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-connection-disabled-adapter-client-precheck-echo-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_FAKE_TRANSPORT_DRY_RUN_PACKET_ECHO_MARKER_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-connection-fake-transport-dry-run-packet-echo-marker.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -156,6 +160,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PRECHECK_PACKET_ECHO_RECEIPT_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v23";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_DISABLED_ADAPTER_CLIENT_PRECHECK_ECHO_RECEIPT_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v24";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -163,7 +171,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v24";
+            "java-release-approval-rehearsal-response-schema.v25";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -383,6 +391,33 @@ public class OpsEvidenceService {
 
     static final String NODE_V254_DISABLED_ADAPTER_CLIENT_UPSTREAM_ECHO_VERIFICATION_PROFILE =
             "managed-audit-manual-sandbox-connection-disabled-adapter-client-upstream-echo-verification.v1";
+
+    static final String NODE_V255_FAKE_TRANSPORT_DRY_RUN_PACKET_VERSION = "Node v255";
+
+    static final String NODE_V255_FAKE_TRANSPORT_DRY_RUN_PACKET_PROFILE =
+            "managed-audit-manual-sandbox-connection-fake-transport-adapter-dry-run-verification-packet.v1";
+
+    static final String NODE_V255_FAKE_TRANSPORT_DRY_RUN_PACKET_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-fake-transport-adapter-dry-run-verification-packet";
+
+    static final String NODE_V255_FAKE_TRANSPORT_DRY_RUN_PACKET_STATE =
+            "fake-transport-adapter-dry-run-verification-packet-ready";
+
+    static final String NODE_V256_FAKE_TRANSPORT_PACKET_ARCHIVE_VERIFICATION_VERSION = "Node v256";
+
+    static final String NODE_V256_FAKE_TRANSPORT_PACKET_ARCHIVE_VERIFICATION_PROFILE =
+            "managed-audit-manual-sandbox-connection-fake-transport-packet-archive-verification.v1";
+
+    static final String NODE_V256_FAKE_TRANSPORT_PACKET_ARCHIVE_VERIFICATION_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-fake-transport-packet-archive-verification";
+
+    static final String NODE_V256_FAKE_TRANSPORT_PACKET_ARCHIVE_VERIFICATION_STATE =
+            "fake-transport-packet-archive-verification-ready";
+
+    static final String NODE_V257_FAKE_TRANSPORT_PACKET_UPSTREAM_ECHO_VERIFICATION_VERSION = "Node v257";
+
+    static final String NODE_V257_FAKE_TRANSPORT_PACKET_UPSTREAM_ECHO_VERIFICATION_PROFILE =
+            "managed-audit-manual-sandbox-connection-fake-transport-packet-upstream-echo-verification.v1";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";

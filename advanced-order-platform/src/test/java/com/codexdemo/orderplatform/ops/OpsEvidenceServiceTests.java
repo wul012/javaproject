@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v24");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v25");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2376,7 +2376,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v24");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v25");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2406,6 +2406,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt",
                         "managedAuditSandboxConnectionPrecheckPacketEchoReceipt",
                         "managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt",
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -2434,6 +2435,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxConnectionDryRunCommandPackageEchoReceiptWarnings",
                         "managedAuditSandboxConnectionPrecheckPacketEchoReceiptWarnings",
                         "managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptWarnings",
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -2559,6 +2561,20 @@ class OpsEvidenceServiceTests {
                         "sandboxConnectionDisabledAdapterClientPrecheckApprovalLedgerWrittenByJava",
                         "sandboxConnectionDisabledAdapterClientPrecheckUpstreamServiceAutoStartRequestedByJava",
                         "sandboxConnectionDisabledAdapterClientPrecheckMiniKvWritePermissionRequestedByJava",
+                        "sandboxConnectionFakeTransportDryRunPacketEchoMarkerDigest",
+                        "sandboxConnectionFakeTransportDryRunPacketRequestShapeFieldCount",
+                        "sandboxConnectionFakeTransportDryRunPacketResponseShapeFieldCount",
+                        "sandboxConnectionFakeTransportDryRunPacketFailureMappingCount",
+                        "sandboxConnectionFakeTransportDryRunPacketTimeoutBudgetMs",
+                        "sandboxConnectionFakeTransportDryRunPacketCleanupArtifactCount",
+                        "sandboxConnectionFakeTransportDryRunPacketConnectionAttempted",
+                        "sandboxConnectionFakeTransportDryRunPacketExternalRequestSent",
+                        "sandboxConnectionFakeTransportDryRunPacketCredentialValueRead",
+                        "sandboxConnectionFakeTransportDryRunPacketSchemaMigrationExecuted",
+                        "sandboxConnectionFakeTransportDryRunPacketProductionRecordWritten",
+                        "sandboxConnectionFakeTransportDryRunPacketJavaStarted",
+                        "sandboxConnectionFakeTransportDryRunPacketMiniKvStarted",
+                        "sandboxConnectionFakeTransportDryRunPacketExternalAuditServiceStarted",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -2642,6 +2658,8 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false",
                         "managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.precheckShape.requiredEnvHandleCount=5",
                         "managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false",
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.requestShape.requestShapeFieldCount=8",
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.cleanupBoundary.cleanupArtifactCount=0",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -2673,6 +2691,8 @@ class OpsEvidenceServiceTests {
                         "Require managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.readyForNodeV237ManualSandboxConnectionReadinessGate=true before Node v237",
                         "Compare managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.consumedByNodeOperatorWindowChecklistProfile with Node v238",
                         "Require managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.readyForNodeV239ManualSandboxConnectionEvidenceVerification=true before Node v239",
+                        "Compare managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.consumedByNodeFakeTransportDryRunPacketProfile with Node v255",
+                        "Require managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.readyForNodeV257FakeTransportPacketUpstreamEchoVerification=true before Node v257",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
@@ -3348,7 +3368,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v24");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v25");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -3814,6 +3834,214 @@ class OpsEvidenceServiceTests {
                 service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(repeated.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt().receiptDigest())
                 .isEqualTo(receipt.receiptDigest());
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesFakeTransportDryRunPacketEchoMarker() {
+        when(failedEventSummaryService.summary()).thenReturn(new FailedEventSummaryResponse(
+                Instant.parse("2026-05-12T01:10:00Z"),
+                4,
+                2,
+                1,
+                1,
+                Instant.parse("2026-05-12T01:00:00Z"),
+                Instant.parse("2026-05-12T01:05:00Z"),
+                3
+        ));
+        when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
+        OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
+        outboxPublisherProperties.setEnabled(false);
+        OutboxRabbitMqProperties outboxRabbitMqProperties = new OutboxRabbitMqProperties();
+        outboxRabbitMqProperties.setEnabled(false);
+        outboxRabbitMqProperties.setExchange("order-platform.outbox");
+        outboxRabbitMqProperties.setQueue("order-platform.outbox.events");
+        outboxRabbitMqProperties.setDeadLetterQueue("order-platform.outbox.events.dlq");
+        MockEnvironment environment = new MockEnvironment()
+                .withProperty("spring.application.name", "advanced-order-platform")
+                .withProperty("info.app.version", "0.1.0-test");
+        environment.setActiveProfiles("local", "ops");
+        OpsEvidenceService service = new OpsEvidenceService(
+                failedEventSummaryService,
+                outboxRepository,
+                outboxPublisherProperties,
+                outboxRabbitMqProperties,
+                idempotencyStore,
+                environment
+        );
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+
+        ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+                marker = rehearsal.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker();
+        assertThat(marker.markerVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-connection-fake-transport-dry-run-packet-echo-marker.v1"
+                );
+        assertThat(marker.sourceDisabledAdapterClientPrecheckEchoReceiptSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v24");
+        assertThat(marker.consumedByNodeFakeTransportDryRunPacketVersion()).isEqualTo("Node v255");
+        assertThat(marker.consumedByNodeFakeTransportDryRunPacketProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-fake-transport-adapter-dry-run-verification-packet.v1"
+                );
+        assertThat(marker.consumedByNodeFakeTransportDryRunPacketEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-fake-transport-adapter-dry-run-verification-packet"
+                );
+        assertThat(marker.consumedByNodeFakeTransportDryRunPacketState())
+                .isEqualTo("fake-transport-adapter-dry-run-verification-packet-ready");
+        assertThat(marker.consumedByNodeFakeTransportPacketArchiveVerificationVersion()).isEqualTo("Node v256");
+        assertThat(marker.consumedByNodeFakeTransportPacketArchiveVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-fake-transport-packet-archive-verification.v1"
+                );
+        assertThat(marker.consumedByNodeFakeTransportPacketArchiveVerificationState())
+                .isEqualTo("fake-transport-packet-archive-verification-ready");
+        assertThat(marker.nextNodeFakeTransportPacketUpstreamEchoVerificationVersion()).isEqualTo("Node v257");
+        assertThat(marker.nextNodeFakeTransportPacketUpstreamEchoVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-fake-transport-packet-upstream-echo-verification.v1"
+                );
+        assertThat(marker.nodeV257MayConsume()).isTrue();
+        assertThat(marker.packetMode()).isEqualTo("fake-transport-adapter-dry-run-verification-only");
+        assertThat(marker.sourceSpan()).isEqualTo("Node v253 + Node v254 + Node v255 + Node v256");
+        assertThat(marker.requestShape().requestId()).isEqualTo("managed-audit-v255-fake-transport-dry-run");
+        assertThat(marker.requestShape().transportKind()).isEqualTo("fake-in-memory");
+        assertThat(marker.requestShape().credentialHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE");
+        assertThat(marker.requestShape().endpointHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_ENDPOINT_HANDLE");
+        assertThat(marker.requestShape().ownerApprovalArtifactId())
+                .isEqualTo("owner-approval-artifact-review-only");
+        assertThat(marker.requestShape().timeoutBudgetMs()).isEqualTo(15000);
+        assertThat(marker.requestShape().dryRun()).isTrue();
+        assertThat(marker.requestShape().fakeTransportOnly()).isTrue();
+        assertThat(marker.requestShape().credentialValueIncluded()).isFalse();
+        assertThat(marker.requestShape().rawEndpointUrlIncluded()).isFalse();
+        assertThat(marker.requestShape().payloadMayContainSecrets()).isFalse();
+        assertThat(marker.requestShape().requestShapeFieldCount()).isEqualTo(8);
+        assertThat(marker.responseShape().status()).isEqualTo("fake-transport-dry-run-accepted");
+        assertThat(marker.responseShape().code()).isEqualTo("TEST_ONLY_FAKE_TRANSPORT_DRY_RUN");
+        assertThat(marker.responseShape().fakeTransportOnly()).isTrue();
+        assertThat(marker.responseShape().timeoutBudgetMs()).isEqualTo(15000);
+        assertThat(marker.responseShape().connectionAttempted()).isFalse();
+        assertThat(marker.responseShape().externalRequestSent()).isFalse();
+        assertThat(marker.responseShape().credentialValueRead()).isFalse();
+        assertThat(marker.responseShape().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.responseShape().productionRecordWritten()).isFalse();
+        assertThat(marker.responseShape().responseShapeFieldCount()).isEqualTo(9);
+        assertThat(marker.timeoutBoundary().finiteBudget()).isTrue();
+        assertThat(marker.timeoutBoundary().budgetSource()).isEqualTo("operator-review-field");
+        assertThat(marker.timeoutBoundary().budgetSpent()).isFalse();
+        assertThat(marker.timeoutBoundary().timerStarted()).isFalse();
+        assertThat(marker.timeoutBoundary().timeoutClassifiable()).isTrue();
+        assertThat(marker.failureMappingShape().sourceFailureMappingCount()).isEqualTo(6);
+        assertThat(marker.failureMappingShape().mappedFailureCount()).isEqualTo(6);
+        assertThat(marker.failureMappingShape().guardConditionCount()).isEqualTo(7);
+        assertThat(marker.failureMappingShape().allFailuresNonRetryable()).isTrue();
+        assertThat(marker.failureMappingShape().credentialValueRequestStillBlocked()).isTrue();
+        assertThat(marker.failureMappingShape().manualWindowClosedStillBlocked()).isTrue();
+        assertThat(marker.failureMappingShape().failureMappingCovered()).isTrue();
+        assertThat(marker.cleanupBoundary().inMemoryOnly()).isTrue();
+        assertThat(marker.cleanupBoundary().temporaryDirectoryCreated()).isFalse();
+        assertThat(marker.cleanupBoundary().temporaryFileCreated()).isFalse();
+        assertThat(marker.cleanupBoundary().cleanupRequired()).isFalse();
+        assertThat(marker.cleanupBoundary().cleanupArtifactCount()).isEqualTo(0);
+        assertThat(marker.cleanupBoundary().cleanupVerified()).isTrue();
+        assertThat(marker.cleanupBoundary().nodeServiceStartedByPacket()).isFalse();
+        assertThat(marker.sideEffectBoundary().connectionAttempted()).isFalse();
+        assertThat(marker.sideEffectBoundary().externalRequestSent()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueRead()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueStored()).isFalse();
+        assertThat(marker.sideEffectBoundary().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.sideEffectBoundary().productionRecordWritten()).isFalse();
+        assertThat(marker.sideEffectBoundary().approvalLedgerWritten()).isFalse();
+        assertThat(marker.sideEffectBoundary().managedAuditStateWritten()).isFalse();
+        assertThat(marker.sideEffectBoundary().sqlExecuted()).isFalse();
+        assertThat(marker.sideEffectBoundary().javaStarted()).isFalse();
+        assertThat(marker.sideEffectBoundary().miniKvStarted()).isFalse();
+        assertThat(marker.sideEffectBoundary().externalAuditServiceStarted()).isFalse();
+        assertThat(marker.readyForNodeV257FakeTransportPacketUpstreamEchoVerification()).isTrue();
+        assertThat(marker.readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(marker.readyForProductionAudit()).isFalse();
+        assertThat(marker.readyForProductionWindow()).isFalse();
+        assertThat(marker.nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(marker.markerWarnings()).isEmpty();
+        assertThat(marker.markerDigest()).startsWith("sha256:");
+        assertThat(marker.echoedRequestFieldNames())
+                .contains("credentialValueIncluded", "rawEndpointUrlIncluded", "payloadMayContainSecrets");
+        assertThat(marker.echoedResponseFieldNames())
+                .contains(
+                        "connectionAttempted",
+                        "externalRequestSent",
+                        "credentialValueRead",
+                        "schemaMigrationExecuted",
+                        "productionRecordWritten"
+                );
+        assertThat(marker.echoedFailureMappingCodes())
+                .containsExactly(
+                        "ADAPTER_CLIENT_DISABLED",
+                        "CREDENTIAL_HANDLE_MISSING",
+                        "CREDENTIAL_VALUE_REQUESTED",
+                        "ENDPOINT_HANDLE_MISSING",
+                        "SCHEMA_REHEARSAL_MISSING",
+                        "MANUAL_WINDOW_NOT_OPEN"
+                );
+        assertThat(marker.forbiddenFakeTransportOperations())
+                .contains(
+                        "instantiate real managed audit adapter client",
+                        "include raw endpoint URL",
+                        "create temporary dry-run directory or file"
+                );
+        assertThat(marker.nodeV257Prerequisites())
+                .contains(
+                        "Java v103 fake transport dry-run packet echo marker is present",
+                        "mini-kv v112 fake transport dry-run packet non-participation receipt is present",
+                        "UPSTREAM_ACTIONS_ENABLED remains false"
+                );
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerWarnings",
+                        "sandboxConnectionFakeTransportDryRunPacketEchoMarkerDigest",
+                        "sandboxConnectionFakeTransportDryRunPacketCleanupArtifactCount"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.requestShape.requestShapeFieldCount=8",
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.responseShape.responseShapeFieldCount=9",
+                        "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.cleanupBoundary.cleanupArtifactCount=0"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.consumedByNodeFakeTransportDryRunPacketProfile with Node v255",
+                        "Require managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker.readyForNodeV257FakeTransportPacketUpstreamEchoVerification=true before Node v257"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker().markerDigest())
+                .isEqualTo(marker.markerDigest());
     }
 
     private ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {

@@ -81,4 +81,7 @@ c/101/解释/说明.md
 
 c/102/解释/说明.md
  -> Java v102 disabled adapter client precheck echo receipt，只读回显 Node v252 env handles / opt-in gate / failure taxonomy / dry-run response shape，并继续阻断 credential value、真实 client、外部请求、连接、SQL、ledger、auto-start 和 mini-kv 写权限
+
+c/103/解释/说明.md
+ -> Java v103 fake transport dry-run packet echo marker，只读回显 Node v255/v256 fake transport packet 的 request / response / timeout / cleanup / side-effect 边界，并继续阻断 credential value、raw endpoint、真实连接、SQL、ledger、临时文件、auto-start 和 mini-kv 写权限
 ```
