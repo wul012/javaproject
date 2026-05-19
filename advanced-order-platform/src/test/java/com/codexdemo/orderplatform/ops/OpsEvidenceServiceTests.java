@@ -972,7 +972,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v26");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v27");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2376,7 +2376,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v26");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v27");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2437,6 +2437,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptWarnings",
                         "managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerWarnings",
                         "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -2591,6 +2592,18 @@ class OpsEvidenceServiceTests {
                         "sandboxEndpointHandlePreflightConnectsManagedAudit",
                         "sandboxEndpointHandlePreflightJavaStarted",
                         "sandboxEndpointHandlePreflightMiniKvStarted",
+                        "sandboxEndpointCredentialResolverDecisionEchoMarkerDigest",
+                        "sandboxEndpointCredentialResolverDecisionRequiredFieldCount",
+                        "sandboxEndpointCredentialResolverDecisionNoGoConditionCount",
+                        "sandboxEndpointCredentialResolverDecisionCredentialValueMayBeRead",
+                        "sandboxEndpointCredentialResolverDecisionCredentialValueMayBeLoaded",
+                        "sandboxEndpointCredentialResolverDecisionCredentialValueMayBeStored",
+                        "sandboxEndpointCredentialResolverDecisionRawEndpointUrlMayBeParsed",
+                        "sandboxEndpointCredentialResolverDecisionExternalRequestMayBeSent",
+                        "sandboxEndpointCredentialResolverDecisionManagedAuditConnectionMayOpen",
+                        "sandboxEndpointCredentialResolverDecisionSchemaMigrationMayExecute",
+                        "sandboxEndpointCredentialResolverDecisionApprovalLedgerMayBeWritten",
+                        "sandboxEndpointCredentialResolverDecisionJavaOrMiniKvStartAllowed",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -3384,7 +3397,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v26");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v27");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -4293,6 +4306,274 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse repeated =
                 service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(repeated.managedAuditSandboxEndpointHandlePreflightEchoMarker().markerDigest())
+                .isEqualTo(marker.markerDigest());
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesSandboxEndpointCredentialResolverDecisionEchoMarker() {
+        when(failedEventSummaryService.summary()).thenReturn(new FailedEventSummaryResponse(
+                Instant.parse("2026-05-12T01:10:00Z"),
+                4,
+                2,
+                1,
+                1,
+                Instant.parse("2026-05-12T01:00:00Z"),
+                Instant.parse("2026-05-12T01:05:00Z"),
+                3
+        ));
+        when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
+        OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
+        outboxPublisherProperties.setEnabled(false);
+        OutboxRabbitMqProperties outboxRabbitMqProperties = new OutboxRabbitMqProperties();
+        outboxRabbitMqProperties.setEnabled(false);
+        outboxRabbitMqProperties.setExchange("order-platform.outbox");
+        outboxRabbitMqProperties.setQueue("order-platform.outbox.events");
+        outboxRabbitMqProperties.setDeadLetterQueue("order-platform.outbox.events.dlq");
+        MockEnvironment environment = new MockEnvironment()
+                .withProperty("spring.application.name", "advanced-order-platform")
+                .withProperty("info.app.version", "0.1.0-test");
+        environment.setActiveProfiles("local", "ops");
+        OpsEvidenceService service = new OpsEvidenceService(
+                failedEventSummaryService,
+                outboxRepository,
+                outboxPublisherProperties,
+                outboxRabbitMqProperties,
+                idempotencyStore,
+                environment
+        );
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+
+        ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker =
+                rehearsal.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker();
+        assertThat(marker.markerVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-decision-echo-marker.v1"
+                );
+        assertThat(marker.sourceEndpointHandlePreflightEchoMarkerSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v26");
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordVersion())
+                .isEqualTo("Node v260");
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-decision-record.v1"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-decision-record"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordMarkdownEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-decision-record?format=markdown"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordState())
+                .isEqualTo("sandbox-endpoint-credential-resolver-decision-record-ready");
+        assertThat(marker.sourceNodeSandboxEndpointHandleUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v259");
+        assertThat(marker.sourceNodeSandboxEndpointHandleUpstreamEchoVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-handle-upstream-echo-verification.v1"
+                );
+        assertThat(marker.sourceNodeSandboxEndpointHandleUpstreamEchoVerificationEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-handle-upstream-echo-verification"
+                );
+        assertThat(marker.sourceNodeSandboxEndpointHandleUpstreamEchoVerificationState())
+                .isEqualTo("sandbox-endpoint-handle-upstream-echo-verification-ready");
+        assertThat(marker.nextNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v261");
+        assertThat(marker.nextNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-upstream-echo-verification.v1"
+                );
+        assertThat(marker.nodeV261MayConsume()).isTrue();
+        assertThat(marker.recordMode()).isEqualTo("sandbox-endpoint-credential-resolver-decision-record-only");
+        assertThat(marker.sourceSpan()).isEqualTo("Node v259 sandbox endpoint handle upstream echo verification");
+        assertThat(marker.sourceNodeV259().sourceVersion()).isEqualTo("Node v259");
+        assertThat(marker.sourceNodeV259().verificationState())
+                .isEqualTo("sandbox-endpoint-handle-upstream-echo-verification-ready");
+        assertThat(marker.sourceNodeV259().endpointHandleAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().credentialHandleAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().reviewCountsAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().policyReviewsAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().operatorWindowAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().credentialBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().rawEndpointBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().connectionBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().writeBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().autoStartBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().miniKvNonParticipationAligned()).isTrue();
+        assertThat(marker.sourceNodeV259().nodeV259BlocksRealConnection()).isTrue();
+        assertThat(marker.sourceNodeV259().evidenceFileCount()).isEqualTo(6);
+        assertThat(marker.sourceNodeV259().matchedSnippetCount()).isEqualTo(39);
+        assertThat(marker.sourceNodeV259().checkCount()).isEqualTo(19);
+        assertThat(marker.sourceNodeV259().passedCheckCount()).isEqualTo(19);
+        assertThat(marker.sourceNodeV259().productionBlockerCount()).isZero();
+        assertThat(marker.sourceNodeV259().warningCount()).isEqualTo(2);
+        assertThat(marker.sourceNodeV259().recommendationCount()).isEqualTo(2);
+        assertThat(marker.sourceNodeV259().sourceNodeV258Ready()).isTrue();
+        assertThat(marker.sourceNodeV259().javaV104Ready()).isTrue();
+        assertThat(marker.sourceNodeV259().miniKvV113Ready()).isTrue();
+        assertThat(marker.sourceNodeV259().readyForNodeV260CredentialResolverDecisionRecord()).isTrue();
+        assertThat(marker.decisionRecord().decisionDigest()).startsWith("sha256:");
+        assertThat(marker.decisionRecord().recordMode())
+                .isEqualTo("sandbox-endpoint-credential-resolver-decision-record-only");
+        assertThat(marker.decisionRecord().decisionScope())
+                .isEqualTo("managed-audit-sandbox-endpoint-credential-resolver");
+        assertThat(marker.decisionRecord().decisionStatus())
+                .isEqualTo("human-review-required-before-credential-resolution");
+        assertThat(marker.decisionRecord().endpointHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_ENDPOINT_HANDLE");
+        assertThat(marker.decisionRecord().credentialHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE");
+        assertThat(marker.decisionRecord().resolverPolicyHandle())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_RESOLVER_POLICY_HANDLE");
+        assertThat(marker.decisionRecord().approvalMarker())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_CREDENTIAL_RESOLVER_APPROVAL_MARKER");
+        assertThat(marker.decisionRecord().operatorIdentityRequired()).isTrue();
+        assertThat(marker.decisionRecord().approvalCorrelationRequired()).isTrue();
+        assertThat(marker.decisionRecord().resolverMode()).isEqualTo("policy-record-only-no-value-read");
+        assertThat(marker.decisionRecord().resolverCandidateImplementation()).isEqualTo("not-implemented");
+        assertThat(marker.decisionRecord().requiredDecisionFieldCount()).isEqualTo(8);
+        assertThat(marker.decisionRecord().explicitNoGoConditionCount()).isEqualTo(9);
+        assertThat(marker.decisionRecord().requiredDecisionFields())
+                .extracting(ReleaseApprovalRehearsalResponse
+                        .RehearsalSandboxEndpointCredentialResolverDecisionField::id)
+                .containsExactly(
+                        "endpoint-handle",
+                        "credential-handle",
+                        "resolver-policy-handle",
+                        "approval-marker",
+                        "operator-identity",
+                        "approval-correlation",
+                        "redaction-policy",
+                        "fallback-rotation-plan"
+                );
+        assertThat(marker.decisionRecord().requiredDecisionFields())
+                .allMatch(field -> field.required() && !field.nodeMayReadValue());
+        assertThat(marker.decisionRecord().explicitNoGoConditions())
+                .extracting(ReleaseApprovalRehearsalResponse
+                        .RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
+                .containsExactly(
+                        "CREDENTIAL_VALUE_REQUIRED",
+                        "RAW_ENDPOINT_URL_REQUIRED",
+                        "REAL_CONNECTION_REQUIRED",
+                        "EXTERNAL_REQUEST_REQUIRED",
+                        "SCHEMA_MIGRATION_REQUIRED",
+                        "UPSTREAM_WRITE_REQUIRED",
+                        "AUTO_START_REQUIRED",
+                        "MINI_KV_BACKEND_REQUIRED",
+                        "PRODUCTION_WINDOW_REQUIRED"
+                );
+        assertThat(marker.decisionRecord().explicitNoGoConditions())
+                .allMatch(noGoCondition -> !noGoCondition.allowed());
+        assertThat(marker.decisionRecord().credentialValueMayBeRead()).isFalse();
+        assertThat(marker.decisionRecord().credentialValueMayBeLoaded()).isFalse();
+        assertThat(marker.decisionRecord().credentialValueMayBeStored()).isFalse();
+        assertThat(marker.decisionRecord().rawEndpointUrlMayBeParsed()).isFalse();
+        assertThat(marker.decisionRecord().managedAuditConnectionMayOpen()).isFalse();
+        assertThat(marker.decisionRecord().schemaMigrationMayExecute()).isFalse();
+        assertThat(marker.decisionRecord().externalRequestMayBeSent()).isFalse();
+        assertThat(marker.decisionRecord().nodeMayStartJavaOrMiniKv()).isFalse();
+        assertThat(marker.decisionRecord().miniKvMayActAsManagedAuditStorage()).isFalse();
+        assertThat(marker.decisionRecord().approvalLedgerMayBeWritten()).isFalse();
+        assertThat(marker.sideEffectBoundary().readOnlyDecisionRecord()).isTrue();
+        assertThat(marker.sideEffectBoundary().credentialResolverDecisionOnly()).isTrue();
+        assertThat(marker.sideEffectBoundary().executionAllowed()).isFalse();
+        assertThat(marker.sideEffectBoundary().connectsManagedAudit()).isFalse();
+        assertThat(marker.sideEffectBoundary().readsManagedAuditCredential()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueRead()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueLoaded()).isFalse();
+        assertThat(marker.sideEffectBoundary().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.sideEffectBoundary().externalRequestSent()).isFalse();
+        assertThat(marker.sideEffectBoundary().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.sideEffectBoundary().automaticUpstreamStart()).isFalse();
+        assertThat(marker.sideEffectBoundary().approvalLedgerWritten()).isFalse();
+        assertThat(marker.sideEffectBoundary().javaStarted()).isFalse();
+        assertThat(marker.sideEffectBoundary().miniKvStarted()).isFalse();
+        assertThat(marker.sourceNodeV259Echoed()).isTrue();
+        assertThat(marker.decisionFieldsEchoed()).isTrue();
+        assertThat(marker.endpointHandleEchoed()).isTrue();
+        assertThat(marker.credentialHandleEchoed()).isTrue();
+        assertThat(marker.resolverPolicyEchoed()).isTrue();
+        assertThat(marker.approvalMarkerEchoed()).isTrue();
+        assertThat(marker.operatorIdentityRequirementEchoed()).isTrue();
+        assertThat(marker.approvalCorrelationRequirementEchoed()).isTrue();
+        assertThat(marker.redactionPolicyEchoed()).isTrue();
+        assertThat(marker.fallbackRotationPlanEchoed()).isTrue();
+        assertThat(marker.explicitNoGoConditionsEchoed()).isTrue();
+        assertThat(marker.sideEffectBoundaryEchoed()).isTrue();
+        assertThat(marker.readyForNodeV261SandboxEndpointCredentialResolverUpstreamEchoVerification()).isTrue();
+        assertThat(marker.readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(marker.readyForProductionAudit()).isFalse();
+        assertThat(marker.readyForProductionWindow()).isFalse();
+        assertThat(marker.nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(marker.requiredDecisionFieldIds()).containsExactlyElementsOf(
+                marker.decisionRecord().requiredDecisionFields().stream()
+                        .map(ReleaseApprovalRehearsalResponse
+                                .RehearsalSandboxEndpointCredentialResolverDecisionField::id)
+                        .toList()
+        );
+        assertThat(marker.explicitNoGoConditionCodes()).containsExactlyElementsOf(
+                marker.decisionRecord().explicitNoGoConditions().stream()
+                        .map(ReleaseApprovalRehearsalResponse
+                                .RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
+                        .toList()
+        );
+        assertThat(marker.nodeWarningCodes())
+                .containsExactly("DECISION_RECORD_ONLY", "REAL_CREDENTIAL_STILL_ABSENT");
+        assertThat(marker.nodeRecommendationCodes())
+                .containsExactly("START_POST_V260_PLAN", "DESIGN_DISABLED_RESOLVER_PRECHECK_LATER");
+        assertThat(marker.nextRequiredEchoVersions())
+                .contains(
+                        "Java v105 sandbox endpoint credential resolver decision echo marker",
+                        "mini-kv v114 sandbox endpoint credential resolver non-participation receipt"
+                );
+        assertThat(marker.markerWarnings()).isEmpty();
+        assertThat(marker.markerDigest()).startsWith("sha256:");
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerWarnings",
+                        "sandboxEndpointCredentialResolverDecisionEchoMarkerDigest",
+                        "sandboxEndpointCredentialResolverDecisionRawEndpointUrlMayBeParsed"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.requiredDecisionFieldCount=8",
+                        "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.credentialValueMayBeRead=false",
+                        "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.readyForManagedAuditSandboxAdapterConnection=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordProfile with Node v260",
+                        "Require managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.readyForNodeV261SandboxEndpointCredentialResolverUpstreamEchoVerification=true before Node v261",
+                        "Keep managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sideEffectBoundary.externalRequestSent=false"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker().markerDigest())
                 .isEqualTo(marker.markerDigest());
     }
 

@@ -2863,6 +2863,7 @@ ops
   -> v102 adds release approval rehearsal disabled adapter client precheck echo receipt for Node v252/v254 while keeping credential values, real client instantiation, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv writes blocked
   -> v103 adds release approval rehearsal fake transport dry-run packet echo marker for Node v255/v257 while keeping credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, temp files, auto-start, and mini-kv writes blocked
   -> v104 adds release approval rehearsal sandbox endpoint handle preflight echo marker for Node v258/v259 while keeping credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv managed-audit storage blocked
+  -> v105 adds release approval rehearsal sandbox endpoint credential resolver decision echo marker for Node v260/v261 while echoing only handles, policy markers, no-go conditions, and read-only boundaries; Java still blocks resolver execution, credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, auto-start, and mini-kv managed-audit storage
 
 common
  -> 业务异常和统一错误响应

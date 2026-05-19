@@ -242,6 +242,13 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> 第一百零三版 fake transport dry-run packet echo marker，只读回显 Node v255/v256 fake transport packet 的 request、response、timeout、cleanup 和 side-effect 边界，供 Node v257 校验，并继续阻断 credential value、真实连接、SQL、ledger、临时文件和 auto-start
 ```
 
+## v105 update
+
+```text
+108-version-105-sandbox-endpoint-credential-resolver-decision-echo-marker.md
+ -> 绗竴鐧鹃浂浜斾簲 sandbox endpoint credential resolver decision echo marker锛屽彧璇诲洖鏄?Node v260 decision record、Node v259 upstream echo verification、8 个决策字段、9 个 no-go 条件和 side-effect 边界；继续阻断 resolver 执行、credential value、raw endpoint、外部请求、managed-audit connection、SQL、ledger、auto-start 和 mini-kv 托管存储
+```
+
 ## v104 update
 
 ```text

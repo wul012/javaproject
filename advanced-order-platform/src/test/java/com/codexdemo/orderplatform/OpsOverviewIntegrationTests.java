@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v26"))
+                        .value("java-release-approval-rehearsal-response-schema.v27"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1833,7 +1833,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v26"))
+                        .value("java-release-approval-rehearsal-response-schema.v27"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -2658,7 +2658,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v26"))
+                        .value("java-release-approval-rehearsal-response-schema.v27"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
@@ -3447,6 +3447,132 @@ class OpsOverviewIntegrationTests {
                         hasItem("managedAuditSandboxEndpointHandlePreflightEchoMarker.sideEffectBoundary.rawEndpointUrlParsed=false")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare managedAuditSandboxEndpointHandlePreflightEchoMarker.consumedByNodeSandboxEndpointHandlePreflightReviewProfile with Node v258")));
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesSandboxEndpointCredentialResolverDecisionEchoMarker() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal")
+                        .header("X-Rehearsal-Request-Id", "rehearsal-v67-001")
+                        .header("X-Operator-Identity", "release-operator@example.test")
+                        .header("X-Audit-Correlation-Id", "audit-correlation-v67")
+                        .header("x-orderops-operator-id", "operator-198")
+                        .header("x-orderops-roles", "operator,auditor")
+                        .header("x-orderops-operator-verified", "true")
+                        .header("x-orderops-approval-correlation-id", "approval-v198-operator-window")
+                        .header("x-orderops-ci-manifest-version",
+                                "real-read-window-ci-archive-artifact-manifest.v1")
+                        .header("x-orderops-ci-manifest-digest", "sha256:node-v200-manifest-digest")
+                        .header("x-orderops-ci-manifest-endpoint",
+                                "/api/v1/production/real-read-window-ci-archive-artifact-manifest")
+                        .header("x-orderops-ci-artifact-record-count", "9")
+                        .header("x-orderops-ci-approval-correlation-id", "approval-v198-operator-window")
+                        .header("x-orderops-ci-upload-contract-version",
+                                "real-read-window-ci-artifact-upload-dry-run-contract.v1")
+                        .header("x-orderops-ci-upload-contract-digest",
+                                "sha256:node-v202-upload-contract-digest")
+                        .header("x-orderops-ci-artifact-name", "orderops-real-read-window-evidence-v191-v201")
+                        .header("x-orderops-ci-artifact-root", "c/")
+                        .header("x-orderops-ci-retention-days", "30")
+                        .header("x-orderops-ci-upload-mode", "dry-run-contract-only")
+                        .header("x-orderops-runtime-preflight-version",
+                                "three-project-real-read-runtime-smoke-preflight.v1")
+                        .header("x-orderops-runtime-preflight-digest",
+                                "sha256:node-v204-preflight-digest")
+                        .header("x-orderops-runtime-smoke-session-id",
+                                "runtime-smoke-v205-session-001")
+                        .header("x-orderops-runtime-read-target-id",
+                                "java-release-approval-rehearsal")
+                        .header("x-orderops-runtime-window-mode",
+                                "manual-open-window-plan")
+                        .header("x-orderops-managed-audit-candidate-version",
+                                "managed-audit-persistence-boundary-candidate.v1")
+                        .header("x-orderops-managed-audit-candidate-digest",
+                                "sha256:node-v208-managed-audit-candidate-digest")
+                        .header("x-orderops-managed-audit-sink-mode",
+                                "file-or-sqlite-dry-run-candidate")
+                        .header("x-orderops-managed-audit-retention-days", "30")
+                        .header("x-orderops-managed-audit-rotation-policy",
+                                "size-and-age-rotation-candidate")
+                        .header("x-orderops-approval-binding-contract-version",
+                                "managed-audit-identity-approval-binding-contract.v1")
+                        .header("x-orderops-approval-binding-contract-digest",
+                                "sha256:node-v210-approval-binding-digest")
+                        .header("x-orderops-approval-request-id", "approval-request-v210-001")
+                        .header("x-orderops-approval-decision-state", "APPROVED_DRY_RUN_ONLY")
+                        .header("x-orderops-approval-record-correlation-id",
+                                "approval-record-correlation-v210"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.markerVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-decision-echo-marker.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sourceEndpointHandlePreflightEchoMarkerSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v26"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordVersion")
+                        .value("Node v260"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordProfile")
+                        .value("managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-decision-record.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordEndpoint")
+                        .value("/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-decision-record"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordMarkdownEndpoint")
+                        .value("/api/v1/audit/managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-decision-record?format=markdown"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordState")
+                        .value("sandbox-endpoint-credential-resolver-decision-record-ready"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sourceNodeSandboxEndpointHandleUpstreamEchoVerificationVersion")
+                        .value("Node v259"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sourceNodeSandboxEndpointHandleUpstreamEchoVerificationState")
+                        .value("sandbox-endpoint-handle-upstream-echo-verification-ready"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.nextNodeSandboxEndpointCredentialResolverUpstreamEchoVerificationVersion")
+                        .value("Node v261"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sourceNodeV259.evidenceFileCount")
+                        .value(6))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sourceNodeV259.matchedSnippetCount")
+                        .value(39))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sourceNodeV259.checkCount")
+                        .value(19))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.requiredDecisionFieldCount")
+                        .value(8))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.explicitNoGoConditionCount")
+                        .value(9))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.endpointHandle")
+                        .value("ORDEROPS_MANAGED_AUDIT_SANDBOX_ENDPOINT_HANDLE"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.credentialHandle")
+                        .value("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.resolverPolicyHandle")
+                        .value("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_RESOLVER_POLICY_HANDLE"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.approvalMarker")
+                        .value("ORDEROPS_MANAGED_AUDIT_CREDENTIAL_RESOLVER_APPROVAL_MARKER"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.resolverMode")
+                        .value("policy-record-only-no-value-read"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.resolverCandidateImplementation")
+                        .value("not-implemented"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.requiredDecisionFields[*].id",
+                        hasItem("fallback-rotation-plan")))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.explicitNoGoConditions[*].code",
+                        hasItem("CREDENTIAL_VALUE_REQUIRED")))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.credentialValueMayBeRead")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.rawEndpointUrlMayBeParsed")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.externalRequestMayBeSent")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sideEffectBoundary.credentialValueRead")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sideEffectBoundary.rawEndpointUrlParsed")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sideEffectBoundary.externalRequestSent")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.readyForNodeV261SandboxEndpointCredentialResolverUpstreamEchoVerification")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.readyForManagedAuditSandboxAdapterConnection")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.markerWarnings").isEmpty())
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("sandboxEndpointCredentialResolverDecisionEchoMarkerDigest")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.decisionRecord.credentialValueMayBeRead=false")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.consumedByNodeSandboxEndpointCredentialResolverDecisionRecordProfile with Node v260")));
     }
 
     @Test

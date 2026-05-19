@@ -112,6 +112,14 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointHandlePreflightEchoMarker =
                         sandboxEndpointHandlePreflightEchoMarkerBuilder
                                 .build(managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker);
+        ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
+                sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder =
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder();
+        ReleaseApprovalRehearsalResponse
+                .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+                managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker =
+                        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
+                                .build(managedAuditSandboxEndpointHandlePreflightEchoMarker);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -141,7 +149,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
                 sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
                 managedAuditSandboxEndpointHandlePreflightEchoMarker,
-                sandboxEndpointHandlePreflightEchoMarkerBuilder
+                sandboxEndpointHandlePreflightEchoMarkerBuilder,
+                managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
+                sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
         );
     }
 
@@ -207,7 +217,12 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                     .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     managedAuditSandboxEndpointHandlePreflightEchoMarker,
             ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
-                    sandboxEndpointHandlePreflightEchoMarkerBuilder
+                    sandboxEndpointHandlePreflightEchoMarkerBuilder,
+            ReleaseApprovalRehearsalResponse
+                    .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+                    managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
+                    sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
     ) {
     }
 }
