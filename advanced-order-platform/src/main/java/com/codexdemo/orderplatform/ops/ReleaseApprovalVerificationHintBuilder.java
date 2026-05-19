@@ -2,6 +2,8 @@ package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ final class ReleaseApprovalVerificationHintBuilder {
             sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
             sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder;
+    private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
+            sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder;
     private final ReleaseApprovalVerificationWarningDigestBuilder warningDigestBuilder;
 
     ReleaseApprovalVerificationHintBuilder(
@@ -62,7 +66,9 @@ final class ReleaseApprovalVerificationHintBuilder {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
                     sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                    sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+                    sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
+                    sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -90,6 +96,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder;
         this.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder =
                 sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder;
+        this.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder =
+                sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder;
         this.warningDigestBuilder = new ReleaseApprovalVerificationWarningDigestBuilder(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                 sandboxConnectionOperatorHandoffMarkerBuilder,
@@ -103,7 +111,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
                 sandboxEndpointHandlePreflightEchoMarkerBuilder,
                 sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
-                sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+                sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
         );
     }
 
@@ -160,6 +169,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
+                    managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
             ReleaseApprovalRehearsalResponse.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
@@ -193,6 +204,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditSandboxEndpointHandlePreflightEchoMarker,
                         managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
                         managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
+                        managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -223,6 +235,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditSandboxEndpointHandlePreflightEchoMarker,
                         managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
                         managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
+                        managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
                         executionBoundaries
                 ),
                 false,
@@ -262,6 +275,8 @@ final class ReleaseApprovalVerificationHintBuilder {
         inputs.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.warningDigestWarningInputNames());
         inputs.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestWarningInputNames());
         inputs.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+                .warningDigestWarningInputNames());
+        inputs.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
                 .warningDigestWarningInputNames());
         inputs.addAll(List.of(
                 "failureCategories",
@@ -321,6 +336,8 @@ final class ReleaseApprovalVerificationHintBuilder {
         inputs.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.warningDigestBoundaryInputNames());
         inputs.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestBoundaryInputNames());
         inputs.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
+                .warningDigestBoundaryInputNames());
+        inputs.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
                 .warningDigestBoundaryInputNames());
         inputs.add("nodeMayWriteApprovalLedger");
         return inputs;
@@ -418,6 +435,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         claims.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.proofClaims());
         claims.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.proofClaims());
         claims.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.proofClaims());
+        claims.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder.proofClaims());
         claims.addAll(List.of(
                 "executionBoundaries.nodeMayCreateApprovalDecision=false",
                 "executionBoundaries.nodeMayWriteApprovalLedger=false",
@@ -480,6 +498,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
+                    managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
             ReleaseApprovalRehearsalResponse.ExecutionBoundaries executionBoundaries
     ) {
         return !requestContext.approvalLedgerWritten()
@@ -614,6 +634,10 @@ final class ReleaseApprovalVerificationHintBuilder {
                 .noCredentialConnectionWriteOrAutoStartProved(
                         managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                 )
+                && sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
+                .noCredentialConnectionWriteOrAutoStartProved(
+                        managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
+                )
                 && !executionBoundaries.nodeMayCreateApprovalDecision()
                 && !executionBoundaries.nodeMayWriteApprovalLedger();
     }
@@ -648,6 +672,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                 "managedAuditSandboxEndpointHandlePreflightEchoMarker",
                 "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker",
                 "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker",
+                "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker",
                 "failureTaxonomy",
                 "verificationHint",
                 "releaseApprovalInputs",
@@ -718,6 +743,7 @@ final class ReleaseApprovalVerificationHintBuilder {
         actions.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.nodeVerificationActions());
         actions.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.nodeVerificationActions());
         actions.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.nodeVerificationActions());
+        actions.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder.nodeVerificationActions());
         actions.addAll(List.of(
                 "Compare warningDigest across closed-window and operator-window reads",
                 "Require noLedgerWriteProved=true before treating the response as read-only evidence",

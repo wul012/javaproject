@@ -66,6 +66,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.managedAuditSandboxEndpointHandlePreflightEchoMarker(),
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker(),
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker(),
+                managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -176,7 +177,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxEndpointHandlePreflightEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder(),
-                managedAuditReceiptChain.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder()
+                managedAuditReceiptChain.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder(),
+                managedAuditReceiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -210,6 +212,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                                 .managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker(),
                         failureTaxonomy,
                         executionBoundaries
                 );

@@ -16,6 +16,10 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalSandboxEndpointCredentialResolverEnvHandle;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
         .RehearsalSandboxEndpointCredentialResolverFailureClass;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
+        .RehearsalSandboxEndpointCredentialResolverTestOnlyShellFailureMapping;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.env.MockEnvironment;
@@ -978,7 +982,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v28");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v29");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2382,7 +2386,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v28");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v29");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2445,6 +2449,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxEndpointHandlePreflightEchoMarkerWarnings",
                         "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerWarnings",
                         "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -2625,6 +2630,20 @@ class OpsEvidenceServiceTests {
                         "sandboxEndpointCredentialResolverDisabledPrecheckSideEffectCredentialValueRead",
                         "sandboxEndpointCredentialResolverDisabledPrecheckSideEffectRawEndpointUrlParsed",
                         "sandboxEndpointCredentialResolverDisabledPrecheckSideEffectExternalRequestSent",
+                        "sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerDigest",
+                        "sandboxEndpointCredentialResolverTestOnlyShellRequestShapeFieldCount",
+                        "sandboxEndpointCredentialResolverTestOnlyShellResponseShapeFieldCount",
+                        "sandboxEndpointCredentialResolverTestOnlyShellFailureMappingCount",
+                        "sandboxEndpointCredentialResolverTestOnlyShellGuardConditionCount",
+                        "sandboxEndpointCredentialResolverTestOnlyShellFakeResolverOnly",
+                        "sandboxEndpointCredentialResolverTestOnlyShellCredentialValueAccepted",
+                        "sandboxEndpointCredentialResolverTestOnlyShellRawEndpointUrlAccepted",
+                        "sandboxEndpointCredentialResolverTestOnlyShellResolverClientInstantiated",
+                        "sandboxEndpointCredentialResolverTestOnlyShellSecretProviderInstantiated",
+                        "sandboxEndpointCredentialResolverTestOnlyShellExternalRequestSent",
+                        "sandboxEndpointCredentialResolverTestOnlyShellProbeCredentialValueRead",
+                        "sandboxEndpointCredentialResolverTestOnlyShellProbeExternalRequestSent",
+                        "sandboxEndpointCredentialResolverTestOnlyShellProbeProductionRecordWritten",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -3418,7 +3437,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v28");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v29");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -4865,6 +4884,283 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse repeated =
                 service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(repeated.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker().markerDigest())
+                .isEqualTo(marker.markerDigest());
+    }
+
+    @Test
+    void releaseApprovalRehearsalAddsSandboxEndpointCredentialResolverTestOnlyShellEchoMarker() {
+        Instant latestFailedAt = Instant.parse("2026-05-12T01:00:00Z");
+        Instant latestApprovalAt = Instant.parse("2026-05-12T01:05:00Z");
+        when(failedEventSummaryService.summary()).thenReturn(new FailedEventSummaryResponse(
+                Instant.parse("2026-05-12T01:10:00Z"),
+                4,
+                2,
+                1,
+                1,
+                latestFailedAt,
+                latestApprovalAt,
+                3
+        ));
+        when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
+        OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
+        outboxPublisherProperties.setEnabled(false);
+        OutboxRabbitMqProperties outboxRabbitMqProperties = new OutboxRabbitMqProperties();
+        outboxRabbitMqProperties.setEnabled(false);
+        outboxRabbitMqProperties.setExchange("order-platform.outbox");
+        outboxRabbitMqProperties.setQueue("order-platform.outbox.events");
+        outboxRabbitMqProperties.setDeadLetterQueue("order-platform.outbox.events.dlq");
+        MockEnvironment environment = new MockEnvironment()
+                .withProperty("spring.application.name", "advanced-order-platform")
+                .withProperty("info.app.version", "0.1.0-test");
+        environment.setActiveProfiles("local", "ops");
+        OpsEvidenceService service = new OpsEvidenceService(
+                failedEventSummaryService,
+                outboxRepository,
+                outboxPublisherProperties,
+                outboxRabbitMqProperties,
+                idempotencyStore,
+                environment
+        );
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+
+        RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker marker =
+                rehearsal.managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker();
+        assertThat(marker.markerVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-test-only-shell-echo-marker.v1"
+                );
+        assertThat(marker.sourceDisabledPrecheckEchoMarkerSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v28");
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractVersion())
+                .isEqualTo("Node v264");
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-sandbox-endpoint-credential-resolver-test-only-shell-contract.v1"
+                );
+        assertThat(marker.consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractState())
+                .isEqualTo("sandbox-endpoint-credential-resolver-test-only-shell-contract-ready");
+        assertThat(marker.sourceNodeSandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v263");
+        assertThat(marker.sourceNodeSandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerificationState())
+                .isEqualTo(
+                        "sandbox-endpoint-credential-resolver-disabled-precheck-upstream-echo-verification-ready"
+                );
+        assertThat(marker.nextNodeSandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v265");
+        assertThat(marker.nodeV265MayConsume()).isTrue();
+        assertThat(marker.shellMode()).isEqualTo("test-only-fake-resolver-contract");
+        assertThat(marker.sourceSpan()).isEqualTo("Node v264 credential resolver test-only shell contract");
+        assertThat(marker.sourceNodeV263().sourceVersion()).isEqualTo("Node v263");
+        assertThat(marker.sourceNodeV263().verificationMode())
+                .isEqualTo(
+                        "java-v106-plus-mini-kv-v115-disabled-credential-resolver-precheck-upstream-echo-verification-only"
+                );
+        assertThat(marker.sourceNodeV263().sourceSpan()).isEqualTo("Node v262 + Java v106 + mini-kv v115");
+        assertThat(marker.sourceNodeV263().sourceNodeV262Ready()).isTrue();
+        assertThat(marker.sourceNodeV263().javaV106EchoReady()).isTrue();
+        assertThat(marker.sourceNodeV263().miniKvV115NonParticipationReady()).isTrue();
+        assertThat(marker.sourceNodeV263().disabledPrecheckAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().requiredEnvHandlesAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().optInGatesAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().failureTaxonomyAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().dryRunResponseShapeAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().inheritedNoGoConditionsAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().credentialBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().rawEndpointBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().connectionBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().writeBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().autoStartBoundaryAligned()).isTrue();
+        assertThat(marker.sourceNodeV263().upstreamActionsStillDisabled()).isTrue();
+        assertThat(marker.sourceNodeV263().credentialResolverExecutionAllowed()).isFalse();
+        assertThat(marker.sourceNodeV263().credentialValueRead()).isFalse();
+        assertThat(marker.sourceNodeV263().credentialValueLoaded()).isFalse();
+        assertThat(marker.sourceNodeV263().credentialValueStored()).isFalse();
+        assertThat(marker.sourceNodeV263().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.sourceNodeV263().rawEndpointUrlIncluded()).isFalse();
+        assertThat(marker.sourceNodeV263().externalRequestSent()).isFalse();
+        assertThat(marker.sourceNodeV263().secretProviderInstantiated()).isFalse();
+        assertThat(marker.sourceNodeV263().resolverClientInstantiated()).isFalse();
+        assertThat(marker.sourceNodeV263().connectsManagedAudit()).isFalse();
+        assertThat(marker.sourceNodeV263().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.sourceNodeV263().automaticUpstreamStart()).isFalse();
+        assertThat(marker.sourceNodeV263().failureClassCount()).isEqualTo(7);
+        assertThat(marker.sourceNodeV263().requiredEnvHandleCount()).isEqualTo(6);
+        assertThat(marker.sourceNodeV263().optInGateCount()).isEqualTo(2);
+        assertThat(marker.sourceNodeV263().dryRunResponseFieldCount()).isEqualTo(12);
+        assertThat(marker.sourceNodeV263().inheritedNoGoConditionCount()).isEqualTo(9);
+        assertThat(marker.sourceNodeV263().checkCount()).isEqualTo(19);
+        assertThat(marker.sourceNodeV263().passedCheckCount()).isEqualTo(19);
+        assertThat(marker.sourceNodeV263().productionBlockerCount()).isZero();
+        assertThat(marker.sourceNodeV263().warningCount()).isEqualTo(2);
+        assertThat(marker.sourceNodeV263().recommendationCount()).isEqualTo(2);
+        assertThat(marker.sourceNodeV263().readyForNodeV264CredentialResolverTestOnlyShellContract()).isTrue();
+        assertThat(marker.resolverShellContract().contractDigest()).startsWith("sha256:");
+        assertThat(marker.resolverShellContract().shellName())
+                .isEqualTo("ManagedAuditSandboxEndpointCredentialResolverTestOnlyShell");
+        assertThat(marker.resolverShellContract().shellMode()).isEqualTo("test-only-fake-resolver-contract");
+        assertThat(marker.resolverShellContract().resolverKind()).isEqualTo("fake-in-memory");
+        assertThat(marker.resolverShellContract().realResolverImplemented()).isFalse();
+        assertThat(marker.resolverShellContract().realSecretProviderAllowed()).isFalse();
+        assertThat(marker.resolverShellContract().fakeResolverOnly()).isTrue();
+        assertThat(marker.resolverShellContract().requestShapeFieldCount()).isEqualTo(9);
+        assertThat(marker.resolverShellContract().responseShapeFieldCount()).isEqualTo(13);
+        assertThat(marker.resolverShellContract().failureMappingCount()).isEqualTo(7);
+        assertThat(marker.resolverShellContract().guardConditionCount()).isEqualTo(10);
+        assertThat(marker.resolverShellContract().requestShape().fields())
+                .containsExactly(
+                        "requestId",
+                        "operation",
+                        "credentialHandle",
+                        "endpointHandle",
+                        "resolverPolicyHandle",
+                        "approvalMarker",
+                        "approvalCorrelationId",
+                        "dryRun",
+                        "fakeResolverOnly"
+                );
+        assertThat(marker.resolverShellContract().requestShape().credentialHandleOnly()).isTrue();
+        assertThat(marker.resolverShellContract().requestShape().credentialValueAccepted()).isFalse();
+        assertThat(marker.resolverShellContract().requestShape().endpointHandleOnly()).isTrue();
+        assertThat(marker.resolverShellContract().requestShape().rawEndpointUrlAccepted()).isFalse();
+        assertThat(marker.resolverShellContract().requestShape().resolverPolicyHandleRequired()).isTrue();
+        assertThat(marker.resolverShellContract().requestShape().approvalMarkerRequired()).isTrue();
+        assertThat(marker.resolverShellContract().requestShape().payloadMayContainSecrets()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().fields())
+                .containsExactly(
+                        "requestId",
+                        "status",
+                        "code",
+                        "fakeResolverOnly",
+                        "resolverClientInstantiated",
+                        "secretProviderInstantiated",
+                        "credentialValueRead",
+                        "credentialValueLoaded",
+                        "rawEndpointUrlParsed",
+                        "externalRequestSent",
+                        "connectsManagedAudit",
+                        "schemaMigrationExecuted",
+                        "productionRecordWritten"
+                );
+        assertThat(marker.resolverShellContract().responseShape().fakeResolverResponseOnly()).isTrue();
+        assertThat(marker.resolverShellContract().responseShape().resolverClientInstantiated()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().secretProviderInstantiated()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().credentialValueRead()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().credentialValueLoaded()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().externalRequestSent()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().connectsManagedAudit()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.resolverShellContract().responseShape().productionRecordWritten()).isFalse();
+        assertThat(marker.resolverShellContract().failureMapping())
+                .extracting(RehearsalSandboxEndpointCredentialResolverTestOnlyShellFailureMapping::sourceFailureCode)
+                .containsExactly(
+                        "RESOLVER_DISABLED",
+                        "APPROVAL_MARKER_MISSING",
+                        "CREDENTIAL_HANDLE_MISSING",
+                        "CREDENTIAL_VALUE_REQUESTED",
+                        "RAW_ENDPOINT_URL_REQUESTED",
+                        "EXTERNAL_REQUEST_REQUESTED",
+                        "SCHEMA_MIGRATION_REQUESTED"
+                );
+        assertThat(marker.resolverShellContract().failureMapping())
+                .allMatch(mapping -> mapping.shellFailureCode().startsWith("TEST_ONLY_") && !mapping.retryable());
+        assertThat(marker.resolverShellContract().guardConditions())
+                .allMatch(condition -> condition.required() && condition.value());
+        assertThat(marker.resolverShellContract().fakeResolverProbe().requestId())
+                .isEqualTo("managed-audit-v264-test-only-resolver-shell-probe");
+        assertThat(marker.resolverShellContract().fakeResolverProbe().resolverKind()).isEqualTo("fake-in-memory");
+        assertThat(marker.resolverShellContract().fakeResolverProbe().acceptedByFakeResolver()).isTrue();
+        assertThat(marker.resolverShellContract().fakeResolverProbe().responseCode())
+                .isEqualTo("TEST_ONLY_FAKE_RESOLVER");
+        assertThat(marker.resolverShellContract().fakeResolverProbe().credentialValueRead()).isFalse();
+        assertThat(marker.resolverShellContract().fakeResolverProbe().credentialValueLoaded()).isFalse();
+        assertThat(marker.resolverShellContract().fakeResolverProbe().externalRequestSent()).isFalse();
+        assertThat(marker.resolverShellContract().fakeResolverProbe().connectsManagedAudit()).isFalse();
+        assertThat(marker.resolverShellContract().fakeResolverProbe().schemaMigrationExecuted()).isFalse();
+        assertThat(marker.resolverShellContract().fakeResolverProbe().productionRecordWritten()).isFalse();
+        assertThat(marker.resolverShellContract().fakeResolverProbe().probeDigest()).startsWith("sha256:");
+        assertThat(marker.sideEffectBoundary().testOnlyShell()).isTrue();
+        assertThat(marker.sideEffectBoundary().readOnlyContract()).isTrue();
+        assertThat(marker.sideEffectBoundary().fakeResolverOnly()).isTrue();
+        assertThat(marker.sideEffectBoundary().handleOnlyRequest()).isTrue();
+        assertThat(marker.sideEffectBoundary().credentialResolverExecutionAllowed()).isFalse();
+        assertThat(marker.sideEffectBoundary().connectsManagedAudit()).isFalse();
+        assertThat(marker.sideEffectBoundary().readsManagedAuditCredential()).isFalse();
+        assertThat(marker.sideEffectBoundary().credentialValueRead()).isFalse();
+        assertThat(marker.sideEffectBoundary().rawEndpointUrlParsed()).isFalse();
+        assertThat(marker.sideEffectBoundary().externalRequestSent()).isFalse();
+        assertThat(marker.sideEffectBoundary().secretProviderInstantiated()).isFalse();
+        assertThat(marker.sideEffectBoundary().resolverClientInstantiated()).isFalse();
+        assertThat(marker.sourceNodeV263Echoed()).isTrue();
+        assertThat(marker.requestShapeEchoed()).isTrue();
+        assertThat(marker.responseShapeEchoed()).isTrue();
+        assertThat(marker.failureMappingEchoed()).isTrue();
+        assertThat(marker.guardConditionsEchoed()).isTrue();
+        assertThat(marker.fakeResolverProbeEchoed()).isTrue();
+        assertThat(marker.fakeResolverOnlyEchoed()).isTrue();
+        assertThat(marker.handleOnlyRequestEchoed()).isTrue();
+        assertThat(marker.sideEffectBoundaryEchoed()).isTrue();
+        assertThat(marker.upstreamActionsStillDisabledEchoed()).isTrue();
+        assertThat(marker.readyForNodeV265SandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerification())
+                .isTrue();
+        assertThat(marker.readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(marker.readyForProductionAudit()).isFalse();
+        assertThat(marker.readyForProductionWindow()).isFalse();
+        assertThat(marker.nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(marker.nodeWarningCodes())
+                .containsExactly("TEST_ONLY_SHELL_NOT_A_REAL_RESOLVER", "UPSTREAM_ECHO_REQUIRED_NEXT");
+        assertThat(marker.nodeRecommendationCodes())
+                .containsExactly("ASK_JAVA_MINI_KV_FOR_ECHO_NEXT", "KEEP_REAL_RESOLVER_OUT_OF_SCOPE");
+        assertThat(marker.nextRequiredEchoVersions())
+                .contains(
+                        "Java v107 sandbox endpoint credential resolver test-only shell echo marker",
+                        "mini-kv v116 sandbox endpoint credential resolver test-only shell non-participation receipt"
+                );
+        assertThat(marker.markerWarnings()).isEmpty();
+        assertThat(marker.markerDigest()).startsWith("sha256:");
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerWarnings",
+                        "sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerDigest",
+                        "sandboxEndpointCredentialResolverTestOnlyShellRawEndpointUrlAccepted"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker.resolverShellContract.requestShapeFieldCount=9",
+                        "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker.resolverShellContract.requestShape.credentialValueAccepted=false",
+                        "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker.readyForManagedAuditSandboxAdapterConnection=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker.consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractProfile with Node v264",
+                        "Require managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker.readyForNodeV265SandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerification=true before Node v265",
+                        "Keep managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker.sideEffectBoundary.connectsManagedAudit=false"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker().markerDigest())
                 .isEqualTo(marker.markerDigest());
     }
 
