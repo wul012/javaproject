@@ -28,6 +28,8 @@ v117: d/117/瑙ｉ噴/璇存槑.md
       split v116 readiness echo unit/MVC tests out of the two largest test files
 v118: d/118/瑙ｉ噴/璇存槑.md
       split release approval credential resolver rehearsal tests out of OpsOverviewIntegrationTests
-```
 v119: d/119/解释/说明.md
       continue shrinking OpsOverviewIntegrationTests after release approval split
+v120: d/120/解释/说明.md
+      continue shrinking OpsEvidenceServiceTests after moving release approval rehearsal out
+```

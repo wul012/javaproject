@@ -32,7 +32,8 @@ Java v116: consumes Node v281, echoes 6 approval-required readiness boundaries a
 Java v117: splits v116 readiness echo unit/MVC tests and shared fixtures out of large test files.
 121-version-118-release-approval-credential-resolver-endpoint-test-split.md
 Java v118: splits a large release approval credential resolver rehearsal block out of OpsOverviewIntegrationTests.
-```
 122-version-119-continue-shrink-ops-overview-test-suite.md
 Java v119: continues shrinking OpsOverviewIntegrationTests after moving out release approval rehearsals and static contracts.
-
+123-version-120-continue-shrink-ops-evidence-service-test-suite.md
+Java v120: continues shrinking OpsEvidenceServiceTests after moving release approval rehearsal and credential-resolver scenarios out.
+```
