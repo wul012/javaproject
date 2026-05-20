@@ -1,0 +1,195 @@
+package com.codexdemo.orderplatform.ops;
+
+import java.util.List;
+
+public final class ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords {
+
+    private ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords() {
+    }
+
+    public record RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt(
+            String receiptVersion,
+            String sourceFakeShellArchiveEchoReceiptVersion,
+            String sourceFakeShellArchiveEchoReceiptSchemaVersion,
+            String consumedByNodeCredentialResolverProductionReadinessDecisionGateVersion,
+            String consumedByNodeCredentialResolverProductionReadinessDecisionGateProfile,
+            String consumedByNodeCredentialResolverProductionReadinessDecisionGateEndpoint,
+            String consumedByNodeCredentialResolverProductionReadinessDecisionGateMarkdownEndpoint,
+            String consumedByNodeCredentialResolverProductionReadinessDecisionGateState,
+            String sourceNodeCredentialResolverFakeShellArchiveUpstreamEchoVerificationVersion,
+            String sourceNodeCredentialResolverFakeShellArchiveUpstreamEchoVerificationProfile,
+            boolean nodeV269MayConsume,
+            String decisionEchoMode,
+            String sourceSpan,
+            RehearsalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionSourceEcho sourceNodeV268,
+            RehearsalSandboxEndpointCredentialResolverPreImplementationRequirements preImplementationRequirements,
+            RehearsalSandboxEndpointCredentialResolverProductionReadinessDecision productionReadinessDecision,
+            RehearsalSandboxEndpointCredentialResolverProductionReadinessDecisionChecks decisionChecks,
+            RehearsalSandboxEndpointCredentialResolverProductionReadinessSideEffectBoundary sideEffectBoundary,
+            boolean sourceNodeV268Echoed,
+            boolean sourceNodeV267UpstreamEchoed,
+            boolean blockedDecisionEchoed,
+            boolean preImplementationRequirementsEchoed,
+            boolean missingRequirementBlockersEchoed,
+            boolean noCredentialBoundaryEchoed,
+            boolean noRawEndpointBoundaryEchoed,
+            boolean noResolverBoundaryEchoed,
+            boolean noConnectionBoundaryEchoed,
+            boolean noWriteBoundaryEchoed,
+            boolean noAutoStartBoundaryEchoed,
+            boolean readyForNodeV269CredentialResolverProductionReadinessBlockedDecisionUpstreamEchoVerification,
+            boolean readyForCredentialResolverPreImplementationPlan,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> missingRequirementCodes,
+            List<String> productionBlockerCodes,
+            List<String> nodeWarningCodes,
+            List<String> nodeRecommendationCodes,
+            List<String> nextRequiredEchoVersions,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionSourceEcho(
+            String sourceVersion,
+            String profileVersion,
+            String decisionGateState,
+            String readinessDecision,
+            String decisionMode,
+            String sourceSpan,
+            boolean sourceNodeV267Ready,
+            boolean sourceNodeV267BlocksRealResolver,
+            boolean archiveEchoChainReady,
+            boolean decisionGateEvaluated,
+            boolean productionReadinessGateOnly,
+            boolean readOnlyDecisionGate,
+            boolean readyForCredentialResolverPreImplementationPlan,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean realResolverImplementationAllowed,
+            boolean executionAllowed,
+            boolean connectsManagedAudit,
+            boolean readsManagedAuditCredential,
+            boolean storesManagedAuditCredential,
+            boolean credentialValueRead,
+            boolean rawEndpointUrlParsed,
+            boolean externalRequestSent,
+            boolean secretProviderInstantiated,
+            boolean resolverClientInstantiated,
+            boolean schemaMigrationExecuted,
+            boolean automaticUpstreamStart,
+            int checkCount,
+            int passedCheckCount,
+            int sourceCheckCount,
+            int sourcePassedCheckCount,
+            int archiveFileCount,
+            int evidenceFileCount,
+            int requiredSnippetCount,
+            int matchedSnippetCount,
+            int missingPreImplementationRequirementCount,
+            int productionBlockerCount,
+            int warningCount,
+            int recommendationCount,
+            boolean readyForJavaV111EchoReceipt,
+            boolean readyForMiniKvV118NonParticipationReceipt
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointCredentialResolverPreImplementationRequirements(
+            boolean planDocumentPresent,
+            boolean credentialHandleBoundaryDefined,
+            boolean endpointHandleBoundaryDefined,
+            boolean secretProviderStubDefined,
+            boolean operatorApprovalBoundaryDefined,
+            boolean rollbackBoundaryDefined,
+            boolean redactionPolicyDefined,
+            boolean externalRequestSimulationDefined,
+            boolean schemaMigrationPolicyDefined,
+            boolean auditLedgerWritePolicyDefined
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointCredentialResolverProductionReadinessDecision(
+            String decisionDigest,
+            String decisionMode,
+            String sourceSpan,
+            String decision,
+            String reason,
+            boolean allowsRealResolverPreImplementationPlan,
+            boolean allowsRealCredentialResolverImplementation,
+            boolean allowsSecretProviderStub,
+            boolean allowsSecretProviderRuntime,
+            boolean allowsCredentialValueRead,
+            boolean allowsRawEndpointUrlParse,
+            boolean allowsExternalRequest,
+            boolean allowsManagedAuditConnection,
+            boolean allowsSchemaMigration,
+            boolean allowsApprovalLedgerWrite,
+            boolean allowsAutomaticUpstreamStart,
+            boolean nextPlanRequiredBeforeImplementation
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointCredentialResolverProductionReadinessDecisionChecks(
+            boolean decisionGateEvaluated,
+            boolean sourceNodeV267Ready,
+            boolean sourceNodeV267BlocksRealResolver,
+            boolean archiveEchoChainReady,
+            boolean credentialBoundaryStillClosed,
+            boolean rawEndpointBoundaryStillClosed,
+            boolean resolverBoundaryStillClosed,
+            boolean connectionBoundaryStillClosed,
+            boolean writeBoundaryStillClosed,
+            boolean autoStartBoundaryStillClosed,
+            boolean upstreamProbesStillDisabled,
+            boolean upstreamActionsStillDisabled,
+            boolean preImplementationPlanPresent,
+            boolean credentialHandleBoundaryDefined,
+            boolean endpointHandleBoundaryDefined,
+            boolean secretProviderStubDefined,
+            boolean operatorApprovalBoundaryDefined,
+            boolean rollbackBoundaryDefined,
+            boolean redactionPolicyDefined,
+            boolean externalRequestSimulationDefined,
+            boolean schemaMigrationPolicyDefined,
+            boolean auditLedgerWritePolicyDefined,
+            boolean productionAuditStillBlocked,
+            boolean productionWindowStillBlocked,
+            boolean realResolverImplementationStillBlocked
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointCredentialResolverProductionReadinessSideEffectBoundary(
+            boolean readOnlyDecisionGate,
+            boolean productionReadinessGateOnly,
+            boolean decisionGateEvaluated,
+            boolean readyForCredentialResolverPreImplementationPlan,
+            boolean readyForManagedAuditSandboxAdapterConnection,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean readyForProductionOperations,
+            boolean realResolverImplementationAllowed,
+            boolean executionAllowed,
+            boolean connectsManagedAudit,
+            boolean readsManagedAuditCredential,
+            boolean storesManagedAuditCredential,
+            boolean credentialValueRead,
+            boolean rawEndpointUrlParsed,
+            boolean rawEndpointUrlIncluded,
+            boolean externalRequestSent,
+            boolean secretProviderInstantiated,
+            boolean resolverClientInstantiated,
+            boolean approvalLedgerWritten,
+            boolean managedAuditStoreWritten,
+            boolean sqlExecuted,
+            boolean schemaMigrationExecuted,
+            boolean automaticUpstreamStart,
+            boolean javaStartedNodeOrMiniKv
+    ) {
+    }
+}

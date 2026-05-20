@@ -264,6 +264,13 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> Java v110 sandbox endpoint credential resolver fake-shell archive echo receipt：只读承接 Node v266 archive verification，供 Node v267 继续校验，并保持 credential value、真实 resolver、managed-audit connection、SQL、ledger 和 auto-start 全部阻断。
 ```
 
+## v111 update
+
+```text
+114-version-111-sandbox-endpoint-credential-resolver-production-readiness-blocked-decision-echo-receipt.md
+ -> Java v111 sandbox endpoint credential resolver production-readiness blocked-decision echo receipt: read-only echo of the Node v268 blocked decision gate for Node v269 verification, while real resolver, credential value, raw endpoint, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
+```
+
 ## v108 update
 
 ```text

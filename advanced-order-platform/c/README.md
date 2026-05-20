@@ -108,6 +108,13 @@ c/110/解释/说明.md
  -> Java v110 credential resolver fake-shell archive echo receipt：只读回显 Node v266 archive verification，拆出 records / support / builder，并继续阻断 credential value、raw endpoint、external request、managed-audit connection、SQL、ledger、schema migration 和 auto-start。
 ```
 
+## v111 update
+
+```text
+c/111/解释/说明.md
+ -> Java v111 credential resolver production-readiness blocked-decision echo receipt: read-only echo of the Node v268 blocked decision gate, split into records / support / builder, while real resolver, credential value, raw endpoint, external request, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
+```
+
 ## v108 update
 
 ```text

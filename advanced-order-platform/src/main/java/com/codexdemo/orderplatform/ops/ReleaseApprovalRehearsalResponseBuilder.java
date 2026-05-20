@@ -68,6 +68,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker(),
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker(),
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt(),
+                managedAuditReceiptChain
+                        .managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -180,7 +182,9 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder(),
-                managedAuditReceiptChain.sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder()
+                managedAuditReceiptChain.sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder(),
+                managedAuditReceiptChain
+                        .sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -218,6 +222,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                                 .managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );
