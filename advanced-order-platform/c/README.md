@@ -101,6 +101,13 @@ c/109/解释/说明.md
  -> Java v109 release approval rehearsal response records split: 把 1798 行的 `ReleaseApprovalRehearsalResponse` nested records 迁入 `ReleaseApprovalRehearsalResponseRecords` 容器，让主响应文件只保留顶层壳；不改业务 contract、schema 或 managed-audit 边界。
 ```
 
+## v110 update
+
+```text
+c/110/解释/说明.md
+ -> Java v110 credential resolver fake-shell archive echo receipt：只读回显 Node v266 archive verification，拆出 records / support / builder，并继续阻断 credential value、raw endpoint、external request、managed-audit connection、SQL、ledger、schema migration 和 auto-start。
+```
+
 ## v108 update
 
 ```text

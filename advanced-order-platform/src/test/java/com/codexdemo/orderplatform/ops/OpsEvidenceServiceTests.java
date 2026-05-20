@@ -16,6 +16,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalSandboxEndpointCredentialResolverEnvHandle;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
         .RehearsalSandboxEndpointCredentialResolverFailureClass;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
@@ -982,7 +984,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v29");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v30");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2386,7 +2388,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v29");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v30");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2450,6 +2452,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerWarnings",
                         "managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerWarnings",
                         "managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -2644,6 +2647,25 @@ class OpsEvidenceServiceTests {
                         "sandboxEndpointCredentialResolverTestOnlyShellProbeCredentialValueRead",
                         "sandboxEndpointCredentialResolverTestOnlyShellProbeExternalRequestSent",
                         "sandboxEndpointCredentialResolverTestOnlyShellProbeProductionRecordWritten",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveCheckCount",
+                        "sandboxEndpointCredentialResolverFakeShellArchivePassedCheckCount",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveFileCount",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveRequiredSnippetCount",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveMatchedSnippetCount",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveRerunsFakeShellBehavior",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveReadsFilesOnly",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveRouteResponsesVerified",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveCredentialValueRead",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveExternalRequestSent",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveSecretProviderInstantiated",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveResolverClientInstantiated",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveConnectsManagedAudit",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveSqlExecuted",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveAutomaticUpstreamStart",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -3437,7 +3459,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v29");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v30");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -5155,6 +5177,224 @@ class OpsEvidenceServiceTests {
                 service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(repeated.managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker().markerDigest())
                 .isEqualTo(marker.markerDigest());
+    }
+
+    @Test
+    void releaseApprovalRehearsalAddsSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt() {
+        Instant latestFailedAt = Instant.parse("2026-05-12T01:00:00Z");
+        Instant latestApprovalAt = Instant.parse("2026-05-12T01:05:00Z");
+        when(failedEventSummaryService.summary()).thenReturn(new FailedEventSummaryResponse(
+                Instant.parse("2026-05-12T01:10:00Z"),
+                4,
+                2,
+                1,
+                1,
+                latestFailedAt,
+                latestApprovalAt,
+                3
+        ));
+        when(outboxRepository.countByPublishedAtIsNull()).thenReturn(6L);
+        when(idempotencyStore.descriptor()).thenReturn(new IdempotencyStoreDescriptor(
+                "java-idempotency-store.v1",
+                "jpa-order-idempotency-store",
+                "JpaIdempotencyStore",
+                "JPA_DATABASE",
+                "orders table",
+                "orders.idempotency_key",
+                "orders.idempotency_request_fingerprint",
+                true,
+                false,
+                false,
+                true,
+                false,
+                "DISABLED_CANDIDATE_ONLY",
+                "mini-kv-ttl-token-adapter is documented for later TTL-token experiments, not wired into create-order.",
+                false
+        ));
+        OutboxPublisherProperties outboxPublisherProperties = new OutboxPublisherProperties();
+        outboxPublisherProperties.setEnabled(false);
+        OutboxRabbitMqProperties outboxRabbitMqProperties = new OutboxRabbitMqProperties();
+        outboxRabbitMqProperties.setEnabled(false);
+        outboxRabbitMqProperties.setExchange("order-platform.outbox");
+        outboxRabbitMqProperties.setQueue("order-platform.outbox.events");
+        outboxRabbitMqProperties.setDeadLetterQueue("order-platform.outbox.events.dlq");
+        MockEnvironment environment = new MockEnvironment()
+                .withProperty("spring.application.name", "advanced-order-platform")
+                .withProperty("info.app.version", "0.1.0-test");
+        environment.setActiveProfiles("local", "ops");
+        OpsEvidenceService service = new OpsEvidenceService(
+                failedEventSummaryService,
+                outboxRepository,
+                outboxPublisherProperties,
+                outboxRabbitMqProperties,
+                idempotencyStore,
+                environment
+        );
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+
+        RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt receipt =
+                rehearsal.managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt();
+        assertThat(receipt.receiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-fake-shell-archive-echo-receipt.v1"
+                );
+        assertThat(receipt.sourceTestOnlyShellEchoMarkerSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v29");
+        assertThat(receipt.consumedByNodeSandboxEndpointCredentialResolverFakeShellArchiveVerificationVersion())
+                .isEqualTo("Node v266");
+        assertThat(receipt.consumedByNodeSandboxEndpointCredentialResolverFakeShellArchiveVerificationProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-credential-resolver-fake-shell-archive-verification.v1"
+                );
+        assertThat(receipt.consumedByNodeSandboxEndpointCredentialResolverFakeShellArchiveVerificationEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-fake-shell-archive-verification"
+                );
+        assertThat(receipt.consumedByNodeSandboxEndpointCredentialResolverFakeShellArchiveVerificationState())
+                .isEqualTo("credential-resolver-fake-shell-archive-verification-ready");
+        assertThat(receipt.sourceNodeSandboxEndpointCredentialResolverTestOnlyShellContractVersion())
+                .isEqualTo("Node v264");
+        assertThat(receipt.sourceNodeSandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v265");
+        assertThat(receipt.sourceNodeSandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerificationState())
+                .isEqualTo("sandbox-endpoint-credential-resolver-test-only-shell-upstream-echo-verification-ready");
+        assertThat(receipt.nextNodeSandboxEndpointCredentialResolverFakeShellArchiveUpstreamEchoVerificationVersion())
+                .isEqualTo("Node v267");
+        assertThat(receipt.nodeV267MayConsume()).isTrue();
+        assertThat(receipt.archiveEchoMode())
+                .isEqualTo("java-v110-credential-resolver-fake-shell-archive-echo-receipt-only");
+        assertThat(receipt.sourceSpan())
+                .isEqualTo("Node v264 credential resolver fake shell contract + Node v265 upstream echo archive");
+        assertThat(receipt.sourceNodeV266().checkCount()).isEqualTo(28);
+        assertThat(receipt.sourceNodeV266().passedCheckCount()).isEqualTo(28);
+        assertThat(receipt.sourceNodeV266().archiveFileCount()).isEqualTo(9);
+        assertThat(receipt.sourceNodeV266().requiredSnippetCount()).isEqualTo(24);
+        assertThat(receipt.sourceNodeV266().matchedSnippetCount()).isEqualTo(24);
+        assertThat(receipt.sourceNodeV266().productionBlockerCount()).isZero();
+        assertThat(receipt.sourceNodeV266().warningCount()).isEqualTo(1);
+        assertThat(receipt.sourceNodeV266().recommendationCount()).isEqualTo(2);
+        assertThat(receipt.sourceNodeV266().sourceNodeV264Ready()).isTrue();
+        assertThat(receipt.sourceNodeV266().sourceNodeV265Ready()).isTrue();
+        assertThat(receipt.sourceNodeV266().sourceNodeV265ConsumesUpstreamEchoes()).isTrue();
+        assertThat(receipt.sourceNodeV266().javaV107EchoReady()).isTrue();
+        assertThat(receipt.sourceNodeV266().miniKvV116NonParticipationReady()).isTrue();
+        assertThat(receipt.sourceNodeV266().javaV109OptimizationContextReady()).isTrue();
+        assertThat(receipt.sourceNodeV266().archiveFilesPresent()).isTrue();
+        assertThat(receipt.sourceNodeV266().archiveFilesNonEmpty()).isTrue();
+        assertThat(receipt.sourceNodeV266().archiveSnippetsMatched()).isTrue();
+        assertThat(receipt.sourceNodeV266().routeResponsesVerified()).isTrue();
+        assertThat(receipt.sourceNodeV266().noArchiveVerificationFakeShellRerun()).isTrue();
+        assertThat(receipt.sourceNodeV266().readOnlyArchiveVerification()).isTrue();
+        assertThat(receipt.sourceNodeV266().archiveVerificationReadsFilesOnly()).isTrue();
+        assertThat(receipt.sourceNodeV266().archiveVerificationRerunsFakeShellBehavior()).isFalse();
+        assertThat(receipt.sourceNodeV266().upstreamActionsStillDisabled()).isTrue();
+        assertThat(receipt.sourceNodeV266().credentialValueRead()).isFalse();
+        assertThat(receipt.sourceNodeV266().rawEndpointUrlParsed()).isFalse();
+        assertThat(receipt.sourceNodeV266().externalRequestSent()).isFalse();
+        assertThat(receipt.sourceNodeV266().secretProviderInstantiated()).isFalse();
+        assertThat(receipt.sourceNodeV266().resolverClientInstantiated()).isFalse();
+        assertThat(receipt.sourceNodeV266().connectsManagedAudit()).isFalse();
+        assertThat(receipt.sourceNodeV266().schemaMigrationExecuted()).isFalse();
+        assertThat(receipt.sourceNodeV266().automaticUpstreamStart()).isFalse();
+        assertThat(receipt.archiveEvidence().archiveRoots()).containsExactly("c/264/", "c/265/");
+        assertThat(receipt.archiveEvidence().sourceVersions()).containsExactly("Node v264", "Node v265");
+        assertThat(receipt.archiveEvidence().archiveFileCount()).isEqualTo(9);
+        assertThat(receipt.archiveEvidence().requiredSnippetCount()).isEqualTo(24);
+        assertThat(receipt.archiveEvidence().matchedSnippetCount()).isEqualTo(24);
+        assertThat(receipt.archiveEvidence().files())
+                .extracting(file -> file.id())
+                .containsExactly(
+                        "v264-html-archive",
+                        "v264-screenshot",
+                        "v264-explanation",
+                        "v264-code-walkthrough",
+                        "v265-html-archive",
+                        "v265-screenshot",
+                        "v265-explanation",
+                        "v265-code-walkthrough",
+                        "active-plan"
+                );
+        assertThat(receipt.archiveEvidence().snippets())
+                .extracting(snippet -> snippet.id())
+                .contains("plan-v266", "v265-walkthrough-mini-kv-v116");
+        assertThat(receipt.archiveVerification().archiveVerificationReadsFilesOnly()).isTrue();
+        assertThat(receipt.archiveVerification().archiveVerificationRerunsFakeShellBehavior()).isFalse();
+        assertThat(receipt.archiveVerification().upstreamActionsEnabled()).isFalse();
+        assertThat(receipt.archiveVerification().productionAuditAllowed()).isFalse();
+        assertThat(receipt.archiveVerification().routeResponsesVerified()).isTrue();
+        assertThat(receipt.archiveChecks().sourceNodeV265ConsumesUpstreamEchoes()).isTrue();
+        assertThat(receipt.archiveChecks().archiveFilesPresent()).isTrue();
+        assertThat(receipt.archiveChecks().archiveSnippetsMatched()).isTrue();
+        assertThat(receipt.archiveChecks().noArchiveVerificationFakeShellRerun()).isTrue();
+        assertThat(receipt.sideEffectBoundary().readOnlyArchiveVerification()).isTrue();
+        assertThat(receipt.sideEffectBoundary().archiveVerificationReadsFilesOnly()).isTrue();
+        assertThat(receipt.sideEffectBoundary().archiveVerificationRerunsFakeShellBehavior()).isFalse();
+        assertThat(receipt.sideEffectBoundary().credentialValueRead()).isFalse();
+        assertThat(receipt.sideEffectBoundary().rawEndpointUrlParsed()).isFalse();
+        assertThat(receipt.sideEffectBoundary().externalRequestSent()).isFalse();
+        assertThat(receipt.sideEffectBoundary().secretProviderInstantiated()).isFalse();
+        assertThat(receipt.sideEffectBoundary().resolverClientInstantiated()).isFalse();
+        assertThat(receipt.sideEffectBoundary().connectsManagedAudit()).isFalse();
+        assertThat(receipt.sideEffectBoundary().approvalLedgerWritten()).isFalse();
+        assertThat(receipt.sideEffectBoundary().managedAuditStoreWritten()).isFalse();
+        assertThat(receipt.sideEffectBoundary().sqlExecuted()).isFalse();
+        assertThat(receipt.sideEffectBoundary().schemaMigrationExecuted()).isFalse();
+        assertThat(receipt.sideEffectBoundary().automaticUpstreamStart()).isFalse();
+        assertThat(receipt.sourceNodeV266Echoed()).isTrue();
+        assertThat(receipt.sourceNodeV264ContractEchoed()).isTrue();
+        assertThat(receipt.sourceNodeV265UpstreamEchoed()).isTrue();
+        assertThat(receipt.archiveEvidenceEchoed()).isTrue();
+        assertThat(receipt.archiveSnippetsEchoed()).isTrue();
+        assertThat(receipt.routeResponsesEchoed()).isTrue();
+        assertThat(receipt.readOnlyArchiveBoundaryEchoed()).isTrue();
+        assertThat(receipt.noFakeShellRerunEchoed()).isTrue();
+        assertThat(receipt.sideEffectBoundaryEchoed()).isTrue();
+        assertThat(receipt.upstreamActionsStillDisabledEchoed()).isTrue();
+        assertThat(receipt.readyForNodeV267SandboxEndpointCredentialResolverFakeShellArchiveUpstreamEchoVerification())
+                .isTrue();
+        assertThat(receipt.readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(receipt.readyForProductionAudit()).isFalse();
+        assertThat(receipt.readyForProductionWindow()).isFalse();
+        assertThat(receipt.nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(receipt.nodeWarningCodes()).containsExactly("ARCHIVE_VERIFICATION_ONLY");
+        assertThat(receipt.nodeRecommendationCodes())
+                .containsExactly("WRITE_POST_V266_PLAN", "KEEP_REAL_RESOLVER_OUT_OF_SCOPE");
+        assertThat(receipt.nextRequiredEchoVersions())
+                .contains(
+                        "Java v110 credential resolver fake-shell archive echo receipt",
+                        "mini-kv v117 credential resolver fake-shell archive non-participation receipt"
+                );
+        assertThat(receipt.receiptWarnings()).isEmpty();
+        assertThat(receipt.receiptDigest()).startsWith("sha256:");
+        assertThat(rehearsal.verificationHint().responseSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v30");
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptWarnings",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverFakeShellArchiveExternalRequestSent"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.archiveEvidence.archiveFileCount=9",
+                        "managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.archiveVerification.archiveVerificationRerunsFakeShellBehavior=false",
+                        "managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.readyForManagedAuditSandboxAdapterConnection=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.consumedByNodeSandboxEndpointCredentialResolverFakeShellArchiveVerificationProfile with Node v266",
+                        "Require managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.readyForNodeV267SandboxEndpointCredentialResolverFakeShellArchiveUpstreamEchoVerification=true before Node v267",
+                        "Keep managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.sideEffectBoundary.connectsManagedAudit=false"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt().receiptDigest())
+                .isEqualTo(receipt.receiptDigest());
     }
 
     private ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {

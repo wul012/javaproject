@@ -257,6 +257,13 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> Java v109 release approval rehearsal response records split: 把 1798 行的 `ReleaseApprovalRehearsalResponse` nested records 迁入 `ReleaseApprovalRehearsalResponseRecords` 容器，让主响应文件只保留顶层壳；不改业务 contract、schema 或 managed-audit 边界。
 ```
 
+## v110 update
+
+```text
+113-version-110-sandbox-endpoint-credential-resolver-fake-shell-archive-echo-receipt.md
+ -> Java v110 sandbox endpoint credential resolver fake-shell archive echo receipt：只读承接 Node v266 archive verification，供 Node v267 继续校验，并保持 credential value、真实 resolver、managed-audit connection、SQL、ledger 和 auto-start 全部阻断。
+```
+
 ## v108 update
 
 ```text

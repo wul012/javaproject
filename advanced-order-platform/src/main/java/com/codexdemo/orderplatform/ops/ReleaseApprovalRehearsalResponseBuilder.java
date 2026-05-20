@@ -67,6 +67,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker(),
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker(),
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker(),
+                managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -178,7 +179,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.sandboxEndpointHandlePreflightEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder(),
-                managedAuditReceiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder()
+                managedAuditReceiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder(),
+                managedAuditReceiptChain.sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -214,6 +216,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                                 .managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );

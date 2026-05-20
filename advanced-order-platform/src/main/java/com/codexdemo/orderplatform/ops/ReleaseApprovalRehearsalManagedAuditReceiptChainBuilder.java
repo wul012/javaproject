@@ -2,6 +2,8 @@ package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
 
@@ -132,6 +134,13 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker =
                         sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
                                 .build(managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker);
+        ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
+                sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder();
+        RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt
+                managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt =
+                        sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
+                                .build(managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -167,7 +176,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
                 sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
                 managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
-                sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
+                sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder,
+                managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt,
+                sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
         );
     }
 
@@ -239,7 +250,11 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
             RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
                     managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
-                    sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
+                    sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
     ) {
     }
 }
