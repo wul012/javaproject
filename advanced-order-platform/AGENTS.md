@@ -56,32 +56,32 @@ Version completion expectations:
 
 ## Runtime Archive Folder
 
-For future Java version work, put run/debug explanations and screenshots in `c/`, which is a sibling of the old `a/` and `b/` archive folders.
+For future Java version work after v115, put run/debug explanations and screenshots in `d/`, which is a sibling of the old `a/`, `b/`, and `c/` archive folders.
 
 Use this shape:
 
 ```text
-c/<version>/解释/说明.md
-c/<version>/图片/*.png
+d/<version>/解释/说明.md
+d/<version>/图片/*.png
 ```
 
-Keep the old `a/` and `b/` folders as historical archives for earlier versions. Do not move old `a/<version>` or `b/<version>` records unless the user explicitly asks.
+Keep the old `a/`, `b/`, and `c/` folders as historical archives for earlier versions. `c/` is closed after Java v115. Do not move old `a/<version>`, `b/<version>`, or `c/<version>` records unless the user explicitly asks.
 
-When finishing a version, the final report should mention the `c/<version>` archive path.
+When finishing a version, the final report should mention the `d/<version>` archive path.
 
 ## Code Explanation Folder
 
-For new Java code explanation notes, use the stage-specific sibling folder instead of the older crowded folder:
+For new Java code explanation notes after v115, use the new stage-specific sibling folder instead of the older crowded folders:
 
 ```text
-代码讲解记录_生产雏形阶段/
+代码讲解记录_生产雏形阶段_续/
 ```
 
-Keep the existing explanation style and numbered Markdown naming pattern. Do not move older `代码讲解记录/` files unless the user explicitly asks.
+Keep the existing explanation style and numbered Markdown naming pattern. `代码讲解记录_生产雏形阶段/` is closed after `118-version-115-credential-resolver-approval-required-boundary-echo-refinement.md`. Do not move older `代码讲解记录/` or `代码讲解记录_生产雏形阶段/` files unless the user explicitly asks.
 
 ## Document Expansion Rule
 
-For document work only, when an output folder becomes crowded, create or use a same-level sibling folder and continue writing there instead of stuffing everything into the original folder. Keep the original folder for older files and let the sibling folder carry the newer sequence.
+For document work only, when an output folder becomes crowded, create or use a same-level sibling folder and continue writing there instead of stuffing everything into the original folder. Keep the original folder for older files and let the sibling folder carry the newer sequence. For the current Java docs, this means runtime/screenshot explanations continue in `d/`, and code explanation notes continue in `代码讲解记录_生产雏形阶段_续/`.
 
 ## Docker Shutdown Fast Path
 

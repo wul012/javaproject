@@ -1,6 +1,6 @@
 # advanced-order-platform 运行调试归档 c
 
-本目录从后续版本开始，作为新的运行调试归档入口使用，和旧目录 `a/`、`b/` 同级：
+本目录是 Java v54-v115 的运行调试归档入口，和旧目录 `a/`、`b/` 同级：
 
 ```text
 D:\javaproj\advanced-order-platform\a
@@ -8,11 +8,11 @@ D:\javaproj\advanced-order-platform\b
 D:\javaproj\advanced-order-platform\c
 ```
 
-旧目录 `a/` 和 `b/` 保留历史版本记录，不主动搬迁。
+旧目录 `a/` 和 `b/` 保留历史版本记录，不主动搬迁。Java v116 之后的新运行解释和截图写入同级 `d/`。
 
 ## 写入规则
 
-后续每个 Java 版本的运行解释和截图写入：
+本目录内的 Java v54-v115 运行解释和截图使用：
 
 ```text
 c/<版本>/解释/说明.md
@@ -47,7 +47,13 @@ c/54/图片/05-cleanup.png
 
 ## 一句话总览
 
-`a/` 和 `b/` 作为历史归档保留；后续运行截图和解释统一写入 `c/<版本>/`。
+`a/`、`b/` 和 `c/` 作为历史归档保留；Java v116 之后运行截图和解释统一写入 `d/<版本>/`。
+
+## v115 close note
+
+```text
+c/ is closed after Java v115. Future runtime explanations and screenshot archives should go to d/<version>/.
+```
 
 ## 最新说明
 

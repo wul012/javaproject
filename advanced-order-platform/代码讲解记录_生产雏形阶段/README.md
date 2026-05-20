@@ -285,6 +285,12 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> Java v115 credential resolver approval-required boundary echo refinement: six approval-required boundaries now carry read-only explanations and decision echo records move out of ReleaseApprovalRehearsalResponseRecords, with credential values, raw endpoints, real resolver execution, managed-audit connections, SQL, ledger writes, rollback, and auto-start still blocked.
 ```
 
+## close note
+
+```text
+This folder is closed after 118-version-115. Future Java code explanation notes continue in 代码讲解记录_生产雏形阶段_续/.
+```
+
 ## v111 update
 
 ```text
