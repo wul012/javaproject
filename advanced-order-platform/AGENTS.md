@@ -79,6 +79,10 @@ For new Java code explanation notes, use the stage-specific sibling folder inste
 
 Keep the existing explanation style and numbered Markdown naming pattern. Do not move older `代码讲解记录/` files unless the user explicitly asks.
 
+## Document Expansion Rule
+
+For document work only, when an output folder becomes crowded, create or use a same-level sibling folder and continue writing there instead of stuffing everything into the original folder. Keep the original folder for older files and let the sibling folder carry the newer sequence.
+
 ## Docker Shutdown Fast Path
 
 When Docker was started only for this Java project validation, close it quickly during cleanup.

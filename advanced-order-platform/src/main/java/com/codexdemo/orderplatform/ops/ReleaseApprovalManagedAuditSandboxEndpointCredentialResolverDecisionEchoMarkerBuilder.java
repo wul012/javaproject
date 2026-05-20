@@ -114,17 +114,17 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
             "Keep managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker.sideEffectBoundary.connectsManagedAudit=false"
     );
 
-    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+    ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
     build(
             ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     endpointHandlePreflightEchoMarker
     ) {
         boolean sourceAccepted = sourceMarkerAccepted(endpointHandlePreflightEchoMarker);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho sourceNodeV259 =
+        ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho sourceNodeV259 =
                 sourceNodeV259(sourceAccepted);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord
+        ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord
                 decisionRecord = decisionRecord();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary
+        ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary
                 sideEffectBoundary = sideEffectBoundary();
 
         List<String> markerWarnings = ReleaseApprovalEchoMarkerSupport.warnings(
@@ -190,7 +190,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker(
+        return new ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DECISION_ECHO_MARKER_VERSION,
                 endpointHandlePreflightEchoMarker.markerVersion(),
@@ -258,7 +258,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
     ) {
         return ReleaseApprovalEchoMarkerSupport.warningLines(
                 WARNING_DIGEST_WARNING_INPUT_NAME,
@@ -267,7 +267,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -322,7 +322,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     boolean noCredentialConnectionWriteOrAutoStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
     ) {
         return decisionFieldsEchoed(marker.decisionRecord())
                 && endpointHandleEchoed(marker.decisionRecord())
@@ -357,9 +357,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
                 && !marker.readyForManagedAuditSandboxAdapterConnection();
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho
+    private static ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho
     sourceNodeV259(boolean readyForNodeV260CredentialResolverDecisionRecord) {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho(
+        return new ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho(
                 OpsEvidenceService.NODE_V259_SANDBOX_ENDPOINT_HANDLE_UPSTREAM_ECHO_VERIFICATION_VERSION,
                 OpsEvidenceService.NODE_V259_SANDBOX_ENDPOINT_HANDLE_UPSTREAM_ECHO_VERIFICATION_PROFILE,
                 OpsEvidenceService.NODE_V259_SANDBOX_ENDPOINT_HANDLE_UPSTREAM_ECHO_VERIFICATION_STATE,
@@ -390,11 +390,11 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord
+    private static ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord
     decisionRecord() {
-        List<ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField>
+        List<ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionField>
                 requiredDecisionFields = requiredDecisionFields();
-        List<ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition>
+        List<ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition>
                 explicitNoGoConditions = explicitNoGoConditions();
         String decisionDigest = ReleaseApprovalDigestSupport.digest(List.of(
                 ReleaseApprovalDigestSupport.line("recordMode", RECORD_MODE),
@@ -412,7 +412,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
                 ReleaseApprovalDigestSupport.line("requiredDecisionFields", requiredDecisionFields),
                 ReleaseApprovalDigestSupport.line("explicitNoGoConditions", explicitNoGoConditions)
         ));
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord(
+        return new ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord(
                 decisionDigest,
                 RECORD_MODE,
                 DECISION_SCOPE,
@@ -443,7 +443,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
         );
     }
 
-    private static List<ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField> requiredDecisionFields() {
+    private static List<ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionField> requiredDecisionFields() {
         return List.of(
                 decisionField(
                         "endpoint-handle",
@@ -496,13 +496,13 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField decisionField(
+    private static ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionField decisionField(
             String id,
             String label,
             String expectedSource,
             String acceptedEvidence
     ) {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField(
+        return new ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionField(
                 id,
                 label,
                 expectedSource,
@@ -512,7 +512,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
         );
     }
 
-    private static List<ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition> explicitNoGoConditions() {
+    private static List<ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition> explicitNoGoConditions() {
         return List.of(
                 noGo("CREDENTIAL_VALUE_REQUIRED", "credential value would need to be read"),
                 noGo("RAW_ENDPOINT_URL_REQUIRED", "raw endpoint URL would need to be parsed"),
@@ -526,19 +526,19 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition noGo(
+    private static ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition noGo(
             String code,
             String description
     ) {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition(
+        return new ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition(
                 code,
                 description,
                 false
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary sideEffectBoundary() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary(
+    private static ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary sideEffectBoundary() {
+        return new ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary(
                 true,
                 true,
                 false,
@@ -564,7 +564,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean sourceNodeV259Ready(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho source
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSourceEcho source
     ) {
         return OpsEvidenceService.NODE_V259_SANDBOX_ENDPOINT_HANDLE_UPSTREAM_ECHO_VERIFICATION_VERSION
                 .equals(source.sourceVersion())
@@ -599,12 +599,12 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean decisionFieldsEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return record.requiredDecisionFieldCount() == REQUIRED_DECISION_FIELD_COUNT
                 && record.requiredDecisionFields().size() == REQUIRED_DECISION_FIELD_COUNT
                 && record.requiredDecisionFields().stream()
-                .map(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
+                .map(ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
                 .toList()
                 .equals(REQUIRED_DECISION_FIELD_IDS)
                 && record.requiredDecisionFields().stream()
@@ -612,21 +612,21 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean endpointHandleEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return ENDPOINT_HANDLE.equals(record.endpointHandle())
                 && hasDecisionField(record, "endpoint-handle", "Node v259 upstream echo", "handle-aligned");
     }
 
     private static boolean credentialHandleEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return CREDENTIAL_HANDLE.equals(record.credentialHandle())
                 && hasDecisionField(record, "credential-handle", "Node v259 upstream echo", "handle-aligned");
     }
 
     private static boolean resolverPolicyEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return RESOLVER_POLICY_HANDLE.equals(record.resolverPolicyHandle())
                 && RESOLVER_MODE.equals(record.resolverMode())
@@ -635,28 +635,28 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean approvalMarkerEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return APPROVAL_MARKER.equals(record.approvalMarker())
                 && hasDecisionField(record, "approval-marker", "operator decision", "approval-marker-only");
     }
 
     private static boolean operatorIdentityRequirementEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return record.operatorIdentityRequired()
                 && hasDecisionField(record, "operator-identity", "access guard", "operator-header");
     }
 
     private static boolean approvalCorrelationRequirementEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return record.approvalCorrelationRequired()
                 && hasDecisionField(record, "approval-correlation", "access guard", "approval-correlation-header");
     }
 
     private static boolean redactionPolicyEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return hasDecisionField(record, "redaction-policy", "Node v259 policy review", "redaction-reviewed")
                 && !record.credentialValueMayBeRead()
@@ -666,22 +666,22 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean fallbackRotationPlanEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return hasDecisionField(record, "fallback-rotation-plan", "operator decision", "plan-handle-only");
     }
 
     private static boolean explicitNoGoConditionsEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record
     ) {
         return record.explicitNoGoConditionCount() == EXPLICIT_NO_GO_CONDITION_COUNT
                 && record.explicitNoGoConditions().size() == EXPLICIT_NO_GO_CONDITION_COUNT
                 && record.explicitNoGoConditions().stream()
-                .map(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
+                .map(ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
                 .toList()
                 .equals(EXPLICIT_NO_GO_CONDITION_CODES)
                 && record.explicitNoGoConditions().stream()
-                .noneMatch(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::allowed)
+                .noneMatch(ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::allowed)
                 && !record.managedAuditConnectionMayOpen()
                 && !record.schemaMigrationMayExecute()
                 && !record.externalRequestMayBeSent()
@@ -691,7 +691,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean hasDecisionField(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record,
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionRecord record,
             String id,
             String expectedSource,
             String acceptedEvidence
@@ -705,7 +705,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean noCredentialConnectionWriteOrAutoStart(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary boundary
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverSideEffectBoundary boundary
     ) {
         return boundary.readOnlyDecisionRecord()
                 && boundary.credentialResolverDecisionOnly()

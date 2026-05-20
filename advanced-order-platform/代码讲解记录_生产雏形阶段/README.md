@@ -278,6 +278,13 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> Java v114 release approval verification hint catalog split: fixed schema/proof/action/warning catalogs and the contribution record move out of ReleaseApprovalVerificationHintBuilder, reducing the builder from 903 to 648 lines with no response contract or managed-audit boundary change.
 ```
 
+## v115 update
+
+```text
+118-version-115-credential-resolver-approval-required-boundary-echo-refinement.md
+ -> Java v115 credential resolver approval-required boundary echo refinement: six approval-required boundaries now carry read-only explanations and decision echo records move out of ReleaseApprovalRehearsalResponseRecords, with credential values, raw endpoints, real resolver execution, managed-audit connections, SQL, ledger writes, rollback, and auto-start still blocked.
+```
+
 ## v111 update
 
 ```text

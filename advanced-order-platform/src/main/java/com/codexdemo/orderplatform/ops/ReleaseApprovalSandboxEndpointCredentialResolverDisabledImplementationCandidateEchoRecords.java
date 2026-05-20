@@ -34,6 +34,7 @@ public final class ReleaseApprovalSandboxEndpointCredentialResolverDisabledImple
             boolean candidateDecisionsEchoed,
             boolean candidateReadyScopeEchoed,
             boolean approvalRequiredScopeEchoed,
+            boolean approvalRequiredBoundaryExplanationsEchoed,
             boolean handleOnlyInterfaceEchoed,
             boolean fakeWiringReviewEchoed,
             boolean noCredentialBoundaryEchoed,
@@ -54,6 +55,8 @@ public final class ReleaseApprovalSandboxEndpointCredentialResolverDisabledImple
             List<String> requirementCodes,
             List<String> candidateReadyBoundaryCodes,
             List<String> approvalRequiredBoundaryCodes,
+            List<RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation>
+                    approvalRequiredBoundaryExplanations,
             List<String> nodeWarningCodes,
             List<String> nodeRecommendationCodes,
             List<String> nextRequiredEchoVersions,
@@ -181,6 +184,22 @@ public final class ReleaseApprovalSandboxEndpointCredentialResolverDisabledImple
             String owner,
             String candidateRule,
             List<String> prohibitedRuntimeActions
+    ) {
+    }
+
+    public record RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation(
+            String code,
+            String requirementFromV268,
+            String evidenceAllowed,
+            String approvalReason,
+            List<String> prohibitedRuntimeActions,
+            boolean credentialValueReadAllowed,
+            boolean rawEndpointUrlParseAllowed,
+            boolean managedAuditConnectionAllowed,
+            boolean approvalLedgerWriteAllowed,
+            boolean sqlExecutionAllowed,
+            boolean rollbackExecutionAllowed,
+            boolean automaticUpstreamStartAllowed
     ) {
     }
 

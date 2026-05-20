@@ -296,7 +296,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
             ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     managedAuditSandboxEndpointHandlePreflightEchoMarker,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
@@ -452,7 +452,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
             ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     managedAuditSandboxEndpointHandlePreflightEchoMarker,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,

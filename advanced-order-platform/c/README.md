@@ -136,6 +136,13 @@ c/114/解释/说明.md
  -> Java v114 release approval verification hint catalog split: contract-preserving refactor that moves fixed schema/proof/action/warning lists and contribution record out of ReleaseApprovalVerificationHintBuilder, reducing it from 903 to 648 lines while keeping response contracts and managed-audit boundaries unchanged.
 ```
 
+## v115 update
+
+```text
+c/115/解释/说明.md
+ -> Java v115 credential resolver approval-required boundary echo refinement: adds six read-only approval-required boundary explanations, moves decision echo records out of ReleaseApprovalRehearsalResponseRecords, and keeps credential values, raw endpoints, real resolver execution, managed-audit connections, SQL, ledger writes, rollback, and auto-start blocked.
+```
+
 ## v108 update
 
 ```text

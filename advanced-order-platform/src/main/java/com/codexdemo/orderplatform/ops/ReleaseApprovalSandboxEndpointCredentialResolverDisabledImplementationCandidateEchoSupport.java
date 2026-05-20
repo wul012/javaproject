@@ -1,6 +1,8 @@
 package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
+        .RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
         .RehearsalSandboxEndpointCredentialResolverDisabledCandidateBoundaryDecision;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
         .RehearsalSandboxEndpointCredentialResolverDisabledCandidateInterfaceShape;
@@ -18,7 +20,7 @@ import java.util.List;
 final class ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport {
 
     static final String CANDIDATE_ECHO_MODE =
-            "java-v113-credential-resolver-disabled-implementation-candidate-echo-receipt-only";
+            "java-v115-credential-resolver-approval-required-boundary-echo-refinement-only";
     static final String SOURCE_SPAN = "Node v273 disabled implementation candidate review";
     static final String NODE_V272_SOURCE_SPAN = "Node v270 + Java v112 + mini-kv v119";
     static final String NODE_V273_CANDIDATE_VERSION =
@@ -102,6 +104,26 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementati
 
     static List<String> approvalRequiredBoundaryCodes() {
         return APPROVAL_REQUIRED_BOUNDARY_CODES;
+    }
+
+    static List<RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation>
+    approvalRequiredBoundaryExplanations() {
+        return APPROVAL_REQUIRED_BOUNDARY_CODES.stream()
+                .map(code -> new RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation(
+                        code,
+                        REQUIREMENT_CODES.get(BOUNDARY_CODES.indexOf(code)),
+                        approvalRequiredEvidenceAllowedFor(code),
+                        approvalReasonFor(code),
+                        prohibitedRuntimeActionsFor(code),
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                ))
+                .toList();
     }
 
     static RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate candidate(String candidateDigest) {
@@ -303,6 +325,30 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementati
                 && candidate.fakeWiringReview().cleanupArtifactCount() == 0;
     }
 
+    static boolean approvalRequiredBoundaryExplanationsComplete(
+            List<RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation> explanations
+    ) {
+        return explanations.size() == APPROVAL_REQUIRED_DECISION_COUNT
+                && explanations.stream()
+                .map(RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation::code)
+                .toList().equals(APPROVAL_REQUIRED_BOUNDARY_CODES)
+                && explanations.stream()
+                .map(RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation::requirementFromV268)
+                .toList().equals(APPROVAL_REQUIRED_BOUNDARY_CODES.stream()
+                        .map(code -> REQUIREMENT_CODES.get(BOUNDARY_CODES.indexOf(code)))
+                        .toList())
+                && explanations.stream()
+                .allMatch(explanation -> "approval-required-read-only-evidence"
+                        .equals(explanation.evidenceAllowed())
+                        && !explanation.credentialValueReadAllowed()
+                        && !explanation.rawEndpointUrlParseAllowed()
+                        && !explanation.managedAuditConnectionAllowed()
+                        && !explanation.approvalLedgerWriteAllowed()
+                        && !explanation.sqlExecutionAllowed()
+                        && !explanation.rollbackExecutionAllowed()
+                        && !explanation.automaticUpstreamStartAllowed());
+    }
+
     static boolean checksClosed(
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateChecks checks
     ) {
@@ -436,6 +482,33 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementati
             case "SCHEMA_MIGRATION_POLICY" -> List.of("execute-schema-migration", "execute-sql");
             case "AUDIT_LEDGER_WRITE_POLICY" -> List.of("write-approval-ledger", "write-managed-audit-state");
             default -> throw new IllegalArgumentException("Unknown boundary code: " + code);
+        };
+    }
+
+    private static String approvalRequiredEvidenceAllowedFor(String code) {
+        return switch (code) {
+            case "CREDENTIAL_HANDLE", "ENDPOINT_HANDLE", "OPERATOR_APPROVAL", "ROLLBACK_BOUNDARY",
+                    "SCHEMA_MIGRATION_POLICY", "AUDIT_LEDGER_WRITE_POLICY" ->
+                    "approval-required-read-only-evidence";
+            default -> throw new IllegalArgumentException("Unknown approval-required boundary code: " + code);
+        };
+    }
+
+    private static String approvalReasonFor(String code) {
+        return switch (code) {
+            case "CREDENTIAL_HANDLE" ->
+                    "Credential handle may be echoed only as an identifier; the credential value remains unread.";
+            case "ENDPOINT_HANDLE" ->
+                    "Endpoint handle may be echoed only as an identifier; the raw endpoint URL remains unparsed.";
+            case "OPERATOR_APPROVAL" ->
+                    "Operator approval must be supplied by a human-reviewed marker before resolver execution.";
+            case "ROLLBACK_BOUNDARY" ->
+                    "Rollback handling stays outside the disabled candidate and cannot execute from this receipt.";
+            case "SCHEMA_MIGRATION_POLICY" ->
+                    "Schema migration policy requires approval and cannot execute SQL from this receipt.";
+            case "AUDIT_LEDGER_WRITE_POLICY" ->
+                    "Audit ledger writes require approval and cannot be produced by this read-only evidence.";
+            default -> throw new IllegalArgumentException("Unknown approval-required boundary code: " + code);
         };
     }
 }

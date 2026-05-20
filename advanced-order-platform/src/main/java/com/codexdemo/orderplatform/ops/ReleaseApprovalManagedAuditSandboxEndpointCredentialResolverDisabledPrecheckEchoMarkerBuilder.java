@@ -154,7 +154,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
     );
 
     RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker decisionEchoMarker
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker decisionEchoMarker
     ) {
         SourceGate sourceGate = SourceGate.from(decisionEchoMarker);
         RehearsalSandboxEndpointCredentialResolverDisabledPrecheckSourceEcho sourceNodeV261 =
@@ -609,7 +609,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
     private record SourceGate(boolean sourceAccepted) {
 
         static SourceGate from(
-                ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
+                ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker
         ) {
             return new SourceGate(
                     marker.readyForNodeV261SandboxEndpointCredentialResolverUpstreamEchoVerification()

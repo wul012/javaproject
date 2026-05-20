@@ -2873,6 +2873,7 @@ ops
   -> v112 adds release approval rehearsal sandbox endpoint credential resolver pre-implementation plan intake echo receipt for Node v270/v272 while echoing 10 defined-for-review boundaries and keeping credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, schema migrations, and auto-start blocked
   -> v113 adds release approval rehearsal sandbox endpoint credential resolver disabled implementation candidate echo receipt for Node v273/v274 while using echo workflow template support and keeping credential values, raw endpoints, real resolver execution, managed-audit connections, SQL, ledger writes, schema migrations, and auto-start blocked
   -> v114 refactors release approval verification hint catalogs out of ReleaseApprovalVerificationHintBuilder, reducing the builder from 903 to 648 lines while keeping response contracts, digest order, proof claims, and managed-audit boundaries unchanged
+  -> v115 refines credential resolver approval-required boundary echo evidence with six read-only explanations, moves decision echo records out of ReleaseApprovalRehearsalResponseRecords, and keeps credential values, raw endpoints, resolver execution, managed-audit connections, SQL, ledger writes, rollback, and auto-start blocked
 
 common
  -> 业务异常和统一错误响应

@@ -61,7 +61,7 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
         ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                 managedAuditSandboxEndpointHandlePreflightEchoMarker,
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+        ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                 managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
         RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
                 managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,

@@ -990,7 +990,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.liveReadinessHint().serverTimestamp()).isEqualTo(rehearsal.sampledAt());
         assertThat(rehearsal.liveReadinessHint().serverTimestampSource()).isEqualTo("sampledAt");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpointVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v33");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v34");
         assertThat(rehearsal.liveReadinessHint().readOnlyEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.liveReadinessHint().healthEndpoint()).isEqualTo("/actuator/health");
@@ -2394,7 +2394,7 @@ class OpsEvidenceServiceTests {
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v33");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v34");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -2721,6 +2721,7 @@ class OpsEvidenceServiceTests {
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateBoundaryCount",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateCandidateReadyDecisionCount",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalRequiredDecisionCount",
+                        "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalRequiredExplanationCount",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateCredentialValueRead",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateRawEndpointUrlParsed",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateExternalRequestSent",
@@ -3524,7 +3525,7 @@ class OpsEvidenceServiceTests {
         assertThat(headerBackedRehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(headerBackedRehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v33");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v34");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(headerBackedRehearsal.verificationHint().warningDigest())
                 .isNotEqualTo(rehearsal.verificationHint().warningDigest());
@@ -4487,7 +4488,7 @@ class OpsEvidenceServiceTests {
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker =
+        ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker marker =
                 rehearsal.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker();
         assertThat(marker.markerVersion())
                 .isEqualTo(
@@ -4580,7 +4581,7 @@ class OpsEvidenceServiceTests {
         assertThat(marker.decisionRecord().requiredDecisionFieldCount()).isEqualTo(8);
         assertThat(marker.decisionRecord().explicitNoGoConditionCount()).isEqualTo(9);
         assertThat(marker.decisionRecord().requiredDecisionFields())
-                .extracting(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
+                .extracting(ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
                 .containsExactly(
                         "endpoint-handle",
                         "credential-handle",
@@ -4594,7 +4595,7 @@ class OpsEvidenceServiceTests {
         assertThat(marker.decisionRecord().requiredDecisionFields())
                 .allMatch(field -> field.required() && !field.nodeMayReadValue());
         assertThat(marker.decisionRecord().explicitNoGoConditions())
-                .extracting(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
+                .extracting(ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
                 .containsExactly(
                         "CREDENTIAL_VALUE_REQUIRED",
                         "RAW_ENDPOINT_URL_REQUIRED",
@@ -4651,12 +4652,12 @@ class OpsEvidenceServiceTests {
         assertThat(marker.nodeMayTreatAsProductionAuditRecord()).isFalse();
         assertThat(marker.requiredDecisionFieldIds()).containsExactlyElementsOf(
                 marker.decisionRecord().requiredDecisionFields().stream()
-                        .map(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
+                        .map(ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverDecisionField::id)
                         .toList()
         );
         assertThat(marker.explicitNoGoConditionCodes()).containsExactlyElementsOf(
                 marker.decisionRecord().explicitNoGoConditions().stream()
-                        .map(ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
+                        .map(ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalSandboxEndpointCredentialResolverNoGoCondition::code)
                         .toList()
         );
         assertThat(marker.nodeWarningCodes())
@@ -5434,7 +5435,7 @@ class OpsEvidenceServiceTests {
         assertThat(receipt.receiptWarnings()).isEmpty();
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v33");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v34");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())
@@ -5972,7 +5973,7 @@ class OpsEvidenceServiceTests {
         assertThat(receipt.receiptWarnings()).isEmpty();
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v33");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v34");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())
@@ -6014,7 +6015,7 @@ class OpsEvidenceServiceTests {
                 rehearsal.managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt();
         assertThat(receipt.receiptVersion())
                 .isEqualTo(
-                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-disabled-implementation-candidate-echo-receipt.v1"
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-disabled-implementation-candidate-echo-receipt.v2"
                 );
         assertThat(receipt.sourcePreImplementationPlanIntakeEchoReceiptVersion())
                 .isEqualTo(
@@ -6046,7 +6047,7 @@ class OpsEvidenceServiceTests {
                 );
         assertThat(receipt.nodeV274MayConsume()).isTrue();
         assertThat(receipt.disabledCandidateEchoMode())
-                .isEqualTo("java-v113-credential-resolver-disabled-implementation-candidate-echo-receipt-only");
+                .isEqualTo("java-v115-credential-resolver-approval-required-boundary-echo-refinement-only");
         assertThat(receipt.sourceSpan()).isEqualTo("Node v273 disabled implementation candidate review");
 
         assertThat(receipt.sourceNodeV273().sourceVersion()).isEqualTo("Node v273");
@@ -6148,6 +6149,25 @@ class OpsEvidenceServiceTests {
                         "SCHEMA_MIGRATION_POLICY",
                         "AUDIT_LEDGER_WRITE_POLICY"
                 );
+        assertThat(receipt.approvalRequiredBoundaryExplanations())
+                .extracting(ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords.RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation::code)
+                .containsExactly(
+                        "CREDENTIAL_HANDLE",
+                        "ENDPOINT_HANDLE",
+                        "OPERATOR_APPROVAL",
+                        "ROLLBACK_BOUNDARY",
+                        "SCHEMA_MIGRATION_POLICY",
+                        "AUDIT_LEDGER_WRITE_POLICY"
+                );
+        assertThat(receipt.approvalRequiredBoundaryExplanations())
+                .allMatch(explanation -> explanation.evidenceAllowed().equals("approval-required-read-only-evidence")
+                        && !explanation.credentialValueReadAllowed()
+                        && !explanation.rawEndpointUrlParseAllowed()
+                        && !explanation.managedAuditConnectionAllowed()
+                        && !explanation.approvalLedgerWriteAllowed()
+                        && !explanation.sqlExecutionAllowed()
+                        && !explanation.rollbackExecutionAllowed()
+                        && !explanation.automaticUpstreamStartAllowed());
         assertThat(receipt.candidate().interfaceShape().requestFields())
                 .containsExactly(
                         "credentialHandle",
@@ -6243,6 +6263,7 @@ class OpsEvidenceServiceTests {
                         "candidateDecisionsEchoed",
                         "candidateReadyScopeEchoed",
                         "approvalRequiredScopeEchoed",
+                        "approvalRequiredBoundaryExplanationsEchoed",
                         "handleOnlyInterfaceEchoed",
                         "fakeWiringReviewEchoed",
                         "noCredentialBoundaryEchoed",
@@ -6274,7 +6295,7 @@ class OpsEvidenceServiceTests {
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v33");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v34");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())
@@ -6282,6 +6303,7 @@ class OpsEvidenceServiceTests {
                         "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptWarnings",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptDigest",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateCandidateReadyDecisionCount",
+                        "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalRequiredExplanationCount",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalLedgerWritten",
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateAutomaticUpstreamStart"
                 );
@@ -6289,6 +6311,7 @@ class OpsEvidenceServiceTests {
                 .contains(
                         "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.candidateDecisionCount=10",
                         "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.candidateReadyDecisionCount=4",
+                        "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.approvalRequiredBoundaryExplanations.size=6",
                         "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.sideEffectBoundary.approvalLedgerWritten=false",
                         "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.readyForManagedAuditSandboxAdapterConnection=false"
                 );
@@ -6296,6 +6319,7 @@ class OpsEvidenceServiceTests {
                 .contains(
                         "Compare managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.consumedByNodeCredentialResolverDisabledImplementationCandidateReviewProfile with Node v273",
                         "Require managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.readyForNodeV274CredentialResolverDisabledCandidateVerification=true before Node v274",
+                        "Verify managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.approvalRequiredBoundaryExplanations.size=6",
                         "Keep managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.interfaceShape.includesCredentialValue=false",
                         "Keep managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.sideEffectBoundary.automaticUpstreamStart=false"
                 );

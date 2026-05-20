@@ -122,7 +122,7 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
         ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
                 sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder =
                         new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+        ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                 managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker =
                         sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
                                 .build(managedAuditSandboxEndpointHandlePreflightEchoMarker);
@@ -272,7 +272,7 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                     managedAuditSandboxEndpointHandlePreflightEchoMarker,
             ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
                     sandboxEndpointHandlePreflightEchoMarkerBuilder,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
+            ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
                     managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
                     sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,

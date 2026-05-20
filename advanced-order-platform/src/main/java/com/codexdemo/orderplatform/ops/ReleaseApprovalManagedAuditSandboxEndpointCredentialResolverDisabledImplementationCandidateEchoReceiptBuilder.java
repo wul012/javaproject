@@ -22,6 +22,8 @@ import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCred
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.SOURCE_SPAN;
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.WARNING_COUNT;
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.approvalRequiredBoundaryCodes;
+import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.approvalRequiredBoundaryExplanations;
+import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.approvalRequiredBoundaryExplanationsComplete;
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.boundaryCodes;
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.candidate;
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoSupport.candidateComplete;
@@ -35,6 +37,8 @@ import static com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCred
 import com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.EchoWorkflowReadiness;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
+        .RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
         .RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
@@ -65,6 +69,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                     "sandboxEndpointCredentialResolverDisabledImplementationCandidateBoundaryCount",
                     "sandboxEndpointCredentialResolverDisabledImplementationCandidateCandidateReadyDecisionCount",
                     "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalRequiredDecisionCount",
+                    "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalRequiredExplanationCount",
                     "sandboxEndpointCredentialResolverDisabledImplementationCandidateCredentialValueRead",
                     "sandboxEndpointCredentialResolverDisabledImplementationCandidateRawEndpointUrlParsed",
                     "sandboxEndpointCredentialResolverDisabledImplementationCandidateExternalRequestSent",
@@ -82,6 +87,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
             "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.candidateDecisionCount=10",
             "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.candidateReadyDecisionCount=4",
             "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.approvalRequiredDecisionCount=6",
+            "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.approvalRequiredBoundaryExplanations.size=6",
             "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.interfaceShape.handleOnlyRequest=true",
             "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.fakeWiringReview.fakeWiringReviewOnly=true",
             "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.sideEffectBoundary.credentialValueRead=false",
@@ -96,6 +102,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
             "Require managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.readyForNodeV274CredentialResolverDisabledCandidateVerification=true before Node v274",
             "Verify managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.candidateDecisionCount=10",
             "Verify managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.candidateReadyDecisionCount=4",
+            "Verify managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.approvalRequiredBoundaryExplanations.size=6",
             "Keep managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.interfaceShape.includesCredentialValue=false",
             "Keep managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.candidate.interfaceShape.includesRawEndpointUrl=false",
             "Keep managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt.sideEffectBoundary.credentialValueRead=false",
@@ -130,19 +137,28 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                 candidate(candidateDigest(sourceNodeV272));
         RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateChecks checks =
                 checks(sourceNodeV272Ready(sourceNodeV272), candidate);
+        List<RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation>
+                approvalRequiredBoundaryExplanations = approvalRequiredBoundaryExplanations();
         RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateSummary summary =
                 summary(candidate);
         RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateReviewSourceEcho sourceNodeV273 =
                 sourceNodeV273(sourceNodeV272, summary);
         RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateSideEffectBoundary sideEffectBoundary =
                 sideEffectBoundary();
-        EchoWorkflowReadiness readiness = readiness(sourceNodeV273, candidate, checks, sideEffectBoundary);
+        EchoWorkflowReadiness readiness = readiness(
+                sourceNodeV273,
+                candidate,
+                checks,
+                approvalRequiredBoundaryExplanations,
+                sideEffectBoundary
+        );
         List<String> receiptWarnings = receiptWarnings(readiness);
         String receiptDigest = receiptDigest(
                 planIntakeEchoReceipt,
                 sourceNodeV273,
                 candidate,
                 checks,
+                approvalRequiredBoundaryExplanations,
                 sideEffectBoundary,
                 readiness
         );
@@ -175,6 +191,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                 readiness.ready("candidateDecisionsEchoed"),
                 readiness.ready("candidateReadyScopeEchoed"),
                 readiness.ready("approvalRequiredScopeEchoed"),
+                readiness.ready("approvalRequiredBoundaryExplanationsEchoed"),
                 readiness.ready("handleOnlyInterfaceEchoed"),
                 readiness.ready("fakeWiringReviewEchoed"),
                 readiness.ready("noCredentialBoundaryEchoed"),
@@ -195,6 +212,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                 requirementCodes(),
                 candidateReadyBoundaryCodes(),
                 approvalRequiredBoundaryCodes(),
+                approvalRequiredBoundaryExplanations,
                 NODE_WARNING_CODES,
                 NODE_RECOMMENDATION_CODES,
                 NEXT_REQUIRED_ECHO_VERSIONS,
@@ -255,6 +273,10 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                 boundaryInput(
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalRequiredDecisionCount",
                         receipt.candidate().approvalRequiredDecisionCount()
+                ),
+                boundaryInput(
+                        "sandboxEndpointCredentialResolverDisabledImplementationCandidateApprovalRequiredExplanationCount",
+                        receipt.approvalRequiredBoundaryExplanations().size()
                 ),
                 boundaryInput(
                         "sandboxEndpointCredentialResolverDisabledImplementationCandidateCredentialValueRead",
@@ -443,6 +465,8 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateReviewSourceEcho sourceNodeV273,
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate candidate,
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateChecks checks,
+            List<RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation>
+                    approvalRequiredBoundaryExplanations,
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateSideEffectBoundary sideEffectBoundary
     ) {
         return workflowReadiness(
@@ -452,6 +476,8 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                 workflowStep("candidateDecisionsEchoed", checks.allCandidateDecisionsCovered()),
                 workflowStep("candidateReadyScopeEchoed", checks.candidateReadyBoundariesLimited()),
                 workflowStep("approvalRequiredScopeEchoed", checks.approvalRequiredBoundariesPreserved()),
+                workflowStep("approvalRequiredBoundaryExplanationsEchoed",
+                        approvalRequiredBoundaryExplanationsComplete(approvalRequiredBoundaryExplanations)),
                 workflowStep("handleOnlyInterfaceEchoed", checks.interfaceShapeHandleOnly()),
                 workflowStep("fakeWiringReviewEchoed", checks.fakeWiringReviewOnly()),
                 workflowStep("noCredentialBoundaryEchoed", checks.credentialValueStillForbidden()
@@ -592,6 +618,8 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateReviewSourceEcho sourceNodeV273,
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate candidate,
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateChecks checks,
+            List<RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation>
+                    approvalRequiredBoundaryExplanations,
             RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidateSideEffectBoundary sideEffectBoundary,
             EchoWorkflowReadiness readiness
     ) {
@@ -606,6 +634,8 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                 ReleaseApprovalDigestSupport.line("sourceNodeV273", sourceNodeV273),
                 ReleaseApprovalDigestSupport.line("candidate", candidate),
                 ReleaseApprovalDigestSupport.line("checks", checks),
+                ReleaseApprovalDigestSupport.line("approvalRequiredBoundaryExplanations",
+                        approvalRequiredBoundaryExplanations),
                 ReleaseApprovalDigestSupport.line("sideEffectBoundary", sideEffectBoundary),
                 ReleaseApprovalDigestSupport.line("readySteps", readiness.readyStepNames())
         ));
@@ -616,6 +646,10 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabled
                 readiness.warningIfMissing("sourceNodeV273Echoed", "NODE_V273_DISABLED_CANDIDATE_NOT_READY"),
                 readiness.warningIfMissing("sourceNodeV272UpstreamEchoed", "NODE_V272_PLAN_INTAKE_UPSTREAM_ECHO_NOT_READY"),
                 readiness.warningIfMissing("disabledImplementationCandidateEchoed", "NODE_V273_DISABLED_CANDIDATE_INCOMPLETE"),
+                readiness.warningIfMissing(
+                        "approvalRequiredBoundaryExplanationsEchoed",
+                        "JAVA_V115_APPROVAL_REQUIRED_BOUNDARY_EXPLANATIONS_INCOMPLETE"
+                ),
                 readiness.warningIfMissing("noCredentialBoundaryEchoed", "NODE_V273_CREDENTIAL_BOUNDARY_OPEN")
         );
     }
