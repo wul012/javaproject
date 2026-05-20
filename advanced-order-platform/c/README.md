@@ -122,6 +122,13 @@ c/112/解释/说明.md
  -> Java v112 credential resolver pre-implementation plan intake echo receipt: read-only echo of Node v270 plan intake, split into records / support / builder, with 10 defined-for-review boundaries while credential value, raw endpoint, external request, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
 ```
 
+## v113 update
+
+```text
+c/113/解释/说明.md
+ -> Java v113 credential resolver disabled implementation candidate echo receipt: read-only echo of Node v273 disabled candidate review, with echo workflow template support, 4 candidate-ready and 6 approval-required boundaries, while credential value, raw endpoint, real resolver, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
+```
+
 ## v108 update
 
 ```text
