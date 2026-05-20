@@ -2870,6 +2870,7 @@ ops
   -> v109 splits ReleaseApprovalRehearsalResponse into a thin response shell plus ReleaseApprovalRehearsalResponseRecords so the nested record catalog stops living inside the top-level response type; no business contract or boundary changes
   -> v110 adds release approval rehearsal sandbox endpoint credential resolver fake-shell archive echo receipt for Node v266/v267 while keeping credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, schema migrations, and auto-start blocked
   -> v111 adds release approval rehearsal sandbox endpoint credential resolver production-readiness blocked-decision echo receipt for Node v268/v269 while keeping real resolver implementation, credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, schema migrations, and auto-start blocked
+  -> v112 adds release approval rehearsal sandbox endpoint credential resolver pre-implementation plan intake echo receipt for Node v270/v272 while echoing 10 defined-for-review boundaries and keeping credential values, raw endpoints, external requests, managed-audit connections, SQL, ledger writes, schema migrations, and auto-start blocked
 
 common
  -> 业务异常和统一错误响应

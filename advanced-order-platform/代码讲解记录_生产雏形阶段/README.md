@@ -271,6 +271,13 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> Java v111 sandbox endpoint credential resolver production-readiness blocked-decision echo receipt: read-only echo of the Node v268 blocked decision gate for Node v269 verification, while real resolver, credential value, raw endpoint, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
 ```
 
+## v112 update
+
+```text
+115-version-112-sandbox-endpoint-credential-resolver-pre-implementation-plan-intake-echo-receipt.md
+ -> Java v112 sandbox endpoint credential resolver pre-implementation plan intake echo receipt: read-only echo of Node v270 plan intake for Node v272 verification, with 10 defined-for-review boundaries and no credential value, raw endpoint, real resolver, managed-audit connection, SQL, ledger, schema migration, or auto-start.
+```
+
 ## v108 update
 
 ```text

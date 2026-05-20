@@ -1026,7 +1026,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v31"))
+                        .value("java-release-approval-rehearsal-response-schema.v32"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))
@@ -1833,7 +1833,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v31"))
+                        .value("java-release-approval-rehearsal-response-schema.v32"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -2658,7 +2658,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v31"))
+                        .value("java-release-approval-rehearsal-response-schema.v32"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProved").value(true))
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
@@ -3929,7 +3929,7 @@ class OpsOverviewIntegrationTests {
                         .value(false))
                 .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.receiptWarnings").isEmpty())
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v31"))
+                        .value("java-release-approval-rehearsal-response-schema.v32"))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
@@ -4036,7 +4036,7 @@ class OpsOverviewIntegrationTests {
                 .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt.readyForManagedAuditSandboxAdapterConnection")
                         .value(false))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v31"))
+                        .value("java-release-approval-rehearsal-response-schema.v32"))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
@@ -4045,6 +4045,133 @@ class OpsOverviewIntegrationTests {
                         hasItem("managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt.sourceNodeV268.readinessDecision=blocked")))
                 .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
                         hasItem("Compare managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt.consumedByNodeCredentialResolverProductionReadinessDecisionGateProfile with Node v268")));
+    }
+
+    @Test
+    void releaseApprovalRehearsalExposesSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/release-approval-rehearsal")
+                        .header("x-orderops-request-id", "rehearsal-v112-plan-intake")
+                        .header("x-orderops-operator-id", "auditor-v112")
+                        .header("x-orderops-roles", "auditor,operator,viewer")
+                        .header("x-orderops-operator-verified", "true")
+                        .header("x-orderops-approval-correlation-id",
+                                "approval-v112-credential-resolver-plan-intake")
+                        .header("x-orderops-ci-manifest-version",
+                                "real-read-window-ci-archive-artifact-manifest.v1")
+                        .header("x-orderops-ci-manifest-digest", "sha256:node-v200-manifest-digest")
+                        .header("x-orderops-ci-manifest-endpoint",
+                                "/api/v1/production/real-read-window-ci-archive-artifact-manifest")
+                        .header("x-orderops-ci-artifact-record-count", "9")
+                        .header("x-orderops-ci-approval-correlation-id",
+                                "approval-v112-credential-resolver-plan-intake")
+                        .header("x-orderops-ci-upload-contract-version",
+                                "real-read-window-ci-artifact-upload-dry-run-contract.v1")
+                        .header("x-orderops-ci-upload-contract-digest",
+                                "sha256:node-v202-upload-contract-digest")
+                        .header("x-orderops-ci-artifact-name", "orderops-real-read-window-evidence-v191-v201")
+                        .header("x-orderops-ci-artifact-root", "c/")
+                        .header("x-orderops-ci-retention-days", "30")
+                        .header("x-orderops-ci-upload-mode", "dry-run-contract-only")
+                        .header("x-orderops-runtime-preflight-version",
+                                "three-project-real-read-runtime-smoke-preflight.v1")
+                        .header("x-orderops-runtime-preflight-digest",
+                                "sha256:node-v204-preflight-digest")
+                        .header("x-orderops-runtime-smoke-session-id",
+                                "runtime-smoke-v205-session-001")
+                        .header("x-orderops-runtime-read-target-id",
+                                "java-release-approval-rehearsal")
+                        .header("x-orderops-runtime-window-mode",
+                                "manual-open-window-plan")
+                        .header("x-orderops-managed-audit-candidate-version",
+                                "managed-audit-persistence-boundary-candidate.v1")
+                        .header("x-orderops-managed-audit-candidate-digest",
+                                "sha256:node-v208-managed-audit-candidate-digest")
+                        .header("x-orderops-managed-audit-sink-mode",
+                                "file-or-sqlite-dry-run-candidate")
+                        .header("x-orderops-managed-audit-retention-days", "30")
+                        .header("x-orderops-managed-audit-rotation-policy",
+                                "size-and-age-rotation-candidate")
+                        .header("x-orderops-approval-binding-contract-version",
+                                "managed-audit-identity-approval-binding-contract.v1")
+                        .header("x-orderops-approval-binding-contract-digest",
+                                "sha256:node-v210-approval-binding-digest")
+                        .header("x-orderops-approval-request-id", "approval-request-v210-001")
+                        .header("x-orderops-approval-decision-state", "APPROVED_DRY_RUN_ONLY")
+                        .header("x-orderops-approval-record-correlation-id",
+                                "approval-record-correlation-v210"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.receiptVersion")
+                        .value("java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-pre-implementation-plan-intake-echo-receipt.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceProductionReadinessBlockedDecisionEchoReceiptSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v31"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.consumedByNodeCredentialResolverPreImplementationPlanIntakeVersion")
+                        .value("Node v270"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.consumedByNodeCredentialResolverPreImplementationPlanIntakeProfile")
+                        .value("managed-audit-manual-sandbox-connection-credential-resolver-pre-implementation-plan-intake.v1"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.consumedByNodeCredentialResolverPreImplementationPlanIntakeState")
+                        .value("credential-resolver-pre-implementation-plan-intake-ready"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceNodeV270.planIntakeOnly")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceNodeV270.readyForCredentialResolverPreImplementationPlan")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceNodeV270.connectsManagedAudit")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceNodeV270.credentialValueRead")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceNodeV270.rawEndpointUrlParsed")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceNodeV270.sourceNodeV269.verificationState")
+                        .value("credential-resolver-production-readiness-blocked-decision-upstream-echo-verification-ready"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sourceNodeV270.sourceNodeV269.missingPreImplementationRequirementCount")
+                        .value(10))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.preImplementationPlan.boundaryCount")
+                        .value(10))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.preImplementationPlan.definedBoundaryCount")
+                        .value(10))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.preImplementationPlan.allRequiredBoundariesDefined")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.preImplementationPlan.credentialValueReadAllowed")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.preImplementationPlan.rawEndpointUrlParseAllowed")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.preImplementationPlan.boundaries[*].requirementFromV268",
+                        hasItem("REAL_RESOLVER_PRE_IMPLEMENTATION_PLAN_MISSING")))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.planIntake.intakeMode")
+                        .value("node-v270-plan-intake-only"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.planIntake.missingBoundaryCount")
+                        .value(0))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.planIntake.nextNodeVerificationVersion")
+                        .value("Node v272"))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.checks.allTenBoundariesDefined")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.checks.credentialValueStillForbidden")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.checks.rawEndpointStillForbidden")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.checks.externalRequestStillSimulationOnly")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sideEffectBoundary.approvalLedgerWritten")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sideEffectBoundary.sqlExecuted")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.sideEffectBoundary.automaticUpstreamStart")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.readyForNodeV272CredentialResolverPreImplementationPlanVerification")
+                        .value(true))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.readyForManagedAuditSandboxAdapterConnection")
+                        .value(false))
+                .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.receiptWarnings").isEmpty())
+                .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v32"))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt")))
+                .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
+                        hasItem("sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptDigest")))
+                .andExpect(jsonPath("$.verificationHint.proofClaims",
+                        hasItem("managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.preImplementationPlan.boundaryCount=10")))
+                .andExpect(jsonPath("$.verificationHint.nodeVerificationActions",
+                        hasItem("Compare managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt.consumedByNodeCredentialResolverPreImplementationPlanIntakeProfile with Node v270")));
     }
 
     @Test

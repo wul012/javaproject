@@ -115,6 +115,13 @@ c/111/解释/说明.md
  -> Java v111 credential resolver production-readiness blocked-decision echo receipt: read-only echo of the Node v268 blocked decision gate, split into records / support / builder, while real resolver, credential value, raw endpoint, external request, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
 ```
 
+## v112 update
+
+```text
+c/112/解释/说明.md
+ -> Java v112 credential resolver pre-implementation plan intake echo receipt: read-only echo of Node v270 plan intake, split into records / support / builder, with 10 defined-for-review boundaries while credential value, raw endpoint, external request, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
+```
+
 ## v108 update
 
 ```text

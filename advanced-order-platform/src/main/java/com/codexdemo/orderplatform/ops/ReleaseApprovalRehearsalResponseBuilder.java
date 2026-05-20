@@ -70,6 +70,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt(),
                 managedAuditReceiptChain
                         .managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt(),
+                managedAuditReceiptChain
+                        .managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -184,7 +186,9 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder(),
                 managedAuditReceiptChain.sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder(),
                 managedAuditReceiptChain
-                        .sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder()
+                        .sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder(),
+                managedAuditReceiptChain
+                        .sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -224,6 +228,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                                 .managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );
