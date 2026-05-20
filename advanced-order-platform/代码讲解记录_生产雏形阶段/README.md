@@ -271,6 +271,13 @@ PostgreSQL / RabbitMQ 的定期完整验证
  -> Java v113 sandbox endpoint credential resolver disabled implementation candidate echo receipt: read-only echo of Node v273 disabled candidate review for Node v274 verification, using echo workflow template support while credential value, raw endpoint, real resolver, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
 ```
 
+## v114 update
+
+```text
+117-version-114-release-approval-verification-hint-catalog-split.md
+ -> Java v114 release approval verification hint catalog split: fixed schema/proof/action/warning catalogs and the contribution record move out of ReleaseApprovalVerificationHintBuilder, reducing the builder from 903 to 648 lines with no response contract or managed-audit boundary change.
+```
+
 ## v111 update
 
 ```text

@@ -129,6 +129,13 @@ c/113/解释/说明.md
  -> Java v113 credential resolver disabled implementation candidate echo receipt: read-only echo of Node v273 disabled candidate review, with echo workflow template support, 4 candidate-ready and 6 approval-required boundaries, while credential value, raw endpoint, real resolver, managed-audit connection, SQL, ledger, schema migration, and auto-start stay blocked.
 ```
 
+## v114 update
+
+```text
+c/114/解释/说明.md
+ -> Java v114 release approval verification hint catalog split: contract-preserving refactor that moves fixed schema/proof/action/warning lists and contribution record out of ReleaseApprovalVerificationHintBuilder, reducing it from 903 to 648 lines while keeping response contracts and managed-audit boundaries unchanged.
+```
+
 ## v108 update
 
 ```text
