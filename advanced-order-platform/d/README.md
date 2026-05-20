@@ -26,4 +26,6 @@ v116: d/116/解释/说明.md
       consumes Node v281 readiness review and keeps resolver implementation blocked
 v117: d/117/解释/说明.md
       split v116 readiness echo unit/MVC tests out of the two largest test files
+v118: d/118/解释/说明.md
+      split release approval credential resolver rehearsal tests out of OpsOverviewIntegrationTests
 ```

@@ -30,4 +30,6 @@ Use this folder for new Java code explanation notes.
 Java v116: consumes Node v281, echoes 6 approval-required readiness boundaries and 18 required artifacts.
 120-version-117-v116-readiness-echo-test-split.md
 Java v117: splits v116 readiness echo unit/MVC tests and shared fixtures out of large test files.
+121-version-118-release-approval-credential-resolver-endpoint-test-split.md
+Java v118: splits a large release approval credential resolver rehearsal block out of OpsOverviewIntegrationTests.
 ```
