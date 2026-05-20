@@ -23,3 +23,9 @@ Do not move older files unless explicitly requested.
 Use this folder for new Java code explanation notes.
 ```
 
+## Index
+
+```text
+119-version-116-credential-resolver-approval-required-implementation-readiness-echo.md
+Java v116: consumes Node v281, echoes 6 approval-required readiness boundaries and 18 required artifacts.
+```

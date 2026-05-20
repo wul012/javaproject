@@ -58,6 +58,7 @@
 - 订单平台 release approval rehearsal 只读 approval-record handoff hint，标注可进入 Node audit record 的审批字段
 - 订单平台 release approval rehearsal 只读 approval-handoff verification marker，标注 Node v211 已消费 Java v75 handoff 的 dry-run packet 边界
 - 订单平台 release approval rehearsal 只读 managed-audit adapter boundary receipt，标注 Node v215 只能写本地 dry-run 文件且不能触发 Java/审计/SQL/部署/回滚/restore
+- 订单平台 release approval rehearsal 只读 credential resolver approval-required implementation readiness echo，回显 Node v281 的 6 个审批边界和 18 个 required artifact，继续阻断真实 resolver、credential、endpoint、ledger、SQL 和 managed audit connection
 - 失败事件治理摘要接口，汇总失败事件积压、审批状态和最近治理活动时间
 - 失败事件重放 readiness 接口，只读说明某条失败事件能否重放、阻断原因和下一步动作
 - 失败事件重放 simulation 接口，只读预演真实重放可能产生的副作用和阻断原因
