@@ -29,3 +29,5 @@ v117: d/117/è§£é‡Š/è¯´æ˜Ž.md
 v118: d/118/è§£é‡Š/è¯´æ˜Ž.md
       split release approval credential resolver rehearsal tests out of OpsOverviewIntegrationTests
 ```
+v119: d/119/½âÊÍ/ËµÃ÷.md
+      continue shrinking OpsOverviewIntegrationTests after release approval split
