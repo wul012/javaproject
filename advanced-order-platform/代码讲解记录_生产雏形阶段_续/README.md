@@ -28,4 +28,6 @@ Use this folder for new Java code explanation notes.
 ```text
 119-version-116-credential-resolver-approval-required-implementation-readiness-echo.md
 Java v116: consumes Node v281, echoes 6 approval-required readiness boundaries and 18 required artifacts.
+120-version-117-v116-readiness-echo-test-split.md
+Java v117: splits v116 readiness echo unit/MVC tests and shared fixtures out of large test files.
 ```
