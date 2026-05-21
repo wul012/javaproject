@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v36");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v37");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -54,6 +54,8 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -93,6 +95,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -389,6 +392,18 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "sandboxEndpointCredentialResolverImplementationPlanSqlExecuted",
                         "sandboxEndpointCredentialResolverImplementationPlanSchemaMigrationExecuted",
                         "sandboxEndpointCredentialResolverImplementationPlanAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverExecutionDeniedNodeV292State",
+                        "sandboxEndpointCredentialResolverExecutionDeniedJavaEchoPresent",
+                        "sandboxEndpointCredentialResolverExecutionDeniedFakeHarnessRuntimeAllowed",
+                        "sandboxEndpointCredentialResolverExecutionDeniedCredentialValueRead",
+                        "sandboxEndpointCredentialResolverExecutionDeniedRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverExecutionDeniedConnectsManagedAudit",
+                        "sandboxEndpointCredentialResolverExecutionDeniedApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverExecutionDeniedSqlExecuted",
+                        "sandboxEndpointCredentialResolverExecutionDeniedSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverExecutionDeniedAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverExecutionDeniedReadyForNodeV293",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
