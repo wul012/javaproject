@@ -150,6 +150,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_EXECUTION_DENIED_ECHO_RECEIPT_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-execution-denied-echo-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_HANDOFF_ECHO_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-disabled-runtime-shell-handoff-echo-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -256,6 +260,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_EXECUTION_DENIED_ECHO_RECEIPT_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v37";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_HANDOFF_ECHO_RECEIPT_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v38";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -263,7 +271,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v37";
+            "java-release-approval-rehearsal-response-schema.v38";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -782,6 +790,30 @@ public class OpsEvidenceService {
 
     static final String NODE_V293_CREDENTIAL_RESOLVER_FAKE_HARNESS_READINESS_BLOCKED_DECISION_UPSTREAM_ECHO_VERIFICATION_STATE =
             "credential-resolver-fake-harness-readiness-blocked-decision-upstream-echo-verification-ready";
+
+    static final String NODE_V295_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_DESIGN_REVIEW_VERSION =
+            "Node v295";
+
+    static final String NODE_V295_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_DESIGN_REVIEW_PROFILE =
+            "managed-audit-manual-sandbox-connection-credential-resolver-disabled-runtime-shell-design-review.v1";
+
+    static final String NODE_V295_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_DESIGN_REVIEW_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-disabled-runtime-shell-design-review";
+
+    static final String NODE_V295_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_DESIGN_REVIEW_MARKDOWN_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-disabled-runtime-shell-design-review?format=markdown";
+
+    static final String NODE_V295_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_DESIGN_REVIEW_STATE =
+            "disabled-runtime-shell-design-review-ready";
+
+    static final String NODE_V296_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_UPSTREAM_ECHO_VERIFICATION_VERSION =
+            "Node v296";
+
+    static final String NODE_V296_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_UPSTREAM_ECHO_VERIFICATION_PROFILE =
+            "managed-audit-manual-sandbox-connection-credential-resolver-disabled-runtime-shell-upstream-echo-verification.v1";
+
+    static final String NODE_V296_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_UPSTREAM_ECHO_VERIFICATION_STATE =
+            "disabled-runtime-shell-upstream-echo-verification-awaiting-java-mini-kv";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";

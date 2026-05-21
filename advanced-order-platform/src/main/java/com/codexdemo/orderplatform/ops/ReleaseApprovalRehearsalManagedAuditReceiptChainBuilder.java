@@ -10,6 +10,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverExecutionDeniedEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -195,6 +197,13 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt =
                         sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
                                 .build(managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt);
+        ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
+                sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder();
+        RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt
+                managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt =
+                        sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
+                                .build(managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -244,7 +253,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt,
                 sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder,
                 managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt,
-                sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
+                sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder,
+                managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt,
+                sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
         );
     }
 
@@ -344,7 +355,11 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
             RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
     ) {
     }
 }
