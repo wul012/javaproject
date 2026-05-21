@@ -12,6 +12,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -204,6 +206,13 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt =
                         sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
                                 .build(managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt);
+        ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
+                sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder();
+        RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
+                managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt =
+                        sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
+                                .build(managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -255,7 +264,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt,
                 sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder,
                 managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt,
-                sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
+                sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder,
+                managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt,
+                sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
         );
     }
 
@@ -359,7 +370,11 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
     ) {
     }
 }

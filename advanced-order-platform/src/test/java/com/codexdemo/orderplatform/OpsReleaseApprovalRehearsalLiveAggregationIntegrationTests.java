@@ -171,7 +171,7 @@ class OpsReleaseApprovalRehearsalLiveAggregationIntegrationTests
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestamp").exists())
                 .andExpect(jsonPath("$.liveReadinessHint.serverTimestampSource").value("sampledAt"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpointVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v38"))
+                        .value("java-release-approval-rehearsal-response-schema.v39"))
                 .andExpect(jsonPath("$.liveReadinessHint.readOnlyEndpoint")
                         .value("/api/v1/ops/release-approval-rehearsal"))
                 .andExpect(jsonPath("$.liveReadinessHint.healthEndpoint").value("/actuator/health"))

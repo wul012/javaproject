@@ -125,7 +125,7 @@ class OpsReleaseApprovalCredentialResolverEndpointArchiveIntegrationTests {
                         .value(false))
                 .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt.receiptWarnings").isEmpty())
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v38"))
+                        .value("java-release-approval-rehearsal-response-schema.v39"))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",
@@ -232,7 +232,7 @@ class OpsReleaseApprovalCredentialResolverEndpointArchiveIntegrationTests {
                 .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt.readyForManagedAuditSandboxAdapterConnection")
                         .value(false))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v38"))
+                        .value("java-release-approval-rehearsal-response-schema.v39"))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",

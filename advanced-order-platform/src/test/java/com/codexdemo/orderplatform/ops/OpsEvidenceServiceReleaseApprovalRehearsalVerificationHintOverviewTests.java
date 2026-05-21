@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v38");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v39");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -56,6 +56,8 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -97,6 +99,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -420,6 +423,24 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffSqlExecuted",
                         "sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffSchemaMigrationExecuted",
                         "sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateState",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateDecision",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateCount",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateReviewEvidenceCount",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateImplementationAllowedCount",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateReadyForNodeV298",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateRuntimeImplemented",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateRuntimeInvocationAllowed",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateCredentialValueRead",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateExternalRequestSent",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateSecretProviderInstantiated",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateResolverClientInstantiated",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateSqlExecuted",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateAutomaticUpstreamStart",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
