@@ -72,6 +72,16 @@ Keep the old `a/`, `b/`, and `c/` folders as historical archives for earlier ver
 
 When finishing a version, the final report should mention the `d/<version>` archive path.
 
+## Screenshot Capture Rule
+
+For Java version screenshots, prefer the Playwright MCP screenshot tool when it is available. Save successful version screenshots under:
+
+```text
+d/<version>/图片/*.png
+```
+
+Use `d/<version>/解释/说明.md` to describe what each screenshot proves. If MCP screenshot capture fails, fall back to the installed screenshot skill or another local screenshot method and record the fallback in the explanation.
+
 ## Code Explanation Folder
 
 For new Java code explanation notes after v115, use the new stage-specific sibling folder instead of the older crowded folders:
