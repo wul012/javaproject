@@ -13,7 +13,7 @@ class OpsEvidenceServiceSandboxEndpointPreflightEchoTests extends OpsEvidenceSer
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                 marker = rehearsal.managedAuditSandboxEndpointHandlePreflightEchoMarker();
         assertThat(marker.markerVersion())
                 .isEqualTo(

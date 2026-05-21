@@ -116,7 +116,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
 
     ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords.RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
     build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     endpointHandlePreflightEchoMarker
     ) {
         boolean sourceAccepted = sourceMarkerAccepted(endpointHandlePreflightEchoMarker);
@@ -342,7 +342,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecision
     }
 
     private static boolean sourceMarkerAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
     ) {
         return marker.readyForNodeV259SandboxEndpointHandleUpstreamEchoVerification()
                 && marker.markerWarnings().isEmpty()

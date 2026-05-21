@@ -105,21 +105,21 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
         ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
                 sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder =
                         new ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt =
                         sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
                                 .build(managedAuditSandboxConnectionPrecheckPacketEchoReceipt);
         ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
                 sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder =
                         new ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker =
                         sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
                                 .build(managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt);
         ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
                 sandboxEndpointHandlePreflightEchoMarkerBuilder =
                         new ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                 managedAuditSandboxEndpointHandlePreflightEchoMarker =
                         sandboxEndpointHandlePreflightEchoMarkerBuilder
                                 .build(managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker);
@@ -282,15 +282,15 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                     managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
             ReleaseApprovalManagedAuditSandboxConnectionPrecheckPacketEchoReceiptBuilder
                     sandboxConnectionPrecheckPacketEchoReceiptBuilder,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                     managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
             ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
                     sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                     managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
             ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
                     sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
                     managedAuditSandboxEndpointHandlePreflightEchoMarker,
             ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
                     sandboxEndpointHandlePreflightEchoMarkerBuilder,

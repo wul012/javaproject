@@ -168,7 +168,7 @@ class OpsEvidenceServiceSandboxConnectionPacketEchoTests extends OpsEvidenceServ
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                 receipt = rehearsal.managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt();
         assertThat(receipt.receiptVersion())
                 .isEqualTo(
@@ -316,7 +316,7 @@ class OpsEvidenceServiceSandboxConnectionPacketEchoTests extends OpsEvidenceServ
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                 marker = rehearsal.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker();
         assertThat(marker.markerVersion())
                 .isEqualTo(

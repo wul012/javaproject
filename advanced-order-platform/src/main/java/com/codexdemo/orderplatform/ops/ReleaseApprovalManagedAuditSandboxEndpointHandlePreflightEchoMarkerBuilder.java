@@ -97,25 +97,25 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
             "Keep managedAuditSandboxEndpointHandlePreflightEchoMarker.sideEffectBoundary.externalRequestSent=false"
     );
 
-    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
+    ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
     build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
                     fakeTransportDryRunPacketEchoMarker
     ) {
         boolean sourceAccepted = sourceMarkerAccepted(fakeTransportDryRunPacketEchoMarker);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho sourceNodeV257 =
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho sourceNodeV257 =
                 sourceNodeV257(sourceAccepted);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightReviewShape
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightReviewShape
                 preflightReview = preflightReview();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview
                 networkAllowlistReview = networkAllowlistReview();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleTlsPolicyReview
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleTlsPolicyReview
                 tlsPolicyReview = tlsPolicyReview();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview
                 redactionPolicy = redactionPolicy();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleOperatorWindowReview
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleOperatorWindowReview
                 operatorWindow = operatorWindow();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary
+        ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary
                 sideEffectBoundary = sideEffectBoundary();
 
         List<String> markerWarnings = ReleaseApprovalEchoMarkerSupport.warnings(
@@ -179,7 +179,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_HANDLE_PREFLIGHT_ECHO_MARKER_VERSION,
                 fakeTransportDryRunPacketEchoMarker.markerVersion(),
@@ -246,7 +246,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
     ) {
         return ReleaseApprovalEchoMarkerSupport.warningLines(
                 WARNING_DIGEST_WARNING_INPUT_NAME,
@@ -255,7 +255,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -322,7 +322,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     boolean noCredentialConnectionWriteOrAutoStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker marker
     ) {
         return endpointHandleReviewEchoed(marker.preflightReview())
                 && credentialHandleReviewEchoed(marker.preflightReview())
@@ -339,7 +339,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean sourceMarkerAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker marker
     ) {
         return marker.readyForNodeV257FakeTransportPacketUpstreamEchoVerification()
                 && marker.markerWarnings().isEmpty()
@@ -352,9 +352,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
                 && !marker.readyForManagedAuditSandboxAdapterConnection();
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho
+    private static ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho
     sourceNodeV257(boolean readyForNodeV258PreflightReview) {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho(
                 OpsEvidenceService.NODE_V257_FAKE_TRANSPORT_PACKET_UPSTREAM_ECHO_VERIFICATION_VERSION,
                 OpsEvidenceService.NODE_V257_FAKE_TRANSPORT_PACKET_UPSTREAM_ECHO_VERIFICATION_PROFILE,
                 OpsEvidenceService.NODE_V257_FAKE_TRANSPORT_PACKET_UPSTREAM_ECHO_VERIFICATION_STATE,
@@ -382,9 +382,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightReviewShape
+    private static ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightReviewShape
     preflightReview() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightReviewShape(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightReviewShape(
                 REVIEW_MODE,
                 SOURCE_SPAN,
                 ENDPOINT_HANDLE,
@@ -404,9 +404,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview
+    private static ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview
     networkAllowlistReview() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview(
                 true,
                 NETWORK_ALLOWLIST_HANDLE,
                 false,
@@ -415,9 +415,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleTlsPolicyReview
+    private static ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleTlsPolicyReview
     tlsPolicyReview() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleTlsPolicyReview(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleTlsPolicyReview(
                 true,
                 TLS_POLICY_HANDLE,
                 false,
@@ -426,9 +426,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview
+    private static ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview
     redactionPolicy() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview(
                 true,
                 REDACTION_POLICY_HANDLE,
                 true,
@@ -438,9 +438,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleOperatorWindowReview
+    private static ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleOperatorWindowReview
     operatorWindow() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleOperatorWindowReview(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleOperatorWindowReview(
                 true,
                 false,
                 true,
@@ -450,9 +450,9 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary
+    private static ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary
     sideEffectBoundary() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary(
+        return new ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary(
                 false,
                 false,
                 false,
@@ -473,7 +473,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean sourceNodeV257Ready(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho source
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSourceEcho source
     ) {
         return OpsEvidenceService.NODE_V257_FAKE_TRANSPORT_PACKET_UPSTREAM_ECHO_VERIFICATION_VERSION
                 .equals(source.sourceVersion())
@@ -505,7 +505,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean endpointHandleReviewEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightReviewShape review
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightReviewShape review
     ) {
         return ENDPOINT_HANDLE.equals(review.endpointHandle())
                 && review.endpointHandleReviewed()
@@ -514,7 +514,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean credentialHandleReviewEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightReviewShape review
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightReviewShape review
     ) {
         return CREDENTIAL_HANDLE.equals(review.credentialHandle())
                 && review.credentialHandleReviewed()
@@ -523,7 +523,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean ownerApprovalArtifactReviewEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightReviewShape review
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightReviewShape review
     ) {
         return REVIEW_MODE.equals(review.reviewMode())
                 && SOURCE_SPAN.equals(review.sourceSpan())
@@ -537,7 +537,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean networkAllowlistReviewEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview review
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleNetworkAllowlistReview review
     ) {
         return review.reviewRequired()
                 && NETWORK_ALLOWLIST_HANDLE.equals(review.allowlistHandle())
@@ -547,7 +547,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean tlsPolicyReviewEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleTlsPolicyReview review
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleTlsPolicyReview review
     ) {
         return review.reviewRequired()
                 && TLS_POLICY_HANDLE.equals(review.policyHandle())
@@ -557,7 +557,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean redactionPolicyEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview review
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleRedactionPolicyReview review
     ) {
         return review.reviewRequired()
                 && REDACTION_POLICY_HANDLE.equals(review.policyHandle())
@@ -568,7 +568,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean operatorWindowReviewEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandleOperatorWindowReview review
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandleOperatorWindowReview review
     ) {
         return review.manualWindowRequired()
                 && !review.windowOpen()
@@ -579,7 +579,7 @@ final class ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerB
     }
 
     private static boolean noCredentialConnectionWriteOrAutoStart(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary boundary
+            ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalSandboxEndpointHandlePreflightSideEffectBoundary boundary
     ) {
         return !boundary.rawEndpointUrlParsed()
                 && !boundary.rawEndpointUrlIncluded()
