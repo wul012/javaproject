@@ -10,24 +10,6 @@ import com.codexdemo.orderplatform.order.IdempotencyStoreDescriptor;
 import com.codexdemo.orderplatform.outbox.OutboxPublisherProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRabbitMqProperties;
 import com.codexdemo.orderplatform.outbox.OutboxRepository;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
-        .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
-        .RehearsalSandboxEndpointCredentialResolverEnvHandle;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
-        .RehearsalSandboxEndpointCredentialResolverFailureClass;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords
-        .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
-        .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords
-        .RehearsalManagedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
-        .RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
-        .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
-import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
-        .RehearsalSandboxEndpointCredentialResolverTestOnlyShellFailureMapping;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.env.MockEnvironment;
@@ -794,21 +776,5 @@ class OpsEvidenceServiceTests {
                         "/api/v1/failed-events/replay-evidence-index"
                 );
 
-    }
-
-    private OpsEvidenceService readOnlyFixtureService() {
-        return OpsEvidenceServiceTestFixtures.readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
-    }
-
-    private ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {
-        return OpsEvidenceServiceTestFixtures.paddedHeaderBackedRehearsalRequest();
-    }
-
-    private ReleaseApprovalRehearsalRequest headerBackedRehearsalRequest() {
-        return OpsEvidenceServiceTestFixtures.headerBackedRehearsalRequest();
     }
 }

@@ -76,6 +76,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         .managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt(),
                 managedAuditReceiptChain
                         .managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt(),
+                managedAuditReceiptChain
+                        .managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -196,7 +198,9 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain
                         .sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder(),
                 managedAuditReceiptChain
-                        .sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder()
+                        .sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder(),
+                managedAuditReceiptChain
+                        .sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -242,6 +246,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                                 .managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );

@@ -38,22 +38,11 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImpl
     static final int SOURCE_CHECK_COUNT = 25;
     static final int SOURCE_PASSED_CHECK_COUNT = 25;
 
-    private static final List<String> BOUNDARY_CODES = List.of(
-            "CREDENTIAL_HANDLE",
-            "ENDPOINT_HANDLE",
-            "OPERATOR_APPROVAL",
-            "ROLLBACK_BOUNDARY",
-            "SCHEMA_MIGRATION_POLICY",
-            "AUDIT_LEDGER_WRITE_POLICY"
-    );
-    private static final List<String> REQUIREMENT_CODES = List.of(
-            "CREDENTIAL_HANDLE_BOUNDARY_MISSING",
-            "ENDPOINT_HANDLE_BOUNDARY_MISSING",
-            "OPERATOR_APPROVAL_BOUNDARY_MISSING",
-            "ROLLBACK_BOUNDARY_MISSING",
-            "SCHEMA_MIGRATION_POLICY_MISSING",
-            "AUDIT_LEDGER_WRITE_POLICY_MISSING"
-    );
+    private static final List<String> BOUNDARY_CODES =
+            ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog.approvalRequiredBoundaryCodes();
+    private static final List<String> REQUIREMENT_CODES = BOUNDARY_CODES.stream()
+            .map(ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog::requirementCodeFor)
+            .toList();
 
     private ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoSupport() {
     }

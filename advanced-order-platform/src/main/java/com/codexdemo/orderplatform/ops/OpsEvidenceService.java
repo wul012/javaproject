@@ -142,6 +142,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_APPROVAL_REQUIRED_IMPLEMENTATION_READINESS_ECHO_RECEIPT_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-approval-required-implementation-readiness-echo-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_IMPLEMENTATION_PLAN_ECHO_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-implementation-plan-echo-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -240,6 +244,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_APPROVAL_REQUIRED_IMPLEMENTATION_READINESS_ECHO_RECEIPT_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v35";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_IMPLEMENTATION_PLAN_ECHO_RECEIPT_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v36";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -247,7 +255,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v35";
+            "java-release-approval-rehearsal-response-schema.v36";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -727,6 +735,21 @@ public class OpsEvidenceService {
 
     static final String NODE_V281_CREDENTIAL_RESOLVER_APPROVAL_REQUIRED_IMPLEMENTATION_READINESS_REVIEW_STATE =
             "credential-resolver-approval-required-implementation-readiness-review-ready";
+
+    static final String NODE_V283_CREDENTIAL_RESOLVER_IMPLEMENTATION_PLAN_DRAFT_VERSION =
+            "Node v283";
+
+    static final String NODE_V283_CREDENTIAL_RESOLVER_IMPLEMENTATION_PLAN_DRAFT_PROFILE =
+            "managed-audit-manual-sandbox-connection-credential-resolver-implementation-plan-draft.v1";
+
+    static final String NODE_V283_CREDENTIAL_RESOLVER_IMPLEMENTATION_PLAN_DRAFT_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-implementation-plan-draft";
+
+    static final String NODE_V283_CREDENTIAL_RESOLVER_IMPLEMENTATION_PLAN_DRAFT_MARKDOWN_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-implementation-plan-draft?format=markdown";
+
+    static final String NODE_V283_CREDENTIAL_RESOLVER_IMPLEMENTATION_PLAN_DRAFT_STATE =
+            "credential-resolver-implementation-plan-draft-ready";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";

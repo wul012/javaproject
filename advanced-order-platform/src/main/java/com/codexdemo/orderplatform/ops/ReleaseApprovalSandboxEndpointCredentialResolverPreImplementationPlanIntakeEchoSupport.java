@@ -42,31 +42,11 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPla
     static final int WARNING_COUNT = 2;
     static final int RECOMMENDATION_COUNT = 2;
 
-    private static final List<String> BOUNDARY_CODES = List.of(
-            "PLAN_DOCUMENT",
-            "CREDENTIAL_HANDLE",
-            "ENDPOINT_HANDLE",
-            "DISABLED_SECRET_PROVIDER_STUB",
-            "OPERATOR_APPROVAL",
-            "ROLLBACK_BOUNDARY",
-            "REDACTION_POLICY",
-            "EXTERNAL_REQUEST_SIMULATION",
-            "SCHEMA_MIGRATION_POLICY",
-            "AUDIT_LEDGER_WRITE_POLICY"
-    );
+    private static final List<String> BOUNDARY_CODES =
+            ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog.boundaryCodes();
 
-    private static final List<String> REQUIREMENT_CODES = List.of(
-            "REAL_RESOLVER_PRE_IMPLEMENTATION_PLAN_MISSING",
-            "CREDENTIAL_HANDLE_BOUNDARY_MISSING",
-            "ENDPOINT_HANDLE_BOUNDARY_MISSING",
-            "SECRET_PROVIDER_STUB_MISSING",
-            "OPERATOR_APPROVAL_BOUNDARY_MISSING",
-            "ROLLBACK_BOUNDARY_MISSING",
-            "REDACTION_POLICY_MISSING",
-            "EXTERNAL_REQUEST_SIMULATION_PLAN_MISSING",
-            "SCHEMA_MIGRATION_POLICY_MISSING",
-            "AUDIT_LEDGER_WRITE_POLICY_MISSING"
-    );
+    private static final List<String> REQUIREMENT_CODES =
+            ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog.requirementCodes();
 
     private ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoSupport() {
     }

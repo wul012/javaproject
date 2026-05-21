@@ -1,31 +1,16 @@
 package com.codexdemo.orderplatform.ops;
 
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.headerBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.paddedHeaderBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.readOnlyFixtureService;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
-import com.codexdemo.orderplatform.order.IdempotencyStore;
-import com.codexdemo.orderplatform.outbox.OutboxRepository;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt;
 import org.junit.jupiter.api.Test;
 
-class OpsEvidenceServiceCredentialResolverProductionReadinessBlockedDecisionEchoTests {
-
-    private final FailedEventSummaryService failedEventSummaryService =
-            org.mockito.Mockito.mock(FailedEventSummaryService.class);
-    private final OutboxRepository outboxRepository = org.mockito.Mockito.mock(OutboxRepository.class);
-    private final IdempotencyStore idempotencyStore = org.mockito.Mockito.mock(IdempotencyStore.class);
+class OpsEvidenceServiceCredentialResolverProductionReadinessBlockedDecisionEchoTests extends OpsEvidenceServiceRehearsalTestSupport {
 
     @Test
     void releaseApprovalRehearsalAddsSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt() {
-        OpsEvidenceService service = readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
+        OpsEvidenceService service = readOnlyFixtureService();
 
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());

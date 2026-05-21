@@ -1,14 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.headerBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.paddedHeaderBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.readOnlyFixtureService;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
-import com.codexdemo.orderplatform.order.IdempotencyStore;
-import com.codexdemo.orderplatform.outbox.OutboxRepository;
-import org.junit.jupiter.api.Test;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords
@@ -21,21 +14,13 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
         .RehearsalSandboxEndpointCredentialResolverTestOnlyShellFailureMapping;
+import org.junit.jupiter.api.Test;
 
-class OpsEvidenceServiceCredentialResolverEarlyEchoTests {
-
-    private final FailedEventSummaryService failedEventSummaryService =
-            org.mockito.Mockito.mock(FailedEventSummaryService.class);
-    private final OutboxRepository outboxRepository = org.mockito.Mockito.mock(OutboxRepository.class);
-    private final IdempotencyStore idempotencyStore = org.mockito.Mockito.mock(IdempotencyStore.class);
+class OpsEvidenceServiceCredentialResolverEarlyEchoTests extends OpsEvidenceServiceRehearsalTestSupport {
 
     @Test
     void releaseApprovalRehearsalAddsSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker() {
-        OpsEvidenceService service = readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
+        OpsEvidenceService service = readOnlyFixtureService();
 
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
@@ -258,11 +243,7 @@ class OpsEvidenceServiceCredentialResolverEarlyEchoTests {
 
     @Test
     void releaseApprovalRehearsalAddsSandboxEndpointCredentialResolverTestOnlyShellEchoMarker() {
-        OpsEvidenceService service = readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
+        OpsEvidenceService service = readOnlyFixtureService();
 
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
@@ -492,11 +473,7 @@ class OpsEvidenceServiceCredentialResolverEarlyEchoTests {
 
     @Test
     void releaseApprovalRehearsalAddsSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt() {
-        OpsEvidenceService service = readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
+        OpsEvidenceService service = readOnlyFixtureService();
 
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
@@ -636,7 +613,7 @@ class OpsEvidenceServiceCredentialResolverEarlyEchoTests {
         assertThat(receipt.receiptWarnings()).isEmpty();
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v35");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v36");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

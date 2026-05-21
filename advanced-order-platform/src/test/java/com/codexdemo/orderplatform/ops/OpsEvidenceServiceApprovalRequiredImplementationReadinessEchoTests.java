@@ -1,33 +1,22 @@
 package com.codexdemo.orderplatform.ops;
 
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.headerBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.paddedHeaderBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.readOnlyFixtureService;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
-import com.codexdemo.orderplatform.order.IdempotencyStore;
-import com.codexdemo.orderplatform.outbox.OutboxRepository;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords
         .RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords
+        .RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho;
 import org.junit.jupiter.api.Test;
 
-class OpsEvidenceServiceApprovalRequiredImplementationReadinessEchoTests {
-
-    private final FailedEventSummaryService failedEventSummaryService =
-            org.mockito.Mockito.mock(FailedEventSummaryService.class);
-    private final OutboxRepository outboxRepository = org.mockito.Mockito.mock(OutboxRepository.class);
-    private final IdempotencyStore idempotencyStore = org.mockito.Mockito.mock(IdempotencyStore.class);
+class OpsEvidenceServiceApprovalRequiredImplementationReadinessEchoTests extends OpsEvidenceServiceRehearsalTestSupport {
 
     @Test
     void releaseApprovalRehearsalAddsApprovalRequiredImplementationReadinessEchoReceipt() {
-        OpsEvidenceService service = readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
+        OpsEvidenceService service = readOnlyFixtureService();
 
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
@@ -194,7 +183,7 @@ class OpsEvidenceServiceApprovalRequiredImplementationReadinessEchoTests {
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v35");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v36");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())
@@ -222,6 +211,216 @@ class OpsEvidenceServiceApprovalRequiredImplementationReadinessEchoTests {
                 service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
         assertThat(repeated
                 .managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt()
+                .receiptDigest()).isEqualTo(receipt.receiptDigest());
+    }
+
+    @Test
+    void releaseApprovalRehearsalAddsImplementationPlanEchoReceiptForNodeV284() {
+        OpsEvidenceService service = readOnlyFixtureService();
+
+        ReleaseApprovalRehearsalResponse rehearsal =
+                service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
+        RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt receipt =
+                rehearsal.managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt();
+
+        assertThat(receipt.receiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-implementation-plan-echo-receipt.v1"
+                );
+        assertThat(receipt.sourceApprovalRequiredImplementationReadinessEchoReceiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-approval-required-implementation-readiness-echo-receipt.v1"
+                );
+        assertThat(receipt.sourceApprovalRequiredImplementationReadinessEchoReceiptSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v35");
+        assertThat(receipt.consumedByNodeCredentialResolverImplementationPlanDraftVersion())
+                .isEqualTo("Node v283");
+        assertThat(receipt.consumedByNodeCredentialResolverImplementationPlanDraftProfile())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-credential-resolver-implementation-plan-draft.v1"
+                );
+        assertThat(receipt.consumedByNodeCredentialResolverImplementationPlanDraftEndpoint())
+                .isEqualTo(
+                        "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-implementation-plan-draft"
+                );
+        assertThat(receipt.consumedByNodeCredentialResolverImplementationPlanDraftMarkdownEndpoint())
+                .endsWith("?format=markdown");
+        assertThat(receipt.consumedByNodeCredentialResolverImplementationPlanDraftState())
+                .isEqualTo("credential-resolver-implementation-plan-draft-ready");
+        assertThat(receipt.planEchoMode())
+                .isEqualTo("java-v121-credential-resolver-implementation-plan-echo-only");
+        assertThat(receipt.sourceSpan()).isEqualTo("Node v283");
+
+        assertThat(receipt.sourceNodeV283().planVersion())
+                .isEqualTo("node-v283-credential-resolver-implementation-plan-draft.v1");
+        assertThat(receipt.sourceNodeV283().planMode()).isEqualTo("implementation-plan-draft-only");
+        assertThat(receipt.sourceNodeV283().sourceSpan()).isEqualTo("Node v282");
+        assertThat(receipt.sourceNodeV283().checkCount()).isEqualTo(28);
+        assertThat(receipt.sourceNodeV283().passedCheckCount()).isEqualTo(28);
+        assertThat(receipt.sourceNodeV283().sourceCheckCount()).isEqualTo(23);
+        assertThat(receipt.sourceNodeV283().sourcePassedCheckCount()).isEqualTo(23);
+        assertThat(receipt.sourceNodeV283().interfaceBoundaryCount()).isEqualTo(7);
+        assertThat(receipt.sourceNodeV283().requiredArtifactCount()).isEqualTo(21);
+        assertThat(receipt.sourceNodeV283().prohibitedActionCount()).isEqualTo(21);
+        assertThat(receipt.sourceNodeV283().javaEchoRequirementCount()).isEqualTo(4);
+        assertThat(receipt.sourceNodeV283().miniKvReceiptRequirementCount()).isEqualTo(4);
+        assertRuntimeBlocked(
+                receipt.sourceNodeV283().readyForManagedAuditResolverImplementation(),
+                receipt.sourceNodeV283().realResolverImplementationAllowed(),
+                receipt.sourceNodeV283().testOnlyFakeHarnessAllowed(),
+                receipt.sourceNodeV283().executionAllowed(),
+                receipt.sourceNodeV283().connectsManagedAudit(),
+                receipt.sourceNodeV283().credentialValueRead(),
+                receipt.sourceNodeV283().rawEndpointUrlParsed(),
+                receipt.sourceNodeV283().externalRequestSent(),
+                receipt.sourceNodeV283().secretProviderInstantiated(),
+                receipt.sourceNodeV283().resolverClientInstantiated(),
+                receipt.sourceNodeV283().schemaMigrationExecuted(),
+                receipt.sourceNodeV283().approvalLedgerWritten(),
+                receipt.sourceNodeV283().automaticUpstreamStart()
+        );
+
+        assertThat(receipt.implementationPlanReview().reviewMode())
+                .isEqualTo("node-v283-implementation-plan-draft-only");
+        assertThat(receipt.implementationPlanReview().nextJavaEchoVersion()).isEqualTo("Java v121");
+        assertThat(receipt.implementationPlanReview().nextMiniKvReceiptVersion()).isEqualTo("mini-kv v126");
+        assertThat(receipt.implementationPlanReview().nextNodeVerificationVersion()).isEqualTo("Node v284");
+        assertThat(receipt.implementationPlanReview().fakeHarnessDeferredUntil()).isEqualTo("Node v285");
+        assertThat(receipt.implementationPlanReview().readyForJavaV121MiniKvV126Echo()).isTrue();
+
+        assertThat(receipt.interfaceBoundaries())
+                .extracting(RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho::code)
+                .containsExactly(
+                        "CONFIG_HANDLE_CONTRACT",
+                        "CREDENTIAL_HANDLE_CONTRACT",
+                        "ENDPOINT_HANDLE_CONTRACT",
+                        "APPROVAL_ARTIFACT_CONTRACT",
+                        "FAILURE_TAXONOMY_CONTRACT",
+                        "ROLLBACK_GUARD_CONTRACT",
+                        "TEST_ONLY_FAKE_HARNESS_CONTRACT"
+                );
+        assertThat(receipt.interfaceBoundaries())
+                .allMatch(boundary -> boundary.status().equals("drafted-for-upstream-echo")
+                        && boundary.requiredArtifacts().size() == 3
+                        && boundary.prohibitedActions().size() == 3);
+        assertThat(receipt.requiredArtifactIds()).hasSize(21)
+                .contains(
+                        "config-handle-review-id",
+                        "credential-handle-review-id",
+                        "endpoint-handle-review-id",
+                        "operator-identity-binding",
+                        "failure-taxonomy-id",
+                        "rollback-abort-marker",
+                        "test-only-fake-harness-plan-id"
+                );
+        assertThat(receipt.prohibitedActions()).hasSize(21)
+                .contains(
+                        "read-credential-value",
+                        "parse-raw-endpoint-url",
+                        "connect-managed-audit",
+                        "write-approval-ledger",
+                        "execute-rollback",
+                        "send-real-http-request"
+                );
+        assertThat(receipt.javaRequirementIds())
+                .containsExactly(
+                        "java-v121-consumes-node-v283-plan",
+                        "java-v121-approval-artifact-boundary",
+                        "java-v121-schema-migration-boundary",
+                        "java-v121-failure-taxonomy-echo"
+                );
+        assertThat(receipt.miniKvRequirementIds())
+                .containsExactly(
+                        "mini-kv-v126-consumes-node-v283-plan",
+                        "mini-kv-v126-no-storage-backend",
+                        "mini-kv-v126-no-secret-or-endpoint",
+                        "mini-kv-v126-no-write-command"
+                );
+
+        assertThat(receipt.checks().sourceNodeV283Ready()).isTrue();
+        assertThat(receipt.checks().allInterfaceBoundariesDefined()).isTrue();
+        assertThat(receipt.checks().javaV121EchoRequirementsDefined()).isTrue();
+        assertThat(receipt.checks().miniKvV126ReceiptRequirementsDefined()).isTrue();
+        assertThat(receipt.checks().readyForManagedAuditManualSandboxConnectionCredentialResolverImplementationPlanEcho())
+                .isTrue();
+        assertRuntimeBlocked(
+                receipt.sideEffectBoundary().readyForManagedAuditResolverImplementation(),
+                receipt.sideEffectBoundary().readyForTestOnlyFakeHarnessPrecheck(),
+                receipt.sideEffectBoundary().realResolverImplementationAllowed(),
+                receipt.sideEffectBoundary().testOnlyFakeHarnessAllowed(),
+                receipt.sideEffectBoundary().executionAllowed(),
+                receipt.sideEffectBoundary().connectsManagedAudit(),
+                receipt.sideEffectBoundary().credentialValueRead(),
+                receipt.sideEffectBoundary().rawEndpointUrlParsed(),
+                receipt.sideEffectBoundary().externalRequestSent(),
+                receipt.sideEffectBoundary().secretProviderInstantiated(),
+                receipt.sideEffectBoundary().resolverClientInstantiated(),
+                receipt.sideEffectBoundary().approvalLedgerWritten(),
+                receipt.sideEffectBoundary().managedAuditStoreWritten(),
+                receipt.sideEffectBoundary().sqlExecuted(),
+                receipt.sideEffectBoundary().schemaMigrationExecuted(),
+                receipt.sideEffectBoundary().automaticUpstreamStart(),
+                receipt.sideEffectBoundary().javaStartedNodeOrMiniKv()
+        );
+
+        assertThat(receipt.echoWorkflowReadySteps())
+                .containsExactly(
+                        "sourceNodeV283Echoed",
+                        "interfaceBoundariesEchoed",
+                        "javaV121EchoRequirementsEchoed",
+                        "miniKvV126ReceiptRequirementsEchoed",
+                        "noCredentialBoundaryEchoed",
+                        "noRawEndpointBoundaryEchoed",
+                        "noManagedAuditConnectionEchoed",
+                        "noSqlOrLedgerWriteEchoed",
+                        "noAutoStartBoundaryEchoed"
+                );
+        assertThat(receipt.echoWorkflowMissingSteps()).isEmpty();
+        assertThat(receipt.readyForNodeV284CredentialResolverImplementationPlanEchoVerification()).isTrue();
+        assertThat(receipt.readyForJavaV121MiniKvV126Echo()).isTrue();
+        assertThat(receipt.readyForManagedAuditResolverImplementation()).isFalse();
+        assertThat(receipt.readyForTestOnlyFakeHarnessPrecheck()).isFalse();
+        assertThat(receipt.nodeWarningCodes())
+                .containsExactly("IMPLEMENTATION_STILL_BLOCKED", "UPSTREAM_ECHO_REQUIRED");
+        assertThat(receipt.nodeRecommendationCodes())
+                .containsExactly("RUN_PARALLEL_JAVA_V121_MINIKV_V126",
+                        "VERIFY_WITH_NODE_V284_BEFORE_FAKE_HARNESS");
+        assertThat(receipt.nextRequiredEchoVersions())
+                .containsExactly(
+                        "mini-kv v126 resolver implementation plan non-participation receipt",
+                        "Node v284 resolver implementation plan upstream echo verification"
+                );
+        assertThat(receipt.receiptWarnings()).isEmpty();
+        assertThat(receipt.receiptDigest()).startsWith("sha256:");
+
+        assertThat(rehearsal.verificationHint().responseSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v36");
+        assertThat(rehearsal.verificationHint().schemaFields())
+                .contains("managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt");
+        assertThat(rehearsal.verificationHint().warningDigestInputs())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptWarnings",
+                        "sandboxEndpointCredentialResolverImplementationPlanEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverImplementationPlanRequiredArtifactCount",
+                        "sandboxEndpointCredentialResolverImplementationPlanApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverImplementationPlanAutomaticUpstreamStart"
+                );
+        assertThat(rehearsal.verificationHint().proofClaims())
+                .contains(
+                        "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt.interfaceBoundaries.size=7",
+                        "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt.javaV121EchoRequirements.size=4",
+                        "managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt.readyForManagedAuditResolverImplementation=false"
+                );
+        assertThat(rehearsal.verificationHint().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt.consumedByNodeCredentialResolverImplementationPlanDraftProfile with Node v283",
+                        "Verify managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt.interfaceBoundaries.size=7 before Node v284",
+                        "Require managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt.readyForNodeV284CredentialResolverImplementationPlanEchoVerification=true before Node v284"
+                );
+
+        ReleaseApprovalRehearsalResponse repeated =
+                service.releaseApprovalRehearsal(paddedHeaderBackedRehearsalRequest());
+        assertThat(repeated.managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt()
                 .receiptDigest()).isEqualTo(receipt.receiptDigest());
     }
 

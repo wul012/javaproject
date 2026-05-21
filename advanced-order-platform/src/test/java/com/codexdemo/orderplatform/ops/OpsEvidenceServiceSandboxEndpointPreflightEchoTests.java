@@ -1,29 +1,14 @@
 package com.codexdemo.orderplatform.ops;
 
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.headerBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.paddedHeaderBackedRehearsalRequest;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures.readOnlyFixtureService;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
-import com.codexdemo.orderplatform.order.IdempotencyStore;
-import com.codexdemo.orderplatform.outbox.OutboxRepository;
 import org.junit.jupiter.api.Test;
 
-class OpsEvidenceServiceSandboxEndpointPreflightEchoTests {
-
-    private final FailedEventSummaryService failedEventSummaryService =
-            org.mockito.Mockito.mock(FailedEventSummaryService.class);
-    private final OutboxRepository outboxRepository = org.mockito.Mockito.mock(OutboxRepository.class);
-    private final IdempotencyStore idempotencyStore = org.mockito.Mockito.mock(IdempotencyStore.class);
+class OpsEvidenceServiceSandboxEndpointPreflightEchoTests extends OpsEvidenceServiceRehearsalTestSupport {
 
     @Test
     void releaseApprovalRehearsalExposesSandboxEndpointHandlePreflightEchoMarker() {
-        OpsEvidenceService service = readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
+        OpsEvidenceService service = readOnlyFixtureService();
 
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());
@@ -214,11 +199,7 @@ class OpsEvidenceServiceSandboxEndpointPreflightEchoTests {
 
     @Test
     void releaseApprovalRehearsalExposesSandboxEndpointCredentialResolverDecisionEchoMarker() {
-        OpsEvidenceService service = readOnlyFixtureService(
-                failedEventSummaryService,
-                outboxRepository,
-                idempotencyStore
-        );
+        OpsEvidenceService service = readOnlyFixtureService();
 
         ReleaseApprovalRehearsalResponse rehearsal =
                 service.releaseApprovalRehearsal(headerBackedRehearsalRequest());

@@ -6,6 +6,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -177,6 +179,13 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt =
                         sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
                                 .build(managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt);
+        ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
+                sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder();
+        RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt
+                managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt =
+                        sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
+                                .build(managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -222,7 +231,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt,
                 sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder,
                 managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt,
-                sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
+                sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder,
+                managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt,
+                sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
         );
     }
 
@@ -314,7 +325,11 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
             RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
     ) {
     }
 }

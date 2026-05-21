@@ -42,7 +42,10 @@ When the user says to continue, advance, or push the project, treat it as Java w
 
 Before starting a new Java version:
 
-- Read the latest plan under `D:\nodeproj\orderops-node\docs\plans`.
+- Read the latest active Node plan under `D:\nodeproj\orderops-node\docs\plans2` first, then fall back to
+  `D:\nodeproj\orderops-node\docs\plans` only when `plans2` has no relevant active plan.
+- If the user names a Node version such as `v282`, locate and read that Node plan directly in the Node
+  repository instead of relying only on Java-side mentions of that version.
 - If the latest plan is reasonable and the current recommended step is Java, execute it.
 - If the plan is unreasonable, dependencies are not satisfied, or the next recommended step belongs to Node or mini-kv, stop and explain instead of forcing Java work.
 - Keep each version right-sized. Prefer one small, valuable capability, refactor, or hardening step rather than a broad mixed change.
