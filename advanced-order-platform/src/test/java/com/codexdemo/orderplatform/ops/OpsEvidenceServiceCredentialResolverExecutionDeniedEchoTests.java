@@ -143,7 +143,7 @@ class OpsEvidenceServiceCredentialResolverExecutionDeniedEchoTests extends OpsEv
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v39");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v40");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

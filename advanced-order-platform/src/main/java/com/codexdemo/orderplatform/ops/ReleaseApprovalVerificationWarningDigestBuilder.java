@@ -14,6 +14,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -74,6 +76,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
             sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
+            sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
@@ -121,7 +125,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
                     sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -169,6 +175,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder;
         this.sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder =
                 sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder;
+        this.sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder =
+                sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder;
     }
 
     String build(
@@ -237,6 +245,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                     managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt,
             ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
@@ -364,6 +374,10 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         lines.addAll(sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
                 .warningDigestWarningLines(
                         managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
+                ));
+        lines.addAll(sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
+                .warningDigestWarningLines(
+                        managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt
                 ));
         lines.addAll(List.of(
                 ReleaseApprovalDigestSupport.line("failureCategories", failureTaxonomy.failureCategories()),
@@ -633,6 +647,10 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
         lines.addAll(sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
                 .warningDigestBoundaryLines(
                         managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
+                ));
+        lines.addAll(sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
+                .warningDigestBoundaryLines(
+                        managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt
                 ));
         lines.add(ReleaseApprovalDigestSupport.line(
                 "nodeMayWriteApprovalLedger",

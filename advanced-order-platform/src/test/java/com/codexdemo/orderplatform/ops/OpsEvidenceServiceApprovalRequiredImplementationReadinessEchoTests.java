@@ -183,7 +183,7 @@ class OpsEvidenceServiceApprovalRequiredImplementationReadinessEchoTests extends
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v39");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v40");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())
@@ -394,7 +394,7 @@ class OpsEvidenceServiceApprovalRequiredImplementationReadinessEchoTests extends
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v39");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v40");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

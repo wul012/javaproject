@@ -14,6 +14,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -95,6 +97,8 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt,
         RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
                 managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt,
+        RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt
+                managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt,
         ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
         ReleaseApprovalRehearsalResponseRecords.RehearsalVerificationHint verificationHint,
         ReleaseApprovalRehearsalResponseRecords.ReleaseApprovalInputs releaseApprovalInputs,

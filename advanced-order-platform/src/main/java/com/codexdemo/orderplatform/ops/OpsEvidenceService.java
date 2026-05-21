@@ -158,6 +158,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_CANDIDATE_GATE_ECHO_RECEIPT_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-disabled-runtime-shell-candidate-gate-echo-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_RUNTIME_SHELL_DECISION_RECORD_ECHO_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-runtime-shell-decision-record-echo-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -272,6 +276,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_DISABLED_RUNTIME_SHELL_CANDIDATE_GATE_ECHO_RECEIPT_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v39";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_RUNTIME_SHELL_DECISION_RECORD_ECHO_RECEIPT_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v40";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -279,7 +287,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v39";
+            "java-release-approval-rehearsal-response-schema.v40";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -850,6 +858,21 @@ public class OpsEvidenceService {
     static final String
             NODE_V298_CREDENTIAL_RESOLVER_RUNTIME_SHELL_CANDIDATE_GATE_UPSTREAM_ECHO_VERIFICATION_STATE =
                     "runtime-shell-candidate-gate-upstream-echo-verification-awaiting-java-mini-kv";
+
+    static final String NODE_V299_CREDENTIAL_RESOLVER_RUNTIME_SHELL_CANDIDATE_GATE_DECISION_RECORD_VERSION =
+            "Node v299";
+
+    static final String NODE_V299_CREDENTIAL_RESOLVER_RUNTIME_SHELL_CANDIDATE_GATE_DECISION_RECORD_PROFILE =
+            "managed-audit-manual-sandbox-connection-credential-resolver-runtime-shell-candidate-gate-decision-record.v1";
+
+    static final String NODE_V299_CREDENTIAL_RESOLVER_RUNTIME_SHELL_CANDIDATE_GATE_DECISION_RECORD_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-runtime-shell-candidate-gate-decision-record";
+
+    static final String NODE_V299_CREDENTIAL_RESOLVER_RUNTIME_SHELL_CANDIDATE_GATE_DECISION_RECORD_MARKDOWN_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-runtime-shell-candidate-gate-decision-record?format=markdown";
+
+    static final String NODE_V299_CREDENTIAL_RESOLVER_RUNTIME_SHELL_CANDIDATE_GATE_DECISION_RECORD_STATE =
+            "runtime-shell-candidate-gate-decision-record-ready";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";
