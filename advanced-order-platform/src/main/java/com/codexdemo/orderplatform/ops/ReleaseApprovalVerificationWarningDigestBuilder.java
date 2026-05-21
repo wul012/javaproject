@@ -82,6 +82,7 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
             sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder;
+    private final ReleaseApprovalVerificationWarningDigestLineCatalog.Builders lineBuilders;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
             ReleaseApprovalManagedAuditSandboxAdapterApprovalSchemaGuardReceiptBuilder
@@ -185,6 +186,33 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder;
         this.sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder =
                 sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder;
+        this.lineBuilders = new ReleaseApprovalVerificationWarningDigestLineCatalog.Builders(
+                sandboxAdapterApprovalSchemaGuardReceiptBuilder,
+                sandboxConnectionOperatorHandoffMarkerBuilder,
+                sandboxConnectionPreflightEchoMarkerBuilder,
+                sandboxConnectionPreconditionReceiptBuilder,
+                sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
+                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
+                sandboxConnectionDryRunCommandPackageEchoReceiptBuilder,
+                sandboxConnectionPrecheckPacketEchoReceiptBuilder,
+                sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
+                sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
+                sandboxEndpointHandlePreflightEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
+        );
     }
 
     String build(
@@ -260,6 +288,34 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
+        ReleaseApprovalVerificationWarningDigestLineCatalog.Receipts lineReceipts =
+                new ReleaseApprovalVerificationWarningDigestLineCatalog.Receipts(
+                        managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
+                        managedAuditSandboxConnectionOperatorHandoffMarker,
+                        managedAuditSandboxConnectionPreflightEchoMarker,
+                        managedAuditSandboxConnectionPreconditionReceipt,
+                        managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
+                        managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
+                        managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
+                        managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
+                        managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,
+                        managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
+                        managedAuditSandboxEndpointHandlePreflightEchoMarker,
+                        managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
+                        managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
+                        managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
+                        managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt
+                );
         List<String> lines = new ArrayList<>(List.of(
                 ReleaseApprovalDigestSupport.line("digestKind", "releaseApprovalRehearsalWarning"),
                 ReleaseApprovalDigestSupport.line(
@@ -308,91 +364,7 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                         managedAuditExternalAdapterMigrationGuardReceipt.guardWarnings()
                 )
         ));
-        lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxAdapterApprovalSchemaGuardReceipt
-        ));
-        lines.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionOperatorHandoffMarker
-        ));
-        lines.addAll(sandboxConnectionPreflightEchoMarkerBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionPreflightEchoMarker
-        ));
-        lines.addAll(sandboxConnectionPreconditionReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionPreconditionReceipt
-        ));
-        lines.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionPrecheckPacketEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.warningDigestWarningLines(
-                managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
-        ));
-        lines.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.warningDigestWarningLines(
-                managedAuditSandboxEndpointHandlePreflightEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestWarningLines(
-                managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.warningDigestWarningLines(
-                managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder.warningDigestWarningLines(
-                managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder.warningDigestWarningLines(
-                managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
-                .warningDigestWarningLines(
-                        managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt
-                ));
+        lines.addAll(ReleaseApprovalVerificationWarningDigestLineCatalog.warningLines(lineBuilders, lineReceipts));
         lines.addAll(List.of(
                 ReleaseApprovalDigestSupport.line("failureCategories", failureTaxonomy.failureCategories()),
                 ReleaseApprovalDigestSupport.line("taxonomyWarnings", failureTaxonomy.taxonomyWarnings()),
@@ -585,91 +557,7 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                         managedAuditExternalAdapterMigrationGuardReceipt.nodeV222AdditionalLocalDryRunWritePerformed()
                 )
         ));
-        lines.addAll(sandboxAdapterApprovalSchemaGuardReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxAdapterApprovalSchemaGuardReceipt
-        ));
-        lines.addAll(sandboxConnectionOperatorHandoffMarkerBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionOperatorHandoffMarker
-        ));
-        lines.addAll(sandboxConnectionPreflightEchoMarkerBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionPreflightEchoMarker
-        ));
-        lines.addAll(sandboxConnectionPreconditionReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionPreconditionReceipt
-        ));
-        lines.addAll(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionPrecheckPacketEchoReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionPrecheckPacketEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
-        ));
-        lines.addAll(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker
-        ));
-        lines.addAll(sandboxEndpointHandlePreflightEchoMarkerBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxEndpointHandlePreflightEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder.warningDigestBoundaryLines(
-                managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt
-        ));
-        lines.addAll(sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt
-                ));
-        lines.addAll(sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
-                .warningDigestBoundaryLines(
-                        managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt
-                ));
+        lines.addAll(ReleaseApprovalVerificationWarningDigestLineCatalog.boundaryLines(lineBuilders, lineReceipts));
         lines.add(ReleaseApprovalDigestSupport.line(
                 "nodeMayWriteApprovalLedger",
                 executionBoundaries.nodeMayWriteApprovalLedger()
