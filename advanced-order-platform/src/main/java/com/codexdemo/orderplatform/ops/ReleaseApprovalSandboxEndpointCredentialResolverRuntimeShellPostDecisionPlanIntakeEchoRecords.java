@@ -1,0 +1,196 @@
+package com.codexdemo.orderplatform.ops;
+
+import java.util.List;
+
+public final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords {
+
+    private ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords() {
+    }
+
+    public record RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt(
+            String receiptVersion,
+            String sourceRuntimeShellDecisionRecordEchoReceiptVersion,
+            String sourceRuntimeShellDecisionRecordEchoReceiptSchemaVersion,
+            String sourceRuntimeShellDecisionRecordEchoReceiptDigest,
+            String consumedByNodeRuntimeShellPostDecisionPlanIntakeVersion,
+            String consumedByNodeRuntimeShellPostDecisionPlanIntakeProfile,
+            String consumedByNodeRuntimeShellPostDecisionPlanIntakeEndpoint,
+            String consumedByNodeRuntimeShellPostDecisionPlanIntakeMarkdownEndpoint,
+            String consumedByNodeRuntimeShellPostDecisionPlanIntakeState,
+            String nextNodePostDecisionPlanIntakeUpstreamEchoVerificationVersion,
+            String nextNodePostDecisionPlanIntakeUpstreamEchoVerificationProfile,
+            String planIntakeEchoMode,
+            String sourceSpan,
+            RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho sourceDecisionRecordEcho,
+            RehearsalRuntimeShellPostDecisionPlanIntake planIntake,
+            RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof necessityProof,
+            RehearsalRuntimeShellPostDecisionPlanIntakeChecks checks,
+            RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary sideEffectBoundary,
+            List<String> echoWorkflowReadySteps,
+            List<String> echoWorkflowMissingSteps,
+            boolean sourceDecisionRecordEchoed,
+            boolean nodeV301PlanIntakeEchoed,
+            boolean continuationDecisionEchoed,
+            boolean continuationOptionsEchoed,
+            boolean necessityProofEchoed,
+            boolean runtimeImplementationRejectedEchoed,
+            boolean noRuntimeImplementationEchoed,
+            boolean noRuntimeInvocationEchoed,
+            boolean noCredentialReadEchoed,
+            boolean noRawEndpointParseEchoed,
+            boolean noProviderClientInstantiationEchoed,
+            boolean noExternalRequestEchoed,
+            boolean noWriteOrMigrationEchoed,
+            boolean noAutoStartBoundaryEchoed,
+            boolean readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification,
+            boolean readyForDisabledRuntimeShellImplementation,
+            boolean readyForDisabledRuntimeShellInvocation,
+            boolean readyForManagedAuditResolverImplementation,
+            boolean readyForProductionAudit,
+            boolean readyForProductionWindow,
+            boolean nodeMayTreatAsProductionAuditRecord,
+            String receiptDigest,
+            List<String> continuationOptionCodes,
+            List<String> nodeWarningCodes,
+            List<String> nodeRecommendationCodes,
+            List<String> nextRequiredEchoVersions,
+            List<String> receiptWarnings,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
+    public record RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho(
+            String sourceReceiptVersion,
+            String sourceReceiptSchemaVersion,
+            String sourceReceiptDigest,
+            boolean readyForNodeV300RuntimeShellDecisionRecordUpstreamEchoVerification,
+            boolean sourceCandidateGateEchoed,
+            boolean nodeV299DecisionRecordEchoed,
+            boolean blockedDecisionEchoed,
+            boolean requiredEvidenceEchoed,
+            boolean noGoConditionsEchoed,
+            boolean readyForDisabledRuntimeShellImplementation,
+            boolean readyForDisabledRuntimeShellInvocation,
+            boolean readyForManagedAuditResolverImplementation,
+            boolean disabledRuntimeShellImplemented,
+            boolean disabledRuntimeShellInvocationAllowed,
+            boolean credentialValueRead,
+            boolean rawEndpointUrlParsed,
+            boolean externalRequestSent,
+            boolean secretProviderInstantiated,
+            boolean resolverClientInstantiated,
+            boolean approvalLedgerWritten,
+            boolean sqlExecuted,
+            boolean schemaMigrationExecuted,
+            boolean automaticUpstreamStart
+    ) {
+    }
+
+    public record RehearsalRuntimeShellPostDecisionPlanIntake(
+            String nodeVersion,
+            String profileVersion,
+            String endpoint,
+            String markdownEndpoint,
+            String planIntakeState,
+            String intakeMode,
+            String sourceSpan,
+            String selectedContinuationDecision,
+            int decisionOptionCount,
+            int selectedDecisionOptionCount,
+            int rejectedRuntimeImplementationOptionCount,
+            String nextJavaEchoVersion,
+            String nextMiniKvReceiptVersion,
+            String nextNodeVerificationVersion,
+            boolean runtimeShellImplementationAllowed,
+            boolean runtimeShellInvocationAllowed,
+            boolean credentialValueReadAllowed,
+            boolean rawEndpointUrlParseAllowed,
+            boolean providerClientInstantiationAllowed,
+            boolean externalRequestAllowed,
+            boolean schemaMigrationAllowed,
+            boolean approvalLedgerWriteAllowed,
+            boolean automaticUpstreamStartAllowed,
+            List<RehearsalRuntimeShellPostDecisionContinuationOption> continuationOptions
+    ) {
+    }
+
+    public record RehearsalRuntimeShellPostDecisionContinuationOption(
+            String code,
+            String title,
+            String status,
+            String rationale,
+            List<String> allowedActions,
+            List<String> prohibitedActions
+    ) {
+    }
+
+    public record RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof(
+            String blockerResolved,
+            String consumer,
+            String whyV300CannotBeReused,
+            String existingReportReuseDecision,
+            String stopCondition,
+            String growthControl,
+            boolean proofComplete
+    ) {
+    }
+
+    public record RehearsalRuntimeShellPostDecisionPlanIntakeChecks(
+            boolean sourceDecisionRecordEchoLoaded,
+            boolean sourceDecisionRecordEchoReady,
+            boolean sourceDecisionRecordKeepsRuntimeBlocked,
+            boolean sourceDecisionRecordKeepsSideEffectsClosed,
+            boolean continuationDecisionSelected,
+            boolean decisionOptionsDocumented,
+            boolean runtimeImplementationOptionRejected,
+            boolean necessityProofHasBlocker,
+            boolean necessityProofHasConsumer,
+            boolean necessityProofExplainsV300ReuseBoundary,
+            boolean necessityProofDefinesStopCondition,
+            boolean necessityProofComplete,
+            boolean runtimeShellImplementationStillForbidden,
+            boolean runtimeShellInvocationStillForbidden,
+            boolean providerClientInstantiationStillForbidden,
+            boolean externalRequestStillForbidden,
+            boolean credentialBoundaryClosed,
+            boolean rawEndpointBoundaryClosed,
+            boolean writeBoundaryClosed,
+            boolean autoStartBoundaryClosed,
+            boolean productionAuditStillBlocked,
+            boolean productionWindowStillBlocked,
+            boolean readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification
+    ) {
+    }
+
+    public record RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary(
+            boolean planIntakeEchoOnly,
+            boolean readOnlyPlanIntakeEcho,
+            boolean disabledRuntimeShellImplemented,
+            boolean disabledRuntimeShellEnabled,
+            boolean disabledRuntimeShellInvocationAllowed,
+            boolean managedAuditResolverImplementationAllowed,
+            boolean productionAuditAllowed,
+            boolean productionWindowAllowed,
+            boolean executionAllowed,
+            boolean connectsManagedAudit,
+            boolean readsManagedAuditCredential,
+            boolean storesManagedAuditCredential,
+            boolean credentialValueRead,
+            boolean credentialValueProvided,
+            boolean rawEndpointUrlParsed,
+            boolean rawEndpointUrlRendered,
+            boolean externalRequestSent,
+            boolean secretProviderInstantiated,
+            boolean resolverClientInstantiated,
+            boolean fakeSecretProviderInstantiated,
+            boolean fakeResolverClientInstantiated,
+            boolean approvalLedgerWritten,
+            boolean managedAuditStoreWritten,
+            boolean sqlExecuted,
+            boolean schemaMigrationExecuted,
+            boolean rollbackExecuted,
+            boolean automaticUpstreamStart,
+            boolean javaStartedNodeMiniKvOrHarness
+    ) {
+    }
+}

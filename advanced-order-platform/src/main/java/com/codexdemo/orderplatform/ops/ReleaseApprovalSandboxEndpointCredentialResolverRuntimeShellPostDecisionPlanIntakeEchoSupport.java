@@ -1,0 +1,613 @@
+package com.codexdemo.orderplatform.ops;
+
+import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.boundaryInput;
+import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.boundaryLines;
+import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.workflowReadiness;
+import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.workflowStep;
+
+import com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.EchoWorkflowReadiness;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords
+        .RehearsalRuntimeShellPostDecisionContinuationOption;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords
+        .RehearsalRuntimeShellPostDecisionPlanIntake;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords
+        .RehearsalRuntimeShellPostDecisionPlanIntakeChecks;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords
+        .RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords
+        .RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords
+        .RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho;
+import java.util.List;
+
+final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoSupport {
+
+    private static final String WARNING_DIGEST_WARNING_INPUT_NAME =
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptWarnings";
+
+    private static final List<String> CONTINUATION_OPTION_CODES = List.of(
+            "CONTINUE_BLOCKED_PLANNING",
+            "PAUSE_RUNTIME_SHELL_CHAIN",
+            "REQUIRE_EXPLICIT_APPROVAL_PREREQUISITES",
+            "IMPLEMENT_RUNTIME_SHELL_NOW"
+    );
+
+    private static final List<String> WARNING_DIGEST_BOUNDARY_INPUT_NAMES = ReleaseApprovalEchoMarkerSupport
+            .boundaryInputNames(
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptDigest",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeState",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedContinuationDecision",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionDecisionOptionCount",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedDecisionOptionCount",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRejectedRuntimeImplementationOptionCount",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionReadyForNodeV302",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeImplemented",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeInvocationAllowed",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionCredentialValueRead",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRawEndpointUrlParsed",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionExternalRequestSent",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSecretProviderInstantiated",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionResolverClientInstantiated",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionApprovalLedgerWritten",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSqlExecuted",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSchemaMigrationExecuted",
+                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionAutomaticUpstreamStart"
+            );
+
+    private static final List<String> PROOF_CLAIMS = List.of(
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeState=runtime-shell-post-decision-continuation-plan-intake-ready",
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.selectedContinuationDecision=continue-blocked-planning",
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.decisionOptionCount=4",
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.rejectedRuntimeImplementationOptionCount=1",
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.necessityProof.proofComplete=true",
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.runtimeShellImplementationAllowed=false",
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.externalRequestAllowed=false",
+            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification=true"
+    );
+
+    private static final List<String> NODE_VERIFICATION_ACTIONS = List.of(
+            "Compare managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeProfile with Node v301",
+            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.selectedContinuationDecision=continue-blocked-planning before Node v302",
+            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.decisionOptionCount=4 before Node v302",
+            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.rejectedRuntimeImplementationOptionCount=1 before Node v302",
+            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.necessityProof.proofComplete=true before Node v302",
+            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.runtimeShellImplementationAllowed=false",
+            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.runtimeShellInvocationAllowed=false",
+            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.credentialValueReadAllowed=false",
+            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.externalRequestAllowed=false",
+            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.approvalLedgerWriteAllowed=false"
+    );
+
+    private static final List<String> NODE_WARNING_CODES = List.of(
+            "CONTINUATION_PLAN_DOES_NOT_AUTHORIZE_RUNTIME",
+            "NODE_V302_REQUIRES_JAVA_V136_AND_MINI_KV_V133"
+    );
+
+    private static final List<String> NODE_RECOMMENDATION_CODES = List.of(
+            "REQUEST_PARALLEL_JAVA_MINI_KV_ECHO",
+            "STOP_CHAIN_AFTER_V302_WITHOUT_NEW_BLOCKER"
+    );
+
+    private static final List<String> NEXT_REQUIRED_ECHO_VERSIONS = List.of(
+            "mini-kv v133 runtime shell post-decision plan intake non-participation receipt",
+            "Node v302 post-decision plan intake upstream echo verification"
+    );
+
+    private ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoSupport() {
+    }
+
+    static RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt build(
+            RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt sourceReceipt
+    ) {
+        RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho sourceEcho =
+                sourceEcho(sourceReceipt);
+        RehearsalRuntimeShellPostDecisionPlanIntake planIntake = planIntake();
+        RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof necessityProof =
+                necessityProof();
+        RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary sideEffectBoundary =
+                sideEffectBoundary();
+        RehearsalRuntimeShellPostDecisionPlanIntakeChecks checks =
+                checks(sourceEcho, planIntake, necessityProof, sideEffectBoundary);
+        EchoWorkflowReadiness readiness =
+                readiness(sourceEcho, planIntake, necessityProof, checks, sideEffectBoundary);
+        List<String> receiptWarnings = receiptWarnings(readiness);
+        String receiptDigest = receiptDigest(sourceReceipt, sourceEcho, planIntake, necessityProof,
+                checks, sideEffectBoundary, readiness);
+
+        return new RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt(
+                OpsEvidenceService
+                        .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_PLAN_INTAKE_ECHO_RECEIPT_VERSION,
+                sourceReceipt.receiptVersion(),
+                OpsEvidenceService
+                        .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_RUNTIME_SHELL_DECISION_RECORD_ECHO_RECEIPT_SCHEMA_VERSION,
+                sourceReceipt.receiptDigest(),
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_VERSION,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_PROFILE,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_ENDPOINT,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_MARKDOWN_ENDPOINT,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_STATE,
+                "Node v302",
+                "managed-audit-manual-sandbox-connection-credential-resolver-runtime-shell-post-decision-plan-intake-upstream-echo-verification.v1",
+                "java-v136-credential-resolver-runtime-shell-post-decision-plan-intake-echo-only",
+                "Node v301",
+                sourceEcho,
+                planIntake,
+                necessityProof,
+                checks,
+                sideEffectBoundary,
+                readiness.readyStepNames(),
+                readiness.missingStepNames(),
+                readiness.ready("sourceDecisionRecordEchoed"),
+                readiness.ready("nodeV301PlanIntakeEchoed"),
+                readiness.ready("continuationDecisionEchoed"),
+                readiness.ready("continuationOptionsEchoed"),
+                readiness.ready("necessityProofEchoed"),
+                readiness.ready("runtimeImplementationRejectedEchoed"),
+                readiness.ready("noRuntimeImplementationEchoed"),
+                readiness.ready("noRuntimeInvocationEchoed"),
+                readiness.ready("noCredentialReadEchoed"),
+                readiness.ready("noRawEndpointParseEchoed"),
+                readiness.ready("noProviderClientInstantiationEchoed"),
+                readiness.ready("noExternalRequestEchoed"),
+                readiness.ready("noWriteOrMigrationEchoed"),
+                readiness.ready("noAutoStartBoundaryEchoed"),
+                checks.readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification(),
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                receiptDigest,
+                CONTINUATION_OPTION_CODES,
+                NODE_WARNING_CODES,
+                NODE_RECOMMENDATION_CODES,
+                NEXT_REQUIRED_ECHO_VERSIONS,
+                receiptWarnings,
+                NODE_VERIFICATION_ACTIONS
+        );
+    }
+
+    static List<String> warningDigestWarningInputNames() {
+        return ReleaseApprovalEchoMarkerSupport.warningInputNames(WARNING_DIGEST_WARNING_INPUT_NAME);
+    }
+
+    static List<String> warningDigestBoundaryInputNames() {
+        return WARNING_DIGEST_BOUNDARY_INPUT_NAMES;
+    }
+
+    static List<String> proofClaims() {
+        return PROOF_CLAIMS;
+    }
+
+    static List<String> nodeVerificationActions() {
+        return NODE_VERIFICATION_ACTIONS;
+    }
+
+    static List<String> warningDigestWarningLines(
+            RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt receipt
+    ) {
+        return ReleaseApprovalEchoMarkerSupport.warningLines(WARNING_DIGEST_WARNING_INPUT_NAME,
+                receipt.receiptWarnings());
+    }
+
+    static List<String> warningDigestBoundaryLines(
+            RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt receipt
+    ) {
+        return boundaryLines(
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptDigest",
+                        receipt.receiptDigest()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeState",
+                        receipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeState()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedContinuationDecision",
+                        receipt.planIntake().selectedContinuationDecision()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionDecisionOptionCount",
+                        receipt.planIntake().decisionOptionCount()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedDecisionOptionCount",
+                        receipt.planIntake().selectedDecisionOptionCount()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRejectedRuntimeImplementationOptionCount",
+                        receipt.planIntake().rejectedRuntimeImplementationOptionCount()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionReadyForNodeV302",
+                        receipt.readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeImplemented",
+                        receipt.sideEffectBoundary().disabledRuntimeShellImplemented()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeInvocationAllowed",
+                        receipt.sideEffectBoundary().disabledRuntimeShellInvocationAllowed()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionCredentialValueRead",
+                        receipt.sideEffectBoundary().credentialValueRead()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRawEndpointUrlParsed",
+                        receipt.sideEffectBoundary().rawEndpointUrlParsed()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionExternalRequestSent",
+                        receipt.sideEffectBoundary().externalRequestSent()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSecretProviderInstantiated",
+                        receipt.sideEffectBoundary().secretProviderInstantiated()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionResolverClientInstantiated",
+                        receipt.sideEffectBoundary().resolverClientInstantiated()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionApprovalLedgerWritten",
+                        receipt.sideEffectBoundary().approvalLedgerWritten()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSqlExecuted",
+                        receipt.sideEffectBoundary().sqlExecuted()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSchemaMigrationExecuted",
+                        receipt.sideEffectBoundary().schemaMigrationExecuted()),
+                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionAutomaticUpstreamStart",
+                        receipt.sideEffectBoundary().automaticUpstreamStart())
+        );
+    }
+
+    static boolean noCredentialConnectionWriteOrAutoStartProved(
+            RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt receipt
+    ) {
+        return receipt.readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification()
+                && !receipt.readyForDisabledRuntimeShellImplementation()
+                && !receipt.readyForDisabledRuntimeShellInvocation()
+                && !receipt.readyForManagedAuditResolverImplementation()
+                && !receipt.sideEffectBoundary().disabledRuntimeShellImplemented()
+                && !receipt.sideEffectBoundary().disabledRuntimeShellInvocationAllowed()
+                && !receipt.sideEffectBoundary().credentialValueRead()
+                && !receipt.sideEffectBoundary().rawEndpointUrlParsed()
+                && !receipt.sideEffectBoundary().externalRequestSent()
+                && !receipt.sideEffectBoundary().approvalLedgerWritten()
+                && !receipt.sideEffectBoundary().sqlExecuted()
+                && !receipt.sideEffectBoundary().schemaMigrationExecuted()
+                && !receipt.sideEffectBoundary().automaticUpstreamStart();
+    }
+
+    private static RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho sourceEcho(
+            RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt source
+    ) {
+        return new RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho(
+                source.receiptVersion(),
+                OpsEvidenceService
+                        .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_RUNTIME_SHELL_DECISION_RECORD_ECHO_RECEIPT_SCHEMA_VERSION,
+                source.receiptDigest(),
+                source.readyForNodeV300RuntimeShellDecisionRecordUpstreamEchoVerification(),
+                source.sourceCandidateGateEchoed(),
+                source.nodeV299DecisionRecordEchoed(),
+                source.blockedDecisionEchoed(),
+                source.requiredEvidenceEchoed(),
+                source.noGoConditionsEchoed(),
+                source.readyForDisabledRuntimeShellImplementation(),
+                source.readyForDisabledRuntimeShellInvocation(),
+                source.readyForManagedAuditResolverImplementation(),
+                source.sideEffectBoundary().disabledRuntimeShellImplemented(),
+                source.sideEffectBoundary().disabledRuntimeShellInvocationAllowed(),
+                source.sideEffectBoundary().credentialValueRead(),
+                source.sideEffectBoundary().rawEndpointUrlParsed(),
+                source.sideEffectBoundary().externalRequestSent(),
+                source.sideEffectBoundary().secretProviderInstantiated(),
+                source.sideEffectBoundary().resolverClientInstantiated(),
+                source.sideEffectBoundary().approvalLedgerWritten(),
+                source.sideEffectBoundary().sqlExecuted(),
+                source.sideEffectBoundary().schemaMigrationExecuted(),
+                source.sideEffectBoundary().automaticUpstreamStart()
+        );
+    }
+
+    private static RehearsalRuntimeShellPostDecisionPlanIntake planIntake() {
+        List<RehearsalRuntimeShellPostDecisionContinuationOption> options =
+                continuationOptions();
+        return new RehearsalRuntimeShellPostDecisionPlanIntake(
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_VERSION,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_PROFILE,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_ENDPOINT,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_MARKDOWN_ENDPOINT,
+                OpsEvidenceService
+                        .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_STATE,
+                "runtime-shell-post-decision-continuation-plan-intake-only",
+                "Node v300",
+                "continue-blocked-planning",
+                options.size(),
+                1,
+                1,
+                "Java v136",
+                "mini-kv v133",
+                "Node v302",
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                options
+        );
+    }
+
+    private static List<RehearsalRuntimeShellPostDecisionContinuationOption> continuationOptions() {
+        return List.of(
+                option(
+                        "CONTINUE_BLOCKED_PLANNING",
+                        "Continue blocked planning",
+                        "selected",
+                        "v300 proved upstream agreement on the blocked decision, so the next safe step is read-only echo of this continuation intake.",
+                        List.of("write-v301-intake", "request-java-v136-echo",
+                                "request-mini-kv-v133-non-participation"),
+                        List.of("implement-runtime-shell", "invoke-runtime-shell",
+                                "open-managed-audit-connection")
+                ),
+                option(
+                        "PAUSE_RUNTIME_SHELL_CHAIN",
+                        "Pause runtime shell chain",
+                        "documented-alternative",
+                        "This remains valid if the next echo would not be consumed, but v302 has a narrow consumer for Java v136 and mini-kv v133.",
+                        List.of("archive-v301-as-paused", "return-to-quality-work"),
+                        List.of("treat-pause-as-production-approval")
+                ),
+                option(
+                        "REQUIRE_EXPLICIT_APPROVAL_PREREQUISITES",
+                        "Require explicit approval prerequisites",
+                        "documented-alternative",
+                        "Future approval prerequisites can be proposed, but v301 has no credential, endpoint, provider, or operator-window approval to unlock runtime.",
+                        List.of("list-approval-prerequisites", "keep-prerequisites-read-only"),
+                        List.of("read-credential-value", "parse-raw-endpoint-url",
+                                "instantiate-provider-client")
+                ),
+                option(
+                        "IMPLEMENT_RUNTIME_SHELL_NOW",
+                        "Implement runtime shell now",
+                        "rejected",
+                        "v300 aligned a blocked decision record only; it did not approve implementation, invocation, network, credential, or write boundaries.",
+                        List.of(),
+                        List.of("implement-runtime-shell", "invoke-runtime-shell",
+                                "send-external-request", "write-ledger-or-schema")
+                )
+        );
+    }
+
+    private static RehearsalRuntimeShellPostDecisionContinuationOption option(
+            String code,
+            String title,
+            String status,
+            String rationale,
+            List<String> allowedActions,
+            List<String> prohibitedActions
+    ) {
+        return new RehearsalRuntimeShellPostDecisionContinuationOption(
+                code,
+                title,
+                status,
+                rationale,
+                allowedActions,
+                prohibitedActions
+        );
+    }
+
+    private static RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof necessityProof() {
+        return new RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof(
+                "v300 verified Java v135 and mini-kv v132 agreement with the blocked decision record, but it did not decide the post-decision continuation path.",
+                "Java v136 and mini-kv v133 consume v301 as read-only echoes; Node v302 consumes both echoes to verify post-decision plan alignment.",
+                "v300 is an upstream echo verification for Node v299; it lacks a selected continuation option, v136/v133 handoff target, and explicit stop condition for the post-decision chain.",
+                "Reuse v300 only as source evidence; v301 is the minimal intake layer that records continuation, pause, and approval-prerequisite alternatives.",
+                "Stop immediately if the next step requires credential values, raw endpoint URLs, provider/client instantiation, HTTP/TCP, runtime shell implementation or invocation, ledger/schema writes, or automatic upstream start.",
+                "After Node v302 verifies Java v136 and mini-kv v133, do not add another echo stage unless a new blocker and downstream consumer are named in the active plan.",
+                true
+        );
+    }
+
+    private static RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary sideEffectBoundary() {
+        return new RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary(
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+        );
+    }
+
+    private static RehearsalRuntimeShellPostDecisionPlanIntakeChecks checks(
+            RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho sourceEcho,
+            RehearsalRuntimeShellPostDecisionPlanIntake planIntake,
+            RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof proof,
+            RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary boundary
+    ) {
+        boolean sourceLoaded = sourceEcho.sourceReceiptSchemaVersion()
+                .equals(OpsEvidenceService
+                        .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_RUNTIME_SHELL_DECISION_RECORD_ECHO_RECEIPT_SCHEMA_VERSION);
+        boolean sourceReady = sourceEcho.readyForNodeV300RuntimeShellDecisionRecordUpstreamEchoVerification()
+                && sourceEcho.nodeV299DecisionRecordEchoed()
+                && sourceEcho.blockedDecisionEchoed()
+                && sourceEcho.requiredEvidenceEchoed()
+                && sourceEcho.noGoConditionsEchoed();
+        boolean sourceRuntimeBlocked = !sourceEcho.readyForDisabledRuntimeShellImplementation()
+                && !sourceEcho.readyForDisabledRuntimeShellInvocation()
+                && !sourceEcho.readyForManagedAuditResolverImplementation()
+                && !sourceEcho.disabledRuntimeShellImplemented()
+                && !sourceEcho.disabledRuntimeShellInvocationAllowed();
+        boolean sourceSideEffectsClosed = !sourceEcho.credentialValueRead()
+                && !sourceEcho.rawEndpointUrlParsed()
+                && !sourceEcho.externalRequestSent()
+                && !sourceEcho.secretProviderInstantiated()
+                && !sourceEcho.resolverClientInstantiated()
+                && !sourceEcho.approvalLedgerWritten()
+                && !sourceEcho.sqlExecuted()
+                && !sourceEcho.schemaMigrationExecuted()
+                && !sourceEcho.automaticUpstreamStart();
+        boolean continuationSelected = "continue-blocked-planning"
+                .equals(planIntake.selectedContinuationDecision())
+                && planIntake.selectedDecisionOptionCount() == 1;
+        boolean optionsDocumented = planIntake.decisionOptionCount() == CONTINUATION_OPTION_CODES.size()
+                && planIntake.continuationOptions().stream()
+                .map(RehearsalRuntimeShellPostDecisionContinuationOption::code)
+                .toList().equals(CONTINUATION_OPTION_CODES);
+        boolean implementationRejected = planIntake.rejectedRuntimeImplementationOptionCount() == 1
+                && planIntake.continuationOptions().stream()
+                .anyMatch(option -> "IMPLEMENT_RUNTIME_SHELL_NOW".equals(option.code())
+                        && "rejected".equals(option.status()));
+        boolean proofHasBlocker = proof.blockerResolved().contains("v300");
+        boolean proofHasConsumer = proof.consumer().contains("Java v136")
+                && proof.consumer().contains("mini-kv v133")
+                && proof.consumer().contains("Node v302");
+        boolean proofExplainsReuse = proof.whyV300CannotBeReused().contains("v300");
+        boolean proofDefinesStop = proof.stopCondition().contains("credential values")
+                && proof.stopCondition().contains("HTTP/TCP");
+        boolean noWritesOrMigrations = !boundary.approvalLedgerWritten()
+                && !boundary.managedAuditStoreWritten()
+                && !boundary.sqlExecuted()
+                && !boundary.schemaMigrationExecuted();
+        boolean ready = sourceLoaded
+                && sourceReady
+                && sourceRuntimeBlocked
+                && sourceSideEffectsClosed
+                && continuationSelected
+                && optionsDocumented
+                && implementationRejected
+                && proofHasBlocker
+                && proofHasConsumer
+                && proofExplainsReuse
+                && proofDefinesStop
+                && proof.proofComplete()
+                && !planIntake.runtimeShellImplementationAllowed()
+                && !planIntake.runtimeShellInvocationAllowed()
+                && !planIntake.providerClientInstantiationAllowed()
+                && !planIntake.externalRequestAllowed()
+                && !planIntake.credentialValueReadAllowed()
+                && !planIntake.rawEndpointUrlParseAllowed()
+                && !planIntake.approvalLedgerWriteAllowed()
+                && !planIntake.automaticUpstreamStartAllowed()
+                && !boundary.credentialValueRead()
+                && !boundary.rawEndpointUrlParsed()
+                && !boundary.externalRequestSent()
+                && noWritesOrMigrations
+                && !boundary.automaticUpstreamStart();
+        return new RehearsalRuntimeShellPostDecisionPlanIntakeChecks(
+                sourceLoaded,
+                sourceReady,
+                sourceRuntimeBlocked,
+                sourceSideEffectsClosed,
+                continuationSelected,
+                optionsDocumented,
+                implementationRejected,
+                proofHasBlocker,
+                proofHasConsumer,
+                proofExplainsReuse,
+                proofDefinesStop,
+                proof.proofComplete(),
+                !planIntake.runtimeShellImplementationAllowed(),
+                !planIntake.runtimeShellInvocationAllowed(),
+                !planIntake.providerClientInstantiationAllowed(),
+                !planIntake.externalRequestAllowed(),
+                !boundary.credentialValueRead() && !boundary.credentialValueProvided(),
+                !boundary.rawEndpointUrlParsed() && !boundary.rawEndpointUrlRendered(),
+                noWritesOrMigrations,
+                !boundary.automaticUpstreamStart(),
+                !boundary.productionAuditAllowed(),
+                !boundary.productionWindowAllowed(),
+                ready
+        );
+    }
+
+    private static EchoWorkflowReadiness readiness(
+            RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho sourceEcho,
+            RehearsalRuntimeShellPostDecisionPlanIntake planIntake,
+            RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof proof,
+            RehearsalRuntimeShellPostDecisionPlanIntakeChecks checks,
+            RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary boundary
+    ) {
+        return workflowReadiness(
+                workflowStep("sourceDecisionRecordEchoed", checks.sourceDecisionRecordEchoReady()
+                        && sourceEcho.readyForNodeV300RuntimeShellDecisionRecordUpstreamEchoVerification()),
+                workflowStep("nodeV301PlanIntakeEchoed", checks.continuationDecisionSelected()),
+                workflowStep("continuationDecisionEchoed", checks.continuationDecisionSelected()),
+                workflowStep("continuationOptionsEchoed", checks.decisionOptionsDocumented()),
+                workflowStep("necessityProofEchoed", checks.necessityProofComplete()
+                        && proof.consumer().contains("Java v136")),
+                workflowStep("runtimeImplementationRejectedEchoed",
+                        checks.runtimeImplementationOptionRejected()),
+                workflowStep("noRuntimeImplementationEchoed",
+                        checks.runtimeShellImplementationStillForbidden()
+                                && !planIntake.runtimeShellImplementationAllowed()),
+                workflowStep("noRuntimeInvocationEchoed",
+                        checks.runtimeShellInvocationStillForbidden()
+                                && !planIntake.runtimeShellInvocationAllowed()),
+                workflowStep("noCredentialReadEchoed", checks.credentialBoundaryClosed()),
+                workflowStep("noRawEndpointParseEchoed", checks.rawEndpointBoundaryClosed()),
+                workflowStep("noProviderClientInstantiationEchoed",
+                        checks.providerClientInstantiationStillForbidden()),
+                workflowStep("noExternalRequestEchoed", checks.externalRequestStillForbidden()
+                        && !boundary.externalRequestSent()),
+                workflowStep("noWriteOrMigrationEchoed", checks.writeBoundaryClosed()),
+                workflowStep("noAutoStartBoundaryEchoed", checks.autoStartBoundaryClosed()
+                        && !boundary.javaStartedNodeMiniKvOrHarness())
+        );
+    }
+
+    private static String receiptDigest(
+            RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt sourceReceipt,
+            RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho sourceEcho,
+            RehearsalRuntimeShellPostDecisionPlanIntake planIntake,
+            RehearsalRuntimeShellPostDecisionPlanIntakeNecessityProof necessityProof,
+            RehearsalRuntimeShellPostDecisionPlanIntakeChecks checks,
+            RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary boundary,
+            EchoWorkflowReadiness readiness
+    ) {
+        return ReleaseApprovalDigestSupport.digest(List.of(
+                ReleaseApprovalDigestSupport.line("receiptVersion", OpsEvidenceService
+                        .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_PLAN_INTAKE_ECHO_RECEIPT_VERSION),
+                ReleaseApprovalDigestSupport.line("sourceDecisionRecordEchoReceiptVersion",
+                        sourceReceipt.receiptVersion()),
+                ReleaseApprovalDigestSupport.line("sourceDecisionRecordEchoReceiptDigest",
+                        sourceReceipt.receiptDigest()),
+                ReleaseApprovalDigestSupport.line("sourceEcho", sourceEcho),
+                ReleaseApprovalDigestSupport.line("planIntake", planIntake),
+                ReleaseApprovalDigestSupport.line("necessityProof", necessityProof),
+                ReleaseApprovalDigestSupport.line("checks", checks),
+                ReleaseApprovalDigestSupport.line("sideEffectBoundary", boundary),
+                ReleaseApprovalDigestSupport.line("readySteps", readiness.readyStepNames())
+        ));
+    }
+
+    private static List<String> receiptWarnings(EchoWorkflowReadiness readiness) {
+        return ReleaseApprovalEchoMarkerSupport.warnings(
+                readiness.warningIfMissing("sourceDecisionRecordEchoed",
+                        "SOURCE_DECISION_RECORD_ECHO_NOT_READY"),
+                readiness.warningIfMissing("nodeV301PlanIntakeEchoed",
+                        "NODE_V301_PLAN_INTAKE_NOT_READY"),
+                readiness.warningIfMissing("continuationOptionsEchoed",
+                        "POST_DECISION_CONTINUATION_OPTIONS_UNSTABLE"),
+                readiness.warningIfMissing("necessityProofEchoed",
+                        "POST_DECISION_NECESSITY_PROOF_INCOMPLETE"),
+                readiness.warningIfMissing("runtimeImplementationRejectedEchoed",
+                        "RUNTIME_IMPLEMENTATION_OPTION_NOT_REJECTED"),
+                readiness.warningIfMissing("noWriteOrMigrationEchoed",
+                        "POST_DECISION_PLAN_WRITE_BOUNDARY_OPEN")
+        );
+    }
+}
