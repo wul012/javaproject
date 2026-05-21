@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog
+        .ApprovalRequiredImplementationTemplate;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords
         .RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords
@@ -40,9 +42,8 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImpl
 
     private static final List<String> BOUNDARY_CODES =
             ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog.approvalRequiredBoundaryCodes();
-    private static final List<String> REQUIREMENT_CODES = BOUNDARY_CODES.stream()
-            .map(ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog::requirementCodeFor)
-            .toList();
+    private static final List<String> REQUIREMENT_CODES =
+            ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog.approvalRequiredRequirementCodes();
 
     private ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoSupport() {
     }
@@ -58,22 +59,27 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImpl
     static List<RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness>
     boundaryReadiness() {
         return BOUNDARY_CODES.stream()
-                .map(code -> new RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness(
-                        code,
-                        REQUIREMENT_CODES.get(BOUNDARY_CODES.indexOf(code)),
-                        "echo-ready-implementation-blocked",
-                        "requires-explicit-follow-up-artifacts",
-                        ownerFor(code),
-                        requiredArtifactsFor(code),
-                        javaV116EchoHintFor(code),
-                        miniKvV122ReceiptHintFor(code),
-                        nodeV282VerificationHintFor(code),
-                        prohibitedRuntimeActionsFor(code),
-                        true,
-                        true,
-                        false,
-                        false
-                ))
+                .map(code -> {
+                    ApprovalRequiredImplementationTemplate template =
+                            ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog
+                                    .approvalRequiredImplementationTemplateFor(code);
+                    return new RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness(
+                            code,
+                            REQUIREMENT_CODES.get(BOUNDARY_CODES.indexOf(code)),
+                            "echo-ready-implementation-blocked",
+                            "requires-explicit-follow-up-artifacts",
+                            template.owner(),
+                            template.requiredArtifacts(),
+                            template.javaV116EchoHint(),
+                            template.miniKvV122ReceiptHint(),
+                            template.nodeV282VerificationHint(),
+                            template.prohibitedRuntimeActions(),
+                            true,
+                            true,
+                            false,
+                            false
+                    );
+                })
                 .toList();
     }
 
@@ -344,122 +350,4 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImpl
                 && !boundary.javaStartedNodeOrMiniKv();
     }
 
-    private static String ownerFor(String code) {
-        return switch (code) {
-            case "CREDENTIAL_HANDLE", "ENDPOINT_HANDLE" -> "security";
-            case "OPERATOR_APPROVAL" -> "operator";
-            case "ROLLBACK_BOUNDARY", "SCHEMA_MIGRATION_POLICY" -> "release-manager";
-            case "AUDIT_LEDGER_WRITE_POLICY" -> "node";
-            default -> throw new IllegalArgumentException("Unknown boundary code: " + code);
-        };
-    }
-
-    private static List<String> requiredArtifactsFor(String code) {
-        return switch (code) {
-            case "CREDENTIAL_HANDLE" -> List.of(
-                    "credential-handle-review-id",
-                    "credential-value-redaction-contract",
-                    "operator-visible-secret-value-prohibition"
-            );
-            case "ENDPOINT_HANDLE" -> List.of(
-                    "endpoint-handle-review-id",
-                    "allowlist-review-status",
-                    "raw-endpoint-redaction-contract"
-            );
-            case "OPERATOR_APPROVAL" -> List.of(
-                    "operator-identity-binding",
-                    "approval-correlation-marker",
-                    "manual-window-open-marker"
-            );
-            case "ROLLBACK_BOUNDARY" -> List.of(
-                    "rollback-abort-marker",
-                    "restore-point-review-id",
-                    "manual-rollback-runbook-reference"
-            );
-            case "SCHEMA_MIGRATION_POLICY" -> List.of(
-                    "schema-migration-rehearsal-id",
-                    "migration-review-status",
-                    "sql-execution-prohibition-marker"
-            );
-            case "AUDIT_LEDGER_WRITE_POLICY" -> List.of(
-                    "approval-ledger-write-policy-id",
-                    "audit-store-write-prohibition-marker",
-                    "write-path-owner-review"
-            );
-            default -> throw new IllegalArgumentException("Unknown boundary code: " + code);
-        };
-    }
-
-    private static String javaV116EchoHintFor(String code) {
-        return switch (code) {
-            case "CREDENTIAL_HANDLE" -> "Echo credential handle review id without credential value fields.";
-            case "ENDPOINT_HANDLE" -> "Echo endpoint handle and allowlist review status without raw URL.";
-            case "OPERATOR_APPROVAL" ->
-                    "Echo operator approval marker and manual-window evidence without executing ledger writes.";
-            case "ROLLBACK_BOUNDARY" -> "Echo rollback abort marker and restore review id without executing rollback.";
-            case "SCHEMA_MIGRATION_POLICY" -> "Echo schema migration rehearsal id without executing SQL.";
-            case "AUDIT_LEDGER_WRITE_POLICY" -> "Echo ledger write policy id without writing approval ledger.";
-            default -> throw new IllegalArgumentException("Unknown boundary code: " + code);
-        };
-    }
-
-    private static String miniKvV122ReceiptHintFor(String code) {
-        return switch (code) {
-            case "CREDENTIAL_HANDLE" -> "Confirm no credential value load/store/include behavior.";
-            case "ENDPOINT_HANDLE" -> "Confirm no raw endpoint parse/include/connect behavior.";
-            case "OPERATOR_APPROVAL" -> "Confirm no auto-start and no approval side effects.";
-            case "ROLLBACK_BOUNDARY" -> "Confirm no LOAD/RESTORE/COMPACT and no authority over rollback state.";
-            case "SCHEMA_MIGRATION_POLICY" -> "Confirm no admin command or schema/storage mutation participates.";
-            case "AUDIT_LEDGER_WRITE_POLICY" -> "Confirm no storage/backend/write participation.";
-            default -> throw new IllegalArgumentException("Unknown boundary code: " + code);
-        };
-    }
-
-    private static String nodeV282VerificationHintFor(String code) {
-        return switch (code) {
-            case "CREDENTIAL_HANDLE" -> "Verify handle-only evidence and value-redaction invariants.";
-            case "ENDPOINT_HANDLE" -> "Verify handle-only endpoint evidence and no raw URL shape drift.";
-            case "OPERATOR_APPROVAL" -> "Verify operator marker completeness before any later dry-run shell.";
-            case "ROLLBACK_BOUNDARY" -> "Verify rollback guard evidence stays separate from execution.";
-            case "SCHEMA_MIGRATION_POLICY" -> "Verify schema migration remains review-only.";
-            case "AUDIT_LEDGER_WRITE_POLICY" -> "Verify all write paths stay blocked until an explicit later plan.";
-            default -> throw new IllegalArgumentException("Unknown boundary code: " + code);
-        };
-    }
-
-    private static List<String> prohibitedRuntimeActionsFor(String code) {
-        return switch (code) {
-            case "CREDENTIAL_HANDLE" -> List.of(
-                    "read-credential-value",
-                    "store-credential-value",
-                    "render-credential-value"
-            );
-            case "ENDPOINT_HANDLE" -> List.of(
-                    "parse-raw-endpoint-url",
-                    "render-raw-endpoint-url",
-                    "connect-managed-audit"
-            );
-            case "OPERATOR_APPROVAL" -> List.of(
-                    "execute-without-operator-marker",
-                    "auto-approve-operation",
-                    "auto-start-upstream"
-            );
-            case "ROLLBACK_BOUNDARY" -> List.of(
-                    "execute-rollback",
-                    "deploy-resolver-without-abort-marker",
-                    "write-production-record"
-            );
-            case "SCHEMA_MIGRATION_POLICY" -> List.of(
-                    "execute-schema-migration",
-                    "execute-sql",
-                    "mutate-managed-audit-schema"
-            );
-            case "AUDIT_LEDGER_WRITE_POLICY" -> List.of(
-                    "write-approval-ledger",
-                    "write-managed-audit-state",
-                    "write-storage"
-            );
-            default -> throw new IllegalArgumentException("Unknown boundary code: " + code);
-        };
-    }
 }

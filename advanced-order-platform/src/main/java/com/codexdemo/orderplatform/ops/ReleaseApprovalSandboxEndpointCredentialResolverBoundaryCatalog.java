@@ -4,6 +4,16 @@ import java.util.List;
 
 final class ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog {
 
+    record ApprovalRequiredImplementationTemplate(
+            String owner,
+            List<String> requiredArtifacts,
+            String javaV116EchoHint,
+            String miniKvV122ReceiptHint,
+            String nodeV282VerificationHint,
+            List<String> prohibitedRuntimeActions
+    ) {
+    }
+
     private static final List<String> BOUNDARY_CODES = List.of(
             "PLAN_DOCUMENT",
             "CREDENTIAL_HANDLE",
@@ -73,6 +83,12 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog {
         return APPROVAL_REQUIRED_BOUNDARY_CODES;
     }
 
+    static List<String> approvalRequiredRequirementCodes() {
+        return APPROVAL_REQUIRED_BOUNDARY_CODES.stream()
+                .map(ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog::requirementCodeFor)
+                .toList();
+    }
+
     static String candidateRuleFor(String code) {
         if (CANDIDATE_READY_BOUNDARY_CODES.contains(code)) {
             return code + " may be represented in the disabled interface or fake wiring review only.";
@@ -130,6 +146,108 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog {
                     "Schema migration policy requires approval and cannot execute SQL from this receipt.";
             case "AUDIT_LEDGER_WRITE_POLICY" ->
                     "Audit ledger writes require approval and cannot be produced by this read-only evidence.";
+            default -> throw new IllegalArgumentException("Unknown approval-required boundary code: " + code);
+        };
+    }
+
+    static ApprovalRequiredImplementationTemplate approvalRequiredImplementationTemplateFor(String code) {
+        return switch (code) {
+            case "CREDENTIAL_HANDLE" -> new ApprovalRequiredImplementationTemplate(
+                    "security",
+                    List.of(
+                            "credential-handle-review-id",
+                            "credential-value-redaction-contract",
+                            "operator-visible-secret-value-prohibition"
+                    ),
+                    "Echo credential handle review id without credential value fields.",
+                    "Confirm no credential value load/store/include behavior.",
+                    "Verify handle-only evidence and value-redaction invariants.",
+                    List.of(
+                            "read-credential-value",
+                            "store-credential-value",
+                            "render-credential-value"
+                    )
+            );
+            case "ENDPOINT_HANDLE" -> new ApprovalRequiredImplementationTemplate(
+                    "security",
+                    List.of(
+                            "endpoint-handle-review-id",
+                            "allowlist-review-status",
+                            "raw-endpoint-redaction-contract"
+                    ),
+                    "Echo endpoint handle and allowlist review status without raw URL.",
+                    "Confirm no raw endpoint parse/include/connect behavior.",
+                    "Verify handle-only endpoint evidence and no raw URL shape drift.",
+                    List.of(
+                            "parse-raw-endpoint-url",
+                            "render-raw-endpoint-url",
+                            "connect-managed-audit"
+                    )
+            );
+            case "OPERATOR_APPROVAL" -> new ApprovalRequiredImplementationTemplate(
+                    "operator",
+                    List.of(
+                            "operator-identity-binding",
+                            "approval-correlation-marker",
+                            "manual-window-open-marker"
+                    ),
+                    "Echo operator approval marker and manual-window evidence without executing ledger writes.",
+                    "Confirm no auto-start and no approval side effects.",
+                    "Verify operator marker completeness before any later dry-run shell.",
+                    List.of(
+                            "execute-without-operator-marker",
+                            "auto-approve-operation",
+                            "auto-start-upstream"
+                    )
+            );
+            case "ROLLBACK_BOUNDARY" -> new ApprovalRequiredImplementationTemplate(
+                    "release-manager",
+                    List.of(
+                            "rollback-abort-marker",
+                            "restore-point-review-id",
+                            "manual-rollback-runbook-reference"
+                    ),
+                    "Echo rollback abort marker and restore review id without executing rollback.",
+                    "Confirm no LOAD/RESTORE/COMPACT and no authority over rollback state.",
+                    "Verify rollback guard evidence stays separate from execution.",
+                    List.of(
+                            "execute-rollback",
+                            "deploy-resolver-without-abort-marker",
+                            "write-production-record"
+                    )
+            );
+            case "SCHEMA_MIGRATION_POLICY" -> new ApprovalRequiredImplementationTemplate(
+                    "release-manager",
+                    List.of(
+                            "schema-migration-rehearsal-id",
+                            "migration-review-status",
+                            "sql-execution-prohibition-marker"
+                    ),
+                    "Echo schema migration rehearsal id without executing SQL.",
+                    "Confirm no admin command or schema/storage mutation participates.",
+                    "Verify schema migration remains review-only.",
+                    List.of(
+                            "execute-schema-migration",
+                            "execute-sql",
+                            "mutate-managed-audit-schema"
+                    )
+            );
+            case "AUDIT_LEDGER_WRITE_POLICY" -> new ApprovalRequiredImplementationTemplate(
+                    "node",
+                    List.of(
+                            "approval-ledger-write-policy-id",
+                            "audit-store-write-prohibition-marker",
+                            "write-path-owner-review"
+                    ),
+                    "Echo ledger write policy id without writing approval ledger.",
+                    "Confirm no storage/backend/write participation.",
+                    "Verify all write paths stay blocked until an explicit later plan.",
+                    List.of(
+                            "write-approval-ledger",
+                            "write-managed-audit-state",
+                            "write-storage"
+                    )
+            );
             default -> throw new IllegalArgumentException("Unknown approval-required boundary code: " + code);
         };
     }
