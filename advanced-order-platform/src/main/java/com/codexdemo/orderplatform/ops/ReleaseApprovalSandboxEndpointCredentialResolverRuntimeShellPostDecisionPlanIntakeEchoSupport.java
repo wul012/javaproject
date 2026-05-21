@@ -27,52 +27,6 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
     private static final String WARNING_DIGEST_WARNING_INPUT_NAME =
             "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptWarnings";
 
-    private static final List<String> CONTINUATION_OPTION_CODES = List.of(
-            "CONTINUE_BLOCKED_PLANNING",
-            "PAUSE_RUNTIME_SHELL_CHAIN",
-            "REQUIRE_EXPLICIT_APPROVAL_PREREQUISITES",
-            "IMPLEMENT_RUNTIME_SHELL_NOW"
-    );
-
-    private static final List<String> PROOF_CLAIMS = List.of(
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeState=runtime-shell-post-decision-continuation-plan-intake-ready",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.selectedContinuationDecision=continue-blocked-planning",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.decisionOptionCount=4",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.rejectedRuntimeImplementationOptionCount=1",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.necessityProof.proofComplete=true",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.runtimeShellImplementationAllowed=false",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.externalRequestAllowed=false",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification=true"
-    );
-
-    private static final List<String> NODE_VERIFICATION_ACTIONS = List.of(
-            "Compare managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeProfile with Node v301",
-            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.selectedContinuationDecision=continue-blocked-planning before Node v302",
-            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.decisionOptionCount=4 before Node v302",
-            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.rejectedRuntimeImplementationOptionCount=1 before Node v302",
-            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.necessityProof.proofComplete=true before Node v302",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.runtimeShellImplementationAllowed=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.runtimeShellInvocationAllowed=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.credentialValueReadAllowed=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.externalRequestAllowed=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.approvalLedgerWriteAllowed=false"
-    );
-
-    private static final List<String> NODE_WARNING_CODES = List.of(
-            "CONTINUATION_PLAN_DOES_NOT_AUTHORIZE_RUNTIME",
-            "NODE_V302_REQUIRES_JAVA_V136_AND_MINI_KV_V133"
-    );
-
-    private static final List<String> NODE_RECOMMENDATION_CODES = List.of(
-            "REQUEST_PARALLEL_JAVA_MINI_KV_ECHO",
-            "STOP_CHAIN_AFTER_V302_WITHOUT_NEW_BLOCKER"
-    );
-
-    private static final List<String> NEXT_REQUIRED_ECHO_VERSIONS = List.of(
-            "mini-kv v133 runtime shell post-decision plan intake non-participation receipt",
-            "Node v302 post-decision plan intake upstream echo verification"
-    );
-
     private ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoSupport() {
     }
 
@@ -144,12 +98,17 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
                 false,
                 false,
                 receiptDigest,
-                CONTINUATION_OPTION_CODES,
-                NODE_WARNING_CODES,
-                NODE_RECOMMENDATION_CODES,
-                NEXT_REQUIRED_ECHO_VERSIONS,
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .postDecisionPlanIntakeContinuationOptionCodes(),
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .postDecisionPlanIntakeNodeWarningCodes(),
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .postDecisionPlanIntakeNodeRecommendationCodes(),
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .postDecisionPlanIntakeNextRequiredEchoVersions(),
                 receiptWarnings,
-                NODE_VERIFICATION_ACTIONS
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .postDecisionPlanIntakeNodeVerificationActions()
         );
     }
 
@@ -163,11 +122,13 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
     }
 
     static List<String> proofClaims() {
-        return PROOF_CLAIMS;
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                .postDecisionPlanIntakeProofClaims();
     }
 
     static List<String> nodeVerificationActions() {
-        return NODE_VERIFICATION_ACTIONS;
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                .postDecisionPlanIntakeNodeVerificationActions();
     }
 
     static List<String> warningDigestWarningLines(
@@ -224,7 +185,8 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
 
     private static RehearsalRuntimeShellPostDecisionPlanIntake planIntake() {
         List<RehearsalRuntimeShellPostDecisionContinuationOption> options =
-                continuationOptions();
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .postDecisionPlanIntakeContinuationOptions();
         return new RehearsalRuntimeShellPostDecisionPlanIntake(
                 OpsEvidenceService
                         .NODE_V301_CREDENTIAL_RESOLVER_RUNTIME_SHELL_POST_DECISION_CONTINUATION_PLAN_INTAKE_VERSION,
@@ -255,65 +217,6 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
                 false,
                 false,
                 options
-        );
-    }
-
-    private static List<RehearsalRuntimeShellPostDecisionContinuationOption> continuationOptions() {
-        return List.of(
-                option(
-                        "CONTINUE_BLOCKED_PLANNING",
-                        "Continue blocked planning",
-                        "selected",
-                        "v300 proved upstream agreement on the blocked decision, so the next safe step is read-only echo of this continuation intake.",
-                        List.of("write-v301-intake", "request-java-v136-echo",
-                                "request-mini-kv-v133-non-participation"),
-                        List.of("implement-runtime-shell", "invoke-runtime-shell",
-                                "open-managed-audit-connection")
-                ),
-                option(
-                        "PAUSE_RUNTIME_SHELL_CHAIN",
-                        "Pause runtime shell chain",
-                        "documented-alternative",
-                        "This remains valid if the next echo would not be consumed, but v302 has a narrow consumer for Java v136 and mini-kv v133.",
-                        List.of("archive-v301-as-paused", "return-to-quality-work"),
-                        List.of("treat-pause-as-production-approval")
-                ),
-                option(
-                        "REQUIRE_EXPLICIT_APPROVAL_PREREQUISITES",
-                        "Require explicit approval prerequisites",
-                        "documented-alternative",
-                        "Future approval prerequisites can be proposed, but v301 has no credential, endpoint, provider, or operator-window approval to unlock runtime.",
-                        List.of("list-approval-prerequisites", "keep-prerequisites-read-only"),
-                        List.of("read-credential-value", "parse-raw-endpoint-url",
-                                "instantiate-provider-client")
-                ),
-                option(
-                        "IMPLEMENT_RUNTIME_SHELL_NOW",
-                        "Implement runtime shell now",
-                        "rejected",
-                        "v300 aligned a blocked decision record only; it did not approve implementation, invocation, network, credential, or write boundaries.",
-                        List.of(),
-                        List.of("implement-runtime-shell", "invoke-runtime-shell",
-                                "send-external-request", "write-ledger-or-schema")
-                )
-        );
-    }
-
-    private static RehearsalRuntimeShellPostDecisionContinuationOption option(
-            String code,
-            String title,
-            String status,
-            String rationale,
-            List<String> allowedActions,
-            List<String> prohibitedActions
-    ) {
-        return new RehearsalRuntimeShellPostDecisionContinuationOption(
-                code,
-                title,
-                status,
-                rationale,
-                allowedActions,
-                prohibitedActions
         );
     }
 
@@ -365,10 +268,13 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
         boolean continuationSelected = "continue-blocked-planning"
                 .equals(planIntake.selectedContinuationDecision())
                 && planIntake.selectedDecisionOptionCount() == 1;
-        boolean optionsDocumented = planIntake.decisionOptionCount() == CONTINUATION_OPTION_CODES.size()
+        List<String> continuationOptionCodes =
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .postDecisionPlanIntakeContinuationOptionCodes();
+        boolean optionsDocumented = planIntake.decisionOptionCount() == continuationOptionCodes.size()
                 && planIntake.continuationOptions().stream()
-                .map(RehearsalRuntimeShellPostDecisionContinuationOption::code)
-                .toList().equals(CONTINUATION_OPTION_CODES);
+                .map(option -> option.code())
+                .toList().equals(continuationOptionCodes);
         boolean implementationRejected = planIntake.rejectedRuntimeImplementationOptionCount() == 1
                 && planIntake.continuationOptions().stream()
                 .anyMatch(option -> "IMPLEMENT_RUNTIME_SHELL_NOW".equals(option.code())

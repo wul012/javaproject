@@ -27,61 +27,6 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecision
     private static final String WARNING_DIGEST_WARNING_INPUT_NAME =
             "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptWarnings";
 
-    private static final List<String> REQUIRED_EVIDENCE_IDS = List.of(
-            "node-v298-upstream-echo-ready",
-            "java-v134-echo-ready",
-            "mini-kv-v131-receipt-ready",
-            "runtime-shell-still-blocked"
-    );
-
-    private static final List<String> NO_GO_CONDITION_CODES = List.of(
-            "RUNTIME_SHELL_IMPLEMENTATION_REQUIRED",
-            "CREDENTIAL_VALUE_REQUIRED",
-            "RAW_ENDPOINT_URL_REQUIRED",
-            "MANAGED_AUDIT_CONNECTION_REQUIRED",
-            "LEDGER_SCHEMA_WRITE_REQUIRED",
-            "AUTOSTART_REQUIRED"
-    );
-
-    private static final List<String> PROOF_CLAIMS = List.of(
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.consumedByNodeRuntimeShellCandidateGateDecisionRecordState=runtime-shell-candidate-gate-decision-record-ready",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.decision=blocked",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.requiredEvidenceCount=4",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.noGoConditionCount=6",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsDisabledRuntimeShellImplementation=false",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsCredentialValueRead=false",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.sideEffectBoundary.externalRequestSent=false",
-            "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.readyForNodeV300RuntimeShellDecisionRecordUpstreamEchoVerification=true"
-    );
-
-    private static final List<String> NODE_VERIFICATION_ACTIONS = List.of(
-            "Compare managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.consumedByNodeRuntimeShellCandidateGateDecisionRecordProfile with Node v299",
-            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.decision=blocked before Node v300",
-            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.requiredEvidenceCount=4 before Node v300",
-            "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.noGoConditionCount=6 before Node v300",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsDisabledRuntimeShellImplementation=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsDisabledRuntimeShellInvocation=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsCredentialValueRead=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsRawEndpointUrlParse=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsExternalRequest=false",
-            "Keep managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsApprovalLedgerWrite=false"
-    );
-
-    private static final List<String> NODE_WARNING_CODES = List.of(
-            "DECISION_RECORD_ONLY_DOES_NOT_AUTHORIZE_RUNTIME",
-            "NODE_V300_REQUIRES_JAVA_V135_AND_MINI_KV_V132"
-    );
-
-    private static final List<String> NODE_RECOMMENDATION_CODES = List.of(
-            "RUN_PARALLEL_JAVA_V135_MINI_KV_V132",
-            "KEEP_NODE_V300_BEHIND_PARALLEL_EVIDENCE"
-    );
-
-    private static final List<String> NEXT_REQUIRED_ECHO_VERSIONS = List.of(
-            "mini-kv v132 runtime shell decision record non-participation receipt",
-            "Node v300 runtime shell decision record upstream echo verification"
-    );
-
     private ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoSupport() {
     }
 
@@ -147,13 +92,19 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecision
                 false,
                 false,
                 receiptDigest,
-                REQUIRED_EVIDENCE_IDS,
-                NO_GO_CONDITION_CODES,
-                NODE_WARNING_CODES,
-                NODE_RECOMMENDATION_CODES,
-                NEXT_REQUIRED_ECHO_VERSIONS,
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .decisionRecordRequiredEvidenceIds(),
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .decisionRecordNoGoConditionCodes(),
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .decisionRecordNodeWarningCodes(),
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .decisionRecordNodeRecommendationCodes(),
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .decisionRecordNextRequiredEchoVersions(),
                 receiptWarnings,
-                NODE_VERIFICATION_ACTIONS
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                        .decisionRecordNodeVerificationActions()
         );
     }
 
@@ -167,11 +118,13 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecision
     }
 
     static List<String> proofClaims() {
-        return PROOF_CLAIMS;
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                .decisionRecordProofClaims();
     }
 
     static List<String> nodeVerificationActions() {
-        return NODE_VERIFICATION_ACTIONS;
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                .decisionRecordNodeVerificationActions();
     }
 
     static List<String> warningDigestWarningLines(
@@ -229,7 +182,9 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecision
             RehearsalRuntimeShellDecisionRecordSourceGateEcho sourceEcho
     ) {
         List<RehearsalRuntimeShellDecisionRequirement> requiredEvidence = requiredEvidence(sourceEcho);
-        List<RehearsalRuntimeShellDecisionNoGoCondition> noGoConditions = noGoConditions();
+        List<RehearsalRuntimeShellDecisionNoGoCondition> noGoConditions =
+                ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                .decisionRecordNoGoConditions();
         return new RehearsalRuntimeShellDecisionRecord(
                 OpsEvidenceService
                         .NODE_V299_CREDENTIAL_RESOLVER_RUNTIME_SHELL_CANDIDATE_GATE_DECISION_RECORD_VERSION,
@@ -300,31 +255,6 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecision
         );
     }
 
-    private static List<RehearsalRuntimeShellDecisionNoGoCondition> noGoConditions() {
-        return List.of(
-                noGo("RUNTIME_SHELL_IMPLEMENTATION_REQUIRED",
-                        "The next step would have to implement or invoke a runtime shell."),
-                noGo("CREDENTIAL_VALUE_REQUIRED",
-                        "The next step would have to read, store, render, or test credential values."),
-                noGo("RAW_ENDPOINT_URL_REQUIRED",
-                        "The next step would have to parse or render a raw endpoint URL."),
-                noGo("MANAGED_AUDIT_CONNECTION_REQUIRED",
-                        "The next step would have to open managed audit connectivity."),
-                noGo("LEDGER_SCHEMA_WRITE_REQUIRED",
-                        "The next step would have to write ledger state or execute schema migration SQL."),
-                noGo("AUTOSTART_REQUIRED",
-                        "The next step would have to auto-start Java, mini-kv, or managed audit services.")
-        );
-    }
-
-    private static RehearsalRuntimeShellDecisionNoGoCondition noGo(String code, String condition) {
-        return new RehearsalRuntimeShellDecisionNoGoCondition(
-                code,
-                condition,
-                "pause-and-do-not-implement-runtime-shell"
-        );
-    }
-
     private static RehearsalRuntimeShellDecisionRecordSideEffectBoundary sideEffectBoundary() {
         return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoBoundaryCatalog
                 .decisionRecordSideEffectBoundary();
@@ -372,17 +302,21 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecision
                 && !decisionRecord.allowsSchemaMigration()
                 && !decisionRecord.allowsApprovalLedgerWrite()
                 && !decisionRecord.allowsAutomaticUpstreamStart();
-        boolean requiredEvidenceStable = decisionRecord.requiredEvidenceCount() == REQUIRED_EVIDENCE_IDS.size()
+        List<String> requiredEvidenceIds = ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                .decisionRecordRequiredEvidenceIds();
+        List<String> noGoConditionCodes = ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoMetadataCatalog
+                .decisionRecordNoGoConditionCodes();
+        boolean requiredEvidenceStable = decisionRecord.requiredEvidenceCount() == requiredEvidenceIds.size()
                 && decisionRecord.requiredEvidence().stream()
                 .map(RehearsalRuntimeShellDecisionRequirement::id)
-                .toList().equals(REQUIRED_EVIDENCE_IDS)
+                .toList().equals(requiredEvidenceIds)
                 && decisionRecord.requiredEvidence().stream()
                 .allMatch(item -> "present".equals(item.status())
                         && item.requiredBeforeRuntimeShell());
-        boolean noGoConditionsStable = decisionRecord.noGoConditionCount() == NO_GO_CONDITION_CODES.size()
+        boolean noGoConditionsStable = decisionRecord.noGoConditionCount() == noGoConditionCodes.size()
                 && decisionRecord.explicitNoGoConditions().stream()
                 .map(RehearsalRuntimeShellDecisionNoGoCondition::code)
-                .toList().equals(NO_GO_CONDITION_CODES)
+                .toList().equals(noGoConditionCodes)
                 && decisionRecord.explicitNoGoConditions().stream()
                 .allMatch(item -> "pause-and-do-not-implement-runtime-shell".equals(item.action()));
         boolean noRuntime = !boundary.disabledRuntimeShellImplemented()
