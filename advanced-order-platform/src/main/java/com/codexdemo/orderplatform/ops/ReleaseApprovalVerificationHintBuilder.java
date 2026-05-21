@@ -29,7 +29,6 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 final class ReleaseApprovalVerificationHintBuilder {
 
@@ -188,161 +187,32 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder;
         this.sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder =
                 sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder;
-        this.verificationContributions = List.of(
-                contribution(
-                        sandboxAdapterApprovalSchemaGuardReceiptBuilder::warningDigestWarningInputNames,
-                        sandboxAdapterApprovalSchemaGuardReceiptBuilder::warningDigestBoundaryInputNames,
-                        sandboxAdapterApprovalSchemaGuardReceiptBuilder::proofClaims,
-                        () -> sandboxAdapterApprovalSchemaGuardReceiptBuilder.nodeVerificationActions().stream()
-                                .filter(action -> !("Verify managedAuditSandboxAdapterApprovalSchemaGuardReceipt"
-                                        + ".qualityGateBoundary.builderOrHelperSplitApplied=true").equals(action))
-                                .toList()
-                ),
-                contribution(sandboxConnectionOperatorHandoffMarkerBuilder::warningDigestWarningInputNames,
-                        sandboxConnectionOperatorHandoffMarkerBuilder::warningDigestBoundaryInputNames,
-                        sandboxConnectionOperatorHandoffMarkerBuilder::proofClaims,
-                        sandboxConnectionOperatorHandoffMarkerBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionPreflightEchoMarkerBuilder::warningDigestWarningInputNames,
-                        sandboxConnectionPreflightEchoMarkerBuilder::warningDigestBoundaryInputNames,
-                        sandboxConnectionPreflightEchoMarkerBuilder::proofClaims,
-                        sandboxConnectionPreflightEchoMarkerBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionPreconditionReceiptBuilder::warningDigestWarningInputNames,
-                        sandboxConnectionPreconditionReceiptBuilder::warningDigestBoundaryInputNames,
-                        sandboxConnectionPreconditionReceiptBuilder::proofClaims,
-                        sandboxConnectionPreconditionReceiptBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::warningDigestWarningInputNames,
-                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::warningDigestBoundaryInputNames,
-                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::proofClaims,
-                        sandboxConnectionDryRunEnvelopeEchoReceiptBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::warningDigestWarningInputNames,
-                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::warningDigestBoundaryInputNames,
-                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::proofClaims,
-                        sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::warningDigestWarningInputNames,
-                        sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::warningDigestBoundaryInputNames,
-                        sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::proofClaims,
-                        sandboxConnectionDryRunCommandPackageEchoReceiptBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionPrecheckPacketEchoReceiptBuilder::warningDigestWarningInputNames,
-                        sandboxConnectionPrecheckPacketEchoReceiptBuilder::warningDigestBoundaryInputNames,
-                        sandboxConnectionPrecheckPacketEchoReceiptBuilder::proofClaims,
-                        sandboxConnectionPrecheckPacketEchoReceiptBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder::proofClaims,
-                        sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder::nodeVerificationActions),
-                contribution(sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder::proofClaims,
-                        sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder::nodeVerificationActions),
-                contribution(sandboxEndpointHandlePreflightEchoMarkerBuilder::warningDigestWarningInputNames,
-                        sandboxEndpointHandlePreflightEchoMarkerBuilder::warningDigestBoundaryInputNames,
-                        sandboxEndpointHandlePreflightEchoMarkerBuilder::proofClaims,
-                        sandboxEndpointHandlePreflightEchoMarkerBuilder::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder::proofClaims,
-                        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder::proofClaims,
-                        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder::proofClaims,
-                        sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder::proofClaims,
-                        sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder::proofClaims,
-                        sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder::proofClaims,
-                        sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder::proofClaims,
-                        sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
-                                ::proofClaims,
-                        sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
-                                ::proofClaims,
-                        sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
-                                ::proofClaims,
-                        sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
-                                ::proofClaims,
-                        sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
-                                ::proofClaims,
-                        sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
-                                ::proofClaims,
-                        sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder
-                                ::nodeVerificationActions),
-                contribution(sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
-                                ::warningDigestWarningInputNames,
-                        sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
-                                ::warningDigestBoundaryInputNames,
-                        sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
-                                ::proofClaims,
-                        sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
-                                ::nodeVerificationActions)
+        this.verificationContributions = ReleaseApprovalVerificationHintContributionCatalog.build(
+                sandboxAdapterApprovalSchemaGuardReceiptBuilder,
+                sandboxConnectionOperatorHandoffMarkerBuilder,
+                sandboxConnectionPreflightEchoMarkerBuilder,
+                sandboxConnectionPreconditionReceiptBuilder,
+                sandboxConnectionDryRunEnvelopeEchoReceiptBuilder,
+                sandboxConnectionOperatorWindowChecklistEchoReceiptBuilder,
+                sandboxConnectionDryRunCommandPackageEchoReceiptBuilder,
+                sandboxConnectionPrecheckPacketEchoReceiptBuilder,
+                sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
+                sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
+                sandboxEndpointHandlePreflightEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder,
+                sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverExecutionDeniedEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder
         );
         this.warningDigestBuilder = new ReleaseApprovalVerificationWarningDigestBuilder(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
@@ -821,17 +691,4 @@ final class ReleaseApprovalVerificationHintBuilder {
         return actions;
     }
 
-    private static ReleaseApprovalVerificationHintContribution contribution(
-            Supplier<List<String>> warningDigestWarningInputNames,
-            Supplier<List<String>> warningDigestBoundaryInputNames,
-            Supplier<List<String>> proofClaims,
-            Supplier<List<String>> nodeVerificationActions
-    ) {
-        return new ReleaseApprovalVerificationHintContribution(
-                warningDigestWarningInputNames,
-                warningDigestBoundaryInputNames,
-                proofClaims,
-                nodeVerificationActions
-        );
-    }
 }
