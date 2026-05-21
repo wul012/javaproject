@@ -22,6 +22,10 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalSandboxEndpointCredentialResolverImplementationPlanSourceNodeV283;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords
         .RehearsalSandboxEndpointCredentialResolverImplementationUpstreamEchoRequirement;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog
+        .ImplementationPlanInterfaceBoundaryTemplate;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog
+        .ImplementationPlanUpstreamEchoRequirementTemplate;
 
 import java.util.List;
 
@@ -460,177 +464,59 @@ final class ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverImplemen
 
     private static List<RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho>
     interfaceBoundaries() {
-        return List.of(
-                boundary(
-                        "CONFIG_HANDLE_CONTRACT",
-                        "PLAN_DOCUMENT",
-                        "Config handle contract",
-                        "node",
-                        List.of("ORDEROPS_MANAGED_AUDIT_RESOLVER_CONFIG_HANDLE",
-                                "ORDEROPS_MANAGED_AUDIT_RESOLVER_POLICY_HANDLE"),
-                        List.of("configHandle", "policyHandle", "reviewStatus"),
-                        List.of("read-secret-env-value", "render-secret-env-value", "instantiate-runtime-client"),
-                        List.of("config-handle-review-id", "resolver-policy-handle-review-id",
-                                "config-redaction-contract"),
-                        "Only named handles may appear in profile output; no raw config values or external client objects are created."
-                ),
-                boundary(
-                        "CREDENTIAL_HANDLE_CONTRACT",
-                        "CREDENTIAL_HANDLE",
-                        "Credential handle contract",
-                        "security",
-                        List.of("credentialHandle", "credentialReviewStatus"),
-                        List.of("credentialHandle", "credentialReviewStatus", "credentialValuePresent=false"),
-                        List.of("read-credential-value", "store-credential-value", "render-credential-value"),
-                        List.of("credential-handle-review-id", "credential-value-redaction-contract",
-                                "operator-visible-secret-value-prohibition"),
-                        "Profiles may reference credential handles only; credential values stay outside Node, Java, and mini-kv."
-                ),
-                boundary(
-                        "ENDPOINT_HANDLE_CONTRACT",
-                        "ENDPOINT_HANDLE",
-                        "Endpoint handle contract",
-                        "security",
-                        List.of("endpointHandle", "allowlistReviewStatus"),
-                        List.of("endpointHandle", "allowlistReviewStatus", "rawEndpointUrlPresent=false"),
-                        List.of("parse-raw-endpoint-url", "render-raw-endpoint-url", "dial-managed-audit-endpoint"),
-                        List.of("endpoint-handle-review-id", "allowlist-review-status",
-                                "raw-endpoint-redaction-contract"),
-                        "Endpoint evidence may name handles and review status only; raw URLs stay out of logs, digests, and Markdown."
-                ),
-                boundary(
-                        "APPROVAL_ARTIFACT_CONTRACT",
-                        "OPERATOR_APPROVAL",
-                        "Approval artifact contract",
-                        "operator",
-                        List.of("operatorIdentityBinding", "approvalCorrelationId", "manualWindowMarker"),
-                        List.of("approvalArtifactDigest", "approvalState", "manualWindowStatus"),
-                        List.of("auto-approve-operation", "execute-without-operator-marker",
-                                "write-approval-ledger"),
-                        List.of("operator-identity-binding", "approval-correlation-marker",
-                                "manual-window-open-marker"),
-                        "A later fake harness may only read approval artifacts; real ledger writes stay blocked until a separate write gate."
-                ),
-                boundary(
-                        "FAILURE_TAXONOMY_CONTRACT",
-                        "EXTERNAL_REQUEST_SIMULATION",
-                        "Failure taxonomy contract",
-                        "node",
-                        List.of("simulatedFailureClass", "dryRunAdapterResult", "blockedReason"),
-                        List.of("failureClass", "operatorVisibleReason", "retryDisposition"),
-                        List.of("send-external-request", "connect-managed-audit", "mask-unclassified-error"),
-                        List.of("failure-taxonomy-id", "operator-visible-failure-map",
-                                "retry-policy-review-id"),
-                        "Future fake harness errors must be classified without contacting managed audit or exposing secret/endpoint material."
-                ),
-                boundary(
-                        "ROLLBACK_GUARD_CONTRACT",
-                        "ROLLBACK_BOUNDARY",
-                        "Rollback guard contract",
-                        "release-manager",
-                        List.of("rollbackAbortMarker", "restorePointReviewId",
-                                "manualRollbackRunbookReference"),
-                        List.of("rollbackGuardState", "abortRequired=true", "executionAllowed=false"),
-                        List.of("execute-rollback", "deploy-resolver-without-abort-marker",
-                                "auto-start-upstream"),
-                        List.of("rollback-abort-marker", "restore-point-review-id",
-                                "manual-rollback-runbook-reference"),
-                        "Resolver implementation remains blocked unless rollback guard evidence exists; this plan executes no rollback."
-                ),
-                boundary(
-                        "TEST_ONLY_FAKE_HARNESS_CONTRACT",
-                        "DISABLED_SECRET_PROVIDER_STUB",
-                        "Test-only fake harness contract",
-                        "node",
-                        List.of("fakeCredentialHandle", "fakeEndpointHandle", "testOnlyHarnessToggle=false"),
-                        List.of("fakeHarnessPlan", "sideEffectBoundary", "runtimeToggleState"),
-                        List.of("instantiate-real-secret-provider", "resolve-real-credential",
-                                "send-real-http-request"),
-                        List.of("test-only-fake-harness-plan-id", "fake-harness-disabled-toggle",
-                                "fake-harness-side-effect-contract"),
-                        "Node v285 may define a disabled fake harness precheck only after Java v121, mini-kv v126, and Node v284 align."
-                )
-        );
+        return ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog
+                .implementationPlanInterfaceBoundaryTemplates()
+                .stream()
+                .map(ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
+                        ::boundary)
+                .toList();
     }
 
     private static RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho boundary(
-            String code,
-            String sourceBoundary,
-            String title,
-            String owner,
-            List<String> allowedInputs,
-            List<String> allowedOutputs,
-            List<String> prohibitedActions,
-            List<String> requiredArtifacts,
-            String verificationRule
+            ImplementationPlanInterfaceBoundaryTemplate template
     ) {
         return new RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho(
-                code,
-                sourceBoundary,
-                title,
-                owner,
+                template.code(),
+                template.sourceBoundary(),
+                template.title(),
+                template.owner(),
                 "drafted-for-upstream-echo",
-                allowedInputs,
-                allowedOutputs,
-                prohibitedActions,
-                requiredArtifacts,
-                verificationRule
+                template.allowedInputs(),
+                template.allowedOutputs(),
+                template.prohibitedActions(),
+                template.requiredArtifacts(),
+                template.verificationRule()
         );
     }
 
     private static List<RehearsalSandboxEndpointCredentialResolverImplementationUpstreamEchoRequirement>
     javaV121EchoRequirements() {
-        return List.of(
-                javaRequirement("java-v121-consumes-node-v283-plan",
-                        "Java v121 must identify Node v283 planDigest and planVersion without deriving credential values."),
-                javaRequirement("java-v121-approval-artifact-boundary",
-                        "Java v121 must describe required operator approval and ledger policy artifacts without writing approval ledger state."),
-                javaRequirement("java-v121-schema-migration-boundary",
-                        "Java v121 must keep schema migration review-only and prove no SQL execution."),
-                javaRequirement("java-v121-failure-taxonomy-echo",
-                        "Java v121 must echo failure taxonomy expectations for future Node v284 verification.")
-        );
+        return ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog
+                .javaV121ImplementationPlanEchoRequirementTemplates()
+                .stream()
+                .map(ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
+                        ::upstreamRequirement)
+                .toList();
     }
 
     private static List<RehearsalSandboxEndpointCredentialResolverImplementationUpstreamEchoRequirement>
     miniKvV126ReceiptRequirements() {
-        return List.of(
-                miniKvRequirement("mini-kv-v126-consumes-node-v283-plan",
-                        "mini-kv v126 must identify Node v283 planDigest and remain non-participating."),
-                miniKvRequirement("mini-kv-v126-no-storage-backend",
-                        "mini-kv v126 must prove it is not a managed audit storage backend and not authoritative for audit/order state."),
-                miniKvRequirement("mini-kv-v126-no-secret-or-endpoint",
-                        "mini-kv v126 must prove no credential resolver, no secret provider, and no raw endpoint parser."),
-                miniKvRequirement("mini-kv-v126-no-write-command",
-                        "mini-kv v126 must keep write/admin commands out of this plan echo receipt.")
-        );
-    }
-
-    private static RehearsalSandboxEndpointCredentialResolverImplementationUpstreamEchoRequirement javaRequirement(
-            String id,
-            String requirement
-    ) {
-        return upstreamRequirement(id, "java", "Java v121", requirement);
-    }
-
-    private static RehearsalSandboxEndpointCredentialResolverImplementationUpstreamEchoRequirement miniKvRequirement(
-            String id,
-            String requirement
-    ) {
-        return upstreamRequirement(id, "mini-kv", "mini-kv v126", requirement);
+        return ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog
+                .miniKvV126ImplementationPlanReceiptRequirementTemplates()
+                .stream()
+                .map(ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceiptBuilder
+                        ::upstreamRequirement)
+                .toList();
     }
 
     private static RehearsalSandboxEndpointCredentialResolverImplementationUpstreamEchoRequirement upstreamRequirement(
-            String id,
-            String project,
-            String expectedVersion,
-            String requirement
+            ImplementationPlanUpstreamEchoRequirementTemplate template
     ) {
         return new RehearsalSandboxEndpointCredentialResolverImplementationUpstreamEchoRequirement(
-                id,
-                project,
-                expectedVersion,
-                requirement,
+                template.id(),
+                template.project(),
+                template.expectedVersion(),
+                template.requirement(),
                 true,
                 true,
                 true,

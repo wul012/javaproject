@@ -14,6 +14,27 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog {
     ) {
     }
 
+    record ImplementationPlanInterfaceBoundaryTemplate(
+            String code,
+            String sourceBoundary,
+            String title,
+            String owner,
+            List<String> allowedInputs,
+            List<String> allowedOutputs,
+            List<String> prohibitedActions,
+            List<String> requiredArtifacts,
+            String verificationRule
+    ) {
+    }
+
+    record ImplementationPlanUpstreamEchoRequirementTemplate(
+            String id,
+            String project,
+            String expectedVersion,
+            String requirement
+    ) {
+    }
+
     private static final List<String> BOUNDARY_CODES = List.of(
             "PLAN_DOCUMENT",
             "CREDENTIAL_HANDLE",
@@ -56,6 +77,202 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog {
             "AUDIT_LEDGER_WRITE_POLICY"
     );
 
+    private static final List<ImplementationPlanInterfaceBoundaryTemplate>
+            IMPLEMENTATION_PLAN_INTERFACE_BOUNDARY_TEMPLATES = List.of(
+                    new ImplementationPlanInterfaceBoundaryTemplate(
+                            "CONFIG_HANDLE_CONTRACT",
+                            "PLAN_DOCUMENT",
+                            "Config handle contract",
+                            "node",
+                            List.of(
+                                    "ORDEROPS_MANAGED_AUDIT_RESOLVER_CONFIG_HANDLE",
+                                    "ORDEROPS_MANAGED_AUDIT_RESOLVER_POLICY_HANDLE"
+                            ),
+                            List.of("configHandle", "policyHandle", "reviewStatus"),
+                            List.of(
+                                    "read-secret-env-value",
+                                    "render-secret-env-value",
+                                    "instantiate-runtime-client"
+                            ),
+                            List.of(
+                                    "config-handle-review-id",
+                                    "resolver-policy-handle-review-id",
+                                    "config-redaction-contract"
+                            ),
+                            "Only named handles may appear in profile output; no raw config values or external client objects are created."
+                    ),
+                    new ImplementationPlanInterfaceBoundaryTemplate(
+                            "CREDENTIAL_HANDLE_CONTRACT",
+                            "CREDENTIAL_HANDLE",
+                            "Credential handle contract",
+                            "security",
+                            List.of("credentialHandle", "credentialReviewStatus"),
+                            List.of("credentialHandle", "credentialReviewStatus", "credentialValuePresent=false"),
+                            List.of("read-credential-value", "store-credential-value", "render-credential-value"),
+                            List.of(
+                                    "credential-handle-review-id",
+                                    "credential-value-redaction-contract",
+                                    "operator-visible-secret-value-prohibition"
+                            ),
+                            "Profiles may reference credential handles only; credential values stay outside Node, Java, and mini-kv."
+                    ),
+                    new ImplementationPlanInterfaceBoundaryTemplate(
+                            "ENDPOINT_HANDLE_CONTRACT",
+                            "ENDPOINT_HANDLE",
+                            "Endpoint handle contract",
+                            "security",
+                            List.of("endpointHandle", "allowlistReviewStatus"),
+                            List.of("endpointHandle", "allowlistReviewStatus", "rawEndpointUrlPresent=false"),
+                            List.of(
+                                    "parse-raw-endpoint-url",
+                                    "render-raw-endpoint-url",
+                                    "dial-managed-audit-endpoint"
+                            ),
+                            List.of(
+                                    "endpoint-handle-review-id",
+                                    "allowlist-review-status",
+                                    "raw-endpoint-redaction-contract"
+                            ),
+                            "Endpoint evidence may name handles and review status only; raw URLs stay out of logs, digests, and Markdown."
+                    ),
+                    new ImplementationPlanInterfaceBoundaryTemplate(
+                            "APPROVAL_ARTIFACT_CONTRACT",
+                            "OPERATOR_APPROVAL",
+                            "Approval artifact contract",
+                            "operator",
+                            List.of("operatorIdentityBinding", "approvalCorrelationId", "manualWindowMarker"),
+                            List.of("approvalArtifactDigest", "approvalState", "manualWindowStatus"),
+                            List.of(
+                                    "auto-approve-operation",
+                                    "execute-without-operator-marker",
+                                    "write-approval-ledger"
+                            ),
+                            List.of(
+                                    "operator-identity-binding",
+                                    "approval-correlation-marker",
+                                    "manual-window-open-marker"
+                            ),
+                            "A later fake harness may only read approval artifacts; real ledger writes stay blocked until a separate write gate."
+                    ),
+                    new ImplementationPlanInterfaceBoundaryTemplate(
+                            "FAILURE_TAXONOMY_CONTRACT",
+                            "EXTERNAL_REQUEST_SIMULATION",
+                            "Failure taxonomy contract",
+                            "node",
+                            List.of("simulatedFailureClass", "dryRunAdapterResult", "blockedReason"),
+                            List.of("failureClass", "operatorVisibleReason", "retryDisposition"),
+                            List.of(
+                                    "send-external-request",
+                                    "connect-managed-audit",
+                                    "mask-unclassified-error"
+                            ),
+                            List.of(
+                                    "failure-taxonomy-id",
+                                    "operator-visible-failure-map",
+                                    "retry-policy-review-id"
+                            ),
+                            "Future fake harness errors must be classified without contacting managed audit or exposing secret/endpoint material."
+                    ),
+                    new ImplementationPlanInterfaceBoundaryTemplate(
+                            "ROLLBACK_GUARD_CONTRACT",
+                            "ROLLBACK_BOUNDARY",
+                            "Rollback guard contract",
+                            "release-manager",
+                            List.of(
+                                    "rollbackAbortMarker",
+                                    "restorePointReviewId",
+                                    "manualRollbackRunbookReference"
+                            ),
+                            List.of("rollbackGuardState", "abortRequired=true", "executionAllowed=false"),
+                            List.of(
+                                    "execute-rollback",
+                                    "deploy-resolver-without-abort-marker",
+                                    "auto-start-upstream"
+                            ),
+                            List.of(
+                                    "rollback-abort-marker",
+                                    "restore-point-review-id",
+                                    "manual-rollback-runbook-reference"
+                            ),
+                            "Resolver implementation remains blocked unless rollback guard evidence exists; this plan executes no rollback."
+                    ),
+                    new ImplementationPlanInterfaceBoundaryTemplate(
+                            "TEST_ONLY_FAKE_HARNESS_CONTRACT",
+                            "DISABLED_SECRET_PROVIDER_STUB",
+                            "Test-only fake harness contract",
+                            "node",
+                            List.of("fakeCredentialHandle", "fakeEndpointHandle", "testOnlyHarnessToggle=false"),
+                            List.of("fakeHarnessPlan", "sideEffectBoundary", "runtimeToggleState"),
+                            List.of(
+                                    "instantiate-real-secret-provider",
+                                    "resolve-real-credential",
+                                    "send-real-http-request"
+                            ),
+                            List.of(
+                                    "test-only-fake-harness-plan-id",
+                                    "fake-harness-disabled-toggle",
+                                    "fake-harness-side-effect-contract"
+                            ),
+                            "Node v285 may define a disabled fake harness precheck only after Java v121, mini-kv v126, and Node v284 align."
+                    )
+            );
+
+    private static final List<ImplementationPlanUpstreamEchoRequirementTemplate>
+            JAVA_V121_IMPLEMENTATION_PLAN_ECHO_REQUIREMENT_TEMPLATES = List.of(
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "java-v121-consumes-node-v283-plan",
+                            "java",
+                            "Java v121",
+                            "Java v121 must identify Node v283 planDigest and planVersion without deriving credential values."
+                    ),
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "java-v121-approval-artifact-boundary",
+                            "java",
+                            "Java v121",
+                            "Java v121 must describe required operator approval and ledger policy artifacts without writing approval ledger state."
+                    ),
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "java-v121-schema-migration-boundary",
+                            "java",
+                            "Java v121",
+                            "Java v121 must keep schema migration review-only and prove no SQL execution."
+                    ),
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "java-v121-failure-taxonomy-echo",
+                            "java",
+                            "Java v121",
+                            "Java v121 must echo failure taxonomy expectations for future Node v284 verification."
+                    )
+            );
+
+    private static final List<ImplementationPlanUpstreamEchoRequirementTemplate>
+            MINI_KV_V126_IMPLEMENTATION_PLAN_RECEIPT_REQUIREMENT_TEMPLATES = List.of(
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "mini-kv-v126-consumes-node-v283-plan",
+                            "mini-kv",
+                            "mini-kv v126",
+                            "mini-kv v126 must identify Node v283 planDigest and remain non-participating."
+                    ),
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "mini-kv-v126-no-storage-backend",
+                            "mini-kv",
+                            "mini-kv v126",
+                            "mini-kv v126 must prove it is not a managed audit storage backend and not authoritative for audit/order state."
+                    ),
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "mini-kv-v126-no-secret-or-endpoint",
+                            "mini-kv",
+                            "mini-kv v126",
+                            "mini-kv v126 must prove no credential resolver, no secret provider, and no raw endpoint parser."
+                    ),
+                    new ImplementationPlanUpstreamEchoRequirementTemplate(
+                            "mini-kv-v126-no-write-command",
+                            "mini-kv",
+                            "mini-kv v126",
+                            "mini-kv v126 must keep write/admin commands out of this plan echo receipt."
+                    )
+            );
+
     private ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog() {
     }
 
@@ -87,6 +304,20 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog {
         return APPROVAL_REQUIRED_BOUNDARY_CODES.stream()
                 .map(ReleaseApprovalSandboxEndpointCredentialResolverBoundaryCatalog::requirementCodeFor)
                 .toList();
+    }
+
+    static List<ImplementationPlanInterfaceBoundaryTemplate> implementationPlanInterfaceBoundaryTemplates() {
+        return IMPLEMENTATION_PLAN_INTERFACE_BOUNDARY_TEMPLATES;
+    }
+
+    static List<ImplementationPlanUpstreamEchoRequirementTemplate>
+    javaV121ImplementationPlanEchoRequirementTemplates() {
+        return JAVA_V121_IMPLEMENTATION_PLAN_ECHO_REQUIREMENT_TEMPLATES;
+    }
+
+    static List<ImplementationPlanUpstreamEchoRequirementTemplate>
+    miniKvV126ImplementationPlanReceiptRequirementTemplates() {
+        return MINI_KV_V126_IMPLEMENTATION_PLAN_RECEIPT_REQUIREMENT_TEMPLATES;
     }
 
     static String candidateRuleFor(String code) {
