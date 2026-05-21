@@ -1,0 +1,505 @@
+package com.codexdemo.orderplatform.ops;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
+class OpsEvidenceServiceReleaseApprovalRehearsalSandboxConnectionOverviewTests extends OpsEvidenceServiceRehearsalTestSupport {
+
+    @Test
+    void buildsReleaseApprovalRehearsalSandboxConnectionOverviewForDefaultRequest() {
+        OpsEvidenceService service = readOnlyFixtureService();
+
+        ReleaseApprovalRehearsalResponse rehearsal = service.releaseApprovalRehearsal();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().markerVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-connection-operator-handoff-marker.v1"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .sourceSandboxAdapterApprovalSchemaGuardReceiptVersion())
+                .isEqualTo(
+                        "java-release-approval-rehearsal-managed-audit-sandbox-adapter-approval-schema-guard-receipt.v1"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .sourceSandboxAdapterApprovalSchemaGuardSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v16");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .consumedByNodeEvidenceChecklistVersion()).isEqualTo("Node v227");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .consumedByNodeEvidenceChecklistProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-evidence-checklist.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .consumedByNodeOperatorPacketVersion()).isEqualTo("Node v228");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .consumedByNodeOperatorPacketProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-operator-packet.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .consumedByNodeOperatorPacketEndpoint())
+                .isEqualTo("/api/v1/audit/managed-audit-manual-sandbox-connection-operator-packet");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .consumedByNodeOperatorPacketState())
+                .isEqualTo("manual-sandbox-connection-operator-packet-ready");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .nextNodePacketVerificationVersion()).isEqualTo("Node v229");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .nextNodePacketVerificationProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-packet-verification.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().nodeV229MayConsume())
+                .isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .sandboxConnectionWindowBoundary().manualSandboxConnectionWindowRequired()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .sandboxConnectionWindowBoundary().manualSandboxConnectionWindowOpenedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .sandboxConnectionWindowBoundary().javaStartsManagedAuditService()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .sandboxConnectionWindowBoundary().nodeAutoStartAllowed()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .operatorPacketBoundary().ownerApprovalArtifactIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .operatorPacketBoundary().schemaRehearsalIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SCHEMA_REHEARSAL_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .operatorPacketBoundary().operatorPacketReadOnly()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .operatorPacketBoundary().ownerApprovalArtifactIdFieldRecognizedByJava()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .operatorPacketBoundary().schemaRehearsalIdFieldRecognizedByJava()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .operatorPacketBoundary().packetCreatesApprovalDecision()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .credentialBoundary().credentialHandleNameField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .credentialBoundary().credentialHandleNameRecognizedByJava()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .credentialBoundary().credentialValueRequiredByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .credentialBoundary().credentialValueReadByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .schemaRehearsalBoundary().schemaMigrationSqlExecutedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .rollbackPathBoundary().rollbackPathIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_ROLLBACK_PATH_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .rollbackPathBoundary().manualAbortMarkerField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_MANUAL_ABORT");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .rollbackPathBoundary().timeoutBudgetMs()).isEqualTo(15000);
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .rollbackPathBoundary().rollbackExecutionAllowedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .javaExecutionBoundary().approvalLedgerWrittenByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .javaExecutionBoundary().externalManagedAuditConnectionOpenedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .javaExecutionBoundary().sqlExecutedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .readyForNodeV229ManualSandboxConnectionPacketVerification()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().readyForProductionAudit())
+                .isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().readyForProductionWindow())
+                .isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker()
+                .nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().markerDigest())
+                .startsWith("sha256:");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().acceptedOperatorPacketFields())
+                .contains(
+                        "ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID",
+                        "ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE",
+                        "ORDEROPS_MANAGED_AUDIT_SCHEMA_REHEARSAL_ID",
+                        "ORDEROPS_MANAGED_AUDIT_ROLLBACK_PATH_ID",
+                        "ORDEROPS_MANAGED_AUDIT_MANUAL_ABORT"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().forbiddenHandoffOperations())
+                .contains(
+                        "Open a managed audit sandbox connection during Java v87 marker",
+                        "Execute schema migration SQL during Java v87 marker",
+                        "Write approval ledger or managed audit state during Java v87 marker"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().nodeV229Prerequisites())
+                .contains(
+                        "Node v228 manual sandbox connection operator packet must be archived",
+                        "Java v87 sandbox connection operator handoff marker must be ready",
+                        "mini-kv v96 sandbox connection receipt echo marker must be ready"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().markerWarnings())
+                .containsExactly("NODE_V229_SOURCE_SANDBOX_ADAPTER_APPROVAL_SCHEMA_GUARD_RECEIPT_NOT_READY");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorHandoffMarker().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxConnectionOperatorHandoffMarker.consumedByNodeOperatorPacketProfile with Node v228",
+                        "Require managedAuditSandboxConnectionOperatorHandoffMarker.readyForNodeV229ManualSandboxConnectionPacketVerification=true before Node v229",
+                        "Keep managedAuditSandboxConnectionOperatorHandoffMarker.credentialBoundary.credentialValueReadByJava=false",
+                        "Keep managedAuditSandboxConnectionOperatorHandoffMarker.sandboxConnectionWindowBoundary.manualSandboxConnectionWindowOpenedByJava=false"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().markerVersion())
+                .isEqualTo("java-release-approval-rehearsal-managed-audit-sandbox-connection-preflight-echo-marker.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .sourceSandboxConnectionOperatorHandoffMarkerVersion())
+                .isEqualTo("java-release-approval-rehearsal-managed-audit-sandbox-connection-operator-handoff-marker.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .sourceSandboxConnectionOperatorHandoffSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v17");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .consumedByNodePreflightGateVersion()).isEqualTo("Node v230");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .consumedByNodePreflightGateProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-preflight-gate.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .consumedByNodePreflightGateEndpoint())
+                .isEqualTo("/api/v1/audit/managed-audit-manual-sandbox-connection-preflight-gate");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .consumedByNodePreflightGateState())
+                .isEqualTo("manual-sandbox-connection-preflight-gate-ready");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .nextNodePreflightVerificationVersion()).isEqualTo("Node v231");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .nextNodePreflightVerificationProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-preflight-verification.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().nodeV231MayConsume())
+                .isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .sandboxConnectionWindowBoundary().manualWindowFlagName())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_MANUAL_SANDBOX_WINDOW_APPROVED");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .sandboxConnectionWindowBoundary().manualWindowFlagRequired()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .sandboxConnectionWindowBoundary().manualWindowOpenByDefault()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .sandboxConnectionWindowBoundary().manualWindowOpenedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .sandboxConnectionWindowBoundary().nodeAutoStartAllowed()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().ownerApprovalArtifactIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().schemaRehearsalIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SCHEMA_REHEARSAL_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().rollbackPathIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_ROLLBACK_PATH_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().timeoutBudgetMs()).isEqualTo(15000);
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().manualAbortMarkerField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_MANUAL_ABORT");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().allRequiredPreflightFieldsRecognizedByJava()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().preflightGateReadOnly()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .preflightFieldBoundary().gateCreatesConnectionCommand()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .credentialBoundary().credentialHandleNameField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .credentialBoundary().credentialValueReadByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .schemaRehearsalBoundary().schemaMigrationSqlExecutedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .rollbackPathBoundary().rollbackExecutionAllowedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .javaExecutionBoundary().externalManagedAuditConnectionOpenedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .javaExecutionBoundary().approvalLedgerWrittenByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .javaExecutionBoundary().sqlExecutedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .readyForNodeV231ManualSandboxConnectionPreflightVerification()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().readyForProductionAudit())
+                .isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().readyForProductionWindow())
+                .isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .nodeMayTreatAsProductionAuditRecord()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().markerDigest())
+                .startsWith("sha256:");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().requiredPreflightFields())
+                .containsExactly(
+                        "ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID",
+                        "ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE",
+                        "ORDEROPS_MANAGED_AUDIT_SCHEMA_REHEARSAL_ID",
+                        "ORDEROPS_MANAGED_AUDIT_ROLLBACK_PATH_ID",
+                        "timeoutBudgetMs=15000",
+                        "ORDEROPS_MANAGED_AUDIT_MANUAL_ABORT",
+                        "ORDEROPS_MANAGED_AUDIT_MANUAL_SANDBOX_WINDOW_APPROVED"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker()
+                .forbiddenPreflightOperations())
+                .contains(
+                        "Open a managed audit sandbox connection during Java v88 preflight echo",
+                        "Execute schema migration SQL during Java v88 preflight echo",
+                        "Start Java, mini-kv, or external audit services automatically"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().nodeV231Prerequisites())
+                .contains(
+                        "Node v230 manual sandbox connection preflight gate must be archived",
+                        "Java v88 sandbox connection preflight echo marker must be ready",
+                        "mini-kv v97 no-start guard receipt must be ready"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().markerWarnings())
+                .containsExactly("NODE_V231_SOURCE_SANDBOX_CONNECTION_OPERATOR_HANDOFF_MARKER_NOT_READY");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreflightEchoMarker().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxConnectionPreflightEchoMarker.consumedByNodePreflightGateProfile with Node v230",
+                        "Require managedAuditSandboxConnectionPreflightEchoMarker.readyForNodeV231ManualSandboxConnectionPreflightVerification=true before Node v231",
+                        "Compare managedAuditSandboxConnectionPreflightEchoMarker.requiredPreflightFields with Node v230 preflightFields",
+                        "Keep managedAuditSandboxConnectionPreflightEchoMarker.credentialBoundary.credentialValueReadByJava=false"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().receiptVersion())
+                .isEqualTo("java-release-approval-rehearsal-managed-audit-sandbox-connection-precondition-receipt.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .sourceSandboxConnectionPreflightEchoMarkerVersion())
+                .isEqualTo("java-release-approval-rehearsal-managed-audit-sandbox-connection-preflight-echo-marker.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .sourceSandboxConnectionPreflightEchoMarkerSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v18");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .consumedByNodeBlockedExecutionRehearsalVersion()).isEqualTo("Node v234");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .consumedByNodeBlockedExecutionRehearsalProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-blocked-execution-rehearsal.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .nextNodePreconditionIntakeVersion()).isEqualTo("Node v235");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().nodeV235MayConsume()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .ownerApprovalBoundary().ownerApprovalArtifactIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .ownerApprovalBoundary().ownerApprovalArtifactRequired()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .ownerApprovalBoundary().ownerApprovalArtifactProvidedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .credentialBoundary().credentialHandleReviewRequired()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .credentialBoundary().credentialValueReadByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .schemaRehearsalBoundary().schemaMigrationSqlExecutedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .rollbackPathBoundary().timeoutBudgetMs()).isEqualTo(15000);
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .rollbackPathBoundary().manualAbortMarkerRequired()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .javaExecutionBoundary().externalManagedAuditConnectionOpenedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .javaExecutionBoundary().actualConnectionAttemptedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().allPreconditionsDocumented())
+                .isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .readyForNodeV235ManualSandboxConnectionPreconditionIntake()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().readyForProductionAudit())
+                .isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().receiptDigest())
+                .startsWith("sha256:");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().requiredPreconditionEvidence())
+                .contains(
+                        "owner approval artifact id field: ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID",
+                        "credential handle review field: ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE",
+                        "schema rehearsal evidence field: ORDEROPS_MANAGED_AUDIT_SCHEMA_REHEARSAL_ID",
+                        "timeout budget: 15000ms",
+                        "manual abort marker field: ORDEROPS_MANAGED_AUDIT_MANUAL_ABORT"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt()
+                .forbiddenPreconditionOperations())
+                .contains(
+                        "Open a managed audit sandbox connection during Java v91 precondition receipt",
+                        "Read or print a managed audit credential value during Java v91 precondition receipt",
+                        "Execute schema migration SQL during Java v91 precondition receipt"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().nodeV235Prerequisites())
+                .contains(
+                        "Node v234 blocked execution rehearsal must be archived",
+                        "Java v91 sandbox connection precondition receipt must be present",
+                        "mini-kv v100 current runtime fixture rolling evidence guard must be present"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().receiptWarnings())
+                .containsExactly("NODE_V235_SOURCE_SANDBOX_CONNECTION_PREFLIGHT_ECHO_MARKER_NOT_READY");
+        assertThat(rehearsal.managedAuditSandboxConnectionPreconditionReceipt().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxConnectionPreconditionReceipt.consumedByNodeBlockedExecutionRehearsalProfile with Node v234",
+                        "Require managedAuditSandboxConnectionPreconditionReceipt.readyForNodeV235ManualSandboxConnectionPreconditionIntake=true before Node v235",
+                        "Keep managedAuditSandboxConnectionPreconditionReceipt.readyForManagedAuditSandboxAdapterConnection=false",
+                        "Keep managedAuditSandboxConnectionPreconditionReceipt.javaExecutionBoundary.actualConnectionAttemptedByJava=false"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().receiptVersion())
+                .isEqualTo("java-release-approval-rehearsal-managed-audit-sandbox-connection-dry-run-envelope-echo-receipt.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .sourceSandboxConnectionPreconditionReceiptSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v19");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .consumedByNodeDryRunRequestEnvelopeVersion()).isEqualTo("Node v236");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .consumedByNodeDryRunRequestEnvelopeProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-dry-run-request-envelope.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .consumedByNodeDryRunRequestEnvelopeEndpoint())
+                .isEqualTo("/api/v1/audit/managed-audit-manual-sandbox-connection-dry-run-request-envelope");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .nextNodeReadinessGateVersion()).isEqualTo("Node v237");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().nodeV237MayConsume())
+                .isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .envelopeFieldBoundary().ownerApprovalArtifactIdField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .envelopeFieldBoundary().credentialHandleNameField())
+                .isEqualTo("ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .envelopeFieldBoundary().timeoutBudgetField()).isEqualTo("timeoutBudgetMs");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .envelopeFieldBoundary().operatorReviewFieldsComplete()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .envelopeFieldBoundary().dryRunEnvelopeReadOnly()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .envelopeFieldBoundary().envelopeCreatesConnectionCommand()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .credentialBoundary().credentialHandleOnly()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .credentialBoundary().credentialValueIncludedInEnvelope()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .credentialBoundary().credentialValueReadByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .javaExecutionBoundary().actualConnectionAttemptedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .javaExecutionBoundary().schemaMigrationSqlExecutedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .javaExecutionBoundary().approvalLedgerWrittenByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .javaExecutionBoundary().managedAuditStoreWrittenByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().allEnvelopeFieldsEchoed())
+                .isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().credentialValueExcluded())
+                .isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .readyForNodeV237ManualSandboxConnectionReadinessGate()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().readyForProductionAudit())
+                .isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().receiptDigest())
+                .startsWith("sha256:");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().echoedEnvelopeFieldNames())
+                .containsExactly(
+                        "ORDEROPS_MANAGED_AUDIT_OWNER_APPROVAL_ARTIFACT_ID",
+                        "ORDEROPS_MANAGED_AUDIT_SANDBOX_CREDENTIAL_HANDLE",
+                        "ORDEROPS_MANAGED_AUDIT_SCHEMA_REHEARSAL_ID",
+                        "ORDEROPS_MANAGED_AUDIT_ROLLBACK_PATH_ID",
+                        "timeoutBudgetMs",
+                        "ORDEROPS_MANAGED_AUDIT_MANUAL_ABORT"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt()
+                .forbiddenEnvelopeOperations())
+                .contains(
+                        "Include a managed audit credential value in the Java v92 dry-run envelope echo",
+                        "Open a managed audit sandbox connection during Java v92 dry-run envelope echo",
+                        "Write approval ledger or managed audit state during Java v92 dry-run envelope echo"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().nodeV237Prerequisites())
+                .contains(
+                        "Node v236 manual sandbox connection dry-run request envelope must be archived",
+                        "Java v92 sandbox connection dry-run envelope echo receipt must be present",
+                        "mini-kv v101 no-start / no-write evidence follow-up must be present"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().receiptWarnings())
+                .containsExactly("NODE_V237_SOURCE_SANDBOX_CONNECTION_PRECONDITION_RECEIPT_NOT_READY");
+        assertThat(rehearsal.managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt().nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.consumedByNodeDryRunRequestEnvelopeProfile with Node v236",
+                        "Require managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.readyForNodeV237ManualSandboxConnectionReadinessGate=true before Node v237",
+                        "Keep managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.credentialBoundary.credentialValueIncludedInEnvelope=false",
+                        "Keep managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt().receiptVersion())
+                .isEqualTo("java-release-approval-rehearsal-managed-audit-sandbox-connection-operator-window-checklist-echo-receipt.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .sourceSandboxConnectionDryRunEnvelopeEchoReceiptSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v20");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .consumedByNodeOperatorWindowChecklistVersion()).isEqualTo("Node v238");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .consumedByNodeOperatorWindowChecklistProfile())
+                .isEqualTo("managed-audit-manual-sandbox-connection-operator-window-checklist.v1");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .nextNodeEvidenceVerificationVersion()).isEqualTo("Node v239");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .checklistFieldBoundary().requiredApprovalCount()).isEqualTo(3);
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .checklistFieldBoundary().checklistStepCount()).isEqualTo(8);
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .checklistFieldBoundary().pauseConditionCount()).isEqualTo(8);
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .checklistFieldBoundary().forbiddenOperationCount()).isEqualTo(6);
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .checklistFieldBoundary().operatorChecklistReadOnly()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .checklistFieldBoundary().checklistCreatesConnectionCommand()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .approvalBoundary().approvalItemCount()).isEqualTo(3);
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .approvalBoundary().approvalLedgerWrittenByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .credentialBoundary().credentialHandleOnly()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .credentialBoundary().credentialValueIncludedInChecklist()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .credentialBoundary().credentialValueReadByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .javaExecutionBoundary().actualConnectionAttemptedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .javaExecutionBoundary().schemaMigrationSqlExecutedByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .javaExecutionBoundary().approvalLedgerWrittenByJava()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .allChecklistFieldsEchoed()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .approvalChecklistEchoComplete()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .credentialValueExcluded()).isTrue();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .readyForNodeV239ManualSandboxConnectionEvidenceVerification()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .readyForManagedAuditSandboxAdapterConnection()).isFalse();
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt().receiptDigest())
+                .startsWith("sha256:");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .echoedApprovalItemIds())
+                .containsExactly("release-owner", "security-reviewer", "operations-owner");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .echoedChecklistStepPhases())
+                .contains("source-readiness-gate", "credential-handle", "final-stop-gate");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .echoedPauseConditionCodes())
+                .contains("SOURCE_GATE_NOT_READY", "CREDENTIAL_VALUE_REQUESTED", "UPSTREAM_ACTIONS_ENABLED");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .forbiddenChecklistOperations())
+                .contains(
+                        "Open a managed audit sandbox connection during Java v93 operator checklist echo",
+                        "Write approval ledger or managed audit state during Java v93 operator checklist echo"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .nodeV239Prerequisites())
+                .contains(
+                        "Node v238 manual sandbox connection operator window checklist must be archived",
+                        "Java v93 sandbox connection operator window checklist echo receipt must be present",
+                        "mini-kv v102 operator window no-start / no-write receipt must be present"
+                );
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt().receiptWarnings())
+                .containsExactly("NODE_V239_SOURCE_SANDBOX_CONNECTION_DRY_RUN_ENVELOPE_ECHO_RECEIPT_NOT_READY");
+        assertThat(rehearsal.managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt()
+                .nodeVerificationActions())
+                .contains(
+                        "Compare managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.consumedByNodeOperatorWindowChecklistProfile with Node v238",
+                        "Require managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.readyForNodeV239ManualSandboxConnectionEvidenceVerification=true before Node v239",
+                        "Keep managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.credentialBoundary.credentialValueIncludedInChecklist=false",
+                        "Keep managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false"
+                );
+    }
+}
