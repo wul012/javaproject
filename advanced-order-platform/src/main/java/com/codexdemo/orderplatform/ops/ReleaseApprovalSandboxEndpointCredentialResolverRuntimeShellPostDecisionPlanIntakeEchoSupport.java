@@ -1,7 +1,5 @@
 package com.codexdemo.orderplatform.ops;
 
-import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.boundaryInput;
-import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.boundaryLines;
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.workflowReadiness;
 import static com.codexdemo.orderplatform.ops.ReleaseApprovalEchoMarkerSupport.workflowStep;
 
@@ -35,28 +33,6 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
             "REQUIRE_EXPLICIT_APPROVAL_PREREQUISITES",
             "IMPLEMENT_RUNTIME_SHELL_NOW"
     );
-
-    private static final List<String> WARNING_DIGEST_BOUNDARY_INPUT_NAMES = ReleaseApprovalEchoMarkerSupport
-            .boundaryInputNames(
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptDigest",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeState",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedContinuationDecision",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionDecisionOptionCount",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedDecisionOptionCount",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRejectedRuntimeImplementationOptionCount",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionReadyForNodeV302",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeImplemented",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeInvocationAllowed",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionCredentialValueRead",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionRawEndpointUrlParsed",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionExternalRequestSent",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSecretProviderInstantiated",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionResolverClientInstantiated",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionApprovalLedgerWritten",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSqlExecuted",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSchemaMigrationExecuted",
-                    "sandboxEndpointCredentialResolverRuntimeShellPostDecisionAutomaticUpstreamStart"
-            );
 
     private static final List<String> PROOF_CLAIMS = List.of(
             "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeState=runtime-shell-post-decision-continuation-plan-intake-ready",
@@ -182,7 +158,8 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
     }
 
     static List<String> warningDigestBoundaryInputNames() {
-        return WARNING_DIGEST_BOUNDARY_INPUT_NAMES;
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoBoundaryCatalog
+                .postDecisionPlanIntakeWarningDigestBoundaryInputNames();
     }
 
     static List<String> proofClaims() {
@@ -203,62 +180,15 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
     static List<String> warningDigestBoundaryLines(
             RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt receipt
     ) {
-        return boundaryLines(
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptDigest",
-                        receipt.receiptDigest()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeState",
-                        receipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeState()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedContinuationDecision",
-                        receipt.planIntake().selectedContinuationDecision()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionDecisionOptionCount",
-                        receipt.planIntake().decisionOptionCount()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSelectedDecisionOptionCount",
-                        receipt.planIntake().selectedDecisionOptionCount()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRejectedRuntimeImplementationOptionCount",
-                        receipt.planIntake().rejectedRuntimeImplementationOptionCount()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionReadyForNodeV302",
-                        receipt.readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeImplemented",
-                        receipt.sideEffectBoundary().disabledRuntimeShellImplemented()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRuntimeInvocationAllowed",
-                        receipt.sideEffectBoundary().disabledRuntimeShellInvocationAllowed()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionCredentialValueRead",
-                        receipt.sideEffectBoundary().credentialValueRead()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionRawEndpointUrlParsed",
-                        receipt.sideEffectBoundary().rawEndpointUrlParsed()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionExternalRequestSent",
-                        receipt.sideEffectBoundary().externalRequestSent()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSecretProviderInstantiated",
-                        receipt.sideEffectBoundary().secretProviderInstantiated()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionResolverClientInstantiated",
-                        receipt.sideEffectBoundary().resolverClientInstantiated()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionApprovalLedgerWritten",
-                        receipt.sideEffectBoundary().approvalLedgerWritten()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSqlExecuted",
-                        receipt.sideEffectBoundary().sqlExecuted()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionSchemaMigrationExecuted",
-                        receipt.sideEffectBoundary().schemaMigrationExecuted()),
-                boundaryInput("sandboxEndpointCredentialResolverRuntimeShellPostDecisionAutomaticUpstreamStart",
-                        receipt.sideEffectBoundary().automaticUpstreamStart())
-        );
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoBoundaryCatalog
+                .postDecisionPlanIntakeWarningDigestBoundaryLines(receipt);
     }
 
     static boolean noCredentialConnectionWriteOrAutoStartProved(
             RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt receipt
     ) {
-        return receipt.readyForNodeV302PostDecisionPlanIntakeUpstreamEchoVerification()
-                && !receipt.readyForDisabledRuntimeShellImplementation()
-                && !receipt.readyForDisabledRuntimeShellInvocation()
-                && !receipt.readyForManagedAuditResolverImplementation()
-                && !receipt.sideEffectBoundary().disabledRuntimeShellImplemented()
-                && !receipt.sideEffectBoundary().disabledRuntimeShellInvocationAllowed()
-                && !receipt.sideEffectBoundary().credentialValueRead()
-                && !receipt.sideEffectBoundary().rawEndpointUrlParsed()
-                && !receipt.sideEffectBoundary().externalRequestSent()
-                && !receipt.sideEffectBoundary().approvalLedgerWritten()
-                && !receipt.sideEffectBoundary().sqlExecuted()
-                && !receipt.sideEffectBoundary().schemaMigrationExecuted()
-                && !receipt.sideEffectBoundary().automaticUpstreamStart();
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoBoundaryCatalog
+                .postDecisionPlanIntakeNoCredentialConnectionWriteOrAutoStartProved(receipt);
     }
 
     private static RehearsalRuntimeShellPostDecisionPlanIntakeSourceDecisionRecordEcho sourceEcho(
@@ -400,36 +330,8 @@ final class ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDeci
     }
 
     private static RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary sideEffectBoundary() {
-        return new RehearsalRuntimeShellPostDecisionPlanIntakeSideEffectBoundary(
-                true,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false
-        );
+        return ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellEchoBoundaryCatalog
+                .postDecisionPlanIntakeSideEffectBoundary();
     }
 
     private static RehearsalRuntimeShellPostDecisionPlanIntakeChecks checks(
