@@ -92,6 +92,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         .managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt(),
                 managedAuditReceiptChain
                         .managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt(),
+                managedAuditReceiptChain
+                        .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -228,7 +230,9 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain
                         .sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder(),
                 managedAuditReceiptChain
-                        .sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder()
+                        .sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder(),
+                managedAuditReceiptChain
+                        .sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -290,6 +294,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                                 .managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );

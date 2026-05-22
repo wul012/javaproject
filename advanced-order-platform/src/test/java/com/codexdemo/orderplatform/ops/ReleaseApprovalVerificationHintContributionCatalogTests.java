@@ -37,10 +37,11 @@ class ReleaseApprovalVerificationHintContributionCatalogTests {
                         new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder(),
                         new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder(),
                         new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder(),
-                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder()
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder(),
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder()
                 );
 
-        assertThat(contributions).hasSize(27);
+        assertThat(contributions).hasSize(28);
         assertThat(contributions.getFirst().warningDigestWarningInputValues())
                 .containsExactly("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings");
         assertThat(contributions.getFirst().nodeVerificationActionValues())
@@ -54,17 +55,17 @@ class ReleaseApprovalVerificationHintContributionCatalogTests {
         ReleaseApprovalVerificationHintContribution last = contributions.getLast();
         assertThat(last.warningDigestWarningInputValues())
                 .containsExactly(
-                        "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptWarnings"
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptWarnings"
                 );
         assertThat(last.proofClaimValues())
                 .contains(
-                        "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt.artifactIntakePlan.requiredFieldCount=12",
-                        "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt.readyForNodeV307ApprovalPrerequisiteArtifactUpstreamEchoVerification=true"
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.reviewPacket.requiredFieldCount=9",
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.readyForNodeV309HumanApprovalArtifactReviewPacketUpstreamEchoVerification=true"
                 );
         assertThat(last.nodeVerificationActionValues())
                 .contains(
-                        "Compare managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt.consumedByNodeApprovalPrerequisiteArtifactIntakePlanProfile with Node v306",
-                        "Require managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt.artifactIntakePlan.requiredFieldCount=12 before Node v307"
+                        "Compare managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.consumedByNodeHumanApprovalArtifactReviewPacketProfile with Node v308",
+                        "Require managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.reviewPacket.requiredFieldCount=9 before Node v309"
                 );
     }
 }

@@ -235,7 +235,7 @@ class OpsEvidenceServiceCredentialResolverPreImplementationPlanIntakeEchoTests e
         assertThat(receipt.receiptWarnings()).isEmpty();
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v43");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v44");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

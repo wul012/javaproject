@@ -28,6 +28,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
 import java.util.ArrayList;
@@ -143,6 +145,10 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                 .warningDigestWarningLines(
                         receipts.managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt()
                 ));
+        lines.addAll(builders.sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder()
+                .warningDigestWarningLines(
+                        receipts.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt()
+                ));
         return lines;
     }
 
@@ -251,6 +257,10 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                 .warningDigestBoundaryLines(
                         receipts.managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt()
                 ));
+        lines.addAll(builders.sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder()
+                .warningDigestBoundaryLines(
+                        receipts.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt()
+                ));
         return lines;
     }
 
@@ -308,7 +318,9 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder
                     sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
     ) {
     }
 
@@ -366,7 +378,9 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
             RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt
-                    managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt
     ) {
     }
 }

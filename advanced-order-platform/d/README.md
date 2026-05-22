@@ -32,4 +32,6 @@ v119: d/119/解释/说明.md
       continue shrinking OpsOverviewIntegrationTests after release approval split
 v120: d/120/解释/说明.md
       continue shrinking OpsEvidenceServiceTests after moving release approval rehearsal out
+v143: d/143/解释/说明.md
+      human approval artifact review packet echo for Node v308, ready for Node v309 verification
 ```

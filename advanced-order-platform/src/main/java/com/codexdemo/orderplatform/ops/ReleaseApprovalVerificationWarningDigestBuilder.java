@@ -22,6 +22,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -90,6 +92,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
             sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
+            sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder;
     private final ReleaseApprovalVerificationWarningDigestLineCatalog.Builders lineBuilders;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
@@ -146,7 +150,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder
                     sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -202,6 +208,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder;
         this.sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder =
                 sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder;
+        this.sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder =
+                sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder;
         this.lineBuilders = new ReleaseApprovalVerificationWarningDigestLineCatalog.Builders(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                 sandboxConnectionOperatorHandoffMarkerBuilder,
@@ -229,7 +237,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder,
-                sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
+                sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
         );
     }
 
@@ -307,6 +316,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                     managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt,
             ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
@@ -338,7 +349,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                         managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt,
-                        managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt
+                        managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt
                 );
         List<String> lines = new ArrayList<>(List.of(
                 ReleaseApprovalDigestSupport.line("digestKind", "releaseApprovalRehearsalWarning"),

@@ -174,6 +174,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_APPROVAL_PREREQUISITE_ARTIFACT_INTAKE_ECHO_RECEIPT_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-approval-prerequisite-artifact-intake-echo-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_HUMAN_APPROVAL_ARTIFACT_REVIEW_PACKET_ECHO_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-human-approval-artifact-review-packet-echo-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -304,6 +308,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_APPROVAL_PREREQUISITE_ARTIFACT_INTAKE_ECHO_RECEIPT_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v43";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_HUMAN_APPROVAL_ARTIFACT_REVIEW_PACKET_ECHO_RECEIPT_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v44";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -311,7 +319,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v43";
+            "java-release-approval-rehearsal-response-schema.v44";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -957,6 +965,26 @@ public class OpsEvidenceService {
     static final String
             NODE_V306_CREDENTIAL_RESOLVER_APPROVAL_PREREQUISITE_ARTIFACT_INTAKE_PLAN_STATE =
                     "approval-prerequisite-artifact-intake-plan-ready";
+
+    static final String
+            NODE_V308_CREDENTIAL_RESOLVER_HUMAN_APPROVAL_ARTIFACT_REVIEW_PACKET_VERSION =
+                    "Node v308";
+
+    static final String
+            NODE_V308_CREDENTIAL_RESOLVER_HUMAN_APPROVAL_ARTIFACT_REVIEW_PACKET_PROFILE =
+                    "managed-audit-manual-sandbox-connection-credential-resolver-human-approval-artifact-review-packet.v1";
+
+    static final String
+            NODE_V308_CREDENTIAL_RESOLVER_HUMAN_APPROVAL_ARTIFACT_REVIEW_PACKET_ENDPOINT =
+                    "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-human-approval-artifact-review-packet";
+
+    static final String
+            NODE_V308_CREDENTIAL_RESOLVER_HUMAN_APPROVAL_ARTIFACT_REVIEW_PACKET_MARKDOWN_ENDPOINT =
+                    "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-human-approval-artifact-review-packet?format=markdown";
+
+    static final String
+            NODE_V308_CREDENTIAL_RESOLVER_HUMAN_APPROVAL_ARTIFACT_REVIEW_PACKET_STATE =
+                    "human-approval-artifact-review-packet-ready";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";

@@ -62,7 +62,9 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder
                     sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
     ) {
         return List.of(
                 contribution(
@@ -234,6 +236,14 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
                         sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
                                 ::proofClaims,
                         sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder
+                                ::nodeVerificationActions),
+                contribution(sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
+                                ::proofClaims,
+                        sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
                                 ::nodeVerificationActions)
         );
     }

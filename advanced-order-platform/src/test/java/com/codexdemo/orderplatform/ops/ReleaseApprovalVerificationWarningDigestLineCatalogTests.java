@@ -19,12 +19,12 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
         List<String> boundaryLines = ReleaseApprovalVerificationWarningDigestLineCatalog
                 .boundaryLines(builders, receipts);
 
-        assertThat(warningLines).hasSize(27);
+        assertThat(warningLines).hasSize(28);
         assertThat(warningLines.getFirst())
                 .startsWith("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings=");
         assertThat(warningLines.getLast())
                 .startsWith(
-                        "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptWarnings="
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptWarnings="
                 );
 
         assertThat(boundaryLines.getFirst())
@@ -39,10 +39,13 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                         "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteMiniKvWriteOrAuthorityCommandExecuted=false",
                         "sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakePlanState=approval-prerequisite-artifact-intake-plan-ready",
                         "sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactReadyForNodeV307=true",
-                        "sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactMiniKvWriteOrAuthorityCommandExecuted=false"
+                        "sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactMiniKvWriteOrAuthorityCommandExecuted=false",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketState=human-approval-artifact-review-packet-ready",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactReadyForNodeV309=true",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactMiniKvWriteOrAuthorityCommandExecuted=false"
                 );
         assertThat(boundaryLines.getLast())
-                .isEqualTo("sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactAutomaticUpstreamStart=false");
+                .isEqualTo("sandboxEndpointCredentialResolverHumanApprovalArtifactAutomaticUpstreamStart=false");
     }
 
     private static ReleaseApprovalVerificationWarningDigestLineCatalog.Builders builders() {
@@ -73,7 +76,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder(),
-                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder()
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder(),
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder()
         );
     }
 
@@ -107,7 +111,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 rehearsal.managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt(),
-                rehearsal.managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt()
+                rehearsal.managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt(),
+                rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt()
         );
     }
 }
