@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v41");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v42");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -60,6 +60,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -104,6 +105,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -480,6 +482,24 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSqlExecuted",
                         "sandboxEndpointCredentialResolverRuntimeShellPostDecisionSchemaMigrationExecuted",
                         "sandboxEndpointCredentialResolverRuntimeShellPostDecisionAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionRecordState",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecision",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisitePrerequisiteCount",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteMissingPrerequisiteCount",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteNoGoConditionCount",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteReadyForNodeV305",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteRuntimeImplemented",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteRuntimeInvocationAllowed",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteCredentialValueRead",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteExternalRequestSent",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteProviderClientInstantiated",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteSqlExecuted",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteMiniKvWriteOrAuthorityCommandExecuted",
+                        "sandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteAutomaticUpstreamStart",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -569,6 +589,8 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.allowsDisabledRuntimeShellImplementation=false",
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.selectedContinuationDecision=continue-blocked-planning",
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.runtimeShellImplementationAllowed=false",
+                        "managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt.decisionRecord.prerequisiteCount=6",
+                        "managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt.readyForNodeV305StopPrerequisiteUpstreamEchoVerification=true",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -606,6 +628,8 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt.decisionRecord.decision=blocked before Node v300",
                         "Compare managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.consumedByNodeRuntimeShellPostDecisionPlanIntakeProfile with Node v301",
                         "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt.planIntake.selectedContinuationDecision=continue-blocked-planning before Node v302",
+                        "Compare managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt.consumedByNodeRuntimeShellChainStopPrerequisiteDecisionRecordProfile with Node v304",
+                        "Require managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt.decisionRecord.prerequisiteCount=6 before Node v305",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
     }
