@@ -38,4 +38,6 @@ Java v119: continues shrinking OpsOverviewIntegrationTests after moving out rele
 Java v120: continues shrinking OpsEvidenceServiceTests after moving release approval rehearsal and credential-resolver scenarios out.
 145-version-143-human-approval-artifact-review-packet-echo.md
 Java v143: consumes Node v308 human approval artifact review packet and echoes required/prohibited/missing/no-go boundaries for Node v309.
+146-version-144-human-approval-post-echo-decision-gate-echo.md
+Java v144: consumes Node v310 post-echo decision gate and echoes 6 missing prerequisites plus 9 no-go conditions for Node v311.
 ```

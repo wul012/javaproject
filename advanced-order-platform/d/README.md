@@ -34,4 +34,6 @@ v120: d/120/解释/说明.md
       continue shrinking OpsEvidenceServiceTests after moving release approval rehearsal out
 v143: d/143/解释/说明.md
       human approval artifact review packet echo for Node v308, ready for Node v309 verification
+v144: d/144/解释/说明.md
+      human approval artifact review post-echo decision gate echo for Node v310, ready for Node v311 verification
 ```

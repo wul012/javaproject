@@ -613,7 +613,7 @@ class OpsEvidenceServiceCredentialResolverEarlyEchoTests extends OpsEvidenceServ
         assertThat(receipt.receiptWarnings()).isEmpty();
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v44");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v45");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

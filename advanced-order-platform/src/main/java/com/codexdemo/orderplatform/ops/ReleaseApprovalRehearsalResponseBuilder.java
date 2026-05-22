@@ -94,6 +94,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         .managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt(),
                 managedAuditReceiptChain
                         .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt(),
+                managedAuditReceiptChain
+                        .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt(),
                 failureTaxonomy,
                 releaseApprovalVerificationHint(
                         sections,
@@ -232,7 +234,9 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain
                         .sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder(),
                 managedAuditReceiptChain
-                        .sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder()
+                        .sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder(),
+                managedAuditReceiptChain
+                        .sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder()
         )
                 .build(
                         sections.requestContext(),
@@ -296,6 +300,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                                 .managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt(),
                         managedAuditReceiptChain
                                 .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt(),
+                        managedAuditReceiptChain
+                                .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt(),
                         failureTaxonomy,
                         executionBoundaries
                 );

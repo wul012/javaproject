@@ -19,12 +19,12 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
         List<String> boundaryLines = ReleaseApprovalVerificationWarningDigestLineCatalog
                 .boundaryLines(builders, receipts);
 
-        assertThat(warningLines).hasSize(28);
+        assertThat(warningLines).hasSize(29);
         assertThat(warningLines.getFirst())
                 .startsWith("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings=");
         assertThat(warningLines.getLast())
                 .startsWith(
-                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptWarnings="
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptWarnings="
                 );
 
         assertThat(boundaryLines.getFirst())
@@ -42,10 +42,13 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                         "sandboxEndpointCredentialResolverApprovalPrerequisiteArtifactMiniKvWriteOrAuthorityCommandExecuted=false",
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketState=human-approval-artifact-review-packet-ready",
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactReadyForNodeV309=true",
-                        "sandboxEndpointCredentialResolverHumanApprovalArtifactMiniKvWriteOrAuthorityCommandExecuted=false"
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactMiniKvWriteOrAuthorityCommandExecuted=false",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateState=human-approval-artifact-review-post-echo-decision-gate-ready",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoReadyForNodeV311=true",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoMiniKvWriteOrAuthorityCommandExecuted=false"
                 );
         assertThat(boundaryLines.getLast())
-                .isEqualTo("sandboxEndpointCredentialResolverHumanApprovalArtifactAutomaticUpstreamStart=false");
+                .isEqualTo("sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoAutomaticUpstreamStart=false");
     }
 
     private static ReleaseApprovalVerificationWarningDigestLineCatalog.Builders builders() {
@@ -77,7 +80,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder(),
-                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder()
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder(),
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder()
         );
     }
 
@@ -112,7 +116,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 rehearsal.managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt(),
-                rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt()
+                rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt(),
+                rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt()
         );
     }
 }

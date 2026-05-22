@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v44");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v45");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -63,6 +63,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -110,6 +111,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -541,6 +543,23 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactSchemaMigrationExecuted",
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactMiniKvWriteOrAuthorityCommandExecuted",
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateState",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoPrerequisiteCount",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoMissingPrerequisiteCount",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoNoGoConditionCount",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoReadyForNodeV311",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoRuntimeImplemented",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoRuntimeInvocationAllowed",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoCredentialValueRead",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoExternalRequestSent",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoProviderClientInstantiated",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoSqlExecuted",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoMiniKvWriteOrAuthorityCommandExecuted",
+                        "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoAutomaticUpstreamStart",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -640,6 +659,10 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.reviewPacket.noGoBoundaryCount=12",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.sideEffectBoundary.approvalLedgerWritten=false",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.readyForNodeV309HumanApprovalArtifactReviewPacketUpstreamEchoVerification=true",
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt.decisionGate.prerequisiteCount=6",
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt.decisionGate.noGoConditionCount=9",
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt.sideEffectBoundary.approvalLedgerWritten=false",
+                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt.readyForNodeV311PostEchoDecisionUpstreamEchoVerification=true",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -683,6 +706,8 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "Require managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt.artifactIntakePlan.requiredFieldCount=12 before Node v307",
                         "Compare managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.consumedByNodeHumanApprovalArtifactReviewPacketProfile with Node v308",
                         "Require managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt.reviewPacket.requiredFieldCount=9 before Node v309",
+                        "Compare managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt.consumedByNodePostEchoDecisionGateProfile with Node v310",
+                        "Require managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt.decisionGate.prerequisiteCount=6 before Node v311",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
     }
