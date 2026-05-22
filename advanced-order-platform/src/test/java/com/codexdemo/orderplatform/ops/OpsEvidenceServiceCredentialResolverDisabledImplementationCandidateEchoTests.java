@@ -299,7 +299,7 @@ class OpsEvidenceServiceCredentialResolverDisabledImplementationCandidateEchoTes
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v42");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v43");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())
