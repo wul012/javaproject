@@ -36,6 +36,8 @@ Java v118: splits a large release approval credential resolver rehearsal block o
 Java v119: continues shrinking OpsOverviewIntegrationTests after moving out release approval rehearsals and static contracts.
 123-version-120-continue-shrink-ops-evidence-service-test-suite.md
 Java v120: continues shrinking OpsEvidenceServiceTests after moving release approval rehearsal and credential-resolver scenarios out.
+148-version-146-credential-handle-approval-contract-echo.md
+Java v146: consumes Node v317 credential-handle approval contract intake and keeps the echo read-only for Node v318.
 145-version-143-human-approval-artifact-review-packet-echo.md
 Java v143: consumes Node v308 human approval artifact review packet and echoes required/prohibited/missing/no-go boundaries for Node v309.
 146-version-144-human-approval-post-echo-decision-gate-echo.md

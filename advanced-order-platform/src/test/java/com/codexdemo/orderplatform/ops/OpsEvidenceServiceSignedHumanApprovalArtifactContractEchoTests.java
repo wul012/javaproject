@@ -165,7 +165,7 @@ class OpsEvidenceServiceSignedHumanApprovalArtifactContractEchoTests
         assertThat(receipt.summary().recommendationCount()).isEqualTo(2);
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v46");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v47");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

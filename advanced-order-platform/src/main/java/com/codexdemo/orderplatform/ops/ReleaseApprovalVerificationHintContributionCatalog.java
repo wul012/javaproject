@@ -68,7 +68,9 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
                     sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
     ) {
         return List.of(
                 contribution(
@@ -265,6 +267,14 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
                         sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
                                 ::proofClaims,
                         sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
+                                ::nodeVerificationActions),
+                contribution(sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+                                ::proofClaims,
+                        sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
                                 ::nodeVerificationActions)
         );
     }

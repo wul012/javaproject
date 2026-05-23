@@ -40,10 +40,11 @@ class ReleaseApprovalVerificationHintContributionCatalogTests {
                         new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder(),
                         new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder(),
                         new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder(),
-                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder()
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder(),
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder()
                 );
 
-        assertThat(contributions).hasSize(30);
+        assertThat(contributions).hasSize(31);
         assertThat(contributions.getFirst().warningDigestWarningInputValues())
                 .containsExactly("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings");
         assertThat(contributions.getFirst().nodeVerificationActionValues())
@@ -57,17 +58,18 @@ class ReleaseApprovalVerificationHintContributionCatalogTests {
         ReleaseApprovalVerificationHintContribution last = contributions.getLast();
         assertThat(last.warningDigestWarningInputValues())
                 .containsExactly(
-                        "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptWarnings"
+                        "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptWarnings"
                 );
         assertThat(last.proofClaimValues())
                 .contains(
-                        "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt.signedArtifactContract.requiredFieldCount=11",
-                        "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt.readyForNodeV315SignedHumanApprovalArtifactContractUpstreamEchoVerification=true"
+                        "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt.credentialHandleApprovalContract.requiredFieldCount=10",
+                        "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt.credentialHandleApprovalContract.prohibitedFieldCount=8",
+                        "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt.readyForNodeV318CredentialHandleApprovalContractUpstreamEchoVerification=true"
                 );
         assertThat(last.nodeVerificationActionValues())
                 .contains(
-                        "Compare managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt.consumedByNodeSignedHumanApprovalArtifactContractProfile with Node v314",
-                        "Require managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt.signedArtifactContract.requiredFieldCount=11 before Node v315"
+                        "Compare managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt.consumedByNodeCredentialHandleApprovalContractProfile with Node v317",
+                        "Require managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt.credentialHandleApprovalContract.requiredFieldCount=10 before Node v318"
                 );
     }
 }

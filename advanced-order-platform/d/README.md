@@ -38,4 +38,6 @@ v144: d/144/解释/说明.md
       human approval artifact review post-echo decision gate echo for Node v310, ready for Node v311 verification
 v145: d/145/解释/说明.md
       signed human approval artifact contract intake echo for Node v314, ready for Node v315 verification
+v146: d/146/解释/说明.md
+      credential-handle approval contract intake echo for Node v317, ready for Node v318 verification
 ```
