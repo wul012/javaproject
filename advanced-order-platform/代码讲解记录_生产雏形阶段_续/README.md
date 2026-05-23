@@ -40,4 +40,6 @@ Java v120: continues shrinking OpsEvidenceServiceTests after moving release appr
 Java v143: consumes Node v308 human approval artifact review packet and echoes required/prohibited/missing/no-go boundaries for Node v309.
 146-version-144-human-approval-post-echo-decision-gate-echo.md
 Java v144: consumes Node v310 post-echo decision gate and echoes 6 missing prerequisites plus 9 no-go conditions for Node v311.
+147-version-145-signed-human-approval-artifact-contract-echo.md
+Java v145: consumes Node v314 signed human approval artifact contract intake and echoes the read-only contract for Node v315.
 ```

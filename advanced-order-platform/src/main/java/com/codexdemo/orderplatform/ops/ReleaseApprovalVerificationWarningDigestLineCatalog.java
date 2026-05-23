@@ -32,6 +32,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
 import java.util.ArrayList;
@@ -157,6 +159,12 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                         receipts
                                 .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt()
                 ));
+        lines.addAll(builders
+                .sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder()
+                .warningDigestWarningLines(
+                        receipts
+                                .managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt()
+                ));
         return lines;
     }
 
@@ -275,6 +283,12 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                         receipts
                                 .managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt()
                 ));
+        lines.addAll(builders
+                .sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder()
+                .warningDigestBoundaryLines(
+                        receipts
+                                .managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt()
+                ));
         return lines;
     }
 
@@ -337,6 +351,9 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                     sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
                     sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
+            ,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
     ) {
     }
 
@@ -399,6 +416,9 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                     managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt
+            ,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt
     ) {
     }
 }

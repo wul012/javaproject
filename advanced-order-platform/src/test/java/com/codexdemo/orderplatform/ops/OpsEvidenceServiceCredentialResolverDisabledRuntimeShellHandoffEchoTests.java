@@ -163,7 +163,7 @@ class OpsEvidenceServiceCredentialResolverDisabledRuntimeShellHandoffEchoTests
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v45");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v46");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

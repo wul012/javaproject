@@ -66,7 +66,9 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder
                     sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
     ) {
         return List.of(
                 contribution(
@@ -254,6 +256,15 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
                         sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
                                 ::proofClaims,
                         sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
+                                ::nodeVerificationActions)
+                ,
+                contribution(sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
+                                ::proofClaims,
+                        sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
                                 ::nodeVerificationActions)
         );
     }

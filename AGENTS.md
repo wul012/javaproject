@@ -15,6 +15,14 @@ Prefer `plans2` when both exist. Do not rely only on Java-side mentions of a Nod
 
 写代码的时候不要出现难于维护的巨型代码文件，要做必要拆分。
 
+## Screenshot Automation Rule
+
+When browser automation, page inspection, or runtime screenshots are needed, use `tool_search`
+to discover Playwright MCP tools first. Prefer `mcp__playwright__` tools such as
+`browser_tabs`, `browser_resize`, `browser_snapshot`, and `browser_take_screenshot`.
+Run tab/open, snapshot, and screenshot calls sequentially so the session is established before
+capture. Use Playwright CLI or the Playwright skill only when MCP is unavailable.
+
 ## Completion Cleanup Gate
 
 Before sending the final response for any task, clean files and processes created during that task.

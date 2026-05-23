@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v45");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v46");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -64,6 +64,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -112,6 +113,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -560,6 +562,26 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoSchemaMigrationExecuted",
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoMiniKvWriteOrAuthorityCommandExecuted",
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractState",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractRequiredFieldCount",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractProhibitedFieldCount",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractNoGoBoundaryCount",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractReadyForNodeV315",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractRuntimeImplemented",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractRuntimeInvocationAllowed",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractCredentialValueRead",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractSignedArtifactStored",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractSignedArtifactValidated",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractSignedArtifactAuthorityClaimed",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractExternalRequestSent",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractSqlExecuted",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractDeploymentExecuted",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractRollbackExecuted",
+                        "sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractAutomaticUpstreamStart",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())

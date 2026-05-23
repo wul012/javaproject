@@ -19,12 +19,12 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
         List<String> boundaryLines = ReleaseApprovalVerificationWarningDigestLineCatalog
                 .boundaryLines(builders, receipts);
 
-        assertThat(warningLines).hasSize(29);
+        assertThat(warningLines).hasSize(30);
         assertThat(warningLines.getFirst())
                 .startsWith("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings=");
         assertThat(warningLines.getLast())
                 .startsWith(
-                        "managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptWarnings="
+                        "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptWarnings="
                 );
 
         assertThat(boundaryLines.getFirst())
@@ -48,7 +48,7 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                         "sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoMiniKvWriteOrAuthorityCommandExecuted=false"
                 );
         assertThat(boundaryLines.getLast())
-                .isEqualTo("sandboxEndpointCredentialResolverHumanApprovalArtifactPostEchoAutomaticUpstreamStart=false");
+                .isEqualTo("sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractAutomaticUpstreamStart=false");
     }
 
     private static ReleaseApprovalVerificationWarningDigestLineCatalog.Builders builders() {
@@ -81,7 +81,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceiptBuilder(),
-                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder()
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder(),
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder()
         );
     }
 
@@ -117,7 +118,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 rehearsal.managedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt(),
-                rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt()
+                rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt(),
+                rehearsal.managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt()
         );
     }
 }
