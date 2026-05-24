@@ -44,4 +44,6 @@ Java v143: consumes Node v308 human approval artifact review packet and echoes r
 Java v144: consumes Node v310 post-echo decision gate and echoes 6 missing prerequisites plus 9 no-go conditions for Node v311.
 147-version-145-signed-human-approval-artifact-contract-echo.md
 Java v145: consumes Node v314 signed human approval artifact contract intake and echoes the read-only contract for Node v315.
+149-version-147-endpoint-handle-allowlist-approval-contract-echo.md
+Java v147: consumes Node v320 endpoint-handle allowlist approval contract intake and keeps the echo read-only for Node v321.
 ```
