@@ -257,7 +257,7 @@ class OpsEvidenceServiceApprovalPrerequisiteArtifactIntakeEchoTests extends OpsE
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v48");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v49");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

@@ -19,12 +19,12 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
         List<String> boundaryLines = ReleaseApprovalVerificationWarningDigestLineCatalog
                 .boundaryLines(builders, receipts);
 
-        assertThat(warningLines).hasSize(32);
+        assertThat(warningLines).hasSize(33);
         assertThat(warningLines.getFirst())
                 .startsWith("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings=");
         assertThat(warningLines.getLast())
                 .startsWith(
-                        "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptWarnings="
+                        "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptWarnings="
                 );
 
         assertThat(boundaryLines.getFirst())
@@ -51,10 +51,14 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                         "sandboxEndpointCredentialResolverCredentialHandleApprovalContractCredentialAuthorityClaimed=false",
                         "sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractState=endpoint-handle-allowlist-approval-contract-intake-ready",
                         "sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractReadyForNodeV321=true",
-                        "sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEndpointHandleAuthorityClaimed=false"
+                        "sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEndpointHandleAuthorityClaimed=false",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractState=no-network-safety-fixture-contract-intake-ready",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractReadyForNodeV324=true",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractHttpRequestSent=false",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractTcpConnectionAttempted=false"
                 );
         assertThat(boundaryLines.getLast())
-                .isEqualTo("sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractAutomaticUpstreamStart=false");
+                .isEqualTo("sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractAutomaticUpstreamStart=false");
     }
 
     private static ReleaseApprovalVerificationWarningDigestLineCatalog.Builders builders() {
@@ -90,7 +94,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder(),
-                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder()
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder(),
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder()
         );
     }
 
@@ -129,7 +134,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 rehearsal.managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt(),
-                rehearsal.managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt()
+                rehearsal.managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt(),
+                rehearsal.managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt()
         );
     }
 }

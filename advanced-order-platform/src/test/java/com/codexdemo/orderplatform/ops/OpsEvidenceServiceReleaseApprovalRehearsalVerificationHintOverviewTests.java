@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v48");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v49");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -67,6 +67,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -118,6 +119,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -628,6 +630,28 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractDeploymentExecuted",
                         "sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractRollbackExecuted",
                         "sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractState",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractRequiredFieldCount",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractProhibitedFieldCount",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractNoGoBoundaryCount",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractReadyForNodeV324",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractRuntimeImplemented",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractRuntimeInvocationAllowed",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractCredentialValueRead",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractNetworkSafetyFixtureExecuted",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractHttpRequestSent",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractTcpConnectionAttempted",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractExternalRequestSent",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractSecretProviderInstantiated",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractResolverClientInstantiated",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractSqlExecuted",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractDeploymentExecuted",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractRollbackExecuted",
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractAutomaticUpstreamStart",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -737,6 +761,9 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt.endpointHandleAllowlistApprovalContract.requiredFieldCount=10",
                         "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt.sideEffectBoundary.endpointHandleAuthorityClaimedByJava=false",
                         "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt.readyForNodeV321EndpointHandleAllowlistApprovalContractUpstreamEchoVerification=true",
+                        "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.noNetworkSafetyFixtureContract.requiredFieldCount=10",
+                        "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.sideEffectBoundary.httpRequestSent=false",
+                        "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.readyForNodeV324NoNetworkSafetyFixtureUpstreamEchoVerification=true",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -786,6 +813,8 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "Require managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt.credentialHandleApprovalContract.requiredFieldCount=10 before Node v318",
                         "Compare managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt.consumedByNodeEndpointHandleAllowlistApprovalContractProfile with Node v320",
                         "Require managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt.endpointHandleAllowlistApprovalContract.requiredFieldCount=10 before Node v321",
+                        "Compare managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.consumedByNodeNoNetworkSafetyFixtureContractProfile with Node v323",
+                        "Require managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.noNetworkSafetyFixtureContract.requiredFieldCount=10 before Node v324",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
     }

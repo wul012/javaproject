@@ -48,4 +48,6 @@ Java v145: consumes Node v314 signed human approval artifact contract intake and
 Java v147: consumes Node v320 endpoint-handle allowlist approval contract intake and keeps the echo read-only for Node v321.
 150-version-148-sandbox-connection-response-records-split.md
 Java v148: splits sandbox connection response records out of ReleaseApprovalRehearsalResponseRecords for maintainability.
+151-version-149-no-network-safety-fixture-contract-echo.md
+Java v149: consumes Node v323 no-network safety fixture contract intake and keeps the echo read-only for Node v324.
 ```

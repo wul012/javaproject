@@ -44,4 +44,6 @@ v147: d/147/解释/说明.md
       endpoint-handle allowlist approval contract intake echo for Node v320, ready for Node v321 verification
 v148: d/148/解释/说明.md
       split sandbox connection response records out of ReleaseApprovalRehearsalResponseRecords
+v149: d/149/解释/说明.md
+      no-network safety fixture contract echo for Node v323, ready for Node v324 verification
 ```
