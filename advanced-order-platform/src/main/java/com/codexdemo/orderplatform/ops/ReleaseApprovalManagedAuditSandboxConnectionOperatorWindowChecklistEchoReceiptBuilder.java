@@ -63,18 +63,18 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
             "Keep managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false"
     );
 
-    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
+    ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt build(
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
                     dryRunEnvelopeEchoReceipt
     ) {
         boolean sourceReceiptAccepted = sourceReceiptAccepted(dryRunEnvelopeEchoReceipt);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary
                 checklistFieldBoundary = ChecklistFieldBoundaryFields.nodeV238OperatorWindow().toBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
                 approvalBoundary = ApprovalBoundaryFlags.requiredOperatorWindowApprovals().toBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
                 credentialBoundary = CredentialBoundaryFlags.handleOnly().toBoundary(CREDENTIAL_HANDLE_NAME_FIELD);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary
                 javaExecutionBoundary = ExecutionBoundaryFlags.noExecutionEffects().toBoundary();
 
         List<String> receiptWarnings = new ArrayList<>();
@@ -148,7 +148,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_OPERATOR_WINDOW_CHECKLIST_ECHO_RECEIPT_VERSION,
                 dryRunEnvelopeEchoReceipt.receiptVersion(),
@@ -202,7 +202,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -213,7 +213,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -256,7 +256,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
     ) {
         return noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
                 receipt.approvalBoundary(),
@@ -266,11 +266,11 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     private boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
                     approvalBoundary,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
                     credentialBoundary,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary
                     javaExecutionBoundary
     ) {
         return !approvalBoundary.javaCreatesApprovalDecision()
@@ -297,7 +297,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     private boolean sourceReceiptAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
                     dryRunEnvelopeEchoReceipt
     ) {
         return OpsEvidenceService
@@ -334,7 +334,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     private boolean allChecklistFieldsEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary
                     checklistFieldBoundary
     ) {
         return checklistFieldBoundary.requiredApprovalCount() == REQUIRED_APPROVAL_COUNT
@@ -357,7 +357,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     private boolean approvalChecklistEchoComplete(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
                     approvalBoundary
     ) {
         return approvalBoundary.approvalItemCount() == REQUIRED_APPROVAL_COUNT
@@ -374,7 +374,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
     }
 
     private boolean credentialValueExcluded(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
                     credentialBoundary
     ) {
         return credentialBoundary.credentialHandleOnly()
@@ -505,9 +505,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary
                 toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary(
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowChecklistFieldBoundary(
                     ownerApprovalArtifactIdField,
                     credentialHandleNameField,
                     schemaRehearsalIdField,
@@ -565,9 +565,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary
                 toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary(
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowApprovalBoundary(
                     approvalItemCount,
                     releaseOwnerApprovalItemEchoed,
                     securityReviewerApprovalItemEchoed,
@@ -595,9 +595,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
             return new CredentialBoundaryFlags(true, false, false, false, false);
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary
                 toBoundary(String credentialHandleNameField) {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary(
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowCredentialBoundary(
                     credentialHandleNameField,
                     credentialHandleOnly,
                     credentialValueIncludedInChecklist,
@@ -646,9 +646,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionOperatorWindowChecklistE
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary
                 toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary(
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionOperatorWindowExecutionBoundary(
                     actualConnectionAttemptedByJava,
                     externalManagedAuditConnectionOpenedByJava,
                     schemaMigrationRequestedByJava,

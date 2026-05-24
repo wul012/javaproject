@@ -100,7 +100,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
 
     ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
     build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
                     precheckPacketEchoReceipt
     ) {
         boolean sourceReceiptAccepted = sourceReceiptAccepted(precheckPacketEchoReceipt);
@@ -337,7 +337,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDisabledAdapterClientPre
     }
 
     private static boolean sourceReceiptAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt receipt
     ) {
         return receipt.readyForNodeV246ManualSandboxConnectionPrecheckUpstreamReceiptVerification()
                 && receipt.receiptWarnings().isEmpty()

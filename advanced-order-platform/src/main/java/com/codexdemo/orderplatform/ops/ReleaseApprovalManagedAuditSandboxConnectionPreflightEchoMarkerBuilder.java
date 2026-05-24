@@ -57,8 +57,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
             "Keep managedAuditSandboxConnectionPreflightEchoMarker.javaExecutionBoundary.externalManagedAuditConnectionOpenedByJava=false"
     );
 
-    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+    ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker build(
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
                     sandboxConnectionOperatorHandoffMarker
     ) {
         boolean sourceMarkerAccepted = sourceMarkerAccepted(sandboxConnectionOperatorHandoffMarker);
@@ -70,17 +70,17 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
         RollbackFlags rollbackFlags = RollbackFlags.rollbackEvidenceOnly();
         JavaExecutionFlags javaExecutionFlags = JavaExecutionFlags.noExecution();
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightWindowBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightWindowBoundary
                 sandboxConnectionWindowBoundary = windowFlags.toBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightFieldBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightFieldBoundary
                 preflightFieldBoundary = preflightFieldFlags.toBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightCredentialBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightCredentialBoundary
                 credentialBoundary = credentialFlags.toBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightSchemaBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightSchemaBoundary
                 schemaRehearsalBoundary = schemaFlags.toBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightRollbackBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightRollbackBoundary
                 rollbackPathBoundary = rollbackFlags.toBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightJavaExecutionBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightJavaExecutionBoundary
                 javaExecutionBoundary = javaExecutionFlags.toBoundary();
 
         List<String> markerWarnings = new ArrayList<>();
@@ -178,7 +178,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker(
                         OpsEvidenceService
                                 .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PREFLIGHT_ECHO_MARKER_VERSION,
                         sandboxConnectionOperatorHandoffMarker.markerVersion(),
@@ -228,7 +228,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -239,7 +239,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line("sandboxConnectionPreflightEchoMarkerDigest", marker.markerDigest()),
@@ -271,7 +271,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
     }
 
     boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
     ) {
         return !marker.sandboxConnectionWindowBoundary().manualWindowOpenByDefault()
                 && !marker.sandboxConnectionWindowBoundary().manualWindowOpenedByJava()
@@ -300,7 +300,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
     }
 
     private boolean sourceMarkerAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker marker
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker marker
     ) {
         return OpsEvidenceService
                 .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_OPERATOR_HANDOFF_MARKER_VERSION
@@ -388,8 +388,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightWindowBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightWindowBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightWindowBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightWindowBoundary(
                     manualWindowFlagName,
                     manualWindowFlagRequired,
                     manualWindowOpenByDefault,
@@ -425,8 +425,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightFieldBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightFieldBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightFieldBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightFieldBoundary(
                     ownerApprovalArtifactIdField,
                     schemaRehearsalIdField,
                     rollbackPathIdField,
@@ -459,8 +459,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightCredentialBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightCredentialBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightCredentialBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightCredentialBoundary(
                     credentialHandleNameField,
                     credentialHandleNameRecognizedByJava,
                     credentialValueRequiredByJava,
@@ -489,8 +489,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightSchemaBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightSchemaBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightSchemaBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightSchemaBoundary(
                     schemaRehearsalIdField,
                     schemaRehearsalIdRequired,
                     schemaMigrationExecutionAllowed,
@@ -522,8 +522,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightRollbackBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightRollbackBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightRollbackBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightRollbackBoundary(
                     rollbackPathIdField,
                     manualAbortMarkerField,
                     timeoutBudgetMs,
@@ -561,8 +561,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreflightEchoMarkerBuild
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightJavaExecutionBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreflightJavaExecutionBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightJavaExecutionBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreflightJavaExecutionBoundary(
                     approvalDecisionCreatedByJava,
                     approvalLedgerWrittenByJava,
                     approvalRecordPersistedByJava,

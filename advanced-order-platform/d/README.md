@@ -42,4 +42,6 @@ v146: d/146/解释/说明.md
       credential-handle approval contract intake echo for Node v317, ready for Node v318 verification
 v147: d/147/解释/说明.md
       endpoint-handle allowlist approval contract intake echo for Node v320, ready for Node v321 verification
+v148: d/148/解释/说明.md
+      split sandbox connection response records out of ReleaseApprovalRehearsalResponseRecords
 ```

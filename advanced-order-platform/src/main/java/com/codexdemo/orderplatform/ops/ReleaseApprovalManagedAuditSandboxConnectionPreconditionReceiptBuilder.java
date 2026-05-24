@@ -53,19 +53,19 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
             "Keep managedAuditSandboxConnectionPreconditionReceipt.javaExecutionBoundary.actualConnectionAttemptedByJava=false"
     );
 
-    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker preflightEchoMarker
+    ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt build(
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker preflightEchoMarker
     ) {
         boolean sourceMarkerAccepted = sourceMarkerAccepted(preflightEchoMarker);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary
                 ownerApprovalBoundary = ownerApprovalBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary
                 credentialBoundary = credentialBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary
                 schemaRehearsalBoundary = schemaRehearsalBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary
                 rollbackPathBoundary = rollbackPathBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary
                 javaExecutionBoundary = javaExecutionBoundary();
 
         List<String> receiptWarnings = new ArrayList<>();
@@ -137,7 +137,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PRECONDITION_RECEIPT_VERSION,
                 preflightEchoMarker.markerVersion(),
@@ -187,7 +187,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -198,7 +198,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line("sandboxConnectionPreconditionReceiptDigest", receipt.receiptDigest()),
@@ -230,7 +230,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
     }
 
     boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt receipt
     ) {
         return noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
                 receipt.ownerApprovalBoundary(),
@@ -242,15 +242,15 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
     }
 
     private boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary
                     ownerApprovalBoundary,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary
                     credentialBoundary,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary
                     schemaRehearsalBoundary,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary
                     rollbackPathBoundary,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary
                     javaExecutionBoundary
     ) {
         return !ownerApprovalBoundary.ownerApprovalArtifactProvidedByJava()
@@ -281,7 +281,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
     }
 
     private boolean sourceMarkerAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker marker
     ) {
         return OpsEvidenceService
                 .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PREFLIGHT_ECHO_MARKER_VERSION
@@ -317,9 +317,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
                 && !marker.javaExecutionBoundary().restoreExecutedByJava();
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary
             ownerApprovalBoundary() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionOwnerApprovalBoundary(
                 OWNER_APPROVAL_ARTIFACT_ID_FIELD,
                 true,
                 false,
@@ -329,9 +329,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary
             credentialBoundary() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionCredentialBoundary(
                 CREDENTIAL_HANDLE_NAME_FIELD,
                 true,
                 true,
@@ -342,9 +342,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary
             schemaRehearsalBoundary() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionSchemaBoundary(
                 SCHEMA_REHEARSAL_ID_FIELD,
                 true,
                 false,
@@ -353,9 +353,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary
             rollbackPathBoundary() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionRollbackBoundary(
                 ROLLBACK_PATH_ID_FIELD,
                 MANUAL_ABORT_MARKER_FIELD,
                 TIMEOUT_BUDGET_MS,
@@ -367,9 +367,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionPreconditionReceiptBuild
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary
             javaExecutionBoundary() {
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionPreconditionExecutionBoundary(
                 false,
                 false,
                 false,

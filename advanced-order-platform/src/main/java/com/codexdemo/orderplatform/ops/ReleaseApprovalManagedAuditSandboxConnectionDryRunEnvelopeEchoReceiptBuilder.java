@@ -55,16 +55,16 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
             "Keep managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false"
     );
 
-    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+    ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt build(
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
                     preconditionReceipt
     ) {
         boolean sourceReceiptAccepted = sourceReceiptAccepted(preconditionReceipt);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary
                 envelopeFieldBoundary = envelopeFieldBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary
                 credentialBoundary = credentialBoundary();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary
                 javaExecutionBoundary = javaExecutionBoundary();
 
         List<String> receiptWarnings = new ArrayList<>();
@@ -143,7 +143,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_DRY_RUN_ENVELOPE_ECHO_RECEIPT_VERSION,
                 preconditionReceipt.receiptVersion(),
@@ -192,7 +192,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -203,7 +203,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -242,7 +242,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
     }
 
     boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt receipt
     ) {
         return noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
                 receipt.credentialBoundary(),
@@ -251,9 +251,9 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
     }
 
     private boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary
                     credentialBoundary,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary
                     javaExecutionBoundary
     ) {
         return !credentialBoundary.credentialValueIncludedInEnvelope()
@@ -276,7 +276,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
     }
 
     private boolean sourceReceiptAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
                     preconditionReceipt
     ) {
         return OpsEvidenceService
@@ -316,17 +316,17 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
                 && !preconditionReceipt.javaExecutionBoundary().actualConnectionAttemptedByJava();
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary
             envelopeFieldBoundary() {
         return EnvelopeFieldBoundaryFields.nodeV236EnvelopeFields().toBoundary();
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary
             credentialBoundary() {
         return CredentialBoundaryFlags.handleOnly().toBoundary(CREDENTIAL_HANDLE_NAME_FIELD);
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary
             javaExecutionBoundary() {
         return ExecutionBoundaryFlags.noExecutionEffects().toBoundary();
     }
@@ -401,8 +401,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeFieldBoundary(
                     ownerApprovalArtifactIdField,
                     credentialHandleNameField,
                     schemaRehearsalIdField,
@@ -434,10 +434,10 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
             return new CredentialBoundaryFlags(true, false, false, false, false);
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary toBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary toBoundary(
                 String credentialHandleNameField
         ) {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary(
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeCredentialBoundary(
                     credentialHandleNameField,
                     credentialHandleOnly,
                     credentialValueIncludedInEnvelope,
@@ -482,8 +482,8 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceip
             );
         }
 
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary toBoundary() {
-            return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary(
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary toBoundary() {
+            return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunEnvelopeExecutionBoundary(
                     actualConnectionAttemptedByJava,
                     externalManagedAuditConnectionOpenedByJava,
                     schemaMigrationRequestedByJava,

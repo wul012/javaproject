@@ -300,19 +300,19 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                     managedAuditExternalAdapterMigrationGuardReceipt,
             ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt
                     managedAuditSandboxAdapterApprovalSchemaGuardReceipt,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker
                     managedAuditSandboxConnectionOperatorHandoffMarker,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreflightEchoMarker
                     managedAuditSandboxConnectionPreflightEchoMarker,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPreconditionReceipt
                     managedAuditSandboxConnectionPreconditionReceipt,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt
                     managedAuditSandboxConnectionDryRunEnvelopeEchoReceipt,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
                     managedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt
                     managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt,
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt
                     managedAuditSandboxConnectionPrecheckPacketEchoReceipt,
             ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords.RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt
                     managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt,

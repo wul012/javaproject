@@ -77,16 +77,16 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
             "Keep managedAuditSandboxConnectionDryRunCommandPackageEchoReceipt.javaExecutionBoundary.approvalLedgerWrittenByJava=false"
     );
 
-    ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt build(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
+    ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt build(
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt
                     operatorWindowChecklistEchoReceipt
     ) {
         boolean sourceReceiptAccepted = sourceReceiptAccepted(operatorWindowChecklistEchoReceipt);
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape packageShape =
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape packageShape =
                 packageShape();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho fieldEcho =
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho fieldEcho =
                 fieldEcho();
-        ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary
+        ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary
                 javaExecutionBoundary = javaExecutionBoundary();
 
         List<String> receiptWarnings = new ArrayList<>();
@@ -160,7 +160,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
                 )
         ));
 
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt(
                 OpsEvidenceService
                         .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_DRY_RUN_COMMAND_PACKAGE_ECHO_RECEIPT_VERSION,
                 operatorWindowChecklistEchoReceipt.receiptVersion(),
@@ -211,7 +211,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
     }
 
     List<String> warningDigestWarningLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -222,7 +222,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
     }
 
     List<String> warningDigestBoundaryLines(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt receipt
     ) {
         return List.of(
                 ReleaseApprovalDigestSupport.line(
@@ -277,7 +277,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
     }
 
     boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt receipt
     ) {
         return noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(receipt.javaExecutionBoundary())
                 && receipt.packageShape().disabledByDefault()
@@ -291,7 +291,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
     }
 
     private static boolean sourceReceiptAccepted(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt receipt
     ) {
         return receipt.readyForNodeV239ManualSandboxConnectionEvidenceVerification()
                 && receipt.receiptWarnings().isEmpty()
@@ -300,10 +300,10 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
                 && !receipt.readyForManagedAuditSandboxAdapterConnection();
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape
     packageShape() {
         CommandPackageShapeFlags flags = CommandPackageShapeFlags.disabledDryRunReviewOnly();
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape(
                 PACKAGE_MODE,
                 SOURCE_SPAN,
                 COMMAND_COUNT,
@@ -316,10 +316,10 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho
     fieldEcho() {
         CommandPackageFieldEchoFlags flags = CommandPackageFieldEchoFlags.fieldsOnlyNoCredentialValue();
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho(
                 "review-owner-approval-artifact",
                 "verify-credential-handle",
                 "review-schema-rehearsal",
@@ -341,10 +341,10 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
         );
     }
 
-    private static ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary
+    private static ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary
     javaExecutionBoundary() {
         CommandPackageExecutionBoundaryFlags flags = CommandPackageExecutionBoundaryFlags.allBlocked();
-        return new ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary(
+        return new ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary(
                 flags.carriesCredentialValue(),
                 flags.credentialValueReadByJava(),
                 flags.credentialValueStoredByJava(),
@@ -366,7 +366,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
     }
 
     private static boolean commandShapeEchoed(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape packageShape
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageShape packageShape
     ) {
         return PACKAGE_MODE.equals(packageShape.packageMode())
                 && SOURCE_SPAN.equals(packageShape.sourceSpan())
@@ -380,7 +380,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
     }
 
     private static boolean fieldEchoComplete(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho fieldEcho
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageFieldEcho fieldEcho
     ) {
         return "review-owner-approval-artifact".equals(fieldEcho.ownerApprovalArtifactCommandId())
                 && "verify-credential-handle".equals(fieldEcho.credentialHandleCommandId())
@@ -403,7 +403,7 @@ final class ReleaseApprovalManagedAuditSandboxConnectionDryRunCommandPackageEcho
     }
 
     private static boolean noWriteCredentialConnectionSchemaRollbackOrServiceStartProved(
-            ReleaseApprovalRehearsalResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary javaExecutionBoundary
+            ReleaseApprovalRehearsalSandboxConnectionResponseRecords.RehearsalSandboxConnectionDryRunCommandPackageExecutionBoundary javaExecutionBoundary
     ) {
         return !javaExecutionBoundary.carriesCredentialValue()
                 && !javaExecutionBoundary.credentialValueReadByJava()
