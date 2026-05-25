@@ -250,7 +250,7 @@ class OpsEvidenceServiceCredentialResolverRuntimeShellPostDecisionPlanIntakeEcho
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v49");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v50");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

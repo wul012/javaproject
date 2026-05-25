@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v49");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v50");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -68,6 +68,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt",
                         "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt",
+                        "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt",
                         "failureTaxonomy",
                         "verificationHint",
                         "executionBoundaries"
@@ -120,6 +121,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptWarnings",
                         "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptWarnings",
+                        "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptWarnings",
                         "failureCategories",
                         "taxonomyWarnings",
                         "executionAllowed",
@@ -652,6 +654,28 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractDeploymentExecuted",
                         "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractRollbackExecuted",
                         "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractAutomaticUpstreamStart",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptDigest",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractState",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractRequiredFieldCount",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractProhibitedFieldCount",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractNoGoBoundaryCount",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractReadyForNodeV327",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractRuntimeImplemented",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractRuntimeInvocationAllowed",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractCredentialValueRead",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractRawEndpointUrlParsed",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractAbortRollbackSemanticsExecuted",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractHttpRequestSent",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractTcpConnectionAttempted",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractExternalRequestSent",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractSecretProviderInstantiated",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractResolverClientInstantiated",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractApprovalLedgerWritten",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractSqlExecuted",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractSchemaMigrationExecuted",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractDeploymentExecuted",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractRollbackExecuted",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractAutomaticUpstreamStart",
                         "nodeMayWriteApprovalLedger"
                 );
         assertThat(rehearsal.verificationHint().proofClaims())
@@ -764,6 +788,10 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.noNetworkSafetyFixtureContract.requiredFieldCount=10",
                         "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.sideEffectBoundary.httpRequestSent=false",
                         "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.readyForNodeV324NoNetworkSafetyFixtureUpstreamEchoVerification=true",
+                        "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt.abortRollbackSemanticsContract.requiredFieldCount=10",
+                        "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt.abortRollbackSemanticsContract.prohibitedFieldCount=14",
+                        "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt.abortRollbackSemanticsContract.abortRollbackExecutionAllowed=false",
+                        "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt.readyForNodeV327AbortRollbackSemanticsUpstreamEchoVerification=true",
                         "executionBoundaries.nodeMayWriteApprovalLedger=false"
                 );
         assertThat(rehearsal.verificationHint().nodeVerificationActions())
@@ -815,6 +843,9 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "Require managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt.endpointHandleAllowlistApprovalContract.requiredFieldCount=10 before Node v321",
                         "Compare managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.consumedByNodeNoNetworkSafetyFixtureContractProfile with Node v323",
                         "Require managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt.noNetworkSafetyFixtureContract.requiredFieldCount=10 before Node v324",
+                        "Compare managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt.consumedByNodeAbortRollbackSemanticsContractProfile with Node v326",
+                        "Require managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt.abortRollbackSemanticsContract.requiredFieldCount=10 before Node v327",
+                        "Keep managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt.sideEffectBoundary.rollbackExecuted=false",
                         "Keep UPSTREAM_ACTIONS_ENABLED=false"
                 );
     }

@@ -172,7 +172,7 @@ class OpsEvidenceServiceEndpointHandleAllowlistApprovalContractEchoTests
         assertThat(receipt.summary().recommendationCount()).isEqualTo(2);
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v49");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v50");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

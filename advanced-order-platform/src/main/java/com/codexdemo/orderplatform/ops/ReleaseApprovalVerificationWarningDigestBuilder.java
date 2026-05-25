@@ -34,6 +34,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -114,6 +116,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
             sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+            sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder;
     private final ReleaseApprovalVerificationWarningDigestLineCatalog.Builders lineBuilders;
 
     ReleaseApprovalVerificationWarningDigestBuilder(
@@ -182,7 +186,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
                     sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -250,6 +256,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder;
         this.sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder =
                 sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder;
+        this.sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder =
+                sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder;
         this.lineBuilders = new ReleaseApprovalVerificationWarningDigestLineCatalog.Builders(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                 sandboxConnectionOperatorHandoffMarkerBuilder,
@@ -283,7 +291,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                 sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
-                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
         );
     }
 
@@ -373,6 +382,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                     managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
             ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
@@ -410,7 +421,8 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
                         managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
-                        managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
+                        managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
                 );
         List<String> lines = new ArrayList<>(List.of(
                 ReleaseApprovalDigestSupport.line("digestKind", "releaseApprovalRehearsalWarning"),

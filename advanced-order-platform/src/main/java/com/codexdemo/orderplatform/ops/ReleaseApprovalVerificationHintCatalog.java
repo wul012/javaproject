@@ -218,6 +218,7 @@ final class ReleaseApprovalVerificationHintCatalog {
                 "managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt",
                 "managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt",
                 "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt",
+                "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt",
                 "failureTaxonomy",
                 "verificationHint",
                 "releaseApprovalInputs",

@@ -74,7 +74,9 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
                     sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
     ) {
         return List.of(
                 contribution(
@@ -295,6 +297,14 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
                         sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
                                 ::proofClaims,
                         sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                                ::nodeVerificationActions),
+                contribution(sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                                ::warningDigestWarningInputNames,
+                        sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                                ::warningDigestBoundaryInputNames,
+                        sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                                ::proofClaims,
+                        sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
                                 ::nodeVerificationActions)
         );
     }

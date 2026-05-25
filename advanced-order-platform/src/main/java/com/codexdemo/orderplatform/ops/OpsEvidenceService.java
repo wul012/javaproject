@@ -198,6 +198,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_NO_NETWORK_SAFETY_FIXTURE_CONTRACT_ECHO_RECEIPT_VERSION =
                     "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-no-network-safety-fixture-contract-echo-receipt.v1";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_ABORT_ROLLBACK_SEMANTICS_CONTRACT_ECHO_RECEIPT_VERSION =
+                    "java-release-approval-rehearsal-managed-audit-sandbox-endpoint-credential-resolver-abort-rollback-semantics-contract-echo-receipt.v1";
+
     static final String RELEASE_APPROVAL_REHEARSAL_APPROVAL_RECORD_HANDOFF_SCHEMA_VERSION =
             "java-release-approval-rehearsal-response-schema.v9";
 
@@ -352,6 +356,10 @@ public class OpsEvidenceService {
             RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_NO_NETWORK_SAFETY_FIXTURE_CONTRACT_ECHO_RECEIPT_SCHEMA_VERSION =
                     "java-release-approval-rehearsal-response-schema.v49";
 
+    static final String
+            RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_ENDPOINT_CREDENTIAL_RESOLVER_ABORT_ROLLBACK_SEMANTICS_CONTRACT_ECHO_RECEIPT_SCHEMA_VERSION =
+                    "java-release-approval-rehearsal-response-schema.v50";
+
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
@@ -359,7 +367,7 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v49";
+            "java-release-approval-rehearsal-response-schema.v50";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
@@ -1125,6 +1133,21 @@ public class OpsEvidenceService {
     static final String
             NODE_V323_CREDENTIAL_RESOLVER_NO_NETWORK_SAFETY_FIXTURE_CONTRACT_STATE =
                     "no-network-safety-fixture-contract-intake-ready";
+
+    static final String NODE_V326_CREDENTIAL_RESOLVER_ABORT_ROLLBACK_SEMANTICS_CONTRACT_VERSION =
+            "Node v326";
+
+    static final String NODE_V326_CREDENTIAL_RESOLVER_ABORT_ROLLBACK_SEMANTICS_CONTRACT_PROFILE =
+            "managed-audit-manual-sandbox-connection-credential-resolver-abort-rollback-semantics-contract-intake.v1";
+
+    static final String NODE_V326_CREDENTIAL_RESOLVER_ABORT_ROLLBACK_SEMANTICS_CONTRACT_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-abort-rollback-semantics-contract-intake";
+
+    static final String NODE_V326_CREDENTIAL_RESOLVER_ABORT_ROLLBACK_SEMANTICS_CONTRACT_MARKDOWN_ENDPOINT =
+            "/api/v1/audit/managed-audit-manual-sandbox-connection-credential-resolver-abort-rollback-semantics-contract-intake?format=markdown";
+
+    static final String NODE_V326_CREDENTIAL_RESOLVER_ABORT_ROLLBACK_SEMANTICS_CONTRACT_STATE =
+            "abort-rollback-semantics-contract-intake-ready";
 
     static final String NODE_V210_APPROVAL_BINDING_CONTRACT_VERSION =
             "managed-audit-identity-approval-binding-contract.v1";

@@ -50,4 +50,6 @@ Java v147: consumes Node v320 endpoint-handle allowlist approval contract intake
 Java v148: splits sandbox connection response records out of ReleaseApprovalRehearsalResponseRecords for maintainability.
 151-version-149-no-network-safety-fixture-contract-echo.md
 Java v149: consumes Node v323 no-network safety fixture contract intake and keeps the echo read-only for Node v324.
+152-version-150-abort-rollback-semantics-contract-echo.md
+Java v150: consumes Node v326 abort/rollback semantics contract intake and keeps the echo read-only for Node v327.
 ```

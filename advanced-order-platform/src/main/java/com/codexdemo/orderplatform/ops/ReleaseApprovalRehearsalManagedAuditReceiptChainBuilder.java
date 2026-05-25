@@ -34,6 +34,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -303,6 +305,13 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt =
                         sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
                                 .build(managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt);
+        ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder =
+                        new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder();
+        RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
+                managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt =
+                        sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                                .build(managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt);
 
         return new ReceiptChain(
                 approvalHandoffVerificationMarker,
@@ -376,7 +385,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                 managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
                 sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
                 managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
-                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+                managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
+                sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
         );
     }
 
@@ -526,6 +537,11 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
                     managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
                     sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+            ,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
     ) {
     }
 }

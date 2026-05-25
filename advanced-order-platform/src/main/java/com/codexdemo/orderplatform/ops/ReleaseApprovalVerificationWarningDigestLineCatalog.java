@@ -40,6 +40,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker;
 import java.util.ArrayList;
@@ -189,6 +191,12 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                         receipts
                                 .managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt()
                 ));
+        lines.addAll(builders
+                .sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder()
+                .warningDigestWarningLines(
+                        receipts
+                                .managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt()
+                ));
         return lines;
     }
 
@@ -331,6 +339,12 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                         receipts
                                 .managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt()
                 ));
+        lines.addAll(builders
+                .sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder()
+                .warningDigestBoundaryLines(
+                        receipts
+                                .managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt()
+                ));
         return lines;
     }
 
@@ -401,7 +415,9 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
                     sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
     ) {
     }
 
@@ -472,7 +488,9 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
             RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
-                    managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
     ) {
     }
 }

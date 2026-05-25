@@ -34,6 +34,8 @@ import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialR
         .RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt;
+import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords
+        .RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords
         .RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt;
 import com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords
@@ -114,6 +116,8 @@ final class ReleaseApprovalVerificationHintBuilder {
             sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder;
     private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
             sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder;
+    private final ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+            sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder;
     private final List<ReleaseApprovalVerificationHintContribution> verificationContributions;
     private final ReleaseApprovalVerificationWarningDigestBuilder warningDigestBuilder;
 
@@ -183,7 +187,9 @@ final class ReleaseApprovalVerificationHintBuilder {
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
                     sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
             ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
-                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+            ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                    sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
     ) {
         this.sandboxAdapterApprovalSchemaGuardReceiptBuilder =
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder;
@@ -251,6 +257,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder;
         this.sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder =
                 sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder;
+        this.sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder =
+                sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder;
         this.verificationContributions = ReleaseApprovalVerificationHintContributionCatalog.build(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
                 sandboxConnectionOperatorHandoffMarkerBuilder,
@@ -284,7 +292,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
-                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
         );
         this.warningDigestBuilder = new ReleaseApprovalVerificationWarningDigestBuilder(
                 sandboxAdapterApprovalSchemaGuardReceiptBuilder,
@@ -319,7 +328,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                 sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder,
                 sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
-                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+                sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
+                sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
         );
     }
 
@@ -409,6 +419,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
             ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
             ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
@@ -462,6 +474,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
                         failureTaxonomy,
                         executionBoundaries
                 ),
@@ -512,6 +525,7 @@ final class ReleaseApprovalVerificationHintBuilder {
                         managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
                         managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
+                        managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
                         executionBoundaries
                 ),
                 false,
@@ -625,6 +639,8 @@ final class ReleaseApprovalVerificationHintBuilder {
                     managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
             RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
                     managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
+            RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
+                    managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
             ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries
     ) {
         return !requestContext.approvalLedgerWritten()
@@ -838,6 +854,10 @@ final class ReleaseApprovalVerificationHintBuilder {
                 && sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
                 .noCredentialConnectionWriteOrAutoStartProved(
                         managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
+                )
+                && sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+                .noCredentialConnectionWriteOrAutoStartProved(
+                        managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
                 )
                 && !executionBoundaries.nodeMayCreateApprovalDecision()
                 && !executionBoundaries.nodeMayWriteApprovalLedger();

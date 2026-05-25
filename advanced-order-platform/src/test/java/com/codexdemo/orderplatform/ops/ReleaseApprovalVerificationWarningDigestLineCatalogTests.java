@@ -19,12 +19,12 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
         List<String> boundaryLines = ReleaseApprovalVerificationWarningDigestLineCatalog
                 .boundaryLines(builders, receipts);
 
-        assertThat(warningLines).hasSize(33);
+        assertThat(warningLines).hasSize(34);
         assertThat(warningLines.getFirst())
                 .startsWith("managedAuditSandboxAdapterApprovalSchemaGuardReceiptWarnings=");
         assertThat(warningLines.getLast())
                 .startsWith(
-                        "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptWarnings="
+                        "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptWarnings="
                 );
 
         assertThat(boundaryLines.getFirst())
@@ -55,10 +55,14 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                         "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractState=no-network-safety-fixture-contract-intake-ready",
                         "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractReadyForNodeV324=true",
                         "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractHttpRequestSent=false",
-                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractTcpConnectionAttempted=false"
+                        "sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractTcpConnectionAttempted=false",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractState=abort-rollback-semantics-contract-intake-ready",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractReadyForNodeV327=true",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractAbortRollbackSemanticsExecuted=false",
+                        "sandboxEndpointCredentialResolverAbortRollbackSemanticsContractRollbackExecuted=false"
                 );
         assertThat(boundaryLines.getLast())
-                .isEqualTo("sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractAutomaticUpstreamStart=false");
+                .isEqualTo("sandboxEndpointCredentialResolverAbortRollbackSemanticsContractAutomaticUpstreamStart=false");
     }
 
     private static ReleaseApprovalVerificationWarningDigestLineCatalog.Builders builders() {
@@ -95,7 +99,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder(),
                 new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder(),
-                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder()
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder(),
+                new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder()
         );
     }
 
@@ -135,7 +140,8 @@ class ReleaseApprovalVerificationWarningDigestLineCatalogTests extends OpsEviden
                 rehearsal.managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt(),
                 rehearsal.managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt(),
-                rehearsal.managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt()
+                rehearsal.managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt(),
+                rehearsal.managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt()
         );
     }
 }
