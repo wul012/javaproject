@@ -27,7 +27,7 @@ class OpsReleaseApprovalRehearsalLiveAggregationVerificationHintIntegrationTests
                 .andExpect(jsonPath("$.verificationHint.hintVersion")
                         .value("java-release-approval-rehearsal-verification-hint.v1"))
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v50"))
+                        .value("java-release-approval-rehearsal-response-schema.v51"))
                 .andExpect(jsonPath("$.verificationHint.warningDigest").exists())
                 .andExpect(jsonPath("$.verificationHint.noLedgerWriteProof")
                         .value("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS"))
@@ -35,6 +35,18 @@ class OpsReleaseApprovalRehearsalLiveAggregationVerificationHintIntegrationTests
                 .andExpect(jsonPath("$.verificationHint.nodeMayTreatAsProductionAuthorization").value(false))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("verificationHint")))
+                .andExpect(jsonPath("$.verificationHint.schemaFields",
+                        hasItem("evidenceExportHint")))
+                .andExpect(jsonPath("$.evidenceExportHint.currentJsonEndpoint")
+                        .value("/api/v1/ops/release-approval-rehearsal"))
+                .andExpect(jsonPath("$.evidenceExportHint.responseSchemaVersion")
+                        .value("java-release-approval-rehearsal-response-schema.v51"))
+                .andExpect(jsonPath("$.evidenceExportHint.readOnly").value(true))
+                .andExpect(jsonPath("$.evidenceExportHint.stableCurrentResponse").value(true))
+                .andExpect(jsonPath("$.evidenceExportHint.requiresCredentialValue").value(false))
+                .andExpect(jsonPath("$.evidenceExportHint.executesNetworkRequest").value(false))
+                .andExpect(jsonPath("$.evidenceExportHint.writesLedgerOrSchema").value(false))
+                .andExpect(jsonPath("$.evidenceExportHint.startsUpstreamProcess").value(false))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("operatorWindowHint")))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",

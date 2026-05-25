@@ -282,7 +282,7 @@ class OpsEvidenceServiceHumanApprovalArtifactReviewPacketEchoTests extends OpsEv
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v50");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v51");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

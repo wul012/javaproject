@@ -15,6 +15,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 new ReleaseApprovalRehearsalHandoffHintBuilder();
         ReleaseApprovalRehearsalFailureTaxonomyBuilder failureTaxonomyBuilder =
                 new ReleaseApprovalRehearsalFailureTaxonomyBuilder();
+        ReleaseApprovalRehearsalEvidenceExportHintBuilder evidenceExportHintBuilder =
+                new ReleaseApprovalRehearsalEvidenceExportHintBuilder();
         NormalizedRequest normalizedRequest = NormalizedRequest.from(request);
         RehearsalSections sections = rehearsalSections(
                 evidence,
@@ -107,6 +109,7 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain
                         .managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt(),
                 failureTaxonomy,
+                evidenceExportHintBuilder.build(),
                 releaseApprovalVerificationHint(
                         sections,
                         managedAuditReceiptChain,

@@ -363,11 +363,17 @@ public class OpsEvidenceService {
     static final String RELEASE_APPROVAL_REHEARSAL_FAILURE_TAXONOMY_VERSION =
             "java-release-approval-rehearsal-failure-taxonomy.v1";
 
+    static final String RELEASE_APPROVAL_REHEARSAL_EVIDENCE_EXPORT_HINT_VERSION =
+            "java-release-approval-rehearsal-evidence-export-hint.v1";
+
+    static final String RELEASE_APPROVAL_REHEARSAL_EVIDENCE_EXPORT_HINT_SCHEMA_VERSION =
+            "java-release-approval-rehearsal-response-schema.v51";
+
     static final String RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION =
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v50";
+            "java-release-approval-rehearsal-response-schema.v51";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";

@@ -220,6 +220,7 @@ final class ReleaseApprovalVerificationHintCatalog {
                 "managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt",
                 "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt",
                 "failureTaxonomy",
+                "evidenceExportHint",
                 "verificationHint",
                 "releaseApprovalInputs",
                 "liveSignals",

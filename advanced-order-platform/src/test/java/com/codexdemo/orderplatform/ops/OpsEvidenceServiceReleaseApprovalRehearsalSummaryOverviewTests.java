@@ -33,6 +33,39 @@ class OpsEvidenceServiceReleaseApprovalRehearsalSummaryOverviewTests extends Ops
                         "AUDIT_CORRELATION_ID_MISSING",
                         "REHEARSAL_REMAINS_READ_ONLY"
                 );
+        assertThat(rehearsal.evidenceExportHint().exportHintVersion())
+                .isEqualTo("java-release-approval-rehearsal-evidence-export-hint.v1");
+        assertThat(rehearsal.evidenceExportHint().responseSchemaVersion())
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v51");
+        assertThat(rehearsal.evidenceExportHint().currentJsonEndpoint())
+                .isEqualTo("/api/v1/ops/release-approval-rehearsal");
+        assertThat(rehearsal.evidenceExportHint().sourceEvidenceEndpoint())
+                .isEqualTo("/api/v1/ops/evidence");
+        assertThat(rehearsal.evidenceExportHint().preferredArtifactName())
+                .isEqualTo("release-approval-rehearsal-current.json");
+        assertThat(rehearsal.evidenceExportHint().readOnly()).isTrue();
+        assertThat(rehearsal.evidenceExportHint().stableCurrentResponse()).isTrue();
+        assertThat(rehearsal.evidenceExportHint().historicalFallbackAllowed()).isTrue();
+        assertThat(rehearsal.evidenceExportHint().requiresCredentialValue()).isFalse();
+        assertThat(rehearsal.evidenceExportHint().parsesRawEndpointUrl()).isFalse();
+        assertThat(rehearsal.evidenceExportHint().executesNetworkRequest()).isFalse();
+        assertThat(rehearsal.evidenceExportHint().writesLedgerOrSchema()).isFalse();
+        assertThat(rehearsal.evidenceExportHint().startsUpstreamProcess()).isFalse();
+        assertThat(rehearsal.evidenceExportHint().requiredConsumerChecks())
+                .containsExactly(
+                        "responseSchemaVersion",
+                        "verificationHint.warningDigest",
+                        "verificationHint.noLedgerWriteProved",
+                        "executionBoundaries.nodeMayWriteApprovalLedger",
+                        "executionBoundaries.nodeMayTriggerRollback"
+                );
+        assertThat(rehearsal.evidenceExportHint().prohibitedConsumerActions())
+                .contains(
+                        "credential_value_read",
+                        "raw_endpoint_url_parse",
+                        "deployment_or_rollback_execution",
+                        "automatic_upstream_start"
+                );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
                 .isEqualTo("/contracts/release-operator-signoff.fixture.json");
         assertThat(rehearsal.releaseApprovalInputs().rollbackApproverEvidenceFixtureEndpoint())

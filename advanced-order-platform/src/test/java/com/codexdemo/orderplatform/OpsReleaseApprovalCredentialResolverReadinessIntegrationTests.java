@@ -115,7 +115,7 @@ class OpsReleaseApprovalCredentialResolverReadinessIntegrationTests {
                         .value(false))
                 .andExpect(jsonPath("$.managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt.receiptWarnings").isEmpty())
                 .andExpect(jsonPath("$.verificationHint.responseSchemaVersion")
-                        .value("java-release-approval-rehearsal-response-schema.v50"))
+                        .value("java-release-approval-rehearsal-response-schema.v51"))
                 .andExpect(jsonPath("$.verificationHint.schemaFields",
                         hasItem("managedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt")))
                 .andExpect(jsonPath("$.verificationHint.warningDigestInputs",

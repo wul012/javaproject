@@ -178,7 +178,7 @@ class OpsEvidenceServiceCredentialResolverDisabledRuntimeShellCandidateGateEchoT
         assertThat(receipt.receiptDigest()).startsWith("sha256:");
 
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v50");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v51");
         assertThat(rehearsal.verificationHint().schemaFields())
                 .contains("managedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt");
         assertThat(rehearsal.verificationHint().warningDigestInputs())

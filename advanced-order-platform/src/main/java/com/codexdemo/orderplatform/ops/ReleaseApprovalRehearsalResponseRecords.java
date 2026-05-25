@@ -598,6 +598,26 @@ public final class ReleaseApprovalRehearsalResponseRecords {
     ) {
     }
 
+    public record RehearsalEvidenceExportHint(
+            String exportHintVersion,
+            String responseSchemaVersion,
+            String currentJsonEndpoint,
+            String sourceEvidenceEndpoint,
+            String preferredArtifactName,
+            String exportMode,
+            boolean readOnly,
+            boolean stableCurrentResponse,
+            boolean historicalFallbackAllowed,
+            boolean requiresCredentialValue,
+            boolean parsesRawEndpointUrl,
+            boolean executesNetworkRequest,
+            boolean writesLedgerOrSchema,
+            boolean startsUpstreamProcess,
+            List<String> requiredConsumerChecks,
+            List<String> prohibitedConsumerActions
+    ) {
+    }
+
     public record RehearsalVerificationHint(
             String hintVersion,
             String responseSchemaVersion,

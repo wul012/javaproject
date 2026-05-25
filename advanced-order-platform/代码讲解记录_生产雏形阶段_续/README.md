@@ -52,4 +52,6 @@ Java v148: splits sandbox connection response records out of ReleaseApprovalRehe
 Java v149: consumes Node v323 no-network safety fixture contract intake and keeps the echo read-only for Node v324.
 152-version-150-abort-rollback-semantics-contract-echo.md
 Java v150: consumes Node v326 abort/rollback semantics contract intake and keeps the echo read-only for Node v327.
+153-version-151-release-approval-evidence-export-hint.md
+Java v151: adds a stable read-only release approval rehearsal evidence export hint while Node v329 is not yet generated.
 ```
