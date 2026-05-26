@@ -36,7 +36,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalSummaryOverviewTests extends Ops
         assertThat(rehearsal.evidenceExportHint().exportHintVersion())
                 .isEqualTo("java-release-approval-rehearsal-evidence-export-hint.v1");
         assertThat(rehearsal.evidenceExportHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v51");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v52");
         assertThat(rehearsal.evidenceExportHint().currentJsonEndpoint())
                 .isEqualTo("/api/v1/ops/release-approval-rehearsal");
         assertThat(rehearsal.evidenceExportHint().sourceEvidenceEndpoint())
@@ -65,6 +65,39 @@ class OpsEvidenceServiceReleaseApprovalRehearsalSummaryOverviewTests extends Ops
                         "raw_endpoint_url_parse",
                         "deployment_or_rollback_execution",
                         "automatic_upstream_start"
+                );
+        assertThat(rehearsal.inputHardeningDecisionEcho().echoVersion())
+                .isEqualTo("java-release-approval-rehearsal-input-hardening-decision-echo.v1");
+        assertThat(rehearsal.inputHardeningDecisionEcho().sourceNodeVersion()).isEqualTo("Node v329");
+        assertThat(rehearsal.inputHardeningDecisionEcho().sourceProfileVersion())
+                .isEqualTo(
+                        "managed-audit-manual-sandbox-connection-credential-resolver-implementation-candidate-gate-input-hardening-decision.v1"
+                );
+        assertThat(rehearsal.inputHardeningDecisionEcho().sourceCandidateGateDecision())
+                .isEqualTo("require-input-export-hardening-before-disabled-runtime-design");
+        assertThat(rehearsal.inputHardeningDecisionEcho().sourceDecisionDigest())
+                .isEqualTo("e92109116e9d106ffdaa5691aa2eaa626fb595f8a9f4020dbf903fbce7874e87");
+        assertThat(rehearsal.inputHardeningDecisionEcho().consumedEvidenceExportMode())
+                .isEqualTo("stable-read-only-current-response");
+        assertThat(rehearsal.inputHardeningDecisionEcho().readOnlyEcho()).isTrue();
+        assertThat(rehearsal.inputHardeningDecisionEcho().consumesNodeV329()).isTrue();
+        assertThat(rehearsal.inputHardeningDecisionEcho().stableJavaEvidenceExportAvailable()).isTrue();
+        assertThat(rehearsal.inputHardeningDecisionEcho().readyForNodeV330CandidateGateUpstreamAlignment()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().readyForDisabledRuntimeShellDesignDraft()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().requiresCredentialValue()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().parsesRawEndpointUrl()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().opensManagedAuditConnection()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().executesNetworkRequest()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().writesApprovalLedger()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().triggersDeploymentOrRollback()).isFalse();
+        assertThat(rehearsal.inputHardeningDecisionEcho().satisfiedJavaInputHardeningRequirements())
+                .containsExactly("java-stable-evidence-export");
+        assertThat(rehearsal.inputHardeningDecisionEcho().acceptedNoGoConditions())
+                .contains(
+                        "CREDENTIAL_VALUE_REQUIRED",
+                        "NETWORK_REQUEST_REQUIRED",
+                        "JAVA_WRITE_REQUIRED",
+                        "AUTO_START_REQUIRED"
                 );
         assertThat(rehearsal.releaseApprovalInputs().releaseOperatorSignoffFixtureEndpoint())
                 .isEqualTo("/contracts/release-operator-signoff.fixture.json");

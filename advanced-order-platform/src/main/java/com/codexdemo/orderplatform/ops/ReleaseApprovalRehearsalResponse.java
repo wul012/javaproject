@@ -141,6 +141,7 @@ public record ReleaseApprovalRehearsalResponse(
                 managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
         ReleaseApprovalRehearsalResponseRecords.RehearsalFailureTaxonomy failureTaxonomy,
         ReleaseApprovalRehearsalResponseRecords.RehearsalEvidenceExportHint evidenceExportHint,
+        ReleaseApprovalRehearsalResponseRecords.RehearsalInputHardeningDecisionEcho inputHardeningDecisionEcho,
         ReleaseApprovalRehearsalResponseRecords.RehearsalVerificationHint verificationHint,
         ReleaseApprovalRehearsalResponseRecords.ReleaseApprovalInputs releaseApprovalInputs,
         ReleaseApprovalRehearsalResponseRecords.LiveSignals liveSignals,

@@ -14,7 +14,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
         assertThat(rehearsal.verificationHint().hintVersion())
                 .isEqualTo("java-release-approval-rehearsal-verification-hint.v1");
         assertThat(rehearsal.verificationHint().responseSchemaVersion())
-                .isEqualTo("java-release-approval-rehearsal-response-schema.v51");
+                .isEqualTo("java-release-approval-rehearsal-response-schema.v52");
         assertThat(rehearsal.verificationHint().warningDigest()).startsWith("sha256:");
         assertThat(rehearsal.verificationHint().noLedgerWriteProof())
                 .isEqualTo("NO_LEDGER_WRITE_PROOF_BY_RESPONSE_FIELDS");
@@ -71,6 +71,7 @@ class OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests ex
                         "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt",
                         "failureTaxonomy",
                         "evidenceExportHint",
+                        "inputHardeningDecisionEcho",
                         "verificationHint",
                         "executionBoundaries"
                 );

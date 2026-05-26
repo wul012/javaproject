@@ -618,6 +618,37 @@ public final class ReleaseApprovalRehearsalResponseRecords {
     ) {
     }
 
+    public record RehearsalInputHardeningDecisionEcho(
+            String echoVersion,
+            String sourceNodeVersion,
+            String sourceProfileVersion,
+            String sourceCandidateGateState,
+            String sourceCandidateGateDecision,
+            String sourceDecisionDigest,
+            String sourceEvidenceArtifact,
+            String consumedEvidenceExportHintVersion,
+            String consumedEvidenceExportMode,
+            boolean readOnlyEcho,
+            boolean consumesNodeV329,
+            boolean stableJavaEvidenceExportAvailable,
+            boolean readyForNodeV330CandidateGateUpstreamAlignment,
+            boolean readyForDisabledRuntimeShellDesignDraft,
+            boolean readyForRuntimeShellImplementation,
+            boolean requiresCredentialValue,
+            boolean parsesRawEndpointUrl,
+            boolean opensManagedAuditConnection,
+            boolean executesNetworkRequest,
+            boolean writesApprovalLedger,
+            boolean executesSchemaMigration,
+            boolean triggersDeploymentOrRollback,
+            boolean startsUpstreamProcess,
+            List<String> satisfiedJavaInputHardeningRequirements,
+            List<String> remainingExternalInputHardeningRequirements,
+            List<String> acceptedNoGoConditions,
+            List<String> nodeVerificationActions
+    ) {
+    }
+
     public record RehearsalVerificationHint(
             String hintVersion,
             String responseSchemaVersion,

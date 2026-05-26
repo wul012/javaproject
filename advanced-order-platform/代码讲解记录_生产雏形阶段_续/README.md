@@ -54,4 +54,6 @@ Java v149: consumes Node v323 no-network safety fixture contract intake and keep
 Java v150: consumes Node v326 abort/rollback semantics contract intake and keeps the echo read-only for Node v327.
 153-version-151-release-approval-evidence-export-hint.md
 Java v151: adds a stable read-only release approval rehearsal evidence export hint while Node v329 is not yet generated.
+154-version-152-input-hardening-decision-echo.md
+Java v152: consumes Node v329 input-hardening decision and reuses v151 stable evidence export for the read-only echo.
 ```

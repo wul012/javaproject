@@ -221,6 +221,7 @@ final class ReleaseApprovalVerificationHintCatalog {
                 "managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt",
                 "failureTaxonomy",
                 "evidenceExportHint",
+                "inputHardeningDecisionEcho",
                 "verificationHint",
                 "releaseApprovalInputs",
                 "liveSignals",

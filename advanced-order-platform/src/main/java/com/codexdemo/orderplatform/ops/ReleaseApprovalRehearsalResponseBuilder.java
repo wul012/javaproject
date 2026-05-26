@@ -17,6 +17,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 new ReleaseApprovalRehearsalFailureTaxonomyBuilder();
         ReleaseApprovalRehearsalEvidenceExportHintBuilder evidenceExportHintBuilder =
                 new ReleaseApprovalRehearsalEvidenceExportHintBuilder();
+        ReleaseApprovalRehearsalInputHardeningDecisionEchoBuilder inputHardeningDecisionEchoBuilder =
+                new ReleaseApprovalRehearsalInputHardeningDecisionEchoBuilder();
         NormalizedRequest normalizedRequest = NormalizedRequest.from(request);
         RehearsalSections sections = rehearsalSections(
                 evidence,
@@ -35,6 +37,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                         normalizedRequest.auditCorrelationId()
                 );
         ReleaseApprovalRehearsalResponseRecords.ExecutionBoundaries executionBoundaries = executionBoundaries();
+        ReleaseApprovalRehearsalResponseRecords.RehearsalEvidenceExportHint evidenceExportHint =
+                evidenceExportHintBuilder.build();
         return new ReleaseApprovalRehearsalResponse(
                 evidence.sampledAt(),
                 OpsEvidenceService.RELEASE_APPROVAL_REHEARSAL_VERSION,
@@ -109,7 +113,8 @@ final class ReleaseApprovalRehearsalResponseBuilder {
                 managedAuditReceiptChain
                         .managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt(),
                 failureTaxonomy,
-                evidenceExportHintBuilder.build(),
+                evidenceExportHint,
+                inputHardeningDecisionEchoBuilder.build(evidenceExportHint),
                 releaseApprovalVerificationHint(
                         sections,
                         managedAuditReceiptChain,

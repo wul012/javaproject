@@ -50,4 +50,6 @@ v150: d/150/解释/说明.md
       abort/rollback semantics contract echo for Node v326, ready for Node v327 verification
 v151: d/151/解释/说明.md
       stable release approval rehearsal evidence export hint for future Node v329 consumption
+v152: d/152/解释/说明.md
+      input-hardening decision echo for Node v329, reusing Java v151 stable evidence export
 ```

@@ -367,13 +367,28 @@ public class OpsEvidenceService {
             "java-release-approval-rehearsal-evidence-export-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_EVIDENCE_EXPORT_HINT_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v51";
+            "java-release-approval-rehearsal-response-schema.v52";
+
+    static final String RELEASE_APPROVAL_REHEARSAL_INPUT_HARDENING_DECISION_ECHO_VERSION =
+            "java-release-approval-rehearsal-input-hardening-decision-echo.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_VERIFICATION_HINT_VERSION =
             "java-release-approval-rehearsal-verification-hint.v1";
 
     static final String RELEASE_APPROVAL_REHEARSAL_RESPONSE_SCHEMA_VERSION =
-            "java-release-approval-rehearsal-response-schema.v51";
+            "java-release-approval-rehearsal-response-schema.v52";
+
+    static final String NODE_V329_INPUT_HARDENING_DECISION_PROFILE_VERSION =
+            "managed-audit-manual-sandbox-connection-credential-resolver-implementation-candidate-gate-input-hardening-decision.v1";
+
+    static final String NODE_V329_INPUT_HARDENING_DECISION_STATE =
+            "implementation-candidate-gate-input-hardening-decision-ready";
+
+    static final String NODE_V329_INPUT_HARDENING_DECISION =
+            "require-input-export-hardening-before-disabled-runtime-design";
+
+    static final String NODE_V329_INPUT_HARDENING_DECISION_DIGEST =
+            "e92109116e9d106ffdaa5691aa2eaa626fb595f8a9f4020dbf903fbce7874e87";
 
     static final String NODE_V211_MANAGED_AUDIT_PROFILE_VERSION =
             "managed-audit-identity-approval-provenance-dry-run-packet.v1";
