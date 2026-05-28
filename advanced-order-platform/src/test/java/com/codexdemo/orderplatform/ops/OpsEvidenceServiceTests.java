@@ -92,7 +92,9 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.healthProbe().additionalProbeEndpoints())
                 .containsExactly(
                         "/api/v1/ops/overview",
+                        "/api/v1/ops/shard-readiness",
                         "/api/v1/ops/release-approval-rehearsal",
+                        "/contracts/java-shard-readiness-v153.fixture.json",
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",
                         "/contracts/order-idempotency-store-abstraction.sample.json",
@@ -123,7 +125,9 @@ class OpsEvidenceServiceTests {
                         "GET /actuator/health",
                         "GET /api/v1/ops/overview",
                         "GET /api/v1/ops/evidence",
+                        "GET /api/v1/ops/shard-readiness",
                         "GET /api/v1/ops/release-approval-rehearsal",
+                        "GET /contracts/java-shard-readiness-v153.fixture.json",
                         "GET /contracts/ops-read-only-evidence.sample.json",
                         "GET /contracts/order-idempotency-boundary.sample.json",
                         "GET /contracts/order-idempotency-store-abstraction.sample.json",
@@ -755,7 +759,9 @@ class OpsEvidenceServiceTests {
         assertThat(evidence.evidenceEndpoints())
                 .contains(
                         "/api/v1/ops/evidence",
+                        "/api/v1/ops/shard-readiness",
                         "/api/v1/ops/release-approval-rehearsal",
+                        "/contracts/java-shard-readiness-v153.fixture.json",
                         "/contracts/ops-read-only-evidence.sample.json",
                         "/contracts/ops-evidence-field-guide.sample.json",
                         "/contracts/order-idempotency-boundary.sample.json",

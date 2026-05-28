@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Java v153 shard readiness echo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #162033;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0 0 24px;
+      color: #4b5870;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #dce3ee;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .label {
+      color: #65728a;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .value {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 17px;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #177245;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v153 shard readiness echo</h1>
+  <p class="summary">Frozen Node v369 shard-readiness.v1 fields, exposed as fixture-first read-only Java evidence.</p>
+  <section class="grid" aria-label="shard readiness fields">
+    <div class="item"><div class="label">project</div><div class="value">advanced-order-platform</div></div>
+    <div class="item"><div class="label">version</div><div class="value">Java v153</div></div>
+    <div class="item"><div class="label">readOnly</div><div class="value ok">true</div></div>
+    <div class="item"><div class="label">executionAllowed</div><div class="value">false</div></div>
+    <div class="item"><div class="label">shardEnabled</div><div class="value">false</div></div>
+    <div class="item"><div class="label">shardCount / slotCount</div><div class="value">0 / 0</div></div>
+    <div class="item"><div class="label">routingMode</div><div class="value">fixture</div></div>
+    <div class="item"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness</div></div>
+    <div class="item"><div class="label">evidencePath</div><div class="value">e/153/evidence/java-shard-readiness-v153.json</div></div>
+  </section>
+</main>
+</body>
+</html>

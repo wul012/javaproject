@@ -13,9 +13,16 @@ public class OpsOverviewController {
 
     private final OpsEvidenceService opsEvidenceService;
 
-    public OpsOverviewController(OpsOverviewService opsOverviewService, OpsEvidenceService opsEvidenceService) {
+    private final OpsShardReadinessService opsShardReadinessService;
+
+    public OpsOverviewController(
+            OpsOverviewService opsOverviewService,
+            OpsEvidenceService opsEvidenceService,
+            OpsShardReadinessService opsShardReadinessService
+    ) {
         this.opsOverviewService = opsOverviewService;
         this.opsEvidenceService = opsEvidenceService;
+        this.opsShardReadinessService = opsShardReadinessService;
     }
 
     @GetMapping("/overview")
@@ -26,6 +33,11 @@ public class OpsOverviewController {
     @GetMapping("/evidence")
     public OpsEvidenceResponse evidence() {
         return opsEvidenceService.evidence();
+    }
+
+    @GetMapping("/shard-readiness")
+    public OpsShardReadinessResponse shardReadiness() {
+        return opsShardReadinessService.readiness();
     }
 
     @GetMapping("/release-approval-rehearsal")
