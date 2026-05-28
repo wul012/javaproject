@@ -23,6 +23,12 @@ to discover Playwright MCP tools first. Prefer `mcp__playwright__` tools such as
 Run tab/open, snapshot, and screenshot calls sequentially so the session is established before
 capture. Use Playwright CLI or the Playwright skill only when MCP is unavailable.
 
+## Documentation Archive Rule
+
+代码讲解和截图归档类文档可以在原目录同级另起续写目录，避免单个目录长期膨胀。代码讲解可继续用
+`代码讲解记录_生产雏形阶段_续` 或后续同级续写目录；截图/说明归档可继续用 `d/<版本>/`，
+也可在内容过多时另起同级归档目录。保持命名清晰、版本可追踪，并在最终汇报中说明新目录位置。
+
 ## Completion Cleanup Gate
 
 Before sending the final response for any task, clean files and processes created during that task.
