@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Java v157 shard readiness evidence handoff</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0 0 24px;
+      color: #526176;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #dce3ee;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 88px;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    .label {
+      color: #65768a;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .value {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #1d794c;
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v157 shard readiness evidence handoff</h1>
+  <p class="summary">
+    Completed Java evidence handoff after Node v378 intake. It packages Java v155 index and Java v156 verification as
+    frozen, read-only inputs for future consumers.
+  </p>
+  <section class="grid" aria-label="evidence handoff fields">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/evidence-handoff</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-evidence-handoff-v157.fixture.json</div></div>
+    <div class="item"><div class="label">source index</div><div class="value">Java v155</div></div>
+    <div class="item"><div class="label">source verification</div><div class="value">Java v156</div></div>
+    <div class="item"><div class="label">last consumed by</div><div class="value">Node v378</div></div>
+    <div class="item"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="item wide">
+      <div class="label">consumer rules</div>
+      <div class="value">
+        <ul>
+          <li>consume-only-completed-and-tagged-java-evidence</li>
+          <li>prefer-versioned-fixture-and-archive-paths</li>
+          <li>do-not-read-rolling-current-files-for-historical-baselines</li>
+          <li>treat-active-sharding-as-disabled</li>
+          <li>do-not-start-or-stop-java-from-node-consumption</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

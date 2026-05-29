@@ -16,16 +16,20 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessEvidenceVerificationService opsShardReadinessEvidenceVerificationService;
 
+    private final OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
             OpsShardReadinessEvidenceIndexService opsShardReadinessEvidenceIndexService,
-            OpsShardReadinessEvidenceVerificationService opsShardReadinessEvidenceVerificationService
+            OpsShardReadinessEvidenceVerificationService opsShardReadinessEvidenceVerificationService,
+            OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
         this.opsShardReadinessEvidenceIndexService = opsShardReadinessEvidenceIndexService;
         this.opsShardReadinessEvidenceVerificationService = opsShardReadinessEvidenceVerificationService;
+        this.opsShardReadinessEvidenceHandoffService = opsShardReadinessEvidenceHandoffService;
     }
 
     @GetMapping("/shard-readiness")
@@ -46,5 +50,10 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/evidence-verification")
     public OpsShardReadinessEvidenceVerificationResponse shardReadinessEvidenceVerification() {
         return opsShardReadinessEvidenceVerificationService.verification();
+    }
+
+    @GetMapping("/shard-readiness/evidence-handoff")
+    public OpsShardReadinessEvidenceHandoffResponse shardReadinessEvidenceHandoff() {
+        return opsShardReadinessEvidenceHandoffService.handoff();
     }
 }
