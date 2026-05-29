@@ -24,6 +24,8 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService;
 
+    private final OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -32,7 +34,8 @@ public class OpsShardReadinessController {
             OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService,
             OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService,
             OpsShardReadinessLiveReadGatePlanService opsShardReadinessLiveReadGatePlanService,
-            OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService
+            OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService,
+            OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -42,6 +45,7 @@ public class OpsShardReadinessController {
         this.opsShardReadinessActiveShardPlanHandoffService = opsShardReadinessActiveShardPlanHandoffService;
         this.opsShardReadinessLiveReadGatePlanService = opsShardReadinessLiveReadGatePlanService;
         this.opsShardReadinessOperatorServiceLifecycleService = opsShardReadinessOperatorServiceLifecycleService;
+        this.opsShardReadinessDeclaredOperatorLifecycleService = opsShardReadinessDeclaredOperatorLifecycleService;
     }
 
     @GetMapping("/shard-readiness")
@@ -82,5 +86,10 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/operator-service-lifecycle")
     public OpsShardReadinessOperatorServiceLifecycleResponse shardReadinessOperatorServiceLifecycle() {
         return opsShardReadinessOperatorServiceLifecycleService.lifecycle();
+    }
+
+    @GetMapping("/shard-readiness/declared-operator-lifecycle")
+    public OpsShardReadinessDeclaredOperatorLifecycleResponse shardReadinessDeclaredOperatorLifecycle() {
+        return opsShardReadinessDeclaredOperatorLifecycleService.lifecycle();
     }
 }

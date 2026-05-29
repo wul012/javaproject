@@ -1,0 +1,45 @@
+- main [ref=e2] [box=135,0,1080,1182]:
+  - heading "Java v161 declared operator lifecycle evidence" [level=1] [ref=e3] [box=135,36,1080,40]
+  - paragraph [ref=e4] [box=135,88,1080,48]: Declared Java-side operator lifecycle evidence after Node v387 archive verification. It records the service owner, start command, port, GET-only smoke targets, fail-closed behavior, and cleanup responsibility without starting Java or approving runtime probes.
+  - generic [ref=e5] [box=135,154,135,35]: "status: passed"
+  - generic [ref=e6] [box=135,207,1080,47]: runtimeProbeAllowed=false, nodeMayStartService=false, nodeMayStopService=false
+  - generic [ref=e7] [box=135,281,1080,406]:
+    - generic [ref=e8] [box=135,281,533,100]:
+      - generic [ref=e9] [box=152,295,500,14]: endpoint
+      - generic [ref=e10] [box=152,317,500,49]: GET /api/v1/ops/shard-readiness/declared-operator-lifecycle
+    - generic [ref=e11] [box=682,281,533,100]:
+      - generic [ref=e12] [box=699,295,500,14]: fixture
+      - generic [ref=e13] [box=699,317,500,49]: /contracts/java-shard-readiness-declared-operator-lifecycle-v161.fixture.json
+    - generic [ref=e14] [box=135,394,533,88]:
+      - generic [ref=e15] [box=152,409,500,14]: source evidence
+      - generic [ref=e16] [box=152,431,500,24]: Java v160
+    - generic [ref=e17] [box=682,394,533,88]:
+      - generic [ref=e18] [box=699,409,500,14]: last verified by
+      - generic [ref=e19] [box=699,431,500,24]: Node v387
+    - generic [ref=e20] [box=135,496,533,88]:
+      - generic [ref=e21] [box=152,511,500,14]: next consumer hint
+      - generic [ref=e22] [box=152,533,500,24]: Node v388
+    - generic [ref=e23] [box=682,496,533,88]:
+      - generic [ref=e24] [box=699,511,500,14]: port
+      - generic [ref=e25] [box=699,533,500,24]: "8080"
+    - generic [ref=e26] [box=135,598,533,88]:
+      - generic [ref=e27] [box=152,613,500,14]: service owner
+      - generic [ref=e28] [box=152,635,500,24]: java-platform-operator
+    - generic [ref=e29] [box=682,598,533,88]:
+      - generic [ref=e30] [box=699,613,500,14]: base URL handle
+      - generic [ref=e31] [box=699,635,500,24]: java-local-readonly-base-url
+  - generic [ref=e32] [box=135,714,1080,167]:
+    - heading "GET-only smoke targets" [level=2] [ref=e33] [box=135,739,1080,26]
+    - list [ref=e34] [box=135,779,1080,103]:
+      - listitem [ref=e35] [box=135,779,535,47]: GET /actuator/health
+      - listitem [ref=e36] [box=680,779,535,47]: GET /api/v1/ops/shard-readiness/declared-operator-lifecycle
+      - listitem [ref=e37] [box=135,835,535,47]: GET /api/v1/ops/shard-readiness/operator-service-lifecycle
+      - listitem [ref=e38] [box=680,835,535,47]: GET /api/v1/ops/shard-readiness/live-read-gate-plan
+  - generic [ref=e39] [box=135,910,1080,224]:
+    - heading "Runtime gate prerequisites" [level=2] [ref=e40] [box=135,934,1080,26]
+    - list [ref=e41] [box=135,974,1080,160]:
+      - listitem [ref=e42] [box=135,974,535,47]: mini-kv-declared-operator-lifecycle-evidence
+      - listitem [ref=e43] [box=680,974,535,47]: separate-approved-runtime-live-read-gate
+      - listitem [ref=e44] [box=135,1031,535,47]: operator-confirms-java-service-running-and-port
+      - listitem [ref=e45] [box=680,1031,535,47]: operator-confirms-get-only-smoke-before-node-consumption
+      - listitem [ref=e46] [box=135,1087,535,47]: node-records-fail-closed-result-before-consuming

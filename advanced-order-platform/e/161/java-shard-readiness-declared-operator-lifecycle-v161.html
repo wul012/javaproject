@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v161 declared operator lifecycle evidence</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2433;
+      --muted: #58657a;
+      --line: #ccd5e0;
+      --panel: #f7f9fb;
+      --accent: #236a5b;
+      --accent-soft: #e5f3ef;
+      --warn: #8f5a13;
+      --warn-soft: #fff4df;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    main {
+      width: min(1080px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: var(--panel);
+      min-height: 88px;
+    }
+    .label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .value {
+      overflow-wrap: anywhere;
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+    section {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: #ffffff;
+      line-height: 1.35;
+    }
+    .status {
+      display: inline-block;
+      margin-top: 18px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .notice {
+      margin-top: 18px;
+      border: 1px solid #efd39b;
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: var(--warn-soft);
+      color: var(--warn);
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 28px, 1080px);
+        padding-top: 24px;
+      }
+      h1 {
+        font-size: 27px;
+      }
+      .grid,
+      ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v161 declared operator lifecycle evidence</h1>
+  <p>
+    Declared Java-side operator lifecycle evidence after Node v387 archive verification. It records the service
+    owner, start command, port, GET-only smoke targets, fail-closed behavior, and cleanup responsibility without
+    starting Java or approving runtime probes.
+  </p>
+  <div class="status">status: passed</div>
+  <div class="notice">runtimeProbeAllowed=false, nodeMayStartService=false, nodeMayStopService=false</div>
+  <div class="grid">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/declared-operator-lifecycle</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-declared-operator-lifecycle-v161.fixture.json</div></div>
+    <div class="item"><div class="label">source evidence</div><div class="value">Java v160</div></div>
+    <div class="item"><div class="label">last verified by</div><div class="value">Node v387</div></div>
+    <div class="item"><div class="label">next consumer hint</div><div class="value">Node v388</div></div>
+    <div class="item"><div class="label">port</div><div class="value">8080</div></div>
+    <div class="item"><div class="label">service owner</div><div class="value">java-platform-operator</div></div>
+    <div class="item"><div class="label">base URL handle</div><div class="value">java-local-readonly-base-url</div></div>
+  </div>
+  <section>
+    <h2>GET-only smoke targets</h2>
+    <ul>
+      <li>GET /actuator/health</li>
+      <li>GET /api/v1/ops/shard-readiness/declared-operator-lifecycle</li>
+      <li>GET /api/v1/ops/shard-readiness/operator-service-lifecycle</li>
+      <li>GET /api/v1/ops/shard-readiness/live-read-gate-plan</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Runtime gate prerequisites</h2>
+    <ul>
+      <li>mini-kv-declared-operator-lifecycle-evidence</li>
+      <li>separate-approved-runtime-live-read-gate</li>
+      <li>operator-confirms-java-service-running-and-port</li>
+      <li>operator-confirms-get-only-smoke-before-node-consumption</li>
+      <li>node-records-fail-closed-result-before-consuming</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
