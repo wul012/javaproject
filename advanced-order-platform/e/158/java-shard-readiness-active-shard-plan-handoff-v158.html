@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Java v158 active shard plan boundary handoff</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f4f7f6;
+      color: #15201d;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0 0 24px;
+      color: #52645f;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #d8e3df;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 88px;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    .label {
+      color: #65756f;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .value {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #1d794c;
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v158 active shard plan boundary handoff</h1>
+  <p class="summary">
+    Read-only Java boundary handoff after Node v380 consumed Java v157 and Node v381 verified that archive. Java keeps
+    active shard prototype authority outside this service until a separate live-read plan exists.
+  </p>
+  <section class="grid" aria-label="active shard plan handoff fields">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/active-shard-plan-handoff</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-active-shard-plan-handoff-v158.fixture.json</div></div>
+    <div class="item"><div class="label">source handoff</div><div class="value">Java v157</div></div>
+    <div class="item"><div class="label">last consumed by</div><div class="value">Node v380</div></div>
+    <div class="item"><div class="label">archive verified by</div><div class="value">Node v381</div></div>
+    <div class="item"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="item wide">
+      <div class="label">java boundary rules</div>
+      <div class="value">
+        <ul>
+          <li>java-remains-read-only-contract-echo-and-handoff-producer</li>
+          <li>active-shard-prototype-authority-stays-with-mini-kv-plan</li>
+          <li>do-not-enable-java-shard-router-or-write-routing</li>
+          <li>do-not-start-or-stop-node-or-mini-kv-from-java-handoff</li>
+          <li>live-read-gate-requires-explicit-service-start-port-and-cleanup-plan</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

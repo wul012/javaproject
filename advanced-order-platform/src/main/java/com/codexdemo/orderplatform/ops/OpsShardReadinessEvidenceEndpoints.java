@@ -13,7 +13,8 @@ final class OpsShardReadinessEvidenceEndpoints {
                 OpsShardReadinessHardeningService.ENDPOINT,
                 OpsShardReadinessEvidenceIndexService.ENDPOINT,
                 OpsShardReadinessEvidenceVerificationService.ENDPOINT,
-                OpsShardReadinessEvidenceHandoffService.ENDPOINT
+                OpsShardReadinessEvidenceHandoffService.ENDPOINT,
+                OpsShardReadinessActiveShardPlanHandoffService.ENDPOINT
         );
     }
 
@@ -23,7 +24,8 @@ final class OpsShardReadinessEvidenceEndpoints {
                 OpsShardReadinessHardeningService.FIXTURE_ENDPOINT,
                 OpsShardReadinessEvidenceIndexService.FIXTURE_ENDPOINT,
                 OpsShardReadinessEvidenceVerificationService.FIXTURE_ENDPOINT,
-                OpsShardReadinessEvidenceHandoffService.FIXTURE_ENDPOINT
+                OpsShardReadinessEvidenceHandoffService.FIXTURE_ENDPOINT,
+                OpsShardReadinessActiveShardPlanHandoffService.FIXTURE_ENDPOINT
         );
     }
 

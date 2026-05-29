@@ -18,18 +18,22 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService;
 
+    private final OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
             OpsShardReadinessEvidenceIndexService opsShardReadinessEvidenceIndexService,
             OpsShardReadinessEvidenceVerificationService opsShardReadinessEvidenceVerificationService,
-            OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService
+            OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService,
+            OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
         this.opsShardReadinessEvidenceIndexService = opsShardReadinessEvidenceIndexService;
         this.opsShardReadinessEvidenceVerificationService = opsShardReadinessEvidenceVerificationService;
         this.opsShardReadinessEvidenceHandoffService = opsShardReadinessEvidenceHandoffService;
+        this.opsShardReadinessActiveShardPlanHandoffService = opsShardReadinessActiveShardPlanHandoffService;
     }
 
     @GetMapping("/shard-readiness")
@@ -55,5 +59,10 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/evidence-handoff")
     public OpsShardReadinessEvidenceHandoffResponse shardReadinessEvidenceHandoff() {
         return opsShardReadinessEvidenceHandoffService.handoff();
+    }
+
+    @GetMapping("/shard-readiness/active-shard-plan-handoff")
+    public OpsShardReadinessActiveShardPlanHandoffResponse shardReadinessActiveShardPlanHandoff() {
+        return opsShardReadinessActiveShardPlanHandoffService.handoff();
     }
 }

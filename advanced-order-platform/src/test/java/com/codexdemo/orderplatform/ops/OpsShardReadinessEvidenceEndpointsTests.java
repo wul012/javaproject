@@ -14,7 +14,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/api/v1/ops/shard-readiness/hardening",
                         "/api/v1/ops/shard-readiness/evidence-index",
                         "/api/v1/ops/shard-readiness/evidence-verification",
-                        "/api/v1/ops/shard-readiness/evidence-handoff"
+                        "/api/v1/ops/shard-readiness/evidence-handoff",
+                        "/api/v1/ops/shard-readiness/active-shard-plan-handoff"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
                 .containsExactly(
@@ -22,7 +23,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/contracts/java-shard-readiness-hardening-v154.fixture.json",
                         "/contracts/java-shard-readiness-evidence-index-v155.fixture.json",
                         "/contracts/java-shard-readiness-evidence-verification-v156.fixture.json",
-                        "/contracts/java-shard-readiness-evidence-handoff-v157.fixture.json"
+                        "/contracts/java-shard-readiness-evidence-handoff-v157.fixture.json",
+                        "/contracts/java-shard-readiness-active-shard-plan-handoff-v158.fixture.json"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.liveProbeEndpoints())
                 .containsExactly(
@@ -30,7 +32,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /api/v1/ops/shard-readiness/hardening",
                         "GET /api/v1/ops/shard-readiness/evidence-index",
                         "GET /api/v1/ops/shard-readiness/evidence-verification",
-                        "GET /api/v1/ops/shard-readiness/evidence-handoff"
+                        "GET /api/v1/ops/shard-readiness/evidence-handoff",
+                        "GET /api/v1/ops/shard-readiness/active-shard-plan-handoff"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureProbeEndpoints())
                 .containsExactly(
@@ -38,7 +41,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /contracts/java-shard-readiness-hardening-v154.fixture.json",
                         "GET /contracts/java-shard-readiness-evidence-index-v155.fixture.json",
                         "GET /contracts/java-shard-readiness-evidence-verification-v156.fixture.json",
-                        "GET /contracts/java-shard-readiness-evidence-handoff-v157.fixture.json"
+                        "GET /contracts/java-shard-readiness-evidence-handoff-v157.fixture.json",
+                        "GET /contracts/java-shard-readiness-active-shard-plan-handoff-v158.fixture.json"
                 );
     }
 }
