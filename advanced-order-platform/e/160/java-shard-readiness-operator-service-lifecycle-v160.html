@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Java v160 operator service lifecycle evidence</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f7f6f2;
+      color: #211f1a;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0 0 24px;
+      color: #5f5b52;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #e3dfd5;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 88px;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    .label {
+      color: #756f64;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .value {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #1d794c;
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v160 operator service lifecycle evidence</h1>
+  <p class="summary">
+    Operator-owned service lifecycle evidence after Node v385 archive verification. It freezes owner, port template,
+    GET smoke, fail-closed, and cleanup responsibilities without starting Java or opening runtime probes.
+  </p>
+  <section class="grid" aria-label="operator service lifecycle fields">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/operator-service-lifecycle</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-operator-service-lifecycle-v160.fixture.json</div></div>
+    <div class="item"><div class="label">source gate plan</div><div class="value">Java v159</div></div>
+    <div class="item"><div class="label">last verified by</div><div class="value">Node v385</div></div>
+    <div class="item"><div class="label">base url template</div><div class="value">http://127.0.0.1:{java-port}</div></div>
+    <div class="item"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="item wide">
+      <div class="label">operator prerequisites</div>
+      <div class="value">
+        <ul>
+          <li>operator-confirms-java-service-owner</li>
+          <li>operator-confirms-start-command-and-port-before-window</li>
+          <li>operator-confirms-stop-responsibility-before-window</li>
+          <li>operator-confirms-get-only-smoke-targets</li>
+          <li>operator-confirms-no-credential-or-raw-endpoint-value-read</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

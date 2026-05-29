@@ -16,7 +16,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/api/v1/ops/shard-readiness/evidence-verification",
                         "/api/v1/ops/shard-readiness/evidence-handoff",
                         "/api/v1/ops/shard-readiness/active-shard-plan-handoff",
-                        "/api/v1/ops/shard-readiness/live-read-gate-plan"
+                        "/api/v1/ops/shard-readiness/live-read-gate-plan",
+                        "/api/v1/ops/shard-readiness/operator-service-lifecycle"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
                 .containsExactly(
@@ -26,7 +27,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/contracts/java-shard-readiness-evidence-verification-v156.fixture.json",
                         "/contracts/java-shard-readiness-evidence-handoff-v157.fixture.json",
                         "/contracts/java-shard-readiness-active-shard-plan-handoff-v158.fixture.json",
-                        "/contracts/java-shard-readiness-live-read-gate-plan-v159.fixture.json"
+                        "/contracts/java-shard-readiness-live-read-gate-plan-v159.fixture.json",
+                        "/contracts/java-shard-readiness-operator-service-lifecycle-v160.fixture.json"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.liveProbeEndpoints())
                 .containsExactly(
@@ -36,7 +38,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /api/v1/ops/shard-readiness/evidence-verification",
                         "GET /api/v1/ops/shard-readiness/evidence-handoff",
                         "GET /api/v1/ops/shard-readiness/active-shard-plan-handoff",
-                        "GET /api/v1/ops/shard-readiness/live-read-gate-plan"
+                        "GET /api/v1/ops/shard-readiness/live-read-gate-plan",
+                        "GET /api/v1/ops/shard-readiness/operator-service-lifecycle"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureProbeEndpoints())
                 .containsExactly(
@@ -46,7 +49,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /contracts/java-shard-readiness-evidence-verification-v156.fixture.json",
                         "GET /contracts/java-shard-readiness-evidence-handoff-v157.fixture.json",
                         "GET /contracts/java-shard-readiness-active-shard-plan-handoff-v158.fixture.json",
-                        "GET /contracts/java-shard-readiness-live-read-gate-plan-v159.fixture.json"
+                        "GET /contracts/java-shard-readiness-live-read-gate-plan-v159.fixture.json",
+                        "GET /contracts/java-shard-readiness-operator-service-lifecycle-v160.fixture.json"
                 );
     }
 }

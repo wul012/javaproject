@@ -1,0 +1,30 @@
+- main [ref=e2] [box=143,40,1080,699]:
+  - heading "Java v160 operator service lifecycle evidence" [level=1] [ref=e3] [box=143,40,1080,40]
+  - paragraph [ref=e4] [box=143,90,1080,48]: Operator-owned service lifecycle evidence after Node v385 archive verification. It freezes owner, port template, GET smoke, fail-closed, and cleanup responsibilities without starting Java or opening runtime probes.
+  - region "operator service lifecycle fields" [ref=e5] [box=143,162,1080,577]:
+    - generic [ref=e6] [box=143,162,533,121]:
+      - generic [ref=e7] [box=159,179,500,15]: endpoint
+      - generic [ref=e8] [box=159,201,500,46]: GET /api/v1/ops/shard-readiness/operator-service-lifecycle
+    - generic [ref=e9] [box=690,162,533,121]:
+      - generic [ref=e10] [box=706,179,500,15]: fixture
+      - generic [ref=e11] [box=706,201,500,46]: /contracts/java-shard-readiness-operator-service-lifecycle-v160.fixture.json
+    - generic [ref=e12] [box=143,297,533,121]:
+      - generic [ref=e13] [box=159,314,500,15]: source gate plan
+      - generic [ref=e14] [box=159,336,500,23]: Java v159
+    - generic [ref=e15] [box=690,297,533,121]:
+      - generic [ref=e16] [box=706,314,500,15]: last verified by
+      - generic [ref=e17] [box=706,336,500,23]: Node v385
+    - generic [ref=e18] [box=143,432,533,121]:
+      - generic [ref=e19] [box=159,449,500,15]: base url template
+      - generic [ref=e20] [box=159,471,500,23]: "http://127.0.0.1:{java-port}"
+    - generic [ref=e21] [box=690,432,533,121]:
+      - generic [ref=e22] [box=706,449,500,15]: status
+      - generic [ref=e23] [box=706,471,500,23]: passed
+    - generic [ref=e24] [box=143,567,1080,171]:
+      - generic [ref=e25] [box=159,584,1047,15]: operator prerequisites
+      - list [ref=e27] [box=159,606,1047,116]:
+        - listitem [ref=e28] [box=177,606,1029,23]: operator-confirms-java-service-owner
+        - listitem [ref=e29] [box=177,629,1029,23]: operator-confirms-start-command-and-port-before-window
+        - listitem [ref=e30] [box=177,653,1029,23]: operator-confirms-stop-responsibility-before-window
+        - listitem [ref=e31] [box=177,676,1029,23]: operator-confirms-get-only-smoke-targets
+        - listitem [ref=e32] [box=177,699,1029,23]: operator-confirms-no-credential-or-raw-endpoint-value-read
