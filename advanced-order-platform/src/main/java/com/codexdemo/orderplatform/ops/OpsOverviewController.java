@@ -13,20 +13,12 @@ public class OpsOverviewController {
 
     private final OpsEvidenceService opsEvidenceService;
 
-    private final OpsShardReadinessService opsShardReadinessService;
-
-    private final OpsShardReadinessHardeningService opsShardReadinessHardeningService;
-
     public OpsOverviewController(
             OpsOverviewService opsOverviewService,
-            OpsEvidenceService opsEvidenceService,
-            OpsShardReadinessService opsShardReadinessService,
-            OpsShardReadinessHardeningService opsShardReadinessHardeningService
+            OpsEvidenceService opsEvidenceService
     ) {
         this.opsOverviewService = opsOverviewService;
         this.opsEvidenceService = opsEvidenceService;
-        this.opsShardReadinessService = opsShardReadinessService;
-        this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
     }
 
     @GetMapping("/overview")
@@ -37,16 +29,6 @@ public class OpsOverviewController {
     @GetMapping("/evidence")
     public OpsEvidenceResponse evidence() {
         return opsEvidenceService.evidence();
-    }
-
-    @GetMapping("/shard-readiness")
-    public OpsShardReadinessResponse shardReadiness() {
-        return opsShardReadinessService.readiness();
-    }
-
-    @GetMapping("/shard-readiness/hardening")
-    public OpsShardReadinessHardeningResponse shardReadinessHardening() {
-        return opsShardReadinessHardeningService.hardening();
     }
 
     @GetMapping("/release-approval-rehearsal")

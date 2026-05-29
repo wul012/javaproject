@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Java v155 shard readiness evidence index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f6f7fa;
+      color: #172033;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0 0 24px;
+      color: #536176;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #dce3ed;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 88px;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    .label {
+      color: #66768a;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .value {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #1d794c;
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v155 shard readiness evidence index</h1>
+  <p class="summary">
+    Frozen index for Java shard readiness evidence consumed through Node v376. Historical baselines use versioned
+    fixtures and archive paths only.
+  </p>
+  <section class="grid" aria-label="evidence index fields">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/evidence-index</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-evidence-index-v155.fixture.json</div></div>
+    <div class="item"><div class="label">last consumed by</div><div class="value">Node v376</div></div>
+    <div class="item"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="item wide">
+      <div class="label">frozen sources</div>
+      <div class="value">
+        <ul>
+          <li>Java v153: shard-readiness-core-contract</li>
+          <li>Java v154: shard-readiness-hardening</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item wide">
+      <div class="label">fallback policy</div>
+      <div class="value">
+        <ul>
+          <li>use-versioned-fixture-endpoints-only</li>
+          <li>use-versioned-archive-paths-only</li>
+          <li>do-not-read-rolling-current-files-for-historical-baselines</li>
+          <li>fail-closed-if-versioned-source-is-missing</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item wide">
+      <div class="label">controller split</div>
+      <div class="value">Shard readiness routes now live in OpsShardReadinessController, keeping OpsOverviewController focused.</div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
