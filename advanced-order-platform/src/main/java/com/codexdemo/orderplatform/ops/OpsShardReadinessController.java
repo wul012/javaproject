@@ -20,13 +20,16 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService;
 
+    private final OpsShardReadinessLiveReadGatePlanService opsShardReadinessLiveReadGatePlanService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
             OpsShardReadinessEvidenceIndexService opsShardReadinessEvidenceIndexService,
             OpsShardReadinessEvidenceVerificationService opsShardReadinessEvidenceVerificationService,
             OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService,
-            OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService
+            OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService,
+            OpsShardReadinessLiveReadGatePlanService opsShardReadinessLiveReadGatePlanService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessController {
         this.opsShardReadinessEvidenceVerificationService = opsShardReadinessEvidenceVerificationService;
         this.opsShardReadinessEvidenceHandoffService = opsShardReadinessEvidenceHandoffService;
         this.opsShardReadinessActiveShardPlanHandoffService = opsShardReadinessActiveShardPlanHandoffService;
+        this.opsShardReadinessLiveReadGatePlanService = opsShardReadinessLiveReadGatePlanService;
     }
 
     @GetMapping("/shard-readiness")
@@ -64,5 +68,10 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/active-shard-plan-handoff")
     public OpsShardReadinessActiveShardPlanHandoffResponse shardReadinessActiveShardPlanHandoff() {
         return opsShardReadinessActiveShardPlanHandoffService.handoff();
+    }
+
+    @GetMapping("/shard-readiness/live-read-gate-plan")
+    public OpsShardReadinessLiveReadGatePlanResponse shardReadinessLiveReadGatePlan() {
+        return opsShardReadinessLiveReadGatePlanService.plan();
     }
 }

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Java v159 live-read gate lifecycle plan</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f6f7f4;
+      color: #1b2018;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0 0 24px;
+      color: #596250;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #dfe4d7;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 88px;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    .label {
+      color: #6c7463;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .value {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #1d794c;
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v159 live-read gate lifecycle plan</h1>
+  <p class="summary">
+    Read-only service lifecycle plan after Node v383 archive verification. It declares owner, port, GET smoke,
+    fail-closed, and cleanup requirements before any later live-read gate may run.
+  </p>
+  <section class="grid" aria-label="live-read gate lifecycle plan fields">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/live-read-gate-plan</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-live-read-gate-plan-v159.fixture.json</div></div>
+    <div class="item"><div class="label">source boundary</div><div class="value">Java v158</div></div>
+    <div class="item"><div class="label">last verified by</div><div class="value">Node v383</div></div>
+    <div class="item"><div class="label">next node hint</div><div class="value">Node v384</div></div>
+    <div class="item"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="item wide">
+      <div class="label">lifecycle plan</div>
+      <div class="value">
+        <ul>
+          <li>node-may-not-start-java-from-this-plan</li>
+          <li>java-operator-starts-service-before-live-read-window</li>
+          <li>java-port-must-be-declared-by-operator-before-node-probe</li>
+          <li>node-probes-get-only-smoke-targets-after-service-owner-confirms-readiness</li>
+          <li>operator-stops-java-service-after-window-if-operator-started-it</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
