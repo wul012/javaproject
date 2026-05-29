@@ -1270,13 +1270,9 @@ public class OpsEvidenceService {
     private OpsEvidenceResponse.HealthProbe healthProbe(boolean staticSampleOnly) {
         List<String> additionalProbeEndpoints = new ArrayList<>();
         additionalProbeEndpoints.add("/api/v1/ops/overview");
-        additionalProbeEndpoints.add(OpsShardReadinessService.ENDPOINT);
-        additionalProbeEndpoints.add(OpsShardReadinessHardeningService.ENDPOINT);
-        additionalProbeEndpoints.add(OpsShardReadinessEvidenceIndexService.ENDPOINT);
+        additionalProbeEndpoints.addAll(OpsShardReadinessEvidenceEndpoints.liveEndpoints());
         additionalProbeEndpoints.add(RELEASE_APPROVAL_REHEARSAL_ENDPOINT);
-        additionalProbeEndpoints.add(OpsShardReadinessService.FIXTURE_ENDPOINT);
-        additionalProbeEndpoints.add(OpsShardReadinessHardeningService.FIXTURE_ENDPOINT);
-        additionalProbeEndpoints.add(OpsShardReadinessEvidenceIndexService.FIXTURE_ENDPOINT);
+        additionalProbeEndpoints.addAll(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints());
         additionalProbeEndpoints.addAll(OpsEvidenceStaticReleaseDispatchTable.staticContractEndpoints(false));
 
         return new OpsEvidenceResponse.HealthProbe(
@@ -1295,13 +1291,9 @@ public class OpsEvidenceService {
         allowedProbeEndpoints.add("GET /actuator/health");
         allowedProbeEndpoints.add("GET /api/v1/ops/overview");
         allowedProbeEndpoints.add("GET /api/v1/ops/evidence");
-        allowedProbeEndpoints.add("GET " + OpsShardReadinessService.ENDPOINT);
-        allowedProbeEndpoints.add("GET " + OpsShardReadinessHardeningService.ENDPOINT);
-        allowedProbeEndpoints.add("GET " + OpsShardReadinessEvidenceIndexService.ENDPOINT);
+        allowedProbeEndpoints.addAll(OpsShardReadinessEvidenceEndpoints.liveProbeEndpoints());
         allowedProbeEndpoints.add("GET " + RELEASE_APPROVAL_REHEARSAL_ENDPOINT);
-        allowedProbeEndpoints.add("GET " + OpsShardReadinessService.FIXTURE_ENDPOINT);
-        allowedProbeEndpoints.add("GET " + OpsShardReadinessHardeningService.FIXTURE_ENDPOINT);
-        allowedProbeEndpoints.add("GET " + OpsShardReadinessEvidenceIndexService.FIXTURE_ENDPOINT);
+        allowedProbeEndpoints.addAll(OpsShardReadinessEvidenceEndpoints.fixtureProbeEndpoints());
         allowedProbeEndpoints.addAll(OpsEvidenceStaticReleaseDispatchTable.staticContractProbeEndpoints(false));
 
         return new OpsEvidenceResponse.ReadOnlyWindow(
@@ -1468,13 +1460,9 @@ public class OpsEvidenceService {
         List<String> endpoints = new ArrayList<>();
         endpoints.add("/api/v1/ops/overview");
         endpoints.add("/api/v1/ops/evidence");
-        endpoints.add(OpsShardReadinessService.ENDPOINT);
-        endpoints.add(OpsShardReadinessHardeningService.ENDPOINT);
-        endpoints.add(OpsShardReadinessEvidenceIndexService.ENDPOINT);
+        endpoints.addAll(OpsShardReadinessEvidenceEndpoints.liveEndpoints());
         endpoints.add(RELEASE_APPROVAL_REHEARSAL_ENDPOINT);
-        endpoints.add(OpsShardReadinessService.FIXTURE_ENDPOINT);
-        endpoints.add(OpsShardReadinessHardeningService.FIXTURE_ENDPOINT);
-        endpoints.add(OpsShardReadinessEvidenceIndexService.FIXTURE_ENDPOINT);
+        endpoints.addAll(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints());
         endpoints.addAll(OpsEvidenceStaticReleaseDispatchTable.staticContractEndpoints(true));
         endpoints.addAll(List.of(
                 "/api/v1/failed-events/summary",

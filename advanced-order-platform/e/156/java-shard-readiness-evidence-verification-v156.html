@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Java v156 shard readiness evidence verification</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0 0 24px;
+      color: #526176;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      background: #ffffff;
+      border: 1px solid #dce3ee;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 88px;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    .label {
+      color: #65768a;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .value {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #1d794c;
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v156 shard readiness evidence verification</h1>
+  <p class="summary">
+    Verification receipt for the Java v155 frozen evidence index. It confirms versioned fallback sources and blocks
+    rolling-current historical baselines.
+  </p>
+  <section class="grid" aria-label="evidence verification fields">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/evidence-verification</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-evidence-verification-v156.fixture.json</div></div>
+    <div class="item"><div class="label">source index</div><div class="value">Java v155</div></div>
+    <div class="item"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="item"><div class="label">verified entries</div><div class="value">Java v153, Java v154</div></div>
+    <div class="item"><div class="label">check count</div><div class="value ok">8 / 8 passed</div></div>
+    <div class="item wide">
+      <div class="label">critical checks</div>
+      <div class="value">
+        <ul>
+          <li>no-rolling-current-pointer</li>
+          <li>versioned-fixture-endpoints</li>
+          <li>versioned-archive-paths</li>
+          <li>node-archive-mutation-forbidden</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item wide">
+      <div class="label">maintainability split</div>
+      <div class="value">OpsEvidenceService now delegates shard readiness endpoint grouping to OpsShardReadinessEvidenceEndpoints.</div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
