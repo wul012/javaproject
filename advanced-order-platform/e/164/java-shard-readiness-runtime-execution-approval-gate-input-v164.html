@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v164 runtime execution approval gate input</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202833;
+      --muted: #5a6472;
+      --line: #c8d2dc;
+      --panel: #f5f7f9;
+      --accent: #1b6a58;
+      --accent-soft: #e3f0ec;
+      --warn: #8a5817;
+      --warn-soft: #fff2dc;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    main {
+      width: min(1100px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill {
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .warn {
+      background: var(--warn-soft);
+      color: var(--warn);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: var(--panel);
+      min-height: 88px;
+    }
+    .label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .value {
+      overflow-wrap: anywhere;
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+    section {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: #ffffff;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 28px, 1100px);
+        padding-top: 24px;
+      }
+      h1 {
+        font-size: 27px;
+      }
+      .grid,
+      ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v164 runtime execution approval gate input</h1>
+  <p>
+    Java-side approval-gate input prepared after Node v399 verified that the blocked v398 gate remains archived and
+    replayable. It converts Java v163 contribution evidence into a Node v400-consumable input while keeping runtime
+    approval, cross-project packet assembly, and live execution closed.
+  </p>
+  <div class="status-row">
+    <div class="pill">status: passed</div>
+    <div class="pill">javaApprovalGateInputPresent=true</div>
+    <div class="pill warn">runtimeGateApprovalPresent=false</div>
+    <div class="pill warn">crossProjectRuntimeExecutionPacketPresent=false</div>
+  </div>
+  <div class="grid">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/runtime-execution-approval-gate-input</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-runtime-execution-approval-gate-input-v164.fixture.json</div></div>
+    <div class="item"><div class="label">source contribution</div><div class="value">Java v163</div></div>
+    <div class="item"><div class="label">last reviewed by</div><div class="value">Node v397</div></div>
+    <div class="item"><div class="label">archive verified by</div><div class="value">Node v399</div></div>
+    <div class="item"><div class="label">next consumer hint</div><div class="value">Node v400</div></div>
+    <div class="item"><div class="label">java loopback port</div><div class="value">8080</div></div>
+    <div class="item"><div class="label">service owner</div><div class="value">java-platform-operator-confirmed</div></div>
+  </div>
+  <section>
+    <h2>Java input artifacts</h2>
+    <ul>
+      <li>source-packet-contribution:Java v163</li>
+      <li>java-operator-approval-record:java-runtime-packet-contribution-approval-record-v163</li>
+      <li>java-loopback-port:8080</li>
+      <li>java-service-owner:java-platform-operator-confirmed</li>
+      <li>java-get-only-smoke-commands:3</li>
+      <li>java-stop-only-owned-process-rules:4</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Required sibling inputs</h2>
+    <ul>
+      <li>mini-kv-approval-gate-input</li>
+      <li>node-approved-runtime-window</li>
+      <li>correlated-operator-approval-record</li>
+      <li>complete-cross-project-runtime-execution-packet</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Fail-closed rules</h2>
+    <ul>
+      <li>missing-node-approved-runtime-window-blocks-runtime-execution</li>
+      <li>missing-correlated-operator-approval-record-blocks-runtime-execution</li>
+      <li>missing-mini-kv-approval-gate-input-blocks-runtime-execution</li>
+      <li>java-approval-gate-input-alone-is-not-runtime-approval</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

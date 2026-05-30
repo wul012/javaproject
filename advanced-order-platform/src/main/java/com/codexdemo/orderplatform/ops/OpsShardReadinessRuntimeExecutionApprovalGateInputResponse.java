@@ -1,0 +1,44 @@
+package com.codexdemo.orderplatform.ops;
+
+import java.util.List;
+
+public record OpsShardReadinessRuntimeExecutionApprovalGateInputResponse(
+        String project,
+        String version,
+        boolean readOnly,
+        boolean executionAllowed,
+        boolean javaApprovalGateInputPresent,
+        boolean javaApprovalGateInputComplete,
+        boolean runtimeGateApprovalPresent,
+        boolean nodeApprovedRuntimeWindowPresent,
+        boolean correlatedOperatorApprovalRecordPresent,
+        boolean crossProjectRuntimeExecutionPacketPresent,
+        boolean crossProjectRuntimeExecutionPacketExecutable,
+        boolean readyForRuntimeExecutionPacket,
+        boolean readyForRuntimeLiveReadGate,
+        boolean executionAttempted,
+        boolean startsJavaService,
+        boolean startsMiniKvService,
+        boolean activeShardPrototypeEnabled,
+        String sourcePacketContributionVersion,
+        String lastReviewedByNodeVersion,
+        String lastArchiveVerifiedByNodeVersion,
+        String nextNodeConsumerHint,
+        String inputScope,
+        String approvalGateInputId,
+        String approvalGateInputPath,
+        String javaOperatorApprovalRecordId,
+        String approvalCorrelationRequirement,
+        String javaLoopbackPort,
+        String javaServiceOwner,
+        String javaStartupCommand,
+        List<String> javaApprovalInputArtifacts,
+        List<String> javaPacketRowsForCorrelation,
+        List<String> requiredSiblingInputs,
+        List<String> nodeApprovalGateInputPaths,
+        List<String> failClosedRules,
+        List<String> stopConditions,
+        String evidencePath,
+        String status
+) {
+}

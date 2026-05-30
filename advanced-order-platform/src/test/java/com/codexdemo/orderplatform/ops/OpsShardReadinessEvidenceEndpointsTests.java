@@ -20,7 +20,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/api/v1/ops/shard-readiness/operator-service-lifecycle",
                         "/api/v1/ops/shard-readiness/declared-operator-lifecycle",
                         "/api/v1/ops/shard-readiness/runtime-execution-artifact-candidate",
-                        "/api/v1/ops/shard-readiness/runtime-execution-packet-contribution"
+                        "/api/v1/ops/shard-readiness/runtime-execution-packet-contribution",
+                        "/api/v1/ops/shard-readiness/runtime-execution-approval-gate-input"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
                 .containsExactly(
@@ -34,7 +35,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/contracts/java-shard-readiness-operator-service-lifecycle-v160.fixture.json",
                         "/contracts/java-shard-readiness-declared-operator-lifecycle-v161.fixture.json",
                         "/contracts/java-shard-readiness-runtime-execution-artifact-candidate-v162.fixture.json",
-                        "/contracts/java-shard-readiness-runtime-execution-packet-contribution-v163.fixture.json"
+                        "/contracts/java-shard-readiness-runtime-execution-packet-contribution-v163.fixture.json",
+                        "/contracts/java-shard-readiness-runtime-execution-approval-gate-input-v164.fixture.json"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.liveProbeEndpoints())
                 .containsExactly(
@@ -48,7 +50,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /api/v1/ops/shard-readiness/operator-service-lifecycle",
                         "GET /api/v1/ops/shard-readiness/declared-operator-lifecycle",
                         "GET /api/v1/ops/shard-readiness/runtime-execution-artifact-candidate",
-                        "GET /api/v1/ops/shard-readiness/runtime-execution-packet-contribution"
+                        "GET /api/v1/ops/shard-readiness/runtime-execution-packet-contribution",
+                        "GET /api/v1/ops/shard-readiness/runtime-execution-approval-gate-input"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureProbeEndpoints())
                 .containsExactly(
@@ -62,7 +65,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /contracts/java-shard-readiness-operator-service-lifecycle-v160.fixture.json",
                         "GET /contracts/java-shard-readiness-declared-operator-lifecycle-v161.fixture.json",
                         "GET /contracts/java-shard-readiness-runtime-execution-artifact-candidate-v162.fixture.json",
-                        "GET /contracts/java-shard-readiness-runtime-execution-packet-contribution-v163.fixture.json"
+                        "GET /contracts/java-shard-readiness-runtime-execution-packet-contribution-v163.fixture.json",
+                        "GET /contracts/java-shard-readiness-runtime-execution-approval-gate-input-v164.fixture.json"
                 );
     }
 }

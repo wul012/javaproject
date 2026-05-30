@@ -32,6 +32,9 @@ public class OpsShardReadinessController {
     private final OpsShardReadinessRuntimeExecutionPacketContributionService
             opsShardReadinessRuntimeExecutionPacketContributionService;
 
+    private final OpsShardReadinessRuntimeExecutionApprovalGateInputService
+            opsShardReadinessRuntimeExecutionApprovalGateInputService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -45,7 +48,9 @@ public class OpsShardReadinessController {
             OpsShardReadinessRuntimeExecutionArtifactCandidateService
                     opsShardReadinessRuntimeExecutionArtifactCandidateService,
             OpsShardReadinessRuntimeExecutionPacketContributionService
-                    opsShardReadinessRuntimeExecutionPacketContributionService
+                    opsShardReadinessRuntimeExecutionPacketContributionService,
+            OpsShardReadinessRuntimeExecutionApprovalGateInputService
+                    opsShardReadinessRuntimeExecutionApprovalGateInputService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -60,6 +65,8 @@ public class OpsShardReadinessController {
                 opsShardReadinessRuntimeExecutionArtifactCandidateService;
         this.opsShardReadinessRuntimeExecutionPacketContributionService =
                 opsShardReadinessRuntimeExecutionPacketContributionService;
+        this.opsShardReadinessRuntimeExecutionApprovalGateInputService =
+                opsShardReadinessRuntimeExecutionApprovalGateInputService;
     }
 
     @GetMapping("/shard-readiness")
@@ -117,5 +124,11 @@ public class OpsShardReadinessController {
     public OpsShardReadinessRuntimeExecutionPacketContributionResponse
             shardReadinessRuntimeExecutionPacketContribution() {
         return opsShardReadinessRuntimeExecutionPacketContributionService.contribution();
+    }
+
+    @GetMapping("/shard-readiness/runtime-execution-approval-gate-input")
+    public OpsShardReadinessRuntimeExecutionApprovalGateInputResponse
+            shardReadinessRuntimeExecutionApprovalGateInput() {
+        return opsShardReadinessRuntimeExecutionApprovalGateInputService.approvalGateInput();
     }
 }

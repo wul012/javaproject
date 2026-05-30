@@ -1,0 +1,56 @@
+- main [ref=e2] [box=125,0,1100,1377]:
+  - heading "Java v164 runtime execution approval gate input" [level=1] [ref=e3] [box=125,34,1100,40]
+  - paragraph [ref=e4] [box=125,86,1100,48]: Java-side approval-gate input prepared after Node v399 verified that the blocked v398 gate remains archived and replayable. It converts Java v163 contribution evidence into a Node v400-consumable input while keeping runtime approval, cross-project packet assembly, and live execution closed.
+  - generic [ref=e5] [box=125,152,1100,80]:
+    - generic [ref=e6] [box=125,152,135,35]: "status: passed"
+    - generic [ref=e7] [box=270,152,294,35]: javaApprovalGateInputPresent=true
+    - generic [ref=e8] [box=575,152,288,35]: runtimeGateApprovalPresent=false
+    - generic [ref=e9] [box=125,197,412,35]: crossProjectRuntimeExecutionPacketPresent=false
+  - generic [ref=e10] [box=125,258,1100,406]:
+    - generic [ref=e11] [box=125,258,543,100]:
+      - generic [ref=e12] [box=142,273,510,14]: endpoint
+      - generic [ref=e13] [box=142,295,510,49]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-gate-input
+    - generic [ref=e14] [box=682,258,543,100]:
+      - generic [ref=e15] [box=699,273,510,14]: fixture
+      - generic [ref=e16] [box=699,295,510,49]: /contracts/java-shard-readiness-runtime-execution-approval-gate-input-v164.fixture.json
+    - generic [ref=e17] [box=125,372,543,88]:
+      - generic [ref=e18] [box=142,387,510,14]: source contribution
+      - generic [ref=e19] [box=142,409,510,24]: Java v163
+    - generic [ref=e20] [box=682,372,543,88]:
+      - generic [ref=e21] [box=699,387,510,14]: last reviewed by
+      - generic [ref=e22] [box=699,409,510,24]: Node v397
+    - generic [ref=e23] [box=125,474,543,88]:
+      - generic [ref=e24] [box=142,489,510,14]: archive verified by
+      - generic [ref=e25] [box=142,511,510,24]: Node v399
+    - generic [ref=e26] [box=682,474,543,88]:
+      - generic [ref=e27] [box=699,489,510,14]: next consumer hint
+      - generic [ref=e28] [box=699,511,510,24]: Node v400
+    - generic [ref=e29] [box=125,576,543,88]:
+      - generic [ref=e30] [box=142,591,510,14]: java loopback port
+      - generic [ref=e31] [box=142,613,510,24]: "8080"
+    - generic [ref=e32] [box=682,576,543,88]:
+      - generic [ref=e33] [box=699,591,510,14]: service owner
+      - generic [ref=e34] [box=699,613,510,24]: java-platform-operator-confirmed
+  - generic [ref=e35] [box=125,692,1100,246]:
+    - heading "Java input artifacts" [level=2] [ref=e36] [box=125,717,1100,26]
+    - list [ref=e37] [box=125,756,1100,182]:
+      - listitem [ref=e38] [box=125,756,545,68]: source-packet-contribution:Java v163
+      - listitem [ref=e39] [box=680,756,545,68]: java-operator-approval-record:java-runtime-packet-contribution-approval-record-v163
+      - listitem [ref=e40] [box=125,835,545,47]: java-loopback-port:8080
+      - listitem [ref=e41] [box=680,835,545,47]: java-service-owner:java-platform-operator-confirmed
+      - listitem [ref=e42] [box=125,891,545,47]: java-get-only-smoke-commands:3
+      - listitem [ref=e43] [box=680,891,545,47]: java-stop-only-owned-process-rules:4
+  - generic [ref=e44] [box=125,966,1100,167]:
+    - heading "Required sibling inputs" [level=2] [ref=e45] [box=125,991,1100,26]
+    - list [ref=e46] [box=125,1030,1100,103]:
+      - listitem [ref=e47] [box=125,1030,545,47]: mini-kv-approval-gate-input
+      - listitem [ref=e48] [box=680,1030,545,47]: node-approved-runtime-window
+      - listitem [ref=e49] [box=125,1087,545,47]: correlated-operator-approval-record
+      - listitem [ref=e50] [box=680,1087,545,47]: complete-cross-project-runtime-execution-packet
+  - generic [ref=e51] [box=125,1161,1100,167]:
+    - heading "Fail-closed rules" [level=2] [ref=e52] [box=125,1186,1100,26]
+    - list [ref=e53] [box=125,1226,1100,103]:
+      - listitem [ref=e54] [box=125,1226,545,47]: missing-node-approved-runtime-window-blocks-runtime-execution
+      - listitem [ref=e55] [box=680,1226,545,47]: missing-correlated-operator-approval-record-blocks-runtime-execution
+      - listitem [ref=e56] [box=125,1282,545,47]: missing-mini-kv-approval-gate-input-blocks-runtime-execution
+      - listitem [ref=e57] [box=680,1282,545,47]: java-approval-gate-input-alone-is-not-runtime-approval
