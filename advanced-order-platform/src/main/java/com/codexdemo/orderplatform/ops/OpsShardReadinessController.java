@@ -26,6 +26,9 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService;
 
+    private final OpsShardReadinessRuntimeExecutionArtifactCandidateService
+            opsShardReadinessRuntimeExecutionArtifactCandidateService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -35,7 +38,9 @@ public class OpsShardReadinessController {
             OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService,
             OpsShardReadinessLiveReadGatePlanService opsShardReadinessLiveReadGatePlanService,
             OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService,
-            OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService
+            OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService,
+            OpsShardReadinessRuntimeExecutionArtifactCandidateService
+                    opsShardReadinessRuntimeExecutionArtifactCandidateService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -46,6 +51,8 @@ public class OpsShardReadinessController {
         this.opsShardReadinessLiveReadGatePlanService = opsShardReadinessLiveReadGatePlanService;
         this.opsShardReadinessOperatorServiceLifecycleService = opsShardReadinessOperatorServiceLifecycleService;
         this.opsShardReadinessDeclaredOperatorLifecycleService = opsShardReadinessDeclaredOperatorLifecycleService;
+        this.opsShardReadinessRuntimeExecutionArtifactCandidateService =
+                opsShardReadinessRuntimeExecutionArtifactCandidateService;
     }
 
     @GetMapping("/shard-readiness")
@@ -91,5 +98,11 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/declared-operator-lifecycle")
     public OpsShardReadinessDeclaredOperatorLifecycleResponse shardReadinessDeclaredOperatorLifecycle() {
         return opsShardReadinessDeclaredOperatorLifecycleService.lifecycle();
+    }
+
+    @GetMapping("/shard-readiness/runtime-execution-artifact-candidate")
+    public OpsShardReadinessRuntimeExecutionArtifactCandidateResponse
+            shardReadinessRuntimeExecutionArtifactCandidate() {
+        return opsShardReadinessRuntimeExecutionArtifactCandidateService.candidate();
     }
 }
