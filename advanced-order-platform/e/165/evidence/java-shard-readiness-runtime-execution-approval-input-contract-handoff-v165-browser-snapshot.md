@@ -1,0 +1,52 @@
+- main [ref=e2] [box=125,0,1100,1343]:
+  - heading "Java v165 runtime execution approval input contract handoff" [level=1] [ref=e3] [box=125,34,1100,40]
+  - paragraph [ref=e4] [box=125,86,1100,48]: Java-side handoff after Node v400 turned approval input intake into owner-by-owner requirements. Java v164 remains the canonical Java approval input; this archive names the non-Java inputs still required before any runtime packet can be approved or executed.
+  - generic [ref=e5] [box=125,152,1100,80]:
+    - generic [ref=e6] [box=125,152,135,35]: "status: passed"
+    - generic [ref=e7] [box=270,152,275,35]: javaInputRemainsCanonical=true
+    - generic [ref=e8] [box=555,152,288,35]: runtimeGateApprovalPresent=false
+    - generic [ref=e9] [box=125,197,484,35]: completeCrossProjectRuntimeExecutionPacketPresent=false
+  - generic [ref=e10] [box=125,258,1100,316]:
+    - generic [ref=e11] [box=125,258,543,100]:
+      - generic [ref=e12] [box=142,273,510,14]: endpoint
+      - generic [ref=e13] [box=142,295,510,49]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-contract-handoff
+    - generic [ref=e14] [box=682,258,543,100]:
+      - generic [ref=e15] [box=699,273,510,14]: fixture
+      - generic [ref=e16] [box=699,295,510,49]: /contracts/java-shard-readiness-runtime-execution-approval-input-contract-handoff-v165.fixture.json
+    - generic [ref=e17] [box=125,372,543,88]:
+      - generic [ref=e18] [box=142,387,510,14]: source approval input
+      - generic [ref=e19] [box=142,409,510,24]: Java v164
+    - generic [ref=e20] [box=682,372,543,88]:
+      - generic [ref=e21] [box=699,387,510,14]: contracted by
+      - generic [ref=e22] [box=699,409,510,24]: Node v400
+    - generic [ref=e23] [box=125,474,543,100]:
+      - generic [ref=e24] [box=142,489,510,14]: next consumer hint
+      - generic [ref=e25] [box=142,511,510,24]: Node v401
+    - generic [ref=e26] [box=682,474,543,100]:
+      - generic [ref=e27] [box=699,489,510,14]: canonical Java input
+      - generic [ref=e28] [box=699,511,510,49]: e/164/evidence/java-shard-readiness-runtime-execution-approval-gate-input-v164.json
+  - generic [ref=e29] [box=125,602,1100,246]:
+    - heading "Owner-by-owner handoff" [level=2] [ref=e30] [box=125,627,1100,26]
+    - list [ref=e31] [box=125,666,1100,182]:
+      - listitem [ref=e32] [box=125,666,545,47]: java:canonical-approval-gate-input-present:Java v164
+      - listitem [ref=e33] [box=680,666,545,47]: mini-kv:final-approval-gate-input-required-not-owned-by-java
+      - listitem [ref=e34] [box=125,723,545,47]: node:node-approved-runtime-window-required-not-owned-by-java
+      - listitem [ref=e35] [box=680,723,545,47]: operator:correlated-operator-approval-record-required-not-owned-by-java
+      - listitem [ref=e36] [box=125,780,545,68]: cross-project:complete-runtime-execution-packet-required-not-owned-by-java
+      - listitem [ref=e37] [box=680,780,545,68]: cleanup:cleanup-proof-accepted-only-after-approved-runtime-start
+  - generic [ref=e38] [box=125,876,1100,224]:
+    - heading "Final packet binding requirements" [level=2] [ref=e39] [box=125,900,1100,26]
+    - list [ref=e40] [box=125,940,1100,160]:
+      - listitem [ref=e41] [box=125,940,545,47]: bind-java-v164-approval-gate-input
+      - listitem [ref=e42] [box=680,940,545,47]: bind-final-mini-kv-approval-gate-input
+      - listitem [ref=e43] [box=125,997,545,47]: bind-node-approved-runtime-window
+      - listitem [ref=e44] [box=680,997,545,47]: bind-correlated-operator-approval-record
+      - listitem [ref=e45] [box=125,1053,545,47]: bind-java-and-mini-kv-get-only-smoke-commands
+      - listitem [ref=e46] [box=680,1053,545,47]: bind-cleanup-proof-after-approved-runtime-start
+  - generic [ref=e47] [box=125,1128,1100,167]:
+    - heading "Fail-closed rules" [level=2] [ref=e48] [box=125,1153,1100,26]
+    - list [ref=e49] [box=125,1192,1100,103]:
+      - listitem [ref=e50] [box=125,1192,545,47]: missing-final-mini-kv-approval-gate-input-blocks-runtime-execution
+      - listitem [ref=e51] [box=680,1192,545,47]: missing-node-approved-runtime-window-blocks-runtime-execution
+      - listitem [ref=e52] [box=125,1249,545,47]: missing-correlated-operator-approval-record-blocks-runtime-execution
+      - listitem [ref=e53] [box=680,1249,545,47]: contract-handoff-alone-is-not-runtime-approval
