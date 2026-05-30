@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v163 runtime execution packet contribution</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2732;
+      --muted: #5a6677;
+      --line: #cbd5df;
+      --panel: #f6f8fa;
+      --accent: #1e6b5d;
+      --accent-soft: #e4f2ef;
+      --warn: #8a5a16;
+      --warn-soft: #fff3dd;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    main {
+      width: min(1100px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill {
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .warn {
+      background: var(--warn-soft);
+      color: var(--warn);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: var(--panel);
+      min-height: 88px;
+    }
+    .label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .value {
+      overflow-wrap: anywhere;
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+    section {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: #ffffff;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 28px, 1100px);
+        padding-top: 24px;
+      }
+      h1 {
+        font-size: 27px;
+      }
+      .grid,
+      ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v163 runtime execution packet contribution</h1>
+  <p>
+    Java-side packet contribution after Node v396 clarified the six accepted runtime execution requirements. It answers
+    all six rows for Java, while keeping the cross-project runtime packet absent and non-executable until mini-kv and a
+    Node-approved runtime window are supplied.
+  </p>
+  <div class="status-row">
+    <div class="pill">status: passed</div>
+    <div class="pill warn">crossProjectRuntimeExecutionPacketPresent=false</div>
+    <div class="pill warn">readyForRuntimeExecutionPacket=false</div>
+  </div>
+  <div class="grid">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/runtime-execution-packet-contribution</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-runtime-execution-packet-contribution-v163.fixture.json</div></div>
+    <div class="item"><div class="label">source candidate</div><div class="value">Java v162</div></div>
+    <div class="item"><div class="label">last clarified by</div><div class="value">Node v396</div></div>
+    <div class="item"><div class="label">next consumer hint</div><div class="value">Node v397</div></div>
+    <div class="item"><div class="label">java loopback port</div><div class="value">8080</div></div>
+    <div class="item"><div class="label">service owner</div><div class="value">java-platform-operator-confirmed</div></div>
+    <div class="item"><div class="label">mini-kv requirement</div><div class="value">requires-mini-kv-runtime-packet-contribution</div></div>
+  </div>
+  <section>
+    <h2>Accepted requirement rows</h2>
+    <ul>
+      <li>operator-approval-record:java-side-record-present-cross-project-signature-required</li>
+      <li>concrete-loopback-ports:java-8080-present-mini-kv-required</li>
+      <li>get-only-smoke-command:java-get-only-present-mini-kv-required</li>
+      <li>cleanup-proof:java-cleanup-proof-reference-present-runtime-start-archive-required</li>
+      <li>service-owner-confirmation:java-platform-operator-confirmed-mini-kv-required</li>
+      <li>process-cleanup-rules:java-stop-only-owned-process-rules-present-mini-kv-required</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Missing cross-project artifacts</h2>
+    <ul>
+      <li>mini-kv-runtime-execution-packet-contribution</li>
+      <li>node-approved-cross-project-runtime-window</li>
+      <li>correlated-operator-approval-record-for-java-and-mini-kv</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

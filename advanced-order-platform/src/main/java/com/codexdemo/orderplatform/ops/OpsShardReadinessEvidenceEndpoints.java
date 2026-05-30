@@ -18,7 +18,8 @@ final class OpsShardReadinessEvidenceEndpoints {
                 OpsShardReadinessLiveReadGatePlanService.ENDPOINT,
                 OpsShardReadinessOperatorServiceLifecycleService.ENDPOINT,
                 OpsShardReadinessDeclaredOperatorLifecycleService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionArtifactCandidateService.ENDPOINT
+                OpsShardReadinessRuntimeExecutionArtifactCandidateService.ENDPOINT,
+                OpsShardReadinessRuntimeExecutionPacketContributionService.ENDPOINT
         );
     }
 
@@ -33,7 +34,8 @@ final class OpsShardReadinessEvidenceEndpoints {
                 OpsShardReadinessLiveReadGatePlanService.FIXTURE_ENDPOINT,
                 OpsShardReadinessOperatorServiceLifecycleService.FIXTURE_ENDPOINT,
                 OpsShardReadinessDeclaredOperatorLifecycleService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionArtifactCandidateService.FIXTURE_ENDPOINT
+                OpsShardReadinessRuntimeExecutionArtifactCandidateService.FIXTURE_ENDPOINT,
+                OpsShardReadinessRuntimeExecutionPacketContributionService.FIXTURE_ENDPOINT
         );
     }
 

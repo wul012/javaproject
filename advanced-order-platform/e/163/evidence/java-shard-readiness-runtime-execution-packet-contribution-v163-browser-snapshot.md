@@ -1,0 +1,47 @@
+- main [ref=e2] [box=125,0,1100,1181]:
+  - heading "Java v163 runtime execution packet contribution" [level=1] [ref=e3] [box=125,36,1100,40]
+  - paragraph [ref=e4] [box=125,88,1100,48]: Java-side packet contribution after Node v396 clarified the six accepted runtime execution requirements. It answers all six rows for Java, while keeping the cross-project runtime packet absent and non-executable until mini-kv and a Node-approved runtime window are supplied.
+  - generic [ref=e5] [box=125,154,1100,35]:
+    - generic [ref=e6] [box=125,154,135,35]: "status: passed"
+    - generic [ref=e7] [box=270,154,412,35]: crossProjectRuntimeExecutionPacketPresent=false
+    - generic [ref=e8] [box=692,154,327,35]: readyForRuntimeExecutionPacket=false
+  - generic [ref=e9] [box=125,215,1100,406]:
+    - generic [ref=e10] [box=125,215,543,100]:
+      - generic [ref=e11] [box=142,230,510,14]: endpoint
+      - generic [ref=e12] [box=142,252,510,49]: GET /api/v1/ops/shard-readiness/runtime-execution-packet-contribution
+    - generic [ref=e13] [box=682,215,543,100]:
+      - generic [ref=e14] [box=699,230,510,14]: fixture
+      - generic [ref=e15] [box=699,252,510,49]: /contracts/java-shard-readiness-runtime-execution-packet-contribution-v163.fixture.json
+    - generic [ref=e16] [box=125,329,543,88]:
+      - generic [ref=e17] [box=142,344,510,14]: source candidate
+      - generic [ref=e18] [box=142,366,510,24]: Java v162
+    - generic [ref=e19] [box=682,329,543,88]:
+      - generic [ref=e20] [box=699,344,510,14]: last clarified by
+      - generic [ref=e21] [box=699,366,510,24]: Node v396
+    - generic [ref=e22] [box=125,431,543,88]:
+      - generic [ref=e23] [box=142,446,510,14]: next consumer hint
+      - generic [ref=e24] [box=142,468,510,24]: Node v397
+    - generic [ref=e25] [box=682,431,543,88]:
+      - generic [ref=e26] [box=699,446,510,14]: java loopback port
+      - generic [ref=e27] [box=699,468,510,24]: "8080"
+    - generic [ref=e28] [box=125,533,543,88]:
+      - generic [ref=e29] [box=142,548,510,14]: service owner
+      - generic [ref=e30] [box=142,570,510,24]: java-platform-operator-confirmed
+    - generic [ref=e31] [box=682,533,543,88]:
+      - generic [ref=e32] [box=699,548,510,14]: mini-kv requirement
+      - generic [ref=e33] [box=699,570,510,24]: requires-mini-kv-runtime-packet-contribution
+  - generic [ref=e34] [box=125,649,1100,289]:
+    - heading "Accepted requirement rows" [level=2] [ref=e35] [box=125,674,1100,26]
+    - list [ref=e36] [box=125,713,1100,225]:
+      - listitem [ref=e37] [box=125,713,545,68]: operator-approval-record:java-side-record-present-cross-project-signature-required
+      - listitem [ref=e38] [box=680,713,545,68]: concrete-loopback-ports:java-8080-present-mini-kv-required
+      - listitem [ref=e39] [box=125,791,545,68]: get-only-smoke-command:java-get-only-present-mini-kv-required
+      - listitem [ref=e40] [box=680,791,545,68]: cleanup-proof:java-cleanup-proof-reference-present-runtime-start-archive-required
+      - listitem [ref=e41] [box=125,870,545,68]: service-owner-confirmation:java-platform-operator-confirmed-mini-kv-required
+      - listitem [ref=e42] [box=680,870,545,68]: process-cleanup-rules:java-stop-only-owned-process-rules-present-mini-kv-required
+  - generic [ref=e43] [box=125,966,1100,167]:
+    - heading "Missing cross-project artifacts" [level=2] [ref=e44] [box=125,991,1100,26]
+    - list [ref=e45] [box=125,1030,1100,103]:
+      - listitem [ref=e46] [box=125,1030,545,47]: mini-kv-runtime-execution-packet-contribution
+      - listitem [ref=e47] [box=680,1030,545,47]: node-approved-cross-project-runtime-window
+      - listitem [ref=e48] [box=125,1087,545,47]: correlated-operator-approval-record-for-java-and-mini-kv

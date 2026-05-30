@@ -29,6 +29,9 @@ public class OpsShardReadinessController {
     private final OpsShardReadinessRuntimeExecutionArtifactCandidateService
             opsShardReadinessRuntimeExecutionArtifactCandidateService;
 
+    private final OpsShardReadinessRuntimeExecutionPacketContributionService
+            opsShardReadinessRuntimeExecutionPacketContributionService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -40,7 +43,9 @@ public class OpsShardReadinessController {
             OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService,
             OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService,
             OpsShardReadinessRuntimeExecutionArtifactCandidateService
-                    opsShardReadinessRuntimeExecutionArtifactCandidateService
+                    opsShardReadinessRuntimeExecutionArtifactCandidateService,
+            OpsShardReadinessRuntimeExecutionPacketContributionService
+                    opsShardReadinessRuntimeExecutionPacketContributionService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -53,6 +58,8 @@ public class OpsShardReadinessController {
         this.opsShardReadinessDeclaredOperatorLifecycleService = opsShardReadinessDeclaredOperatorLifecycleService;
         this.opsShardReadinessRuntimeExecutionArtifactCandidateService =
                 opsShardReadinessRuntimeExecutionArtifactCandidateService;
+        this.opsShardReadinessRuntimeExecutionPacketContributionService =
+                opsShardReadinessRuntimeExecutionPacketContributionService;
     }
 
     @GetMapping("/shard-readiness")
@@ -104,5 +111,11 @@ public class OpsShardReadinessController {
     public OpsShardReadinessRuntimeExecutionArtifactCandidateResponse
             shardReadinessRuntimeExecutionArtifactCandidate() {
         return opsShardReadinessRuntimeExecutionArtifactCandidateService.candidate();
+    }
+
+    @GetMapping("/shard-readiness/runtime-execution-packet-contribution")
+    public OpsShardReadinessRuntimeExecutionPacketContributionResponse
+            shardReadinessRuntimeExecutionPacketContribution() {
+        return opsShardReadinessRuntimeExecutionPacketContributionService.contribution();
     }
 }
