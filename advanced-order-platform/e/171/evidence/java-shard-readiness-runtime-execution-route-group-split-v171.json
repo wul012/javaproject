@@ -1,0 +1,46 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v171",
+  "scope": "runtime-execution-route-group-split",
+  "nodePlanReference": "Node v410",
+  "sourceJavaVersion": "Java v170",
+  "refactorOnly": true,
+  "apiPathChanged": false,
+  "responseContractChanged": false,
+  "newEvidenceGateAdded": false,
+  "runtimeExecutionAllowed": false,
+  "startsJavaService": false,
+  "startsMiniKvService": false,
+  "connectsManagedAudit": false,
+  "writeOperationsAllowed": false,
+  "sourceController": "OpsShardReadinessController",
+  "extractedController": "OpsShardReadinessRuntimeExecutionController",
+  "extractedEndpointCount": 9,
+  "preservedBasePath": "/api/v1/ops/shard-readiness",
+  "preservedRuntimeExecutionEndpoints": [
+    "GET /api/v1/ops/shard-readiness/runtime-execution-artifact-candidate",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-packet-contribution",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-approval-gate-input",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-contract-handoff",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-value-validation",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-live-read-gate",
+    "GET /api/v1/ops/shard-readiness/runtime-execution-pass-evidence-closeout"
+  ],
+  "validationPlan": [
+    "compile",
+    "focused runtime execution endpoint integration tests",
+    "full mvn test",
+    "browser screenshot of v171 archive page"
+  ],
+  "stopConditions": [
+    "any runtime execution path changes",
+    "any response payload changes",
+    "any new runtime approval or pass-evidence gate",
+    "any Java or mini-kv process start/stop behavior",
+    "any managed audit connection or write path"
+  ],
+  "evidencePath": "e/171/evidence/java-shard-readiness-runtime-execution-route-group-split-v171.json",
+  "status": "passed"
+}

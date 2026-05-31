@@ -26,33 +26,6 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService;
 
-    private final OpsShardReadinessRuntimeExecutionArtifactCandidateService
-            opsShardReadinessRuntimeExecutionArtifactCandidateService;
-
-    private final OpsShardReadinessRuntimeExecutionPacketContributionService
-            opsShardReadinessRuntimeExecutionPacketContributionService;
-
-    private final OpsShardReadinessRuntimeExecutionApprovalGateInputService
-            opsShardReadinessRuntimeExecutionApprovalGateInputService;
-
-    private final OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService
-            opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
-
-    private final OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
-            opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
-
-    private final OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService
-            opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService;
-
-    private final OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService
-            opsShardReadinessRuntimeExecutionApprovalInputValueValidationService;
-
-    private final OpsShardReadinessRuntimeExecutionLiveReadGateService
-            opsShardReadinessRuntimeExecutionLiveReadGateService;
-
-    private final OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService
-            opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
-
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -62,25 +35,7 @@ public class OpsShardReadinessController {
             OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService,
             OpsShardReadinessLiveReadGatePlanService opsShardReadinessLiveReadGatePlanService,
             OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService,
-            OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService,
-            OpsShardReadinessRuntimeExecutionArtifactCandidateService
-                    opsShardReadinessRuntimeExecutionArtifactCandidateService,
-            OpsShardReadinessRuntimeExecutionPacketContributionService
-                    opsShardReadinessRuntimeExecutionPacketContributionService,
-            OpsShardReadinessRuntimeExecutionApprovalGateInputService
-                    opsShardReadinessRuntimeExecutionApprovalGateInputService,
-            OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService
-                    opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService,
-            OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
-                    opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService,
-            OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService
-                    opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService,
-            OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService
-                    opsShardReadinessRuntimeExecutionApprovalInputValueValidationService,
-            OpsShardReadinessRuntimeExecutionLiveReadGateService
-                    opsShardReadinessRuntimeExecutionLiveReadGateService,
-            OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService
-                    opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService
+            OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -91,24 +46,6 @@ public class OpsShardReadinessController {
         this.opsShardReadinessLiveReadGatePlanService = opsShardReadinessLiveReadGatePlanService;
         this.opsShardReadinessOperatorServiceLifecycleService = opsShardReadinessOperatorServiceLifecycleService;
         this.opsShardReadinessDeclaredOperatorLifecycleService = opsShardReadinessDeclaredOperatorLifecycleService;
-        this.opsShardReadinessRuntimeExecutionArtifactCandidateService =
-                opsShardReadinessRuntimeExecutionArtifactCandidateService;
-        this.opsShardReadinessRuntimeExecutionPacketContributionService =
-                opsShardReadinessRuntimeExecutionPacketContributionService;
-        this.opsShardReadinessRuntimeExecutionApprovalGateInputService =
-                opsShardReadinessRuntimeExecutionApprovalGateInputService;
-        this.opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService =
-                opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
-        this.opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService =
-                opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
-        this.opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService =
-                opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService;
-        this.opsShardReadinessRuntimeExecutionApprovalInputValueValidationService =
-                opsShardReadinessRuntimeExecutionApprovalInputValueValidationService;
-        this.opsShardReadinessRuntimeExecutionLiveReadGateService =
-                opsShardReadinessRuntimeExecutionLiveReadGateService;
-        this.opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService =
-                opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
     }
 
     @GetMapping("/shard-readiness")
@@ -156,56 +93,4 @@ public class OpsShardReadinessController {
         return opsShardReadinessDeclaredOperatorLifecycleService.lifecycle();
     }
 
-    @GetMapping("/shard-readiness/runtime-execution-artifact-candidate")
-    public OpsShardReadinessRuntimeExecutionArtifactCandidateResponse
-            shardReadinessRuntimeExecutionArtifactCandidate() {
-        return opsShardReadinessRuntimeExecutionArtifactCandidateService.candidate();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-packet-contribution")
-    public OpsShardReadinessRuntimeExecutionPacketContributionResponse
-            shardReadinessRuntimeExecutionPacketContribution() {
-        return opsShardReadinessRuntimeExecutionPacketContributionService.contribution();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-approval-gate-input")
-    public OpsShardReadinessRuntimeExecutionApprovalGateInputResponse
-            shardReadinessRuntimeExecutionApprovalGateInput() {
-        return opsShardReadinessRuntimeExecutionApprovalGateInputService.approvalGateInput();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-approval-input-contract-handoff")
-    public OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffResponse
-            shardReadinessRuntimeExecutionApprovalInputContractHandoff() {
-        return opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.handoff();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-approval-input-template-compatibility")
-    public OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityResponse
-            shardReadinessRuntimeExecutionApprovalInputTemplateCompatibility() {
-        return opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.compatibility();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-approval-input-template-compatibility-intake")
-    public OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeResponse
-            shardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntake() {
-        return opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.intake();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-approval-input-value-validation")
-    public OpsShardReadinessRuntimeExecutionApprovalInputValueValidationResponse
-            shardReadinessRuntimeExecutionApprovalInputValueValidation() {
-        return opsShardReadinessRuntimeExecutionApprovalInputValueValidationService.validation();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-live-read-gate")
-    public OpsShardReadinessRuntimeExecutionLiveReadGateResponse shardReadinessRuntimeExecutionLiveReadGate() {
-        return opsShardReadinessRuntimeExecutionLiveReadGateService.gate();
-    }
-
-    @GetMapping("/shard-readiness/runtime-execution-pass-evidence-closeout")
-    public OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutResponse
-            shardReadinessRuntimeExecutionPassEvidenceCloseout() {
-        return opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService.closeout();
-    }
 }

@@ -1,0 +1,67 @@
+- main [ref=e2] [box=115,0,1120,1361]:
+  - heading "Java v171 runtime execution route group split" [level=1] [ref=e3] [box=143,34,1064,41]
+  - paragraph [ref=e4] [box=143,83,980,50]: Java-side maintainability receipt for the Node v410 route split theme. Runtime execution endpoints now live in a focused controller while every public API path and response contract remains unchanged.
+  - region "summary" [ref=e5] [box=143,156,1064,103]:
+    - generic [ref=e6] [box=143,179,257,80]:
+      - generic [ref=e7] [box=158,193,228,19]: status
+      - generic [ref=e8] [box=158,220,228,25]: passed
+    - generic [ref=e9] [box=412,179,257,80]:
+      - generic [ref=e10] [box=427,193,228,19]: refactor
+      - generic [ref=e11] [box=427,220,228,25]: route group split
+    - generic [ref=e12] [box=681,179,257,80]:
+      - generic [ref=e13] [box=696,193,228,19]: path changes
+      - generic [ref=e14] [box=696,220,228,25]: none
+    - generic [ref=e15] [box=950,179,257,80]:
+      - generic [ref=e16] [box=965,193,228,19]: new gate
+      - generic [ref=e17] [box=965,220,228,25]: not added
+  - generic [ref=e18] [box=143,283,1064,237]:
+    - heading "Controller Boundary" [level=2] [ref=e19] [box=143,306,1064,28]
+    - generic [ref=e20] [box=143,348,1064,173]:
+      - generic [ref=e21] [box=143,348,526,80]:
+        - generic [ref=e22] [box=158,362,497,19]: source controller
+        - generic [ref=e23] [box=158,389,497,25]: OpsShardReadinessController
+      - generic [ref=e24] [box=681,348,526,80]:
+        - generic [ref=e25] [box=696,362,497,19]: extracted controller
+        - generic [ref=e26] [box=696,389,497,25]: OpsShardReadinessRuntimeExecutionController
+      - generic [ref=e27] [box=143,440,526,80]:
+        - generic [ref=e28] [box=158,455,497,19]: node plan reference
+        - generic [ref=e29] [box=158,481,497,25]: Node v410
+      - generic [ref=e30] [box=681,440,526,80]:
+        - generic [ref=e31] [box=696,455,497,19]: endpoint count
+        - generic [ref=e32] [box=696,481,497,25]: 9 preserved runtime execution endpoints
+  - generic [ref=e33] [box=143,545,1064,498]:
+    - heading "Preserved Endpoints" [level=2] [ref=e34] [box=143,567,1064,28]
+    - list [ref=e35] [box=143,609,1064,433]:
+      - listitem [ref=e36] [box=143,609,527,79]:
+        - code [ref=e37] [box=158,630,450,40]: GET /api/v1/ops/shard-readiness/runtime-execution-artifact-candidate
+      - listitem [ref=e38] [box=680,609,527,79]:
+        - code [ref=e39] [box=695,630,434,40]: GET /api/v1/ops/shard-readiness/runtime-execution-packet-contribution
+      - listitem [ref=e40] [box=143,698,527,79]:
+        - code [ref=e41] [box=158,719,488,40]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-gate-input
+      - listitem [ref=e42] [box=680,698,527,79]:
+        - code [ref=e43] [box=695,719,495,40]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-contract-handoff
+      - listitem [ref=e44] [box=143,787,527,79]:
+        - code [ref=e45] [box=158,808,495,40]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility
+      - listitem [ref=e46] [box=680,787,527,79]:
+        - code [ref=e47] [box=695,808,495,40]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake
+      - listitem [ref=e48] [box=143,875,527,79]:
+        - code [ref=e49] [box=158,896,495,40]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-value-validation
+      - listitem [ref=e50] [box=680,875,527,79]:
+        - code [ref=e51] [box=695,896,488,15]: GET /api/v1/ops/shard-readiness/runtime-execution-live-read-gate
+      - listitem [ref=e52] [box=143,964,527,79]:
+        - code [ref=e53] [box=158,985,488,40]: GET /api/v1/ops/shard-readiness/runtime-execution-pass-evidence-closeout
+  - generic [ref=e54] [box=143,1067,1064,246]:
+    - heading "Fail-Closed Scope" [level=2] [ref=e55] [box=143,1089,1064,28]
+    - list [ref=e56] [box=143,1131,1064,182]:
+      - listitem [ref=e57] [box=143,1131,527,54]:
+        - code [ref=e58] [box=158,1152,145,15]: no API path changes
+      - listitem [ref=e59] [box=680,1131,527,54]:
+        - code [ref=e60] [box=695,1152,213,15]: no response contract changes
+      - listitem [ref=e61] [box=143,1195,527,54]:
+        - code [ref=e62] [box=158,1216,213,15]: no new runtime approval gate
+      - listitem [ref=e63] [box=680,1195,527,54]:
+        - code [ref=e64] [box=695,1216,282,15]: no Java or mini-kv process start/stop
+      - listitem [ref=e65] [box=143,1259,527,54]:
+        - code [ref=e66] [box=158,1280,206,15]: no managed audit connection
+      - listitem [ref=e67] [box=680,1259,527,54]:
+        - code [ref=e68] [box=695,1280,328,15]: no write routing or active shard enablement
