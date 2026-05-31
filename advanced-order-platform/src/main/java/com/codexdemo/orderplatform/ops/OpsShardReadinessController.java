@@ -38,6 +38,9 @@ public class OpsShardReadinessController {
     private final OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService
             opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
 
+    private final OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
+            opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -55,7 +58,9 @@ public class OpsShardReadinessController {
             OpsShardReadinessRuntimeExecutionApprovalGateInputService
                     opsShardReadinessRuntimeExecutionApprovalGateInputService,
             OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService
-                    opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService
+                    opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService,
+            OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
+                    opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -74,6 +79,8 @@ public class OpsShardReadinessController {
                 opsShardReadinessRuntimeExecutionApprovalGateInputService;
         this.opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService =
                 opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
+        this.opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService =
+                opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
     }
 
     @GetMapping("/shard-readiness")
@@ -143,5 +150,11 @@ public class OpsShardReadinessController {
     public OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffResponse
             shardReadinessRuntimeExecutionApprovalInputContractHandoff() {
         return opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.handoff();
+    }
+
+    @GetMapping("/shard-readiness/runtime-execution-approval-input-template-compatibility")
+    public OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityResponse
+            shardReadinessRuntimeExecutionApprovalInputTemplateCompatibility() {
+        return opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.compatibility();
     }
 }

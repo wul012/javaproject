@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v166 runtime execution approval input template compatibility</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202833;
+      --muted: #5a6472;
+      --line: #c8d2dc;
+      --panel: #f5f7f9;
+      --accent: #1b6a58;
+      --accent-soft: #e3f0ec;
+      --warn: #8a5817;
+      --warn-soft: #fff2dc;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    main {
+      width: min(1100px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill {
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .warn {
+      background: var(--warn-soft);
+      color: var(--warn);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: var(--panel);
+      min-height: 88px;
+    }
+    .label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .value {
+      overflow-wrap: anywhere;
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+    section {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: #ffffff;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 28px, 1100px);
+        padding-top: 24px;
+      }
+      h1 {
+        font-size: 27px;
+      }
+      .grid,
+      ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v166 runtime execution approval input template compatibility</h1>
+  <p>
+    Java-side compatibility receipt after Node v402 published machine-checkable templates for the three still-missing
+    approval inputs. Java v166 confirms Java v164/v165 can be bound into those templates, while refusing to create
+    canonical approval files or treat templates as approval.
+  </p>
+  <div class="status-row">
+    <div class="pill">status: passed</div>
+    <div class="pill">nodeTemplateValidatorPresent=true</div>
+    <div class="pill warn">templatesAreApprovalInputs=false</div>
+    <div class="pill warn">canonicalApprovalInputsCreatedByJava=false</div>
+  </div>
+  <div class="grid">
+    <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility</div></div>
+    <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-v166.fixture.json</div></div>
+    <div class="item"><div class="label">source handoff</div><div class="value">Java v165</div></div>
+    <div class="item"><div class="label">canonical Java input</div><div class="value">Java v164</div></div>
+    <div class="item"><div class="label">template validator</div><div class="value">Node v402</div></div>
+    <div class="item"><div class="label">next consumer hint</div><div class="value">Node v403</div></div>
+  </div>
+  <section>
+    <h2>Template matrix</h2>
+    <ul>
+      <li>node-approved-runtime-window: e/398/input/node-approved-runtime-window-v398.json</li>
+      <li>template: e/402/input-templates/node-approved-runtime-window-v402.template.json</li>
+      <li>correlated-operator-approval-record: e/398/input/correlated-operator-approval-record-v398.json</li>
+      <li>template: e/402/input-templates/correlated-operator-approval-record-v402.template.json</li>
+      <li>complete-cross-project-runtime-execution-packet: e/398/input/cross-project-runtime-execution-packet-v398.json</li>
+      <li>template: e/402/input-templates/cross-project-runtime-execution-packet-v402.template.json</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Java binding fields</h2>
+    <ul>
+      <li>java-input-version:Java v164</li>
+      <li>java-input-path:e/164/evidence/java-shard-readiness-runtime-execution-approval-gate-input-v164.json</li>
+      <li>java-loopback-port:8080</li>
+      <li>java-service-owner:java-platform-operator-confirmed</li>
+      <li>java-get-only-smoke-commands:required-by-final-packet</li>
+      <li>java-stop-only-owned-process-rules:required-by-final-packet</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Fail-closed rules</h2>
+    <ul>
+      <li>node-v402-templates-are-template-only-not-approval-inputs</li>
+      <li>java-does-not-create-e398-canonical-approval-input-files</li>
+      <li>missing-node-approved-runtime-window-blocks-runtime-execution</li>
+      <li>template-compatibility-receipt-alone-is-not-runtime-approval</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

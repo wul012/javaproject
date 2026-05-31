@@ -1,0 +1,52 @@
+- main [ref=e2] [box=125,0,1100,1396]:
+  - heading "Java v166 runtime execution approval input template compatibility" [level=1] [ref=e3] [box=125,34,1100,40]
+  - paragraph [ref=e4] [box=125,86,1100,48]: Java-side compatibility receipt after Node v402 published machine-checkable templates for the three still-missing approval inputs. Java v166 confirms Java v164/v165 can be bound into those templates, while refusing to create canonical approval files or treat templates as approval.
+  - generic [ref=e5] [box=125,152,1100,80]:
+    - generic [ref=e6] [box=125,152,135,35]: "status: passed"
+    - generic [ref=e7] [box=270,152,294,35]: nodeTemplateValidatorPresent=true
+    - generic [ref=e8] [box=574,152,284,35]: templatesAreApprovalInputs=false
+    - generic [ref=e9] [box=125,197,372,35]: canonicalApprovalInputsCreatedByJava=false
+  - generic [ref=e10] [box=125,258,1100,304]:
+    - generic [ref=e11] [box=125,258,543,100]:
+      - generic [ref=e12] [box=142,273,510,14]: endpoint
+      - generic [ref=e13] [box=142,295,510,49]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility
+    - generic [ref=e14] [box=682,258,543,100]:
+      - generic [ref=e15] [box=699,273,510,14]: fixture
+      - generic [ref=e16] [box=699,295,510,49]: /contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-v166.fixture.json
+    - generic [ref=e17] [box=125,372,543,88]:
+      - generic [ref=e18] [box=142,387,510,14]: source handoff
+      - generic [ref=e19] [box=142,409,510,24]: Java v165
+    - generic [ref=e20] [box=682,372,543,88]:
+      - generic [ref=e21] [box=699,387,510,14]: canonical Java input
+      - generic [ref=e22] [box=699,409,510,24]: Java v164
+    - generic [ref=e23] [box=125,474,543,88]:
+      - generic [ref=e24] [box=142,489,510,14]: template validator
+      - generic [ref=e25] [box=142,511,510,24]: Node v402
+    - generic [ref=e26] [box=682,474,543,88]:
+      - generic [ref=e27] [box=699,489,510,14]: next consumer hint
+      - generic [ref=e28] [box=699,511,510,24]: Node v403
+  - generic [ref=e29] [box=125,590,1100,289]:
+    - heading "Template matrix" [level=2] [ref=e30] [box=125,615,1100,26]
+    - list [ref=e31] [box=125,654,1100,225]:
+      - listitem [ref=e32] [box=125,654,545,68]: "node-approved-runtime-window: e/398/input/node-approved-runtime-window-v398.json"
+      - listitem [ref=e33] [box=680,654,545,68]: "template: e/402/input-templates/node-approved-runtime-window-v402.template.json"
+      - listitem [ref=e34] [box=125,733,545,68]: "correlated-operator-approval-record: e/398/input/correlated-operator-approval-record-v398.json"
+      - listitem [ref=e35] [box=680,733,545,68]: "template: e/402/input-templates/correlated-operator-approval-record-v402.template.json"
+      - listitem [ref=e36] [box=125,811,545,68]: "complete-cross-project-runtime-execution-packet: e/398/input/cross-project-runtime-execution-packet-v398.json"
+      - listitem [ref=e37] [box=680,811,545,68]: "template: e/402/input-templates/cross-project-runtime-execution-packet-v402.template.json"
+  - generic [ref=e38] [box=125,907,1100,246]:
+    - heading "Java binding fields" [level=2] [ref=e39] [box=125,932,1100,26]
+    - list [ref=e40] [box=125,971,1100,182]:
+      - listitem [ref=e41] [box=125,971,545,68]: java-input-version:Java v164
+      - listitem [ref=e42] [box=680,971,545,68]: java-input-path:e/164/evidence/java-shard-readiness-runtime-execution-approval-gate-input-v164.json
+      - listitem [ref=e43] [box=125,1050,545,47]: java-loopback-port:8080
+      - listitem [ref=e44] [box=680,1050,545,47]: java-service-owner:java-platform-operator-confirmed
+      - listitem [ref=e45] [box=125,1106,545,47]: java-get-only-smoke-commands:required-by-final-packet
+      - listitem [ref=e46] [box=680,1106,545,47]: java-stop-only-owned-process-rules:required-by-final-packet
+  - generic [ref=e47] [box=125,1181,1100,167]:
+    - heading "Fail-closed rules" [level=2] [ref=e48] [box=125,1205,1100,26]
+    - list [ref=e49] [box=125,1245,1100,103]:
+      - listitem [ref=e50] [box=125,1245,545,47]: node-v402-templates-are-template-only-not-approval-inputs
+      - listitem [ref=e51] [box=680,1245,545,47]: java-does-not-create-e398-canonical-approval-input-files
+      - listitem [ref=e52] [box=125,1302,545,47]: missing-node-approved-runtime-window-blocks-runtime-execution
+      - listitem [ref=e53] [box=680,1302,545,47]: template-compatibility-receipt-alone-is-not-runtime-approval
