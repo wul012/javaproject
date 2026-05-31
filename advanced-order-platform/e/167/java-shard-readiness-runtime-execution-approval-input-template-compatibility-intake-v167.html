@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v167 runtime execution approval input template compatibility intake</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #162018;
+      --muted: #516052;
+      --line: #cbd8c8;
+      --panel: #f7faf4;
+      --accent: #1b6f5b;
+      --accent-2: #b55a31;
+      --bg: #fbfcf7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    main {
+      width: min(1120px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 36px;
+      line-height: 1.16;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    section {
+      margin-top: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .metric,
+    .item {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+      min-width: 0;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .value {
+      margin-top: 8px;
+      overflow-wrap: anywhere;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .value.ok {
+      color: var(--accent);
+    }
+
+    .value.blocked {
+      color: var(--accent-2);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 14px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 12px;
+      color: var(--ink);
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+    }
+
+    @media (max-width: 780px) {
+      main {
+        width: min(100vw - 28px, 1120px);
+        padding-top: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .summary,
+      .grid,
+      ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v167 runtime execution approval input template compatibility intake</h1>
+  <p>
+    Java-side read-only receipt after Node v403 records the Node v402 template validator, Java v166 compatibility
+    receipt, and mini-kv v157 echo. The receipt keeps the three canonical approval inputs absent and keeps runtime
+    execution closed until real approval values exist.
+  </p>
+
+  <div class="summary">
+    <div class="metric"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="metric"><div class="label">runtime</div><div class="value blocked">blocked</div></div>
+    <div class="metric"><div class="label">canonical inputs</div><div class="value">0 / 3 present</div></div>
+    <div class="metric"><div class="label">next consumer</div><div class="value">Node v404</div></div>
+  </div>
+
+  <section>
+    <h2>Evidence Surface</h2>
+    <div class="grid">
+      <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake</div></div>
+      <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json</div></div>
+      <div class="item"><div class="label">source Java receipt</div><div class="value">Java v166</div></div>
+      <div class="item"><div class="label">Node intake</div><div class="value">Node v403</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Canonical Approval Inputs Still Missing</h2>
+    <ul>
+      <li><code>e/398/input/node-approved-runtime-window-v398.json</code></li>
+      <li><code>e/398/input/correlated-operator-approval-record-v398.json</code></li>
+      <li><code>e/398/input/cross-project-runtime-execution-packet-v398.json</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Node v403 Intake Fields</h2>
+    <ul>
+      <li><code>readyForRuntimeExecutionApprovalInputTemplateCompatibilityIntake:true</code></li>
+      <li><code>readyForRuntimeExecutionPacket:false</code></li>
+      <li><code>readyForRuntimeLiveReadGate:false</code></li>
+      <li><code>javaCompatibilityReady:true</code></li>
+      <li><code>miniKvTemplateEchoReady:true</code></li>
+      <li><code>presentCanonicalInputCount:0</code></li>
+      <li><code>validCanonicalInputCount:0</code></li>
+      <li><code>productionBlockerCount:3</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Fail-Closed Rules</h2>
+    <ul>
+      <li><code>node-v403-intake-is-read-only-and-not-runtime-approval</code></li>
+      <li><code>java-v167-does-not-create-e398-canonical-approval-input-files</code></li>
+      <li><code>missing-node-approved-runtime-window-blocks-runtime-execution</code></li>
+      <li><code>missing-correlated-operator-approval-record-blocks-runtime-execution</code></li>
+      <li><code>missing-complete-cross-project-runtime-execution-packet-blocks-runtime-execution</code></li>
+      <li><code>node-v404-may-run-only-after-real-canonical-approval-inputs-exist</code></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

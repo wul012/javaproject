@@ -41,6 +41,9 @@ public class OpsShardReadinessController {
     private final OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
             opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
 
+    private final OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService
+            opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -60,7 +63,9 @@ public class OpsShardReadinessController {
             OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService
                     opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService,
             OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
-                    opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService
+                    opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService,
+            OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService
+                    opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -81,6 +86,8 @@ public class OpsShardReadinessController {
                 opsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
         this.opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService =
                 opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
+        this.opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService =
+                opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService;
     }
 
     @GetMapping("/shard-readiness")
@@ -156,5 +163,11 @@ public class OpsShardReadinessController {
     public OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityResponse
             shardReadinessRuntimeExecutionApprovalInputTemplateCompatibility() {
         return opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.compatibility();
+    }
+
+    @GetMapping("/shard-readiness/runtime-execution-approval-input-template-compatibility-intake")
+    public OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeResponse
+            shardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntake() {
+        return opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.intake();
     }
 }

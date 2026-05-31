@@ -1,0 +1,74 @@
+- main [ref=e2] [box=115,0,1120,1344]:
+  - heading "Java v167 runtime execution approval input template compatibility intake" [level=1] [ref=e3] [box=115,34,1120,84]
+  - paragraph [ref=e4] [box=115,130,1120,50]: Java-side read-only receipt after Node v403 records the Node v402 template validator, Java v166 compatibility receipt, and mini-kv v157 echo. The receipt keeps the three canonical approval inputs absent and keeps runtime execution closed until real approval values exist.
+  - generic [ref=e5] [box=115,203,1120,75]:
+    - generic [ref=e6] [box=115,203,271,75]:
+      - generic [ref=e7] [box=130,218,242,16]: status
+      - generic [ref=e8] [box=130,242,242,22]: passed
+    - generic [ref=e9] [box=398,203,271,75]:
+      - generic [ref=e10] [box=413,218,242,16]: runtime
+      - generic [ref=e11] [box=413,242,242,22]: blocked
+    - generic [ref=e12] [box=681,203,271,75]:
+      - generic [ref=e13] [box=696,218,242,16]: canonical inputs
+      - generic [ref=e14] [box=696,242,242,22]: 0 / 3 present
+    - generic [ref=e15] [box=964,203,271,75]:
+      - generic [ref=e16] [box=979,218,242,16]: next consumer
+      - generic [ref=e17] [box=979,242,242,22]: Node v404
+  - generic [ref=e18] [box=115,302,1120,243]:
+    - heading "Evidence Surface" [level=2] [ref=e19] [box=115,325,1120,23]
+    - generic [ref=e20] [box=115,361,1120,184]:
+      - generic [ref=e21] [box=115,361,554,97]:
+        - generic [ref=e22] [box=130,376,525,16]: endpoint
+        - generic [ref=e23] [box=130,400,525,43]: GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake
+      - generic [ref=e24] [box=681,361,554,97]:
+        - generic [ref=e25] [box=696,376,525,16]: fixture
+        - generic [ref=e26] [box=696,400,525,43]: /contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json
+      - generic [ref=e27] [box=115,470,554,75]:
+        - generic [ref=e28] [box=130,484,525,16]: source Java receipt
+        - generic [ref=e29] [box=130,509,525,22]: Java v166
+      - generic [ref=e30] [box=681,470,554,75]:
+        - generic [ref=e31] [box=696,484,525,16]: Node intake
+        - generic [ref=e32] [box=696,509,525,22]: Node v403
+  - generic [ref=e33] [box=115,569,1120,162]:
+    - heading "Canonical Approval Inputs Still Missing" [level=2] [ref=e34] [box=115,591,1120,23]
+    - list [ref=e35] [box=115,628,1120,103]:
+      - listitem [ref=e36] [box=115,628,553,47]:
+        - code [ref=e37] [box=128,645,381,15]: e/398/input/node-approved-runtime-window-v398.json
+      - listitem [ref=e38] [box=682,628,553,47]:
+        - code [ref=e39] [box=695,645,434,15]: e/398/input/correlated-operator-approval-record-v398.json
+      - listitem [ref=e40] [box=115,684,553,47]:
+        - code [ref=e41] [box=128,702,457,15]: e/398/input/cross-project-runtime-execution-packet-v398.json
+  - generic [ref=e42] [box=115,755,1120,276]:
+    - heading "Node v403 Intake Fields" [level=2] [ref=e43] [box=115,778,1120,23]
+    - list [ref=e44] [box=115,814,1120,217]:
+      - listitem [ref=e45] [box=115,814,553,47]:
+        - code [ref=e46] [box=128,832,526,15]: readyForRuntimeExecutionApprovalInputTemplateCompatibilityIntake:true
+      - listitem [ref=e47] [box=682,814,553,47]:
+        - code [ref=e48] [box=695,832,274,15]: readyForRuntimeExecutionPacket:false
+      - listitem [ref=e49] [box=115,871,553,47]:
+        - code [ref=e50] [box=128,888,251,15]: readyForRuntimeLiveReadGate:false
+      - listitem [ref=e51] [box=682,871,553,47]:
+        - code [ref=e52] [box=695,888,206,15]: javaCompatibilityReady:true
+      - listitem [ref=e53] [box=115,928,553,47]:
+        - code [ref=e54] [box=128,945,213,15]: miniKvTemplateEchoReady:true
+      - listitem [ref=e55] [box=682,928,553,47]:
+        - code [ref=e56] [box=695,945,213,15]: presentCanonicalInputCount:0
+      - listitem [ref=e57] [box=115,984,553,47]:
+        - code [ref=e58] [box=128,1002,198,15]: validCanonicalInputCount:0
+      - listitem [ref=e59] [box=682,984,553,47]:
+        - code [ref=e60] [box=695,1002,183,15]: productionBlockerCount:3
+  - generic [ref=e61] [box=115,1055,1120,241]:
+    - heading "Fail-Closed Rules" [level=2] [ref=e62] [box=115,1077,1120,23]
+    - list [ref=e63] [box=115,1114,1120,182]:
+      - listitem [ref=e64] [box=115,1114,553,47]:
+        - code [ref=e65] [box=128,1131,411,15]: node-v403-intake-is-read-only-and-not-runtime-approval
+      - listitem [ref=e66] [box=682,1114,553,47]:
+        - code [ref=e67] [box=695,1131,465,15]: java-v167-does-not-create-e398-canonical-approval-input-files
+      - listitem [ref=e68] [box=115,1171,553,47]:
+        - code [ref=e69] [box=128,1188,465,15]: missing-node-approved-runtime-window-blocks-runtime-execution
+      - listitem [ref=e70] [box=682,1171,553,47]:
+        - code [ref=e71] [box=695,1188,518,15]: missing-correlated-operator-approval-record-blocks-runtime-execution
+      - listitem [ref=e72] [box=115,1227,553,68]:
+        - code [ref=e73] [box=128,1245,480,37]: missing-complete-cross-project-runtime-execution-packet-blocks-runtime-execution
+      - listitem [ref=e74] [box=682,1227,553,68]:
+        - code [ref=e75] [box=695,1245,495,15]: node-v404-may-run-only-after-real-canonical-approval-inputs-exist
