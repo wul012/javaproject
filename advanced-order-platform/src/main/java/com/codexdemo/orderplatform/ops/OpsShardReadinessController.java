@@ -47,6 +47,9 @@ public class OpsShardReadinessController {
     private final OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService
             opsShardReadinessRuntimeExecutionApprovalInputValueValidationService;
 
+    private final OpsShardReadinessRuntimeExecutionLiveReadGateService
+            opsShardReadinessRuntimeExecutionLiveReadGateService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -70,7 +73,9 @@ public class OpsShardReadinessController {
             OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService
                     opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService,
             OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService
-                    opsShardReadinessRuntimeExecutionApprovalInputValueValidationService
+                    opsShardReadinessRuntimeExecutionApprovalInputValueValidationService,
+            OpsShardReadinessRuntimeExecutionLiveReadGateService
+                    opsShardReadinessRuntimeExecutionLiveReadGateService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -95,6 +100,8 @@ public class OpsShardReadinessController {
                 opsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService;
         this.opsShardReadinessRuntimeExecutionApprovalInputValueValidationService =
                 opsShardReadinessRuntimeExecutionApprovalInputValueValidationService;
+        this.opsShardReadinessRuntimeExecutionLiveReadGateService =
+                opsShardReadinessRuntimeExecutionLiveReadGateService;
     }
 
     @GetMapping("/shard-readiness")
@@ -182,5 +189,10 @@ public class OpsShardReadinessController {
     public OpsShardReadinessRuntimeExecutionApprovalInputValueValidationResponse
             shardReadinessRuntimeExecutionApprovalInputValueValidation() {
         return opsShardReadinessRuntimeExecutionApprovalInputValueValidationService.validation();
+    }
+
+    @GetMapping("/shard-readiness/runtime-execution-live-read-gate")
+    public OpsShardReadinessRuntimeExecutionLiveReadGateResponse shardReadinessRuntimeExecutionLiveReadGate() {
+        return opsShardReadinessRuntimeExecutionLiveReadGateService.gate();
     }
 }

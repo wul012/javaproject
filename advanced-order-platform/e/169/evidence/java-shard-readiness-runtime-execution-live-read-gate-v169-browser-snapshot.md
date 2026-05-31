@@ -1,0 +1,70 @@
+- main [ref=e2] [box=115,0,1120,1277]:
+  - heading "Java v169 runtime execution live-read gate" [level=1] [ref=e3] [box=115,34,1120,42]
+  - paragraph [ref=e4] [box=115,88,1120,50]: Java-side receipt for Node v406 live-read gate. The approved targets, owners, ports, and cleanup-proof requirements are ready for a later local-loopback smoke, but Java v169 still performs no startup and no runtime probe.
+  - generic [ref=e5] [box=115,161,1120,75]:
+    - generic [ref=e6] [box=115,161,271,75]:
+      - generic [ref=e7] [box=130,176,242,16]: status
+      - generic [ref=e8] [box=130,200,242,22]: passed
+    - generic [ref=e9] [box=398,161,271,75]:
+      - generic [ref=e10] [box=413,176,242,16]: targets
+      - generic [ref=e11] [box=413,200,242,22]: 2 / 2 ready
+    - generic [ref=e12] [box=681,161,271,75]:
+      - generic [ref=e13] [box=696,176,242,16]: cleanup proof
+      - generic [ref=e14] [box=696,200,242,22]: required
+    - generic [ref=e15] [box=964,161,271,75]:
+      - generic [ref=e16] [box=979,176,242,16]: smoke
+      - generic [ref=e17] [box=979,200,242,22]: not attempted
+  - generic [ref=e18] [box=115,260,1120,243]:
+    - heading "Evidence Surface" [level=2] [ref=e19] [box=115,283,1120,23]
+    - generic [ref=e20] [box=115,319,1120,184]:
+      - generic [ref=e21] [box=115,319,554,97]:
+        - generic [ref=e22] [box=130,334,525,16]: endpoint
+        - generic [ref=e23] [box=130,358,525,22]: GET /api/v1/ops/shard-readiness/runtime-execution-live-read-gate
+      - generic [ref=e24] [box=681,319,554,97]:
+        - generic [ref=e25] [box=696,334,525,16]: fixture
+        - generic [ref=e26] [box=696,358,525,43]: /contracts/java-shard-readiness-runtime-execution-live-read-gate-v169.fixture.json
+      - generic [ref=e27] [box=115,428,554,75]:
+        - generic [ref=e28] [box=130,443,525,16]: source Java receipt
+        - generic [ref=e29] [box=130,467,525,22]: Java v168
+      - generic [ref=e30] [box=681,428,554,75]:
+        - generic [ref=e31] [box=696,443,525,16]: Node live-read gate
+        - generic [ref=e32] [box=696,467,525,22]: Node v406
+  - generic [ref=e33] [box=115,527,1120,131]:
+    - heading "Runtime Targets" [level=2] [ref=e34] [box=115,550,1120,23]
+    - list [ref=e35] [box=115,586,1120,72]:
+      - listitem [ref=e36] [box=115,586,553,72]:
+        - code [ref=e37] [box=130,605,381,37]: java:owner=java-platform-operator:GET:http://127.0.0.1:8080/actuator/health
+      - listitem [ref=e38] [box=682,586,553,72]:
+        - code [ref=e39] [box=697,605,472,15]: mini-kv:owner=mini-kv-service-owner:GET:127.0.0.1:6424:/health
+  - generic [ref=e40] [box=115,682,1120,292]:
+    - heading "Accepted Node v406 Fields" [level=2] [ref=e41] [box=115,705,1120,23]
+    - list [ref=e42] [box=115,741,1120,233]:
+      - listitem [ref=e43] [box=115,741,553,51]:
+        - code [ref=e44] [box=130,761,312,15]: readyForRuntimeExecutionLiveReadGate:true
+      - listitem [ref=e45] [box=682,741,553,51]:
+        - code [ref=e46] [box=697,761,358,15]: readyForApprovedLocalLoopbackReadOnlySmoke:true
+      - listitem [ref=e47] [box=115,802,553,51]:
+        - code [ref=e48] [box=130,821,99,15]: targetCount:2
+      - listitem [ref=e49] [box=682,802,553,51]:
+        - code [ref=e50] [box=697,821,137,15]: readyTargetCount:2
+      - listitem [ref=e51] [box=115,863,553,51]:
+        - code [ref=e52] [box=130,882,206,15]: runtimeSmokeAttempted:false
+      - listitem [ref=e53] [box=682,863,553,51]:
+        - code [ref=e54] [box=697,882,175,15]: startsJavaService:false
+      - listitem [ref=e55] [box=115,923,553,51]:
+        - code [ref=e56] [box=130,943,168,15]: executionAllowed:false
+      - listitem [ref=e57] [box=682,923,553,51]:
+        - code [ref=e58] [box=697,943,183,15]: productionBlockerCount:0
+  - generic [ref=e59] [box=115,998,1120,231]:
+    - heading "Cleanup Proof Requirements" [level=2] [ref=e60] [box=115,1021,1120,23]
+    - list [ref=e61] [box=115,1057,1120,172]:
+      - listitem [ref=e62] [box=115,1057,553,51]:
+        - code [ref=e63] [box=130,1077,358,15]: record-owned-java-pid-if-started-by-later-smoke
+      - listitem [ref=e64] [box=682,1057,553,51]:
+        - code [ref=e65] [box=697,1077,381,15]: record-owned-mini-kv-pid-if-started-by-later-smoke
+      - listitem [ref=e66] [box=115,1118,553,51]:
+        - code [ref=e67] [box=130,1137,190,15]: stop-only-owned-processes
+      - listitem [ref=e68] [box=682,1118,553,51]:
+        - code [ref=e69] [box=697,1137,335,15]: verify-port-8080-not-listening-after-cleanup
+      - listitem [ref=e70] [box=115,1178,553,51]:
+        - code [ref=e71] [box=130,1198,335,15]: verify-port-6424-not-listening-after-cleanup

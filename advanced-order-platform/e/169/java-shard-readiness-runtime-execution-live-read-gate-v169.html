@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v169 runtime execution live-read gate</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172018;
+      --muted: #526154;
+      --line: #cbd9cd;
+      --panel: #f6faf3;
+      --accent: #176f5d;
+      --warn: #ad5d2c;
+      --bg: #fbfcf7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    main {
+      width: min(1120px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 36px;
+      line-height: 1.16;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    section {
+      margin-top: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .summary, .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 0;
+    }
+    .metric, .item, li {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .value {
+      margin-top: 8px;
+      overflow-wrap: anywhere;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+    .ok { color: var(--accent); }
+    .hold { color: var(--warn); }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 14px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+    }
+    @media (max-width: 780px) {
+      main { width: min(100vw - 28px, 1120px); padding-top: 24px; }
+      h1 { font-size: 28px; }
+      .summary, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v169 runtime execution live-read gate</h1>
+  <p>
+    Java-side receipt for Node v406 live-read gate. The approved targets, owners, ports, and cleanup-proof requirements
+    are ready for a later local-loopback smoke, but Java v169 still performs no startup and no runtime probe.
+  </p>
+
+  <div class="summary">
+    <div class="metric"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="metric"><div class="label">targets</div><div class="value ok">2 / 2 ready</div></div>
+    <div class="metric"><div class="label">cleanup proof</div><div class="value ok">required</div></div>
+    <div class="metric"><div class="label">smoke</div><div class="value hold">not attempted</div></div>
+  </div>
+
+  <section>
+    <h2>Evidence Surface</h2>
+    <div class="grid">
+      <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/runtime-execution-live-read-gate</div></div>
+      <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-runtime-execution-live-read-gate-v169.fixture.json</div></div>
+      <div class="item"><div class="label">source Java receipt</div><div class="value">Java v168</div></div>
+      <div class="item"><div class="label">Node live-read gate</div><div class="value">Node v406</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Runtime Targets</h2>
+    <ul>
+      <li><code>java:owner=java-platform-operator:GET:http://127.0.0.1:8080/actuator/health</code></li>
+      <li><code>mini-kv:owner=mini-kv-service-owner:GET:127.0.0.1:6424:/health</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Accepted Node v406 Fields</h2>
+    <ul>
+      <li><code>readyForRuntimeExecutionLiveReadGate:true</code></li>
+      <li><code>readyForApprovedLocalLoopbackReadOnlySmoke:true</code></li>
+      <li><code>targetCount:2</code></li>
+      <li><code>readyTargetCount:2</code></li>
+      <li><code>runtimeSmokeAttempted:false</code></li>
+      <li><code>startsJavaService:false</code></li>
+      <li><code>executionAllowed:false</code></li>
+      <li><code>productionBlockerCount:0</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Cleanup Proof Requirements</h2>
+    <ul>
+      <li><code>record-owned-java-pid-if-started-by-later-smoke</code></li>
+      <li><code>record-owned-mini-kv-pid-if-started-by-later-smoke</code></li>
+      <li><code>stop-only-owned-processes</code></li>
+      <li><code>verify-port-8080-not-listening-after-cleanup</code></li>
+      <li><code>verify-port-6424-not-listening-after-cleanup</code></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
