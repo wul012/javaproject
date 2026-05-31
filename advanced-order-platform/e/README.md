@@ -11,3 +11,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `173/`: Java shard-readiness evidence route group split evidence.
 - `174/`: Java shard-readiness read-only echo evidence.
 - `175/`: Java shard-readiness read-only evidence catalog.
+- `176/`: Java shard-readiness read-only evidence catalog snapshot freeze.

@@ -29,8 +29,8 @@ public class OpsShardReadinessReadOnlyEvidenceCatalogService {
         OpsShardReadinessEchoResponse echo = echoService.echo();
         OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutResponse closeout =
                 passEvidenceCloseoutService.closeout();
-        List<String> liveEndpoints = OpsShardReadinessEvidenceEndpoints.liveEndpoints();
-        List<String> fixtureEndpoints = OpsShardReadinessEvidenceEndpoints.fixtureEndpoints();
+        List<String> liveEndpoints = OpsShardReadinessReadOnlyEvidenceCatalogSnapshot.v175LiveEndpoints();
+        List<String> fixtureEndpoints = OpsShardReadinessReadOnlyEvidenceCatalogSnapshot.v175FixtureEndpoints();
 
         return new OpsShardReadinessReadOnlyEvidenceCatalogResponse(
                 "advanced-order-platform",

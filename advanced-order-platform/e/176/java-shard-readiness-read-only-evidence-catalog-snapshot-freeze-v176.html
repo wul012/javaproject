@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v176 catalog snapshot freeze</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f2;
+      --ink: #172019;
+      --muted: #5c665d;
+      --line: #d7ddd2;
+      --panel: #ffffff;
+      --ok: #08725f;
+      --hold: #9a4a15;
+      --accent: #244d75;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    .accent { color: var(--accent); }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main { padding: 28px 18px 38px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Java v176 catalog snapshot freeze</h1>
+    <p>Internal hardening for the v175 read-only evidence catalog. The catalog now reads a frozen v175 endpoint snapshot, so later endpoint growth will not mutate already versioned evidence output.</p>
+
+    <section class="stats" aria-label="summary">
+      <div class="tile">
+        <div class="label">status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="tile">
+        <div class="label">target</div>
+        <div class="value accent">Java v175</div>
+      </div>
+      <div class="tile">
+        <div class="label">live endpoints</div>
+        <div class="value accent">20</div>
+      </div>
+      <div class="tile">
+        <div class="label">execution</div>
+        <div class="value hold">not allowed</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Snapshot Surface</h2>
+      <div class="grid">
+        <div class="tile">
+          <div class="label">class</div>
+          <div class="value">OpsShardReadinessReadOnlyEvidenceCatalogSnapshot</div>
+        </div>
+        <div class="tile">
+          <div class="label">catalog service</div>
+          <div class="value">OpsShardReadinessReadOnlyEvidenceCatalogService</div>
+        </div>
+        <div class="tile">
+          <div class="label">fixture endpoints</div>
+          <div class="value">20</div>
+        </div>
+        <div class="tile">
+          <div class="label">future growth</div>
+          <div class="value ok">allowed outside v175</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>catalog-service-continues-to-return-20-live-endpoints</code></li>
+        <li><code>catalog-service-continues-to-return-20-fixture-endpoints</code></li>
+        <li><code>snapshot-test-locks-v175-endpoint-order</code></li>
+        <li><code>future-global-endpoint-registry-growth-will-not-mutate-v175-catalog</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Held Boundaries</h2>
+      <ul>
+        <li><code>root-readiness-schema-changed:false</code></li>
+        <li><code>write-routing-allowed:false</code></li>
+        <li><code>active-shard-router-allowed:false</code></li>
+        <li><code>credential-value-read:false</code></li>
+        <li><code>managed-audit-connection-allowed:false</code></li>
+        <li><code>node-may-start-or-stop-java-or-mini-kv:false</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

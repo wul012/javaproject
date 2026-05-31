@@ -1,0 +1,57 @@
+- main [ref=e2]:
+  - heading "Java v176 catalog snapshot freeze" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Internal hardening for the v175 read-only evidence catalog. The catalog now reads a frozen v175 endpoint snapshot, so later endpoint growth will not mutate already versioned evidence output.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: status
+      - generic [ref=e8]: passed
+    - generic [ref=e9]:
+      - generic [ref=e10]: target
+      - generic [ref=e11]: Java v175
+    - generic [ref=e12]:
+      - generic [ref=e13]: live endpoints
+      - generic [ref=e14]: "20"
+    - generic [ref=e15]:
+      - generic [ref=e16]: execution
+      - generic [ref=e17]: not allowed
+  - generic [ref=e18]:
+    - heading "Snapshot Surface" [level=2] [ref=e19]
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: class
+        - generic [ref=e23]: OpsShardReadinessReadOnlyEvidenceCatalogSnapshot
+      - generic [ref=e24]:
+        - generic [ref=e25]: catalog service
+        - generic [ref=e26]: OpsShardReadinessReadOnlyEvidenceCatalogService
+      - generic [ref=e27]:
+        - generic [ref=e28]: fixture endpoints
+        - generic [ref=e29]: "20"
+      - generic [ref=e30]:
+        - generic [ref=e31]: future growth
+        - generic [ref=e32]: allowed outside v175
+  - generic [ref=e33]:
+    - heading "Verification" [level=2] [ref=e34]
+    - list [ref=e35]:
+      - listitem [ref=e36]:
+        - code [ref=e37]: catalog-service-continues-to-return-20-live-endpoints
+      - listitem [ref=e38]:
+        - code [ref=e39]: catalog-service-continues-to-return-20-fixture-endpoints
+      - listitem [ref=e40]:
+        - code [ref=e41]: snapshot-test-locks-v175-endpoint-order
+      - listitem [ref=e42]:
+        - code [ref=e43]: future-global-endpoint-registry-growth-will-not-mutate-v175-catalog
+  - generic [ref=e44]:
+    - heading "Held Boundaries" [level=2] [ref=e45]
+    - list [ref=e46]:
+      - listitem [ref=e47]:
+        - code [ref=e48]: root-readiness-schema-changed:false
+      - listitem [ref=e49]:
+        - code [ref=e50]: write-routing-allowed:false
+      - listitem [ref=e51]:
+        - code [ref=e52]: active-shard-router-allowed:false
+      - listitem [ref=e53]:
+        - code [ref=e54]: credential-value-read:false
+      - listitem [ref=e55]:
+        - code [ref=e56]: managed-audit-connection-allowed:false
+      - listitem [ref=e57]:
+        - code [ref=e58]: node-may-start-or-stop-java-or-mini-kv:false
