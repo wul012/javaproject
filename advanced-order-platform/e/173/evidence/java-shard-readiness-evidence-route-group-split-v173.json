@@ -1,0 +1,44 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v173",
+  "scope": "shard-readiness-evidence-route-group-split",
+  "nodePlanReference": "Node v413",
+  "sourceJavaVersion": "Java v172",
+  "refactorOnly": true,
+  "apiPathChanged": false,
+  "responseContractChanged": false,
+  "newEvidenceGateAdded": false,
+  "runtimeExecutionAllowed": false,
+  "startsJavaService": false,
+  "startsMiniKvService": false,
+  "connectsManagedAudit": false,
+  "writeOperationsAllowed": false,
+  "sourceController": "OpsShardReadinessController",
+  "extractedController": "OpsShardReadinessEvidenceController",
+  "extractedEndpointCount": 3,
+  "remainingSourceControllerEndpoints": [
+    "GET /api/v1/ops/shard-readiness",
+    "GET /api/v1/ops/shard-readiness/hardening"
+  ],
+  "preservedBasePath": "/api/v1/ops/shard-readiness",
+  "preservedEvidenceEndpoints": [
+    "GET /api/v1/ops/shard-readiness/evidence-index",
+    "GET /api/v1/ops/shard-readiness/evidence-verification",
+    "GET /api/v1/ops/shard-readiness/evidence-handoff"
+  ],
+  "validationPlan": [
+    "compile",
+    "focused evidence endpoint integration tests",
+    "full mvn test",
+    "browser screenshot of v173 archive page"
+  ],
+  "stopConditions": [
+    "any evidence path changes",
+    "any response payload changes",
+    "any new evidence gate",
+    "any Java or mini-kv process start/stop behavior",
+    "any managed audit connection or write path"
+  ],
+  "evidencePath": "e/173/evidence/java-shard-readiness-evidence-route-group-split-v173.json",
+  "status": "passed"
+}
