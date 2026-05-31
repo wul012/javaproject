@@ -14,14 +14,23 @@ public class OpsShardReadinessEvidenceController {
 
     private final OpsShardReadinessEvidenceHandoffService evidenceHandoffService;
 
+    private final OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService;
+
     public OpsShardReadinessEvidenceController(
             OpsShardReadinessEvidenceIndexService evidenceIndexService,
             OpsShardReadinessEvidenceVerificationService evidenceVerificationService,
-            OpsShardReadinessEvidenceHandoffService evidenceHandoffService
+            OpsShardReadinessEvidenceHandoffService evidenceHandoffService,
+            OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService
     ) {
         this.evidenceIndexService = evidenceIndexService;
         this.evidenceVerificationService = evidenceVerificationService;
         this.evidenceHandoffService = evidenceHandoffService;
+        this.readOnlyEvidenceCatalogService = readOnlyEvidenceCatalogService;
+    }
+
+    @GetMapping("/read-only-evidence-catalog")
+    public OpsShardReadinessReadOnlyEvidenceCatalogResponse readOnlyEvidenceCatalog() {
+        return readOnlyEvidenceCatalogService.catalog();
     }
 
     @GetMapping("/evidence-index")
