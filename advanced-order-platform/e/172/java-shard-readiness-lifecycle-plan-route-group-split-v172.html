@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v172 lifecycle plan route group split</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f4;
+      --ink: #172018;
+      --muted: #59645d;
+      --line: #d8dfd6;
+      --panel: #ffffff;
+      --ok: #087363;
+      --hold: #a4501b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main { padding: 28px 18px 38px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Java v172 lifecycle plan route group split</h1>
+    <p>Java-side maintainability receipt for Node v411-v412. Active-shard plan, live-read gate plan, operator lifecycle, and declared operator lifecycle endpoints now live in a focused controller with no public API drift.</p>
+
+    <section class="stats" aria-label="summary">
+      <div class="tile">
+        <div class="label">status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="tile">
+        <div class="label">refactor</div>
+        <div class="value ok">route group split</div>
+      </div>
+      <div class="tile">
+        <div class="label">path changes</div>
+        <div class="value ok">none</div>
+      </div>
+      <div class="tile">
+        <div class="label">new gate</div>
+        <div class="value hold">not added</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Controller Boundary</h2>
+      <div class="grid">
+        <div class="tile">
+          <div class="label">source controller</div>
+          <div class="value">OpsShardReadinessController</div>
+        </div>
+        <div class="tile">
+          <div class="label">extracted controller</div>
+          <div class="value">OpsShardReadinessLifecyclePlanController</div>
+        </div>
+        <div class="tile">
+          <div class="label">node plan references</div>
+          <div class="value">Node v411, Node v412</div>
+        </div>
+        <div class="tile">
+          <div class="label">endpoint count</div>
+          <div class="value">4 preserved lifecycle/plan endpoints</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Preserved Endpoints</h2>
+      <ul>
+        <li><code>GET /api/v1/ops/shard-readiness/active-shard-plan-handoff</code></li>
+        <li><code>GET /api/v1/ops/shard-readiness/live-read-gate-plan</code></li>
+        <li><code>GET /api/v1/ops/shard-readiness/operator-service-lifecycle</code></li>
+        <li><code>GET /api/v1/ops/shard-readiness/declared-operator-lifecycle</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Fail-Closed Scope</h2>
+      <ul>
+        <li><code>no lifecycle or plan path changes</code></li>
+        <li><code>no response contract changes</code></li>
+        <li><code>no new runtime approval or evidence gate</code></li>
+        <li><code>no Java or mini-kv process start/stop</code></li>
+        <li><code>no managed audit connection</code></li>
+        <li><code>no write routing or active shard enablement</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

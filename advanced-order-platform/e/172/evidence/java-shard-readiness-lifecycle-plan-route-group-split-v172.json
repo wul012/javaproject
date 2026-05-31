@@ -1,0 +1,44 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v172",
+  "scope": "lifecycle-plan-route-group-split",
+  "nodePlanReferences": [
+    "Node v411",
+    "Node v412"
+  ],
+  "sourceJavaVersion": "Java v171",
+  "refactorOnly": true,
+  "apiPathChanged": false,
+  "responseContractChanged": false,
+  "newEvidenceGateAdded": false,
+  "runtimeExecutionAllowed": false,
+  "startsJavaService": false,
+  "startsMiniKvService": false,
+  "connectsManagedAudit": false,
+  "writeOperationsAllowed": false,
+  "sourceController": "OpsShardReadinessController",
+  "extractedController": "OpsShardReadinessLifecyclePlanController",
+  "extractedEndpointCount": 4,
+  "preservedBasePath": "/api/v1/ops/shard-readiness",
+  "preservedLifecyclePlanEndpoints": [
+    "GET /api/v1/ops/shard-readiness/active-shard-plan-handoff",
+    "GET /api/v1/ops/shard-readiness/live-read-gate-plan",
+    "GET /api/v1/ops/shard-readiness/operator-service-lifecycle",
+    "GET /api/v1/ops/shard-readiness/declared-operator-lifecycle"
+  ],
+  "validationPlan": [
+    "compile",
+    "focused lifecycle and plan endpoint integration tests",
+    "full mvn test",
+    "browser screenshot of v172 archive page"
+  ],
+  "stopConditions": [
+    "any lifecycle or plan path changes",
+    "any response payload changes",
+    "any new runtime approval or evidence gate",
+    "any Java or mini-kv process start/stop behavior",
+    "any managed audit connection or write path"
+  ],
+  "evidencePath": "e/172/evidence/java-shard-readiness-lifecycle-plan-route-group-split-v172.json",
+  "status": "passed"
+}

@@ -18,34 +18,18 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService;
 
-    private final OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService;
-
-    private final OpsShardReadinessLiveReadGatePlanService opsShardReadinessLiveReadGatePlanService;
-
-    private final OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService;
-
-    private final OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService;
-
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
             OpsShardReadinessEvidenceIndexService opsShardReadinessEvidenceIndexService,
             OpsShardReadinessEvidenceVerificationService opsShardReadinessEvidenceVerificationService,
-            OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService,
-            OpsShardReadinessActiveShardPlanHandoffService opsShardReadinessActiveShardPlanHandoffService,
-            OpsShardReadinessLiveReadGatePlanService opsShardReadinessLiveReadGatePlanService,
-            OpsShardReadinessOperatorServiceLifecycleService opsShardReadinessOperatorServiceLifecycleService,
-            OpsShardReadinessDeclaredOperatorLifecycleService opsShardReadinessDeclaredOperatorLifecycleService
+            OpsShardReadinessEvidenceHandoffService opsShardReadinessEvidenceHandoffService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
         this.opsShardReadinessEvidenceIndexService = opsShardReadinessEvidenceIndexService;
         this.opsShardReadinessEvidenceVerificationService = opsShardReadinessEvidenceVerificationService;
         this.opsShardReadinessEvidenceHandoffService = opsShardReadinessEvidenceHandoffService;
-        this.opsShardReadinessActiveShardPlanHandoffService = opsShardReadinessActiveShardPlanHandoffService;
-        this.opsShardReadinessLiveReadGatePlanService = opsShardReadinessLiveReadGatePlanService;
-        this.opsShardReadinessOperatorServiceLifecycleService = opsShardReadinessOperatorServiceLifecycleService;
-        this.opsShardReadinessDeclaredOperatorLifecycleService = opsShardReadinessDeclaredOperatorLifecycleService;
     }
 
     @GetMapping("/shard-readiness")
@@ -71,26 +55,6 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/evidence-handoff")
     public OpsShardReadinessEvidenceHandoffResponse shardReadinessEvidenceHandoff() {
         return opsShardReadinessEvidenceHandoffService.handoff();
-    }
-
-    @GetMapping("/shard-readiness/active-shard-plan-handoff")
-    public OpsShardReadinessActiveShardPlanHandoffResponse shardReadinessActiveShardPlanHandoff() {
-        return opsShardReadinessActiveShardPlanHandoffService.handoff();
-    }
-
-    @GetMapping("/shard-readiness/live-read-gate-plan")
-    public OpsShardReadinessLiveReadGatePlanResponse shardReadinessLiveReadGatePlan() {
-        return opsShardReadinessLiveReadGatePlanService.plan();
-    }
-
-    @GetMapping("/shard-readiness/operator-service-lifecycle")
-    public OpsShardReadinessOperatorServiceLifecycleResponse shardReadinessOperatorServiceLifecycle() {
-        return opsShardReadinessOperatorServiceLifecycleService.lifecycle();
-    }
-
-    @GetMapping("/shard-readiness/declared-operator-lifecycle")
-    public OpsShardReadinessDeclaredOperatorLifecycleResponse shardReadinessDeclaredOperatorLifecycle() {
-        return opsShardReadinessDeclaredOperatorLifecycleService.lifecycle();
     }
 
 }

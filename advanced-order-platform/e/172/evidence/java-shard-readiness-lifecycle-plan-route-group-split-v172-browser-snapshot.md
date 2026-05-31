@@ -1,0 +1,57 @@
+- main [ref=e2] [box=115,0,1120,1051]:
+  - heading "Java v172 lifecycle plan route group split" [level=1] [ref=e3] [box=143,34,1064,41]
+  - paragraph [ref=e4] [box=143,83,980,50]: Java-side maintainability receipt for Node v411-v412. Active-shard plan, live-read gate plan, operator lifecycle, and declared operator lifecycle endpoints now live in a focused controller with no public API drift.
+  - region "summary" [ref=e5] [box=143,156,1064,103]:
+    - generic [ref=e6] [box=143,179,257,80]:
+      - generic [ref=e7] [box=158,193,228,19]: status
+      - generic [ref=e8] [box=158,220,228,25]: passed
+    - generic [ref=e9] [box=412,179,257,80]:
+      - generic [ref=e10] [box=427,193,228,19]: refactor
+      - generic [ref=e11] [box=427,220,228,25]: route group split
+    - generic [ref=e12] [box=681,179,257,80]:
+      - generic [ref=e13] [box=696,193,228,19]: path changes
+      - generic [ref=e14] [box=696,220,228,25]: none
+    - generic [ref=e15] [box=950,179,257,80]:
+      - generic [ref=e16] [box=965,193,228,19]: new gate
+      - generic [ref=e17] [box=965,220,228,25]: not added
+  - generic [ref=e18] [box=143,283,1064,237]:
+    - heading "Controller Boundary" [level=2] [ref=e19] [box=143,306,1064,28]
+    - generic [ref=e20] [box=143,348,1064,173]:
+      - generic [ref=e21] [box=143,348,526,80]:
+        - generic [ref=e22] [box=158,362,497,19]: source controller
+        - generic [ref=e23] [box=158,389,497,25]: OpsShardReadinessController
+      - generic [ref=e24] [box=681,348,526,80]:
+        - generic [ref=e25] [box=696,362,497,19]: extracted controller
+        - generic [ref=e26] [box=696,389,497,25]: OpsShardReadinessLifecyclePlanController
+      - generic [ref=e27] [box=143,440,526,80]:
+        - generic [ref=e28] [box=158,455,497,19]: node plan references
+        - generic [ref=e29] [box=158,481,497,25]: Node v411, Node v412
+      - generic [ref=e30] [box=681,440,526,80]:
+        - generic [ref=e31] [box=696,455,497,19]: endpoint count
+        - generic [ref=e32] [box=696,481,497,25]: 4 preserved lifecycle/plan endpoints
+  - generic [ref=e33] [box=143,545,1064,184]:
+    - heading "Preserved Endpoints" [level=2] [ref=e34] [box=143,567,1064,28]
+    - list [ref=e35] [box=143,609,1064,120]:
+      - listitem [ref=e36] [box=143,609,526,54]:
+        - code [ref=e37] [box=158,630,434,15]: GET /api/v1/ops/shard-readiness/active-shard-plan-handoff
+      - listitem [ref=e38] [box=681,609,526,54]:
+        - code [ref=e39] [box=696,630,389,15]: GET /api/v1/ops/shard-readiness/live-read-gate-plan
+      - listitem [ref=e40] [box=143,675,526,54]:
+        - code [ref=e41] [box=158,696,442,15]: GET /api/v1/ops/shard-readiness/operator-service-lifecycle
+      - listitem [ref=e42] [box=681,675,526,54]:
+        - code [ref=e43] [box=696,696,450,15]: GET /api/v1/ops/shard-readiness/declared-operator-lifecycle
+  - generic [ref=e44] [box=143,753,1064,250]:
+    - heading "Fail-Closed Scope" [level=2] [ref=e45] [box=143,776,1064,28]
+    - list [ref=e46] [box=143,817,1064,186]:
+      - listitem [ref=e47] [box=143,817,526,54]:
+        - code [ref=e48] [box=158,839,251,15]: no lifecycle or plan path changes
+      - listitem [ref=e49] [box=681,817,526,54]:
+        - code [ref=e50] [box=696,839,213,15]: no response contract changes
+      - listitem [ref=e51] [box=143,883,526,54]:
+        - code [ref=e52] [box=158,904,305,15]: no new runtime approval or evidence gate
+      - listitem [ref=e53] [box=681,883,526,54]:
+        - code [ref=e54] [box=696,904,282,15]: no Java or mini-kv process start/stop
+      - listitem [ref=e55] [box=143,949,526,54]:
+        - code [ref=e56] [box=158,970,206,15]: no managed audit connection
+      - listitem [ref=e57] [box=681,949,526,54]:
+        - code [ref=e58] [box=696,970,328,15]: no write routing or active shard enablement
