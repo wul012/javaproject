@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v174 shard readiness echo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f4;
+      --ink: #172018;
+      --muted: #59645d;
+      --line: #d8dfd6;
+      --panel: #ffffff;
+      --ok: #087363;
+      --hold: #a4501b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main { padding: 28px 18px 38px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Java v174 shard readiness echo</h1>
+    <p>Versioned read-only echo for Java shard readiness consumption. The original v153 root schema is unchanged while this endpoint summarizes capability, controller split evidence, and fail-closed boundaries for independent consumers.</p>
+
+    <section class="stats" aria-label="summary">
+      <div class="tile">
+        <div class="label">status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="tile">
+        <div class="label">schema</div>
+        <div class="value ok">append-only</div>
+      </div>
+      <div class="tile">
+        <div class="label">shard router</div>
+        <div class="value hold">disabled</div>
+      </div>
+      <div class="tile">
+        <div class="label">execution</div>
+        <div class="value hold">not allowed</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Echo Surface</h2>
+      <div class="grid">
+        <div class="tile">
+          <div class="label">endpoint</div>
+          <div class="value">GET /api/v1/ops/shard-readiness/echo</div>
+        </div>
+        <div class="tile">
+          <div class="label">fixture</div>
+          <div class="value">/contracts/java-shard-readiness-echo-v174.fixture.json</div>
+        </div>
+        <div class="tile">
+          <div class="label">source readiness</div>
+          <div class="value">Java v153</div>
+        </div>
+        <div class="tile">
+          <div class="label">evidence handoff</div>
+          <div class="value">Java v157</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Controller Split Receipts</h2>
+      <ul>
+        <li><code>Java v171:runtime-execution-controller-split</code></li>
+        <li><code>Java v172:lifecycle-plan-controller-split</code></li>
+        <li><code>Java v173:evidence-controller-split</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Read-Only Capabilities</h2>
+      <ul>
+        <li><code>preserves-frozen-v153-root-readiness-contract</code></li>
+        <li><code>exposes-versioned-shard-readiness-echo</code></li>
+        <li><code>indexes-live-and-fixture-evidence-endpoints</code></li>
+        <li><code>documents-controller-split-readiness</code></li>
+        <li><code>supports-node-independent-consumption</code></li>
+        <li><code>keeps-active-shard-router-disabled</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Forbidden Operations</h2>
+      <ul>
+        <li><code>write-routing</code></li>
+        <li><code>active-shard-router</code></li>
+        <li><code>credential-value-read</code></li>
+        <li><code>raw-endpoint-parse</code></li>
+        <li><code>managed-audit-connection</code></li>
+        <li><code>deployment-or-rollback</code></li>
+        <li><code>node-start-or-stop-java-or-mini-kv</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

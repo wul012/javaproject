@@ -11,6 +11,7 @@ final class OpsShardReadinessEvidenceEndpoints {
         return List.of(
                 OpsShardReadinessService.ENDPOINT,
                 OpsShardReadinessHardeningService.ENDPOINT,
+                OpsShardReadinessEchoService.ENDPOINT,
                 OpsShardReadinessEvidenceIndexService.ENDPOINT,
                 OpsShardReadinessEvidenceVerificationService.ENDPOINT,
                 OpsShardReadinessEvidenceHandoffService.ENDPOINT,
@@ -34,6 +35,7 @@ final class OpsShardReadinessEvidenceEndpoints {
         return List.of(
                 OpsShardReadinessService.FIXTURE_ENDPOINT,
                 OpsShardReadinessHardeningService.FIXTURE_ENDPOINT,
+                OpsShardReadinessEchoService.FIXTURE_ENDPOINT,
                 OpsShardReadinessEvidenceIndexService.FIXTURE_ENDPOINT,
                 OpsShardReadinessEvidenceVerificationService.FIXTURE_ENDPOINT,
                 OpsShardReadinessEvidenceHandoffService.FIXTURE_ENDPOINT,

@@ -1,0 +1,72 @@
+- main [ref=e2] [box=115,0,1120,1391]:
+  - heading "Java v174 shard readiness echo" [level=1] [ref=e3] [box=143,34,1064,41]
+  - paragraph [ref=e4] [box=143,83,980,50]: Versioned read-only echo for Java shard readiness consumption. The original v153 root schema is unchanged while this endpoint summarizes capability, controller split evidence, and fail-closed boundaries for independent consumers.
+  - region "summary" [ref=e5] [box=143,156,1064,103]:
+    - generic [ref=e6] [box=143,179,257,80]:
+      - generic [ref=e7] [box=158,193,228,19]: status
+      - generic [ref=e8] [box=158,220,228,25]: passed
+    - generic [ref=e9] [box=412,179,257,80]:
+      - generic [ref=e10] [box=427,193,228,19]: schema
+      - generic [ref=e11] [box=427,220,228,25]: append-only
+    - generic [ref=e12] [box=681,179,257,80]:
+      - generic [ref=e13] [box=696,193,228,19]: shard router
+      - generic [ref=e14] [box=696,220,228,25]: disabled
+    - generic [ref=e15] [box=950,179,257,80]:
+      - generic [ref=e16] [box=965,193,228,19]: execution
+      - generic [ref=e17] [box=965,220,228,25]: not allowed
+  - generic [ref=e18] [box=143,283,1064,237]:
+    - heading "Echo Surface" [level=2] [ref=e19] [box=143,306,1064,28]
+    - generic [ref=e20] [box=143,348,1064,173]:
+      - generic [ref=e21] [box=143,348,526,80]:
+        - generic [ref=e22] [box=158,362,497,19]: endpoint
+        - generic [ref=e23] [box=158,389,497,25]: GET /api/v1/ops/shard-readiness/echo
+      - generic [ref=e24] [box=681,348,526,80]:
+        - generic [ref=e25] [box=696,362,497,19]: fixture
+        - generic [ref=e26] [box=696,389,497,25]: /contracts/java-shard-readiness-echo-v174.fixture.json
+      - generic [ref=e27] [box=143,440,526,80]:
+        - generic [ref=e28] [box=158,455,497,19]: source readiness
+        - generic [ref=e29] [box=158,481,497,25]: Java v153
+      - generic [ref=e30] [box=681,440,526,80]:
+        - generic [ref=e31] [box=696,455,497,19]: evidence handoff
+        - generic [ref=e32] [box=696,481,497,25]: Java v157
+  - generic [ref=e33] [box=143,545,1064,184]:
+    - heading "Controller Split Receipts" [level=2] [ref=e34] [box=143,567,1064,28]
+    - list [ref=e35] [box=143,609,1064,120]:
+      - listitem [ref=e36] [box=143,609,526,54]:
+        - code [ref=e37] [box=158,630,335,15]: Java v171:runtime-execution-controller-split
+      - listitem [ref=e38] [box=681,609,526,54]:
+        - code [ref=e39] [box=696,630,312,15]: Java v172:lifecycle-plan-controller-split
+      - listitem [ref=e40] [box=143,675,526,54]:
+        - code [ref=e41] [box=158,696,267,15]: Java v173:evidence-controller-split
+  - generic [ref=e42] [box=143,753,1064,250]:
+    - heading "Read-Only Capabilities" [level=2] [ref=e43] [box=143,776,1064,28]
+    - list [ref=e44] [box=143,817,1064,186]:
+      - listitem [ref=e45] [box=143,817,526,54]:
+        - code [ref=e46] [box=158,839,343,15]: preserves-frozen-v153-root-readiness-contract
+      - listitem [ref=e47] [box=681,817,526,54]:
+        - code [ref=e48] [box=696,839,290,15]: exposes-versioned-shard-readiness-echo
+      - listitem [ref=e49] [box=143,883,526,54]:
+        - code [ref=e50] [box=158,904,328,15]: indexes-live-and-fixture-evidence-endpoints
+      - listitem [ref=e51] [box=681,883,526,54]:
+        - code [ref=e52] [box=696,904,274,15]: documents-controller-split-readiness
+      - listitem [ref=e53] [box=143,949,526,54]:
+        - code [ref=e54] [box=158,970,282,15]: supports-node-independent-consumption
+      - listitem [ref=e55] [box=681,949,526,54]:
+        - code [ref=e56] [box=696,970,259,15]: keeps-active-shard-router-disabled
+  - generic [ref=e57] [box=143,1027,1064,316]:
+    - heading "Forbidden Operations" [level=2] [ref=e58] [box=143,1050,1064,28]
+    - list [ref=e59] [box=143,1092,1064,252]:
+      - listitem [ref=e60] [box=143,1092,526,54]:
+        - code [ref=e61] [box=158,1113,99,15]: write-routing
+      - listitem [ref=e62] [box=681,1092,526,54]:
+        - code [ref=e63] [box=696,1113,145,15]: active-shard-router
+      - listitem [ref=e64] [box=143,1157,526,54]:
+        - code [ref=e65] [box=158,1178,160,15]: credential-value-read
+      - listitem [ref=e66] [box=681,1157,526,54]:
+        - code [ref=e67] [box=696,1178,137,15]: raw-endpoint-parse
+      - listitem [ref=e68] [box=143,1223,526,54]:
+        - code [ref=e69] [box=158,1244,183,15]: managed-audit-connection
+      - listitem [ref=e70] [box=681,1223,526,54]:
+        - code [ref=e71] [box=696,1244,168,15]: deployment-or-rollback
+      - listitem [ref=e72] [box=143,1289,526,54]:
+        - code [ref=e73] [box=158,1310,259,15]: node-start-or-stop-java-or-mini-kv

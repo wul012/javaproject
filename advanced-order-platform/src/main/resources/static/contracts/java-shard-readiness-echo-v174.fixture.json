@@ -1,0 +1,73 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v174",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueRead": false,
+  "rawEndpointParsed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentAllowed": false,
+  "rollbackAllowed": false,
+  "sourceReadinessVersion": "Java v153",
+  "sourceHardeningVersion": "Java v154",
+  "sourceEvidenceIndexVersion": "Java v155",
+  "sourceEvidenceHandoffVersion": "Java v157",
+  "schemaCompatibilityMode": "append-only-new-echo-endpoint-preserves-v153-root-schema",
+  "echoProfile": "java-shard-readiness-read-only-echo.v1",
+  "receiptId": "java-shard-readiness-echo-receipt-v174",
+  "preservedRootFields": [
+    "project",
+    "version",
+    "readOnly",
+    "executionAllowed",
+    "shardEnabled",
+    "shardCount",
+    "slotCount",
+    "routingMode",
+    "evidencePath",
+    "status"
+  ],
+  "controllerSplitReceipts": [
+    "Java v171:runtime-execution-controller-split",
+    "Java v172:lifecycle-plan-controller-split",
+    "Java v173:evidence-controller-split"
+  ],
+  "evidenceArchivePaths": [
+    "e/153/evidence/java-shard-readiness-v153.json",
+    "e/154/evidence/java-shard-readiness-hardening-v154.json",
+    "e/155/evidence/java-shard-readiness-evidence-index-v155.json",
+    "e/157/evidence/java-shard-readiness-evidence-handoff-v157.json",
+    "e/171/evidence/java-shard-readiness-runtime-execution-route-group-split-v171.json",
+    "e/172/evidence/java-shard-readiness-lifecycle-plan-route-group-split-v172.json",
+    "e/173/evidence/java-shard-readiness-evidence-route-group-split-v173.json"
+  ],
+  "readOnlyEvidenceCapabilities": [
+    "preserves-frozen-v153-root-readiness-contract",
+    "exposes-versioned-shard-readiness-echo",
+    "indexes-live-and-fixture-evidence-endpoints",
+    "documents-controller-split-readiness",
+    "supports-node-independent-consumption",
+    "keeps-active-shard-router-disabled"
+  ],
+  "forbiddenOperations": [
+    "write-routing",
+    "active-shard-router",
+    "credential-value-read",
+    "raw-endpoint-parse",
+    "managed-audit-connection",
+    "deployment-or-rollback",
+    "node-start-or-stop-java-or-mini-kv"
+  ],
+  "consumerGuidance": [
+    "consume-versioned-fixtures-and-evidence-archives",
+    "do-not-treat-echo-as-runtime-permission",
+    "do-not-open-write-routing-before-explicit-approval",
+    "prefer-small-independent-java-and-mini-kv-evidence-milestones",
+    "node-may-consume-after-java-evidence-is-versioned"
+  ],
+  "evidencePath": "e/174/evidence/java-shard-readiness-echo-v174.json",
+  "status": "passed"
+}
