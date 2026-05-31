@@ -8,40 +8,8 @@ class OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutServiceTests {
 
     @Test
     void buildsJavaPassEvidenceCloseoutWithoutRerunningSmoke() {
-        OpsShardReadinessEvidenceIndexService indexService = new OpsShardReadinessEvidenceIndexService();
-        OpsShardReadinessEvidenceVerificationService verificationService =
-                new OpsShardReadinessEvidenceVerificationService(indexService);
-        OpsShardReadinessEvidenceHandoffService evidenceHandoffService =
-                new OpsShardReadinessEvidenceHandoffService(indexService, verificationService);
-        OpsShardReadinessActiveShardPlanHandoffService activeShardPlanHandoffService =
-                new OpsShardReadinessActiveShardPlanHandoffService(evidenceHandoffService);
-        OpsShardReadinessLiveReadGatePlanService liveReadGatePlanService =
-                new OpsShardReadinessLiveReadGatePlanService(activeShardPlanHandoffService);
-        OpsShardReadinessOperatorServiceLifecycleService operatorLifecycleService =
-                new OpsShardReadinessOperatorServiceLifecycleService(liveReadGatePlanService);
-        OpsShardReadinessDeclaredOperatorLifecycleService declaredLifecycleService =
-                new OpsShardReadinessDeclaredOperatorLifecycleService(operatorLifecycleService);
-        OpsShardReadinessRuntimeExecutionArtifactCandidateService artifactCandidateService =
-                new OpsShardReadinessRuntimeExecutionArtifactCandidateService(declaredLifecycleService);
-        OpsShardReadinessRuntimeExecutionPacketContributionService packetContributionService =
-                new OpsShardReadinessRuntimeExecutionPacketContributionService(artifactCandidateService);
-        OpsShardReadinessRuntimeExecutionApprovalGateInputService approvalGateInputService =
-                new OpsShardReadinessRuntimeExecutionApprovalGateInputService(packetContributionService);
-        OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService contractHandoffService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService(approvalGateInputService);
-        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService templateCompatibilityService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService(contractHandoffService);
-        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService compatibilityIntakeService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService(
-                        templateCompatibilityService
-                );
-        OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService valueValidationService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService(compatibilityIntakeService);
-        OpsShardReadinessRuntimeExecutionLiveReadGateService liveReadGateService =
-                new OpsShardReadinessRuntimeExecutionLiveReadGateService(valueValidationService);
-
         OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutResponse receipt =
-                new OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService(liveReadGateService).closeout();
+                OpsShardReadinessServiceGraphTestFactory.passEvidenceCloseoutService().closeout();
 
         assertThat(receipt.project()).isEqualTo("advanced-order-platform");
         assertThat(receipt.version()).isEqualTo("Java v170");

@@ -1,0 +1,46 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v178",
+  "readOnly": true,
+  "executionAllowed": false,
+  "refactorScope": "test-service-graph-factory",
+  "factoryClass": "OpsShardReadinessServiceGraphTestFactory",
+  "productionSourceChanged": false,
+  "apiEndpointChanged": false,
+  "fixtureEndpointChanged": false,
+  "rootReadinessSchemaChanged": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueRead": false,
+  "rawEndpointParsed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentAllowed": false,
+  "rollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "sharedBuilders": [
+    "readOnlyEvidenceCatalogService",
+    "readOnlyEvidenceCatalogHandoffService",
+    "passEvidenceCloseoutService"
+  ],
+  "testsRefactored": [
+    "OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutServiceTests",
+    "OpsShardReadinessReadOnlyEvidenceCatalogServiceTests",
+    "OpsShardReadinessReadOnlyEvidenceCatalogHandoffServiceTests"
+  ],
+  "maintainabilityWins": [
+    "removes-repeated-runtime-execution-service-graph-setup",
+    "keeps-future-shard-readiness-service-tests-focused-on-assertions",
+    "centralizes-read-only-test-graph-construction",
+    "preserves-v175-catalog-snapshot-behavior",
+    "preserves-v177-catalog-handoff-behavior"
+  ],
+  "verification": [
+    "compile",
+    "focused-service-graph-tests",
+    "full-mvn-test",
+    "static-json-parse",
+    "browser-archive-snapshot"
+  ],
+  "evidencePath": "e/178/evidence/java-shard-readiness-test-service-graph-factory-v178.json",
+  "status": "passed"
+}

@@ -8,7 +8,8 @@ class OpsShardReadinessReadOnlyEvidenceCatalogServiceTests {
 
     @Test
     void buildsReadOnlyEvidenceCatalogForBatchConsumption() {
-        OpsShardReadinessReadOnlyEvidenceCatalogResponse catalog = catalogService().catalog();
+        OpsShardReadinessReadOnlyEvidenceCatalogResponse catalog =
+                OpsShardReadinessServiceGraphTestFactory.readOnlyEvidenceCatalogService().catalog();
 
         assertThat(catalog.project()).isEqualTo("advanced-order-platform");
         assertThat(catalog.version()).isEqualTo("Java v175");
@@ -85,53 +86,5 @@ class OpsShardReadinessReadOnlyEvidenceCatalogServiceTests {
         assertThat(catalog.evidencePath())
                 .isEqualTo("e/175/evidence/java-shard-readiness-read-only-evidence-catalog-v175.json");
         assertThat(catalog.status()).isEqualTo("passed");
-    }
-
-    private OpsShardReadinessReadOnlyEvidenceCatalogService catalogService() {
-        OpsShardReadinessEvidenceIndexService indexService = new OpsShardReadinessEvidenceIndexService();
-        OpsShardReadinessEvidenceVerificationService verificationService =
-                new OpsShardReadinessEvidenceVerificationService(indexService);
-        OpsShardReadinessEvidenceHandoffService handoffService =
-                new OpsShardReadinessEvidenceHandoffService(indexService, verificationService);
-        OpsShardReadinessEchoService echoService = new OpsShardReadinessEchoService(
-                new OpsShardReadinessService(),
-                new OpsShardReadinessHardeningService(),
-                indexService,
-                handoffService
-        );
-        return new OpsShardReadinessReadOnlyEvidenceCatalogService(
-                echoService,
-                new OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService(liveReadGateService(handoffService))
-        );
-    }
-
-    private OpsShardReadinessRuntimeExecutionLiveReadGateService liveReadGateService(
-            OpsShardReadinessEvidenceHandoffService handoffService
-    ) {
-        OpsShardReadinessActiveShardPlanHandoffService activeShardPlanHandoffService =
-                new OpsShardReadinessActiveShardPlanHandoffService(handoffService);
-        OpsShardReadinessLiveReadGatePlanService liveReadGatePlanService =
-                new OpsShardReadinessLiveReadGatePlanService(activeShardPlanHandoffService);
-        OpsShardReadinessOperatorServiceLifecycleService operatorLifecycleService =
-                new OpsShardReadinessOperatorServiceLifecycleService(liveReadGatePlanService);
-        OpsShardReadinessDeclaredOperatorLifecycleService declaredLifecycleService =
-                new OpsShardReadinessDeclaredOperatorLifecycleService(operatorLifecycleService);
-        OpsShardReadinessRuntimeExecutionArtifactCandidateService artifactCandidateService =
-                new OpsShardReadinessRuntimeExecutionArtifactCandidateService(declaredLifecycleService);
-        OpsShardReadinessRuntimeExecutionPacketContributionService packetContributionService =
-                new OpsShardReadinessRuntimeExecutionPacketContributionService(artifactCandidateService);
-        OpsShardReadinessRuntimeExecutionApprovalGateInputService approvalGateInputService =
-                new OpsShardReadinessRuntimeExecutionApprovalGateInputService(packetContributionService);
-        OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService contractHandoffService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService(approvalGateInputService);
-        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService templateCompatibilityService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService(contractHandoffService);
-        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService compatibilityIntakeService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService(
-                        templateCompatibilityService
-                );
-        OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService valueValidationService =
-                new OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService(compatibilityIntakeService);
-        return new OpsShardReadinessRuntimeExecutionLiveReadGateService(valueValidationService);
     }
 }

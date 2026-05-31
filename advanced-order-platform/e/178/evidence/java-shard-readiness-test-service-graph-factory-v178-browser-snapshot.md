@@ -1,0 +1,49 @@
+- main [ref=e2]:
+  - heading "Java v178 test service graph factory" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Maintainability refactor for shard-readiness tests. Shared service graph construction now lives in one package-private test factory, keeping the catalog and handoff tests focused on behavior.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: status
+      - generic [ref=e8]: passed
+    - generic [ref=e9]:
+      - generic [ref=e10]: scope
+      - generic [ref=e11]: test refactor
+    - generic [ref=e12]:
+      - generic [ref=e13]: api change
+      - generic [ref=e14]: none
+    - generic [ref=e15]:
+      - generic [ref=e16]: execution
+      - generic [ref=e17]: not allowed
+  - generic [ref=e18]:
+    - heading "Shared Builders" [level=2] [ref=e19]
+    - list [ref=e20]:
+      - listitem [ref=e21]:
+        - code [ref=e22]: readOnlyEvidenceCatalogService
+      - listitem [ref=e23]:
+        - code [ref=e24]: readOnlyEvidenceCatalogHandoffService
+      - listitem [ref=e25]:
+        - code [ref=e26]: passEvidenceCloseoutService
+  - generic [ref=e27]:
+    - heading "Tests Refactored" [level=2] [ref=e28]
+    - list [ref=e29]:
+      - listitem [ref=e30]:
+        - code [ref=e31]: OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutServiceTests
+      - listitem [ref=e32]:
+        - code [ref=e33]: OpsShardReadinessReadOnlyEvidenceCatalogServiceTests
+      - listitem [ref=e34]:
+        - code [ref=e35]: OpsShardReadinessReadOnlyEvidenceCatalogHandoffServiceTests
+  - generic [ref=e36]:
+    - heading "Boundaries Held" [level=2] [ref=e37]
+    - list [ref=e38]:
+      - listitem [ref=e39]:
+        - code [ref=e40]: production-source-changed:false
+      - listitem [ref=e41]:
+        - code [ref=e42]: api-endpoint-changed:false
+      - listitem [ref=e43]:
+        - code [ref=e44]: write-routing-allowed:false
+      - listitem [ref=e45]:
+        - code [ref=e46]: active-shard-router-allowed:false
+      - listitem [ref=e47]:
+        - code [ref=e48]: credential-value-read:false
+      - listitem [ref=e49]:
+        - code [ref=e50]: node-may-start-or-stop-java-or-mini-kv:false

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v178 test service graph factory</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f3;
+      --ink: #172019;
+      --muted: #5c665d;
+      --line: #d6ddd4;
+      --panel: #ffffff;
+      --ok: #08725f;
+      --hold: #9a4a15;
+      --accent: #244f76;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    .accent { color: var(--accent); }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main { padding: 28px 18px 38px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Java v178 test service graph factory</h1>
+    <p>Maintainability refactor for shard-readiness tests. Shared service graph construction now lives in one package-private test factory, keeping the catalog and handoff tests focused on behavior.</p>
+
+    <section class="stats" aria-label="summary">
+      <div class="tile">
+        <div class="label">status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="tile">
+        <div class="label">scope</div>
+        <div class="value accent">test refactor</div>
+      </div>
+      <div class="tile">
+        <div class="label">api change</div>
+        <div class="value ok">none</div>
+      </div>
+      <div class="tile">
+        <div class="label">execution</div>
+        <div class="value hold">not allowed</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Shared Builders</h2>
+      <ul>
+        <li><code>readOnlyEvidenceCatalogService</code></li>
+        <li><code>readOnlyEvidenceCatalogHandoffService</code></li>
+        <li><code>passEvidenceCloseoutService</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tests Refactored</h2>
+      <ul>
+        <li><code>OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutServiceTests</code></li>
+        <li><code>OpsShardReadinessReadOnlyEvidenceCatalogServiceTests</code></li>
+        <li><code>OpsShardReadinessReadOnlyEvidenceCatalogHandoffServiceTests</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Boundaries Held</h2>
+      <ul>
+        <li><code>production-source-changed:false</code></li>
+        <li><code>api-endpoint-changed:false</code></li>
+        <li><code>write-routing-allowed:false</code></li>
+        <li><code>active-shard-router-allowed:false</code></li>
+        <li><code>credential-value-read:false</code></li>
+        <li><code>node-may-start-or-stop-java-or-mini-kv:false</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
