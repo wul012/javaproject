@@ -1,0 +1,76 @@
+- main [ref=e2] [box=115,0,1120,1377]:
+  - heading "Java v170 runtime execution pass evidence closeout" [level=1] [ref=e3] [box=115,34,1120,42]
+  - paragraph [ref=e4] [box=115,88,1120,50]: Java-side closeout ledger for Node v407-v409 pass evidence. The approved local-loopback read-only smoke passed, cleanup proof and archive verification are consumed, and Java v170 does not rerun smoke or start services.
+  - generic [ref=e5] [box=115,161,1120,75]:
+    - generic [ref=e6] [box=115,161,271,75]:
+      - generic [ref=e7] [box=130,176,242,16]: status
+      - generic [ref=e8] [box=130,200,242,22]: passed
+    - generic [ref=e9] [box=398,161,271,75]:
+      - generic [ref=e10] [box=413,176,242,16]: smoke evidence
+      - generic [ref=e11] [box=413,200,242,22]: passed
+    - generic [ref=e12] [box=681,161,271,75]:
+      - generic [ref=e13] [box=696,176,242,16]: cleanup proof
+      - generic [ref=e14] [box=696,200,242,22]: verified
+    - generic [ref=e15] [box=964,161,271,75]:
+      - generic [ref=e16] [box=979,176,242,16]: rerun
+      - generic [ref=e17] [box=979,200,242,22]: not performed
+  - generic [ref=e18] [box=115,260,1120,243]:
+    - heading "Evidence Surface" [level=2] [ref=e19] [box=115,283,1120,23]
+    - generic [ref=e20] [box=115,319,1120,184]:
+      - generic [ref=e21] [box=115,319,554,97]:
+        - generic [ref=e22] [box=130,334,525,16]: endpoint
+        - generic [ref=e23] [box=130,358,525,43]: GET /api/v1/ops/shard-readiness/runtime-execution-pass-evidence-closeout
+      - generic [ref=e24] [box=681,319,554,97]:
+        - generic [ref=e25] [box=696,334,525,16]: fixture
+        - generic [ref=e26] [box=696,358,525,43]: /contracts/java-shard-readiness-runtime-execution-pass-evidence-closeout-v170.fixture.json
+      - generic [ref=e27] [box=115,428,554,75]:
+        - generic [ref=e28] [box=130,443,525,16]: source Java receipt
+        - generic [ref=e29] [box=130,467,525,22]: Java v169
+      - generic [ref=e30] [box=681,428,554,75]:
+        - generic [ref=e31] [box=696,443,525,16]: Node closeout
+        - generic [ref=e32] [box=696,467,525,22]: Node v409
+  - generic [ref=e33] [box=115,527,1120,231]:
+    - heading "Closeout Chain" [level=2] [ref=e34] [box=115,550,1120,23]
+    - list [ref=e35] [box=115,586,1120,172]:
+      - listitem [ref=e36] [box=115,586,553,51]:
+        - code [ref=e37] [box=130,605,434,15]: node-v405:canonical-approval-input-value-validation-ready
+      - listitem [ref=e38] [box=682,586,553,51]:
+        - code [ref=e39] [box=697,605,366,15]: node-v406:runtime-execution-live-read-gate-ready
+      - listitem [ref=e40] [box=115,647,553,51]:
+        - code [ref=e41] [box=130,666,427,15]: node-v407:approved-local-loopback-read-only-smoke-passed
+      - listitem [ref=e42] [box=682,647,553,51]:
+        - code [ref=e43] [box=697,666,442,15]: node-v408:runtime-execution-pass-evidence-archive-verified
+      - listitem [ref=e44] [box=115,707,553,51]:
+        - code [ref=e45] [box=130,727,427,15]: node-v409:runtime-execution-pass-evidence-closeout-ready
+  - generic [ref=e46] [box=115,782,1120,292]:
+    - heading "Cleanup Proof" [level=2] [ref=e47] [box=115,805,1120,23]
+    - list [ref=e48] [box=115,841,1120,233]:
+      - listitem [ref=e49] [box=115,841,553,51]:
+        - code [ref=e50] [box=130,861,137,15]: cleanupPassed:true
+      - listitem [ref=e51] [box=682,841,553,51]:
+        - code [ref=e52] [box=697,861,122,15]: checkedPort:8080
+      - listitem [ref=e53] [box=115,902,553,51]:
+        - code [ref=e54] [box=130,921,122,15]: checkedPort:6424
+      - listitem [ref=e55] [box=682,902,553,51]:
+        - code [ref=e56] [box=697,921,122,15]: checkedPort:4407
+      - listitem [ref=e57] [box=115,962,553,51]:
+        - code [ref=e58] [box=130,982,122,15]: checkedPort:8407
+      - listitem [ref=e59] [box=682,962,553,51]:
+        - code [ref=e60] [box=697,982,206,15]: afterListeningSocketCount:0
+      - listitem [ref=e61] [box=115,1023,553,51]:
+        - code [ref=e62] [box=130,1043,229,15]: stop-only-owned-processes:true
+  - generic [ref=e63] [box=115,1098,1120,231]:
+    - heading "Fail-Closed Rules" [level=2] [ref=e64] [box=115,1120,1120,23]
+    - list [ref=e65] [box=115,1157,1120,172]:
+      - listitem [ref=e66] [box=115,1157,553,51]:
+        - code [ref=e67] [box=130,1176,366,15]: node-v409-closeout-is-not-new-runtime-permission
+      - listitem [ref=e68] [box=682,1157,553,51]:
+        - code [ref=e69] [box=697,1176,229,15]: java-v170-does-not-rerun-smoke
+      - listitem [ref=e70] [box=115,1217,553,51]:
+        - code [ref=e71] [box=130,1237,343,15]: java-v170-does-not-start-or-stop-java-service
+      - listitem [ref=e72] [box=682,1217,553,51]:
+        - code [ref=e73] [box=697,1237,366,15]: java-v170-does-not-start-or-stop-mini-kv-service
+      - listitem [ref=e74] [box=115,1278,553,51]:
+        - code [ref=e75] [box=130,1298,411,15]: cleanup-proof-must-remain-present-before-chain-handoff
+      - listitem [ref=e76] [box=682,1278,553,51]:
+        - code [ref=e77] [box=697,1298,411,15]: future-route-group-refactors-must-not-change-api-paths

@@ -50,6 +50,9 @@ public class OpsShardReadinessController {
     private final OpsShardReadinessRuntimeExecutionLiveReadGateService
             opsShardReadinessRuntimeExecutionLiveReadGateService;
 
+    private final OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService
+            opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -75,7 +78,9 @@ public class OpsShardReadinessController {
             OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService
                     opsShardReadinessRuntimeExecutionApprovalInputValueValidationService,
             OpsShardReadinessRuntimeExecutionLiveReadGateService
-                    opsShardReadinessRuntimeExecutionLiveReadGateService
+                    opsShardReadinessRuntimeExecutionLiveReadGateService,
+            OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService
+                    opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -102,6 +107,8 @@ public class OpsShardReadinessController {
                 opsShardReadinessRuntimeExecutionApprovalInputValueValidationService;
         this.opsShardReadinessRuntimeExecutionLiveReadGateService =
                 opsShardReadinessRuntimeExecutionLiveReadGateService;
+        this.opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService =
+                opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
     }
 
     @GetMapping("/shard-readiness")
@@ -194,5 +201,11 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/runtime-execution-live-read-gate")
     public OpsShardReadinessRuntimeExecutionLiveReadGateResponse shardReadinessRuntimeExecutionLiveReadGate() {
         return opsShardReadinessRuntimeExecutionLiveReadGateService.gate();
+    }
+
+    @GetMapping("/shard-readiness/runtime-execution-pass-evidence-closeout")
+    public OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutResponse
+            shardReadinessRuntimeExecutionPassEvidenceCloseout() {
+        return opsShardReadinessRuntimeExecutionPassEvidenceCloseoutService.closeout();
     }
 }

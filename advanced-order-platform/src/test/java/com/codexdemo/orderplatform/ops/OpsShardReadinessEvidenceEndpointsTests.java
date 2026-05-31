@@ -26,7 +26,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility",
                         "/api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake",
                         "/api/v1/ops/shard-readiness/runtime-execution-approval-input-value-validation",
-                        "/api/v1/ops/shard-readiness/runtime-execution-live-read-gate"
+                        "/api/v1/ops/shard-readiness/runtime-execution-live-read-gate",
+                        "/api/v1/ops/shard-readiness/runtime-execution-pass-evidence-closeout"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
                 .containsExactly(
@@ -46,7 +47,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-v166.fixture.json",
                         "/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json",
                         "/contracts/java-shard-readiness-runtime-execution-approval-input-value-validation-v168.fixture.json",
-                        "/contracts/java-shard-readiness-runtime-execution-live-read-gate-v169.fixture.json"
+                        "/contracts/java-shard-readiness-runtime-execution-live-read-gate-v169.fixture.json",
+                        "/contracts/java-shard-readiness-runtime-execution-pass-evidence-closeout-v170.fixture.json"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.liveProbeEndpoints())
                 .containsExactly(
@@ -66,7 +68,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility",
                         "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake",
                         "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-value-validation",
-                        "GET /api/v1/ops/shard-readiness/runtime-execution-live-read-gate"
+                        "GET /api/v1/ops/shard-readiness/runtime-execution-live-read-gate",
+                        "GET /api/v1/ops/shard-readiness/runtime-execution-pass-evidence-closeout"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureProbeEndpoints())
                 .containsExactly(
@@ -86,7 +89,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-v166.fixture.json",
                         "GET /contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json",
                         "GET /contracts/java-shard-readiness-runtime-execution-approval-input-value-validation-v168.fixture.json",
-                        "GET /contracts/java-shard-readiness-runtime-execution-live-read-gate-v169.fixture.json"
+                        "GET /contracts/java-shard-readiness-runtime-execution-live-read-gate-v169.fixture.json",
+                        "GET /contracts/java-shard-readiness-runtime-execution-pass-evidence-closeout-v170.fixture.json"
                 );
     }
 }
