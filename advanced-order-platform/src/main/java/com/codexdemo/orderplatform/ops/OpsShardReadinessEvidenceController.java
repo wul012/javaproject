@@ -16,21 +16,30 @@ public class OpsShardReadinessEvidenceController {
 
     private final OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService;
 
+    private final OpsShardReadinessReadOnlyEvidenceCatalogHandoffService readOnlyEvidenceCatalogHandoffService;
+
     public OpsShardReadinessEvidenceController(
             OpsShardReadinessEvidenceIndexService evidenceIndexService,
             OpsShardReadinessEvidenceVerificationService evidenceVerificationService,
             OpsShardReadinessEvidenceHandoffService evidenceHandoffService,
-            OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService
+            OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService,
+            OpsShardReadinessReadOnlyEvidenceCatalogHandoffService readOnlyEvidenceCatalogHandoffService
     ) {
         this.evidenceIndexService = evidenceIndexService;
         this.evidenceVerificationService = evidenceVerificationService;
         this.evidenceHandoffService = evidenceHandoffService;
         this.readOnlyEvidenceCatalogService = readOnlyEvidenceCatalogService;
+        this.readOnlyEvidenceCatalogHandoffService = readOnlyEvidenceCatalogHandoffService;
     }
 
     @GetMapping("/read-only-evidence-catalog")
     public OpsShardReadinessReadOnlyEvidenceCatalogResponse readOnlyEvidenceCatalog() {
         return readOnlyEvidenceCatalogService.catalog();
+    }
+
+    @GetMapping("/read-only-evidence-catalog-handoff")
+    public OpsShardReadinessReadOnlyEvidenceCatalogHandoffResponse readOnlyEvidenceCatalogHandoff() {
+        return readOnlyEvidenceCatalogHandoffService.handoff();
     }
 
     @GetMapping("/evidence-index")

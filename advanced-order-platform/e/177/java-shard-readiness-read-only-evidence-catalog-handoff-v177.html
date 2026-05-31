@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v177 catalog handoff</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8f3;
+      --ink: #172019;
+      --muted: #5c665d;
+      --line: #d6ddd4;
+      --panel: #ffffff;
+      --ok: #08725f;
+      --hold: #9a4a15;
+      --accent: #244f76;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    .accent { color: var(--accent); }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main { padding: 28px 18px 38px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Java v177 catalog handoff</h1>
+    <p>Read-only handoff for batch Node consumption of the frozen Java v175 evidence catalog. It names the source artifacts, consumer rules, and blocked operations without starting services or enabling runtime execution.</p>
+
+    <section class="stats" aria-label="summary">
+      <div class="tile">
+        <div class="label">status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="tile">
+        <div class="label">source</div>
+        <div class="value accent">Java v175</div>
+      </div>
+      <div class="tile">
+        <div class="label">catalog frozen</div>
+        <div class="value ok">true</div>
+      </div>
+      <div class="tile">
+        <div class="label">execution</div>
+        <div class="value hold">not allowed</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Handoff Surface</h2>
+      <div class="grid">
+        <div class="tile">
+          <div class="label">endpoint</div>
+          <div class="value">GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff</div>
+        </div>
+        <div class="tile">
+          <div class="label">fixture</div>
+          <div class="value">/contracts/java-shard-readiness-read-only-evidence-catalog-handoff-v177.fixture.json</div>
+        </div>
+        <div class="tile">
+          <div class="label">catalog endpoints</div>
+          <div class="value">20 live / 20 fixture</div>
+        </div>
+        <div class="tile">
+          <div class="label">receipt</div>
+          <div class="value">java-shard-readiness-read-only-evidence-catalog-handoff-receipt-v177</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Consumer Rules</h2>
+      <ul>
+        <li><code>consume-versioned-fixtures-before-live-probes</code></li>
+        <li><code>treat-v175-catalog-as-frozen-snapshot</code></li>
+        <li><code>node-may-batch-consume-java-evidence-after-versioned-archive-exists</code></li>
+        <li><code>node-must-not-start-or-stop-java-or-mini-kv</code></li>
+        <li><code>node-must-not-open-write-routing-or-active-shard-router</code></li>
+        <li><code>node-must-fail-closed-if-catalog-status-is-not-passed</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Blocked Operations</h2>
+      <ul>
+        <li><code>write-routing</code></li>
+        <li><code>active-shard-router</code></li>
+        <li><code>credential-value-read</code></li>
+        <li><code>raw-endpoint-parse</code></li>
+        <li><code>managed-audit-connection</code></li>
+        <li><code>deployment-or-rollback</code></li>
+        <li><code>node-start-or-stop-java-or-mini-kv</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

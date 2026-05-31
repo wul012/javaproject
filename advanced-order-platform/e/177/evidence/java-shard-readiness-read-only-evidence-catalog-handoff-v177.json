@@ -1,0 +1,62 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v177",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "sourceCatalogVersion": "Java v175",
+  "sourceCatalogReceiptId": "java-shard-readiness-read-only-evidence-catalog-receipt-v175",
+  "sourceCatalogEndpoint": "/api/v1/ops/shard-readiness/read-only-evidence-catalog",
+  "sourceCatalogFixtureEndpoint": "/contracts/java-shard-readiness-read-only-evidence-catalog-v175.fixture.json",
+  "sourceCatalogEvidencePath": "e/175/evidence/java-shard-readiness-read-only-evidence-catalog-v175.json",
+  "sourceCatalogLiveEndpointCount": 20,
+  "sourceCatalogFixtureEndpointCount": 20,
+  "sourceCatalogFrozen": true,
+  "readyForBatchNodeConsumption": true,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueRead": false,
+  "rawEndpointParsed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentAllowed": false,
+  "rollbackAllowed": false,
+  "handoffProfile": "java-shard-readiness-read-only-evidence-catalog-handoff.v1",
+  "receiptId": "java-shard-readiness-read-only-evidence-catalog-handoff-receipt-v177",
+  "nextNodeConsumerHint": "Node may consume the frozen Java v175 catalog after Java and mini-kv evidence is versioned",
+  "handoffArtifacts": [
+    "/api/v1/ops/shard-readiness/read-only-evidence-catalog",
+    "/contracts/java-shard-readiness-read-only-evidence-catalog-v175.fixture.json",
+    "e/175/evidence/java-shard-readiness-read-only-evidence-catalog-v175.json",
+    "e/176/evidence/java-shard-readiness-read-only-evidence-catalog-snapshot-freeze-v176.json",
+    "e/177/evidence/java-shard-readiness-read-only-evidence-catalog-handoff-v177.json"
+  ],
+  "consumerRules": [
+    "consume-versioned-fixtures-before-live-probes",
+    "treat-v175-catalog-as-frozen-snapshot",
+    "node-may-batch-consume-java-evidence-after-versioned-archive-exists",
+    "node-must-not-start-or-stop-java-or-mini-kv",
+    "node-must-not-open-write-routing-or-active-shard-router",
+    "node-must-fail-closed-if-catalog-status-is-not-passed"
+  ],
+  "failClosedChecks": [
+    "source-catalog-status-must-be-passed:passed",
+    "source-catalog-live-endpoint-count:20",
+    "source-catalog-fixture-endpoint-count:20",
+    "source-catalog-receipt:java-shard-readiness-read-only-evidence-catalog-receipt-v175",
+    "snapshot-freeze-evidence-required:e/176/evidence/java-shard-readiness-read-only-evidence-catalog-snapshot-freeze-v176.json",
+    "handoff-does-not-read-secrets-or-raw-endpoints",
+    "handoff-does-not-enable-runtime-execution"
+  ],
+  "blockedOperations": [
+    "write-routing",
+    "active-shard-router",
+    "credential-value-read",
+    "raw-endpoint-parse",
+    "managed-audit-connection",
+    "deployment-or-rollback",
+    "node-start-or-stop-java-or-mini-kv"
+  ],
+  "evidencePath": "e/177/evidence/java-shard-readiness-read-only-evidence-catalog-handoff-v177.json",
+  "status": "passed"
+}
