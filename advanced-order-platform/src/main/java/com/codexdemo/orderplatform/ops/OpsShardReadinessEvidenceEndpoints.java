@@ -23,7 +23,8 @@ final class OpsShardReadinessEvidenceEndpoints {
                 OpsShardReadinessRuntimeExecutionApprovalGateInputService.ENDPOINT,
                 OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.ENDPOINT,
                 OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.ENDPOINT
+                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.ENDPOINT,
+                OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService.ENDPOINT
         );
     }
 
@@ -43,7 +44,8 @@ final class OpsShardReadinessEvidenceEndpoints {
                 OpsShardReadinessRuntimeExecutionApprovalGateInputService.FIXTURE_ENDPOINT,
                 OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.FIXTURE_ENDPOINT,
                 OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.FIXTURE_ENDPOINT
+                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.FIXTURE_ENDPOINT,
+                OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService.FIXTURE_ENDPOINT
         );
     }
 

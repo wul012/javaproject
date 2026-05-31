@@ -24,7 +24,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/api/v1/ops/shard-readiness/runtime-execution-approval-gate-input",
                         "/api/v1/ops/shard-readiness/runtime-execution-approval-input-contract-handoff",
                         "/api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility",
-                        "/api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake"
+                        "/api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake",
+                        "/api/v1/ops/shard-readiness/runtime-execution-approval-input-value-validation"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
                 .containsExactly(
@@ -42,7 +43,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "/contracts/java-shard-readiness-runtime-execution-approval-gate-input-v164.fixture.json",
                         "/contracts/java-shard-readiness-runtime-execution-approval-input-contract-handoff-v165.fixture.json",
                         "/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-v166.fixture.json",
-                        "/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json"
+                        "/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json",
+                        "/contracts/java-shard-readiness-runtime-execution-approval-input-value-validation-v168.fixture.json"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.liveProbeEndpoints())
                 .containsExactly(
@@ -60,7 +62,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /api/v1/ops/shard-readiness/runtime-execution-approval-gate-input",
                         "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-contract-handoff",
                         "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility",
-                        "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake"
+                        "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake",
+                        "GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-value-validation"
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureProbeEndpoints())
                 .containsExactly(
@@ -78,7 +81,8 @@ class OpsShardReadinessEvidenceEndpointsTests {
                         "GET /contracts/java-shard-readiness-runtime-execution-approval-gate-input-v164.fixture.json",
                         "GET /contracts/java-shard-readiness-runtime-execution-approval-input-contract-handoff-v165.fixture.json",
                         "GET /contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-v166.fixture.json",
-                        "GET /contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json"
+                        "GET /contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json",
+                        "GET /contracts/java-shard-readiness-runtime-execution-approval-input-value-validation-v168.fixture.json"
                 );
     }
 }

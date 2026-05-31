@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v168 runtime execution approval input value validation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172018;
+      --muted: #526154;
+      --line: #cbd9cd;
+      --panel: #f6faf3;
+      --accent: #176f5d;
+      --warn: #ad5d2c;
+      --bg: #fbfcf7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    main {
+      width: min(1120px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 36px;
+      line-height: 1.16;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    section {
+      margin-top: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .summary, .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 0;
+    }
+    .metric, .item, li {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .value {
+      margin-top: 8px;
+      overflow-wrap: anywhere;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+    .ok { color: var(--accent); }
+    .hold { color: var(--warn); }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 14px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    code {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 13px;
+    }
+    @media (max-width: 780px) {
+      main { width: min(100vw - 28px, 1120px); padding-top: 24px; }
+      h1 { font-size: 28px; }
+      .summary, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v168 runtime execution approval input value validation</h1>
+  <p>
+    Java-side receipt for Node v405 canonical approval input value validation. The three real canonical inputs are
+    accepted as value-valid for the next live-read gate, while Java still performs no startup, no smoke, no writes,
+    no credential access, and no raw endpoint parsing.
+  </p>
+
+  <div class="summary">
+    <div class="metric"><div class="label">status</div><div class="value ok">passed</div></div>
+    <div class="metric"><div class="label">canonical inputs</div><div class="value ok">3 / 3 valid</div></div>
+    <div class="metric"><div class="label">runtime packet</div><div class="value ok">ready</div></div>
+    <div class="metric"><div class="label">smoke</div><div class="value hold">not attempted</div></div>
+  </div>
+
+  <section>
+    <h2>Evidence Surface</h2>
+    <div class="grid">
+      <div class="item"><div class="label">endpoint</div><div class="value">GET /api/v1/ops/shard-readiness/runtime-execution-approval-input-value-validation</div></div>
+      <div class="item"><div class="label">fixture</div><div class="value">/contracts/java-shard-readiness-runtime-execution-approval-input-value-validation-v168.fixture.json</div></div>
+      <div class="item"><div class="label">source Java receipt</div><div class="value">Java v167</div></div>
+      <div class="item"><div class="label">Node value validation</div><div class="value">Node v405</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Accepted Node v405 Fields</h2>
+    <ul>
+      <li><code>readyForRuntimeExecutionPacket:true</code></li>
+      <li><code>readyForRuntimeLiveReadGate:true</code></li>
+      <li><code>presentTargetInputCount:3</code></li>
+      <li><code>validTargetInputCount:3</code></li>
+      <li><code>sharedApprovalCorrelationIdValidated:true</code></li>
+      <li><code>executionAttempted:false</code></li>
+      <li><code>startsJavaService:false</code></li>
+      <li><code>productionBlockerCount:0</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Eligible Read-Only Smoke Commands</h2>
+    <ul>
+      <li><code>java:GET:http://127.0.0.1:8080/actuator/health</code></li>
+      <li><code>mini-kv:GET:127.0.0.1:6424:/health</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Fail-Closed Rules</h2>
+    <ul>
+      <li><code>node-v405-value-validation-is-not-java-service-startup</code></li>
+      <li><code>java-v168-does-not-read-or-write-e398-canonical-input-files</code></li>
+      <li><code>java-v168-does-not-generate-approval-correlation-id</code></li>
+      <li><code>java-v168-does-not-run-runtime-smoke</code></li>
+      <li><code>node-v406-live-read-gate-required-before-any-approved-smoke</code></li>
+      <li><code>only-get-local-loopback-smoke-commands-remain-eligible</code></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
