@@ -59,3 +59,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `221/`: Java shard-readiness v220 consumer evidence digest snapshot freeze.
 - `222/`: Java shard-readiness v220 consumer evidence digest historical compatibility.
 - `223/`: Java shard-readiness v1 contract consumer evidence digest integrity.
+- `224/`: Java shard-readiness v1 contract consumer readiness completion.
