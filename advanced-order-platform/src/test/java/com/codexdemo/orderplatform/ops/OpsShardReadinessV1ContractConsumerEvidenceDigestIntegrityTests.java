@@ -13,13 +13,14 @@ class OpsShardReadinessV1ContractConsumerEvidenceDigestIntegrityTests {
         OpsShardReadinessV1ContractConsumerEvidenceDigestResponse digest =
                 OpsShardReadinessV1ContractConsumerEvidenceDigestSnapshot.v220Digest();
 
-        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(10);
+        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(11);
         assertThat(OpsShardReadinessV1ContractEndpointPairs.liveEndpoints())
                 .doesNotHaveDuplicates()
                 .containsSubsequence(
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT,
-                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT
                 )
                 .doesNotContain(
                         OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT,

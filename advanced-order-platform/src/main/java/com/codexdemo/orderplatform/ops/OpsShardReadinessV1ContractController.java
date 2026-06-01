@@ -29,6 +29,8 @@ public class OpsShardReadinessV1ContractController {
 
     private final OpsShardReadinessV1ContractConsumerEvidenceDigestService consumerEvidenceDigestService;
 
+    private final OpsShardReadinessV1ContractConsumerReadinessHandoffService consumerReadinessHandoffService;
+
     public OpsShardReadinessV1ContractController(
             OpsShardReadinessV1ContractAlignmentService alignmentService,
             OpsShardReadinessV1ContractAlignmentHandoffService alignmentHandoffService,
@@ -39,7 +41,8 @@ public class OpsShardReadinessV1ContractController {
             OpsShardReadinessV1ContractEndpointCatalogService endpointCatalogService,
             OpsShardReadinessV1ContractConsumerHandoffBundleService consumerHandoffBundleService,
             OpsShardReadinessV1ContractConsumerVerificationChecklistService consumerVerificationChecklistService,
-            OpsShardReadinessV1ContractConsumerEvidenceDigestService consumerEvidenceDigestService
+            OpsShardReadinessV1ContractConsumerEvidenceDigestService consumerEvidenceDigestService,
+            OpsShardReadinessV1ContractConsumerReadinessHandoffService consumerReadinessHandoffService
     ) {
         this.alignmentService = alignmentService;
         this.alignmentHandoffService = alignmentHandoffService;
@@ -51,6 +54,7 @@ public class OpsShardReadinessV1ContractController {
         this.consumerHandoffBundleService = consumerHandoffBundleService;
         this.consumerVerificationChecklistService = consumerVerificationChecklistService;
         this.consumerEvidenceDigestService = consumerEvidenceDigestService;
+        this.consumerReadinessHandoffService = consumerReadinessHandoffService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_ALIGNMENT)
@@ -101,5 +105,10 @@ public class OpsShardReadinessV1ContractController {
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_EVIDENCE_DIGEST)
     public OpsShardReadinessV1ContractConsumerEvidenceDigestResponse consumerEvidenceDigest() {
         return consumerEvidenceDigestService.digest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_READINESS_HANDOFF)
+    public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse consumerReadinessHandoff() {
+        return consumerReadinessHandoffService.handoff();
     }
 }

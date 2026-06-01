@@ -8,7 +8,7 @@ class OpsShardReadinessV1ContractEndpointPairsTests {
 
     @Test
     void groupsV1ContractEndpointPairsInContractOrder() {
-        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(10);
+        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(11);
         assertThat(OpsShardReadinessV1ContractEndpointPairs.liveEndpoints())
                 .containsExactly(
                         "/api/v1/ops/shard-readiness/v1-contract-alignment",
@@ -20,7 +20,8 @@ class OpsShardReadinessV1ContractEndpointPairsTests {
                         "/api/v1/ops/shard-readiness/v1-contract-endpoint-catalog",
                         "/api/v1/ops/shard-readiness/v1-contract-consumer-handoff-bundle",
                         "/api/v1/ops/shard-readiness/v1-contract-consumer-verification-checklist",
-                        "/api/v1/ops/shard-readiness/v1-contract-consumer-evidence-digest"
+                        "/api/v1/ops/shard-readiness/v1-contract-consumer-evidence-digest",
+                        "/api/v1/ops/shard-readiness/v1-contract-consumer-readiness-handoff"
                 );
         assertThat(OpsShardReadinessV1ContractEndpointPairs.fixtureEndpoints())
                 .containsExactly(
@@ -33,7 +34,8 @@ class OpsShardReadinessV1ContractEndpointPairsTests {
                         "/contracts/java-shard-readiness-v1-contract-endpoint-catalog-v208.fixture.json",
                         "/contracts/java-shard-readiness-v1-contract-consumer-handoff-bundle-v211.fixture.json",
                         "/contracts/java-shard-readiness-v1-contract-consumer-verification-checklist-v215.fixture.json",
-                        "/contracts/java-shard-readiness-v1-contract-consumer-evidence-digest-v220.fixture.json"
+                        "/contracts/java-shard-readiness-v1-contract-consumer-evidence-digest-v220.fixture.json",
+                        "/contracts/java-shard-readiness-v1-contract-consumer-readiness-handoff-v225.fixture.json"
                 );
     }
 }

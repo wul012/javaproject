@@ -27,6 +27,8 @@ final class OpsShardReadinessRoutePaths {
             "/v1-contract-consumer-verification-checklist";
     static final String V1_CONTRACT_CONSUMER_EVIDENCE_DIGEST =
             "/v1-contract-consumer-evidence-digest";
+    static final String V1_CONTRACT_CONSUMER_READINESS_HANDOFF =
+            "/v1-contract-consumer-readiness-handoff";
 
     private OpsShardReadinessRoutePaths() {
     }

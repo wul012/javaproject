@@ -17,7 +17,7 @@ class OpsShardReadinessV1ContractRouteInventoryTests {
                 .toList();
 
         assertThat(controllerRoutes)
-                .hasSize(10)
+                .hasSize(11)
                 .doesNotHaveDuplicates()
                 .allSatisfy(route -> assertThat(route).startsWith("/v1-contract-"))
                 .containsExactlyInAnyOrderElementsOf(endpointPairRoutes);
@@ -39,9 +39,10 @@ class OpsShardReadinessV1ContractRouteInventoryTests {
                 OpsShardReadinessRoutePaths.V1_CONTRACT_ENDPOINT_CATALOG,
                 OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_HANDOFF_BUNDLE,
                 OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_VERIFICATION_CHECKLIST,
-                OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_EVIDENCE_DIGEST
+                OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_EVIDENCE_DIGEST,
+                OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_READINESS_HANDOFF
         ))
-                .hasSize(10)
+                .hasSize(11)
                 .doesNotHaveDuplicates()
                 .allSatisfy(route -> assertThat(route).startsWith("/v1-contract-"))
                 .doesNotContain(
