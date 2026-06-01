@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v185 v184 registry integrity snapshot freeze</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f3;
+      --ink: #17201d;
+      --muted: #5c665f;
+      --line: #d7ded4;
+      --panel: #ffffff;
+      --ok: #08725f;
+      --hold: #9a4a15;
+      --accent: #285678;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      min-height: 80px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    .accent { color: var(--accent); }
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    code {
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 14px;
+    }
+    @media (max-width: 760px) {
+      main { padding: 26px 18px 36px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v185 v184 registry integrity snapshot freeze</h1>
+  <p>V184 endpoint registry integrity now reads a frozen 23/23/23 snapshot, so later endpoint growth will not mutate the historical receipt.</p>
+
+  <section class="stats" aria-label="summary">
+    <div class="tile">
+      <span class="label">Status</span>
+      <span class="value ok">passed</span>
+    </div>
+    <div class="tile">
+      <span class="label">V184 snapshot</span>
+      <span class="value accent">23 / 23 / 23</span>
+    </div>
+    <div class="tile">
+      <span class="label">Rolling registry</span>
+      <span class="value ok">not read</span>
+    </div>
+    <div class="tile">
+      <span class="label">Execution</span>
+      <span class="value hold">not allowed</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Freeze Surface</h2>
+    <div class="grid">
+      <div class="tile">
+        <span class="label">Snapshot class</span>
+        <code>OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot</code>
+      </div>
+      <div class="tile">
+        <span class="label">Service source</span>
+        <code>OpsShardReadinessReadOnlyEndpointRegistryIntegrityService</code>
+      </div>
+      <div class="tile">
+        <span class="label">Live endpoint count</span>
+        <span class="value accent">23</span>
+      </div>
+      <div class="tile">
+        <span class="label">Fixture endpoint count</span>
+        <span class="value accent">23</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Checks</h2>
+    <ul>
+      <li><code>v184-integrity-uses-frozen-snapshot:true</code></li>
+      <li><code>v184-integrity-uses-rolling-registry:false</code></li>
+      <li><code>endpoint-pairs-count:23</code></li>
+      <li><code>live-endpoints-count:23</code></li>
+      <li><code>fixture-endpoints-count:23</code></li>
+      <li><code>future-endpoint-growth-preserves-v184-receipt:true</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Blocked Operations</h2>
+    <ul>
+      <li><code>write-routing</code></li>
+      <li><code>active-shard-router</code></li>
+      <li><code>credential-value-read</code></li>
+      <li><code>raw-endpoint-parse</code></li>
+      <li><code>managed-audit-connection</code></li>
+      <li><code>deployment-or-rollback</code></li>
+      <li><code>node-start-or-stop-java-or-mini-kv</code></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

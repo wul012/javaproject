@@ -1,0 +1,39 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v185",
+  "title": "V184 endpoint registry integrity snapshot freeze",
+  "sourceVersion": "Java v184",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "v184IntegrityUsesRollingRegistry": false,
+  "v184IntegrityUsesFrozenSnapshot": true,
+  "v184EndpointPairCount": 23,
+  "v184LiveEndpointCount": 23,
+  "v184FixtureEndpointCount": 23,
+  "v184IntegrityEndpointIncluded": true,
+  "v184IntegrityFixtureIncluded": true,
+  "futureEndpointGrowthCanProceedWithoutChangingV184Receipt": true,
+  "currentGlobalRegistryMutation": false,
+  "liveReceiptContractPreserved": true,
+  "staticFixtureContractPreserved": true,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshotTests,OpsShardReadinessReadOnlyEndpointRegistryIntegrityServiceTests,OpsShardReadinessReadOnlyEndpointRegistryIntegrityIntegrationTests,OpsShardReadinessEvidenceEndpointsTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEndpointRegistryIntegrityService.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshotTests.java"
+  ],
+  "receiptId": "java-shard-readiness-v184-registry-integrity-snapshot-freeze-receipt-v185",
+  "evidencePath": "e/185/evidence/java-shard-readiness-v184-registry-integrity-snapshot-freeze-v185.json",
+  "status": "passed"
+}

@@ -19,9 +19,11 @@ public class OpsShardReadinessReadOnlyEndpointRegistryIntegrityService {
     @Transactional(readOnly = true)
     public OpsShardReadinessReadOnlyEndpointRegistryIntegrityResponse integrity() {
         List<OpsShardReadinessEvidenceEndpoints.EndpointPair> pairs =
-                OpsShardReadinessEvidenceEndpoints.endpointPairs();
-        List<String> liveEndpoints = OpsShardReadinessEvidenceEndpoints.liveEndpoints();
-        List<String> fixtureEndpoints = OpsShardReadinessEvidenceEndpoints.fixtureEndpoints();
+                OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184EndpointPairs();
+        List<String> liveEndpoints =
+                OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints();
+        List<String> fixtureEndpoints =
+                OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints();
 
         boolean pairCountsAligned = pairs.size() == liveEndpoints.size()
                 && pairs.size() == fixtureEndpoints.size();
