@@ -41,3 +41,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `203/`: Java shard-readiness v202 contract consumer probe plan snapshot freeze.
 - `204/`: Java shard-readiness v202 contract consumer probe plan historical snapshot compatibility.
 - `205/`: Java shard-readiness v1 contract endpoint pair split.
+- `206/`: Java shard-readiness v1 contract endpoint pair integrity.
