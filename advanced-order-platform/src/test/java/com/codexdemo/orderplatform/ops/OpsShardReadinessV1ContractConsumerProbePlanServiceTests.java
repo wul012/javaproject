@@ -9,9 +9,7 @@ class OpsShardReadinessV1ContractConsumerProbePlanServiceTests {
     @Test
     void buildsReadOnlyConsumerProbePlanFromHandoffManifestWithoutOpeningExecution() {
         OpsShardReadinessV1ContractConsumerProbePlanResponse probePlan =
-                new OpsShardReadinessV1ContractConsumerProbePlanService(
-                        new OpsShardReadinessV1ContractHandoffManifestService()
-                ).probePlan();
+                new OpsShardReadinessV1ContractConsumerProbePlanService().probePlan();
 
         assertThat(probePlan.project()).isEqualTo("advanced-order-platform");
         assertThat(probePlan.version()).isEqualTo("Java v202");
