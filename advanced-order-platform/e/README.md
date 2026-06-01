@@ -72,3 +72,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `234/`: Java shard-readiness v1 contract consumer readiness handoff boundary matrix.
 - `235/`: Java shard-readiness v1 contract consumer readiness handoff endpoint adjacency.
 - `236/`: Java shard-readiness v1 contract consumer readiness handoff receipt uniqueness.
+- `237/`: Java shard-readiness v1 contract consumer readiness handoff node consumer boundary.
