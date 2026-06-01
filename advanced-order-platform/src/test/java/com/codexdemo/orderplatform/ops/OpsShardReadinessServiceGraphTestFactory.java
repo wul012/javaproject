@@ -26,6 +26,15 @@ final class OpsShardReadinessServiceGraphTestFactory {
         return new OpsShardReadinessReadOnlyEvidenceCatalogHandoffService(readOnlyEvidenceCatalogService());
     }
 
+    static OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService
+            readOnlyEvidenceCatalogHandoffVerificationService() {
+        OpsShardReadinessReadOnlyEvidenceCatalogService catalogService = readOnlyEvidenceCatalogService();
+        return new OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService(
+                catalogService,
+                new OpsShardReadinessReadOnlyEvidenceCatalogHandoffService(catalogService)
+        );
+    }
+
     static OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService passEvidenceCloseoutService() {
         OpsShardReadinessEvidenceIndexService indexService = new OpsShardReadinessEvidenceIndexService();
         OpsShardReadinessEvidenceVerificationService verificationService =

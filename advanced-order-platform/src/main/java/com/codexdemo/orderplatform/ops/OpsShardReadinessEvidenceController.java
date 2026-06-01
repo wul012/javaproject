@@ -18,18 +18,24 @@ public class OpsShardReadinessEvidenceController {
 
     private final OpsShardReadinessReadOnlyEvidenceCatalogHandoffService readOnlyEvidenceCatalogHandoffService;
 
+    private final OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService
+            readOnlyEvidenceCatalogHandoffVerificationService;
+
     public OpsShardReadinessEvidenceController(
             OpsShardReadinessEvidenceIndexService evidenceIndexService,
             OpsShardReadinessEvidenceVerificationService evidenceVerificationService,
             OpsShardReadinessEvidenceHandoffService evidenceHandoffService,
             OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService,
-            OpsShardReadinessReadOnlyEvidenceCatalogHandoffService readOnlyEvidenceCatalogHandoffService
+            OpsShardReadinessReadOnlyEvidenceCatalogHandoffService readOnlyEvidenceCatalogHandoffService,
+            OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService
+                    readOnlyEvidenceCatalogHandoffVerificationService
     ) {
         this.evidenceIndexService = evidenceIndexService;
         this.evidenceVerificationService = evidenceVerificationService;
         this.evidenceHandoffService = evidenceHandoffService;
         this.readOnlyEvidenceCatalogService = readOnlyEvidenceCatalogService;
         this.readOnlyEvidenceCatalogHandoffService = readOnlyEvidenceCatalogHandoffService;
+        this.readOnlyEvidenceCatalogHandoffVerificationService = readOnlyEvidenceCatalogHandoffVerificationService;
     }
 
     @GetMapping("/read-only-evidence-catalog")
@@ -40,6 +46,12 @@ public class OpsShardReadinessEvidenceController {
     @GetMapping("/read-only-evidence-catalog-handoff")
     public OpsShardReadinessReadOnlyEvidenceCatalogHandoffResponse readOnlyEvidenceCatalogHandoff() {
         return readOnlyEvidenceCatalogHandoffService.handoff();
+    }
+
+    @GetMapping("/read-only-evidence-catalog-handoff-verification")
+    public OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationResponse
+            readOnlyEvidenceCatalogHandoffVerification() {
+        return readOnlyEvidenceCatalogHandoffVerificationService.verification();
     }
 
     @GetMapping("/evidence-index")
