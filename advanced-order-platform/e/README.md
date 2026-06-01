@@ -62,3 +62,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `224/`: Java shard-readiness v1 contract consumer readiness completion.
 - `225/`: Java shard-readiness v1 contract consumer readiness handoff.
 - `226/`: Java shard-readiness v225 consumer readiness handoff snapshot freeze.
+- `227/`: Java shard-readiness v225 consumer readiness handoff historical compatibility.
