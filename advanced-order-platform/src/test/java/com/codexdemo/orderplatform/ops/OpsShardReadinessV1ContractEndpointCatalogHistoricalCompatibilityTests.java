@@ -44,12 +44,14 @@ class OpsShardReadinessV1ContractEndpointCatalogHistoricalCompatibilityTests {
                 .containsSubsequence(
                         OpsShardReadinessV1ContractConsumerProbePlanService.ENDPOINT,
                         OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT,
                         OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
                 .containsSubsequence(
                         OpsShardReadinessV1ContractConsumerProbePlanService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractEndpointCatalogService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT,
                         OpsShardReadinessReadOnlyEvidenceCatalogService.FIXTURE_ENDPOINT
                 );
     }

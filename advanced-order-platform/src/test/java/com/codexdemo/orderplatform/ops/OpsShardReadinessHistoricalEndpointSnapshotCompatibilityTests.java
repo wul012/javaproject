@@ -19,7 +19,8 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
                         OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT,
                         OpsShardReadinessV1ContractHandoffManifestService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerProbePlanService.ENDPOINT,
-                        OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT
+                        OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT
                 );
     }
 
@@ -36,7 +37,8 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
                         OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractHandoffManifestService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractConsumerProbePlanService.FIXTURE_ENDPOINT,
-                        OpsShardReadinessV1ContractEndpointCatalogService.FIXTURE_ENDPOINT
+                        OpsShardReadinessV1ContractEndpointCatalogService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT
                 );
     }
 
@@ -227,6 +229,33 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
                         OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT,
                         OpsShardReadinessV1ContractHandoffManifestService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerProbePlanService.ENDPOINT
+                );
+    }
+
+    @Test
+    void v211ContractConsumerHandoffBundleDoesNotBackfillOlderEndpointSnapshots() {
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT);
+
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT);
+
+        OpsShardReadinessV1ContractConsumerHandoffBundleResponse bundle =
+                new OpsShardReadinessV1ContractConsumerHandoffBundleService().bundle();
+        assertThat(bundle.version()).isEqualTo("Java v211");
+        assertThat(bundle.endpointCatalogEndpoint())
+                .isEqualTo(OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT);
+        assertThat(bundle.requiredEvidence())
+                .contains(
+                        OpsShardReadinessV1ContractEndpointCatalogService.EVIDENCE_PATH,
+                        OpsShardReadinessV1ContractConsumerHandoffBundleService
+                                .ENDPOINT_CATALOG_SNAPSHOT_FREEZE_EVIDENCE_PATH,
+                        OpsShardReadinessV1ContractConsumerHandoffBundleService
+                                .ENDPOINT_CATALOG_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH
                 );
     }
 }
