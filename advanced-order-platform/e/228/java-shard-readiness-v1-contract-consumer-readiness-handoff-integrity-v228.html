@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v228 v1 contract consumer readiness handoff integrity</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5d6875;
+      --line: #ccd8e2;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --ok: #1f7a4d;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1080px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+    header {
+      padding-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.16;
+    }
+    p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    section {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .metric {
+      min-height: 88px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .ok {
+      color: var(--ok);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: #f1f5f8;
+    }
+    @media (max-width: 900px) {
+      main {
+        width: min(100% - 28px, 1080px);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Java v228 v1 contract consumer readiness handoff integrity</h1>
+      <p>v228 locks the v225 readiness handoff evidence, checks, and denied execution boundary as an integrity guard.</p>
+    </header>
+
+    <section class="grid">
+      <div class="metric">
+        <div class="label">Status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="metric">
+        <div class="label">Digest evidence</div>
+        <div class="value">5</div>
+      </div>
+      <div class="metric">
+        <div class="label">Guard evidence</div>
+        <div class="value">4</div>
+      </div>
+      <div class="metric">
+        <div class="label">Boundary</div>
+        <div class="value ok">closed</div>
+      </div>
+    </section>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Integrity guard</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Digest evidence</td>
+            <td class="ok">Matches the frozen Java v220 digest evidence exactly.</td>
+          </tr>
+          <tr>
+            <td>Guard evidence</td>
+            <td class="ok">Carries only v221-v224 digest guard receipts.</td>
+          </tr>
+          <tr>
+            <td>Future receipt exclusion</td>
+            <td class="ok">v226-v228 handoff guard receipts are excluded from the frozen v225 handoff.</td>
+          </tr>
+          <tr>
+            <td>Execution boundary</td>
+            <td>All write, router, credential, raw endpoint, audit, deployment, rollback, and process-control operations remain blocked.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

@@ -21,6 +21,9 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
     static final String CONSUMER_READINESS_HANDOFF_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH =
             "e/227/evidence/java-shard-readiness-v225-consumer-readiness-handoff-historical-compatibility-v227.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_INTEGRITY_EVIDENCE_PATH =
+            "e/228/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-integrity-v228.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
