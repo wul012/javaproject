@@ -1,0 +1,41 @@
+package com.codexdemo.orderplatform.ops;
+
+import java.util.List;
+
+public record OpsShardReadinessV1ContractHandoffManifestResponse(
+        String project,
+        String version,
+        String contractName,
+        boolean readOnly,
+        boolean executionAllowed,
+        boolean shardEnabled,
+        String manifestEndpoint,
+        String manifestFixtureEndpoint,
+        String packetEndpoint,
+        String packetFixtureEndpoint,
+        String packetEvidencePath,
+        String checklistEndpoint,
+        String checklistFixtureEndpoint,
+        String checklistEvidencePath,
+        List<String> prerequisiteEvidence,
+        List<String> manifestSections,
+        List<String> consumerReadTargets,
+        List<String> consumerFixtureTargets,
+        List<String> operatorHandoffChecks,
+        List<String> blockedOperations,
+        List<String> verificationChecks,
+        boolean packetFrozen,
+        boolean checklistFrozen,
+        boolean historicalSnapshotsProtected,
+        boolean writeRoutingAllowed,
+        boolean activeShardRouterAllowed,
+        boolean credentialValueRead,
+        boolean rawEndpointParsed,
+        boolean managedAuditConnectionAllowed,
+        boolean deploymentOrRollbackAllowed,
+        boolean nodeMayStartOrStopJavaOrMiniKv,
+        String receiptId,
+        String evidencePath,
+        String status
+) {
+}

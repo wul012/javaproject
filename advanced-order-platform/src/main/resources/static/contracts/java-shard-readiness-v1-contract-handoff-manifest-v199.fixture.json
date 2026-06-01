@@ -1,0 +1,85 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v199",
+  "contractName": "shard-readiness.v1",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "manifestEndpoint": "/api/v1/ops/shard-readiness/v1-contract-handoff-manifest",
+  "manifestFixtureEndpoint": "/contracts/java-shard-readiness-v1-contract-handoff-manifest-v199.fixture.json",
+  "packetEndpoint": "/api/v1/ops/shard-readiness/v1-contract-evidence-packet",
+  "packetFixtureEndpoint": "/contracts/java-shard-readiness-v1-contract-evidence-packet-v193.fixture.json",
+  "packetEvidencePath": "e/193/evidence/java-shard-readiness-v1-contract-evidence-packet-v193.json",
+  "checklistEndpoint": "/api/v1/ops/shard-readiness/v1-contract-operator-checklist",
+  "checklistFixtureEndpoint": "/contracts/java-shard-readiness-v1-contract-operator-checklist-v196.fixture.json",
+  "checklistEvidencePath": "e/196/evidence/java-shard-readiness-v1-contract-operator-checklist-v196.json",
+  "prerequisiteEvidence": [
+    "e/193/evidence/java-shard-readiness-v1-contract-evidence-packet-v193.json",
+    "e/194/evidence/java-shard-readiness-v193-evidence-packet-snapshot-freeze-v194.json",
+    "e/195/evidence/java-shard-readiness-v193-evidence-packet-historical-snapshot-compatibility-v195.json",
+    "e/196/evidence/java-shard-readiness-v1-contract-operator-checklist-v196.json",
+    "e/197/evidence/java-shard-readiness-v196-operator-checklist-snapshot-freeze-v197.json",
+    "e/198/evidence/java-shard-readiness-v196-operator-checklist-historical-snapshot-compatibility-v198.json",
+    "e/199/evidence/java-shard-readiness-v1-contract-handoff-manifest-v199.json"
+  ],
+  "manifestSections": [
+    "contract-summary",
+    "read-only-endpoints",
+    "fixture-endpoints",
+    "required-evidence",
+    "operator-handoff-checks",
+    "blocked-operations"
+  ],
+  "consumerReadTargets": [
+    "/api/v1/ops/shard-readiness",
+    "/api/v1/ops/shard-readiness/v1-contract-evidence-packet",
+    "/api/v1/ops/shard-readiness/v1-contract-operator-checklist",
+    "/api/v1/ops/shard-readiness/v1-contract-handoff-manifest"
+  ],
+  "consumerFixtureTargets": [
+    "/contracts/java-shard-readiness-v153.fixture.json",
+    "/contracts/java-shard-readiness-v1-contract-evidence-packet-v193.fixture.json",
+    "/contracts/java-shard-readiness-v1-contract-operator-checklist-v196.fixture.json",
+    "/contracts/java-shard-readiness-v1-contract-handoff-manifest-v199.fixture.json"
+  ],
+  "operatorHandoffChecks": [
+    "read-manifest-with-get-only",
+    "verify-packet-and-checklist-receipts-are-present",
+    "verify-snapshot-freeze-evidence-before-consuming-current-registry",
+    "verify-historical-compatibility-evidence-before-adding-new-consumers",
+    "keep-upstream-actions-disabled"
+  ],
+  "blockedOperations": [
+    "write-routing",
+    "active-shard-router",
+    "credential-value-read",
+    "raw-endpoint-parse",
+    "managed-audit-connection",
+    "deployment-or-rollback",
+    "node-start-or-stop-java-or-mini-kv"
+  ],
+  "verificationChecks": [
+    "contract-name:shard-readiness.v1",
+    "packet-endpoint:/api/v1/ops/shard-readiness/v1-contract-evidence-packet",
+    "checklist-endpoint:/api/v1/ops/shard-readiness/v1-contract-operator-checklist",
+    "manifest-section-count:6",
+    "consumer-read-target-count:4",
+    "consumer-fixture-target-count:4",
+    "operator-handoff-check-count:5",
+    "prerequisite-evidence-count:7",
+    "execution-allowed:false"
+  ],
+  "packetFrozen": true,
+  "checklistFrozen": true,
+  "historicalSnapshotsProtected": true,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueRead": false,
+  "rawEndpointParsed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "receiptId": "java-shard-readiness-v1-contract-handoff-manifest-receipt-v199",
+  "evidencePath": "e/199/evidence/java-shard-readiness-v1-contract-handoff-manifest-v199.json",
+  "status": "passed"
+}

@@ -22,6 +22,8 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService;
 
+    private final OpsShardReadinessV1ContractHandoffManifestService v1ContractHandoffManifestService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -29,7 +31,8 @@ public class OpsShardReadinessController {
             OpsShardReadinessV1ContractAlignmentService v1ContractAlignmentService,
             OpsShardReadinessV1ContractAlignmentHandoffService v1ContractAlignmentHandoffService,
             OpsShardReadinessV1ContractEvidencePacketService v1ContractEvidencePacketService,
-            OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService
+            OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService,
+            OpsShardReadinessV1ContractHandoffManifestService v1ContractHandoffManifestService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -38,6 +41,7 @@ public class OpsShardReadinessController {
         this.v1ContractAlignmentHandoffService = v1ContractAlignmentHandoffService;
         this.v1ContractEvidencePacketService = v1ContractEvidencePacketService;
         this.v1ContractOperatorChecklistService = v1ContractOperatorChecklistService;
+        this.v1ContractHandoffManifestService = v1ContractHandoffManifestService;
     }
 
     @GetMapping("/shard-readiness")
@@ -73,6 +77,11 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/v1-contract-operator-checklist")
     public OpsShardReadinessV1ContractOperatorChecklistResponse shardReadinessV1ContractOperatorChecklist() {
         return v1ContractOperatorChecklistService.checklist();
+    }
+
+    @GetMapping("/shard-readiness/v1-contract-handoff-manifest")
+    public OpsShardReadinessV1ContractHandoffManifestResponse shardReadinessV1ContractHandoffManifest() {
+        return v1ContractHandoffManifestService.manifest();
     }
 
 }
