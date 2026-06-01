@@ -1,0 +1,33 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v205",
+  "title": "Shard readiness v1 contract endpoint pair split",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "v1ContractEndpointPairCount": 6,
+  "currentRollingRegistryLiveEndpointCount": 29,
+  "currentRollingRegistryFixtureEndpointCount": 29,
+  "registryBehaviorChanged": false,
+  "newRouteAdded": false,
+  "productionCodeChanged": true,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessV1ContractEndpointPairsTests,OpsShardReadinessEvidenceEndpointsTests,OpsEvidenceServiceTests,OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractEndpointPairs.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessEvidenceEndpoints.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractEndpointPairsTests.java"
+  ],
+  "receiptId": "java-shard-readiness-v1-contract-endpoint-pair-split-receipt-v205",
+  "evidencePath": "e/205/evidence/java-shard-readiness-v1-contract-endpoint-pair-split-v205.json",
+  "status": "passed"
+}
