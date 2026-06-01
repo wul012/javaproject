@@ -1,0 +1,63 @@
+- main [ref=e2]:
+  - heading "Java v186 historical endpoint snapshot compatibility" [level=1] [ref=e3]
+  - paragraph [ref=e4]: The rolling registry is guarded so it keeps covering frozen v179 and v184 endpoint snapshots without opening any execution behavior.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Status
+      - text: passed
+    - generic [ref=e8]:
+      - generic [ref=e9]: Rolling registry
+      - text: 23 / 23
+    - generic [ref=e10]:
+      - generic [ref=e11]: Historical snapshots
+      - text: covered
+    - generic [ref=e12]:
+      - generic [ref=e13]: Execution
+      - text: not allowed
+  - generic [ref=e14]:
+    - heading "Compatibility Surface" [level=2] [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Guard test
+        - code [ref=e19]: OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests
+      - generic [ref=e20]:
+        - generic [ref=e21]: Rolling registry
+        - code [ref=e22]: OpsShardReadinessEvidenceEndpoints
+      - generic [ref=e23]:
+        - generic [ref=e24]: V179 snapshot
+        - text: 22 / 22
+      - generic [ref=e25]:
+        - generic [ref=e26]: V184 snapshot
+        - text: 23 / 23 / 23
+  - generic [ref=e27]:
+    - heading "Checks" [level=2] [ref=e28]
+    - list [ref=e29]:
+      - listitem [ref=e30]:
+        - code [ref=e31]: rolling-registry-contains-v179-snapshot:true
+      - listitem [ref=e32]:
+        - code [ref=e33]: rolling-registry-contains-v184-snapshot:true
+      - listitem [ref=e34]:
+        - code [ref=e35]: v184-snapshot-contains-v179-snapshot:true
+      - listitem [ref=e36]:
+        - code [ref=e37]: v179-snapshot-excludes-v184-integrity-endpoint:true
+      - listitem [ref=e38]:
+        - code [ref=e39]: future-endpoint-deletion-guard-present:true
+      - listitem [ref=e40]:
+        - code [ref=e41]: new-route-added:false
+  - generic [ref=e42]:
+    - heading "Blocked Operations" [level=2] [ref=e43]
+    - list [ref=e44]:
+      - listitem [ref=e45]:
+        - code [ref=e46]: write-routing
+      - listitem [ref=e47]:
+        - code [ref=e48]: active-shard-router
+      - listitem [ref=e49]:
+        - code [ref=e50]: credential-value-read
+      - listitem [ref=e51]:
+        - code [ref=e52]: raw-endpoint-parse
+      - listitem [ref=e53]:
+        - code [ref=e54]: managed-audit-connection
+      - listitem [ref=e55]:
+        - code [ref=e56]: deployment-or-rollback
+      - listitem [ref=e57]:
+        - code [ref=e58]: node-start-or-stop-java-or-mini-kv
