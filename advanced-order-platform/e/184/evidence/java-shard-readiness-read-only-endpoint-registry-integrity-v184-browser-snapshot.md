@@ -1,0 +1,63 @@
+- main [ref=e2]:
+  - heading "Java v184 endpoint registry integrity" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Read-only receipt proving the current shard-readiness endpoint pair registry is aligned, distinct, and non-executable.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Status
+      - text: passed
+    - generic [ref=e8]:
+      - generic [ref=e9]: Pairs
+      - text: "23"
+    - generic [ref=e10]:
+      - generic [ref=e11]: Registry
+      - text: 23 / 23
+    - generic [ref=e12]:
+      - generic [ref=e13]: Execution
+      - text: not allowed
+  - generic [ref=e14]:
+    - heading "Integrity Surface" [level=2] [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Endpoint
+        - code [ref=e19]: GET /api/v1/ops/shard-readiness/read-only-endpoint-registry-integrity
+      - generic [ref=e20]:
+        - generic [ref=e21]: Fixture
+        - code [ref=e22]: /contracts/java-shard-readiness-read-only-endpoint-registry-integrity-v184.fixture.json
+      - generic [ref=e23]:
+        - generic [ref=e24]: Live endpoints
+        - text: distinct
+      - generic [ref=e25]:
+        - generic [ref=e26]: Fixture endpoints
+        - text: distinct
+  - generic [ref=e27]:
+    - heading "Checks" [level=2] [ref=e28]
+    - list [ref=e29]:
+      - listitem [ref=e30]:
+        - code [ref=e31]: endpoint-pairs-count:23
+      - listitem [ref=e32]:
+        - code [ref=e33]: live-endpoints-count:23
+      - listitem [ref=e34]:
+        - code [ref=e35]: fixture-endpoints-count:23
+      - listitem [ref=e36]:
+        - code [ref=e37]: pair-counts-aligned:true
+      - listitem [ref=e38]:
+        - code [ref=e39]: endpoint-registry-includes-integrity:true
+      - listitem [ref=e40]:
+        - code [ref=e41]: fixture-registry-includes-integrity:true
+  - generic [ref=e42]:
+    - heading "Blocked Operations" [level=2] [ref=e43]
+    - list [ref=e44]:
+      - listitem [ref=e45]:
+        - code [ref=e46]: write-routing
+      - listitem [ref=e47]:
+        - code [ref=e48]: active-shard-router
+      - listitem [ref=e49]:
+        - code [ref=e50]: credential-value-read
+      - listitem [ref=e51]:
+        - code [ref=e52]: raw-endpoint-parse
+      - listitem [ref=e53]:
+        - code [ref=e54]: managed-audit-connection
+      - listitem [ref=e55]:
+        - code [ref=e56]: deployment-or-rollback
+      - listitem [ref=e57]:
+        - code [ref=e58]: node-start-or-stop-java-or-mini-kv

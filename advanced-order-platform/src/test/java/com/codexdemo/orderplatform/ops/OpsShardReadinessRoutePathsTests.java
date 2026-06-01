@@ -16,6 +16,8 @@ class OpsShardReadinessRoutePathsTests {
                 OpsShardReadinessReadOnlyEvidenceCatalogHandoffService.ENDPOINT,
                 OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG_HANDOFF_VERIFICATION,
                 OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService.ENDPOINT,
+                OpsShardReadinessRoutePaths.READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY,
+                OpsShardReadinessReadOnlyEndpointRegistryIntegrityService.ENDPOINT,
                 OpsShardReadinessRoutePaths.EVIDENCE_INDEX,
                 OpsShardReadinessEvidenceIndexService.ENDPOINT,
                 OpsShardReadinessRoutePaths.EVIDENCE_VERIFICATION,

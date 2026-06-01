@@ -18,13 +18,15 @@ class OpsShardReadinessReadOnlyEvidenceControllerSplitTests {
                 .containsExactlyInAnyOrder(
                         "/read-only-evidence-catalog",
                         "/read-only-evidence-catalog-handoff",
-                        "/read-only-evidence-catalog-handoff-verification"
+                        "/read-only-evidence-catalog-handoff-verification",
+                        "/read-only-endpoint-registry-integrity"
                 );
         assertThat(getMappings(OpsShardReadinessEvidenceController.class))
                 .doesNotContain(
                         "/read-only-evidence-catalog",
                         "/read-only-evidence-catalog-handoff",
-                        "/read-only-evidence-catalog-handoff-verification"
+                        "/read-only-evidence-catalog-handoff-verification",
+                        "/read-only-endpoint-registry-integrity"
                 );
     }
 

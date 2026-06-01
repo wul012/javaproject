@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v184 endpoint registry integrity</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f5;
+      --ink: #172019;
+      --muted: #5c665d;
+      --line: #d8ded6;
+      --panel: #ffffff;
+      --ok: #08725f;
+      --hold: #9a4a15;
+      --accent: #244f76;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      min-height: 80px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    .accent { color: var(--accent); }
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    code {
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 14px;
+    }
+    @media (max-width: 760px) {
+      main { padding: 26px 18px 36px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v184 endpoint registry integrity</h1>
+  <p>Read-only receipt proving the current shard-readiness endpoint pair registry is aligned, distinct, and non-executable.</p>
+
+  <section class="stats" aria-label="summary">
+    <div class="tile">
+      <span class="label">Status</span>
+      <span class="value ok">passed</span>
+    </div>
+    <div class="tile">
+      <span class="label">Pairs</span>
+      <span class="value accent">23</span>
+    </div>
+    <div class="tile">
+      <span class="label">Registry</span>
+      <span class="value accent">23 / 23</span>
+    </div>
+    <div class="tile">
+      <span class="label">Execution</span>
+      <span class="value hold">not allowed</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Integrity Surface</h2>
+    <div class="grid">
+      <div class="tile">
+        <span class="label">Endpoint</span>
+        <code>GET /api/v1/ops/shard-readiness/read-only-endpoint-registry-integrity</code>
+      </div>
+      <div class="tile">
+        <span class="label">Fixture</span>
+        <code>/contracts/java-shard-readiness-read-only-endpoint-registry-integrity-v184.fixture.json</code>
+      </div>
+      <div class="tile">
+        <span class="label">Live endpoints</span>
+        <span class="value ok">distinct</span>
+      </div>
+      <div class="tile">
+        <span class="label">Fixture endpoints</span>
+        <span class="value ok">distinct</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Checks</h2>
+    <ul>
+      <li><code>endpoint-pairs-count:23</code></li>
+      <li><code>live-endpoints-count:23</code></li>
+      <li><code>fixture-endpoints-count:23</code></li>
+      <li><code>pair-counts-aligned:true</code></li>
+      <li><code>endpoint-registry-includes-integrity:true</code></li>
+      <li><code>fixture-registry-includes-integrity:true</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Blocked Operations</h2>
+    <ul>
+      <li><code>write-routing</code></li>
+      <li><code>active-shard-router</code></li>
+      <li><code>credential-value-read</code></li>
+      <li><code>raw-endpoint-parse</code></li>
+      <li><code>managed-audit-connection</code></li>
+      <li><code>deployment-or-rollback</code></li>
+      <li><code>node-start-or-stop-java-or-mini-kv</code></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

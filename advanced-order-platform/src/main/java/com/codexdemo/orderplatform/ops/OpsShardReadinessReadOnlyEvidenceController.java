@@ -15,15 +15,21 @@ public class OpsShardReadinessReadOnlyEvidenceController {
     private final OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService
             readOnlyEvidenceCatalogHandoffVerificationService;
 
+    private final OpsShardReadinessReadOnlyEndpointRegistryIntegrityService
+            readOnlyEndpointRegistryIntegrityService;
+
     public OpsShardReadinessReadOnlyEvidenceController(
             OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService,
             OpsShardReadinessReadOnlyEvidenceCatalogHandoffService readOnlyEvidenceCatalogHandoffService,
             OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService
-                    readOnlyEvidenceCatalogHandoffVerificationService
+                    readOnlyEvidenceCatalogHandoffVerificationService,
+            OpsShardReadinessReadOnlyEndpointRegistryIntegrityService
+                    readOnlyEndpointRegistryIntegrityService
     ) {
         this.readOnlyEvidenceCatalogService = readOnlyEvidenceCatalogService;
         this.readOnlyEvidenceCatalogHandoffService = readOnlyEvidenceCatalogHandoffService;
         this.readOnlyEvidenceCatalogHandoffVerificationService = readOnlyEvidenceCatalogHandoffVerificationService;
+        this.readOnlyEndpointRegistryIntegrityService = readOnlyEndpointRegistryIntegrityService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG)
@@ -40,5 +46,11 @@ public class OpsShardReadinessReadOnlyEvidenceController {
     public OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationResponse
             readOnlyEvidenceCatalogHandoffVerification() {
         return readOnlyEvidenceCatalogHandoffVerificationService.verification();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY)
+    public OpsShardReadinessReadOnlyEndpointRegistryIntegrityResponse
+            readOnlyEndpointRegistryIntegrity() {
+        return readOnlyEndpointRegistryIntegrityService.integrity();
     }
 }
