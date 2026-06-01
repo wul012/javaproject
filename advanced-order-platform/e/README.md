@@ -69,3 +69,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `231/`: Java shard-readiness v1 contract consumer readiness handoff ops evidence alignment.
 - `232/`: Java shard-readiness v1 contract consumer readiness handoff controller mapping.
 - `233/`: Java shard-readiness v1 contract consumer readiness handoff fixture parity.
+- `234/`: Java shard-readiness v1 contract consumer readiness handoff boundary matrix.
