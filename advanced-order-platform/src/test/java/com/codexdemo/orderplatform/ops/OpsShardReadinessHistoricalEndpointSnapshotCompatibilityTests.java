@@ -9,19 +9,25 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
     @Test
     void rollingRegistryKeepsHistoricalLiveSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.liveEndpoints())
-                .hasSizeGreaterThanOrEqualTo(24)
+                .hasSizeGreaterThanOrEqualTo(25)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
-                .contains(OpsShardReadinessV1ContractAlignmentService.ENDPOINT);
+                .contains(
+                        OpsShardReadinessV1ContractAlignmentService.ENDPOINT,
+                        OpsShardReadinessV1ContractAlignmentHandoffService.ENDPOINT
+                );
     }
 
     @Test
     void rollingRegistryKeepsHistoricalFixtureSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
-                .hasSizeGreaterThanOrEqualTo(24)
+                .hasSizeGreaterThanOrEqualTo(25)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
-                .contains(OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT);
+                .contains(
+                        OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT
+                );
     }
 
     @Test
@@ -55,5 +61,23 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
                 .isEqualTo(OpsShardReadinessService.ENDPOINT);
         assertThat(OpsShardReadinessV1ContractAlignmentSnapshot.v187MinimalFields())
                 .hasSize(10);
+    }
+
+    @Test
+    void v190ContractAlignmentHandoffDoesNotBackfillOlderEndpointSnapshots() {
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractAlignmentHandoffService.ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractAlignmentHandoffService.ENDPOINT);
+
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT);
+
+        assertThat(OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190SourceAlignment().version())
+                .isEqualTo("Java v187");
+        assertThat(OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190HistoricalSnapshotsProtected())
+                .isTrue();
     }
 }
