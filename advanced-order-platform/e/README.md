@@ -24,3 +24,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `186/`: Java shard-readiness historical endpoint snapshot compatibility.
 - `187/`: Java shard-readiness v1 contract alignment.
 - `188/`: Java shard-readiness v187 contract alignment snapshot freeze.
+- `189/`: Java shard-readiness v187 historical snapshot compatibility.
