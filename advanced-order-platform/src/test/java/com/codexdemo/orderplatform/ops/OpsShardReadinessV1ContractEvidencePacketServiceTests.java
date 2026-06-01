@@ -9,9 +9,7 @@ class OpsShardReadinessV1ContractEvidencePacketServiceTests {
     @Test
     void buildsNodeConsumableReadOnlyEvidencePacketWithoutOpeningExecution() {
         OpsShardReadinessV1ContractEvidencePacketResponse packet =
-                new OpsShardReadinessV1ContractEvidencePacketService(
-                        new OpsShardReadinessV1ContractAlignmentHandoffService()
-                ).packet();
+                new OpsShardReadinessV1ContractEvidencePacketService().packet();
 
         assertThat(packet.project()).isEqualTo("advanced-order-platform");
         assertThat(packet.version()).isEqualTo("Java v193");

@@ -1,0 +1,40 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v194",
+  "title": "V193 shard readiness v1 contract evidence packet snapshot freeze",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "frozenPacketVersion": "Java v193",
+  "frozenPacketEndpoint": "/api/v1/ops/shard-readiness/v1-contract-evidence-packet",
+  "frozenPacketFixtureEndpoint": "/contracts/java-shard-readiness-v1-contract-evidence-packet-v193.fixture.json",
+  "frozenPacketEvidencePath": "e/193/evidence/java-shard-readiness-v1-contract-evidence-packet-v193.json",
+  "frozenEvidenceChainCount": 6,
+  "frozenNodeConsumableEndpointCount": 4,
+  "currentRollingRegistryLiveEndpointCount": 26,
+  "currentRollingRegistryFixtureEndpointCount": 26,
+  "packetUsesFrozenEvidenceChain": true,
+  "packetUsesFrozenNodeConsumableEndpoints": true,
+  "newRouteAdded": false,
+  "productionCodeChanged": true,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessV1ContractEvidencePacketSnapshotTests,OpsShardReadinessV1ContractEvidencePacketServiceTests,OpsShardReadinessV1ContractEvidencePacketIntegrationTests,OpsShardReadinessEvidenceEndpointsTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractEvidencePacketSnapshot.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractEvidencePacketService.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractEvidencePacketSnapshotTests.java",
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractEvidencePacketServiceTests.java"
+  ],
+  "receiptId": "java-shard-readiness-v193-evidence-packet-snapshot-freeze-receipt-v194",
+  "evidencePath": "e/194/evidence/java-shard-readiness-v193-evidence-packet-snapshot-freeze-v194.json",
+  "status": "passed"
+}
