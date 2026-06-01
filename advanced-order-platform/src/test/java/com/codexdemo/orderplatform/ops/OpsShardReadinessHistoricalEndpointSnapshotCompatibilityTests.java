@@ -9,28 +9,30 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
     @Test
     void rollingRegistryKeepsHistoricalLiveSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.liveEndpoints())
-                .hasSizeGreaterThanOrEqualTo(27)
+                .hasSizeGreaterThanOrEqualTo(28)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
                 .contains(
                         OpsShardReadinessV1ContractAlignmentService.ENDPOINT,
                         OpsShardReadinessV1ContractAlignmentHandoffService.ENDPOINT,
                         OpsShardReadinessV1ContractEvidencePacketService.ENDPOINT,
-                        OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT
+                        OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT,
+                        OpsShardReadinessV1ContractHandoffManifestService.ENDPOINT
                 );
     }
 
     @Test
     void rollingRegistryKeepsHistoricalFixtureSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
-                .hasSizeGreaterThanOrEqualTo(27)
+                .hasSizeGreaterThanOrEqualTo(28)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
                 .contains(
                         OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractEvidencePacketService.FIXTURE_ENDPOINT,
-                        OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT
+                        OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractHandoffManifestService.FIXTURE_ENDPOINT
                 );
     }
 
@@ -137,6 +139,34 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
         assertThat(checklist.operatorChecklistItems())
                 .containsExactlyElementsOf(
                         OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196OperatorChecklistItems()
+                );
+    }
+
+    @Test
+    void v199ContractHandoffManifestDoesNotBackfillOlderEndpointSnapshots() {
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractHandoffManifestService.ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractHandoffManifestService.ENDPOINT);
+
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractHandoffManifestService.FIXTURE_ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractHandoffManifestService.FIXTURE_ENDPOINT);
+
+        OpsShardReadinessV1ContractHandoffManifestResponse manifest =
+                OpsShardReadinessV1ContractHandoffManifestSnapshot.v199Manifest();
+        OpsShardReadinessV1ContractOperatorChecklistResponse checklist =
+                OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196Checklist();
+        assertThat(manifest.version()).isEqualTo("Java v199");
+        assertThat(manifest.checklistEndpoint()).isEqualTo(checklist.checklistEndpoint());
+        assertThat(manifest.prerequisiteEvidence())
+                .containsExactlyElementsOf(
+                        OpsShardReadinessV1ContractHandoffManifestSnapshot.v199PrerequisiteEvidence(checklist)
+                );
+        assertThat(manifest.consumerReadTargets())
+                .containsExactlyElementsOf(
+                        OpsShardReadinessV1ContractHandoffManifestSnapshot.v199ConsumerReadTargets(checklist)
                 );
     }
 }
