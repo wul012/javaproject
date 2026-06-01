@@ -36,6 +36,10 @@ final class OpsShardReadinessEvidenceEndpoints {
                         OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT
                 ),
                 endpointPair(
+                        OpsShardReadinessV1ContractEvidencePacketService.ENDPOINT,
+                        OpsShardReadinessV1ContractEvidencePacketService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
                         OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT,
                         OpsShardReadinessReadOnlyEvidenceCatalogService.FIXTURE_ENDPOINT
                 ),

@@ -1,0 +1,36 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v193 shard readiness v1 contract evidence packet" [level=1] [ref=e4]
+    - paragraph [ref=e5]: A read-only packet that gathers the Java v187-v192 shard-readiness v1 evidence chain into one Node-consumable endpoint and fixture.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Evidence chain
+      - generic [ref=e12]: 6 receipts
+    - generic [ref=e13]:
+      - generic [ref=e14]: Endpoint pairs
+      - generic [ref=e15]: 26 live / 26 fixture
+  - generic [ref=e16]:
+    - heading "Node-consumable packet" [level=2] [ref=e17]
+    - table [ref=e18]:
+      - rowgroup [ref=e19]:
+        - row "Item Value" [ref=e20]:
+          - columnheader "Item" [ref=e21]
+          - columnheader "Value" [ref=e22]
+      - rowgroup [ref=e23]:
+        - row "Packet endpoint /api/v1/ops/shard-readiness/v1-contract-evidence-packet" [ref=e24]:
+          - cell "Packet endpoint" [ref=e25]
+          - cell "/api/v1/ops/shard-readiness/v1-contract-evidence-packet" [ref=e26]:
+            - code [ref=e27]: /api/v1/ops/shard-readiness/v1-contract-evidence-packet
+        - row "Packet fixture /contracts/java-shard-readiness-v1-contract-evidence-packet-v193.fixture.json" [ref=e28]:
+          - cell "Packet fixture" [ref=e29]
+          - cell "/contracts/java-shard-readiness-v1-contract-evidence-packet-v193.fixture.json" [ref=e30]:
+            - code [ref=e31]: /contracts/java-shard-readiness-v1-contract-evidence-packet-v193.fixture.json
+        - row "Included chain Java v187 alignment, v188 freeze, v189 guard, v190 handoff, v191 freeze, v192 guard." [ref=e32]:
+          - cell "Included chain" [ref=e33]
+          - cell "Java v187 alignment, v188 freeze, v189 guard, v190 handoff, v191 freeze, v192 guard." [ref=e34]
+        - row "Boundary No write routing, active shard router, credential reads, raw endpoint parsing, managed audit connection, deployment, rollback, or Node-managed Java/mini-kv process control." [ref=e35]:
+          - cell "Boundary" [ref=e36]
+          - cell "No write routing, active shard router, credential reads, raw endpoint parsing, managed audit connection, deployment, rollback, or Node-managed Java/mini-kv process control." [ref=e37]

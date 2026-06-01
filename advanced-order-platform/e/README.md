@@ -28,3 +28,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `190/`: Java shard-readiness v1 contract alignment handoff.
 - `191/`: Java shard-readiness v190 contract alignment handoff snapshot freeze.
 - `192/`: Java shard-readiness v190 handoff historical snapshot compatibility.
+- `193/`: Java shard-readiness v1 contract evidence packet.
