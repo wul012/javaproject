@@ -21,6 +21,7 @@ final class OpsShardReadinessRoutePaths {
     static final String V1_CONTRACT_OPERATOR_CHECKLIST = "/v1-contract-operator-checklist";
     static final String V1_CONTRACT_HANDOFF_MANIFEST = "/v1-contract-handoff-manifest";
     static final String V1_CONTRACT_CONSUMER_PROBE_PLAN = "/v1-contract-consumer-probe-plan";
+    static final String V1_CONTRACT_ENDPOINT_CATALOG = "/v1-contract-endpoint-catalog";
 
     private OpsShardReadinessRoutePaths() {
     }

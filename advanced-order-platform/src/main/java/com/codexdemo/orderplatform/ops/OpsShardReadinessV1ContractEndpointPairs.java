@@ -32,6 +32,10 @@ final class OpsShardReadinessV1ContractEndpointPairs {
                 endpointPair(
                         OpsShardReadinessV1ContractConsumerProbePlanService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerProbePlanService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT,
+                        OpsShardReadinessV1ContractEndpointCatalogService.FIXTURE_ENDPOINT
                 )
         );
     }

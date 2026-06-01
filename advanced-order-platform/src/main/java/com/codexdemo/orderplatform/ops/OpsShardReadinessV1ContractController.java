@@ -20,13 +20,16 @@ public class OpsShardReadinessV1ContractController {
 
     private final OpsShardReadinessV1ContractConsumerProbePlanService consumerProbePlanService;
 
+    private final OpsShardReadinessV1ContractEndpointCatalogService endpointCatalogService;
+
     public OpsShardReadinessV1ContractController(
             OpsShardReadinessV1ContractAlignmentService alignmentService,
             OpsShardReadinessV1ContractAlignmentHandoffService alignmentHandoffService,
             OpsShardReadinessV1ContractEvidencePacketService evidencePacketService,
             OpsShardReadinessV1ContractOperatorChecklistService operatorChecklistService,
             OpsShardReadinessV1ContractHandoffManifestService handoffManifestService,
-            OpsShardReadinessV1ContractConsumerProbePlanService consumerProbePlanService
+            OpsShardReadinessV1ContractConsumerProbePlanService consumerProbePlanService,
+            OpsShardReadinessV1ContractEndpointCatalogService endpointCatalogService
     ) {
         this.alignmentService = alignmentService;
         this.alignmentHandoffService = alignmentHandoffService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessV1ContractController {
         this.operatorChecklistService = operatorChecklistService;
         this.handoffManifestService = handoffManifestService;
         this.consumerProbePlanService = consumerProbePlanService;
+        this.endpointCatalogService = endpointCatalogService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_ALIGNMENT)
@@ -64,5 +68,10 @@ public class OpsShardReadinessV1ContractController {
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_PROBE_PLAN)
     public OpsShardReadinessV1ContractConsumerProbePlanResponse consumerProbePlan() {
         return consumerProbePlanService.probePlan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_ENDPOINT_CATALOG)
+    public OpsShardReadinessV1ContractEndpointCatalogResponse endpointCatalog() {
+        return endpointCatalogService.catalog();
     }
 }

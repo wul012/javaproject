@@ -43,3 +43,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `205/`: Java shard-readiness v1 contract endpoint pair split.
 - `206/`: Java shard-readiness v1 contract endpoint pair integrity.
 - `207/`: Java shard-readiness v1 contract controller split.
+- `208/`: Java shard-readiness v1 contract endpoint catalog.

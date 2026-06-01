@@ -8,7 +8,7 @@ class OpsShardReadinessV1ContractEndpointPairsTests {
 
     @Test
     void groupsV1ContractEndpointPairsInContractOrder() {
-        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(6);
+        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(7);
         assertThat(OpsShardReadinessV1ContractEndpointPairs.liveEndpoints())
                 .containsExactly(
                         "/api/v1/ops/shard-readiness/v1-contract-alignment",
@@ -16,7 +16,8 @@ class OpsShardReadinessV1ContractEndpointPairsTests {
                         "/api/v1/ops/shard-readiness/v1-contract-evidence-packet",
                         "/api/v1/ops/shard-readiness/v1-contract-operator-checklist",
                         "/api/v1/ops/shard-readiness/v1-contract-handoff-manifest",
-                        "/api/v1/ops/shard-readiness/v1-contract-consumer-probe-plan"
+                        "/api/v1/ops/shard-readiness/v1-contract-consumer-probe-plan",
+                        "/api/v1/ops/shard-readiness/v1-contract-endpoint-catalog"
                 );
         assertThat(OpsShardReadinessV1ContractEndpointPairs.fixtureEndpoints())
                 .containsExactly(
@@ -25,7 +26,8 @@ class OpsShardReadinessV1ContractEndpointPairsTests {
                         "/contracts/java-shard-readiness-v1-contract-evidence-packet-v193.fixture.json",
                         "/contracts/java-shard-readiness-v1-contract-operator-checklist-v196.fixture.json",
                         "/contracts/java-shard-readiness-v1-contract-handoff-manifest-v199.fixture.json",
-                        "/contracts/java-shard-readiness-v1-contract-consumer-probe-plan-v202.fixture.json"
+                        "/contracts/java-shard-readiness-v1-contract-consumer-probe-plan-v202.fixture.json",
+                        "/contracts/java-shard-readiness-v1-contract-endpoint-catalog-v208.fixture.json"
                 );
     }
 }
