@@ -9,26 +9,28 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
     @Test
     void rollingRegistryKeepsHistoricalLiveSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.liveEndpoints())
-                .hasSizeGreaterThanOrEqualTo(26)
+                .hasSizeGreaterThanOrEqualTo(27)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
                 .contains(
                         OpsShardReadinessV1ContractAlignmentService.ENDPOINT,
                         OpsShardReadinessV1ContractAlignmentHandoffService.ENDPOINT,
-                        OpsShardReadinessV1ContractEvidencePacketService.ENDPOINT
+                        OpsShardReadinessV1ContractEvidencePacketService.ENDPOINT,
+                        OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT
                 );
     }
 
     @Test
     void rollingRegistryKeepsHistoricalFixtureSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
-                .hasSizeGreaterThanOrEqualTo(26)
+                .hasSizeGreaterThanOrEqualTo(27)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
                 .contains(
                         OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT,
-                        OpsShardReadinessV1ContractEvidencePacketService.FIXTURE_ENDPOINT
+                        OpsShardReadinessV1ContractEvidencePacketService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT
                 );
     }
 
@@ -107,6 +109,34 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
         assertThat(packet.nodeConsumableFixtureEndpoints())
                 .containsExactlyElementsOf(
                         OpsShardReadinessV1ContractEvidencePacketSnapshot.v193NodeConsumableFixtureEndpoints()
+                );
+    }
+
+    @Test
+    void v196ContractOperatorChecklistDoesNotBackfillOlderEndpointSnapshots() {
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT);
+
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT);
+
+        OpsShardReadinessV1ContractOperatorChecklistResponse checklist =
+                OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196Checklist();
+        OpsShardReadinessV1ContractEvidencePacketResponse packet =
+                OpsShardReadinessV1ContractEvidencePacketSnapshot.v193Packet();
+        assertThat(checklist.version()).isEqualTo("Java v196");
+        assertThat(checklist.packetEndpoint()).isEqualTo(packet.packetEndpoint());
+        assertThat(checklist.requiredReadOnlyEvidence())
+                .containsExactlyElementsOf(
+                        OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196RequiredReadOnlyEvidence(packet)
+                );
+        assertThat(checklist.operatorChecklistItems())
+                .containsExactlyElementsOf(
+                        OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196OperatorChecklistItems()
                 );
     }
 }
