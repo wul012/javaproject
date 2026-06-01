@@ -22,6 +22,9 @@ public class OpsShardReadinessV1ContractConsumerEvidenceDigestService {
     static final String CONSUMER_EVIDENCE_DIGEST_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH =
             "e/222/evidence/java-shard-readiness-v220-consumer-evidence-digest-historical-compatibility-v222.json";
 
+    static final String CONSUMER_EVIDENCE_DIGEST_INTEGRITY_EVIDENCE_PATH =
+            "e/223/evidence/java-shard-readiness-v1-contract-consumer-evidence-digest-integrity-v223.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerEvidenceDigestResponse digest() {
         return OpsShardReadinessV1ContractConsumerEvidenceDigestSnapshot.v220Digest();
