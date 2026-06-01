@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v214 v1 contract consumer handoff bundle integrity</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5b6875;
+      --line: #cbd6df;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --ok: #1f7a4d;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1040px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+    header {
+      padding-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.16;
+    }
+    p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    section {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .metric {
+      min-height: 88px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .ok {
+      color: var(--ok);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: #f1f5f8;
+    }
+    @media (max-width: 900px) {
+      main {
+        width: min(100% - 28px, 1040px);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Java v214 v1 contract consumer handoff bundle integrity</h1>
+      <p>v214 cross-checks endpoint pairs, endpoint catalog, and consumer handoff bundle snapshots so the v1 contract handoff remains bounded and internally consistent.</p>
+    </header>
+
+    <section class="grid">
+      <div class="metric">
+        <div class="label">Status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="metric">
+        <div class="label">V1 pairs</div>
+        <div class="value">8</div>
+      </div>
+      <div class="metric">
+        <div class="label">Catalog artifacts</div>
+        <div class="value">6</div>
+      </div>
+      <div class="metric">
+        <div class="label">Scope</div>
+        <div class="value ok">bounded</div>
+      </div>
+    </section>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Integrity guard</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Registry</td>
+            <td class="ok">The v1 group contains eight endpoint pairs and excludes read-only/runtime execution groups.</td>
+          </tr>
+          <tr>
+            <td>Catalog alignment</td>
+            <td class="ok">Bundle target lists match the frozen v208 endpoint catalog probes.</td>
+          </tr>
+          <tr>
+            <td>Evidence boundary</td>
+            <td class="ok">Required evidence excludes bundle self evidence; handoff evidence includes it explicitly.</td>
+          </tr>
+          <tr>
+            <td>Boundary</td>
+            <td>No write routing, active shard router, credential value read, raw endpoint parsing, managed audit connection, deployment, rollback, or process control was opened.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
