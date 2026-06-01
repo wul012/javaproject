@@ -1,0 +1,63 @@
+- main [ref=e2]:
+  - heading "Java v180 read-only evidence controller split" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Controller-only split that keeps read-only catalog routes stable while moving them out of the general evidence controller.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Status
+      - text: passed
+    - generic [ref=e8]:
+      - generic [ref=e9]: Endpoint registry
+      - text: 22 / 22
+    - generic [ref=e10]:
+      - generic [ref=e11]: Route mutation
+      - text: none
+    - generic [ref=e12]:
+      - generic [ref=e13]: Execution
+      - text: not allowed
+  - generic [ref=e14]:
+    - heading "Split Surface" [level=2] [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Dedicated controller
+        - code [ref=e19]: OpsShardReadinessReadOnlyEvidenceController
+      - generic [ref=e20]:
+        - generic [ref=e21]: General controller
+        - code [ref=e22]: OpsShardReadinessEvidenceController
+      - generic [ref=e23]:
+        - generic [ref=e24]: Guard test
+        - code [ref=e25]: OpsShardReadinessReadOnlyEvidenceControllerSplitTests
+      - generic [ref=e26]:
+        - generic [ref=e27]: Evidence
+        - code [ref=e28]: java-shard-readiness-read-only-evidence-controller-split-v180.json
+  - generic [ref=e29]:
+    - heading "Preserved Routes" [level=2] [ref=e30]
+    - list [ref=e31]:
+      - listitem [ref=e32]:
+        - code [ref=e33]: GET /api/v1/ops/shard-readiness/read-only-evidence-catalog
+      - listitem [ref=e34]:
+        - code [ref=e35]: GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff
+      - listitem [ref=e36]:
+        - code [ref=e37]: GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff-verification
+      - listitem [ref=e38]:
+        - code [ref=e39]: GET /api/v1/ops/shard-readiness/evidence-index
+      - listitem [ref=e40]:
+        - code [ref=e41]: GET /api/v1/ops/shard-readiness/evidence-verification
+      - listitem [ref=e42]:
+        - code [ref=e43]: GET /api/v1/ops/shard-readiness/evidence-handoff
+  - generic [ref=e44]:
+    - heading "Blocked Operations" [level=2] [ref=e45]
+    - list [ref=e46]:
+      - listitem [ref=e47]:
+        - code [ref=e48]: write-routing
+      - listitem [ref=e49]:
+        - code [ref=e50]: active-shard-router
+      - listitem [ref=e51]:
+        - code [ref=e52]: credential-value-read
+      - listitem [ref=e53]:
+        - code [ref=e54]: raw-endpoint-parse
+      - listitem [ref=e55]:
+        - code [ref=e56]: managed-audit-connection
+      - listitem [ref=e57]:
+        - code [ref=e58]: deployment-or-rollback
+      - listitem [ref=e59]:
+        - code [ref=e60]: node-start-or-stop-java-or-mini-kv

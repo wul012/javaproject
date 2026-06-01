@@ -1,0 +1,43 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v180",
+  "title": "Read-only evidence controller split",
+  "sourceVersion": "Java v179",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "endpointRegistryMutated": false,
+  "currentLiveEndpointCount": 22,
+  "currentFixtureEndpointCount": 22,
+  "pathsPreserved": true,
+  "readOnlyCatalogRoutesOwnedByDedicatedController": true,
+  "evidenceRoutesRemainInEvidenceController": true,
+  "splitGuardTest": "OpsShardReadinessReadOnlyEvidenceControllerSplitTests",
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessReadOnlyEvidenceControllerSplitTests,OpsShardReadinessReadOnlyEvidenceCatalogIntegrationTests,OpsShardReadinessReadOnlyEvidenceCatalogHandoffIntegrationTests,OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationIntegrationTests,OpsShardReadinessEvidenceIndexIntegrationTests,OpsShardReadinessEvidenceVerificationIntegrationTests,OpsShardReadinessEvidenceHandoffIntegrationTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessEvidenceController.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEvidenceController.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEvidenceControllerSplitTests.java"
+  ],
+  "preservedRoutes": [
+    "GET /api/v1/ops/shard-readiness/read-only-evidence-catalog",
+    "GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff",
+    "GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff-verification",
+    "GET /api/v1/ops/shard-readiness/evidence-index",
+    "GET /api/v1/ops/shard-readiness/evidence-verification",
+    "GET /api/v1/ops/shard-readiness/evidence-handoff"
+  ],
+  "receiptId": "java-shard-readiness-read-only-evidence-controller-split-receipt-v180",
+  "evidencePath": "e/180/evidence/java-shard-readiness-read-only-evidence-controller-split-v180.json",
+  "status": "passed"
+}
