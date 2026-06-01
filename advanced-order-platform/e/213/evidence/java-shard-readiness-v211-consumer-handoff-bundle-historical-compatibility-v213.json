@@ -1,0 +1,28 @@
+{
+  "receiptId": "java-shard-readiness-v211-consumer-handoff-bundle-historical-compatibility-receipt-v213",
+  "version": "Java v213",
+  "status": "passed",
+  "scope": "v211 consumer handoff bundle historical compatibility",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "V213 guards the v211 consumer handoff bundle against older snapshot backfill and later freeze evidence mutation.",
+  "guards": [
+    "v208 endpoint catalog does not include the v211 bundle endpoint",
+    "v179 and v184 registry snapshots do not include the v211 bundle endpoint",
+    "v211 requiredEvidence does not include v212 freeze evidence",
+    "current rolling registry positions bundle after endpoint catalog"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerHandoffBundleHistoricalCompatibilityTests,OpsShardReadinessV1ContractConsumerHandoffBundleSnapshotTests,OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

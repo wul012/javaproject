@@ -48,3 +48,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `210/`: Java shard-readiness v208 endpoint catalog historical compatibility.
 - `211/`: Java shard-readiness v1 contract consumer handoff bundle.
 - `212/`: Java shard-readiness v211 consumer handoff bundle snapshot freeze.
+- `213/`: Java shard-readiness v211 consumer handoff bundle historical compatibility.
