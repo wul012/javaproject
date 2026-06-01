@@ -27,6 +27,9 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
     static final String CONSUMER_READINESS_HANDOFF_ROUTE_INVENTORY_EVIDENCE_PATH =
             "e/229/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-route-inventory-v229.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_EVIDENCE_CHAIN_EVIDENCE_PATH =
+            "e/230/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-evidence-chain-v230.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
