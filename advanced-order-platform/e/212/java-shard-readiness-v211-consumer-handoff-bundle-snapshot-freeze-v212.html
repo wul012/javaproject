@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v212 v211 consumer handoff bundle snapshot freeze</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5b6875;
+      --line: #cbd6df;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --ok: #1f7a4d;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1040px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+    header {
+      padding-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.16;
+    }
+    p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    section {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .metric {
+      min-height: 88px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .ok {
+      color: var(--ok);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: #f1f5f8;
+    }
+    @media (max-width: 900px) {
+      main {
+        width: min(100% - 28px, 1040px);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Java v212 v211 consumer handoff bundle snapshot freeze</h1>
+      <p>v212 freezes the v211 consumer handoff bundle behind a snapshot class so later handoff work can evolve without mutating the v211 receipt.</p>
+    </header>
+
+    <section class="grid">
+      <div class="metric">
+        <div class="label">Status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="metric">
+        <div class="label">Frozen version</div>
+        <div class="value">v211</div>
+      </div>
+      <div class="metric">
+        <div class="label">Required evidence</div>
+        <div class="value">9</div>
+      </div>
+      <div class="metric">
+        <div class="label">Mutation</div>
+        <div class="value ok">blocked</div>
+      </div>
+    </section>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Freeze guard</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Snapshot source</td>
+            <td class="ok">Service now returns the frozen v211 consumer handoff bundle snapshot.</td>
+          </tr>
+          <tr>
+            <td>Receipt</td>
+            <td class="ok">java-shard-readiness-v1-contract-consumer-handoff-bundle-receipt-v211 remains frozen.</td>
+          </tr>
+          <tr>
+            <td>Evidence lists</td>
+            <td class="ok">Required evidence and handoff evidence are pinned through snapshot helper methods.</td>
+          </tr>
+          <tr>
+            <td>Boundary</td>
+            <td>No write routing, active shard router, credential value read, raw endpoint parsing, managed audit connection, deployment, rollback, or process control was opened.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

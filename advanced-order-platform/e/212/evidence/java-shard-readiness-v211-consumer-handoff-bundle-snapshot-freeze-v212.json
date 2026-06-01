@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v211-consumer-handoff-bundle-snapshot-freeze-receipt-v212",
+  "version": "Java v212",
+  "status": "passed",
+  "scope": "v211 consumer handoff bundle snapshot freeze",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "V212 freezes the Java v211 consumer handoff bundle through OpsShardReadinessV1ContractConsumerHandoffBundleSnapshot so future bundle evolution cannot mutate the v211 receipt.",
+  "frozenReceipt": "java-shard-readiness-v1-contract-consumer-handoff-bundle-receipt-v211",
+  "frozenEvidencePath": "e/211/evidence/java-shard-readiness-v1-contract-consumer-handoff-bundle-v211.json",
+  "requiredEvidenceCount": 9,
+  "handoffEvidenceCount": 4,
+  "snapshotSource": "OpsShardReadinessV1ContractConsumerHandoffBundleSnapshot.v211Bundle()",
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerHandoffBundleSnapshotTests,OpsShardReadinessV1ContractConsumerHandoffBundleServiceTests,OpsShardReadinessV1ContractConsumerHandoffBundleIntegrationTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
