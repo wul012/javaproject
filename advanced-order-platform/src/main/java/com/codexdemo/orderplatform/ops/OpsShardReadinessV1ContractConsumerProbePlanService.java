@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessV1ContractConsumerProbePlanService {
 
     public static final String ENDPOINT =
-            "/api/v1/ops/shard-readiness/v1-contract-consumer-probe-plan";
+            OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_PROBE_PLAN;
 
     public static final String FIXTURE_ENDPOINT =
             "/contracts/java-shard-readiness-v1-contract-consumer-probe-plan-v202.fixture.json";

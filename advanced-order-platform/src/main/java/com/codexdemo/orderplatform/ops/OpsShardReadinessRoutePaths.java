@@ -15,6 +15,13 @@ final class OpsShardReadinessRoutePaths {
     static final String EVIDENCE_VERIFICATION = "/evidence-verification";
     static final String EVIDENCE_HANDOFF = "/evidence-handoff";
 
+    static final String V1_CONTRACT_ALIGNMENT = "/v1-contract-alignment";
+    static final String V1_CONTRACT_ALIGNMENT_HANDOFF = "/v1-contract-alignment-handoff";
+    static final String V1_CONTRACT_EVIDENCE_PACKET = "/v1-contract-evidence-packet";
+    static final String V1_CONTRACT_OPERATOR_CHECKLIST = "/v1-contract-operator-checklist";
+    static final String V1_CONTRACT_HANDOFF_MANIFEST = "/v1-contract-handoff-manifest";
+    static final String V1_CONTRACT_CONSUMER_PROBE_PLAN = "/v1-contract-consumer-probe-plan";
+
     private OpsShardReadinessRoutePaths() {
     }
 }

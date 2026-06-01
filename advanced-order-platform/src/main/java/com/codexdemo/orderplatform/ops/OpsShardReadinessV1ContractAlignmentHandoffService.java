@@ -7,7 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessV1ContractAlignmentHandoffService {
 
-    static final String ENDPOINT = "/api/v1/ops/shard-readiness/v1-contract-alignment-handoff";
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths.V1_CONTRACT_ALIGNMENT_HANDOFF;
     static final String FIXTURE_ENDPOINT =
             "/contracts/java-shard-readiness-v1-contract-alignment-handoff-v190.fixture.json";
     static final String EVIDENCE_PATH =

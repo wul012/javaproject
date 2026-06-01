@@ -14,38 +14,14 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessEchoService opsShardReadinessEchoService;
 
-    private final OpsShardReadinessV1ContractAlignmentService v1ContractAlignmentService;
-
-    private final OpsShardReadinessV1ContractAlignmentHandoffService v1ContractAlignmentHandoffService;
-
-    private final OpsShardReadinessV1ContractEvidencePacketService v1ContractEvidencePacketService;
-
-    private final OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService;
-
-    private final OpsShardReadinessV1ContractHandoffManifestService v1ContractHandoffManifestService;
-
-    private final OpsShardReadinessV1ContractConsumerProbePlanService v1ContractConsumerProbePlanService;
-
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
-            OpsShardReadinessEchoService opsShardReadinessEchoService,
-            OpsShardReadinessV1ContractAlignmentService v1ContractAlignmentService,
-            OpsShardReadinessV1ContractAlignmentHandoffService v1ContractAlignmentHandoffService,
-            OpsShardReadinessV1ContractEvidencePacketService v1ContractEvidencePacketService,
-            OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService,
-            OpsShardReadinessV1ContractHandoffManifestService v1ContractHandoffManifestService,
-            OpsShardReadinessV1ContractConsumerProbePlanService v1ContractConsumerProbePlanService
+            OpsShardReadinessEchoService opsShardReadinessEchoService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
         this.opsShardReadinessEchoService = opsShardReadinessEchoService;
-        this.v1ContractAlignmentService = v1ContractAlignmentService;
-        this.v1ContractAlignmentHandoffService = v1ContractAlignmentHandoffService;
-        this.v1ContractEvidencePacketService = v1ContractEvidencePacketService;
-        this.v1ContractOperatorChecklistService = v1ContractOperatorChecklistService;
-        this.v1ContractHandoffManifestService = v1ContractHandoffManifestService;
-        this.v1ContractConsumerProbePlanService = v1ContractConsumerProbePlanService;
     }
 
     @GetMapping("/shard-readiness")
@@ -62,35 +38,4 @@ public class OpsShardReadinessController {
     public OpsShardReadinessEchoResponse shardReadinessEcho() {
         return opsShardReadinessEchoService.echo();
     }
-
-    @GetMapping("/shard-readiness/v1-contract-alignment")
-    public OpsShardReadinessV1ContractAlignmentResponse shardReadinessV1ContractAlignment() {
-        return v1ContractAlignmentService.alignment();
-    }
-
-    @GetMapping("/shard-readiness/v1-contract-alignment-handoff")
-    public OpsShardReadinessV1ContractAlignmentHandoffResponse shardReadinessV1ContractAlignmentHandoff() {
-        return v1ContractAlignmentHandoffService.handoff();
-    }
-
-    @GetMapping("/shard-readiness/v1-contract-evidence-packet")
-    public OpsShardReadinessV1ContractEvidencePacketResponse shardReadinessV1ContractEvidencePacket() {
-        return v1ContractEvidencePacketService.packet();
-    }
-
-    @GetMapping("/shard-readiness/v1-contract-operator-checklist")
-    public OpsShardReadinessV1ContractOperatorChecklistResponse shardReadinessV1ContractOperatorChecklist() {
-        return v1ContractOperatorChecklistService.checklist();
-    }
-
-    @GetMapping("/shard-readiness/v1-contract-handoff-manifest")
-    public OpsShardReadinessV1ContractHandoffManifestResponse shardReadinessV1ContractHandoffManifest() {
-        return v1ContractHandoffManifestService.manifest();
-    }
-
-    @GetMapping("/shard-readiness/v1-contract-consumer-probe-plan")
-    public OpsShardReadinessV1ContractConsumerProbePlanResponse shardReadinessV1ContractConsumerProbePlan() {
-        return v1ContractConsumerProbePlanService.probePlan();
-    }
-
 }

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessV1ContractOperatorChecklistService {
 
     public static final String ENDPOINT =
-            "/api/v1/ops/shard-readiness/v1-contract-operator-checklist";
+            OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths.V1_CONTRACT_OPERATOR_CHECKLIST;
 
     public static final String FIXTURE_ENDPOINT =
             "/contracts/java-shard-readiness-v1-contract-operator-checklist-v196.fixture.json";
