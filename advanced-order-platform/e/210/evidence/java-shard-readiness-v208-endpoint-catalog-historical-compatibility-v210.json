@@ -1,0 +1,29 @@
+{
+  "receiptId": "java-shard-readiness-v208-endpoint-catalog-historical-compatibility-receipt-v210",
+  "version": "Java v210",
+  "status": "passed",
+  "scope": "v208 endpoint catalog historical compatibility",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "V210 adds a focused historical compatibility guard for the v208 endpoint catalog snapshot and rolling registry position.",
+  "guards": [
+    "v208 catalog lists only the six historical v1 contract artifacts",
+    "v208 catalog does not self-include the endpoint catalog route",
+    "v208 catalog does not pull in read-only evidence catalog routes",
+    "v179 and v184 registry snapshots are not backfilled with v208 catalog routes",
+    "current rolling registry positions endpoint catalog after consumer-probe-plan"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractEndpointCatalogHistoricalCompatibilityTests,OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests,OpsShardReadinessV1ContractEndpointCatalogSnapshotTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
