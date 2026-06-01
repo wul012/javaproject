@@ -37,3 +37,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `199/`: Java shard-readiness v1 contract handoff manifest.
 - `200/`: Java shard-readiness v199 contract handoff manifest snapshot freeze.
 - `201/`: Java shard-readiness v199 contract handoff manifest historical snapshot compatibility.
+- `202/`: Java shard-readiness v1 contract consumer probe plan.

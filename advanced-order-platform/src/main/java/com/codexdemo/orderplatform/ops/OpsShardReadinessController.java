@@ -24,6 +24,8 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessV1ContractHandoffManifestService v1ContractHandoffManifestService;
 
+    private final OpsShardReadinessV1ContractConsumerProbePlanService v1ContractConsumerProbePlanService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
@@ -32,7 +34,8 @@ public class OpsShardReadinessController {
             OpsShardReadinessV1ContractAlignmentHandoffService v1ContractAlignmentHandoffService,
             OpsShardReadinessV1ContractEvidencePacketService v1ContractEvidencePacketService,
             OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService,
-            OpsShardReadinessV1ContractHandoffManifestService v1ContractHandoffManifestService
+            OpsShardReadinessV1ContractHandoffManifestService v1ContractHandoffManifestService,
+            OpsShardReadinessV1ContractConsumerProbePlanService v1ContractConsumerProbePlanService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -42,6 +45,7 @@ public class OpsShardReadinessController {
         this.v1ContractEvidencePacketService = v1ContractEvidencePacketService;
         this.v1ContractOperatorChecklistService = v1ContractOperatorChecklistService;
         this.v1ContractHandoffManifestService = v1ContractHandoffManifestService;
+        this.v1ContractConsumerProbePlanService = v1ContractConsumerProbePlanService;
     }
 
     @GetMapping("/shard-readiness")
@@ -82,6 +86,11 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/v1-contract-handoff-manifest")
     public OpsShardReadinessV1ContractHandoffManifestResponse shardReadinessV1ContractHandoffManifest() {
         return v1ContractHandoffManifestService.manifest();
+    }
+
+    @GetMapping("/shard-readiness/v1-contract-consumer-probe-plan")
+    public OpsShardReadinessV1ContractConsumerProbePlanResponse shardReadinessV1ContractConsumerProbePlan() {
+        return v1ContractConsumerProbePlanService.probePlan();
     }
 
 }
