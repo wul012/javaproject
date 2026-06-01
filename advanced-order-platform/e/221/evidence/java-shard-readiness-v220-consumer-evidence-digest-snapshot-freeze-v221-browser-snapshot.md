@@ -1,0 +1,22 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v221 v220 consumer evidence digest snapshot freeze" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v221 freezes the v220 digest response so later guards can compare against an immutable consumer evidence baseline.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Snapshot
+      - generic [ref=e12]: v220
+    - generic [ref=e13]:
+      - generic [ref=e14]: Evidence
+      - generic [ref=e15]: "5"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Checks
+      - generic [ref=e18]: "7"
+  - list [ref=e20]:
+    - listitem [ref=e21]: The service returns the frozen v220 digest snapshot.
+    - listitem [ref=e22]: The v215 checklist endpoint and receipt remain unchanged.
+    - listitem [ref=e23]: Digest evidence and digest checks are locked by snapshot tests.
+    - listitem [ref=e24]: No write routing, active shard router, credential read, raw endpoint parsing, managed audit connection, deployment, rollback, or process control was opened.
