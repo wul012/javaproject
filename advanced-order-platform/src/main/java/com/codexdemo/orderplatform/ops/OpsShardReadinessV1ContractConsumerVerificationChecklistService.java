@@ -25,6 +25,12 @@ public class OpsShardReadinessV1ContractConsumerVerificationChecklistService {
     static final String HANDOFF_BUNDLE_INTEGRITY_EVIDENCE_PATH =
             "e/214/evidence/java-shard-readiness-v1-contract-consumer-handoff-bundle-integrity-v214.json";
 
+    static final String CONSUMER_VERIFICATION_CHECKLIST_SNAPSHOT_FREEZE_EVIDENCE_PATH =
+            "e/216/evidence/java-shard-readiness-v215-consumer-verification-checklist-snapshot-freeze-v216.json";
+
+    static final String CONSUMER_VERIFICATION_CHECKLIST_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH =
+            "e/217/evidence/java-shard-readiness-v215-consumer-verification-checklist-historical-compatibility-v217.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerVerificationChecklistResponse checklist() {
         return OpsShardReadinessV1ContractConsumerVerificationChecklistSnapshot.v215Checklist();
