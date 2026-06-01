@@ -8,7 +8,7 @@ class OpsShardReadinessV1ContractEndpointPairIntegrityTests {
 
     @Test
     void keepsV1ContractEndpointPairsFocusedAndPositionedInRollingRegistry() {
-        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(9);
+        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(10);
         assertThat(OpsShardReadinessV1ContractEndpointPairs.liveEndpoints())
                 .doesNotHaveDuplicates()
                 .allSatisfy(endpoint -> assertThat(endpoint).contains("/v1-contract-"))
@@ -36,6 +36,7 @@ class OpsShardReadinessV1ContractEndpointPairIntegrityTests {
                         OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT,
                         OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT
                 );
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
@@ -50,6 +51,7 @@ class OpsShardReadinessV1ContractEndpointPairIntegrityTests {
                         OpsShardReadinessV1ContractEndpointCatalogService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.FIXTURE_ENDPOINT,
                         OpsShardReadinessReadOnlyEvidenceCatalogService.FIXTURE_ENDPOINT
                 );
     }

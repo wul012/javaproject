@@ -27,6 +27,8 @@ public class OpsShardReadinessV1ContractController {
     private final OpsShardReadinessV1ContractConsumerVerificationChecklistService
             consumerVerificationChecklistService;
 
+    private final OpsShardReadinessV1ContractConsumerEvidenceDigestService consumerEvidenceDigestService;
+
     public OpsShardReadinessV1ContractController(
             OpsShardReadinessV1ContractAlignmentService alignmentService,
             OpsShardReadinessV1ContractAlignmentHandoffService alignmentHandoffService,
@@ -36,7 +38,8 @@ public class OpsShardReadinessV1ContractController {
             OpsShardReadinessV1ContractConsumerProbePlanService consumerProbePlanService,
             OpsShardReadinessV1ContractEndpointCatalogService endpointCatalogService,
             OpsShardReadinessV1ContractConsumerHandoffBundleService consumerHandoffBundleService,
-            OpsShardReadinessV1ContractConsumerVerificationChecklistService consumerVerificationChecklistService
+            OpsShardReadinessV1ContractConsumerVerificationChecklistService consumerVerificationChecklistService,
+            OpsShardReadinessV1ContractConsumerEvidenceDigestService consumerEvidenceDigestService
     ) {
         this.alignmentService = alignmentService;
         this.alignmentHandoffService = alignmentHandoffService;
@@ -47,6 +50,7 @@ public class OpsShardReadinessV1ContractController {
         this.endpointCatalogService = endpointCatalogService;
         this.consumerHandoffBundleService = consumerHandoffBundleService;
         this.consumerVerificationChecklistService = consumerVerificationChecklistService;
+        this.consumerEvidenceDigestService = consumerEvidenceDigestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_ALIGNMENT)
@@ -92,5 +96,10 @@ public class OpsShardReadinessV1ContractController {
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_VERIFICATION_CHECKLIST)
     public OpsShardReadinessV1ContractConsumerVerificationChecklistResponse consumerVerificationChecklist() {
         return consumerVerificationChecklistService.checklist();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_EVIDENCE_DIGEST)
+    public OpsShardReadinessV1ContractConsumerEvidenceDigestResponse consumerEvidenceDigest() {
+        return consumerEvidenceDigestService.digest();
     }
 }

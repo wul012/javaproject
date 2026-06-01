@@ -44,6 +44,10 @@ final class OpsShardReadinessV1ContractEndpointPairs {
                 endpointPair(
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.FIXTURE_ENDPOINT
                 )
         );
     }

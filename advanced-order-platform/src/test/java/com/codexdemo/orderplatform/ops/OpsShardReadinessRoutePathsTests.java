@@ -73,6 +73,10 @@ class OpsShardReadinessRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_VERIFICATION_CHECKLIST,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_EVIDENCE_DIGEST,
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
