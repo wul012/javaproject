@@ -66,3 +66,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `228/`: Java shard-readiness v1 contract consumer readiness handoff integrity.
 - `229/`: Java shard-readiness v1 contract consumer readiness handoff route inventory.
 - `230/`: Java shard-readiness v1 contract consumer readiness handoff evidence chain.
+- `231/`: Java shard-readiness v1 contract consumer readiness handoff ops evidence alignment.
