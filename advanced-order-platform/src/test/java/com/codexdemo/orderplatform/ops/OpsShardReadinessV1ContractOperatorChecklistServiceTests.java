@@ -9,9 +9,7 @@ class OpsShardReadinessV1ContractOperatorChecklistServiceTests {
     @Test
     void buildsReadOnlyOperatorChecklistFromFrozenPacketEvidence() {
         OpsShardReadinessV1ContractOperatorChecklistResponse checklist =
-                new OpsShardReadinessV1ContractOperatorChecklistService(
-                        new OpsShardReadinessV1ContractEvidencePacketService()
-                ).checklist();
+                new OpsShardReadinessV1ContractOperatorChecklistService().checklist();
 
         assertThat(checklist.project()).isEqualTo("advanced-order-platform");
         assertThat(checklist.version()).isEqualTo("Java v196");

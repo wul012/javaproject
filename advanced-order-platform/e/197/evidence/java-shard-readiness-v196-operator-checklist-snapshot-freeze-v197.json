@@ -1,0 +1,43 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v197",
+  "title": "V196 shard readiness v1 contract operator checklist snapshot freeze",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "frozenChecklistVersion": "Java v196",
+  "frozenChecklistEndpoint": "/api/v1/ops/shard-readiness/v1-contract-operator-checklist",
+  "frozenChecklistFixtureEndpoint": "/contracts/java-shard-readiness-v1-contract-operator-checklist-v196.fixture.json",
+  "frozenChecklistEvidencePath": "e/196/evidence/java-shard-readiness-v1-contract-operator-checklist-v196.json",
+  "frozenSourcePacketVersion": "Java v193",
+  "frozenOperatorChecklistItemCount": 7,
+  "frozenRequiredReadOnlyEvidenceCount": 4,
+  "frozenNodeResponsibilityCount": 5,
+  "frozenJavaResponsibilityCount": 5,
+  "currentRollingRegistryLiveEndpointCount": 27,
+  "currentRollingRegistryFixtureEndpointCount": 27,
+  "checklistUsesFrozenPacketSnapshot": true,
+  "checklistUsesFrozenChecklistInputs": true,
+  "newRouteAdded": false,
+  "productionCodeChanged": true,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessV1ContractOperatorChecklistSnapshotTests,OpsShardReadinessV1ContractOperatorChecklistServiceTests,OpsShardReadinessV1ContractOperatorChecklistIntegrationTests,OpsShardReadinessEvidenceEndpointsTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractOperatorChecklistSnapshot.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractOperatorChecklistService.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractOperatorChecklistSnapshotTests.java",
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractOperatorChecklistServiceTests.java"
+  ],
+  "receiptId": "java-shard-readiness-v196-operator-checklist-snapshot-freeze-receipt-v197",
+  "evidencePath": "e/197/evidence/java-shard-readiness-v196-operator-checklist-snapshot-freeze-v197.json",
+  "status": "passed"
+}

@@ -32,3 +32,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `194/`: Java shard-readiness v193 contract evidence packet snapshot freeze.
 - `195/`: Java shard-readiness v193 contract evidence packet historical snapshot compatibility.
 - `196/`: Java shard-readiness v1 contract operator checklist.
+- `197/`: Java shard-readiness v196 contract operator checklist snapshot freeze.
