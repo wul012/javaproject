@@ -8,56 +8,101 @@ final class OpsShardReadinessEvidenceEndpoints {
     }
 
     static List<String> liveEndpoints() {
-        return List.of(
-                OpsShardReadinessService.ENDPOINT,
-                OpsShardReadinessHardeningService.ENDPOINT,
-                OpsShardReadinessEchoService.ENDPOINT,
-                OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT,
-                OpsShardReadinessReadOnlyEvidenceCatalogHandoffService.ENDPOINT,
-                OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService.ENDPOINT,
-                OpsShardReadinessEvidenceIndexService.ENDPOINT,
-                OpsShardReadinessEvidenceVerificationService.ENDPOINT,
-                OpsShardReadinessEvidenceHandoffService.ENDPOINT,
-                OpsShardReadinessActiveShardPlanHandoffService.ENDPOINT,
-                OpsShardReadinessLiveReadGatePlanService.ENDPOINT,
-                OpsShardReadinessOperatorServiceLifecycleService.ENDPOINT,
-                OpsShardReadinessDeclaredOperatorLifecycleService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionArtifactCandidateService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionPacketContributionService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalGateInputService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionLiveReadGateService.ENDPOINT,
-                OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService.ENDPOINT
-        );
+        return endpointPairs().stream()
+                .map(EndpointPair::liveEndpoint)
+                .toList();
     }
 
     static List<String> fixtureEndpoints() {
+        return endpointPairs().stream()
+                .map(EndpointPair::fixtureEndpoint)
+                .toList();
+    }
+
+    static List<EndpointPair> endpointPairs() {
         return List.of(
-                OpsShardReadinessService.FIXTURE_ENDPOINT,
-                OpsShardReadinessHardeningService.FIXTURE_ENDPOINT,
-                OpsShardReadinessEchoService.FIXTURE_ENDPOINT,
-                OpsShardReadinessReadOnlyEvidenceCatalogService.FIXTURE_ENDPOINT,
-                OpsShardReadinessReadOnlyEvidenceCatalogHandoffService.FIXTURE_ENDPOINT,
-                OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService.FIXTURE_ENDPOINT,
-                OpsShardReadinessEvidenceIndexService.FIXTURE_ENDPOINT,
-                OpsShardReadinessEvidenceVerificationService.FIXTURE_ENDPOINT,
-                OpsShardReadinessEvidenceHandoffService.FIXTURE_ENDPOINT,
-                OpsShardReadinessActiveShardPlanHandoffService.FIXTURE_ENDPOINT,
-                OpsShardReadinessLiveReadGatePlanService.FIXTURE_ENDPOINT,
-                OpsShardReadinessOperatorServiceLifecycleService.FIXTURE_ENDPOINT,
-                OpsShardReadinessDeclaredOperatorLifecycleService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionArtifactCandidateService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionPacketContributionService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalGateInputService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionLiveReadGateService.FIXTURE_ENDPOINT,
-                OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService.FIXTURE_ENDPOINT
+                endpointPair(OpsShardReadinessService.ENDPOINT, OpsShardReadinessService.FIXTURE_ENDPOINT),
+                endpointPair(
+                        OpsShardReadinessHardeningService.ENDPOINT,
+                        OpsShardReadinessHardeningService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(OpsShardReadinessEchoService.ENDPOINT, OpsShardReadinessEchoService.FIXTURE_ENDPOINT),
+                endpointPair(
+                        OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT,
+                        OpsShardReadinessReadOnlyEvidenceCatalogService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessReadOnlyEvidenceCatalogHandoffService.ENDPOINT,
+                        OpsShardReadinessReadOnlyEvidenceCatalogHandoffService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService.ENDPOINT,
+                        OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessEvidenceIndexService.ENDPOINT,
+                        OpsShardReadinessEvidenceIndexService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessEvidenceVerificationService.ENDPOINT,
+                        OpsShardReadinessEvidenceVerificationService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessEvidenceHandoffService.ENDPOINT,
+                        OpsShardReadinessEvidenceHandoffService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessActiveShardPlanHandoffService.ENDPOINT,
+                        OpsShardReadinessActiveShardPlanHandoffService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessLiveReadGatePlanService.ENDPOINT,
+                        OpsShardReadinessLiveReadGatePlanService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessOperatorServiceLifecycleService.ENDPOINT,
+                        OpsShardReadinessOperatorServiceLifecycleService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessDeclaredOperatorLifecycleService.ENDPOINT,
+                        OpsShardReadinessDeclaredOperatorLifecycleService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionArtifactCandidateService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionArtifactCandidateService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionPacketContributionService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionPacketContributionService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionApprovalGateInputService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionApprovalGateInputService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionLiveReadGateService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionLiveReadGateService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService.ENDPOINT,
+                        OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService.FIXTURE_ENDPOINT
+                )
         );
     }
 
@@ -71,5 +116,12 @@ final class OpsShardReadinessEvidenceEndpoints {
         return fixtureEndpoints().stream()
                 .map(endpoint -> "GET " + endpoint)
                 .toList();
+    }
+
+    private static EndpointPair endpointPair(String liveEndpoint, String fixtureEndpoint) {
+        return new EndpointPair(liveEndpoint, fixtureEndpoint);
+    }
+
+    record EndpointPair(String liveEndpoint, String fixtureEndpoint) {
     }
 }

@@ -1,0 +1,42 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v182",
+  "title": "Paired shard-readiness endpoint registry",
+  "sourceVersion": "Java v181",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "endpointRegistryMutated": false,
+  "currentLiveEndpointCount": 22,
+  "currentFixtureEndpointCount": 22,
+  "endpointPairsIntroduced": true,
+  "liveEndpointsDerivedFromPairs": true,
+  "fixtureEndpointsDerivedFromPairs": true,
+  "probeEndpointsDerivedFromDerivedLists": true,
+  "pathsPreserved": true,
+  "orderPreserved": true,
+  "splitControllerBoundaryPreserved": true,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessEvidenceEndpointsTests,OpsEvidenceServiceTests,OpsShardReadinessReadOnlyEvidenceCatalogServiceTests,OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationServiceTests,OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationIntegrationTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessEvidenceEndpoints.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessEvidenceEndpointsTests.java"
+  ],
+  "preservedCounts": {
+    "live": 22,
+    "fixture": 22,
+    "pairs": 22
+  },
+  "receiptId": "java-shard-readiness-paired-endpoint-registry-receipt-v182",
+  "evidencePath": "e/182/evidence/java-shard-readiness-paired-endpoint-registry-v182.json",
+  "status": "passed"
+}

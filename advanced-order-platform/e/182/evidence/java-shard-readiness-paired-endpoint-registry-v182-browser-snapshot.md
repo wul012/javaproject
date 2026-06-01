@@ -1,0 +1,63 @@
+- main [ref=e2]:
+  - heading "Java v182 paired endpoint registry" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Single-source endpoint pairs now drive live, fixture, and probe endpoint lists without changing external routes.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Status
+      - text: passed
+    - generic [ref=e8]:
+      - generic [ref=e9]: Pairs
+      - text: "22"
+    - generic [ref=e10]:
+      - generic [ref=e11]: Registry
+      - text: 22 / 22
+    - generic [ref=e12]:
+      - generic [ref=e13]: Execution
+      - text: not allowed
+  - generic [ref=e14]:
+    - heading "Registry Surface" [level=2] [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Single source
+        - code [ref=e19]: EndpointPair(liveEndpoint, fixtureEndpoint)
+      - generic [ref=e20]:
+        - generic [ref=e21]: Live endpoints
+        - text: derived from pairs
+      - generic [ref=e22]:
+        - generic [ref=e23]: Fixture endpoints
+        - text: derived from pairs
+      - generic [ref=e24]:
+        - generic [ref=e25]: Order
+        - text: preserved
+  - generic [ref=e26]:
+    - heading "Checks" [level=2] [ref=e27]
+    - list [ref=e28]:
+      - listitem [ref=e29]:
+        - code [ref=e30]: endpoint-pairs-count:22
+      - listitem [ref=e31]:
+        - code [ref=e32]: live-endpoints-count:22
+      - listitem [ref=e33]:
+        - code [ref=e34]: fixture-endpoints-count:22
+      - listitem [ref=e35]:
+        - code [ref=e36]: probe-endpoints-derived:true
+      - listitem [ref=e37]:
+        - code [ref=e38]: paths-preserved:true
+      - listitem [ref=e39]:
+        - code [ref=e40]: read-only-boundary-held:true
+  - generic [ref=e41]:
+    - heading "Blocked Operations" [level=2] [ref=e42]
+    - list [ref=e43]:
+      - listitem [ref=e44]:
+        - code [ref=e45]: write-routing
+      - listitem [ref=e46]:
+        - code [ref=e47]: active-shard-router
+      - listitem [ref=e48]:
+        - code [ref=e49]: credential-value-read
+      - listitem [ref=e50]:
+        - code [ref=e51]: raw-endpoint-parse
+      - listitem [ref=e52]:
+        - code [ref=e53]: managed-audit-connection
+      - listitem [ref=e54]:
+        - code [ref=e55]: deployment-or-rollback
+      - listitem [ref=e56]:
+        - code [ref=e57]: node-start-or-stop-java-or-mini-kv
