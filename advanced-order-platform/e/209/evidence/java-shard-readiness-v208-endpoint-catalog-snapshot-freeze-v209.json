@@ -1,0 +1,33 @@
+{
+  "receiptId": "java-shard-readiness-v208-endpoint-catalog-snapshot-freeze-receipt-v209",
+  "version": "Java v209",
+  "status": "passed",
+  "scope": "v208 endpoint catalog snapshot freeze",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "V209 freezes the Java v208 v1 contract endpoint catalog through OpsShardReadinessV1ContractEndpointCatalogSnapshot so future catalog evolution cannot mutate the v208 receipt.",
+  "frozenReceipt": "java-shard-readiness-v1-contract-endpoint-catalog-receipt-v208",
+  "frozenEvidencePath": "e/208/evidence/java-shard-readiness-v1-contract-endpoint-catalog-v208.json",
+  "frozenArtifactCount": 6,
+  "snapshotSource": "OpsShardReadinessV1ContractEndpointCatalogSnapshot.v208Catalog()",
+  "serviceSource": "OpsShardReadinessV1ContractEndpointCatalogService.catalog()",
+  "guards": [
+    "service returns the frozen v208 snapshot",
+    "endpoint entries remain exactly the v187-v202 v1 contract artifacts",
+    "blocked operations remain frozen",
+    "receipt id and evidence path stay stable"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractEndpointCatalogSnapshotTests,OpsShardReadinessV1ContractEndpointCatalogServiceTests,OpsShardReadinessV1ContractEndpointCatalogIntegrationTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
