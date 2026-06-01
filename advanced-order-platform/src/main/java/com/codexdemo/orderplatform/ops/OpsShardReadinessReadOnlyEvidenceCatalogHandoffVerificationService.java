@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService {
 
     static final String ENDPOINT =
-            "/api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff-verification";
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG_HANDOFF_VERIFICATION;
     static final String FIXTURE_ENDPOINT =
             "/contracts/java-shard-readiness-read-only-evidence-catalog-handoff-verification-v179.fixture.json";
     static final String EVIDENCE_PATH =

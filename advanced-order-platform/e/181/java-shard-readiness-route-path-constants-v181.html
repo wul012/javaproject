@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v181 route path constants</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f5;
+      --ink: #172019;
+      --muted: #5c665d;
+      --line: #d8ded6;
+      --panel: #ffffff;
+      --ok: #08725f;
+      --hold: #9a4a15;
+      --accent: #244f76;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 34px 28px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 980px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 22px;
+    }
+    .stats, .grid, ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid, ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tile, li {
+      min-height: 80px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .ok { color: var(--ok); }
+    .hold { color: var(--hold); }
+    .accent { color: var(--accent); }
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    code {
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 14px;
+    }
+    @media (max-width: 760px) {
+      main { padding: 26px 18px 36px; }
+      h1 { font-size: 28px; }
+      .stats, .grid, ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Java v181 route path constants</h1>
+  <p>Shared route constants for shard-readiness evidence controllers and services, with all external paths preserved.</p>
+
+  <section class="stats" aria-label="summary">
+    <div class="tile">
+      <span class="label">Status</span>
+      <span class="value ok">passed</span>
+    </div>
+    <div class="tile">
+      <span class="label">Endpoint registry</span>
+      <span class="value accent">22 / 22</span>
+    </div>
+    <div class="tile">
+      <span class="label">Path change</span>
+      <span class="value ok">none</span>
+    </div>
+    <div class="tile">
+      <span class="label">Execution</span>
+      <span class="value hold">not allowed</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Constant Surface</h2>
+    <div class="grid">
+      <div class="tile">
+        <span class="label">Base path</span>
+        <code>OpsShardReadinessRoutePaths.BASE_PATH</code>
+      </div>
+      <div class="tile">
+        <span class="label">Controller mappings</span>
+        <span class="value ok">use route constants</span>
+      </div>
+      <div class="tile">
+        <span class="label">Service endpoints</span>
+        <span class="value ok">use base + route constants</span>
+      </div>
+      <div class="tile">
+        <span class="label">Guard test</span>
+        <code>OpsShardReadinessRoutePathsTests</code>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Preserved Routes</h2>
+    <ul>
+      <li><code>GET /api/v1/ops/shard-readiness/read-only-evidence-catalog</code></li>
+      <li><code>GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff</code></li>
+      <li><code>GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff-verification</code></li>
+      <li><code>GET /api/v1/ops/shard-readiness/evidence-index</code></li>
+      <li><code>GET /api/v1/ops/shard-readiness/evidence-verification</code></li>
+      <li><code>GET /api/v1/ops/shard-readiness/evidence-handoff</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Blocked Operations</h2>
+    <ul>
+      <li><code>write-routing</code></li>
+      <li><code>active-shard-router</code></li>
+      <li><code>credential-value-read</code></li>
+      <li><code>raw-endpoint-parse</code></li>
+      <li><code>managed-audit-connection</code></li>
+      <li><code>deployment-or-rollback</code></li>
+      <li><code>node-start-or-stop-java-or-mini-kv</code></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

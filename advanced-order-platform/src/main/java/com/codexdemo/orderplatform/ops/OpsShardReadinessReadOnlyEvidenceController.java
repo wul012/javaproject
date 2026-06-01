@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/ops/shard-readiness")
+@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
 public class OpsShardReadinessReadOnlyEvidenceController {
 
     private final OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService;
@@ -26,17 +26,17 @@ public class OpsShardReadinessReadOnlyEvidenceController {
         this.readOnlyEvidenceCatalogHandoffVerificationService = readOnlyEvidenceCatalogHandoffVerificationService;
     }
 
-    @GetMapping("/read-only-evidence-catalog")
+    @GetMapping(OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG)
     public OpsShardReadinessReadOnlyEvidenceCatalogResponse readOnlyEvidenceCatalog() {
         return readOnlyEvidenceCatalogService.catalog();
     }
 
-    @GetMapping("/read-only-evidence-catalog-handoff")
+    @GetMapping(OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG_HANDOFF)
     public OpsShardReadinessReadOnlyEvidenceCatalogHandoffResponse readOnlyEvidenceCatalogHandoff() {
         return readOnlyEvidenceCatalogHandoffService.handoff();
     }
 
-    @GetMapping("/read-only-evidence-catalog-handoff-verification")
+    @GetMapping(OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG_HANDOFF_VERIFICATION)
     public OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationResponse
             readOnlyEvidenceCatalogHandoffVerification() {
         return readOnlyEvidenceCatalogHandoffVerificationService.verification();

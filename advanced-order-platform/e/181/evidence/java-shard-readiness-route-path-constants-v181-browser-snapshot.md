@@ -1,0 +1,63 @@
+- main [ref=e2]:
+  - heading "Java v181 route path constants" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Shared route constants for shard-readiness evidence controllers and services, with all external paths preserved.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Status
+      - text: passed
+    - generic [ref=e8]:
+      - generic [ref=e9]: Endpoint registry
+      - text: 22 / 22
+    - generic [ref=e10]:
+      - generic [ref=e11]: Path change
+      - text: none
+    - generic [ref=e12]:
+      - generic [ref=e13]: Execution
+      - text: not allowed
+  - generic [ref=e14]:
+    - heading "Constant Surface" [level=2] [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Base path
+        - code [ref=e19]: OpsShardReadinessRoutePaths.BASE_PATH
+      - generic [ref=e20]:
+        - generic [ref=e21]: Controller mappings
+        - text: use route constants
+      - generic [ref=e22]:
+        - generic [ref=e23]: Service endpoints
+        - text: use base + route constants
+      - generic [ref=e24]:
+        - generic [ref=e25]: Guard test
+        - code [ref=e26]: OpsShardReadinessRoutePathsTests
+  - generic [ref=e27]:
+    - heading "Preserved Routes" [level=2] [ref=e28]
+    - list [ref=e29]:
+      - listitem [ref=e30]:
+        - code [ref=e31]: GET /api/v1/ops/shard-readiness/read-only-evidence-catalog
+      - listitem [ref=e32]:
+        - code [ref=e33]: GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff
+      - listitem [ref=e34]:
+        - code [ref=e35]: GET /api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff-verification
+      - listitem [ref=e36]:
+        - code [ref=e37]: GET /api/v1/ops/shard-readiness/evidence-index
+      - listitem [ref=e38]:
+        - code [ref=e39]: GET /api/v1/ops/shard-readiness/evidence-verification
+      - listitem [ref=e40]:
+        - code [ref=e41]: GET /api/v1/ops/shard-readiness/evidence-handoff
+  - generic [ref=e42]:
+    - heading "Blocked Operations" [level=2] [ref=e43]
+    - list [ref=e44]:
+      - listitem [ref=e45]:
+        - code [ref=e46]: write-routing
+      - listitem [ref=e47]:
+        - code [ref=e48]: active-shard-router
+      - listitem [ref=e49]:
+        - code [ref=e50]: credential-value-read
+      - listitem [ref=e51]:
+        - code [ref=e52]: raw-endpoint-parse
+      - listitem [ref=e53]:
+        - code [ref=e54]: managed-audit-connection
+      - listitem [ref=e55]:
+        - code [ref=e56]: deployment-or-rollback
+      - listitem [ref=e57]:
+        - code [ref=e58]: node-start-or-stop-java-or-mini-kv

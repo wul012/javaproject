@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/ops/shard-readiness")
+@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
 public class OpsShardReadinessEvidenceController {
 
     private final OpsShardReadinessEvidenceIndexService evidenceIndexService;
@@ -24,17 +24,17 @@ public class OpsShardReadinessEvidenceController {
         this.evidenceHandoffService = evidenceHandoffService;
     }
 
-    @GetMapping("/evidence-index")
+    @GetMapping(OpsShardReadinessRoutePaths.EVIDENCE_INDEX)
     public OpsShardReadinessEvidenceIndexResponse evidenceIndex() {
         return evidenceIndexService.evidenceIndex();
     }
 
-    @GetMapping("/evidence-verification")
+    @GetMapping(OpsShardReadinessRoutePaths.EVIDENCE_VERIFICATION)
     public OpsShardReadinessEvidenceVerificationResponse evidenceVerification() {
         return evidenceVerificationService.verification();
     }
 
-    @GetMapping("/evidence-handoff")
+    @GetMapping(OpsShardReadinessRoutePaths.EVIDENCE_HANDOFF)
     public OpsShardReadinessEvidenceHandoffResponse evidenceHandoff() {
         return evidenceHandoffService.handoff();
     }

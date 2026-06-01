@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessReadOnlyEvidenceCatalogHandoffService {
 
-    static final String ENDPOINT = "/api/v1/ops/shard-readiness/read-only-evidence-catalog-handoff";
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG_HANDOFF;
     static final String FIXTURE_ENDPOINT =
             "/contracts/java-shard-readiness-read-only-evidence-catalog-handoff-v177.fixture.json";
     static final String EVIDENCE_PATH =

@@ -16,3 +16,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `178/`: Java shard-readiness test service graph factory refactor.
 - `179/`: Java shard-readiness read-only catalog handoff verification.
 - `180/`: Java shard-readiness read-only evidence controller split.
+- `181/`: Java shard-readiness route path constants.

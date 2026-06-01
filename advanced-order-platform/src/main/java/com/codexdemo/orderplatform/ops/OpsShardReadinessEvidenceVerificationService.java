@@ -7,7 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessEvidenceVerificationService {
 
-    static final String ENDPOINT = "/api/v1/ops/shard-readiness/evidence-verification";
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths.EVIDENCE_VERIFICATION;
     static final String FIXTURE_ENDPOINT = "/contracts/java-shard-readiness-evidence-verification-v156.fixture.json";
     static final String EVIDENCE_PATH = "e/156/evidence/java-shard-readiness-evidence-verification-v156.json";
 
