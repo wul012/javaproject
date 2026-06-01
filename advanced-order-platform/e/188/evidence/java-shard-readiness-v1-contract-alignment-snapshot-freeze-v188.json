@@ -1,0 +1,37 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v188",
+  "title": "V187 shard-readiness.v1 contract alignment snapshot freeze",
+  "sourceVersion": "Java v187",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "v187AlignmentUsesFrozenSnapshot": true,
+  "v187AlignmentUsesRollingRootReadiness": false,
+  "frozenContractName": "shard-readiness.v1",
+  "frozenSourceReadinessVersion": "Java v153",
+  "frozenMinimalFieldCount": 10,
+  "futureRootReadinessChangesCanProceedWithoutChangingV187Receipt": true,
+  "currentGlobalRegistryMutation": false,
+  "newRouteAdded": false,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessV1ContractAlignmentSnapshotTests,OpsShardReadinessV1ContractAlignmentServiceTests,OpsShardReadinessV1ContractAlignmentIntegrationTests,OpsShardReadinessEvidenceEndpointsTests,OpsEvidenceServiceTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentSnapshot.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentService.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentSnapshotTests.java",
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentServiceTests.java"
+  ],
+  "receiptId": "java-shard-readiness-v1-contract-alignment-snapshot-freeze-receipt-v188",
+  "evidencePath": "e/188/evidence/java-shard-readiness-v1-contract-alignment-snapshot-freeze-v188.json",
+  "status": "passed"
+}

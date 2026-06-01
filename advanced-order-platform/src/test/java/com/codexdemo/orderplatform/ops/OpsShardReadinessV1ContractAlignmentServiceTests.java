@@ -9,7 +9,7 @@ class OpsShardReadinessV1ContractAlignmentServiceTests {
     @Test
     void alignsFrozenRootReadinessWithShardReadinessV1WithoutOpeningExecution() {
         OpsShardReadinessV1ContractAlignmentResponse alignment =
-                new OpsShardReadinessV1ContractAlignmentService(new OpsShardReadinessService()).alignment();
+                new OpsShardReadinessV1ContractAlignmentService().alignment();
 
         assertThat(alignment.project()).isEqualTo("advanced-order-platform");
         assertThat(alignment.version()).isEqualTo("Java v187");

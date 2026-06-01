@@ -13,15 +13,10 @@ public class OpsShardReadinessV1ContractAlignmentService {
     static final String EVIDENCE_PATH =
             "e/187/evidence/java-shard-readiness-v1-contract-alignment-v187.json";
 
-    private final OpsShardReadinessService readinessService;
-
-    public OpsShardReadinessV1ContractAlignmentService(OpsShardReadinessService readinessService) {
-        this.readinessService = readinessService;
-    }
-
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractAlignmentResponse alignment() {
-        OpsShardReadinessResponse readiness = readinessService.readiness();
+        OpsShardReadinessResponse readiness =
+                OpsShardReadinessV1ContractAlignmentSnapshot.v187SourceReadiness();
 
         boolean readOnlyMatches = readiness.readOnly();
         boolean executionBlocked = !readiness.executionAllowed();
@@ -33,15 +28,15 @@ public class OpsShardReadinessV1ContractAlignmentService {
         return new OpsShardReadinessV1ContractAlignmentResponse(
                 "advanced-order-platform",
                 "Java v187",
-                OpsShardReadinessV1Contract.CONTRACT_NAME,
+                OpsShardReadinessV1ContractAlignmentSnapshot.v187ContractName(),
                 true,
                 false,
                 false,
                 readiness.version(),
-                OpsShardReadinessService.ENDPOINT,
-                OpsShardReadinessService.FIXTURE_ENDPOINT,
+                OpsShardReadinessV1ContractAlignmentSnapshot.v187SourceEndpoint(),
+                OpsShardReadinessV1ContractAlignmentSnapshot.v187SourceFixtureEndpoint(),
                 readiness.evidencePath(),
-                OpsShardReadinessV1Contract.minimalFields(),
+                OpsShardReadinessV1ContractAlignmentSnapshot.v187MinimalFields(),
                 true,
                 readOnlyMatches,
                 executionBlocked,
@@ -79,9 +74,9 @@ public class OpsShardReadinessV1ContractAlignmentService {
             boolean routingModeFixtureBacked
     ) {
         return List.of(
-                "contract-name:" + OpsShardReadinessV1Contract.CONTRACT_NAME,
+                "contract-name:" + OpsShardReadinessV1ContractAlignmentSnapshot.v187ContractName(),
                 "source-readiness-version:" + readiness.version(),
-                "minimal-field-count:" + OpsShardReadinessV1Contract.minimalFields().size(),
+                "minimal-field-count:" + OpsShardReadinessV1ContractAlignmentSnapshot.v187MinimalFields().size(),
                 "read-only-matches:" + readOnlyMatches,
                 "execution-blocked:" + executionBlocked,
                 "shard-routing-disabled:" + shardRoutingDisabled,
