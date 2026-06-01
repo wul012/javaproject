@@ -22,3 +22,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `184/`: Java shard-readiness read-only endpoint registry integrity.
 - `185/`: Java shard-readiness v184 registry integrity snapshot freeze.
 - `186/`: Java shard-readiness historical endpoint snapshot compatibility.
+- `187/`: Java shard-readiness v1 contract alignment.

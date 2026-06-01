@@ -1,0 +1,67 @@
+- main [ref=e2]:
+  - heading "Java v187 shard-readiness.v1 contract alignment" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Java now publishes an additive read-only receipt proving the frozen root readiness output aligns with the minimal shard-readiness.v1 field contract.
+  - region "summary" [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Status
+      - text: passed
+    - generic [ref=e8]:
+      - generic [ref=e9]: Contract
+      - text: shard-readiness.v1
+    - generic [ref=e10]:
+      - generic [ref=e11]: Minimal fields
+      - text: "10"
+    - generic [ref=e12]:
+      - generic [ref=e13]: Execution
+      - text: not allowed
+  - generic [ref=e14]:
+    - heading "Alignment Surface" [level=2] [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Receipt endpoint
+        - code [ref=e19]: /api/v1/ops/shard-readiness/v1-contract-alignment
+      - generic [ref=e20]:
+        - generic [ref=e21]: Fixture
+        - code [ref=e22]: /contracts/java-shard-readiness-v1-contract-alignment-v187.fixture.json
+      - generic [ref=e23]:
+        - generic [ref=e24]: Source readiness
+        - text: Java v153
+      - generic [ref=e25]:
+        - generic [ref=e26]: Endpoint registry
+        - text: 24 pairs
+  - generic [ref=e27]:
+    - heading "Checks" [level=2] [ref=e28]
+    - list [ref=e29]:
+      - listitem [ref=e30]:
+        - code [ref=e31]: contract-name:shard-readiness.v1
+      - listitem [ref=e32]:
+        - code [ref=e33]: source-readiness-version:Java v153
+      - listitem [ref=e34]:
+        - code [ref=e35]: minimal-field-count:10
+      - listitem [ref=e36]:
+        - code [ref=e37]: read-only-matches:true
+      - listitem [ref=e38]:
+        - code [ref=e39]: execution-blocked:true
+      - listitem [ref=e40]:
+        - code [ref=e41]: shard-routing-disabled:true
+      - listitem [ref=e42]:
+        - code [ref=e43]: shard-counts-closed:true
+      - listitem [ref=e44]:
+        - code [ref=e45]: routing-mode-fixture-backed:true
+  - generic [ref=e46]:
+    - heading "Blocked Operations" [level=2] [ref=e47]
+    - list [ref=e48]:
+      - listitem [ref=e49]:
+        - code [ref=e50]: write-routing
+      - listitem [ref=e51]:
+        - code [ref=e52]: active-shard-router
+      - listitem [ref=e53]:
+        - code [ref=e54]: credential-value-read
+      - listitem [ref=e55]:
+        - code [ref=e56]: raw-endpoint-parse
+      - listitem [ref=e57]:
+        - code [ref=e58]: managed-audit-connection
+      - listitem [ref=e59]:
+        - code [ref=e60]: deployment-or-rollback
+      - listitem [ref=e61]:
+        - code [ref=e62]: node-start-or-stop-java-or-mini-kv
