@@ -1,0 +1,52 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v190 shard readiness v1 contract alignment handoff" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Read-only handoff receipt tying Java v187 alignment, Java v188 snapshot freeze, and Java v189 historical snapshot compatibility into one Node-consumable surface.
+  - region "status metrics" [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Mode
+      - generic [ref=e12]: read-only
+    - generic [ref=e13]:
+      - generic [ref=e14]: Endpoint pairs
+      - generic [ref=e15]: 25 live / 25 fixture
+  - generic [ref=e16]:
+    - heading "Handoff chain" [level=2] [ref=e17]
+    - table [ref=e18]:
+      - rowgroup [ref=e19]:
+        - row "Version Role Evidence" [ref=e20]:
+          - columnheader "Version" [ref=e21]
+          - columnheader "Role" [ref=e22]
+          - columnheader "Evidence" [ref=e23]
+      - rowgroup [ref=e24]:
+        - row "Java v187 Align root readiness to shard-readiness.v1. e/187/evidence/java-shard-readiness-v1-contract-alignment-v187.json" [ref=e25]:
+          - cell "Java v187" [ref=e26]
+          - cell "Align root readiness to shard-readiness.v1." [ref=e27]:
+            - text: Align root readiness to
+            - code [ref=e28]: shard-readiness.v1
+            - text: .
+          - cell "e/187/evidence/java-shard-readiness-v1-contract-alignment-v187.json" [ref=e29]:
+            - code [ref=e30]: e/187/evidence/java-shard-readiness-v1-contract-alignment-v187.json
+        - row "Java v188 Freeze the v187 source readiness fields and endpoint references. e/188/evidence/java-shard-readiness-v1-contract-alignment-snapshot-freeze-v188.json" [ref=e31]:
+          - cell "Java v188" [ref=e32]
+          - cell "Freeze the v187 source readiness fields and endpoint references." [ref=e33]
+          - cell "e/188/evidence/java-shard-readiness-v1-contract-alignment-snapshot-freeze-v188.json" [ref=e34]:
+            - code [ref=e35]: e/188/evidence/java-shard-readiness-v1-contract-alignment-snapshot-freeze-v188.json
+        - row "Java v189 Guard historical endpoint snapshots from v187 backfill. e/189/evidence/java-shard-readiness-v187-historical-snapshot-compatibility-v189.json" [ref=e36]:
+          - cell "Java v189" [ref=e37]
+          - cell "Guard historical endpoint snapshots from v187 backfill." [ref=e38]
+          - cell "e/189/evidence/java-shard-readiness-v187-historical-snapshot-compatibility-v189.json" [ref=e39]:
+            - code [ref=e40]: e/189/evidence/java-shard-readiness-v187-historical-snapshot-compatibility-v189.json
+        - row "Java v190 Expose the handoff as a dedicated read-only receipt. e/190/evidence/java-shard-readiness-v1-contract-alignment-handoff-v190.json" [ref=e41]:
+          - cell "Java v190" [ref=e42]
+          - cell "Expose the handoff as a dedicated read-only receipt." [ref=e43]
+          - cell "e/190/evidence/java-shard-readiness-v1-contract-alignment-handoff-v190.json" [ref=e44]:
+            - code [ref=e45]: e/190/evidence/java-shard-readiness-v1-contract-alignment-handoff-v190.json
+  - generic [ref=e46]:
+    - heading "Boundaries" [level=2] [ref=e47]
+    - list [ref=e48]:
+      - listitem [ref=e49]: No write routing, active shard router, credential value read, raw endpoint parse, managed audit connection, deployment, or rollback.
+      - listitem [ref=e50]: Node may consume the receipt and fixture, but may not start or stop Java or mini-kv.
+      - listitem [ref=e51]: The new route is a GET-only evidence endpoint and fixture pair.

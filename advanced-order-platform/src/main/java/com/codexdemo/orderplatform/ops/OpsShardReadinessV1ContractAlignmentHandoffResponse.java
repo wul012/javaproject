@@ -1,0 +1,38 @@
+package com.codexdemo.orderplatform.ops;
+
+import java.util.List;
+
+public record OpsShardReadinessV1ContractAlignmentHandoffResponse(
+        String project,
+        String version,
+        String contractName,
+        boolean readOnly,
+        boolean executionAllowed,
+        boolean shardEnabled,
+        String alignmentVersion,
+        String alignmentEndpoint,
+        String alignmentFixtureEndpoint,
+        String alignmentEvidencePath,
+        String alignmentReceiptId,
+        String snapshotFreezeVersion,
+        String snapshotFreezeEvidencePath,
+        String historicalCompatibilityVersion,
+        String historicalCompatibilityEvidencePath,
+        boolean minimalFieldsFrozen,
+        boolean historicalSnapshotsProtected,
+        boolean registryContainsAlignment,
+        boolean olderSnapshotsRemainUnbackfilled,
+        boolean writeRoutingAllowed,
+        boolean activeShardRouterAllowed,
+        boolean credentialValueRead,
+        boolean rawEndpointParsed,
+        boolean managedAuditConnectionAllowed,
+        boolean deploymentOrRollbackAllowed,
+        boolean nodeMayStartOrStopJavaOrMiniKv,
+        List<String> handoffArtifacts,
+        List<String> verificationChecks,
+        String receiptId,
+        String evidencePath,
+        String status
+) {
+}

@@ -16,16 +16,20 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessV1ContractAlignmentService v1ContractAlignmentService;
 
+    private final OpsShardReadinessV1ContractAlignmentHandoffService v1ContractAlignmentHandoffService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
             OpsShardReadinessEchoService opsShardReadinessEchoService,
-            OpsShardReadinessV1ContractAlignmentService v1ContractAlignmentService
+            OpsShardReadinessV1ContractAlignmentService v1ContractAlignmentService,
+            OpsShardReadinessV1ContractAlignmentHandoffService v1ContractAlignmentHandoffService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
         this.opsShardReadinessEchoService = opsShardReadinessEchoService;
         this.v1ContractAlignmentService = v1ContractAlignmentService;
+        this.v1ContractAlignmentHandoffService = v1ContractAlignmentHandoffService;
     }
 
     @GetMapping("/shard-readiness")
@@ -46,6 +50,11 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/v1-contract-alignment")
     public OpsShardReadinessV1ContractAlignmentResponse shardReadinessV1ContractAlignment() {
         return v1ContractAlignmentService.alignment();
+    }
+
+    @GetMapping("/shard-readiness/v1-contract-alignment-handoff")
+    public OpsShardReadinessV1ContractAlignmentHandoffResponse shardReadinessV1ContractAlignmentHandoff() {
+        return v1ContractAlignmentHandoffService.handoff();
     }
 
 }

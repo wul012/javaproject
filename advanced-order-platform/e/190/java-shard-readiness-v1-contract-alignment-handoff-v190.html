@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v190 shard readiness v1 contract alignment handoff</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #5a6675;
+      --line: #c9d4df;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --accent: #25636f;
+      --ok: #1f7a4d;
+      --warn: #9b5d10;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1100px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+    header {
+      display: grid;
+      gap: 10px;
+      padding-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    section {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .metric {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+      min-height: 92px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .ok {
+      color: var(--ok);
+    }
+    .warn {
+      color: var(--warn);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: #f1f5f8;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    @media (max-width: 820px) {
+      main {
+        width: min(100% - 28px, 1100px);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Java v190 shard readiness v1 contract alignment handoff</h1>
+      <p>Read-only handoff receipt tying Java v187 alignment, Java v188 snapshot freeze, and Java v189 historical snapshot compatibility into one Node-consumable surface.</p>
+    </header>
+
+    <section class="grid" aria-label="status metrics">
+      <div class="metric">
+        <div class="label">Status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="metric">
+        <div class="label">Mode</div>
+        <div class="value">read-only</div>
+      </div>
+      <div class="metric">
+        <div class="label">Endpoint pairs</div>
+        <div class="value">25 live / 25 fixture</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Handoff chain</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Role</th>
+            <th>Evidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Java v187</td>
+            <td>Align root readiness to <code>shard-readiness.v1</code>.</td>
+            <td><code>e/187/evidence/java-shard-readiness-v1-contract-alignment-v187.json</code></td>
+          </tr>
+          <tr>
+            <td>Java v188</td>
+            <td>Freeze the v187 source readiness fields and endpoint references.</td>
+            <td><code>e/188/evidence/java-shard-readiness-v1-contract-alignment-snapshot-freeze-v188.json</code></td>
+          </tr>
+          <tr>
+            <td>Java v189</td>
+            <td>Guard historical endpoint snapshots from v187 backfill.</td>
+            <td><code>e/189/evidence/java-shard-readiness-v187-historical-snapshot-compatibility-v189.json</code></td>
+          </tr>
+          <tr>
+            <td>Java v190</td>
+            <td>Expose the handoff as a dedicated read-only receipt.</td>
+            <td><code>e/190/evidence/java-shard-readiness-v1-contract-alignment-handoff-v190.json</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Boundaries</h2>
+      <ul>
+        <li>No write routing, active shard router, credential value read, raw endpoint parse, managed audit connection, deployment, or rollback.</li>
+        <li>Node may consume the receipt and fixture, but may not start or stop Java or mini-kv.</li>
+        <li>The new route is a GET-only evidence endpoint and fixture pair.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
