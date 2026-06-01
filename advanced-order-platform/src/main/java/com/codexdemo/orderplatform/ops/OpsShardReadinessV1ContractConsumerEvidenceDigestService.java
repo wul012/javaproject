@@ -19,6 +19,9 @@ public class OpsShardReadinessV1ContractConsumerEvidenceDigestService {
     static final String CONSUMER_EVIDENCE_DIGEST_SNAPSHOT_FREEZE_EVIDENCE_PATH =
             "e/221/evidence/java-shard-readiness-v220-consumer-evidence-digest-snapshot-freeze-v221.json";
 
+    static final String CONSUMER_EVIDENCE_DIGEST_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH =
+            "e/222/evidence/java-shard-readiness-v220-consumer-evidence-digest-historical-compatibility-v222.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerEvidenceDigestResponse digest() {
         return OpsShardReadinessV1ContractConsumerEvidenceDigestSnapshot.v220Digest();
