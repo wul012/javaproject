@@ -20,13 +20,16 @@ public class OpsShardReadinessController {
 
     private final OpsShardReadinessV1ContractEvidencePacketService v1ContractEvidencePacketService;
 
+    private final OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService;
+
     public OpsShardReadinessController(
             OpsShardReadinessService opsShardReadinessService,
             OpsShardReadinessHardeningService opsShardReadinessHardeningService,
             OpsShardReadinessEchoService opsShardReadinessEchoService,
             OpsShardReadinessV1ContractAlignmentService v1ContractAlignmentService,
             OpsShardReadinessV1ContractAlignmentHandoffService v1ContractAlignmentHandoffService,
-            OpsShardReadinessV1ContractEvidencePacketService v1ContractEvidencePacketService
+            OpsShardReadinessV1ContractEvidencePacketService v1ContractEvidencePacketService,
+            OpsShardReadinessV1ContractOperatorChecklistService v1ContractOperatorChecklistService
     ) {
         this.opsShardReadinessService = opsShardReadinessService;
         this.opsShardReadinessHardeningService = opsShardReadinessHardeningService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessController {
         this.v1ContractAlignmentService = v1ContractAlignmentService;
         this.v1ContractAlignmentHandoffService = v1ContractAlignmentHandoffService;
         this.v1ContractEvidencePacketService = v1ContractEvidencePacketService;
+        this.v1ContractOperatorChecklistService = v1ContractOperatorChecklistService;
     }
 
     @GetMapping("/shard-readiness")
@@ -64,6 +68,11 @@ public class OpsShardReadinessController {
     @GetMapping("/shard-readiness/v1-contract-evidence-packet")
     public OpsShardReadinessV1ContractEvidencePacketResponse shardReadinessV1ContractEvidencePacket() {
         return v1ContractEvidencePacketService.packet();
+    }
+
+    @GetMapping("/shard-readiness/v1-contract-operator-checklist")
+    public OpsShardReadinessV1ContractOperatorChecklistResponse shardReadinessV1ContractOperatorChecklist() {
+        return v1ContractOperatorChecklistService.checklist();
     }
 
 }
