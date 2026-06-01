@@ -9,9 +9,7 @@ class OpsShardReadinessV1ContractAlignmentHandoffServiceTests {
     @Test
     void buildsReadOnlyHandoffAcrossContractAlignmentFreezeAndHistoricalGuard() {
         OpsShardReadinessV1ContractAlignmentHandoffResponse handoff =
-                new OpsShardReadinessV1ContractAlignmentHandoffService(
-                        new OpsShardReadinessV1ContractAlignmentService()
-                ).handoff();
+                new OpsShardReadinessV1ContractAlignmentHandoffService().handoff();
 
         assertThat(handoff.project()).isEqualTo("advanced-order-platform");
         assertThat(handoff.version()).isEqualTo("Java v190");

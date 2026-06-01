@@ -1,0 +1,42 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v191",
+  "title": "V190 shard readiness v1 contract alignment handoff snapshot freeze",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "frozenHandoffVersion": "Java v190",
+  "frozenHandoffEndpoint": "/api/v1/ops/shard-readiness/v1-contract-alignment-handoff",
+  "frozenHandoffFixtureEndpoint": "/contracts/java-shard-readiness-v1-contract-alignment-handoff-v190.fixture.json",
+  "frozenHandoffEvidencePath": "e/190/evidence/java-shard-readiness-v1-contract-alignment-handoff-v190.json",
+  "sourceAlignmentVersion": "Java v187",
+  "sourceAlignmentReceiptId": "java-shard-readiness-v1-contract-alignment-receipt-v187",
+  "snapshotFreezeVersion": "Java v188",
+  "historicalCompatibilityVersion": "Java v189",
+  "currentRollingRegistryLiveEndpointCount": 25,
+  "currentRollingRegistryFixtureEndpointCount": 25,
+  "handoffUsesFrozenSourceAlignment": true,
+  "handoffUsesFrozenRegistryBooleans": true,
+  "newRouteAdded": false,
+  "productionCodeChanged": true,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessV1ContractAlignmentHandoffSnapshotTests,OpsShardReadinessV1ContractAlignmentHandoffServiceTests,OpsShardReadinessV1ContractAlignmentHandoffIntegrationTests,OpsShardReadinessV1ContractAlignmentServiceTests,OpsShardReadinessEvidenceEndpointsTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentHandoffSnapshot.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentHandoffService.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentHandoffSnapshotTests.java",
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessV1ContractAlignmentHandoffServiceTests.java"
+  ],
+  "receiptId": "java-shard-readiness-v190-handoff-snapshot-freeze-receipt-v191",
+  "evidencePath": "e/191/evidence/java-shard-readiness-v190-handoff-snapshot-freeze-v191.json",
+  "status": "passed"
+}

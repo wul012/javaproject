@@ -17,37 +17,16 @@ public class OpsShardReadinessV1ContractAlignmentHandoffService {
     static final String HISTORICAL_COMPATIBILITY_EVIDENCE_PATH =
             "e/189/evidence/java-shard-readiness-v187-historical-snapshot-compatibility-v189.json";
 
-    private final OpsShardReadinessV1ContractAlignmentService alignmentService;
-
-    public OpsShardReadinessV1ContractAlignmentHandoffService(
-            OpsShardReadinessV1ContractAlignmentService alignmentService
-    ) {
-        this.alignmentService = alignmentService;
-    }
-
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractAlignmentHandoffResponse handoff() {
-        OpsShardReadinessV1ContractAlignmentResponse alignment = alignmentService.alignment();
-        List<String> currentLiveEndpoints = OpsShardReadinessEvidenceEndpoints.liveEndpoints();
-        List<String> currentFixtureEndpoints = OpsShardReadinessEvidenceEndpoints.fixtureEndpoints();
-        List<String> v179LiveEndpoints =
-                OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints();
-        List<String> v179FixtureEndpoints =
-                OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints();
-        List<String> v184LiveEndpoints =
-                OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints();
-        List<String> v184FixtureEndpoints =
-                OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints();
-
+        OpsShardReadinessV1ContractAlignmentResponse alignment =
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190SourceAlignment();
         boolean registryContainsAlignment =
-                currentLiveEndpoints.contains(OpsShardReadinessV1ContractAlignmentService.ENDPOINT)
-                        && currentFixtureEndpoints.contains(OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT);
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190RegistryContainsAlignment();
         boolean olderSnapshotsRemainUnbackfilled =
-                !v179LiveEndpoints.contains(OpsShardReadinessV1ContractAlignmentService.ENDPOINT)
-                        && !v184LiveEndpoints.contains(OpsShardReadinessV1ContractAlignmentService.ENDPOINT)
-                        && !v179FixtureEndpoints.contains(OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT)
-                        && !v184FixtureEndpoints.contains(OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT);
-        boolean historicalSnapshotsProtected = registryContainsAlignment && olderSnapshotsRemainUnbackfilled;
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190OlderSnapshotsRemainUnbackfilled();
+        boolean historicalSnapshotsProtected =
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190HistoricalSnapshotsProtected();
 
         return new OpsShardReadinessV1ContractAlignmentHandoffResponse(
                 "advanced-order-platform",
@@ -61,10 +40,10 @@ public class OpsShardReadinessV1ContractAlignmentHandoffService {
                 OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT,
                 alignment.evidencePath(),
                 alignment.receiptId(),
-                "Java v188",
-                SNAPSHOT_FREEZE_EVIDENCE_PATH,
-                "Java v189",
-                HISTORICAL_COMPATIBILITY_EVIDENCE_PATH,
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190SnapshotFreezeVersion(),
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190SnapshotFreezeEvidencePath(),
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190HistoricalCompatibilityVersion(),
+                OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190HistoricalCompatibilityEvidencePath(),
                 alignment.minimalFieldsFrozen(),
                 historicalSnapshotsProtected,
                 registryContainsAlignment,

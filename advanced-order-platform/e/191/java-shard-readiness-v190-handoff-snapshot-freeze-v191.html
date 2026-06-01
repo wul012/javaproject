@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v191 v190 handoff snapshot freeze</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5b6875;
+      --line: #cbd6df;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --ok: #1f7a4d;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1040px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 22px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.16;
+    }
+    p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    section {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .metric {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+      min-height: 88px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .ok {
+      color: var(--ok);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: #f1f5f8;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+    }
+    @media (max-width: 800px) {
+      main {
+        width: min(100% - 28px, 1040px);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Java v191 v190 handoff snapshot freeze</h1>
+      <p>v191 freezes the inputs used by the Java v190 shard-readiness v1 contract-alignment handoff, preserving the historical receipt while later read-only evidence can continue to grow.</p>
+    </header>
+
+    <section class="grid">
+      <div class="metric">
+        <div class="label">Status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="metric">
+        <div class="label">New route</div>
+        <div class="value">no</div>
+      </div>
+      <div class="metric">
+        <div class="label">Frozen source</div>
+        <div class="value">Java v190</div>
+      </div>
+    </section>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Frozen item</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Handoff endpoint</td>
+            <td><code>/api/v1/ops/shard-readiness/v1-contract-alignment-handoff</code></td>
+          </tr>
+          <tr>
+            <td>Source alignment receipt</td>
+            <td><code>java-shard-readiness-v1-contract-alignment-receipt-v187</code></td>
+          </tr>
+          <tr>
+            <td>Snapshot freeze version</td>
+            <td>Java v188</td>
+          </tr>
+          <tr>
+            <td>Historical compatibility version</td>
+            <td>Java v189</td>
+          </tr>
+          <tr>
+            <td>Boundary</td>
+            <td>No write routing, runtime execution, credential reads, managed audit connection, deployment, rollback, or Node-managed Java/mini-kv process control.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
