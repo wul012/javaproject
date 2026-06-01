@@ -1,0 +1,30 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-verification-checklist-integrity-receipt-v218",
+  "version": "Java v218",
+  "status": "passed",
+  "scope": "v1 contract consumer verification checklist integrity",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v218 cross-checks the v1 endpoint registry, the v211 handoff bundle snapshot, and the v215 verification checklist snapshot.",
+  "guards": [
+    "v1 endpoint registry contains nine focused v1 contract endpoint/fixture pairs",
+    "endpoint catalog, consumer handoff bundle, and consumer verification checklist stay adjacent in order",
+    "checklist handoff bundle endpoint, fixture, evidence path, and receipt match the frozen v211 bundle",
+    "checklist catalogedArtifactCount and blocked operations match the frozen v211 bundle",
+    "checklist requiredEvidence contains only predecessor bundle/catalog evidence and excludes checklist self/future receipts",
+    "checklist verification checks mirror v211 bundle version and evidence counts"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerVerificationChecklistIntegrityTests,OpsShardReadinessV1ContractEndpointPairIntegrityTests,OpsShardReadinessV1ContractConsumerHandoffBundleIntegrityTests,OpsShardReadinessV1ContractConsumerVerificationChecklistHistoricalCompatibilityTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
