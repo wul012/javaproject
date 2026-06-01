@@ -34,6 +34,9 @@ public class OpsShardReadinessV1ContractConsumerVerificationChecklistService {
     static final String CONSUMER_VERIFICATION_CHECKLIST_INTEGRITY_EVIDENCE_PATH =
             "e/218/evidence/java-shard-readiness-v1-contract-consumer-verification-checklist-integrity-v218.json";
 
+    static final String CONSUMER_VERIFICATION_CHECKLIST_ROUTE_INVENTORY_EVIDENCE_PATH =
+            "e/219/evidence/java-shard-readiness-v1-contract-consumer-route-inventory-v219.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerVerificationChecklistResponse checklist() {
         return OpsShardReadinessV1ContractConsumerVerificationChecklistSnapshot.v215Checklist();

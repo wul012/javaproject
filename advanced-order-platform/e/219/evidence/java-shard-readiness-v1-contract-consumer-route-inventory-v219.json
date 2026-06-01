@@ -1,0 +1,29 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-route-inventory-receipt-v219",
+  "version": "Java v219",
+  "status": "passed",
+  "scope": "v1 contract consumer route inventory",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v219 ties the v1 controller mappings, route constants, and endpoint pair registry together so future split work cannot omit or leak routes.",
+  "guards": [
+    "v1 controller exposes nine GET mappings",
+    "controller route suffixes match the v1 endpoint pair live endpoints after removing the shared base path",
+    "all v1 route constants start with /v1-contract- and are unique",
+    "fixture endpoint count matches controller route count",
+    "read-only evidence catalog and evidence index routes remain outside the v1 contract route group"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractRouteInventoryTests,OpsShardReadinessV1ContractControllerSplitTests,OpsShardReadinessRoutePathsTests,OpsShardReadinessV1ContractEndpointPairsTests,OpsShardReadinessV1ContractEndpointPairIntegrityTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

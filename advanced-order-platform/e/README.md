@@ -54,3 +54,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `216/`: Java shard-readiness v215 consumer verification checklist snapshot freeze.
 - `217/`: Java shard-readiness v215 consumer verification checklist historical compatibility.
 - `218/`: Java shard-readiness v1 contract consumer verification checklist integrity.
+- `219/`: Java shard-readiness v1 contract consumer route inventory.
