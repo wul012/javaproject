@@ -18,3 +18,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `180/`: Java shard-readiness read-only evidence controller split.
 - `181/`: Java shard-readiness route path constants.
 - `182/`: Java shard-readiness paired endpoint registry.
+- `183/`: Java shard-readiness v179 verification snapshot freeze.

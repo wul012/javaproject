@@ -1,0 +1,38 @@
+{
+  "project": "advanced-order-platform",
+  "version": "Java v183",
+  "title": "V179 verification registry snapshot freeze",
+  "sourceVersion": "Java v179",
+  "readOnly": true,
+  "executionAllowed": false,
+  "shardEnabled": false,
+  "writeRoutingAllowed": false,
+  "activeShardRouterAllowed": false,
+  "credentialValueReadAllowed": false,
+  "rawEndpointParseAllowed": false,
+  "managedAuditConnectionAllowed": false,
+  "deploymentOrRollbackAllowed": false,
+  "nodeMayStartOrStopJavaOrMiniKv": false,
+  "v179VerificationUsesRollingRegistry": false,
+  "v179VerificationUsesFrozenSnapshot": true,
+  "v179LiveEndpointCount": 22,
+  "v179FixtureEndpointCount": 22,
+  "sourceCatalogLiveEndpointCount": 20,
+  "sourceCatalogFixtureEndpointCount": 20,
+  "futureEndpointGrowthCanProceedWithoutChangingV179Receipt": true,
+  "currentGlobalRegistryMutation": false,
+  "pathsPreserved": true,
+  "statusPreserved": true,
+  "focusedTestCommand": "mvn -q \"-Dtest=OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshotTests,OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationServiceTests,OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationIntegrationTests,OpsShardReadinessEvidenceEndpointsTests\" test",
+  "fullTestCommand": "mvn -q test",
+  "changedProductionFiles": [
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.java",
+    "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService.java"
+  ],
+  "changedTestFiles": [
+    "src/test/java/com/codexdemo/orderplatform/ops/OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshotTests.java"
+  ],
+  "receiptId": "java-shard-readiness-v179-verification-snapshot-freeze-receipt-v183",
+  "evidencePath": "e/183/evidence/java-shard-readiness-v179-verification-snapshot-freeze-v183.json",
+  "status": "passed"
+}

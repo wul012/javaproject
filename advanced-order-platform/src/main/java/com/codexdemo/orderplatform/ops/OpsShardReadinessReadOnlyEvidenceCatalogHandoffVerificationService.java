@@ -30,8 +30,10 @@ public class OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService 
     public OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationResponse verification() {
         OpsShardReadinessReadOnlyEvidenceCatalogResponse catalog = catalogService.catalog();
         OpsShardReadinessReadOnlyEvidenceCatalogHandoffResponse handoff = handoffService.handoff();
-        List<String> currentLiveEndpoints = OpsShardReadinessEvidenceEndpoints.liveEndpoints();
-        List<String> currentFixtureEndpoints = OpsShardReadinessEvidenceEndpoints.fixtureEndpoints();
+        List<String> currentLiveEndpoints =
+                OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints();
+        List<String> currentFixtureEndpoints =
+                OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints();
 
         return new OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationResponse(
                 "advanced-order-platform",
