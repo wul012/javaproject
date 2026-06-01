@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v215 v1 contract consumer verification checklist</title>
+  <style>
+    :root {
+      --ink: #18222f;
+      --muted: #5d6b78;
+      --line: #cbd7e1;
+      --paper: #f6f8fb;
+      --panel: #ffffff;
+      --ok: #1f7a4d;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1080px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+    header {
+      padding-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.16;
+    }
+    p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    section {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .metric {
+      min-height: 88px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .ok {
+      color: var(--ok);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: #f1f5f8;
+    }
+    @media (max-width: 900px) {
+      main {
+        width: min(100% - 28px, 1080px);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Java v215 v1 contract consumer verification checklist</h1>
+      <p>v215 adds the read-only checklist a consumer must satisfy before using the v211 handoff bundle. It keeps Node consumption bounded to GET probes and archived evidence only.</p>
+    </header>
+
+    <section class="grid">
+      <div class="metric">
+        <div class="label">Status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="metric">
+        <div class="label">Checklist items</div>
+        <div class="value">7</div>
+      </div>
+      <div class="metric">
+        <div class="label">Required evidence</div>
+        <div class="value">5</div>
+      </div>
+      <div class="metric">
+        <div class="label">Boundary</div>
+        <div class="value ok">read-only</div>
+      </div>
+    </section>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Verification item</th>
+            <th>Expected result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Read endpoint catalog before consuming bundle</td>
+            <td class="ok">The frozen v208 catalog remains the source for the six v1 consumer read targets.</td>
+          </tr>
+          <tr>
+            <td>Confirm v211 bundle evidence counts</td>
+            <td class="ok">The checklist verifies nine required evidence entries and four handoff evidence entries.</td>
+          </tr>
+          <tr>
+            <td>Keep probes GET-only</td>
+            <td class="ok">No write routing, active shard router, credential read, raw endpoint parsing, managed audit connection, deployment, rollback, or process control is opened.</td>
+          </tr>
+          <tr>
+            <td>Archive v215 receipt first</td>
+            <td>Consumers can reference this receipt before any Node-side consumption of the v211 handoff bundle.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

@@ -24,6 +24,9 @@ public class OpsShardReadinessV1ContractController {
 
     private final OpsShardReadinessV1ContractConsumerHandoffBundleService consumerHandoffBundleService;
 
+    private final OpsShardReadinessV1ContractConsumerVerificationChecklistService
+            consumerVerificationChecklistService;
+
     public OpsShardReadinessV1ContractController(
             OpsShardReadinessV1ContractAlignmentService alignmentService,
             OpsShardReadinessV1ContractAlignmentHandoffService alignmentHandoffService,
@@ -32,7 +35,8 @@ public class OpsShardReadinessV1ContractController {
             OpsShardReadinessV1ContractHandoffManifestService handoffManifestService,
             OpsShardReadinessV1ContractConsumerProbePlanService consumerProbePlanService,
             OpsShardReadinessV1ContractEndpointCatalogService endpointCatalogService,
-            OpsShardReadinessV1ContractConsumerHandoffBundleService consumerHandoffBundleService
+            OpsShardReadinessV1ContractConsumerHandoffBundleService consumerHandoffBundleService,
+            OpsShardReadinessV1ContractConsumerVerificationChecklistService consumerVerificationChecklistService
     ) {
         this.alignmentService = alignmentService;
         this.alignmentHandoffService = alignmentHandoffService;
@@ -42,6 +46,7 @@ public class OpsShardReadinessV1ContractController {
         this.consumerProbePlanService = consumerProbePlanService;
         this.endpointCatalogService = endpointCatalogService;
         this.consumerHandoffBundleService = consumerHandoffBundleService;
+        this.consumerVerificationChecklistService = consumerVerificationChecklistService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_ALIGNMENT)
@@ -82,5 +87,10 @@ public class OpsShardReadinessV1ContractController {
     @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_HANDOFF_BUNDLE)
     public OpsShardReadinessV1ContractConsumerHandoffBundleResponse consumerHandoffBundle() {
         return consumerHandoffBundleService.bundle();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_VERIFICATION_CHECKLIST)
+    public OpsShardReadinessV1ContractConsumerVerificationChecklistResponse consumerVerificationChecklist() {
+        return consumerVerificationChecklistService.checklist();
     }
 }

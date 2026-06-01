@@ -23,7 +23,8 @@ class OpsShardReadinessV1ContractControllerSplitTests {
                         OpsShardReadinessRoutePaths.V1_CONTRACT_HANDOFF_MANIFEST,
                         OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_PROBE_PLAN,
                         OpsShardReadinessRoutePaths.V1_CONTRACT_ENDPOINT_CATALOG,
-                        OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_HANDOFF_BUNDLE
+                        OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_HANDOFF_BUNDLE,
+                        OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_VERIFICATION_CHECKLIST
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
@@ -34,7 +35,8 @@ class OpsShardReadinessV1ContractControllerSplitTests {
                         "/shard-readiness/v1-contract-handoff-manifest",
                         "/shard-readiness/v1-contract-consumer-probe-plan",
                         "/shard-readiness/v1-contract-endpoint-catalog",
-                        "/shard-readiness/v1-contract-consumer-handoff-bundle"
+                        "/shard-readiness/v1-contract-consumer-handoff-bundle",
+                        "/shard-readiness/v1-contract-consumer-verification-checklist"
                 );
     }
 

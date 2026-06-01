@@ -40,6 +40,10 @@ final class OpsShardReadinessV1ContractEndpointPairs {
                 endpointPair(
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT
+                ),
+                endpointPair(
+                        OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerVerificationChecklistService.FIXTURE_ENDPOINT
                 )
         );
     }

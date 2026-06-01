@@ -23,6 +23,8 @@ final class OpsShardReadinessRoutePaths {
     static final String V1_CONTRACT_CONSUMER_PROBE_PLAN = "/v1-contract-consumer-probe-plan";
     static final String V1_CONTRACT_ENDPOINT_CATALOG = "/v1-contract-endpoint-catalog";
     static final String V1_CONTRACT_CONSUMER_HANDOFF_BUNDLE = "/v1-contract-consumer-handoff-bundle";
+    static final String V1_CONTRACT_CONSUMER_VERIFICATION_CHECKLIST =
+            "/v1-contract-consumer-verification-checklist";
 
     private OpsShardReadinessRoutePaths() {
     }
