@@ -9,7 +9,7 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
     @Test
     void rollingRegistryKeepsHistoricalLiveSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.liveEndpoints())
-                .hasSizeGreaterThanOrEqualTo(28)
+                .hasSizeGreaterThanOrEqualTo(29)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
                 .contains(
@@ -17,14 +17,15 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
                         OpsShardReadinessV1ContractAlignmentHandoffService.ENDPOINT,
                         OpsShardReadinessV1ContractEvidencePacketService.ENDPOINT,
                         OpsShardReadinessV1ContractOperatorChecklistService.ENDPOINT,
-                        OpsShardReadinessV1ContractHandoffManifestService.ENDPOINT
+                        OpsShardReadinessV1ContractHandoffManifestService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerProbePlanService.ENDPOINT
                 );
     }
 
     @Test
     void rollingRegistryKeepsHistoricalFixtureSnapshotsReachable() {
         assertThat(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints())
-                .hasSizeGreaterThanOrEqualTo(28)
+                .hasSizeGreaterThanOrEqualTo(29)
                 .containsAll(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
                 .containsAll(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
                 .contains(
@@ -32,7 +33,8 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
                         OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractEvidencePacketService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT,
-                        OpsShardReadinessV1ContractHandoffManifestService.FIXTURE_ENDPOINT
+                        OpsShardReadinessV1ContractHandoffManifestService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerProbePlanService.FIXTURE_ENDPOINT
                 );
     }
 
@@ -167,6 +169,34 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
         assertThat(manifest.consumerReadTargets())
                 .containsExactlyElementsOf(
                         OpsShardReadinessV1ContractHandoffManifestSnapshot.v199ConsumerReadTargets(checklist)
+                );
+    }
+
+    @Test
+    void v202ContractConsumerProbePlanDoesNotBackfillOlderEndpointSnapshots() {
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerProbePlanService.ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184LiveEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerProbePlanService.ENDPOINT);
+
+        assertThat(OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationSnapshot.v179FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerProbePlanService.FIXTURE_ENDPOINT);
+        assertThat(OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot.v184FixtureEndpoints())
+                .doesNotContain(OpsShardReadinessV1ContractConsumerProbePlanService.FIXTURE_ENDPOINT);
+
+        OpsShardReadinessV1ContractConsumerProbePlanResponse probePlan =
+                OpsShardReadinessV1ContractConsumerProbePlanSnapshot.v202ProbePlan();
+        OpsShardReadinessV1ContractHandoffManifestResponse manifest =
+                OpsShardReadinessV1ContractHandoffManifestSnapshot.v199Manifest();
+        assertThat(probePlan.version()).isEqualTo("Java v202");
+        assertThat(probePlan.manifestEndpoint()).isEqualTo(manifest.manifestEndpoint());
+        assertThat(probePlan.readTargets())
+                .containsExactlyElementsOf(
+                        OpsShardReadinessV1ContractConsumerProbePlanSnapshot.v202ReadTargets(manifest)
+                );
+        assertThat(probePlan.stopConditions())
+                .containsExactlyElementsOf(
+                        OpsShardReadinessV1ContractConsumerProbePlanSnapshot.v202StopConditions()
                 );
     }
 }
