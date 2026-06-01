@@ -9,9 +9,7 @@ class OpsShardReadinessV1ContractHandoffManifestServiceTests {
     @Test
     void buildsReadOnlyManifestFromPacketAndChecklistReceipts() {
         OpsShardReadinessV1ContractHandoffManifestResponse manifest =
-                new OpsShardReadinessV1ContractHandoffManifestService(
-                        new OpsShardReadinessV1ContractOperatorChecklistService()
-                ).manifest();
+                new OpsShardReadinessV1ContractHandoffManifestService().manifest();
 
         assertThat(manifest.project()).isEqualTo("advanced-order-platform");
         assertThat(manifest.version()).isEqualTo("Java v199");
