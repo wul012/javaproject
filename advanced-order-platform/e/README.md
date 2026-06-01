@@ -51,3 +51,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `213/`: Java shard-readiness v211 consumer handoff bundle historical compatibility.
 - `214/`: Java shard-readiness v1 contract consumer handoff bundle integrity.
 - `215/`: Java shard-readiness v1 contract consumer verification checklist.
+- `216/`: Java shard-readiness v215 consumer verification checklist snapshot freeze.

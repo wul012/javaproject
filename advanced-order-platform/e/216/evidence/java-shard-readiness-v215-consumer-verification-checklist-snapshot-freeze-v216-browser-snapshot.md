@@ -1,0 +1,22 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v216 v215 consumer verification checklist snapshot freeze" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v216 moves the v215 checklist into a frozen snapshot helper, keeping the service response stable for later historical compatibility and integrity checks.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Snapshot
+      - generic [ref=e12]: v215
+    - generic [ref=e13]:
+      - generic [ref=e14]: Items
+      - generic [ref=e15]: "7"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Evidence
+      - generic [ref=e18]: "5"
+  - list [ref=e20]:
+    - listitem [ref=e21]: The service returns the frozen v215 checklist snapshot.
+    - listitem [ref=e22]: The v211 handoff bundle endpoint and receipt remain unchanged.
+    - listitem [ref=e23]: Verification items, required evidence, and verification checks are all locked by snapshot tests.
+    - listitem [ref=e24]: No write routing, active shard router, credential read, raw endpoint parsing, managed audit connection, deployment, rollback, or process control was opened.

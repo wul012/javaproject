@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java v216 v215 consumer verification checklist snapshot freeze</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5d6a77;
+      --line: #ccd8e2;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --ok: #1f7a4d;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1040px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+    header {
+      padding-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.16;
+    }
+    p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    section {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .metric {
+      min-height: 88px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .ok {
+      color: var(--ok);
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.7;
+    }
+    li {
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 900px) {
+      main {
+        width: min(100% - 28px, 1040px);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Java v216 v215 consumer verification checklist snapshot freeze</h1>
+      <p>v216 moves the v215 checklist into a frozen snapshot helper, keeping the service response stable for later historical compatibility and integrity checks.</p>
+    </header>
+
+    <section class="grid">
+      <div class="metric">
+        <div class="label">Status</div>
+        <div class="value ok">passed</div>
+      </div>
+      <div class="metric">
+        <div class="label">Snapshot</div>
+        <div class="value">v215</div>
+      </div>
+      <div class="metric">
+        <div class="label">Items</div>
+        <div class="value">7</div>
+      </div>
+      <div class="metric">
+        <div class="label">Evidence</div>
+        <div class="value">5</div>
+      </div>
+    </section>
+
+    <section>
+      <ul>
+        <li class="ok">The service returns the frozen v215 checklist snapshot.</li>
+        <li class="ok">The v211 handoff bundle endpoint and receipt remain unchanged.</li>
+        <li class="ok">Verification items, required evidence, and verification checks are all locked by snapshot tests.</li>
+        <li>No write routing, active shard router, credential read, raw endpoint parsing, managed audit connection, deployment, rollback, or process control was opened.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
