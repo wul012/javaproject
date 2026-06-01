@@ -36,6 +36,9 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
     static final String CONSUMER_READINESS_HANDOFF_CONTROLLER_MAPPING_EVIDENCE_PATH =
             "e/232/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-controller-mapping-v232.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_FIXTURE_PARITY_EVIDENCE_PATH =
+            "e/233/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-fixture-parity-v233.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
