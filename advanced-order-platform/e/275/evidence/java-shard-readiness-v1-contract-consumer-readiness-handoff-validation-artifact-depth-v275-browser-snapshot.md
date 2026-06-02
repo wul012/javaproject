@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v275 readiness handoff validation artifact depth" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v275 verifies every catalog evidence receipt keeps Maven and Playwright validation depth.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Maven
+      - generic [ref=e12]: present
+    - generic [ref=e13]:
+      - generic [ref=e14]: Playwright
+      - generic [ref=e15]: present
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Validation arrays stay non-empty.
+    - listitem [ref=e22]: Each receipt keeps command and browser evidence.
+    - listitem [ref=e23]: The check grows with the catalog.

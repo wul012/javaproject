@@ -110,3 +110,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `272/`: Java shard-readiness v1 contract consumer readiness handoff post-handoff isolation.
 - `273/`: Java shard-readiness v1 contract consumer readiness handoff catalog fifteen-version closeout.
 - `274/`: Java shard-readiness v1 contract consumer readiness handoff fifteen-version completion.
+- `275/`: Java shard-readiness v1 contract consumer readiness handoff validation artifact depth.

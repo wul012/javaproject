@@ -302,6 +302,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "fifteen version completion",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FIFTEEN_VERSION_COMPLETION_EVIDENCE_PATH
+                ),
+                receipt(
+                        275,
+                        "validation artifact depth",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_VALIDATION_ARTIFACT_DEPTH_EVIDENCE_PATH
                 )
         );
     }

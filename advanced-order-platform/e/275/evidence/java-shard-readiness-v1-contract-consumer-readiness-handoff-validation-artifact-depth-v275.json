@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-validation-artifact-depth-receipt-v275",
+  "version": "Java v275",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff validation artifact depth",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v275 verifies every post-handoff catalog evidence JSON keeps both Maven and Playwright validation depth.",
+  "guards": [
+    "every catalog validation array has at least two non-empty entries",
+    "every catalog validation array includes Maven and Playwright evidence",
+    "validation artifact depth path is versioned to v275"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffValidationArtifactDepthTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFifteenVersionCompletionTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
