@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-json-guard-completeness-receipt-v267",
+  "version": "Java v267",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff json guard completeness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v267 verifies every post-handoff catalog evidence JSON contains non-empty guard statements.",
+  "guards": [
+    "every catalog evidence JSON has a guards array",
+    "every catalog evidence JSON keeps multiple non-empty guard entries",
+    "JSON guard completeness path is versioned to v267"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffJsonGuardCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffHtmlArchiveVersionAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogJsonBoundaryTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

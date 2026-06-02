@@ -254,6 +254,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "html archive version alignment",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_HTML_ARCHIVE_VERSION_ALIGNMENT_EVIDENCE_PATH
+                ),
+                receipt(
+                        267,
+                        "json guard completeness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_JSON_GUARD_COMPLETENESS_EVIDENCE_PATH
                 )
         );
     }

@@ -165,6 +165,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/266/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-html-archive-version-alignment-v266.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_JSON_GUARD_COMPLETENESS_EVIDENCE_PATH =
+            "e/267/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-json-guard-completeness-v267.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

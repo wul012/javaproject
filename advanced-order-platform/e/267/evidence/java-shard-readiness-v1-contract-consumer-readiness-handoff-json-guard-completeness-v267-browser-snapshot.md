@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v267 readiness handoff JSON guard completeness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v267 verifies every evidence JSON keeps explicit guard statements.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Guards
+      - generic [ref=e12]: non-empty
+    - generic [ref=e13]:
+      - generic [ref=e14]: JSON
+      - generic [ref=e15]: catalog-wide
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Each evidence JSON has a guards array.
+    - listitem [ref=e22]: Guard entries must be non-empty.
+    - listitem [ref=e23]: The check documents why each version remains read-only.
