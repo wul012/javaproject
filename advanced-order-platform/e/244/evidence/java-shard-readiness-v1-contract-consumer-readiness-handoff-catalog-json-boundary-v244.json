@@ -1,0 +1,29 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-json-boundary-receipt-v244",
+  "version": "Java v244",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff catalog JSON boundary",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v244 parses every catalog evidence JSON and verifies each receipt remains passed, read-only, non-executable, and version-aligned with the catalog entry.",
+  "guards": [
+    "each catalog JSON version matches its receipt version",
+    "each catalog JSON status is passed",
+    "each catalog JSON declares readOnly true",
+    "each catalog JSON declares executionAllowed false",
+    "the JSON boundary check is catalog-driven and grows with future receipts"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogJsonBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

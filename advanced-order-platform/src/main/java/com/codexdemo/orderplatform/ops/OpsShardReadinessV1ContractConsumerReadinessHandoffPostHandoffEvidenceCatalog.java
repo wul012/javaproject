@@ -116,6 +116,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "catalog archive presence",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CATALOG_ARCHIVE_PRESENCE_EVIDENCE_PATH
+                ),
+                receipt(
+                        244,
+                        "catalog json boundary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CATALOG_JSON_BOUNDARY_EVIDENCE_PATH
                 )
         );
     }
