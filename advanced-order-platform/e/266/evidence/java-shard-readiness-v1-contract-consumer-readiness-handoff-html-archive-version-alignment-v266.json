@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-html-archive-version-alignment-receipt-v266",
+  "version": "Java v266",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff html archive version alignment",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v266 verifies every post-handoff catalog HTML archive names the same Java version as its catalog receipt.",
+  "guards": [
+    "every catalog HTML archive is present through archive presence checks",
+    "every catalog HTML archive contains its receipt Java version in the title content",
+    "HTML archive version alignment path is versioned to v266"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffHtmlArchiveVersionAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffScreenshotArtifactCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffBrowserSnapshotCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

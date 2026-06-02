@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v266 readiness handoff HTML archive version alignment" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v266 verifies HTML archive pages show the same Java version as their catalog receipt.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: HTML
+      - generic [ref=e12]: aligned
+    - generic [ref=e13]:
+      - generic [ref=e14]: Version
+      - generic [ref=e15]: v266
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Each HTML archive contains a title.
+    - listitem [ref=e22]: Each title content includes the matching Java version.
+    - listitem [ref=e23]: The check protects catalog-to-page parity.

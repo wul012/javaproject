@@ -248,6 +248,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "screenshot artifact completeness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_SCREENSHOT_ARTIFACT_COMPLETENESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        266,
+                        "html archive version alignment",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_HTML_ARCHIVE_VERSION_ALIGNMENT_EVIDENCE_PATH
                 )
         );
     }
