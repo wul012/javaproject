@@ -124,3 +124,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `286/`: Java shard-readiness v1 contract consumer readiness handoff archive artifact byte floor.
 - `287/`: Java shard-readiness v1 contract consumer readiness handoff receipt scope uniqueness.
 - `288/`: Java shard-readiness v1 contract consumer readiness handoff post-handoff catalog growth closeout.
+- `289/`: Java shard-readiness v1 contract consumer readiness handoff v275-v289 fifteen-version completion.

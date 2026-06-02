@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v289 readiness handoff v275-v289 fifteen-version completion" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v289 closes the fifteen-version run with strict sequence and scope-order evidence.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Run
+      - generic [ref=e12]: 15 versions
+    - generic [ref=e13]:
+      - generic [ref=e14]: Receipts
+      - generic [ref=e15]: 64+
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: The v275-v289 run is exactly fifteen consecutive versions.
+    - listitem [ref=e22]: The scope chain remains ordered from validation depth to completion.
+    - listitem [ref=e23]: The catalog stays read-only and separate from the frozen v225 handoff.

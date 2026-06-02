@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-v275-v289-fifteen-version-completion-receipt-v289",
+  "version": "Java v289",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff v275-v289 fifteen-version completion",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v289 completes the requested fifteen-version run from v275 through v289 with strict sequence, scope ordering, and a sixty-four receipt catalog floor.",
+  "guards": [
+    "v275 through v289 are cataloged as exactly fifteen consecutive versions",
+    "v275 through v289 scopes remain cataloged in order",
+    "post-handoff catalog has at least sixty-four receipts"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffV275V289FifteenVersionCompletionTests,OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogGrowthCloseoutTests,OpsShardReadinessV1ContractConsumerReadinessHandoffReceiptScopeUniquenessTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
