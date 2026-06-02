@@ -290,6 +290,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "post handoff isolation",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH
+                ),
+                receipt(
+                        273,
+                        "catalog fifteen version closeout",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CATALOG_FIFTEEN_VERSION_CLOSEOUT_EVIDENCE_PATH
                 )
         );
     }

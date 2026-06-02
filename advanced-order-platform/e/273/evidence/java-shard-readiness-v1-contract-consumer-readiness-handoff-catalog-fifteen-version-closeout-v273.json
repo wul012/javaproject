@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-fifteen-version-closeout-receipt-v273",
+  "version": "Java v273",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff catalog fifteen-version closeout",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v273 verifies v260 through v273 are cataloged as the active fifteen-version run preview and that the frozen-contract closeout scopes are ordered.",
+  "guards": [
+    "v260 through v273 remain cataloged as the active fifteen-version run preview",
+    "v270 through v273 frozen-contract closeout scopes remain ordered",
+    "catalog fifteen-version closeout path is versioned to v273"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogFifteenVersionCloseoutTests,OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffIsolationTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenPayloadStabilityTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
