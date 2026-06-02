@@ -176,6 +176,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "consumer boundary completion",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CONSUMER_BOUNDARY_COMPLETION_EVIDENCE_PATH
+                ),
+                receipt(
+                        254,
+                        "read only adjacency",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_READ_ONLY_ADJACENCY_EVIDENCE_PATH
                 )
         );
     }

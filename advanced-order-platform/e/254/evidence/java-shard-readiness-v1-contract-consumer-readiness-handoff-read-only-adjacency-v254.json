@@ -1,0 +1,28 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-read-only-adjacency-receipt-v254",
+  "version": "Java v254",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff read-only adjacency",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v254 verifies read-only catalog remains adjacent after readiness handoff in the broader rolling evidence registry while staying outside the frozen v1 consumer endpoint registry.",
+  "guards": [
+    "rolling evidence endpoints keep evidence digest -> readiness handoff -> read-only catalog",
+    "v1 consumer endpoint registry contains readiness handoff",
+    "v1 consumer endpoint registry excludes read-only catalog",
+    "read-only adjacency evidence path is versioned to v254"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffReadOnlyAdjacencyTests,OpsShardReadinessV1ContractConsumerReadinessHandoffConsumerBoundaryCompletionTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

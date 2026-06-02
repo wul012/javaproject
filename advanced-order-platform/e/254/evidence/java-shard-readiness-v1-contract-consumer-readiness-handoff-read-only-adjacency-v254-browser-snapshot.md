@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v254 readiness handoff read-only adjacency" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v254 keeps read-only catalog adjacent in the rolling registry while excluding it from the frozen v1 consumer registry.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Rolling order
+      - generic [ref=e12]: kept
+    - generic [ref=e13]:
+      - generic [ref=e14]: V1 registry
+      - generic [ref=e15]: bounded
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Rolling evidence keeps digest -> readiness handoff -> read-only catalog.
+    - listitem [ref=e22]: Frozen v1 consumer registry excludes read-only catalog.
+    - listitem [ref=e23]: No execution surface was added.
