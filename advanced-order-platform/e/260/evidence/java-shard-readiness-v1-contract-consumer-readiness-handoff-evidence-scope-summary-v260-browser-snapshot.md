@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v260 readiness handoff evidence scope summary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v260 keeps every catalog evidence entry self-describing in readiness handoff terms.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Scope
+      - generic [ref=e12]: covered
+    - generic [ref=e13]:
+      - generic [ref=e14]: Summary
+      - generic [ref=e15]: covered
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Every catalog evidence scope mentions readiness handoff.
+    - listitem [ref=e22]: Every catalog evidence summary mentions readiness handoff.
+    - listitem [ref=e23]: The check is driven by the post-handoff catalog.

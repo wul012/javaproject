@@ -212,6 +212,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "twenty version completion",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_TWENTY_VERSION_COMPLETION_EVIDENCE_PATH
+                ),
+                receipt(
+                        260,
+                        "evidence scope summary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_EVIDENCE_SCOPE_SUMMARY_EVIDENCE_PATH
                 )
         );
     }

@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-evidence-scope-summary-receipt-v260",
+  "version": "Java v260",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff evidence scope summary",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v260 verifies every post-handoff catalog evidence JSON keeps a readiness handoff scope and readiness handoff summary so archive entries remain self-describing.",
+  "guards": [
+    "every catalog evidence scope mentions readiness handoff",
+    "every catalog evidence summary mentions readiness handoff",
+    "evidence scope summary path is versioned to v260"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffEvidenceScopeSummaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffTwentyVersionCompletionTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
