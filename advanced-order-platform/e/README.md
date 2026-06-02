@@ -100,3 +100,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `262/`: Java shard-readiness v1 contract consumer readiness handoff archive slug parity.
 - `263/`: Java shard-readiness v1 contract consumer readiness handoff explanation archive completeness.
 - `264/`: Java shard-readiness v1 contract consumer readiness handoff browser snapshot completeness.
+- `265/`: Java shard-readiness v1 contract consumer readiness handoff screenshot artifact completeness.

@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v265 readiness handoff screenshot artifact completeness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v265 verifies catalog screenshots remain non-empty PNG artifacts.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Screenshot
+      - generic [ref=e12]: png
+    - generic [ref=e13]:
+      - generic [ref=e14]: Size
+      - generic [ref=e15]: ">1KB"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Every catalog screenshot is present.
+    - listitem [ref=e22]: Each screenshot has a PNG signature and useful byte size.
+    - listitem [ref=e23]: The check remains catalog-driven.

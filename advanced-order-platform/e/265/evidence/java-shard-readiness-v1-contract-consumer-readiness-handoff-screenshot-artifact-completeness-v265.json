@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-screenshot-artifact-completeness-receipt-v265",
+  "version": "Java v265",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff screenshot artifact completeness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v265 verifies every post-handoff catalog receipt keeps a non-empty PNG screenshot artifact for visual review.",
+  "guards": [
+    "every catalog screenshot file is present through archive presence checks",
+    "every catalog screenshot is a non-empty PNG artifact",
+    "screenshot artifact completeness path is versioned to v265"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffScreenshotArtifactCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffBrowserSnapshotCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
