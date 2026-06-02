@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-evidence-path-structure-stability-receipt-v278",
+  "version": "Java v278",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff evidence path structure stability",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v278 verifies every post-handoff catalog evidence path stays in the versioned readiness handoff archive structure.",
+  "guards": [
+    "every catalog evidence path starts with the versioned e/N/evidence/java-shard-readiness prefix",
+    "every catalog evidence path stays inside the consumer readiness handoff naming domain",
+    "evidence path structure stability path is versioned to v278"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePathStructureStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogContinuityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffWalkthroughFilenameAlignmentTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

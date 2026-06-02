@@ -320,6 +320,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "walkthrough filename alignment",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_WALKTHROUGH_FILENAME_ALIGNMENT_EVIDENCE_PATH
+                ),
+                receipt(
+                        278,
+                        "evidence path structure stability",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_EVIDENCE_PATH_STRUCTURE_STABILITY_EVIDENCE_PATH
                 )
         );
     }

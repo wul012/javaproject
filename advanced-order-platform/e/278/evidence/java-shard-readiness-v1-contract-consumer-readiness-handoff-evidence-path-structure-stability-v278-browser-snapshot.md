@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v278 readiness handoff evidence path structure stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v278 verifies catalog evidence paths stay versioned, predictable, and inside the readiness handoff archive.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Prefix
+      - generic [ref=e12]: stable
+    - generic [ref=e13]:
+      - generic [ref=e14]: Suffix
+      - generic [ref=e15]: versioned
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Paths stay under e/N/evidence.
+    - listitem [ref=e22]: Path names stay in the readiness handoff domain.
+    - listitem [ref=e23]: Paths do not contain spaces or Windows separators.
