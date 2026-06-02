@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-validation-command-coverage-receipt-v257",
+  "version": "Java v257",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff validation command coverage",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v257 verifies every catalog evidence JSON declares both Maven validation and Playwright browser evidence coverage.",
+  "guards": [
+    "every catalog JSON validation array includes a Maven test command",
+    "every catalog JSON validation array includes Playwright browser evidence",
+    "validation command coverage evidence path is versioned to v257"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffValidationCommandCoverageTests,OpsShardReadinessV1ContractConsumerReadinessHandoffReceiptIdUniquenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

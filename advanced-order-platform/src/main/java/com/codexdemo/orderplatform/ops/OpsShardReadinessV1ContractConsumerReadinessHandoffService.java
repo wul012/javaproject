@@ -125,6 +125,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/256/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-id-uniqueness-v256.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_VALIDATION_COMMAND_COVERAGE_EVIDENCE_PATH =
+            "e/257/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-validation-command-coverage-v257.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

@@ -194,6 +194,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "receipt id uniqueness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_RECEIPT_ID_UNIQUENESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        257,
+                        "validation command coverage",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_VALIDATION_COMMAND_COVERAGE_EVIDENCE_PATH
                 )
         );
     }

@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v257 readiness handoff validation command coverage" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v257 checks that each catalog receipt records Maven validation and Playwright browser evidence.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Maven
+      - generic [ref=e12]: covered
+    - generic [ref=e13]:
+      - generic [ref=e14]: Playwright
+      - generic [ref=e15]: covered
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Every validation array includes a Maven command.
+    - listitem [ref=e22]: Every validation array includes Playwright evidence.
+    - listitem [ref=e23]: The check is catalog-driven.
