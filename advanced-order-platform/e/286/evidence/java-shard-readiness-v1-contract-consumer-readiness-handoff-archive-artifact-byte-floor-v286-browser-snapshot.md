@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v286 readiness handoff archive artifact byte floor" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v286 checks recent archive files have useful body content across JSON, HTML, snapshot, and screenshot artifacts.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Artifacts
+      - generic [ref=e12]: 4 types
+    - generic [ref=e13]:
+      - generic [ref=e14]: Coverage
+      - generic [ref=e15]: v275-v286
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: JSON evidence files clear the byte floor.
+    - listitem [ref=e22]: HTML pages and browser snapshots clear the byte floor.
+    - listitem [ref=e23]: PNG screenshots clear the byte floor.

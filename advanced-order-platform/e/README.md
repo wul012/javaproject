@@ -121,3 +121,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `283/`: Java shard-readiness v1 contract consumer readiness handoff catalog boundary schema strictness.
 - `284/`: Java shard-readiness v1 contract consumer readiness handoff frozen boundary closeout.
 - `285/`: Java shard-readiness v1 contract consumer readiness handoff catalog receipt count floor.
+- `286/`: Java shard-readiness v1 contract consumer readiness handoff archive artifact byte floor.

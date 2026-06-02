@@ -241,6 +241,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/285/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-receipt-count-floor-v285.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_ARCHIVE_ARTIFACT_BYTE_FLOOR_EVIDENCE_PATH =
+            "e/286/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-artifact-byte-floor-v286.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

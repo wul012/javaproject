@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-artifact-byte-floor-receipt-v286",
+  "version": "Java v286",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff archive artifact byte floor",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v286 verifies recent JSON, HTML, browser snapshot, and screenshot artifacts are non-trivial files instead of empty or placeholder archives.",
+  "guards": [
+    "v275 through v286 JSON files exceed the byte floor",
+    "v275 through v286 HTML pages exceed the byte floor",
+    "v275 through v286 browser snapshots and screenshots exceed the byte floor"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveArtifactByteFloorTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogReceiptCountFloorTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
