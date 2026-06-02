@@ -1,0 +1,34 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-catalog-receipt-v241",
+  "version": "Java v241",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff post-handoff catalog",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v241 introduces a dedicated post-handoff evidence catalog so v226-v241 validation receipts are tracked as validation around frozen v225, not as mutable inputs to the v225 handoff payload.",
+  "catalog": {
+    "firstVersion": 226,
+    "lastVersion": 241,
+    "receiptCount": 16,
+    "belongsToFrozenV225Payload": false
+  },
+  "guards": [
+    "post-handoff receipts are listed in version order",
+    "catalog evidence paths stay outside frozen v225 digestEvidence",
+    "catalog evidence paths stay outside frozen v225 handoffGuardEvidence",
+    "legacy registry alignment and post-handoff catalog receipts are both represented"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogTests,OpsShardReadinessV1ContractConsumerReadinessHandoffLegacyRegistryAlignmentTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
