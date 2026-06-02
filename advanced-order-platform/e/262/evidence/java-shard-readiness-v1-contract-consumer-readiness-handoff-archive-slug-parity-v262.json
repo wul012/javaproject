@@ -1,0 +1,28 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-slug-parity-receipt-v262",
+  "version": "Java v262",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff archive slug parity",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v262 verifies every post-handoff catalog receipt keeps the same archive slug across evidence JSON, browser snapshot, HTML page, and PNG screenshot.",
+  "guards": [
+    "evidence JSON stem defines the archive slug",
+    "browser snapshot uses the same archive slug",
+    "HTML evidence page uses the same archive slug",
+    "PNG screenshot uses the same archive slug"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveSlugParityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffBoundaryFieldCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

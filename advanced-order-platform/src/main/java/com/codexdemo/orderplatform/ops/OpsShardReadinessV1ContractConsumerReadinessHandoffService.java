@@ -145,6 +145,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/261/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-boundary-field-completeness-v261.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_ARCHIVE_SLUG_PARITY_EVIDENCE_PATH =
+            "e/262/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-slug-parity-v262.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

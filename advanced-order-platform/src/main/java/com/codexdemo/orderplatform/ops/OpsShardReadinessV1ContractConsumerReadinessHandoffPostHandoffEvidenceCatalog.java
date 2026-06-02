@@ -224,6 +224,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "boundary field completeness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_BOUNDARY_FIELD_COMPLETENESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        262,
+                        "archive slug parity",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_ARCHIVE_SLUG_PARITY_EVIDENCE_PATH
                 )
         );
     }
