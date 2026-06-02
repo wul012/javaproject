@@ -1,24 +1,19 @@
 package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertEvidencePath;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertVersionRun;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.evidencePaths;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.scopes;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogTests {
 
     @Test
     void keepsPostHandoffCatalogSeededThroughV241() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.versions())
-                .containsSubsequence(
-                        226, 227, 228, 229,
-                        230, 231, 232, 233,
-                        234, 235, 236, 237,
-                        238, 239, 240, 241
-                );
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipts())
-                .extracting(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog
-                        .Receipt::scope)
+        assertVersionRun(226, 241);
+        assertThat(scopes())
                 .contains("post handoff catalog", "legacy registry alignment", "completion");
     }
 
@@ -26,21 +21,18 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogTests
     void keepsPostHandoffCatalogOutsideFrozenV225Handoff() {
         OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff =
                 OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
-        List<String> postHandoffPaths =
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.evidencePaths();
 
-        assertThat(handoff.digestEvidence()).doesNotContainAnyElementsOf(postHandoffPaths);
-        assertThat(handoff.handoffGuardEvidence()).doesNotContainAnyElementsOf(postHandoffPaths);
+        assertThat(handoff.digestEvidence()).doesNotContainAnyElementsOf(evidencePaths());
+        assertThat(handoff.handoffGuardEvidence()).doesNotContainAnyElementsOf(evidencePaths());
     }
 
     @Test
     void keepsPostHandoffCatalogEvidencePathVersionedToV241() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
-                .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_EVIDENCE_PATH)
-                .isEqualTo(
-                        "e/241/evidence/"
-                                + "java-shard-readiness-v1-contract-consumer-readiness-handoff-"
-                                + "post-handoff-catalog-v241.json"
-                );
+        assertEvidencePath(
+                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_EVIDENCE_PATH,
+                241,
+                "post-handoff-catalog"
+        );
     }
 }

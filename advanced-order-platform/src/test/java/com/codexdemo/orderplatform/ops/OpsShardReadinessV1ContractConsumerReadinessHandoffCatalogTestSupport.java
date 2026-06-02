@@ -21,6 +21,10 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSuppor
         return OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.versions();
     }
 
+    static List<String> evidencePaths() {
+        return OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.evidencePaths();
+    }
+
     static List<String> scopes() {
         return receipts().stream()
                 .map(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt::scope)
@@ -39,11 +43,28 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSuppor
         assertThat(versions()).containsSubsequence(expected);
     }
 
+    static void assertContinuousCatalogFrom(int first) {
+        List<Integer> catalogVersions = versions();
+
+        assertThat(catalogVersions).startsWith(first);
+        assertThat(catalogVersions)
+                .containsExactlyElementsOf(IntStream.rangeClosed(first, catalogVersions.getLast()).boxed().toList());
+    }
+
     static void assertExactVersionWindow(int first, int last) {
         assertThat(versions().stream()
                 .filter(version -> version >= first && version <= last)
                 .toList())
                 .containsExactlyElementsOf(IntStream.rangeClosed(first, last).boxed().toList());
+    }
+
+    static void assertEvidencePathsUniqueAndVersionScoped() {
+        assertThat(receipts())
+                .doesNotHaveDuplicates()
+                .allSatisfy(receipt -> assertThat(receipt.evidencePath())
+                        .contains("/" + receipt.version() + "/")
+                        .endsWith("-v" + receipt.version() + ".json"));
+        assertThat(evidencePaths()).doesNotHaveDuplicates();
     }
 
     static void assertEvidencePath(String actualPath, int version, String slug) {

@@ -1,6 +1,8 @@
 package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertEvidencePath;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.evidencePaths;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +16,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffIsolationTes
                 OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
         List<String> frozenPayloadStrings = frozenPayloadStrings(handoff);
 
-        for (String postHandoffEvidencePath
-                : OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.evidencePaths()) {
+        for (String postHandoffEvidencePath : evidencePaths()) {
             assertThat(frozenPayloadStrings)
                     .as(postHandoffEvidencePath)
                     .allSatisfy(value -> assertThat(value).doesNotContain(postHandoffEvidencePath));
@@ -27,21 +28,19 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffIsolationTes
         OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff =
                 OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
 
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.evidencePaths())
-                .doesNotContain(handoff.evidencePath());
+        assertThat(evidencePaths()).doesNotContain(handoff.evidencePath());
         assertThat(handoff.receiptId()).endsWith("v225");
         assertThat(handoff.evidencePath()).startsWith("e/225/");
     }
 
     @Test
     void keepsPostHandoffIsolationPathVersionedToV272() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
-                .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH)
-                .isEqualTo(
-                        "e/272/evidence/"
-                                + "java-shard-readiness-v1-contract-consumer-readiness-handoff-"
-                                + "post-handoff-isolation-v272.json"
-                );
+        assertEvidencePath(
+                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH,
+                272,
+                "post-handoff-isolation"
+        );
     }
 
     private static List<String> frozenPayloadStrings(
