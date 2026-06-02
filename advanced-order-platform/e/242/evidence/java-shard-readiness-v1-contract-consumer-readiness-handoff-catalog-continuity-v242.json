@@ -1,0 +1,35 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-continuity-receipt-v242",
+  "version": "Java v242",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff catalog continuity",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v242 verifies the post-handoff catalog is consecutive from v226 through v242, with unique evidence paths scoped to the same version number as each receipt.",
+  "catalog": {
+    "firstVersion": 226,
+    "lastVersion": 242,
+    "receiptCount": 17,
+    "pathShape": "e/<version>/evidence/<slug>-v<version>.json"
+  },
+  "guards": [
+    "catalog versions are consecutive from v226 through v242",
+    "catalog receipt records are unique",
+    "catalog evidence paths are unique",
+    "each evidence path contains its receipt version directory",
+    "each evidence path ends with the matching version suffix"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogContinuityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

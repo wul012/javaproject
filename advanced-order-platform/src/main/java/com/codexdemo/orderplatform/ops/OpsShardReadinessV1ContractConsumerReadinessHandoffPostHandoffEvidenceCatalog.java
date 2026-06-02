@@ -104,6 +104,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "post handoff catalog",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_EVIDENCE_PATH
+                ),
+                receipt(
+                        242,
+                        "catalog continuity",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CATALOG_CONTINUITY_EVIDENCE_PATH
                 )
         );
     }

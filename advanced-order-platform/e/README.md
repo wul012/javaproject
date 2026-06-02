@@ -77,3 +77,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `239/`: Java shard-readiness v1 contract consumer readiness handoff completion.
 - `240/`: Java shard-readiness v1 contract consumer readiness handoff legacy registry alignment.
 - `241/`: Java shard-readiness v1 contract consumer readiness handoff post-handoff catalog.
+- `242/`: Java shard-readiness v1 contract consumer readiness handoff catalog continuity.
