@@ -2,248 +2,213 @@ package com.codexdemo.orderplatform.ops;
 
 final class OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths {
 
+    private static final String V225_PREFIX = "java-shard-readiness-v225-consumer-readiness-handoff-";
+    private static final String V1_PREFIX = "java-shard-readiness-v1-contract-consumer-readiness-handoff-";
+
     private OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths() {
     }
 
     static final String CONSUMER_READINESS_HANDOFF_SNAPSHOT_FREEZE_EVIDENCE_PATH =
-            "e/226/evidence/java-shard-readiness-v225-consumer-readiness-handoff-snapshot-freeze-v226.json";
+            v225Path(226, "snapshot-freeze");
 
     static final String CONSUMER_READINESS_HANDOFF_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH =
-            "e/227/evidence/java-shard-readiness-v225-consumer-readiness-handoff-historical-compatibility-v227.json";
+            v225Path(227, "historical-compatibility");
 
     static final String CONSUMER_READINESS_HANDOFF_INTEGRITY_EVIDENCE_PATH =
-            "e/228/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-integrity-v228.json";
+            path(228, "integrity");
 
     static final String CONSUMER_READINESS_HANDOFF_ROUTE_INVENTORY_EVIDENCE_PATH =
-            "e/229/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-route-inventory-v229.json";
+            path(229, "route-inventory");
 
     static final String CONSUMER_READINESS_HANDOFF_EVIDENCE_CHAIN_EVIDENCE_PATH =
-            "e/230/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-evidence-chain-v230.json";
+            path(230, "evidence-chain");
 
     static final String CONSUMER_READINESS_HANDOFF_OPS_EVIDENCE_ALIGNMENT_EVIDENCE_PATH =
-            "e/231/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-ops-evidence-alignment-v231.json";
+            path(231, "ops-evidence-alignment");
 
     static final String CONSUMER_READINESS_HANDOFF_CONTROLLER_MAPPING_EVIDENCE_PATH =
-            "e/232/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-controller-mapping-v232.json";
+            path(232, "controller-mapping");
 
     static final String CONSUMER_READINESS_HANDOFF_FIXTURE_PARITY_EVIDENCE_PATH =
-            "e/233/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-fixture-parity-v233.json";
+            path(233, "fixture-parity");
 
     static final String CONSUMER_READINESS_HANDOFF_BOUNDARY_MATRIX_EVIDENCE_PATH =
-            "e/234/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-boundary-matrix-v234.json";
+            path(234, "boundary-matrix");
 
     static final String CONSUMER_READINESS_HANDOFF_ENDPOINT_ADJACENCY_EVIDENCE_PATH =
-            "e/235/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-endpoint-adjacency-v235.json";
+            path(235, "endpoint-adjacency");
 
     static final String CONSUMER_READINESS_HANDOFF_RECEIPT_UNIQUENESS_EVIDENCE_PATH =
-            "e/236/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-uniqueness-v236.json";
+            path(236, "receipt-uniqueness");
 
     static final String CONSUMER_READINESS_HANDOFF_NODE_CONSUMER_BOUNDARY_EVIDENCE_PATH =
-            "e/237/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-node-consumer-boundary-v237.json";
+            path(237, "node-consumer-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_ARTIFACT_PRESENCE_EVIDENCE_PATH =
-            "e/238/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-artifact-presence-v238.json";
+            path(238, "artifact-presence");
 
     static final String CONSUMER_READINESS_HANDOFF_COMPLETION_EVIDENCE_PATH =
-            "e/239/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-completion-v239.json";
+            path(239, "completion");
 
     static final String CONSUMER_READINESS_HANDOFF_LEGACY_REGISTRY_ALIGNMENT_EVIDENCE_PATH =
-            "e/240/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-legacy-registry-alignment-v240.json";
+            path(240, "legacy-registry-alignment");
 
     static final String CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_EVIDENCE_PATH =
-            "e/241/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-catalog-v241.json";
+            path(241, "post-handoff-catalog");
 
     static final String CONSUMER_READINESS_HANDOFF_CATALOG_CONTINUITY_EVIDENCE_PATH =
-            "e/242/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-continuity-v242.json";
+            path(242, "catalog-continuity");
 
     static final String CONSUMER_READINESS_HANDOFF_CATALOG_ARCHIVE_PRESENCE_EVIDENCE_PATH =
-            "e/243/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-archive-presence-v243.json";
+            path(243, "catalog-archive-presence");
 
     static final String CONSUMER_READINESS_HANDOFF_CATALOG_JSON_BOUNDARY_EVIDENCE_PATH =
-            "e/244/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-json-boundary-v244.json";
+            path(244, "catalog-json-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_README_INDEX_EVIDENCE_PATH =
-            "e/245/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-readme-index-v245.json";
+            path(245, "readme-index");
 
     static final String CONSUMER_READINESS_HANDOFF_WALKTHROUGH_INDEX_EVIDENCE_PATH =
-            "e/246/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-walkthrough-index-v246.json";
+            path(246, "walkthrough-index");
 
     static final String CONSUMER_READINESS_HANDOFF_BLOCKED_OPERATION_CATALOG_EVIDENCE_PATH =
-            "e/247/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-blocked-operation-catalog-v247.json";
+            path(247, "blocked-operation-catalog");
 
     static final String CONSUMER_READINESS_HANDOFF_GET_ONLY_PROBE_BOUNDARY_EVIDENCE_PATH =
-            "e/248/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-get-only-probe-boundary-v248.json";
+            path(248, "get-only-probe-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_CREDENTIAL_RAW_ENDPOINT_BOUNDARY_EVIDENCE_PATH =
-            "e/249/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-credential-raw-endpoint-boundary-v249.json";
+            path(249, "credential-raw-endpoint-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_AUDIT_DEPLOYMENT_BOUNDARY_EVIDENCE_PATH =
-            "e/250/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-audit-deployment-boundary-v250.json";
+            path(250, "audit-deployment-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_PROCESS_CONTROL_BOUNDARY_EVIDENCE_PATH =
-            "e/251/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-process-control-boundary-v251.json";
+            path(251, "process-control-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_WRITE_ROUTER_BOUNDARY_EVIDENCE_PATH =
-            "e/252/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-write-router-boundary-v252.json";
+            path(252, "write-router-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_CONSUMER_BOUNDARY_COMPLETION_EVIDENCE_PATH =
-            "e/253/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-consumer-boundary-completion-v253.json";
+            path(253, "consumer-boundary-completion");
 
     static final String CONSUMER_READINESS_HANDOFF_READ_ONLY_ADJACENCY_EVIDENCE_PATH =
-            "e/254/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-read-only-adjacency-v254.json";
+            path(254, "read-only-adjacency");
 
     static final String CONSUMER_READINESS_HANDOFF_FIXTURE_CONTRACT_BOUNDARY_EVIDENCE_PATH =
-            "e/255/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-fixture-contract-boundary-v255.json";
+            path(255, "fixture-contract-boundary");
 
     static final String CONSUMER_READINESS_HANDOFF_RECEIPT_ID_UNIQUENESS_EVIDENCE_PATH =
-            "e/256/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-id-uniqueness-v256.json";
+            path(256, "receipt-id-uniqueness");
 
     static final String CONSUMER_READINESS_HANDOFF_VALIDATION_COMMAND_COVERAGE_EVIDENCE_PATH =
-            "e/257/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-validation-command-coverage-v257.json";
+            path(257, "validation-command-coverage");
 
     static final String CONSUMER_READINESS_HANDOFF_CATALOG_COMPLETION_READINESS_EVIDENCE_PATH =
-            "e/258/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-completion-readiness-v258.json";
+            path(258, "catalog-completion-readiness");
 
     static final String CONSUMER_READINESS_HANDOFF_TWENTY_VERSION_COMPLETION_EVIDENCE_PATH =
-            "e/259/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-twenty-version-completion-v259.json";
+            path(259, "twenty-version-completion");
 
     static final String CONSUMER_READINESS_HANDOFF_EVIDENCE_SCOPE_SUMMARY_EVIDENCE_PATH =
-            "e/260/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-evidence-scope-summary-v260.json";
+            path(260, "evidence-scope-summary");
 
     static final String CONSUMER_READINESS_HANDOFF_BOUNDARY_FIELD_COMPLETENESS_EVIDENCE_PATH =
-            "e/261/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-boundary-field-completeness-v261.json";
+            path(261, "boundary-field-completeness");
 
     static final String CONSUMER_READINESS_HANDOFF_ARCHIVE_SLUG_PARITY_EVIDENCE_PATH =
-            "e/262/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-slug-parity-v262.json";
+            path(262, "archive-slug-parity");
 
     static final String CONSUMER_READINESS_HANDOFF_EXPLANATION_ARCHIVE_COMPLETENESS_EVIDENCE_PATH =
-            "e/263/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-explanation-archive-completeness-v263.json";
+            path(263, "explanation-archive-completeness");
 
     static final String CONSUMER_READINESS_HANDOFF_BROWSER_SNAPSHOT_COMPLETENESS_EVIDENCE_PATH =
-            "e/264/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-browser-snapshot-completeness-v264.json";
+            path(264, "browser-snapshot-completeness");
 
     static final String CONSUMER_READINESS_HANDOFF_SCREENSHOT_ARTIFACT_COMPLETENESS_EVIDENCE_PATH =
-            "e/265/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-screenshot-artifact-completeness-v265.json";
+            path(265, "screenshot-artifact-completeness");
 
     static final String CONSUMER_READINESS_HANDOFF_HTML_ARCHIVE_VERSION_ALIGNMENT_EVIDENCE_PATH =
-            "e/266/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-html-archive-version-alignment-v266.json";
+            path(266, "html-archive-version-alignment");
 
     static final String CONSUMER_READINESS_HANDOFF_JSON_GUARD_COMPLETENESS_EVIDENCE_PATH =
-            "e/267/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-json-guard-completeness-v267.json";
+            path(267, "json-guard-completeness");
 
     static final String CONSUMER_READINESS_HANDOFF_JSON_METADATA_COMPLETENESS_EVIDENCE_PATH =
-            "e/268/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-json-metadata-completeness-v268.json";
+            path(268, "json-metadata-completeness");
 
     static final String CONSUMER_READINESS_HANDOFF_ARCHIVE_QUALITY_CLOSEOUT_EVIDENCE_PATH =
-            "e/269/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-quality-closeout-v269.json";
+            path(269, "archive-quality-closeout");
 
     static final String CONSUMER_READINESS_HANDOFF_V1_ENDPOINT_REGISTRY_STABILITY_EVIDENCE_PATH =
-            "e/270/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-v1-endpoint-registry-stability-v270.json";
+            path(270, "v1-endpoint-registry-stability");
 
     static final String CONSUMER_READINESS_HANDOFF_FROZEN_PAYLOAD_STABILITY_EVIDENCE_PATH =
-            "e/271/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-payload-stability-v271.json";
+            path(271, "frozen-payload-stability");
 
     static final String CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH =
-            "e/272/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-isolation-v272.json";
+            path(272, "post-handoff-isolation");
 
     static final String CONSUMER_READINESS_HANDOFF_CATALOG_FIFTEEN_VERSION_CLOSEOUT_EVIDENCE_PATH =
-            "e/273/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-fifteen-version-closeout-v273.json";
+            path(273, "catalog-fifteen-version-closeout");
 
     static final String CONSUMER_READINESS_HANDOFF_FIFTEEN_VERSION_COMPLETION_EVIDENCE_PATH =
-            "e/274/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-fifteen-version-completion-v274.json";
+            path(274, "fifteen-version-completion");
 
     static final String CONSUMER_READINESS_HANDOFF_VALIDATION_ARTIFACT_DEPTH_EVIDENCE_PATH =
-            "e/275/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-validation-artifact-depth-v275.json";
+            path(275, "validation-artifact-depth");
 
     static final String CONSUMER_READINESS_HANDOFF_README_DESCRIPTION_ALIGNMENT_EVIDENCE_PATH =
-            "e/276/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-readme-description-alignment-v276.json";
+            path(276, "readme-description-alignment");
 
     static final String CONSUMER_READINESS_HANDOFF_WALKTHROUGH_FILENAME_ALIGNMENT_EVIDENCE_PATH =
-            "e/277/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-walkthrough-filename-alignment-v277.json";
+            path(277, "walkthrough-filename-alignment");
 
     static final String CONSUMER_READINESS_HANDOFF_EVIDENCE_PATH_STRUCTURE_STABILITY_EVIDENCE_PATH =
-            "e/278/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-evidence-path-structure-stability-v278.json";
+            path(278, "evidence-path-structure-stability");
 
     static final String CONSUMER_READINESS_HANDOFF_AUDITABILITY_CLOSEOUT_EVIDENCE_PATH =
-            "e/279/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-auditability-closeout-v279.json";
+            path(279, "auditability-closeout");
 
     static final String CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_FLAGS_EVIDENCE_PATH =
-            "e/280/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-boundary-flags-v280.json";
+            path(280, "frozen-boundary-flags");
 
     static final String CONSUMER_READINESS_HANDOFF_FROZEN_FIXTURE_ENDPOINT_STABILITY_EVIDENCE_PATH =
-            "e/281/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-fixture-endpoint-stability-v281.json";
+            path(281, "frozen-fixture-endpoint-stability");
 
     static final String CONSUMER_READINESS_HANDOFF_FROZEN_DIGEST_COUNT_PARITY_EVIDENCE_PATH =
-            "e/282/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-digest-count-parity-v282.json";
+            path(282, "frozen-digest-count-parity");
 
     static final String CONSUMER_READINESS_HANDOFF_CATALOG_BOUNDARY_SCHEMA_STRICTNESS_EVIDENCE_PATH =
-            "e/283/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-boundary-schema-strictness-v283.json";
+            path(283, "catalog-boundary-schema-strictness");
 
     static final String CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_CLOSEOUT_EVIDENCE_PATH =
-            "e/284/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-boundary-closeout-v284.json";
+            path(284, "frozen-boundary-closeout");
 
     static final String CONSUMER_READINESS_HANDOFF_CATALOG_RECEIPT_COUNT_FLOOR_EVIDENCE_PATH =
-            "e/285/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-receipt-count-floor-v285.json";
+            path(285, "catalog-receipt-count-floor");
 
     static final String CONSUMER_READINESS_HANDOFF_ARCHIVE_ARTIFACT_BYTE_FLOOR_EVIDENCE_PATH =
-            "e/286/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-artifact-byte-floor-v286.json";
+            path(286, "archive-artifact-byte-floor");
 
     static final String CONSUMER_READINESS_HANDOFF_RECEIPT_SCOPE_UNIQUENESS_EVIDENCE_PATH =
-            "e/287/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-scope-uniqueness-v287.json";
+            path(287, "receipt-scope-uniqueness");
 
     static final String CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_GROWTH_CLOSEOUT_EVIDENCE_PATH =
-            "e/288/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-catalog-growth-closeout-v288.json";
+            path(288, "post-handoff-catalog-growth-closeout");
 
     static final String CONSUMER_READINESS_HANDOFF_V275_V289_FIFTEEN_VERSION_COMPLETION_EVIDENCE_PATH =
-            "e/289/evidence/"
-                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-v275-v289-fifteen-version-completion-v289.json";
+            path(289, "v275-v289-fifteen-version-completion");
+
+    private static String v225Path(int version, String slug) {
+        return path(version, V225_PREFIX, slug);
+    }
+
+    private static String path(int version, String slug) {
+        return path(version, V1_PREFIX, slug);
+    }
+
+    private static String path(int version, String prefix, String slug) {
+        return "e/" + version + "/evidence/" + prefix + slug + "-v" + version + ".json";
+    }
 }
