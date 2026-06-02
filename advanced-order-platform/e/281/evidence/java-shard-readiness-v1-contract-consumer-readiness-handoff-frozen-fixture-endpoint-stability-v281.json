@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-fixture-endpoint-stability-receipt-v281",
+  "version": "Java v281",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff frozen fixture endpoint stability",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v281 verifies the frozen Java v225 readiness handoff live and fixture endpoints remain stable and paired with the frozen digest endpoints.",
+  "guards": [
+    "frozen v225 readiness handoff endpoint and fixture endpoint remain equal to the service constants",
+    "frozen v225 handoff remains paired with the frozen v220 digest endpoint and fixture endpoint",
+    "frozen fixture endpoint stability path is versioned to v281"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenFixtureEndpointStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenBoundaryFlagsTests,OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshotTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

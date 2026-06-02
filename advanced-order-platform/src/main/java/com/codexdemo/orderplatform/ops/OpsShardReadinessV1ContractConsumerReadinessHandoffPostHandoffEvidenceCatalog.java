@@ -338,6 +338,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "frozen boundary flags",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_FLAGS_EVIDENCE_PATH
+                ),
+                receipt(
+                        281,
+                        "frozen fixture endpoint stability",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_FROZEN_FIXTURE_ENDPOINT_STABILITY_EVIDENCE_PATH
                 )
         );
     }

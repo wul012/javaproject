@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v281 readiness handoff frozen fixture endpoint stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v281 verifies frozen handoff and digest endpoints stay paired with their fixture endpoints.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Fixture
+      - generic [ref=e12]: stable
+    - generic [ref=e13]:
+      - generic [ref=e14]: Digest pair
+      - generic [ref=e15]: stable
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: "The handoff fixture remains under `/contracts`."
+    - listitem [ref=e22]: The v225 handoff endpoint stays paired with its fixture.
+    - listitem [ref=e23]: The frozen digest endpoint pair remains unchanged.

@@ -221,6 +221,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/280/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-boundary-flags-v280.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_FROZEN_FIXTURE_ENDPOINT_STABILITY_EVIDENCE_PATH =
+            "e/281/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-fixture-endpoint-stability-v281.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
