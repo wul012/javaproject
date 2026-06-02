@@ -296,6 +296,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "catalog fifteen version closeout",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CATALOG_FIFTEEN_VERSION_CLOSEOUT_EVIDENCE_PATH
+                ),
+                receipt(
+                        274,
+                        "fifteen version completion",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_FIFTEEN_VERSION_COMPLETION_EVIDENCE_PATH
                 )
         );
     }
