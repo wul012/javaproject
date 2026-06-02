@@ -1,6 +1,8 @@
 package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveTestSupport.browserSnapshot;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.receipts;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,14 +13,9 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffBrowserSnapshotComplete
 
     @Test
     void keepsEveryCatalogBrowserSnapshotNonEmptyAndReadable() throws IOException {
-        Path root = Path.of("").toAbsolutePath();
-
         for (OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt receipt
-                : OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipts()) {
-            Path evidencePath = root.resolve(receipt.evidencePath());
-            String fileName = evidencePath.getFileName().toString();
-            String stem = fileName.substring(0, fileName.length() - ".json".length());
-            Path snapshot = evidencePath.getParent().resolve(stem + "-browser-snapshot.md");
+                : receipts()) {
+            Path snapshot = browserSnapshot(receipt);
             String snapshotText = Files.readString(snapshot);
 
             assertThat(snapshotText).as(snapshot.toString()).contains("main").contains("heading");
