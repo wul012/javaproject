@@ -374,6 +374,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "archive artifact byte floor",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_ARCHIVE_ARTIFACT_BYTE_FLOOR_EVIDENCE_PATH
+                ),
+                receipt(
+                        287,
+                        "receipt scope uniqueness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_RECEIPT_SCOPE_UNIQUENESS_EVIDENCE_PATH
                 )
         );
     }

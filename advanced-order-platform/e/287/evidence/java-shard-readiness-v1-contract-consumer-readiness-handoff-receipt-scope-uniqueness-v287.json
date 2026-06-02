@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-scope-uniqueness-receipt-v287",
+  "version": "Java v287",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff receipt scope uniqueness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v287 makes receipt scope naming auditable by requiring unique, lowercase, trimmed, single-spaced scopes across the post-handoff catalog.",
+  "guards": [
+    "post-handoff receipt scopes are unique",
+    "post-handoff receipt scopes are lowercase and trimmed",
+    "post-handoff receipt scopes do not contain double spaces"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffReceiptScopeUniquenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveArtifactByteFloorTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
