@@ -1,0 +1,29 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-legacy-registry-alignment-receipt-v240",
+  "version": "Java v240",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff legacy registry alignment",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v240 turns the post-v239 full-test alignment fix into versioned evidence: the legacy v1 consumer registry remains an eleven-pair read-only contract ending at readiness handoff, while the broader rolling evidence registry may continue to read-only catalog and runtime closeout entries.",
+  "guards": [
+    "v1 endpoint-pair registry remains exactly eleven pairs",
+    "readiness handoff remains after evidence digest in the v1 consumer registry",
+    "read-only catalog and runtime execution closeout remain outside the frozen v1 consumer registry",
+    "fixture endpoint registry mirrors the live endpoint registry",
+    "rolling evidence endpoints keep echo, v1 alignment, evidence digest, readiness handoff, and read-only catalog in order"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffLegacyRegistryAlignmentTests,OpsShardReadinessV1ContractConsumerHandoffBundleIntegrityTests,OpsShardReadinessV1ContractConsumerVerificationChecklistIntegrityTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
