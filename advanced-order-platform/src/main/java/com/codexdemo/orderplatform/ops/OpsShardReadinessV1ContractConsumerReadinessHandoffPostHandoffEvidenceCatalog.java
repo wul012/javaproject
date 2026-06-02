@@ -200,6 +200,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "validation command coverage",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_VALIDATION_COMMAND_COVERAGE_EVIDENCE_PATH
+                ),
+                receipt(
+                        258,
+                        "catalog completion readiness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CATALOG_COMPLETION_READINESS_EVIDENCE_PATH
                 )
         );
     }

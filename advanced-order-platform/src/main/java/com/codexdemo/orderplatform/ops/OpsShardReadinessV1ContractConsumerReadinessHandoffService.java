@@ -129,6 +129,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/257/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-validation-command-coverage-v257.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_CATALOG_COMPLETION_READINESS_EVIDENCE_PATH =
+            "e/258/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-completion-readiness-v258.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

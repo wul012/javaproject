@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v258 readiness handoff catalog completion readiness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v258 confirms third-group quality receipts are cataloged and ready for final completion.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Quality range
+      - generic [ref=e12]: 254-258
+    - generic [ref=e13]:
+      - generic [ref=e14]: Completion
+      - generic [ref=e15]: ready
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: v254-v258 quality receipts are cataloged in order.
+    - listitem [ref=e22]: The catalog is ready for final v259 completion.
+    - listitem [ref=e23]: All checks remain read-only evidence checks.
