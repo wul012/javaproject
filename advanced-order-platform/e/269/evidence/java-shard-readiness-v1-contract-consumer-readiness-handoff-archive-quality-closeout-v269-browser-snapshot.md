@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v269 readiness handoff archive quality closeout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v269 closes the v260-v269 archive-quality run with ordered receipt checks.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Run
+      - generic [ref=e12]: v260-v269
+    - generic [ref=e13]:
+      - generic [ref=e14]: Receipts
+      - generic [ref=e15]: ordered
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: v260-v269 remain cataloged in order.
+    - listitem [ref=e22]: The run covers artifact and metadata quality gates.
+    - listitem [ref=e23]: The closeout remains separate from the frozen v225 handoff payload.

@@ -266,6 +266,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "json metadata completeness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_JSON_METADATA_COMPLETENESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        269,
+                        "archive quality closeout",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_ARCHIVE_QUALITY_CLOSEOUT_EVIDENCE_PATH
                 )
         );
     }

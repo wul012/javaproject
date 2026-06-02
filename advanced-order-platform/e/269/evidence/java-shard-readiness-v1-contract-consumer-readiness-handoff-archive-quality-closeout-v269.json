@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-quality-closeout-receipt-v269",
+  "version": "Java v269",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff archive quality closeout",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v269 closes the v260-v269 archive-quality run by verifying the ten-version receipt sequence remains cataloged in order.",
+  "guards": [
+    "v260 through v269 remain cataloged as an ordered archive-quality sequence",
+    "the archive-quality sequence covers scope, boundary, slug, explanation, snapshot, screenshot, HTML, guard, metadata, and closeout checks",
+    "archive quality closeout path is versioned to v269"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveQualityCloseoutTests,OpsShardReadinessV1ContractConsumerReadinessHandoffJsonMetadataCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffJsonGuardCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffHtmlArchiveVersionAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffScreenshotArtifactCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffBrowserSnapshotCompletenessTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
