@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v253 readiness handoff consumer boundary completion" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v253 closes v247-v253 by proving all consumer boundary guards remain cataloged and read-only.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Boundary receipts
+      - generic [ref=e12]: "7"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Capabilities
+      - generic [ref=e15]: blocked
+    - generic [ref=e16]:
+      - generic [ref=e17]: Execution
+      - generic [ref=e18]: "false"
+  - list [ref=e20]:
+    - listitem [ref=e21]: Blocked operation, GET-only, credential/raw, audit/deploy, process-control, and write/router boundaries are cataloged.
+    - listitem [ref=e22]: Readiness handoff remains read-only across every blocked capability.
+    - listitem [ref=e23]: No endpoint or execution surface was added.

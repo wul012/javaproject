@@ -170,6 +170,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "write router boundary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_WRITE_ROUTER_BOUNDARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        253,
+                        "consumer boundary completion",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CONSUMER_BOUNDARY_COMPLETION_EVIDENCE_PATH
                 )
         );
     }
