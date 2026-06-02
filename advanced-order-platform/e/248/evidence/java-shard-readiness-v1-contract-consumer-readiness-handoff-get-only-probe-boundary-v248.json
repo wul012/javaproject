@@ -1,0 +1,29 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-get-only-probe-boundary-receipt-v248",
+  "version": "Java v248",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff GET-only probe boundary",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v248 verifies consumer readiness probes remain GET-only and upstream actions remain disabled across checklist, evidence digest, and readiness handoff.",
+  "guards": [
+    "checklist probesAreGetOnly remains true",
+    "evidence digest probesAreGetOnly remains true",
+    "readiness handoff probesAreGetOnly remains true",
+    "upstream actions remain disabled",
+    "live and fixture probe endpoint strings are GET-only"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffGetOnlyProbeBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffBlockedOperationCatalogTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

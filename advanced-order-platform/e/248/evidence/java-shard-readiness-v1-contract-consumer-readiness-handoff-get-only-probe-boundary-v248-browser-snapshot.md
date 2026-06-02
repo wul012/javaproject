@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v248 readiness handoff GET-only probe boundary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v248 proves consumer readiness probes remain read-only GET probes and upstream actions stay disabled.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Method
+      - generic [ref=e12]: GET
+    - generic [ref=e13]:
+      - generic [ref=e14]: Actions
+      - generic [ref=e15]: disabled
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: "Checklist, digest, and handoff all keep `probesAreGetOnly` true."
+    - listitem [ref=e22]: Upstream actions stay false.
+    - listitem [ref=e23]: Live and fixture probe endpoint strings start with GET.

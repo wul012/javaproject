@@ -140,6 +140,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "blocked operation catalog",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_BLOCKED_OPERATION_CATALOG_EVIDENCE_PATH
+                ),
+                receipt(
+                        248,
+                        "get only probe boundary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_GET_ONLY_PROBE_BOUNDARY_EVIDENCE_PATH
                 )
         );
     }
