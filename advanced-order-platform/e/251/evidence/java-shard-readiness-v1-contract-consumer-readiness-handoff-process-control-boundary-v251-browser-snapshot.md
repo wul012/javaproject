@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v251 readiness handoff process-control boundary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: "v251 keeps process control outside the readiness handoff: Java, mini-kv, and Node stop/start actions remain disabled."
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Java start
+      - generic [ref=e12]: "false"
+    - generic [ref=e13]:
+      - generic [ref=e14]: mini-kv start
+      - generic [ref=e15]: "false"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Node control
+      - generic [ref=e18]: "false"
+  - list [ref=e20]:
+    - listitem [ref=e21]: Readiness handoff does not start Java.
+    - listitem [ref=e22]: Readiness handoff does not start mini-kv.
+    - listitem [ref=e23]: Node consumers may not start or stop Java or mini-kv.

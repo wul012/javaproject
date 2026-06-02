@@ -1,0 +1,29 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-process-control-boundary-receipt-v251",
+  "version": "Java v251",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff process-control boundary",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v251 verifies readiness handoff does not start Java, does not start mini-kv, and does not allow Node consumers to start or stop either process.",
+  "guards": [
+    "startsJavaService remains false",
+    "startsMiniKvService remains false",
+    "nodeMayStartOrStopJavaOrMiniKv remains false",
+    "blocked operations include node-start-or-stop-java-or-mini-kv",
+    "handoff checks expose node-may-start-or-stop-java-or-mini-kv:false"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffProcessControlBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffAuditDeploymentBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

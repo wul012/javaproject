@@ -158,6 +158,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "audit deployment boundary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_AUDIT_DEPLOYMENT_BOUNDARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        251,
+                        "process control boundary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_PROCESS_CONTROL_BOUNDARY_EVIDENCE_PATH
                 )
         );
     }
