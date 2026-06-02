@@ -1,8 +1,10 @@
 package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 import com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffReceiptSegments.Segment;
 import java.util.List;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
@@ -10,43 +12,23 @@ import org.junit.jupiter.api.Test;
 class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffSegmentBoundaryTests {
 
     @Test
-    void keepsSeedReceiptsBoundedToV226V241() {
-        assertSegment(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffSeedReceipts.receipts(),
-                226,
-                241,
-                16
-        );
-    }
+    void keepsSegmentRegistryOrderedByMaintenanceWindow() {
+        List<Segment> segments =
+                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffReceiptSegments.segments();
 
-    @Test
-    void keepsGrowthReceiptsBoundedToV242V259() {
-        assertSegment(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffGrowthReceipts.receipts(),
-                242,
-                259,
-                18
-        );
-    }
+        assertThat(segments)
+                .extracting(Segment::name, Segment::firstVersion, Segment::lastVersion)
+                .containsExactly(
+                        tuple("seed", 226, 241),
+                        tuple("growth", 242, 259),
+                        tuple("archive", 260, 274),
+                        tuple("completion", 275, 289)
+                );
 
-    @Test
-    void keepsArchiveReceiptsBoundedToV260V274() {
-        assertSegment(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffArchiveReceipts.receipts(),
-                260,
-                274,
-                15
-        );
-    }
-
-    @Test
-    void keepsCompletionReceiptsBoundedToV275V289() {
-        assertSegment(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCompletionReceipts.receipts(),
-                275,
-                289,
-                15
-        );
+        assertSegment(segments.get(0).receipts(), 226, 241, 16);
+        assertSegment(segments.get(1).receipts(), 242, 259, 18);
+        assertSegment(segments.get(2).receipts(), 260, 274, 15);
+        assertSegment(segments.get(3).receipts(), 275, 289, 15);
     }
 
     private static void assertSegment(List<Receipt> receipts, int firstVersion, int lastVersion, int count) {

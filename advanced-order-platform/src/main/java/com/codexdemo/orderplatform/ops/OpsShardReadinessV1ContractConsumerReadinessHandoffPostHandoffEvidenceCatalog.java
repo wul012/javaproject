@@ -1,7 +1,6 @@
 package com.codexdemo.orderplatform.ops;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog {
 
@@ -9,12 +8,8 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
     }
 
     static List<Receipt> receipts() {
-        return Stream.of(
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffSeedReceipts.receipts(),
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffGrowthReceipts.receipts(),
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffArchiveReceipts.receipts(),
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCompletionReceipts.receipts()
-                )
+        return OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffReceiptSegments.segments().stream()
+                .map(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffReceiptSegments.Segment::receipts)
                 .flatMap(List::stream)
                 .toList();
     }
