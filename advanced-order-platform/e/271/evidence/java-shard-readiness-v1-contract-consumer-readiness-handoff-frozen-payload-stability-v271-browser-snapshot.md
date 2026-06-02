@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v271 readiness handoff frozen payload stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v271 verifies the frozen v225 payload stays stable while the post-handoff catalog keeps growing.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Frozen
+      - generic [ref=e12]: v225
+    - generic [ref=e13]:
+      - generic [ref=e14]: Guards
+      - generic [ref=e15]: "4"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Core v225 payload fields remain unchanged.
+    - listitem [ref=e22]: Read-only and non-executable flags remain true to the boundary.
+    - listitem [ref=e23]: Digest and handoff count relationships are checked.

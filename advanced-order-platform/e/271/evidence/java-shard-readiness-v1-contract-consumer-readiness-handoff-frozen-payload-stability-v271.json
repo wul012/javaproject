@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-payload-stability-receipt-v271",
+  "version": "Java v271",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff frozen payload stability",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v271 verifies the frozen Java v225 readiness handoff payload keeps its core fields, read-only flags, and digest counts stable after post-handoff catalog growth.",
+  "guards": [
+    "frozen v225 handoff project, version, receiptId, evidence path, and status remain stable",
+    "frozen v225 handoff stays read-only, non-executable, and shard-disabled",
+    "frozen payload stability path is versioned to v271"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenPayloadStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshotTests,OpsShardReadinessV1ContractConsumerReadinessHandoffTwentyVersionCompletionTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

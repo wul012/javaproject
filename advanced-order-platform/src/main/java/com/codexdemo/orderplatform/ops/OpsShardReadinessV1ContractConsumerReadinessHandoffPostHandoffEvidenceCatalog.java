@@ -278,6 +278,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "v1 endpoint registry stability",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_V1_ENDPOINT_REGISTRY_STABILITY_EVIDENCE_PATH
+                ),
+                receipt(
+                        271,
+                        "frozen payload stability",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_FROZEN_PAYLOAD_STABILITY_EVIDENCE_PATH
                 )
         );
     }
