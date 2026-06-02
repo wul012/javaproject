@@ -1,5 +1,8 @@
 package com.codexdemo.orderplatform.ops;
 
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt;
+
+import com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt;
 import java.util.List;
 
 final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCompletionReceipts {
@@ -7,93 +10,93 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffComple
     private OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCompletionReceipts() {
     }
 
-    static List<OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt> receipts() {
+    static List<Receipt> receipts() {
         return List.of(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         275,
                         "validation artifact depth",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_VALIDATION_ARTIFACT_DEPTH_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         276,
                         "readme description alignment",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_README_DESCRIPTION_ALIGNMENT_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         277,
                         "walkthrough filename alignment",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_WALKTHROUGH_FILENAME_ALIGNMENT_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         278,
                         "evidence path structure stability",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_EVIDENCE_PATH_STRUCTURE_STABILITY_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         279,
                         "auditability closeout",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_AUDITABILITY_CLOSEOUT_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         280,
                         "frozen boundary flags",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_FLAGS_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         281,
                         "frozen fixture endpoint stability",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_FIXTURE_ENDPOINT_STABILITY_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         282,
                         "frozen digest count parity",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_DIGEST_COUNT_PARITY_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         283,
                         "catalog boundary schema strictness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CATALOG_BOUNDARY_SCHEMA_STRICTNESS_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         284,
                         "frozen boundary closeout",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_CLOSEOUT_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         285,
                         "catalog receipt count floor",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CATALOG_RECEIPT_COUNT_FLOOR_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         286,
                         "archive artifact byte floor",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_ARCHIVE_ARTIFACT_BYTE_FLOOR_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         287,
                         "receipt scope uniqueness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_RECEIPT_SCOPE_UNIQUENESS_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         288,
                         "post handoff catalog growth closeout",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_GROWTH_CLOSEOUT_EVIDENCE_PATH
                 ),
-                OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt(
+                receipt(
                         289,
                         "v275 v289 fifteen version completion",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
