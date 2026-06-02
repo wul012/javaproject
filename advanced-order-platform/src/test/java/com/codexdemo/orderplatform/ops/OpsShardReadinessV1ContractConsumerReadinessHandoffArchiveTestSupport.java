@@ -27,17 +27,44 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveTestSuppor
         }
     }
 
+    static Path evidenceJson(
+            OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt receipt
+    ) {
+        return WORKING_ROOT.resolve(receipt.evidencePath());
+    }
+
+    static Path htmlArchive(
+            OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt receipt
+    ) throws IOException {
+        return versionedArtifact(receipt.version(), evidenceStem(evidenceJson(receipt)) + ".html");
+    }
+
+    static Path explanation(
+            OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt receipt
+    ) throws IOException {
+        try (Stream<Path> paths = Files.walk(ARCHIVE_ROOT.resolve(String.valueOf(receipt.version())))) {
+            return paths
+                    .filter(Files::isRegularFile)
+                    .filter(path -> {
+                        String name = path.getFileName().toString();
+                        return name.endsWith(".md") && !name.endsWith("-browser-snapshot.md");
+                    })
+                    .findFirst()
+                    .orElseThrow(() -> new AssertionError("Missing explanation artifact for v" + receipt.version()));
+        }
+    }
+
     static Path browserSnapshot(
             OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt receipt
     ) {
-        Path evidencePath = WORKING_ROOT.resolve(receipt.evidencePath());
+        Path evidencePath = evidenceJson(receipt);
         return evidencePath.getParent().resolve(evidenceStem(evidencePath) + "-browser-snapshot.md");
     }
 
     static Path screenshot(
             OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt receipt
     ) throws IOException {
-        return versionedArtifact(receipt.version(), evidenceStem(WORKING_ROOT.resolve(receipt.evidencePath())) + ".png");
+        return versionedArtifact(receipt.version(), evidenceStem(evidenceJson(receipt)) + ".png");
     }
 
     private static String evidenceStem(Path evidencePath) {

@@ -1,6 +1,9 @@
 package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveTestSupport.explanation;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertEvidencePath;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.receipts;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,27 +14,21 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffExplanationArchiveCompl
 
     @Test
     void keepsEveryCatalogExplanationArchiveNonEmpty() throws IOException {
-        Path root = Path.of("").toAbsolutePath();
-
         for (OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt receipt
-                : OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipts()) {
-            Path explanation = root.resolve("e")
-                    .resolve(String.valueOf(receipt.version()))
-                    .resolve("解释")
-                    .resolve("说明.md");
+                : receipts()) {
+            Path explanationPath = explanation(receipt);
 
-            assertThat(Files.size(explanation)).as(explanation.toString()).isGreaterThan(20L);
+            assertThat(Files.size(explanationPath)).as(explanationPath.toString()).isGreaterThan(20L);
         }
     }
 
     @Test
     void keepsExplanationArchiveCompletenessPathVersionedToV263() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
-                .CONSUMER_READINESS_HANDOFF_EXPLANATION_ARCHIVE_COMPLETENESS_EVIDENCE_PATH)
-                .isEqualTo(
-                        "e/263/evidence/"
-                                + "java-shard-readiness-v1-contract-consumer-readiness-handoff-"
-                                + "explanation-archive-completeness-v263.json"
-                );
+        assertEvidencePath(
+                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        .CONSUMER_READINESS_HANDOFF_EXPLANATION_ARCHIVE_COMPLETENESS_EVIDENCE_PATH,
+                263,
+                "explanation-archive-completeness"
+        );
     }
 }
