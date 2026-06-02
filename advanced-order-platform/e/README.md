@@ -96,3 +96,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `258/`: Java shard-readiness v1 contract consumer readiness handoff catalog completion readiness.
 - `259/`: Java shard-readiness v1 contract consumer readiness handoff twenty-version completion.
 - `260/`: Java shard-readiness v1 contract consumer readiness handoff evidence scope summary.
+- `261/`: Java shard-readiness v1 contract consumer readiness handoff boundary field completeness.

@@ -218,6 +218,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "evidence scope summary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_EVIDENCE_SCOPE_SUMMARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        261,
+                        "boundary field completeness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_BOUNDARY_FIELD_COMPLETENESS_EVIDENCE_PATH
                 )
         );
     }

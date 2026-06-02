@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v261 readiness handoff boundary field completeness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v261 makes the boundary object itself a catalog-wide contract.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Fields
+      - generic [ref=e12]: "7"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Allowed
+      - generic [ref=e15]: "false"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: complete
+  - list [ref=e20]:
+    - listitem [ref=e21]: Every catalog evidence boundary object exists.
+    - listitem [ref=e22]: All seven blocked capability fields stay false.
+    - listitem [ref=e23]: The check grows with future receipts.
