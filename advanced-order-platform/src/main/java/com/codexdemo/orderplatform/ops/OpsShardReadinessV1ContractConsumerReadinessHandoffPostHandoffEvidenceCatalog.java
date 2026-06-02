@@ -230,6 +230,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "archive slug parity",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_ARCHIVE_SLUG_PARITY_EVIDENCE_PATH
+                ),
+                receipt(
+                        263,
+                        "explanation archive completeness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_EXPLANATION_ARCHIVE_COMPLETENESS_EVIDENCE_PATH
                 )
         );
     }

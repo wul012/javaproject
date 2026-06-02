@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-explanation-archive-completeness-receipt-v263",
+  "version": "Java v263",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff explanation archive completeness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v263 verifies every post-handoff catalog receipt keeps a non-empty Chinese explanation archive file for human review.",
+  "guards": [
+    "every catalog explanation markdown file is present through archive presence checks",
+    "every catalog explanation markdown file has non-empty content",
+    "explanation archive completeness path is versioned to v263"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffExplanationArchiveCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveSlugParityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
