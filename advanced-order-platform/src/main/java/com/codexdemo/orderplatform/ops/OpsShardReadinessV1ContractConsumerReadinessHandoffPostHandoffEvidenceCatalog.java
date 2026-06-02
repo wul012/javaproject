@@ -188,6 +188,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "fixture contract boundary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FIXTURE_CONTRACT_BOUNDARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        256,
+                        "receipt id uniqueness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_RECEIPT_ID_UNIQUENESS_EVIDENCE_PATH
                 )
         );
     }

@@ -121,6 +121,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/255/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-fixture-contract-boundary-v255.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_RECEIPT_ID_UNIQUENESS_EVIDENCE_PATH =
+            "e/256/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-id-uniqueness-v256.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

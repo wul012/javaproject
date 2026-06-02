@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v256 readiness handoff receipt id uniqueness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v256 proves catalog receipt IDs are unique and versioned.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Receipt IDs
+      - generic [ref=e12]: unique
+    - generic [ref=e13]:
+      - generic [ref=e14]: Version suffix
+      - generic [ref=e15]: matched
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Each JSON receiptId ends with its version suffix.
+    - listitem [ref=e22]: No duplicate receiptId appears in the catalog.
+    - listitem [ref=e23]: The check grows with future catalog entries.

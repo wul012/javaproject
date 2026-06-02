@@ -91,3 +91,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `253/`: Java shard-readiness v1 contract consumer readiness handoff consumer boundary completion.
 - `254/`: Java shard-readiness v1 contract consumer readiness handoff read-only adjacency.
 - `255/`: Java shard-readiness v1 contract consumer readiness handoff fixture contract boundary.
+- `256/`: Java shard-readiness v1 contract consumer readiness handoff receipt id uniqueness.

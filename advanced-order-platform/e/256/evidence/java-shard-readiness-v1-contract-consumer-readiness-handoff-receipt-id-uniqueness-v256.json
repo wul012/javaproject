@@ -1,0 +1,28 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-id-uniqueness-receipt-v256",
+  "version": "Java v256",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff receipt id uniqueness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v256 parses catalog evidence JSON files and verifies receiptId values are unique and suffixed with the matching receipt version.",
+  "guards": [
+    "every catalog evidence JSON has a receiptId",
+    "every receiptId ends with its matching version suffix",
+    "catalog receiptIds contain no duplicates",
+    "receipt id uniqueness evidence path is versioned to v256"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffReceiptIdUniquenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFixtureContractBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
