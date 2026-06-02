@@ -185,6 +185,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/271/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-payload-stability-v271.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH =
+            "e/272/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-isolation-v272.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

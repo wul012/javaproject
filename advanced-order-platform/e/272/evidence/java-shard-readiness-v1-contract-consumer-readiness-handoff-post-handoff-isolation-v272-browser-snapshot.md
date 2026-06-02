@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v272 readiness handoff post-handoff isolation" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v272 verifies post-handoff evidence does not leak back into the frozen v225 handoff payload.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Frozen
+      - generic [ref=e12]: isolated
+    - generic [ref=e13]:
+      - generic [ref=e14]: Catalog
+      - generic [ref=e15]: post-handoff
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Catalog evidence paths stay out of v225 payload strings.
+    - listitem [ref=e22]: The frozen receipt remains v225.
+    - listitem [ref=e23]: The frozen evidence path remains under e/225.

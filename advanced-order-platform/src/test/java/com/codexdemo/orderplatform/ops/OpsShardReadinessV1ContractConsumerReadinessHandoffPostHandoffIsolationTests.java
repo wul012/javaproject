@@ -1,0 +1,61 @@
+package com.codexdemo.orderplatform.ops;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffIsolationTests {
+
+    @Test
+    void keepsPostHandoffEvidencePathsOutOfTheFrozenV225Payload() {
+        OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff =
+                OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
+        List<String> frozenPayloadStrings = frozenPayloadStrings(handoff);
+
+        for (String postHandoffEvidencePath
+                : OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.evidencePaths()) {
+            assertThat(frozenPayloadStrings)
+                    .as(postHandoffEvidencePath)
+                    .allSatisfy(value -> assertThat(value).doesNotContain(postHandoffEvidencePath));
+        }
+    }
+
+    @Test
+    void keepsFrozenV225ReceiptAndEvidencePathSeparateFromThePostHandoffCatalog() {
+        OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff =
+                OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
+
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.evidencePaths())
+                .doesNotContain(handoff.evidencePath());
+        assertThat(handoff.receiptId()).endsWith("v225");
+        assertThat(handoff.evidencePath()).startsWith("e/225/");
+    }
+
+    @Test
+    void keepsPostHandoffIsolationPathVersionedToV272() {
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH)
+                .isEqualTo(
+                        "e/272/evidence/"
+                                + "java-shard-readiness-v1-contract-consumer-readiness-handoff-"
+                                + "post-handoff-isolation-v272.json"
+                );
+    }
+
+    private static List<String> frozenPayloadStrings(
+            OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff
+    ) {
+        List<String> values = new ArrayList<>();
+        values.add(handoff.receiptId());
+        values.add(handoff.evidencePath());
+        values.add(handoff.evidenceDigestEvidencePath());
+        values.add(handoff.evidenceDigestReceiptId());
+        values.addAll(handoff.digestEvidence());
+        values.addAll(handoff.handoffGuardEvidence());
+        values.addAll(handoff.handoffChecks());
+        values.addAll(handoff.blockedOperations());
+        return values;
+    }
+}

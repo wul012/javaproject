@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-isolation-receipt-v272",
+  "version": "Java v272",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff post-handoff isolation",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v272 verifies post-handoff catalog evidence paths stay out of the frozen Java v225 readiness handoff payload.",
+  "guards": [
+    "post-handoff evidence paths do not appear inside frozen v225 payload strings",
+    "frozen v225 receiptId and evidence path remain separate from the post-handoff catalog",
+    "post-handoff isolation path is versioned to v272"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffIsolationTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenPayloadStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffTwentyVersionCompletionTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

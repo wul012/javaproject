@@ -284,6 +284,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "frozen payload stability",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_PAYLOAD_STABILITY_EVIDENCE_PATH
+                ),
+                receipt(
+                        272,
+                        "post handoff isolation",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH
                 )
         );
     }
