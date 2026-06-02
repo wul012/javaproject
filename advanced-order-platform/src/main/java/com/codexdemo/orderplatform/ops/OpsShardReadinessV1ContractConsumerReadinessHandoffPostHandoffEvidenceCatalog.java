@@ -146,6 +146,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "get only probe boundary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_GET_ONLY_PROBE_BOUNDARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        249,
+                        "credential raw endpoint boundary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CREDENTIAL_RAW_ENDPOINT_BOUNDARY_EVIDENCE_PATH
                 )
         );
     }

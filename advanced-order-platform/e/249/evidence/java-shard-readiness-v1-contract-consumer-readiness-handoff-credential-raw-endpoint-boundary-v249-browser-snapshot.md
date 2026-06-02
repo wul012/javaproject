@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v249 readiness handoff credential/raw endpoint boundary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v249 keeps credential values and raw endpoint parsing outside the consumer readiness handoff path.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Credential read
+      - generic [ref=e12]: "false"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Raw endpoint
+      - generic [ref=e15]: "false"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: blocked
+  - list [ref=e20]:
+    - listitem [ref=e21]: "Checklist, digest, and handoff keep `credentialValueRead` false."
+    - listitem [ref=e22]: "Checklist, digest, and handoff keep `rawEndpointParsed` false."
+    - listitem [ref=e23]: Both operations remain listed in blocked operations.
