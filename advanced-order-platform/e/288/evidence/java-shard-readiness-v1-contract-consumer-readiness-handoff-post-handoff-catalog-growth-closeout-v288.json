@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-catalog-growth-closeout-receipt-v288",
+  "version": "Java v288",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff post-handoff catalog growth closeout",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v288 closes the v275-v288 catalog growth run by requiring the ordered version sequence, the final scope sequence, and at least sixty-three post-handoff receipts.",
+  "guards": [
+    "v275 through v288 remain cataloged as an ordered growth run",
+    "v285 through v288 closeout scopes remain in order",
+    "post-handoff catalog has at least sixty-three receipts"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogGrowthCloseoutTests,OpsShardReadinessV1ContractConsumerReadinessHandoffReceiptScopeUniquenessTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

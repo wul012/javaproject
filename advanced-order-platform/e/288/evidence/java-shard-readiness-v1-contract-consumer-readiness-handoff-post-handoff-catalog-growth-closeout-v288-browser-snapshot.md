@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v288 readiness handoff post-handoff catalog growth closeout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v288 closes the v275-v288 growth run with ordered versions, ordered scopes, and a receipt-count floor.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Run
+      - generic [ref=e12]: v275-v288
+    - generic [ref=e13]:
+      - generic [ref=e14]: Receipts
+      - generic [ref=e15]: 63+
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: The v275-v288 run remains cataloged as one ordered growth chain.
+    - listitem [ref=e22]: The v285-v288 closeout scopes remain ordered.
+    - listitem [ref=e23]: The catalog remains above the receipt-count floor.

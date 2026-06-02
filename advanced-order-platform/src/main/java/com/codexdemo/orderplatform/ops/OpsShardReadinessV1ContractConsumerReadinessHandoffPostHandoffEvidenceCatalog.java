@@ -380,6 +380,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "receipt scope uniqueness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_RECEIPT_SCOPE_UNIQUENESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        288,
+                        "post handoff catalog growth closeout",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_GROWTH_CLOSEOUT_EVIDENCE_PATH
                 )
         );
     }

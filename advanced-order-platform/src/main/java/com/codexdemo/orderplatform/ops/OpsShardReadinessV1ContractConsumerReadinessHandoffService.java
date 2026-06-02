@@ -249,6 +249,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/287/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-receipt-scope-uniqueness-v287.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_GROWTH_CLOSEOUT_EVIDENCE_PATH =
+            "e/288/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-post-handoff-catalog-growth-closeout-v288.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
