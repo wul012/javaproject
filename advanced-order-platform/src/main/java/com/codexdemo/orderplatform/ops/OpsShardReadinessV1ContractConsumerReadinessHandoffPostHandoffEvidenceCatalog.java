@@ -122,6 +122,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "catalog json boundary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CATALOG_JSON_BOUNDARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        245,
+                        "readme index",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_README_INDEX_EVIDENCE_PATH
                 )
         );
     }

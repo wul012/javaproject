@@ -1,0 +1,28 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-readme-index-receipt-v245",
+  "version": "Java v245",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff README index",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v245 verifies every post-handoff catalog receipt is indexed in advanced-order-platform/e/README.md and that README ordering follows catalog version order.",
+  "guards": [
+    "every catalog receipt version has an e/README.md entry",
+    "README version entries are ordered the same way as the catalog",
+    "the README index check grows with future catalog receipts",
+    "README index evidence path is versioned to v245"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffReadmeIndexTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogJsonBoundaryTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
