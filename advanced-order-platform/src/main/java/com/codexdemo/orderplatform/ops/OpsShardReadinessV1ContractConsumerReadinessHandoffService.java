@@ -233,6 +233,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/283/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-boundary-schema-strictness-v283.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_CLOSEOUT_EVIDENCE_PATH =
+            "e/284/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-boundary-closeout-v284.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

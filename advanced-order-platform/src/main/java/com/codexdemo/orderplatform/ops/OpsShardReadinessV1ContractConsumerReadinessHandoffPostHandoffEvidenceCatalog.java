@@ -356,6 +356,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "catalog boundary schema strictness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CATALOG_BOUNDARY_SCHEMA_STRICTNESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        284,
+                        "frozen boundary closeout",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_CLOSEOUT_EVIDENCE_PATH
                 )
         );
     }

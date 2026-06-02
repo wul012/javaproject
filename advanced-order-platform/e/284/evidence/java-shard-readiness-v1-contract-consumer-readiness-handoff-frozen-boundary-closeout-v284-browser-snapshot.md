@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v284 readiness handoff frozen boundary closeout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v284 closes the frozen-boundary stability slice with ordered scope checks.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Run
+      - generic [ref=e12]: v280-v284
+    - generic [ref=e13]:
+      - generic [ref=e14]: Scopes
+      - generic [ref=e15]: ordered
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: The frozen-boundary sequence stays cataloged.
+    - listitem [ref=e22]: Fixture endpoint and digest count checks remain grouped.
+    - listitem [ref=e23]: Boundary schema checks remain read-only.

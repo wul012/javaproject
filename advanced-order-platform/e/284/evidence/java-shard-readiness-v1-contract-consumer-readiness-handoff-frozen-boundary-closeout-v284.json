@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-boundary-closeout-receipt-v284",
+  "version": "Java v284",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff frozen boundary closeout",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v284 closes the v280-v284 frozen-boundary stability slice by verifying the five-version scope sequence remains cataloged in order.",
+  "guards": [
+    "v280 through v284 remain cataloged as the frozen-boundary sequence",
+    "the frozen-boundary sequence covers flags, fixture endpoints, digest counts, boundary schema, and closeout checks",
+    "frozen boundary closeout path is versioned to v284"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenBoundaryCloseoutTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogBoundarySchemaStrictnessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenDigestCountParityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenFixtureEndpointStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenBoundaryFlagsTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

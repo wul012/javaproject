@@ -119,3 +119,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `281/`: Java shard-readiness v1 contract consumer readiness handoff frozen fixture endpoint stability.
 - `282/`: Java shard-readiness v1 contract consumer readiness handoff frozen digest count parity.
 - `283/`: Java shard-readiness v1 contract consumer readiness handoff catalog boundary schema strictness.
+- `284/`: Java shard-readiness v1 contract consumer readiness handoff frozen boundary closeout.
