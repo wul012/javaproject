@@ -1,6 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertEvidencePath;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,13 +28,12 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveArtifactByteFloo
 
     @Test
     void keepsArchiveArtifactByteFloorPathVersionedToV286() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
-                .CONSUMER_READINESS_HANDOFF_ARCHIVE_ARTIFACT_BYTE_FLOOR_EVIDENCE_PATH)
-                .isEqualTo(
-                        "e/286/evidence/"
-                                + "java-shard-readiness-v1-contract-consumer-readiness-handoff-"
-                                + "archive-artifact-byte-floor-v286.json"
-                );
+        assertEvidencePath(
+                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        .CONSUMER_READINESS_HANDOFF_ARCHIVE_ARTIFACT_BYTE_FLOOR_EVIDENCE_PATH,
+                286,
+                "archive-artifact-byte-floor"
+        );
     }
 
     private static Path versionedArtifact(Path versionRoot, int version, String suffix) throws IOException {

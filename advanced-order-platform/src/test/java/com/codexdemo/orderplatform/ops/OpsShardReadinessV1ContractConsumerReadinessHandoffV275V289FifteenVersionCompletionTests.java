@@ -1,39 +1,26 @@
 package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertEvidencePath;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertExactVersionWindow;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertReceiptCountAtLeast;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertVersionRun;
+import static com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.scopes;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessV1ContractConsumerReadinessHandoffV275V289FifteenVersionCompletionTests {
 
     @Test
     void keepsV275ThroughV289CatalogedAsCompleteFifteenVersionRun() {
-        List<Integer> versions = OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog
-                .versions();
-
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipts())
-                .hasSizeGreaterThanOrEqualTo(64);
-        assertThat(versions).containsSubsequence(
-                275, 276, 277, 278, 279,
-                280, 281, 282, 283, 284,
-                285, 286, 287, 288, 289
-        );
-        assertThat(versions.stream()
-                .filter(version -> version >= 275 && version <= 289)
-                .toList())
-                .containsExactly(
-                        275, 276, 277, 278, 279,
-                        280, 281, 282, 283, 284,
-                        285, 286, 287, 288, 289
-                );
+        assertReceiptCountAtLeast(64);
+        assertVersionRun(275, 289);
+        assertExactVersionWindow(275, 289);
     }
 
     @Test
     void keepsV275ThroughV289ScopesCatalogedInOrder() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipts())
-                .extracting(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog
-                        .Receipt::scope)
+        assertThat(scopes())
                 .containsSubsequence(
                         "validation artifact depth",
                         "readme description alignment",
@@ -55,12 +42,11 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffV275V289FifteenVersionC
 
     @Test
     void keepsV275V289FifteenVersionCompletionPathVersionedToV289() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
-                .CONSUMER_READINESS_HANDOFF_V275_V289_FIFTEEN_VERSION_COMPLETION_EVIDENCE_PATH)
-                .isEqualTo(
-                        "e/289/evidence/"
-                                + "java-shard-readiness-v1-contract-consumer-readiness-handoff-"
-                                + "v275-v289-fifteen-version-completion-v289.json"
-                );
+        assertEvidencePath(
+                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        .CONSUMER_READINESS_HANDOFF_V275_V289_FIFTEEN_VERSION_COMPLETION_EVIDENCE_PATH,
+                289,
+                "v275-v289-fifteen-version-completion"
+        );
     }
 }
