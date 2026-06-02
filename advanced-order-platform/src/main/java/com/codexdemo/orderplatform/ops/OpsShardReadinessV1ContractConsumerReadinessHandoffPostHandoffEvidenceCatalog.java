@@ -164,6 +164,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "process control boundary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_PROCESS_CONTROL_BOUNDARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        252,
+                        "write router boundary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_WRITE_ROUTER_BOUNDARY_EVIDENCE_PATH
                 )
         );
     }

@@ -1,0 +1,29 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-write-router-boundary-receipt-v252",
+  "version": "Java v252",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff write/router boundary",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v252 verifies readiness handoff keeps write routing, active shard routing, and shard enablement disabled and listed as blocked where applicable.",
+  "guards": [
+    "writeRoutingAllowed remains false",
+    "activeShardRouterAllowed remains false",
+    "shardEnabled remains false",
+    "blocked operations include write-routing",
+    "blocked operations include active-shard-router"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffWriteRouterBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffProcessControlBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v252 readiness handoff write/router boundary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v252 keeps write routing, active shard routing, and shard enablement outside the handoff.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Write routing
+      - generic [ref=e12]: "false"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Active router
+      - generic [ref=e15]: "false"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Shard enabled
+      - generic [ref=e18]: "false"
+  - list [ref=e20]:
+    - listitem [ref=e21]: Write routing remains disabled.
+    - listitem [ref=e22]: Active shard router remains disabled.
+    - listitem [ref=e23]: Shard enablement remains false for this consumer handoff.
