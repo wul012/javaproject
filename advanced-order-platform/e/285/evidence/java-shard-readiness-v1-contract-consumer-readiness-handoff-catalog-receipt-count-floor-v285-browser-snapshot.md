@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v285 readiness handoff catalog receipt count floor" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v285 keeps the post-handoff catalog above the sixty-receipt floor after the v275-v285 run.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Receipt floor
+      - generic [ref=e12]: 60+
+    - generic [ref=e13]:
+      - generic [ref=e14]: Run
+      - generic [ref=e15]: v275-v285
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: The post-handoff catalog remains large enough to preserve historical receipts.
+    - listitem [ref=e22]: The v275-v285 subsequence remains ordered.
+    - listitem [ref=e23]: The evidence path is pinned to v285.

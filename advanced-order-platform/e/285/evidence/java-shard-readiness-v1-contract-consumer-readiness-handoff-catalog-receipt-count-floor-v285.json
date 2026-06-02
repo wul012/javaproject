@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-receipt-count-floor-receipt-v285",
+  "version": "Java v285",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff catalog receipt count floor",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v285 adds a catalog receipt count floor so the post-handoff evidence catalog cannot silently drop below sixty receipts after the v275-v285 run.",
+  "guards": [
+    "post-handoff catalog has at least sixty receipts",
+    "v275 through v285 remain cataloged as an ordered subsequence",
+    "catalog receipt count floor evidence path is versioned to v285"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogReceiptCountFloorTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenBoundaryCloseoutTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

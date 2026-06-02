@@ -362,6 +362,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "frozen boundary closeout",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_CLOSEOUT_EVIDENCE_PATH
+                ),
+                receipt(
+                        285,
+                        "catalog receipt count floor",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CATALOG_RECEIPT_COUNT_FLOOR_EVIDENCE_PATH
                 )
         );
     }
