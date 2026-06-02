@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v268 readiness handoff JSON metadata completeness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v268 verifies core JSON metadata remains complete for each catalog receipt.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Fields
+      - generic [ref=e12]: complete
+    - generic [ref=e13]:
+      - generic [ref=e14]: Receipt
+      - generic [ref=e15]: aligned
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Each JSON carries the core metadata fields.
+    - listitem [ref=e22]: Receipt identifiers stay version aligned.
+    - listitem [ref=e23]: Version text must match the catalog receipt.

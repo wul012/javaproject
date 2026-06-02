@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-json-metadata-completeness-receipt-v268",
+  "version": "Java v268",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff json metadata completeness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v268 verifies every post-handoff catalog evidence JSON keeps the core metadata fields needed for handoff review.",
+  "guards": [
+    "every catalog evidence JSON has receiptId, version, status, scope, summary, guards, validation, and boundary fields",
+    "receiptId and version stay aligned with the catalog receipt version",
+    "JSON metadata completeness path is versioned to v268"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffJsonMetadataCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffJsonGuardCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogJsonBoundaryTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

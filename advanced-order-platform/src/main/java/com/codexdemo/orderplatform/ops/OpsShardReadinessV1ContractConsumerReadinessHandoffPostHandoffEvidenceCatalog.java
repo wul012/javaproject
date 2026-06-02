@@ -260,6 +260,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "json guard completeness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_JSON_GUARD_COMPLETENESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        268,
+                        "json metadata completeness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_JSON_METADATA_COMPLETENESS_EVIDENCE_PATH
                 )
         );
     }
