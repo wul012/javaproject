@@ -1,0 +1,39 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-archive-presence-receipt-v243",
+  "version": "Java v243",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff catalog archive presence",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v243 verifies every post-handoff catalog receipt has the expected evidence JSON, browser snapshot, HTML, screenshot, and Chinese explanation artifacts present in the archive.",
+  "archive": {
+    "requiredFilesPerReceipt": [
+      "evidence json",
+      "browser snapshot",
+      "html evidence page",
+      "screenshot png",
+      "explanation markdown"
+    ],
+    "catalogDriven": true
+  },
+  "guards": [
+    "every catalog evidence JSON exists",
+    "every catalog browser snapshot exists",
+    "every catalog HTML evidence page exists",
+    "every catalog screenshot PNG exists",
+    "every catalog explanation markdown exists"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogContinuityTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

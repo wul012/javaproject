@@ -8,9 +8,12 @@ import org.junit.jupiter.api.Test;
 class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogContinuityTests {
 
     @Test
-    void keepsPostHandoffCatalogVersionsConsecutiveThroughV242() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.versions())
-                .containsExactlyElementsOf(IntStream.rangeClosed(226, 242).boxed().toList());
+    void keepsPostHandoffCatalogVersionsConsecutiveFromV226() {
+        var versions = OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.versions();
+
+        assertThat(versions).startsWith(226).contains(242);
+        assertThat(versions)
+                .containsExactlyElementsOf(IntStream.rangeClosed(226, versions.getLast()).boxed().toList());
     }
 
     @Test
