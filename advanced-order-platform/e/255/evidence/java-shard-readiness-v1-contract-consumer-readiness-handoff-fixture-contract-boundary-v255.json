@@ -1,0 +1,28 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-fixture-contract-boundary-receipt-v255",
+  "version": "Java v255",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff fixture contract boundary",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v255 verifies the readiness handoff fixture endpoint remains frozen to the v225 fixture and is not advanced to a post-handoff validation version.",
+  "guards": [
+    "handoff fixture endpoint equals service fixture endpoint",
+    "fixture endpoint contains v225",
+    "fixture endpoint does not contain v255",
+    "v225 static fixture file exists"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffFixtureContractBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffReadOnlyAdjacencyTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

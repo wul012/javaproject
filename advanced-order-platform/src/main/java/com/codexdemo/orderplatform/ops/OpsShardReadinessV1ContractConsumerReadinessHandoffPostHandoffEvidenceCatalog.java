@@ -182,6 +182,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "read only adjacency",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_READ_ONLY_ADJACENCY_EVIDENCE_PATH
+                ),
+                receipt(
+                        255,
+                        "fixture contract boundary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_FIXTURE_CONTRACT_BOUNDARY_EVIDENCE_PATH
                 )
         );
     }

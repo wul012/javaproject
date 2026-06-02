@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v255 readiness handoff fixture contract boundary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v255 keeps the readiness handoff fixture frozen to v225 while post-handoff receipts continue separately.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Fixture
+      - generic [ref=e12]: v225
+    - generic [ref=e13]:
+      - generic [ref=e14]: Post-handoff
+      - generic [ref=e15]: separate
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: frozen
+  - list [ref=e20]:
+    - listitem [ref=e21]: Fixture endpoint still references v225.
+    - listitem [ref=e22]: Fixture endpoint does not advance to v255.
+    - listitem [ref=e23]: The v225 static fixture file is present.
