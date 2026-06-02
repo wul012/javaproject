@@ -206,6 +206,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "catalog completion readiness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CATALOG_COMPLETION_READINESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        259,
+                        "twenty version completion",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_TWENTY_VERSION_COMPLETION_EVIDENCE_PATH
                 )
         );
     }

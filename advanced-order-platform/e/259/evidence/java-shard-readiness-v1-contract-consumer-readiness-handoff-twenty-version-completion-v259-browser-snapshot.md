@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v259 readiness handoff twenty-version completion" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v259 closes the v240-v259 run and proves frozen v225 remains separate from all validation evidence.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Current run
+      - generic [ref=e12]: "20"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Catalog
+      - generic [ref=e15]: 226-259
+    - generic [ref=e16]:
+      - generic [ref=e17]: Frozen v225
+      - generic [ref=e18]: separate
+  - list [ref=e20]:
+    - listitem [ref=e21]: v240-v259 receipts are cataloged in order.
+    - listitem [ref=e22]: The full post-handoff catalog is consecutive from v226 through v259.
+    - listitem [ref=e23]: Validation evidence stays outside frozen v225 digest and guard evidence.
