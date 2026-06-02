@@ -225,6 +225,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/281/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-fixture-endpoint-stability-v281.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_FROZEN_DIGEST_COUNT_PARITY_EVIDENCE_PATH =
+            "e/282/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-digest-count-parity-v282.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

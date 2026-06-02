@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v282 readiness handoff frozen digest count parity" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v282 verifies v225 handoff digest counts remain aligned with the frozen v220 digest.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Digest
+      - generic [ref=e12]: v220
+    - generic [ref=e13]:
+      - generic [ref=e14]: Counts
+      - generic [ref=e15]: aligned
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Digest evidence count matches the frozen digest.
+    - listitem [ref=e22]: Digest check count matches the frozen digest.
+    - listitem [ref=e23]: Handoff checks still report the same counts.

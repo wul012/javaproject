@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-digest-count-parity-receipt-v282",
+  "version": "Java v282",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff frozen digest count parity",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v282 verifies the frozen Java v225 readiness handoff digest counts and evidence list remain aligned with the frozen Java v220 digest.",
+  "guards": [
+    "frozen v225 handoff digest evidence count equals the frozen v220 digest evidence size",
+    "frozen v225 handoff digest check count equals the frozen v220 digest check size",
+    "frozen digest count parity path is versioned to v282"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenDigestCountParityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenFixtureEndpointStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshotTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}
