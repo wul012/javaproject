@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-readme-description-alignment-receipt-v276",
+  "version": "Java v276",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff readme description alignment",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v276 verifies every post-handoff README entry remains descriptive and aligned with its catalog scope.",
+  "guards": [
+    "every catalog README entry mentions readiness handoff",
+    "every catalog README entry includes its receipt scope",
+    "README description alignment path is versioned to v276"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffReadmeDescriptionAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffReadmeIndexTests,OpsShardReadinessV1ContractConsumerReadinessHandoffValidationArtifactDepthTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

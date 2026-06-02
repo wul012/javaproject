@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v276 readiness handoff README description alignment" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v276 verifies README catalog entries stay descriptive and scope-aligned.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: README
+      - generic [ref=e12]: aligned
+    - generic [ref=e13]:
+      - generic [ref=e14]: Scope
+      - generic [ref=e15]: present
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Every README entry mentions readiness handoff.
+    - listitem [ref=e22]: Every README entry includes its receipt scope.
+    - listitem [ref=e23]: The check prevents vague archive index rows.

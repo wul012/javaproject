@@ -308,6 +308,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "validation artifact depth",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_VALIDATION_ARTIFACT_DEPTH_EVIDENCE_PATH
+                ),
+                receipt(
+                        276,
+                        "readme description alignment",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_README_DESCRIPTION_ALIGNMENT_EVIDENCE_PATH
                 )
         );
     }
