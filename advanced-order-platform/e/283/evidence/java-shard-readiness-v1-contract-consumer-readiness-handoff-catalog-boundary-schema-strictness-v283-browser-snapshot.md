@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v283 readiness handoff catalog boundary schema strictness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v283 verifies every catalog boundary object keeps the exact read-only schema.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Schema
+      - generic [ref=e12]: exact
+    - generic [ref=e13]:
+      - generic [ref=e14]: Fields
+      - generic [ref=e15]: "false"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Boundary objects have no missing fields.
+    - listitem [ref=e22]: Boundary objects have no extra fields.
+    - listitem [ref=e23]: Every boundary field remains false.

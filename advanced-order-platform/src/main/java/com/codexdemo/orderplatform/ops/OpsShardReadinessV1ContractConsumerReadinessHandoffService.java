@@ -229,6 +229,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/282/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-digest-count-parity-v282.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_CATALOG_BOUNDARY_SCHEMA_STRICTNESS_EVIDENCE_PATH =
+            "e/283/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-boundary-schema-strictness-v283.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();

@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-catalog-boundary-schema-strictness-receipt-v283",
+  "version": "Java v283",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff catalog boundary schema strictness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v283 verifies every post-handoff catalog evidence boundary object keeps the exact read-only schema with every field false.",
+  "guards": [
+    "every catalog boundary object has exactly the expected read-only boundary fields",
+    "every catalog boundary field remains false",
+    "catalog boundary schema strictness path is versioned to v283"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogBoundarySchemaStrictnessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffBoundaryFieldCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogJsonBoundaryTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

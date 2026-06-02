@@ -350,6 +350,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "frozen digest count parity",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_FROZEN_DIGEST_COUNT_PARITY_EVIDENCE_PATH
+                ),
+                receipt(
+                        283,
+                        "catalog boundary schema strictness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_CATALOG_BOUNDARY_SCHEMA_STRICTNESS_EVIDENCE_PATH
                 )
         );
     }
