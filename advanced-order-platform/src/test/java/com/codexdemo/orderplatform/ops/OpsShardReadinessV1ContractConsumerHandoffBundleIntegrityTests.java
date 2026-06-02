@@ -13,14 +13,15 @@ class OpsShardReadinessV1ContractConsumerHandoffBundleIntegrityTests {
         OpsShardReadinessV1ContractConsumerHandoffBundleResponse bundle =
                 OpsShardReadinessV1ContractConsumerHandoffBundleSnapshot.v211Bundle();
 
-        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(10);
+        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(11);
         assertThat(OpsShardReadinessV1ContractEndpointPairs.liveEndpoints())
                 .doesNotHaveDuplicates()
                 .containsSubsequence(
                         OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT,
-                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT
                 )
                 .doesNotContain(
                         OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT,
@@ -32,7 +33,8 @@ class OpsShardReadinessV1ContractConsumerHandoffBundleIntegrityTests {
                         OpsShardReadinessV1ContractEndpointCatalogService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.FIXTURE_ENDPOINT,
-                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.FIXTURE_ENDPOINT
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService.FIXTURE_ENDPOINT
                 )
                 .doesNotContain(
                         OpsShardReadinessReadOnlyEvidenceCatalogService.FIXTURE_ENDPOINT,
@@ -71,6 +73,7 @@ class OpsShardReadinessV1ContractConsumerHandoffBundleIntegrityTests {
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT,
                         OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT
                 );
     }

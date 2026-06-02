@@ -13,14 +13,15 @@ class OpsShardReadinessV1ContractConsumerVerificationChecklistIntegrityTests {
         OpsShardReadinessV1ContractConsumerVerificationChecklistResponse checklist =
                 OpsShardReadinessV1ContractConsumerVerificationChecklistSnapshot.v215Checklist();
 
-        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(10);
+        assertThat(OpsShardReadinessV1ContractEndpointPairs.endpointPairs()).hasSize(11);
         assertThat(OpsShardReadinessV1ContractEndpointPairs.liveEndpoints())
                 .doesNotHaveDuplicates()
                 .containsSubsequence(
                         OpsShardReadinessV1ContractEndpointCatalogService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.ENDPOINT,
-                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT
                 )
                 .doesNotContain(
                         OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT,
@@ -32,7 +33,8 @@ class OpsShardReadinessV1ContractConsumerVerificationChecklistIntegrityTests {
                         OpsShardReadinessV1ContractEndpointCatalogService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractConsumerHandoffBundleService.FIXTURE_ENDPOINT,
                         OpsShardReadinessV1ContractConsumerVerificationChecklistService.FIXTURE_ENDPOINT,
-                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.FIXTURE_ENDPOINT
+                        OpsShardReadinessV1ContractConsumerEvidenceDigestService.FIXTURE_ENDPOINT,
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService.FIXTURE_ENDPOINT
                 )
                 .doesNotContain(
                         OpsShardReadinessReadOnlyEvidenceCatalogService.FIXTURE_ENDPOINT,
