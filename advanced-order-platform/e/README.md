@@ -85,3 +85,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `247/`: Java shard-readiness v1 contract consumer readiness handoff blocked operation catalog.
 - `248/`: Java shard-readiness v1 contract consumer readiness handoff GET-only probe boundary.
 - `249/`: Java shard-readiness v1 contract consumer readiness handoff credential/raw endpoint boundary.
+- `250/`: Java shard-readiness v1 contract consumer readiness handoff audit/deployment boundary.

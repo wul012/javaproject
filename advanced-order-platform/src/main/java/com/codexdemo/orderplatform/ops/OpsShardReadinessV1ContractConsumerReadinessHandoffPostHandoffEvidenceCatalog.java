@@ -152,6 +152,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "credential raw endpoint boundary",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_CREDENTIAL_RAW_ENDPOINT_BOUNDARY_EVIDENCE_PATH
+                ),
+                receipt(
+                        250,
+                        "audit deployment boundary",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_AUDIT_DEPLOYMENT_BOUNDARY_EVIDENCE_PATH
                 )
         );
     }

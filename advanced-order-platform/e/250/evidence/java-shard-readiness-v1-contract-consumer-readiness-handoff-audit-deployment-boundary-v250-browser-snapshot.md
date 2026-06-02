@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v250 readiness handoff audit/deployment boundary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v250 keeps managed audit connections and deployment or rollback actions out of the read-only handoff.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Audit connection
+      - generic [ref=e12]: "false"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Deploy/rollback
+      - generic [ref=e15]: "false"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: blocked
+  - list [ref=e20]:
+    - listitem [ref=e21]: Managed audit connection remains disabled.
+    - listitem [ref=e22]: Deployment and rollback remain disabled.
+    - listitem [ref=e23]: Both operations remain visible in blocked operations.

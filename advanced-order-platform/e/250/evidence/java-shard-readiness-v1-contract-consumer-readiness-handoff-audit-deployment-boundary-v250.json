@@ -1,0 +1,28 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-audit-deployment-boundary-receipt-v250",
+  "version": "Java v250",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff audit/deployment boundary",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v250 verifies readiness handoff keeps managed audit connections and deployment/rollback actions disabled and listed as blocked operations.",
+  "guards": [
+    "managedAuditConnectionAllowed remains false",
+    "deploymentOrRollbackAllowed remains false",
+    "blocked operations include managed-audit-connection",
+    "blocked operations include deployment-or-rollback"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffAuditDeploymentBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCredentialRawEndpointBoundaryTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

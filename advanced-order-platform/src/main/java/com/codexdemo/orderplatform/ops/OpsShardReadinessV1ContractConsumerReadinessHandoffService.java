@@ -97,6 +97,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/249/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-credential-raw-endpoint-boundary-v249.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_AUDIT_DEPLOYMENT_BOUNDARY_EVIDENCE_PATH =
+            "e/250/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-audit-deployment-boundary-v250.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
