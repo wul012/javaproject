@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-v1-endpoint-registry-stability-receipt-v270",
+  "version": "Java v270",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff v1 endpoint registry stability",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v270 verifies the consumer readiness handoff remains the final v1 contract endpoint pair and read-only/runtime closeout endpoints remain outside that v1 pair list.",
+  "guards": [
+    "consumer readiness handoff remains the final v1 contract endpoint pair",
+    "read-only catalog and runtime closeout endpoints remain outside the v1 contract pair list",
+    "v1 endpoint registry stability path is versioned to v270"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffV1EndpointRegistryStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffLegacyRegistryAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveQualityCloseoutTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

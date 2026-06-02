@@ -105,3 +105,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `267/`: Java shard-readiness v1 contract consumer readiness handoff JSON guard completeness.
 - `268/`: Java shard-readiness v1 contract consumer readiness handoff JSON metadata completeness.
 - `269/`: Java shard-readiness v1 contract consumer readiness handoff archive quality closeout.
+- `270/`: Java shard-readiness v1 contract consumer readiness handoff v1 endpoint registry stability.

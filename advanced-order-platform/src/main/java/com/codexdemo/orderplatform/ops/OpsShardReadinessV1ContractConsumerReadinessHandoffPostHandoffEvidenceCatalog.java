@@ -272,6 +272,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "archive quality closeout",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_ARCHIVE_QUALITY_CLOSEOUT_EVIDENCE_PATH
+                ),
+                receipt(
+                        270,
+                        "v1 endpoint registry stability",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_V1_ENDPOINT_REGISTRY_STABILITY_EVIDENCE_PATH
                 )
         );
     }

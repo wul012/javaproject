@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v270 readiness handoff v1 endpoint registry stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v270 verifies the readiness handoff endpoint remains in the v1 contract slot without pulling later read-only or runtime endpoints into that list.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: V1 pairs
+      - generic [ref=e12]: "11"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Final pair
+      - generic [ref=e15]: handoff
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Consumer readiness handoff remains the final v1 pair.
+    - listitem [ref=e22]: Read-only catalog is not backfilled into the v1 pair list.
+    - listitem [ref=e23]: Runtime closeout remains outside this handoff boundary.

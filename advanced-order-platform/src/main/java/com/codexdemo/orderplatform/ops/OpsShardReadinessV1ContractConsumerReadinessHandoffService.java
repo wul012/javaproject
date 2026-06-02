@@ -177,6 +177,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/269/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-archive-quality-closeout-v269.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_V1_ENDPOINT_REGISTRY_STABILITY_EVIDENCE_PATH =
+            "e/270/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-v1-endpoint-registry-stability-v270.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
