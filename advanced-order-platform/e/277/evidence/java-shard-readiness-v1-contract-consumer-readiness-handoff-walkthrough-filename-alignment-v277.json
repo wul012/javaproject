@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-walkthrough-filename-alignment-receipt-v277",
+  "version": "Java v277",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff walkthrough filename alignment",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v277 verifies every post-handoff walkthrough filename carries both the receipt version and the receipt scope slug.",
+  "guards": [
+    "every catalog walkthrough filename contains the receipt version token",
+    "every catalog walkthrough filename contains the receipt scope slug",
+    "walkthrough filename alignment path is versioned to v277"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffWalkthroughFilenameAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffWalkthroughIndexTests,OpsShardReadinessV1ContractConsumerReadinessHandoffReadmeDescriptionAlignmentTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

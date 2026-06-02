@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v277 readiness handoff walkthrough filename alignment" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v277 verifies walkthrough filenames remain aligned to receipt versions and scope slugs.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Version
+      - generic [ref=e12]: present
+    - generic [ref=e13]:
+      - generic [ref=e14]: Scope slug
+      - generic [ref=e15]: present
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: "Walkthrough names include `version-N`."
+    - listitem [ref=e22]: Walkthrough names include the receipt scope slug.
+    - listitem [ref=e23]: The archive remains easy to scan and diff.

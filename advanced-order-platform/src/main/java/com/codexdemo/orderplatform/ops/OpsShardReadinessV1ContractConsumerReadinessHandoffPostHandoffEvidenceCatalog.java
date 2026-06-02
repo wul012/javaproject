@@ -314,6 +314,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "readme description alignment",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_README_DESCRIPTION_ALIGNMENT_EVIDENCE_PATH
+                ),
+                receipt(
+                        277,
+                        "walkthrough filename alignment",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_WALKTHROUGH_FILENAME_ALIGNMENT_EVIDENCE_PATH
                 )
         );
     }
