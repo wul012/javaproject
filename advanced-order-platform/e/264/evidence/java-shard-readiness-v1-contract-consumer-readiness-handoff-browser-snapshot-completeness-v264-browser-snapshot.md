@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v264 readiness handoff browser snapshot completeness" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v264 verifies each catalog receipt keeps a readable browser snapshot.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Snapshot
+      - generic [ref=e12]: present
+    - generic [ref=e13]:
+      - generic [ref=e14]: Landmark
+      - generic [ref=e15]: main
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Every catalog snapshot is non-empty.
+    - listitem [ref=e22]: Snapshots retain main and heading nodes for quick review.
+    - listitem [ref=e23]: The check grows with the catalog.

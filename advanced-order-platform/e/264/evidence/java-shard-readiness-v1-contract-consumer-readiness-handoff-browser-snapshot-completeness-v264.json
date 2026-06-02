@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-browser-snapshot-completeness-receipt-v264",
+  "version": "Java v264",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff browser snapshot completeness",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v264 verifies every post-handoff catalog receipt keeps a non-empty Playwright browser snapshot for accessibility-tree review.",
+  "guards": [
+    "every catalog browser snapshot file is present through archive presence checks",
+    "every catalog browser snapshot contains a main landmark and heading",
+    "browser snapshot completeness path is versioned to v264"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffBrowserSnapshotCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffExplanationArchiveCompletenessTests,OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveSlugParityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

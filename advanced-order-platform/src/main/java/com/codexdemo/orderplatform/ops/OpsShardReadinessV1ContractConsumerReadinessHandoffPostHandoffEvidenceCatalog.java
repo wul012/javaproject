@@ -236,6 +236,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "explanation archive completeness",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_EXPLANATION_ARCHIVE_COMPLETENESS_EVIDENCE_PATH
+                ),
+                receipt(
+                        264,
+                        "browser snapshot completeness",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_BROWSER_SNAPSHOT_COMPLETENESS_EVIDENCE_PATH
                 )
         );
     }
