@@ -34,7 +34,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffReceiptIdUniquenessTest
 
     @Test
     void keepsReceiptIdUniquenessEvidencePathVersionedToV256() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_RECEIPT_ID_UNIQUENESS_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/256/evidence/"

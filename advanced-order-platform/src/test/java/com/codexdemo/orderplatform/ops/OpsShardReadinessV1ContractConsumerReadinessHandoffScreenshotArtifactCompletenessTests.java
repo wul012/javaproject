@@ -28,7 +28,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffScreenshotArtifactCompl
 
     @Test
     void keepsScreenshotArtifactCompletenessPathVersionedToV265() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_SCREENSHOT_ARTIFACT_COMPLETENESS_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/265/evidence/"

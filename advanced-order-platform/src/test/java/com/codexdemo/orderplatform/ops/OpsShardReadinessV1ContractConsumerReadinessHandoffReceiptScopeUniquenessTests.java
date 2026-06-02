@@ -21,7 +21,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffReceiptScopeUniquenessT
     @Test
     void keepsReceiptScopeUniquenessPathVersionedToV287() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_RECEIPT_SCOPE_UNIQUENESS_EVIDENCE_PATH,
                 287,
                 "receipt-scope-uniqueness"

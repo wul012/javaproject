@@ -31,7 +31,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffEvidenceScopeSummaryTes
 
     @Test
     void keepsEvidenceScopeSummaryPathVersionedToV260() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_EVIDENCE_SCOPE_SUMMARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/260/evidence/"

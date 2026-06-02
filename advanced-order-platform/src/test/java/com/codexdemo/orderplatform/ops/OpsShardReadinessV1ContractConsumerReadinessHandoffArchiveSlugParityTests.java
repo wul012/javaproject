@@ -33,7 +33,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveSlugParityTests 
 
     @Test
     void keepsArchiveSlugParityPathVersionedToV262() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_ARCHIVE_SLUG_PARITY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/262/evidence/"

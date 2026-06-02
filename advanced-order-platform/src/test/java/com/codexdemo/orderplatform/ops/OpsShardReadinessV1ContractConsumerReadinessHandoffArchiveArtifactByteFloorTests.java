@@ -23,7 +23,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveArtifactByteFloo
     @Test
     void keepsArchiveArtifactByteFloorPathVersionedToV286() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_ARCHIVE_ARTIFACT_BYTE_FLOOR_EVIDENCE_PATH,
                 286,
                 "archive-artifact-byte-floor"

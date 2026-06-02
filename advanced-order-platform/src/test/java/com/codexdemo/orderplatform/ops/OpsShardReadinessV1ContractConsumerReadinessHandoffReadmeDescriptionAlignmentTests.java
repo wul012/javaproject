@@ -34,7 +34,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffReadmeDescriptionAlignm
     @Test
     void keepsReadmeDescriptionAlignmentPathVersionedToV276() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_README_DESCRIPTION_ALIGNMENT_EVIDENCE_PATH,
                 276,
                 "readme-description-alignment"

@@ -24,7 +24,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffFixtureContractBoundary
 
     @Test
     void keepsFixtureContractBoundaryEvidencePathVersionedToV255() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_FIXTURE_CONTRACT_BOUNDARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/255/evidence/"

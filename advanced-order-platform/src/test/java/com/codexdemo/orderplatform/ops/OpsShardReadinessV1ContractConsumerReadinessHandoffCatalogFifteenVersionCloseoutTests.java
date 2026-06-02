@@ -32,7 +32,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogFifteenVersionCl
 
     @Test
     void keepsCatalogFifteenVersionCloseoutPathVersionedToV273() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_CATALOG_FIFTEEN_VERSION_CLOSEOUT_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/273/evidence/"

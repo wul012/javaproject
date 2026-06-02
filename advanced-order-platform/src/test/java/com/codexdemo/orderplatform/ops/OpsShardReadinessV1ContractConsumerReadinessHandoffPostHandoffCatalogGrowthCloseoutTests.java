@@ -26,7 +26,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogGrowt
     @Test
     void keepsPostHandoffCatalogGrowthCloseoutPathVersionedToV288() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_GROWTH_CLOSEOUT_EVIDENCE_PATH,
                 288,
                 "post-handoff-catalog-growth-closeout"

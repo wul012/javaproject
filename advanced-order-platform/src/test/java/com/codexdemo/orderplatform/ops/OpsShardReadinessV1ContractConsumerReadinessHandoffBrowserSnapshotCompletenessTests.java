@@ -25,7 +25,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffBrowserSnapshotComplete
 
     @Test
     void keepsBrowserSnapshotCompletenessPathVersionedToV264() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_BROWSER_SNAPSHOT_COMPLETENESS_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/264/evidence/"

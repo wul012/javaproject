@@ -36,7 +36,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffValidationArtifactDepth
 
     @Test
     void keepsValidationArtifactDepthPathVersionedToV275() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_VALIDATION_ARTIFACT_DEPTH_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/275/evidence/"

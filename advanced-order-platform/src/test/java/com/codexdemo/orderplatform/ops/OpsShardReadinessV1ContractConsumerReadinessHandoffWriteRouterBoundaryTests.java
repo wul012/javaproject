@@ -19,7 +19,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffWriteRouterBoundaryTest
 
     @Test
     void keepsWriteRouterBoundaryEvidencePathVersionedToV252() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_WRITE_ROUTER_BOUNDARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/252/evidence/"

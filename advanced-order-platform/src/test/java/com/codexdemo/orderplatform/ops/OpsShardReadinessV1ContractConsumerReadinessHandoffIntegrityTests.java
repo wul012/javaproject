@@ -47,20 +47,20 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffIntegrityTests {
 
         assertThat(handoff.digestEvidence())
                 .doesNotContain(
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_SNAPSHOT_FREEZE_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_INTEGRITY_EVIDENCE_PATH
                 );
         assertThat(handoff.handoffGuardEvidence())
                 .doesNotContain(
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_SNAPSHOT_FREEZE_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_INTEGRITY_EVIDENCE_PATH
                 );
     }

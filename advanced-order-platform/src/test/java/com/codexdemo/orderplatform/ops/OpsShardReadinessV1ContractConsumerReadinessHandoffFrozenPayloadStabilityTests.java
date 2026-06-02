@@ -35,7 +35,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenPayloadStabilityT
 
     @Test
     void keepsFrozenPayloadStabilityPathVersionedToV271() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_FROZEN_PAYLOAD_STABILITY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/271/evidence/"

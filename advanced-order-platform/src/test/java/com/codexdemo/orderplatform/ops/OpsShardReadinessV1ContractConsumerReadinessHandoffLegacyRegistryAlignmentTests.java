@@ -55,7 +55,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffLegacyRegistryAlignment
 
     @Test
     void keepsLegacyRegistryAlignmentEvidencePathVersionedToV240() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_LEGACY_REGISTRY_ALIGNMENT_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/240/evidence/"

@@ -21,7 +21,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCredentialRawEndpointBo
 
     @Test
     void keepsCredentialRawEndpointBoundaryEvidencePathVersionedToV249() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_CREDENTIAL_RAW_ENDPOINT_BOUNDARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/249/evidence/"

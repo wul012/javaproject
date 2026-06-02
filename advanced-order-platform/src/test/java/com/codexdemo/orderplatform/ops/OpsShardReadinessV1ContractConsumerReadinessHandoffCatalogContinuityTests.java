@@ -21,7 +21,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogContinuityTests 
     @Test
     void keepsCatalogContinuityEvidencePathVersionedToV242() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_CATALOG_CONTINUITY_EVIDENCE_PATH,
                 242,
                 "catalog-continuity"

@@ -25,7 +25,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenBoundaryFlagsTest
 
     @Test
     void keepsFrozenBoundaryFlagsPathVersionedToV280() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_FLAGS_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/280/evidence/"

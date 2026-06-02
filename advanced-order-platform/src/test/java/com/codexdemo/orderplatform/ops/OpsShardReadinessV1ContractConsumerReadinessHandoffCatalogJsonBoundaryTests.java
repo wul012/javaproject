@@ -31,7 +31,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogJsonBoundaryTest
 
     @Test
     void keepsCatalogJsonBoundaryEvidencePathVersionedToV244() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_CATALOG_JSON_BOUNDARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/244/evidence/"

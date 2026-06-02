@@ -33,7 +33,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffJsonGuardCompletenessTe
     @Test
     void keepsJsonGuardCompletenessPathVersionedToV267() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_JSON_GUARD_COMPLETENESS_EVIDENCE_PATH,
                 267,
                 "json-guard-completeness"

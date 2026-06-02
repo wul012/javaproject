@@ -32,15 +32,15 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffEvidenceChainTests {
                         "e/225/evidence/java-shard-readiness-v1-contract-consumer-readiness-handoff-v225.json"
                 )
                 .doesNotContain(
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_SNAPSHOT_FREEZE_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_INTEGRITY_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_ROUTE_INVENTORY_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_EVIDENCE_CHAIN_EVIDENCE_PATH
                 );
     }

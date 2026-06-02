@@ -30,7 +30,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveQualityCloseoutT
 
     @Test
     void keepsArchiveQualityCloseoutPathVersionedToV269() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_ARCHIVE_QUALITY_CLOSEOUT_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/269/evidence/"

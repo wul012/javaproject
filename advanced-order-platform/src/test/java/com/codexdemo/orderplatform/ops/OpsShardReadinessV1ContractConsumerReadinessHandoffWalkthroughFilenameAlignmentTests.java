@@ -31,7 +31,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffWalkthroughFilenameAlig
     @Test
     void keepsWalkthroughFilenameAlignmentPathVersionedToV277() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_WALKTHROUGH_FILENAME_ALIGNMENT_EVIDENCE_PATH,
                 277,
                 "walkthrough-filename-alignment"

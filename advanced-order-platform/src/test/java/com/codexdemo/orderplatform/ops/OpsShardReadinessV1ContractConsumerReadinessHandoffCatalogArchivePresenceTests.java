@@ -22,7 +22,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceT
 
     @Test
     void keepsCatalogArchivePresenceEvidencePathVersionedToV243() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_CATALOG_ARCHIVE_PRESENCE_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/243/evidence/"

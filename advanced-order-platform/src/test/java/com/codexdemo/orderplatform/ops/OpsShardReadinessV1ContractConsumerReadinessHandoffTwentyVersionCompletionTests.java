@@ -33,7 +33,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffTwentyVersionCompletion
     @Test
     void keepsTwentyVersionCompletionEvidencePathVersionedToV259() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_TWENTY_VERSION_COMPLETION_EVIDENCE_PATH,
                 259,
                 "twenty-version-completion"

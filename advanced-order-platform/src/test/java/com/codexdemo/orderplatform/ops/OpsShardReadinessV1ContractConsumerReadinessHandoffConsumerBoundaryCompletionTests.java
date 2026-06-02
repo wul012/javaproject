@@ -42,7 +42,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffConsumerBoundaryComplet
 
     @Test
     void keepsConsumerBoundaryCompletionEvidencePathVersionedToV253() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_CONSUMER_BOUNDARY_COMPLETION_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/253/evidence/"

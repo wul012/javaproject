@@ -24,7 +24,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogCompletionReadin
 
     @Test
     void keepsCatalogCompletionReadinessEvidencePathVersionedToV258() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_CATALOG_COMPLETION_READINESS_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/258/evidence/"

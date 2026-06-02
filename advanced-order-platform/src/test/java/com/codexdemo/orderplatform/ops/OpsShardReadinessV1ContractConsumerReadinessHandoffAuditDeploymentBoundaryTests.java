@@ -19,7 +19,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffAuditDeploymentBoundary
 
     @Test
     void keepsAuditDeploymentBoundaryEvidencePathVersionedToV250() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_AUDIT_DEPLOYMENT_BOUNDARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/250/evidence/"

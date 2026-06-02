@@ -18,7 +18,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogReceiptCountFloo
     @Test
     void keepsCatalogReceiptCountFloorPathVersionedToV285() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_CATALOG_RECEIPT_COUNT_FLOOR_EVIDENCE_PATH,
                 285,
                 "catalog-receipt-count-floor"

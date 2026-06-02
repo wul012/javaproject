@@ -20,7 +20,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffProcessControlBoundaryT
 
     @Test
     void keepsProcessControlBoundaryEvidencePathVersionedToV251() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_PROCESS_CONTROL_BOUNDARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/251/evidence/"

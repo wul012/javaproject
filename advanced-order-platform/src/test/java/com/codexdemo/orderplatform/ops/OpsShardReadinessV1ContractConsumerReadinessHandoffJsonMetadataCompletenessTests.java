@@ -41,7 +41,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffJsonMetadataCompletenes
     @Test
     void keepsJsonMetadataCompletenessPathVersionedToV268() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_JSON_METADATA_COMPLETENESS_EVIDENCE_PATH,
                 268,
                 "json-metadata-completeness"

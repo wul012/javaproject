@@ -33,7 +33,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffFifteenVersionCompletio
 
     @Test
     void keepsFifteenVersionCompletionPathVersionedToV274() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_FIFTEEN_VERSION_COMPLETION_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/274/evidence/"

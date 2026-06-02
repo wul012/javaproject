@@ -35,7 +35,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffGetOnlyProbeBoundaryTes
 
     @Test
     void keepsGetOnlyProbeBoundaryEvidencePathVersionedToV248() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_GET_ONLY_PROBE_BOUNDARY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/248/evidence/"

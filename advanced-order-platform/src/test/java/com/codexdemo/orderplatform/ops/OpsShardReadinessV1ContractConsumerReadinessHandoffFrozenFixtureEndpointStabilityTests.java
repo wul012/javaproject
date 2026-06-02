@@ -33,7 +33,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenFixtureEndpointSt
 
     @Test
     void keepsFrozenFixtureEndpointStabilityPathVersionedToV281() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_FROZEN_FIXTURE_ENDPOINT_STABILITY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/281/evidence/"

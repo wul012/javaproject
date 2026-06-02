@@ -43,7 +43,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogBoundarySchemaSt
 
     @Test
     void keepsCatalogBoundarySchemaStrictnessPathVersionedToV283() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_CATALOG_BOUNDARY_SCHEMA_STRICTNESS_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/283/evidence/"

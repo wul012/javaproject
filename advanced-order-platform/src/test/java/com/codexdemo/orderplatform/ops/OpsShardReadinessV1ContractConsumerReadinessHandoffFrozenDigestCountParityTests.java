@@ -23,7 +23,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenDigestCountParity
 
     @Test
     void keepsFrozenDigestCountParityPathVersionedToV282() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_FROZEN_DIGEST_COUNT_PARITY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/282/evidence/"

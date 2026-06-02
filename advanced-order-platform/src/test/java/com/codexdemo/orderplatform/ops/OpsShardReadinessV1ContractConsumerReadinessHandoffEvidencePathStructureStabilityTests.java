@@ -22,7 +22,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePathStructureSt
 
     @Test
     void keepsEvidencePathStructureStabilityPathVersionedToV278() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_EVIDENCE_PATH_STRUCTURE_STABILITY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/278/evidence/"

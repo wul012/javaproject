@@ -36,7 +36,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffIsolationTes
     @Test
     void keepsPostHandoffIsolationPathVersionedToV272() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_ISOLATION_EVIDENCE_PATH,
                 272,
                 "post-handoff-isolation"

@@ -24,7 +24,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffAuditabilityCloseoutTes
 
     @Test
     void keepsAuditabilityCloseoutPathVersionedToV279() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_AUDITABILITY_CLOSEOUT_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/279/evidence/"

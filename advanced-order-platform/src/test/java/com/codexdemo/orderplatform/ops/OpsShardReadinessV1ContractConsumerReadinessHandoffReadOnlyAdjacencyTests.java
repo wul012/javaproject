@@ -21,7 +21,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffReadOnlyAdjacencyTests 
 
     @Test
     void keepsReadOnlyAdjacencyEvidencePathVersionedToV254() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_READ_ONLY_ADJACENCY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/254/evidence/"

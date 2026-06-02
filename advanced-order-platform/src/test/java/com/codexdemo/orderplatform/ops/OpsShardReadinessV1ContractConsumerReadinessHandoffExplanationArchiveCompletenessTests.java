@@ -25,7 +25,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffExplanationArchiveCompl
     @Test
     void keepsExplanationArchiveCompletenessPathVersionedToV263() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_EXPLANATION_ARCHIVE_COMPLETENESS_EVIDENCE_PATH,
                 263,
                 "explanation-archive-completeness"

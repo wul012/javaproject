@@ -37,7 +37,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffReadmeIndexTests {
     @Test
     void keepsReadmeIndexEvidencePathVersionedToV245() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_README_INDEX_EVIDENCE_PATH,
                 245,
                 "readme-index"

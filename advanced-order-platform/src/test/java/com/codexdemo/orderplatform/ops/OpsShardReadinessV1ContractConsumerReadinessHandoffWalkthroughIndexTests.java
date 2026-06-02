@@ -25,7 +25,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffWalkthroughIndexTests {
     @Test
     void keepsWalkthroughIndexEvidencePathVersionedToV246() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_WALKTHROUGH_INDEX_EVIDENCE_PATH,
                 246,
                 "walkthrough-index"

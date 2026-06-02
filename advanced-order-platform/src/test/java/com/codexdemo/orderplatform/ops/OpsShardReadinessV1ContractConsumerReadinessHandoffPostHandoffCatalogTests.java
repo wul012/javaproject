@@ -29,7 +29,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffCatalogTests
     @Test
     void keepsPostHandoffCatalogEvidencePathVersionedToV241() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_EVIDENCE_PATH,
                 241,
                 "post-handoff-catalog"

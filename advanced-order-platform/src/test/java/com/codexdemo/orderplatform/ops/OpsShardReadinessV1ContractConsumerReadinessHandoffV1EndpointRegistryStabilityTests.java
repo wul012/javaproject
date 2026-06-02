@@ -34,7 +34,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffV1EndpointRegistryStabi
 
     @Test
     void keepsV1EndpointRegistryStabilityPathVersionedToV270() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_V1_ENDPOINT_REGISTRY_STABILITY_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/270/evidence/"

@@ -24,7 +24,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenBoundaryCloseoutT
 
     @Test
     void keepsFrozenBoundaryCloseoutPathVersionedToV284() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_CLOSEOUT_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/284/evidence/"

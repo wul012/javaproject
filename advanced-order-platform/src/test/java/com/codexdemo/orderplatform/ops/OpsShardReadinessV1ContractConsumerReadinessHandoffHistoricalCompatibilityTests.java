@@ -32,9 +32,9 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffHistoricalCompatibility
                                 .CONSUMER_EVIDENCE_DIGEST_READINESS_COMPLETION_EVIDENCE_PATH
                 )
                 .doesNotContain(
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_SNAPSHOT_FREEZE_EVIDENCE_PATH,
-                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                                 .CONSUMER_READINESS_HANDOFF_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH
                 );
         assertThat(handoff.evidencePath())

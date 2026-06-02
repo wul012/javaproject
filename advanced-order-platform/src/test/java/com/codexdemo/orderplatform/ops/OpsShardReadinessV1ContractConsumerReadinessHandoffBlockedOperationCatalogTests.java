@@ -34,7 +34,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffBlockedOperationCatalog
 
     @Test
     void keepsBlockedOperationCatalogEvidencePathVersionedToV247() {
-        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService
+        assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                 .CONSUMER_READINESS_HANDOFF_BLOCKED_OPERATION_CATALOG_EVIDENCE_PATH)
                 .isEqualTo(
                         "e/247/evidence/"

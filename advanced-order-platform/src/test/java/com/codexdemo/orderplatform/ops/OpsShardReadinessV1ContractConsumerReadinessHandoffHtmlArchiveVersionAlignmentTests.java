@@ -27,7 +27,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffHtmlArchiveVersionAlign
     @Test
     void keepsHtmlArchiveVersionAlignmentPathVersionedToV266() {
         assertEvidencePath(
-                OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
                         .CONSUMER_READINESS_HANDOFF_HTML_ARCHIVE_VERSION_ALIGNMENT_EVIDENCE_PATH,
                 266,
                 "html-archive-version-alignment"
