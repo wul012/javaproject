@@ -81,3 +81,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `243/`: Java shard-readiness v1 contract consumer readiness handoff catalog archive presence.
 - `244/`: Java shard-readiness v1 contract consumer readiness handoff catalog JSON boundary.
 - `245/`: Java shard-readiness v1 contract consumer readiness handoff README index.
+- `246/`: Java shard-readiness v1 contract consumer readiness handoff walkthrough index.

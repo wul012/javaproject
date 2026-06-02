@@ -81,6 +81,10 @@ public class OpsShardReadinessV1ContractConsumerReadinessHandoffService {
             "e/245/evidence/"
                     + "java-shard-readiness-v1-contract-consumer-readiness-handoff-readme-index-v245.json";
 
+    static final String CONSUMER_READINESS_HANDOFF_WALKTHROUGH_INDEX_EVIDENCE_PATH =
+            "e/246/evidence/"
+                    + "java-shard-readiness-v1-contract-consumer-readiness-handoff-walkthrough-index-v246.json";
+
     @Transactional(readOnly = true)
     public OpsShardReadinessV1ContractConsumerReadinessHandoffResponse handoff() {
         return OpsShardReadinessV1ContractConsumerReadinessHandoffSnapshot.v225Handoff();
