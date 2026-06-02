@@ -134,6 +134,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "walkthrough index",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_WALKTHROUGH_INDEX_EVIDENCE_PATH
+                ),
+                receipt(
+                        247,
+                        "blocked operation catalog",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_BLOCKED_OPERATION_CATALOG_EVIDENCE_PATH
                 )
         );
     }

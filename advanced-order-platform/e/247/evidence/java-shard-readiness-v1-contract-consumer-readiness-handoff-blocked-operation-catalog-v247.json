@@ -1,0 +1,37 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-blocked-operation-catalog-receipt-v247",
+  "version": "Java v247",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff blocked operation catalog",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v247 verifies checklist, evidence digest, and readiness handoff all expose the same seven blocked operations for the consumer readiness boundary.",
+  "blockedOperations": [
+    "write-routing",
+    "active-shard-router",
+    "credential-value-read",
+    "raw-endpoint-parse",
+    "managed-audit-connection",
+    "deployment-or-rollback",
+    "node-start-or-stop-java-or-mini-kv"
+  ],
+  "guards": [
+    "checklist blocked operations match the catalog",
+    "evidence digest blocked operations match the catalog",
+    "readiness handoff blocked operations match the catalog",
+    "blocked operations contain no duplicates"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffBlockedOperationCatalogTests,OpsShardReadinessV1ContractConsumerReadinessHandoffWalkthroughIndexTests,OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogArchivePresenceTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

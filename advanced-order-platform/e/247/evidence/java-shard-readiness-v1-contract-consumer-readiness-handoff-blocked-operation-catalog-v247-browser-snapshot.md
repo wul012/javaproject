@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v247 readiness handoff blocked operation catalog" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v247 keeps the consumer readiness chain aligned on the same seven blocked operations.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Blocked ops
+      - generic [ref=e12]: "7"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Duplicates
+      - generic [ref=e15]: none
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: Checklist, digest, and readiness handoff expose the same blocked-operation catalog.
+    - listitem [ref=e22]: Write routing, active routing, credentials, raw endpoint parsing, audit connection, deployment/rollback, and process control stay blocked.
+    - listitem [ref=e23]: No endpoint or runtime execution surface was added.
