@@ -115,3 +115,4 @@ This directory continues Java runtime evidence archives after `d/` grew large.
 - `277/`: Java shard-readiness v1 contract consumer readiness handoff walkthrough filename alignment.
 - `278/`: Java shard-readiness v1 contract consumer readiness handoff evidence path structure stability.
 - `279/`: Java shard-readiness v1 contract consumer readiness handoff auditability closeout.
+- `280/`: Java shard-readiness v1 contract consumer readiness handoff frozen boundary flags.

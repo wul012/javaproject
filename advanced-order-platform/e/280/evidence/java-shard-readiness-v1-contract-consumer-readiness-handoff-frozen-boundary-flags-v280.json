@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-frozen-boundary-flags-receipt-v280",
+  "version": "Java v280",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff frozen boundary flags",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v280 verifies the frozen Java v225 readiness handoff keeps every dangerous boundary flag false.",
+  "guards": [
+    "frozen v225 handoff does not allow upstream actions",
+    "frozen v225 handoff does not allow routing, credentials, raw endpoints, audit connection, deployment, rollback, or process control",
+    "frozen boundary flags path is versioned to v280"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenBoundaryFlagsTests,OpsShardReadinessV1ContractConsumerReadinessHandoffFrozenPayloadStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffIsolationTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

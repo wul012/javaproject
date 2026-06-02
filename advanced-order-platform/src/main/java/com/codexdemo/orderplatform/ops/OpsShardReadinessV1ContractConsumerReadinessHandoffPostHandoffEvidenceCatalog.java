@@ -332,6 +332,12 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEviden
                         "auditability closeout",
                         OpsShardReadinessV1ContractConsumerReadinessHandoffService
                                 .CONSUMER_READINESS_HANDOFF_AUDITABILITY_CLOSEOUT_EVIDENCE_PATH
+                ),
+                receipt(
+                        280,
+                        "frozen boundary flags",
+                        OpsShardReadinessV1ContractConsumerReadinessHandoffService
+                                .CONSUMER_READINESS_HANDOFF_FROZEN_BOUNDARY_FLAGS_EVIDENCE_PATH
                 )
         );
     }

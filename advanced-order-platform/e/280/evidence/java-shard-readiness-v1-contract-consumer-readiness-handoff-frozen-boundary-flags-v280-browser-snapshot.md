@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v280 readiness handoff frozen boundary flags" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v280 verifies every dangerous frozen handoff boundary flag stays false.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Frozen
+      - generic [ref=e12]: v225
+    - generic [ref=e13]:
+      - generic [ref=e14]: Flags
+      - generic [ref=e15]: "false"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: No write routing or active router is allowed.
+    - listitem [ref=e22]: No credentials or raw endpoints are read.
+    - listitem [ref=e23]: No deployment, rollback, audit connection, or process control is allowed.
