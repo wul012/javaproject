@@ -1,0 +1,27 @@
+{
+  "receiptId": "java-shard-readiness-v1-contract-consumer-readiness-handoff-auditability-closeout-receipt-v279",
+  "version": "Java v279",
+  "status": "passed",
+  "scope": "v1 contract consumer readiness handoff auditability closeout",
+  "readOnly": true,
+  "executionAllowed": false,
+  "summary": "v279 closes the v275-v279 auditability slice by verifying the five-version scope sequence remains cataloged in order.",
+  "guards": [
+    "v275 through v279 remain cataloged as the auditability sequence",
+    "the auditability sequence covers validation, README, walkthrough, path structure, and closeout checks",
+    "auditability closeout path is versioned to v279"
+  ],
+  "validation": [
+    "mvn -q \"-Dtest=OpsShardReadinessV1ContractConsumerReadinessHandoffAuditabilityCloseoutTests,OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePathStructureStabilityTests,OpsShardReadinessV1ContractConsumerReadinessHandoffWalkthroughFilenameAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffReadmeDescriptionAlignmentTests,OpsShardReadinessV1ContractConsumerReadinessHandoffValidationArtifactDepthTests\" test",
+    "Playwright browser snapshot and screenshot"
+  ],
+  "boundary": {
+    "writeRoutingAllowed": false,
+    "activeShardRouterAllowed": false,
+    "credentialValueRead": false,
+    "rawEndpointParsed": false,
+    "managedAuditConnectionAllowed": false,
+    "deploymentOrRollbackAllowed": false,
+    "nodeMayStartOrStopJavaOrMiniKv": false
+  }
+}

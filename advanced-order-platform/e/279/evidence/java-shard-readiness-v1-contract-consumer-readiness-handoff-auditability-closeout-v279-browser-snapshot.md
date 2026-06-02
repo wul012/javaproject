@@ -1,0 +1,21 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Java v279 readiness handoff auditability closeout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v279 closes the v275-v279 auditability slice with ordered scope checks.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - generic [ref=e9]: passed
+    - generic [ref=e10]:
+      - generic [ref=e11]: Run
+      - generic [ref=e12]: v275-v279
+    - generic [ref=e13]:
+      - generic [ref=e14]: Scopes
+      - generic [ref=e15]: ordered
+    - generic [ref=e16]:
+      - generic [ref=e17]: Boundary
+      - generic [ref=e18]: read-only
+  - list [ref=e20]:
+    - listitem [ref=e21]: The auditability sequence stays cataloged.
+    - listitem [ref=e22]: The sequence covers validation, README, walkthrough, and path structure.
+    - listitem [ref=e23]: The sequence remains separate from execution behavior.
