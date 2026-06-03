@@ -26,6 +26,8 @@ class OpsShardReadinessRouteCleanupConsumerPacketServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(packet.readOnly()).isTrue();
         assertThat(packet.executionAllowed()).isFalse();
+        assertThat(packet.packetEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-consumer-packet");
         assertThat(packet.packetProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-consumer-packet.v1");
         assertThat(packet.endpointCount()).isEqualTo(4);

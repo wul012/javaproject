@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupConsumerPacketResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String packetEndpoint,
         String packetProfile,
         String readOnlyGateEndpoint,
         String archiveVerificationEndpoint,
