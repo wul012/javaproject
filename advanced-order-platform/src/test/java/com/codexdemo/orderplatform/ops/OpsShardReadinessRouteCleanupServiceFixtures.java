@@ -123,4 +123,86 @@ final class OpsShardReadinessRouteCleanupServiceFixtures {
                 continuityReportService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupAuditTrailService auditTrailService() {
+        return new OpsShardReadinessRouteCleanupAuditTrailService();
+    }
+
+    static OpsShardReadinessRouteCleanupAcceptanceReceiptService acceptanceReceiptService() {
+        return new OpsShardReadinessRouteCleanupAcceptanceReceiptService(
+                auditTrailService(),
+                extendedCloseoutService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupEvidenceRegisterService evidenceRegisterService() {
+        return new OpsShardReadinessRouteCleanupEvidenceRegisterService(
+                endpointManifestService(),
+                finalDigestService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupOperationalSnapshotService operationalSnapshotService() {
+        return new OpsShardReadinessRouteCleanupOperationalSnapshotService(
+                continuityReportService(),
+                endpointManifestService(),
+                acceptanceReceiptService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupPolicyGuardService policyGuardService() {
+        return new OpsShardReadinessRouteCleanupPolicyGuardService(
+                operationalSnapshotService(),
+                evidenceRegisterService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupReviewerPacketService reviewerPacketService() {
+        return new OpsShardReadinessRouteCleanupReviewerPacketService(
+                evidenceRegisterService(),
+                acceptanceReceiptService(),
+                policyGuardService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupTransitionBriefService transitionBriefService() {
+        return new OpsShardReadinessRouteCleanupTransitionBriefService(
+                reviewerPacketService(),
+                operationalSnapshotService(),
+                policyGuardService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService() {
+        return new OpsShardReadinessRouteCleanupFinalVerificationService(
+                transitionBriefService(),
+                reviewerPacketService(),
+                finalDigestService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupFinalArchivePlanService finalArchivePlanService() {
+        return new OpsShardReadinessRouteCleanupFinalArchivePlanService(
+                finalVerificationService(),
+                endpointManifestService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupThirdRunCloseoutService thirdRunCloseoutService() {
+        return new OpsShardReadinessRouteCleanupThirdRunCloseoutService(
+                finalVerificationService(),
+                finalArchivePlanService(),
+                acceptanceReceiptService()
+        );
+    }
+
+    static OpsShardReadinessRouteCleanupCompletionIndexService completionIndexService() {
+        return new OpsShardReadinessRouteCleanupCompletionIndexService(
+                reviewerPacketService(),
+                transitionBriefService(),
+                finalVerificationService(),
+                finalArchivePlanService(),
+                thirdRunCloseoutService()
+        );
+    }
 }
