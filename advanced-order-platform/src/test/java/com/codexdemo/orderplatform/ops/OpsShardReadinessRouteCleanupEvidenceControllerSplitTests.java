@@ -25,7 +25,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                 .contains(
                         "/route-cleanup-boundary-matrix",
                         "/route-cleanup-operator-runbook",
-                        "/route-cleanup-read-only-gate"
+                        "/route-cleanup-read-only-gate",
+                        "/route-cleanup-ci-evidence"
                 );
         assertThat(getMappings(OpsShardReadinessRouteCleanupHandoffController.class))
                 .contains(

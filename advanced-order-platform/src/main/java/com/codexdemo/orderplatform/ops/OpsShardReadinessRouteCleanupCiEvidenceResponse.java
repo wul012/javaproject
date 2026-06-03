@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupCiEvidenceResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String ciEvidenceEndpoint,
         String ciProfile,
         int validationStepCount,
         List<ValidationStep> validationSteps,

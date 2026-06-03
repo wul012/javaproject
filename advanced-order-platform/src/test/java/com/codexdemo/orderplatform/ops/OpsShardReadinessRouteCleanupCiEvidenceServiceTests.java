@@ -17,6 +17,8 @@ class OpsShardReadinessRouteCleanupCiEvidenceServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(evidence.readOnly()).isTrue();
         assertThat(evidence.executionAllowed()).isFalse();
+        assertThat(evidence.ciEvidenceEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-ci-evidence");
         assertThat(evidence.ciProfile()).isEqualTo("java-shard-readiness-route-cleanup-ci-evidence.v1");
         assertThat(evidence.validationStepCount()).isEqualTo(4);
         assertThat(evidence.validationSteps())
