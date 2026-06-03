@@ -134,6 +134,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "ci-catalog-health-closeout",
                         "read-only-ci-catalog-health-entry",
                         "java-shard-readiness-route-cleanup-ci-catalog-health-closeout-v323"
+                ),
+                entry(
+                        324,
+                        "Node v537",
+                        "extended-run-final-closeout",
+                        "read-only-extended-run-closeout-entry",
+                        "java-shard-readiness-route-cleanup-extended-run-final-closeout-v324"
                 )
         );
     }
