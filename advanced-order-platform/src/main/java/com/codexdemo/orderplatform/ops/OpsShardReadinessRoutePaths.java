@@ -90,6 +90,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-final-verification";
     static final String ROUTE_CLEANUP_FINAL_ARCHIVE_PLAN =
             "/route-cleanup-final-archive-plan";
+    static final String ROUTE_CLEANUP_THIRD_RUN_CLOSEOUT =
+            "/route-cleanup-third-run-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
