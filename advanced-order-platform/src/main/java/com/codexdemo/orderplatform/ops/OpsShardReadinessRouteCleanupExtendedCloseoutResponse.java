@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupExtendedCloseoutResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String closeoutEndpoint,
         String closeoutProfile,
         int firstExtendedVersion,
         int latestVersion,

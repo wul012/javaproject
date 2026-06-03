@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupExtendedCloseoutService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EXTENDED_CLOSEOUT;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-extended-closeout.v1";
 
     private static final int FIRST_EXTENDED_VERSION = 346;
@@ -54,6 +58,7 @@ public class OpsShardReadinessRouteCleanupExtendedCloseoutService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 FIRST_EXTENDED_VERSION,
                 latestVersion,

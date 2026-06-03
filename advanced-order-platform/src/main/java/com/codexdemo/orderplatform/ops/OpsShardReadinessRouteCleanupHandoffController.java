@@ -24,6 +24,8 @@ public class OpsShardReadinessRouteCleanupHandoffController {
 
     private final OpsShardReadinessRouteCleanupConsumerChecklistService consumerChecklistService;
 
+    private final OpsShardReadinessRouteCleanupExtendedCloseoutService extendedCloseoutService;
+
     public OpsShardReadinessRouteCleanupHandoffController(
             OpsShardReadinessRouteCleanupHandoffChecklistService handoffChecklistService,
             OpsShardReadinessRouteCleanupArchivePlanService archivePlanService,
@@ -32,7 +34,8 @@ public class OpsShardReadinessRouteCleanupHandoffController {
             OpsShardReadinessRouteCleanupArchiveVerificationService archiveVerificationService,
             OpsShardReadinessRouteCleanupConsumerPacketService consumerPacketService,
             OpsShardReadinessRouteCleanupHandoffBundleService handoffBundleService,
-            OpsShardReadinessRouteCleanupConsumerChecklistService consumerChecklistService
+            OpsShardReadinessRouteCleanupConsumerChecklistService consumerChecklistService,
+            OpsShardReadinessRouteCleanupExtendedCloseoutService extendedCloseoutService
     ) {
         this.handoffChecklistService = handoffChecklistService;
         this.archivePlanService = archivePlanService;
@@ -42,6 +45,7 @@ public class OpsShardReadinessRouteCleanupHandoffController {
         this.consumerPacketService = consumerPacketService;
         this.handoffBundleService = handoffBundleService;
         this.consumerChecklistService = consumerChecklistService;
+        this.extendedCloseoutService = extendedCloseoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_CHECKLIST)
@@ -82,5 +86,10 @@ public class OpsShardReadinessRouteCleanupHandoffController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_CHECKLIST)
     public OpsShardReadinessRouteCleanupConsumerChecklistResponse consumerChecklist() {
         return consumerChecklistService.checklist();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EXTENDED_CLOSEOUT)
+    public OpsShardReadinessRouteCleanupExtendedCloseoutResponse extendedCloseout() {
+        return extendedCloseoutService.closeout();
     }
 }
