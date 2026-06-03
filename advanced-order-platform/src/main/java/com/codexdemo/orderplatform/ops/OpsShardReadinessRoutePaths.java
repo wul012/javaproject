@@ -64,6 +64,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-regression-guard";
     static final String ROUTE_CLEANUP_HANDOFF_BUNDLE =
             "/route-cleanup-handoff-bundle";
+    static final String ROUTE_CLEANUP_CONTINUITY_REPORT =
+            "/route-cleanup-continuity-report";
 
     private OpsShardReadinessRoutePaths() {
     }

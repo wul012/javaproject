@@ -6,6 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupContinuityReportService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONTINUITY_REPORT;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-continuity-report.v1";
 
     private static final int FIRST_VERSION = 326;
@@ -32,6 +36,7 @@ public class OpsShardReadinessRouteCleanupContinuityReportService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 FIRST_VERSION,
                 latest,

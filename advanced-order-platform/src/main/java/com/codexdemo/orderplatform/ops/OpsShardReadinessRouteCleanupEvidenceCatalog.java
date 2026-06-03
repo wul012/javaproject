@@ -379,6 +379,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-continuity-report-service",
                         "read-only-handoff-suite-continuity-report-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-continuity-report-service-v358"
+                ),
+                entry(
+                        359,
+                        "Node v549",
+                        "handoff-suite-continuity-report-route",
+                        "read-only-handoff-suite-continuity-report-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-continuity-report-route-v359"
                 )
         );
     }

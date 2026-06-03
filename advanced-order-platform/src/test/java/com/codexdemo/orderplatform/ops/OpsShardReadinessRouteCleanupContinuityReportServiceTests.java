@@ -21,6 +21,8 @@ class OpsShardReadinessRouteCleanupContinuityReportServiceTests {
         assertThat(report.version()).isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(report.readOnly()).isTrue();
         assertThat(report.executionAllowed()).isFalse();
+        assertThat(report.reportEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-continuity-report");
         assertThat(report.reportProfile()).isEqualTo("java-shard-readiness-route-cleanup-continuity-report.v1");
         assertThat(report.firstVersion()).isEqualTo(326);
         assertThat(report.latestVersion()).isEqualTo(latestVersion);

@@ -5,6 +5,7 @@ public record OpsShardReadinessRouteCleanupContinuityReportResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String reportEndpoint,
         String reportProfile,
         int firstVersion,
         int latestVersion,
