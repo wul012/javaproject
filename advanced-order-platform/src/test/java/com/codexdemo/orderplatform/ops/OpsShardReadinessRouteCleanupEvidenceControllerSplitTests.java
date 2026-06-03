@@ -48,7 +48,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                 .contains(
                         "/route-cleanup-audit-trail",
                         "/route-cleanup-acceptance-receipt",
-                        "/route-cleanup-evidence-register"
+                        "/route-cleanup-evidence-register",
+                        "/route-cleanup-operational-snapshot"
                 );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");

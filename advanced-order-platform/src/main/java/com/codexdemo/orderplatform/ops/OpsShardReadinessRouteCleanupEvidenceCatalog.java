@@ -477,6 +477,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-operational-snapshot-service",
                         "read-only-handoff-suite-operational-snapshot-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-operational-snapshot-service-v372"
+                ),
+                entry(
+                        373,
+                        "Node v549",
+                        "handoff-suite-operational-snapshot-route",
+                        "read-only-handoff-suite-operational-snapshot-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-operational-snapshot-route-v373"
                 )
         );
     }
