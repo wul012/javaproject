@@ -42,6 +42,18 @@ final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
         );
     }
 
+    static List<String> forbiddenOperations() {
+        return List.of(
+                "write-routing",
+                "active-shard-router",
+                "credential-value-read",
+                "raw-endpoint-parse",
+                "managed-audit-connection",
+                "deployment-or-rollback",
+                "node-start-or-stop-java-or-mini-kv"
+        );
+    }
+
     static String segmentFor(OpsShardReadinessRouteCleanupEvidenceResponse.Entry entry) {
         String phase = entry.phase();
         if (phase.startsWith("handoff-suite")) {

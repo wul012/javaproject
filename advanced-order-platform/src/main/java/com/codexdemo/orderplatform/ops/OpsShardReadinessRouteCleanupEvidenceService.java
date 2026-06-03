@@ -30,15 +30,7 @@ public class OpsShardReadinessRouteCleanupEvidenceService {
     }
 
     private List<String> forbiddenOperations() {
-        return List.of(
-                "write-routing",
-                "active-shard-router",
-                "credential-value-read",
-                "raw-endpoint-parse",
-                "managed-audit-connection",
-                "deployment-or-rollback",
-                "node-start-or-stop-java-or-mini-kv"
-        );
+        return OpsShardReadinessRouteCleanupEvidenceAnalyzer.forbiddenOperations();
     }
 
     private String catalogStatus() {
