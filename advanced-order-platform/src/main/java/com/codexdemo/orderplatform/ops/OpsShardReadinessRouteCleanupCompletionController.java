@@ -20,13 +20,16 @@ public class OpsShardReadinessRouteCleanupCompletionController {
 
     private final OpsShardReadinessRouteCleanupCompletionIndexService completionIndexService;
 
+    private final OpsShardReadinessRouteCleanupCompletionCertificateService completionCertificateService;
+
     public OpsShardReadinessRouteCleanupCompletionController(
             OpsShardReadinessRouteCleanupReviewerPacketService reviewerPacketService,
             OpsShardReadinessRouteCleanupTransitionBriefService transitionBriefService,
             OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService,
             OpsShardReadinessRouteCleanupFinalArchivePlanService finalArchivePlanService,
             OpsShardReadinessRouteCleanupThirdRunCloseoutService thirdRunCloseoutService,
-            OpsShardReadinessRouteCleanupCompletionIndexService completionIndexService
+            OpsShardReadinessRouteCleanupCompletionIndexService completionIndexService,
+            OpsShardReadinessRouteCleanupCompletionCertificateService completionCertificateService
     ) {
         this.reviewerPacketService = reviewerPacketService;
         this.transitionBriefService = transitionBriefService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessRouteCleanupCompletionController {
         this.finalArchivePlanService = finalArchivePlanService;
         this.thirdRunCloseoutService = thirdRunCloseoutService;
         this.completionIndexService = completionIndexService;
+        this.completionCertificateService = completionCertificateService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REVIEWER_PACKET)
@@ -64,5 +68,10 @@ public class OpsShardReadinessRouteCleanupCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_COMPLETION_INDEX)
     public OpsShardReadinessRouteCleanupCompletionIndexResponse completionIndex() {
         return completionIndexService.index();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_COMPLETION_CERTIFICATE)
+    public OpsShardReadinessRouteCleanupCompletionCertificateResponse completionCertificate() {
+        return completionCertificateService.certificate();
     }
 }

@@ -209,6 +209,10 @@ class OpsShardReadinessRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_COMPLETION_INDEX,
                         OpsShardReadinessRouteCleanupCompletionIndexService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_COMPLETION_CERTIFICATE,
+                        OpsShardReadinessRouteCleanupCompletionCertificateService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

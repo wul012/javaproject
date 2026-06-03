@@ -205,4 +205,12 @@ final class OpsShardReadinessRouteCleanupServiceFixtures {
                 thirdRunCloseoutService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupCompletionCertificateService completionCertificateService() {
+        return new OpsShardReadinessRouteCleanupCompletionCertificateService(
+                completionIndexService(),
+                thirdRunCloseoutService(),
+                finalArchivePlanService()
+        );
+    }
 }

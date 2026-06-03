@@ -94,6 +94,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-third-run-closeout";
     static final String ROUTE_CLEANUP_COMPLETION_INDEX =
             "/route-cleanup-completion-index";
+    static final String ROUTE_CLEANUP_COMPLETION_CERTIFICATE =
+            "/route-cleanup-completion-certificate";
 
     private OpsShardReadinessRoutePaths() {
     }

@@ -59,7 +59,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                         "/route-cleanup-final-verification",
                         "/route-cleanup-final-archive-plan",
                         "/route-cleanup-third-run-closeout",
-                        "/route-cleanup-completion-index"
+                        "/route-cleanup-completion-index",
+                        "/route-cleanup-completion-certificate"
                 );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");
