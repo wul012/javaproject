@@ -14,10 +14,10 @@ class OpsShardReadinessRouteCleanupEvidenceAnalyzerTests {
         assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.versionsAreContinuous()).isTrue();
         assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.allEntriesKeepReadOnlyBoundary()).isTrue();
         assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.boundaryStatus()).isEqualTo("passed");
-        assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.entries().getLast().phase())
-                .isEqualTo("handoff-suite-evidence-analyzer");
         assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.segmentFor(
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.entries().getLast()
         )).isEqualTo("handoff-suite");
+        assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.entries())
+                .anySatisfy(entry -> assertThat(entry.phase()).isEqualTo("handoff-suite-evidence-analyzer"));
     }
 }
