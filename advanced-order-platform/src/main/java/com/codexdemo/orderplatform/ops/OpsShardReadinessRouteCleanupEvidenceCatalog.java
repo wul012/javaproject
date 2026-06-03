@@ -575,6 +575,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-completion-index-service",
                         "read-only-handoff-suite-completion-index-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-completion-index-service-v386"
+                ),
+                entry(
+                        387,
+                        "Node v549",
+                        "handoff-suite-completion-index-route",
+                        "read-only-handoff-suite-completion-index-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-completion-index-route-v387"
                 )
         );
     }

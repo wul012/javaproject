@@ -18,18 +18,22 @@ public class OpsShardReadinessRouteCleanupCompletionController {
 
     private final OpsShardReadinessRouteCleanupThirdRunCloseoutService thirdRunCloseoutService;
 
+    private final OpsShardReadinessRouteCleanupCompletionIndexService completionIndexService;
+
     public OpsShardReadinessRouteCleanupCompletionController(
             OpsShardReadinessRouteCleanupReviewerPacketService reviewerPacketService,
             OpsShardReadinessRouteCleanupTransitionBriefService transitionBriefService,
             OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService,
             OpsShardReadinessRouteCleanupFinalArchivePlanService finalArchivePlanService,
-            OpsShardReadinessRouteCleanupThirdRunCloseoutService thirdRunCloseoutService
+            OpsShardReadinessRouteCleanupThirdRunCloseoutService thirdRunCloseoutService,
+            OpsShardReadinessRouteCleanupCompletionIndexService completionIndexService
     ) {
         this.reviewerPacketService = reviewerPacketService;
         this.transitionBriefService = transitionBriefService;
         this.finalVerificationService = finalVerificationService;
         this.finalArchivePlanService = finalArchivePlanService;
         this.thirdRunCloseoutService = thirdRunCloseoutService;
+        this.completionIndexService = completionIndexService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REVIEWER_PACKET)
@@ -55,5 +59,10 @@ public class OpsShardReadinessRouteCleanupCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_THIRD_RUN_CLOSEOUT)
     public OpsShardReadinessRouteCleanupThirdRunCloseoutResponse thirdRunCloseout() {
         return thirdRunCloseoutService.closeout();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_COMPLETION_INDEX)
+    public OpsShardReadinessRouteCleanupCompletionIndexResponse completionIndex() {
+        return completionIndexService.index();
     }
 }
