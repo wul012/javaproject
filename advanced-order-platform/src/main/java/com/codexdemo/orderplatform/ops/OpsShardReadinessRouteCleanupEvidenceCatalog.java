@@ -442,6 +442,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-audit-trail-route",
                         "read-only-handoff-suite-audit-trail-route-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-audit-trail-route-v367"
+                ),
+                entry(
+                        368,
+                        "Node v549",
+                        "handoff-suite-acceptance-receipt-service",
+                        "read-only-handoff-suite-acceptance-receipt-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-acceptance-receipt-service-v368"
                 )
         );
     }

@@ -74,6 +74,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-extended-closeout";
     static final String ROUTE_CLEANUP_AUDIT_TRAIL =
             "/route-cleanup-audit-trail";
+    static final String ROUTE_CLEANUP_ACCEPTANCE_RECEIPT =
+            "/route-cleanup-acceptance-receipt";
 
     private OpsShardReadinessRoutePaths() {
     }
