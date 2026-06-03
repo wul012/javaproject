@@ -19,6 +19,8 @@ class OpsShardReadinessRouteCleanupRegressionGuardServiceTests {
         assertThat(guard.version()).isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(guard.readOnly()).isTrue();
         assertThat(guard.executionAllowed()).isFalse();
+        assertThat(guard.guardEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-regression-guard");
         assertThat(guard.guardProfile()).isEqualTo("java-shard-readiness-route-cleanup-regression-guard.v1");
         assertThat(guard.guardCount()).isEqualTo(4);
         assertThat(guard.guards())

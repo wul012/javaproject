@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupRegressionGuardService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REGRESSION_GUARD;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-regression-guard.v1";
 
     private final OpsShardReadinessRouteCleanupEndpointManifestService endpointManifestService;
@@ -46,6 +50,7 @@ public class OpsShardReadinessRouteCleanupRegressionGuardService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 guards.size(),
                 guards,

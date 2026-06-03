@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupRegressionGuardResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String guardEndpoint,
         String guardProfile,
         int guardCount,
         List<GuardCheck> guards,
