@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupEndpointManifestService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ENDPOINT_MANIFEST;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-endpoint-manifest.v1";
 
     @Transactional(readOnly = true)
@@ -26,6 +30,7 @@ public class OpsShardReadinessRouteCleanupEndpointManifestService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 endpoints.size(),
                 endpoints,

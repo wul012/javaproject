@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupEndpointManifestResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String manifestEndpoint,
         String manifestProfile,
         int endpointCount,
         List<EndpointEntry> endpoints,

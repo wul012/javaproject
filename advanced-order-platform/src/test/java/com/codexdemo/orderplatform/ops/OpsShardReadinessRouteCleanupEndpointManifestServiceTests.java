@@ -17,6 +17,8 @@ class OpsShardReadinessRouteCleanupEndpointManifestServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(manifest.readOnly()).isTrue();
         assertThat(manifest.executionAllowed()).isFalse();
+        assertThat(manifest.manifestEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-endpoint-manifest");
         assertThat(manifest.manifestProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-endpoint-manifest.v1");
         assertThat(manifest.endpointCount()).isEqualTo(manifest.endpoints().size());
