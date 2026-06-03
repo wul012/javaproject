@@ -16,16 +16,20 @@ public class OpsShardReadinessRouteCleanupHandoffController {
 
     private final OpsShardReadinessRouteCleanupSuiteCloseoutService suiteCloseoutService;
 
+    private final OpsShardReadinessRouteCleanupArchiveVerificationService archiveVerificationService;
+
     public OpsShardReadinessRouteCleanupHandoffController(
             OpsShardReadinessRouteCleanupHandoffChecklistService handoffChecklistService,
             OpsShardReadinessRouteCleanupArchivePlanService archivePlanService,
             OpsShardReadinessRouteCleanupReleaseHandoffService releaseHandoffService,
-            OpsShardReadinessRouteCleanupSuiteCloseoutService suiteCloseoutService
+            OpsShardReadinessRouteCleanupSuiteCloseoutService suiteCloseoutService,
+            OpsShardReadinessRouteCleanupArchiveVerificationService archiveVerificationService
     ) {
         this.handoffChecklistService = handoffChecklistService;
         this.archivePlanService = archivePlanService;
         this.releaseHandoffService = releaseHandoffService;
         this.suiteCloseoutService = suiteCloseoutService;
+        this.archiveVerificationService = archiveVerificationService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_CHECKLIST)
@@ -46,5 +50,10 @@ public class OpsShardReadinessRouteCleanupHandoffController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_SUITE_CLOSEOUT)
     public OpsShardReadinessRouteCleanupSuiteCloseoutResponse suiteCloseout() {
         return suiteCloseoutService.closeout();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_VERIFICATION)
+    public OpsShardReadinessRouteCleanupArchiveVerificationResponse archiveVerification() {
+        return archiveVerificationService.verification();
     }
 }

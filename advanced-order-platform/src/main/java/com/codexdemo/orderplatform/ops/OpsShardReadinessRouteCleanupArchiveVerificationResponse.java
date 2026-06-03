@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupArchiveVerificationResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String verificationEndpoint,
         String verificationProfile,
         String archivePlanEndpoint,
         String suiteCloseoutEndpoint,

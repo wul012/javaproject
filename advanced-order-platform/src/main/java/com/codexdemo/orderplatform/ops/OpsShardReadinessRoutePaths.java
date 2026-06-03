@@ -52,6 +52,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-read-only-gate";
     static final String ROUTE_CLEANUP_SUITE_CLOSEOUT =
             "/route-cleanup-suite-closeout";
+    static final String ROUTE_CLEANUP_ARCHIVE_VERIFICATION =
+            "/route-cleanup-archive-verification";
 
     private OpsShardReadinessRoutePaths() {
     }

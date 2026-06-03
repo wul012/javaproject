@@ -20,6 +20,8 @@ class OpsShardReadinessRouteCleanupArchiveVerificationServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(verification.readOnly()).isTrue();
         assertThat(verification.executionAllowed()).isFalse();
+        assertThat(verification.verificationEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-archive-verification");
         assertThat(verification.verificationProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-archive-verification.v1");
         assertThat(verification.archivePlanEndpoint())
