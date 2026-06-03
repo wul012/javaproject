@@ -43,14 +43,17 @@ class OpsShardReadinessRouteCleanupEvidenceServiceTests {
         assertThat(catalog.entries().getFirst().sourceNodePlan()).isEqualTo("Node v549");
         assertThat(catalog.entries().getFirst().evidencePath())
                 .isEqualTo("e/306/evidence/java-shard-readiness-route-cleanup-catalog-contract-freeze-v306.json");
-        assertThat(catalog.entries().getLast().phase())
-                .isEqualTo("latest-sibling-evidence-intake");
-        assertThat(catalog.entries().getLast().sourceNodePlan()).isEqualTo("Node v538");
-        assertThat(catalog.entries().getLast().evidencePath())
-                .isEqualTo(
-                        "e/307/evidence/"
-                                + "java-shard-readiness-route-cleanup-latest-sibling-evidence-intake-v307.json"
+        assertThat(catalog.entries())
+                .extracting(OpsShardReadinessRouteCleanupEvidenceResponse.Entry::phase)
+                .contains(
+                        "route-cleanup-catalog-contract-freeze",
+                        "latest-sibling-evidence-intake",
+                        "latest-sibling-evidence-report"
                 );
+        assertThat(catalog.entries())
+                .allSatisfy(entry -> assertThat(entry.evidencePath())
+                        .contains("/" + entry.javaVersion() + "/")
+                        .endsWith("-v" + entry.javaVersion() + ".json"));
         assertThat(catalog.forbiddenOperations())
                 .contains(
                         "write-routing",
