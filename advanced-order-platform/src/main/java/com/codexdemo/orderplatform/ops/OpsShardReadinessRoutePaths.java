@@ -80,6 +80,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-evidence-register";
     static final String ROUTE_CLEANUP_OPERATIONAL_SNAPSHOT =
             "/route-cleanup-operational-snapshot";
+    static final String ROUTE_CLEANUP_POLICY_GUARD =
+            "/route-cleanup-policy-guard";
 
     private OpsShardReadinessRoutePaths() {
     }
