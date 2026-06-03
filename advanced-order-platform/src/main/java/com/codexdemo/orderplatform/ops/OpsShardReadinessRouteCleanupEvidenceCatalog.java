@@ -449,6 +449,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-acceptance-receipt-service",
                         "read-only-handoff-suite-acceptance-receipt-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-acceptance-receipt-service-v368"
+                ),
+                entry(
+                        369,
+                        "Node v549",
+                        "handoff-suite-acceptance-receipt-route",
+                        "read-only-handoff-suite-acceptance-receipt-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-acceptance-receipt-route-v369"
                 )
         );
     }
