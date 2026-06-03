@@ -17,7 +17,7 @@ public class OpsShardReadinessRouteCleanupEvidenceService {
                 OpsShardReadinessRouteCleanupEvidenceCatalog.entries();
         return new OpsShardReadinessRouteCleanupEvidenceResponse(
                 "advanced-order-platform",
-                "Java v306",
+                "Java v" + entries.getLast().javaVersion(),
                 true,
                 false,
                 ENDPOINT,

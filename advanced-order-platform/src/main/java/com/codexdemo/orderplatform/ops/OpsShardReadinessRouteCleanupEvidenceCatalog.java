@@ -15,6 +15,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "route-cleanup-catalog-contract-freeze",
                         "typed-read-only-catalog-entry",
                         "java-shard-readiness-route-cleanup-catalog-contract-freeze-v306"
+                ),
+                entry(
+                        307,
+                        "Node v538",
+                        "latest-sibling-evidence-intake",
+                        "read-only-sibling-intake-entry",
+                        "java-shard-readiness-route-cleanup-latest-sibling-evidence-intake-v307"
                 )
         );
     }
