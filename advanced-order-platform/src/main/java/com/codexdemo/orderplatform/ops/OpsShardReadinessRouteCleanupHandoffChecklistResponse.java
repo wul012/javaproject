@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupHandoffChecklistResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String checklistEndpoint,
         String checklistProfile,
         int checkCount,
         List<CheckItem> checks,

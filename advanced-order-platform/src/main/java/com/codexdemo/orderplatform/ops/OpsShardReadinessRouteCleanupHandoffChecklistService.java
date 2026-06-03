@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupHandoffChecklistService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_CHECKLIST;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-handoff-checklist.v1";
 
     private final OpsShardReadinessRouteCleanupPhaseSummaryService phaseSummaryService;
@@ -42,6 +46,7 @@ public class OpsShardReadinessRouteCleanupHandoffChecklistService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 checks.size(),
                 checks,

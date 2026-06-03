@@ -20,6 +20,8 @@ class OpsShardReadinessRouteCleanupHandoffChecklistServiceTests {
         assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersion()).isGreaterThanOrEqualTo(331);
         assertThat(checklist.readOnly()).isTrue();
         assertThat(checklist.executionAllowed()).isFalse();
+        assertThat(checklist.checklistEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-handoff-checklist");
         assertThat(checklist.checklistProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-handoff-checklist.v1");
         assertThat(checklist.checkCount()).isEqualTo(5);
