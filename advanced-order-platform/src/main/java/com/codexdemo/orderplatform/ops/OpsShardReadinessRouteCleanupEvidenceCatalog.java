@@ -274,6 +274,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-read-only-gate-service",
                         "read-only-handoff-suite-gate-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-read-only-gate-service-v343"
+                ),
+                entry(
+                        344,
+                        "Node v549",
+                        "handoff-suite-read-only-gate-route",
+                        "read-only-handoff-suite-gate-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-read-only-gate-route-v344"
                 )
         );
     }

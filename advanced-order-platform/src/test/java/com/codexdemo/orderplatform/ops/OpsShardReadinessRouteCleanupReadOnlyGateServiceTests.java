@@ -28,6 +28,8 @@ class OpsShardReadinessRouteCleanupReadOnlyGateServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(gate.readOnly()).isTrue();
         assertThat(gate.executionAllowed()).isFalse();
+        assertThat(gate.gateEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-read-only-gate");
         assertThat(gate.gateProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-read-only-gate.v1");
         assertThat(gate.releaseHandoffEndpoint())

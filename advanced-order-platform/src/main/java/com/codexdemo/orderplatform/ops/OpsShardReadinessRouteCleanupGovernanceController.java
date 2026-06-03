@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupGovernanceController {
 
     private final OpsShardReadinessRouteCleanupOperatorRunbookService operatorRunbookService;
 
+    private final OpsShardReadinessRouteCleanupReadOnlyGateService readOnlyGateService;
+
     public OpsShardReadinessRouteCleanupGovernanceController(
             OpsShardReadinessRouteCleanupBoundaryMatrixService boundaryMatrixService,
-            OpsShardReadinessRouteCleanupOperatorRunbookService operatorRunbookService
+            OpsShardReadinessRouteCleanupOperatorRunbookService operatorRunbookService,
+            OpsShardReadinessRouteCleanupReadOnlyGateService readOnlyGateService
     ) {
         this.boundaryMatrixService = boundaryMatrixService;
         this.operatorRunbookService = operatorRunbookService;
+        this.readOnlyGateService = readOnlyGateService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_BOUNDARY_MATRIX)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupGovernanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_OPERATOR_RUNBOOK)
     public OpsShardReadinessRouteCleanupOperatorRunbookResponse operatorRunbook() {
         return operatorRunbookService.runbook();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_READ_ONLY_GATE)
+    public OpsShardReadinessRouteCleanupReadOnlyGateResponse readOnlyGate() {
+        return readOnlyGateService.gate();
     }
 }

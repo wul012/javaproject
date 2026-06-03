@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupReadOnlyGateResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String gateEndpoint,
         String gateProfile,
         String releaseHandoffEndpoint,
         String operatorRunbookEndpoint,

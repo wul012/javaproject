@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupReadOnlyGateService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_READ_ONLY_GATE;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-read-only-gate.v1";
 
     private final OpsShardReadinessRouteCleanupReleaseHandoffService releaseHandoffService;
@@ -41,6 +45,7 @@ public class OpsShardReadinessRouteCleanupReadOnlyGateService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 OpsShardReadinessRouteCleanupReleaseHandoffService.ENDPOINT,
                 OpsShardReadinessRouteCleanupOperatorRunbookService.ENDPOINT,
