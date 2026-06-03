@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupPhaseSummaryService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_PHASE_SUMMARY;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-phase-summary.v1";
 
     @Transactional(readOnly = true)
@@ -23,6 +27,7 @@ public class OpsShardReadinessRouteCleanupPhaseSummaryService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 entries.size(),
                 phases.size(),

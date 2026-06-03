@@ -12,12 +12,14 @@ class OpsShardReadinessRouteCleanupPhaseSummaryServiceTests {
                 new OpsShardReadinessRouteCleanupPhaseSummaryService().summary();
 
         assertThat(summary.project()).isEqualTo("advanced-order-platform");
-        assertThat(summary.version()).isEqualTo("Java v327");
+        assertThat(summary.version()).isEqualTo("Java v328");
         assertThat(summary.readOnly()).isTrue();
         assertThat(summary.executionAllowed()).isFalse();
+        assertThat(summary.summaryEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-phase-summary");
         assertThat(summary.summaryProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-phase-summary.v1");
-        assertThat(summary.entryCount()).isEqualTo(22);
+        assertThat(summary.entryCount()).isEqualTo(23);
         assertThat(summary.phaseCount()).isEqualTo(summary.phases().size());
         assertThat(summary.phases())
                 .extracting(OpsShardReadinessRouteCleanupPhaseSummaryResponse.PhaseSummary::segment)
@@ -29,7 +31,7 @@ class OpsShardReadinessRouteCleanupPhaseSummaryServiceTests {
                 );
         assertThat(summary.phases().getLast().segment()).isEqualTo("handoff-suite");
         assertThat(summary.phases().getLast().firstJavaVersion()).isEqualTo(326);
-        assertThat(summary.phases().getLast().lastJavaVersion()).isEqualTo(327);
+        assertThat(summary.phases().getLast().lastJavaVersion()).isEqualTo(328);
         assertThat(summary.phases().getLast().sourceNodePlans()).containsExactly("Node v549");
         assertThat(summary.phases())
                 .allSatisfy(phase -> {

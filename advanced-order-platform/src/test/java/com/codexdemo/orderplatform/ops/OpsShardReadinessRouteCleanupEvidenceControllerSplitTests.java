@@ -15,6 +15,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                 .hasAnnotation(RestController.class);
         assertThat(getMappings(OpsShardReadinessRouteCleanupEvidenceController.class))
                 .containsExactly("/route-cleanup-evidence-catalog");
+        assertThat(getMappings(OpsShardReadinessRouteCleanupSummaryController.class))
+                .containsExactly("/route-cleanup-phase-summary");
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");
     }

@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupPhaseSummaryResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String summaryEndpoint,
         String summaryProfile,
         int entryCount,
         int phaseCount,

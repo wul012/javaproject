@@ -162,6 +162,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-phase-summary-service",
                         "read-only-handoff-suite-phase-summary-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-phase-summary-service-v327"
+                ),
+                entry(
+                        328,
+                        "Node v549",
+                        "handoff-suite-phase-summary-route",
+                        "read-only-handoff-suite-phase-summary-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-phase-summary-route-v328"
                 )
         );
     }
