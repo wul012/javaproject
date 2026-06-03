@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupCompletionController {
 
     private final OpsShardReadinessRouteCleanupTransitionBriefService transitionBriefService;
 
+    private final OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService;
+
     public OpsShardReadinessRouteCleanupCompletionController(
             OpsShardReadinessRouteCleanupReviewerPacketService reviewerPacketService,
-            OpsShardReadinessRouteCleanupTransitionBriefService transitionBriefService
+            OpsShardReadinessRouteCleanupTransitionBriefService transitionBriefService,
+            OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService
     ) {
         this.reviewerPacketService = reviewerPacketService;
         this.transitionBriefService = transitionBriefService;
+        this.finalVerificationService = finalVerificationService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REVIEWER_PACKET)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_TRANSITION_BRIEF)
     public OpsShardReadinessRouteCleanupTransitionBriefResponse transitionBrief() {
         return transitionBriefService.brief();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_VERIFICATION)
+    public OpsShardReadinessRouteCleanupFinalVerificationResponse finalVerification() {
+        return finalVerificationService.verification();
     }
 }

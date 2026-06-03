@@ -55,7 +55,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
         assertThat(getMappings(OpsShardReadinessRouteCleanupCompletionController.class))
                 .contains(
                         "/route-cleanup-reviewer-packet",
-                        "/route-cleanup-transition-brief"
+                        "/route-cleanup-transition-brief",
+                        "/route-cleanup-final-verification"
                 );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");
