@@ -127,6 +127,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "readiness-handoff-evidence-archive-verification-route",
                         "read-only-readiness-handoff-archive-route-entry",
                         "java-shard-readiness-route-cleanup-readiness-handoff-archive-route-v322"
+                ),
+                entry(
+                        323,
+                        "Node v532",
+                        "ci-catalog-health-closeout",
+                        "read-only-ci-catalog-health-entry",
+                        "java-shard-readiness-route-cleanup-ci-catalog-health-closeout-v323"
                 )
         );
     }
