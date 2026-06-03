@@ -17,7 +17,7 @@ class OpsShardReadinessRouteCleanupThirdRunCloseoutServiceTests {
 
         int latestVersion = OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersion();
 
-        assertThat(latestVersion).isGreaterThanOrEqualTo(384);
+        assertThat(latestVersion).isGreaterThanOrEqualTo(385);
         assertThat(closeout.project()).isEqualTo("advanced-order-platform");
         assertThat(closeout.version())
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
@@ -30,7 +30,7 @@ class OpsShardReadinessRouteCleanupThirdRunCloseoutServiceTests {
         assertThat(closeout.firstVersion()).isEqualTo(366);
         assertThat(closeout.latestVersion()).isEqualTo(latestVersion);
         assertThat(closeout.versionCount()).isEqualTo(latestVersion - 365);
-        assertThat(closeout.versionCount()).isGreaterThanOrEqualTo(19);
+        assertThat(closeout.versionCount()).isGreaterThanOrEqualTo(20);
         assertThat(closeout.finalVerificationEndpoint())
                 .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-final-verification");
         assertThat(closeout.finalArchivePlanEndpoint())
