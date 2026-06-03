@@ -12,7 +12,8 @@ class OpsShardReadinessRouteCleanupBoundaryMatrixServiceTests {
                 new OpsShardReadinessRouteCleanupBoundaryMatrixService().matrix();
 
         assertThat(matrix.project()).isEqualTo("advanced-order-platform");
-        assertThat(matrix.version()).isEqualTo("Java v330");
+        assertThat(matrix.version())
+                .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(matrix.readOnly()).isTrue();
         assertThat(matrix.executionAllowed()).isFalse();
         assertThat(matrix.matrixEndpoint())

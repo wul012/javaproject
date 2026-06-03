@@ -183,6 +183,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-boundary-matrix-route",
                         "read-only-handoff-suite-boundary-matrix-route-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-boundary-matrix-route-v330"
+                ),
+                entry(
+                        331,
+                        "Node v549",
+                        "handoff-suite-handoff-checklist-service",
+                        "read-only-handoff-suite-checklist-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-checklist-service-v331"
                 )
         );
     }
