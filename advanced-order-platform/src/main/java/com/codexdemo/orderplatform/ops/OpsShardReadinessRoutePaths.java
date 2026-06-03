@@ -86,6 +86,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-reviewer-packet";
     static final String ROUTE_CLEANUP_TRANSITION_BRIEF =
             "/route-cleanup-transition-brief";
+    static final String ROUTE_CLEANUP_FINAL_VERIFICATION =
+            "/route-cleanup-final-verification";
 
     private OpsShardReadinessRoutePaths() {
     }
