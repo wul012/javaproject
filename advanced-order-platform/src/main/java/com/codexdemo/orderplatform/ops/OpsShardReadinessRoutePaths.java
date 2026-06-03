@@ -50,6 +50,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-operator-runbook";
     static final String ROUTE_CLEANUP_READ_ONLY_GATE =
             "/route-cleanup-read-only-gate";
+    static final String ROUTE_CLEANUP_SUITE_CLOSEOUT =
+            "/route-cleanup-suite-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
