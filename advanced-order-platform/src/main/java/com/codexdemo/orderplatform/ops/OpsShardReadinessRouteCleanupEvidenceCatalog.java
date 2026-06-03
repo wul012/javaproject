@@ -78,6 +78,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "latest-sibling-live-smoke-archive-verification-route",
                         "read-only-live-smoke-archive-route-entry",
                         "java-shard-readiness-route-cleanup-latest-sibling-live-smoke-archive-route-v315"
+                ),
+                entry(
+                        316,
+                        "Node v548",
+                        "latest-sibling-live-smoke-archive-verification-route-archive",
+                        "read-only-live-smoke-route-archive-entry",
+                        "java-shard-readiness-route-cleanup-latest-sibling-live-smoke-route-archive-v316"
                 )
         );
     }
