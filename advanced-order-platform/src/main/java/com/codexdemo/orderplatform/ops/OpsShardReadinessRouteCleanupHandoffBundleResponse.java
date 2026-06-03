@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupHandoffBundleResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String bundleEndpoint,
         String bundleProfile,
         int componentCount,
         List<BundleComponent> components,

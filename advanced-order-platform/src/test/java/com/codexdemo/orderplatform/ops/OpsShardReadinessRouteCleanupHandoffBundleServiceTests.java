@@ -32,6 +32,8 @@ class OpsShardReadinessRouteCleanupHandoffBundleServiceTests {
         assertThat(bundle.version()).isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(bundle.readOnly()).isTrue();
         assertThat(bundle.executionAllowed()).isFalse();
+        assertThat(bundle.bundleEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-handoff-bundle");
         assertThat(bundle.bundleProfile()).isEqualTo("java-shard-readiness-route-cleanup-handoff-bundle.v1");
         assertThat(bundle.componentCount()).isEqualTo(3);
         assertThat(bundle.components())

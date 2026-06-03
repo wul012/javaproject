@@ -145,6 +145,10 @@ class OpsShardReadinessRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REGRESSION_GUARD,
                         OpsShardReadinessRouteCleanupRegressionGuardService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_BUNDLE,
+                        OpsShardReadinessRouteCleanupHandoffBundleService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

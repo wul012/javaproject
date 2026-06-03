@@ -20,13 +20,16 @@ public class OpsShardReadinessRouteCleanupHandoffController {
 
     private final OpsShardReadinessRouteCleanupConsumerPacketService consumerPacketService;
 
+    private final OpsShardReadinessRouteCleanupHandoffBundleService handoffBundleService;
+
     public OpsShardReadinessRouteCleanupHandoffController(
             OpsShardReadinessRouteCleanupHandoffChecklistService handoffChecklistService,
             OpsShardReadinessRouteCleanupArchivePlanService archivePlanService,
             OpsShardReadinessRouteCleanupReleaseHandoffService releaseHandoffService,
             OpsShardReadinessRouteCleanupSuiteCloseoutService suiteCloseoutService,
             OpsShardReadinessRouteCleanupArchiveVerificationService archiveVerificationService,
-            OpsShardReadinessRouteCleanupConsumerPacketService consumerPacketService
+            OpsShardReadinessRouteCleanupConsumerPacketService consumerPacketService,
+            OpsShardReadinessRouteCleanupHandoffBundleService handoffBundleService
     ) {
         this.handoffChecklistService = handoffChecklistService;
         this.archivePlanService = archivePlanService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessRouteCleanupHandoffController {
         this.suiteCloseoutService = suiteCloseoutService;
         this.archiveVerificationService = archiveVerificationService;
         this.consumerPacketService = consumerPacketService;
+        this.handoffBundleService = handoffBundleService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_CHECKLIST)
@@ -64,5 +68,10 @@ public class OpsShardReadinessRouteCleanupHandoffController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_PACKET)
     public OpsShardReadinessRouteCleanupConsumerPacketResponse consumerPacket() {
         return consumerPacketService.packet();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_BUNDLE)
+    public OpsShardReadinessRouteCleanupHandoffBundleResponse handoffBundle() {
+        return handoffBundleService.bundle();
     }
 }
