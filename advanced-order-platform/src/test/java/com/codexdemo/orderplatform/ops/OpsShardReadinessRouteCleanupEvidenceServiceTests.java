@@ -21,11 +21,13 @@ class OpsShardReadinessRouteCleanupEvidenceServiceTests {
         assertThat(catalog.catalogProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-evidence-catalog.v1");
         assertThat(catalog.entryCount()).isEqualTo(catalog.entries().size());
+        assertThat(catalog.entryCount()).isEqualTo(20);
         assertThat(catalog.entries())
                 .extracting(OpsShardReadinessRouteCleanupEvidenceResponse.Entry::javaVersion)
                 .containsExactlyElementsOf(IntStream.rangeClosed(306, catalog.entries().getLast().javaVersion())
                         .boxed()
                         .toList());
+        assertThat(catalog.entries().getLast().javaVersion()).isEqualTo(325);
         assertThat(catalog.entries())
                 .allSatisfy(entry -> {
                     assertThat(entry.readOnly()).isTrue();
@@ -48,7 +50,8 @@ class OpsShardReadinessRouteCleanupEvidenceServiceTests {
                 .contains(
                         "route-cleanup-catalog-contract-freeze",
                         "latest-sibling-evidence-intake",
-                        "latest-sibling-evidence-report"
+                        "latest-sibling-evidence-report",
+                        "twenty-version-functional-run-closeout"
                 );
         assertThat(catalog.entries())
                 .allSatisfy(entry -> assertThat(entry.evidencePath())

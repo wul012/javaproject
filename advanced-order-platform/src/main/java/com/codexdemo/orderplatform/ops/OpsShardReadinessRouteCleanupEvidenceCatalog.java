@@ -141,6 +141,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "extended-run-final-closeout",
                         "read-only-extended-run-closeout-entry",
                         "java-shard-readiness-route-cleanup-extended-run-final-closeout-v324"
+                ),
+                entry(
+                        325,
+                        "Node v549",
+                        "twenty-version-functional-run-closeout",
+                        "read-only-twenty-version-closeout-entry",
+                        "java-shard-readiness-route-cleanup-twenty-version-functional-run-closeout-v325"
                 )
         );
     }
