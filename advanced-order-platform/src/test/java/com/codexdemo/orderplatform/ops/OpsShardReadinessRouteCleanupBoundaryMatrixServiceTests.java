@@ -12,9 +12,11 @@ class OpsShardReadinessRouteCleanupBoundaryMatrixServiceTests {
                 new OpsShardReadinessRouteCleanupBoundaryMatrixService().matrix();
 
         assertThat(matrix.project()).isEqualTo("advanced-order-platform");
-        assertThat(matrix.version()).isEqualTo("Java v329");
+        assertThat(matrix.version()).isEqualTo("Java v330");
         assertThat(matrix.readOnly()).isTrue();
         assertThat(matrix.executionAllowed()).isFalse();
+        assertThat(matrix.matrixEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-boundary-matrix");
         assertThat(matrix.matrixProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-boundary-matrix.v1");
         assertThat(matrix.ruleCount()).isEqualTo(7);

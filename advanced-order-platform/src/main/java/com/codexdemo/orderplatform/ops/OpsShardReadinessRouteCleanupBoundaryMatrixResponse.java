@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupBoundaryMatrixResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String matrixEndpoint,
         String matrixProfile,
         int ruleCount,
         List<BoundaryRule> rules,

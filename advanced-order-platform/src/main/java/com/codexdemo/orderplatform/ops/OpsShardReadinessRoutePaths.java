@@ -34,6 +34,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-evidence-catalog";
     static final String ROUTE_CLEANUP_PHASE_SUMMARY =
             "/route-cleanup-phase-summary";
+    static final String ROUTE_CLEANUP_BOUNDARY_MATRIX =
+            "/route-cleanup-boundary-matrix";
 
     private OpsShardReadinessRoutePaths() {
     }
