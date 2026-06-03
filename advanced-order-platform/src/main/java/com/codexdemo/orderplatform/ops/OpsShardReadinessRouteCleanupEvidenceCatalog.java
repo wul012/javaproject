@@ -120,6 +120,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "readiness-handoff-evidence-archive-verification",
                         "read-only-readiness-handoff-archive-verification-entry",
                         "java-shard-readiness-route-cleanup-readiness-handoff-archive-verification-v321"
+                ),
+                entry(
+                        322,
+                        "Node v505",
+                        "readiness-handoff-evidence-archive-verification-route",
+                        "read-only-readiness-handoff-archive-route-entry",
+                        "java-shard-readiness-route-cleanup-readiness-handoff-archive-route-v322"
                 )
         );
     }
