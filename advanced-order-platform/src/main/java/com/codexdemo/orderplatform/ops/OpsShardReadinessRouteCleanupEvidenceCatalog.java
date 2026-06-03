@@ -239,6 +239,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-source-plan-alignment-route",
                         "read-only-handoff-suite-source-plan-alignment-route-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-source-plan-alignment-route-v338"
+                ),
+                entry(
+                        339,
+                        "Node v549",
+                        "handoff-suite-release-handoff-service",
+                        "read-only-handoff-suite-release-handoff-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-release-handoff-service-v339"
                 )
         );
     }
