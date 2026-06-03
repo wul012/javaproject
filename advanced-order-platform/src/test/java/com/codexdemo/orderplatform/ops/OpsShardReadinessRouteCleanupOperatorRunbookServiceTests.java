@@ -17,6 +17,8 @@ class OpsShardReadinessRouteCleanupOperatorRunbookServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(runbook.readOnly()).isTrue();
         assertThat(runbook.executionAllowed()).isFalse();
+        assertThat(runbook.runbookEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-operator-runbook");
         assertThat(runbook.runbookProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-operator-runbook.v1");
         assertThat(runbook.stepCount()).isEqualTo(5);

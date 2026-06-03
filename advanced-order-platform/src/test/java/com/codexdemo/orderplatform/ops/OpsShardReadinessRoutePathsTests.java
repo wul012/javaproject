@@ -113,6 +113,10 @@ class OpsShardReadinessRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_RELEASE_HANDOFF,
                         OpsShardReadinessRouteCleanupReleaseHandoffService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_OPERATOR_RUNBOOK,
+                        OpsShardReadinessRouteCleanupOperatorRunbookService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

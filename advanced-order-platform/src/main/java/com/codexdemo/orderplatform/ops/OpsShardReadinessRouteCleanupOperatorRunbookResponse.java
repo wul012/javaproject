@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupOperatorRunbookResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String runbookEndpoint,
         String runbookProfile,
         int stepCount,
         List<RunbookStep> steps,

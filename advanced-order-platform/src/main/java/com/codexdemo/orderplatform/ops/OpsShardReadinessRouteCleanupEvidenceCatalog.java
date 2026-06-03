@@ -260,6 +260,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-operator-runbook-service",
                         "read-only-handoff-suite-operator-runbook-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-operator-runbook-service-v341"
+                ),
+                entry(
+                        342,
+                        "Node v549",
+                        "handoff-suite-operator-runbook-route",
+                        "read-only-handoff-suite-operator-runbook-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-operator-runbook-route-v342"
                 )
         );
     }
