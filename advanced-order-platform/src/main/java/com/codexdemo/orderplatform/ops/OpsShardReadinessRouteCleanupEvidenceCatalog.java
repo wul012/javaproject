@@ -330,6 +330,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-ci-evidence-route",
                         "read-only-handoff-suite-ci-evidence-route-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-ci-evidence-route-v351"
+                ),
+                entry(
+                        352,
+                        "Node v549",
+                        "handoff-suite-endpoint-manifest-service",
+                        "read-only-handoff-suite-endpoint-manifest-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-endpoint-manifest-service-v352"
                 )
         );
     }
