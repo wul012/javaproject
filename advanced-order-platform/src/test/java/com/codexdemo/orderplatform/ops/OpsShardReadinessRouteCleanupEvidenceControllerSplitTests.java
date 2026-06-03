@@ -44,6 +44,10 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                         "/route-cleanup-consumer-checklist",
                         "/route-cleanup-extended-closeout"
                 );
+        assertThat(getMappings(OpsShardReadinessRouteCleanupAssuranceController.class))
+                .contains(
+                        "/route-cleanup-audit-trail"
+                );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");
     }
