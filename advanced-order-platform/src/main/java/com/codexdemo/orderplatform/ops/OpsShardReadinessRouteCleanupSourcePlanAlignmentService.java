@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupSourcePlanAlignmentService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_SOURCE_PLAN_ALIGNMENT;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-source-plan-alignment.v1";
 
     static final String SOURCE_PLAN = "Node v549";
@@ -29,6 +33,7 @@ public class OpsShardReadinessRouteCleanupSourcePlanAlignmentService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 SOURCE_PLAN,
                 SOURCE_PLAN_PATH,

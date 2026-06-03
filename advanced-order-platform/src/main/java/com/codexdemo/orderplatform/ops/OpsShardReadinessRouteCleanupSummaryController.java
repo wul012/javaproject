@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupSummaryController {
 
     private final OpsShardReadinessRouteCleanupDigestService digestService;
 
+    private final OpsShardReadinessRouteCleanupSourcePlanAlignmentService sourcePlanAlignmentService;
+
     public OpsShardReadinessRouteCleanupSummaryController(
             OpsShardReadinessRouteCleanupPhaseSummaryService phaseSummaryService,
-            OpsShardReadinessRouteCleanupDigestService digestService
+            OpsShardReadinessRouteCleanupDigestService digestService,
+            OpsShardReadinessRouteCleanupSourcePlanAlignmentService sourcePlanAlignmentService
     ) {
         this.phaseSummaryService = phaseSummaryService;
         this.digestService = digestService;
+        this.sourcePlanAlignmentService = sourcePlanAlignmentService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_PHASE_SUMMARY)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupSummaryController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_DIGEST)
     public OpsShardReadinessRouteCleanupDigestResponse digest() {
         return digestService.digest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_SOURCE_PLAN_ALIGNMENT)
+    public OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse sourcePlanAlignment() {
+        return sourcePlanAlignmentService.alignment();
     }
 }

@@ -18,7 +18,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
         assertThat(getMappings(OpsShardReadinessRouteCleanupSummaryController.class))
                 .contains(
                         "/route-cleanup-phase-summary",
-                        "/route-cleanup-digest"
+                        "/route-cleanup-digest",
+                        "/route-cleanup-source-plan-alignment"
                 );
         assertThat(getMappings(OpsShardReadinessRouteCleanupGovernanceController.class))
                 .containsExactly("/route-cleanup-boundary-matrix");

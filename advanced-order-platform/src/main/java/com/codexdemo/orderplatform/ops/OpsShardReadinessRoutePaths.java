@@ -42,6 +42,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-archive-plan";
     static final String ROUTE_CLEANUP_DIGEST =
             "/route-cleanup-digest";
+    static final String ROUTE_CLEANUP_SOURCE_PLAN_ALIGNMENT =
+            "/route-cleanup-source-plan-alignment";
 
     private OpsShardReadinessRoutePaths() {
     }

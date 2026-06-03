@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String alignmentEndpoint,
         String alignmentProfile,
         String sourcePlan,
         String sourcePlanPath,

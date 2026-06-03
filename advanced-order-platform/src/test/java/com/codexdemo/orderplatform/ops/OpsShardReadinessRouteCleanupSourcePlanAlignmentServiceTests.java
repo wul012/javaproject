@@ -17,6 +17,8 @@ class OpsShardReadinessRouteCleanupSourcePlanAlignmentServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(alignment.readOnly()).isTrue();
         assertThat(alignment.executionAllowed()).isFalse();
+        assertThat(alignment.alignmentEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-source-plan-alignment");
         assertThat(alignment.alignmentProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-source-plan-alignment.v1");
         assertThat(alignment.sourcePlan()).isEqualTo("Node v549");
