@@ -18,18 +18,22 @@ public class OpsShardReadinessRouteCleanupSummaryController {
 
     private final OpsShardReadinessRouteCleanupContinuityReportService continuityReportService;
 
+    private final OpsShardReadinessRouteCleanupFinalDigestService finalDigestService;
+
     public OpsShardReadinessRouteCleanupSummaryController(
             OpsShardReadinessRouteCleanupPhaseSummaryService phaseSummaryService,
             OpsShardReadinessRouteCleanupDigestService digestService,
             OpsShardReadinessRouteCleanupSourcePlanAlignmentService sourcePlanAlignmentService,
             OpsShardReadinessRouteCleanupEndpointManifestService endpointManifestService,
-            OpsShardReadinessRouteCleanupContinuityReportService continuityReportService
+            OpsShardReadinessRouteCleanupContinuityReportService continuityReportService,
+            OpsShardReadinessRouteCleanupFinalDigestService finalDigestService
     ) {
         this.phaseSummaryService = phaseSummaryService;
         this.digestService = digestService;
         this.sourcePlanAlignmentService = sourcePlanAlignmentService;
         this.endpointManifestService = endpointManifestService;
         this.continuityReportService = continuityReportService;
+        this.finalDigestService = finalDigestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_PHASE_SUMMARY)
@@ -55,5 +59,10 @@ public class OpsShardReadinessRouteCleanupSummaryController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONTINUITY_REPORT)
     public OpsShardReadinessRouteCleanupContinuityReportResponse continuityReport() {
         return continuityReportService.report();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_DIGEST)
+    public OpsShardReadinessRouteCleanupFinalDigestResponse finalDigest() {
+        return finalDigestService.digest();
     }
 }

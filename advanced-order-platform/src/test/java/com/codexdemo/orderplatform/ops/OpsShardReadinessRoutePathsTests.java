@@ -157,6 +157,10 @@ class OpsShardReadinessRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_CHECKLIST,
                         OpsShardReadinessRouteCleanupConsumerChecklistService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_DIGEST,
+                        OpsShardReadinessRouteCleanupFinalDigestService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

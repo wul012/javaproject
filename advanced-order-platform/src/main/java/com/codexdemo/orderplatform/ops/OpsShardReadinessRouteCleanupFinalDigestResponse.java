@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupFinalDigestResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String digestEndpoint,
         String digestProfile,
         String digestAlgorithm,
         String digestInput,

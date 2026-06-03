@@ -21,7 +21,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                         "/route-cleanup-digest",
                         "/route-cleanup-source-plan-alignment",
                         "/route-cleanup-endpoint-manifest",
-                        "/route-cleanup-continuity-report"
+                        "/route-cleanup-continuity-report",
+                        "/route-cleanup-final-digest"
                 );
         assertThat(getMappings(OpsShardReadinessRouteCleanupGovernanceController.class))
                 .contains(

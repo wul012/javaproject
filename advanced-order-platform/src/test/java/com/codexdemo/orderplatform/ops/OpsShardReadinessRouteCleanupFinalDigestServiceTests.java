@@ -16,6 +16,8 @@ class OpsShardReadinessRouteCleanupFinalDigestServiceTests {
         assertThat(digest.version()).isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(digest.readOnly()).isTrue();
         assertThat(digest.executionAllowed()).isFalse();
+        assertThat(digest.digestEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-final-digest");
         assertThat(digest.digestProfile()).isEqualTo("java-shard-readiness-route-cleanup-final-digest.v1");
         assertThat(digest.digestAlgorithm()).isEqualTo("SHA-256");
         assertThat(digest.digestInput()).contains("Java v", "passed", "/route-cleanup-handoff-bundle");

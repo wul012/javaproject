@@ -407,6 +407,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-final-digest-service",
                         "read-only-handoff-suite-final-digest-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-final-digest-service-v362"
+                ),
+                entry(
+                        363,
+                        "Node v549",
+                        "handoff-suite-final-digest-route",
+                        "read-only-handoff-suite-final-digest-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-final-digest-route-v363"
                 )
         );
     }

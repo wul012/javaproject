@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupFinalDigestService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_DIGEST;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-final-digest.v1";
 
     static final String ALGORITHM = "SHA-256";
@@ -35,6 +39,7 @@ public class OpsShardReadinessRouteCleanupFinalDigestService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 ALGORITHM,
                 input,
