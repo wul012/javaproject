@@ -19,7 +19,10 @@ class OpsShardReadinessRouteCleanupSuiteCloseoutServiceTests {
                 ).closeout();
 
         assertThat(closeout.project()).isEqualTo("advanced-order-platform");
-        assertThat(closeout.version()).isEqualTo("Java v345");
+        int latestVersion = OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersion();
+
+        assertThat(closeout.version())
+                .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(closeout.readOnly()).isTrue();
         assertThat(closeout.executionAllowed()).isFalse();
         assertThat(closeout.closeoutEndpoint())
@@ -27,8 +30,8 @@ class OpsShardReadinessRouteCleanupSuiteCloseoutServiceTests {
         assertThat(closeout.closeoutProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-suite-closeout.v1");
         assertThat(closeout.firstSuiteVersion()).isEqualTo(326);
-        assertThat(closeout.lastSuiteVersion()).isEqualTo(345);
-        assertThat(closeout.suiteVersionCount()).isEqualTo(20);
+        assertThat(closeout.lastSuiteVersion()).isEqualTo(latestVersion);
+        assertThat(closeout.suiteVersionCount()).isEqualTo(latestVersion - 325);
         assertThat(closeout.publishedEndpointCount()).isEqualTo(11);
         assertThat(closeout.publishedEndpoints())
                 .contains(
