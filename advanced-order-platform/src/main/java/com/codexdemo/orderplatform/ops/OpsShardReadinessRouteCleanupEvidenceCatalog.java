@@ -99,6 +99,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "readiness-handoff-evidence-intake",
                         "read-only-readiness-handoff-intake-entry",
                         "java-shard-readiness-route-cleanup-readiness-handoff-evidence-intake-v318"
+                ),
+                entry(
+                        319,
+                        "Node v502",
+                        "readiness-handoff-evidence-report",
+                        "read-only-readiness-handoff-report-entry",
+                        "java-shard-readiness-route-cleanup-readiness-handoff-evidence-report-v319"
                 )
         );
     }
