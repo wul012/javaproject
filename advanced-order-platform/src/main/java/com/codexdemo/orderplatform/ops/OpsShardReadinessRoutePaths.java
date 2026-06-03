@@ -40,6 +40,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-handoff-checklist";
     static final String ROUTE_CLEANUP_ARCHIVE_PLAN =
             "/route-cleanup-archive-plan";
+    static final String ROUTE_CLEANUP_DIGEST =
+            "/route-cleanup-digest";
 
     private OpsShardReadinessRoutePaths() {
     }
