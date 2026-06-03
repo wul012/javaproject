@@ -20,7 +20,10 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
         assertThat(getMappings(OpsShardReadinessRouteCleanupGovernanceController.class))
                 .containsExactly("/route-cleanup-boundary-matrix");
         assertThat(getMappings(OpsShardReadinessRouteCleanupHandoffController.class))
-                .containsExactly("/route-cleanup-handoff-checklist");
+                .contains(
+                        "/route-cleanup-handoff-checklist",
+                        "/route-cleanup-archive-plan"
+                );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");
     }

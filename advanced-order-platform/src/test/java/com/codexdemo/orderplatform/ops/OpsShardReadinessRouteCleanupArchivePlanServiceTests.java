@@ -18,6 +18,8 @@ class OpsShardReadinessRouteCleanupArchivePlanServiceTests {
         assertThat(plan.version()).isEqualTo("Java v" + version);
         assertThat(plan.readOnly()).isTrue();
         assertThat(plan.executionAllowed()).isFalse();
+        assertThat(plan.archivePlanEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-archive-plan");
         assertThat(plan.archiveProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-archive-plan.v1");
         assertThat(plan.sourceEndpoint())

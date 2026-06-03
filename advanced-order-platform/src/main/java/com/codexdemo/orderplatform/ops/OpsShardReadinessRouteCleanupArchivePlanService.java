@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupArchivePlanService {
 
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_PLAN;
+
     static final String PROFILE = "java-shard-readiness-route-cleanup-archive-plan.v1";
 
     @Transactional(readOnly = true)
@@ -28,6 +32,7 @@ public class OpsShardReadinessRouteCleanupArchivePlanService {
                 OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
+                ENDPOINT,
                 PROFILE,
                 OpsShardReadinessRouteCleanupHandoffChecklistService.ENDPOINT,
                 root,

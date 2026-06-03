@@ -204,6 +204,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-archive-plan-service",
                         "read-only-handoff-suite-archive-plan-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-archive-plan-service-v333"
+                ),
+                entry(
+                        334,
+                        "Node v549",
+                        "handoff-suite-archive-plan-route",
+                        "read-only-handoff-suite-archive-plan-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-archive-plan-route-v334"
                 )
         );
     }
