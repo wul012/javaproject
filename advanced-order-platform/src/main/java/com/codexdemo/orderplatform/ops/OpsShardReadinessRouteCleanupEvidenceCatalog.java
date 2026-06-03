@@ -519,6 +519,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-transition-brief-service",
                         "read-only-handoff-suite-transition-brief-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-transition-brief-service-v378"
+                ),
+                entry(
+                        379,
+                        "Node v549",
+                        "handoff-suite-transition-brief-route",
+                        "read-only-handoff-suite-transition-brief-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-transition-brief-route-v379"
                 )
         );
     }
