@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupHandoffController {
 
     private final OpsShardReadinessRouteCleanupArchivePlanService archivePlanService;
 
+    private final OpsShardReadinessRouteCleanupReleaseHandoffService releaseHandoffService;
+
     public OpsShardReadinessRouteCleanupHandoffController(
             OpsShardReadinessRouteCleanupHandoffChecklistService handoffChecklistService,
-            OpsShardReadinessRouteCleanupArchivePlanService archivePlanService
+            OpsShardReadinessRouteCleanupArchivePlanService archivePlanService,
+            OpsShardReadinessRouteCleanupReleaseHandoffService releaseHandoffService
     ) {
         this.handoffChecklistService = handoffChecklistService;
         this.archivePlanService = archivePlanService;
+        this.releaseHandoffService = releaseHandoffService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_CHECKLIST)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupHandoffController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_PLAN)
     public OpsShardReadinessRouteCleanupArchivePlanResponse archivePlan() {
         return archivePlanService.plan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_RELEASE_HANDOFF)
+    public OpsShardReadinessRouteCleanupReleaseHandoffResponse releaseHandoff() {
+        return releaseHandoffService.handoff();
     }
 }

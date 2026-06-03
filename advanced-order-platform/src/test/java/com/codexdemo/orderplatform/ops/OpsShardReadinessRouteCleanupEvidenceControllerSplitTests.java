@@ -26,7 +26,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
         assertThat(getMappings(OpsShardReadinessRouteCleanupHandoffController.class))
                 .contains(
                         "/route-cleanup-handoff-checklist",
-                        "/route-cleanup-archive-plan"
+                        "/route-cleanup-archive-plan",
+                        "/route-cleanup-release-handoff"
                 );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");

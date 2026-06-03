@@ -7,6 +7,7 @@ public record OpsShardReadinessRouteCleanupReleaseHandoffResponse(
         String version,
         boolean readOnly,
         boolean executionAllowed,
+        String releaseHandoffEndpoint,
         String handoffProfile,
         String checklistEndpoint,
         String archivePlanEndpoint,

@@ -25,6 +25,8 @@ class OpsShardReadinessRouteCleanupReleaseHandoffServiceTests {
                 .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(handoff.readOnly()).isTrue();
         assertThat(handoff.executionAllowed()).isFalse();
+        assertThat(handoff.releaseHandoffEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-release-handoff");
         assertThat(handoff.handoffProfile())
                 .isEqualTo("java-shard-readiness-route-cleanup-release-handoff.v1");
         assertThat(handoff.checklistEndpoint())
