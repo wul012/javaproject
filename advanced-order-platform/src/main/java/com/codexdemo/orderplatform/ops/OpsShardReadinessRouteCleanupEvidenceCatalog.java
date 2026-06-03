@@ -29,6 +29,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "latest-sibling-evidence-report",
                         "read-only-sibling-report-entry",
                         "java-shard-readiness-route-cleanup-latest-sibling-evidence-report-v308"
+                ),
+                entry(
+                        309,
+                        "Node v541",
+                        "latest-sibling-evidence-report-archive",
+                        "read-only-report-archive-entry",
+                        "java-shard-readiness-route-cleanup-latest-sibling-evidence-report-archive-v309"
                 )
         );
     }
