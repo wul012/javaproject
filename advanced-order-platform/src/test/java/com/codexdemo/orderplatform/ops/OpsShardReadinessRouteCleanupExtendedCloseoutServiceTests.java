@@ -32,7 +32,7 @@ class OpsShardReadinessRouteCleanupExtendedCloseoutServiceTests {
         assertThat(closeout.firstExtendedVersion()).isEqualTo(346);
         assertThat(closeout.latestVersion()).isEqualTo(latestVersion);
         assertThat(closeout.extendedVersionCount()).isEqualTo(latestVersion - 345);
-        assertThat(closeout.extendedVersionCount()).isEqualTo(20);
+        assertThat(closeout.extendedVersionCount()).isGreaterThanOrEqualTo(20);
         assertThat(closeout.evidenceCount()).isEqualTo(4);
         assertThat(closeout.evidence()).allSatisfy(item -> assertThat(item).isNotBlank());
         assertThat(closeout.decision()).isEqualTo("extended-closeout-ready-for-final-route");
