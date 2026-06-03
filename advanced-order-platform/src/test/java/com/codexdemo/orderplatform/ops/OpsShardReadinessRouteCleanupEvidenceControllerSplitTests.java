@@ -39,7 +39,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                         "/route-cleanup-suite-closeout",
                         "/route-cleanup-archive-verification",
                         "/route-cleanup-consumer-packet",
-                        "/route-cleanup-handoff-bundle"
+                        "/route-cleanup-handoff-bundle",
+                        "/route-cleanup-consumer-checklist"
                 );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");

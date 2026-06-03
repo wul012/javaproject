@@ -22,6 +22,8 @@ public class OpsShardReadinessRouteCleanupHandoffController {
 
     private final OpsShardReadinessRouteCleanupHandoffBundleService handoffBundleService;
 
+    private final OpsShardReadinessRouteCleanupConsumerChecklistService consumerChecklistService;
+
     public OpsShardReadinessRouteCleanupHandoffController(
             OpsShardReadinessRouteCleanupHandoffChecklistService handoffChecklistService,
             OpsShardReadinessRouteCleanupArchivePlanService archivePlanService,
@@ -29,7 +31,8 @@ public class OpsShardReadinessRouteCleanupHandoffController {
             OpsShardReadinessRouteCleanupSuiteCloseoutService suiteCloseoutService,
             OpsShardReadinessRouteCleanupArchiveVerificationService archiveVerificationService,
             OpsShardReadinessRouteCleanupConsumerPacketService consumerPacketService,
-            OpsShardReadinessRouteCleanupHandoffBundleService handoffBundleService
+            OpsShardReadinessRouteCleanupHandoffBundleService handoffBundleService,
+            OpsShardReadinessRouteCleanupConsumerChecklistService consumerChecklistService
     ) {
         this.handoffChecklistService = handoffChecklistService;
         this.archivePlanService = archivePlanService;
@@ -38,6 +41,7 @@ public class OpsShardReadinessRouteCleanupHandoffController {
         this.archiveVerificationService = archiveVerificationService;
         this.consumerPacketService = consumerPacketService;
         this.handoffBundleService = handoffBundleService;
+        this.consumerChecklistService = consumerChecklistService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_CHECKLIST)
@@ -73,5 +77,10 @@ public class OpsShardReadinessRouteCleanupHandoffController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_BUNDLE)
     public OpsShardReadinessRouteCleanupHandoffBundleResponse handoffBundle() {
         return handoffBundleService.bundle();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_CHECKLIST)
+    public OpsShardReadinessRouteCleanupConsumerChecklistResponse consumerChecklist() {
+        return consumerChecklistService.checklist();
     }
 }

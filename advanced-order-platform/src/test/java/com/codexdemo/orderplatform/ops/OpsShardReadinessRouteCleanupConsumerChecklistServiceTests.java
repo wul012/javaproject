@@ -22,6 +22,8 @@ class OpsShardReadinessRouteCleanupConsumerChecklistServiceTests {
         assertThat(checklist.version()).isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(checklist.readOnly()).isTrue();
         assertThat(checklist.executionAllowed()).isFalse();
+        assertThat(checklist.checklistEndpoint())
+                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-consumer-checklist");
         assertThat(checklist.checklistProfile()).isEqualTo("java-shard-readiness-route-cleanup-consumer-checklist.v1");
         assertThat(checklist.itemCount()).isEqualTo(4);
         assertThat(checklist.items())

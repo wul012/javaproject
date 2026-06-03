@@ -66,6 +66,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-handoff-bundle";
     static final String ROUTE_CLEANUP_CONTINUITY_REPORT =
             "/route-cleanup-continuity-report";
+    static final String ROUTE_CLEANUP_CONSUMER_CHECKLIST =
+            "/route-cleanup-consumer-checklist";
 
     private OpsShardReadinessRoutePaths() {
     }
