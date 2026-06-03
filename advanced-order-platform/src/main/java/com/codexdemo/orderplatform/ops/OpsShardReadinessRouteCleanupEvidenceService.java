@@ -14,10 +14,10 @@ public class OpsShardReadinessRouteCleanupEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessRouteCleanupEvidenceResponse catalog() {
         List<OpsShardReadinessRouteCleanupEvidenceResponse.Entry> entries =
-                OpsShardReadinessRouteCleanupEvidenceCatalog.entries();
+                OpsShardReadinessRouteCleanupEvidenceAnalyzer.entries();
         return new OpsShardReadinessRouteCleanupEvidenceResponse(
                 "advanced-order-platform",
-                "Java v" + entries.getLast().javaVersion(),
+                OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel(),
                 true,
                 false,
                 ENDPOINT,
@@ -25,7 +25,7 @@ public class OpsShardReadinessRouteCleanupEvidenceService {
                 entries.size(),
                 entries,
                 forbiddenOperations(),
-                catalogStatus(entries)
+                catalogStatus()
         );
     }
 
@@ -41,16 +41,7 @@ public class OpsShardReadinessRouteCleanupEvidenceService {
         );
     }
 
-    private String catalogStatus(List<OpsShardReadinessRouteCleanupEvidenceResponse.Entry> entries) {
-        boolean allReadOnly = entries.stream()
-                .allMatch(entry -> entry.readOnly()
-                        && !entry.executionAllowed()
-                        && !entry.startsJavaService()
-                        && !entry.startsMiniKvService()
-                        && !entry.credentialValueRead()
-                        && !entry.rawEndpointParsed()
-                        && !entry.managedAuditConnectionOpened()
-                        && !entry.writeRoutingChanged());
-        return allReadOnly ? "passed" : "blocked";
+    private String catalogStatus() {
+        return OpsShardReadinessRouteCleanupEvidenceAnalyzer.boundaryStatus();
     }
 }

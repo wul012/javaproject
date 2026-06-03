@@ -148,6 +148,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "twenty-version-functional-run-closeout",
                         "read-only-twenty-version-closeout-entry",
                         "java-shard-readiness-route-cleanup-twenty-version-functional-run-closeout-v325"
+                ),
+                entry(
+                        326,
+                        "Node v549",
+                        "handoff-suite-evidence-analyzer",
+                        "read-only-handoff-suite-analyzer-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-evidence-analyzer-v326"
                 )
         );
     }
