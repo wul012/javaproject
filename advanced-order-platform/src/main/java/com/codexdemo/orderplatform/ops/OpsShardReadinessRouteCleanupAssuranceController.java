@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupAssuranceController {
 
     private final OpsShardReadinessRouteCleanupAcceptanceReceiptService acceptanceReceiptService;
 
+    private final OpsShardReadinessRouteCleanupEvidenceRegisterService evidenceRegisterService;
+
     public OpsShardReadinessRouteCleanupAssuranceController(
             OpsShardReadinessRouteCleanupAuditTrailService auditTrailService,
-            OpsShardReadinessRouteCleanupAcceptanceReceiptService acceptanceReceiptService
+            OpsShardReadinessRouteCleanupAcceptanceReceiptService acceptanceReceiptService,
+            OpsShardReadinessRouteCleanupEvidenceRegisterService evidenceRegisterService
     ) {
         this.auditTrailService = auditTrailService;
         this.acceptanceReceiptService = acceptanceReceiptService;
+        this.evidenceRegisterService = evidenceRegisterService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_AUDIT_TRAIL)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ACCEPTANCE_RECEIPT)
     public OpsShardReadinessRouteCleanupAcceptanceReceiptResponse acceptanceReceipt() {
         return acceptanceReceiptService.receipt();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_REGISTER)
+    public OpsShardReadinessRouteCleanupEvidenceRegisterResponse evidenceRegister() {
+        return evidenceRegisterService.register();
     }
 }
