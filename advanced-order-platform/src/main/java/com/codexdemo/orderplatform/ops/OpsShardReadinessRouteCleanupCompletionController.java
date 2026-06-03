@@ -14,14 +14,18 @@ public class OpsShardReadinessRouteCleanupCompletionController {
 
     private final OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService;
 
+    private final OpsShardReadinessRouteCleanupFinalArchivePlanService finalArchivePlanService;
+
     public OpsShardReadinessRouteCleanupCompletionController(
             OpsShardReadinessRouteCleanupReviewerPacketService reviewerPacketService,
             OpsShardReadinessRouteCleanupTransitionBriefService transitionBriefService,
-            OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService
+            OpsShardReadinessRouteCleanupFinalVerificationService finalVerificationService,
+            OpsShardReadinessRouteCleanupFinalArchivePlanService finalArchivePlanService
     ) {
         this.reviewerPacketService = reviewerPacketService;
         this.transitionBriefService = transitionBriefService;
         this.finalVerificationService = finalVerificationService;
+        this.finalArchivePlanService = finalArchivePlanService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REVIEWER_PACKET)
@@ -37,5 +41,10 @@ public class OpsShardReadinessRouteCleanupCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_VERIFICATION)
     public OpsShardReadinessRouteCleanupFinalVerificationResponse finalVerification() {
         return finalVerificationService.verification();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_ARCHIVE_PLAN)
+    public OpsShardReadinessRouteCleanupFinalArchivePlanResponse finalArchivePlan() {
+        return finalArchivePlanService.plan();
     }
 }
