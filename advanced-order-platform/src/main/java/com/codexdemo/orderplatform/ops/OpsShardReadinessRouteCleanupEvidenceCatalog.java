@@ -505,6 +505,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-reviewer-packet-service",
                         "read-only-handoff-suite-reviewer-packet-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-reviewer-packet-service-v376"
+                ),
+                entry(
+                        377,
+                        "Node v549",
+                        "handoff-suite-reviewer-packet-route",
+                        "read-only-handoff-suite-reviewer-packet-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-reviewer-packet-route-v377"
                 )
         );
     }
