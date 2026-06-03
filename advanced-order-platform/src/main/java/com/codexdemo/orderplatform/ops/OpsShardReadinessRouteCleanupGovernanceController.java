@@ -18,18 +18,22 @@ public class OpsShardReadinessRouteCleanupGovernanceController {
 
     private final OpsShardReadinessRouteCleanupRegressionGuardService regressionGuardService;
 
+    private final OpsShardReadinessRouteCleanupPolicyGuardService policyGuardService;
+
     public OpsShardReadinessRouteCleanupGovernanceController(
             OpsShardReadinessRouteCleanupBoundaryMatrixService boundaryMatrixService,
             OpsShardReadinessRouteCleanupOperatorRunbookService operatorRunbookService,
             OpsShardReadinessRouteCleanupReadOnlyGateService readOnlyGateService,
             OpsShardReadinessRouteCleanupCiEvidenceService ciEvidenceService,
-            OpsShardReadinessRouteCleanupRegressionGuardService regressionGuardService
+            OpsShardReadinessRouteCleanupRegressionGuardService regressionGuardService,
+            OpsShardReadinessRouteCleanupPolicyGuardService policyGuardService
     ) {
         this.boundaryMatrixService = boundaryMatrixService;
         this.operatorRunbookService = operatorRunbookService;
         this.readOnlyGateService = readOnlyGateService;
         this.ciEvidenceService = ciEvidenceService;
         this.regressionGuardService = regressionGuardService;
+        this.policyGuardService = policyGuardService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_BOUNDARY_MATRIX)
@@ -55,5 +59,10 @@ public class OpsShardReadinessRouteCleanupGovernanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REGRESSION_GUARD)
     public OpsShardReadinessRouteCleanupRegressionGuardResponse regressionGuard() {
         return regressionGuardService.guard();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POLICY_GUARD)
+    public OpsShardReadinessRouteCleanupPolicyGuardResponse policyGuard() {
+        return policyGuardService.guard();
     }
 }
