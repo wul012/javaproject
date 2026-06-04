@@ -652,6 +652,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-consumer-signoff-packet-service",
                         "read-only-handoff-suite-consumer-signoff-packet-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-consumer-signoff-packet-service-v397"
+                ),
+                entry(
+                        398,
+                        "Node v549",
+                        "handoff-suite-consumer-signoff-packet-route",
+                        "read-only-handoff-suite-consumer-signoff-packet-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-consumer-signoff-packet-route-v398"
                 )
         );
     }
