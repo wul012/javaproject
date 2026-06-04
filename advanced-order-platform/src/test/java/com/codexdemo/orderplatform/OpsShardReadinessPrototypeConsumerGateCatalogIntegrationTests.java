@@ -172,4 +172,25 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("ci-smoke-only-with-explicit-user-window"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateArchiveManifestReturnsArchiveEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-archive-manifest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v463"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-archive-manifest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-archive-manifest.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-archive-manifest"))
+                .andExpect(jsonPath("$.evidencePath")
+                        .value("e/463/evidence/java-shard-readiness-prototype-consumer-gate-archive-manifest-v463.json"))
+                .andExpect(jsonPath("$.checks[2]").value("archive-node-v370-can-pin-versioned-paths"))
+                .andExpect(jsonPath("$.checks[3]").value("archive-runtime-artifacts-not-required"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

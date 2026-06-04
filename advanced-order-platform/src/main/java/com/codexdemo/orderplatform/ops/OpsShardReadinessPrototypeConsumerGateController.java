@@ -50,4 +50,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse ciBatchPlan() {
         return consumerGateService.ciBatchPlan();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ARCHIVE_MANIFEST)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse archiveManifest() {
+        return consumerGateService.archiveManifest();
+    }
 }
