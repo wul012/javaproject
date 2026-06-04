@@ -38,6 +38,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String AUDIT_DIGEST_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST;
+    static final String CLOSEOUT_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CLOSEOUT;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -117,6 +120,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessPrototypeEvidenceResponse auditDigest() {
         return evidence("prototype-audit-digest");
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse closeout() {
+        return evidence("prototype-closeout");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {

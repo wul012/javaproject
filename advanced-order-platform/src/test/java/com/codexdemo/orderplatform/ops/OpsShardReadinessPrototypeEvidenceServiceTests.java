@@ -82,6 +82,26 @@ class OpsShardReadinessPrototypeEvidenceServiceTests {
                 });
     }
 
+    @Test
+    void closesOutPrototypeEvidenceRunForConsumerGate() {
+        OpsShardReadinessPrototypeEvidenceService service = service();
+        OpsShardReadinessPrototypeCatalogResponse catalog = service.catalog();
+        OpsShardReadinessPrototypeEvidenceResponse closeout = service.closeout();
+
+        assertThat(catalog.entryCount()).isEqualTo(10);
+        assertThat(catalog.entries().getFirst().javaVersion()).isEqualTo(409);
+        assertThat(catalog.entries().getLast().javaVersion()).isEqualTo(427);
+        assertThat(closeout.version()).isEqualTo("Java v427");
+        assertThat(closeout.entryKey()).isEqualTo("prototype-closeout");
+        assertThat(closeout.checks())
+                .contains(
+                        "closeout-entry-count-10",
+                        "closeout-ready-for-node-consumer-gate"
+                );
+        assertThat(closeout.digestValue()).matches("[0-9a-f]{64}");
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessPrototypeEvidenceService service() {
         OpsShardReadinessEvidenceIndexService evidenceIndexService = new OpsShardReadinessEvidenceIndexService();
         OpsShardReadinessEvidenceVerificationService evidenceVerificationService =

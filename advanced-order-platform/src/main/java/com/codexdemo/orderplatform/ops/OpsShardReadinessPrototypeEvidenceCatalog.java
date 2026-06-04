@@ -157,6 +157,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "digest-covers-echo-version",
                                 "digest-covers-route-cleanup-closeout-version"
                         )
+                ),
+                entry(
+                        427,
+                        "prototype-closeout",
+                        "Java shard-readiness.v1 prototype closeout",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.CLOSEOUT_ENDPOINT,
+                        "java-shard-readiness-prototype-closeout.v1",
+                        "e/427/evidence/java-shard-readiness-prototype-closeout-v427.json",
+                        List.of(
+                                "closeout-entry-count-10",
+                                "closeout-first-entry-v409",
+                                "closeout-latest-entry-v427",
+                                "closeout-all-evidence-read-only",
+                                "closeout-ready-for-node-consumer-gate"
+                        )
                 )
         );
     }
