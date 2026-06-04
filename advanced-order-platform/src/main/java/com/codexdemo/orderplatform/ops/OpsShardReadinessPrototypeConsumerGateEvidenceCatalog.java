@@ -128,6 +128,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "archive-runtime-artifacts-not-required",
                                 "archive-routes-remain-read-only"
                         )
+                ),
+                entry(
+                        465,
+                        "consumer-gate-operator-signoff",
+                        "Java shard-readiness prototype consumer gate operator signoff",
+                        OpsShardReadinessPrototypeConsumerGateService.OPERATOR_SIGNOFF_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-operator-signoff.v1",
+                        "e/465/evidence/java-shard-readiness-prototype-consumer-gate-operator-signoff-v465.json",
+                        List.of(
+                                "operator-owns-java-read-window",
+                                "node-does-not-start-or-stop-java",
+                                "node-does-not-start-or-stop-mini-kv",
+                                "upstream-actions-remain-disabled",
+                                "consumer-gate-fails-closed-on-status-mismatch"
+                        )
                 )
         );
     }

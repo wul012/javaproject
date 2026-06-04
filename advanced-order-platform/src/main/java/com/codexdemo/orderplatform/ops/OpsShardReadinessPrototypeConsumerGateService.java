@@ -37,6 +37,9 @@ public class OpsShardReadinessPrototypeConsumerGateService {
     static final String ARCHIVE_MANIFEST_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ARCHIVE_MANIFEST;
+    static final String OPERATOR_SIGNOFF_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_OPERATOR_SIGNOFF;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -101,6 +104,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
 
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse archiveManifest() {
         return evidence("consumer-gate-archive-manifest");
+    }
+
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse operatorSignoff() {
+        return evidence("consumer-gate-operator-signoff");
     }
 
     OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence(String key) {

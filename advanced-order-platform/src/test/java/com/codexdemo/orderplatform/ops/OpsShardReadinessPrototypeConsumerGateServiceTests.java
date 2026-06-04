@@ -189,6 +189,35 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void buildsOperatorSignoffEvidence() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().operatorSignoff();
+
+        assertThat(evidence.version()).isEqualTo("Java v465");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-operator-signoff");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-operator-signoff.v1");
+        assertThat(evidence.evidencePath()).isEqualTo(
+                "e/465/evidence/java-shard-readiness-prototype-consumer-gate-operator-signoff-v465.json");
+        assertThat(evidence.checks())
+                .contains(
+                        "operator-owns-java-read-window",
+                        "node-does-not-start-or-stop-java",
+                        "node-does-not-start-or-stop-mini-kv",
+                        "upstream-actions-remain-disabled",
+                        "consumer-gate-fails-closed-on-status-mismatch"
+                );
+        assertThat(evidence.forbiddenOperations())
+                .contains(
+                        "write-routing",
+                        "active-shard-router",
+                        "deployment-or-rollback",
+                        "node-start-or-stop-java-or-mini-kv"
+                );
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 
