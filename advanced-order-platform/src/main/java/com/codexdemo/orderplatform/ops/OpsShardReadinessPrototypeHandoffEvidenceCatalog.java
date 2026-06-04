@@ -98,6 +98,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "digest-covers-entry-key-and-profile",
                                 "digest-covers-evidence-path"
                         )
+                ),
+                entry(
+                        441,
+                        "handoff-ci-manifest",
+                        "Java shard-readiness prototype handoff CI manifest",
+                        OpsShardReadinessPrototypeHandoffService.CI_MANIFEST_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-ci-manifest.v1",
+                        "e/441/evidence/java-shard-readiness-prototype-handoff-ci-manifest-v441.json",
+                        List.of(
+                                "ci-runs-handoff-service-tests",
+                                "ci-runs-route-path-tests",
+                                "ci-runs-handoff-integration-tests",
+                                "ci-runs-full-maven-test-before-push",
+                                "ci-leaves-runtime-processes-stopped"
+                        )
                 )
         );
     }

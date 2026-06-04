@@ -146,6 +146,27 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsCiManifestEvidence() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence = service().ciManifest();
+
+        assertThat(evidence.version()).isEqualTo("Java v441");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-ci-manifest");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-ci-manifest.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "ci-runs-handoff-service-tests",
+                        "ci-runs-route-path-tests",
+                        "ci-runs-handoff-integration-tests",
+                        "ci-runs-full-maven-test-before-push",
+                        "ci-leaves-runtime-processes-stopped"
+                );
+        assertThat(evidence.readOnly()).isTrue();
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 
