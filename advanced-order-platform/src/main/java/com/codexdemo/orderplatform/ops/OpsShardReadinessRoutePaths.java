@@ -110,6 +110,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-archive-handoff-receipt";
     static final String ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_REPORT =
             "/route-cleanup-maintenance-boundary-report";
+    static final String ROUTE_CLEANUP_FIXTURE_COVERAGE_INDEX =
+            "/route-cleanup-fixture-coverage-index";
 
     private OpsShardReadinessRoutePaths() {
     }

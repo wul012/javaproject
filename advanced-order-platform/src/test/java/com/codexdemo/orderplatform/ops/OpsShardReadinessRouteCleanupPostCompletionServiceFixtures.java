@@ -55,4 +55,11 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 OpsShardReadinessRouteCleanupServiceFixtures.policyGuardService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupFixtureCoverageIndexService fixtureCoverageIndexService() {
+        return new OpsShardReadinessRouteCleanupFixtureCoverageIndexService(
+                maintenanceBoundaryReportService(),
+                releaseEvidenceBundleService()
+        );
+    }
 }

@@ -687,6 +687,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-maintenance-boundary-report-route",
                         "read-only-handoff-suite-maintenance-boundary-report-route-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-maintenance-boundary-report-route-v402"
+                ),
+                entry(
+                        403,
+                        "Node v549",
+                        "handoff-suite-fixture-coverage-index-service",
+                        "read-only-handoff-suite-fixture-coverage-index-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-fixture-coverage-index-service-v403"
                 )
         );
     }
