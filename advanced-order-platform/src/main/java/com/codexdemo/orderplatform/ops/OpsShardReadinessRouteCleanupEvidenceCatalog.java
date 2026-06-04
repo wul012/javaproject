@@ -694,6 +694,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-fixture-coverage-index-service",
                         "read-only-handoff-suite-fixture-coverage-index-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-fixture-coverage-index-service-v403"
+                ),
+                entry(
+                        404,
+                        "Node v549",
+                        "handoff-suite-fixture-coverage-index-route",
+                        "read-only-handoff-suite-fixture-coverage-index-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-fixture-coverage-index-route-v404"
                 )
         );
     }

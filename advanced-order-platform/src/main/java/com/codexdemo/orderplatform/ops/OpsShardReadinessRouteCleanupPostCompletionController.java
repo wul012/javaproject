@@ -22,6 +22,8 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService;
 
+    private final OpsShardReadinessRouteCleanupFixtureCoverageIndexService fixtureCoverageIndexService;
+
     public OpsShardReadinessRouteCleanupPostCompletionController(
             OpsShardReadinessRouteCleanupPostPushCloseoutService postPushCloseoutService,
             OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService,
@@ -29,7 +31,8 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
             OpsShardReadinessRouteCleanupReleaseEvidenceBundleService releaseEvidenceBundleService,
             OpsShardReadinessRouteCleanupConsumerSignoffPacketService consumerSignoffPacketService,
             OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService,
-            OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService
+            OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService,
+            OpsShardReadinessRouteCleanupFixtureCoverageIndexService fixtureCoverageIndexService
     ) {
         this.postPushCloseoutService = postPushCloseoutService;
         this.ciRunAttestationService = ciRunAttestationService;
@@ -38,6 +41,7 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
         this.consumerSignoffPacketService = consumerSignoffPacketService;
         this.archiveHandoffReceiptService = archiveHandoffReceiptService;
         this.maintenanceBoundaryReportService = maintenanceBoundaryReportService;
+        this.fixtureCoverageIndexService = fixtureCoverageIndexService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_PUSH_CLOSEOUT)
@@ -73,5 +77,10 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_REPORT)
     public OpsShardReadinessRouteCleanupMaintenanceBoundaryReportResponse maintenanceBoundaryReport() {
         return maintenanceBoundaryReportService.report();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FIXTURE_COVERAGE_INDEX)
+    public OpsShardReadinessRouteCleanupFixtureCoverageIndexResponse fixtureCoverageIndex() {
+        return fixtureCoverageIndexService.index();
     }
 }
