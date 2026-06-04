@@ -11,4 +11,11 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 OpsShardReadinessRouteCleanupServiceFixtures.ciEvidenceService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService() {
+        return new OpsShardReadinessRouteCleanupCiRunAttestationService(
+                postPushCloseoutService(),
+                OpsShardReadinessRouteCleanupServiceFixtures.ciEvidenceService()
+        );
+    }
 }
