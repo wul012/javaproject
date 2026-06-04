@@ -22,7 +22,8 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         OpsShardReadinessRoutePaths
                                 .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
@@ -31,7 +32,8 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         "/shard-readiness/prototype-handoff-boundary-matrix",
                         "/shard-readiness/prototype-handoff-consumer-verification-checklist",
                         "/shard-readiness/prototype-handoff-read-window-checklist",
-                        "/shard-readiness/prototype-handoff-digest-manifest"
+                        "/shard-readiness/prototype-handoff-digest-manifest",
+                        "/shard-readiness/prototype-handoff-ci-manifest"
                 );
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
                 .doesNotContain(
@@ -41,7 +43,8 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         OpsShardReadinessRoutePaths
                                 .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST
                 );
     }
 

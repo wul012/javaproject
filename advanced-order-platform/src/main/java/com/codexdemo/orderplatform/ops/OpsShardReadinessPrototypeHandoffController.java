@@ -45,4 +45,9 @@ public class OpsShardReadinessPrototypeHandoffController {
     public OpsShardReadinessPrototypeHandoffEvidenceResponse digestManifest() {
         return handoffService.digestManifest();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST)
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse ciManifest() {
+        return handoffService.ciManifest();
+    }
 }

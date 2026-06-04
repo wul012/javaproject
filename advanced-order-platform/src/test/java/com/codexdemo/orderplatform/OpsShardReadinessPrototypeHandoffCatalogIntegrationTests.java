@@ -152,4 +152,24 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
                 .andExpect(jsonPath("$.digestValue").isString())
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeHandoffCiManifestReturnsCiEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-handoff-ci-manifest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v441"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-handoff-ci-manifest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-handoff-ci-manifest.v1"))
+                .andExpect(jsonPath("$.entryKey").value("handoff-ci-manifest"))
+                .andExpect(jsonPath("$.checks[0]").value("ci-runs-handoff-service-tests"))
+                .andExpect(jsonPath("$.checks[3]").value("ci-runs-full-maven-test-before-push"))
+                .andExpect(jsonPath("$.checks[4]").value("ci-leaves-runtime-processes-stopped"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
