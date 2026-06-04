@@ -32,4 +32,12 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 tagManifestService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupConsumerSignoffPacketService consumerSignoffPacketService() {
+        return new OpsShardReadinessRouteCleanupConsumerSignoffPacketService(
+                releaseEvidenceBundleService(),
+                OpsShardReadinessRouteCleanupServiceFixtures.policyGuardService(),
+                OpsShardReadinessRouteCleanupServiceFixtures.acceptanceReceiptService()
+        );
+    }
 }
