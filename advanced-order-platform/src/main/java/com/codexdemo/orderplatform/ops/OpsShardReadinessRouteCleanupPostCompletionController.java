@@ -18,18 +18,22 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
 
     private final OpsShardReadinessRouteCleanupConsumerSignoffPacketService consumerSignoffPacketService;
 
+    private final OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService;
+
     public OpsShardReadinessRouteCleanupPostCompletionController(
             OpsShardReadinessRouteCleanupPostPushCloseoutService postPushCloseoutService,
             OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService,
             OpsShardReadinessRouteCleanupTagManifestService tagManifestService,
             OpsShardReadinessRouteCleanupReleaseEvidenceBundleService releaseEvidenceBundleService,
-            OpsShardReadinessRouteCleanupConsumerSignoffPacketService consumerSignoffPacketService
+            OpsShardReadinessRouteCleanupConsumerSignoffPacketService consumerSignoffPacketService,
+            OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService
     ) {
         this.postPushCloseoutService = postPushCloseoutService;
         this.ciRunAttestationService = ciRunAttestationService;
         this.tagManifestService = tagManifestService;
         this.releaseEvidenceBundleService = releaseEvidenceBundleService;
         this.consumerSignoffPacketService = consumerSignoffPacketService;
+        this.archiveHandoffReceiptService = archiveHandoffReceiptService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_PUSH_CLOSEOUT)
@@ -55,5 +59,10 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_SIGNOFF_PACKET)
     public OpsShardReadinessRouteCleanupConsumerSignoffPacketResponse consumerSignoffPacket() {
         return consumerSignoffPacketService.packet();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_HANDOFF_RECEIPT)
+    public OpsShardReadinessRouteCleanupArchiveHandoffReceiptResponse archiveHandoffReceipt() {
+        return archiveHandoffReceiptService.receipt();
     }
 }

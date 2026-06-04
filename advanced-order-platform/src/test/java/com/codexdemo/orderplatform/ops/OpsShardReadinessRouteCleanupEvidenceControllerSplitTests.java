@@ -68,7 +68,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                         "/route-cleanup-ci-run-attestation",
                         "/route-cleanup-tag-manifest",
                         "/route-cleanup-release-evidence-bundle",
-                        "/route-cleanup-consumer-signoff-packet"
+                        "/route-cleanup-consumer-signoff-packet",
+                        "/route-cleanup-archive-handoff-receipt"
                 );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");
