@@ -15,13 +15,20 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                 .hasAnnotation(RestController.class);
 
         assertThat(getMappings(OpsShardReadinessPrototypeHandoffController.class))
-                .containsExactly(
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG
+                .containsExactlyInAnyOrder(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
-                .doesNotContain("/shard-readiness/prototype-handoff-catalog");
+                .doesNotContain(
+                        "/shard-readiness/prototype-handoff-catalog",
+                        "/shard-readiness/prototype-handoff-endpoint-inventory"
+                );
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
-                .doesNotContain(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG);
+                .doesNotContain(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY
+                );
     }
 
     private static String[] getMappings(Class<?> controllerClass) {

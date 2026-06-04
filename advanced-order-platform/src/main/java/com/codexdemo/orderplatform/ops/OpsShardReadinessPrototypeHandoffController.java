@@ -20,4 +20,9 @@ public class OpsShardReadinessPrototypeHandoffController {
     public OpsShardReadinessPrototypeHandoffCatalogResponse catalog() {
         return handoffService.catalog();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY)
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse endpointInventory() {
+        return handoffService.endpointInventory();
+    }
 }
