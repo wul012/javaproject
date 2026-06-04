@@ -23,6 +23,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String READ_ONLY_INTEGRATION_BRIDGE_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE;
+    static final String ROUTE_CLEANUP_BRIDGE_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -77,6 +80,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessPrototypeEvidenceResponse readOnlyIntegrationBridge() {
         return evidence("prototype-read-only-integration-bridge");
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse routeCleanupBridge() {
+        return evidence("prototype-route-cleanup-bridge");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {

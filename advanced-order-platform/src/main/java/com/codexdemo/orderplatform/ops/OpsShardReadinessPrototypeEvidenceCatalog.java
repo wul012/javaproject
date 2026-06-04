@@ -77,6 +77,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "bridge-executionAllowed-false",
                                 "bridge-upstream-actions-disabled"
                         )
+                ),
+                entry(
+                        417,
+                        "prototype-route-cleanup-bridge",
+                        "Java route-cleanup closeout bridge for shard-readiness.v1",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.ROUTE_CLEANUP_BRIDGE_ENDPOINT,
+                        "java-shard-readiness-prototype-route-cleanup-bridge.v1",
+                        "e/417/evidence/java-shard-readiness-prototype-route-cleanup-bridge-v417.json",
+                        List.of(
+                                "route-cleanup-v408-closeout-present",
+                                "route-cleanup-boundary-status-passed",
+                                "route-cleanup-forbidden-operations-carried-forward",
+                                "route-cleanup-does-not-enable-active-shard-router",
+                                "route-cleanup-consumable-as-read-only-evidence"
+                        )
                 )
         );
     }

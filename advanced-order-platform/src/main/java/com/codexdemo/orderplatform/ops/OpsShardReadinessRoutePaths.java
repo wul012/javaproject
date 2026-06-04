@@ -38,6 +38,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-field-alignment";
     static final String SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE =
             "/prototype-read-only-integration-bridge";
+    static final String SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE =
+            "/prototype-route-cleanup-bridge";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";
