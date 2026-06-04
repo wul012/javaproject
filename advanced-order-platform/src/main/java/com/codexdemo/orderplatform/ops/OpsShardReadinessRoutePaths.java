@@ -30,6 +30,9 @@ final class OpsShardReadinessRoutePaths {
     static final String V1_CONTRACT_CONSUMER_READINESS_HANDOFF =
             "/v1-contract-consumer-readiness-handoff";
 
+    static final String SHARD_READINESS_PROTOTYPE_CATALOG =
+            "/prototype-catalog";
+
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";
     static final String ROUTE_CLEANUP_PHASE_SUMMARY =
