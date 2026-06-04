@@ -109,6 +109,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "node-may-probe-only-with-upstream-probes-enabled",
                                 "node-upstream-actions-must-remain-disabled"
                         )
+                ),
+                entry(
+                        421,
+                        "prototype-consumer-gate-packet",
+                        "Java shard-readiness.v1 consumer gate packet",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.CONSUMER_GATE_PACKET_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-packet.v1",
+                        "e/421/evidence/java-shard-readiness-prototype-consumer-gate-packet-v421.json",
+                        List.of(
+                                "consumer-must-check-contract-name",
+                                "consumer-must-check-readOnly-true",
+                                "consumer-must-check-executionAllowed-false",
+                                "consumer-must-check-status-passed",
+                                "consumer-must-fail-closed-on-missing-evidence"
+                        )
                 )
         );
     }

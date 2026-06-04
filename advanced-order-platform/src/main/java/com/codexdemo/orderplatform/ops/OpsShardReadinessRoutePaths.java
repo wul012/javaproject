@@ -42,6 +42,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-route-cleanup-bridge";
     static final String SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF =
             "/prototype-read-window-handoff";
+    static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET =
+            "/prototype-consumer-gate-packet";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

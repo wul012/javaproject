@@ -29,6 +29,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String READ_WINDOW_HANDOFF_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF;
+    static final String CONSUMER_GATE_PACKET_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -93,6 +96,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessPrototypeEvidenceResponse readWindowHandoff() {
         return evidence("prototype-read-window-handoff");
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse consumerGatePacket() {
+        return evidence("prototype-consumer-gate-packet");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {
