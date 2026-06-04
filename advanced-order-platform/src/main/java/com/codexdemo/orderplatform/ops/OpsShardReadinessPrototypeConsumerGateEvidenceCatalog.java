@@ -38,6 +38,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "verify-source-entry-count-10",
                                 "keep-node-v370-consumer-gate-read-only"
                         )
+                ),
+                entry(
+                        453,
+                        "consumer-gate-minimal-field-checklist",
+                        "Java shard-readiness prototype consumer gate minimal field checklist",
+                        OpsShardReadinessPrototypeConsumerGateService.MINIMAL_FIELD_CHECKLIST_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-minimal-field-checklist.v1",
+                        "e/453/evidence/java-shard-readiness-prototype-consumer-gate-minimal-field-checklist-v453.json",
+                        List.of(
+                                "field-project-required",
+                                "field-version-required",
+                                "field-readOnly-true-required",
+                                "field-executionAllowed-false-required",
+                                "field-shardEnabled-shardCount-slotCount-routingMode-evidencePath-status-required"
+                        )
                 )
         );
     }

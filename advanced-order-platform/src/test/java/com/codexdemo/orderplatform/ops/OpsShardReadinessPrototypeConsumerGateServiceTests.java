@@ -60,6 +60,27 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void buildsMinimalFieldChecklistEvidence() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().minimalFieldChecklist();
+
+        assertThat(evidence.version()).isEqualTo("Java v453");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-minimal-field-checklist");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-minimal-field-checklist.v1");
+        assertThat(evidence.contractName()).isEqualTo("shard-readiness.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "field-project-required",
+                        "field-version-required",
+                        "field-readOnly-true-required",
+                        "field-executionAllowed-false-required",
+                        "field-shardEnabled-shardCount-slotCount-routingMode-evidencePath-status-required"
+                );
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 

@@ -17,6 +17,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
     static final String SOURCE_INVENTORY_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY;
+    static final String MINIMAL_FIELD_CHECKLIST_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths
+                            .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -57,6 +61,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
 
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse sourceInventory() {
         return evidence("consumer-gate-source-inventory");
+    }
+
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse minimalFieldChecklist() {
+        return evidence("consumer-gate-minimal-field-checklist");
     }
 
     OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence(String key) {

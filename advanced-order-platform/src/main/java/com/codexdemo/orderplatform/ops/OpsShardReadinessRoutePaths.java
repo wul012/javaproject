@@ -74,6 +74,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-consumer-gate-catalog";
     static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY =
             "/prototype-consumer-gate-source-inventory";
+    static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST =
+            "/prototype-consumer-gate-minimal-field-checklist";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

@@ -173,6 +173,11 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeConsumerGateService.SOURCE_INVENTORY_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST,
+                        OpsShardReadinessPrototypeConsumerGateService.MINIMAL_FIELD_CHECKLIST_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),
