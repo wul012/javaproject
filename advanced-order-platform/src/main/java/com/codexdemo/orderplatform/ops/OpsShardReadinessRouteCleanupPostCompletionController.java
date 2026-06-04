@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
 
     private final OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService;
 
+    private final OpsShardReadinessRouteCleanupTagManifestService tagManifestService;
+
     public OpsShardReadinessRouteCleanupPostCompletionController(
             OpsShardReadinessRouteCleanupPostPushCloseoutService postPushCloseoutService,
-            OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService
+            OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService,
+            OpsShardReadinessRouteCleanupTagManifestService tagManifestService
     ) {
         this.postPushCloseoutService = postPushCloseoutService;
         this.ciRunAttestationService = ciRunAttestationService;
+        this.tagManifestService = tagManifestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_PUSH_CLOSEOUT)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CI_RUN_ATTESTATION)
     public OpsShardReadinessRouteCleanupCiRunAttestationResponse ciRunAttestation() {
         return ciRunAttestationService.attestation();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_TAG_MANIFEST)
+    public OpsShardReadinessRouteCleanupTagManifestResponse tagManifest() {
+        return tagManifestService.manifest();
     }
 }
