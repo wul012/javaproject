@@ -40,6 +40,27 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "echo-routing-mode-fixture",
                                 "echo-status-passed"
                         )
+                ),
+                entry(
+                        413,
+                        "prototype-field-alignment",
+                        "Java shard-readiness.v1 field alignment",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.FIELD_ALIGNMENT_ENDPOINT,
+                        "java-shard-readiness-prototype-field-alignment.v1",
+                        "e/413/evidence/java-shard-readiness-prototype-field-alignment-v413.json",
+                        List.of(
+                                "field-project-present",
+                                "field-version-present",
+                                "field-readOnly-true",
+                                "field-executionAllowed-false",
+                                "field-shardEnabled-false",
+                                "field-shardCount-zero",
+                                "field-slotCount-zero",
+                                "field-routingMode-fixture",
+                                "field-evidencePath-present",
+                                "field-status-passed"
+                        )
                 )
         );
     }

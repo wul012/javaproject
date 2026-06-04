@@ -17,6 +17,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String FIXTURE_ECHO_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO;
+    static final String FIELD_ALIGNMENT_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -61,6 +64,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessPrototypeEvidenceResponse fixtureEcho() {
         return evidence("prototype-fixture-echo");
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse fieldAlignment() {
+        return evidence("prototype-field-alignment");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {

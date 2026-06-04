@@ -34,6 +34,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-catalog";
     static final String SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO =
             "/prototype-fixture-echo";
+    static final String SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT =
+            "/prototype-field-alignment";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

@@ -63,6 +63,25 @@ class OpsShardReadinessPrototypeEvidenceServiceTests {
         assertThat(evidence.status()).isEqualTo("passed");
     }
 
+    @Test
+    void allCatalogEntriesProducePassedReadOnlyEvidence() {
+        OpsShardReadinessPrototypeEvidenceService service = service();
+
+        assertThat(OpsShardReadinessPrototypeEvidenceCatalog.entries())
+                .allSatisfy(entry -> {
+                    OpsShardReadinessPrototypeEvidenceResponse evidence = service.evidence(entry.key());
+
+                    assertThat(evidence.version()).isEqualTo(entry.version());
+                    assertThat(evidence.endpoint()).isEqualTo(entry.endpoint());
+                    assertThat(evidence.profile()).isEqualTo(entry.profile());
+                    assertThat(evidence.readOnly()).isTrue();
+                    assertThat(evidence.executionAllowed()).isFalse();
+                    assertThat(evidence.requiredFields())
+                            .containsExactlyElementsOf(OpsShardReadinessV1Contract.minimalFields());
+                    assertThat(evidence.status()).isEqualTo("passed");
+                });
+    }
+
     private OpsShardReadinessPrototypeEvidenceService service() {
         OpsShardReadinessEvidenceIndexService evidenceIndexService = new OpsShardReadinessEvidenceIndexService();
         OpsShardReadinessEvidenceVerificationService evidenceVerificationService =
