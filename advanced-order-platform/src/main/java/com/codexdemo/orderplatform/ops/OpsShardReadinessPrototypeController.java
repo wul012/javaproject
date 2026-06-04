@@ -45,4 +45,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse readWindowHandoff() {
         return prototypeEvidenceService.readWindowHandoff();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET)
+    public OpsShardReadinessPrototypeEvidenceResponse consumerGatePacket() {
+        return prototypeEvidenceService.consumerGatePacket();
+    }
 }
