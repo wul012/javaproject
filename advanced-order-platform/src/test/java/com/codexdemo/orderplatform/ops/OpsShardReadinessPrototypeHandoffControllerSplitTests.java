@@ -20,14 +20,16 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX,
                         OpsShardReadinessRoutePaths
-                                .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST
+                                .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
                         "/shard-readiness/prototype-handoff-catalog",
                         "/shard-readiness/prototype-handoff-endpoint-inventory",
                         "/shard-readiness/prototype-handoff-boundary-matrix",
-                        "/shard-readiness/prototype-handoff-consumer-verification-checklist"
+                        "/shard-readiness/prototype-handoff-consumer-verification-checklist",
+                        "/shard-readiness/prototype-handoff-read-window-checklist"
                 );
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
                 .doesNotContain(
@@ -35,7 +37,8 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX,
                         OpsShardReadinessRoutePaths
-                                .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST
+                                .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST
                 );
     }
 

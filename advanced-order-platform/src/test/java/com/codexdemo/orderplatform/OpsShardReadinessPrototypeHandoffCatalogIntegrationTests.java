@@ -111,4 +111,24 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
                 .andExpect(jsonPath("$.digestValue").isString())
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeHandoffReadWindowChecklistReturnsReadWindowEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-handoff-read-window-checklist"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v437"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-handoff-read-window-checklist"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-handoff-read-window-checklist.v1"))
+                .andExpect(jsonPath("$.entryKey").value("handoff-read-window-checklist"))
+                .andExpect(jsonPath("$.checks[0]").value("read-window-java-health-route-observed"))
+                .andExpect(jsonPath("$.checks[3]").value("read-window-upstream-probes-only"))
+                .andExpect(jsonPath("$.checks[4]").value("read-window-actions-disabled"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

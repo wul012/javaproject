@@ -35,4 +35,9 @@ public class OpsShardReadinessPrototypeHandoffController {
     public OpsShardReadinessPrototypeHandoffEvidenceResponse consumerVerificationChecklist() {
         return handoffService.consumerVerificationChecklist();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST)
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse readWindowChecklist() {
+        return handoffService.readWindowChecklist();
+    }
 }
