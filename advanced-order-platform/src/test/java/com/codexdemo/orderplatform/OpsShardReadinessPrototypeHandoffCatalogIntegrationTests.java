@@ -172,4 +172,25 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("ci-leaves-runtime-processes-stopped"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeHandoffArchiveManifestReturnsArchiveEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-handoff-archive-manifest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v443"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-handoff-archive-manifest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-handoff-archive-manifest.v1"))
+                .andExpect(jsonPath("$.entryKey").value("handoff-archive-manifest"))
+                .andExpect(jsonPath("$.evidencePath")
+                        .value("e/443/evidence/java-shard-readiness-prototype-handoff-archive-manifest-v443.json"))
+                .andExpect(jsonPath("$.checks[0]").value("archive-evidence-paths-versioned"))
+                .andExpect(jsonPath("$.checks[3]").value("archive-runtime-artifacts-not-required"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
