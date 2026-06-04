@@ -143,6 +143,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "writes-and-deployments-remain-forbidden",
                                 "handoff-fails-closed-on-status-mismatch"
                         )
+                ),
+                entry(
+                        447,
+                        "handoff-closeout",
+                        "Java shard-readiness prototype handoff closeout",
+                        OpsShardReadinessPrototypeHandoffService.CLOSEOUT_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-closeout.v1",
+                        "e/447/evidence/java-shard-readiness-prototype-handoff-closeout-v447.json",
+                        List.of(
+                                "closeout-entry-count-10",
+                                "closeout-first-entry-java-v429",
+                                "closeout-latest-entry-java-v447",
+                                "closeout-all-evidence-passed",
+                                "closeout-ready-for-node-consumer-gate"
+                        )
                 )
         );
     }

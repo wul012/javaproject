@@ -40,6 +40,9 @@ public class OpsShardReadinessPrototypeHandoffService {
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths
                             .SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET;
+    static final String CLOSEOUT_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -106,6 +109,10 @@ public class OpsShardReadinessPrototypeHandoffService {
 
     public OpsShardReadinessPrototypeHandoffEvidenceResponse operatorSignoffPacket() {
         return evidence("handoff-operator-signoff-packet");
+    }
+
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse closeout() {
+        return evidence("handoff-closeout");
     }
 
     OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {

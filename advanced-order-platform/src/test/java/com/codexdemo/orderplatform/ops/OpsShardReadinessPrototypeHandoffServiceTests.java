@@ -211,6 +211,41 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void closesOutPrototypeHandoffEvidenceRunForNodeConsumerGate() {
+        OpsShardReadinessPrototypeHandoffService service = service();
+
+        OpsShardReadinessPrototypeHandoffCatalogResponse catalog = service.catalog();
+        OpsShardReadinessPrototypeHandoffEvidenceResponse closeout = service.closeout();
+
+        assertThat(catalog.entryCount()).isEqualTo(10);
+        assertThat(catalog.version()).isEqualTo("Java v447");
+        assertThat(catalog.entries()).first()
+                .satisfies(entry -> {
+                    assertThat(entry.javaVersion()).isEqualTo(429);
+                    assertThat(entry.key()).isEqualTo("handoff-catalog");
+                });
+        assertThat(catalog.entries()).last()
+                .satisfies(entry -> {
+                    assertThat(entry.javaVersion()).isEqualTo(447);
+                    assertThat(entry.key()).isEqualTo("handoff-closeout");
+                });
+        assertThat(closeout.version()).isEqualTo("Java v447");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-closeout");
+        assertThat(closeout.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-closeout.v1");
+        assertThat(closeout.checks())
+                .contains(
+                        "closeout-entry-count-10",
+                        "closeout-first-entry-java-v429",
+                        "closeout-latest-entry-java-v447",
+                        "closeout-all-evidence-passed",
+                        "closeout-ready-for-node-consumer-gate"
+                );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 
