@@ -68,4 +68,25 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("verify-source-entry-count-10"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateMinimalFieldChecklistReturnsFieldEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-minimal-field-checklist"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v453"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-minimal-field-checklist"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-minimal-field-checklist.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-minimal-field-checklist"))
+                .andExpect(jsonPath("$.contractName").value("shard-readiness.v1"))
+                .andExpect(jsonPath("$.checks[0]").value("field-project-required"))
+                .andExpect(jsonPath("$.checks[4]")
+                        .value("field-shardEnabled-shardCount-slotCount-routingMode-evidencePath-status-required"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

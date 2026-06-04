@@ -25,4 +25,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse sourceInventory() {
         return consumerGateService.sourceInventory();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse minimalFieldChecklist() {
+        return consumerGateService.minimalFieldChecklist();
+    }
 }
