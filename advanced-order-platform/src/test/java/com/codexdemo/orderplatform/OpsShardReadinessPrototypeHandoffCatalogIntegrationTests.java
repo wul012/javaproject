@@ -68,4 +68,26 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
                 .andExpect(jsonPath("$.digestValue").isString())
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeHandoffBoundaryMatrixReturnsBoundaryEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-handoff-boundary-matrix"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v433"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-handoff-boundary-matrix"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-handoff-boundary-matrix.v1"))
+                .andExpect(jsonPath("$.entryKey").value("handoff-boundary-matrix"))
+                .andExpect(jsonPath("$.checks[0]").value("preserve-read-only-contract-boundary"))
+                .andExpect(jsonPath("$.checks[3]").value("forbid-managed-audit-connection"))
+                .andExpect(jsonPath("$.forbiddenOperations[0]").value("write-routing"))
+                .andExpect(jsonPath("$.forbiddenOperations[6]")
+                        .value("node-start-or-stop-java-or-mini-kv"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

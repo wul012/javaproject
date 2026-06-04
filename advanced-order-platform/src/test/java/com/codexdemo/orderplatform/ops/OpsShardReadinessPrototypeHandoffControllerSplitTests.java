@@ -17,17 +17,20 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
         assertThat(getMappings(OpsShardReadinessPrototypeHandoffController.class))
                 .containsExactlyInAnyOrder(
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
                         "/shard-readiness/prototype-handoff-catalog",
-                        "/shard-readiness/prototype-handoff-endpoint-inventory"
+                        "/shard-readiness/prototype-handoff-endpoint-inventory",
+                        "/shard-readiness/prototype-handoff-boundary-matrix"
                 );
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
                 .doesNotContain(
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX
                 );
     }
 

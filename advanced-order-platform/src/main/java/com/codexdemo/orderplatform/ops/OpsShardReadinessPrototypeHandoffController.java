@@ -25,4 +25,9 @@ public class OpsShardReadinessPrototypeHandoffController {
     public OpsShardReadinessPrototypeHandoffEvidenceResponse endpointInventory() {
         return handoffService.endpointInventory();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX)
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse boundaryMatrix() {
+        return handoffService.boundaryMatrix();
+    }
 }
