@@ -115,6 +115,10 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeEvidenceService.OPERATOR_CI_HANDOFF_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST,
+                        OpsShardReadinessPrototypeEvidenceService.AUDIT_DIGEST_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),

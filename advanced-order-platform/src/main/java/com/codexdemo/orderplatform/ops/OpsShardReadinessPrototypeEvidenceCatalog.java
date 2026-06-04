@@ -141,6 +141,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "ci-step-read-only-smoke-after-user-window",
                                 "ci-step-no-owned-process-left-running"
                         )
+                ),
+                entry(
+                        425,
+                        "prototype-audit-digest",
+                        "Java shard-readiness.v1 prototype audit digest",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.AUDIT_DIGEST_ENDPOINT,
+                        "java-shard-readiness-prototype-audit-digest.v1",
+                        "e/425/evidence/java-shard-readiness-prototype-audit-digest-v425.json",
+                        List.of(
+                                "digest-covers-entry-key",
+                                "digest-covers-profile",
+                                "digest-covers-root-readiness-version",
+                                "digest-covers-echo-version",
+                                "digest-covers-route-cleanup-closeout-version"
+                        )
                 )
         );
     }

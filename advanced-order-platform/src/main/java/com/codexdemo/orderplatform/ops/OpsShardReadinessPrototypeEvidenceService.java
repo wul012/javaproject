@@ -35,6 +35,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String OPERATOR_CI_HANDOFF_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_OPERATOR_CI_HANDOFF;
+    static final String AUDIT_DIGEST_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -109,6 +112,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessPrototypeEvidenceResponse operatorCiHandoff() {
         return evidence("prototype-operator-ci-handoff");
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse auditDigest() {
+        return evidence("prototype-audit-digest");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {
