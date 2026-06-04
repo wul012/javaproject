@@ -132,4 +132,24 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                         .value("node-start-or-stop-java-or-mini-kv"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateDigestAcceptanceReturnsDigestEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-digest-acceptance"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v459"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-digest-acceptance"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-digest-acceptance.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-digest-acceptance"))
+                .andExpect(jsonPath("$.checks[2]").value("digest-covers-handoff-closeout-digest"))
+                .andExpect(jsonPath("$.checks[4]").value("digest-covers-consumer-gate-evidence-path"))
+                .andExpect(jsonPath("$.digestValue").isString())
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

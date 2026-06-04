@@ -40,4 +40,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse boundaryMatrix() {
         return consumerGateService.boundaryMatrix();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse digestAcceptance() {
+        return consumerGateService.digestAcceptance();
+    }
 }

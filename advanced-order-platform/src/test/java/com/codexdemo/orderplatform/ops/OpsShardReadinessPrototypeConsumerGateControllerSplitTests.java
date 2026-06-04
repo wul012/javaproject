@@ -22,7 +22,8 @@ class OpsShardReadinessPrototypeConsumerGateControllerSplitTests {
                                 .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST,
                         OpsShardReadinessRoutePaths
                                 .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
@@ -30,7 +31,8 @@ class OpsShardReadinessPrototypeConsumerGateControllerSplitTests {
                         "/shard-readiness/prototype-consumer-gate-source-inventory",
                         "/shard-readiness/prototype-consumer-gate-minimal-field-checklist",
                         "/shard-readiness/prototype-consumer-gate-route-topology-preview",
-                        "/shard-readiness/prototype-consumer-gate-boundary-matrix"
+                        "/shard-readiness/prototype-consumer-gate-boundary-matrix",
+                        "/shard-readiness/prototype-consumer-gate-digest-acceptance"
                 );
         assertThat(getMappings(OpsShardReadinessPrototypeHandoffController.class))
                 .doesNotContain(
@@ -40,7 +42,8 @@ class OpsShardReadinessPrototypeConsumerGateControllerSplitTests {
                                 .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST,
                         OpsShardReadinessRoutePaths
                                 .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE
                 );
     }
 
