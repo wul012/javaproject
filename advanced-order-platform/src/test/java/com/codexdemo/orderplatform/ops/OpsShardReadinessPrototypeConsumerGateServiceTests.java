@@ -81,6 +81,27 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void buildsRouteTopologyPreviewEvidence() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().routeTopologyPreview();
+
+        assertThat(evidence.version()).isEqualTo("Java v455");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-route-topology-preview");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-route-topology-preview.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "topology-java-health-read-target",
+                        "topology-ops-overview-read-target",
+                        "topology-shard-readiness-prototype-read-target",
+                        "topology-prototype-handoff-closeout-read-target",
+                        "topology-consumer-gate-catalog-read-target"
+                );
+        assertThat(evidence.forbiddenOperations()).contains("active-shard-router");
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 

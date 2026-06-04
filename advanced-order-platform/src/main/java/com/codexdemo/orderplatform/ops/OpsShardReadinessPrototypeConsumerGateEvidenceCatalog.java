@@ -53,6 +53,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "field-executionAllowed-false-required",
                                 "field-shardEnabled-shardCount-slotCount-routingMode-evidencePath-status-required"
                         )
+                ),
+                entry(
+                        455,
+                        "consumer-gate-route-topology-preview",
+                        "Java shard-readiness prototype consumer gate route topology preview",
+                        OpsShardReadinessPrototypeConsumerGateService.ROUTE_TOPOLOGY_PREVIEW_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-route-topology-preview.v1",
+                        "e/455/evidence/java-shard-readiness-prototype-consumer-gate-route-topology-preview-v455.json",
+                        List.of(
+                                "topology-java-health-read-target",
+                                "topology-ops-overview-read-target",
+                                "topology-shard-readiness-prototype-read-target",
+                                "topology-prototype-handoff-closeout-read-target",
+                                "topology-consumer-gate-catalog-read-target"
+                        )
                 )
         );
     }

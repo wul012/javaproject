@@ -21,6 +21,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths
                             .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST;
+    static final String ROUTE_TOPOLOGY_PREVIEW_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths
+                            .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -65,6 +69,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
 
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse minimalFieldChecklist() {
         return evidence("consumer-gate-minimal-field-checklist");
+    }
+
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse routeTopologyPreview() {
+        return evidence("consumer-gate-route-topology-preview");
     }
 
     OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence(String key) {
