@@ -193,4 +193,26 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("archive-runtime-artifacts-not-required"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateOperatorSignoffReturnsOperatorEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-operator-signoff"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v465"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-operator-signoff"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-operator-signoff.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-operator-signoff"))
+                .andExpect(jsonPath("$.checks[0]").value("operator-owns-java-read-window"))
+                .andExpect(jsonPath("$.checks[1]").value("node-does-not-start-or-stop-java"))
+                .andExpect(jsonPath("$.checks[4]").value("consumer-gate-fails-closed-on-status-mismatch"))
+                .andExpect(jsonPath("$.forbiddenOperations[6]")
+                        .value("node-start-or-stop-java-or-mini-kv"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

@@ -55,4 +55,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse archiveManifest() {
         return consumerGateService.archiveManifest();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_OPERATOR_SIGNOFF)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse operatorSignoff() {
+        return consumerGateService.operatorSignoff();
+    }
 }
