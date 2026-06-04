@@ -90,4 +90,25 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
                         .value("node-start-or-stop-java-or-mini-kv"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeHandoffConsumerChecklistReturnsConsumerEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-handoff-consumer-verification-checklist"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v435"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-handoff-consumer-verification-checklist"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-handoff-consumer-verification-checklist.v1"))
+                .andExpect(jsonPath("$.entryKey").value("handoff-consumer-verification-checklist"))
+                .andExpect(jsonPath("$.contractName").value("shard-readiness.v1"))
+                .andExpect(jsonPath("$.checks[0]").value("verify-contractName-shard-readiness-v1"))
+                .andExpect(jsonPath("$.checks[4]").value("verify-digest-present"))
+                .andExpect(jsonPath("$.digestValue").isString())
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

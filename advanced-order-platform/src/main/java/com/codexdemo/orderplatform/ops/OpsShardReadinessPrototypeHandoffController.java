@@ -30,4 +30,9 @@ public class OpsShardReadinessPrototypeHandoffController {
     public OpsShardReadinessPrototypeHandoffEvidenceResponse boundaryMatrix() {
         return handoffService.boundaryMatrix();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST)
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse consumerVerificationChecklist() {
+        return handoffService.consumerVerificationChecklist();
+    }
 }

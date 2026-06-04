@@ -18,19 +18,24 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                 .containsExactlyInAnyOrder(
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX,
+                        OpsShardReadinessRoutePaths
+                                .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
                         "/shard-readiness/prototype-handoff-catalog",
                         "/shard-readiness/prototype-handoff-endpoint-inventory",
-                        "/shard-readiness/prototype-handoff-boundary-matrix"
+                        "/shard-readiness/prototype-handoff-boundary-matrix",
+                        "/shard-readiness/prototype-handoff-consumer-verification-checklist"
                 );
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
                 .doesNotContain(
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX,
+                        OpsShardReadinessRoutePaths
+                                .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST
                 );
     }
 
