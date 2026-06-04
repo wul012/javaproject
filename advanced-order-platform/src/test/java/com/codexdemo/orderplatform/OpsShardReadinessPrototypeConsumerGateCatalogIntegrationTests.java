@@ -215,4 +215,26 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                         .value("node-start-or-stop-java-or-mini-kv"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateCloseoutReturnsCloseoutEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-closeout"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v467"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-closeout"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-closeout.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-closeout"))
+                .andExpect(jsonPath("$.evidencePath")
+                        .value("e/467/evidence/java-shard-readiness-prototype-consumer-gate-closeout-v467.json"))
+                .andExpect(jsonPath("$.checks[0]").value("closeout-entry-count-10"))
+                .andExpect(jsonPath("$.checks[2]").value("closeout-latest-entry-java-v467"))
+                .andExpect(jsonPath("$.checks[4]").value("closeout-ready-for-node-v370-consumer-gate"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

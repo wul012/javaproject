@@ -60,4 +60,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse operatorSignoff() {
         return consumerGateService.operatorSignoff();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CLOSEOUT)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse closeout() {
+        return consumerGateService.closeout();
+    }
 }
