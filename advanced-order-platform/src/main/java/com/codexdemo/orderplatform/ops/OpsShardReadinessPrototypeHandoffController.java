@@ -60,4 +60,9 @@ public class OpsShardReadinessPrototypeHandoffController {
     public OpsShardReadinessPrototypeHandoffEvidenceResponse operatorSignoffPacket() {
         return handoffService.operatorSignoffPacket();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT)
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse closeout() {
+        return handoffService.closeout();
+    }
 }
