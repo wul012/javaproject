@@ -40,4 +40,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse routeCleanupBridge() {
         return prototypeEvidenceService.routeCleanupBridge();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF)
+    public OpsShardReadinessPrototypeEvidenceResponse readWindowHandoff() {
+        return prototypeEvidenceService.readWindowHandoff();
+    }
 }
