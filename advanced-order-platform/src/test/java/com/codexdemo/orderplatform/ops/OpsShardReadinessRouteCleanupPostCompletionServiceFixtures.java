@@ -70,4 +70,13 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 archiveHandoffReceiptService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupPostCompletionCloseoutService postCompletionCloseoutService() {
+        return new OpsShardReadinessRouteCleanupPostCompletionCloseoutService(
+                completionAuditDigestService(),
+                maintenanceBoundaryReportService(),
+                archiveHandoffReceiptService(),
+                ciRunAttestationService()
+        );
+    }
 }
