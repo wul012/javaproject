@@ -610,6 +610,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-ci-run-attestation-service",
                         "read-only-handoff-suite-ci-run-attestation-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-ci-run-attestation-service-v391"
+                ),
+                entry(
+                        392,
+                        "Node v549",
+                        "handoff-suite-ci-run-attestation-route",
+                        "read-only-handoff-suite-ci-run-attestation-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-ci-run-attestation-route-v392"
                 )
         );
     }

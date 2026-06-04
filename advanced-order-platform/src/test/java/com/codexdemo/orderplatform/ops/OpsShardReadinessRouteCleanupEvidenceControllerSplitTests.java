@@ -64,7 +64,8 @@ class OpsShardReadinessRouteCleanupEvidenceControllerSplitTests {
                 );
         assertThat(getMappings(OpsShardReadinessRouteCleanupPostCompletionController.class))
                 .contains(
-                        "/route-cleanup-post-push-closeout"
+                        "/route-cleanup-post-push-closeout",
+                        "/route-cleanup-ci-run-attestation"
                 );
         assertThat(getMappings(OpsShardReadinessV1ContractController.class))
                 .doesNotContain("/route-cleanup-evidence-catalog");
