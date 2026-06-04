@@ -102,6 +102,29 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void buildsBoundaryMatrixEvidenceForConsumerGate() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().boundaryMatrix();
+
+        assertThat(evidence.version()).isEqualTo("Java v457");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-boundary-matrix");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-boundary-matrix.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "boundary-forbid-write-routing",
+                        "boundary-forbid-credential-value-read",
+                        "boundary-forbid-raw-endpoint-parse",
+                        "boundary-forbid-managed-audit-connection",
+                        "boundary-forbid-node-start-stop-upstreams"
+                );
+        assertThat(evidence.forbiddenOperations())
+                .contains("write-routing", "credential-value-read", "raw-endpoint-parse",
+                        "managed-audit-connection", "node-start-or-stop-java-or-mini-kv");
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 

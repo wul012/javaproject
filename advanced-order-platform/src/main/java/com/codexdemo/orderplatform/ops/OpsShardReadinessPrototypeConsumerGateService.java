@@ -25,6 +25,9 @@ public class OpsShardReadinessPrototypeConsumerGateService {
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths
                             .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW;
+    static final String BOUNDARY_MATRIX_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -73,6 +76,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
 
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse routeTopologyPreview() {
         return evidence("consumer-gate-route-topology-preview");
+    }
+
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse boundaryMatrix() {
+        return evidence("consumer-gate-boundary-matrix");
     }
 
     OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence(String key) {

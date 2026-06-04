@@ -68,6 +68,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "topology-prototype-handoff-closeout-read-target",
                                 "topology-consumer-gate-catalog-read-target"
                         )
+                ),
+                entry(
+                        457,
+                        "consumer-gate-boundary-matrix",
+                        "Java shard-readiness prototype consumer gate boundary matrix",
+                        OpsShardReadinessPrototypeConsumerGateService.BOUNDARY_MATRIX_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-boundary-matrix.v1",
+                        "e/457/evidence/java-shard-readiness-prototype-consumer-gate-boundary-matrix-v457.json",
+                        List.of(
+                                "boundary-forbid-write-routing",
+                                "boundary-forbid-credential-value-read",
+                                "boundary-forbid-raw-endpoint-parse",
+                                "boundary-forbid-managed-audit-connection",
+                                "boundary-forbid-node-start-stop-upstreams"
+                        )
                 )
         );
     }

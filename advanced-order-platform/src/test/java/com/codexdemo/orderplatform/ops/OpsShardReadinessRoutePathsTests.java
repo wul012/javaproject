@@ -183,6 +183,10 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeConsumerGateService.ROUTE_TOPOLOGY_PREVIEW_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX,
+                        OpsShardReadinessPrototypeConsumerGateService.BOUNDARY_MATRIX_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),
