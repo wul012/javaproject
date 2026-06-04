@@ -23,6 +23,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "keep-readOnly-true",
                                 "keep-executionAllowed-false"
                         )
+                ),
+                entry(
+                        451,
+                        "consumer-gate-source-inventory",
+                        "Java shard-readiness prototype consumer gate source inventory",
+                        OpsShardReadinessPrototypeConsumerGateService.SOURCE_INVENTORY_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-source-inventory.v1",
+                        "e/451/evidence/java-shard-readiness-prototype-consumer-gate-source-inventory-v451.json",
+                        List.of(
+                                "consume-handoff-catalog-route",
+                                "consume-handoff-closeout-route",
+                                "consume-shard-readiness-v1-contract",
+                                "verify-source-entry-count-10",
+                                "keep-node-v370-consumer-gate-read-only"
+                        )
                 )
         );
     }

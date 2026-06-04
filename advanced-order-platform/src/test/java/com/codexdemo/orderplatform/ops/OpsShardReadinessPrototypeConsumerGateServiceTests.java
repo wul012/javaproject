@@ -11,7 +11,7 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
         OpsShardReadinessPrototypeConsumerGateCatalogResponse catalog = service().catalog();
 
         assertThat(catalog.project()).isEqualTo("advanced-order-platform");
-        assertThat(catalog.version()).isEqualTo("Java v449");
+        assertThat(catalog.version()).isEqualTo(catalog.entries().getLast().version());
         assertThat(catalog.readOnly()).isTrue();
         assertThat(catalog.executionAllowed()).isFalse();
         assertThat(catalog.endpoint()).isEqualTo(
@@ -23,9 +23,9 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
                 "/api/v1/ops/shard-readiness/prototype-handoff-closeout");
         assertThat(catalog.sourceHandoffEntryCount()).isEqualTo(10);
         assertThat(catalog.contractName()).isEqualTo("shard-readiness.v1");
-        assertThat(catalog.entryCount()).isEqualTo(1);
+        assertThat(catalog.entryCount()).isEqualTo(catalog.entries().size());
         assertThat(catalog.entries())
-                .singleElement()
+                .first()
                 .satisfies(entry -> {
                     assertThat(entry.javaVersion()).isEqualTo(449);
                     assertThat(entry.key()).isEqualTo("consumer-gate-catalog");
@@ -35,6 +35,28 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
                 });
         assertThat(catalog.forbiddenOperations()).contains("active-shard-router");
         assertThat(catalog.status()).isEqualTo("passed");
+    }
+
+    @Test
+    void buildsSourceInventoryEvidenceForNodeConsumerGate() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().sourceInventory();
+
+        assertThat(evidence.version()).isEqualTo("Java v451");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-source-inventory");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-source-inventory.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "consume-handoff-catalog-route",
+                        "consume-handoff-closeout-route",
+                        "consume-shard-readiness-v1-contract",
+                        "verify-source-entry-count-10",
+                        "keep-node-v370-consumer-gate-read-only"
+                );
+        assertThat(evidence.evidenceRefs())
+                .contains("prototype-handoff-closeout:/api/v1/ops/shard-readiness/prototype-handoff-closeout");
+        assertThat(evidence.status()).isEqualTo("passed");
     }
 
     @Test

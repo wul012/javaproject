@@ -14,6 +14,9 @@ public class OpsShardReadinessPrototypeConsumerGateService {
     static final String CATALOG_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG;
+    static final String SOURCE_INVENTORY_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -50,6 +53,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
                 forbiddenOperations(),
                 catalogStatus(sourceCatalog, sourceCloseout, entries)
         );
+    }
+
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse sourceInventory() {
+        return evidence("consumer-gate-source-inventory");
     }
 
     OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence(String key) {
