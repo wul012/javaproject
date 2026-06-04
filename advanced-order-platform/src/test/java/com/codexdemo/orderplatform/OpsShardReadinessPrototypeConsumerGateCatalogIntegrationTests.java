@@ -152,4 +152,24 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                 .andExpect(jsonPath("$.digestValue").isString())
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateCiBatchPlanReturnsCiEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-ci-batch-plan"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v461"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-ci-batch-plan"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-ci-batch-plan.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-ci-batch-plan"))
+                .andExpect(jsonPath("$.checks[0]").value("ci-focused-consumer-gate-service-tests-first"))
+                .andExpect(jsonPath("$.checks[1]").value("ci-grouped-controller-and-route-tests-second"))
+                .andExpect(jsonPath("$.checks[3]").value("ci-smoke-only-with-explicit-user-window"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

@@ -45,4 +45,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse digestAcceptance() {
         return consumerGateService.digestAcceptance();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CI_BATCH_PLAN)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse ciBatchPlan() {
+        return consumerGateService.ciBatchPlan();
+    }
 }
