@@ -32,6 +32,8 @@ final class OpsShardReadinessRoutePaths {
 
     static final String SHARD_READINESS_PROTOTYPE_CATALOG =
             "/prototype-catalog";
+    static final String SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO =
+            "/prototype-fixture-echo";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

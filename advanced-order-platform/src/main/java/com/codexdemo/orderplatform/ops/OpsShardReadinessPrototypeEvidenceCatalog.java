@@ -24,6 +24,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "reuse-route-cleanup-v408-closeout",
                                 "keep-read-only-and-execution-disabled"
                         )
+                ),
+                entry(
+                        411,
+                        "prototype-fixture-echo",
+                        "Java shard-readiness.v1 fixture echo",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.FIXTURE_ECHO_ENDPOINT,
+                        "java-shard-readiness-prototype-fixture-echo.v1",
+                        "e/411/evidence/java-shard-readiness-prototype-fixture-echo-v411.json",
+                        List.of(
+                                "echo-project-advanced-order-platform",
+                                "echo-contract-shard-readiness-v1",
+                                "echo-shard-enabled-false",
+                                "echo-routing-mode-fixture",
+                                "echo-status-passed"
+                        )
                 )
         );
     }

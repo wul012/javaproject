@@ -14,6 +14,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String CATALOG_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CATALOG;
+    static final String FIXTURE_ECHO_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -53,6 +56,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
                 forbiddenOperations(),
                 entries.stream().allMatch(entry -> !entry.checks().isEmpty()) ? "passed" : "blocked"
         );
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse fixtureEcho() {
+        return evidence("prototype-fixture-echo");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {

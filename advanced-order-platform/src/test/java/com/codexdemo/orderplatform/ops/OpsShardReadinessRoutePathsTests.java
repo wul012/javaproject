@@ -87,6 +87,10 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeEvidenceService.CATALOG_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO,
+                        OpsShardReadinessPrototypeEvidenceService.FIXTURE_ECHO_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),

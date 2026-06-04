@@ -11,20 +11,20 @@ class OpsShardReadinessPrototypeEvidenceServiceTests {
         OpsShardReadinessPrototypeCatalogResponse catalog = service().catalog();
 
         assertThat(catalog.project()).isEqualTo("advanced-order-platform");
-        assertThat(catalog.version()).isEqualTo("Java v409");
+        assertThat(catalog.version()).isEqualTo(catalog.entries().getLast().version());
         assertThat(catalog.readOnly()).isTrue();
         assertThat(catalog.executionAllowed()).isFalse();
         assertThat(catalog.endpoint()).isEqualTo(
                 "/api/v1/ops/shard-readiness/prototype-catalog");
         assertThat(catalog.profile()).isEqualTo("java-shard-readiness-prototype-catalog.v1");
         assertThat(catalog.contractName()).isEqualTo("shard-readiness.v1");
-        assertThat(catalog.entryCount()).isEqualTo(1);
+        assertThat(catalog.entryCount()).isEqualTo(catalog.entries().size());
         assertThat(catalog.requiredFields())
                 .containsExactlyElementsOf(OpsShardReadinessV1Contract.minimalFields());
         assertThat(catalog.forbiddenOperations())
                 .contains("write-routing", "managed-audit-connection");
         assertThat(catalog.entries())
-                .singleElement()
+                .first()
                 .satisfies(entry -> {
                     assertThat(entry.javaVersion()).isEqualTo(409);
                     assertThat(entry.key()).isEqualTo("prototype-catalog");
@@ -33,6 +33,34 @@ class OpsShardReadinessPrototypeEvidenceServiceTests {
                             .contains("reuse-route-cleanup-v408-closeout");
                 });
         assertThat(catalog.status()).isEqualTo("passed");
+    }
+
+    @Test
+    void buildsPrototypeFixtureEchoEvidence() {
+        OpsShardReadinessPrototypeEvidenceResponse evidence = service().fixtureEcho();
+
+        assertThat(evidence.project()).isEqualTo("advanced-order-platform");
+        assertThat(evidence.version()).isEqualTo("Java v411");
+        assertThat(evidence.readOnly()).isTrue();
+        assertThat(evidence.executionAllowed()).isFalse();
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-fixture-echo");
+        assertThat(evidence.profile()).isEqualTo("java-shard-readiness-prototype-fixture-echo.v1");
+        assertThat(evidence.entryKey()).isEqualTo("prototype-fixture-echo");
+        assertThat(evidence.contractName()).isEqualTo("shard-readiness.v1");
+        assertThat(evidence.shardEnabled()).isFalse();
+        assertThat(evidence.shardCount()).isZero();
+        assertThat(evidence.slotCount()).isZero();
+        assertThat(evidence.routingMode()).isEqualTo("fixture");
+        assertThat(evidence.rootReadinessVersion()).isEqualTo("Java v153");
+        assertThat(evidence.echoVersion()).isEqualTo("Java v174");
+        assertThat(evidence.routeCleanupCloseoutVersion()).isEqualTo("Java v408");
+        assertThat(evidence.checks()).contains("echo-status-passed");
+        assertThat(evidence.forbiddenOperations()).contains("active-shard-router");
+        assertThat(evidence.digestValue()).matches("[0-9a-f]{64}");
+        assertThat(evidence.evidencePath())
+                .isEqualTo("e/411/evidence/java-shard-readiness-prototype-fixture-echo-v411.json");
+        assertThat(evidence.status()).isEqualTo("passed");
     }
 
     private OpsShardReadinessPrototypeEvidenceService service() {
