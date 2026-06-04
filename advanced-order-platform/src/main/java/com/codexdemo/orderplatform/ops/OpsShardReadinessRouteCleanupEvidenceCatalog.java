@@ -701,6 +701,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-fixture-coverage-index-route",
                         "read-only-handoff-suite-fixture-coverage-index-route-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-fixture-coverage-index-route-v404"
+                ),
+                entry(
+                        405,
+                        "Node v549",
+                        "handoff-suite-completion-audit-digest-service",
+                        "read-only-handoff-suite-completion-audit-digest-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-completion-audit-digest-service-v405"
                 )
         );
     }

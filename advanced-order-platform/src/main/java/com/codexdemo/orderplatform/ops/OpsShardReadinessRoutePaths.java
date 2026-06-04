@@ -112,6 +112,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-boundary-report";
     static final String ROUTE_CLEANUP_FIXTURE_COVERAGE_INDEX =
             "/route-cleanup-fixture-coverage-index";
+    static final String ROUTE_CLEANUP_COMPLETION_AUDIT_DIGEST =
+            "/route-cleanup-completion-audit-digest";
 
     private OpsShardReadinessRoutePaths() {
     }

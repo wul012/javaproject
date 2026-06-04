@@ -62,4 +62,12 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 releaseEvidenceBundleService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupCompletionAuditDigestService completionAuditDigestService() {
+        return new OpsShardReadinessRouteCleanupCompletionAuditDigestService(
+                fixtureCoverageIndexService(),
+                tagManifestService(),
+                archiveHandoffReceiptService()
+        );
+    }
 }
