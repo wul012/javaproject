@@ -24,7 +24,8 @@ class OpsShardReadinessPrototypeControllerSplitTests {
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_OPERATOR_CI_HANDOFF,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CLOSEOUT
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
@@ -36,7 +37,8 @@ class OpsShardReadinessPrototypeControllerSplitTests {
                         "/shard-readiness/prototype-read-window-handoff",
                         "/shard-readiness/prototype-consumer-gate-packet",
                         "/shard-readiness/prototype-operator-ci-handoff",
-                        "/shard-readiness/prototype-audit-digest"
+                        "/shard-readiness/prototype-audit-digest",
+                        "/shard-readiness/prototype-closeout"
                 );
     }
 

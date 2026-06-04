@@ -60,4 +60,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse auditDigest() {
         return prototypeEvidenceService.auditDigest();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CLOSEOUT)
+    public OpsShardReadinessPrototypeEvidenceResponse closeout() {
+        return prototypeEvidenceService.closeout();
+    }
 }
