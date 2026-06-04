@@ -24,7 +24,9 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST,
+                        OpsShardReadinessRoutePaths
+                                .SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
@@ -35,7 +37,8 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         "/shard-readiness/prototype-handoff-read-window-checklist",
                         "/shard-readiness/prototype-handoff-digest-manifest",
                         "/shard-readiness/prototype-handoff-ci-manifest",
-                        "/shard-readiness/prototype-handoff-archive-manifest"
+                        "/shard-readiness/prototype-handoff-archive-manifest",
+                        "/shard-readiness/prototype-handoff-operator-signoff-packet"
                 );
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
                 .doesNotContain(
@@ -47,7 +50,9 @@ class OpsShardReadinessPrototypeHandoffControllerSplitTests {
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST,
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST,
+                        OpsShardReadinessRoutePaths
+                                .SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET
                 );
     }
 
