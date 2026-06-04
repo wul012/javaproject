@@ -23,6 +23,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "keep-executionAllowed-false",
                                 "prepare-node-consumer-gate-inputs"
                         )
+                ),
+                entry(
+                        431,
+                        "handoff-endpoint-inventory",
+                        "Java shard-readiness prototype handoff endpoint inventory",
+                        OpsShardReadinessPrototypeHandoffService.ENDPOINT_INVENTORY_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-endpoint-inventory.v1",
+                        "e/431/evidence/java-shard-readiness-prototype-handoff-endpoint-inventory-v431.json",
+                        List.of(
+                                "inventory-prototype-catalog-route-present",
+                                "inventory-prototype-closeout-route-present",
+                                "inventory-handoff-catalog-route-present",
+                                "inventory-all-routes-read-only",
+                                "inventory-no-root-controller-regression"
+                        )
                 )
         );
     }

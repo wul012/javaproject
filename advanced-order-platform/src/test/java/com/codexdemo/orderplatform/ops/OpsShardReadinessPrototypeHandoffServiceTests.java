@@ -36,6 +36,25 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsEndpointInventoryEvidenceForReadOnlyRouteHandoff() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence = service().endpointInventory();
+
+        assertThat(evidence.version()).isEqualTo("Java v431");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-endpoint-inventory");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-endpoint-inventory.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "inventory-prototype-catalog-route-present",
+                        "inventory-prototype-closeout-route-present",
+                        "inventory-handoff-catalog-route-present",
+                        "inventory-no-root-controller-regression"
+                );
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 

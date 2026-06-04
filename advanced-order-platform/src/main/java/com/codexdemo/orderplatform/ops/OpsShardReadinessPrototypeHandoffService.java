@@ -14,6 +14,9 @@ public class OpsShardReadinessPrototypeHandoffService {
     static final String CATALOG_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG;
+    static final String ENDPOINT_INVENTORY_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -48,6 +51,10 @@ public class OpsShardReadinessPrototypeHandoffService {
                 forbiddenOperations(),
                 catalogStatus(sourceCatalog, sourceCloseout, entries)
         );
+    }
+
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse endpointInventory() {
+        return evidence("handoff-endpoint-inventory");
     }
 
     OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {
