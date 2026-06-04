@@ -20,4 +20,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateCatalogResponse catalog() {
         return consumerGateService.catalog();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse sourceInventory() {
+        return consumerGateService.sourceInventory();
+    }
 }

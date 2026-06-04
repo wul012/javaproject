@@ -15,13 +15,20 @@ class OpsShardReadinessPrototypeConsumerGateControllerSplitTests {
                 .hasAnnotation(RestController.class);
 
         assertThat(getMappings(OpsShardReadinessPrototypeConsumerGateController.class))
-                .containsExactly(
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG
+                .containsExactlyInAnyOrder(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
-                .doesNotContain("/shard-readiness/prototype-consumer-gate-catalog");
+                .doesNotContain(
+                        "/shard-readiness/prototype-consumer-gate-catalog",
+                        "/shard-readiness/prototype-consumer-gate-source-inventory"
+                );
         assertThat(getMappings(OpsShardReadinessPrototypeHandoffController.class))
-                .doesNotContain(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG);
+                .doesNotContain(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY
+                );
     }
 
     private static String[] getMappings(Class<?> controllerClass) {
