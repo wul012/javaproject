@@ -40,4 +40,9 @@ public class OpsShardReadinessPrototypeHandoffController {
     public OpsShardReadinessPrototypeHandoffEvidenceResponse readWindowChecklist() {
         return handoffService.readWindowChecklist();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST)
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse digestManifest() {
+        return handoffService.digestManifest();
+    }
 }

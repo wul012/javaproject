@@ -131,4 +131,25 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("read-window-actions-disabled"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeHandoffDigestManifestReturnsDigestEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-handoff-digest-manifest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v439"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-handoff-digest-manifest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-handoff-digest-manifest.v1"))
+                .andExpect(jsonPath("$.entryKey").value("handoff-digest-manifest"))
+                .andExpect(jsonPath("$.evidenceRefs.length()").value(3))
+                .andExpect(jsonPath("$.checks[2]").value("digest-covers-source-closeout-digest"))
+                .andExpect(jsonPath("$.checks[4]").value("digest-covers-evidence-path"))
+                .andExpect(jsonPath("$.digestValue").isString())
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
