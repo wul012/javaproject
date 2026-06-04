@@ -17,6 +17,9 @@ public class OpsShardReadinessPrototypeHandoffService {
     static final String ENDPOINT_INVENTORY_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY;
+    static final String BOUNDARY_MATRIX_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -55,6 +58,10 @@ public class OpsShardReadinessPrototypeHandoffService {
 
     public OpsShardReadinessPrototypeHandoffEvidenceResponse endpointInventory() {
         return evidence("handoff-endpoint-inventory");
+    }
+
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse boundaryMatrix() {
+        return evidence("handoff-boundary-matrix");
     }
 
     OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {

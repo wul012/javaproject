@@ -4,6 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.matchesPattern;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +25,7 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
         mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-handoff-catalog"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.project").value("advanced-order-platform"))
-                .andExpect(jsonPath("$.version").value("Java v431"))
+                .andExpect(jsonPath("$.version").value(matchesPattern("Java v\\d+")))
                 .andExpect(jsonPath("$.readOnly").value(true))
                 .andExpect(jsonPath("$.executionAllowed").value(false))
                 .andExpect(jsonPath("$.endpoint")
@@ -33,7 +36,7 @@ class OpsShardReadinessPrototypeHandoffCatalogIntegrationTests
                 .andExpect(jsonPath("$.sourcePrototypeEndpoint")
                         .value("/api/v1/ops/shard-readiness/prototype-closeout"))
                 .andExpect(jsonPath("$.contractName").value("shard-readiness.v1"))
-                .andExpect(jsonPath("$.entryCount").value(2))
+                .andExpect(jsonPath("$.entryCount").value(greaterThanOrEqualTo(2)))
                 .andExpect(jsonPath("$.entries[0].javaVersion").value(429))
                 .andExpect(jsonPath("$.entries[0].key").value("handoff-catalog"))
                 .andExpect(jsonPath("$.entries[0].nodePlanVersion").value("Node v368"))

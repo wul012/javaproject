@@ -55,6 +55,28 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsBoundaryMatrixEvidenceForForbiddenOperations() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence = service().boundaryMatrix();
+
+        assertThat(evidence.version()).isEqualTo("Java v433");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-boundary-matrix");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-boundary-matrix.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "preserve-read-only-contract-boundary",
+                        "preserve-executionAllowed-false",
+                        "forbid-write-routing",
+                        "forbid-managed-audit-connection",
+                        "forbid-node-process-control"
+                );
+        assertThat(evidence.forbiddenOperations())
+                .contains("write-routing", "managed-audit-connection", "node-start-or-stop-java-or-mini-kv");
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 

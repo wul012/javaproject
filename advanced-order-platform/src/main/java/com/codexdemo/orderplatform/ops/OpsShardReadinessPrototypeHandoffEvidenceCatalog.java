@@ -38,6 +38,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "inventory-all-routes-read-only",
                                 "inventory-no-root-controller-regression"
                         )
+                ),
+                entry(
+                        433,
+                        "handoff-boundary-matrix",
+                        "Java shard-readiness prototype handoff boundary matrix",
+                        OpsShardReadinessPrototypeHandoffService.BOUNDARY_MATRIX_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-boundary-matrix.v1",
+                        "e/433/evidence/java-shard-readiness-prototype-handoff-boundary-matrix-v433.json",
+                        List.of(
+                                "preserve-read-only-contract-boundary",
+                                "preserve-executionAllowed-false",
+                                "forbid-write-routing",
+                                "forbid-managed-audit-connection",
+                                "forbid-node-process-control"
+                        )
                 )
         );
     }
