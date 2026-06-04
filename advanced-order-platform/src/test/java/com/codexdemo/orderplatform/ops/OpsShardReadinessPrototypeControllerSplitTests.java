@@ -17,12 +17,14 @@ class OpsShardReadinessPrototypeControllerSplitTests {
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
                 .containsExactlyInAnyOrder(
                         OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CATALOG,
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
                         "/shard-readiness/prototype-catalog",
-                        "/shard-readiness/prototype-fixture-echo"
+                        "/shard-readiness/prototype-fixture-echo",
+                        "/shard-readiness/prototype-field-alignment"
                 );
     }
 

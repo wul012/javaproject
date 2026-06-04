@@ -25,4 +25,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse fixtureEcho() {
         return prototypeEvidenceService.fixtureEcho();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT)
+    public OpsShardReadinessPrototypeEvidenceResponse fieldAlignment() {
+        return prototypeEvidenceService.fieldAlignment();
+    }
 }
