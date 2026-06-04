@@ -125,6 +125,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "consumer-must-check-status-passed",
                                 "consumer-must-fail-closed-on-missing-evidence"
                         )
+                ),
+                entry(
+                        423,
+                        "prototype-operator-ci-handoff",
+                        "Java shard-readiness.v1 operator and CI handoff",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.OPERATOR_CI_HANDOFF_ENDPOINT,
+                        "java-shard-readiness-prototype-operator-ci-handoff.v1",
+                        "e/423/evidence/java-shard-readiness-prototype-operator-ci-handoff-v423.json",
+                        List.of(
+                                "ci-step-focused-service-tests",
+                                "ci-step-controller-route-tests",
+                                "ci-step-full-maven-test",
+                                "ci-step-read-only-smoke-after-user-window",
+                                "ci-step-no-owned-process-left-running"
+                        )
                 )
         );
     }
