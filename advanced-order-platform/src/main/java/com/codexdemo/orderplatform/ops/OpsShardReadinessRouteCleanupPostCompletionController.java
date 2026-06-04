@@ -24,6 +24,8 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
 
     private final OpsShardReadinessRouteCleanupFixtureCoverageIndexService fixtureCoverageIndexService;
 
+    private final OpsShardReadinessRouteCleanupCompletionAuditDigestService completionAuditDigestService;
+
     public OpsShardReadinessRouteCleanupPostCompletionController(
             OpsShardReadinessRouteCleanupPostPushCloseoutService postPushCloseoutService,
             OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService,
@@ -32,7 +34,8 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
             OpsShardReadinessRouteCleanupConsumerSignoffPacketService consumerSignoffPacketService,
             OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService,
             OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService,
-            OpsShardReadinessRouteCleanupFixtureCoverageIndexService fixtureCoverageIndexService
+            OpsShardReadinessRouteCleanupFixtureCoverageIndexService fixtureCoverageIndexService,
+            OpsShardReadinessRouteCleanupCompletionAuditDigestService completionAuditDigestService
     ) {
         this.postPushCloseoutService = postPushCloseoutService;
         this.ciRunAttestationService = ciRunAttestationService;
@@ -42,6 +45,7 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
         this.archiveHandoffReceiptService = archiveHandoffReceiptService;
         this.maintenanceBoundaryReportService = maintenanceBoundaryReportService;
         this.fixtureCoverageIndexService = fixtureCoverageIndexService;
+        this.completionAuditDigestService = completionAuditDigestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_PUSH_CLOSEOUT)
@@ -82,5 +86,10 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FIXTURE_COVERAGE_INDEX)
     public OpsShardReadinessRouteCleanupFixtureCoverageIndexResponse fixtureCoverageIndex() {
         return fixtureCoverageIndexService.index();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_COMPLETION_AUDIT_DIGEST)
+    public OpsShardReadinessRouteCleanupCompletionAuditDigestResponse completionAuditDigest() {
+        return completionAuditDigestService.digest();
     }
 }

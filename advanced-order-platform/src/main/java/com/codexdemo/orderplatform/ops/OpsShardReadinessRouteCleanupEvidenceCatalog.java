@@ -708,6 +708,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-completion-audit-digest-service",
                         "read-only-handoff-suite-completion-audit-digest-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-completion-audit-digest-service-v405"
+                ),
+                entry(
+                        406,
+                        "Node v549",
+                        "handoff-suite-completion-audit-digest-route",
+                        "read-only-handoff-suite-completion-audit-digest-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-completion-audit-digest-route-v406"
                 )
         );
     }
