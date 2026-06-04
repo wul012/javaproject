@@ -89,4 +89,25 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                         .value("field-shardEnabled-shardCount-slotCount-routingMode-evidencePath-status-required"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateRouteTopologyReturnsTopologyEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-route-topology-preview"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v455"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-route-topology-preview"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-route-topology-preview.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-route-topology-preview"))
+                .andExpect(jsonPath("$.checks[0]").value("topology-java-health-read-target"))
+                .andExpect(jsonPath("$.checks[3]").value("topology-prototype-handoff-closeout-read-target"))
+                .andExpect(jsonPath("$.checks[4]").value("topology-consumer-gate-catalog-read-target"))
+                .andExpect(jsonPath("$.forbiddenOperations[1]").value("active-shard-router"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

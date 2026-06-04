@@ -30,4 +30,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse minimalFieldChecklist() {
         return consumerGateService.minimalFieldChecklist();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse routeTopologyPreview() {
+        return consumerGateService.routeTopologyPreview();
+    }
 }
