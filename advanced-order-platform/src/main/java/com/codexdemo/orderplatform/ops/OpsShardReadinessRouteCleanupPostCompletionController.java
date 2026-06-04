@@ -20,13 +20,16 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
 
     private final OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService;
+
     public OpsShardReadinessRouteCleanupPostCompletionController(
             OpsShardReadinessRouteCleanupPostPushCloseoutService postPushCloseoutService,
             OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService,
             OpsShardReadinessRouteCleanupTagManifestService tagManifestService,
             OpsShardReadinessRouteCleanupReleaseEvidenceBundleService releaseEvidenceBundleService,
             OpsShardReadinessRouteCleanupConsumerSignoffPacketService consumerSignoffPacketService,
-            OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService
+            OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService,
+            OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService
     ) {
         this.postPushCloseoutService = postPushCloseoutService;
         this.ciRunAttestationService = ciRunAttestationService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
         this.releaseEvidenceBundleService = releaseEvidenceBundleService;
         this.consumerSignoffPacketService = consumerSignoffPacketService;
         this.archiveHandoffReceiptService = archiveHandoffReceiptService;
+        this.maintenanceBoundaryReportService = maintenanceBoundaryReportService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_PUSH_CLOSEOUT)
@@ -64,5 +68,10 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_HANDOFF_RECEIPT)
     public OpsShardReadinessRouteCleanupArchiveHandoffReceiptResponse archiveHandoffReceipt() {
         return archiveHandoffReceiptService.receipt();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_REPORT)
+    public OpsShardReadinessRouteCleanupMaintenanceBoundaryReportResponse maintenanceBoundaryReport() {
+        return maintenanceBoundaryReportService.report();
     }
 }
