@@ -36,6 +36,10 @@ public class OpsShardReadinessPrototypeHandoffService {
     static final String ARCHIVE_MANIFEST_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST;
+    static final String OPERATOR_SIGNOFF_PACKET_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths
+                            .SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -98,6 +102,10 @@ public class OpsShardReadinessPrototypeHandoffService {
 
     public OpsShardReadinessPrototypeHandoffEvidenceResponse archiveManifest() {
         return evidence("handoff-archive-manifest");
+    }
+
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse operatorSignoffPacket() {
+        return evidence("handoff-operator-signoff-packet");
     }
 
     OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {

@@ -189,6 +189,28 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsOperatorSignoffPacketEvidence() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence = service().operatorSignoffPacket();
+
+        assertThat(evidence.version()).isEqualTo("Java v445");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-operator-signoff-packet");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-operator-signoff-packet.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "operator-owns-java-read-window",
+                        "node-does-not-start-or-stop-java",
+                        "node-does-not-start-or-stop-mini-kv",
+                        "writes-and-deployments-remain-forbidden",
+                        "handoff-fails-closed-on-status-mismatch"
+                );
+        assertThat(evidence.forbiddenOperations())
+                .contains("write-routing", "deployment-or-rollback", "node-start-or-stop-java-or-mini-kv");
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 

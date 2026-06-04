@@ -128,6 +128,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "archive-runtime-artifacts-not-required",
                                 "archive-node-consumer-can-pin-versioned-paths"
                         )
+                ),
+                entry(
+                        445,
+                        "handoff-operator-signoff-packet",
+                        "Java shard-readiness prototype handoff operator signoff packet",
+                        OpsShardReadinessPrototypeHandoffService.OPERATOR_SIGNOFF_PACKET_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-operator-signoff-packet.v1",
+                        "e/445/evidence/java-shard-readiness-prototype-handoff-operator-signoff-packet-v445.json",
+                        List.of(
+                                "operator-owns-java-read-window",
+                                "node-does-not-start-or-stop-java",
+                                "node-does-not-start-or-stop-mini-kv",
+                                "writes-and-deployments-remain-forbidden",
+                                "handoff-fails-closed-on-status-mismatch"
+                        )
                 )
         );
     }
