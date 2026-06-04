@@ -20,6 +20,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String FIELD_ALIGNMENT_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT;
+    static final String READ_ONLY_INTEGRATION_BRIDGE_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -69,6 +72,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessPrototypeEvidenceResponse fieldAlignment() {
         return evidence("prototype-field-alignment");
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse readOnlyIntegrationBridge() {
+        return evidence("prototype-read-only-integration-bridge");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {

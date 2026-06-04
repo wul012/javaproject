@@ -95,6 +95,10 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeEvidenceService.FIELD_ALIGNMENT_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE,
+                        OpsShardReadinessPrototypeEvidenceService.READ_ONLY_INTEGRATION_BRIDGE_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),

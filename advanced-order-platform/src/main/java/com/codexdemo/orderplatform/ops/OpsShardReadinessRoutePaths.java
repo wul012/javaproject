@@ -36,6 +36,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-fixture-echo";
     static final String SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT =
             "/prototype-field-alignment";
+    static final String SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE =
+            "/prototype-read-only-integration-bridge";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

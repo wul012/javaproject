@@ -61,6 +61,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "field-evidencePath-present",
                                 "field-status-passed"
                         )
+                ),
+                entry(
+                        415,
+                        "prototype-read-only-integration-bridge",
+                        "Java read-only integration bridge for shard-readiness.v1",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.READ_ONLY_INTEGRATION_BRIDGE_ENDPOINT,
+                        "java-shard-readiness-prototype-read-only-integration-bridge.v1",
+                        "e/415/evidence/java-shard-readiness-prototype-read-only-integration-bridge-v415.json",
+                        List.of(
+                                "bridge-node-v367-read-targets-passed",
+                                "bridge-node-v368-archive-verified",
+                                "bridge-java-does-not-start-services",
+                                "bridge-executionAllowed-false",
+                                "bridge-upstream-actions-disabled"
+                        )
                 )
         );
     }
