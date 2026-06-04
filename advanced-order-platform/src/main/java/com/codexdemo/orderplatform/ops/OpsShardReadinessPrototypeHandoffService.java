@@ -20,6 +20,10 @@ public class OpsShardReadinessPrototypeHandoffService {
     static final String BOUNDARY_MATRIX_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX;
+    static final String CONSUMER_VERIFICATION_CHECKLIST_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths
+                            .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -62,6 +66,10 @@ public class OpsShardReadinessPrototypeHandoffService {
 
     public OpsShardReadinessPrototypeHandoffEvidenceResponse boundaryMatrix() {
         return evidence("handoff-boundary-matrix");
+    }
+
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse consumerVerificationChecklist() {
+        return evidence("handoff-consumer-verification-checklist");
     }
 
     OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {

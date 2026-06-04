@@ -53,6 +53,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "forbid-managed-audit-connection",
                                 "forbid-node-process-control"
                         )
+                ),
+                entry(
+                        435,
+                        "handoff-consumer-verification-checklist",
+                        "Java shard-readiness prototype handoff consumer verification checklist",
+                        OpsShardReadinessPrototypeHandoffService.CONSUMER_VERIFICATION_CHECKLIST_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-consumer-verification-checklist.v1",
+                        "e/435/evidence/java-shard-readiness-prototype-handoff-consumer-verification-checklist-v435.json",
+                        List.of(
+                                "verify-contractName-shard-readiness-v1",
+                                "verify-readOnly-true",
+                                "verify-executionAllowed-false",
+                                "verify-status-passed",
+                                "verify-digest-present"
+                        )
                 )
         );
     }

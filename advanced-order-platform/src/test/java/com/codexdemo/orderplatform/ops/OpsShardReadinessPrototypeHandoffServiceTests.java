@@ -77,6 +77,29 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsConsumerVerificationChecklistEvidence() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence =
+                service().consumerVerificationChecklist();
+
+        assertThat(evidence.version()).isEqualTo("Java v435");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-consumer-verification-checklist");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-consumer-verification-checklist.v1");
+        assertThat(evidence.contractName()).isEqualTo("shard-readiness.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "verify-contractName-shard-readiness-v1",
+                        "verify-readOnly-true",
+                        "verify-executionAllowed-false",
+                        "verify-status-passed",
+                        "verify-digest-present"
+                );
+        assertThat(evidence.digestValue()).matches("[0-9a-f]{64}");
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 

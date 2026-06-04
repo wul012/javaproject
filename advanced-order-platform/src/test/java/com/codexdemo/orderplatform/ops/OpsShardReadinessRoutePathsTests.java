@@ -135,6 +135,11 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeHandoffService.BOUNDARY_MATRIX_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST,
+                        OpsShardReadinessPrototypeHandoffService.CONSUMER_VERIFICATION_CHECKLIST_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),
