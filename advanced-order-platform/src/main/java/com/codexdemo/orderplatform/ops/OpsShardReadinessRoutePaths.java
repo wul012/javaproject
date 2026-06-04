@@ -50,6 +50,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-audit-digest";
     static final String SHARD_READINESS_PROTOTYPE_CLOSEOUT =
             "/prototype-closeout";
+    static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG =
+            "/prototype-handoff-catalog";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";
