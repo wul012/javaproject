@@ -31,6 +31,9 @@ public class OpsShardReadinessPrototypeConsumerGateService {
     static final String DIGEST_ACCEPTANCE_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE;
+    static final String CI_BATCH_PLAN_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CI_BATCH_PLAN;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -87,6 +90,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
 
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse digestAcceptance() {
         return evidence("consumer-gate-digest-acceptance");
+    }
+
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse ciBatchPlan() {
+        return evidence("consumer-gate-ci-batch-plan");
     }
 
     OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence(String key) {

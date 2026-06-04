@@ -146,6 +146,27 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void buildsCiBatchPlanEvidence() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().ciBatchPlan();
+
+        assertThat(evidence.version()).isEqualTo("Java v461");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-ci-batch-plan");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-ci-batch-plan.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "ci-focused-consumer-gate-service-tests-first",
+                        "ci-grouped-controller-and-route-tests-second",
+                        "ci-full-maven-test-before-push",
+                        "ci-smoke-only-with-explicit-user-window",
+                        "ci-background-processes-stopped-after-run"
+                );
+        assertThat(evidence.executionAllowed()).isFalse();
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 

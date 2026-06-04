@@ -98,6 +98,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "digest-covers-consumer-gate-entry-key-profile",
                                 "digest-covers-consumer-gate-evidence-path"
                         )
+                ),
+                entry(
+                        461,
+                        "consumer-gate-ci-batch-plan",
+                        "Java shard-readiness prototype consumer gate CI batch plan",
+                        OpsShardReadinessPrototypeConsumerGateService.CI_BATCH_PLAN_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-ci-batch-plan.v1",
+                        "e/461/evidence/java-shard-readiness-prototype-consumer-gate-ci-batch-plan-v461.json",
+                        List.of(
+                                "ci-focused-consumer-gate-service-tests-first",
+                                "ci-grouped-controller-and-route-tests-second",
+                                "ci-full-maven-test-before-push",
+                                "ci-smoke-only-with-explicit-user-window",
+                                "ci-background-processes-stopped-after-run"
+                        )
                 )
         );
     }
