@@ -40,4 +40,12 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 OpsShardReadinessRouteCleanupServiceFixtures.acceptanceReceiptService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService() {
+        return new OpsShardReadinessRouteCleanupArchiveHandoffReceiptService(
+                OpsShardReadinessRouteCleanupServiceFixtures.finalArchivePlanService(),
+                consumerSignoffPacketService(),
+                postPushCloseoutService()
+        );
+    }
 }
