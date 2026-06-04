@@ -14,14 +14,18 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
 
     private final OpsShardReadinessRouteCleanupTagManifestService tagManifestService;
 
+    private final OpsShardReadinessRouteCleanupReleaseEvidenceBundleService releaseEvidenceBundleService;
+
     public OpsShardReadinessRouteCleanupPostCompletionController(
             OpsShardReadinessRouteCleanupPostPushCloseoutService postPushCloseoutService,
             OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService,
-            OpsShardReadinessRouteCleanupTagManifestService tagManifestService
+            OpsShardReadinessRouteCleanupTagManifestService tagManifestService,
+            OpsShardReadinessRouteCleanupReleaseEvidenceBundleService releaseEvidenceBundleService
     ) {
         this.postPushCloseoutService = postPushCloseoutService;
         this.ciRunAttestationService = ciRunAttestationService;
         this.tagManifestService = tagManifestService;
+        this.releaseEvidenceBundleService = releaseEvidenceBundleService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_PUSH_CLOSEOUT)
@@ -37,5 +41,10 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_TAG_MANIFEST)
     public OpsShardReadinessRouteCleanupTagManifestResponse tagManifest() {
         return tagManifestService.manifest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_RELEASE_EVIDENCE_BUNDLE)
+    public OpsShardReadinessRouteCleanupReleaseEvidenceBundleResponse releaseEvidenceBundle() {
+        return releaseEvidenceBundleService.bundle();
     }
 }

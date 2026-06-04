@@ -638,6 +638,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-release-evidence-bundle-service",
                         "read-only-handoff-suite-release-evidence-bundle-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-release-evidence-bundle-service-v395"
+                ),
+                entry(
+                        396,
+                        "Node v549",
+                        "handoff-suite-release-evidence-bundle-route",
+                        "read-only-handoff-suite-release-evidence-bundle-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-release-evidence-bundle-route-v396"
                 )
         );
     }
