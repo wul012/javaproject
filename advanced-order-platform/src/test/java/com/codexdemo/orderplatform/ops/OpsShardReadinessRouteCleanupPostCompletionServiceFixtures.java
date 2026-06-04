@@ -18,4 +18,10 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 OpsShardReadinessRouteCleanupServiceFixtures.ciEvidenceService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupTagManifestService tagManifestService() {
+        return new OpsShardReadinessRouteCleanupTagManifestService(
+                ciRunAttestationService()
+        );
+    }
 }

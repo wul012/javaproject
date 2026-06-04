@@ -100,6 +100,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-post-push-closeout";
     static final String ROUTE_CLEANUP_CI_RUN_ATTESTATION =
             "/route-cleanup-ci-run-attestation";
+    static final String ROUTE_CLEANUP_TAG_MANIFEST =
+            "/route-cleanup-tag-manifest";
 
     private OpsShardReadinessRoutePaths() {
     }
