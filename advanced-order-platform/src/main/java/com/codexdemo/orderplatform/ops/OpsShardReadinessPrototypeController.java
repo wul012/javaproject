@@ -50,4 +50,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse consumerGatePacket() {
         return prototypeEvidenceService.consumerGatePacket();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_OPERATOR_CI_HANDOFF)
+    public OpsShardReadinessPrototypeEvidenceResponse operatorCiHandoff() {
+        return prototypeEvidenceService.operatorCiHandoff();
+    }
 }
