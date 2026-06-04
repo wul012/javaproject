@@ -30,4 +30,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse fieldAlignment() {
         return prototypeEvidenceService.fieldAlignment();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE)
+    public OpsShardReadinessPrototypeEvidenceResponse readOnlyIntegrationBridge() {
+        return prototypeEvidenceService.readOnlyIntegrationBridge();
+    }
 }
