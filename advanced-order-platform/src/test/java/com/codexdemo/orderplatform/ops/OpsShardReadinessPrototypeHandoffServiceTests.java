@@ -121,6 +121,31 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsDigestManifestEvidence() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence = service().digestManifest();
+
+        assertThat(evidence.version()).isEqualTo("Java v439");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-digest-manifest");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-digest-manifest.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "digest-covers-source-catalog-version",
+                        "digest-covers-source-closeout-version",
+                        "digest-covers-source-closeout-digest",
+                        "digest-covers-entry-key-and-profile",
+                        "digest-covers-evidence-path"
+                );
+        assertThat(evidence.evidenceRefs()).contains(
+                "prototype-catalog:/api/v1/ops/shard-readiness/prototype-catalog",
+                "prototype-closeout:/api/v1/ops/shard-readiness/prototype-closeout"
+        );
+        assertThat(evidence.digestValue()).matches("[0-9a-f]{64}");
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 

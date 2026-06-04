@@ -27,6 +27,9 @@ public class OpsShardReadinessPrototypeHandoffService {
     static final String READ_WINDOW_CHECKLIST_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST;
+    static final String DIGEST_MANIFEST_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -77,6 +80,10 @@ public class OpsShardReadinessPrototypeHandoffService {
 
     public OpsShardReadinessPrototypeHandoffEvidenceResponse readWindowChecklist() {
         return evidence("handoff-read-window-checklist");
+    }
+
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse digestManifest() {
+        return evidence("handoff-digest-manifest");
     }
 
     OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {

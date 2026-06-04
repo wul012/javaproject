@@ -83,6 +83,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "read-window-upstream-probes-only",
                                 "read-window-actions-disabled"
                         )
+                ),
+                entry(
+                        439,
+                        "handoff-digest-manifest",
+                        "Java shard-readiness prototype handoff digest manifest",
+                        OpsShardReadinessPrototypeHandoffService.DIGEST_MANIFEST_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-digest-manifest.v1",
+                        "e/439/evidence/java-shard-readiness-prototype-handoff-digest-manifest-v439.json",
+                        List.of(
+                                "digest-covers-source-catalog-version",
+                                "digest-covers-source-closeout-version",
+                                "digest-covers-source-closeout-digest",
+                                "digest-covers-entry-key-and-profile",
+                                "digest-covers-evidence-path"
+                        )
                 )
         );
     }

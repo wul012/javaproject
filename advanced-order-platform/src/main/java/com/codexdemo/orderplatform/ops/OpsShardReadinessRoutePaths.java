@@ -60,6 +60,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-handoff-consumer-verification-checklist";
     static final String SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST =
             "/prototype-handoff-read-window-checklist";
+    static final String SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST =
+            "/prototype-handoff-digest-manifest";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";
