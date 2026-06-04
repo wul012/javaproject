@@ -35,4 +35,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse readOnlyIntegrationBridge() {
         return prototypeEvidenceService.readOnlyIntegrationBridge();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE)
+    public OpsShardReadinessPrototypeEvidenceResponse routeCleanupBridge() {
+        return prototypeEvidenceService.routeCleanupBridge();
+    }
 }
