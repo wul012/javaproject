@@ -165,6 +165,10 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeHandoffService.CLOSEOUT_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG,
+                        OpsShardReadinessPrototypeConsumerGateService.CATALOG_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),

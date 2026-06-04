@@ -70,6 +70,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-handoff-operator-signoff-packet";
     static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT =
             "/prototype-handoff-closeout";
+    static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG =
+            "/prototype-consumer-gate-catalog";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";
