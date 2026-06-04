@@ -218,6 +218,36 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void closesOutPrototypeConsumerGateEvidenceRunForNodeV370() {
+        OpsShardReadinessPrototypeConsumerGateService service = service();
+        OpsShardReadinessPrototypeConsumerGateCatalogResponse catalog = service.catalog();
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse closeout = service.closeout();
+
+        assertThat(catalog.entryCount()).isEqualTo(10);
+        assertThat(catalog.version()).isEqualTo("Java v467");
+        assertThat(catalog.entries().getFirst().javaVersion()).isEqualTo(449);
+        assertThat(catalog.entries().getFirst().key()).isEqualTo("consumer-gate-catalog");
+        assertThat(catalog.entries().getLast().javaVersion()).isEqualTo(467);
+        assertThat(catalog.entries().getLast().key()).isEqualTo("consumer-gate-closeout");
+        assertThat(closeout.version()).isEqualTo("Java v467");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-closeout.v1");
+        assertThat(closeout.evidencePath()).isEqualTo(
+                "e/467/evidence/java-shard-readiness-prototype-consumer-gate-closeout-v467.json");
+        assertThat(closeout.checks())
+                .contains(
+                        "closeout-entry-count-10",
+                        "closeout-first-entry-java-v449",
+                        "closeout-latest-entry-java-v467",
+                        "closeout-all-evidence-passed",
+                        "closeout-ready-for-node-v370-consumer-gate"
+                );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 

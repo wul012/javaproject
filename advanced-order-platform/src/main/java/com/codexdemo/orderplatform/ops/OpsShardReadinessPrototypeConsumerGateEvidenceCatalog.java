@@ -143,6 +143,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "upstream-actions-remain-disabled",
                                 "consumer-gate-fails-closed-on-status-mismatch"
                         )
+                ),
+                entry(
+                        467,
+                        "consumer-gate-closeout",
+                        "Java shard-readiness prototype consumer gate closeout",
+                        OpsShardReadinessPrototypeConsumerGateService.CLOSEOUT_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-closeout.v1",
+                        "e/467/evidence/java-shard-readiness-prototype-consumer-gate-closeout-v467.json",
+                        List.of(
+                                "closeout-entry-count-10",
+                                "closeout-first-entry-java-v449",
+                                "closeout-latest-entry-java-v467",
+                                "closeout-all-evidence-passed",
+                                "closeout-ready-for-node-v370-consumer-gate"
+                        )
                 )
         );
     }

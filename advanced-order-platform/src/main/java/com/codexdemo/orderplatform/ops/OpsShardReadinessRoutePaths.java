@@ -88,6 +88,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-consumer-gate-archive-manifest";
     static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_OPERATOR_SIGNOFF =
             "/prototype-consumer-gate-operator-signoff";
+    static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CLOSEOUT =
+            "/prototype-consumer-gate-closeout";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";
