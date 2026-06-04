@@ -48,4 +48,11 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 postPushCloseoutService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService() {
+        return new OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService(
+                archiveHandoffReceiptService(),
+                OpsShardReadinessRouteCleanupServiceFixtures.policyGuardService()
+        );
+    }
 }

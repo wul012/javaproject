@@ -108,6 +108,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-consumer-signoff-packet";
     static final String ROUTE_CLEANUP_ARCHIVE_HANDOFF_RECEIPT =
             "/route-cleanup-archive-handoff-receipt";
+    static final String ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_REPORT =
+            "/route-cleanup-maintenance-boundary-report";
 
     private OpsShardReadinessRoutePaths() {
     }
