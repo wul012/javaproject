@@ -93,6 +93,22 @@ final class OpsShardReadinessPrototypeEvidenceCatalog {
                                 "route-cleanup-does-not-enable-active-shard-router",
                                 "route-cleanup-consumable-as-read-only-evidence"
                         )
+                ),
+                entry(
+                        419,
+                        "prototype-read-window-handoff",
+                        "Java shard-readiness.v1 read window handoff",
+                        "Node v368",
+                        OpsShardReadinessPrototypeEvidenceService.READ_WINDOW_HANDOFF_ENDPOINT,
+                        "java-shard-readiness-prototype-read-window-handoff.v1",
+                        "e/419/evidence/java-shard-readiness-prototype-read-window-handoff-v419.json",
+                        List.of(
+                                "java-health-read-window-required",
+                                "java-ops-overview-read-window-required",
+                                "java-shard-readiness-read-window-required",
+                                "node-may-probe-only-with-upstream-probes-enabled",
+                                "node-upstream-actions-must-remain-disabled"
+                        )
                 )
         );
     }

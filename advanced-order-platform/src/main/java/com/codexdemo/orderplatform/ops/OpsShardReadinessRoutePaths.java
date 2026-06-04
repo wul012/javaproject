@@ -40,6 +40,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-read-only-integration-bridge";
     static final String SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE =
             "/prototype-route-cleanup-bridge";
+    static final String SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF =
+            "/prototype-read-window-handoff";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

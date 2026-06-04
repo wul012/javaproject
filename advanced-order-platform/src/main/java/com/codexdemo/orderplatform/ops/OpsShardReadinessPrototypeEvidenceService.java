@@ -26,6 +26,9 @@ public class OpsShardReadinessPrototypeEvidenceService {
     static final String ROUTE_CLEANUP_BRIDGE_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE;
+    static final String READ_WINDOW_HANDOFF_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -85,6 +88,11 @@ public class OpsShardReadinessPrototypeEvidenceService {
     @Transactional(readOnly = true)
     public OpsShardReadinessPrototypeEvidenceResponse routeCleanupBridge() {
         return evidence("prototype-route-cleanup-bridge");
+    }
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessPrototypeEvidenceResponse readWindowHandoff() {
+        return evidence("prototype-read-window-handoff");
     }
 
     OpsShardReadinessPrototypeEvidenceResponse evidence(String key) {
