@@ -13,7 +13,7 @@ class OpsShardReadinessRouteCleanupPostCompletionCloseoutServiceTests {
 
         int latest = OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersion();
 
-        assertThat(latest).isGreaterThanOrEqualTo(407);
+        assertThat(latest).isGreaterThanOrEqualTo(408);
         assertThat(closeout.project()).isEqualTo("advanced-order-platform");
         assertThat(closeout.version()).isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
         assertThat(closeout.readOnly()).isTrue();
@@ -25,7 +25,7 @@ class OpsShardReadinessRouteCleanupPostCompletionCloseoutServiceTests {
         assertThat(closeout.firstVersion()).isEqualTo(389);
         assertThat(closeout.latestVersion()).isEqualTo(latest);
         assertThat(closeout.versionCount()).isEqualTo(latest - 388);
-        assertThat(closeout.versionCount()).isGreaterThanOrEqualTo(19);
+        assertThat(closeout.versionCount()).isGreaterThanOrEqualTo(20);
         assertThat(closeout.completionAuditDigestEndpoint())
                 .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-completion-audit-digest");
         assertThat(closeout.maintenanceBoundaryReportEndpoint())

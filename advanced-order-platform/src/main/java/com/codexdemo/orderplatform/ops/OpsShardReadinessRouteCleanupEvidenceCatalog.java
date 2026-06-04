@@ -722,6 +722,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-post-completion-closeout-service",
                         "read-only-handoff-suite-post-completion-closeout-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-post-completion-closeout-service-v407"
+                ),
+                entry(
+                        408,
+                        "Node v549",
+                        "handoff-suite-post-completion-closeout-route",
+                        "read-only-handoff-suite-post-completion-closeout-route-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-post-completion-closeout-route-v408"
                 )
         );
     }

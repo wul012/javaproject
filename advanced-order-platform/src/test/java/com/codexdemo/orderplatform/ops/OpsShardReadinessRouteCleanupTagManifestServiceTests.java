@@ -32,7 +32,7 @@ class OpsShardReadinessRouteCleanupTagManifestServiceTests {
                 });
         assertThat(manifest.tags())
                 .extracting(OpsShardReadinessRouteCleanupTagManifestResponse.TagEntry::javaVersion)
-                .contains(393);
+                .contains(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersion());
         assertThat(manifest.policy()).contains("javaproject");
         assertThat(manifest.status()).isEqualTo("passed");
     }

@@ -26,6 +26,8 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
 
     private final OpsShardReadinessRouteCleanupCompletionAuditDigestService completionAuditDigestService;
 
+    private final OpsShardReadinessRouteCleanupPostCompletionCloseoutService postCompletionCloseoutService;
+
     public OpsShardReadinessRouteCleanupPostCompletionController(
             OpsShardReadinessRouteCleanupPostPushCloseoutService postPushCloseoutService,
             OpsShardReadinessRouteCleanupCiRunAttestationService ciRunAttestationService,
@@ -35,7 +37,8 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
             OpsShardReadinessRouteCleanupArchiveHandoffReceiptService archiveHandoffReceiptService,
             OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService maintenanceBoundaryReportService,
             OpsShardReadinessRouteCleanupFixtureCoverageIndexService fixtureCoverageIndexService,
-            OpsShardReadinessRouteCleanupCompletionAuditDigestService completionAuditDigestService
+            OpsShardReadinessRouteCleanupCompletionAuditDigestService completionAuditDigestService,
+            OpsShardReadinessRouteCleanupPostCompletionCloseoutService postCompletionCloseoutService
     ) {
         this.postPushCloseoutService = postPushCloseoutService;
         this.ciRunAttestationService = ciRunAttestationService;
@@ -46,6 +49,7 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
         this.maintenanceBoundaryReportService = maintenanceBoundaryReportService;
         this.fixtureCoverageIndexService = fixtureCoverageIndexService;
         this.completionAuditDigestService = completionAuditDigestService;
+        this.postCompletionCloseoutService = postCompletionCloseoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_PUSH_CLOSEOUT)
@@ -91,5 +95,10 @@ public class OpsShardReadinessRouteCleanupPostCompletionController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_COMPLETION_AUDIT_DIGEST)
     public OpsShardReadinessRouteCleanupCompletionAuditDigestResponse completionAuditDigest() {
         return completionAuditDigestService.digest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_COMPLETION_CLOSEOUT)
+    public OpsShardReadinessRouteCleanupPostCompletionCloseoutResponse postCompletionCloseout() {
+        return postCompletionCloseoutService.closeout();
     }
 }
