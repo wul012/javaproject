@@ -125,6 +125,27 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void buildsDigestAcceptanceEvidence() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().digestAcceptance();
+
+        assertThat(evidence.version()).isEqualTo("Java v459");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-digest-acceptance");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-digest-acceptance.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "digest-covers-handoff-catalog-version",
+                        "digest-covers-handoff-closeout-version",
+                        "digest-covers-handoff-closeout-digest",
+                        "digest-covers-consumer-gate-entry-key-profile",
+                        "digest-covers-consumer-gate-evidence-path"
+                );
+        assertThat(evidence.digestValue()).matches("[0-9a-f]{64}");
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 

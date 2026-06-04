@@ -83,6 +83,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "boundary-forbid-managed-audit-connection",
                                 "boundary-forbid-node-start-stop-upstreams"
                         )
+                ),
+                entry(
+                        459,
+                        "consumer-gate-digest-acceptance",
+                        "Java shard-readiness prototype consumer gate digest acceptance",
+                        OpsShardReadinessPrototypeConsumerGateService.DIGEST_ACCEPTANCE_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-digest-acceptance.v1",
+                        "e/459/evidence/java-shard-readiness-prototype-consumer-gate-digest-acceptance-v459.json",
+                        List.of(
+                                "digest-covers-handoff-catalog-version",
+                                "digest-covers-handoff-closeout-version",
+                                "digest-covers-handoff-closeout-digest",
+                                "digest-covers-consumer-gate-entry-key-profile",
+                                "digest-covers-consumer-gate-evidence-path"
+                        )
                 )
         );
     }

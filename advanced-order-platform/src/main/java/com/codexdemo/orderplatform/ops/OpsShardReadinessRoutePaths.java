@@ -80,6 +80,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-consumer-gate-route-topology-preview";
     static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX =
             "/prototype-consumer-gate-boundary-matrix";
+    static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE =
+            "/prototype-consumer-gate-digest-acceptance";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

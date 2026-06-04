@@ -28,6 +28,9 @@ public class OpsShardReadinessPrototypeConsumerGateService {
     static final String BOUNDARY_MATRIX_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX;
+    static final String DIGEST_ACCEPTANCE_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -80,6 +83,10 @@ public class OpsShardReadinessPrototypeConsumerGateService {
 
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse boundaryMatrix() {
         return evidence("consumer-gate-boundary-matrix");
+    }
+
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse digestAcceptance() {
+        return evidence("consumer-gate-digest-acceptance");
     }
 
     OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence(String key) {
