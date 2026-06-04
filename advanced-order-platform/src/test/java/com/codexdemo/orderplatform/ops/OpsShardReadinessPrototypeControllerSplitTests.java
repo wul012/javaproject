@@ -15,11 +15,15 @@ class OpsShardReadinessPrototypeControllerSplitTests {
                 .hasAnnotation(RestController.class);
 
         assertThat(getMappings(OpsShardReadinessPrototypeController.class))
-                .containsExactly(
-                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CATALOG
+                .containsExactlyInAnyOrder(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CATALOG,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
-                .doesNotContain("/shard-readiness/prototype-catalog");
+                .doesNotContain(
+                        "/shard-readiness/prototype-catalog",
+                        "/shard-readiness/prototype-fixture-echo"
+                );
     }
 
     private static String[] getMappings(Class<?> controllerClass) {

@@ -20,4 +20,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeCatalogResponse catalog() {
         return prototypeEvidenceService.catalog();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO)
+    public OpsShardReadinessPrototypeEvidenceResponse fixtureEcho() {
+        return prototypeEvidenceService.fixtureEcho();
+    }
 }
