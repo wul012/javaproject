@@ -110,4 +110,26 @@ class OpsShardReadinessPrototypeConsumerGateCatalogIntegrationTests
                 .andExpect(jsonPath("$.forbiddenOperations[1]").value("active-shard-router"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void opsShardReadinessPrototypeConsumerGateBoundaryMatrixReturnsBoundaryEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/prototype-consumer-gate-boundary-matrix"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v457"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/prototype-consumer-gate-boundary-matrix"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-prototype-consumer-gate-boundary-matrix.v1"))
+                .andExpect(jsonPath("$.entryKey").value("consumer-gate-boundary-matrix"))
+                .andExpect(jsonPath("$.checks[0]").value("boundary-forbid-write-routing"))
+                .andExpect(jsonPath("$.checks[3]").value("boundary-forbid-managed-audit-connection"))
+                .andExpect(jsonPath("$.forbiddenOperations[2]").value("credential-value-read"))
+                .andExpect(jsonPath("$.forbiddenOperations[6]")
+                        .value("node-start-or-stop-java-or-mini-kv"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

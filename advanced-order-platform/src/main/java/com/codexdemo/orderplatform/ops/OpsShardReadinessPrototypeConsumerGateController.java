@@ -35,4 +35,9 @@ public class OpsShardReadinessPrototypeConsumerGateController {
     public OpsShardReadinessPrototypeConsumerGateEvidenceResponse routeTopologyPreview() {
         return consumerGateService.routeTopologyPreview();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX)
+    public OpsShardReadinessPrototypeConsumerGateEvidenceResponse boundaryMatrix() {
+        return consumerGateService.boundaryMatrix();
+    }
 }

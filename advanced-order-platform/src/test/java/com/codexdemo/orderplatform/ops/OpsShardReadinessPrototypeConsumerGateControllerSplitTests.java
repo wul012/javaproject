@@ -21,14 +21,16 @@ class OpsShardReadinessPrototypeConsumerGateControllerSplitTests {
                         OpsShardReadinessRoutePaths
                                 .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST,
                         OpsShardReadinessRoutePaths
-                                .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW
+                                .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX
                 );
         assertThat(getMappings(OpsShardReadinessController.class))
                 .doesNotContain(
                         "/shard-readiness/prototype-consumer-gate-catalog",
                         "/shard-readiness/prototype-consumer-gate-source-inventory",
                         "/shard-readiness/prototype-consumer-gate-minimal-field-checklist",
-                        "/shard-readiness/prototype-consumer-gate-route-topology-preview"
+                        "/shard-readiness/prototype-consumer-gate-route-topology-preview",
+                        "/shard-readiness/prototype-consumer-gate-boundary-matrix"
                 );
         assertThat(getMappings(OpsShardReadinessPrototypeHandoffController.class))
                 .doesNotContain(
@@ -37,7 +39,8 @@ class OpsShardReadinessPrototypeConsumerGateControllerSplitTests {
                         OpsShardReadinessRoutePaths
                                 .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST,
                         OpsShardReadinessRoutePaths
-                                .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW
+                                .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW,
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX
                 );
     }
 
