@@ -1,0 +1,23 @@
+package com.codexdemo.orderplatform.ops;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+public class OpsShardReadinessPrototypeConsumerGateController {
+
+    private final OpsShardReadinessPrototypeConsumerGateService consumerGateService;
+
+    public OpsShardReadinessPrototypeConsumerGateController(
+            OpsShardReadinessPrototypeConsumerGateService consumerGateService
+    ) {
+        this.consumerGateService = consumerGateService;
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG)
+    public OpsShardReadinessPrototypeConsumerGateCatalogResponse catalog() {
+        return consumerGateService.catalog();
+    }
+}
