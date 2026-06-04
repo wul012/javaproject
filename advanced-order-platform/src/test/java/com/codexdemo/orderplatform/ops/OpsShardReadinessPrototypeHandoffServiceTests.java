@@ -167,6 +167,28 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsArchiveManifestEvidence() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence = service().archiveManifest();
+
+        assertThat(evidence.version()).isEqualTo("Java v443");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-archive-manifest");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-archive-manifest.v1");
+        assertThat(evidence.evidencePath())
+                .isEqualTo("e/443/evidence/java-shard-readiness-prototype-handoff-archive-manifest-v443.json");
+        assertThat(evidence.checks())
+                .contains(
+                        "archive-evidence-paths-versioned",
+                        "archive-entries-use-e-folder-only",
+                        "archive-routes-remain-read-only",
+                        "archive-runtime-artifacts-not-required",
+                        "archive-node-consumer-can-pin-versioned-paths"
+                );
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 

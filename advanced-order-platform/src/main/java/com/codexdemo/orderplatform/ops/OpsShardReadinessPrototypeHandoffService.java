@@ -33,6 +33,9 @@ public class OpsShardReadinessPrototypeHandoffService {
     static final String CI_MANIFEST_ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST;
+    static final String ARCHIVE_MANIFEST_ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST;
 
     private static final String PROJECT = "advanced-order-platform";
 
@@ -91,6 +94,10 @@ public class OpsShardReadinessPrototypeHandoffService {
 
     public OpsShardReadinessPrototypeHandoffEvidenceResponse ciManifest() {
         return evidence("handoff-ci-manifest");
+    }
+
+    public OpsShardReadinessPrototypeHandoffEvidenceResponse archiveManifest() {
+        return evidence("handoff-archive-manifest");
     }
 
     OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {

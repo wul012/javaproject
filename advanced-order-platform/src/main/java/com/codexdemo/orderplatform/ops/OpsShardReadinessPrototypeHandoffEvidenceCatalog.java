@@ -113,6 +113,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "ci-runs-full-maven-test-before-push",
                                 "ci-leaves-runtime-processes-stopped"
                         )
+                ),
+                entry(
+                        443,
+                        "handoff-archive-manifest",
+                        "Java shard-readiness prototype handoff archive manifest",
+                        OpsShardReadinessPrototypeHandoffService.ARCHIVE_MANIFEST_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-archive-manifest.v1",
+                        "e/443/evidence/java-shard-readiness-prototype-handoff-archive-manifest-v443.json",
+                        List.of(
+                                "archive-evidence-paths-versioned",
+                                "archive-entries-use-e-folder-only",
+                                "archive-routes-remain-read-only",
+                                "archive-runtime-artifacts-not-required",
+                                "archive-node-consumer-can-pin-versioned-paths"
+                        )
                 )
         );
     }

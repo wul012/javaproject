@@ -64,6 +64,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-handoff-digest-manifest";
     static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST =
             "/prototype-handoff-ci-manifest";
+    static final String SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST =
+            "/prototype-handoff-archive-manifest";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";
