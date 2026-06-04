@@ -631,6 +631,13 @@ final class OpsShardReadinessRouteCleanupEvidenceCatalog {
                         "handoff-suite-tag-manifest-route",
                         "read-only-handoff-suite-tag-manifest-route-entry",
                         "java-shard-readiness-route-cleanup-handoff-suite-tag-manifest-route-v394"
+                ),
+                entry(
+                        395,
+                        "Node v549",
+                        "handoff-suite-release-evidence-bundle-service",
+                        "read-only-handoff-suite-release-evidence-bundle-entry",
+                        "java-shard-readiness-route-cleanup-handoff-suite-release-evidence-bundle-service-v395"
                 )
         );
     }

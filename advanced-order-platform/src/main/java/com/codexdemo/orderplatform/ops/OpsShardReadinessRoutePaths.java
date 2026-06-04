@@ -102,6 +102,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-ci-run-attestation";
     static final String ROUTE_CLEANUP_TAG_MANIFEST =
             "/route-cleanup-tag-manifest";
+    static final String ROUTE_CLEANUP_RELEASE_EVIDENCE_BUNDLE =
+            "/route-cleanup-release-evidence-bundle";
 
     private OpsShardReadinessRoutePaths() {
     }

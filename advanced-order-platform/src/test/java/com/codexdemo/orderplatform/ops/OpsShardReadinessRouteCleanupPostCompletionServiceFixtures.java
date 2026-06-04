@@ -24,4 +24,12 @@ final class OpsShardReadinessRouteCleanupPostCompletionServiceFixtures {
                 ciRunAttestationService()
         );
     }
+
+    static OpsShardReadinessRouteCleanupReleaseEvidenceBundleService releaseEvidenceBundleService() {
+        return new OpsShardReadinessRouteCleanupReleaseEvidenceBundleService(
+                OpsShardReadinessRouteCleanupServiceFixtures.completionCertificateService(),
+                ciRunAttestationService(),
+                tagManifestService()
+        );
+    }
 }
