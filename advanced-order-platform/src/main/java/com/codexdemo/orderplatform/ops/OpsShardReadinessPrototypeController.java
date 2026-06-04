@@ -55,4 +55,9 @@ public class OpsShardReadinessPrototypeController {
     public OpsShardReadinessPrototypeEvidenceResponse operatorCiHandoff() {
         return prototypeEvidenceService.operatorCiHandoff();
     }
+
+    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST)
+    public OpsShardReadinessPrototypeEvidenceResponse auditDigest() {
+        return prototypeEvidenceService.auditDigest();
+    }
 }
