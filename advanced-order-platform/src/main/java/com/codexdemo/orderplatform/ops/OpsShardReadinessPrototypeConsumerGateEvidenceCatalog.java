@@ -113,6 +113,21 @@ final class OpsShardReadinessPrototypeConsumerGateEvidenceCatalog {
                                 "ci-smoke-only-with-explicit-user-window",
                                 "ci-background-processes-stopped-after-run"
                         )
+                ),
+                entry(
+                        463,
+                        "consumer-gate-archive-manifest",
+                        "Java shard-readiness prototype consumer gate archive manifest",
+                        OpsShardReadinessPrototypeConsumerGateService.ARCHIVE_MANIFEST_ENDPOINT,
+                        "java-shard-readiness-prototype-consumer-gate-archive-manifest.v1",
+                        "e/463/evidence/java-shard-readiness-prototype-consumer-gate-archive-manifest-v463.json",
+                        List.of(
+                                "archive-consumer-gate-evidence-paths-versioned",
+                                "archive-source-handoff-paths-retained",
+                                "archive-node-v370-can-pin-versioned-paths",
+                                "archive-runtime-artifacts-not-required",
+                                "archive-routes-remain-read-only"
+                        )
                 )
         );
     }

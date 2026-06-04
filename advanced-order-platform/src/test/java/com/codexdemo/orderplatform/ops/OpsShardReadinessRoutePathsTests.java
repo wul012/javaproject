@@ -195,6 +195,10 @@ class OpsShardReadinessRoutePathsTests {
                         OpsShardReadinessPrototypeConsumerGateService.CI_BATCH_PLAN_ENDPOINT
                 ),
                 Map.entry(
+                        OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ARCHIVE_MANIFEST,
+                        OpsShardReadinessPrototypeConsumerGateService.ARCHIVE_MANIFEST_ENDPOINT
+                ),
+                Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                         OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT
                 ),

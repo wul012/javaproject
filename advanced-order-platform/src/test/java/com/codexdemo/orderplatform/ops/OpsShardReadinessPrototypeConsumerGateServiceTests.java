@@ -167,6 +167,28 @@ class OpsShardReadinessPrototypeConsumerGateServiceTests {
     }
 
     @Test
+    void buildsArchiveManifestEvidence() {
+        OpsShardReadinessPrototypeConsumerGateEvidenceResponse evidence = service().archiveManifest();
+
+        assertThat(evidence.version()).isEqualTo("Java v463");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-consumer-gate-archive-manifest");
+        assertThat(evidence.profile()).isEqualTo(
+                "java-shard-readiness-prototype-consumer-gate-archive-manifest.v1");
+        assertThat(evidence.evidencePath()).isEqualTo(
+                "e/463/evidence/java-shard-readiness-prototype-consumer-gate-archive-manifest-v463.json");
+        assertThat(evidence.checks())
+                .contains(
+                        "archive-consumer-gate-evidence-paths-versioned",
+                        "archive-source-handoff-paths-retained",
+                        "archive-node-v370-can-pin-versioned-paths",
+                        "archive-runtime-artifacts-not-required",
+                        "archive-routes-remain-read-only"
+                );
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allConsumerGateEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeConsumerGateService service = service();
 
