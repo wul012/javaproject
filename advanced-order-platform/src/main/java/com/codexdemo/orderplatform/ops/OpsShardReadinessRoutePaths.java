@@ -58,6 +58,8 @@ final class OpsShardReadinessRoutePaths {
             "/prototype-handoff-boundary-matrix";
     static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST =
             "/prototype-handoff-consumer-verification-checklist";
+    static final String SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST =
+            "/prototype-handoff-read-window-checklist";
 
     static final String ROUTE_CLEANUP_EVIDENCE_CATALOG =
             "/route-cleanup-evidence-catalog";

@@ -100,6 +100,27 @@ class OpsShardReadinessPrototypeHandoffServiceTests {
     }
 
     @Test
+    void buildsReadWindowChecklistEvidence() {
+        OpsShardReadinessPrototypeHandoffEvidenceResponse evidence = service().readWindowChecklist();
+
+        assertThat(evidence.version()).isEqualTo("Java v437");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/prototype-handoff-read-window-checklist");
+        assertThat(evidence.profile())
+                .isEqualTo("java-shard-readiness-prototype-handoff-read-window-checklist.v1");
+        assertThat(evidence.checks())
+                .contains(
+                        "read-window-java-health-route-observed",
+                        "read-window-ops-overview-route-observed",
+                        "read-window-shard-readiness-route-observed",
+                        "read-window-upstream-probes-only",
+                        "read-window-actions-disabled"
+                );
+        assertThat(evidence.executionAllowed()).isFalse();
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
+
+    @Test
     void allHandoffCatalogEntriesProducePassedReadOnlyEvidence() {
         OpsShardReadinessPrototypeHandoffService service = service();
 

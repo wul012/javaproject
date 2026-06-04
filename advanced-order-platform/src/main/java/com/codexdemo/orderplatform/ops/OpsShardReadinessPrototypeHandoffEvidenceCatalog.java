@@ -68,6 +68,21 @@ final class OpsShardReadinessPrototypeHandoffEvidenceCatalog {
                                 "verify-status-passed",
                                 "verify-digest-present"
                         )
+                ),
+                entry(
+                        437,
+                        "handoff-read-window-checklist",
+                        "Java shard-readiness prototype handoff read window checklist",
+                        OpsShardReadinessPrototypeHandoffService.READ_WINDOW_CHECKLIST_ENDPOINT,
+                        "java-shard-readiness-prototype-handoff-read-window-checklist.v1",
+                        "e/437/evidence/java-shard-readiness-prototype-handoff-read-window-checklist-v437.json",
+                        List.of(
+                                "read-window-java-health-route-observed",
+                                "read-window-ops-overview-route-observed",
+                                "read-window-shard-readiness-route-observed",
+                                "read-window-upstream-probes-only",
+                                "read-window-actions-disabled"
+                        )
                 )
         );
     }
