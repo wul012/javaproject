@@ -18,18 +18,22 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
             OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService,
             OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService,
-            OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService
+            OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService,
+            OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
         this.freshnessWindowService = freshnessWindowService;
         this.ownershipRegisterService = ownershipRegisterService;
         this.riskLedgerService = riskLedgerService;
+        this.handoffAcceptanceDigestService = handoffAcceptanceDigestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -55,5 +59,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RISK_LEDGER)
     public OpsShardReadinessRouteCleanupMaintenanceRiskLedgerResponse riskLedger() {
         return riskLedgerService.ledger();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST)
+    public OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestResponse handoffAcceptanceDigest() {
+        return handoffAcceptanceDigestService.digest();
     }
 }

@@ -121,4 +121,26 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("risk-ledger-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceHandoffAcceptanceDigestReturnsAcceptedSections()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-handoff-acceptance-digest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v522"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-handoff-acceptance-digest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-handoff-acceptance-digest.v1"))
+                .andExpect(jsonPath("$.sectionCount").value(5))
+                .andExpect(jsonPath("$.acceptedSectionCount").value(5))
+                .andExpect(jsonPath("$.blockedSectionCount").value(0))
+                .andExpect(jsonPath("$.sections[1].name").value("risk-closure"))
+                .andExpect(jsonPath("$.sections[1].status").value("passed"))
+                .andExpect(jsonPath("$.checks[4]").value("handoff-acceptance-digest-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
