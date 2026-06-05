@@ -124,4 +124,34 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceServiceTests {
         );
         assertThat(handoff.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCiBudgetWithFullMavenGateLast() {
+        OpsShardReadinessManualEvidenceWorksheetResponse budget =
+                new OpsShardReadinessManualEvidenceWorksheetCiBudgetService().budget();
+
+        assertThat(budget.version()).isEqualTo("Java v580");
+        assertThat(budget.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-ci-budget");
+        assertThat(budget.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-ci-budget.v1");
+        assertThat(budget.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(budget.executionAllowed()).isFalse();
+        assertThat(budget.itemCount()).isEqualTo(5);
+        assertThat(budget.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "support-unit-test",
+                        "foundation-service-tests",
+                        "assurance-service-tests",
+                        "route-integration-tests",
+                        "full-maven-gate"
+                );
+        assertThat(budget.checks()).contains(
+                "ci-budget-focused-tests-first",
+                "ci-budget-route-tests-separated",
+                "ci-budget-full-maven-gate-last"
+        );
+        assertThat(budget.status()).isEqualTo("passed");
+    }
 }
