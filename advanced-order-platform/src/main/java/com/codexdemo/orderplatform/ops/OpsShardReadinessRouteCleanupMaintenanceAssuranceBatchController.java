@@ -11,15 +11,18 @@ public class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchController {
     private final OpsShardReadinessRouteCleanupMaintenanceConsumerGatePacketService consumerGatePacketService;
     private final OpsShardReadinessRouteCleanupMaintenanceArchiveVerifierSummaryService archiveVerifierSummaryService;
     private final OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService ciBudgetLedgerService;
+    private final OpsShardReadinessRouteCleanupMaintenanceRouteInventoryDigestService routeInventoryDigestService;
 
     public OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchController(
             OpsShardReadinessRouteCleanupMaintenanceConsumerGatePacketService consumerGatePacketService,
             OpsShardReadinessRouteCleanupMaintenanceArchiveVerifierSummaryService archiveVerifierSummaryService,
-            OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService ciBudgetLedgerService
+            OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService ciBudgetLedgerService,
+            OpsShardReadinessRouteCleanupMaintenanceRouteInventoryDigestService routeInventoryDigestService
     ) {
         this.consumerGatePacketService = consumerGatePacketService;
         this.archiveVerifierSummaryService = archiveVerifierSummaryService;
         this.ciBudgetLedgerService = ciBudgetLedgerService;
+        this.routeInventoryDigestService = routeInventoryDigestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONSUMER_GATE_PACKET)
@@ -35,5 +38,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CI_BUDGET_LEDGER)
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse ciBudgetLedger() {
         return ciBudgetLedgerService.ledger();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ROUTE_INVENTORY_DIGEST)
+    public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse routeInventoryDigest() {
+        return routeInventoryDigestService.digest();
     }
 }

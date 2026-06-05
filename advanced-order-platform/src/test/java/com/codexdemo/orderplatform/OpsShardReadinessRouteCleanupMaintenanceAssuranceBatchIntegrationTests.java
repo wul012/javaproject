@@ -75,4 +75,24 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("ci-budget-ledger-does-not-run-ci"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceRouteInventoryDigestReturnsInventoryItems()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-route-inventory-digest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v553"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-route-inventory-digest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-route-inventory-digest.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("sustainment-batch-routes"))
+                .andExpect(jsonPath("$.items[3].name").value("read-only-inventory"))
+                .andExpect(jsonPath("$.checks[4]").value("route-inventory-digest-does-not-scan-runtime"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
