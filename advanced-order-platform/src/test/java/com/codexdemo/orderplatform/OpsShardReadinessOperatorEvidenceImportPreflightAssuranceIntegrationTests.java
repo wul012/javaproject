@@ -39,4 +39,27 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("digest-blueprint-covers-lock-flags"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceImportPreflightRouteProfileSummaryReturnsGetOnlyProfile() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-route-profile-summary"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v599"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceImportPreflight").value(true))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-route-profile-summary"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-import-preflight-route-profile-summary.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("foundation-route-profile"))
+                .andExpect(jsonPath("$.items[3].name").value("get-only-boundary"))
+                .andExpect(jsonPath("$.checks[8]").value("import-preflight-route-profile-foundation-routes-6"))
+                .andExpect(jsonPath("$.checks[10]").value("import-preflight-route-profile-get-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

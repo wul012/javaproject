@@ -9,15 +9,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController {
 
     private final OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService digestBlueprintService;
+    private final OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService routeProfileSummaryService;
 
     public OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController(
-            OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService digestBlueprintService
+            OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService digestBlueprintService,
+            OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService routeProfileSummaryService
     ) {
         this.digestBlueprintService = digestBlueprintService;
+        this.routeProfileSummaryService = routeProfileSummaryService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT)
     public OpsShardReadinessOperatorEvidenceImportPreflightResponse digestBlueprint() {
         return digestBlueprintService.blueprint();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY)
+    public OpsShardReadinessOperatorEvidenceImportPreflightResponse routeProfileSummary() {
+        return routeProfileSummaryService.summary();
     }
 }
