@@ -38,4 +38,26 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("upkeep-catalog-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceConsumerHandoffMatrixReturnsConsumerBoundaries()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-consumer-handoff-matrix"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v491"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-consumer-handoff-matrix"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-consumer-handoff-matrix.v1"))
+                .andExpect(jsonPath("$.matrixEntryCount").value(9))
+                .andExpect(jsonPath("$.consumerCount").value(9))
+                .andExpect(jsonPath("$.forbiddenOperationCount").value(7))
+                .andExpect(jsonPath("$.matrix[4].consumer").value("runtime-boundary-reviewer"))
+                .andExpect(jsonPath("$.matrix[4].boundary").value("read-only-boundary"))
+                .andExpect(jsonPath("$.forbiddenOperations[4]").value("managed-audit-connection"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
