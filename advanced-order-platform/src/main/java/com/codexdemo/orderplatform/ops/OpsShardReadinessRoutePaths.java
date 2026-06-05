@@ -187,6 +187,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-handoff-pair-audit";
     static final String ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_DRIFT =
             "/route-cleanup-maintenance-boundary-drift";
+    static final String ROUTE_CLEANUP_MAINTENANCE_SOURCE_PLAN_ALIGNMENT =
+            "/route-cleanup-maintenance-source-plan-alignment";
 
     private OpsShardReadinessRoutePaths() {
     }
