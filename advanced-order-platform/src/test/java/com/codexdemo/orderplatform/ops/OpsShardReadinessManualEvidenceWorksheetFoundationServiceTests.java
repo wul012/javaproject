@@ -152,4 +152,33 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationServiceTests {
         );
         assertThat(policy.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsTargetScopeRegistryWithoutActivatingRouting() {
+        OpsShardReadinessManualEvidenceWorksheetResponse registry =
+                new OpsShardReadinessManualEvidenceWorksheetTargetScopeRegistryService().registry();
+
+        assertThat(registry.version()).isEqualTo("Java v570");
+        assertThat(registry.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-target-scope-registry");
+        assertThat(registry.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-target-scope-registry.v1");
+        assertThat(registry.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(registry.readyForProductionExecution()).isFalse();
+        assertThat(registry.itemCount()).isEqualTo(4);
+        assertThat(registry.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "order-read-model",
+                        "shard-preview-window",
+                        "evidence-review-package",
+                        "operator-entry-slot"
+                );
+        assertThat(registry.checks()).contains(
+                "target-scope-registry-scope-count-4",
+                "target-scope-registry-no-write-routing",
+                "target-scope-registry-no-active-shard-router"
+        );
+        assertThat(registry.status()).isEqualTo("passed");
+    }
 }
