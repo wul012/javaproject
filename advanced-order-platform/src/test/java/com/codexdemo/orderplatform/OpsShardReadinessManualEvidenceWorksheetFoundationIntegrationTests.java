@@ -39,4 +39,25 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[7]").value("worksheet-catalog-slot-count-25"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetSlotTemplateReturnsBlankTemplate() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-slot-template"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v562"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-slot-template"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-slot-template.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("slot-identity"))
+                .andExpect(jsonPath("$.items[3].name").value("validation-hint"))
+                .andExpect(jsonPath("$.checks[8]").value("slot-template-no-secret-placeholder"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
