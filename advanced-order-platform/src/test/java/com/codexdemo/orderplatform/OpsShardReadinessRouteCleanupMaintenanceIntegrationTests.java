@@ -37,4 +37,26 @@ class OpsShardReadinessRouteCleanupMaintenanceIntegrationTests
                 .andExpect(jsonPath("$.segments[5].lastJavaVersion").value(408))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceContinuityReturnsNoGapEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-continuity"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v473"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-continuity"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-continuity.v1"))
+                .andExpect(jsonPath("$.firstJavaVersion").value(306))
+                .andExpect(jsonPath("$.latestJavaVersion").value(408))
+                .andExpect(jsonPath("$.expectedEntryCount").value(103))
+                .andExpect(jsonPath("$.actualEntryCount").value(103))
+                .andExpect(jsonPath("$.gapCount").value(0))
+                .andExpect(jsonPath("$.checks[3]").value("segment-boundaries-are-contiguous"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
