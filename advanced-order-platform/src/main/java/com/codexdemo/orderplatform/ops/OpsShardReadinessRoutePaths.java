@@ -223,6 +223,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-freshness-window";
     static final String ROUTE_CLEANUP_MAINTENANCE_OWNERSHIP_REGISTER =
             "/route-cleanup-maintenance-ownership-register";
+    static final String ROUTE_CLEANUP_MAINTENANCE_RISK_LEDGER =
+            "/route-cleanup-maintenance-risk-ledger";
 
     private OpsShardReadinessRoutePaths() {
     }
