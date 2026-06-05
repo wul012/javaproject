@@ -88,4 +88,27 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[10]").value("import-blocker-matrix-keeps-import-locked"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceImportPreflightRedactionPreservationReturnsNoSecretBoundary() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-redaction-preservation"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v591"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceImportPreflight").value(true))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForProductionExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-redaction-preservation"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-import-preflight-redaction-preservation.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("credential-redaction-preserved"))
+                .andExpect(jsonPath("$.items[1].name").value("raw-endpoint-redaction-preserved"))
+                .andExpect(jsonPath("$.checks[8]").value("redaction-preservation-no-secret-material"))
+                .andExpect(jsonPath("$.checks[9]").value("redaction-preservation-no-raw-endpoints"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

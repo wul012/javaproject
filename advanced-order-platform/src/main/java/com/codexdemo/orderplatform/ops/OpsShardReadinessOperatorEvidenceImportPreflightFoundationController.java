@@ -11,15 +11,19 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationControlle
     private final OpsShardReadinessOperatorEvidenceImportPreflightCatalogService catalogService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService slotNormalizationService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService importBlockerMatrixService;
+    private final OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService
+            redactionPreservationService;
 
     public OpsShardReadinessOperatorEvidenceImportPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceImportPreflightCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService slotNormalizationService,
-            OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService importBlockerMatrixService
+            OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService importBlockerMatrixService,
+            OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService redactionPreservationService
     ) {
         this.catalogService = catalogService;
         this.slotNormalizationService = slotNormalizationService;
         this.importBlockerMatrixService = importBlockerMatrixService;
+        this.redactionPreservationService = redactionPreservationService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG)
@@ -35,5 +39,10 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationControlle
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX)
     public OpsShardReadinessOperatorEvidenceImportPreflightResponse importBlockerMatrix() {
         return importBlockerMatrixService.matrix();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION)
+    public OpsShardReadinessOperatorEvidenceImportPreflightResponse redactionPreservation() {
+        return redactionPreservationService.preservation();
     }
 }
