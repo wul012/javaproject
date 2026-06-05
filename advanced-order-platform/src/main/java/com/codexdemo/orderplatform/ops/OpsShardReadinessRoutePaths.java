@@ -203,6 +203,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-ci-expectation-manifest";
     static final String ROUTE_CLEANUP_MAINTENANCE_ROUTE_TOPOLOGY_INDEX =
             "/route-cleanup-maintenance-route-topology-index";
+    static final String ROUTE_CLEANUP_MAINTENANCE_FAIL_CLOSED_POLICY =
+            "/route-cleanup-maintenance-fail-closed-policy";
 
     private OpsShardReadinessRoutePaths() {
     }
