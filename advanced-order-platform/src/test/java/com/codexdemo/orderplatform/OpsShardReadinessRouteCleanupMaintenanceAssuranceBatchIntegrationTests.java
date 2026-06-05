@@ -115,4 +115,24 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[5]").value("operator-signoff-does-not-approve-execution"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceExtendedCloseoutReturnsCloseoutItems()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-extended-closeout"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v557"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-extended-closeout"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-extended-closeout.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("first-batch-complete"))
+                .andExpect(jsonPath("$.items[4].name").value("operator-signoff-held"))
+                .andExpect(jsonPath("$.checks[3]").value("extended-closeout-versions-v534-v558"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
