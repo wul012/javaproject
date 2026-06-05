@@ -211,6 +211,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-operator-review-packet";
     static final String ROUTE_CLEANUP_MAINTENANCE_VERSION_LINEAGE =
             "/route-cleanup-maintenance-version-lineage";
+    static final String ROUTE_CLEANUP_MAINTENANCE_READINESS_GATE =
+            "/route-cleanup-maintenance-readiness-gate";
 
     private OpsShardReadinessRoutePaths() {
     }
