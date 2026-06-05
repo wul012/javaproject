@@ -16,16 +16,20 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService handoffPairAuditService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService;
+
     public OpsShardReadinessRouteCleanupMaintenanceController(
             OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService segmentCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService,
             OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService latestSiblingService,
-            OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService handoffPairAuditService
+            OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService handoffPairAuditService,
+            OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService
     ) {
         this.segmentCatalogService = segmentCatalogService;
         this.continuityService = continuityService;
         this.latestSiblingService = latestSiblingService;
         this.handoffPairAuditService = handoffPairAuditService;
+        this.boundaryDriftService = boundaryDriftService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG)
@@ -46,5 +50,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_PAIR_AUDIT)
     public OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditResponse handoffPairAudit() {
         return handoffPairAuditService.audit();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_DRIFT)
+    public OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftResponse boundaryDrift() {
+        return boundaryDriftService.audit();
     }
 }
