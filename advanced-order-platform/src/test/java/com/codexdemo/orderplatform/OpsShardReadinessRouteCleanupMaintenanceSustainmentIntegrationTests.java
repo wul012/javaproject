@@ -56,4 +56,26 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("remediation-does-not-execute-actions"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceFreshnessWindowReturnsNoStaleEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-freshness-window"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v516"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-freshness-window"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-freshness-window.v1"))
+                .andExpect(jsonPath("$.evidenceCount").value(9))
+                .andExpect(jsonPath("$.maxVersionLag").value(20))
+                .andExpect(jsonPath("$.staleEvidenceCount").value(0))
+                .andExpect(jsonPath("$.entries[0].versionLag").value(16))
+                .andExpect(jsonPath("$.entries[8].versionLag").value(0))
+                .andExpect(jsonPath("$.checks[4]").value("freshness-window-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

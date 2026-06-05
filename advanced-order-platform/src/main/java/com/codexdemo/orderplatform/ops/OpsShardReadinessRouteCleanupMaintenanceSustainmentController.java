@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
-            OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService
+            OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
+            OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
+        this.freshnessWindowService = freshnessWindowService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_REMEDIATION_QUEUE)
     public OpsShardReadinessRouteCleanupMaintenanceRemediationQueueResponse remediationQueue() {
         return remediationQueueService.queue();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FRESHNESS_WINDOW)
+    public OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowResponse freshnessWindow() {
+        return freshnessWindowService.window();
     }
 }
