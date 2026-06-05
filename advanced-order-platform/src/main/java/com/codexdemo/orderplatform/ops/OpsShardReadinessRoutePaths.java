@@ -205,6 +205,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-route-topology-index";
     static final String ROUTE_CLEANUP_MAINTENANCE_FAIL_CLOSED_POLICY =
             "/route-cleanup-maintenance-fail-closed-policy";
+    static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_DIGEST_LEDGER =
+            "/route-cleanup-maintenance-archive-digest-ledger";
 
     private OpsShardReadinessRoutePaths() {
     }
