@@ -26,6 +26,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService operationsScorecardService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
@@ -35,7 +37,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
             OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService,
             OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService,
             OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService,
-            OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService
+            OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService,
+            OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService operationsScorecardService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
@@ -46,6 +49,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
         this.dependencyBoundaryMapService = dependencyBoundaryMapService;
         this.archiveRetentionCalendarService = archiveRetentionCalendarService;
         this.testEvidenceRollupService = testEvidenceRollupService;
+        this.operationsScorecardService = operationsScorecardService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -91,5 +95,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_TEST_EVIDENCE_ROLLUP)
     public OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupResponse testEvidenceRollup() {
         return testEvidenceRollupService.rollup();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATIONS_SCORECARD)
+    public OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardResponse operationsScorecard() {
+        return operationsScorecardService.scorecard();
     }
 }

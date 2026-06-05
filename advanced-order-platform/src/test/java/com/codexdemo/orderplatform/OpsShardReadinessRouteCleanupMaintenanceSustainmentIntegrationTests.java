@@ -207,4 +207,26 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("test-evidence-rollup-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceOperationsScorecardReturnsPassedScore()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-operations-scorecard"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v530"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-operations-scorecard"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-operations-scorecard.v1"))
+                .andExpect(jsonPath("$.score").value(100))
+                .andExpect(jsonPath("$.dimensionCount").value(4))
+                .andExpect(jsonPath("$.passedDimensionCount").value(4))
+                .andExpect(jsonPath("$.dimensions[0].name").value("handoff-acceptance"))
+                .andExpect(jsonPath("$.dimensions[3].name").value("test-evidence"))
+                .andExpect(jsonPath("$.checks[4]").value("operations-scorecard-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
