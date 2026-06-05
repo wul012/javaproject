@@ -81,4 +81,25 @@ class OpsShardReadinessRouteCleanupMaintenanceIntegrationTests
                 .andExpect(jsonPath("$.checks[2]").value("latest-sibling-source-node-v549-present"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceHandoffPairAuditReturnsPairEvidence()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-handoff-pair-audit"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v477"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-handoff-pair-audit"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-handoff-pair-audit.v1"))
+                .andExpect(jsonPath("$.handoffEntryCount").value(83))
+                .andExpect(jsonPath("$.documentedRouteOnlyEntries[0]").value("handoff-suite-closeout-route"))
+                .andExpect(jsonPath("$.documentedRouteOnlyEntries[1]")
+                        .value("handoff-suite-completion-certificate-route"))
+                .andExpect(jsonPath("$.unpairedServiceEntries.length()").value(0))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
