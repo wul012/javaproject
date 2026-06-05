@@ -108,4 +108,27 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[10]").value("import-preflight-operator-handoff-no-execution-approval"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceImportPreflightCiBudgetReturnsFocusedGatePlan() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-ci-budget"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v605"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceImportPreflight").value(true))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForProductionExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-ci-budget"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-import-preflight-ci-budget.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("support-unit-test"))
+                .andExpect(jsonPath("$.items[4].name").value("full-maven-gate"))
+                .andExpect(jsonPath("$.checks[8]").value("import-preflight-ci-budget-focused-first"))
+                .andExpect(jsonPath("$.checks[10]").value("import-preflight-ci-budget-full-maven-last"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

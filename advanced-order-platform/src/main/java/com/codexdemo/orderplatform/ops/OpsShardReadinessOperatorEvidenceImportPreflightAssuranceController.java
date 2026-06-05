@@ -12,17 +12,20 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController
     private final OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService routeProfileSummaryService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService archivePlanService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService operatorHandoffService;
+    private final OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService ciBudgetService;
 
     public OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService digestBlueprintService,
             OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService routeProfileSummaryService,
             OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService archivePlanService,
-            OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService operatorHandoffService
+            OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService operatorHandoffService,
+            OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService ciBudgetService
     ) {
         this.digestBlueprintService = digestBlueprintService;
         this.routeProfileSummaryService = routeProfileSummaryService;
         this.archivePlanService = archivePlanService;
         this.operatorHandoffService = operatorHandoffService;
+        this.ciBudgetService = ciBudgetService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT)
@@ -43,5 +46,10 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF)
     public OpsShardReadinessOperatorEvidenceImportPreflightResponse operatorHandoff() {
         return operatorHandoffService.handoff();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET)
+    public OpsShardReadinessOperatorEvidenceImportPreflightResponse ciBudget() {
+        return ciBudgetService.budget();
     }
 }
