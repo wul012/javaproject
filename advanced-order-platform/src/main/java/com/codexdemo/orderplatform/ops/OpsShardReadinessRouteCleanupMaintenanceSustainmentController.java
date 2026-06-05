@@ -16,16 +16,20 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
             OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService,
-            OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService
+            OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService,
+            OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
         this.freshnessWindowService = freshnessWindowService;
         this.ownershipRegisterService = ownershipRegisterService;
+        this.riskLedgerService = riskLedgerService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -46,5 +50,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OWNERSHIP_REGISTER)
     public OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterResponse ownershipRegister() {
         return ownershipRegisterService.register();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RISK_LEDGER)
+    public OpsShardReadinessRouteCleanupMaintenanceRiskLedgerResponse riskLedger() {
+        return riskLedgerService.ledger();
     }
 }

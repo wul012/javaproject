@@ -99,4 +99,26 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("ownership-register-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceRiskLedgerReturnsMitigatedRisks()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-risk-ledger"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v520"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-risk-ledger"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-risk-ledger.v1"))
+                .andExpect(jsonPath("$.riskCount").value(5))
+                .andExpect(jsonPath("$.highRiskCount").value(0))
+                .andExpect(jsonPath("$.mitigatedRiskCount").value(5))
+                .andExpect(jsonPath("$.risks[2].name").value("boundary-drift"))
+                .andExpect(jsonPath("$.risks[2].status").value("mitigated"))
+                .andExpect(jsonPath("$.checks[4]").value("risk-ledger-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
