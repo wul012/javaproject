@@ -76,4 +76,24 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("shard-readiness-v1-minimal-fields-mapped"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceReadWindowEvidenceReturnsDocumentedTargets()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-read-window-evidence"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v543"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-read-window-evidence"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-read-window-evidence.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("health-read"))
+                .andExpect(jsonPath("$.items[3].name").value("startup-boundary"))
+                .andExpect(jsonPath("$.checks[4]").value("read-window-evidence-does-not-probe-live-services"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

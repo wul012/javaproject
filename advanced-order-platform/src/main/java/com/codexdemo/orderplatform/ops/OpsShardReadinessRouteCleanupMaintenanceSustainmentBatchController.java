@@ -11,15 +11,18 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController 
     private final OpsShardReadinessRouteCleanupMaintenanceContractFreezeService contractFreezeService;
     private final OpsShardReadinessRouteCleanupMaintenanceGateHandoffService gateHandoffService;
     private final OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService shardFieldMapService;
+    private final OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService readWindowEvidenceService;
 
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController(
             OpsShardReadinessRouteCleanupMaintenanceContractFreezeService contractFreezeService,
             OpsShardReadinessRouteCleanupMaintenanceGateHandoffService gateHandoffService,
-            OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService shardFieldMapService
+            OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService shardFieldMapService,
+            OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService readWindowEvidenceService
     ) {
         this.contractFreezeService = contractFreezeService;
         this.gateHandoffService = gateHandoffService;
         this.shardFieldMapService = shardFieldMapService;
+        this.readWindowEvidenceService = readWindowEvidenceService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE)
@@ -35,5 +38,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SHARD_FIELD_MAP)
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse shardFieldMap() {
         return shardFieldMapService.fieldMap();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_READ_WINDOW_EVIDENCE)
+    public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse readWindowEvidence() {
+        return readWindowEvidenceService.evidence();
     }
 }
