@@ -21,6 +21,10 @@ class OpsShardReadinessOperatorEvidenceImportPreflightRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX,
                         OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION,
+                        OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

@@ -101,4 +101,35 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationServiceTests {
         );
         assertThat(matrix.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRedactionPreservationWithoutSecretMaterial() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse preservation =
+                new OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService()
+                        .preservation();
+
+        assertThat(preservation.version()).isEqualTo("Java v591");
+        assertThat(preservation.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-redaction-preservation");
+        assertThat(preservation.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-redaction-preservation.v1");
+        assertThat(preservation.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(preservation.readyForEvidenceImport()).isFalse();
+        assertThat(preservation.readyForProductionExecution()).isFalse();
+        assertThat(preservation.itemCount()).isEqualTo(4);
+        assertThat(preservation.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "credential-redaction-preserved",
+                        "raw-endpoint-redaction-preserved",
+                        "absence-marker-preserved",
+                        "review-text-boundary-preserved"
+                );
+        assertThat(preservation.checks()).contains(
+                "redaction-preservation-no-secret-material",
+                "redaction-preservation-no-raw-endpoints",
+                "redaction-preservation-absence-markers-only"
+        );
+        assertThat(preservation.status()).isEqualTo("passed");
+    }
 }
