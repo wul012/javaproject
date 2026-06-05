@@ -14,19 +14,22 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationControlle
     private final OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService
             redactionPreservationService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService missingValueGuardService;
+    private final OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService targetScopeMappingService;
 
     public OpsShardReadinessOperatorEvidenceImportPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceImportPreflightCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService slotNormalizationService,
             OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService importBlockerMatrixService,
             OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService redactionPreservationService,
-            OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService missingValueGuardService
+            OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService missingValueGuardService,
+            OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService targetScopeMappingService
     ) {
         this.catalogService = catalogService;
         this.slotNormalizationService = slotNormalizationService;
         this.importBlockerMatrixService = importBlockerMatrixService;
         this.redactionPreservationService = redactionPreservationService;
         this.missingValueGuardService = missingValueGuardService;
+        this.targetScopeMappingService = targetScopeMappingService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG)
@@ -52,5 +55,10 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationControlle
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD)
     public OpsShardReadinessOperatorEvidenceImportPreflightResponse missingValueGuard() {
         return missingValueGuardService.guard();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING)
+    public OpsShardReadinessOperatorEvidenceImportPreflightResponse targetScopeMapping() {
+        return targetScopeMappingService.mapping();
     }
 }
