@@ -100,4 +100,25 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("operator-handoff-no-runtime-approval"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetCiBudgetReturnsFocusedGatePlan() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-ci-budget"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v580"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-ci-budget"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-ci-budget.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("support-unit-test"))
+                .andExpect(jsonPath("$.items[4].name").value("full-maven-gate"))
+                .andExpect(jsonPath("$.checks[9]").value("ci-budget-full-maven-gate-last"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

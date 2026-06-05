@@ -12,17 +12,20 @@ public class OpsShardReadinessManualEvidenceWorksheetAssuranceController {
     private final OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService routeProfileSummaryService;
     private final OpsShardReadinessManualEvidenceWorksheetArchivePlanService archivePlanService;
     private final OpsShardReadinessManualEvidenceWorksheetOperatorHandoffService operatorHandoffService;
+    private final OpsShardReadinessManualEvidenceWorksheetCiBudgetService ciBudgetService;
 
     public OpsShardReadinessManualEvidenceWorksheetAssuranceController(
             OpsShardReadinessManualEvidenceWorksheetImporterPreflightService importerPreflightService,
             OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService routeProfileSummaryService,
             OpsShardReadinessManualEvidenceWorksheetArchivePlanService archivePlanService,
-            OpsShardReadinessManualEvidenceWorksheetOperatorHandoffService operatorHandoffService
+            OpsShardReadinessManualEvidenceWorksheetOperatorHandoffService operatorHandoffService,
+            OpsShardReadinessManualEvidenceWorksheetCiBudgetService ciBudgetService
     ) {
         this.importerPreflightService = importerPreflightService;
         this.routeProfileSummaryService = routeProfileSummaryService;
         this.archivePlanService = archivePlanService;
         this.operatorHandoffService = operatorHandoffService;
+        this.ciBudgetService = ciBudgetService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT)
@@ -43,5 +46,10 @@ public class OpsShardReadinessManualEvidenceWorksheetAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_OPERATOR_HANDOFF)
     public OpsShardReadinessManualEvidenceWorksheetResponse operatorHandoff() {
         return operatorHandoffService.handoff();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET)
+    public OpsShardReadinessManualEvidenceWorksheetResponse ciBudget() {
+        return ciBudgetService.budget();
     }
 }
