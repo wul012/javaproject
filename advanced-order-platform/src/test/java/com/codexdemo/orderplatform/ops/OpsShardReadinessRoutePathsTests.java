@@ -417,4 +417,15 @@ class OpsShardReadinessRoutePathsTests {
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
     }
+
+    @Test
+    void maintenanceUpkeepEndpointsUseSharedRouteConstants() {
+        assertThat(Map.ofEntries(
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG,
+                        OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService.ENDPOINT
+                )
+        )).allSatisfy((route, endpoint) ->
+                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+    }
 }
