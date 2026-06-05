@@ -62,4 +62,29 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchServiceTests {
         );
         assertThat(handoff.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsShardFieldMapWithoutEnablingRouting() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse fieldMap =
+                new OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService().fieldMap();
+
+        assertThat(fieldMap.version()).isEqualTo("Java v541");
+        assertThat(fieldMap.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-shard-field-map");
+        assertThat(fieldMap.itemCount()).isEqualTo(4);
+        assertThat(fieldMap.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "project-version",
+                        "read-only-boundary",
+                        "shard-shape",
+                        "evidence-path"
+                );
+        assertThat(fieldMap.checks()).contains(
+                "shard-readiness-v1-minimal-fields-mapped",
+                "field-map-does-not-enable-active-routing"
+        );
+        assertThat(fieldMap.status()).isEqualTo("passed");
+    }
 }

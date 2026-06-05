@@ -241,6 +241,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-contract-freeze";
     static final String ROUTE_CLEANUP_MAINTENANCE_GATE_HANDOFF =
             "/route-cleanup-maintenance-gate-handoff";
+    static final String ROUTE_CLEANUP_MAINTENANCE_SHARD_FIELD_MAP =
+            "/route-cleanup-maintenance-shard-field-map";
 
     private OpsShardReadinessRoutePaths() {
     }
