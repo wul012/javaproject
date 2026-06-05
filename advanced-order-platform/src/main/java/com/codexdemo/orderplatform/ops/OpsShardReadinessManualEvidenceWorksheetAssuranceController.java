@@ -10,13 +10,16 @@ public class OpsShardReadinessManualEvidenceWorksheetAssuranceController {
 
     private final OpsShardReadinessManualEvidenceWorksheetImporterPreflightService importerPreflightService;
     private final OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService routeProfileSummaryService;
+    private final OpsShardReadinessManualEvidenceWorksheetArchivePlanService archivePlanService;
 
     public OpsShardReadinessManualEvidenceWorksheetAssuranceController(
             OpsShardReadinessManualEvidenceWorksheetImporterPreflightService importerPreflightService,
-            OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService routeProfileSummaryService
+            OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService routeProfileSummaryService,
+            OpsShardReadinessManualEvidenceWorksheetArchivePlanService archivePlanService
     ) {
         this.importerPreflightService = importerPreflightService;
         this.routeProfileSummaryService = routeProfileSummaryService;
+        this.archivePlanService = archivePlanService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT)
@@ -27,5 +30,10 @@ public class OpsShardReadinessManualEvidenceWorksheetAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY)
     public OpsShardReadinessManualEvidenceWorksheetResponse routeProfileSummary() {
         return routeProfileSummaryService.summary();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN)
+    public OpsShardReadinessManualEvidenceWorksheetResponse archivePlan() {
+        return archivePlanService.plan();
     }
 }

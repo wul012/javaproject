@@ -58,4 +58,25 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("route-profile-summary-get-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetArchivePlanReturnsExternalCapturePlan() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-archive-plan"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v576"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-archive-plan"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-archive-plan.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("route-json-capture"))
+                .andExpect(jsonPath("$.items[3].name").value("no-file-write"))
+                .andExpect(jsonPath("$.checks[8]").value("archive-plan-does-not-write-files"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
