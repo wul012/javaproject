@@ -245,6 +245,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-shard-field-map";
     static final String ROUTE_CLEANUP_MAINTENANCE_READ_WINDOW_EVIDENCE =
             "/route-cleanup-maintenance-read-window-evidence";
+    static final String ROUTE_CLEANUP_MAINTENANCE_RUNTIME_BOUNDARY_CHECKLIST =
+            "/route-cleanup-maintenance-runtime-boundary-checklist";
 
     private OpsShardReadinessRoutePaths() {
     }

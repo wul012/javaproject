@@ -113,4 +113,30 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchServiceTests {
         );
         assertThat(evidence.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRuntimeBoundaryChecklistWithoutExecution() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse checklist =
+                new OpsShardReadinessRouteCleanupMaintenanceRuntimeBoundaryChecklistService().checklist();
+
+        assertThat(checklist.version()).isEqualTo("Java v545");
+        assertThat(checklist.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-runtime-boundary-checklist");
+        assertThat(checklist.itemCount()).isEqualTo(5);
+        assertThat(checklist.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "no-write-routing",
+                        "no-credential-value",
+                        "no-raw-endpoint-parse",
+                        "no-managed-audit-connection",
+                        "no-upstream-autostart"
+                );
+        assertThat(checklist.checks()).contains(
+                "runtime-boundary-items-5",
+                "runtime-boundary-checklist-does-not-execute"
+        );
+        assertThat(checklist.status()).isEqualTo("passed");
+    }
 }
