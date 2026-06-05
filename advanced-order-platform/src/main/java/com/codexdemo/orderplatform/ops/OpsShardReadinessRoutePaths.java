@@ -231,6 +231,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-dependency-boundary-map";
     static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR =
             "/route-cleanup-maintenance-archive-retention-calendar";
+    static final String ROUTE_CLEANUP_MAINTENANCE_TEST_EVIDENCE_ROLLUP =
+            "/route-cleanup-maintenance-test-evidence-rollup";
 
     private OpsShardReadinessRoutePaths() {
     }
