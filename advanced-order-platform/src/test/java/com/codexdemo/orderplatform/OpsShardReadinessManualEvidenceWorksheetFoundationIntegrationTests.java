@@ -60,4 +60,26 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[8]").value("slot-template-no-secret-placeholder"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetValidationRulesReturnsFailClosedRules() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-validation-rules"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v564"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.readyForLiveExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-validation-rules"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-validation-rules.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("required-slot-id"))
+                .andExpect(jsonPath("$.items[2].name").value("rejected-runtime-value"))
+                .andExpect(jsonPath("$.checks[8]").value("validation-rules-reject-runtime-payload"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
