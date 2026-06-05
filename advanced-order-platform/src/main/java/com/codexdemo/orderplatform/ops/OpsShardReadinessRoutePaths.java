@@ -179,6 +179,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-post-completion-closeout";
     static final String ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG =
             "/route-cleanup-maintenance-segment-catalog";
+    static final String ROUTE_CLEANUP_MAINTENANCE_CONTINUITY =
+            "/route-cleanup-maintenance-continuity";
 
     private OpsShardReadinessRoutePaths() {
     }
