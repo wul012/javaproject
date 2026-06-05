@@ -268,6 +268,8 @@ final class OpsShardReadinessRoutePaths {
             "/manual-evidence-worksheet-validation-rules";
     static final String MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES =
             "/manual-evidence-worksheet-redaction-rules";
+    static final String MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY =
+            "/manual-evidence-worksheet-missing-value-policy";
 
     private OpsShardReadinessRoutePaths() {
     }

@@ -123,4 +123,33 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationServiceTests {
         );
         assertThat(rules.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsMissingValuePolicyThatBlocksImporterReadiness() {
+        OpsShardReadinessManualEvidenceWorksheetResponse policy =
+                new OpsShardReadinessManualEvidenceWorksheetMissingValuePolicyService().policy();
+
+        assertThat(policy.version()).isEqualTo("Java v568");
+        assertThat(policy.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-missing-value-policy");
+        assertThat(policy.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-missing-value-policy.v1");
+        assertThat(policy.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(policy.readyForManualEvidenceEntry()).isFalse();
+        assertThat(policy.itemCount()).isEqualTo(4);
+        assertThat(policy.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "missing-manual-value",
+                        "missing-owner-review",
+                        "missing-target-scope",
+                        "missing-import-source"
+                );
+        assertThat(policy.checks()).contains(
+                "missing-value-policy-keeps-worksheet-ready",
+                "missing-value-policy-blocks-manual-entry",
+                "missing-value-policy-blocks-importer"
+        );
+        assertThat(policy.status()).isEqualTo("passed");
+    }
 }
