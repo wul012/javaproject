@@ -260,6 +260,9 @@ final class OpsShardReadinessRoutePaths {
     static final String ROUTE_CLEANUP_MAINTENANCE_EXTENDED_CLOSEOUT =
             "/route-cleanup-maintenance-extended-closeout";
 
+    static final String MANUAL_EVIDENCE_WORKSHEET_CATALOG =
+            "/manual-evidence-worksheet-catalog";
+
     private OpsShardReadinessRoutePaths() {
     }
 }

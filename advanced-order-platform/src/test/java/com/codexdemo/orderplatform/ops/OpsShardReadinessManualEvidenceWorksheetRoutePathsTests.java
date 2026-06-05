@@ -1,0 +1,20 @@
+package com.codexdemo.orderplatform.ops;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+
+class OpsShardReadinessManualEvidenceWorksheetRoutePathsTests {
+
+    @Test
+    void manualEvidenceWorksheetEndpointsUseSharedRouteConstants() {
+        assertThat(Map.ofEntries(
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG,
+                        OpsShardReadinessManualEvidenceWorksheetCatalogService.ENDPOINT
+                )
+        )).allSatisfy((route, endpoint) ->
+                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+    }
+}
