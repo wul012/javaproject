@@ -18,38 +18,18 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService;
 
-    private final OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceVersionLineageService versionLineageService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceReadinessGateService readinessGateService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutService upkeepCloseoutService;
-
     public OpsShardReadinessRouteCleanupMaintenanceUpkeepController(
             OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService upkeepCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService consumerHandoffMatrixService,
             OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService ciExpectationManifestService,
             OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService,
-            OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService,
-            OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService,
-            OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService,
-            OpsShardReadinessRouteCleanupMaintenanceVersionLineageService versionLineageService,
-            OpsShardReadinessRouteCleanupMaintenanceReadinessGateService readinessGateService,
-            OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutService upkeepCloseoutService
+            OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService
     ) {
         this.upkeepCatalogService = upkeepCatalogService;
         this.consumerHandoffMatrixService = consumerHandoffMatrixService;
         this.ciExpectationManifestService = ciExpectationManifestService;
         this.routeTopologyIndexService = routeTopologyIndexService;
         this.failClosedPolicyService = failClosedPolicyService;
-        this.archiveDigestLedgerService = archiveDigestLedgerService;
-        this.operatorReviewPacketService = operatorReviewPacketService;
-        this.versionLineageService = versionLineageService;
-        this.readinessGateService = readinessGateService;
-        this.upkeepCloseoutService = upkeepCloseoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG)
@@ -75,30 +55,5 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FAIL_CLOSED_POLICY)
     public OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyResponse failClosedPolicy() {
         return failClosedPolicyService.report();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_DIGEST_LEDGER)
-    public OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerResponse archiveDigestLedger() {
-        return archiveDigestLedgerService.ledger();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATOR_REVIEW_PACKET)
-    public OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketResponse operatorReviewPacket() {
-        return operatorReviewPacketService.packet();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_VERSION_LINEAGE)
-    public OpsShardReadinessRouteCleanupMaintenanceVersionLineageResponse versionLineage() {
-        return versionLineageService.lineage();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_READINESS_GATE)
-    public OpsShardReadinessRouteCleanupMaintenanceReadinessGateResponse readinessGate() {
-        return readinessGateService.gate();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CLOSEOUT)
-    public OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutResponse upkeepCloseout() {
-        return upkeepCloseoutService.closeout();
     }
 }
