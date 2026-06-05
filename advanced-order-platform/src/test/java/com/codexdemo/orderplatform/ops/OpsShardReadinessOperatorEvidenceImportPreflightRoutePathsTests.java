@@ -37,6 +37,10 @@ class OpsShardReadinessOperatorEvidenceImportPreflightRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT,
                         OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY,
+                        OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

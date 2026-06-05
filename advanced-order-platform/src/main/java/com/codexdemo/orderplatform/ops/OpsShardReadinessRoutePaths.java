@@ -299,6 +299,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-import-preflight-target-scope-mapping";
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT =
             "/operator-evidence-import-preflight-digest-blueprint";
+    static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY =
+            "/operator-evidence-import-preflight-route-profile-summary";
 
     private OpsShardReadinessRoutePaths() {
     }

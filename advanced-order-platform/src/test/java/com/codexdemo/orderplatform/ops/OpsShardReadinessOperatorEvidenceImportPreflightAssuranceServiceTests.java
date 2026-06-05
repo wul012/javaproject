@@ -37,4 +37,35 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceServiceTests {
         );
         assertThat(blueprint.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRouteProfileSummaryWithGetOnlyBoundary() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse summary =
+                new OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService()
+                        .summary();
+
+        assertThat(summary.version()).isEqualTo("Java v599");
+        assertThat(summary.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-route-profile-summary");
+        assertThat(summary.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-route-profile-summary.v1");
+        assertThat(summary.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(summary.readyForEvidenceImport()).isFalse();
+        assertThat(summary.readyForManualEvidenceEntry()).isFalse();
+        assertThat(summary.itemCount()).isEqualTo(4);
+        assertThat(summary.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "foundation-route-profile",
+                        "assurance-route-profile",
+                        "json-contract-profile",
+                        "get-only-boundary"
+                );
+        assertThat(summary.checks()).contains(
+                "import-preflight-route-profile-foundation-routes-6",
+                "import-preflight-route-profile-assurance-routes-6",
+                "import-preflight-route-profile-get-only"
+        );
+        assertThat(summary.status()).isEqualTo("passed");
+    }
 }
