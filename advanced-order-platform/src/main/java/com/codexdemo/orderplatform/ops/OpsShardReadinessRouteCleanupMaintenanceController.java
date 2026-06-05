@@ -12,12 +12,16 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService latestSiblingService;
+
     public OpsShardReadinessRouteCleanupMaintenanceController(
             OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService segmentCatalogService,
-            OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService
+            OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService,
+            OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService latestSiblingService
     ) {
         this.segmentCatalogService = segmentCatalogService;
         this.continuityService = continuityService;
+        this.latestSiblingService = latestSiblingService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG)
@@ -28,5 +32,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTINUITY)
     public OpsShardReadinessRouteCleanupMaintenanceContinuityResponse continuity() {
         return continuityService.continuity();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_LATEST_SIBLING_REPORT)
+    public OpsShardReadinessRouteCleanupMaintenanceLatestSiblingResponse latestSiblingReport() {
+        return latestSiblingService.report();
     }
 }
