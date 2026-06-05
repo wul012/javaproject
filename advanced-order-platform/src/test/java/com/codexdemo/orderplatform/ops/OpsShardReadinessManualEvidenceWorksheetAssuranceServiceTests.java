@@ -154,4 +154,36 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceServiceTests {
         );
         assertThat(budget.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCloseoutForManualEvidenceWorksheetBatch() {
+        OpsShardReadinessManualEvidenceWorksheetResponse closeout =
+                new OpsShardReadinessManualEvidenceWorksheetCloseoutService().closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v582");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-closeout.v1");
+        assertThat(closeout.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(closeout.readyForManualEvidenceEntry()).isFalse();
+        assertThat(closeout.readyForLiveExecution()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.itemCount()).isEqualTo(5);
+        assertThat(closeout.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "foundation-complete",
+                        "assurance-complete",
+                        "execution-locks-held",
+                        "node-v861-alignment",
+                        "final-ci-gate-ready"
+                );
+        assertThat(closeout.checks()).contains(
+                "worksheet-closeout-versions-v559-v583",
+                "worksheet-closeout-foundation-and-assurance-split",
+                "worksheet-closeout-operator-entry-only"
+        );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
 }

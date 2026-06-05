@@ -282,6 +282,8 @@ final class OpsShardReadinessRoutePaths {
             "/manual-evidence-worksheet-operator-handoff";
     static final String MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET =
             "/manual-evidence-worksheet-ci-budget";
+    static final String MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT =
+            "/manual-evidence-worksheet-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
