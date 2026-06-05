@@ -131,4 +131,36 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceServiceTests {
         );
         assertThat(handoff.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCiBudgetWithFocusedGatesBeforeFullMaven() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse budget =
+                new OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService()
+                        .budget();
+
+        assertThat(budget.version()).isEqualTo("Java v605");
+        assertThat(budget.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-ci-budget");
+        assertThat(budget.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-ci-budget.v1");
+        assertThat(budget.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(budget.readyForEvidenceImport()).isFalse();
+        assertThat(budget.readyForProductionExecution()).isFalse();
+        assertThat(budget.itemCount()).isEqualTo(5);
+        assertThat(budget.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "support-unit-test",
+                        "foundation-service-tests",
+                        "assurance-service-tests",
+                        "route-integration-tests",
+                        "full-maven-gate"
+                );
+        assertThat(budget.checks()).contains(
+                "import-preflight-ci-budget-focused-first",
+                "import-preflight-ci-budget-routes-separated",
+                "import-preflight-ci-budget-full-maven-last"
+        );
+        assertThat(budget.status()).isEqualTo("passed");
+    }
 }

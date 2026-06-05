@@ -305,6 +305,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-import-preflight-archive-plan";
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF =
             "/operator-evidence-import-preflight-operator-handoff";
+    static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET =
+            "/operator-evidence-import-preflight-ci-budget";
 
     private OpsShardReadinessRoutePaths() {
     }
