@@ -93,6 +93,10 @@ class OpsShardReadinessMaintenanceRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SUSTAINMENT_CLOSEOUT,
                         OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE,
+                        OpsShardReadinessRouteCleanupMaintenanceContractFreezeService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

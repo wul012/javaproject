@@ -237,6 +237,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-operations-scorecard";
     static final String ROUTE_CLEANUP_MAINTENANCE_SUSTAINMENT_CLOSEOUT =
             "/route-cleanup-maintenance-sustainment-closeout";
+    static final String ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE =
+            "/route-cleanup-maintenance-contract-freeze";
 
     private OpsShardReadinessRoutePaths() {
     }
