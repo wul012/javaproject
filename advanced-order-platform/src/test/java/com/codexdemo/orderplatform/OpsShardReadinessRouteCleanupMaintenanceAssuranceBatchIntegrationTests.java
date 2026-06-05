@@ -35,4 +35,24 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("consumer-gate-packet-source-count-4"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceArchiveVerifierSummaryReturnsArchiveItems()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-verifier-summary"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v549"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-verifier-summary"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-archive-verifier-summary.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("json-output"))
+                .andExpect(jsonPath("$.items[3].name").value("route-boundary"))
+                .andExpect(jsonPath("$.checks[4]").value("archive-verifier-summary-does-not-touch-files"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
