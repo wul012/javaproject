@@ -278,6 +278,8 @@ final class OpsShardReadinessRoutePaths {
             "/manual-evidence-worksheet-route-profile-summary";
     static final String MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN =
             "/manual-evidence-worksheet-archive-plan";
+    static final String MANUAL_EVIDENCE_WORKSHEET_OPERATOR_HANDOFF =
+            "/manual-evidence-worksheet-operator-handoff";
 
     private OpsShardReadinessRoutePaths() {
     }

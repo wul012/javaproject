@@ -94,4 +94,34 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceServiceTests {
         );
         assertThat(plan.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsOperatorHandoffWithSeparatedOwners() {
+        OpsShardReadinessManualEvidenceWorksheetResponse handoff =
+                new OpsShardReadinessManualEvidenceWorksheetOperatorHandoffService().handoff();
+
+        assertThat(handoff.version()).isEqualTo("Java v578");
+        assertThat(handoff.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-operator-handoff");
+        assertThat(handoff.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-operator-handoff.v1");
+        assertThat(handoff.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(handoff.readyForManualEvidenceEntry()).isFalse();
+        assertThat(handoff.itemCount()).isEqualTo(5);
+        assertThat(handoff.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "worksheet-owner",
+                        "validation-owner",
+                        "archive-owner",
+                        "importer-owner",
+                        "runtime-boundary-owner"
+                );
+        assertThat(handoff.checks()).contains(
+                "operator-handoff-owner-count-5",
+                "operator-handoff-no-manual-values",
+                "operator-handoff-no-runtime-approval"
+        );
+        assertThat(handoff.status()).isEqualTo("passed");
+    }
 }
