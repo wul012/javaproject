@@ -22,6 +22,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceVersionLineageService versionLineageService;
+
     public OpsShardReadinessRouteCleanupMaintenanceUpkeepController(
             OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService upkeepCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService consumerHandoffMatrixService,
@@ -29,7 +31,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
             OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService,
             OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService,
             OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService,
-            OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService
+            OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService,
+            OpsShardReadinessRouteCleanupMaintenanceVersionLineageService versionLineageService
     ) {
         this.upkeepCatalogService = upkeepCatalogService;
         this.consumerHandoffMatrixService = consumerHandoffMatrixService;
@@ -38,6 +41,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
         this.failClosedPolicyService = failClosedPolicyService;
         this.archiveDigestLedgerService = archiveDigestLedgerService;
         this.operatorReviewPacketService = operatorReviewPacketService;
+        this.versionLineageService = versionLineageService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG)
@@ -73,5 +77,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATOR_REVIEW_PACKET)
     public OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketResponse operatorReviewPacket() {
         return operatorReviewPacketService.packet();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_VERSION_LINEAGE)
+    public OpsShardReadinessRouteCleanupMaintenanceVersionLineageResponse versionLineage() {
+        return versionLineageService.lineage();
     }
 }

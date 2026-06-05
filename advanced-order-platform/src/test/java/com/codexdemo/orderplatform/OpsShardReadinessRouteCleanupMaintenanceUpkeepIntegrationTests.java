@@ -176,4 +176,27 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("operator-review-packet-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceVersionLineageReturnsServiceRoutePairs()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-version-lineage"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v503"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-version-lineage"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-version-lineage.v1"))
+                .andExpect(jsonPath("$.pairCount").value(9))
+                .andExpect(jsonPath("$.firstServiceVersion").value(471))
+                .andExpect(jsonPath("$.latestRouteVersion").value(488))
+                .andExpect(jsonPath("$.gapCount").value(0))
+                .andExpect(jsonPath("$.pairs[0].routeFollowsService").value(true))
+                .andExpect(jsonPath("$.pairs[8].nextServiceVersion").value(-1))
+                .andExpect(jsonPath("$.checks[4]").value("version-lineage-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
