@@ -207,6 +207,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-fail-closed-policy";
     static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_DIGEST_LEDGER =
             "/route-cleanup-maintenance-archive-digest-ledger";
+    static final String ROUTE_CLEANUP_MAINTENANCE_OPERATOR_REVIEW_PACKET =
+            "/route-cleanup-maintenance-operator-review-packet";
 
     private OpsShardReadinessRoutePaths() {
     }
