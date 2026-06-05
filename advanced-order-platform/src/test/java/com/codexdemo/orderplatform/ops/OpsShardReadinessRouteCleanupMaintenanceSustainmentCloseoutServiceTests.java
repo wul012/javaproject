@@ -9,7 +9,9 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutServiceTests {
     @Test
     void buildsCloseoutFromScorecardArchiveAndTestEvidence() {
         OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutResponse closeout =
-                service().closeout();
+                OpsShardReadinessRouteCleanupMaintenanceSustainmentServiceFixture
+                        .closeoutService()
+                        .closeout();
 
         assertThat(closeout.version()).isEqualTo("Java v532");
         assertThat(closeout.endpoint()).isEqualTo(
@@ -33,30 +35,5 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutServiceTests {
         assertThat(closeout.items()).allSatisfy(item -> assertThat(item.status()).isEqualTo("passed"));
         assertThat(closeout.checks()).contains("sustainment-closeout-remains-read-only");
         assertThat(closeout.status()).isEqualTo("passed");
-    }
-
-    private OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService service() {
-        OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoff =
-                new OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService(
-                        new OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService(),
-                        new OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService(),
-                        new OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService()
-                );
-        OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archive =
-                new OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService();
-        OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService tests =
-                new OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService();
-        OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService scorecard =
-                new OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService(
-                        handoff,
-                        new OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService(),
-                        archive,
-                        tests
-                );
-        return new OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService(
-                scorecard,
-                archive,
-                tests
-        );
     }
 }

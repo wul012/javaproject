@@ -9,7 +9,9 @@ class OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardServiceTests {
     @Test
     void buildsOperationsScorecardFromSustainmentServices() {
         OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardResponse scorecard =
-                service().scorecard();
+                OpsShardReadinessRouteCleanupMaintenanceSustainmentServiceFixture
+                        .operationsScorecardService()
+                        .scorecard();
 
         assertThat(scorecard.version()).isEqualTo("Java v530");
         assertThat(scorecard.endpoint()).isEqualTo(
@@ -34,20 +36,5 @@ class OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardServiceTests {
         });
         assertThat(scorecard.checks()).contains("operations-scorecard-remains-read-only");
         assertThat(scorecard.status()).isEqualTo("passed");
-    }
-
-    private OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService service() {
-        OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoff =
-                new OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService(
-                        new OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService(),
-                        new OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService(),
-                        new OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService()
-                );
-        return new OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService(
-                handoff,
-                new OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService(),
-                new OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService(),
-                new OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService()
-        );
     }
 }
