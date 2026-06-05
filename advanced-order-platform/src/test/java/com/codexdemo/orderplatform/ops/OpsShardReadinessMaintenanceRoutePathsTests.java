@@ -1,0 +1,100 @@
+package com.codexdemo.orderplatform.ops;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+
+class OpsShardReadinessMaintenanceRoutePathsTests {
+
+    @Test
+    void maintenanceUpkeepEndpointsUseSharedRouteConstants() {
+        assertThat(Map.ofEntries(
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG,
+                        OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONSUMER_HANDOFF_MATRIX,
+                        OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CI_EXPECTATION_MANIFEST,
+                        OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ROUTE_TOPOLOGY_INDEX,
+                        OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FAIL_CLOSED_POLICY,
+                        OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_DIGEST_LEDGER,
+                        OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATOR_REVIEW_PACKET,
+                        OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_VERSION_LINEAGE,
+                        OpsShardReadinessRouteCleanupMaintenanceVersionLineageService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_READINESS_GATE,
+                        OpsShardReadinessRouteCleanupMaintenanceReadinessGateService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CLOSEOUT,
+                        OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST,
+                        OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_REMEDIATION_QUEUE,
+                        OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FRESHNESS_WINDOW,
+                        OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OWNERSHIP_REGISTER,
+                        OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RISK_LEDGER,
+                        OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST,
+                        OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_DEPENDENCY_BOUNDARY_MAP,
+                        OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR,
+                        OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_TEST_EVIDENCE_ROLLUP,
+                        OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATIONS_SCORECARD,
+                        OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SUSTAINMENT_CLOSEOUT,
+                        OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService.ENDPOINT
+                )
+        )).allSatisfy((route, endpoint) ->
+                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+    }
+}
