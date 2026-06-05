@@ -13,19 +13,22 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentEvidenceControll
     private final OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionService;
     private final OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService;
     private final OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService operationsScorecardService;
+    private final OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService sustainmentCloseoutService;
 
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentEvidenceController(
             OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffDigestService,
             OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService,
             OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionService,
             OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService,
-            OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService operationsScorecardService
+            OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService operationsScorecardService,
+            OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService sustainmentCloseoutService
     ) {
         this.handoffDigestService = handoffDigestService;
         this.dependencyBoundaryMapService = dependencyBoundaryMapService;
         this.archiveRetentionService = archiveRetentionService;
         this.testEvidenceRollupService = testEvidenceRollupService;
         this.operationsScorecardService = operationsScorecardService;
+        this.sustainmentCloseoutService = sustainmentCloseoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST)
@@ -51,5 +54,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentEvidenceControll
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATIONS_SCORECARD)
     public OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardResponse operationsScorecard() {
         return operationsScorecardService.scorecard();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SUSTAINMENT_CLOSEOUT)
+    public OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutResponse sustainmentCloseout() {
+        return sustainmentCloseoutService.closeout();
     }
 }
