@@ -87,4 +87,30 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchServiceTests {
         );
         assertThat(fieldMap.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsReadWindowEvidenceWithoutLiveProbe() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse evidence =
+                new OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService().evidence();
+
+        assertThat(evidence.version()).isEqualTo("Java v543");
+        assertThat(evidence.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-read-window-evidence");
+        assertThat(evidence.itemCount()).isEqualTo(4);
+        assertThat(evidence.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "health-read",
+                        "ops-overview-read",
+                        "shard-readiness-read",
+                        "startup-boundary"
+                );
+        assertThat(evidence.checks()).contains(
+                "read-window-targets-documented",
+                "read-window-evidence-does-not-probe-live-services",
+                "read-window-evidence-does-not-start-upstreams"
+        );
+        assertThat(evidence.status()).isEqualTo("passed");
+    }
 }

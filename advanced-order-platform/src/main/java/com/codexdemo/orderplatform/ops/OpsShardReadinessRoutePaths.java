@@ -243,6 +243,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-gate-handoff";
     static final String ROUTE_CLEANUP_MAINTENANCE_SHARD_FIELD_MAP =
             "/route-cleanup-maintenance-shard-field-map";
+    static final String ROUTE_CLEANUP_MAINTENANCE_READ_WINDOW_EVIDENCE =
+            "/route-cleanup-maintenance-read-window-evidence";
 
     private OpsShardReadinessRoutePaths() {
     }
