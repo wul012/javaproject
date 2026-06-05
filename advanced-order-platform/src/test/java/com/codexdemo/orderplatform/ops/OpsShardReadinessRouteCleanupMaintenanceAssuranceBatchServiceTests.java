@@ -113,4 +113,33 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchServiceTests {
         );
         assertThat(digest.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsOperatorSignoffWithoutApprovingExecution() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse signoff =
+                new OpsShardReadinessRouteCleanupMaintenanceOperatorSignoffService().signoff();
+
+        assertThat(signoff.version()).isEqualTo("Java v555");
+        assertThat(signoff.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-operator-signoff");
+        assertThat(signoff.profile()).isEqualTo(
+                "java-shard-readiness-route-cleanup-maintenance-operator-signoff.v1");
+        assertThat(signoff.itemCount()).isEqualTo(5);
+        assertThat(signoff.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "contract-freeze-reviewed",
+                        "consumer-gate-reviewed",
+                        "archive-verifier-reviewed",
+                        "ci-budget-reviewed",
+                        "route-inventory-reviewed"
+                );
+        assertThat(signoff.checks()).contains(
+                "operator-signoff-items-5",
+                "operator-signoff-is-evidence-only",
+                "operator-signoff-does-not-approve-execution"
+        );
+        assertThat(signoff.status()).isEqualTo("passed");
+    }
 }
