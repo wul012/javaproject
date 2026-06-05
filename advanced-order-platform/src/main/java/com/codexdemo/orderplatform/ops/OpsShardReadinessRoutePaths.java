@@ -181,6 +181,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-segment-catalog";
     static final String ROUTE_CLEANUP_MAINTENANCE_CONTINUITY =
             "/route-cleanup-maintenance-continuity";
+    static final String ROUTE_CLEANUP_MAINTENANCE_LATEST_SIBLING_REPORT =
+            "/route-cleanup-maintenance-latest-sibling-report";
 
     private OpsShardReadinessRoutePaths() {
     }
