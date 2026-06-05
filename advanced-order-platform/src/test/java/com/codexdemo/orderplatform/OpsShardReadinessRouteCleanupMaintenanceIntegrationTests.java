@@ -164,4 +164,24 @@ class OpsShardReadinessRouteCleanupMaintenanceIntegrationTests
                 .andExpect(jsonPath("$.steps[0].startsMiniKvService").value(false))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceArchiveManifestReturnsArchiveTargets()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-manifest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v485"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-manifest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-archive-manifest.v1"))
+                .andExpect(jsonPath("$.artifactCount").value(7))
+                .andExpect(jsonPath("$.artifacts[0].name").value("segment-catalog"))
+                .andExpect(jsonPath("$.artifacts[6].name").value("test-budget-plan"))
+                .andExpect(jsonPath("$.checks[3]").value("archive-does-not-require-runtime-artifacts"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

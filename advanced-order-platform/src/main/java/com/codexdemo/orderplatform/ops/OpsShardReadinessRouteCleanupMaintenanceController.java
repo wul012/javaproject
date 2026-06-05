@@ -22,6 +22,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService testBudgetPlanService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService archiveManifestService;
+
     public OpsShardReadinessRouteCleanupMaintenanceController(
             OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService segmentCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService,
@@ -29,7 +31,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
             OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService handoffPairAuditService,
             OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService,
             OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService sourcePlanAlignmentService,
-            OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService testBudgetPlanService
+            OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService testBudgetPlanService,
+            OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService archiveManifestService
     ) {
         this.segmentCatalogService = segmentCatalogService;
         this.continuityService = continuityService;
@@ -38,6 +41,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
         this.boundaryDriftService = boundaryDriftService;
         this.sourcePlanAlignmentService = sourcePlanAlignmentService;
         this.testBudgetPlanService = testBudgetPlanService;
+        this.archiveManifestService = archiveManifestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG)
@@ -73,5 +77,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_TEST_BUDGET_PLAN)
     public OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanResponse testBudgetPlan() {
         return testBudgetPlanService.plan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_MANIFEST)
+    public OpsShardReadinessRouteCleanupMaintenanceArchiveManifestResponse archiveManifest() {
+        return archiveManifestService.manifest();
     }
 }
