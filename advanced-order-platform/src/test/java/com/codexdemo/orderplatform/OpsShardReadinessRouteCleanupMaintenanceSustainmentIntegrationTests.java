@@ -35,4 +35,25 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("release-checklist-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceRemediationQueueReturnsStandbyPreview()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-remediation-queue"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v514"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-remediation-queue"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-remediation-queue.v1"))
+                .andExpect(jsonPath("$.queueItemCount").value(4))
+                .andExpect(jsonPath("$.standbyItemCount").value(4))
+                .andExpect(jsonPath("$.blockedItemCount").value(0))
+                .andExpect(jsonPath("$.items[0].status").value("standby"))
+                .andExpect(jsonPath("$.checks[3]").value("remediation-does-not-execute-actions"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

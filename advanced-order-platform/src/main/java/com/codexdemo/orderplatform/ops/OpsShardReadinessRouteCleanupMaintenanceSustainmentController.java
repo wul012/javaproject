@@ -10,14 +10,23 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
-            OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService
+            OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
+            OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService
     ) {
         this.releaseChecklistService = releaseChecklistService;
+        this.remediationQueueService = remediationQueueService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
     public OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistResponse releaseChecklist() {
         return releaseChecklistService.checklist();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_REMEDIATION_QUEUE)
+    public OpsShardReadinessRouteCleanupMaintenanceRemediationQueueResponse remediationQueue() {
+        return remediationQueueService.queue();
     }
 }
