@@ -184,4 +184,27 @@ class OpsShardReadinessRouteCleanupMaintenanceIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("archive-does-not-require-runtime-artifacts"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceCloseoutReturnsRunCloseout()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-closeout"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v487"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-closeout"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-closeout.v1"))
+                .andExpect(jsonPath("$.sourcePlan").value("Node v549"))
+                .andExpect(jsonPath("$.checkedReportCount").value(8))
+                .andExpect(jsonPath("$.segmentCount").value(6))
+                .andExpect(jsonPath("$.archiveArtifactCount").value(7))
+                .andExpect(jsonPath("$.checks[0].name").value("segment-catalog"))
+                .andExpect(jsonPath("$.checks[7].name").value("archive-manifest"))
+                .andExpect(jsonPath("$.checks[7].status").value("passed"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

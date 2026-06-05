@@ -24,6 +24,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService archiveManifestService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceCloseoutService closeoutService;
+
     public OpsShardReadinessRouteCleanupMaintenanceController(
             OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService segmentCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService,
@@ -32,7 +34,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
             OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService,
             OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService sourcePlanAlignmentService,
             OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService testBudgetPlanService,
-            OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService archiveManifestService
+            OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService archiveManifestService,
+            OpsShardReadinessRouteCleanupMaintenanceCloseoutService closeoutService
     ) {
         this.segmentCatalogService = segmentCatalogService;
         this.continuityService = continuityService;
@@ -42,6 +45,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
         this.sourcePlanAlignmentService = sourcePlanAlignmentService;
         this.testBudgetPlanService = testBudgetPlanService;
         this.archiveManifestService = archiveManifestService;
+        this.closeoutService = closeoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG)
@@ -82,5 +86,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_MANIFEST)
     public OpsShardReadinessRouteCleanupMaintenanceArchiveManifestResponse archiveManifest() {
         return archiveManifestService.manifest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CLOSEOUT)
+    public OpsShardReadinessRouteCleanupMaintenanceCloseoutResponse closeout() {
+        return closeoutService.closeout();
     }
 }
