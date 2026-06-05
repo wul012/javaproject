@@ -14,14 +14,18 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService ciExpectationManifestService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService;
+
     public OpsShardReadinessRouteCleanupMaintenanceUpkeepController(
             OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService upkeepCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService consumerHandoffMatrixService,
-            OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService ciExpectationManifestService
+            OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService ciExpectationManifestService,
+            OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService
     ) {
         this.upkeepCatalogService = upkeepCatalogService;
         this.consumerHandoffMatrixService = consumerHandoffMatrixService;
         this.ciExpectationManifestService = ciExpectationManifestService;
+        this.routeTopologyIndexService = routeTopologyIndexService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG)
@@ -37,5 +41,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CI_EXPECTATION_MANIFEST)
     public OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestResponse ciExpectationManifest() {
         return ciExpectationManifestService.manifest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ROUTE_TOPOLOGY_INDEX)
+    public OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexResponse routeTopologyIndex() {
+        return routeTopologyIndexService.index();
     }
 }

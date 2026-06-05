@@ -85,4 +85,28 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("ci-manifest-does-not-start-upstreams"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceRouteTopologyIndexReturnsNeighborMap()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-route-topology-index"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v495"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-route-topology-index"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-route-topology-index.v1"))
+                .andExpect(jsonPath("$.routeCount").value(9))
+                .andExpect(jsonPath("$.firstRouteVersion").value(472))
+                .andExpect(jsonPath("$.latestRouteVersion").value(488))
+                .andExpect(jsonPath("$.routes[0].previousEndpoint").value("none"))
+                .andExpect(jsonPath("$.routes[0].nextEndpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-continuity"))
+                .andExpect(jsonPath("$.routes[8].nextEndpoint").value("none"))
+                .andExpect(jsonPath("$.checks[4]").value("topology-index-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
