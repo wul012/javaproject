@@ -235,6 +235,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-test-evidence-rollup";
     static final String ROUTE_CLEANUP_MAINTENANCE_OPERATIONS_SCORECARD =
             "/route-cleanup-maintenance-operations-scorecard";
+    static final String ROUTE_CLEANUP_MAINTENANCE_SUSTAINMENT_CLOSEOUT =
+            "/route-cleanup-maintenance-sustainment-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }

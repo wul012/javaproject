@@ -9,47 +9,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService;
-
     private final OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService;
-
     private final OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService;
-
     private final OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService;
-
     private final OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService;
-
-    private final OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService operationsScorecardService;
 
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
             OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService,
             OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService,
-            OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService,
-            OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService,
-            OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService,
-            OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService,
-            OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService,
-            OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService operationsScorecardService
+            OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
         this.freshnessWindowService = freshnessWindowService;
         this.ownershipRegisterService = ownershipRegisterService;
         this.riskLedgerService = riskLedgerService;
-        this.handoffAcceptanceDigestService = handoffAcceptanceDigestService;
-        this.dependencyBoundaryMapService = dependencyBoundaryMapService;
-        this.archiveRetentionCalendarService = archiveRetentionCalendarService;
-        this.testEvidenceRollupService = testEvidenceRollupService;
-        this.operationsScorecardService = operationsScorecardService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -75,30 +51,5 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RISK_LEDGER)
     public OpsShardReadinessRouteCleanupMaintenanceRiskLedgerResponse riskLedger() {
         return riskLedgerService.ledger();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST)
-    public OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestResponse handoffAcceptanceDigest() {
-        return handoffAcceptanceDigestService.digest();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_DEPENDENCY_BOUNDARY_MAP)
-    public OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapResponse dependencyBoundaryMap() {
-        return dependencyBoundaryMapService.map();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR)
-    public OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarResponse archiveRetentionCalendar() {
-        return archiveRetentionCalendarService.calendar();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_TEST_EVIDENCE_ROLLUP)
-    public OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupResponse testEvidenceRollup() {
-        return testEvidenceRollupService.rollup();
-    }
-
-    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATIONS_SCORECARD)
-    public OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardResponse operationsScorecard() {
-        return operationsScorecardService.scorecard();
     }
 }
