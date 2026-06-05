@@ -12,6 +12,17 @@ final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
         return OpsShardReadinessRouteCleanupEvidenceCatalog.entries();
     }
 
+    static List<Segment> segments() {
+        return List.of(
+                segment("latest-sibling", OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog.entries()),
+                segment("readiness-seed", OpsShardReadinessRouteCleanupReadinessSeedEvidenceCatalog.entries()),
+                segment("handoff-core", OpsShardReadinessRouteCleanupHandoffCoreEvidenceCatalog.entries()),
+                segment("handoff-assurance", OpsShardReadinessRouteCleanupHandoffAssuranceEvidenceCatalog.entries()),
+                segment("handoff-governance", OpsShardReadinessRouteCleanupHandoffGovernanceEvidenceCatalog.entries()),
+                segment("post-completion", OpsShardReadinessRouteCleanupPostCompletionEvidenceCatalog.entries())
+        );
+    }
+
     static int latestJavaVersion() {
         return entries().getLast().javaVersion();
     }
@@ -79,5 +90,36 @@ final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
 
     static String boundaryStatus() {
         return versionsAreContinuous() && allEntriesKeepReadOnlyBoundary() ? "passed" : "blocked";
+    }
+
+    private static Segment segment(
+            String name,
+            List<OpsShardReadinessRouteCleanupEvidenceResponse.Entry> entries
+    ) {
+        return new Segment(
+                name,
+                entries.getFirst().javaVersion(),
+                entries.getLast().javaVersion(),
+                entries.size(),
+                entries.getFirst().phase(),
+                entries.getLast().phase(),
+                entries.stream()
+                        .map(OpsShardReadinessRouteCleanupEvidenceResponse.Entry::sourceNodePlan)
+                        .distinct()
+                        .toList(),
+                entries.stream().allMatch(entry -> "passed".equals(entry.status())) ? "passed" : "blocked"
+        );
+    }
+
+    record Segment(
+            String name,
+            int firstJavaVersion,
+            int lastJavaVersion,
+            int entryCount,
+            String firstPhase,
+            String lastPhase,
+            List<String> sourceNodePlans,
+            String status
+    ) {
     }
 }
