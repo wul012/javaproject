@@ -36,4 +36,25 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[6]").value("sustainment-review-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceGateHandoffReturnsOperatorOrder()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-gate-handoff"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v539"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-gate-handoff"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-gate-handoff.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.passedItemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("focused-tests"))
+                .andExpect(jsonPath("$.items[3].name").value("smoke-read-only"))
+                .andExpect(jsonPath("$.checks[3]").value("gate-order-focused-grouped-build-smoke"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
