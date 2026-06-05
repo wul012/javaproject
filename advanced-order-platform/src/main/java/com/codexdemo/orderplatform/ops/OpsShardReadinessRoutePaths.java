@@ -219,6 +219,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-release-checklist";
     static final String ROUTE_CLEANUP_MAINTENANCE_REMEDIATION_QUEUE =
             "/route-cleanup-maintenance-remediation-queue";
+    static final String ROUTE_CLEANUP_MAINTENANCE_FRESHNESS_WINDOW =
+            "/route-cleanup-maintenance-freshness-window";
 
     private OpsShardReadinessRoutePaths() {
     }
