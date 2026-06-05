@@ -289,6 +289,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-import-preflight-catalog";
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION =
             "/operator-evidence-import-preflight-slot-normalization";
+    static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX =
+            "/operator-evidence-import-preflight-import-blocker-matrix";
 
     private OpsShardReadinessRoutePaths() {
     }

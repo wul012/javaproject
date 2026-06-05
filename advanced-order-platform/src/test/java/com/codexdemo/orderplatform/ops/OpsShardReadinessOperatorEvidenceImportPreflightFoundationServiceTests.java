@@ -69,4 +69,36 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationServiceTests {
         );
         assertThat(normalization.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsImportBlockerMatrixWithRuntimePayloadBlocked() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse matrix =
+                new OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService()
+                        .matrix();
+
+        assertThat(matrix.version()).isEqualTo("Java v589");
+        assertThat(matrix.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-import-blocker-matrix");
+        assertThat(matrix.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-import-blocker-matrix.v1");
+        assertThat(matrix.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(matrix.readyForEvidenceImport()).isFalse();
+        assertThat(matrix.readyForLiveExecution()).isFalse();
+        assertThat(matrix.itemCount()).isEqualTo(5);
+        assertThat(matrix.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "missing-manual-value-blocker",
+                        "redaction-blocker",
+                        "runtime-payload-blocker",
+                        "unmapped-scope-blocker",
+                        "manual-entry-lock-blocker"
+                );
+        assertThat(matrix.checks()).contains(
+                "import-blocker-matrix-blocker-count-5",
+                "import-blocker-matrix-blocks-runtime-payload",
+                "import-blocker-matrix-keeps-import-locked"
+        );
+        assertThat(matrix.status()).isEqualTo("passed");
+    }
 }
