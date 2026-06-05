@@ -131,4 +131,26 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("fail-closed-policy-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceArchiveDigestLedgerReturnsStableDigestEntries()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-digest-ledger"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v499"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-digest-ledger"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-archive-digest-ledger.v1"))
+                .andExpect(jsonPath("$.ledgerEntryCount").value(9))
+                .andExpect(jsonPath("$.algorithm").value("SHA-256"))
+                .andExpect(jsonPath("$.digestLength").value(16))
+                .andExpect(jsonPath("$.entries[0].itemName").value("segment-catalog"))
+                .andExpect(jsonPath("$.entries[0].digest").value("3fbb01c5c2147916"))
+                .andExpect(jsonPath("$.checks[3]").value("ledger-does-not-read-archive-files"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

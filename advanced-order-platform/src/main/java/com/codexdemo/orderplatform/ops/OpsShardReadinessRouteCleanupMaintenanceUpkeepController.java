@@ -18,18 +18,22 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService;
+
     public OpsShardReadinessRouteCleanupMaintenanceUpkeepController(
             OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService upkeepCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService consumerHandoffMatrixService,
             OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService ciExpectationManifestService,
             OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService,
-            OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService
+            OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService,
+            OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService
     ) {
         this.upkeepCatalogService = upkeepCatalogService;
         this.consumerHandoffMatrixService = consumerHandoffMatrixService;
         this.ciExpectationManifestService = ciExpectationManifestService;
         this.routeTopologyIndexService = routeTopologyIndexService;
         this.failClosedPolicyService = failClosedPolicyService;
+        this.archiveDigestLedgerService = archiveDigestLedgerService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG)
@@ -55,5 +59,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FAIL_CLOSED_POLICY)
     public OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyResponse failClosedPolicy() {
         return failClosedPolicyService.report();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_DIGEST_LEDGER)
+    public OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerResponse archiveDigestLedger() {
+        return archiveDigestLedgerService.ledger();
     }
 }
