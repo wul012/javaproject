@@ -65,4 +65,33 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationServiceTests {
         );
         assertThat(template.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsValidationRulesThatRejectRuntimePayloads() {
+        OpsShardReadinessManualEvidenceWorksheetResponse rules =
+                new OpsShardReadinessManualEvidenceWorksheetValidationRulesService().rules();
+
+        assertThat(rules.version()).isEqualTo("Java v564");
+        assertThat(rules.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-validation-rules");
+        assertThat(rules.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-validation-rules.v1");
+        assertThat(rules.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(rules.readyForLiveExecution()).isFalse();
+        assertThat(rules.itemCount()).isEqualTo(4);
+        assertThat(rules.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "required-slot-id",
+                        "accepted-empty-state",
+                        "rejected-runtime-value",
+                        "reviewer-note-length"
+                );
+        assertThat(rules.checks()).contains(
+                "validation-rules-allow-empty-manual-value",
+                "validation-rules-reject-runtime-payload",
+                "validation-rules-do-not-import-values"
+        );
+        assertThat(rules.status()).isEqualTo("passed");
+    }
 }

@@ -264,6 +264,8 @@ final class OpsShardReadinessRoutePaths {
             "/manual-evidence-worksheet-catalog";
     static final String MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE =
             "/manual-evidence-worksheet-slot-template";
+    static final String MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES =
+            "/manual-evidence-worksheet-validation-rules";
 
     private OpsShardReadinessRoutePaths() {
     }
