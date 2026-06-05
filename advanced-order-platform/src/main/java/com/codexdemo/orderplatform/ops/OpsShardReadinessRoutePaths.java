@@ -272,6 +272,8 @@ final class OpsShardReadinessRoutePaths {
             "/manual-evidence-worksheet-missing-value-policy";
     static final String MANUAL_EVIDENCE_WORKSHEET_TARGET_SCOPE_REGISTRY =
             "/manual-evidence-worksheet-target-scope-registry";
+    static final String MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT =
+            "/manual-evidence-worksheet-importer-preflight";
 
     private OpsShardReadinessRoutePaths() {
     }
