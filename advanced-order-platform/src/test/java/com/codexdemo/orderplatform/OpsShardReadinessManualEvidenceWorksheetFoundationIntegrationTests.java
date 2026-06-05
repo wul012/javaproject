@@ -103,4 +103,25 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[7]").value("redaction-rules-ban-credential-values"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetMissingValuePolicyReturnsBlankStatePolicy() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-missing-value-policy"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v568"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-missing-value-policy"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-missing-value-policy.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("missing-manual-value"))
+                .andExpect(jsonPath("$.items[3].name").value("missing-import-source"))
+                .andExpect(jsonPath("$.checks[9]").value("missing-value-policy-blocks-importer"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

@@ -12,17 +12,20 @@ public class OpsShardReadinessManualEvidenceWorksheetFoundationController {
     private final OpsShardReadinessManualEvidenceWorksheetSlotTemplateService slotTemplateService;
     private final OpsShardReadinessManualEvidenceWorksheetValidationRulesService validationRulesService;
     private final OpsShardReadinessManualEvidenceWorksheetRedactionRulesService redactionRulesService;
+    private final OpsShardReadinessManualEvidenceWorksheetMissingValuePolicyService missingValuePolicyService;
 
     public OpsShardReadinessManualEvidenceWorksheetFoundationController(
             OpsShardReadinessManualEvidenceWorksheetCatalogService catalogService,
             OpsShardReadinessManualEvidenceWorksheetSlotTemplateService slotTemplateService,
             OpsShardReadinessManualEvidenceWorksheetValidationRulesService validationRulesService,
-            OpsShardReadinessManualEvidenceWorksheetRedactionRulesService redactionRulesService
+            OpsShardReadinessManualEvidenceWorksheetRedactionRulesService redactionRulesService,
+            OpsShardReadinessManualEvidenceWorksheetMissingValuePolicyService missingValuePolicyService
     ) {
         this.catalogService = catalogService;
         this.slotTemplateService = slotTemplateService;
         this.validationRulesService = validationRulesService;
         this.redactionRulesService = redactionRulesService;
+        this.missingValuePolicyService = missingValuePolicyService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG)
@@ -43,5 +46,10 @@ public class OpsShardReadinessManualEvidenceWorksheetFoundationController {
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES)
     public OpsShardReadinessManualEvidenceWorksheetResponse redactionRules() {
         return redactionRulesService.rules();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY)
+    public OpsShardReadinessManualEvidenceWorksheetResponse missingValuePolicy() {
+        return missingValuePolicyService.policy();
     }
 }
