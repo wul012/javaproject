@@ -94,4 +94,33 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationServiceTests {
         );
         assertThat(rules.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRedactionRulesThatExcludeSecretsAndRawEndpoints() {
+        OpsShardReadinessManualEvidenceWorksheetResponse rules =
+                new OpsShardReadinessManualEvidenceWorksheetRedactionRulesService().rules();
+
+        assertThat(rules.version()).isEqualTo("Java v566");
+        assertThat(rules.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-redaction-rules");
+        assertThat(rules.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-redaction-rules.v1");
+        assertThat(rules.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(rules.readyForManualEvidenceEntry()).isFalse();
+        assertThat(rules.itemCount()).isEqualTo(4);
+        assertThat(rules.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "credential-value-ban",
+                        "raw-endpoint-ban",
+                        "placeholder-policy",
+                        "review-text-boundary"
+                );
+        assertThat(rules.checks()).contains(
+                "redaction-rules-ban-credential-values",
+                "redaction-rules-ban-raw-endpoints",
+                "redaction-rules-placeholders-are-absence-markers"
+        );
+        assertThat(rules.status()).isEqualTo("passed");
+    }
 }
