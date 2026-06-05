@@ -95,4 +95,24 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("route-inventory-digest-does-not-scan-runtime"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceOperatorSignoffReturnsSignoffItems()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-operator-signoff"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v555"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-operator-signoff"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-operator-signoff.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("contract-freeze-reviewed"))
+                .andExpect(jsonPath("$.items[4].name").value("route-inventory-reviewed"))
+                .andExpect(jsonPath("$.checks[5]").value("operator-signoff-does-not-approve-execution"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

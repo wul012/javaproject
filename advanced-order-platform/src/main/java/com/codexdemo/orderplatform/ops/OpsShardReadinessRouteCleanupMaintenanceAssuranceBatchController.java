@@ -12,17 +12,20 @@ public class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchController {
     private final OpsShardReadinessRouteCleanupMaintenanceArchiveVerifierSummaryService archiveVerifierSummaryService;
     private final OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService ciBudgetLedgerService;
     private final OpsShardReadinessRouteCleanupMaintenanceRouteInventoryDigestService routeInventoryDigestService;
+    private final OpsShardReadinessRouteCleanupMaintenanceOperatorSignoffService operatorSignoffService;
 
     public OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchController(
             OpsShardReadinessRouteCleanupMaintenanceConsumerGatePacketService consumerGatePacketService,
             OpsShardReadinessRouteCleanupMaintenanceArchiveVerifierSummaryService archiveVerifierSummaryService,
             OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService ciBudgetLedgerService,
-            OpsShardReadinessRouteCleanupMaintenanceRouteInventoryDigestService routeInventoryDigestService
+            OpsShardReadinessRouteCleanupMaintenanceRouteInventoryDigestService routeInventoryDigestService,
+            OpsShardReadinessRouteCleanupMaintenanceOperatorSignoffService operatorSignoffService
     ) {
         this.consumerGatePacketService = consumerGatePacketService;
         this.archiveVerifierSummaryService = archiveVerifierSummaryService;
         this.ciBudgetLedgerService = ciBudgetLedgerService;
         this.routeInventoryDigestService = routeInventoryDigestService;
+        this.operatorSignoffService = operatorSignoffService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONSUMER_GATE_PACKET)
@@ -43,5 +46,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ROUTE_INVENTORY_DIGEST)
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse routeInventoryDigest() {
         return routeInventoryDigestService.digest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATOR_SIGNOFF)
+    public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse operatorSignoff() {
+        return operatorSignoffService.signoff();
     }
 }
