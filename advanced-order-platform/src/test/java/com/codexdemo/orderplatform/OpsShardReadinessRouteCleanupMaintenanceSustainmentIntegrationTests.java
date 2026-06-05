@@ -186,4 +186,25 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("archive-retention-calendar-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceTestEvidenceRollupReturnsCoverageEntries()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-test-evidence-rollup"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v528"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-test-evidence-rollup"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-test-evidence-rollup.v1"))
+                .andExpect(jsonPath("$.evidenceEntryCount").value(5))
+                .andExpect(jsonPath("$.coveredEntryCount").value(5))
+                .andExpect(jsonPath("$.entries[3].coverageType").value("contract"))
+                .andExpect(jsonPath("$.entries[4].coverageType").value("integration"))
+                .andExpect(jsonPath("$.checks[4]").value("test-evidence-rollup-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

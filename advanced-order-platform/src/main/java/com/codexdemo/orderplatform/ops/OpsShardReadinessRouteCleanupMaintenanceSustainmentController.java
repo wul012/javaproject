@@ -24,6 +24,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
@@ -32,7 +34,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
             OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService,
             OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService,
             OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService,
-            OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService
+            OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService,
+            OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService testEvidenceRollupService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
@@ -42,6 +45,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
         this.handoffAcceptanceDigestService = handoffAcceptanceDigestService;
         this.dependencyBoundaryMapService = dependencyBoundaryMapService;
         this.archiveRetentionCalendarService = archiveRetentionCalendarService;
+        this.testEvidenceRollupService = testEvidenceRollupService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -82,5 +86,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR)
     public OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarResponse archiveRetentionCalendar() {
         return archiveRetentionCalendarService.calendar();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_TEST_EVIDENCE_ROLLUP)
+    public OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupResponse testEvidenceRollup() {
+        return testEvidenceRollupService.rollup();
     }
 }
