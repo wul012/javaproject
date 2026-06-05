@@ -99,4 +99,36 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceServiceTests {
         );
         assertThat(plan.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsOperatorHandoffWithoutExecutionApproval() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse handoff =
+                new OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService()
+                        .handoff();
+
+        assertThat(handoff.version()).isEqualTo("Java v603");
+        assertThat(handoff.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-operator-handoff");
+        assertThat(handoff.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-operator-handoff.v1");
+        assertThat(handoff.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(handoff.readyForEvidenceImport()).isFalse();
+        assertThat(handoff.readyForLiveExecution()).isFalse();
+        assertThat(handoff.itemCount()).isEqualTo(5);
+        assertThat(handoff.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "preflight-owner",
+                        "normalization-owner",
+                        "blocker-owner",
+                        "archive-owner",
+                        "runtime-boundary-owner"
+                );
+        assertThat(handoff.checks()).contains(
+                "import-preflight-operator-handoff-owner-count-5",
+                "import-preflight-operator-handoff-no-values",
+                "import-preflight-operator-handoff-no-execution-approval"
+        );
+        assertThat(handoff.status()).isEqualTo("passed");
+    }
 }
