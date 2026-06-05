@@ -13,19 +13,22 @@ public class OpsShardReadinessManualEvidenceWorksheetAssuranceController {
     private final OpsShardReadinessManualEvidenceWorksheetArchivePlanService archivePlanService;
     private final OpsShardReadinessManualEvidenceWorksheetOperatorHandoffService operatorHandoffService;
     private final OpsShardReadinessManualEvidenceWorksheetCiBudgetService ciBudgetService;
+    private final OpsShardReadinessManualEvidenceWorksheetCloseoutService closeoutService;
 
     public OpsShardReadinessManualEvidenceWorksheetAssuranceController(
             OpsShardReadinessManualEvidenceWorksheetImporterPreflightService importerPreflightService,
             OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService routeProfileSummaryService,
             OpsShardReadinessManualEvidenceWorksheetArchivePlanService archivePlanService,
             OpsShardReadinessManualEvidenceWorksheetOperatorHandoffService operatorHandoffService,
-            OpsShardReadinessManualEvidenceWorksheetCiBudgetService ciBudgetService
+            OpsShardReadinessManualEvidenceWorksheetCiBudgetService ciBudgetService,
+            OpsShardReadinessManualEvidenceWorksheetCloseoutService closeoutService
     ) {
         this.importerPreflightService = importerPreflightService;
         this.routeProfileSummaryService = routeProfileSummaryService;
         this.archivePlanService = archivePlanService;
         this.operatorHandoffService = operatorHandoffService;
         this.ciBudgetService = ciBudgetService;
+        this.closeoutService = closeoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT)
@@ -51,5 +54,10 @@ public class OpsShardReadinessManualEvidenceWorksheetAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET)
     public OpsShardReadinessManualEvidenceWorksheetResponse ciBudget() {
         return ciBudgetService.budget();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT)
+    public OpsShardReadinessManualEvidenceWorksheetResponse closeout() {
+        return closeoutService.closeout();
     }
 }

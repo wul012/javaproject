@@ -121,4 +121,27 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("ci-budget-full-maven-gate-last"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetCloseoutReturnsBatchCloseout() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-closeout"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v582"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.readyForLiveExecution").value(false))
+                .andExpect(jsonPath("$.readyForProductionExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-closeout"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-closeout.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("foundation-complete"))
+                .andExpect(jsonPath("$.items[4].name").value("final-ci-gate-ready"))
+                .andExpect(jsonPath("$.checks[7]").value("worksheet-closeout-versions-v559-v583"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
