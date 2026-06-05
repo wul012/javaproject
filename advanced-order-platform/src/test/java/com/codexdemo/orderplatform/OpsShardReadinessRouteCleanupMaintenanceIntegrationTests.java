@@ -123,4 +123,24 @@ class OpsShardReadinessRouteCleanupMaintenanceIntegrationTests
                 .andExpect(jsonPath("$.forbiddenOperations[4]").value("managed-audit-connection"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceSourcePlanAlignmentReturnsNodeV549Snapshot()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-source-plan-alignment"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v481"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-source-plan-alignment"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-source-plan-alignment.v1"))
+                .andExpect(jsonPath("$.sourcePlan").value("Node v549"))
+                .andExpect(jsonPath("$.segmentCount").value(6))
+                .andExpect(jsonPath("$.upstreamAlignmentCount").value(4))
+                .andExpect(jsonPath("$.checks[2]").value("java-and-mini-kv-not-started-by-maintenance-suite"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

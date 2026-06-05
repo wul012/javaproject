@@ -18,18 +18,22 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService sourcePlanAlignmentService;
+
     public OpsShardReadinessRouteCleanupMaintenanceController(
             OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService segmentCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService,
             OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService latestSiblingService,
             OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService handoffPairAuditService,
-            OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService
+            OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService,
+            OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService sourcePlanAlignmentService
     ) {
         this.segmentCatalogService = segmentCatalogService;
         this.continuityService = continuityService;
         this.latestSiblingService = latestSiblingService;
         this.handoffPairAuditService = handoffPairAuditService;
         this.boundaryDriftService = boundaryDriftService;
+        this.sourcePlanAlignmentService = sourcePlanAlignmentService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG)
@@ -55,5 +59,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_DRIFT)
     public OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftResponse boundaryDrift() {
         return boundaryDriftService.audit();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SOURCE_PLAN_ALIGNMENT)
+    public OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentResponse sourcePlanAlignment() {
+        return sourcePlanAlignmentService.alignment();
     }
 }
