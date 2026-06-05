@@ -36,4 +36,33 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceServiceTests {
         );
         assertThat(preflight.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRouteProfileSummaryForWorksheetRoutes() {
+        OpsShardReadinessManualEvidenceWorksheetResponse summary =
+                new OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService().summary();
+
+        assertThat(summary.version()).isEqualTo("Java v574");
+        assertThat(summary.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-route-profile-summary");
+        assertThat(summary.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-route-profile-summary.v1");
+        assertThat(summary.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(summary.executionAllowed()).isFalse();
+        assertThat(summary.itemCount()).isEqualTo(4);
+        assertThat(summary.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "foundation-route-profile",
+                        "assurance-route-profile",
+                        "json-contract-profile",
+                        "route-boundary-profile"
+                );
+        assertThat(summary.checks()).contains(
+                "route-profile-summary-foundation-routes-6",
+                "route-profile-summary-assurance-routes-started",
+                "route-profile-summary-get-only"
+        );
+        assertThat(summary.status()).isEqualTo("passed");
+    }
 }

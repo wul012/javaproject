@@ -274,6 +274,8 @@ final class OpsShardReadinessRoutePaths {
             "/manual-evidence-worksheet-target-scope-registry";
     static final String MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT =
             "/manual-evidence-worksheet-importer-preflight";
+    static final String MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY =
+            "/manual-evidence-worksheet-route-profile-summary";
 
     private OpsShardReadinessRoutePaths() {
     }
