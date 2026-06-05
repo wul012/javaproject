@@ -165,4 +165,25 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("dependency-boundary-map-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceArchiveRetentionCalendarReturnsReviewWindow()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-retention-calendar"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v526"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-retention-calendar"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-archive-retention-calendar.v1"))
+                .andExpect(jsonPath("$.archiveEntryCount").value(9))
+                .andExpect(jsonPath("$.retentionDays").value(365))
+                .andExpect(jsonPath("$.nextReviewVersion").value(508))
+                .andExpect(jsonPath("$.entries[0].reviewCadence").value("every-20-java-versions"))
+                .andExpect(jsonPath("$.checks[4]").value("archive-retention-calendar-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

@@ -22,6 +22,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
@@ -29,7 +31,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
             OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService,
             OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService,
             OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService,
-            OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService
+            OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService,
+            OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService archiveRetentionCalendarService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
@@ -38,6 +41,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
         this.riskLedgerService = riskLedgerService;
         this.handoffAcceptanceDigestService = handoffAcceptanceDigestService;
         this.dependencyBoundaryMapService = dependencyBoundaryMapService;
+        this.archiveRetentionCalendarService = archiveRetentionCalendarService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -73,5 +77,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_DEPENDENCY_BOUNDARY_MAP)
     public OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapResponse dependencyBoundaryMap() {
         return dependencyBoundaryMapService.map();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR)
+    public OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarResponse archiveRetentionCalendar() {
+        return archiveRetentionCalendarService.calendar();
     }
 }
