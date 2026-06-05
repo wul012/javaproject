@@ -301,6 +301,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-import-preflight-digest-blueprint";
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY =
             "/operator-evidence-import-preflight-route-profile-summary";
+    static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN =
+            "/operator-evidence-import-preflight-archive-plan";
 
     private OpsShardReadinessRoutePaths() {
     }

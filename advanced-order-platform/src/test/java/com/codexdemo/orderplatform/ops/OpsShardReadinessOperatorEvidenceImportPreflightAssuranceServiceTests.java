@@ -68,4 +68,35 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceServiceTests {
         );
         assertThat(summary.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsArchivePlanWithoutFileWrites() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse plan =
+                new OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService()
+                        .plan();
+
+        assertThat(plan.version()).isEqualTo("Java v601");
+        assertThat(plan.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-archive-plan");
+        assertThat(plan.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-archive-plan.v1");
+        assertThat(plan.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(plan.readyForEvidenceImport()).isFalse();
+        assertThat(plan.readyForProductionExecution()).isFalse();
+        assertThat(plan.itemCount()).isEqualTo(4);
+        assertThat(plan.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "json-capture-plan",
+                        "digest-blueprint-plan",
+                        "route-output-plan",
+                        "no-file-write"
+                );
+        assertThat(plan.checks()).contains(
+                "import-preflight-archive-plan-external-capture",
+                "import-preflight-archive-plan-no-file-write",
+                "import-preflight-archive-plan-ready"
+        );
+        assertThat(plan.status()).isEqualTo("passed");
+    }
 }
