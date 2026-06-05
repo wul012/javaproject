@@ -13,17 +13,20 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationControlle
     private final OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService importBlockerMatrixService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService
             redactionPreservationService;
+    private final OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService missingValueGuardService;
 
     public OpsShardReadinessOperatorEvidenceImportPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceImportPreflightCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService slotNormalizationService,
             OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService importBlockerMatrixService,
-            OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService redactionPreservationService
+            OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService redactionPreservationService,
+            OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService missingValueGuardService
     ) {
         this.catalogService = catalogService;
         this.slotNormalizationService = slotNormalizationService;
         this.importBlockerMatrixService = importBlockerMatrixService;
         this.redactionPreservationService = redactionPreservationService;
+        this.missingValueGuardService = missingValueGuardService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG)
@@ -44,5 +47,10 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationControlle
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION)
     public OpsShardReadinessOperatorEvidenceImportPreflightResponse redactionPreservation() {
         return redactionPreservationService.preservation();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD)
+    public OpsShardReadinessOperatorEvidenceImportPreflightResponse missingValueGuard() {
+        return missingValueGuardService.guard();
     }
 }

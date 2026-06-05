@@ -111,4 +111,27 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("redaction-preservation-no-raw-endpoints"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceImportPreflightMissingValueGuardKeepsImportLocked() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-missing-value-guard"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v593"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceImportPreflight").value(true))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-missing-value-guard"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-import-preflight-missing-value-guard.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("blank-slot-guard"))
+                .andExpect(jsonPath("$.items[3].name").value("missing-source-guard"))
+                .andExpect(jsonPath("$.checks[9]").value("missing-value-guard-keeps-import-locked"))
+                .andExpect(jsonPath("$.checks[10]").value("missing-value-guard-no-synthetic-values"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
