@@ -124,4 +124,25 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("missing-value-policy-blocks-importer"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetTargetScopeRegistryReturnsPreviewScopes() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-target-scope-registry"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v570"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForProductionExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-target-scope-registry"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-target-scope-registry.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("order-read-model"))
+                .andExpect(jsonPath("$.items[3].name").value("operator-entry-slot"))
+                .andExpect(jsonPath("$.checks[8]").value("target-scope-registry-no-write-routing"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
