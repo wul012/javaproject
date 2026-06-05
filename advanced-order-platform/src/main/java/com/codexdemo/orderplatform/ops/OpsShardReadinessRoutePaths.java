@@ -293,6 +293,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-import-preflight-import-blocker-matrix";
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION =
             "/operator-evidence-import-preflight-redaction-preservation";
+    static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD =
+            "/operator-evidence-import-preflight-missing-value-guard";
 
     private OpsShardReadinessRoutePaths() {
     }

@@ -132,4 +132,35 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationServiceTests {
         );
         assertThat(preservation.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsMissingValueGuardWithoutSyntheticDefaults() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse guard =
+                new OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService()
+                        .guard();
+
+        assertThat(guard.version()).isEqualTo("Java v593");
+        assertThat(guard.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-missing-value-guard");
+        assertThat(guard.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-missing-value-guard.v1");
+        assertThat(guard.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(guard.readyForEvidenceImport()).isFalse();
+        assertThat(guard.readyForManualEvidenceEntry()).isFalse();
+        assertThat(guard.itemCount()).isEqualTo(4);
+        assertThat(guard.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "blank-slot-guard",
+                        "missing-reviewer-guard",
+                        "missing-scope-guard",
+                        "missing-source-guard"
+                );
+        assertThat(guard.checks()).contains(
+                "missing-value-guard-keeps-preflight-ready",
+                "missing-value-guard-keeps-import-locked",
+                "missing-value-guard-no-synthetic-values"
+        );
+        assertThat(guard.status()).isEqualTo("passed");
+    }
 }
