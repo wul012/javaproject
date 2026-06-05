@@ -227,6 +227,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-risk-ledger";
     static final String ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST =
             "/route-cleanup-maintenance-handoff-acceptance-digest";
+    static final String ROUTE_CLEANUP_MAINTENANCE_DEPENDENCY_BOUNDARY_MAP =
+            "/route-cleanup-maintenance-dependency-boundary-map";
 
     private OpsShardReadinessRoutePaths() {
     }
