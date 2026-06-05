@@ -217,6 +217,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-upkeep-closeout";
     static final String ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST =
             "/route-cleanup-maintenance-release-checklist";
+    static final String ROUTE_CLEANUP_MAINTENANCE_REMEDIATION_QUEUE =
+            "/route-cleanup-maintenance-remediation-queue";
 
     private OpsShardReadinessRoutePaths() {
     }
