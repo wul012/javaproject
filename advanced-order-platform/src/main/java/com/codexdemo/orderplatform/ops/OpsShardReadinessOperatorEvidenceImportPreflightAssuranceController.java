@@ -11,15 +11,18 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController
     private final OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService digestBlueprintService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService routeProfileSummaryService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService archivePlanService;
+    private final OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService operatorHandoffService;
 
     public OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService digestBlueprintService,
             OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService routeProfileSummaryService,
-            OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService archivePlanService
+            OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService archivePlanService,
+            OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService operatorHandoffService
     ) {
         this.digestBlueprintService = digestBlueprintService;
         this.routeProfileSummaryService = routeProfileSummaryService;
         this.archivePlanService = archivePlanService;
+        this.operatorHandoffService = operatorHandoffService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT)
@@ -35,5 +38,10 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN)
     public OpsShardReadinessOperatorEvidenceImportPreflightResponse archivePlan() {
         return archivePlanService.plan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF)
+    public OpsShardReadinessOperatorEvidenceImportPreflightResponse operatorHandoff() {
+        return operatorHandoffService.handoff();
     }
 }
