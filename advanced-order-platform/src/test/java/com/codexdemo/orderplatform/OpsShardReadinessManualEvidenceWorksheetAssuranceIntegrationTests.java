@@ -37,4 +37,25 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("importer-preflight-import-execution-blocked"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetRouteProfileSummaryReturnsGetOnlyProfile() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-route-profile-summary"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v574"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-route-profile-summary"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-route-profile-summary.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("foundation-route-profile"))
+                .andExpect(jsonPath("$.items[3].name").value("route-boundary-profile"))
+                .andExpect(jsonPath("$.checks[9]").value("route-profile-summary-get-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
