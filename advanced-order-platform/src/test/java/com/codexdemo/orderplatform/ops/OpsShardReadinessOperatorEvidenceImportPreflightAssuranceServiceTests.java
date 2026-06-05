@@ -163,4 +163,38 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceServiceTests {
         );
         assertThat(budget.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCloseoutWithImportStillLocked() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse closeout =
+                new OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService()
+                        .closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v607");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-closeout.v1");
+        assertThat(closeout.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(closeout.readyForEvidenceImport()).isFalse();
+        assertThat(closeout.readyForManualEvidenceEntry()).isFalse();
+        assertThat(closeout.readyForLiveExecution()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.itemCount()).isEqualTo(5);
+        assertThat(closeout.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "foundation-complete",
+                        "assurance-complete",
+                        "locks-held",
+                        "node-v886-alignment",
+                        "ci-gate-ready"
+                );
+        assertThat(closeout.checks()).contains(
+                "import-preflight-closeout-versions-v584-v608",
+                "import-preflight-closeout-foundation-and-assurance-split",
+                "import-preflight-closeout-import-remains-locked"
+        );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
 }
