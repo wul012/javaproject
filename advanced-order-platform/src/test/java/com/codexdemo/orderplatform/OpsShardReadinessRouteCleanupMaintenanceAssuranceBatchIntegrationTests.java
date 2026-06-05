@@ -55,4 +55,24 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("archive-verifier-summary-does-not-touch-files"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceCiBudgetLedgerReturnsBudgetItems()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-ci-budget-ledger"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v551"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-ci-budget-ledger"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-ci-budget-ledger.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("focused-service-tests"))
+                .andExpect(jsonPath("$.items[3].name").value("full-suite-final-gate"))
+                .andExpect(jsonPath("$.checks[4]").value("ci-budget-ledger-does-not-run-ci"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
