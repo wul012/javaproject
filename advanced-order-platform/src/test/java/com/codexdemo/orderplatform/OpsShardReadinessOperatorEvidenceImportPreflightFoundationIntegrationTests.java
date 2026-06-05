@@ -65,4 +65,27 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[10]").value("slot-normalization-does-not-import-values"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceImportPreflightImportBlockerMatrixReturnsFailClosedMatrix() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-import-blocker-matrix"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v589"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceImportPreflight").value(true))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForLiveExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-import-blocker-matrix"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-import-preflight-import-blocker-matrix.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[2].name").value("runtime-payload-blocker"))
+                .andExpect(jsonPath("$.items[4].name").value("manual-entry-lock-blocker"))
+                .andExpect(jsonPath("$.checks[9]").value("import-blocker-matrix-blocks-runtime-payload"))
+                .andExpect(jsonPath("$.checks[10]").value("import-blocker-matrix-keeps-import-locked"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
