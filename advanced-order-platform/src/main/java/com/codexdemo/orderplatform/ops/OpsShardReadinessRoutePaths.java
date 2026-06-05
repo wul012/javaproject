@@ -193,6 +193,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-test-budget-plan";
     static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_MANIFEST =
             "/route-cleanup-maintenance-archive-manifest";
+    static final String ROUTE_CLEANUP_MAINTENANCE_CLOSEOUT =
+            "/route-cleanup-maintenance-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
