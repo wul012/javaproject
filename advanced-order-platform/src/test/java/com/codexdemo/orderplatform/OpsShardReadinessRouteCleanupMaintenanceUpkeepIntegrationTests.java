@@ -60,4 +60,29 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.forbiddenOperations[4]").value("managed-audit-connection"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceCiExpectationManifestReturnsRegressionPlan()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-ci-expectation-manifest"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v493"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-ci-expectation-manifest"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-ci-expectation-manifest.v1"))
+                .andExpect(jsonPath("$.expectationCount").value(9))
+                .andExpect(jsonPath("$.laneCount").value(4))
+                .andExpect(jsonPath("$.startsJavaService").value(false))
+                .andExpect(jsonPath("$.startsMiniKvService").value(false))
+                .andExpect(jsonPath("$.expectations[0].focusedTestClass")
+                        .value("OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogServiceTests"))
+                .andExpect(jsonPath("$.expectations[8].focusedTestClass")
+                        .value("OpsShardReadinessRouteCleanupMaintenanceCloseoutServiceTests"))
+                .andExpect(jsonPath("$.checks[4]").value("ci-manifest-does-not-start-upstreams"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
