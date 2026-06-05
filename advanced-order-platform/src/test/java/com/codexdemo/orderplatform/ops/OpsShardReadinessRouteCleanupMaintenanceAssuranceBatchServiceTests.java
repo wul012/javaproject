@@ -85,4 +85,32 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchServiceTests {
         );
         assertThat(ledger.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRouteInventoryDigestWithoutScanningRuntimeRoutes() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse digest =
+                new OpsShardReadinessRouteCleanupMaintenanceRouteInventoryDigestService().digest();
+
+        assertThat(digest.version()).isEqualTo("Java v553");
+        assertThat(digest.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-route-inventory-digest");
+        assertThat(digest.profile()).isEqualTo(
+                "java-shard-readiness-route-cleanup-maintenance-route-inventory-digest.v1");
+        assertThat(digest.itemCount()).isEqualTo(4);
+        assertThat(digest.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "sustainment-batch-routes",
+                        "assurance-batch-routes",
+                        "path-contract",
+                        "read-only-inventory"
+                );
+        assertThat(digest.checks()).contains(
+                "route-inventory-digest-controller-count-2",
+                "route-inventory-digest-does-not-scan-runtime",
+                "route-inventory-digest-uses-shared-paths"
+        );
+        assertThat(digest.status()).isEqualTo("passed");
+    }
 }
