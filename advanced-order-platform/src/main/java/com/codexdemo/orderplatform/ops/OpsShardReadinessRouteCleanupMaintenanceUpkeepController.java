@@ -24,6 +24,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceVersionLineageService versionLineageService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceReadinessGateService readinessGateService;
+
     public OpsShardReadinessRouteCleanupMaintenanceUpkeepController(
             OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService upkeepCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService consumerHandoffMatrixService,
@@ -32,7 +34,8 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
             OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService,
             OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService,
             OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService,
-            OpsShardReadinessRouteCleanupMaintenanceVersionLineageService versionLineageService
+            OpsShardReadinessRouteCleanupMaintenanceVersionLineageService versionLineageService,
+            OpsShardReadinessRouteCleanupMaintenanceReadinessGateService readinessGateService
     ) {
         this.upkeepCatalogService = upkeepCatalogService;
         this.consumerHandoffMatrixService = consumerHandoffMatrixService;
@@ -42,6 +45,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
         this.archiveDigestLedgerService = archiveDigestLedgerService;
         this.operatorReviewPacketService = operatorReviewPacketService;
         this.versionLineageService = versionLineageService;
+        this.readinessGateService = readinessGateService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG)
@@ -82,5 +86,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_VERSION_LINEAGE)
     public OpsShardReadinessRouteCleanupMaintenanceVersionLineageResponse versionLineage() {
         return versionLineageService.lineage();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_READINESS_GATE)
+    public OpsShardReadinessRouteCleanupMaintenanceReadinessGateResponse readinessGate() {
+        return readinessGateService.gate();
     }
 }
