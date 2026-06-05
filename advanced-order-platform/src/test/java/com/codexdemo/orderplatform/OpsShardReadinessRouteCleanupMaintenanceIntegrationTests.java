@@ -143,4 +143,25 @@ class OpsShardReadinessRouteCleanupMaintenanceIntegrationTests
                 .andExpect(jsonPath("$.checks[2]").value("java-and-mini-kv-not-started-by-maintenance-suite"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceTestBudgetPlanReturnsValidationOrder()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-test-budget-plan"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v483"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-test-budget-plan"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-test-budget-plan.v1"))
+                .andExpect(jsonPath("$.stepCount").value(5))
+                .andExpect(jsonPath("$.steps[0].name").value("focused-maintenance-services"))
+                .andExpect(jsonPath("$.steps[4].name").value("github-actions-ci"))
+                .andExpect(jsonPath("$.steps[0].startsJavaService").value(false))
+                .andExpect(jsonPath("$.steps[0].startsMiniKvService").value(false))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

@@ -20,13 +20,16 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService sourcePlanAlignmentService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService testBudgetPlanService;
+
     public OpsShardReadinessRouteCleanupMaintenanceController(
             OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService segmentCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceContinuityService continuityService,
             OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService latestSiblingService,
             OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService handoffPairAuditService,
             OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService boundaryDriftService,
-            OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService sourcePlanAlignmentService
+            OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService sourcePlanAlignmentService,
+            OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService testBudgetPlanService
     ) {
         this.segmentCatalogService = segmentCatalogService;
         this.continuityService = continuityService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
         this.handoffPairAuditService = handoffPairAuditService;
         this.boundaryDriftService = boundaryDriftService;
         this.sourcePlanAlignmentService = sourcePlanAlignmentService;
+        this.testBudgetPlanService = testBudgetPlanService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG)
@@ -64,5 +68,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SOURCE_PLAN_ALIGNMENT)
     public OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentResponse sourcePlanAlignment() {
         return sourcePlanAlignmentService.alignment();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_TEST_BUDGET_PLAN)
+    public OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanResponse testBudgetPlan() {
+        return testBudgetPlanService.plan();
     }
 }
