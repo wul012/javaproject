@@ -201,6 +201,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-consumer-handoff-matrix";
     static final String ROUTE_CLEANUP_MAINTENANCE_CI_EXPECTATION_MANIFEST =
             "/route-cleanup-maintenance-ci-expectation-manifest";
+    static final String ROUTE_CLEANUP_MAINTENANCE_ROUTE_TOPOLOGY_INDEX =
+            "/route-cleanup-maintenance-route-topology-index";
 
     private OpsShardReadinessRoutePaths() {
     }
