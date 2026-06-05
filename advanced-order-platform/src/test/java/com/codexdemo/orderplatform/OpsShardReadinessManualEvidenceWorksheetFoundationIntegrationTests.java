@@ -82,4 +82,25 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[8]").value("validation-rules-reject-runtime-payload"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetRedactionRulesReturnsSecretBoundaries() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-redaction-rules"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v566"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-redaction-rules"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-redaction-rules.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("credential-value-ban"))
+                .andExpect(jsonPath("$.items[1].name").value("raw-endpoint-ban"))
+                .andExpect(jsonPath("$.checks[7]").value("redaction-rules-ban-credential-values"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

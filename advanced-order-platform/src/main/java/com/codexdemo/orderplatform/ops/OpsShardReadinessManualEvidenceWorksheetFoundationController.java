@@ -11,15 +11,18 @@ public class OpsShardReadinessManualEvidenceWorksheetFoundationController {
     private final OpsShardReadinessManualEvidenceWorksheetCatalogService catalogService;
     private final OpsShardReadinessManualEvidenceWorksheetSlotTemplateService slotTemplateService;
     private final OpsShardReadinessManualEvidenceWorksheetValidationRulesService validationRulesService;
+    private final OpsShardReadinessManualEvidenceWorksheetRedactionRulesService redactionRulesService;
 
     public OpsShardReadinessManualEvidenceWorksheetFoundationController(
             OpsShardReadinessManualEvidenceWorksheetCatalogService catalogService,
             OpsShardReadinessManualEvidenceWorksheetSlotTemplateService slotTemplateService,
-            OpsShardReadinessManualEvidenceWorksheetValidationRulesService validationRulesService
+            OpsShardReadinessManualEvidenceWorksheetValidationRulesService validationRulesService,
+            OpsShardReadinessManualEvidenceWorksheetRedactionRulesService redactionRulesService
     ) {
         this.catalogService = catalogService;
         this.slotTemplateService = slotTemplateService;
         this.validationRulesService = validationRulesService;
+        this.redactionRulesService = redactionRulesService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG)
@@ -35,5 +38,10 @@ public class OpsShardReadinessManualEvidenceWorksheetFoundationController {
     @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES)
     public OpsShardReadinessManualEvidenceWorksheetResponse validationRules() {
         return validationRulesService.rules();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES)
+    public OpsShardReadinessManualEvidenceWorksheetResponse redactionRules() {
+        return redactionRulesService.rules();
     }
 }
