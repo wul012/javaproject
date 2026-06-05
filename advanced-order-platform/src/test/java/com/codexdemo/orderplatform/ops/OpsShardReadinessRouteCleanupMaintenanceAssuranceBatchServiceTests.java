@@ -57,4 +57,32 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchServiceTests {
         );
         assertThat(summary.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCiBudgetLedgerWithoutExecutingCi() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse ledger =
+                new OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService().ledger();
+
+        assertThat(ledger.version()).isEqualTo("Java v551");
+        assertThat(ledger.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-ci-budget-ledger");
+        assertThat(ledger.profile()).isEqualTo(
+                "java-shard-readiness-route-cleanup-maintenance-ci-budget-ledger.v1");
+        assertThat(ledger.itemCount()).isEqualTo(4);
+        assertThat(ledger.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "focused-service-tests",
+                        "route-integration-tests",
+                        "path-contract-tests",
+                        "full-suite-final-gate"
+                );
+        assertThat(ledger.checks()).contains(
+                "ci-budget-ledger-focused-first",
+                "ci-budget-ledger-does-not-run-ci",
+                "ci-budget-ledger-keeps-smoke-last"
+        );
+        assertThat(ledger.status()).isEqualTo("passed");
+    }
 }
