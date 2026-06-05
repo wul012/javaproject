@@ -142,4 +142,33 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchServiceTests {
         );
         assertThat(signoff.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsExtendedCloseoutForVersionBatch() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse closeout =
+                new OpsShardReadinessRouteCleanupMaintenanceExtendedCloseoutService().closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v557");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-extended-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-route-cleanup-maintenance-extended-closeout.v1");
+        assertThat(closeout.itemCount()).isEqualTo(5);
+        assertThat(closeout.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "first-batch-complete",
+                        "assurance-batch-complete",
+                        "contract-freeze-held",
+                        "ci-budget-held",
+                        "operator-signoff-held"
+                );
+        assertThat(closeout.checks()).contains(
+                "extended-closeout-versions-v534-v558",
+                "extended-closeout-services-and-routes-paired",
+                "extended-closeout-remains-read-only"
+        );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
 }

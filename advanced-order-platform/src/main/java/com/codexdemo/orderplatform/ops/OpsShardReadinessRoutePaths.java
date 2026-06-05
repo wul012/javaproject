@@ -257,6 +257,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-route-inventory-digest";
     static final String ROUTE_CLEANUP_MAINTENANCE_OPERATOR_SIGNOFF =
             "/route-cleanup-maintenance-operator-signoff";
+    static final String ROUTE_CLEANUP_MAINTENANCE_EXTENDED_CLOSEOUT =
+            "/route-cleanup-maintenance-extended-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
