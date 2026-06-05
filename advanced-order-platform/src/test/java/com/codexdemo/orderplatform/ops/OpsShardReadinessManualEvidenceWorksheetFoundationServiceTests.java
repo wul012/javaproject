@@ -36,4 +36,33 @@ class OpsShardReadinessManualEvidenceWorksheetFoundationServiceTests {
         );
         assertThat(catalog.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSlotTemplateWithoutManualValues() {
+        OpsShardReadinessManualEvidenceWorksheetResponse template =
+                new OpsShardReadinessManualEvidenceWorksheetSlotTemplateService().template();
+
+        assertThat(template.version()).isEqualTo("Java v562");
+        assertThat(template.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-slot-template");
+        assertThat(template.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-slot-template.v1");
+        assertThat(template.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(template.readyForManualEvidenceEntry()).isFalse();
+        assertThat(template.itemCount()).isEqualTo(4);
+        assertThat(template.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "slot-identity",
+                        "blank-value-state",
+                        "operator-note",
+                        "validation-hint"
+                );
+        assertThat(template.checks()).contains(
+                "slot-template-blank-values-only",
+                "slot-template-no-secret-placeholder",
+                "slot-template-target-scope-required"
+        );
+        assertThat(template.status()).isEqualTo("passed");
+    }
 }
