@@ -96,4 +96,24 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("read-window-evidence-does-not-probe-live-services"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceRuntimeBoundaryChecklistReturnsForbiddenActions()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-runtime-boundary-checklist"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v545"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-runtime-boundary-checklist"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-runtime-boundary-checklist.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("no-write-routing"))
+                .andExpect(jsonPath("$.items[4].name").value("no-upstream-autostart"))
+                .andExpect(jsonPath("$.checks[3]").value("runtime-boundary-items-5"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

@@ -12,17 +12,20 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController 
     private final OpsShardReadinessRouteCleanupMaintenanceGateHandoffService gateHandoffService;
     private final OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService shardFieldMapService;
     private final OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService readWindowEvidenceService;
+    private final OpsShardReadinessRouteCleanupMaintenanceRuntimeBoundaryChecklistService runtimeBoundaryChecklistService;
 
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController(
             OpsShardReadinessRouteCleanupMaintenanceContractFreezeService contractFreezeService,
             OpsShardReadinessRouteCleanupMaintenanceGateHandoffService gateHandoffService,
             OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService shardFieldMapService,
-            OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService readWindowEvidenceService
+            OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService readWindowEvidenceService,
+            OpsShardReadinessRouteCleanupMaintenanceRuntimeBoundaryChecklistService runtimeBoundaryChecklistService
     ) {
         this.contractFreezeService = contractFreezeService;
         this.gateHandoffService = gateHandoffService;
         this.shardFieldMapService = shardFieldMapService;
         this.readWindowEvidenceService = readWindowEvidenceService;
+        this.runtimeBoundaryChecklistService = runtimeBoundaryChecklistService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE)
@@ -43,5 +46,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_READ_WINDOW_EVIDENCE)
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse readWindowEvidence() {
         return readWindowEvidenceService.evidence();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RUNTIME_BOUNDARY_CHECKLIST)
+    public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse runtimeBoundaryChecklist() {
+        return runtimeBoundaryChecklistService.checklist();
     }
 }
