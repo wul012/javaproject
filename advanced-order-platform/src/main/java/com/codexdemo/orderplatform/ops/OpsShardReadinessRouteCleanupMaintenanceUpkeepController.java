@@ -20,13 +20,16 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService;
+
     public OpsShardReadinessRouteCleanupMaintenanceUpkeepController(
             OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService upkeepCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService consumerHandoffMatrixService,
             OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService ciExpectationManifestService,
             OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService,
             OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService,
-            OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService
+            OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService archiveDigestLedgerService,
+            OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService operatorReviewPacketService
     ) {
         this.upkeepCatalogService = upkeepCatalogService;
         this.consumerHandoffMatrixService = consumerHandoffMatrixService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
         this.routeTopologyIndexService = routeTopologyIndexService;
         this.failClosedPolicyService = failClosedPolicyService;
         this.archiveDigestLedgerService = archiveDigestLedgerService;
+        this.operatorReviewPacketService = operatorReviewPacketService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG)
@@ -64,5 +68,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_DIGEST_LEDGER)
     public OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerResponse archiveDigestLedger() {
         return archiveDigestLedgerService.ledger();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATOR_REVIEW_PACKET)
+    public OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketResponse operatorReviewPacket() {
+        return operatorReviewPacketService.packet();
     }
 }

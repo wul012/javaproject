@@ -153,4 +153,27 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("ledger-does-not-read-archive-files"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceOperatorReviewPacketReturnsTypedReviewSections()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-operator-review-packet"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v501"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-operator-review-packet"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-operator-review-packet.v1"))
+                .andExpect(jsonPath("$.sectionCount").value(5))
+                .andExpect(jsonPath("$.evidenceItemCount").value(9))
+                .andExpect(jsonPath("$.policyCount").value(7))
+                .andExpect(jsonPath("$.digestLedgerEntryCount").value(9))
+                .andExpect(jsonPath("$.sections[0].name").value("upkeep-catalog"))
+                .andExpect(jsonPath("$.sections[4].name").value("archive-digest-ledger"))
+                .andExpect(jsonPath("$.checks[4]").value("operator-review-packet-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
