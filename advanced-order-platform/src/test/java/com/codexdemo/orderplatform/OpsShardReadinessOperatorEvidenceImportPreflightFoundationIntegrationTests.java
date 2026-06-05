@@ -41,4 +41,28 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[10]").value("import-preflight-catalog-imports-no-values"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceImportPreflightSlotNormalizationReturnsBlankValueBoundary() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-slot-normalization"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v587"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceImportPreflight").value(true))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.readyForLiveExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-slot-normalization"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-import-preflight-slot-normalization.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[0].name").value("slot-id-normalization"))
+                .andExpect(jsonPath("$.items[1].name").value("blank-value-normalization"))
+                .andExpect(jsonPath("$.checks[8]").value("slot-normalization-preserves-blank-values"))
+                .andExpect(jsonPath("$.checks[10]").value("slot-normalization-does-not-import-values"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
