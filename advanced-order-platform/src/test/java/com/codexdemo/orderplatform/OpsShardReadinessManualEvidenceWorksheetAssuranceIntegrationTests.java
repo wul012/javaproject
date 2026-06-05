@@ -79,4 +79,25 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[8]").value("archive-plan-does-not-write-files"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void manualEvidenceWorksheetOperatorHandoffReturnsSeparatedOwners() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/manual-evidence-worksheet-operator-handoff"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v578"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEntryWorksheet").value(true))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/manual-evidence-worksheet-operator-handoff"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-manual-evidence-worksheet-operator-handoff.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("worksheet-owner"))
+                .andExpect(jsonPath("$.items[4].name").value("runtime-boundary-owner"))
+                .andExpect(jsonPath("$.checks[9]").value("operator-handoff-no-runtime-approval"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
