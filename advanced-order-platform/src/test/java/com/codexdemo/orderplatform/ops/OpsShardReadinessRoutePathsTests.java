@@ -424,6 +424,10 @@ class OpsShardReadinessRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG,
                         OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONSUMER_HANDOFF_MATRIX,
+                        OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
