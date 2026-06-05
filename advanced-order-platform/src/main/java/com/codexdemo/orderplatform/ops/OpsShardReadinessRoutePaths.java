@@ -276,6 +276,8 @@ final class OpsShardReadinessRoutePaths {
             "/manual-evidence-worksheet-importer-preflight";
     static final String MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY =
             "/manual-evidence-worksheet-route-profile-summary";
+    static final String MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN =
+            "/manual-evidence-worksheet-archive-plan";
 
     private OpsShardReadinessRoutePaths() {
     }

@@ -41,6 +41,10 @@ class OpsShardReadinessManualEvidenceWorksheetRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY,
                         OpsShardReadinessManualEvidenceWorksheetRouteProfileSummaryService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN,
+                        OpsShardReadinessManualEvidenceWorksheetArchivePlanService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

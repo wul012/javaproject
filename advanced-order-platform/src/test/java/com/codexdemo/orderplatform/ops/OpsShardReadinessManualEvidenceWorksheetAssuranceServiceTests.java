@@ -65,4 +65,33 @@ class OpsShardReadinessManualEvidenceWorksheetAssuranceServiceTests {
         );
         assertThat(summary.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsArchivePlanWithoutWritingFiles() {
+        OpsShardReadinessManualEvidenceWorksheetResponse plan =
+                new OpsShardReadinessManualEvidenceWorksheetArchivePlanService().plan();
+
+        assertThat(plan.version()).isEqualTo("Java v576");
+        assertThat(plan.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/manual-evidence-worksheet-archive-plan");
+        assertThat(plan.profile()).isEqualTo(
+                "java-shard-readiness-manual-evidence-worksheet-archive-plan.v1");
+        assertThat(plan.readyForOperatorEntryWorksheet()).isTrue();
+        assertThat(plan.executionAllowed()).isFalse();
+        assertThat(plan.itemCount()).isEqualTo(4);
+        assertThat(plan.items())
+                .extracting(OpsShardReadinessManualEvidenceWorksheetResponse.WorksheetItem::name)
+                .containsExactly(
+                        "route-json-capture",
+                        "digest-record",
+                        "artifact-location",
+                        "no-file-write"
+                );
+        assertThat(plan.checks()).contains(
+                "archive-plan-captures-json-externally",
+                "archive-plan-does-not-write-files",
+                "archive-plan-ready-for-route"
+        );
+        assertThat(plan.status()).isEqualTo("passed");
+    }
 }
