@@ -223,4 +223,29 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("readiness-gate-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceUpkeepCloseoutReturnsFinalEvidenceCloseout()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-upkeep-closeout"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v507"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-upkeep-closeout"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-upkeep-closeout.v1"))
+                .andExpect(jsonPath("$.sourcePlan").value("Node v549"))
+                .andExpect(jsonPath("$.checkedReportCount").value(5))
+                .andExpect(jsonPath("$.upkeepItemCount").value(9))
+                .andExpect(jsonPath("$.gateCheckCount").value(5))
+                .andExpect(jsonPath("$.archiveDigestCount").value(9))
+                .andExpect(jsonPath("$.latestRouteVersion").value(488))
+                .andExpect(jsonPath("$.checks[0].name").value("upkeep-catalog"))
+                .andExpect(jsonPath("$.checks[4].name").value("archive-digest-ledger"))
+                .andExpect(jsonPath("$.checks[4].status").value("passed"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
