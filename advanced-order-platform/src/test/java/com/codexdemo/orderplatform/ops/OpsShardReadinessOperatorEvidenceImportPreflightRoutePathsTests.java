@@ -1,0 +1,20 @@
+package com.codexdemo.orderplatform.ops;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+
+class OpsShardReadinessOperatorEvidenceImportPreflightRoutePathsTests {
+
+    @Test
+    void operatorEvidenceImportPreflightEndpointsUseSharedRouteConstants() {
+        assertThat(Map.ofEntries(
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG,
+                        OpsShardReadinessOperatorEvidenceImportPreflightCatalogService.ENDPOINT
+                )
+        )).allSatisfy((route, endpoint) ->
+                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+    }
+}

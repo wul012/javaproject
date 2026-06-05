@@ -285,6 +285,9 @@ final class OpsShardReadinessRoutePaths {
     static final String MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT =
             "/manual-evidence-worksheet-closeout";
 
+    static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG =
+            "/operator-evidence-import-preflight-catalog";
+
     private OpsShardReadinessRoutePaths() {
     }
 }
