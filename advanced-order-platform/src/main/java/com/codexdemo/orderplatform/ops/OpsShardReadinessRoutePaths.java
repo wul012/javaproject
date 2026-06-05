@@ -249,6 +249,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-runtime-boundary-checklist";
     static final String ROUTE_CLEANUP_MAINTENANCE_CONSUMER_GATE_PACKET =
             "/route-cleanup-maintenance-consumer-gate-packet";
+    static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_VERIFIER_SUMMARY =
+            "/route-cleanup-maintenance-archive-verifier-summary";
 
     private OpsShardReadinessRoutePaths() {
     }

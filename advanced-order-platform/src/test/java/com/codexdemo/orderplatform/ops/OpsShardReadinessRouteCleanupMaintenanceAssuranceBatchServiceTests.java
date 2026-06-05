@@ -32,4 +32,29 @@ class OpsShardReadinessRouteCleanupMaintenanceAssuranceBatchServiceTests {
         );
         assertThat(packet.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsArchiveVerifierSummaryWithoutTouchingFiles() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse summary =
+                new OpsShardReadinessRouteCleanupMaintenanceArchiveVerifierSummaryService().summary();
+
+        assertThat(summary.version()).isEqualTo("Java v549");
+        assertThat(summary.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-archive-verifier-summary");
+        assertThat(summary.itemCount()).isEqualTo(4);
+        assertThat(summary.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "json-output",
+                        "markdown-output",
+                        "digest-summary",
+                        "route-boundary"
+                );
+        assertThat(summary.checks()).contains(
+                "archive-verifier-summary-items-4",
+                "archive-verifier-summary-does-not-touch-files"
+        );
+        assertThat(summary.status()).isEqualTo("passed");
+    }
 }
