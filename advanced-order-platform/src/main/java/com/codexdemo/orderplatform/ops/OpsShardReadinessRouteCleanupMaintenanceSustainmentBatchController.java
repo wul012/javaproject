@@ -10,13 +10,16 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController 
 
     private final OpsShardReadinessRouteCleanupMaintenanceContractFreezeService contractFreezeService;
     private final OpsShardReadinessRouteCleanupMaintenanceGateHandoffService gateHandoffService;
+    private final OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService shardFieldMapService;
 
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController(
             OpsShardReadinessRouteCleanupMaintenanceContractFreezeService contractFreezeService,
-            OpsShardReadinessRouteCleanupMaintenanceGateHandoffService gateHandoffService
+            OpsShardReadinessRouteCleanupMaintenanceGateHandoffService gateHandoffService,
+            OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService shardFieldMapService
     ) {
         this.contractFreezeService = contractFreezeService;
         this.gateHandoffService = gateHandoffService;
+        this.shardFieldMapService = shardFieldMapService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE)
@@ -27,5 +30,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchController 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_GATE_HANDOFF)
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse gateHandoff() {
         return gateHandoffService.handoff();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SHARD_FIELD_MAP)
+    public OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse shardFieldMap() {
+        return shardFieldMapService.fieldMap();
     }
 }

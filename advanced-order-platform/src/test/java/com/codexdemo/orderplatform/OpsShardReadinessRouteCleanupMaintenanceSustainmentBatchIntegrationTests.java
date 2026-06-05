@@ -57,4 +57,23 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchIntegrationTests
                 .andExpect(jsonPath("$.checks[3]").value("gate-order-focused-grouped-build-smoke"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceShardFieldMapReturnsMinimalFieldMapping()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-shard-field-map"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v541"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-shard-field-map"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-shard-field-map.v1"))
+                .andExpect(jsonPath("$.itemCount").value(4))
+                .andExpect(jsonPath("$.items[2].name").value("shard-shape"))
+                .andExpect(jsonPath("$.checks[3]").value("shard-readiness-v1-minimal-fields-mapped"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
