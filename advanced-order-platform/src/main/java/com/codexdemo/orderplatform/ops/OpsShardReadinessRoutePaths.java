@@ -221,6 +221,8 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-remediation-queue";
     static final String ROUTE_CLEANUP_MAINTENANCE_FRESHNESS_WINDOW =
             "/route-cleanup-maintenance-freshness-window";
+    static final String ROUTE_CLEANUP_MAINTENANCE_OWNERSHIP_REGISTER =
+            "/route-cleanup-maintenance-ownership-register";
 
     private OpsShardReadinessRoutePaths() {
     }
