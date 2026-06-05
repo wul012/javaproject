@@ -297,6 +297,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-import-preflight-missing-value-guard";
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING =
             "/operator-evidence-import-preflight-target-scope-mapping";
+    static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT =
+            "/operator-evidence-import-preflight-digest-blueprint";
 
     private OpsShardReadinessRoutePaths() {
     }
