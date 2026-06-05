@@ -14,14 +14,18 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
-            OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService
+            OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService,
+            OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
         this.freshnessWindowService = freshnessWindowService;
+        this.ownershipRegisterService = ownershipRegisterService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -37,5 +41,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FRESHNESS_WINDOW)
     public OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowResponse freshnessWindow() {
         return freshnessWindowService.window();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OWNERSHIP_REGISTER)
+    public OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterResponse ownershipRegister() {
+        return ownershipRegisterService.register();
     }
 }

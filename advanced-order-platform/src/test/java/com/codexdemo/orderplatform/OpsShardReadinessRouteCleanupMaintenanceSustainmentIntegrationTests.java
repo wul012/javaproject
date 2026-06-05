@@ -78,4 +78,25 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("freshness-window-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceOwnershipRegisterReturnsOwners()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-ownership-register"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v518"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-ownership-register"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-ownership-register.v1"))
+                .andExpect(jsonPath("$.ownerEntryCount").value(9))
+                .andExpect(jsonPath("$.distinctOwnerCount").value(9))
+                .andExpect(jsonPath("$.owners[4].owner").value("runtime-boundary-reviewer"))
+                .andExpect(jsonPath("$.owners[4].boundary").value("read-only-boundary"))
+                .andExpect(jsonPath("$.checks[4]").value("ownership-register-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
