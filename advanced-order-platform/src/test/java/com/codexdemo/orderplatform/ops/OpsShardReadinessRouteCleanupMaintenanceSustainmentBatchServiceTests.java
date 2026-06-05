@@ -35,4 +35,31 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentBatchServiceTests {
         );
         assertThat(freeze.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsGateHandoffWithoutRunningTestsOrStartingUpstreams() {
+        OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse handoff =
+                new OpsShardReadinessRouteCleanupMaintenanceGateHandoffService().handoff();
+
+        assertThat(handoff.version()).isEqualTo("Java v539");
+        assertThat(handoff.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/route-cleanup-maintenance-gate-handoff");
+        assertThat(handoff.itemCount()).isEqualTo(4);
+        assertThat(handoff.passedItemCount()).isEqualTo(4);
+        assertThat(handoff.items())
+                .extracting(OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse
+                        .ReviewItem::name)
+                .containsExactly(
+                        "focused-tests",
+                        "grouped-route-tests",
+                        "build-validation",
+                        "smoke-read-only"
+                );
+        assertThat(handoff.checks()).contains(
+                "gate-order-focused-grouped-build-smoke",
+                "handoff-does-not-run-tests",
+                "handoff-does-not-start-upstreams"
+        );
+        assertThat(handoff.status()).isEqualTo("passed");
+    }
 }
