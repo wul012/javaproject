@@ -163,4 +163,36 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationServiceTests {
         );
         assertThat(guard.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsTargetScopeMappingWithoutWriteRouting() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse mapping =
+                new OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService()
+                        .mapping();
+
+        assertThat(mapping.version()).isEqualTo("Java v595");
+        assertThat(mapping.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-target-scope-mapping");
+        assertThat(mapping.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-target-scope-mapping.v1");
+        assertThat(mapping.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(mapping.readyForEvidenceImport()).isFalse();
+        assertThat(mapping.readyForProductionExecution()).isFalse();
+        assertThat(mapping.itemCount()).isEqualTo(5);
+        assertThat(mapping.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "read-model-scope",
+                        "preview-window-scope",
+                        "review-package-scope",
+                        "operator-slot-scope",
+                        "unmapped-scope-rejection"
+                );
+        assertThat(mapping.checks()).contains(
+                "target-scope-mapping-scope-count-5",
+                "target-scope-mapping-no-write-routing",
+                "target-scope-mapping-no-active-router"
+        );
+        assertThat(mapping.status()).isEqualTo("passed");
+    }
 }

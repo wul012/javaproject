@@ -29,6 +29,10 @@ class OpsShardReadinessOperatorEvidenceImportPreflightRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD,
                         OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING,
+                        OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
