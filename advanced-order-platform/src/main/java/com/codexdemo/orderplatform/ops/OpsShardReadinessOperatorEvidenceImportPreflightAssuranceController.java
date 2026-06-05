@@ -13,19 +13,22 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController
     private final OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService archivePlanService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService operatorHandoffService;
     private final OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService ciBudgetService;
+    private final OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService closeoutService;
 
     public OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService digestBlueprintService,
             OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService routeProfileSummaryService,
             OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService archivePlanService,
             OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService operatorHandoffService,
-            OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService ciBudgetService
+            OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService ciBudgetService,
+            OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService closeoutService
     ) {
         this.digestBlueprintService = digestBlueprintService;
         this.routeProfileSummaryService = routeProfileSummaryService;
         this.archivePlanService = archivePlanService;
         this.operatorHandoffService = operatorHandoffService;
         this.ciBudgetService = ciBudgetService;
+        this.closeoutService = closeoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT)
@@ -51,5 +54,10 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET)
     public OpsShardReadinessOperatorEvidenceImportPreflightResponse ciBudget() {
         return ciBudgetService.budget();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT)
+    public OpsShardReadinessOperatorEvidenceImportPreflightResponse closeout() {
+        return closeoutService.closeout();
     }
 }

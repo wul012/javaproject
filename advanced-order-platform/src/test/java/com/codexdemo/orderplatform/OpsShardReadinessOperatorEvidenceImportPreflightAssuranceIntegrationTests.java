@@ -131,4 +131,29 @@ class OpsShardReadinessOperatorEvidenceImportPreflightAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[10]").value("import-preflight-ci-budget-full-maven-last"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceImportPreflightCloseoutReturnsBatchCloseout() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-closeout"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v607"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceImportPreflight").value(true))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.readyForLiveExecution").value(false))
+                .andExpect(jsonPath("$.readyForProductionExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-import-preflight-closeout"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-import-preflight-closeout.v1"))
+                .andExpect(jsonPath("$.itemCount").value(5))
+                .andExpect(jsonPath("$.items[0].name").value("foundation-complete"))
+                .andExpect(jsonPath("$.items[4].name").value("ci-gate-ready"))
+                .andExpect(jsonPath("$.checks[8]").value("import-preflight-closeout-versions-v584-v608"))
+                .andExpect(jsonPath("$.checks[10]").value("import-preflight-closeout-import-remains-locked"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
