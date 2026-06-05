@@ -20,13 +20,16 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService;
+
     public OpsShardReadinessRouteCleanupMaintenanceSustainmentController(
             OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService releaseChecklistService,
             OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService remediationQueueService,
             OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService freshnessWindowService,
             OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService ownershipRegisterService,
             OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService riskLedgerService,
-            OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService
+            OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService handoffAcceptanceDigestService,
+            OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService dependencyBoundaryMapService
     ) {
         this.releaseChecklistService = releaseChecklistService;
         this.remediationQueueService = remediationQueueService;
@@ -34,6 +37,7 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
         this.ownershipRegisterService = ownershipRegisterService;
         this.riskLedgerService = riskLedgerService;
         this.handoffAcceptanceDigestService = handoffAcceptanceDigestService;
+        this.dependencyBoundaryMapService = dependencyBoundaryMapService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST)
@@ -64,5 +68,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceSustainmentController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST)
     public OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestResponse handoffAcceptanceDigest() {
         return handoffAcceptanceDigestService.digest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_DEPENDENCY_BOUNDARY_MAP)
+    public OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapResponse dependencyBoundaryMap() {
+        return dependencyBoundaryMapService.map();
     }
 }

@@ -143,4 +143,26 @@ class OpsShardReadinessRouteCleanupMaintenanceSustainmentIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("handoff-acceptance-digest-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceDependencyBoundaryMapReturnsBoundaryEntries()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-dependency-boundary-map"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v524"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-dependency-boundary-map"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-dependency-boundary-map.v1"))
+                .andExpect(jsonPath("$.boundaryEntryCount").value(9))
+                .andExpect(jsonPath("$.forbiddenOperationCount").value(7))
+                .andExpect(jsonPath("$.boundaries[4].boundary").value("read-only-boundary"))
+                .andExpect(jsonPath("$.boundaries[4].allowedScope").value("read-only-evidence-preview"))
+                .andExpect(jsonPath("$.forbiddenOperations[0]").value("write-routing"))
+                .andExpect(jsonPath("$.checks[4]").value("dependency-boundary-map-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
