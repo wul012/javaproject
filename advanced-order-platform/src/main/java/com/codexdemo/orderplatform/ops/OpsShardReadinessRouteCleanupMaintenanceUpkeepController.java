@@ -16,16 +16,20 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
 
     private final OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService;
 
+    private final OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService;
+
     public OpsShardReadinessRouteCleanupMaintenanceUpkeepController(
             OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService upkeepCatalogService,
             OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService consumerHandoffMatrixService,
             OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService ciExpectationManifestService,
-            OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService
+            OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService routeTopologyIndexService,
+            OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService failClosedPolicyService
     ) {
         this.upkeepCatalogService = upkeepCatalogService;
         this.consumerHandoffMatrixService = consumerHandoffMatrixService;
         this.ciExpectationManifestService = ciExpectationManifestService;
         this.routeTopologyIndexService = routeTopologyIndexService;
+        this.failClosedPolicyService = failClosedPolicyService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG)
@@ -46,5 +50,10 @@ public class OpsShardReadinessRouteCleanupMaintenanceUpkeepController {
     @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ROUTE_TOPOLOGY_INDEX)
     public OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexResponse routeTopologyIndex() {
         return routeTopologyIndexService.index();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FAIL_CLOSED_POLICY)
+    public OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyResponse failClosedPolicy() {
+        return failClosedPolicyService.report();
     }
 }

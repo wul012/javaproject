@@ -109,4 +109,26 @@ class OpsShardReadinessRouteCleanupMaintenanceUpkeepIntegrationTests
                 .andExpect(jsonPath("$.checks[4]").value("topology-index-remains-read-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void routeCleanupMaintenanceFailClosedPolicyReturnsZeroViolationGuards()
+            throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/route-cleanup-maintenance-fail-closed-policy"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v497"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/route-cleanup-maintenance-fail-closed-policy"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-route-cleanup-maintenance-fail-closed-policy.v1"))
+                .andExpect(jsonPath("$.policyCount").value(7))
+                .andExpect(jsonPath("$.protectedItemCount").value(9))
+                .andExpect(jsonPath("$.zeroViolationCount").value(7))
+                .andExpect(jsonPath("$.policies[4].operation").value("managed-audit-connection"))
+                .andExpect(jsonPath("$.policies[4].violationCount").value(0))
+                .andExpect(jsonPath("$.checks[4]").value("fail-closed-policy-remains-read-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
