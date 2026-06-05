@@ -38,4 +38,35 @@ class OpsShardReadinessOperatorEvidenceImportPreflightFoundationServiceTests {
         );
         assertThat(catalog.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSlotNormalizationWithoutValueImport() {
+        OpsShardReadinessOperatorEvidenceImportPreflightResponse normalization =
+                new OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService()
+                        .normalization();
+
+        assertThat(normalization.version()).isEqualTo("Java v587");
+        assertThat(normalization.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-import-preflight-slot-normalization");
+        assertThat(normalization.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-import-preflight-slot-normalization.v1");
+        assertThat(normalization.readyForOperatorEvidenceImportPreflight()).isTrue();
+        assertThat(normalization.readyForEvidenceImport()).isFalse();
+        assertThat(normalization.readyForManualEvidenceEntry()).isFalse();
+        assertThat(normalization.itemCount()).isEqualTo(4);
+        assertThat(normalization.items())
+                .extracting(OpsShardReadinessOperatorEvidenceImportPreflightResponse.PreflightItem::name)
+                .containsExactly(
+                        "slot-id-normalization",
+                        "blank-value-normalization",
+                        "scope-name-normalization",
+                        "note-text-normalization"
+                );
+        assertThat(normalization.checks()).contains(
+                "slot-normalization-preserves-blank-values",
+                "slot-normalization-does-not-trim-secrets",
+                "slot-normalization-does-not-import-values"
+        );
+        assertThat(normalization.status()).isEqualTo("passed");
+    }
 }
