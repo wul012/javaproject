@@ -12,17 +12,20 @@ public class OpsShardReadinessOperatorEvidenceValueDraftFoundationController {
     private final OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService slotTemplateService;
     private final OpsShardReadinessOperatorEvidenceValueDraftValueBoundaryService valueBoundaryService;
     private final OpsShardReadinessOperatorEvidenceValueDraftInstructionSetService instructionSetService;
+    private final OpsShardReadinessOperatorEvidenceValueDraftSafetyGateMatrixService safetyGateMatrixService;
 
     public OpsShardReadinessOperatorEvidenceValueDraftFoundationController(
             OpsShardReadinessOperatorEvidenceValueDraftCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService slotTemplateService,
             OpsShardReadinessOperatorEvidenceValueDraftValueBoundaryService valueBoundaryService,
-            OpsShardReadinessOperatorEvidenceValueDraftInstructionSetService instructionSetService
+            OpsShardReadinessOperatorEvidenceValueDraftInstructionSetService instructionSetService,
+            OpsShardReadinessOperatorEvidenceValueDraftSafetyGateMatrixService safetyGateMatrixService
     ) {
         this.catalogService = catalogService;
         this.slotTemplateService = slotTemplateService;
         this.valueBoundaryService = valueBoundaryService;
         this.instructionSetService = instructionSetService;
+        this.safetyGateMatrixService = safetyGateMatrixService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG)
@@ -43,5 +46,10 @@ public class OpsShardReadinessOperatorEvidenceValueDraftFoundationController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_INSTRUCTION_SET)
     public OpsShardReadinessOperatorEvidenceValueDraftResponse instructionSet() {
         return instructionSetService.instructions();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SAFETY_GATE_MATRIX)
+    public OpsShardReadinessOperatorEvidenceValueDraftResponse safetyGateMatrix() {
+        return safetyGateMatrixService.matrix();
     }
 }

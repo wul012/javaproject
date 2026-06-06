@@ -112,4 +112,27 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[11]").value("value-draft-instruction-set-no-submitted-values"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueDraftSafetyGateMatrixReturnsNoSecretGates() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-draft-safety-gate-matrix"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v618"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceValueDraft").value(true))
+                .andExpect(jsonPath("$.actualValueState").value("not-supplied"))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-draft-safety-gate-matrix"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-draft-safety-gate-matrix.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_DRAFT_14_CREDENTIAL_REDACTION"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_DRAFT_17_BLANK_SLOT_GUARD"))
+                .andExpect(jsonPath("$.checks[10]").value("value-draft-safety-gate-no-secret-values"))
+                .andExpect(jsonPath("$.checks[11]").value("value-draft-safety-gate-no-synthetic-evidence"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
