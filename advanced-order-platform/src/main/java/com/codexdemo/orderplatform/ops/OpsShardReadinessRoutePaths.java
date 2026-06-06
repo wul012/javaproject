@@ -328,6 +328,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-draft-digest-blueprint";
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_ROUTE_PROFILE_SUMMARY =
             "/operator-evidence-value-draft-route-profile-summary";
+    static final String OPERATOR_EVIDENCE_VALUE_DRAFT_ARCHIVE_PLAN =
+            "/operator-evidence-value-draft-archive-plan";
 
     private OpsShardReadinessRoutePaths() {
     }

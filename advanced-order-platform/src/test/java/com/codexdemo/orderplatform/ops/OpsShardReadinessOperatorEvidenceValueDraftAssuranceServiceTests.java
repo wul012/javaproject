@@ -81,4 +81,26 @@ class OpsShardReadinessOperatorEvidenceValueDraftAssuranceServiceTests {
         );
         assertThat(summary.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsArchivePlanWithoutFileWrites() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse plan =
+                new OpsShardReadinessOperatorEvidenceValueDraftArchivePlanService().plan();
+
+        assertThat(plan.version()).isEqualTo("Java v628");
+        assertThat(plan.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-archive-plan");
+        assertThat(plan.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-archive-plan.v1");
+        assertThat(plan.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(plan.actualValueState()).isEqualTo("not-supplied");
+        assertThat(plan.readyForEvidenceImport()).isFalse();
+        assertThat(plan.slotCount()).isEqualTo(4);
+        assertThat(plan.checks()).contains(
+                "value-draft-archive-plan-external-capture",
+                "value-draft-archive-plan-no-file-write",
+                "value-draft-archive-plan-no-runtime-process"
+        );
+        assertThat(plan.status()).isEqualTo("passed");
+    }
 }
