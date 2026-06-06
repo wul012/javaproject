@@ -126,4 +126,35 @@ class OpsShardReadinessOperatorEvidenceValueDraftAssuranceServiceTests {
         );
         assertThat(handoff.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCloseoutWithAllLocksHeld() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse closeout =
+                new OpsShardReadinessOperatorEvidenceValueDraftCloseoutService().closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v632");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-closeout.v1");
+        assertThat(closeout.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(closeout.actualValueState()).isEqualTo("not-supplied");
+        assertThat(closeout.readyForEvidenceImport()).isFalse();
+        assertThat(closeout.readyForManualEvidenceEntry()).isFalse();
+        assertThat(closeout.readyForLiveExecution()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.slotCount()).isEqualTo(25);
+        assertThat(closeout.passedSlotCount()).isEqualTo(25);
+        assertThat(closeout.slots().get(0).code())
+                .isEqualTo("VALUE_DRAFT_01_SOURCE_WORKSHEET_CLOSEOUT");
+        assertThat(closeout.slots().get(24).code())
+                .isEqualTo("VALUE_DRAFT_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(closeout.checks()).contains(
+                "value-draft-closeout-versions-v609-v633",
+                "value-draft-closeout-slot-count-25",
+                "value-draft-closeout-foundation-and-assurance-split",
+                "value-draft-closeout-import-remains-locked"
+        );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
 }
