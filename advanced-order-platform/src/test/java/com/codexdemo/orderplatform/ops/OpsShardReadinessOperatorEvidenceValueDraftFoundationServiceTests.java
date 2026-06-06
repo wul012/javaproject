@@ -166,4 +166,37 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationServiceTests {
         );
         assertThat(matrix.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSourceMappingRegistryFromPreflightEndpointsOnly() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse registry =
+                new OpsShardReadinessOperatorEvidenceValueDraftSourceMappingRegistryService().registry();
+
+        assertThat(registry.version()).isEqualTo("Java v620");
+        assertThat(registry.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-source-mapping-registry");
+        assertThat(registry.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-source-mapping-registry.v1");
+        assertThat(registry.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(registry.actualValueState()).isEqualTo("not-supplied");
+        assertThat(registry.readyForEvidenceImport()).isFalse();
+        assertThat(registry.slotCount()).isEqualTo(4);
+        assertThat(registry.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::code)
+                .containsExactly(
+                        "VALUE_DRAFT_18_MISSING_REVIEWER_GUARD",
+                        "VALUE_DRAFT_19_MISSING_SCOPE_GUARD",
+                        "VALUE_DRAFT_20_MISSING_SOURCE_GUARD",
+                        "VALUE_DRAFT_21_READ_MODEL_SCOPE"
+                );
+        assertThat(registry.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::sourceEndpoint)
+                .allMatch(endpoint -> endpoint.startsWith(OpsShardReadinessRoutePaths.BASE_PATH));
+        assertThat(registry.checks()).contains(
+                "value-draft-source-mapping-slice-18-21",
+                "value-draft-source-mapping-preflight-endpoints-only",
+                "value-draft-source-mapping-no-fresh-node-evidence"
+        );
+        assertThat(registry.status()).isEqualTo("passed");
+    }
 }
