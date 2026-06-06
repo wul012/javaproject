@@ -161,4 +161,33 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationServiceTests {
         );
         assertThat(requirement.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSourceEvidenceGuardForFreshSiblingAndFallbackReferences() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse guard =
+                new OpsShardReadinessOperatorEvidenceValueSupplySourceEvidenceGuardService().guard();
+
+        assertThat(guard.version()).isEqualTo("Java v646");
+        assertThat(guard.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-source-evidence-guard");
+        assertThat(guard.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-source-evidence-guard.v1");
+        assertThat(guard.readyForRuntimePayload()).isFalse();
+        assertThat(guard.slotCount()).isEqualTo(4);
+        assertThat(guard.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyResponse.SupplySlot::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_17_FRESH_SIBLING_REFERENCE",
+                        "VALUE_SUPPLY_18_HISTORICAL_FALLBACK_MARKER",
+                        "VALUE_SUPPLY_19_SYNTHETIC_EVIDENCE_BLOCK",
+                        "VALUE_SUPPLY_20_RUNTIME_PAYLOAD_BLOCK"
+                );
+        assertThat(guard.checks()).contains(
+                "value-supply-source-evidence-guard-slice-17-20",
+                "value-supply-source-evidence-fresh-sibling-read-only",
+                "value-supply-source-evidence-fallback-explicit",
+                "value-supply-source-evidence-synthetic-blocked"
+        );
+        assertThat(guard.status()).isEqualTo("passed");
+    }
 }

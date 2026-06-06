@@ -29,6 +29,10 @@ class OpsShardReadinessOperatorEvidenceValueSupplyRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_PROVENANCE_REQUIREMENT,
                         OpsShardReadinessOperatorEvidenceValueSupplyProvenanceRequirementService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD,
+                        OpsShardReadinessOperatorEvidenceValueSupplySourceEvidenceGuardService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
