@@ -59,4 +59,26 @@ class OpsShardReadinessOperatorEvidenceValueDraftAssuranceServiceTests {
         );
         assertThat(blueprint.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRouteProfileSummaryWithGetOnlyRoutes() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse summary =
+                new OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService().summary();
+
+        assertThat(summary.version()).isEqualTo("Java v626");
+        assertThat(summary.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-route-profile-summary");
+        assertThat(summary.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-route-profile-summary.v1");
+        assertThat(summary.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(summary.actualValueState()).isEqualTo("not-supplied");
+        assertThat(summary.readyForEvidenceImport()).isFalse();
+        assertThat(summary.slotCount()).isEqualTo(4);
+        assertThat(summary.checks()).contains(
+                "value-draft-route-profile-foundation-routes-6",
+                "value-draft-route-profile-assurance-routes-6",
+                "value-draft-route-profile-get-only"
+        );
+        assertThat(summary.status()).isEqualTo("passed");
+    }
 }

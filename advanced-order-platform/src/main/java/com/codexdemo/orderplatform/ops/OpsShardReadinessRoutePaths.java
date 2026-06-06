@@ -326,6 +326,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-draft-blocked-reason-ledger";
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT =
             "/operator-evidence-value-draft-digest-blueprint";
+    static final String OPERATOR_EVIDENCE_VALUE_DRAFT_ROUTE_PROFILE_SUMMARY =
+            "/operator-evidence-value-draft-route-profile-summary";
 
     private OpsShardReadinessRoutePaths() {
     }
