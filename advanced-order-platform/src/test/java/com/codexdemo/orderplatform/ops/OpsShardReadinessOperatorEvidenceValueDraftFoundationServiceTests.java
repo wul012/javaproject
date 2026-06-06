@@ -136,4 +136,34 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationServiceTests {
         );
         assertThat(instructions.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSafetyGateMatrixWithoutSecretOrSyntheticValues() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse matrix =
+                new OpsShardReadinessOperatorEvidenceValueDraftSafetyGateMatrixService().matrix();
+
+        assertThat(matrix.version()).isEqualTo("Java v618");
+        assertThat(matrix.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-safety-gate-matrix");
+        assertThat(matrix.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-safety-gate-matrix.v1");
+        assertThat(matrix.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(matrix.actualValueState()).isEqualTo("not-supplied");
+        assertThat(matrix.readyForEvidenceImport()).isFalse();
+        assertThat(matrix.slotCount()).isEqualTo(4);
+        assertThat(matrix.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::code)
+                .containsExactly(
+                        "VALUE_DRAFT_14_CREDENTIAL_REDACTION",
+                        "VALUE_DRAFT_15_RAW_ENDPOINT_REDACTION",
+                        "VALUE_DRAFT_16_ABSENCE_MARKER",
+                        "VALUE_DRAFT_17_BLANK_SLOT_GUARD"
+                );
+        assertThat(matrix.checks()).contains(
+                "value-draft-safety-gate-redaction-slice-14-17",
+                "value-draft-safety-gate-no-secret-values",
+                "value-draft-safety-gate-no-synthetic-evidence"
+        );
+        assertThat(matrix.status()).isEqualTo("passed");
+    }
 }

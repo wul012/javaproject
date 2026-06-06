@@ -318,6 +318,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-draft-value-boundary";
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_INSTRUCTION_SET =
             "/operator-evidence-value-draft-instruction-set";
+    static final String OPERATOR_EVIDENCE_VALUE_DRAFT_SAFETY_GATE_MATRIX =
+            "/operator-evidence-value-draft-safety-gate-matrix";
 
     private OpsShardReadinessRoutePaths() {
     }
