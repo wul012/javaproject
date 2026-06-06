@@ -110,4 +110,26 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[13]").value("value-supply-manual-entry-still-locked"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplyProvenanceRequirementReturnsSourceReferenceRules() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-provenance-requirement"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v644"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.provenanceState").value("required-before-import"))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-provenance-requirement"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-provenance-requirement.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_13_PROVENANCE_SOURCE_ID"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_SUPPLY_16_SOURCE_ENDPOINT_ALIAS"))
+                .andExpect(jsonPath("$.checks[11]").value("value-supply-provenance-source-id-required"))
+                .andExpect(jsonPath("$.checks[13]").value("value-supply-provenance-raw-endpoint-alias-only"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
