@@ -89,4 +89,27 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[10]").value("value-draft-boundary-actual-values-not-supplied"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueDraftInstructionSetReturnsBlockedImportInstructions() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-draft-instruction-set"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v616"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceValueDraft").value(true))
+                .andExpect(jsonPath("$.actualValueState").value("not-supplied"))
+                .andExpect(jsonPath("$.readyForManualEvidenceEntry").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-draft-instruction-set"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-draft-instruction-set.v1"))
+                .andExpect(jsonPath("$.slotCount").value(5))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_DRAFT_09_MISSING_MANUAL_VALUE_BLOCKER"))
+                .andExpect(jsonPath("$.slots[4].code").value("VALUE_DRAFT_13_MANUAL_ENTRY_LOCK_BLOCKER"))
+                .andExpect(jsonPath("$.checks[9]").value("value-draft-instruction-set-blocker-slice-9-13"))
+                .andExpect(jsonPath("$.checks[11]").value("value-draft-instruction-set-no-submitted-values"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
