@@ -354,6 +354,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-operator-review-checklist";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT =
             "/operator-evidence-value-supply-digest-blueprint";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN =
+            "/operator-evidence-value-supply-archive-plan";
 
     private OpsShardReadinessRoutePaths() {
     }

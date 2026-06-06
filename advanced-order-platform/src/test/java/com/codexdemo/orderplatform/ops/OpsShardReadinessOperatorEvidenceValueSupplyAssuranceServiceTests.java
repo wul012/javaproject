@@ -115,4 +115,28 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceServiceTests {
         );
         assertThat(blueprint.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsArchivePlanWithoutWritingFilesOrStartingProcesses() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse plan =
+                new OpsShardReadinessOperatorEvidenceValueSupplyArchivePlanService().plan();
+
+        assertThat(plan.version()).isEqualTo("Java v656");
+        assertThat(plan.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-archive-plan");
+        assertThat(plan.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-archive-plan.v1");
+        assertThat(plan.readOnly()).isTrue();
+        assertThat(plan.executionAllowed()).isFalse();
+        assertThat(plan.slotCount()).isEqualTo(5);
+        assertThat(plan.slots().get(0).code()).isEqualTo("VALUE_SUPPLY_21_IMPORT_PREVIEW_BLOCK");
+        assertThat(plan.slots().get(4).code()).isEqualTo("VALUE_SUPPLY_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(plan.checks()).contains(
+                "value-supply-archive-plan-external-capture",
+                "value-supply-archive-plan-no-file-write",
+                "value-supply-archive-plan-no-runtime-process",
+                "value-supply-archive-plan-lock-summary-required"
+        );
+        assertThat(plan.status()).isEqualTo("passed");
+    }
 }
