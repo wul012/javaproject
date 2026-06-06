@@ -38,4 +38,28 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceServiceTests {
         );
         assertThat(matrix.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSideEffectGateWithoutStartingServicesOrWritingState() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse gate =
+                new OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService().gate();
+
+        assertThat(gate.version()).isEqualTo("Java v650");
+        assertThat(gate.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-side-effect-gate");
+        assertThat(gate.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-side-effect-gate.v1");
+        assertThat(gate.readOnly()).isTrue();
+        assertThat(gate.executionAllowed()).isFalse();
+        assertThat(gate.readyForRuntimePayload()).isFalse();
+        assertThat(gate.readyForProductionExecution()).isFalse();
+        assertThat(gate.slotCount()).isEqualTo(25);
+        assertThat(gate.checks()).contains(
+                "value-supply-side-effect-gate-no-sibling-service-start",
+                "value-supply-side-effect-gate-no-state-write",
+                "value-supply-side-effect-gate-no-runtime-payload",
+                "value-supply-side-effect-gate-no-production-path"
+        );
+        assertThat(gate.status()).isEqualTo("passed");
+    }
 }

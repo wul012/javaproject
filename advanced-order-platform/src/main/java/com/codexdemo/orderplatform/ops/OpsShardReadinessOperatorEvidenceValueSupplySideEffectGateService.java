@@ -1,0 +1,31 @@
+package com.codexdemo.orderplatform.ops;
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService {
+
+    static final String ENDPOINT =
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SIDE_EFFECT_GATE;
+    static final String PROFILE =
+            "java-shard-readiness-operator-evidence-value-supply-side-effect-gate.v1";
+
+    @Transactional(readOnly = true)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse gate() {
+        return OpsShardReadinessOperatorEvidenceValueSupplySupport.response(
+                "Java v650",
+                ENDPOINT,
+                PROFILE,
+                OpsShardReadinessOperatorEvidenceValueSupplySlotCatalog.allSlots(),
+                List.of(
+                        "value-supply-side-effect-gate-no-sibling-service-start",
+                        "value-supply-side-effect-gate-no-state-write",
+                        "value-supply-side-effect-gate-no-runtime-payload",
+                        "value-supply-side-effect-gate-no-production-path"
+                )
+        );
+    }
+}
