@@ -59,4 +59,26 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[13]").value("value-supply-side-effect-gate-no-production-path"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplyOperatorReviewChecklistReturnsNoApprovalGrant() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-operator-review-checklist"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v652"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorValueSubmission").value(false))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-operator-review-checklist"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-operator-review-checklist.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_01_ENVELOPE_ID"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_SUPPLY_04_VALUE_KIND"))
+                .andExpect(jsonPath("$.checks[10]").value("value-supply-operator-review-checklist-envelope-id"))
+                .andExpect(jsonPath("$.checks[13]").value("value-supply-operator-review-checklist-no-approval-grant"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

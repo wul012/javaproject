@@ -10,13 +10,16 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
 
     private final OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService validationMatrixService;
     private final OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService validationMatrixService,
-            OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService
+            OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService,
+            OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService
     ) {
         this.validationMatrixService = validationMatrixService;
         this.sideEffectGateService = sideEffectGateService;
+        this.operatorReviewChecklistService = operatorReviewChecklistService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX)
@@ -27,5 +30,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SIDE_EFFECT_GATE)
     public OpsShardReadinessOperatorEvidenceValueSupplyResponse sideEffectGate() {
         return sideEffectGateService.gate();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse operatorReviewChecklist() {
+        return operatorReviewChecklistService.checklist();
     }
 }
