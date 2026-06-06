@@ -10,13 +10,16 @@ public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
 
     private final OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService blockedReasonLedgerService;
     private final OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService;
+    private final OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService routeProfileSummaryService;
 
     public OpsShardReadinessOperatorEvidenceValueDraftAssuranceController(
             OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService blockedReasonLedgerService,
-            OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService
+            OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService,
+            OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService routeProfileSummaryService
     ) {
         this.blockedReasonLedgerService = blockedReasonLedgerService;
         this.digestBlueprintService = digestBlueprintService;
+        this.routeProfileSummaryService = routeProfileSummaryService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER)
@@ -27,5 +30,10 @@ public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT)
     public OpsShardReadinessOperatorEvidenceValueDraftResponse digestBlueprint() {
         return digestBlueprintService.blueprint();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_ROUTE_PROFILE_SUMMARY)
+    public OpsShardReadinessOperatorEvidenceValueDraftResponse routeProfileSummary() {
+        return routeProfileSummaryService.summary();
     }
 }
