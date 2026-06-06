@@ -66,4 +66,26 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[12]").value("value-supply-template-no-value-field"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplyRedactionPolicyReturnsSecretBlocks() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-redaction-policy"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v640"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.redactionState").value("redact-before-storage"))
+                .andExpect(jsonPath("$.readyForOperatorValueSubmission").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-redaction-policy"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-redaction-policy.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_05_REDACTION_CLASSIFICATION"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_SUPPLY_08_SECRET_MATERIAL_BLOCK"))
+                .andExpect(jsonPath("$.checks[11]").value("value-supply-redaction-credential-values-blocked"))
+                .andExpect(jsonPath("$.checks[13]").value("value-supply-redaction-secret-material-blocked"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
