@@ -81,4 +81,25 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[13]").value("value-supply-operator-review-checklist-no-approval-grant"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplyDigestBlueprintReturnsValueFreeDigestPlan() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-digest-blueprint"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v654"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-digest-blueprint"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-digest-blueprint.v1"))
+                .andExpect(jsonPath("$.slotCount").value(25))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_01_ENVELOPE_ID"))
+                .andExpect(jsonPath("$.slots[24].code").value("VALUE_SUPPLY_25_CLOSEOUT_LOCKS_HELD"))
+                .andExpect(jsonPath("$.checks[10]").value("value-supply-digest-blueprint-slot-count-25"))
+                .andExpect(jsonPath("$.checks[11]").value("value-supply-digest-blueprint-no-value-hash"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

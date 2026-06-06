@@ -11,15 +11,18 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     private final OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService validationMatrixService;
     private final OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService digestBlueprintService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService validationMatrixService,
             OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService,
-            OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService
+            OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService,
+            OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService digestBlueprintService
     ) {
         this.validationMatrixService = validationMatrixService;
         this.sideEffectGateService = sideEffectGateService;
         this.operatorReviewChecklistService = operatorReviewChecklistService;
+        this.digestBlueprintService = digestBlueprintService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX)
@@ -35,5 +38,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST)
     public OpsShardReadinessOperatorEvidenceValueSupplyResponse operatorReviewChecklist() {
         return operatorReviewChecklistService.checklist();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse digestBlueprint() {
+        return digestBlueprintService.blueprint();
     }
 }
