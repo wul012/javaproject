@@ -11,15 +11,18 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyFoundationController {
     private final OpsShardReadinessOperatorEvidenceValueSupplyCatalogService catalogService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyEnvelopeTemplateService envelopeTemplateService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyRedactionPolicyService redactionPolicyService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyMissingValuePolicyService missingValuePolicyService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceValueSupplyEnvelopeTemplateService envelopeTemplateService,
-            OpsShardReadinessOperatorEvidenceValueSupplyRedactionPolicyService redactionPolicyService
+            OpsShardReadinessOperatorEvidenceValueSupplyRedactionPolicyService redactionPolicyService,
+            OpsShardReadinessOperatorEvidenceValueSupplyMissingValuePolicyService missingValuePolicyService
     ) {
         this.catalogService = catalogService;
         this.envelopeTemplateService = envelopeTemplateService;
         this.redactionPolicyService = redactionPolicyService;
+        this.missingValuePolicyService = missingValuePolicyService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG)
@@ -35,5 +38,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyFoundationController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_REDACTION_POLICY)
     public OpsShardReadinessOperatorEvidenceValueSupplyResponse redactionPolicy() {
         return redactionPolicyService.policy();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_MISSING_VALUE_POLICY)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse missingValuePolicy() {
+        return missingValuePolicyService.policy();
     }
 }
