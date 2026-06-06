@@ -135,4 +135,27 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[11]").value("value-draft-safety-gate-no-synthetic-evidence"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueDraftSourceMappingRegistryReturnsPreflightSourcesOnly() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-draft-source-mapping-registry"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v620"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceValueDraft").value(true))
+                .andExpect(jsonPath("$.actualValueState").value("not-supplied"))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-draft-source-mapping-registry"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-draft-source-mapping-registry.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_DRAFT_18_MISSING_REVIEWER_GUARD"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_DRAFT_21_READ_MODEL_SCOPE"))
+                .andExpect(jsonPath("$.checks[10]").value("value-draft-source-mapping-preflight-endpoints-only"))
+                .andExpect(jsonPath("$.checks[11]").value("value-draft-source-mapping-no-fresh-node-evidence"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
