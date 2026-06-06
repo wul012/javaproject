@@ -43,4 +43,27 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[9]").value("value-draft-catalog-slot-count-25"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueDraftSlotTemplateReturnsNoValueTemplate() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-draft-slot-template"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v612"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceValueDraft").value(true))
+                .andExpect(jsonPath("$.actualValueState").value("not-supplied"))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-draft-slot-template"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-draft-slot-template.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_DRAFT_01_SOURCE_WORKSHEET_CLOSEOUT"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_DRAFT_04_NO_VALUE_INGESTION"))
+                .andExpect(jsonPath("$.checks[9]").value("value-draft-slot-template-catalog-slice-1-4"))
+                .andExpect(jsonPath("$.checks[11]").value("value-draft-slot-template-no-operator-values"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
