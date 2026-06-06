@@ -13,19 +13,22 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     private final OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService digestBlueprintService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyArchivePlanService archivePlanService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyCloseoutService closeoutService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService validationMatrixService,
             OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService,
             OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService,
             OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService digestBlueprintService,
-            OpsShardReadinessOperatorEvidenceValueSupplyArchivePlanService archivePlanService
+            OpsShardReadinessOperatorEvidenceValueSupplyArchivePlanService archivePlanService,
+            OpsShardReadinessOperatorEvidenceValueSupplyCloseoutService closeoutService
     ) {
         this.validationMatrixService = validationMatrixService;
         this.sideEffectGateService = sideEffectGateService;
         this.operatorReviewChecklistService = operatorReviewChecklistService;
         this.digestBlueprintService = digestBlueprintService;
         this.archivePlanService = archivePlanService;
+        this.closeoutService = closeoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX)
@@ -51,5 +54,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN)
     public OpsShardReadinessOperatorEvidenceValueSupplyResponse archivePlan() {
         return archivePlanService.plan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse closeout() {
+        return closeoutService.closeout();
     }
 }

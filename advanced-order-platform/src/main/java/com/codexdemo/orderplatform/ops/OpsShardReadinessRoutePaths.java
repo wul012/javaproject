@@ -356,6 +356,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-digest-blueprint";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN =
             "/operator-evidence-value-supply-archive-plan";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT =
+            "/operator-evidence-value-supply-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }

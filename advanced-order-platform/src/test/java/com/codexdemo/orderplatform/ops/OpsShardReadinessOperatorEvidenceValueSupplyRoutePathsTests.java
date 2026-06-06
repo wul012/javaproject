@@ -53,6 +53,10 @@ class OpsShardReadinessOperatorEvidenceValueSupplyRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN,
                         OpsShardReadinessOperatorEvidenceValueSupplyArchivePlanService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT,
+                        OpsShardReadinessOperatorEvidenceValueSupplyCloseoutService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

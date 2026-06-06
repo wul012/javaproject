@@ -122,4 +122,32 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[12]").value("value-supply-archive-plan-no-runtime-process"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplyCloseoutReturnsDisabledEnvelopeCloseout() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-closeout"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v658"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.sourcePlan").value("Node v936"))
+                .andExpect(jsonPath("$.sourceDraftVersion").value("Java v633"))
+                .andExpect(jsonPath("$.envelopeState").value("disabled-design"))
+                .andExpect(jsonPath("$.suppliedValueState").value("not-accepted"))
+                .andExpect(jsonPath("$.readyForOperatorValueSubmission").value(false))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.readyForRuntimePayload").value(false))
+                .andExpect(jsonPath("$.readyForProductionExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-closeout"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-closeout.v1"))
+                .andExpect(jsonPath("$.slotCount").value(25))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_01_ENVELOPE_ID"))
+                .andExpect(jsonPath("$.slots[24].code").value("VALUE_SUPPLY_25_CLOSEOUT_LOCKS_HELD"))
+                .andExpect(jsonPath("$.checks[10]").value("value-supply-closeout-versions-v634-v658"))
+                .andExpect(jsonPath("$.checks[14]").value("value-supply-closeout-all-execution-locks-held"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

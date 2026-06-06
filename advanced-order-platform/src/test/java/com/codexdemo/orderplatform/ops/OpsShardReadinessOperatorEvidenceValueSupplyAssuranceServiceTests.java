@@ -139,4 +139,36 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceServiceTests {
         );
         assertThat(plan.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCloseoutWithAllDisabledValueSupplyLocksHeld() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse closeout =
+                new OpsShardReadinessOperatorEvidenceValueSupplyCloseoutService().closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v658");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-closeout.v1");
+        assertThat(closeout.sourcePlan()).isEqualTo("Node v936");
+        assertThat(closeout.sourceDraftVersion()).isEqualTo("Java v633");
+        assertThat(closeout.envelopeState()).isEqualTo("disabled-design");
+        assertThat(closeout.suppliedValueState()).isEqualTo("not-accepted");
+        assertThat(closeout.readyForOperatorValueSubmission()).isFalse();
+        assertThat(closeout.readyForEvidenceImport()).isFalse();
+        assertThat(closeout.readyForRuntimePayload()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.slotCount()).isEqualTo(25);
+        assertThat(closeout.passedSlotCount()).isEqualTo(25);
+        assertThat(closeout.slots().get(0).code()).isEqualTo("VALUE_SUPPLY_01_ENVELOPE_ID");
+        assertThat(closeout.slots().get(24).code()).isEqualTo("VALUE_SUPPLY_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(closeout.checks()).contains(
+                "value-supply-closeout-versions-v634-v658",
+                "value-supply-closeout-slot-count-25",
+                "value-supply-closeout-foundation-and-assurance-split",
+                "value-supply-closeout-values-not-accepted",
+                "value-supply-closeout-all-execution-locks-held"
+        );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
 }
