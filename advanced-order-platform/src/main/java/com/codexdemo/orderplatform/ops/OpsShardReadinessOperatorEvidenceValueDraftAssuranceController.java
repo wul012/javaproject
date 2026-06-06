@@ -13,19 +13,22 @@ public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
     private final OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService routeProfileSummaryService;
     private final OpsShardReadinessOperatorEvidenceValueDraftArchivePlanService archivePlanService;
     private final OpsShardReadinessOperatorEvidenceValueDraftOperatorHandoffService operatorHandoffService;
+    private final OpsShardReadinessOperatorEvidenceValueDraftCloseoutService closeoutService;
 
     public OpsShardReadinessOperatorEvidenceValueDraftAssuranceController(
             OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService blockedReasonLedgerService,
             OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService,
             OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService routeProfileSummaryService,
             OpsShardReadinessOperatorEvidenceValueDraftArchivePlanService archivePlanService,
-            OpsShardReadinessOperatorEvidenceValueDraftOperatorHandoffService operatorHandoffService
+            OpsShardReadinessOperatorEvidenceValueDraftOperatorHandoffService operatorHandoffService,
+            OpsShardReadinessOperatorEvidenceValueDraftCloseoutService closeoutService
     ) {
         this.blockedReasonLedgerService = blockedReasonLedgerService;
         this.digestBlueprintService = digestBlueprintService;
         this.routeProfileSummaryService = routeProfileSummaryService;
         this.archivePlanService = archivePlanService;
         this.operatorHandoffService = operatorHandoffService;
+        this.closeoutService = closeoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER)
@@ -51,5 +54,10 @@ public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_OPERATOR_HANDOFF)
     public OpsShardReadinessOperatorEvidenceValueDraftResponse operatorHandoff() {
         return operatorHandoffService.handoff();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CLOSEOUT)
+    public OpsShardReadinessOperatorEvidenceValueDraftResponse closeout() {
+        return closeoutService.closeout();
     }
 }
