@@ -103,4 +103,27 @@ class OpsShardReadinessOperatorEvidenceValueDraftAssuranceServiceTests {
         );
         assertThat(plan.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsOperatorHandoffWithoutExecutionApproval() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse handoff =
+                new OpsShardReadinessOperatorEvidenceValueDraftOperatorHandoffService().handoff();
+
+        assertThat(handoff.version()).isEqualTo("Java v630");
+        assertThat(handoff.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-operator-handoff");
+        assertThat(handoff.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-operator-handoff.v1");
+        assertThat(handoff.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(handoff.actualValueState()).isEqualTo("not-supplied");
+        assertThat(handoff.readyForEvidenceImport()).isFalse();
+        assertThat(handoff.readyForLiveExecution()).isFalse();
+        assertThat(handoff.slotCount()).isEqualTo(5);
+        assertThat(handoff.checks()).contains(
+                "value-draft-operator-handoff-owner-count-5",
+                "value-draft-operator-handoff-no-values",
+                "value-draft-operator-handoff-no-execution-approval"
+        );
+        assertThat(handoff.status()).isEqualTo("passed");
+    }
 }

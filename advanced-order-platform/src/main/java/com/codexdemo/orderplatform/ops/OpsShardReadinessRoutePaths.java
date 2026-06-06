@@ -330,6 +330,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-draft-route-profile-summary";
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_ARCHIVE_PLAN =
             "/operator-evidence-value-draft-archive-plan";
+    static final String OPERATOR_EVIDENCE_VALUE_DRAFT_OPERATOR_HANDOFF =
+            "/operator-evidence-value-draft-operator-handoff";
 
     private OpsShardReadinessRoutePaths() {
     }
