@@ -310,6 +310,9 @@ final class OpsShardReadinessRoutePaths {
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT =
             "/operator-evidence-import-preflight-closeout";
 
+    static final String OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG =
+            "/operator-evidence-value-draft-catalog";
+
     private OpsShardReadinessRoutePaths() {
     }
 }
