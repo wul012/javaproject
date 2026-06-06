@@ -43,4 +43,27 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[10]").value("value-supply-catalog-slot-count-25"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplyEnvelopeTemplateReturnsMetadataOnlySlots() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-envelope-template"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v638"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorValueSupplyEnvelope").value(true))
+                .andExpect(jsonPath("$.suppliedValueState").value("not-accepted"))
+                .andExpect(jsonPath("$.readyForOperatorValueSubmission").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-envelope-template"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-envelope-template.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_01_ENVELOPE_ID"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_SUPPLY_04_VALUE_KIND"))
+                .andExpect(jsonPath("$.checks[10]").value("value-supply-template-foundation-slice-1-4"))
+                .andExpect(jsonPath("$.checks[12]").value("value-supply-template-no-value-field"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }

@@ -9,15 +9,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class OpsShardReadinessOperatorEvidenceValueSupplyFoundationController {
 
     private final OpsShardReadinessOperatorEvidenceValueSupplyCatalogService catalogService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyEnvelopeTemplateService envelopeTemplateService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyFoundationController(
-            OpsShardReadinessOperatorEvidenceValueSupplyCatalogService catalogService
+            OpsShardReadinessOperatorEvidenceValueSupplyCatalogService catalogService,
+            OpsShardReadinessOperatorEvidenceValueSupplyEnvelopeTemplateService envelopeTemplateService
     ) {
         this.catalogService = catalogService;
+        this.envelopeTemplateService = envelopeTemplateService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG)
     public OpsShardReadinessOperatorEvidenceValueSupplyResponse catalog() {
         return catalogService.catalog();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ENVELOPE_TEMPLATE)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse envelopeTemplate() {
+        return envelopeTemplateService.template();
     }
 }
