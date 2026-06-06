@@ -12,17 +12,20 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     private final OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService digestBlueprintService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyArchivePlanService archivePlanService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService validationMatrixService,
             OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService sideEffectGateService,
             OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService operatorReviewChecklistService,
-            OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService digestBlueprintService
+            OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService digestBlueprintService,
+            OpsShardReadinessOperatorEvidenceValueSupplyArchivePlanService archivePlanService
     ) {
         this.validationMatrixService = validationMatrixService;
         this.sideEffectGateService = sideEffectGateService;
         this.operatorReviewChecklistService = operatorReviewChecklistService;
         this.digestBlueprintService = digestBlueprintService;
+        this.archivePlanService = archivePlanService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX)
@@ -43,5 +46,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT)
     public OpsShardReadinessOperatorEvidenceValueSupplyResponse digestBlueprint() {
         return digestBlueprintService.blueprint();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse archivePlan() {
+        return archivePlanService.plan();
     }
 }

@@ -102,4 +102,24 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[11]").value("value-supply-digest-blueprint-no-value-hash"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplyArchivePlanReturnsExternalCapturePlan() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-archive-plan"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v656"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-archive-plan"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-archive-plan.v1"))
+                .andExpect(jsonPath("$.slotCount").value(5))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_21_IMPORT_PREVIEW_BLOCK"))
+                .andExpect(jsonPath("$.slots[4].code").value("VALUE_SUPPLY_25_CLOSEOUT_LOCKS_HELD"))
+                .andExpect(jsonPath("$.checks[10]").value("value-supply-archive-plan-external-capture"))
+                .andExpect(jsonPath("$.checks[12]").value("value-supply-archive-plan-no-runtime-process"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
