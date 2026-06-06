@@ -350,6 +350,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-validation-matrix";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIDE_EFFECT_GATE =
             "/operator-evidence-value-supply-side-effect-gate";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST =
+            "/operator-evidence-value-supply-operator-review-checklist";
 
     private OpsShardReadinessRoutePaths() {
     }

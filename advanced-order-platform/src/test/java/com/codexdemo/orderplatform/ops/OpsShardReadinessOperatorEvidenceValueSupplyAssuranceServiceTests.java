@@ -62,4 +62,34 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceServiceTests {
         );
         assertThat(gate.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsOperatorReviewChecklistWithoutGrantingApproval() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse checklist =
+                new OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService().checklist();
+
+        assertThat(checklist.version()).isEqualTo("Java v652");
+        assertThat(checklist.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-operator-review-checklist");
+        assertThat(checklist.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-operator-review-checklist.v1");
+        assertThat(checklist.readyForOperatorValueSubmission()).isFalse();
+        assertThat(checklist.readyForEvidenceImport()).isFalse();
+        assertThat(checklist.slotCount()).isEqualTo(4);
+        assertThat(checklist.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyResponse.SupplySlot::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_01_ENVELOPE_ID",
+                        "VALUE_SUPPLY_02_OPERATOR_REFERENCE",
+                        "VALUE_SUPPLY_03_SOURCE_DRAFT_SLOT",
+                        "VALUE_SUPPLY_04_VALUE_KIND"
+                );
+        assertThat(checklist.checks()).contains(
+                "value-supply-operator-review-checklist-envelope-id",
+                "value-supply-operator-review-checklist-source-draft-slot",
+                "value-supply-operator-review-checklist-redaction-before-value",
+                "value-supply-operator-review-checklist-no-approval-grant"
+        );
+        assertThat(checklist.status()).isEqualTo("passed");
+    }
 }
