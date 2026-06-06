@@ -10,13 +10,16 @@ public class OpsShardReadinessOperatorEvidenceValueDraftFoundationController {
 
     private final OpsShardReadinessOperatorEvidenceValueDraftCatalogService catalogService;
     private final OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService slotTemplateService;
+    private final OpsShardReadinessOperatorEvidenceValueDraftValueBoundaryService valueBoundaryService;
 
     public OpsShardReadinessOperatorEvidenceValueDraftFoundationController(
             OpsShardReadinessOperatorEvidenceValueDraftCatalogService catalogService,
-            OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService slotTemplateService
+            OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService slotTemplateService,
+            OpsShardReadinessOperatorEvidenceValueDraftValueBoundaryService valueBoundaryService
     ) {
         this.catalogService = catalogService;
         this.slotTemplateService = slotTemplateService;
+        this.valueBoundaryService = valueBoundaryService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG)
@@ -27,5 +30,10 @@ public class OpsShardReadinessOperatorEvidenceValueDraftFoundationController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SLOT_TEMPLATE)
     public OpsShardReadinessOperatorEvidenceValueDraftResponse slotTemplate() {
         return slotTemplateService.template();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_VALUE_BOUNDARY)
+    public OpsShardReadinessOperatorEvidenceValueDraftResponse valueBoundary() {
+        return valueBoundaryService.boundary();
     }
 }

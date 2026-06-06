@@ -66,4 +66,27 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[11]").value("value-draft-slot-template-no-operator-values"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueDraftValueBoundaryReturnsActualValueBoundary() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-draft-value-boundary"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v614"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForOperatorEvidenceValueDraft").value(true))
+                .andExpect(jsonPath("$.actualValueState").value("not-supplied"))
+                .andExpect(jsonPath("$.readyForEvidenceImport").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-draft-value-boundary"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-draft-value-boundary.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_DRAFT_05_SLOT_ID_NORMALIZATION"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_DRAFT_08_NOTE_TEXT_NORMALIZATION"))
+                .andExpect(jsonPath("$.slots[0].importValueState").value("blocked"))
+                .andExpect(jsonPath("$.checks[10]").value("value-draft-boundary-actual-values-not-supplied"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
