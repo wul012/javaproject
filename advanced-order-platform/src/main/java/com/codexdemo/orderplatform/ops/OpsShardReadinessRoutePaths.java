@@ -316,6 +316,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-draft-slot-template";
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_VALUE_BOUNDARY =
             "/operator-evidence-value-draft-value-boundary";
+    static final String OPERATOR_EVIDENCE_VALUE_DRAFT_INSTRUCTION_SET =
+            "/operator-evidence-value-draft-instruction-set";
 
     private OpsShardReadinessRoutePaths() {
     }

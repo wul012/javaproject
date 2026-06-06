@@ -105,4 +105,35 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationServiceTests {
         );
         assertThat(boundary.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsInstructionSetForBlockedImportDraftSlots() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse instructions =
+                new OpsShardReadinessOperatorEvidenceValueDraftInstructionSetService().instructions();
+
+        assertThat(instructions.version()).isEqualTo("Java v616");
+        assertThat(instructions.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-instruction-set");
+        assertThat(instructions.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-instruction-set.v1");
+        assertThat(instructions.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(instructions.actualValueState()).isEqualTo("not-supplied");
+        assertThat(instructions.readyForManualEvidenceEntry()).isFalse();
+        assertThat(instructions.slotCount()).isEqualTo(5);
+        assertThat(instructions.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::code)
+                .containsExactly(
+                        "VALUE_DRAFT_09_MISSING_MANUAL_VALUE_BLOCKER",
+                        "VALUE_DRAFT_10_REDACTION_BLOCKER",
+                        "VALUE_DRAFT_11_RUNTIME_PAYLOAD_BLOCKER",
+                        "VALUE_DRAFT_12_UNMAPPED_SCOPE_BLOCKER",
+                        "VALUE_DRAFT_13_MANUAL_ENTRY_LOCK_BLOCKER"
+                );
+        assertThat(instructions.checks()).contains(
+                "value-draft-instruction-set-blocker-slice-9-13",
+                "value-draft-instruction-set-operator-facing",
+                "value-draft-instruction-set-no-submitted-values"
+        );
+        assertThat(instructions.status()).isEqualTo("passed");
+    }
 }
