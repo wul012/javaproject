@@ -131,4 +131,34 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationServiceTests {
         );
         assertThat(policy.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsProvenanceRequirementForSourceEvidenceReferences() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse requirement =
+                new OpsShardReadinessOperatorEvidenceValueSupplyProvenanceRequirementService().requirement();
+
+        assertThat(requirement.version()).isEqualTo("Java v644");
+        assertThat(requirement.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-provenance-requirement");
+        assertThat(requirement.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-provenance-requirement.v1");
+        assertThat(requirement.provenanceState()).isEqualTo("required-before-import");
+        assertThat(requirement.readyForEvidenceImport()).isFalse();
+        assertThat(requirement.slotCount()).isEqualTo(4);
+        assertThat(requirement.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyResponse.SupplySlot::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_13_PROVENANCE_SOURCE_ID",
+                        "VALUE_SUPPLY_14_PROVENANCE_EVIDENCE_FILE",
+                        "VALUE_SUPPLY_15_PROVENANCE_SNIPPET_ID",
+                        "VALUE_SUPPLY_16_SOURCE_ENDPOINT_ALIAS"
+                );
+        assertThat(requirement.checks()).contains(
+                "value-supply-provenance-requirement-slice-13-16",
+                "value-supply-provenance-source-id-required",
+                "value-supply-provenance-evidence-file-required",
+                "value-supply-provenance-raw-endpoint-alias-only"
+        );
+        assertThat(requirement.status()).isEqualTo("passed");
+    }
 }
