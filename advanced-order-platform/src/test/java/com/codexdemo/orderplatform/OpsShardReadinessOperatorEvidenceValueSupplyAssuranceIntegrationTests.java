@@ -39,4 +39,24 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceIntegrationTests
                 .andExpect(jsonPath("$.checks[13]").value("value-supply-validation-execution-locks-held"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplySideEffectGateReturnsNoWriteBoundary() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-side-effect-gate"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v650"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForRuntimePayload").value(false))
+                .andExpect(jsonPath("$.readyForProductionExecution").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-side-effect-gate"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-side-effect-gate.v1"))
+                .andExpect(jsonPath("$.slotCount").value(25))
+                .andExpect(jsonPath("$.checks[10]").value("value-supply-side-effect-gate-no-sibling-service-start"))
+                .andExpect(jsonPath("$.checks[13]").value("value-supply-side-effect-gate-no-production-path"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
