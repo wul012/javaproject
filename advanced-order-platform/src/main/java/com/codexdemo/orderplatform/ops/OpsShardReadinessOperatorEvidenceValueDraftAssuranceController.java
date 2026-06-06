@@ -12,17 +12,20 @@ public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
     private final OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService;
     private final OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService routeProfileSummaryService;
     private final OpsShardReadinessOperatorEvidenceValueDraftArchivePlanService archivePlanService;
+    private final OpsShardReadinessOperatorEvidenceValueDraftOperatorHandoffService operatorHandoffService;
 
     public OpsShardReadinessOperatorEvidenceValueDraftAssuranceController(
             OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService blockedReasonLedgerService,
             OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService,
             OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService routeProfileSummaryService,
-            OpsShardReadinessOperatorEvidenceValueDraftArchivePlanService archivePlanService
+            OpsShardReadinessOperatorEvidenceValueDraftArchivePlanService archivePlanService,
+            OpsShardReadinessOperatorEvidenceValueDraftOperatorHandoffService operatorHandoffService
     ) {
         this.blockedReasonLedgerService = blockedReasonLedgerService;
         this.digestBlueprintService = digestBlueprintService;
         this.routeProfileSummaryService = routeProfileSummaryService;
         this.archivePlanService = archivePlanService;
+        this.operatorHandoffService = operatorHandoffService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER)
@@ -43,5 +46,10 @@ public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_ARCHIVE_PLAN)
     public OpsShardReadinessOperatorEvidenceValueDraftResponse archivePlan() {
         return archivePlanService.plan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_OPERATOR_HANDOFF)
+    public OpsShardReadinessOperatorEvidenceValueDraftResponse operatorHandoff() {
+        return operatorHandoffService.handoff();
     }
 }
