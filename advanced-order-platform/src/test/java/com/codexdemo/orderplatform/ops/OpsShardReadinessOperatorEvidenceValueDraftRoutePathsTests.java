@@ -13,6 +13,10 @@ class OpsShardReadinessOperatorEvidenceValueDraftRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG,
                         OpsShardReadinessOperatorEvidenceValueDraftCatalogService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SLOT_TEMPLATE,
+                        OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

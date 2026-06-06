@@ -42,4 +42,34 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationServiceTests {
         );
         assertThat(catalog.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSlotTemplateWithoutOperatorValues() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse template =
+                new OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService().template();
+
+        assertThat(template.version()).isEqualTo("Java v612");
+        assertThat(template.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-slot-template");
+        assertThat(template.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-slot-template.v1");
+        assertThat(template.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(template.actualValueState()).isEqualTo("not-supplied");
+        assertThat(template.readyForEvidenceImport()).isFalse();
+        assertThat(template.slotCount()).isEqualTo(4);
+        assertThat(template.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::code)
+                .containsExactly(
+                        "VALUE_DRAFT_01_SOURCE_WORKSHEET_CLOSEOUT",
+                        "VALUE_DRAFT_02_PREFLIGHT_SLOT_COUNT",
+                        "VALUE_DRAFT_03_PREFLIGHT_GATE_COUNT",
+                        "VALUE_DRAFT_04_NO_VALUE_INGESTION"
+                );
+        assertThat(template.checks()).contains(
+                "value-draft-slot-template-catalog-slice-1-4",
+                "value-draft-slot-template-fields-present",
+                "value-draft-slot-template-no-operator-values"
+        );
+        assertThat(template.status()).isEqualTo("passed");
+    }
 }
