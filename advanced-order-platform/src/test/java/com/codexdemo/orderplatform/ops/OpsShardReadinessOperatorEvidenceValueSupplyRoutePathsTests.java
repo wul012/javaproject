@@ -45,6 +45,10 @@ class OpsShardReadinessOperatorEvidenceValueSupplyRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST,
                         OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT,
+                        OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

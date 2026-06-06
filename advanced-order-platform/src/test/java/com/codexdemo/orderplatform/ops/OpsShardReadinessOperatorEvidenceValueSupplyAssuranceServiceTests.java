@@ -92,4 +92,27 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceServiceTests {
         );
         assertThat(checklist.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsDigestBlueprintWithoutValueHashOrImportReadiness() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse blueprint =
+                new OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService().blueprint();
+
+        assertThat(blueprint.version()).isEqualTo("Java v654");
+        assertThat(blueprint.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-digest-blueprint");
+        assertThat(blueprint.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-digest-blueprint.v1");
+        assertThat(blueprint.readyForEvidenceImport()).isFalse();
+        assertThat(blueprint.slotCount()).isEqualTo(25);
+        assertThat(blueprint.slots().get(0).code()).isEqualTo("VALUE_SUPPLY_01_ENVELOPE_ID");
+        assertThat(blueprint.slots().get(24).code()).isEqualTo("VALUE_SUPPLY_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(blueprint.checks()).contains(
+                "value-supply-digest-blueprint-slot-count-25",
+                "value-supply-digest-blueprint-no-value-hash",
+                "value-supply-digest-blueprint-provenance-before-import",
+                "value-supply-digest-blueprint-lock-flags-covered"
+        );
+        assertThat(blueprint.status()).isEqualTo("passed");
+    }
 }
