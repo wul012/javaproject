@@ -71,4 +71,34 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationServiceTests {
         );
         assertThat(template.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRedactionPolicyThatBlocksSecretCarryingFields() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse policy =
+                new OpsShardReadinessOperatorEvidenceValueSupplyRedactionPolicyService().policy();
+
+        assertThat(policy.version()).isEqualTo("Java v640");
+        assertThat(policy.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-redaction-policy");
+        assertThat(policy.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-redaction-policy.v1");
+        assertThat(policy.redactionState()).isEqualTo("redact-before-storage");
+        assertThat(policy.readyForOperatorValueSubmission()).isFalse();
+        assertThat(policy.slotCount()).isEqualTo(4);
+        assertThat(policy.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyResponse.SupplySlot::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_05_REDACTION_CLASSIFICATION",
+                        "VALUE_SUPPLY_06_CREDENTIAL_VALUE_BLOCK",
+                        "VALUE_SUPPLY_07_RAW_ENDPOINT_BLOCK",
+                        "VALUE_SUPPLY_08_SECRET_MATERIAL_BLOCK"
+                );
+        assertThat(policy.checks()).contains(
+                "value-supply-redaction-policy-slice-5-8",
+                "value-supply-redaction-credential-values-blocked",
+                "value-supply-redaction-raw-endpoints-blocked",
+                "value-supply-redaction-secret-material-blocked"
+        );
+        assertThat(policy.status()).isEqualTo("passed");
+    }
 }
