@@ -41,4 +41,34 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationServiceTests {
         );
         assertThat(catalog.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsEnvelopeTemplateWithMetadataOnlyFoundationSlots() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse template =
+                new OpsShardReadinessOperatorEvidenceValueSupplyEnvelopeTemplateService().template();
+
+        assertThat(template.version()).isEqualTo("Java v638");
+        assertThat(template.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-envelope-template");
+        assertThat(template.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-envelope-template.v1");
+        assertThat(template.readyForOperatorValueSupplyEnvelope()).isTrue();
+        assertThat(template.suppliedValueState()).isEqualTo("not-accepted");
+        assertThat(template.readyForOperatorValueSubmission()).isFalse();
+        assertThat(template.slotCount()).isEqualTo(4);
+        assertThat(template.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyResponse.SupplySlot::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_01_ENVELOPE_ID",
+                        "VALUE_SUPPLY_02_OPERATOR_REFERENCE",
+                        "VALUE_SUPPLY_03_SOURCE_DRAFT_SLOT",
+                        "VALUE_SUPPLY_04_VALUE_KIND"
+                );
+        assertThat(template.checks()).contains(
+                "value-supply-template-foundation-slice-1-4",
+                "value-supply-template-metadata-only",
+                "value-supply-template-no-value-field"
+        );
+        assertThat(template.status()).isEqualTo("passed");
+    }
 }

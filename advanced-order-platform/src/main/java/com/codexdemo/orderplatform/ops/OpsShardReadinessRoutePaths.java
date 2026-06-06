@@ -336,6 +336,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-draft-closeout";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG =
             "/operator-evidence-value-supply-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ENVELOPE_TEMPLATE =
+            "/operator-evidence-value-supply-envelope-template";
 
     private OpsShardReadinessRoutePaths() {
     }
