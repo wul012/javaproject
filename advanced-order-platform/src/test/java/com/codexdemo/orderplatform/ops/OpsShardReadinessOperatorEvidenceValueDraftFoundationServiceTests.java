@@ -72,4 +72,37 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationServiceTests {
         );
         assertThat(template.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsValueBoundaryWithActualValuesNotSupplied() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse boundary =
+                new OpsShardReadinessOperatorEvidenceValueDraftValueBoundaryService().boundary();
+
+        assertThat(boundary.version()).isEqualTo("Java v614");
+        assertThat(boundary.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-value-boundary");
+        assertThat(boundary.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-value-boundary.v1");
+        assertThat(boundary.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(boundary.actualValueState()).isEqualTo("not-supplied");
+        assertThat(boundary.readyForEvidenceImport()).isFalse();
+        assertThat(boundary.slotCount()).isEqualTo(4);
+        assertThat(boundary.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::code)
+                .containsExactly(
+                        "VALUE_DRAFT_05_SLOT_ID_NORMALIZATION",
+                        "VALUE_DRAFT_06_BLANK_VALUE_NORMALIZATION",
+                        "VALUE_DRAFT_07_SCOPE_NAME_NORMALIZATION",
+                        "VALUE_DRAFT_08_NOTE_TEXT_NORMALIZATION"
+                );
+        assertThat(boundary.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::importValueState)
+                .containsOnly("blocked");
+        assertThat(boundary.checks()).contains(
+                "value-draft-boundary-source-slice-5-8",
+                "value-draft-boundary-actual-values-not-supplied",
+                "value-draft-boundary-import-value-state-blocked"
+        );
+        assertThat(boundary.status()).isEqualTo("passed");
+    }
 }
