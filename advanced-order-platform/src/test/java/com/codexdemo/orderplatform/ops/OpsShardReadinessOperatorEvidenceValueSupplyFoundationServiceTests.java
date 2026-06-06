@@ -101,4 +101,34 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationServiceTests {
         );
         assertThat(policy.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsMissingValuePolicyThatDoesNotDefaultBlankOrManualValues() {
+        OpsShardReadinessOperatorEvidenceValueSupplyResponse policy =
+                new OpsShardReadinessOperatorEvidenceValueSupplyMissingValuePolicyService().policy();
+
+        assertThat(policy.version()).isEqualTo("Java v642");
+        assertThat(policy.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-missing-value-policy");
+        assertThat(policy.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-missing-value-policy.v1");
+        assertThat(policy.suppliedValueState()).isEqualTo("not-accepted");
+        assertThat(policy.readyForManualEvidenceEntry()).isFalse();
+        assertThat(policy.slotCount()).isEqualTo(4);
+        assertThat(policy.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyResponse.SupplySlot::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_09_MISSING_VALUE_POLICY",
+                        "VALUE_SUPPLY_10_BLANK_VALUE_POLICY",
+                        "VALUE_SUPPLY_11_MANUAL_ENTRY_LOCK",
+                        "VALUE_SUPPLY_12_REVIEWER_REQUIRED"
+                );
+        assertThat(policy.checks()).contains(
+                "value-supply-missing-policy-slice-9-12",
+                "value-supply-missing-values-not-defaulted",
+                "value-supply-blank-values-rejected",
+                "value-supply-manual-entry-still-locked"
+        );
+        assertThat(policy.status()).isEqualTo("passed");
+    }
 }
