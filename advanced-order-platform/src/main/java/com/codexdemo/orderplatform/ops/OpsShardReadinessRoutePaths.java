@@ -346,6 +346,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-provenance-requirement";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD =
             "/operator-evidence-value-supply-source-evidence-guard";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX =
+            "/operator-evidence-value-supply-validation-matrix";
 
     private OpsShardReadinessRoutePaths() {
     }
