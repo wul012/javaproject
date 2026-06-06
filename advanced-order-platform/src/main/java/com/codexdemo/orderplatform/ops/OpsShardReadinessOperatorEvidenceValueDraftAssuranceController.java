@@ -9,15 +9,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
 
     private final OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService blockedReasonLedgerService;
+    private final OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService;
 
     public OpsShardReadinessOperatorEvidenceValueDraftAssuranceController(
-            OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService blockedReasonLedgerService
+            OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService blockedReasonLedgerService,
+            OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService digestBlueprintService
     ) {
         this.blockedReasonLedgerService = blockedReasonLedgerService;
+        this.digestBlueprintService = digestBlueprintService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER)
     public OpsShardReadinessOperatorEvidenceValueDraftResponse blockedReasonLedger() {
         return blockedReasonLedgerService.ledger();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT)
+    public OpsShardReadinessOperatorEvidenceValueDraftResponse digestBlueprint() {
+        return digestBlueprintService.blueprint();
     }
 }
