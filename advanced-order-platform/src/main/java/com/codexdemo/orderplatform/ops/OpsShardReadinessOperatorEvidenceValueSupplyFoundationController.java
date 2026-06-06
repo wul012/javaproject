@@ -13,19 +13,22 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyFoundationController {
     private final OpsShardReadinessOperatorEvidenceValueSupplyRedactionPolicyService redactionPolicyService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyMissingValuePolicyService missingValuePolicyService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyProvenanceRequirementService provenanceRequirementService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplySourceEvidenceGuardService sourceEvidenceGuardService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceValueSupplyEnvelopeTemplateService envelopeTemplateService,
             OpsShardReadinessOperatorEvidenceValueSupplyRedactionPolicyService redactionPolicyService,
             OpsShardReadinessOperatorEvidenceValueSupplyMissingValuePolicyService missingValuePolicyService,
-            OpsShardReadinessOperatorEvidenceValueSupplyProvenanceRequirementService provenanceRequirementService
+            OpsShardReadinessOperatorEvidenceValueSupplyProvenanceRequirementService provenanceRequirementService,
+            OpsShardReadinessOperatorEvidenceValueSupplySourceEvidenceGuardService sourceEvidenceGuardService
     ) {
         this.catalogService = catalogService;
         this.envelopeTemplateService = envelopeTemplateService;
         this.redactionPolicyService = redactionPolicyService;
         this.missingValuePolicyService = missingValuePolicyService;
         this.provenanceRequirementService = provenanceRequirementService;
+        this.sourceEvidenceGuardService = sourceEvidenceGuardService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG)
@@ -51,5 +54,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyFoundationController {
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_PROVENANCE_REQUIREMENT)
     public OpsShardReadinessOperatorEvidenceValueSupplyResponse provenanceRequirement() {
         return provenanceRequirementService.requirement();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD)
+    public OpsShardReadinessOperatorEvidenceValueSupplyResponse sourceEvidenceGuard() {
+        return sourceEvidenceGuardService.guard();
     }
 }

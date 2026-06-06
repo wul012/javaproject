@@ -132,4 +132,25 @@ class OpsShardReadinessOperatorEvidenceValueSupplyFoundationIntegrationTests
                 .andExpect(jsonPath("$.checks[13]").value("value-supply-provenance-raw-endpoint-alias-only"))
                 .andExpect(jsonPath("$.status").value("passed"));
     }
+
+    @Test
+    void operatorEvidenceValueSupplySourceEvidenceGuardReturnsReadOnlyEvidenceRules() throws Exception {
+        mockMvc.perform(get("/api/v1/ops/shard-readiness/operator-evidence-value-supply-source-evidence-guard"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.project").value("advanced-order-platform"))
+                .andExpect(jsonPath("$.version").value("Java v646"))
+                .andExpect(jsonPath("$.readOnly").value(true))
+                .andExpect(jsonPath("$.executionAllowed").value(false))
+                .andExpect(jsonPath("$.readyForRuntimePayload").value(false))
+                .andExpect(jsonPath("$.endpoint")
+                        .value("/api/v1/ops/shard-readiness/operator-evidence-value-supply-source-evidence-guard"))
+                .andExpect(jsonPath("$.profile")
+                        .value("java-shard-readiness-operator-evidence-value-supply-source-evidence-guard.v1"))
+                .andExpect(jsonPath("$.slotCount").value(4))
+                .andExpect(jsonPath("$.slots[0].code").value("VALUE_SUPPLY_17_FRESH_SIBLING_REFERENCE"))
+                .andExpect(jsonPath("$.slots[3].code").value("VALUE_SUPPLY_20_RUNTIME_PAYLOAD_BLOCK"))
+                .andExpect(jsonPath("$.checks[11]").value("value-supply-source-evidence-fresh-sibling-read-only"))
+                .andExpect(jsonPath("$.checks[13]").value("value-supply-source-evidence-synthetic-blocked"))
+                .andExpect(jsonPath("$.status").value("passed"));
+    }
 }
