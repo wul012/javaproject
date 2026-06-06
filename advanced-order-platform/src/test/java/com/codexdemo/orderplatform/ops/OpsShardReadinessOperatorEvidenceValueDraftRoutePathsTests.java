@@ -37,6 +37,10 @@ class OpsShardReadinessOperatorEvidenceValueDraftRoutePathsTests {
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER,
                         OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT,
+                        OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

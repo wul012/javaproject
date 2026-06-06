@@ -36,4 +36,27 @@ class OpsShardReadinessOperatorEvidenceValueDraftAssuranceServiceTests {
         );
         assertThat(ledger.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsDigestBlueprintWithoutValueHash() {
+        OpsShardReadinessOperatorEvidenceValueDraftResponse blueprint =
+                new OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService().blueprint();
+
+        assertThat(blueprint.version()).isEqualTo("Java v624");
+        assertThat(blueprint.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-draft-digest-blueprint");
+        assertThat(blueprint.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-draft-digest-blueprint.v1");
+        assertThat(blueprint.readyForOperatorEvidenceValueDraft()).isTrue();
+        assertThat(blueprint.actualValueState()).isEqualTo("not-supplied");
+        assertThat(blueprint.readyForEvidenceImport()).isFalse();
+        assertThat(blueprint.slotCount()).isEqualTo(25);
+        assertThat(blueprint.passedSlotCount()).isEqualTo(25);
+        assertThat(blueprint.checks()).contains(
+                "value-draft-digest-blueprint-slot-count-25",
+                "value-draft-digest-blueprint-no-value-hash",
+                "value-draft-digest-blueprint-lock-flags-covered"
+        );
+        assertThat(blueprint.status()).isEqualTo("passed");
+    }
 }
