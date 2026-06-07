@@ -14,6 +14,8 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
             runtimeSubmissionLockService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService
             operatorRehearsalChecklistService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService
+            digestBlueprintService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService
@@ -21,11 +23,14 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService
                     runtimeSubmissionLockService,
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService
-                    operatorRehearsalChecklistService
+                    operatorRehearsalChecklistService,
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService
+                    digestBlueprintService
     ) {
         this.payloadFirewallService = payloadFirewallService;
         this.runtimeSubmissionLockService = runtimeSubmissionLockService;
         this.operatorRehearsalChecklistService = operatorRehearsalChecklistService;
+        this.digestBlueprintService = digestBlueprintService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PAYLOAD_FIREWALL)
@@ -41,5 +46,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_OPERATOR_REHEARSAL_CHECKLIST)
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse operatorRehearsalChecklist() {
         return operatorRehearsalChecklistService.checklist();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_DIGEST_BLUEPRINT)
+    public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse digestBlueprint() {
+        return digestBlueprintService.blueprint();
     }
 }

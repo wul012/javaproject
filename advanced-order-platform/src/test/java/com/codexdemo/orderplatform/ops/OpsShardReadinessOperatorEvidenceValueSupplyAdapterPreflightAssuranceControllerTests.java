@@ -58,11 +58,29 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceContr
         assertThat(checklist.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesDigestBlueprintThroughAssuranceControllerWithoutValueHash() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse blueprint =
+                controller.digestBlueprint();
+
+        assertThat(blueprint.version()).isEqualTo("Java v680");
+        assertThat(blueprint.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService.ENDPOINT);
+        assertThat(blueprint.readyForEvidenceImport()).isFalse();
+        assertThat(blueprint.readyForRuntimePayload()).isFalse();
+        assertThat(blueprint.slotCount()).isEqualTo(25);
+        assertThat(blueprint.ruleCount()).isEqualTo(18);
+        assertThat(blueprint.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService()
         );
     }
 }
