@@ -13,17 +13,22 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
             identitySignatureService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService
             timestampWindowService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService
+            redactionDigestService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService
                     identitySignatureService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService
-                    timestampWindowService
+                    timestampWindowService,
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService
+                    redactionDigestService
     ) {
         this.catalogService = catalogService;
         this.identitySignatureService = identitySignatureService;
         this.timestampWindowService = timestampWindowService;
+        this.redactionDigestService = redactionDigestService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG)
@@ -39,5 +44,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_TIMESTAMP_WINDOW)
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse timestampWindow() {
         return timestampWindowService.window();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_REDACTION_DIGEST)
+    public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse redactionDigest() {
+        return redactionDigestService.digest();
     }
 }

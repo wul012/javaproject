@@ -60,11 +60,30 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationCon
         assertThat(window.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesRedactionDigestThroughFoundationControllerWithoutValueHash() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse digest =
+                controller.redactionDigest();
+
+        assertThat(digest.version()).isEqualTo("Java v694");
+        assertThat(digest.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService.ENDPOINT);
+        assertThat(digest.redactionDigestState()).isEqualTo("required-before-capture");
+        assertThat(digest.readyForSignedApprovalCapture()).isFalse();
+        assertThat(digest.readyForOperatorValueSubmission()).isFalse();
+        assertThat(digest.itemCount()).isEqualTo(4);
+        assertThat(digest.policyCount()).isEqualTo(2);
+        assertThat(digest.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService()
         );
     }
 }
