@@ -45,4 +45,39 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceServ
         );
         assertThat(rejection.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsZeroValueLedgerForSuppliedAcceptedAndImportedCounts() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse ledger =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService()
+                        .ledger();
+
+        assertThat(ledger.version()).isEqualTo("Java v700");
+        assertThat(ledger.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-zero-value-ledger");
+        assertThat(ledger.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-zero-value-ledger.v1");
+        assertThat(ledger.acceptedValueState()).isEqualTo("not-accepted");
+        assertThat(ledger.readyForOperatorValueSubmission()).isFalse();
+        assertThat(ledger.readyForEvidenceImport()).isFalse();
+        assertThat(ledger.readyForProductionExecution()).isFalse();
+        assertThat(ledger.itemCount()).isEqualTo(3);
+        assertThat(ledger.policyCount()).isEqualTo(1);
+        assertThat(ledger.items())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalItem::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_APPROVAL_PACKET_20_ZERO_SUPPLIED_VALUE_COUNT",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_21_ZERO_ACCEPTED_VALUE_COUNT",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_22_ZERO_IMPORTED_VALUE_COUNT"
+                );
+        assertThat(ledger.policies().get(0).code())
+                .isEqualTo("APPROVAL_PREFLIGHT_POLICY_16_ZERO_VALUE_COUNTS_REQUIRED");
+        assertThat(ledger.checks()).contains(
+                "value-supply-approval-preflight-zero-supplied-value-count",
+                "value-supply-approval-preflight-zero-accepted-value-count",
+                "value-supply-approval-preflight-zero-imported-value-count",
+                "value-supply-approval-preflight-zero-counts-import-locked"
+        );
+        assertThat(ledger.status()).isEqualTo("passed");
+    }
 }
