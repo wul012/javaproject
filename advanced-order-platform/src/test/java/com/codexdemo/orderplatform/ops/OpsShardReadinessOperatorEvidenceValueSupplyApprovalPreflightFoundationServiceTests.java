@@ -172,4 +172,42 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationSer
         );
         assertThat(digest.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsProvenanceBindingWithoutImportReadiness() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse binding =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightProvenanceBindingService()
+                        .binding();
+
+        assertThat(binding.version()).isEqualTo("Java v696");
+        assertThat(binding.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-provenance-binding");
+        assertThat(binding.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-provenance-binding.v1");
+        assertThat(binding.provenanceState()).isEqualTo("required-before-import");
+        assertThat(binding.readyForEvidenceImport()).isFalse();
+        assertThat(binding.itemCount()).isEqualTo(4);
+        assertThat(binding.policyCount()).isEqualTo(2);
+        assertThat(binding.items())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalItem::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_APPROVAL_PACKET_13_PROVENANCE_SOURCE_ID",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_14_PROVENANCE_EVIDENCE_FILE",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_15_PROVENANCE_SNIPPET_ID",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_16_ENDPOINT_ALIAS"
+                );
+        assertThat(binding.policies())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalPolicy::code)
+                .containsExactly(
+                        "APPROVAL_PREFLIGHT_POLICY_11_PROVENANCE_SOURCE_REQUIRED",
+                        "APPROVAL_PREFLIGHT_POLICY_12_PROVENANCE_FILE_AND_SNIPPET_REQUIRED"
+                );
+        assertThat(binding.checks()).contains(
+                "value-supply-approval-preflight-provenance-source-id-required",
+                "value-supply-approval-preflight-provenance-evidence-file-required",
+                "value-supply-approval-preflight-provenance-snippet-required",
+                "value-supply-approval-preflight-provenance-import-still-locked"
+        );
+        assertThat(binding.status()).isEqualTo("passed");
+    }
 }
