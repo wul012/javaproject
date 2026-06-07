@@ -486,6 +486,24 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-archive-plan";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_DIGEST_PINS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-digest-pins";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_OPERATOR_REVIEW =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-operator-review";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_SIGNATURE_REVIEW =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-signature-review";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_EVIDENCE_REVIEW =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-evidence-review";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_VALUE_REDACTION =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-value-redaction";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_EMBARGO_LOCKS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-embargo-locks";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_MANUAL_PACKAGE_GATE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-manual-package-gate";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CLOSEOUT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
