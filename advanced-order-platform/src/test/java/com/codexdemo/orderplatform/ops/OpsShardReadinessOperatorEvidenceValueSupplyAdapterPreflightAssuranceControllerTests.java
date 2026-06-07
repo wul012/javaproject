@@ -41,10 +41,28 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceContr
         assertThat(lock.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesOperatorRehearsalChecklistThroughAssuranceControllerWithoutApprovalGrant() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse checklist =
+                controller.operatorRehearsalChecklist();
+
+        assertThat(checklist.version()).isEqualTo("Java v678");
+        assertThat(checklist.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService.ENDPOINT);
+        assertThat(checklist.readyForAdapterImplementation()).isFalse();
+        assertThat(checklist.readyForOperatorValueSubmission()).isFalse();
+        assertThat(checklist.slotCount()).isEqualTo(13);
+        assertThat(checklist.ruleCount()).isEqualTo(18);
+        assertThat(checklist.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService()
         );
     }
 }
