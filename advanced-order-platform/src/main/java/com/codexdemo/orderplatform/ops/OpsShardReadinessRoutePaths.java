@@ -384,6 +384,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-adapter-preflight-closeout";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG =
             "/operator-evidence-value-supply-approval-preflight-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IDENTITY_SIGNATURE =
+            "/operator-evidence-value-supply-approval-preflight-identity-signature";
 
     private OpsShardReadinessRoutePaths() {
     }

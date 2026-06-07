@@ -50,4 +50,48 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationSer
         );
         assertThat(catalog.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsIdentitySignaturePreflightWithoutApprovalCaptureOrGrant() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse signature =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService()
+                        .signature();
+
+        assertThat(signature.version()).isEqualTo("Java v690");
+        assertThat(signature.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-identity-signature");
+        assertThat(signature.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-identity-signature.v1");
+        assertThat(signature.approvalCaptureState()).isEqualTo("not-captured");
+        assertThat(signature.readyForSignedApprovalCapture()).isFalse();
+        assertThat(signature.readyForApprovalGrant()).isFalse();
+        assertThat(signature.readyForOperatorValueSubmission()).isFalse();
+        assertThat(signature.itemCount()).isEqualTo(5);
+        assertThat(signature.policyCount()).isEqualTo(5);
+        assertThat(signature.items())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalItem::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_APPROVAL_PACKET_01_PACKET_ID",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_02_OPERATOR_IDENTITY_ALIAS",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_03_REVIEWER_ROLE",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_04_APPROVAL_INTENT",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_05_SIGNED_HUMAN_POLICY"
+                );
+        assertThat(signature.policies())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalPolicy::code)
+                .containsExactly(
+                        "APPROVAL_PREFLIGHT_POLICY_01_IDENTITY_ALIAS_ONLY",
+                        "APPROVAL_PREFLIGHT_POLICY_02_REVIEWER_ROLE_REQUIRED",
+                        "APPROVAL_PREFLIGHT_POLICY_03_SIGNED_HUMAN_APPROVAL_REQUIRED",
+                        "APPROVAL_PREFLIGHT_POLICY_04_NO_APPROVAL_CAPTURE",
+                        "APPROVAL_PREFLIGHT_POLICY_05_NO_OPERATOR_VALUE_BODY"
+                );
+        assertThat(signature.checks()).contains(
+                "value-supply-approval-preflight-identity-operator-alias-only",
+                "value-supply-approval-preflight-signature-human-policy-required",
+                "value-supply-approval-preflight-signature-capture-locked",
+                "value-supply-approval-preflight-signature-grant-locked"
+        );
+        assertThat(signature.status()).isEqualTo("passed");
+    }
 }
