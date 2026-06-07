@@ -9,15 +9,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController {
 
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService catalogService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService
+            compatibilityMatrixService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
-            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService catalogService
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService catalogService,
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService
+                    compatibilityMatrixService
     ) {
         this.catalogService = catalogService;
+        this.compatibilityMatrixService = compatibilityMatrixService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG)
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse catalog() {
         return catalogService.catalog();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_COMPATIBILITY_MATRIX)
+    public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse compatibilityMatrix() {
+        return compatibilityMatrixService.matrix();
     }
 }

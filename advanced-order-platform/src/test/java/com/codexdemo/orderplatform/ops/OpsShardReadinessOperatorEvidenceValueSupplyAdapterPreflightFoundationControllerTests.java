@@ -10,7 +10,8 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
     void exposesCatalogThroughFoundationControllerWithoutOpeningAdapter() {
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService()
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService()
                 );
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse catalog = controller.catalog();
@@ -22,5 +23,26 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
         assertThat(catalog.readyForAdapterImplementation()).isFalse();
         assertThat(catalog.ruleCount()).isEqualTo(18);
         assertThat(catalog.status()).isEqualTo("passed");
+    }
+
+    @Test
+    void exposesCompatibilityMatrixThroughFoundationControllerWithoutAcceptingValues() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService()
+                );
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse matrix =
+                controller.compatibilityMatrix();
+
+        assertThat(matrix.version()).isEqualTo("Java v664");
+        assertThat(matrix.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService.ENDPOINT);
+        assertThat(matrix.compatibilityState()).isEqualTo("metadata-only");
+        assertThat(matrix.readyForOperatorValueSubmission()).isFalse();
+        assertThat(matrix.slotCount()).isEqualTo(4);
+        assertThat(matrix.ruleCount()).isEqualTo(4);
+        assertThat(matrix.status()).isEqualTo("passed");
     }
 }
