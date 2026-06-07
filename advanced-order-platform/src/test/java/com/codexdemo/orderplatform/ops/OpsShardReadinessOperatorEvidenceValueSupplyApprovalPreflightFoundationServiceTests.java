@@ -94,4 +94,43 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationSer
         );
         assertThat(signature.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsTimestampWindowWithoutUnlockingCaptureOrRuntime() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse window =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService()
+                        .window();
+
+        assertThat(window.version()).isEqualTo("Java v692");
+        assertThat(window.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-timestamp-window");
+        assertThat(window.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-timestamp-window.v1");
+        assertThat(window.readyForSignedApprovalCapture()).isFalse();
+        assertThat(window.readyForRuntimePayload()).isFalse();
+        assertThat(window.readyForLiveExecution()).isFalse();
+        assertThat(window.itemCount()).isEqualTo(3);
+        assertThat(window.policyCount()).isEqualTo(3);
+        assertThat(window.items())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalItem::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_APPROVAL_PACKET_06_ISSUED_AT_TIMESTAMP",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_07_EXPIRY_WINDOW",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_08_REPLAY_NONCE"
+                );
+        assertThat(window.policies())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalPolicy::code)
+                .containsExactly(
+                        "APPROVAL_PREFLIGHT_POLICY_06_ISSUED_AT_REQUIRED",
+                        "APPROVAL_PREFLIGHT_POLICY_07_EXPIRY_WINDOW_REQUIRED",
+                        "APPROVAL_PREFLIGHT_POLICY_08_REPLAY_NONCE_REQUIRED"
+                );
+        assertThat(window.checks()).contains(
+                "value-supply-approval-preflight-timestamp-issued-at-required",
+                "value-supply-approval-preflight-timestamp-expiry-window-required",
+                "value-supply-approval-preflight-timestamp-replay-nonce-required",
+                "value-supply-approval-preflight-timestamp-capture-still-locked"
+        );
+        assertThat(window.status()).isEqualTo("passed");
+    }
 }
