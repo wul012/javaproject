@@ -36,7 +36,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSupportTests {
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
         assertThat(response.readyForDisabledAdapterPreflight()).isTrue();
-        assertThat(response.sourcePlan()).isEqualTo("Node v936");
+        assertThat(response.sourcePlan()).isEqualTo("Node v986");
         assertThat(response.sourceSupplyVersion()).isEqualTo("Java v658");
         assertThat(response.adapterState()).isEqualTo("disabled-preflight");
         assertThat(response.acceptedValueState()).isEqualTo("not-accepted");
@@ -57,7 +57,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSupportTests {
                 .isEqualTo("adapter implementation remains locked");
         assertThat(response.rules().get(0).enforcement()).isEqualTo("fail-closed");
         assertThat(response.checks()).contains(
-                "value-supply-adapter-preflight-source-plan-Node v936",
+                "value-supply-adapter-preflight-source-plan-Node v986",
                 "value-supply-adapter-preflight-source-supply-Java v658",
                 "value-supply-adapter-preflight-disabled",
                 "value-supply-adapter-preflight-values-not-accepted",

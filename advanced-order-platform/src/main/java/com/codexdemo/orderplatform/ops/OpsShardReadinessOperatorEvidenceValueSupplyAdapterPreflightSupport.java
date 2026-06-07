@@ -6,7 +6,7 @@ import java.util.List;
 final class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSupport {
 
     static final String PROJECT = "advanced-order-platform";
-    static final String SOURCE_PLAN = "Node v936";
+    static final String SOURCE_PLAN = "Node v986";
     static final String SOURCE_SUPPLY_VERSION = "Java v658";
     static final String ADAPTER_STATE = "disabled-preflight";
     static final String ACCEPTED_VALUE_STATE = "not-accepted";
