@@ -75,12 +75,30 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceContr
         assertThat(blueprint.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesArchivePlanThroughAssuranceControllerWithoutWritingFiles() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse plan =
+                controller.archivePlan();
+
+        assertThat(plan.version()).isEqualTo("Java v682");
+        assertThat(plan.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService.ENDPOINT);
+        assertThat(plan.readOnly()).isTrue();
+        assertThat(plan.executionAllowed()).isFalse();
+        assertThat(plan.slotCount()).isEqualTo(5);
+        assertThat(plan.ruleCount()).isEqualTo(18);
+        assertThat(plan.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService()
         );
     }
 }
