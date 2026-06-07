@@ -8,13 +8,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
 
     @Test
     void exposesCatalogThroughFoundationControllerWithoutOpeningAdapter() {
-        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
-                );
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller = controller();
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse catalog = controller.catalog();
 
@@ -29,13 +23,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
 
     @Test
     void exposesCompatibilityMatrixThroughFoundationControllerWithoutAcceptingValues() {
-        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
-                );
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller = controller();
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse matrix =
                 controller.compatibilityMatrix();
@@ -52,13 +40,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
 
     @Test
     void exposesRedactionBoundaryThroughFoundationControllerWithoutSecretMaterial() {
-        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
-                );
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller = controller();
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse boundary =
                 controller.redactionBoundary();
@@ -75,13 +57,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
 
     @Test
     void exposesProvenanceBindingThroughFoundationControllerWithoutImportReadiness() {
-        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
-                );
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller = controller();
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse binding =
                 controller.provenanceBinding();
@@ -94,5 +70,32 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
         assertThat(binding.slotCount()).isEqualTo(4);
         assertThat(binding.ruleCount()).isEqualTo(3);
         assertThat(binding.status()).isEqualTo("passed");
+    }
+
+    @Test
+    void exposesMissingValueRejectionThroughFoundationControllerWithoutDefaults() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse rejection =
+                controller.missingValueRejection();
+
+        assertThat(rejection.version()).isEqualTo("Java v670");
+        assertThat(rejection.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService.ENDPOINT);
+        assertThat(rejection.acceptedValueState()).isEqualTo("not-accepted");
+        assertThat(rejection.readyForOperatorValueSubmission()).isFalse();
+        assertThat(rejection.slotCount()).isEqualTo(4);
+        assertThat(rejection.ruleCount()).isEqualTo(2);
+        assertThat(rejection.status()).isEqualTo("passed");
+    }
+
+    private OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller() {
+        return new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService()
+        );
     }
 }

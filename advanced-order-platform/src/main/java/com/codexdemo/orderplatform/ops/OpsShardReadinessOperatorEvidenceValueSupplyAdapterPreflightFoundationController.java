@@ -15,6 +15,8 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
             redactionBoundaryService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService
             provenanceBindingService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService
+            missingValueRejectionService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService catalogService,
@@ -23,12 +25,15 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService
                     redactionBoundaryService,
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService
-                    provenanceBindingService
+                    provenanceBindingService,
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService
+                    missingValueRejectionService
     ) {
         this.catalogService = catalogService;
         this.compatibilityMatrixService = compatibilityMatrixService;
         this.redactionBoundaryService = redactionBoundaryService;
         this.provenanceBindingService = provenanceBindingService;
+        this.missingValueRejectionService = missingValueRejectionService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG)
@@ -49,5 +54,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PROVENANCE_BINDING)
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse provenanceBinding() {
         return provenanceBindingService.binding();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_MISSING_VALUE_REJECTION)
+    public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse missingValueRejection() {
+        return missingValueRejectionService.rejection();
     }
 }
