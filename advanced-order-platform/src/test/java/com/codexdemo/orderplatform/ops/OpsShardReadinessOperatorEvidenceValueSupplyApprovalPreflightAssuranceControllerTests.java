@@ -43,10 +43,30 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceCont
         assertThat(ledger.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesCleanupReceiptThroughAssuranceControllerWithoutFileWrites() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse receipt =
+                controller.cleanupReceipt();
+
+        assertThat(receipt.version()).isEqualTo("Java v702");
+        assertThat(receipt.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService.ENDPOINT);
+        assertThat(receipt.receiptState()).isEqualTo("required-before-import");
+        assertThat(receipt.readOnly()).isTrue();
+        assertThat(receipt.executionAllowed()).isFalse();
+        assertThat(receipt.readyForEvidenceImport()).isFalse();
+        assertThat(receipt.itemCount()).isEqualTo(1);
+        assertThat(receipt.policyCount()).isEqualTo(1);
+        assertThat(receipt.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService()
         );
     }
 }
