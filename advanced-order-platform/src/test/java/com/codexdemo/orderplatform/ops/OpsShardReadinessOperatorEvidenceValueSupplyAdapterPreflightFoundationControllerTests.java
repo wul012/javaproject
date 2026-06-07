@@ -89,13 +89,31 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
         assertThat(rejection.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesSourceEvidenceSnapshotThroughFoundationControllerWithoutSiblingImport() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse snapshot =
+                controller.sourceEvidenceSnapshot();
+
+        assertThat(snapshot.version()).isEqualTo("Java v672");
+        assertThat(snapshot.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSourceEvidenceSnapshotService.ENDPOINT);
+        assertThat(snapshot.readyForEvidenceImport()).isFalse();
+        assertThat(snapshot.readyForRuntimePayload()).isFalse();
+        assertThat(snapshot.slotCount()).isEqualTo(4);
+        assertThat(snapshot.ruleCount()).isEqualTo(3);
+        assertThat(snapshot.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSourceEvidenceSnapshotService()
         );
     }
 }
