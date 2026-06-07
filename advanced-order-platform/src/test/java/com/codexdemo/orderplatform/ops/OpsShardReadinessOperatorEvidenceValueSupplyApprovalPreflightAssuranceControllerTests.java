@@ -8,10 +8,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceCont
 
     @Test
     void exposesValueRejectionThroughAssuranceControllerWithoutImportReadiness() {
-        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller =
-                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
-                        new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService()
-                );
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller = controller();
 
         OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse rejection =
                 controller.valueRejection();
@@ -26,5 +23,30 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceCont
         assertThat(rejection.itemCount()).isEqualTo(3);
         assertThat(rejection.policyCount()).isEqualTo(3);
         assertThat(rejection.status()).isEqualTo("passed");
+    }
+
+    @Test
+    void exposesZeroValueLedgerThroughAssuranceControllerWithoutAcceptedValues() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse ledger =
+                controller.zeroValueLedger();
+
+        assertThat(ledger.version()).isEqualTo("Java v700");
+        assertThat(ledger.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService.ENDPOINT);
+        assertThat(ledger.acceptedValueState()).isEqualTo("not-accepted");
+        assertThat(ledger.readyForOperatorValueSubmission()).isFalse();
+        assertThat(ledger.readyForEvidenceImport()).isFalse();
+        assertThat(ledger.itemCount()).isEqualTo(3);
+        assertThat(ledger.policyCount()).isEqualTo(1);
+        assertThat(ledger.status()).isEqualTo("passed");
+    }
+
+    private OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller() {
+        return new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService()
+        );
     }
 }
