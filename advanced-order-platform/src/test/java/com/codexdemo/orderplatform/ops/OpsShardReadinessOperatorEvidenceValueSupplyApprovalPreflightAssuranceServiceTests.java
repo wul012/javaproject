@@ -80,4 +80,32 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceServ
         );
         assertThat(ledger.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCleanupReceiptWithoutWritingFilesOrStartingProcesses() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse receipt =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService()
+                        .receipt();
+
+        assertThat(receipt.version()).isEqualTo("Java v702");
+        assertThat(receipt.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-cleanup-receipt");
+        assertThat(receipt.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-cleanup-receipt.v1");
+        assertThat(receipt.receiptState()).isEqualTo("required-before-import");
+        assertThat(receipt.readOnly()).isTrue();
+        assertThat(receipt.executionAllowed()).isFalse();
+        assertThat(receipt.readyForEvidenceImport()).isFalse();
+        assertThat(receipt.itemCount()).isEqualTo(1);
+        assertThat(receipt.policyCount()).isEqualTo(1);
+        assertThat(receipt.items().get(0).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_23_CLEANUP_RECEIPT_ID");
+        assertThat(receipt.policies().get(0).code()).isEqualTo("APPROVAL_PREFLIGHT_POLICY_17_CLEANUP_RECEIPT_REQUIRED");
+        assertThat(receipt.checks()).contains(
+                "value-supply-approval-preflight-cleanup-receipt-id-required",
+                "value-supply-approval-preflight-cleanup-receipt-no-file-write",
+                "value-supply-approval-preflight-cleanup-receipt-no-process-start",
+                "value-supply-approval-preflight-cleanup-receipt-import-still-locked"
+        );
+        assertThat(receipt.status()).isEqualTo("passed");
+    }
 }

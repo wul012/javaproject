@@ -37,6 +37,10 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePathsTes
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ZERO_VALUE_LEDGER,
                         OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLEANUP_RECEIPT,
+                        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
