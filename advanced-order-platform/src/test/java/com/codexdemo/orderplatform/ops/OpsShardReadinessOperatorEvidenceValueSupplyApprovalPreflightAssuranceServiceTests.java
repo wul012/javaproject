@@ -199,4 +199,47 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceServ
         );
         assertThat(plan.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCloseoutWithAllApprovalPreflightLocksHeld() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse closeout =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCloseoutService()
+                        .closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v709");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-closeout.v1");
+        assertThat(closeout.sourcePlan()).isEqualTo("Node v986");
+        assertThat(closeout.sourceEnvelopeVersion()).isEqualTo("Node v961");
+        assertThat(closeout.sourceValueSupplyVersion()).isEqualTo("Java v658");
+        assertThat(closeout.sourceAdapterPreflightVersion()).isEqualTo("Java v684");
+        assertThat(closeout.approvalPacketState()).isEqualTo("draft-preflight");
+        assertThat(closeout.approvalCaptureState()).isEqualTo("not-captured");
+        assertThat(closeout.acceptedValueState()).isEqualTo("not-accepted");
+        assertThat(closeout.importState()).isEqualTo("locked");
+        assertThat(closeout.readyForSignedApprovalCapture()).isFalse();
+        assertThat(closeout.readyForApprovalGrant()).isFalse();
+        assertThat(closeout.readyForOperatorValueSubmission()).isFalse();
+        assertThat(closeout.readyForEvidenceImport()).isFalse();
+        assertThat(closeout.readyForRuntimePayload()).isFalse();
+        assertThat(closeout.readyForLiveExecution()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.itemCount()).isEqualTo(25);
+        assertThat(closeout.passedItemCount()).isEqualTo(25);
+        assertThat(closeout.policyCount()).isEqualTo(20);
+        assertThat(closeout.items().get(0).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_01_PACKET_ID");
+        assertThat(closeout.items().get(24).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(closeout.checks()).contains(
+                "value-supply-approval-preflight-closeout-versions-v685-v709",
+                "value-supply-approval-preflight-closeout-foundation-and-assurance-split",
+                "value-supply-approval-preflight-closeout-no-approval-capture",
+                "value-supply-approval-preflight-closeout-no-approval-grant",
+                "value-supply-approval-preflight-closeout-values-not-accepted",
+                "value-supply-approval-preflight-closeout-import-runtime-live-production-locked",
+                "value-supply-approval-preflight-closeout-all-locks-held"
+        );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
 }

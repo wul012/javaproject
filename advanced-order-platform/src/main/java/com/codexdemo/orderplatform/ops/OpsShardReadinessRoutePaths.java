@@ -404,6 +404,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-approval-preflight-digest-blueprint";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ARCHIVE_PLAN =
             "/operator-evidence-value-supply-approval-preflight-archive-plan";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLOSEOUT =
+            "/operator-evidence-value-supply-approval-preflight-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }

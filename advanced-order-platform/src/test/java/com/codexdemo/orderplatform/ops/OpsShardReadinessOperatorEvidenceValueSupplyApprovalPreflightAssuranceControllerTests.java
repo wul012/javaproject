@@ -117,6 +117,25 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceCont
         assertThat(plan.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesCloseoutThroughAssuranceControllerWithAllLocksHeld() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse closeout =
+                controller.closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v709");
+        assertThat(closeout.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCloseoutService.ENDPOINT);
+        assertThat(closeout.readyForSignedApprovalCapture()).isFalse();
+        assertThat(closeout.readyForOperatorValueSubmission()).isFalse();
+        assertThat(closeout.readyForEvidenceImport()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.itemCount()).isEqualTo(25);
+        assertThat(closeout.policyCount()).isEqualTo(20);
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService(),
@@ -124,7 +143,8 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceCont
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCloseoutService()
         );
     }
 }

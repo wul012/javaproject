@@ -19,6 +19,7 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService
             digestBlueprintService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService archivePlanService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCloseoutService closeoutService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService valueRejectionService,
@@ -26,7 +27,8 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService cleanupReceiptService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService importFirewallService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService digestBlueprintService,
-            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService archivePlanService
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService archivePlanService,
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCloseoutService closeoutService
     ) {
         this.valueRejectionService = valueRejectionService;
         this.zeroValueLedgerService = zeroValueLedgerService;
@@ -34,6 +36,7 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
         this.importFirewallService = importFirewallService;
         this.digestBlueprintService = digestBlueprintService;
         this.archivePlanService = archivePlanService;
+        this.closeoutService = closeoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_VALUE_REJECTION)
@@ -64,5 +67,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ARCHIVE_PLAN)
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse archivePlan() {
         return archivePlanService.plan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLOSEOUT)
+    public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse closeout() {
+        return closeoutService.closeout();
     }
 }
