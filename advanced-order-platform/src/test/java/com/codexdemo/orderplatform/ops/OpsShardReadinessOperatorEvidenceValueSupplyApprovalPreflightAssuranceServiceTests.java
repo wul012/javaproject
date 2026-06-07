@@ -170,4 +170,33 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceServ
         );
         assertThat(blueprint.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsArchivePlanWithoutWritingFilesStartingProcessesOrImportingValues() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse plan =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService()
+                        .plan();
+
+        assertThat(plan.version()).isEqualTo("Java v708");
+        assertThat(plan.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-archive-plan");
+        assertThat(plan.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-archive-plan.v1");
+        assertThat(plan.readOnly()).isTrue();
+        assertThat(plan.executionAllowed()).isFalse();
+        assertThat(plan.readyForSignedApprovalCapture()).isFalse();
+        assertThat(plan.readyForEvidenceImport()).isFalse();
+        assertThat(plan.readyForRuntimePayload()).isFalse();
+        assertThat(plan.itemCount()).isEqualTo(5);
+        assertThat(plan.policyCount()).isEqualTo(20);
+        assertThat(plan.items().get(0).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_21_ZERO_ACCEPTED_VALUE_COUNT");
+        assertThat(plan.items().get(4).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(plan.checks()).contains(
+                "value-supply-approval-preflight-archive-plan-external-capture",
+                "value-supply-approval-preflight-archive-plan-no-file-write",
+                "value-supply-approval-preflight-archive-plan-no-process-start",
+                "value-supply-approval-preflight-archive-plan-no-import-or-runtime"
+        );
+        assertThat(plan.status()).isEqualTo("passed");
+    }
 }

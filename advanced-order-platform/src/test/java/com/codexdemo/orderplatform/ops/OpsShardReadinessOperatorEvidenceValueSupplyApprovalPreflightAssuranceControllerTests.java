@@ -99,13 +99,32 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceCont
         assertThat(blueprint.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesArchivePlanThroughAssuranceControllerWithoutSideEffects() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse plan =
+                controller.archivePlan();
+
+        assertThat(plan.version()).isEqualTo("Java v708");
+        assertThat(plan.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService.ENDPOINT);
+        assertThat(plan.readOnly()).isTrue();
+        assertThat(plan.executionAllowed()).isFalse();
+        assertThat(plan.readyForEvidenceImport()).isFalse();
+        assertThat(plan.itemCount()).isEqualTo(5);
+        assertThat(plan.policyCount()).isEqualTo(20);
+        assertThat(plan.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService()
         );
     }
 }
