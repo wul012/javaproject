@@ -398,6 +398,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-approval-preflight-zero-value-ledger";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLEANUP_RECEIPT =
             "/operator-evidence-value-supply-approval-preflight-cleanup-receipt";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IMPORT_FIREWALL =
+            "/operator-evidence-value-supply-approval-preflight-import-firewall";
 
     private OpsShardReadinessRoutePaths() {
     }

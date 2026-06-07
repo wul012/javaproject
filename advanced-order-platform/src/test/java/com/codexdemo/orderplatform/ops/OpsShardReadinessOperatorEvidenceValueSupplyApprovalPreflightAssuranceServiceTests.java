@@ -108,4 +108,39 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceServ
         );
         assertThat(receipt.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsImportFirewallWithoutImportRuntimeOrProductionReadiness() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse firewall =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService()
+                        .firewall();
+
+        assertThat(firewall.version()).isEqualTo("Java v704");
+        assertThat(firewall.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-import-firewall");
+        assertThat(firewall.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-import-firewall.v1");
+        assertThat(firewall.importState()).isEqualTo("locked");
+        assertThat(firewall.readyForEvidenceImport()).isFalse();
+        assertThat(firewall.readyForRuntimePayload()).isFalse();
+        assertThat(firewall.readyForLiveExecution()).isFalse();
+        assertThat(firewall.readyForProductionExecution()).isFalse();
+        assertThat(firewall.itemCount()).isEqualTo(5);
+        assertThat(firewall.policyCount()).isEqualTo(2);
+        assertThat(firewall.items().get(0).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_21_ZERO_ACCEPTED_VALUE_COUNT");
+        assertThat(firewall.items().get(4).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(firewall.policies())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalPolicy::code)
+                .containsExactly(
+                        "APPROVAL_PREFLIGHT_POLICY_18_IMPORT_FIREWALL_LOCKED",
+                        "APPROVAL_PREFLIGHT_POLICY_19_RUNTIME_EXECUTION_LOCKED"
+                );
+        assertThat(firewall.checks()).contains(
+                "value-supply-approval-preflight-import-firewall-no-import-preview",
+                "value-supply-approval-preflight-import-firewall-no-evidence-import",
+                "value-supply-approval-preflight-import-firewall-no-runtime-payload",
+                "value-supply-approval-preflight-import-firewall-no-production-execution"
+        );
+        assertThat(firewall.status()).isEqualTo("passed");
+    }
 }
