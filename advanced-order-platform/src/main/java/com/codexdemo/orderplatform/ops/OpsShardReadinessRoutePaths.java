@@ -504,6 +504,24 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-manual-package-gate";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_DIGEST_PINS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-digest-pins";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_OPERATOR_PACKAGE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-operator-package";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_SIGNATURE_PACKAGE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-signature-package";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_EVIDENCE_PACKAGE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-evidence-package";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_VALUE_POLICY_PACKAGE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-value-policy-package";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_EMBARGO_PACKAGE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-embargo-package";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_DRAFT_AUTHORING_GATE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-draft-authoring-gate";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_CLOSEOUT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
