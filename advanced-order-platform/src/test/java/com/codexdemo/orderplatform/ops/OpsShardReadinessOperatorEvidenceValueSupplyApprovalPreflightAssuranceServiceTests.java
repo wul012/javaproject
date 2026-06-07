@@ -143,4 +143,31 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceServ
         );
         assertThat(firewall.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsDigestBlueprintWithoutApprovalCaptureValueHashOrImportReadiness() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse blueprint =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService()
+                        .blueprint();
+
+        assertThat(blueprint.version()).isEqualTo("Java v706");
+        assertThat(blueprint.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-digest-blueprint");
+        assertThat(blueprint.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-digest-blueprint.v1");
+        assertThat(blueprint.readyForSignedApprovalCapture()).isFalse();
+        assertThat(blueprint.readyForOperatorValueSubmission()).isFalse();
+        assertThat(blueprint.readyForEvidenceImport()).isFalse();
+        assertThat(blueprint.itemCount()).isEqualTo(25);
+        assertThat(blueprint.policyCount()).isEqualTo(20);
+        assertThat(blueprint.items().get(0).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_01_PACKET_ID");
+        assertThat(blueprint.items().get(24).code()).isEqualTo("VALUE_SUPPLY_APPROVAL_PACKET_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(blueprint.checks()).contains(
+                "value-supply-approval-preflight-digest-blueprint-no-value-hash",
+                "value-supply-approval-preflight-digest-blueprint-no-approval-capture",
+                "value-supply-approval-preflight-digest-blueprint-zero-value-counts",
+                "value-supply-approval-preflight-digest-blueprint-import-firewall-covered"
+        );
+        assertThat(blueprint.status()).isEqualTo("passed");
+    }
 }

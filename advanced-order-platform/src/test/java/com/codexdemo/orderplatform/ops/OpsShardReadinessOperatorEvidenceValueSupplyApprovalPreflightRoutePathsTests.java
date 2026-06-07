@@ -45,6 +45,10 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePathsTes
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IMPORT_FIREWALL,
                         OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_DIGEST_BLUEPRINT,
+                        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
