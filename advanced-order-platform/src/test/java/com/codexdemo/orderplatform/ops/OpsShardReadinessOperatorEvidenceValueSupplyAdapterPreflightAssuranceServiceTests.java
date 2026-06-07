@@ -142,4 +142,31 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceServi
         );
         assertThat(blueprint.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsArchivePlanWithoutWritingFilesOrStartingProcesses() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse plan =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService()
+                        .plan();
+
+        assertThat(plan.version()).isEqualTo("Java v682");
+        assertThat(plan.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-archive-plan");
+        assertThat(plan.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-archive-plan.v1");
+        assertThat(plan.readOnly()).isTrue();
+        assertThat(plan.executionAllowed()).isFalse();
+        assertThat(plan.readyForRuntimePayload()).isFalse();
+        assertThat(plan.slotCount()).isEqualTo(5);
+        assertThat(plan.ruleCount()).isEqualTo(18);
+        assertThat(plan.slots().get(0).code()).isEqualTo("ADAPTER_PREFLIGHT_21_IMPORT_PREVIEW_BLOCK");
+        assertThat(plan.slots().get(4).code()).isEqualTo("ADAPTER_PREFLIGHT_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(plan.checks()).contains(
+                "value-supply-adapter-preflight-archive-plan-external-capture",
+                "value-supply-adapter-preflight-archive-plan-no-file-write",
+                "value-supply-adapter-preflight-archive-plan-no-runtime-process",
+                "value-supply-adapter-preflight-archive-plan-lock-summary-required"
+        );
+        assertThat(plan.status()).isEqualTo("passed");
+    }
 }

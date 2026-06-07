@@ -378,6 +378,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-adapter-preflight-operator-rehearsal-checklist";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_DIGEST_BLUEPRINT =
             "/operator-evidence-value-supply-adapter-preflight-digest-blueprint";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_ARCHIVE_PLAN =
+            "/operator-evidence-value-supply-adapter-preflight-archive-plan";
 
     private OpsShardReadinessRoutePaths() {
     }
