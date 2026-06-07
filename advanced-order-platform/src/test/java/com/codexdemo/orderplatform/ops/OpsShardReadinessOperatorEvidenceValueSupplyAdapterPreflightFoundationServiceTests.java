@@ -83,4 +83,42 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationServ
         );
         assertThat(matrix.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRedactionBoundaryThatBlocksSecretCarryingAdapterInputs() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse boundary =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
+                        .boundary();
+
+        assertThat(boundary.version()).isEqualTo("Java v666");
+        assertThat(boundary.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-redaction-boundary");
+        assertThat(boundary.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-redaction-boundary.v1");
+        assertThat(boundary.redactionState()).isEqualTo("required-before-adapter");
+        assertThat(boundary.readyForOperatorValueSubmission()).isFalse();
+        assertThat(boundary.slotCount()).isEqualTo(4);
+        assertThat(boundary.ruleCount()).isEqualTo(3);
+        assertThat(boundary.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+                .containsExactly(
+                        "ADAPTER_PREFLIGHT_05_REDACTION_CLASSIFICATION",
+                        "ADAPTER_PREFLIGHT_06_CREDENTIAL_VALUE_BLOCK",
+                        "ADAPTER_PREFLIGHT_07_RAW_ENDPOINT_BLOCK",
+                        "ADAPTER_PREFLIGHT_08_SECRET_MATERIAL_BLOCK"
+                );
+        assertThat(boundary.rules())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+                .containsExactly(
+                        "ADAPTER_RULE_05_NO_CREDENTIAL_VALUE",
+                        "ADAPTER_RULE_06_NO_RAW_ENDPOINT",
+                        "ADAPTER_RULE_07_NO_SECRET_MATERIAL"
+                );
+        assertThat(boundary.checks()).contains(
+                "value-supply-adapter-preflight-redaction-credential-values-blocked",
+                "value-supply-adapter-preflight-redaction-raw-endpoints-blocked",
+                "value-supply-adapter-preflight-redaction-secret-material-blocked"
+        );
+        assertThat(boundary.status()).isEqualTo("passed");
+    }
 }
