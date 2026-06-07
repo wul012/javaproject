@@ -160,4 +160,42 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationServ
         );
         assertThat(binding.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsMissingValueRejectionWithoutDefaultsOrManualSubmission() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse rejection =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService()
+                        .rejection();
+
+        assertThat(rejection.version()).isEqualTo("Java v670");
+        assertThat(rejection.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-missing-value-rejection");
+        assertThat(rejection.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-missing-value-rejection.v1");
+        assertThat(rejection.acceptedValueState()).isEqualTo("not-accepted");
+        assertThat(rejection.readyForOperatorValueSubmission()).isFalse();
+        assertThat(rejection.slotCount()).isEqualTo(4);
+        assertThat(rejection.ruleCount()).isEqualTo(2);
+        assertThat(rejection.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+                .containsExactly(
+                        "ADAPTER_PREFLIGHT_09_MISSING_VALUE_REJECTION",
+                        "ADAPTER_PREFLIGHT_10_BLANK_VALUE_REJECTION",
+                        "ADAPTER_PREFLIGHT_11_MANUAL_ENTRY_LOCK",
+                        "ADAPTER_PREFLIGHT_12_REVIEWER_REQUIRED"
+                );
+        assertThat(rejection.rules())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+                .containsExactly(
+                        "ADAPTER_RULE_11_MISSING_VALUES_REJECTED",
+                        "ADAPTER_RULE_12_BLANK_VALUES_REJECTED"
+                );
+        assertThat(rejection.checks()).contains(
+                "value-supply-adapter-preflight-missing-values-rejected",
+                "value-supply-adapter-preflight-blank-values-rejected",
+                "value-supply-adapter-preflight-manual-entry-locked",
+                "value-supply-adapter-preflight-reviewer-required-before-adapter"
+        );
+        assertThat(rejection.status()).isEqualTo("passed");
+    }
 }
