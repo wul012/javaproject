@@ -10,16 +10,26 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
 
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService
             payloadFirewallService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService
+            runtimeSubmissionLockService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService
-                    payloadFirewallService
+                    payloadFirewallService,
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService
+                    runtimeSubmissionLockService
     ) {
         this.payloadFirewallService = payloadFirewallService;
+        this.runtimeSubmissionLockService = runtimeSubmissionLockService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PAYLOAD_FIREWALL)
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse payloadFirewall() {
         return payloadFirewallService.firewall();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_RUNTIME_SUBMISSION_LOCK)
+    public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse runtimeSubmissionLock() {
+        return runtimeSubmissionLockService.lock();
     }
 }
