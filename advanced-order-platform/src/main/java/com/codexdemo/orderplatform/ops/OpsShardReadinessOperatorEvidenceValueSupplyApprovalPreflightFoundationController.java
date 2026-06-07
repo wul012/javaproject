@@ -9,15 +9,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController {
 
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService catalogService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService
+            identitySignatureService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController(
-            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService catalogService
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService catalogService,
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService
+                    identitySignatureService
     ) {
         this.catalogService = catalogService;
+        this.identitySignatureService = identitySignatureService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG)
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse catalog() {
         return catalogService.catalog();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IDENTITY_SIGNATURE)
+    public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse identitySignature() {
+        return identitySignatureService.signature();
     }
 }
