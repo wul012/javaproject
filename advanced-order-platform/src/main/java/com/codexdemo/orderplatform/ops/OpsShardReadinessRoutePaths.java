@@ -468,6 +468,24 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-archive-plan";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_DIGEST_CHAIN =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-digest-chain";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_OPERATOR_WINDOW =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-operator-window";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_SIGNATURE_STATEMENT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-signature-statement";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_EVIDENCE_SOURCE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-evidence-source";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_REDACTION_PROVENANCE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-redaction-provenance";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_FAIL_CLOSED_LOCKS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-fail-closed-locks";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_ARCHIVE_PLAN =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-archive-plan";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_CLOSEOUT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
