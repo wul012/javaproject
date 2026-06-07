@@ -392,6 +392,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-approval-preflight-redaction-digest";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_PROVENANCE_BINDING =
             "/operator-evidence-value-supply-approval-preflight-provenance-binding";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_VALUE_REJECTION =
+            "/operator-evidence-value-supply-approval-preflight-value-rejection";
 
     private OpsShardReadinessRoutePaths() {
     }
