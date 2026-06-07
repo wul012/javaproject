@@ -21,6 +21,10 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePathsTes
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_TIMESTAMP_WINDOW,
                         OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_REDACTION_DIGEST,
+                        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

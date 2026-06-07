@@ -133,4 +133,43 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationSer
         );
         assertThat(window.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsRedactionDigestWithoutCredentialRawEndpointOrValueHash() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse digest =
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService()
+                        .digest();
+
+        assertThat(digest.version()).isEqualTo("Java v694");
+        assertThat(digest.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-approval-preflight-redaction-digest");
+        assertThat(digest.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-approval-preflight-redaction-digest.v1");
+        assertThat(digest.redactionDigestState()).isEqualTo("required-before-capture");
+        assertThat(digest.readyForSignedApprovalCapture()).isFalse();
+        assertThat(digest.readyForOperatorValueSubmission()).isFalse();
+        assertThat(digest.itemCount()).isEqualTo(4);
+        assertThat(digest.policyCount()).isEqualTo(2);
+        assertThat(digest.items())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalItem::code)
+                .containsExactly(
+                        "VALUE_SUPPLY_APPROVAL_PACKET_09_REDACTION_DIGEST_ID",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_10_REDACTION_DIGEST_ALGORITHM",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_11_CREDENTIAL_ABSENCE_PROOF",
+                        "VALUE_SUPPLY_APPROVAL_PACKET_12_RAW_ENDPOINT_ABSENCE_PROOF"
+                );
+        assertThat(digest.policies())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse.ApprovalPolicy::code)
+                .containsExactly(
+                        "APPROVAL_PREFLIGHT_POLICY_09_REDACTION_DIGEST_REQUIRED",
+                        "APPROVAL_PREFLIGHT_POLICY_10_NO_CREDENTIAL_OR_RAW_ENDPOINT"
+                );
+        assertThat(digest.checks()).contains(
+                "value-supply-approval-preflight-redaction-digest-id-required",
+                "value-supply-approval-preflight-redaction-credential-absence-proof",
+                "value-supply-approval-preflight-redaction-raw-endpoint-absence-proof",
+                "value-supply-approval-preflight-redaction-no-value-hash"
+        );
+        assertThat(digest.status()).isEqualTo("passed");
+    }
 }

@@ -388,6 +388,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-approval-preflight-identity-signature";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_TIMESTAMP_WINDOW =
             "/operator-evidence-value-supply-approval-preflight-timestamp-window";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_REDACTION_DIGEST =
+            "/operator-evidence-value-supply-approval-preflight-redaction-digest";
 
     private OpsShardReadinessRoutePaths() {
     }
