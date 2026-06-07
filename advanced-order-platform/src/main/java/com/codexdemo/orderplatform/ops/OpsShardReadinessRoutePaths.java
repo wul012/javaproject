@@ -368,6 +368,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-adapter-preflight-provenance-binding";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_MISSING_VALUE_REJECTION =
             "/operator-evidence-value-supply-adapter-preflight-missing-value-rejection";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_SOURCE_EVIDENCE_SNAPSHOT =
+            "/operator-evidence-value-supply-adapter-preflight-source-evidence-snapshot";
 
     private OpsShardReadinessRoutePaths() {
     }

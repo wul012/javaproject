@@ -198,4 +198,43 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationServ
         );
         assertThat(rejection.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsSourceEvidenceSnapshotWithoutAutomaticSiblingImportOrRuntimePayload() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse snapshot =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSourceEvidenceSnapshotService()
+                        .snapshot();
+
+        assertThat(snapshot.version()).isEqualTo("Java v672");
+        assertThat(snapshot.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-source-evidence-snapshot");
+        assertThat(snapshot.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-source-evidence-snapshot.v1");
+        assertThat(snapshot.readyForEvidenceImport()).isFalse();
+        assertThat(snapshot.readyForRuntimePayload()).isFalse();
+        assertThat(snapshot.slotCount()).isEqualTo(4);
+        assertThat(snapshot.ruleCount()).isEqualTo(3);
+        assertThat(snapshot.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+                .containsExactly(
+                        "ADAPTER_PREFLIGHT_17_FRESH_SIBLING_REFERENCE",
+                        "ADAPTER_PREFLIGHT_18_HISTORICAL_FALLBACK_MARKER",
+                        "ADAPTER_PREFLIGHT_19_SYNTHETIC_EVIDENCE_BLOCK",
+                        "ADAPTER_PREFLIGHT_20_RUNTIME_PAYLOAD_BLOCK"
+                );
+        assertThat(snapshot.rules())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+                .containsExactly(
+                        "ADAPTER_RULE_13_NO_AUTOMATIC_SIBLING_IMPORT",
+                        "ADAPTER_RULE_14_SYNTHETIC_EVIDENCE_BLOCKED",
+                        "ADAPTER_RULE_15_RUNTIME_PAYLOAD_BLOCKED"
+                );
+        assertThat(snapshot.checks()).contains(
+                "value-supply-adapter-preflight-source-evidence-fresh-sibling-read-only",
+                "value-supply-adapter-preflight-source-evidence-historical-fallback-explicit",
+                "value-supply-adapter-preflight-source-evidence-no-automatic-sibling-import",
+                "value-supply-adapter-preflight-source-evidence-runtime-payload-blocked"
+        );
+        assertThat(snapshot.status()).isEqualTo("passed");
+    }
 }
