@@ -358,6 +358,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-archive-plan";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT =
             "/operator-evidence-value-supply-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG =
+            "/operator-evidence-value-supply-adapter-preflight-catalog";
 
     private OpsShardReadinessRoutePaths() {
     }
