@@ -81,4 +81,37 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceServi
         );
         assertThat(lock.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsOperatorRehearsalChecklistWithoutApprovalGrant() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse checklist =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService()
+                        .checklist();
+
+        assertThat(checklist.version()).isEqualTo("Java v678");
+        assertThat(checklist.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-operator-rehearsal-checklist");
+        assertThat(checklist.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-operator-rehearsal-checklist.v1");
+        assertThat(checklist.readyForAdapterImplementation()).isFalse();
+        assertThat(checklist.readyForOperatorValueSubmission()).isFalse();
+        assertThat(checklist.slotCount()).isEqualTo(13);
+        assertThat(checklist.ruleCount()).isEqualTo(18);
+        assertThat(checklist.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+                .contains(
+                        "ADAPTER_PREFLIGHT_01_ENVELOPE_ID_COMPATIBILITY",
+                        "ADAPTER_PREFLIGHT_13_PROVENANCE_SOURCE_ID",
+                        "ADAPTER_PREFLIGHT_21_IMPORT_PREVIEW_BLOCK",
+                        "ADAPTER_PREFLIGHT_25_CLOSEOUT_LOCKS_HELD"
+                );
+        assertThat(checklist.checks()).contains(
+                "value-supply-adapter-preflight-rehearsal-envelope-metadata-reviewed",
+                "value-supply-adapter-preflight-rehearsal-provenance-reviewed",
+                "value-supply-adapter-preflight-rehearsal-runtime-locks-reviewed",
+                "value-supply-adapter-preflight-rehearsal-no-approval-grant",
+                "value-supply-adapter-preflight-rehearsal-no-adapter-implementation"
+        );
+        assertThat(checklist.status()).isEqualTo("passed");
+    }
 }

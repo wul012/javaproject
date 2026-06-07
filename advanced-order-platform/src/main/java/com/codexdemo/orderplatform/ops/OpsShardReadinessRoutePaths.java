@@ -374,6 +374,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-adapter-preflight-payload-firewall";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_RUNTIME_SUBMISSION_LOCK =
             "/operator-evidence-value-supply-adapter-preflight-runtime-submission-lock";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_OPERATOR_REHEARSAL_CHECKLIST =
+            "/operator-evidence-value-supply-adapter-preflight-operator-rehearsal-checklist";
 
     private OpsShardReadinessRoutePaths() {
     }
