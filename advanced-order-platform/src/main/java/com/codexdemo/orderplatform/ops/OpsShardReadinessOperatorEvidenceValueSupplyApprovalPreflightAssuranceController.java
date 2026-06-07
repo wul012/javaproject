@@ -14,15 +14,19 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
             zeroValueLedgerService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService
             cleanupReceiptService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService
+            importFirewallService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService valueRejectionService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService zeroValueLedgerService,
-            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService cleanupReceiptService
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService cleanupReceiptService,
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService importFirewallService
     ) {
         this.valueRejectionService = valueRejectionService;
         this.zeroValueLedgerService = zeroValueLedgerService;
         this.cleanupReceiptService = cleanupReceiptService;
+        this.importFirewallService = importFirewallService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_VALUE_REJECTION)
@@ -38,5 +42,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLEANUP_RECEIPT)
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse cleanupReceipt() {
         return cleanupReceiptService.receipt();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IMPORT_FIREWALL)
+    public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse importFirewall() {
+        return importFirewallService.firewall();
     }
 }
