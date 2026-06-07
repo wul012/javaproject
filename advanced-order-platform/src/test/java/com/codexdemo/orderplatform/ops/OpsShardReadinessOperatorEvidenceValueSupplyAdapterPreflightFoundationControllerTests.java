@@ -12,7 +12,8 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
                 );
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse catalog = controller.catalog();
@@ -32,7 +33,8 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
                 );
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse matrix =
@@ -54,7 +56,8 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
                 );
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse boundary =
@@ -68,5 +71,28 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
         assertThat(boundary.slotCount()).isEqualTo(4);
         assertThat(boundary.ruleCount()).isEqualTo(3);
         assertThat(boundary.status()).isEqualTo("passed");
+    }
+
+    @Test
+    void exposesProvenanceBindingThroughFoundationControllerWithoutImportReadiness() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
+                );
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse binding =
+                controller.provenanceBinding();
+
+        assertThat(binding.version()).isEqualTo("Java v668");
+        assertThat(binding.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService.ENDPOINT);
+        assertThat(binding.provenanceState()).isEqualTo("required-before-adapter");
+        assertThat(binding.readyForEvidenceImport()).isFalse();
+        assertThat(binding.slotCount()).isEqualTo(4);
+        assertThat(binding.ruleCount()).isEqualTo(3);
+        assertThat(binding.status()).isEqualTo("passed");
     }
 }

@@ -13,17 +13,22 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
             compatibilityMatrixService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService
             redactionBoundaryService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService
+            provenanceBindingService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService
                     compatibilityMatrixService,
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService
-                    redactionBoundaryService
+                    redactionBoundaryService,
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService
+                    provenanceBindingService
     ) {
         this.catalogService = catalogService;
         this.compatibilityMatrixService = compatibilityMatrixService;
         this.redactionBoundaryService = redactionBoundaryService;
+        this.provenanceBindingService = provenanceBindingService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG)
@@ -39,5 +44,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_REDACTION_BOUNDARY)
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse redactionBoundary() {
         return redactionBoundaryService.boundary();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PROVENANCE_BINDING)
+    public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse provenanceBinding() {
+        return provenanceBindingService.binding();
     }
 }
