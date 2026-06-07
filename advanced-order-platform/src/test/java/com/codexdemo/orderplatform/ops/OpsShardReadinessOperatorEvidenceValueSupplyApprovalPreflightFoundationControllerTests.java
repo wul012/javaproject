@@ -42,10 +42,29 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationCon
         assertThat(signature.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesTimestampWindowThroughFoundationControllerWithoutRuntimeUnlock() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse window =
+                controller.timestampWindow();
+
+        assertThat(window.version()).isEqualTo("Java v692");
+        assertThat(window.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService.ENDPOINT);
+        assertThat(window.readyForSignedApprovalCapture()).isFalse();
+        assertThat(window.readyForRuntimePayload()).isFalse();
+        assertThat(window.readyForLiveExecution()).isFalse();
+        assertThat(window.itemCount()).isEqualTo(3);
+        assertThat(window.policyCount()).isEqualTo(3);
+        assertThat(window.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService()
         );
     }
 }

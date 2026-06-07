@@ -11,14 +11,19 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService catalogService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService
             identitySignatureService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService
+            timestampWindowService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService
-                    identitySignatureService
+                    identitySignatureService,
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService
+                    timestampWindowService
     ) {
         this.catalogService = catalogService;
         this.identitySignatureService = identitySignatureService;
+        this.timestampWindowService = timestampWindowService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG)
@@ -29,5 +34,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IDENTITY_SIGNATURE)
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse identitySignature() {
         return identitySignatureService.signature();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_TIMESTAMP_WINDOW)
+    public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse timestampWindow() {
+        return timestampWindowService.window();
     }
 }
