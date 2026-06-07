@@ -169,4 +169,44 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceServi
         );
         assertThat(plan.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsCloseoutWithAllAdapterPreflightLocksHeld() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse closeout =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseoutService()
+                        .closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v684");
+        assertThat(closeout.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-closeout");
+        assertThat(closeout.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-closeout.v1");
+        assertThat(closeout.sourcePlan()).isEqualTo("Node v986");
+        assertThat(closeout.sourceSupplyVersion()).isEqualTo("Java v658");
+        assertThat(closeout.adapterState()).isEqualTo("disabled-preflight");
+        assertThat(closeout.acceptedValueState()).isEqualTo("not-accepted");
+        assertThat(closeout.readyForAdapterImplementation()).isFalse();
+        assertThat(closeout.readyForOperatorValueSubmission()).isFalse();
+        assertThat(closeout.readyForEvidenceImport()).isFalse();
+        assertThat(closeout.readyForRuntimePayload()).isFalse();
+        assertThat(closeout.readyForLiveExecution()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.slotCount()).isEqualTo(25);
+        assertThat(closeout.passedSlotCount()).isEqualTo(25);
+        assertThat(closeout.ruleCount()).isEqualTo(18);
+        assertThat(closeout.slots().get(0).code()).isEqualTo(
+                "ADAPTER_PREFLIGHT_01_ENVELOPE_ID_COMPATIBILITY");
+        assertThat(closeout.slots().get(24).code()).isEqualTo(
+                "ADAPTER_PREFLIGHT_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(closeout.checks()).contains(
+                "value-supply-adapter-preflight-closeout-versions-v660-v684",
+                "value-supply-adapter-preflight-closeout-support-carried-forward-v659",
+                "value-supply-adapter-preflight-closeout-foundation-and-assurance-split",
+                "value-supply-adapter-preflight-closeout-node-v986-approval-draft-boundary",
+                "value-supply-adapter-preflight-closeout-no-approval-captured",
+                "value-supply-adapter-preflight-closeout-import-runtime-live-production-locked",
+                "value-supply-adapter-preflight-closeout-all-locks-held"
+        );
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
 }

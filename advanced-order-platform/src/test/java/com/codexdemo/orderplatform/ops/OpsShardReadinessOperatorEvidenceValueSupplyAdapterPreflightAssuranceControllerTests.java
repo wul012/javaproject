@@ -92,13 +92,32 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceContr
         assertThat(plan.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesCloseoutThroughAssuranceControllerWithAllLocksHeld() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse closeout =
+                controller.closeout();
+
+        assertThat(closeout.version()).isEqualTo("Java v684");
+        assertThat(closeout.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseoutService.ENDPOINT);
+        assertThat(closeout.readyForOperatorValueSubmission()).isFalse();
+        assertThat(closeout.readyForEvidenceImport()).isFalse();
+        assertThat(closeout.readyForProductionExecution()).isFalse();
+        assertThat(closeout.slotCount()).isEqualTo(25);
+        assertThat(closeout.ruleCount()).isEqualTo(18);
+        assertThat(closeout.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseoutService()
         );
     }
 }

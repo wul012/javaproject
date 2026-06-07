@@ -53,6 +53,10 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePathsTest
                 Map.entry(
                         OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_ARCHIVE_PLAN,
                         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService.ENDPOINT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT,
+                        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseoutService.ENDPOINT
                 )
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

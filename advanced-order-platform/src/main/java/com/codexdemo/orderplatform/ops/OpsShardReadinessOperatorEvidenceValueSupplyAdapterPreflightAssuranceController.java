@@ -17,6 +17,7 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService
             digestBlueprintService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService archivePlanService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseoutService closeoutService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService
@@ -27,13 +28,15 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
                     operatorRehearsalChecklistService,
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService
                     digestBlueprintService,
-            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService archivePlanService
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightArchivePlanService archivePlanService,
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseoutService closeoutService
     ) {
         this.payloadFirewallService = payloadFirewallService;
         this.runtimeSubmissionLockService = runtimeSubmissionLockService;
         this.operatorRehearsalChecklistService = operatorRehearsalChecklistService;
         this.digestBlueprintService = digestBlueprintService;
         this.archivePlanService = archivePlanService;
+        this.closeoutService = closeoutService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PAYLOAD_FIREWALL)
@@ -59,5 +62,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_ARCHIVE_PLAN)
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse archivePlan() {
         return archivePlanService.plan();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT)
+    public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse closeout() {
+        return closeoutService.closeout();
     }
 }
