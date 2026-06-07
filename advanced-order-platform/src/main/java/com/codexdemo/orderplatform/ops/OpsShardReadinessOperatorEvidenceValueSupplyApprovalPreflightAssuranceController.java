@@ -16,17 +16,21 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
             cleanupReceiptService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService
             importFirewallService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService
+            digestBlueprintService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssuranceController(
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightValueRejectionService valueRejectionService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightZeroValueLedgerService zeroValueLedgerService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCleanupReceiptService cleanupReceiptService,
-            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService importFirewallService
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightImportFirewallService importFirewallService,
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightDigestBlueprintService digestBlueprintService
     ) {
         this.valueRejectionService = valueRejectionService;
         this.zeroValueLedgerService = zeroValueLedgerService;
         this.cleanupReceiptService = cleanupReceiptService;
         this.importFirewallService = importFirewallService;
+        this.digestBlueprintService = digestBlueprintService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_VALUE_REJECTION)
@@ -47,5 +51,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightAssura
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IMPORT_FIREWALL)
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse importFirewall() {
         return importFirewallService.firewall();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_DIGEST_BLUEPRINT)
+    public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse digestBlueprint() {
+        return digestBlueprintService.blueprint();
     }
 }
