@@ -78,12 +78,30 @@ class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationCon
         assertThat(digest.status()).isEqualTo("passed");
     }
 
+    @Test
+    void exposesProvenanceBindingThroughFoundationControllerWithoutImportReadiness() {
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController controller = controller();
+
+        OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse binding =
+                controller.provenanceBinding();
+
+        assertThat(binding.version()).isEqualTo("Java v696");
+        assertThat(binding.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightProvenanceBindingService.ENDPOINT);
+        assertThat(binding.provenanceState()).isEqualTo("required-before-import");
+        assertThat(binding.readyForEvidenceImport()).isFalse();
+        assertThat(binding.itemCount()).isEqualTo(4);
+        assertThat(binding.policyCount()).isEqualTo(2);
+        assertThat(binding.status()).isEqualTo("passed");
+    }
+
     private OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController controller() {
         return new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController(
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightIdentitySignatureService(),
                 new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService()
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService(),
+                new OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightProvenanceBindingService()
         );
     }
 }

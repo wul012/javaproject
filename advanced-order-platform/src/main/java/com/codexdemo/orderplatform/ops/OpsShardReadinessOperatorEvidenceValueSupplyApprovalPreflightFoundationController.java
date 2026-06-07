@@ -15,6 +15,8 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
             timestampWindowService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService
             redactionDigestService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightProvenanceBindingService
+            provenanceBindingService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService catalogService,
@@ -23,12 +25,15 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService
                     timestampWindowService,
             OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService
-                    redactionDigestService
+                    redactionDigestService,
+            OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightProvenanceBindingService
+                    provenanceBindingService
     ) {
         this.catalogService = catalogService;
         this.identitySignatureService = identitySignatureService;
         this.timestampWindowService = timestampWindowService;
         this.redactionDigestService = redactionDigestService;
+        this.provenanceBindingService = provenanceBindingService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG)
@@ -49,5 +54,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_REDACTION_DIGEST)
     public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse redactionDigest() {
         return redactionDigestService.digest();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_PROVENANCE_BINDING)
+    public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse provenanceBinding() {
+        return provenanceBindingService.binding();
     }
 }
