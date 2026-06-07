@@ -364,6 +364,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-adapter-preflight-compatibility-matrix";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_REDACTION_BOUNDARY =
             "/operator-evidence-value-supply-adapter-preflight-redaction-boundary";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PROVENANCE_BINDING =
+            "/operator-evidence-value-supply-adapter-preflight-provenance-binding";
 
     private OpsShardReadinessRoutePaths() {
     }

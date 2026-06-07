@@ -121,4 +121,43 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationServ
         );
         assertThat(boundary.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsProvenanceBindingBeforeAnyAdapterInputCanBeImported() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse binding =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
+                        .binding();
+
+        assertThat(binding.version()).isEqualTo("Java v668");
+        assertThat(binding.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-provenance-binding");
+        assertThat(binding.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-provenance-binding.v1");
+        assertThat(binding.provenanceState()).isEqualTo("required-before-adapter");
+        assertThat(binding.readyForEvidenceImport()).isFalse();
+        assertThat(binding.slotCount()).isEqualTo(4);
+        assertThat(binding.ruleCount()).isEqualTo(3);
+        assertThat(binding.slots())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+                .containsExactly(
+                        "ADAPTER_PREFLIGHT_13_PROVENANCE_SOURCE_ID",
+                        "ADAPTER_PREFLIGHT_14_PROVENANCE_EVIDENCE_FILE",
+                        "ADAPTER_PREFLIGHT_15_PROVENANCE_SNIPPET_ID",
+                        "ADAPTER_PREFLIGHT_16_ENDPOINT_ALIAS_ONLY"
+                );
+        assertThat(binding.rules())
+                .extracting(OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+                .containsExactly(
+                        "ADAPTER_RULE_08_PROVENANCE_SOURCE_REQUIRED",
+                        "ADAPTER_RULE_09_PROVENANCE_EVIDENCE_FILE_REQUIRED",
+                        "ADAPTER_RULE_10_PROVENANCE_SNIPPET_REQUIRED"
+                );
+        assertThat(binding.checks()).contains(
+                "value-supply-adapter-preflight-provenance-source-id-required",
+                "value-supply-adapter-preflight-provenance-evidence-file-required",
+                "value-supply-adapter-preflight-provenance-snippet-required",
+                "value-supply-adapter-preflight-provenance-endpoint-alias-only"
+        );
+        assertThat(binding.status()).isEqualTo("passed");
+    }
 }
