@@ -114,4 +114,32 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceServi
         );
         assertThat(checklist.status()).isEqualTo("passed");
     }
+
+    @Test
+    void buildsDigestBlueprintWithoutValueHashOrImportReadiness() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse blueprint =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightDigestBlueprintService()
+                        .blueprint();
+
+        assertThat(blueprint.version()).isEqualTo("Java v680");
+        assertThat(blueprint.endpoint()).isEqualTo(
+                "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-digest-blueprint");
+        assertThat(blueprint.profile()).isEqualTo(
+                "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-digest-blueprint.v1");
+        assertThat(blueprint.readyForEvidenceImport()).isFalse();
+        assertThat(blueprint.readyForRuntimePayload()).isFalse();
+        assertThat(blueprint.slotCount()).isEqualTo(25);
+        assertThat(blueprint.ruleCount()).isEqualTo(18);
+        assertThat(blueprint.slots().get(0).code()).isEqualTo(
+                "ADAPTER_PREFLIGHT_01_ENVELOPE_ID_COMPATIBILITY");
+        assertThat(blueprint.slots().get(24).code()).isEqualTo(
+                "ADAPTER_PREFLIGHT_25_CLOSEOUT_LOCKS_HELD");
+        assertThat(blueprint.checks()).contains(
+                "value-supply-adapter-preflight-digest-blueprint-no-value-hash",
+                "value-supply-adapter-preflight-digest-blueprint-source-supply-v658",
+                "value-supply-adapter-preflight-digest-blueprint-node-v986-approval-draft-boundary",
+                "value-supply-adapter-preflight-digest-blueprint-lock-flags-covered"
+        );
+        assertThat(blueprint.status()).isEqualTo("passed");
+    }
 }
