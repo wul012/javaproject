@@ -11,14 +11,19 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService catalogService;
     private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService
             compatibilityMatrixService;
+    private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService
+            redactionBoundaryService;
 
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService catalogService,
             OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService
-                    compatibilityMatrixService
+                    compatibilityMatrixService,
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService
+                    redactionBoundaryService
     ) {
         this.catalogService = catalogService;
         this.compatibilityMatrixService = compatibilityMatrixService;
+        this.redactionBoundaryService = redactionBoundaryService;
     }
 
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG)
@@ -29,5 +34,10 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
     @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_COMPATIBILITY_MATRIX)
     public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse compatibilityMatrix() {
         return compatibilityMatrixService.matrix();
+    }
+
+    @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_REDACTION_BOUNDARY)
+    public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse redactionBoundary() {
+        return redactionBoundaryService.boundary();
     }
 }

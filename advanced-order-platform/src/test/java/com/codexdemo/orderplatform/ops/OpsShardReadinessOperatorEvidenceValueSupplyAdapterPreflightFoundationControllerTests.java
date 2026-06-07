@@ -11,7 +11,8 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService()
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
                 );
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse catalog = controller.catalog();
@@ -30,7 +31,8 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
                 new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
                         new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
-                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService()
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
                 );
 
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse matrix =
@@ -44,5 +46,27 @@ class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationCont
         assertThat(matrix.slotCount()).isEqualTo(4);
         assertThat(matrix.ruleCount()).isEqualTo(4);
         assertThat(matrix.status()).isEqualTo("passed");
+    }
+
+    @Test
+    void exposesRedactionBoundaryThroughFoundationControllerWithoutSecretMaterial() {
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController controller =
+                new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController(
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService(),
+                        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
+                );
+
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse boundary =
+                controller.redactionBoundary();
+
+        assertThat(boundary.version()).isEqualTo("Java v666");
+        assertThat(boundary.endpoint()).isEqualTo(
+                OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService.ENDPOINT);
+        assertThat(boundary.redactionState()).isEqualTo("required-before-adapter");
+        assertThat(boundary.readyForOperatorValueSubmission()).isFalse();
+        assertThat(boundary.slotCount()).isEqualTo(4);
+        assertThat(boundary.ruleCount()).isEqualTo(3);
+        assertThat(boundary.status()).isEqualTo("passed");
     }
 }
