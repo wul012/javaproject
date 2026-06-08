@@ -1,0 +1,20 @@
+package com.codexdemo.orderplatform.ops;
+
+final class OpsShardReadinessComparedPackageReviewEndpointRefs {
+
+    static final String CATALOG = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_CATALOG;
+    static final String SOURCE_EVIDENCE = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_SOURCE_EVIDENCE;
+    static final String COMPARISON_OUTCOME = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_COMPARISON_OUTCOME;
+    static final String IDENTITY_DIGEST = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_IDENTITY_DIGEST;
+    static final String POLICY_ARCHIVE = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_POLICY_ARCHIVE;
+    static final String HANDOFF_CLOSEOUT = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT;
+
+    private OpsShardReadinessComparedPackageReviewEndpointRefs() {
+    }
+}
