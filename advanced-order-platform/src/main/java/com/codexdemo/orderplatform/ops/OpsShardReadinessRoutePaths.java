@@ -540,6 +540,24 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-draft-text-absence";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DIGEST_INSTRUCTIONS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-digest-instructions";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_OPERATOR_INSTRUCTIONS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-operator-instructions";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_SIGNATURE_INSTRUCTIONS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-signature-instructions";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EVIDENCE_INSTRUCTIONS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-evidence-instructions";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_VALUE_POLICY_INSTRUCTIONS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-value-policy-instructions";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EMBARGO_INSTRUCTIONS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-embargo-instructions";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DRAFT_TEXT_LOCK =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-draft-text-lock";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CLOSEOUT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-instruction-preflight-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
