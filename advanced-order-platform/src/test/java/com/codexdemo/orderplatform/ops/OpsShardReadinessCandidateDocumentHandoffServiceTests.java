@@ -74,6 +74,23 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
                 });
     }
 
+    @Test
+    void policyLocksMirrorAcceptanceChecksAndStayFailClosed() {
+        var response = service().handoff();
+
+        assertThat(response.policyLocks())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.PolicyLock::acceptanceCode)
+                .doesNotHaveDuplicates()
+                .allMatch(code -> code.endsWith("-acceptance-check"));
+        assertThat(response.policyLocks())
+                .allSatisfy(lock -> {
+                    assertThat(lock.rejectionCode()).startsWith("reject-request-package-");
+                    assertThat(lock.freeze()).isEqualTo("freeze-until-reviewed-real-document-is-present");
+                    assertThat(lock.enforcement()).isEqualTo("fail-closed");
+                    assertThat(lock.status()).isEqualTo("passed");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentHandoffService service() {
         return new OpsShardReadinessCandidateDocumentHandoffService(
                 new OpsShardReadinessCandidateDocumentRequestPackageService());
