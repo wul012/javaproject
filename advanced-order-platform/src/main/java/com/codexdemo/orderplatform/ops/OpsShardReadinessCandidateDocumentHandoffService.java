@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessCandidateDocumentHandoffService {
 
-    static final String RESPONSE_VERSION = "Java v1106";
+    static final String RESPONSE_VERSION = "Java v1107";
     static final String ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF;

@@ -18,8 +18,12 @@ class OpsShardReadinessCandidateDocumentHandoffControllerTests {
                 .isEqualTo("/api/v1/ops/shard-readiness/candidate-document-request-package-handoff");
         assertThat(response.profile())
                 .isEqualTo("java-shard-readiness-candidate-document-request-package-handoff.v1");
+        assertThat(response.version()).isEqualTo("Java v1107");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
+        assertThat(response.archiveEntries())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.ArchiveEntry::path)
+                .contains("e/1107/routes/candidate-document-request-package-handoff-route.json");
     }
 
     private OpsShardReadinessCandidateDocumentHandoffService service() {
