@@ -117,6 +117,29 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
                 });
     }
 
+    @Test
+    void archiveEntriesStayVersionedAndEvidenceOnly() {
+        var response = service().handoff();
+
+        assertThat(response.archiveEntries())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.ArchiveEntry::code)
+                .containsExactly(
+                        "source-plan",
+                        "source-request-package",
+                        "source-lineage",
+                        "artifact-handles",
+                        "policy-locks",
+                        "consumer-rules",
+                        "route-evidence",
+                        "closeout");
+        assertThat(response.archiveEntries())
+                .allSatisfy(entry -> {
+                    assertThat(entry.path()).startsWith("e/1107/");
+                    assertThat(entry.retention()).isEqualTo("retained-with-version-tag");
+                    assertThat(entry.status()).isEqualTo("passed");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentHandoffService service() {
         return new OpsShardReadinessCandidateDocumentHandoffService(
                 new OpsShardReadinessCandidateDocumentRequestPackageService());
