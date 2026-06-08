@@ -604,6 +604,18 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-evidence-value";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_POLICY_EXECUTION_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-policy-execution-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_CLOSEOUT_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-closeout-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_CLOSEOUT_HANDOFF_LEDGER =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-closeout-handoff-ledger";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_CLOSEOUT_ROUTE_EVIDENCE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-closeout-route-evidence";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_CLOSEOUT_ARCHIVE_MANIFEST =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-closeout-archive-manifest";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_CLOSEOUT_RUNTIME_BOUNDARY =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-closeout-runtime-boundary";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_CLOSEOUT_INTEGRITY_SUMMARY =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-closeout-integrity-summary";
 
     private OpsShardReadinessRoutePaths() {
     }
