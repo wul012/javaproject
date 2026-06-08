@@ -656,6 +656,16 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-policy-archive";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-handoff-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_SOURCE_ARTIFACT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-source-artifact";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_IDENTITY_DIGEST =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-identity-digest";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_POLICY_RUNTIME =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-policy-runtime";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_EXCLUSION_CLOSEOUT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-exclusion-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
