@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessCandidateDocumentHandoffService {
 
     static final String ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH + "/candidate-document-request-package-handoff";
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF;
     static final String PROFILE = "java-shard-readiness-candidate-document-request-package-handoff.v1";
 
     private final OpsShardReadinessCandidateDocumentRequestPackageService sourcePackageService;
