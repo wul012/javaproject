@@ -522,6 +522,24 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-draft-authoring-gate";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_DIGEST_PINS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-digest-pins";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_OPERATOR_REQUIREMENTS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-operator-requirements";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_SIGNATURE_REQUIREMENTS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-signature-requirements";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_EVIDENCE_REQUIREMENTS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-evidence-requirements";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_VALUE_POLICY_REQUIREMENTS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-value-policy-requirements";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_EMBARGO_REQUIREMENTS =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-embargo-requirements";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_DRAFT_TEXT_ABSENCE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-draft-text-absence";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_CLOSEOUT =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-authoring-readiness-closeout";
 
     private OpsShardReadinessRoutePaths() {
     }
