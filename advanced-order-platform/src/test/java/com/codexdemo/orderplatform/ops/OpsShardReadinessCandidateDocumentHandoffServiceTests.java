@@ -140,6 +140,27 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
                 });
     }
 
+    @Test
+    void consumerRulesPreserveReadOnlyStopCondition() {
+        var response = service().handoff();
+
+        assertThat(response.consumerRules())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.ConsumerRule::code)
+                .contains(
+                        "consume-versioned-route-only",
+                        "require-reviewed-real-document",
+                        "do-not-import-payload",
+                        "do-not-evaluate-candidate",
+                        "do-not-open-runtime",
+                        "do-not-write-routing",
+                        "do-not-mutate-siblings");
+        assertThat(response.consumerRules())
+                .allSatisfy(rule -> {
+                    assertThat(rule.enforcement()).isEqualTo("fail-closed");
+                    assertThat(rule.status()).isEqualTo("passed");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentHandoffService service() {
         return new OpsShardReadinessCandidateDocumentHandoffService(
                 new OpsShardReadinessCandidateDocumentRequestPackageService());
