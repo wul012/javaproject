@@ -686,6 +686,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-policy";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_CANDIDATE_DOCUMENT_REQUEST_PACKAGE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-candidate-document-request-package";
 
     private OpsShardReadinessRoutePaths() {
     }
