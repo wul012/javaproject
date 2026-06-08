@@ -626,6 +626,14 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-comparison-preflight-evidence-value-policy";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_PREFLIGHT_EXECUTION_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-comparison-preflight-execution-closeout";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_ACCEPTANCE_PRECHECK_CATALOG =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-catalog";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_ACCEPTANCE_PRECHECK_SOURCE_IDENTITY_DIGEST =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-source-identity-digest";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_ACCEPTANCE_PRECHECK_SIGNATURE_EVIDENCE_VALUE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-signature-evidence-value";
+    static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_ACCEPTANCE_PRECHECK_POLICY_EXECUTION_ARCHIVE =
+            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-policy-execution-archive";
 
     private OpsShardReadinessRoutePaths() {
     }
