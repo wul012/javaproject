@@ -130,6 +130,23 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
     }
 
     @Test
+    void modulesKeepMaintenanceSplitOrder() {
+        var response = service().handoff();
+
+        assertThat(response.modules())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.ModuleEntry::order)
+                .containsExactly(190, 191, 192, 193, 194);
+        assertThat(response.modules())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.ModuleEntry::code)
+                .containsExactly(
+                        "source-lineage",
+                        "artifact-handles",
+                        "policy-locks",
+                        "archive-closeout",
+                        "consumer-rules");
+    }
+
+    @Test
     void archiveEntriesStayVersionedAndEvidenceOnly() {
         var response = service().handoff();
 
