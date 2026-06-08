@@ -91,6 +91,32 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
                 });
     }
 
+    @Test
+    void sourceLineageNamesPlanRequestPackageAndFutureBlockedIntake() {
+        var response = service().handoff();
+
+        assertThat(response.sourceLineage())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.SourceLineage::code)
+                .containsExactly(
+                        "node-request-plan",
+                        "node-candidate-intake",
+                        "java-candidate-intake",
+                        "java-request-package",
+                        "java-request-package-profile",
+                        "future-real-document-intake");
+        assertThat(response.sourceLineage())
+                .anySatisfy(lineage -> {
+                    assertThat(lineage.code()).isEqualTo("node-request-plan");
+                    assertThat(lineage.version()).isEqualTo("Node v1386");
+                    assertThat(lineage.source()).contains("v1386-controlled-read-only-shard-preview");
+                })
+                .anySatisfy(lineage -> {
+                    assertThat(lineage.code()).isEqualTo("future-real-document-intake");
+                    assertThat(lineage.version()).isEqualTo("blocked");
+                    assertThat(lineage.source()).isEqualTo("not-opened");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentHandoffService service() {
         return new OpsShardReadinessCandidateDocumentHandoffService(
                 new OpsShardReadinessCandidateDocumentRequestPackageService());
