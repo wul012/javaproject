@@ -190,6 +190,29 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
                 });
     }
 
+    @Test
+    void gatesAndChecksRecordCountAndReadOnlyBoundaries() {
+        var response = service().handoff();
+
+        assertThat(response.gates())
+                .hasSize(25)
+                .first()
+                .isEqualTo("candidate-document-handoff-read-only-gate-1");
+        assertThat(response.gates())
+                .last()
+                .isEqualTo("candidate-document-handoff-read-only-gate-25");
+        assertThat(response.checks())
+                .contains(
+                        "candidate-document-handoff-artifact-handle-count-15",
+                        "candidate-document-handoff-policy-lock-count-15",
+                        "candidate-document-handoff-zero-real-documents",
+                        "candidate-document-handoff-zero-payloads",
+                        "candidate-document-handoff-import-disabled",
+                        "candidate-document-handoff-runtime-disabled",
+                        "candidate-document-handoff-sibling-mutation-disabled",
+                        "candidate-document-handoff-service-assembled-from-request-package");
+    }
+
     private OpsShardReadinessCandidateDocumentHandoffService service() {
         return new OpsShardReadinessCandidateDocumentHandoffService(
                 new OpsShardReadinessCandidateDocumentRequestPackageService());
