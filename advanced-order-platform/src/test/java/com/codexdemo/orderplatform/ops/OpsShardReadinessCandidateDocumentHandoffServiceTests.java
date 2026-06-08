@@ -51,6 +51,29 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
         assertThat(response.siblingMutationAllowed()).isFalse();
     }
 
+    @Test
+    void artifactHandlesMirrorEveryRequestPackageItemWithoutImportingDocuments() {
+        var response = service().handoff();
+
+        assertThat(response.artifactHandles())
+                .extracting(OpsShardReadinessCandidateDocumentHandoffResponse.ArtifactHandle::requestCode)
+                .doesNotHaveDuplicates()
+                .contains(
+                        "source-readiness-request",
+                        "operator-provenance-request",
+                        "identity-digest-request",
+                        "signature-envelope-request",
+                        "approval-runtime-write-freeze-request");
+        assertThat(response.artifactHandles())
+                .allSatisfy(handle -> {
+                    assertThat(handle.evidenceRef()).startsWith("candidate-document-request-package/evidence/");
+                    assertThat(handle.digestRef()).endsWith(".sha256");
+                    assertThat(handle.archiveRef()).startsWith("candidate-document-request-package/archive/");
+                    assertThat(handle.state()).isEqualTo("waiting-for-reviewed-real-document");
+                    assertThat(handle.status()).isEqualTo("passed");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentHandoffService service() {
         return new OpsShardReadinessCandidateDocumentHandoffService(
                 new OpsShardReadinessCandidateDocumentRequestPackageService());
