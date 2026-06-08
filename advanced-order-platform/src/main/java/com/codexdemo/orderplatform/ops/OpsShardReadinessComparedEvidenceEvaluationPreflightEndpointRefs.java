@@ -1,0 +1,18 @@
+package com.codexdemo.orderplatform.ops;
+
+final class OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs {
+
+    static final String CATALOG = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_CATALOG;
+    static final String SOURCE_ARTIFACT = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_SOURCE_ARTIFACT;
+    static final String IDENTITY_DIGEST = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_IDENTITY_DIGEST;
+    static final String POLICY_RUNTIME = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_POLICY_RUNTIME;
+    static final String EXCLUSION_CLOSEOUT = OpsShardReadinessRoutePaths.BASE_PATH + OpsShardReadinessRoutePaths
+            .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_EXCLUSION_CLOSEOUT;
+
+    private OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs() {
+    }
+}
