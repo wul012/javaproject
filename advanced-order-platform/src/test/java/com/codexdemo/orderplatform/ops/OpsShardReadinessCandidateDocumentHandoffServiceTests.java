@@ -75,6 +75,18 @@ class OpsShardReadinessCandidateDocumentHandoffServiceTests {
     }
 
     @Test
+    void artifactHandlePathsUseStableLowercaseSlugs() {
+        var response = service().handoff();
+
+        assertThat(response.artifactHandles())
+                .allSatisfy(handle -> {
+                    assertThat(handle.evidenceRef()).matches("candidate-document-request-package/evidence/[a-z0-9-]+\\.json");
+                    assertThat(handle.digestRef()).matches("candidate-document-request-package/digests/[a-z0-9-]+\\.sha256");
+                    assertThat(handle.archiveRef()).matches("candidate-document-request-package/archive/[a-z0-9-]+\\.md");
+                });
+    }
+
+    @Test
     void policyLocksMirrorAcceptanceChecksAndStayFailClosed() {
         var response = service().handoff();
 
