@@ -167,6 +167,23 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
                         "candidate-document-intake-packet-service-assembled-from-submission-precheck");
     }
 
+    @Test
+    void carriedFieldsRemainPlaceholdersUntilReviewedMaterialExists() {
+        var response = service().intakePacket();
+
+        assertThat(response.intakeSlots())
+                .allSatisfy(slot -> {
+                    assertThat(slot.carriedFieldCount()).isEqualTo(2);
+                    assertThat(slot.envelopePlaceholder()).contains("placeholder");
+                    assertThat(slot.envelopePlaceholder()).doesNotContain("accepted");
+                    assertThat(slot.envelopePlaceholder()).doesNotContain("imported");
+                });
+        assertThat(response.carriedCandidateFieldCount()).isEqualTo(
+                response.intakeSlots().stream()
+                        .mapToInt(OpsShardReadinessCandidateDocumentIntakePacketResponse.IntakeSlot::carriedFieldCount)
+                        .sum());
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
