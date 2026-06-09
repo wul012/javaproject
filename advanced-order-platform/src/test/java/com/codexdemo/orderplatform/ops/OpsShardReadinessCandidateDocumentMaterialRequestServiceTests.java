@@ -11,7 +11,7 @@ class OpsShardReadinessCandidateDocumentMaterialRequestServiceTests {
         var response = service().materialRequest();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1146");
+        assertThat(response.version()).isEqualTo("Java v1152");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
         assertThat(response.readyForMaterialRequest()).isTrue();

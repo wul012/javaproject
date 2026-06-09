@@ -18,7 +18,7 @@ class OpsShardReadinessCandidateDocumentMaterialRequestControllerTests {
                 .isEqualTo("/api/v1/ops/shard-readiness/candidate-document-material-request");
         assertThat(response.profile())
                 .isEqualTo("java-shard-readiness-candidate-document-material-request.v1");
-        assertThat(response.version()).isEqualTo("Java v1146");
+        assertThat(response.version()).isEqualTo("Java v1152");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
         assertThat(response.artifacts())

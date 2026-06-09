@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessCandidateDocumentMaterialRequestService {
 
-    static final String RESPONSE_VERSION = "Java v1146";
+    static final String RESPONSE_VERSION = "Java v1152";
     static final String ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_REQUEST;
