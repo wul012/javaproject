@@ -18,6 +18,7 @@ class OpsShardReadinessCandidateDocumentIntakePacketControllerTests {
                 .isEqualTo("/api/v1/ops/shard-readiness/candidate-document-intake-packet");
         assertThat(response.profile())
                 .isEqualTo("java-shard-readiness-candidate-document-intake-packet.v1");
+        assertThat(response.version()).isEqualTo("Java v1139");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
         assertThat(response.artifacts())
