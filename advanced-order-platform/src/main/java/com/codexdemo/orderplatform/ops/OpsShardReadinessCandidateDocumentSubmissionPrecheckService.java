@@ -9,7 +9,8 @@ public class OpsShardReadinessCandidateDocumentSubmissionPrecheckService {
 
     static final String RESPONSE_VERSION = "Java v1113";
     static final String ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH + "/candidate-document-submission-precheck";
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK;
     static final String PROFILE = "java-shard-readiness-candidate-document-submission-precheck.v1";
 
     private final OpsShardReadinessCandidateDocumentRequestPackageService requestPackageService;

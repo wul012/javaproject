@@ -690,6 +690,8 @@ final class OpsShardReadinessRoutePaths {
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-candidate-document-request-package";
     static final String CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF =
             "/candidate-document-request-package-handoff";
+    static final String CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK =
+            "/candidate-document-submission-precheck";
 
     private OpsShardReadinessRoutePaths() {
     }
