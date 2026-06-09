@@ -11,7 +11,7 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
         var response = service().intakePacket();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1139");
+        assertThat(response.version()).isEqualTo("Java v1142");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
         assertThat(response.readyForIntakePacket()).isTrue();
