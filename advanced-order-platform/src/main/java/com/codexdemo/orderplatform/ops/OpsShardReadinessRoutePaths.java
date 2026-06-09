@@ -710,6 +710,8 @@ final class OpsShardReadinessRoutePaths {
             "/signed-approval-draft-text-package-profile-section-registry";
     static final String MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY =
             "/minimal-read-only-gate-execution-registry";
+    static final String MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY =
+            "/minimal-read-only-gate-execution-archive-verification-registry";
 
     private OpsShardReadinessRoutePaths() {
     }
