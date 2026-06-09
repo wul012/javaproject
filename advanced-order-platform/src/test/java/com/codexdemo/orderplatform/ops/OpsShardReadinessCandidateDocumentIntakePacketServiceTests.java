@@ -184,6 +184,20 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
                         .sum());
     }
 
+    @Test
+    void stopConditionWaitsForReviewedRealMaterial() {
+        var response = service().intakePacket();
+
+        assertThat(response.intakePacketState())
+                .isEqualTo("waiting-for-reviewed-real-compared-package-evidence-candidate-document");
+        assertThat(response.sourceLineage())
+                .anySatisfy(source -> {
+                    assertThat(source.code()).isEqualTo("future-reviewed-real-material");
+                    assertThat(source.version()).isEqualTo("blocked");
+                    assertThat(source.role()).contains("actual reviewed material intake out of scope");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
