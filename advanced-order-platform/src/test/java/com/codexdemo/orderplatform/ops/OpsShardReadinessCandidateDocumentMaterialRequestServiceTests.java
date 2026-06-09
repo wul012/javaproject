@@ -54,6 +54,53 @@ class OpsShardReadinessCandidateDocumentMaterialRequestServiceTests {
         assertThat(response.siblingMutationAllowed()).isFalse();
     }
 
+    @Test
+    void requestItemsAndAcceptanceChecksCoverSlotsGuardsAndExternalMaterial() {
+        var response = service().materialRequest();
+
+        assertThat(response.requestItems())
+                .extracting(OpsShardReadinessCandidateDocumentMaterialRequestResponse.RequestItem::category)
+                .contains("intake-slot-material", "guard-attestation", "external-material");
+        assertThat(response.requestItems())
+                .extracting(OpsShardReadinessCandidateDocumentMaterialRequestResponse.RequestItem::code)
+                .contains(
+                        "material-slot-candidate-intake-slot-1",
+                        "material-guard-candidate-intake-slot-1",
+                        "reviewer-identity-request",
+                        "source-uri-digest-request",
+                        "redaction-archive-closeout-request");
+        assertThat(response.acceptanceChecks())
+                .allSatisfy(check -> {
+                    assertThat(check.code()).endsWith("-acceptance-check");
+                    assertThat(check.rejectionCode()).startsWith("reject-material-request-");
+                    assertThat(check.enforcement()).isEqualTo("fail-closed");
+                    assertThat(check.status()).isEqualTo("passed");
+                });
+    }
+
+    @Test
+    void artifactsGatesAndChecksRemainEvidenceOnly() {
+        var response = service().materialRequest();
+
+        assertThat(response.artifacts())
+                .extracting(OpsShardReadinessCandidateDocumentMaterialRequestResponse.Artifact::reference)
+                .allSatisfy(reference -> assertThat(reference).startsWith("e/1152/"));
+        assertThat(response.gates())
+                .hasSize(40)
+                .first()
+                .isEqualTo("candidate-document-material-request-no-material-gate-1");
+        assertThat(response.checks())
+                .contains(
+                        "candidate-document-material-request-source-plan-Node v1446",
+                        "candidate-document-material-request-source-java-intake-packet-Java v1142",
+                        "candidate-document-material-request-item-count-25",
+                        "candidate-document-material-request-acceptance-check-count-25",
+                        "candidate-document-material-request-no-material-accepted",
+                        "candidate-document-material-request-import-disabled",
+                        "candidate-document-material-request-sibling-mutation-disabled",
+                        "candidate-document-material-request-service-assembled-from-intake-packet");
+    }
+
     private OpsShardReadinessCandidateDocumentMaterialRequestService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
