@@ -92,6 +92,32 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
                 });
     }
 
+    @Test
+    void sourceLineageAndModulesKeepMaintenanceBoundary() {
+        var response = service().intakePacket();
+
+        assertThat(response.sourceLineage())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.SourceLineage::code)
+                .containsExactly(
+                        "node-intake-packet-plan",
+                        "node-submission-precheck",
+                        "java-submission-precheck",
+                        "java-submission-precheck-profile",
+                        "future-reviewed-real-material");
+        assertThat(response.sourceLineage())
+                .anySatisfy(source -> {
+                    assertThat(source.code()).isEqualTo("future-reviewed-real-material");
+                    assertThat(source.version()).isEqualTo("blocked");
+                    assertThat(source.source()).isEqualTo("not-supplied");
+                });
+        assertThat(response.modules())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.ModuleEntry::order)
+                .containsExactly(199, 200, 201, 202, 203);
+        assertThat(response.modules())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.ModuleEntry::code)
+                .containsExactly("source-lineage", "intake-slots", "intake-guards", "artifact-handles", "route-closeout");
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
