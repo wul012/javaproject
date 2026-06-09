@@ -11,7 +11,7 @@ class OpsShardReadinessCandidateDocumentSubmissionPrecheckServiceTests {
         var response = service().precheck();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1113");
+        assertThat(response.version()).isEqualTo("Java v1117");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
         assertThat(response.readyForSubmissionPrecheck()).isTrue();

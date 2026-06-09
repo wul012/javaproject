@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessCandidateDocumentSubmissionPrecheckService {
 
-    static final String RESPONSE_VERSION = "Java v1113";
+    static final String RESPONSE_VERSION = "Java v1117";
     static final String ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK;
