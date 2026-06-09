@@ -118,6 +118,35 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
                 .containsExactly("source-lineage", "intake-slots", "intake-guards", "artifact-handles", "route-closeout");
     }
 
+    @Test
+    void artifactsAndGatesStayVersionedAndEvidenceOnly() {
+        var response = service().intakePacket();
+
+        assertThat(response.artifacts())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.Artifact::code)
+                .containsExactly(
+                        "source-node-plan",
+                        "source-submission-precheck",
+                        "source-lineage",
+                        "modules",
+                        "intake-slots",
+                        "intake-guards",
+                        "route-evidence",
+                        "closeout");
+        assertThat(response.artifacts())
+                .allSatisfy(artifact -> {
+                    assertThat(artifact.reference()).startsWith("e/1142/");
+                    assertThat(artifact.status()).isEqualTo("passed");
+                });
+        assertThat(response.gates())
+                .hasSize(35)
+                .first()
+                .isEqualTo("candidate-document-intake-packet-no-material-gate-1");
+        assertThat(response.gates())
+                .last()
+                .isEqualTo("candidate-document-intake-packet-no-material-gate-35");
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
