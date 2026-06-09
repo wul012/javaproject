@@ -147,6 +147,26 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
                 .isEqualTo("candidate-document-intake-packet-no-material-gate-35");
     }
 
+    @Test
+    void checksRecordCoverageCountsAndDisabledBoundaries() {
+        var response = service().intakePacket();
+
+        assertThat(response.checks())
+                .contains(
+                        "candidate-document-intake-packet-source-plan-Node v1421",
+                        "candidate-document-intake-packet-source-java-precheck-Java v1117",
+                        "candidate-document-intake-packet-slot-count-10",
+                        "candidate-document-intake-packet-guard-count-10",
+                        "candidate-document-intake-packet-covered-checkpoint-count-25",
+                        "candidate-document-intake-packet-covered-validator-count-25",
+                        "candidate-document-intake-packet-carried-field-count-20",
+                        "candidate-document-intake-packet-no-material-accepted",
+                        "candidate-document-intake-packet-import-disabled",
+                        "candidate-document-intake-packet-runtime-disabled",
+                        "candidate-document-intake-packet-sibling-mutation-disabled",
+                        "candidate-document-intake-packet-service-assembled-from-submission-precheck");
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
