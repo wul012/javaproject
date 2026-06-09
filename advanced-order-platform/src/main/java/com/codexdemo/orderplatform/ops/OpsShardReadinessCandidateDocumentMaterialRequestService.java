@@ -9,7 +9,8 @@ public class OpsShardReadinessCandidateDocumentMaterialRequestService {
 
     static final String RESPONSE_VERSION = "Java v1146";
     static final String ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH + "/candidate-document-material-request";
+            OpsShardReadinessRoutePaths.BASE_PATH
+                    + OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_REQUEST;
     static final String PROFILE = "java-shard-readiness-candidate-document-material-request.v1";
 
     private final OpsShardReadinessCandidateDocumentIntakePacketService sourcePacketService;

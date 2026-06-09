@@ -694,6 +694,8 @@ final class OpsShardReadinessRoutePaths {
             "/candidate-document-submission-precheck";
     static final String CANDIDATE_DOCUMENT_INTAKE_PACKET =
             "/candidate-document-intake-packet";
+    static final String CANDIDATE_DOCUMENT_MATERIAL_REQUEST =
+            "/candidate-document-material-request";
 
     private OpsShardReadinessRoutePaths() {
     }
