@@ -26,6 +26,27 @@ class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckControllerTest
                 .contains("e/1162/routes/candidate-document-material-submission-precheck-route.json");
     }
 
+    @Test
+    void materialSubmissionPrecheckRouteCarriesCloseoutEvidence() {
+        var response = new OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckController(
+                service()).materialSubmissionPrecheck();
+
+        assertThat(response.materialSubmissionPrecheckState())
+                .isEqualTo("waiting-for-reviewed-real-candidate-document-material-submission");
+        assertThat(response.checks())
+                .contains(
+                        "candidate-document-material-submission-precheck-source-route-"
+                                + "/api/v1/ops/shard-readiness/candidate-document-material-request",
+                        "candidate-document-material-submission-precheck-gate-count-41",
+                        "candidate-document-material-submission-precheck-material-submission-disabled",
+                        "candidate-document-material-submission-precheck-write-disabled");
+        assertThat(response.artifacts())
+                .extracting(OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckResponse.Artifact::reference)
+                .contains(
+                        "e/1162/routes/candidate-document-material-submission-precheck-route.json",
+                        "e/1162/closeout/candidate-document-material-submission-precheck-closeout.md");
+    }
+
     private OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckService service() {
         return new OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckService(materialRequestService());
     }
