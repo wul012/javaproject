@@ -53,6 +53,26 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
         assertThat(response.siblingMutationAllowed()).isFalse();
     }
 
+    @Test
+    void intakeSlotsCompactAllSourceCheckpointsAndCarryFields() {
+        var response = service().intakePacket();
+
+        assertThat(response.intakeSlots())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.IntakeSlot::order)
+                .containsExactly(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        assertThat(response.intakeSlots())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.IntakeSlot::coveredCheckpointCount)
+                .containsExactly(3, 3, 3, 3, 3, 2, 2, 2, 2, 2);
+        assertThat(response.intakeSlots())
+                .allSatisfy(slot -> {
+                    assertThat(slot.code()).startsWith("candidate-intake-slot-");
+                    assertThat(slot.carriedFieldCount()).isEqualTo(2);
+                    assertThat(slot.envelopePlaceholder())
+                            .startsWith("reviewed-real-document-envelope-placeholder-");
+                    assertThat(slot.status()).isEqualTo("passed");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
