@@ -73,6 +73,25 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
                 });
     }
 
+    @Test
+    void intakeGuardsMirrorSlotsAndStayFailClosed() {
+        var response = service().intakePacket();
+
+        assertThat(response.intakeGuards())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.IntakeGuard::slotCode)
+                .containsExactlyElementsOf(response.intakeSlots().stream()
+                        .map(OpsShardReadinessCandidateDocumentIntakePacketResponse.IntakeSlot::code)
+                        .toList());
+        assertThat(response.intakeGuards())
+                .allSatisfy(guard -> {
+                    assertThat(guard.code()).endsWith("-guard");
+                    assertThat(guard.rejectionCode()).startsWith("reject-intake-packet-candidate-intake-slot-");
+                    assertThat(guard.guard()).contains("reviewed real candidate document material");
+                    assertThat(guard.enforcement()).isEqualTo("fail-closed");
+                    assertThat(guard.status()).isEqualTo("passed");
+                });
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
