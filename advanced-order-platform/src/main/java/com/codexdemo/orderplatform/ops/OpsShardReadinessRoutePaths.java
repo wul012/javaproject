@@ -708,6 +708,8 @@ final class OpsShardReadinessRoutePaths {
             "/signed-approval-draft-profile-section-handoff";
     static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
             "/signed-approval-draft-text-package-profile-section-registry";
+    static final String MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY =
+            "/minimal-read-only-gate-execution-registry";
 
     private OpsShardReadinessRoutePaths() {
     }
