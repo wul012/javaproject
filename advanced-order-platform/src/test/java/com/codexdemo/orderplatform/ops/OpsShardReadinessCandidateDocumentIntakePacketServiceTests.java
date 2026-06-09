@@ -31,6 +31,28 @@ class OpsShardReadinessCandidateDocumentIntakePacketServiceTests {
         assertThat(response.status()).isEqualTo("passed");
     }
 
+    @Test
+    void keepsMaterialPayloadAndMutationPathsClosed() {
+        var response = service().intakePacket();
+
+        assertThat(response.realDocumentCount()).isZero();
+        assertThat(response.syntheticDocumentCount()).isZero();
+        assertThat(response.stagedDocumentCount()).isZero();
+        assertThat(response.importedDocumentCount()).isZero();
+        assertThat(response.evaluatedDocumentCount()).isZero();
+        assertThat(response.acceptedDocumentCount()).isZero();
+        assertThat(response.rejectedDocumentCount()).isZero();
+        assertThat(response.payloadCount()).isZero();
+        assertThat(response.materialAccepted()).isFalse();
+        assertThat(response.importAllowed()).isFalse();
+        assertThat(response.evaluationAllowed()).isFalse();
+        assertThat(response.approvalGrantAllowed()).isFalse();
+        assertThat(response.signedApprovalCaptureAllowed()).isFalse();
+        assertThat(response.runtimePayloadAllowed()).isFalse();
+        assertThat(response.writeAllowed()).isFalse();
+        assertThat(response.siblingMutationAllowed()).isFalse();
+    }
+
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
         var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();
         var handoffService = new OpsShardReadinessCandidateDocumentHandoffService(requestPackageService);
