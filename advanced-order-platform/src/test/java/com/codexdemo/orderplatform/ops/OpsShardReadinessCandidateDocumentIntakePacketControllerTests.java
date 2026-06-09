@@ -20,6 +20,9 @@ class OpsShardReadinessCandidateDocumentIntakePacketControllerTests {
                 .isEqualTo("java-shard-readiness-candidate-document-intake-packet.v1");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
+        assertThat(response.artifacts())
+                .extracting(OpsShardReadinessCandidateDocumentIntakePacketResponse.Artifact::reference)
+                .contains("e/1142/routes/candidate-document-intake-packet-route.json");
     }
 
     private OpsShardReadinessCandidateDocumentIntakePacketService service() {
