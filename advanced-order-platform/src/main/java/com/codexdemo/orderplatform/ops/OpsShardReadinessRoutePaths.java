@@ -716,6 +716,8 @@ final class OpsShardReadinessRoutePaths {
             "/minimal-read-only-gate-operator-ci-handoff-registry";
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_VERIFICATION_REGISTRY =
             "/minimal-read-only-gate-operator-ci-handoff-archive-verification-registry";
+    static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_REGISTRY =
+            "/minimal-read-only-gate-operator-ci-handoff-archive-digest-registry";
 
     private OpsShardReadinessRoutePaths() {
     }
