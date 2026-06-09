@@ -700,6 +700,8 @@ final class OpsShardReadinessRoutePaths {
             "/candidate-document-material-submission-precheck";
     static final String CANDIDATE_DOCUMENT_MATERIAL_SUBMISSION_PRECHECK_HANDOFF =
             "/candidate-document-material-submission-precheck-handoff";
+    static final String CANDIDATE_DOCUMENT_PROFILE_SECTION_REGISTRY =
+            "/candidate-document-profile-section-registry";
 
     private OpsShardReadinessRoutePaths() {
     }
