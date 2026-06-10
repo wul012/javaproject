@@ -709,25 +709,34 @@ final class OpsShardReadinessRoutePaths {
     static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
             "/signed-approval-draft-text-package-profile-section-registry";
     static final String MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY =
-            "/minimal-read-only-gate-execution-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY =
-            "/minimal-read-only-gate-execution-archive-verification-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_REGISTRY =
-            "/minimal-read-only-gate-operator-ci-handoff-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths.MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_VERIFICATION_REGISTRY =
-            "/minimal-read-only-gate-operator-ci-handoff-archive-verification-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_VERIFICATION_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_REGISTRY =
-            "/minimal-read-only-gate-operator-ci-handoff-archive-digest-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_REGISTRY =
-            "/minimal-read-only-gate-operator-ci-handoff-archive-digest-consumer-package-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_REGISTRY =
-            "/minimal-read-only-gate-operator-ci-handoff-archive-digest-consumer-package-verification-dossier-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_REGISTRY =
-            "/minimal-read-only-gate-operator-ci-handoff-archive-digest-consumer-package-verification-dossier-release-acceptance-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_ARCHIVE_REGISTRY =
-            "/minimal-read-only-gate-operator-ci-handoff-archive-digest-consumer-package-verification-dossier-release-acceptance-archive-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_ARCHIVE_REGISTRY;
     static final String RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY =
-            "/release-acceptance-archive-verification-handoff-registry";
+            OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY;
+    static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY =
+            OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY;
 
     private OpsShardReadinessRoutePaths() {
     }
