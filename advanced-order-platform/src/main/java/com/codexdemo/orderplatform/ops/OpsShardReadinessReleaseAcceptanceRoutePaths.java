@@ -26,6 +26,8 @@ final class OpsShardReadinessReleaseAcceptanceRoutePaths {
             "/release-acceptance-archive-verification-handoff-registry";
     static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY =
             "/release-acceptance-route-path-split-registry";
+    static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_CLOSEOUT_REGISTRY =
+            "/release-acceptance-route-path-split-closeout-registry";
 
     private OpsShardReadinessReleaseAcceptanceRoutePaths() {
     }

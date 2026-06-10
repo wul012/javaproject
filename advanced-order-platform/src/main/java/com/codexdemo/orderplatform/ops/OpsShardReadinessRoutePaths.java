@@ -737,6 +737,8 @@ final class OpsShardReadinessRoutePaths {
             OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY;
     static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY =
             OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY;
+    static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_CLOSEOUT_REGISTRY =
+            OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_CLOSEOUT_REGISTRY;
 
     private OpsShardReadinessRoutePaths() {
     }
