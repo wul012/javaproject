@@ -722,6 +722,8 @@ final class OpsShardReadinessRoutePaths {
             "/minimal-read-only-gate-operator-ci-handoff-archive-digest-consumer-package-registry";
     static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_REGISTRY =
             "/minimal-read-only-gate-operator-ci-handoff-archive-digest-consumer-package-verification-dossier-registry";
+    static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_REGISTRY =
+            "/minimal-read-only-gate-operator-ci-handoff-archive-digest-consumer-package-verification-dossier-release-acceptance-registry";
 
     private OpsShardReadinessRoutePaths() {
     }
