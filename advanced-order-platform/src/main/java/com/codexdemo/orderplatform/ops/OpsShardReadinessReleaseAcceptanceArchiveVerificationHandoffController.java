@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessReleaseAcceptanceRoutePaths.BASE_PATH)
 public class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffController {
 
     private final OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService service;
@@ -16,7 +16,7 @@ public class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffControl
         this.service = service;
     }
 
-    @GetMapping(OpsShardReadinessRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY)
+    @GetMapping(OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY)
     public OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse registry() {
         return service.registry();
     }

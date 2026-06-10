@@ -8,8 +8,9 @@ public class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService
 
     static final String RESPONSE_VERSION = "Java v1547";
     static final String ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY;
+            OpsShardReadinessReleaseAcceptanceRoutePaths.BASE_PATH
+                    + OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY;
     static final String PROFILE =
             "java-shard-readiness-release-acceptance-archive-verification-handoff-registry.v1";
 

@@ -10,6 +10,8 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffControllerMark
     void controllerRouteExposesArchiveVerificationHandoff() {
         assertThat(OpsShardReadinessRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY)
                 .isEqualTo("/release-acceptance-archive-verification-handoff-registry");
+        assertThat(OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY)
+                .isEqualTo(OpsShardReadinessRoutePaths.RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY);
 
         var response = new OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffController(
                 OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.service())
