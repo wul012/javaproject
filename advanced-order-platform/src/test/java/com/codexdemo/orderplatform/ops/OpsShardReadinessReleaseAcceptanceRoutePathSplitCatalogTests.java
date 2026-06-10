@@ -10,7 +10,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitCatalogTests {
     void registryReturnsSplitCatalogAndSourceSnapshot() {
         var response = OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport.registry();
 
-        assertThat(response.version()).isEqualTo("Java v1567");
+        assertThat(response.version()).isEqualTo("Java v1570");
         assertThat(response.sourcePlan()).isEqualTo("Node v1846");
         assertThat(response.nodeSplitPlan()).isEqualTo("Node v1822-v1846");
         assertThat(response.sourceHandoffVersion()).isEqualTo("Java v1547");

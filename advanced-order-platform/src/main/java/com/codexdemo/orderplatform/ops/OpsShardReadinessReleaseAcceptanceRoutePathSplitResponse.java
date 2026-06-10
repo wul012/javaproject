@@ -43,6 +43,8 @@ public record OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse(
     public record RoutePathEntry(
             String symbol,
             String path,
+            String stablePath,
+            String splitPath,
             String stableEntrypoint,
             String splitEntrypoint,
             boolean legacyCompatible,

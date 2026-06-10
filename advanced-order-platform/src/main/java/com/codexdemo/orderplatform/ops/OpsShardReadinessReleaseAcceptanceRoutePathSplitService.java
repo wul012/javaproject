@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessReleaseAcceptanceRoutePathSplitService {
 
-    static final String RESPONSE_VERSION = "Java v1567";
+    static final String RESPONSE_VERSION = "Java v1570";
     static final String ENDPOINT =
             OpsShardReadinessReleaseAcceptanceRoutePaths.BASE_PATH
                     + OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY;
@@ -25,7 +25,7 @@ public class OpsShardReadinessReleaseAcceptanceRoutePathSplitService {
         var sourceSnapshots = OpsShardReadinessReleaseAcceptanceRoutePathSplitSourceCatalog.snapshots(source);
         var routePaths = OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog.routes();
         var compatibilityChecks =
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog.compatibilityChecks();
+                OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityCatalog.checks(routePaths);
         var boundaryGuards = OpsShardReadinessReleaseAcceptanceRoutePathSplitBoundaryCatalog.guards();
         var consumerHandoffs = OpsShardReadinessReleaseAcceptanceRoutePathSplitConsumerCatalog.handoffs();
         var scorecard = OpsShardReadinessReleaseAcceptanceRoutePathSplitScorecardCatalog.scorecard(

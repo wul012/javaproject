@@ -60,17 +60,6 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog {
         );
     }
 
-    static List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.CompatibilityCheck> compatibilityChecks() {
-        return routes().stream()
-                .map(route -> new OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.CompatibilityCheck(
-                        route.symbol(),
-                        route.path(),
-                        route.path(),
-                        route.legacyCompatible()
-                ))
-                .toList();
-    }
-
     private static OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry entry(
             String symbol,
             String stablePath,
@@ -79,6 +68,8 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog {
         boolean matched = stablePath.equals(splitPath);
         return new OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry(
                 symbol,
+                splitPath,
+                stablePath,
                 splitPath,
                 "OpsShardReadinessRoutePaths." + symbol,
                 "OpsShardReadinessReleaseAcceptanceRoutePaths." + symbol,

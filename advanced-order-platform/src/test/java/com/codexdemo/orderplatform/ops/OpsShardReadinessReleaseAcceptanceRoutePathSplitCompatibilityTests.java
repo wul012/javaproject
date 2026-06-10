@@ -22,7 +22,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityTests {
     void routeCatalogMapsStableAndSplitEntrypointsOneForOne() {
         var routes = OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog.routes();
         var compatibilityChecks =
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog.compatibilityChecks();
+                OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityCatalog.checks(routes);
 
         assertThat(routes).hasSize(11);
         assertThat(routes)
@@ -30,11 +30,16 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityTests {
                     assertThat(route.stableEntrypoint()).startsWith("OpsShardReadinessRoutePaths.");
                     assertThat(route.splitEntrypoint())
                             .startsWith("OpsShardReadinessReleaseAcceptanceRoutePaths.");
+                    assertThat(route.stablePath()).isEqualTo(route.splitPath());
+                    assertThat(route.path()).isEqualTo(route.splitPath());
                     assertThat(route.legacyCompatible()).isTrue();
                     assertThat(route.status()).isEqualTo("passed");
                 });
         assertThat(compatibilityChecks).hasSize(11);
         assertThat(compatibilityChecks)
-                .allSatisfy(check -> assertThat(check.matched()).isTrue());
+                .allSatisfy(check -> {
+                    assertThat(check.stableValue()).isEqualTo(check.splitValue());
+                    assertThat(check.matched()).isTrue();
+                });
     }
 }
