@@ -11,7 +11,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryServiceTests {
         var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1769");
+        assertThat(response.version()).isEqualTo("Java v1773");
         assertThat(response.endpoint())
                 .isEqualTo("/api/v1/ops/shard-readiness/screenshot-explanation-archive-registry");
         assertThat(response.profile())
