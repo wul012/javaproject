@@ -261,29 +261,29 @@ final class OpsShardReadinessRoutePaths {
             "/route-cleanup-maintenance-extended-closeout";
 
     static final String MANUAL_EVIDENCE_WORKSHEET_CATALOG =
-            "/manual-evidence-worksheet-catalog";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG;
     static final String MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE =
-            "/manual-evidence-worksheet-slot-template";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE;
     static final String MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES =
-            "/manual-evidence-worksheet-validation-rules";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES;
     static final String MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES =
-            "/manual-evidence-worksheet-redaction-rules";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES;
     static final String MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY =
-            "/manual-evidence-worksheet-missing-value-policy";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY;
     static final String MANUAL_EVIDENCE_WORKSHEET_TARGET_SCOPE_REGISTRY =
-            "/manual-evidence-worksheet-target-scope-registry";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_TARGET_SCOPE_REGISTRY;
     static final String MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT =
-            "/manual-evidence-worksheet-importer-preflight";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT;
     static final String MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY =
-            "/manual-evidence-worksheet-route-profile-summary";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY;
     static final String MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN =
-            "/manual-evidence-worksheet-archive-plan";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN;
     static final String MANUAL_EVIDENCE_WORKSHEET_OPERATOR_HANDOFF =
-            "/manual-evidence-worksheet-operator-handoff";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_OPERATOR_HANDOFF;
     static final String MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET =
-            "/manual-evidence-worksheet-ci-budget";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET;
     static final String MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT =
-            "/manual-evidence-worksheet-closeout";
+            OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT;
 
     static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG =
             "/operator-evidence-import-preflight-catalog";
