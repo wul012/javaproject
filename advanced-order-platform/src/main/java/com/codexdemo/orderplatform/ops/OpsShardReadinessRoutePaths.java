@@ -744,6 +744,9 @@ final class OpsShardReadinessRoutePaths {
     static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE =
             OpsShardReadinessReleaseAcceptanceRoutePaths
                     .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE;
+    static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE_CLOSEOUT_RECEIPT =
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                    .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE_CLOSEOUT_RECEIPT;
 
     private OpsShardReadinessRoutePaths() {
     }

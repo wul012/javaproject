@@ -32,6 +32,8 @@ final class OpsShardReadinessReleaseAcceptanceRoutePaths {
             "/release-acceptance-route-path-split-sustainment-registry";
     static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE =
             "/release-acceptance-route-path-split-sustainment-acceptance-package";
+    static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE_CLOSEOUT_RECEIPT =
+            "/release-acceptance-route-path-split-sustainment-acceptance-package-closeout-receipt";
 
     private OpsShardReadinessReleaseAcceptanceRoutePaths() {
     }
