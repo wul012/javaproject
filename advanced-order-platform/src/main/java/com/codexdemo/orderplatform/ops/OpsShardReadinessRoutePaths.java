@@ -800,6 +800,8 @@ final class OpsShardReadinessRoutePaths {
     static final String SANDBOX_CONNECTION_PRECHECK_UPSTREAM_RECEIPT_VERIFICATION_MANIFEST =
             OpsShardReadinessSandboxConnectionRoutePaths
                     .SANDBOX_CONNECTION_PRECHECK_UPSTREAM_RECEIPT_VERIFICATION_MANIFEST;
+    static final String CODE_WALKTHROUGH_COMPLIANCE_REGISTRY =
+            OpsShardReadinessCodeWalkthroughComplianceRoutePaths.CODE_WALKTHROUGH_COMPLIANCE_REGISTRY;
 
     private OpsShardReadinessRoutePaths() {
     }
