@@ -13,14 +13,16 @@ d/<version>/图片/*.png
 
 ## Active Continuation
 
-New screenshot/explanation work should continue in the segmented sibling root:
+New screenshot/explanation work should continue in the canonical segmented sibling root:
 
 ```text
-d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/explanations/summary.md
-d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/images/*.png
+f/v<start>-v<end>/<version>/explanations/summary.md
+f/v<start>-v<end>/<version>/images/*.png
 ```
 
-Use a version-range segment first, then a version folder. Do not put screenshots or explanation markdown directly under `d/` or directly under `d_runtime_screenshot_archive_next/`.
+Use a version-range segment first, then a version folder. Do not put screenshots or explanation markdown directly under `d/`, directly under `d_runtime_screenshot_archive_next/`, or directly under `f/`.
+
+The `d_runtime_screenshot_archive_next/` folder is preserved only as the v1759-v1763 transition record.
 
 ## Preserved Range
 

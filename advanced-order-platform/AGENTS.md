@@ -61,16 +61,18 @@ Version completion expectations:
 
 For Java version work after v115 and through the historical v152 runtime evidence set,
 run/debug explanations and screenshots live in `d/`, which is a sibling of the old `a/`,
-`b/`, and `c/` archive folders. For new screenshot/explanation work after this archive
-became crowded, continue in a same-level segmented root:
+`b/`, and `c/` archive folders. The v1759-v1763 `d_runtime_screenshot_archive_next/`
+folder is a preserved transition record only. For new screenshot/explanation work, continue
+in the canonical same-level `f/` root:
 
 ```text
-d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/explanations/summary.md
-d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/images/*.png
+f/v<start>-v<end>/<version>/explanations/summary.md
+f/v<start>-v<end>/<version>/images/*.png
 ```
 
-Do not place new screenshot or explanation files directly under `d/` or directly under
-`d_runtime_screenshot_archive_next/`. Use a version-range segment first, then the version folder.
+Do not place new screenshot or explanation files directly under `d/`, directly under
+`d_runtime_screenshot_archive_next/`, or directly under `f/`. Use a version-range segment first,
+then the version folder.
 
 Use this shape:
 
@@ -95,7 +97,7 @@ d/<version>/图片/*.png
 For new segmented screenshot archives, save successful screenshots under:
 
 ```text
-d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/images/*.png
+f/v<start>-v<end>/<version>/images/*.png
 ```
 
 Use the sibling explanation file to describe what each screenshot proves. If MCP screenshot
@@ -118,8 +120,9 @@ For document work only, when an output folder becomes crowded, create or use a s
 sibling folder and continue writing there instead of stuffing everything into the original
 folder. Keep the original folder for older files and let the sibling folder carry the newer
 sequence. For the current Java docs, this means historical runtime/screenshot explanations stay
-in `d/`, new screenshot/explanation work continues in `d_runtime_screenshot_archive_next/`,
-and code explanation notes continue in the active `代码讲解记录*` continuation folders.
+in `d/`, the v1759-v1763 transition stays in `d_runtime_screenshot_archive_next/`, new
+screenshot/explanation work continues in `f/`, and code explanation notes continue in the active
+`代码讲解记录*` continuation folders.
 
 ## Docker Shutdown Fast Path
 
