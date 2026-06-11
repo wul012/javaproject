@@ -319,29 +319,30 @@ final class OpsShardReadinessRoutePaths {
             OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT;
 
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG =
-            "/operator-evidence-value-draft-catalog";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_SLOT_TEMPLATE =
-            "/operator-evidence-value-draft-slot-template";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SLOT_TEMPLATE;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_VALUE_BOUNDARY =
-            "/operator-evidence-value-draft-value-boundary";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_VALUE_BOUNDARY;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_INSTRUCTION_SET =
-            "/operator-evidence-value-draft-instruction-set";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_INSTRUCTION_SET;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_SAFETY_GATE_MATRIX =
-            "/operator-evidence-value-draft-safety-gate-matrix";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SAFETY_GATE_MATRIX;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_SOURCE_MAPPING_REGISTRY =
-            "/operator-evidence-value-draft-source-mapping-registry";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_DRAFT_SOURCE_MAPPING_REGISTRY;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER =
-            "/operator-evidence-value-draft-blocked-reason-ledger";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT =
-            "/operator-evidence-value-draft-digest-blueprint";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_ROUTE_PROFILE_SUMMARY =
-            "/operator-evidence-value-draft-route-profile-summary";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_ROUTE_PROFILE_SUMMARY;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_ARCHIVE_PLAN =
-            "/operator-evidence-value-draft-archive-plan";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_ARCHIVE_PLAN;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_OPERATOR_HANDOFF =
-            "/operator-evidence-value-draft-operator-handoff";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_OPERATOR_HANDOFF;
     static final String OPERATOR_EVIDENCE_VALUE_DRAFT_CLOSEOUT =
-            "/operator-evidence-value-draft-closeout";
+            OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CLOSEOUT;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG =
             "/operator-evidence-value-supply-catalog";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ENVELOPE_TEMPLATE =
