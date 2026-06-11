@@ -13,13 +13,15 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryCloseoutTests {
         assertThat(response.checks())
                 .contains(
                         "screenshot-explanation-archive-legacy-root-d",
-                        "screenshot-explanation-archive-next-root-d_runtime_screenshot_archive_next",
-                        "screenshot-explanation-archive-segment-plan-count-3",
+                        "screenshot-explanation-archive-next-root-f",
+                        "screenshot-explanation-archive-canonical-root-f",
+                        "screenshot-explanation-archive-transition-root-closed-d_runtime_screenshot_archive_next",
+                        "screenshot-explanation-archive-segment-plan-count-4",
                         "screenshot-explanation-archive-verification-step-count-5"
                 );
         assertThat(response.segmentPlans())
                 .extracting(OpsShardReadinessScreenshotExplanationArchiveRegistryResponse
                         .ArchiveSegmentPlan::versionRange)
-                .containsExactly("v116-v152", "v1759-v1763", "v1764-v1780");
+                .containsExactly("v116-v152", "v1759-v1763", "v1764-v1768", "v1769-v1785");
     }
 }

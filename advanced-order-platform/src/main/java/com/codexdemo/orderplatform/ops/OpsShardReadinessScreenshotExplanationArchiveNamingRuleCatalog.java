@@ -12,17 +12,17 @@ final class OpsShardReadinessScreenshotExplanationArchiveNamingRuleCatalog {
         return List.of(
                 rule(
                         "range-before-version",
-                        "d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/...",
-                        "keep the root small by grouping later evidence into version bands"
+                        "f/v<start>-v<end>/<version>/...",
+                        "keep the canonical screenshot/explanation root small by grouping evidence into version bands"
                 ),
                 rule(
                         "separate-images-and-explanations",
-                        "d_runtime_screenshot_archive_next/v<range>/<version>/images/*.png and explanations/summary.md",
+                        "f/v<range>/<version>/images/*.png and explanations/summary.md",
                         "screenshots and explanations stay adjacent but not mixed in one directory"
                 ),
                 rule(
                         "no-root-dumping",
-                        "never write screenshots or explanation markdown directly under d or the next root",
+                        "never write screenshots or explanation markdown directly under d, d_runtime_screenshot_archive_next, or f",
                         "root folders stay navigational indexes only"
                 ),
                 rule(

@@ -6,13 +6,13 @@ import java.util.List;
 final class OpsShardReadinessScreenshotExplanationArchiveRegistrySupport {
 
     static final String PROJECT = "advanced-order-platform";
-    static final String SOURCE_PLAN = "Node v367 / Java v1759-v1763";
+    static final String SOURCE_PLAN = "Node v367 / Java v1764-v1768";
     static final String LEGACY_ROOT = "d";
-    static final String NEXT_ROOT = "d_runtime_screenshot_archive_next";
+    static final String NEXT_ROOT = "f";
     static final String REGISTRY_STATE =
-            "screenshot-explanation-archives-segmented-away-from-the-crowded-root";
-    static final int EXPECTED_CURRENT_ARCHIVE_ASSESSMENT_COUNT = 2;
-    static final int EXPECTED_SEGMENT_PLAN_COUNT = 3;
+            "screenshot-explanation-archives-canonical-f-root-ready";
+    static final int EXPECTED_CURRENT_ARCHIVE_ASSESSMENT_COUNT = 3;
+    static final int EXPECTED_SEGMENT_PLAN_COUNT = 4;
     static final int EXPECTED_NAMING_RULE_COUNT = 6;
     static final int EXPECTED_BOUNDARY_RULE_COUNT = 8;
     static final int EXPECTED_VERIFICATION_STEP_COUNT = 5;
@@ -55,7 +55,8 @@ final class OpsShardReadinessScreenshotExplanationArchiveRegistrySupport {
         boolean hasNextRoot = currentArchiveCopy.stream()
                 .anyMatch(assessment -> NEXT_ROOT.equals(assessment.root()));
         boolean hasCurrentSegment = segmentPlanCopy.stream()
-                .anyMatch(segment -> segment.path().contains("v1759-v1763") && segment.active());
+                .anyMatch(segment -> segment.path().contains("f/v1764-v1768")
+                        && segment.active());
         boolean statusPassed = currentArchiveCopy.size() == EXPECTED_CURRENT_ARCHIVE_ASSESSMENT_COUNT
                 && segmentPlanCopy.size() == EXPECTED_SEGMENT_PLAN_COUNT
                 && namingRuleCopy.size() == EXPECTED_NAMING_RULE_COUNT
@@ -71,6 +72,8 @@ final class OpsShardReadinessScreenshotExplanationArchiveRegistrySupport {
         checks.add("screenshot-explanation-archive-source-plan-" + SOURCE_PLAN);
         checks.add("screenshot-explanation-archive-legacy-root-" + LEGACY_ROOT);
         checks.add("screenshot-explanation-archive-next-root-" + NEXT_ROOT);
+        checks.add("screenshot-explanation-archive-canonical-root-f");
+        checks.add("screenshot-explanation-archive-transition-root-closed-d_runtime_screenshot_archive_next");
         checks.add("screenshot-explanation-archive-current-assessment-count-"
                 + currentArchiveCopy.size());
         checks.add("screenshot-explanation-archive-segment-plan-count-" + segmentPlanCopy.size());

@@ -22,9 +22,9 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryRendererTests {
                 );
         assertThat(response.markdownSections().get(0).lines())
                 .anySatisfy(line -> assertThat(line)
-                        .contains("d_runtime_screenshot_archive_next", "active-segmented-root"));
+                        .contains("f", "active-canonical-screenshot-explanation-root"));
         assertThat(response.markdownSections().get(1).lines())
-                .anySatisfy(line -> assertThat(line).contains("v1759-v1763", "active=true"));
+                .anySatisfy(line -> assertThat(line).contains("f/v1764-v1768", "active=true"));
         assertThat(response.markdownSections().get(2).lines())
                 .anySatisfy(line -> assertThat(line).contains("no-root-dumping", "required=true"));
         assertThat(response.markdownSections().get(3).lines())

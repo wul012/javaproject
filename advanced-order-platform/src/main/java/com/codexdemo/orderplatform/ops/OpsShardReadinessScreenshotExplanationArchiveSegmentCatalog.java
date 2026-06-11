@@ -18,17 +18,24 @@ final class OpsShardReadinessScreenshotExplanationArchiveSegmentCatalog {
                         false
                 ),
                 segment(
-                        "current-screenshot-explanation-segment",
+                        "transition-screenshot-explanation-segment",
                         "d_runtime_screenshot_archive_next/v1759-v1763",
                         "v1759-v1763",
-                        "hold this five-version archive segmentation registry batch",
+                        "preserve the first segmentation handoff without making the transitional root permanent",
+                        false
+                ),
+                segment(
+                        "current-f-screenshot-explanation-segment",
+                        "f/v1764-v1768",
+                        "v1764-v1768",
+                        "hold the canonical f-root policy correction and any new screenshot explanations",
                         true
                 ),
                 segment(
-                        "next-screenshot-explanation-segment",
-                        "d_runtime_screenshot_archive_next/v1764-v1780",
-                        "v1764-v1780",
-                        "pre-declare the next range when screenshot evidence grows again",
+                        "next-f-screenshot-explanation-segment",
+                        "f/v1769-v1785",
+                        "v1769-v1785",
+                        "reserve the next f range before the current segment becomes crowded",
                         true
                 )
         );

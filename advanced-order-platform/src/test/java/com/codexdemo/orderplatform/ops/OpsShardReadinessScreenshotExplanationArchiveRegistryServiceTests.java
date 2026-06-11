@@ -11,18 +11,18 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryServiceTests {
         var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1763");
+        assertThat(response.version()).isEqualTo("Java v1764");
         assertThat(response.endpoint())
                 .isEqualTo("/api/v1/ops/shard-readiness/screenshot-explanation-archive-registry");
         assertThat(response.profile())
                 .isEqualTo("java-shard-readiness-screenshot-explanation-archive-registry.v1");
-        assertThat(response.sourcePlan()).isEqualTo("Node v367 / Java v1759-v1763");
+        assertThat(response.sourcePlan()).isEqualTo("Node v367 / Java v1764-v1768");
         assertThat(response.legacyRoot()).isEqualTo("d");
-        assertThat(response.nextRoot()).isEqualTo("d_runtime_screenshot_archive_next");
+        assertThat(response.nextRoot()).isEqualTo("f");
         assertThat(response.registryState())
-                .isEqualTo("screenshot-explanation-archives-segmented-away-from-the-crowded-root");
-        assertThat(response.currentArchiveAssessmentCount()).isEqualTo(2);
-        assertThat(response.segmentPlanCount()).isEqualTo(3);
+                .isEqualTo("screenshot-explanation-archives-canonical-f-root-ready");
+        assertThat(response.currentArchiveAssessmentCount()).isEqualTo(3);
+        assertThat(response.segmentPlanCount()).isEqualTo(4);
         assertThat(response.namingRuleCount()).isEqualTo(6);
         assertThat(response.boundaryRuleCount()).isEqualTo(8);
         assertThat(response.deniedBoundaryRuleCount()).isEqualTo(8);
@@ -37,13 +37,14 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryServiceTests {
         assertThat(response.currentArchiveAssessments())
                 .extracting(OpsShardReadinessScreenshotExplanationArchiveRegistryResponse
                         .CurrentArchiveAssessment::root)
-                .containsExactly("d", "d_runtime_screenshot_archive_next");
+                .containsExactly("d", "d_runtime_screenshot_archive_next", "f");
         assertThat(response.segmentPlans())
                 .extracting(OpsShardReadinessScreenshotExplanationArchiveRegistryResponse
                         .ArchiveSegmentPlan::path)
                 .contains(
                         "d_runtime_screenshot_archive_next/v1759-v1763",
-                        "d_runtime_screenshot_archive_next/v1764-v1780"
+                        "f/v1764-v1768",
+                        "f/v1769-v1785"
                 );
         assertThat(response.namingRules())
                 .extracting(OpsShardReadinessScreenshotExplanationArchiveRegistryResponse

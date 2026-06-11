@@ -14,15 +14,22 @@ final class OpsShardReadinessScreenshotExplanationArchiveCurrentCatalog {
                         "d",
                         32,
                         50,
-                        "legacy-active-root-closed-for-new-segmented-work",
-                        "keep historical v116-v152 records in place and route new screenshot explanations to the next root"
+                        "legacy-runtime-root-closed",
+                        "keep historical v116-v152 records in place and route new screenshot explanations to f"
                 ),
                 assessment(
                         "d_runtime_screenshot_archive_next",
                         1,
                         2,
-                        "active-segmented-root",
-                        "continue with version-range folders before any single folder grows crowded"
+                        "transition-segment-root-closed-after-v1763",
+                        "preserve the v1759-v1763 segmentation handoff but do not use it as the continuing root"
+                ),
+                assessment(
+                        "f",
+                        1,
+                        2,
+                        "active-canonical-screenshot-explanation-root",
+                        "use f/<version-range>/<version>/images and explanations for new screenshot evidence"
                 )
         );
     }

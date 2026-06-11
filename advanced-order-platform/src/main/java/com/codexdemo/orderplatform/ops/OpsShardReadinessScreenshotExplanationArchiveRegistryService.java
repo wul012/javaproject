@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessScreenshotExplanationArchiveRegistryService {
 
-    static final String RESPONSE_VERSION = "Java v1763";
+    static final String RESPONSE_VERSION = "Java v1764";
     static final String ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY;
