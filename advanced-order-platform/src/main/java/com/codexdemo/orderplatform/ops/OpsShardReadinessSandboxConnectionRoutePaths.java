@@ -7,6 +7,9 @@ final class OpsShardReadinessSandboxConnectionRoutePaths {
     static final String SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER =
             "/sandbox-connection-blocked-execution-context-normalization-dossier";
 
+    static final String SANDBOX_CONNECTION_PRECHECK_UPSTREAM_RECEIPT_VERIFICATION_MANIFEST =
+            "/sandbox-connection-precheck-upstream-receipt-verification-manifest";
+
     private OpsShardReadinessSandboxConnectionRoutePaths() {
     }
 }

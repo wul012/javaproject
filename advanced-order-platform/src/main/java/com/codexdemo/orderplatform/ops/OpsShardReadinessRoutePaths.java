@@ -756,6 +756,9 @@ final class OpsShardReadinessRoutePaths {
     static final String SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER =
             OpsShardReadinessSandboxConnectionRoutePaths
                     .SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER;
+    static final String SANDBOX_CONNECTION_PRECHECK_UPSTREAM_RECEIPT_VERIFICATION_MANIFEST =
+            OpsShardReadinessSandboxConnectionRoutePaths
+                    .SANDBOX_CONNECTION_PRECHECK_UPSTREAM_RECEIPT_VERIFICATION_MANIFEST;
 
     private OpsShardReadinessRoutePaths() {
     }
