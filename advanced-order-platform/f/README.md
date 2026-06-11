@@ -22,5 +22,6 @@ d_runtime_screenshot_archive_next/v1759-v1763/: transitional segmentation handof
 
 ```text
 v1764-v1768: canonical f-root policy correction and archive handoff
-v1769-v1785: reserved next f segment when screenshot evidence resumes
+v1769-v1773: machine-checkable f-root layout inventory and guard batch
+v1774-v1785: reserved next f segment when screenshot evidence resumes
 ```

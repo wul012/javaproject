@@ -21,6 +21,9 @@ class OpsScreenshotExplanationArchiveSegmentationDocsTests {
         assertThat(Files.isDirectory(NEXT_ROOT.resolve("v1764-v1768"))).isTrue();
         assertThat(Files.isRegularFile(NEXT_ROOT.resolve("v1764-v1768").resolve("README.md")))
                 .isTrue();
+        assertThat(Files.isDirectory(NEXT_ROOT.resolve("v1769-v1773"))).isTrue();
+        assertThat(Files.isRegularFile(NEXT_ROOT.resolve("v1769-v1773").resolve("README.md")))
+                .isTrue();
     }
 
     @Test
@@ -28,12 +31,19 @@ class OpsScreenshotExplanationArchiveSegmentationDocsTests {
         String rootReadme = Files.readString(NEXT_ROOT.resolve("README.md"));
         String segmentReadme = Files.readString(NEXT_ROOT.resolve("v1764-v1768")
                 .resolve("README.md"));
+        String currentSegmentReadme = Files.readString(NEXT_ROOT.resolve("v1769-v1773")
+                .resolve("README.md"));
         String transitionReadme = Files.readString(TRANSITION_ROOT.resolve("README.md"));
 
         assertThat(rootReadme)
-                .contains("Do not place screenshots or explanation markdown directly in this root.");
+                .contains(
+                        "Do not place screenshots or explanation markdown directly in this root.",
+                        "v1769-v1773"
+                );
         assertThat(segmentReadme)
                 .contains("images", "explanations", "v1764-v1768");
+        assertThat(currentSegmentReadme)
+                .contains("images", "explanations", "v1769-v1773");
         assertThat(transitionReadme)
                 .contains("Do not use this root for new screenshot/explanation work.",
                         "Continue new work in `f/`");
