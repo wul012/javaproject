@@ -1,6 +1,6 @@
 # Java code explanation notes - production prototype continuation
 
-This folder is the active code explanation archive for Java versions after v115.
+This folder is the historical code explanation archive for Java versions v116-v152.
 
 The previous folder is closed at:
 
@@ -19,8 +19,8 @@ Rules:
 
 ```text
 Keep older code explanation folders as historical archives.
-Do not move older files unless explicitly requested.
-Use this folder for new Java code explanation notes.
+Use 代码讲解记录_总索引.md as the navigation entry.
+Use 代码讲解记录_写作规范.md for every new or revised walkthrough.
 ```
 
 ## Index

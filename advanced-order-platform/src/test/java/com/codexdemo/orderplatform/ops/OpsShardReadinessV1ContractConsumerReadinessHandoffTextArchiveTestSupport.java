@@ -39,8 +39,9 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffTextArchiveTestSu
     }
 
     static List<String> walkthroughFileNames() throws IOException {
-        try (Stream<Path> files = Files.list(walkthroughRoot())) {
+        try (Stream<Path> files = Files.walk(walkthroughRoot())) {
             return files
+                    .filter(Files::isRegularFile)
                     .map(path -> path.getFileName().toString())
                     .toList();
         }
@@ -64,12 +65,13 @@ final class OpsShardReadinessV1ContractConsumerReadinessHandoffTextArchiveTestSu
     }
 
     private static boolean containsWalkthroughFile(Path directory) {
-        try (Stream<Path> files = Files.list(directory)) {
+        try (Stream<Path> files = Files.walk(directory, 3)) {
             return files
+                    .filter(Files::isRegularFile)
                     .map(path -> path.getFileName().toString())
                     .anyMatch(fileName -> fileName.contains("version-226-"));
         } catch (IOException ex) {
-            throw new AssertionError("Unable to inspect walkthrough archive directory " + directory, ex);
+            throw new AssertionError("Unable to inspect walkthrough archive tree " + directory, ex);
         }
     }
 }
