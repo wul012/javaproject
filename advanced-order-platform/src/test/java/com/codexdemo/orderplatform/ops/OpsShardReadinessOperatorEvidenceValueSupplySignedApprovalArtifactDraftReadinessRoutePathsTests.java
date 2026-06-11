@@ -68,4 +68,64 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftRea
                 .isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route)
                 .contains("signed-approval-artifact-draft-readiness"));
     }
+
+    @Test
+    void signedApprovalArtifactDraftReadinessRoutesDelegateToSplitOwner() {
+        assertThat(Map.ofEntries(
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CATALOG,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CATALOG
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_DIGEST_CHAIN,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_DIGEST_CHAIN
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_OPERATOR_WINDOW,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_OPERATOR_WINDOW
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_SIGNATURE_STATEMENT,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_SIGNATURE_STATEMENT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_EVIDENCE_SOURCE,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_EVIDENCE_SOURCE
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_REDACTION_PROVENANCE,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_REDACTION_PROVENANCE
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_FAIL_CLOSED_LOCKS,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_FAIL_CLOSED_LOCKS
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_ARCHIVE_PLAN,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_ARCHIVE_PLAN
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT,
+                        OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                                .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT
+                )
+        )).allSatisfy((legacy, split) -> assertThat(legacy).isEqualTo(split));
+    }
 }

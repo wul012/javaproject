@@ -482,23 +482,32 @@ final class OpsShardReadinessRoutePaths {
             OpsShardReadinessSignedApprovalCaptureArtifactPreflightRoutePaths
                     .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_ARTIFACT_PREFLIGHT_CLOSEOUT;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CATALOG =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-catalog";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CATALOG;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_DIGEST_CHAIN =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-digest-chain";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_DIGEST_CHAIN;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_OPERATOR_WINDOW =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-operator-window";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_OPERATOR_WINDOW;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_SIGNATURE_STATEMENT =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-signature-statement";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_SIGNATURE_STATEMENT;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_EVIDENCE_SOURCE =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-evidence-source";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_EVIDENCE_SOURCE;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_REDACTION_PROVENANCE =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-redaction-provenance";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_REDACTION_PROVENANCE;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_FAIL_CLOSED_LOCKS =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-fail-closed-locks";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_FAIL_CLOSED_LOCKS;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_ARCHIVE_PLAN =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-archive-plan";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_ARCHIVE_PLAN;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-closeout";
+            OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT;
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_CATALOG =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-preflight-catalog";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_DIGEST_CHAIN =
