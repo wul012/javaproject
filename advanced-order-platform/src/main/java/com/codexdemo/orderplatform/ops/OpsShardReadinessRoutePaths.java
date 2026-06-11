@@ -696,27 +696,28 @@ final class OpsShardReadinessRoutePaths {
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CLOSEOUT =
             "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-closeout";
     static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_CANDIDATE_DOCUMENT_REQUEST_PACKAGE =
-            "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-candidate-document-request-package";
+            OpsShardReadinessCandidateDocumentRoutePaths
+                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_CANDIDATE_DOCUMENT_REQUEST_PACKAGE;
     static final String CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF =
-            "/candidate-document-request-package-handoff";
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF;
     static final String CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK =
-            "/candidate-document-submission-precheck";
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK;
     static final String CANDIDATE_DOCUMENT_INTAKE_PACKET =
-            "/candidate-document-intake-packet";
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_INTAKE_PACKET;
     static final String CANDIDATE_DOCUMENT_MATERIAL_REQUEST =
-            "/candidate-document-material-request";
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_REQUEST;
     static final String CANDIDATE_DOCUMENT_MATERIAL_SUBMISSION_PRECHECK =
-            "/candidate-document-material-submission-precheck";
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_SUBMISSION_PRECHECK;
     static final String CANDIDATE_DOCUMENT_MATERIAL_SUBMISSION_PRECHECK_HANDOFF =
-            "/candidate-document-material-submission-precheck-handoff";
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_SUBMISSION_PRECHECK_HANDOFF;
     static final String CANDIDATE_DOCUMENT_PROFILE_SECTION_REGISTRY =
-            "/candidate-document-profile-section-registry";
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_PROFILE_SECTION_REGISTRY;
     static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY =
-            "/signed-approval-draft-profile-section-registry";
+            OpsShardReadinessCandidateDocumentRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY;
     static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF =
-            "/signed-approval-draft-profile-section-handoff";
+            OpsShardReadinessCandidateDocumentRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF;
     static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
-            "/signed-approval-draft-text-package-profile-section-registry";
+            OpsShardReadinessCandidateDocumentRoutePaths.SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY =
             OpsShardReadinessReleaseAcceptanceRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY;
     static final String MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY =
