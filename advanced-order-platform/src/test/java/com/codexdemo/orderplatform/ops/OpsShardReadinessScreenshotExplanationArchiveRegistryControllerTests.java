@@ -19,7 +19,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryControllerTests {
                 .isEqualTo("/api/v1/ops/shard-readiness/screenshot-explanation-archive-registry");
         assertThat(response.profile())
                 .isEqualTo("java-shard-readiness-screenshot-explanation-archive-registry.v1");
-        assertThat(response.version()).isEqualTo("Java v1764");
+        assertThat(response.version()).isEqualTo("Java v1768");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.capturesScreenshot()).isFalse();
     }
