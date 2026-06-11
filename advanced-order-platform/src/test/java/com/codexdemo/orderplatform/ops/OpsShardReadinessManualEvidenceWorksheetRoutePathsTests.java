@@ -61,4 +61,61 @@ class OpsShardReadinessManualEvidenceWorksheetRoutePathsTests {
         )).allSatisfy((route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
     }
+
+    @Test
+    void manualEvidenceWorksheetRoutesDelegateToSplitOwner() {
+        assertThat(Map.ofEntries(
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths
+                                .MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_TARGET_SCOPE_REGISTRY,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths
+                                .MANUAL_EVIDENCE_WORKSHEET_TARGET_SCOPE_REGISTRY
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths
+                                .MANUAL_EVIDENCE_WORKSHEET_ROUTE_PROFILE_SUMMARY
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_ARCHIVE_PLAN
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_OPERATOR_HANDOFF,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_OPERATOR_HANDOFF
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET
+                ),
+                Map.entry(
+                        OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT,
+                        OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT
+                )
+        )).allSatisfy((legacy, split) -> assertThat(legacy).isEqualTo(split));
+    }
 }
