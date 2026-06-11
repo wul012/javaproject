@@ -25,16 +25,23 @@ final class OpsShardReadinessScreenshotExplanationArchiveSegmentCatalog {
                         false
                 ),
                 segment(
-                        "current-f-screenshot-explanation-segment",
+                        "closed-f-screenshot-explanation-segment",
                         "f/v1764-v1768",
                         "v1764-v1768",
-                        "hold the canonical f-root policy correction and any new screenshot explanations",
+                        "preserve the canonical f-root policy correction and archive handoff",
+                        false
+                ),
+                segment(
+                        "current-f-screenshot-explanation-segment",
+                        "f/v1769-v1773",
+                        "v1769-v1773",
+                        "hold the machine-checkable f-root layout inventory and guard batch",
                         true
                 ),
                 segment(
                         "next-f-screenshot-explanation-segment",
-                        "f/v1769-v1785",
-                        "v1769-v1785",
+                        "f/v1774-v1785",
+                        "v1774-v1785",
                         "reserve the next f range before the current segment becomes crowded",
                         true
                 )

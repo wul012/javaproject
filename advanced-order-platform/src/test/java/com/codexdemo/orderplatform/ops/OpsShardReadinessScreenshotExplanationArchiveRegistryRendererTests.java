@@ -24,7 +24,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryRendererTests {
                 .anySatisfy(line -> assertThat(line)
                         .contains("f", "active-canonical-screenshot-explanation-root"));
         assertThat(response.markdownSections().get(1).lines())
-                .anySatisfy(line -> assertThat(line).contains("f/v1764-v1768", "active=true"));
+                .anySatisfy(line -> assertThat(line).contains("f/v1769-v1773", "active=true"));
         assertThat(response.markdownSections().get(2).lines())
                 .anySatisfy(line -> assertThat(line).contains("no-root-dumping", "required=true"));
         assertThat(response.markdownSections().get(3).lines())

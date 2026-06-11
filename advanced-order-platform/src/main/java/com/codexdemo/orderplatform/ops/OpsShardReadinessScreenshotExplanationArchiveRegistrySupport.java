@@ -6,13 +6,13 @@ import java.util.List;
 final class OpsShardReadinessScreenshotExplanationArchiveRegistrySupport {
 
     static final String PROJECT = "advanced-order-platform";
-    static final String SOURCE_PLAN = "Node v367 / Java v1764-v1768";
+    static final String SOURCE_PLAN = "Node v367 / Java v1769-v1773";
     static final String LEGACY_ROOT = "d";
     static final String NEXT_ROOT = "f";
     static final String REGISTRY_STATE =
             "screenshot-explanation-archives-canonical-f-root-ready";
     static final int EXPECTED_CURRENT_ARCHIVE_ASSESSMENT_COUNT = 3;
-    static final int EXPECTED_SEGMENT_PLAN_COUNT = 4;
+    static final int EXPECTED_SEGMENT_PLAN_COUNT = 5;
     static final int EXPECTED_NAMING_RULE_COUNT = 6;
     static final int EXPECTED_BOUNDARY_RULE_COUNT = 8;
     static final int EXPECTED_VERIFICATION_STEP_COUNT = 5;
@@ -55,7 +55,7 @@ final class OpsShardReadinessScreenshotExplanationArchiveRegistrySupport {
         boolean hasNextRoot = currentArchiveCopy.stream()
                 .anyMatch(assessment -> NEXT_ROOT.equals(assessment.root()));
         boolean hasCurrentSegment = segmentPlanCopy.stream()
-                .anyMatch(segment -> segment.path().contains("f/v1764-v1768")
+                .anyMatch(segment -> segment.path().contains("f/v1769-v1773")
                         && segment.active());
         boolean statusPassed = currentArchiveCopy.size() == EXPECTED_CURRENT_ARCHIVE_ASSESSMENT_COUNT
                 && segmentPlanCopy.size() == EXPECTED_SEGMENT_PLAN_COUNT

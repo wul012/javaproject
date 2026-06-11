@@ -26,8 +26,8 @@ final class OpsShardReadinessScreenshotExplanationArchiveCurrentCatalog {
                 ),
                 assessment(
                         "f",
-                        1,
                         2,
+                        3,
                         "active-canonical-screenshot-explanation-root",
                         "use f/<version-range>/<version>/images and explanations for new screenshot evidence"
                 )
