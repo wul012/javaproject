@@ -59,7 +59,18 @@ Version completion expectations:
 
 ## Runtime Archive Folder
 
-For future Java version work after v115, put run/debug explanations and screenshots in `d/`, which is a sibling of the old `a/`, `b/`, and `c/` archive folders.
+For Java version work after v115 and through the historical v152 runtime evidence set,
+run/debug explanations and screenshots live in `d/`, which is a sibling of the old `a/`,
+`b/`, and `c/` archive folders. For new screenshot/explanation work after this archive
+became crowded, continue in a same-level segmented root:
+
+```text
+d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/explanations/summary.md
+d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/images/*.png
+```
+
+Do not place new screenshot or explanation files directly under `d/` or directly under
+`d_runtime_screenshot_archive_next/`. Use a version-range segment first, then the version folder.
 
 Use this shape:
 
@@ -74,13 +85,22 @@ When finishing a version, the final report should mention the `d/<version>` arch
 
 ## Screenshot Capture Rule
 
-For Java version screenshots, prefer the Playwright MCP screenshot tool when it is available. Save successful version screenshots under:
+For Java version screenshots, prefer the Playwright MCP screenshot tool when it is available.
+Save historical v116-v152 screenshots under:
 
 ```text
 d/<version>/图片/*.png
 ```
 
-Use `d/<version>/解释/说明.md` to describe what each screenshot proves. If MCP screenshot capture fails, fall back to the installed screenshot skill or another local screenshot method and record the fallback in the explanation.
+For new segmented screenshot archives, save successful screenshots under:
+
+```text
+d_runtime_screenshot_archive_next/v<start>-v<end>/<version>/images/*.png
+```
+
+Use the sibling explanation file to describe what each screenshot proves. If MCP screenshot
+capture fails, fall back to the installed screenshot skill or another local screenshot method
+and record the fallback in the explanation.
 
 ## Code Explanation Folder
 
@@ -94,7 +114,12 @@ Keep the existing explanation style and numbered Markdown naming pattern. `代�
 
 ## Document Expansion Rule
 
-For document work only, when an output folder becomes crowded, create or use a same-level sibling folder and continue writing there instead of stuffing everything into the original folder. Keep the original folder for older files and let the sibling folder carry the newer sequence. For the current Java docs, this means runtime/screenshot explanations continue in `d/`, and code explanation notes continue in `代码讲解记录_生产雏形阶段_续/`.
+For document work only, when an output folder becomes crowded, create or use a same-level
+sibling folder and continue writing there instead of stuffing everything into the original
+folder. Keep the original folder for older files and let the sibling folder carry the newer
+sequence. For the current Java docs, this means historical runtime/screenshot explanations stay
+in `d/`, new screenshot/explanation work continues in `d_runtime_screenshot_archive_next/`,
+and code explanation notes continue in the active `代码讲解记录*` continuation folders.
 
 ## Docker Shutdown Fast Path
 
