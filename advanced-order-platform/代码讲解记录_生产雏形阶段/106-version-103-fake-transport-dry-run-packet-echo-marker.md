@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第一百零三版代码讲解：fake transport dry-run packet echo marker
 
 本版目标是让 Java release approval rehearsal 增加一份 `fake transport dry-run packet echo marker`。它接在 Node v255/v256 之后，只证明 Java 看见了 fake transport dry-run packet 的 request、response、timeout、failure mapping、cleanup 和 side-effect 边界，不创建真实 adapter client，不读取 credential value，不打开 managed audit connection。

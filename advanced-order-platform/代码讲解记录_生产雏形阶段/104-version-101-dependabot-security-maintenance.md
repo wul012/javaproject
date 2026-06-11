@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第一百零一版代码讲解：Dependabot/security maintenance
 
 本版目标是给 Java 仓库补 Dependabot 自动依赖维护入口。它接在 v100 的 GitHub Actions Maven CI 之后，让 Maven 依赖和 GitHub Actions action 版本有稳定的安全提醒和 PR 审查路径。

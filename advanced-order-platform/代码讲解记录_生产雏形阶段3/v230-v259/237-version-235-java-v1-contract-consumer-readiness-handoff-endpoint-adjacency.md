@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 237. Java v235 v1 contract consumer readiness handoff endpoint adjacency
 
 v235 是 endpoint adjacency guard，专门验证 readiness handoff 在 endpoint 链里的位置。

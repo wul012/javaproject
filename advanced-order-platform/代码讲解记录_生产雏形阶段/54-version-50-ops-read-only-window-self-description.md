@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第五十版代码讲解：ops read-only window self-description
 
 本版目标是让 Java 启动后的 `/api/v1/ops/evidence` 不只是返回业务风险信号，还能直接说明“真实只读联调窗口里，Node 可以怎么读、不能怎么动”。

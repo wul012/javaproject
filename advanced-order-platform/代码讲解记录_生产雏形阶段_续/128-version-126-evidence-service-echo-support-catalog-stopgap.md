@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # Java v126: EvidenceService echo support catalog 止血
 
 本版执行 Node v287 plan 中的 Java v126: EvidenceService catalog 化止血。目标不是大改 `OpsEvidenceService`，而是把高重复、高漂移风险的 echo support 常量先收口到现有 catalog。

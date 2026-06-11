@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第五十一版代码讲解：ops evidence field guide
 
 本版目标是补一份 Java ops evidence 字段说明样本，让后续 Node release evidence review 能引用 Java 对字段语义、稳定性和只读边界的解释。

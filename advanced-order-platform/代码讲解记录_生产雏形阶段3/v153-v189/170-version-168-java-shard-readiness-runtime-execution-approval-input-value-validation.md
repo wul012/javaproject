@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 170. Java v168 runtime execution approval input value validation
 
 本版追赶 Node v405。Node 已经在 `e/398/input/` 下看到三份真实 canonical approval input，并验证值完整、共享同一个 `approvalCorrelationId`、只允许本地 loopback GET-only smoke。Java v168 不重新验证或生成这些批准材料，只做 Java 侧只读接收回执。

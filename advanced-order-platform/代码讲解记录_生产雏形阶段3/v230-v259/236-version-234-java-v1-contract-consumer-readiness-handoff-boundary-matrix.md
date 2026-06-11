@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 236. Java v234 v1 contract consumer readiness handoff boundary matrix
 
 v234 是 boundary matrix guard。它把 v215 checklist、v220 digest、v225 readiness handoff 三层放在同一组测试里，确保这些 consumer-facing 合同共享一致的只读边界。

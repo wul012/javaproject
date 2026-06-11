@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 230. Java v228 v1 contract consumer readiness handoff integrity
 
 v228 是 readiness handoff 的完整性版本。它不新增 endpoint，也不改 response schema，而是把 v225 handoff 的关键字段做成精确测试。

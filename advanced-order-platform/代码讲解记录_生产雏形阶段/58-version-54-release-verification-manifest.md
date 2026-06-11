@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第五十四版代码讲解：release verification manifest
 
 本版目标是把 Java 发布前验证固化成一份可读、可测、可被 Node 消费的 manifest。v53 已经完成订单幂等存储抽象；v54 不继续改业务，而是开始进入“发布验证硬化”。

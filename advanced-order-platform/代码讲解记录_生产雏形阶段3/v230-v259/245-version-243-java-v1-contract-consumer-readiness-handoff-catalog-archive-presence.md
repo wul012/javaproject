@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 245. Java v243 v1 contract consumer readiness handoff catalog archive presence
 
 v243 的目标是把 post-handoff catalog 和实际归档文件绑定起来。

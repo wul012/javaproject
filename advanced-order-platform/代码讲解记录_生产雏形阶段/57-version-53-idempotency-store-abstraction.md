@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第五十三版代码讲解：idempotency store abstraction
 
 本版目标是把订单创建幂等的“存储边界”从服务层里抽出来。v52 已经解决同一个 `Idempotency-Key` 被不同请求复用时的 409 冲突问题；v53 进一步为后续 Redis / mini-kv TTL token 实验预留接口，但默认实现仍然是 Java 自己的数据库路径。

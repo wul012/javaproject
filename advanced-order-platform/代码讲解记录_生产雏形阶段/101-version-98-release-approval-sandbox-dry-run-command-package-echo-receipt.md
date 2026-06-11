@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第九十八版代码讲解：release approval sandbox dry-run command package echo receipt
 
 本版目标是给 Node v241 的 manual sandbox dry-run command package 增加 Java 只读回执。它不是连接版本，而是给 Node v244 做三方 upstream echo verification 前的 Java 证据。

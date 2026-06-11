@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # Java v127: Ops Release Approval Live Aggregation 二次拆分
 
 本版执行 Node v289 之后的 Java v127：继续拆 `OpsReleaseApprovalRehearsalLiveAggregationIntegrationTests`。目标不是做大改，而是把一个超长 live aggregation 回归按响应职责切成多个独立测试类，减少后续维护时的交叉噪音。

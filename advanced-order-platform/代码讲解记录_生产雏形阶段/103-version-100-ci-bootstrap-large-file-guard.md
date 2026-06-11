@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第一百版代码讲解：CI bootstrap + large-file guard
 
 本版目标是补 Java 仓库自己的 GitHub Actions Maven CI，并把下一轮大文件拆分目标写清楚。v100 不推进 managed-audit 连接能力，也不新增 release approval 业务字段。

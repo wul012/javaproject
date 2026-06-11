@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # Java v112 代码讲解：sandbox endpoint credential resolver pre-implementation plan intake echo receipt
 
 本版目标是把 Node v270 的 credential resolver pre-implementation plan intake 接成 Java 侧只读 echo receipt。它表达的是“Java 已看见 10 个 pre-implementation boundary”，不是打开真实 resolver、连接或生产审计的许可。

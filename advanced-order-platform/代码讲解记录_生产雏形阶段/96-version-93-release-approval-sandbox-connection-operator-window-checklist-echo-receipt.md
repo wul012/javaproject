@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第九十三版代码讲解：release approval sandbox connection operator window checklist echo receipt
 
 本版目标是承接 Node v238 `managed-audit-manual-sandbox-connection-operator-window-checklist.v1`，在 Java release approval rehearsal 中新增一份只读 echo receipt。它只回显 checklist 的字段、数量、approval item id、step phase 和 pause code，供 Node v239 做三方 evidence verification；它不是连接许可，也不会打开 managed audit sandbox connection。

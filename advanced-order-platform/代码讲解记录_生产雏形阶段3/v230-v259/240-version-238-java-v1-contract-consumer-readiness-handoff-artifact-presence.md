@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 240. Java v238 v1 contract consumer readiness handoff artifact presence
 
 v238 是 artifact presence guard。它把 v225 readiness handoff 的关键归档文件纳入测试。

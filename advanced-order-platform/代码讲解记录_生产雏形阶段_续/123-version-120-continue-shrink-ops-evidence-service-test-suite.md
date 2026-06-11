@@ -1,4 +1,6 @@
-﻿# Java v120：继续收缩 OpsEvidenceService 测试总表
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
+# Java v120：继续收缩 OpsEvidenceService 测试总表
 
 本版继续沿用“测试先拆、生产不动”的方式，把 `OpsEvidenceServiceTests` 里仍然很长的 rehearsal / credential-resolver 场景拆到更小的测试类里。
 

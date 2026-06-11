@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第四十三版代码讲解：execution-contract 稳定样本
 
 本版目标很小：给 Node 后续 fixture-driven smoke 一个稳定、可直接读取的 Java replay execution-contract 样本。

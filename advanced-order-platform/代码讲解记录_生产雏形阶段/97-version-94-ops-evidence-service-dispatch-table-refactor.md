@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第九十四版代码讲解：OpsEvidenceService dispatch table refactor
 
 本版是契约不变的质量重构。目标是把 `OpsEvidenceService` 里继续膨胀的 release/static evidence 构建逻辑移出主类，改成 dispatch table 模式，让主类只负责采样、运行时依赖读取和最终 response 组装。

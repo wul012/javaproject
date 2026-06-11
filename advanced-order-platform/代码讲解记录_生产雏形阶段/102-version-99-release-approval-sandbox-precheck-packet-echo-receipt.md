@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第九十九版代码讲解：release approval sandbox precheck packet echo receipt
 
 本版目标是给 Node v245 的 sandbox connection precheck packet 增加 Java 只读回执。它不是连接版本，而是给 Node v246 做 upstream receipt verification 前的 Java 证据。

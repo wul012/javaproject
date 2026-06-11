@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # Java v110 代码讲解：sandbox endpoint credential resolver fake-shell archive echo receipt
 
 本版目标是把 Node v266 的 credential resolver fake-shell archive verification 接成 Java 侧只读回显收据。它不是 resolver 实现，也不是连接准备完成信号，而是一份给 Node v267 继续校验用的 echo receipt。

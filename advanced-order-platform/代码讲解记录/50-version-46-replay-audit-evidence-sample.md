@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第四十六版代码讲解：replay audit evidence 稳定样本
 
 本版目标是补两份 replay audit evidence 静态样本，让控制面能判断一次失败事件重放“是否可追溯”。

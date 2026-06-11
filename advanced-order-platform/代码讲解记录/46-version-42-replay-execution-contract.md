@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第四十二版代码讲解：失败事件重放 execution-contract
 
 本版新增一个只读接口，给 Node execution gate 提供 Java 侧“真实 replay 前会检查什么”的契约证据。

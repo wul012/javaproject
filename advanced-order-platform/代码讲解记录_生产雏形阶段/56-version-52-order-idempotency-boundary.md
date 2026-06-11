@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 第五十二版代码讲解：order idempotency boundary
 
 本版目标是补强订单创建的幂等边界。之前代码已经要求 `Idempotency-Key`，并且同 key 会返回已有订单；v52 进一步解决一个更真实的问题：如果调用方拿同一个 key 提交了不同的订单请求，Java 不能把它误当成重放。

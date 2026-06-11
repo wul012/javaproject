@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 233. Java v231 v1 contract consumer readiness handoff ops evidence alignment
 
 v231 是 OpsEvidence alignment 版本。它关注的是 readiness handoff 从 v1 contract 清单向全局 evidence/probe 清单扩散时是否一致。

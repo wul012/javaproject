@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # Java v117 代码讲解：v116 readiness echo 测试拆分
 
 本版不推进新业务计划，目标是拆分总行数最高的测试文件。上一版 v116 的功能本身合理，但专项断言继续堆在 `OpsEvidenceServiceTests` 和 `OpsOverviewIntegrationTests` 里，会让两个文件越来越难维护。

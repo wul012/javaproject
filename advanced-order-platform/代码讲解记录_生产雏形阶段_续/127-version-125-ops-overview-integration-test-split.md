@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # Java v125: Ops Overview 集成测试拆分
 
 本版执行 Node v287 plan 中的 Java v125: Integration Tests 第四刀连拆。目标是把 `OpsOverviewIntegrationTests` 里三个职责不同的 MockMvc 回归拆开，保留共享 fixture/helper，让后续 overview、dynamic evidence、static sample 可以分别演进。

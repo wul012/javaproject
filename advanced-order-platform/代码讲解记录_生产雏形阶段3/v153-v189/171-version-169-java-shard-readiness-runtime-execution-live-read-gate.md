@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 171. Java v169 runtime execution live-read gate
 
 本版接收 Node v406 live-read gate。Node v405 已确认三份 canonical approval input 的值有效，Node v406 进一步确认 Java 和 mini-kv 的 owner、loopback target、port、cleanup proof 要求都已准备好。Java v169 只记录这个 gate，仍不启动服务、不执行 smoke。

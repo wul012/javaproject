@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 228. Java v226 v225 consumer readiness handoff snapshot freeze
 
 本版的核心是“把已经发布的 v225 handoff 固化成 snapshot”。v225 新增了面向下游消费者的 readiness

@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # Java v114 代码讲解：release approval verification hint catalog split
 
 本版目标是处理计划里保留的 Java 中优先级优化项：`ReleaseApprovalVerificationHintBuilder.java` 已经继续膨胀，适合把固定清单从 builder 编排逻辑中拆出去。

@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 169. Java v167 runtime execution approval input template compatibility intake
 
 本版继续沿着 Node v403 的计划推进，但 Java 只做只读回执。v167 的核心意思是：Node v403 已经把 Java v166 和 mini-kv v157 的 template compatibility 证据纳入 intake，Java 侧也记录这个 intake 边界；同时三份真正的 canonical approval input 仍然缺失，所以 runtime execution 继续关闭。

@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 172. Java v170 runtime execution pass evidence closeout
 
 本版接收 Node v407-v409 的 pass evidence chain。Node v407 完成 approved local-loopback read-only smoke，Node v408 验证 archive 和 cleanup proof，Node v409 形成 closeout ledger。Java v170 只记录这条链已被 Java 侧接收，不重跑 smoke，不启动或停止服务。

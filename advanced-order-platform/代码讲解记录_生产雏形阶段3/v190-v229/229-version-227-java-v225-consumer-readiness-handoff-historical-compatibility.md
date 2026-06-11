@@ -1,3 +1,5 @@
+> 清算状态：`legacy-nonstandard-walkthrough`。这是一份历史非标准讲解，保留作追溯参考；未按 `代码讲解记录_写作规范.md` 重写前，不计为标准代码讲解。
+
 # 229. Java v227 v225 consumer readiness handoff historical compatibility
 
 v227 是 v225 readiness handoff 的历史兼容护栏。它解决的问题是：新版本发布之后，旧 snapshot 是否还保持旧样子。
