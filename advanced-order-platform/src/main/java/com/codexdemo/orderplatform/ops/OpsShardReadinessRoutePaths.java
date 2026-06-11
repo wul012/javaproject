@@ -750,6 +750,9 @@ final class OpsShardReadinessRoutePaths {
     static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE_CLOSEOUT_ARCHIVE_INDEX =
             OpsShardReadinessReleaseAcceptanceRoutePaths
                     .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE_CLOSEOUT_ARCHIVE_INDEX;
+    static final String CREDENTIAL_RESOLVER_DISABLED_FAKE_HARNESS_EVIDENCE_ARCHIVE =
+            OpsShardReadinessCredentialResolverRoutePaths
+                    .CREDENTIAL_RESOLVER_DISABLED_FAKE_HARNESS_EVIDENCE_ARCHIVE;
 
     private OpsShardReadinessRoutePaths() {
     }
