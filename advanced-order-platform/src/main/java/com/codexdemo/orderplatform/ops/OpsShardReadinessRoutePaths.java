@@ -753,6 +753,9 @@ final class OpsShardReadinessRoutePaths {
     static final String CREDENTIAL_RESOLVER_DISABLED_FAKE_HARNESS_EVIDENCE_ARCHIVE =
             OpsShardReadinessCredentialResolverRoutePaths
                     .CREDENTIAL_RESOLVER_DISABLED_FAKE_HARNESS_EVIDENCE_ARCHIVE;
+    static final String SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER =
+            OpsShardReadinessSandboxConnectionRoutePaths
+                    .SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER;
 
     private OpsShardReadinessRoutePaths() {
     }
