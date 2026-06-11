@@ -808,6 +808,9 @@ final class OpsShardReadinessRoutePaths {
     static final String CODE_WALKTHROUGH_QUALITY_AUDIT_REGISTRY =
             OpsShardReadinessCodeWalkthroughQualityAuditRoutePaths
                     .CODE_WALKTHROUGH_QUALITY_AUDIT_REGISTRY;
+    static final String SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY =
+            OpsShardReadinessScreenshotExplanationArchiveRoutePaths
+                    .SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY;
 
     private OpsShardReadinessRoutePaths() {
     }
