@@ -20,6 +20,12 @@ class ReadabilityUpkeepDocsTests {
                 .isTrue();
         assertThat(Files.isRegularFile(DOCS_ROOT.resolve("archive-layout-map.md"))).isTrue();
         assertThat(Files.isRegularFile(DOCS_ROOT.resolve("registry-template.md"))).isTrue();
+        assertThat(Files.isRegularFile(DOCS_ROOT.resolve("route-service-test-map.md")))
+                .isTrue();
+        assertThat(Files.isRegularFile(DOCS_ROOT.resolve("root-package-pressure-map.md")))
+                .isTrue();
+        assertThat(Files.isRegularFile(DOCS_ROOT.resolve("readability-upkeep-cycle.md")))
+                .isTrue();
     }
 
     @Test
@@ -67,14 +73,27 @@ class ReadabilityUpkeepDocsTests {
         String shard = read("shard-readiness-map.md");
         String walkthrough = read("walkthrough-registry-map.md");
         String archive = read("archive-layout-map.md");
+        String routeMap = read("route-service-test-map.md");
+        String pressureMap = read("root-package-pressure-map.md");
+        String cycle = read("readability-upkeep-cycle.md");
 
         assertThat(readme).contains("shard-readiness-map.md", "walkthrough-registry-map.md",
-                "archive-layout-map.md");
+                "archive-layout-map.md", "route-service-test-map.md",
+                "root-package-pressure-map.md", "readability-upkeep-cycle.md");
         assertThat(shard).contains("Controller", "Service", "Response", "read-only");
         assertThat(walkthrough).contains("code-walkthrough-depth-registry",
                 "Chinese longform", "3000 Chinese characters");
         assertThat(archive).contains("OpsCodeWalkthroughArchiveComplianceTests",
                 "OpsScreenshotExplanationFArchiveLayoutInventoryTests");
+        assertThat(routeMap).contains("/api/v1/ops/readability/upkeep-registry",
+                "/api/v1/ops/readability/upkeep-audit",
+                "ReadabilityUpkeepAuditServiceTests");
+        assertThat(pressureMap).contains("ops.maintenance.readability",
+                "Bulk rename work is not a default",
+                "maintenance action.");
+        assertThat(cycle).contains("Map", "Model", "Expose", "Guard", "Close",
+                "Do not create versions that only rewrite the",
+                "walkthrough.");
     }
 
     private static String read(String fileName) throws IOException {

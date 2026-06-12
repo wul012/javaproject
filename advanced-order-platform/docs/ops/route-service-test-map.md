@@ -10,10 +10,11 @@ work is added.
 | Route | Controller | Service | Response | Primary tests |
 | --- | --- | --- | --- | --- |
 | `/api/v1/ops/readability/upkeep-registry` | `ReadabilityUpkeepRegistryController` | `ReadabilityUpkeepRegistryService` | `ReadabilityUpkeepRegistryResponse` | `ReadabilityUpkeepRegistryServiceTests`, `ReadabilityUpkeepRegistryControllerTests`, `ReadabilityUpkeepBoundaryTests`, `ReadabilityUpkeepRegistryRendererTests` |
+| `/api/v1/ops/readability/upkeep-audit` | `ReadabilityUpkeepAuditController` | `ReadabilityUpkeepAuditService` | `ReadabilityUpkeepAuditResponse` | `ReadabilityUpkeepAuditCatalogTests`, `ReadabilityUpkeepAuditServiceTests`, `ReadabilityUpkeepAuditControllerTests`, `ReadabilityUpkeepAuditBoundaryTests`, `ReadabilityUpkeepAuditRendererTests` |
 
-## Planned readability upkeep audit route
+## Next readability upkeep route rule
 
-Future readability audit work should use the same small route pattern instead
+Future readability route work should use the same small route pattern instead
 of adding another broad root-package class:
 
 - Route constant in `ReadabilityUpkeepRoutePaths`.

@@ -16,6 +16,7 @@ package.
 | `class-name-trial.md` | new ops readability subpackages | Which repeated prefixes can be dropped only after package context exists? |
 | `route-service-test-map.md` | ops readability routes, services, and tests | Which route is backed by which service and which guard tests? |
 | `root-package-pressure-map.md` | ops root package pressure | Which work should stay in the new readability subpackage instead of the old root? |
+| `readability-upkeep-cycle.md` | late-stage readability upkeep cycle | Which sequence keeps maps, models, read-only routes, docs guards, and closeout aligned? |
 
 ## Boundary
 
