@@ -2,6 +2,8 @@ package com.codexdemo.orderplatform.common;
 
 import jakarta.validation.ConstraintViolationException;
 import java.net.URI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,8 +15,17 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
+  private static final Logger log = LoggerFactory.getLogger(ApiExceptionHandler.class);
+
   @ExceptionHandler(BusinessException.class)
   public ProblemDetail handleBusinessException(BusinessException exception) {
+    RequestLogCorrelation.Correlation correlation = RequestLogCorrelation.current();
+    log.warn(
+        "business exception handled code={} status={} traceId={} spanId={}",
+        exception.getCode(),
+        exception.getStatus().value(),
+        correlation.traceId(),
+        correlation.spanId());
     ProblemDetail detail =
         ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
     detail.setType(URI.create("https://advanced-order-platform/errors/" + exception.getCode()));
@@ -24,6 +35,12 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ProblemDetail handleValidationException(MethodArgumentNotValidException exception) {
+    RequestLogCorrelation.Correlation correlation = RequestLogCorrelation.current();
+    log.warn(
+        "request body validation failed fieldErrorCount={} traceId={} spanId={}",
+        exception.getBindingResult().getFieldErrorCount(),
+        correlation.traceId(),
+        correlation.spanId());
     ProblemDetail detail =
         ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Request validation failed");
     detail.setTitle("VALIDATION_FAILED");
@@ -38,6 +55,12 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(ConstraintViolationException.class)
   public ProblemDetail handleConstraintViolation(ConstraintViolationException exception) {
+    RequestLogCorrelation.Correlation correlation = RequestLogCorrelation.current();
+    log.warn(
+        "constraint validation failed violationCount={} traceId={} spanId={}",
+        exception.getConstraintViolations().size(),
+        correlation.traceId(),
+        correlation.spanId());
     ProblemDetail detail =
         ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Request validation failed");
     detail.setTitle("VALIDATION_FAILED");
@@ -52,6 +75,12 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(HandlerMethodValidationException.class)
   public ProblemDetail handleHandlerMethodValidation(HandlerMethodValidationException exception) {
+    RequestLogCorrelation.Correlation correlation = RequestLogCorrelation.current();
+    log.warn(
+        "handler method validation failed resultCount={} traceId={} spanId={}",
+        exception.getParameterValidationResults().size(),
+        correlation.traceId(),
+        correlation.spanId());
     ProblemDetail detail =
         ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Request validation failed");
     detail.setTitle("VALIDATION_FAILED");
@@ -73,6 +102,12 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(MissingRequestHeaderException.class)
   public ProblemDetail handleMissingHeader(MissingRequestHeaderException exception) {
+    RequestLogCorrelation.Correlation correlation = RequestLogCorrelation.current();
+    log.warn(
+        "missing request header headerName={} traceId={} spanId={}",
+        exception.getHeaderName(),
+        correlation.traceId(),
+        correlation.spanId());
     ProblemDetail detail =
         ProblemDetail.forStatusAndDetail(
             HttpStatus.BAD_REQUEST, "Missing required header: " + exception.getHeaderName());

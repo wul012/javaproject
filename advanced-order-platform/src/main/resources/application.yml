@@ -26,6 +26,9 @@ management:
     web:
       exposure:
         include: health,info,metrics
+  tracing:
+    sampling:
+      probability: 1.0
   health:
     rabbit:
       enabled: false
@@ -35,6 +38,8 @@ management:
         enabled: true
 
 logging:
+  pattern:
+    level: "%5p [traceId=%X{traceId:-},spanId=%X{spanId:-}]"
   level:
     org.hibernate.SQL: warn
 

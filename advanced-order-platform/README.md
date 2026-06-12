@@ -140,6 +140,20 @@ java -jar target\advanced-order-platform-0.1.0-SNAPSHOT.jar --spring.profiles.ac
 http://localhost:8080/failed-events.html
 ```
 
+## Observability
+
+运行诊断端点保持在 actuator 默认 base path 下，只暴露健康、信息和指标：
+
+```powershell
+Invoke-RestMethod http://localhost:8080/actuator/health
+Invoke-RestMethod http://localhost:8080/actuator/info
+Invoke-RestMethod http://localhost:8080/actuator/metrics
+```
+
+本项目使用 Micrometer Tracing Brave bridge 提供请求级 trace/span 上下文，不要求 Zipkin 等外部后端。日志级别 pattern 会输出 `traceId` 和 `spanId`，`ApiExceptionHandler` 在业务异常、请求体校验异常、方法参数校验异常和缺失 header 场景中都会把当前 trace/span 写入日志，便于把客户端 400/409/业务错误和服务端日志对应起来。
+
+actuator 端点仍然只是运行诊断面：它们不提供部署、回滚、SQL、凭据读取、失败事件重放或任何写操作能力。默认暴露范围由 `management.endpoints.web.exposure.include=health,info,metrics` 控制。
+
 ## Local Compose Environment
 
 本地 compose 默认值只用于开发便利；需要覆盖账号、密码或端口时，复制 `.env.example` 为 `.env`，不要把真实 `.env` 提交到 git。
