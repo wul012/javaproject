@@ -12,6 +12,7 @@ package.
 | `shard-readiness-map.md` | shard readiness and read-only evidence | Which endpoints prove readiness without opening write routing? |
 | `walkthrough-registry-map.md` | code walkthrough quality and depth | Which registries govern code explanation quality? |
 | `archive-layout-map.md` | screenshot/explanation and archive layout | Which docs/tests stop archive sprawl? |
+| `class-name-trial.md` | new ops readability subpackages | Which repeated prefixes can be dropped only after package context exists? |
 
 ## Boundary
 

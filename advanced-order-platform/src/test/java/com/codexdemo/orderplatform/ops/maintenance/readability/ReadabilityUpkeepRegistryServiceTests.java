@@ -11,14 +11,14 @@ class ReadabilityUpkeepRegistryServiceTests {
         var response = ReadabilityUpkeepRegistryTestSupport.registry();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1781");
+        assertThat(response.version()).isEqualTo("Java v1783");
         assertThat(response.endpoint()).isEqualTo("/api/v1/ops/readability/upkeep-registry");
         assertThat(response.profile()).isEqualTo("java-ops-readability-upkeep-registry.v1");
         assertThat(response.docsRoot()).isEqualTo("docs/ops");
         assertThat(response.packageRoot())
                 .isEqualTo("com.codexdemo.orderplatform.ops.maintenance.readability");
         assertThat(response.registryState())
-                .isEqualTo("readability-upkeep-subpackage-registry-active-v1781");
+                .isEqualTo("readability-upkeep-subpackage-registry-active-v1783");
         assertThat(response.topicCount()).isEqualTo(5);
         assertThat(response.packageRuleCount()).isEqualTo(4);
         assertThat(response.templateRuleCount()).isEqualTo(10);

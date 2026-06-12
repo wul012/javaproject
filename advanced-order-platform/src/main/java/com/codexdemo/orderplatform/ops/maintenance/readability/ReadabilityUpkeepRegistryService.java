@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ReadabilityUpkeepRegistryService {
 
-    static final String RESPONSE_VERSION = "Java v1781";
+    static final String RESPONSE_VERSION = "Java v1783";
     static final String ENDPOINT =
             ReadabilityUpkeepRoutePaths.BASE_PATH
                     + ReadabilityUpkeepRoutePaths.UPKEEP_REGISTRY;

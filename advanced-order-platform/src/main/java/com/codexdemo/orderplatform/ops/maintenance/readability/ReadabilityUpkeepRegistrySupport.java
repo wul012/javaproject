@@ -12,7 +12,7 @@ final class ReadabilityUpkeepRegistrySupport {
     static final String PACKAGE_ROOT =
             "com.codexdemo.orderplatform.ops.maintenance.readability";
     static final String REGISTRY_STATE =
-            "readability-upkeep-subpackage-registry-active-v1781";
+            "readability-upkeep-subpackage-registry-active-v1783";
     static final int EXPECTED_TOPIC_COUNT = 5;
     static final int EXPECTED_PACKAGE_RULE_COUNT = 4;
     static final int EXPECTED_TEMPLATE_RULE_COUNT = 10;
