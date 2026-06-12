@@ -32,3 +32,11 @@ New ops registry work should prefer a narrow subpackage, a route constant, a
 response record, catalog data, renderer/support/service/controller layers, and
 tests. Long class names should be shortened only when the package name already
 contains the missing context.
+
+## Active consolidation plan
+
+The current Java-side follow-up to the Node v2114 governance consolidation is
+documented in `../plans/v1789-java-ops-governance-consolidation-roadmap.md`
+and `../plans/v1789-codex-ops-migration-playbook.md`. The plan is
+contract-preserving and archive-preserving: Do not rename or move `a/` through
+`f/`, `e/<version>/`, or evidence JSON files.
