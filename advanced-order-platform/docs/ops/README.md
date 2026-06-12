@@ -18,6 +18,7 @@ package.
 | `root-package-pressure-map.md` | ops root package pressure | Which work should stay in the new readability subpackage instead of the old root? |
 | `readability-upkeep-cycle.md` | late-stage readability upkeep cycle | Which sequence keeps maps, models, read-only routes, docs guards, and closeout aligned? |
 | `readability-upkeep-audit-closeout.md` | audit registry closeout evidence | Which Java-only checks close the current readability upkeep audit batch? |
+| `ops-consolidation-inventory-v1796.md` | ops consolidation inventory | Which route family clusters, load-bearing archive paths, and reduction candidates should guide the next split? |
 
 ## Boundary
 
@@ -40,3 +41,7 @@ documented in `../plans/v1789-java-ops-governance-consolidation-roadmap.md`
 and `../plans/v1789-codex-ops-migration-playbook.md`. The plan is
 contract-preserving and archive-preserving: Do not rename or move `a/` through
 `f/`, `e/<version>/`, or evidence JSON files.
+
+The first J6 inventory is `ops-consolidation-inventory-v1796.md`. It records
+root-package pressure, route family clusters, load-bearing archive boundaries,
+and the first reduction candidates before any class movement begins.

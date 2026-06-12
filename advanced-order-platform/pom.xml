@@ -39,7 +39,7 @@
         <jacoco.outbox.line.minimum>0.69</jacoco.outbox.line.minimum>
         <jacoco.payment.line.minimum>0.90</jacoco.payment.line.minimum>
         <test.jvm.argLine></test.jvm.argLine>
-        <spotless.ratchetFrom>origin/master</spotless.ratchetFrom>
+        <spotless.ratchetFrom>javaproject/master</spotless.ratchetFrom>
         <surefire.excludedGroups>docker</surefire.excludedGroups>
         <surefire.groups></surefire.groups>
     </properties>

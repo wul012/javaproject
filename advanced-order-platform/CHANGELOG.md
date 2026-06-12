@@ -4,6 +4,16 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1796 - Ops consolidation inventory baseline
+
+- 新增 `docs/ops/ops-consolidation-inventory-v1796.md`，记录 ops 包当前
+  1,352 个主源码文件、1,330 个根包直放文件、1,210 个 Readiness 命名文件。
+- 固化 route family、load-bearing archive 和 reduction candidate 清单，为后续
+  contract-preserving 拆分提供边界。
+- 新增文档守卫测试，确保 J6 盘点、历史归档不搬迁规则和 v1796 不搬类停线可发现。
+- 修正本地 Spotless ratchet 默认基准为 `javaproject/master`，与 Java canonical
+  remote 规范一致；GitHub Actions 仍按 workflow 显式参数选择 CI 基准。
+
 ## v1795 - Production readiness documentation discipline
 
 - 新增 `PRODUCTION_READINESS.md`，集中记录生产边界、运行 profile、消息、支付、

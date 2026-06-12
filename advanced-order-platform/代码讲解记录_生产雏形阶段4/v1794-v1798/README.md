@@ -4,3 +4,4 @@
 
 - `version-1794-production-excellence-observability.md`：J4 可观测性补齐。
 - `version-1795-production-excellence-release-readiness-docs.md`：J5 发布纪律与生产边界集中。
+- `version-1796-production-excellence-ops-consolidation-inventory.md`：J6 ops 整合前盘点、历史归档边界与后续拆分候选。
