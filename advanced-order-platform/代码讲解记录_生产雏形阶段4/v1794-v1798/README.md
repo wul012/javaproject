@@ -3,3 +3,4 @@
 本目录承接 `v1789-v1793` 之后的生产卓越阶段代码讲解，避免单个目录继续膨胀。
 
 - `version-1794-production-excellence-observability.md`：J4 可观测性补齐。
+- `version-1795-production-excellence-release-readiness-docs.md`：J5 发布纪律与生产边界集中。

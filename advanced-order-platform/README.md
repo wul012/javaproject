@@ -154,6 +154,15 @@ Invoke-RestMethod http://localhost:8080/actuator/metrics
 
 actuator 端点仍然只是运行诊断面：它们不提供部署、回滚、SQL、凭据读取、失败事件重放或任何写操作能力。默认暴露范围由 `management.endpoints.web.exposure.include=health,info,metrics` 控制。
 
+## Release Discipline
+
+版本记录和生产边界集中在两个根文档：
+
+- `CHANGELOG.md`：记录当前版本策略和最近版本变更。
+- `PRODUCTION_READINESS.md`：记录生产 profile、支付、消息、failed-event replay、release rehearsal、凭据、SQL、部署和回滚边界。
+
+当前版本策略是：git tag `vNNNN-*` 为权威版本证据，Maven artifact 保持 `0.1.0-SNAPSHOT`，直到项目切换到单独的制品发布节奏。
+
 ## Local Compose Environment
 
 本地 compose 默认值只用于开发便利；需要覆盖账号、密码或端口时，复制 `.env.example` 为 `.env`，不要把真实 `.env` 提交到 git。
