@@ -17,6 +17,7 @@ package.
 | `route-service-test-map.md` | ops readability routes, services, and tests | Which route is backed by which service and which guard tests? |
 | `root-package-pressure-map.md` | ops root package pressure | Which work should stay in the new readability subpackage instead of the old root? |
 | `readability-upkeep-cycle.md` | late-stage readability upkeep cycle | Which sequence keeps maps, models, read-only routes, docs guards, and closeout aligned? |
+| `readability-upkeep-audit-closeout.md` | audit registry closeout evidence | Which Java-only checks close the current readability upkeep audit batch? |
 
 ## Boundary
 

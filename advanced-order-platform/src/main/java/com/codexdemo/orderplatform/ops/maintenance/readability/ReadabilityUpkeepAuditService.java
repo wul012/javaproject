@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ReadabilityUpkeepAuditService {
 
-    static final String RESPONSE_VERSION = "Java v1786";
+    static final String RESPONSE_VERSION = "Java v1788";
     static final String ENDPOINT =
             ReadabilityUpkeepRoutePaths.BASE_PATH
                     + ReadabilityUpkeepRoutePaths.UPKEEP_AUDIT;

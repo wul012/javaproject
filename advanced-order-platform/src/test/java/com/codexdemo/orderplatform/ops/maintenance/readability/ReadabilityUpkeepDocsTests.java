@@ -26,6 +26,8 @@ class ReadabilityUpkeepDocsTests {
                 .isTrue();
         assertThat(Files.isRegularFile(DOCS_ROOT.resolve("readability-upkeep-cycle.md")))
                 .isTrue();
+        assertThat(Files.isRegularFile(DOCS_ROOT.resolve("readability-upkeep-audit-closeout.md")))
+                .isTrue();
     }
 
     @Test
@@ -76,10 +78,12 @@ class ReadabilityUpkeepDocsTests {
         String routeMap = read("route-service-test-map.md");
         String pressureMap = read("root-package-pressure-map.md");
         String cycle = read("readability-upkeep-cycle.md");
+        String closeout = read("readability-upkeep-audit-closeout.md");
 
         assertThat(readme).contains("shard-readiness-map.md", "walkthrough-registry-map.md",
                 "archive-layout-map.md", "route-service-test-map.md",
                 "root-package-pressure-map.md", "readability-upkeep-cycle.md");
+        assertThat(readme).contains("readability-upkeep-audit-closeout.md");
         assertThat(shard).contains("Controller", "Service", "Response", "read-only");
         assertThat(walkthrough).contains("code-walkthrough-depth-registry",
                 "Chinese longform", "3000 Chinese characters");
@@ -94,6 +98,8 @@ class ReadabilityUpkeepDocsTests {
         assertThat(cycle).contains("Map", "Model", "Expose", "Guard", "Close",
                 "Do not create versions that only rewrite the",
                 "walkthrough.");
+        assertThat(closeout).contains("v1784", "v1788", "ReadabilityUpkeep*Tests",
+                "GitHub Actions success", "canonical Java remote");
     }
 
     private static String read(String fileName) throws IOException {

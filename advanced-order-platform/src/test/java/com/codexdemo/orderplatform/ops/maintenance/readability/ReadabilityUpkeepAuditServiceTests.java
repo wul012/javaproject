@@ -11,7 +11,7 @@ class ReadabilityUpkeepAuditServiceTests {
         var response = ReadabilityUpkeepAuditTestSupport.audit();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1786");
+        assertThat(response.version()).isEqualTo("Java v1788");
         assertThat(response.endpoint()).isEqualTo("/api/v1/ops/readability/upkeep-audit");
         assertThat(response.profile()).isEqualTo("java-ops-readability-upkeep-audit.v1");
         assertThat(response.docsRoot()).isEqualTo("docs/ops");
@@ -20,7 +20,7 @@ class ReadabilityUpkeepAuditServiceTests {
         assertThat(response.sourceRegistryEndpoint())
                 .isEqualTo("/api/v1/ops/readability/upkeep-registry");
         assertThat(response.auditState())
-                .isEqualTo("readability-upkeep-audit-registry-active-v1786");
+                .isEqualTo("readability-upkeep-audit-registry-active-v1788");
         assertThat(response.topicCount()).isEqualTo(5);
         assertThat(response.routeServiceTestMapCount()).isEqualTo(3);
         assertThat(response.rootPackagePressureCount()).isEqualTo(4);

@@ -10,7 +10,7 @@ final class ReadabilityUpkeepAuditSupport {
     static final String PACKAGE_ROOT =
             "com.codexdemo.orderplatform.ops.maintenance.readability";
     static final String AUDIT_STATE =
-            "readability-upkeep-audit-registry-active-v1786";
+            "readability-upkeep-audit-registry-active-v1788";
     static final int EXPECTED_TOPIC_COUNT = 5;
     static final int EXPECTED_ROUTE_SERVICE_TEST_MAP_COUNT = 3;
     static final int EXPECTED_ROOT_PACKAGE_PRESSURE_COUNT = 4;

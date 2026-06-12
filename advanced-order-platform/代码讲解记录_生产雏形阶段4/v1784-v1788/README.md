@@ -15,3 +15,7 @@
 ## 批次边界
 
 只做本项目 Java 代码、测试、docs 和代码讲解。禁止打开 write routing、active shard router、credential value、raw endpoint、managed audit connection、deployment、rollback、Java autostart、mini-kv autostart，也不修改 Node、mini-kv 或其他项目工作区。
+
+## 收口证据
+
+v1788 将 audit registry 响应版本收口到 `Java v1788`，新增 `docs/ops/readability-upkeep-audit-closeout.md`，并要求本地定向测试、全量测试、canonical Java remote push 和 GitHub Actions 成功后才算本批完成。

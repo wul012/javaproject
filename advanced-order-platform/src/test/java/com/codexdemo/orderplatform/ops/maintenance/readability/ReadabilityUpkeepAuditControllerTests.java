@@ -13,7 +13,7 @@ class ReadabilityUpkeepAuditControllerTests {
                 .audit();
 
         assertThat(response.endpoint()).isEqualTo("/api/v1/ops/readability/upkeep-audit");
-        assertThat(response.version()).isEqualTo("Java v1786");
+        assertThat(response.version()).isEqualTo("Java v1788");
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
         assertThat(response.sourceRegistryEndpoint())
