@@ -12,7 +12,10 @@ package.
 | `shard-readiness-map.md` | shard readiness and read-only evidence | Which endpoints prove readiness without opening write routing? |
 | `walkthrough-registry-map.md` | code walkthrough quality and depth | Which registries govern code explanation quality? |
 | `archive-layout-map.md` | screenshot/explanation and archive layout | Which docs/tests stop archive sprawl? |
+| `registry-template.md` | read-only ops registry shape | Which layers and tests must a new ops registry carry? |
 | `class-name-trial.md` | new ops readability subpackages | Which repeated prefixes can be dropped only after package context exists? |
+| `route-service-test-map.md` | ops readability routes, services, and tests | Which route is backed by which service and which guard tests? |
+| `root-package-pressure-map.md` | ops root package pressure | Which work should stay in the new readability subpackage instead of the old root? |
 
 ## Boundary
 
