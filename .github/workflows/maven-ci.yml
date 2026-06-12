@@ -45,8 +45,16 @@ jobs:
       - name: Wrapper verify without Docker tests
         run: >
           ./mvnw -B
-          "-DargLine=-XX:TieredStopAtLevel=1 -Xmx512m"
+          "-Dtest.jvm.argLine=-XX:TieredStopAtLevel=1 -Xmx512m"
           verify
+
+      - name: Upload JaCoCo report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: advanced-order-platform/target/site/jacoco/**
+          if-no-files-found: ignore
 
       - name: Upload diagnostics on failure
         if: failure()
@@ -55,6 +63,7 @@ jobs:
           name: build-test-diagnostics
           path: |
             advanced-order-platform/target/surefire-reports/**
+            advanced-order-platform/target/site/jacoco/**
             advanced-order-platform/target/spotbugsXml.xml
 
   docker-tests:
@@ -86,7 +95,7 @@ jobs:
         run: >
           ./mvnw -B
           -P docker-tests
-          "-DargLine=-XX:TieredStopAtLevel=1 -Xmx512m"
+          "-Dtest.jvm.argLine=-XX:TieredStopAtLevel=1 -Xmx512m"
           verify
 
       - name: Upload diagnostics on failure
@@ -96,4 +105,5 @@ jobs:
           name: docker-tests-diagnostics
           path: |
             advanced-order-platform/target/surefire-reports/**
+            advanced-order-platform/target/site/jacoco/**
             advanced-order-platform/target/spotbugsXml.xml

@@ -19,8 +19,8 @@ read-only for Java sessions; do not write progress back into `D:\nodeproj`.
 | Milestone | Version(s) | State | Evidence |
 | --------- | ---------- | ----- | -------- |
 | J0 | v1790 | completed; Claude reviewed PASS | `mvnw` generated for Maven 3.9.9; Docker tests tagged; Surefire excludes `docker` by default; `docker-tests` profile selects Docker-tagged tests; local wrapper verifies passed; GitHub Actions run `27397723739` succeeded; Claude reviewed J0 as PASS |
-| J1 | v1791 | local gates passed; remote CI pending | Maven Enforcer requires Java 21 and Maven 3.9.9; SpotBugs first scan found 2602 legacy findings collapsed into a shrink-only baseline; Spotless ratchet defaults to `origin/master`; temporary local formatting violation proved `spotless:check` fails; local Spotless, SpotBugs, focused tests, default verify, and docker profile verify passed; CI now runs `spotless:check` and uploads diagnostics on failure |
-| J2 | — | not started | baseline: __% |
+| J1 | v1791 | completed; remote CI passed | Maven Enforcer requires Java 21 and Maven 3.9.9; SpotBugs first scan found 2602 legacy findings collapsed into a shrink-only baseline; Spotless ratchet defaults to `origin/master`; temporary local formatting violation proved `spotless:check` fails; local Spotless, SpotBugs, focused tests, default verify, and docker profile verify passed; GitHub Actions run `27408969138` succeeded |
+| J2 | v1792 | local gates passed; remote CI pending | JaCoCo 0.8.15 added with `jacocoArgLine` + `test.jvm.argLine` split; baseline recorded in `docs/coverage/jacoco-baseline-v1792.md`; global line baseline 98.18% with floor 0.96; package floors cover root/catalog/common/inventory/notification/ops/readability/order/outbox/payment; outbox temporary floor 0.99 proved the check fails; docker profile sets `jacoco.skip=true` because it is not a coverage representative suite |
 | J3 | — | not started | |
 | J4 | — | not started | |
 | J5 | — | not started | |

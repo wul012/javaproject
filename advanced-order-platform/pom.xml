@@ -21,9 +21,24 @@
         <java.version>21</java.version>
         <maven.version>3.9.9</maven.version>
         <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
+        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <spotbugs-maven-plugin.version>4.10.2.0</spotbugs-maven-plugin.version>
         <spotless-maven-plugin.version>3.6.0</spotless-maven-plugin.version>
         <google-java-format.version>1.35.0</google-java-format.version>
+        <jacocoArgLine></jacocoArgLine>
+        <jacoco.skip>false</jacoco.skip>
+        <jacoco.bundle.line.minimum>0.96</jacoco.bundle.line.minimum>
+        <jacoco.root.line.minimum>0.85</jacoco.root.line.minimum>
+        <jacoco.catalog.line.minimum>0.64</jacoco.catalog.line.minimum>
+        <jacoco.common.line.minimum>0.61</jacoco.common.line.minimum>
+        <jacoco.inventory.line.minimum>0.89</jacoco.inventory.line.minimum>
+        <jacoco.notification.line.minimum>0.77</jacoco.notification.line.minimum>
+        <jacoco.ops.line.minimum>0.97</jacoco.ops.line.minimum>
+        <jacoco.readability.line.minimum>0.98</jacoco.readability.line.minimum>
+        <jacoco.order.line.minimum>0.87</jacoco.order.line.minimum>
+        <jacoco.outbox.line.minimum>0.69</jacoco.outbox.line.minimum>
+        <jacoco.payment.line.minimum>0.90</jacoco.payment.line.minimum>
+        <test.jvm.argLine></test.jvm.argLine>
         <spotless.ratchetFrom>origin/master</spotless.ratchetFrom>
         <surefire.excludedGroups>docker</surefire.excludedGroups>
         <surefire.groups></surefire.groups>
@@ -119,7 +134,185 @@
                 <configuration>
                     <groups>${surefire.groups}</groups>
                     <excludedGroups>${surefire.excludedGroups}</excludedGroups>
+                    <argLine>@{jacocoArgLine} ${test.jvm.argLine}</argLine>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <configuration>
+                    <skip>${jacoco.skip}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>jacocoArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.bundle.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.root.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.catalog</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.catalog.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.common</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.common.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.inventory</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.inventory.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.notification</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.notification.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.ops</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.ops.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.ops.maintenance.readability</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.readability.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.order</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.order.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.outbox</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.outbox.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.codexdemo.orderplatform.payment</include>
+                                    </includes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.payment.line.minimum}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
@@ -171,6 +364,7 @@
             <properties>
                 <surefire.groups>docker</surefire.groups>
                 <surefire.excludedGroups></surefire.excludedGroups>
+                <jacoco.skip>true</jacoco.skip>
             </properties>
         </profile>
     </profiles>
