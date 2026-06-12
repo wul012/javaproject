@@ -3,11 +3,11 @@ services:
     image: postgres:16-alpine
     container_name: advanced-order-postgres
     environment:
-      POSTGRES_DB: order_platform
-      POSTGRES_USER: order_app
-      POSTGRES_PASSWORD: order_app
+      POSTGRES_DB: ${POSTGRES_DB:-order_platform}
+      POSTGRES_USER: ${POSTGRES_USER:-order_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-order_app}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - order-postgres-data:/var/lib/postgresql/data
 
@@ -15,17 +15,17 @@ services:
     image: redis:7-alpine
     container_name: advanced-order-redis
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT:-6379}:6379"
 
   rabbitmq:
     image: rabbitmq:3.13-management-alpine
     container_name: advanced-order-rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: order_app
-      RABBITMQ_DEFAULT_PASS: order_app
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-order_app}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-order_app}
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "${RABBITMQ_AMQP_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 5s

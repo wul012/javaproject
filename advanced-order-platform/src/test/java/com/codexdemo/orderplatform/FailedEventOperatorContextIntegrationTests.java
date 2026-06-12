@@ -22,177 +22,274 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest(properties = {
-        "order.expiration.enabled=false",
-        "outbox.publisher.enabled=false"
-})
+@SpringBootTest(properties = {"order.expiration.enabled=false", "outbox.publisher.enabled=false"})
 @AutoConfigureMockMvc
 class FailedEventOperatorContextIntegrationTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
 
-    @Autowired
-    private FailedEventMessageRepository failedEventMessageRepository;
+  @Autowired private FailedEventMessageRepository failedEventMessageRepository;
 
-    @Autowired
-    private FailedEventReplayAttemptRepository failedEventReplayAttemptRepository;
+  @Autowired private FailedEventReplayAttemptRepository failedEventReplayAttemptRepository;
 
-    @Autowired
-    private FailedEventManagementHistoryRepository failedEventManagementHistoryRepository;
+  @Autowired private FailedEventManagementHistoryRepository failedEventManagementHistoryRepository;
 
-    @Autowired
-    private FailedEventReplayApprovalHistoryRepository failedEventReplayApprovalHistoryRepository;
+  @Autowired
+  private FailedEventReplayApprovalHistoryRepository failedEventReplayApprovalHistoryRepository;
 
-    @BeforeEach
-    void cleanFailedEventData() {
-        failedEventReplayApprovalHistoryRepository.deleteAll();
-        failedEventManagementHistoryRepository.deleteAll();
-        failedEventReplayAttemptRepository.deleteAll();
-        failedEventMessageRepository.deleteAll();
-    }
+  @BeforeEach
+  void cleanFailedEventData() {
+    failedEventReplayApprovalHistoryRepository.deleteAll();
+    failedEventManagementHistoryRepository.deleteAll();
+    failedEventReplayAttemptRepository.deleteAll();
+    failedEventMessageRepository.deleteAll();
+  }
 
-    @Test
-    void resolvesOperatorContextFromHeadersForProbeAndManagementMutation() throws Exception {
-        FailedEventMessage failedMessage = failedEventMessageRepository.save(failedEventMessage());
+  @Test
+  void resolvesOperatorContextFromHeadersForProbeAndManagementMutation() throws Exception {
+    FailedEventMessage failedMessage = failedEventMessageRepository.save(failedEventMessage());
 
-        mockMvc.perform(get("/api/v1/failed-events/operator-context")
-                        .header("X-Operator-Id", " ops-user ")
-                        .header("X-Operator-Role", " sre "))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.operatorId").value("ops-user"))
-                .andExpect(jsonPath("$.operatorRole").value("SRE"))
-                .andExpect(jsonPath("$.allowedRoles").value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
-                .andExpect(jsonPath("$.allowedRolesByAction.MANAGE_FAILED_EVENT")
-                        .value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
-                .andExpect(jsonPath("$.allowedRolesByAction.REVIEW_REPLAY_APPROVAL")
-                        .value(containsInAnyOrder("SRE", "SYSTEM")))
-                .andExpect(jsonPath("$.actionDecisions.MANAGE_FAILED_EVENT.allowed").value(true))
-                .andExpect(jsonPath("$.actionDecisions.MANAGE_FAILED_EVENT.allowedRoles")
-                        .value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
-                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowed").value(true))
-                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowedRoles")
-                        .value(containsInAnyOrder("SRE", "SYSTEM")))
-                .andExpect(jsonPath("$.allowedActions").value(containsInAnyOrder(
+    mockMvc
+        .perform(
+            get("/api/v1/failed-events/operator-context")
+                .header("X-Operator-Id", " ops-user ")
+                .header("X-Operator-Role", " sre "))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.operatorId").value("ops-user"))
+        .andExpect(jsonPath("$.operatorRole").value("SRE"))
+        .andExpect(
+            jsonPath("$.allowedRoles").value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
+        .andExpect(
+            jsonPath("$.allowedRolesByAction.MANAGE_FAILED_EVENT")
+                .value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
+        .andExpect(
+            jsonPath("$.allowedRolesByAction.REVIEW_REPLAY_APPROVAL")
+                .value(containsInAnyOrder("SRE", "SYSTEM")))
+        .andExpect(jsonPath("$.actionDecisions.MANAGE_FAILED_EVENT.allowed").value(true))
+        .andExpect(
+            jsonPath("$.actionDecisions.MANAGE_FAILED_EVENT.allowedRoles")
+                .value(containsInAnyOrder("ORDER_SUPPORT", "SRE", "SYSTEM")))
+        .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowed").value(true))
+        .andExpect(
+            jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowedRoles")
+                .value(containsInAnyOrder("SRE", "SYSTEM")))
+        .andExpect(
+            jsonPath("$.allowedActions")
+                .value(
+                    containsInAnyOrder(
                         "MANAGE_FAILED_EVENT",
                         "REQUEST_REPLAY_APPROVAL",
                         "REVIEW_REPLAY_APPROVAL",
-                        "REPLAY_FAILED_EVENT"
-                )))
-                .andExpect(jsonPath("$.deniedActions").isEmpty());
+                        "REPLAY_FAILED_EVENT")))
+        .andExpect(jsonPath("$.deniedActions").isEmpty());
 
-        mockMvc.perform(post("/api/v1/failed-events/management-status")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("X-Operator-Id", " ops-user ")
-                        .header("X-Operator-Role", " order_support ")
-                        .content("""
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/management-status")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", " ops-user ")
+                .header("X-Operator-Role", " order_support ")
+                .content(
+                    """
                                 {
                                   "ids": [%d],
                                   "status": "INVESTIGATING",
                                   "note": "operator context v29"
                                 }
-                                """.formatted(failedMessage.getId())))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value(FailedEventManagementStatus.INVESTIGATING.name()))
-                .andExpect(jsonPath("$.items[0].managedBy").value("ops-user"));
+                                """
+                        .formatted(failedMessage.getId())))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status").value(FailedEventManagementStatus.INVESTIGATING.name()))
+        .andExpect(jsonPath("$.items[0].managedBy").value("ops-user"));
 
-        assertThat(failedEventManagementHistoryRepository
+    assertThat(
+            failedEventManagementHistoryRepository
                 .findByFailedEventMessageIdOrderByChangedAtDescIdDesc(failedMessage.getId()))
-                .singleElement()
-                .satisfies(history -> {
-                    assertThat(history.getOperatorId()).isEqualTo("ops-user");
-                    assertThat(history.getOperatorRole()).isEqualTo("ORDER_SUPPORT");
-                    assertThat(history.getNote()).isEqualTo("operator context v29");
-                });
-    }
+        .singleElement()
+        .satisfies(
+            history -> {
+              assertThat(history.getOperatorId()).isEqualTo("ops-user");
+              assertThat(history.getOperatorRole()).isEqualTo("ORDER_SUPPORT");
+              assertThat(history.getNote()).isEqualTo("operator context v29");
+            });
+  }
 
-    @Test
-    void appliesActionRolesForReplayApprovalReview() throws Exception {
-        FailedEventMessage failedMessage = failedEventMessageRepository.save(failedEventMessage());
+  @Test
+  void appliesActionRolesForReplayApprovalReview() throws Exception {
+    FailedEventMessage failedMessage = failedEventMessageRepository.save(failedEventMessage());
 
-        mockMvc.perform(get("/api/v1/failed-events/operator-context")
-                        .header("X-Operator-Id", "ops-user")
-                        .header("X-Operator-Role", "viewer"))
-                .andExpect(status().isForbidden());
+    mockMvc
+        .perform(
+            get("/api/v1/failed-events/operator-context")
+                .header("X-Operator-Id", "ops-user")
+                .header("X-Operator-Role", "viewer"))
+        .andExpect(status().isForbidden());
 
-        mockMvc.perform(get("/api/v1/failed-events/operator-context")
-                        .header("X-Operator-Id", "support-user")
-                        .header("X-Operator-Role", "order_support"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.allowedActions").value(containsInAnyOrder(
-                        "MANAGE_FAILED_EVENT",
-                        "REQUEST_REPLAY_APPROVAL",
-                        "REPLAY_FAILED_EVENT"
-                )))
-                .andExpect(jsonPath("$.actionDecisions.REQUEST_REPLAY_APPROVAL.allowed").value(true))
-                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.action")
-                        .value("REVIEW_REPLAY_APPROVAL"))
-                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowed").value(false))
-                .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowedRoles")
-                        .value(containsInAnyOrder("SRE", "SYSTEM")))
-                .andExpect(jsonPath("$.deniedActions").value(containsInAnyOrder("REVIEW_REPLAY_APPROVAL")));
+    mockMvc
+        .perform(
+            get("/api/v1/failed-events/operator-context")
+                .header("X-Operator-Id", "support-user")
+                .header("X-Operator-Role", "order_support"))
+        .andExpect(status().isOk())
+        .andExpect(
+            jsonPath("$.allowedActions")
+                .value(
+                    containsInAnyOrder(
+                        "MANAGE_FAILED_EVENT", "REQUEST_REPLAY_APPROVAL", "REPLAY_FAILED_EVENT")))
+        .andExpect(jsonPath("$.actionDecisions.REQUEST_REPLAY_APPROVAL.allowed").value(true))
+        .andExpect(
+            jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.action")
+                .value("REVIEW_REPLAY_APPROVAL"))
+        .andExpect(jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowed").value(false))
+        .andExpect(
+            jsonPath("$.actionDecisions.REVIEW_REPLAY_APPROVAL.allowedRoles")
+                .value(containsInAnyOrder("SRE", "SYSTEM")))
+        .andExpect(jsonPath("$.deniedActions").value(containsInAnyOrder("REVIEW_REPLAY_APPROVAL")));
 
-        mockMvc.perform(post("/api/v1/failed-events/{id}/replay-approval", failedMessage.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("X-Operator-Id", " ops-user ")
-                        .header("X-Operator-Role", " order_support ")
-                        .content("""
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/{id}/replay-approval", failedMessage.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", " ops-user ")
+                .header("X-Operator-Role", " order_support ")
+                .content(
+                    """
                                 {
                                   "reason": "operator context approval request"
                                 }
                                 """))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.replayApprovalRequestedBy").value("ops-user"))
-                .andExpect(jsonPath("$.replayApprovalStatus").value("PENDING"));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.replayApprovalRequestedBy").value("ops-user"))
+        .andExpect(jsonPath("$.replayApprovalStatus").value("PENDING"));
 
-        assertThat(failedEventReplayApprovalHistoryRepository
+    assertThat(
+            failedEventReplayApprovalHistoryRepository
                 .findByFailedEventMessageIdOrderByChangedAtDescIdDesc(failedMessage.getId()))
-                .singleElement()
-                .satisfies(history -> {
-                    assertThat(history.getAction()).isEqualTo(FailedEventReplayApprovalHistoryAction.REQUESTED);
-                    assertThat(history.getOperatorId()).isEqualTo("ops-user");
-                    assertThat(history.getOperatorRole()).isEqualTo("ORDER_SUPPORT");
-                });
+        .singleElement()
+        .satisfies(
+            history -> {
+              assertThat(history.getAction())
+                  .isEqualTo(FailedEventReplayApprovalHistoryAction.REQUESTED);
+              assertThat(history.getOperatorId()).isEqualTo("ops-user");
+              assertThat(history.getOperatorRole()).isEqualTo("ORDER_SUPPORT");
+            });
 
-        mockMvc.perform(post("/api/v1/failed-events/{id}/replay-approval/review", failedMessage.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("X-Operator-Id", "support-reviewer")
-                        .header("X-Operator-Role", "ORDER_SUPPORT")
-                        .content("""
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/{id}/replay-approval/review", failedMessage.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", "support-reviewer")
+                .header("X-Operator-Role", "ORDER_SUPPORT")
+                .content(
+                    """
                                 {
                                   "status": "APPROVED",
                                   "note": "support role should not review"
                                 }
                                 """))
-                .andExpect(status().isForbidden())
-                .andExpect(status().reason("operator role is not allowed for action: REVIEW_REPLAY_APPROVAL"));
+        .andExpect(status().isForbidden())
+        .andExpect(
+            status().reason("operator role is not allowed for action: REVIEW_REPLAY_APPROVAL"));
 
-        mockMvc.perform(post("/api/v1/failed-events/{id}/replay-approval/review", failedMessage.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("X-Operator-Id", "sre-lead")
-                        .header("X-Operator-Role", "SRE")
-                        .content("""
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/{id}/replay-approval/review", failedMessage.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", "sre-lead")
+                .header("X-Operator-Role", "SRE")
+                .content(
+                    """
                                 {
                                   "status": "APPROVED",
                                   "note": "sre review is allowed"
                                 }
                                 """))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.replayApprovalReviewedBy").value("sre-lead"))
-                .andExpect(jsonPath("$.replayApprovalStatus").value("APPROVED"));
-    }
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.replayApprovalReviewedBy").value("sre-lead"))
+        .andExpect(jsonPath("$.replayApprovalStatus").value("APPROVED"));
+  }
 
-    private FailedEventMessage failedEventMessage() {
-        return FailedEventMessage.record(
-                "v29-message-001",
-                "29292929-2929-2929-2929-292929292901",
-                "OrderCreated",
-                "ORDER",
-                "2901",
-                "order-platform.outbox.events",
-                "order-platform.outbox.events.dlq",
-                "listener rejected event",
-                "{\"aggregateId\":\"2901\"}"
-        );
-    }
+  @Test
+  void rejectsInvalidFailedEventWriteRequestBodiesBeforeMutation() throws Exception {
+    FailedEventMessage failedMessage = failedEventMessageRepository.save(failedEventMessage());
+
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/management-status")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", "ops-user")
+                .header("X-Operator-Role", "SRE")
+                .content(
+                    """
+                                {
+                                  "ids": [],
+                                  "status": "INVESTIGATING",
+                                  "note": "empty id list should fail at the web boundary"
+                                }
+                                """))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.title").value("VALIDATION_FAILED"))
+        .andExpect(jsonPath("$.fieldErrors[0]").exists());
+
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/{id}/replay-approval", failedMessage.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", "support-user")
+                .header("X-Operator-Role", "ORDER_SUPPORT")
+                .content(
+                    """
+                                {
+                                  "reason": " "
+                                }
+                                """))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.title").value("VALIDATION_FAILED"))
+        .andExpect(jsonPath("$.fieldErrors[0]").exists());
+
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/{id}/replay-approval/review", failedMessage.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", "sre-user")
+                .header("X-Operator-Role", "SRE")
+                .content(
+                    """
+                                {
+                                  "note": "missing status should fail before review logic"
+                                }
+                                """))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.title").value("VALIDATION_FAILED"))
+        .andExpect(jsonPath("$.fieldErrors[0]").exists());
+
+    mockMvc
+        .perform(
+            post("/api/v1/failed-events/{id}/replay", failedMessage.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-Operator-Id", "sre-user")
+                .header("X-Operator-Role", "SRE")
+                .content(
+                    """
+                                {
+                                  "reason": " "
+                                }
+                                """))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.title").value("VALIDATION_FAILED"))
+        .andExpect(jsonPath("$.fieldErrors[0]").exists());
+  }
+
+  private FailedEventMessage failedEventMessage() {
+    return FailedEventMessage.record(
+        "v29-message-001",
+        "29292929-2929-2929-2929-292929292901",
+        "OrderCreated",
+        "ORDER",
+        "2901",
+        "order-platform.outbox.events",
+        "order-platform.outbox.events.dlq",
+        "listener rejected event",
+        "{\"aggregateId\":\"2901\"}");
+  }
 }

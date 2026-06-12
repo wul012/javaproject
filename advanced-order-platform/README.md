@@ -110,12 +110,43 @@ http://localhost:8080
 Invoke-RestMethod http://localhost:8080/actuator/health
 ```
 
+## Production Profile
+
+生产 profile 使用同一个 H2 内存默认数据源做本地/CI 冒烟，但关闭本地调试面并启用优雅停机：
+
+```powershell
+mvn spring-boot:run -Dspring-boot.run.profiles=prod
+```
+
+打包后启动：
+
+```powershell
+java -jar target\advanced-order-platform-0.1.0-SNAPSHOT.jar --spring.profiles.active=prod
+```
+
+`prod` profile 的边界：
+
+- H2 console 关闭：`spring.h2.console.enabled=false`
+- SQL 展示关闭：`spring.jpa.show-sql=false`，`hibernate.format_sql=false`
+- 优雅停机开启：`server.shutdown=graceful`
+- 单阶段停机等待：`spring.lifecycle.timeout-per-shutdown-phase=30s`
+- CI 会用 `--spring.profiles.active=prod` 启动 jar 并请求 `/actuator/health`
+
 默认 H2 本地模式下，RabbitMQ 业务能力未启用，因此 RabbitMQ health indicator 也默认关闭，避免本地未启动 RabbitMQ 时根健康检查误报 `DOWN`。
 
 失败事件管理页面：
 
 ```text
 http://localhost:8080/failed-events.html
+```
+
+## Local Compose Environment
+
+本地 compose 默认值只用于开发便利；需要覆盖账号、密码或端口时，复制 `.env.example` 为 `.env`，不要把真实 `.env` 提交到 git。
+
+```powershell
+Copy-Item .env.example .env
+docker compose -f compose.yaml up -d postgres rabbitmq
 ```
 
 ## PostgreSQL Run
