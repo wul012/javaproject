@@ -12,6 +12,8 @@ class ReadabilityUpkeepRoutePathsTests {
                 .isEqualTo("/api/v1/ops/readability");
         assertThat(ReadabilityUpkeepRoutePaths.UPKEEP_REGISTRY)
                 .isEqualTo("/upkeep-registry");
+        assertThat(ReadabilityUpkeepRoutePaths.UPKEEP_AUDIT)
+                .isEqualTo("/upkeep-audit");
         assertThat(ReadabilityUpkeepRegistryService.ENDPOINT)
                 .isEqualTo("/api/v1/ops/readability/upkeep-registry");
     }
