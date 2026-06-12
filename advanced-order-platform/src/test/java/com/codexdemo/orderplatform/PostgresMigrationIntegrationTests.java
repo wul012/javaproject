@@ -14,6 +14,7 @@ import com.codexdemo.orderplatform.order.OrderApplicationService;
 import com.codexdemo.orderplatform.order.OrderStatus;
 import java.util.List;
 import java.util.UUID;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers(disabledWithoutDocker = true)
+@Tag("docker")
 @SpringBootTest(properties = {
         "order.expiration.enabled=false",
         "outbox.publisher.enabled=false",

@@ -10,10 +10,10 @@ permissions:
   contents: read
 
 jobs:
-  maven:
-    name: Maven compile and non-Docker regression
+  build-test:
+    name: Build and headless regression
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: advanced-order-platform
@@ -29,15 +29,41 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Compile
-        run: mvn -B -q -DskipTests compile
+      - name: Make Maven wrapper executable
+        run: chmod +x ./mvnw
 
-      - name: Non-Docker regression tests
+      - name: Wrapper verify without Docker tests
         run: >
-          mvn -B -q
-          "-Dtest=!PostgresMigrationIntegrationTests,!RabbitMqNotificationConsumerIntegrationTests,!RabbitMqNotificationFailureIntegrationTests,!RabbitMqOutboxPublisherIntegrationTests"
+          ./mvnw -B -q
           "-DargLine=-XX:TieredStopAtLevel=1 -Xmx512m"
-          test
+          verify
 
-      - name: Package
-        run: mvn -B -q -DskipTests package
+  docker-tests:
+    name: Docker-tagged integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    defaults:
+      run:
+        working-directory: advanced-order-platform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Make Maven wrapper executable
+        run: chmod +x ./mvnw
+
+      - name: Wrapper verify Docker tests
+        run: >
+          ./mvnw -B -q
+          -P docker-tests
+          "-DargLine=-XX:TieredStopAtLevel=1 -Xmx512m"
+          verify
