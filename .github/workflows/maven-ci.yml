@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Java 21
         uses: actions/setup-java@v4
@@ -32,11 +34,28 @@ jobs:
       - name: Make Maven wrapper executable
         run: chmod +x ./mvnw
 
+      - name: Spotless ratchet check
+        env:
+          SPOTLESS_RATCHET_FROM: ${{ github.event_name == 'pull_request' && 'origin/master' || github.event.before }}
+        run: >
+          ./mvnw -B
+          "-Dspotless.ratchetFrom=${SPOTLESS_RATCHET_FROM}"
+          spotless:check
+
       - name: Wrapper verify without Docker tests
         run: >
-          ./mvnw -B -q
+          ./mvnw -B
           "-DargLine=-XX:TieredStopAtLevel=1 -Xmx512m"
           verify
+
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-test-diagnostics
+          path: |
+            advanced-order-platform/target/surefire-reports/**
+            advanced-order-platform/target/spotbugsXml.xml
 
   docker-tests:
     name: Docker-tagged integration tests
@@ -50,6 +69,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Java 21
         uses: actions/setup-java@v4
@@ -63,7 +84,16 @@ jobs:
 
       - name: Wrapper verify Docker tests
         run: >
-          ./mvnw -B -q
+          ./mvnw -B
           -P docker-tests
           "-DargLine=-XX:TieredStopAtLevel=1 -Xmx512m"
           verify
+
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-tests-diagnostics
+          path: |
+            advanced-order-platform/target/surefire-reports/**
+            advanced-order-platform/target/spotbugsXml.xml

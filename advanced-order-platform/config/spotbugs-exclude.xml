@@ -1,0 +1,2753 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SpotBugs baseline generated from the first J1 production-excellence scan.
+  Ratchet pool: shrink, never grow. Remove Match entries when fixing legacy findings;
+  do not add entries for new findings unless a follow-up review explicitly accepts the debt.
+  Source findings: 2602 BugInstance entries collapsed into 686 class-pattern matches.
+-->
+<FindBugsFilter>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.inventory.InventoryMovement" />
+  </Match>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventManagementHistory" />
+  </Match>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventMessage" />
+  </Match>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayApprovalHistory" />
+  </Match>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayAttempt" />
+  </Match>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.notification.NotificationMessage" />
+  </Match>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.order.OrderStatusHistory" />
+  </Match>
+  <Match>
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    <Class name="com.codexdemo.orderplatform.payment.PaymentTransaction" />
+  </Match>
+  <Match>
+    <Bug pattern="DM_CONVERT_CASE" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventMessageService" />
+  </Match>
+  <Match>
+    <Bug pattern="DM_CONVERT_CASE" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayProperties" />
+  </Match>
+  <Match>
+    <Bug pattern="DM_CONVERT_CASE" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentHandoffArtifactCatalog" />
+  </Match>
+  <Match>
+    <Bug pattern="DM_CONVERT_CASE" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierPreconditionEvidenceCatalog" />
+  </Match>
+  <Match>
+    <Bug pattern="DM_CONVERT_CASE" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketCatalog" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.common.PagedResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventManagementBatchResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventOperatorActionDecision" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventOperatorContextResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayApprovalStatusResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayEvidenceIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayEvidenceIndexResponse$OperatorAuthBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayEvidenceIndexResponse$StaticEvidenceSample" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayExecutionContractResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayExecutionContractResponse$ExecutionCheck" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayProperties" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayReadinessResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplaySimulationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.MarkFailedEventManagementRequest" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.notification.NotificationRabbitMqProperties" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepAuditResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepAuditResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepAuditResponse$RouteServiceTestMap" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ApprovalExecution" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$DeploymentRollback" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$HealthProbe" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$OrderIdempotency" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$Outbox" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ProductionDeploymentRunbookContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ProductionSecretSourceContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReadOnlyWindow" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseAuditRetentionFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseBundle" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseHandoffChecklistFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseOperatorSignoffFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseVerification" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackApprovalHandoff" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackApprovalRecordFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackApproverEvidenceFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackSqlReviewGate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$Service" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsOverviewResponse$Application" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessActiveShardPlanHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentIntakePacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialRequestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckResponse$SubmissionCheckpoint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentProfileSectionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentRequestPackageResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentSubmissionPrecheckResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughDepthRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughDepthRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityAuditRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityAuditRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityGateRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityGateRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateBlueprintResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateIntakePreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceEvaluationPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedPackageReviewResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$FakeHarnessBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEchoResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessHardeningResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessLiveReadGatePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceImportPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueDraftResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplyResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAuthoringReadinessResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReviewPackagePreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparedPackageEvidenceIntakeResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonAcceptancePrecheckResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageReviewPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageSubmissionPreflightCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageSubmissionPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCaptureArtifactPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorServiceLifecycleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEndpointRegistryIntegrityResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEvidenceCatalogHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEvidenceCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupAcceptanceReceiptResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchiveHandoffReceiptResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchivePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchiveVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupAuditTrailResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupBoundaryMatrixResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCiEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCiRunAttestationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCompletionAuditDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCompletionCertificateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCompletionIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupConsumerChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupConsumerPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupConsumerSignoffPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEndpointManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEvidenceRegisterResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupExtendedCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFinalArchivePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFinalDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFinalVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFixtureCoverageIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupHandoffBundleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupHandoffChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceArchiveManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceBoundaryReportResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceContinuityResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceLatestSiblingResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceReadinessGateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceRemediationQueueResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceRiskLedgerResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogResponse$SegmentSummary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceVersionLineageResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupOperationalSnapshotResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupOperatorRunbookResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse$PhaseSummary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPolicyGuardResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPostCompletionCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPostPushCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReadOnlyGateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupRegressionGuardResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReleaseEvidenceBundleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReleaseHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReviewerPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupSuiteCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupTagManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupThirdRunCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupTransitionBriefResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalGateInputResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputValueValidationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionArtifactCandidateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionLiveReadGateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionPacketContributionResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse$SourceReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessScreenshotExplanationArchiveRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessScreenshotExplanationArchiveRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerEvidenceDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerHandoffBundleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerProbePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerVerificationChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEndpointCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEvidencePacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractHandoffManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractOperatorChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalHandoffVerificationMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalRecordHandoffHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalArtifactRetentionHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalAuditPersistenceHandoffHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalCiEvidenceHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalEvidenceExportHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalFailureTaxonomy" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalInputHardeningDecisionEcho" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalLiveReadinessHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterBoundaryReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterImplementationGuardReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditExternalAdapterMigrationGuardReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditProductionAdapterPrerequisiteReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOperatorWindowHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOpsEvidenceServiceQualitySplitReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalRequestContext" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalSandboxQualityGateBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalVerificationHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$ReleaseApprovalInputs" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreconditionReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreflightEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContractSourceNodeV325" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalApprovalPrerequisiteArtifactIntakePlan" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryUpstreamEchoVerificationSource" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContractSourceNodeV316" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalSandboxEndpointCredentialResolverDecisionRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateBoundaryDecision" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateInterfaceShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverPlanIntakeUpstreamEchoVerificationSource" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledPrecheckRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDryRunResponseShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContractSourceNodeV319" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverExecutionDeniedEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalSandboxEndpointCredentialResolverFakeShellArchiveEvidence" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalHumanApprovalArtifactReviewPacket" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalHumanApprovalArtifactReviewPostEchoDecisionGate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContractSourceNodeV322" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationPlan" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalRuntimeShellDecisionRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionContinuationOption" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionPlanIntake" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalRuntimeShellChainStopPrerequisiteDecisionRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContractSourceNodeV312" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.order.CreateOrderRequest" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP" />
+    <Class name="com.codexdemo.orderplatform.order.OrderResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.common.PagedResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventManagementBatchResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventMessageController" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventMessageListener" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventMessageService" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventOperatorActionDecision" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventOperatorContextResolver" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventOperatorContextResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayApprovalStatusResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayEvidenceIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayEvidenceIndexResponse$OperatorAuthBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayEvidenceIndexResponse$StaticEvidenceSample" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayExecutionContractController" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayExecutionContractResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayExecutionContractResponse$ExecutionCheck" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayProperties" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayReadinessResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayReadinessService" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.FailedEventReplaySimulationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.MarkFailedEventManagementRequest" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.notification.NotificationRabbitMqProperties" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepAuditResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepAuditResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepAuditResponse$RouteServiceTestMap" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.readability.ReadabilityUpkeepRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ApprovalExecution" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$DeploymentRollback" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$HealthProbe" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$OrderIdempotency" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$Outbox" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ProductionDeploymentRunbookContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ProductionSecretSourceContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReadOnlyWindow" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseAuditRetentionFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseBundle" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseHandoffChecklistFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseOperatorSignoffFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$ReleaseVerification" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackApprovalHandoff" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackApprovalRecordFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackApproverEvidenceFixture" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$RollbackSqlReviewGate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceResponse$Service" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsEvidenceService" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsOverviewResponse$Application" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessActiveShardPlanHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentIntakePacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialRequestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckResponse$SubmissionCheckpoint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentProfileSectionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentRequestPackageResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCandidateDocumentSubmissionPrecheckResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughDepthRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughDepthRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityAuditRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityAuditRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityGateRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughQualityGateRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateBlueprintResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateIntakePreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceEvaluationPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedPackageReviewResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$FakeHarnessBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEchoResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessHardeningResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessLiveReadGatePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceImportPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueDraftResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplyResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAuthoringReadinessResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReviewPackagePreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparedPackageEvidenceIntakeResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonAcceptancePrecheckResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageReviewPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageSubmissionPreflightCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageSubmissionPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCaptureArtifactPreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorServiceLifecycleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEndpointRegistryIntegrityResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEvidenceCatalogHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReadOnlyEvidenceCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupAcceptanceReceiptResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchiveHandoffReceiptResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchivePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchiveVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupAuditTrailResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupBoundaryMatrixResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCiEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCiRunAttestationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCompletionAuditDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCompletionCertificateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupCompletionIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupConsumerChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupConsumerPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupConsumerSignoffPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEndpointManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEvidenceRegisterResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEvidenceResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupExtendedCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFinalArchivePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFinalDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFinalVerificationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupFixtureCoverageIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupHandoffBundleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupHandoffChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceArchiveManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceBoundaryReportResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceContinuityResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceLatestSiblingResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceReadinessGateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceRemediationQueueResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceRiskLedgerResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogResponse$SegmentSummary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceSustainmentReviewResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupMaintenanceVersionLineageResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupOperationalSnapshotResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupOperatorRunbookResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse$PhaseSummary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPolicyGuardResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPostCompletionCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPostPushCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReadOnlyGateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupRegressionGuardResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReleaseEvidenceBundleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReleaseHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReviewerPacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupSuiteCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupTagManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupThirdRunCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupTransitionBriefResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalGateInputResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputValueValidationResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionArtifactCandidateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionLiveReadGateResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionPacketContributionResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse$SourceReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessScreenshotExplanationArchiveRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessScreenshotExplanationArchiveRegistryResponse$MarkdownSection" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerEvidenceDigestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerHandoffBundleResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerProbePlanResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerVerificationChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEndpointCatalogResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEvidencePacketResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractHandoffManifestResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractOperatorChecklistResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalHandoffVerificationMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalRecordHandoffHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalArtifactRetentionHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalAuditPersistenceHandoffHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalCiEvidenceHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalEvidenceExportHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalFailureTaxonomy" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalInputHardeningDecisionEcho" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalLiveReadinessHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterBoundaryReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterImplementationGuardReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditExternalAdapterMigrationGuardReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditProductionAdapterPrerequisiteReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOperatorWindowHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOpsEvidenceServiceQualitySplitReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalRequestContext" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalSandboxQualityGateBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalVerificationHint" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$ReleaseApprovalInputs" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreconditionReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreflightEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContractSourceNodeV325" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalApprovalPrerequisiteArtifactIntakePlan" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryUpstreamEchoVerificationSource" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContractSourceNodeV316" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalSandboxEndpointCredentialResolverDecisionRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateBoundaryDecision" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateInterfaceShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverPlanIntakeUpstreamEchoVerificationSource" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledPrecheckRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDryRunResponseShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContractSourceNodeV319" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverExecutionDeniedEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalSandboxEndpointCredentialResolverFakeShellArchiveEvidence" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalHumanApprovalArtifactReviewPacket" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalHumanApprovalArtifactReviewPostEchoDecisionGate" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContractSourceNodeV322" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationBoundary" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationPlan" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalRuntimeShellDecisionRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionContinuationOption" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionPlanIntake" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalRuntimeShellChainStopPrerequisiteDecisionRecord" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContractSourceNodeV312" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.order.CreateOrderRequest" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.order.OrderExpirationScheduler" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.order.OrderResponse" />
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="com.codexdemo.orderplatform.outbox.RabbitMqOutboxEventDispatcher" />
+  </Match>
+  <Match>
+    <Bug pattern="URF_UNREAD_FIELD" />
+    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalVerificationWarningDigestBuilder" />
+  </Match>
+  <Match>
+    <Bug pattern="VA_FORMAT_STRING_USES_NEWLINE" />
+    <Class name="com.codexdemo.orderplatform.outbox.OutboxEvent" />
+  </Match>
+</FindBugsFilter>
