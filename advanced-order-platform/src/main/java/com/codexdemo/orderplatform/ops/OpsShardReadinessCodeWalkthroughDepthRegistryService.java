@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessCodeWalkthroughDepthRegistryService {
 
-    static final String RESPONSE_VERSION = "Java v1774";
+    static final String RESPONSE_VERSION = "Java v1778";
     static final String ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.CODE_WALKTHROUGH_DEPTH_REGISTRY;

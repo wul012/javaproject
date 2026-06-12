@@ -11,7 +11,7 @@ class OpsShardReadinessCodeWalkthroughDepthRegistryServiceTests {
         var response = OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport.registry();
 
         assertThat(response.project()).isEqualTo("advanced-order-platform");
-        assertThat(response.version()).isEqualTo("Java v1774");
+        assertThat(response.version()).isEqualTo("Java v1778");
         assertThat(response.endpoint())
                 .isEqualTo("/api/v1/ops/shard-readiness/code-walkthrough-depth-registry");
         assertThat(response.profile())

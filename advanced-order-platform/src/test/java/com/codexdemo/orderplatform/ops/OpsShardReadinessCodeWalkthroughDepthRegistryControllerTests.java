@@ -14,7 +14,7 @@ class OpsShardReadinessCodeWalkthroughDepthRegistryControllerTests {
 
         assertThat(response.endpoint())
                 .isEqualTo("/api/v1/ops/shard-readiness/code-walkthrough-depth-registry");
-        assertThat(response.version()).isEqualTo("Java v1774");
+        assertThat(response.version()).isEqualTo("Java v1778");
         assertThat(response.minimumChineseCharacterCount()).isEqualTo(3000);
         assertThat(response.readOnly()).isTrue();
         assertThat(response.executionAllowed()).isFalse();
