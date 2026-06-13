@@ -29,6 +29,7 @@ class ProductionReadinessDocumentationTests {
         .contains(
             "git tag",
             "0.1.0-SNAPSHOT",
+            "v1797",
             "v1796",
             "v1795",
             "v1794",

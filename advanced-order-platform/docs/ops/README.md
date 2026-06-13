@@ -19,6 +19,7 @@ package.
 | `readability-upkeep-cycle.md` | late-stage readability upkeep cycle | Which sequence keeps maps, models, read-only routes, docs guards, and closeout aligned? |
 | `readability-upkeep-audit-closeout.md` | audit registry closeout evidence | Which Java-only checks close the current readability upkeep audit batch? |
 | `ops-consolidation-inventory-v1796.md` | ops consolidation inventory | Which route family clusters, load-bearing archive paths, and reduction candidates should guide the next split? |
+| `code-walkthrough-compliance-extraction-v1797.md` | first ops extraction | Which code walkthrough compliance classes moved out of the root package while preserving routes and archives? |
 
 ## Boundary
 
@@ -45,3 +46,9 @@ contract-preserving and archive-preserving: Do not rename or move `a/` through
 The first J6 inventory is `ops-consolidation-inventory-v1796.md`. It records
 root-package pressure, route family clusters, load-bearing archive boundaries,
 and the first reduction candidates before any class movement begins.
+
+The first J7 extraction is
+`code-walkthrough-compliance-extraction-v1797.md`. It moves eleven
+implementation files into `ops.maintenance.walkthrough.compliance`, leaves the
+root controller and public route aggregation in place, and lowers direct root
+`ops` Java files from 1,330 to 1,319.

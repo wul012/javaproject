@@ -26,6 +26,10 @@ class ReadabilityUpkeepDocsTests {
         .isTrue();
     assertThat(Files.isRegularFile(DOCS_ROOT.resolve("ops-consolidation-inventory-v1796.md")))
         .isTrue();
+    assertThat(
+            Files.isRegularFile(
+                DOCS_ROOT.resolve("code-walkthrough-compliance-extraction-v1797.md")))
+        .isTrue();
   }
 
   @Test
@@ -74,6 +78,7 @@ class ReadabilityUpkeepDocsTests {
     String cycle = read("readability-upkeep-cycle.md");
     String closeout = read("readability-upkeep-audit-closeout.md");
     String inventory = read("ops-consolidation-inventory-v1796.md");
+    String extraction = read("code-walkthrough-compliance-extraction-v1797.md");
 
     assertThat(readme)
         .contains(
@@ -85,6 +90,7 @@ class ReadabilityUpkeepDocsTests {
             "readability-upkeep-cycle.md");
     assertThat(readme)
         .contains("readability-upkeep-audit-closeout.md", "ops-consolidation-inventory-v1796.md");
+    assertThat(readme).contains("code-walkthrough-compliance-extraction-v1797.md");
     assertThat(shard).contains("Controller", "Service", "Response", "read-only");
     assertThat(walkthrough)
         .contains("code-walkthrough-depth-registry", "Chinese longform", "3000 Chinese characters");
@@ -127,6 +133,13 @@ class ReadabilityUpkeepDocsTests {
             "load-bearing archive",
             "reduction candidate",
             "No class moves in v1796");
+    assertThat(extraction)
+        .contains(
+            "ops.maintenance.walkthrough.compliance",
+            "1,319",
+            "Contract Preservation",
+            "Archive Boundary",
+            "Stop Line");
   }
 
   private static String read(String fileName) throws IOException {

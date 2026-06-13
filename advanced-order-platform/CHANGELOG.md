@@ -4,6 +4,18 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1797 - Code walkthrough compliance package extraction
+
+- Moved eleven code walkthrough compliance implementation files into
+  `ops.maintenance.walkthrough.compliance`, reducing direct root `ops` Java
+  files from 1,330 to 1,319 while keeping the total ops file count stable.
+- Preserved the existing
+  `/api/v1/ops/shard-readiness/code-walkthrough-compliance-registry` route,
+  response version, read-only runtime flags, and root controller entry point.
+- Added `docs/ops/code-walkthrough-compliance-extraction-v1797.md` plus
+  extraction guard tests so future consolidation batches cannot silently move
+  archives, reopen runtime boundaries, or grow the root package again.
+
 ## v1796 - Ops consolidation inventory baseline
 
 - 新增 `docs/ops/ops-consolidation-inventory-v1796.md`，记录 ops 包当前
