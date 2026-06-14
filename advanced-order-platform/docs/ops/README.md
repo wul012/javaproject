@@ -24,6 +24,7 @@ package.
 | `quality-audit-registry-extraction-v1799.md` | third ops extraction | Which code walkthrough quality audit registry classes moved out of the root package while preserving routes and archives? |
 | `depth-registry-extraction-v1800.md` | fourth ops extraction | Which code walkthrough depth registry classes moved out of the root package while preserving routes and archives? |
 | `screenshot-explanation-archive-extraction-v1801.md` | fifth ops extraction | Which screenshot explanation archive registry classes moved out of the root package while preserving routes and archives? |
+| `credential-resolver-disabled-fake-harness-evidence-archive-extraction-v1802.md` | sixth ops extraction | Which credential resolver disabled fake harness evidence archive classes moved out of the root package while preserving routes and archives? |
 
 ## Boundary
 
@@ -77,3 +78,12 @@ It moves ten implementation files into
 `ops.maintenance.screenshotexplanationarchive`, leaves the root controller and
 public route aggregation in place, and lowers direct root `ops` Java files from
 1,290 to 1,280. It is the first extraction outside the CodeWalkthrough family.
+
+The sixth J12 extraction is
+`credential-resolver-disabled-fake-harness-evidence-archive-extraction-v1802.md`.
+It moves eleven implementation files into `ops.maintenance.credentialresolver`,
+leaves the root controller and public route aggregation in place, and lowers
+direct root `ops` Java files from 1,280 to 1,269. It is the first dependency-
+injected evidence registry extracted, and made the shared
+`OpsEvidenceServiceTestFixtures` test helper public so the moved test support
+could reuse it.

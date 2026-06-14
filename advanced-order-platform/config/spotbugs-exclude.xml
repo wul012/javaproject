@@ -308,15 +308,15 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$FakeHarnessBoundary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$FakeHarnessBoundary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$MarkdownSection" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$MarkdownSection" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1660,15 +1660,15 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$FakeHarnessBoundary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$FakeHarnessBoundary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$MarkdownSection" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse$MarkdownSection" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />

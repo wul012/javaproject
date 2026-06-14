@@ -4,6 +4,28 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1802 - Credential resolver disabled fake harness evidence archive package extraction
+
+- Moved eleven credential resolver disabled fake harness evidence archive
+  implementation files into `ops.maintenance.credentialresolver`, reducing direct
+  root `ops` Java files from 1,280 to 1,269 while keeping the total ops file
+  count stable. First dependency-injected "evidence" registry extracted (second
+  family outside CodeWalkthrough).
+- Made the family route-path class public with its public `BASE_PATH`/suffix;
+  the root controller and aggregator import it; the moved service/catalogs import
+  the public `OpsEvidenceService` and `ReleaseApprovalRehearsalResponse` types
+  they previously referenced same-package. The route
+  `/api/v1/ops/shard-readiness/credential-resolver-disabled-fake-harness-evidence-archive`,
+  response shape, and read-only flags are byte-identical.
+- Made the shared test helper `OpsEvidenceServiceTestFixtures` public so the
+  moved package-local test support can reuse it; the root service/controller test
+  now constructs the service directly through that fixture.
+- Relocated the moved Response's accepted `EI_EXPOSE_REP/REP2` exclusions in
+  `config/spotbugs-exclude.xml` to the new FQN (same accepted findings, none new).
+- Added `docs/ops/credential-resolver-disabled-fake-harness-evidence-archive-extraction-v1802.md`
+  plus `ReadabilityUpkeepOpsConsolidationExtractionV1802Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1280 to 1269.
+
 ## v1801 - Screenshot explanation archive registry package extraction
 
 - Moved ten screenshot explanation archive registry implementation files into
