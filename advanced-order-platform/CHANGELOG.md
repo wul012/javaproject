@@ -4,6 +4,26 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1801 - Screenshot explanation archive registry package extraction
+
+- Moved ten screenshot explanation archive registry implementation files into
+  `ops.maintenance.screenshotexplanationarchive`, reducing direct root `ops`
+  Java files from 1,290 to 1,280 while keeping the total ops file count stable.
+  This is the first extraction outside the CodeWalkthrough family.
+- Mirrored the v1797–v1800 recipe: made the screenshot explanation archive
+  route-path class public (with its own `BASE_PATH`), repointed the moved service
+  to it, made `ENDPOINT` public, moved the package-local service/renderer/
+  boundary/immutability/closeout/f-root-policy/test-support tests into the
+  subpackage; the segmentation docs, controller, and route-path tests stay in
+  root (controller/route-path tests construct the service directly). The route
+  `/api/v1/ops/shard-readiness/screenshot-explanation-archive-registry`, response
+  version, read-only flags, and root controller entry point are byte-identical.
+- Relocated the moved Response's accepted `EI_EXPOSE_REP/REP2` exclusions in
+  `config/spotbugs-exclude.xml` to the new FQN (same accepted findings, none new).
+- Added `docs/ops/screenshot-explanation-archive-extraction-v1801.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1801Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1290 to 1280.
+
 ## v1800 - Code walkthrough depth registry package extraction
 
 - Moved eight code walkthrough depth registry implementation files into

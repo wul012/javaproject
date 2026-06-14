@@ -23,6 +23,7 @@ package.
 | `quality-gate-registry-extraction-v1798.md` | second ops extraction | Which code walkthrough quality gate registry classes moved out of the root package while preserving routes and archives? |
 | `quality-audit-registry-extraction-v1799.md` | third ops extraction | Which code walkthrough quality audit registry classes moved out of the root package while preserving routes and archives? |
 | `depth-registry-extraction-v1800.md` | fourth ops extraction | Which code walkthrough depth registry classes moved out of the root package while preserving routes and archives? |
+| `screenshot-explanation-archive-extraction-v1801.md` | fifth ops extraction | Which screenshot explanation archive registry classes moved out of the root package while preserving routes and archives? |
 
 ## Boundary
 
@@ -70,3 +71,9 @@ The fourth J10 extraction is `depth-registry-extraction-v1800.md`. It moves
 eight implementation files into `ops.maintenance.walkthrough.depth`, leaves the
 root controller and public route aggregation in place, and lowers direct root
 `ops` Java files from 1,298 to 1,290.
+
+The fifth J11 extraction is `screenshot-explanation-archive-extraction-v1801.md`.
+It moves ten implementation files into
+`ops.maintenance.screenshotexplanationarchive`, leaves the root controller and
+public route aggregation in place, and lowers direct root `ops` Java files from
+1,290 to 1,280. It is the first extraction outside the CodeWalkthrough family.
