@@ -1,5 +1,8 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse;
+import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService;
+import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionRoutePaths;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(OpsShardReadinessSandboxConnectionRoutePaths.BASE_PATH)
 public class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierController {
 
-    private final OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService service;
+  private final OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService service;
 
-    public OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierController(
-            OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService service
-    ) {
-        this.service = service;
-    }
+  public OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierController(
+      OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService service) {
+    this.service = service;
+  }
 
-    @GetMapping(OpsShardReadinessSandboxConnectionRoutePaths
-            .SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER)
-    public OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse dossier() {
-        return service.dossier();
-    }
+  @GetMapping(
+      OpsShardReadinessSandboxConnectionRoutePaths
+          .SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER)
+  public OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse dossier() {
+    return service.dossier();
+  }
 }

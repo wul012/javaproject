@@ -6,3 +6,4 @@
 - `version-1800-production-excellence-depth-registry-extraction.md`：J10 代码讲解深度注册表簇抽离、根包计数 1,298→1,290，完成代码讲解四个注册表家族全部迁出；讲解先行、静态分析豁免预置平移。
 - `version-1801-production-excellence-screenshot-explanation-archive-registry-extraction.md`：J11 截图解释归档注册表簇抽离（第一刀走出代码讲解家族）、根包计数 1,290→1,280；复用同构范式、讲解先行。
 - `version-1802-production-excellence-credential-resolver-evidence-archive-extraction.md`：J12 凭据解析器禁用假装具证据归档簇抽离（首个依赖注入式证据注册表）、根包计数 1,280→1,269；新增“共享测试夹具公开 + 跨包类型导入平移”两步。
+- `version-1803-production-excellence-sandbox-connection-extraction.md`：J13 沙箱连接注册表家族抽离（第二个依赖注入式证据家族，且首次一次迁出含两个控制器、两套共享同一路由常量类的注册表子簇）、根包计数 1,269→1,243（迄今单版本最大降幅）；复用 J12 依赖注入范式并补充“单个共享 schema 版本常量公开”一步。

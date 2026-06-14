@@ -4,6 +4,38 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1803 - Sandbox connection registry package extraction
+
+- Moved twenty-six sandbox connection implementation files (two sibling registry
+  sub-clusters — the blocked-execution-context dossier and the precheck
+  upstream-receipt verification manifest — that share one route-path class) into
+  `ops.maintenance.sandboxconnection`, reducing direct root `ops` Java files from
+  1,269 to 1,243 while keeping the total ops file count stable. This is the
+  second dependency-injected "evidence" registry family extracted and the largest
+  single root-pressure reduction so far.
+- Made the family route-path class public with its public `BASE_PATH`/suffixes;
+  both root controllers and the aggregator import it; the moved
+  services/catalogs/support import the public `OpsEvidenceService` and
+  `ReleaseApprovalRehearsalResponse` types they previously referenced same-package.
+  The routes
+  `/api/v1/ops/shard-readiness/sandbox-connection-blocked-execution-context-normalization-dossier`
+  and
+  `/api/v1/ops/shard-readiness/sandbox-connection-precheck-upstream-receipt-verification-manifest`,
+  both response shapes, and read-only flags are byte-identical.
+- Made the single shared schema-version constant
+  `RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PRECHECK_PACKET_ECHO_RECEIPT_SCHEMA_VERSION`
+  on `OpsEvidenceService` public (immutable string, behaviour-neutral) so the
+  moved support can read it; the moved test supports reuse the already-public
+  `OpsEvidenceServiceTestFixtures`, and both route/controller tests stay in root
+  and construct their service directly through that fixture.
+- Relocated the moved Responses' accepted `EI_EXPOSE_REP/REP2` exclusions in
+  `config/spotbugs-exclude.xml` (eleven entries) to the new FQN (same accepted
+  findings, none new); the `ReleaseApproval*SandboxConnection*Records` exclusions
+  stay in root because those records do not move.
+- Added `docs/ops/sandbox-connection-extraction-v1803.md`
+  plus `ReadabilityUpkeepOpsConsolidationExtractionV1803Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1269 to 1243.
+
 ## v1802 - Credential resolver disabled fake harness evidence archive package extraction
 
 - Moved eleven credential resolver disabled fake harness evidence archive

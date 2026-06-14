@@ -25,6 +25,7 @@ package.
 | `depth-registry-extraction-v1800.md` | fourth ops extraction | Which code walkthrough depth registry classes moved out of the root package while preserving routes and archives? |
 | `screenshot-explanation-archive-extraction-v1801.md` | fifth ops extraction | Which screenshot explanation archive registry classes moved out of the root package while preserving routes and archives? |
 | `credential-resolver-disabled-fake-harness-evidence-archive-extraction-v1802.md` | sixth ops extraction | Which credential resolver disabled fake harness evidence archive classes moved out of the root package while preserving routes and archives? |
+| `sandbox-connection-extraction-v1803.md` | seventh ops extraction | Which sandbox connection registry classes moved out of the root package while preserving routes and archives? |
 
 ## Boundary
 
@@ -87,3 +88,10 @@ direct root `ops` Java files from 1,280 to 1,269. It is the first dependency-
 injected evidence registry extracted, and made the shared
 `OpsEvidenceServiceTestFixtures` test helper public so the moved test support
 could reuse it.
+
+The seventh J13 extraction is `sandbox-connection-extraction-v1803.md`. It moves
+twenty-six implementation files (two sibling registry sub-clusters that share one
+route-path class) into `ops.maintenance.sandboxconnection`, leaves both root
+controllers and public route aggregation in place, and lowers direct root `ops`
+Java files from 1,269 to 1,243. It is the second dependency-injected evidence
+registry family extracted and the largest single root-pressure reduction so far.
