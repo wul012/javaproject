@@ -22,6 +22,7 @@ package.
 | `code-walkthrough-compliance-extraction-v1797.md` | first ops extraction | Which code walkthrough compliance classes moved out of the root package while preserving routes and archives? |
 | `quality-gate-registry-extraction-v1798.md` | second ops extraction | Which code walkthrough quality gate registry classes moved out of the root package while preserving routes and archives? |
 | `quality-audit-registry-extraction-v1799.md` | third ops extraction | Which code walkthrough quality audit registry classes moved out of the root package while preserving routes and archives? |
+| `depth-registry-extraction-v1800.md` | fourth ops extraction | Which code walkthrough depth registry classes moved out of the root package while preserving routes and archives? |
 
 ## Boundary
 
@@ -64,3 +65,8 @@ The third J9 extraction is `quality-audit-registry-extraction-v1799.md`. It
 moves eleven implementation files into `ops.maintenance.walkthrough.qualityaudit`,
 leaves the root controller and public route aggregation in place, and lowers
 direct root `ops` Java files from 1,309 to 1,298.
+
+The fourth J10 extraction is `depth-registry-extraction-v1800.md`. It moves
+eight implementation files into `ops.maintenance.walkthrough.depth`, leaves the
+root controller and public route aggregation in place, and lowers direct root
+`ops` Java files from 1,298 to 1,290.

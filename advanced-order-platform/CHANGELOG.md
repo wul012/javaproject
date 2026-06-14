@@ -4,6 +4,26 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1800 - Code walkthrough depth registry package extraction
+
+- Moved eight code walkthrough depth registry implementation files into
+  `ops.maintenance.walkthrough.depth`, reducing direct root `ops` Java files
+  from 1,298 to 1,290 while keeping the total ops file count stable. This
+  completes moving all four CodeWalkthrough registry families (compliance,
+  quality gate, quality audit, depth) out of the root package.
+- Mirrored the v1797–v1799 recipe: made the depth route-path class public (with
+  its own `BASE_PATH`), repointed the moved service to it, made `ENDPOINT`
+  public, moved the package-local service/renderer/boundary/test-support tests
+  into the subpackage; the root controller and route-path tests construct the
+  service directly. The route
+  `/api/v1/ops/shard-readiness/code-walkthrough-depth-registry`, response
+  version, read-only flags, and root controller entry point are byte-identical.
+- Relocated the moved Response's accepted `EI_EXPOSE_REP/REP2` exclusions in
+  `config/spotbugs-exclude.xml` to the new FQN (same accepted findings, none new).
+- Added `docs/ops/depth-registry-extraction-v1800.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1800Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1298 to 1290.
+
 ## v1799 - Code walkthrough quality audit registry package extraction
 
 - Moved eleven code walkthrough quality audit registry implementation files into
