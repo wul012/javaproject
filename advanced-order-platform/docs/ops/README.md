@@ -21,6 +21,7 @@ package.
 | `ops-consolidation-inventory-v1796.md` | ops consolidation inventory | Which route family clusters, load-bearing archive paths, and reduction candidates should guide the next split? |
 | `code-walkthrough-compliance-extraction-v1797.md` | first ops extraction | Which code walkthrough compliance classes moved out of the root package while preserving routes and archives? |
 | `quality-gate-registry-extraction-v1798.md` | second ops extraction | Which code walkthrough quality gate registry classes moved out of the root package while preserving routes and archives? |
+| `quality-audit-registry-extraction-v1799.md` | third ops extraction | Which code walkthrough quality audit registry classes moved out of the root package while preserving routes and archives? |
 
 ## Boundary
 
@@ -58,3 +59,8 @@ The second J8 extraction is `quality-gate-registry-extraction-v1798.md`. It
 moves ten implementation files into `ops.maintenance.walkthrough.qualitygate`,
 leaves the root controller and public route aggregation in place, and lowers
 direct root `ops` Java files from 1,319 to 1,309.
+
+The third J9 extraction is `quality-audit-registry-extraction-v1799.md`. It
+moves eleven implementation files into `ops.maintenance.walkthrough.qualityaudit`,
+leaves the root controller and public route aggregation in place, and lowers
+direct root `ops` Java files from 1,309 to 1,298.

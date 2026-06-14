@@ -4,6 +4,31 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1799 - Code walkthrough quality audit registry package extraction
+
+- Moved eleven code walkthrough quality audit registry implementation files into
+  `ops.maintenance.walkthrough.qualityaudit`, reducing direct root `ops` Java
+  files from 1,309 to 1,298 while keeping the total ops file count stable.
+- Mirrored the v1797/v1798 recipe: made the quality audit route-path class public
+  (with its own `BASE_PATH`) and repointed the moved service to it; made
+  `ENDPOINT` public; moved the package-local service/renderer/boundary/
+  immutability/closeout/test-support tests into the subpackage; the root
+  controller and route-path tests construct the service directly. The route
+  `/api/v1/ops/shard-readiness/code-walkthrough-quality-audit-registry`, response
+  version, read-only flags, and root controller entry point are byte-identical.
+- Relocated the moved Response's accepted `EI_EXPOSE_REP/REP2` exclusions in
+  `config/spotbugs-exclude.xml` to the new FQN (same accepted findings, none new).
+- Added `docs/ops/quality-audit-registry-extraction-v1799.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1799Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1309 to 1298.
+- Fixed a latent gate failure inherited from v1798: the v1798 Chinese walkthrough
+  had been written after that version's verify and committed without re-running,
+  leaving it below the 3000-CJK / Chinese-majority threshold enforced by
+  `OpsCodeWalkthroughArchiveComplianceTests`. This version's full verify caught
+  it; the v1798 walkthrough was expanded to satisfy the gate and a full
+  `mvnw verify` now passes (1495 tests, JaCoCo floors met, SpotBugs/Spotless
+  clean).
+
 ## v1798 - Code walkthrough quality gate registry package extraction
 
 - Moved ten code walkthrough quality gate registry implementation files into
