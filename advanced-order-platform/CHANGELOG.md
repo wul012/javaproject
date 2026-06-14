@@ -4,6 +4,25 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1798 - Code walkthrough quality gate registry package extraction
+
+- Moved ten code walkthrough quality gate registry implementation files into
+  `ops.maintenance.walkthrough.qualitygate`, reducing direct root `ops` Java
+  files from 1,319 to 1,309 while keeping the total ops file count stable.
+- Made the quality gate route-path class public (with its own `BASE_PATH`) so
+  the moved service builds the endpoint from its own subpackage route-path
+  class; the root `OpsShardReadinessRoutePaths` table still delegates the public
+  suffix, keeping the
+  `/api/v1/ops/shard-readiness/code-walkthrough-quality-gate-registry` route,
+  response version, read-only runtime flags, and root controller entry point
+  byte-identical.
+- Moved the package-local service/renderer/boundary/immutability/test-support
+  tests into the subpackage; the root controller and route-path tests construct
+  the service directly and import the public route-path class (mirroring v1797).
+- Added `docs/ops/quality-gate-registry-extraction-v1798.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1798Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1319 to 1309.
+
 ## v1797 - Code walkthrough compliance package extraction
 
 - Moved eleven code walkthrough compliance implementation files into

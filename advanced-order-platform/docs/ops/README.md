@@ -20,6 +20,7 @@ package.
 | `readability-upkeep-audit-closeout.md` | audit registry closeout evidence | Which Java-only checks close the current readability upkeep audit batch? |
 | `ops-consolidation-inventory-v1796.md` | ops consolidation inventory | Which route family clusters, load-bearing archive paths, and reduction candidates should guide the next split? |
 | `code-walkthrough-compliance-extraction-v1797.md` | first ops extraction | Which code walkthrough compliance classes moved out of the root package while preserving routes and archives? |
+| `quality-gate-registry-extraction-v1798.md` | second ops extraction | Which code walkthrough quality gate registry classes moved out of the root package while preserving routes and archives? |
 
 ## Boundary
 
@@ -52,3 +53,8 @@ The first J7 extraction is
 implementation files into `ops.maintenance.walkthrough.compliance`, leaves the
 root controller and public route aggregation in place, and lowers direct root
 `ops` Java files from 1,330 to 1,319.
+
+The second J8 extraction is `quality-gate-registry-extraction-v1798.md`. It
+moves ten implementation files into `ops.maintenance.walkthrough.qualitygate`,
+leaves the root controller and public route aggregation in place, and lowers
+direct root `ops` Java files from 1,319 to 1,309.

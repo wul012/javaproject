@@ -1,6 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.compliance.OpsShardReadinessCodeWalkthroughComplianceRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualitygate.OpsShardReadinessCodeWalkthroughQualityGateRoutePaths;
 
 final class OpsShardReadinessRoutePaths {
 
