@@ -4,6 +4,28 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1804 - Signed approval route-path consolidation
+
+- Moved three signed-approval route-path classes
+  (`OpsShardReadinessSignedApproval{ArtifactDraftReadiness,CaptureArtifactPreflight,CapturePreflight}RoutePaths`)
+  into the new `ops.maintenance.signedapproval` subpackage, reducing direct root
+  `ops` Java files from 1,243 to 1,240 while keeping the total ops file count
+  stable. This is the first pure route-path leaf consolidation (no service,
+  controller, or response moves) and stands up the signedapproval subpackage for
+  later migration of the operator-evidence-value-supply signed-approval registry
+  families.
+- Made the three route-path classes and their
+  `OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_*` suffix constants public
+  (behaviour-neutral; values unchanged). Each class is referenced directly only
+  by the root `OpsShardReadinessRoutePaths` aggregator (which still delegates the
+  matching public suffix) and its single `...RoutePathsTests` guard; both were
+  repointed by import only. The registry services/controllers that own those
+  routes stay in root and continue to read the suffixes through the aggregator,
+  so every endpoint string is byte-identical.
+- Added `docs/ops/signed-approval-route-path-consolidation-v1804.md`
+  plus `ReadabilityUpkeepOpsConsolidationExtractionV1804Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1243 to 1240.
+
 ## v1803 - Sandbox connection registry package extraction
 
 - Moved twenty-six sandbox connection implementation files (two sibling registry

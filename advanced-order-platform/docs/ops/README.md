@@ -26,6 +26,7 @@ package.
 | `screenshot-explanation-archive-extraction-v1801.md` | fifth ops extraction | Which screenshot explanation archive registry classes moved out of the root package while preserving routes and archives? |
 | `credential-resolver-disabled-fake-harness-evidence-archive-extraction-v1802.md` | sixth ops extraction | Which credential resolver disabled fake harness evidence archive classes moved out of the root package while preserving routes and archives? |
 | `sandbox-connection-extraction-v1803.md` | seventh ops extraction | Which sandbox connection registry classes moved out of the root package while preserving routes and archives? |
+| `signed-approval-route-path-consolidation-v1804.md` | eighth ops extraction | Which signed-approval route-path leaves moved into the new signedapproval subpackage while preserving routes and archives? |
 
 ## Boundary
 
@@ -95,3 +96,11 @@ route-path class) into `ops.maintenance.sandboxconnection`, leaves both root
 controllers and public route aggregation in place, and lowers direct root `ops`
 Java files from 1,269 to 1,243. It is the second dependency-injected evidence
 registry family extracted and the largest single root-pressure reduction so far.
+
+The eighth J14 extraction is `signed-approval-route-path-consolidation-v1804.md`.
+It is the first pure route-path leaf consolidation: it moves three signed-approval
+route-path classes into the new `ops.maintenance.signedapproval` subpackage,
+leaves their registry services/controllers and public route aggregation in root,
+and lowers direct root `ops` Java files from 1,243 to 1,240. It stands up the
+signedapproval subpackage so the larger operator-evidence-value-supply
+signed-approval registry families can migrate into it later.
