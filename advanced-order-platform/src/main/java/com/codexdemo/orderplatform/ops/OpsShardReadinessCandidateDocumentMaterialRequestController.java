@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentMaterialRequestResponse;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentMaterialRequestService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,16 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
 public class OpsShardReadinessCandidateDocumentMaterialRequestController {
 
-    private final OpsShardReadinessCandidateDocumentMaterialRequestService service;
+  private final OpsShardReadinessCandidateDocumentMaterialRequestService service;
 
-    public OpsShardReadinessCandidateDocumentMaterialRequestController(
-            OpsShardReadinessCandidateDocumentMaterialRequestService service
-    ) {
-        this.service = service;
-    }
+  public OpsShardReadinessCandidateDocumentMaterialRequestController(
+      OpsShardReadinessCandidateDocumentMaterialRequestService service) {
+    this.service = service;
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_REQUEST)
-    public OpsShardReadinessCandidateDocumentMaterialRequestResponse materialRequest() {
-        return service.materialRequest();
-    }
+  @GetMapping(OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_REQUEST)
+  public OpsShardReadinessCandidateDocumentMaterialRequestResponse materialRequest() {
+    return service.materialRequest();
+  }
 }

@@ -27,6 +27,7 @@ package.
 | `credential-resolver-disabled-fake-harness-evidence-archive-extraction-v1802.md` | sixth ops extraction | Which credential resolver disabled fake harness evidence archive classes moved out of the root package while preserving routes and archives? |
 | `sandbox-connection-extraction-v1803.md` | seventh ops extraction | Which sandbox connection registry classes moved out of the root package while preserving routes and archives? |
 | `signed-approval-route-path-consolidation-v1804.md` | eighth ops extraction | Which signed-approval route-path leaves moved into the new signedapproval subpackage while preserving routes and archives? |
+| `candidate-document-extraction-v1805.md` | ninth ops extraction | Which candidate document registry classes moved into the new candidatedocument subpackage while preserving routes and archives? |
 
 ## Boundary
 
@@ -104,3 +105,12 @@ leaves their registry services/controllers and public route aggregation in root,
 and lowers direct root `ops` Java files from 1,243 to 1,240. It stands up the
 signedapproval subpackage so the larger operator-evidence-value-supply
 signed-approval registry families can migrate into it later.
+
+The ninth J15 extraction is `candidate-document-extraction-v1805.md`. It is the
+largest extraction so far: it moves fifty-seven candidate-document implementation
+files plus the family route-path class into the new
+`ops.maintenance.candidatedocument` subpackage, leaves the eight public
+controllers and route aggregation in root, and lowers direct root `ops` Java
+files from 1,240 to 1,183. The family uses intra-family dependency injection and
+has effectively no cross-family coupling; the one cross-family route constant it
+reads was made an owned, delegated constant.

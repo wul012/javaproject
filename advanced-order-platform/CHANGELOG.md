@@ -4,6 +4,31 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1805 - Candidate document registry package extraction
+
+- Moved the entire candidate-document registry family — 57 non-controller
+  implementation files plus the family route-path class
+  `OpsShardReadinessCandidateDocumentRoutePaths` — into the new
+  `ops.maintenance.candidatedocument` subpackage, reducing direct root `ops`
+  Java files from 1,240 to 1,183 (the largest single reduction in the
+  consolidation program). The eight public `@RestController` classes and the
+  global `OpsShardReadinessRoutePaths` aggregator stay in root.
+- The family route-path class was made public with a public `BASE_PATH` and
+  public suffix constants; the relocated services were repointed from the
+  package-private aggregator to the family route-path class. Dependency injection
+  is intra-family, so the family moved as one unit with no cross-package wiring.
+- Handled the one genuine cross-family edge: two candidate-document catalogs
+  reference the compared-evidence candidate-intake-preflight catalog route, which
+  the aggregator previously defined inline. That constant now lives in the
+  candidate-document route-path class and the aggregator delegates to it, so the
+  compared-evidence family keeps the same value through the aggregator.
+- Relocated 19 SpotBugs EI_EXPOSE_REP/REP2 exclusions across 9 candidate-document
+  response classes to the new fully-qualified names. Two shared test-support
+  classes used by retained root tests were made public.
+- Added `docs/ops/candidate-document-extraction-v1805.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1805Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1240 to 1183.
+
 ## v1804 - Signed approval route-path consolidation
 
 - Moved three signed-approval route-path classes
