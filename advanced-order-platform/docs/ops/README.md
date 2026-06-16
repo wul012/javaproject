@@ -29,6 +29,7 @@ package.
 | `signed-approval-route-path-consolidation-v1804.md` | eighth ops extraction | Which signed-approval route-path leaves moved into the new signedapproval subpackage while preserving routes and archives? |
 | `candidate-document-extraction-v1805.md` | ninth ops extraction | Which candidate document registry classes moved into the new candidatedocument subpackage while preserving routes and archives? |
 | `java-extraction-quality-closeout-v1806.md` | quality closeout | Which historical v1798 tag exception should maintainers avoid using as the current green baseline? |
+| `operator-evidence-value-draft-extraction-v1807.md` | tenth ops extraction | Which operator-evidence-value-draft registry classes moved into the new operatorevidencevaluedraft subpackage, and how was the cross-family endpoint coupling handled? |
 
 ## Boundary
 
@@ -120,3 +121,13 @@ The J16 closeout is `java-extraction-quality-closeout-v1806.md`. It does not
 move code. It records the current v1805 green baseline, the historical v1798 tag
 exception, the v1799 remediation boundary, and the rule that historical tags
 must not be rewritten or force-moved.
+
+The tenth J17 extraction is `operator-evidence-value-draft-extraction-v1807.md`.
+It moves sixteen operator-evidence-value-draft implementation files plus the
+family route-path class into the new `ops.maintenance.operatorevidencevaluedraft`
+subpackage, leaves the two controllers and route aggregation in root, and lowers
+direct root `ops` Java files from 1,183 to 1,167. It is the first extraction to
+apply the cross-family endpoint sub-recipe: seven `OperatorEvidenceImportPreflight`
+endpoint constants (read outbound) and several value-draft endpoint constants
+(read inbound by the value-supply family) were made public, with imports added,
+so the coupling crosses the new package boundary without any route change.

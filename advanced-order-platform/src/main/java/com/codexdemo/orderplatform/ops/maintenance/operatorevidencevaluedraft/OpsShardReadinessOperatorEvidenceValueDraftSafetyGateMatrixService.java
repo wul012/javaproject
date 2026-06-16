@@ -1,0 +1,29 @@
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft;
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class OpsShardReadinessOperatorEvidenceValueDraftSafetyGateMatrixService {
+
+  public static final String ENDPOINT =
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_DRAFT_SAFETY_GATE_MATRIX;
+  static final String PROFILE =
+      "java-shard-readiness-operator-evidence-value-draft-safety-gate-matrix.v1";
+
+  @Transactional(readOnly = true)
+  public OpsShardReadinessOperatorEvidenceValueDraftResponse matrix() {
+    return OpsShardReadinessOperatorEvidenceValueDraftSupport.response(
+        "Java v618",
+        ENDPOINT,
+        PROFILE,
+        OpsShardReadinessOperatorEvidenceValueDraftSlotCatalog.slots(13, 17),
+        List.of(
+            "value-draft-safety-gate-redaction-slice-14-17",
+            "value-draft-safety-gate-no-secret-values",
+            "value-draft-safety-gate-no-synthetic-evidence"));
+  }
+}

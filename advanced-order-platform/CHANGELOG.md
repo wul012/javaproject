@@ -41,6 +41,28 @@
   `ReadabilityUpkeepOpsConsolidationExtractionV1805Tests`, and lowered the
   governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1240 to 1183.
 
+## v1807 - Operator evidence value draft registry package extraction
+
+- Moved the operator-evidence-value-draft registry family — 16 non-controller
+  implementation files plus the family route-path class
+  `OpsShardReadinessOperatorEvidenceValueDraftRoutePaths` — into the new
+  `ops.maintenance.operatorevidencevaluedraft` subpackage, reducing direct root
+  `ops` Java files from 1,183 to 1,167. The two public `@RestController` classes
+  and the global `OpsShardReadinessRoutePaths` aggregator stay in root.
+- First application of the cross-family endpoint sub-recipe (visibility only, no
+  route change): made seven `OperatorEvidenceImportPreflight` service `ENDPOINT`
+  constants public (read outbound by the relocated value-draft files) and the
+  value-draft service `ENDPOINT` constants public (read inbound by the root
+  `OperatorEvidenceValueSupplySlotCatalog` and a value-draft route guard test),
+  adding imports across the new package boundary.
+- The family route-path class was made public with a public `BASE_PATH` and
+  public suffix constants; relocated services were repointed from the
+  package-private aggregator to the family route-path class. Relocated 2 SpotBugs
+  EI_EXPOSE exclusions to the new fully-qualified names.
+- Added `docs/ops/operator-evidence-value-draft-extraction-v1807.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1807Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1183 to 1167.
+
 ## v1804 - Signed approval route-path consolidation
 
 - Moved three signed-approval route-path classes
