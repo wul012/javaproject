@@ -30,6 +30,8 @@ class ReadabilityUpkeepDocsTests {
             Files.isRegularFile(
                 DOCS_ROOT.resolve("code-walkthrough-compliance-extraction-v1797.md")))
         .isTrue();
+    assertThat(Files.isRegularFile(DOCS_ROOT.resolve("java-extraction-quality-closeout-v1806.md")))
+        .isTrue();
   }
 
   @Test
@@ -79,6 +81,7 @@ class ReadabilityUpkeepDocsTests {
     String closeout = read("readability-upkeep-audit-closeout.md");
     String inventory = read("ops-consolidation-inventory-v1796.md");
     String extraction = read("code-walkthrough-compliance-extraction-v1797.md");
+    String qualityCloseout = read("java-extraction-quality-closeout-v1806.md");
 
     assertThat(readme)
         .contains(
@@ -91,6 +94,7 @@ class ReadabilityUpkeepDocsTests {
     assertThat(readme)
         .contains("readability-upkeep-audit-closeout.md", "ops-consolidation-inventory-v1796.md");
     assertThat(readme).contains("code-walkthrough-compliance-extraction-v1797.md");
+    assertThat(readme).contains("java-extraction-quality-closeout-v1806.md");
     assertThat(shard).contains("Controller", "Service", "Response", "read-only");
     assertThat(walkthrough)
         .contains("code-walkthrough-depth-registry", "Chinese longform", "3000 Chinese characters");
@@ -139,6 +143,13 @@ class ReadabilityUpkeepDocsTests {
             "1,319",
             "Contract Preservation",
             "Archive Boundary",
+            "Stop Line");
+    assertThat(qualityCloseout)
+        .contains(
+            "v1805",
+            "v1798 tag is a historical exception",
+            "v1799",
+            "Do not rewrite or force-move historical tags",
             "Stop Line");
   }
 

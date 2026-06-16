@@ -28,6 +28,7 @@ package.
 | `sandbox-connection-extraction-v1803.md` | seventh ops extraction | Which sandbox connection registry classes moved out of the root package while preserving routes and archives? |
 | `signed-approval-route-path-consolidation-v1804.md` | eighth ops extraction | Which signed-approval route-path leaves moved into the new signedapproval subpackage while preserving routes and archives? |
 | `candidate-document-extraction-v1805.md` | ninth ops extraction | Which candidate document registry classes moved into the new candidatedocument subpackage while preserving routes and archives? |
+| `java-extraction-quality-closeout-v1806.md` | quality closeout | Which historical v1798 tag exception should maintainers avoid using as the current green baseline? |
 
 ## Boundary
 
@@ -114,3 +115,8 @@ controllers and route aggregation in root, and lowers direct root `ops` Java
 files from 1,240 to 1,183. The family uses intra-family dependency injection and
 has effectively no cross-family coupling; the one cross-family route constant it
 reads was made an owned, delegated constant.
+
+The J16 closeout is `java-extraction-quality-closeout-v1806.md`. It does not
+move code. It records the current v1805 green baseline, the historical v1798 tag
+exception, the v1799 remediation boundary, and the rule that historical tags
+must not be rewritten or force-moved.

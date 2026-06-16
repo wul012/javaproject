@@ -4,6 +4,18 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1806 - Java extraction quality closeout
+
+- Added `docs/ops/java-extraction-quality-closeout-v1806.md` to record the
+  current v1805 green baseline, the historical v1798 tag exception, the v1799
+  remediation boundary, and the policy that historical tags must not be
+  rewritten or force-moved.
+- Added `ReadabilityUpkeepOpsConsolidationQualityCloseoutV1806Tests` so the
+  closeout evidence, current root-package count (`1,183`), progress table, ops
+  index, and changelog stay discoverable.
+- No business code, route string, response schema, runtime profile, archive
+  layout, deployment, rollback, or evidence contract changed.
+
 ## v1805 - Candidate document registry package extraction
 
 - Moved the entire candidate-document registry family — 57 non-controller
