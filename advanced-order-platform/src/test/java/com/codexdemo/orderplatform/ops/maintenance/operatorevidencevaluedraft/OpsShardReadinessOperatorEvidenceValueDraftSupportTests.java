@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

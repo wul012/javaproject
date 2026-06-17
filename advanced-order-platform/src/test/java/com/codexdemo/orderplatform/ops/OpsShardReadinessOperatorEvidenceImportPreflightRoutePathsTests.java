@@ -2,129 +2,141 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightCatalogService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessOperatorEvidenceImportPreflightRoutePathsTests {
 
-    @Test
-    void operatorEvidenceImportPreflightEndpointsUseSharedRouteConstants() {
-        assertThat(Map.ofEntries(
+  @Test
+  void operatorEvidenceImportPreflightEndpointsUseSharedRouteConstants() {
+    assertThat(
+            Map.ofEntries(
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG,
-                        OpsShardReadinessOperatorEvidenceImportPreflightCatalogService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG,
+                    OpsShardReadinessOperatorEvidenceImportPreflightCatalogService.ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION,
-                        OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION,
+                    OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX,
-                        OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX,
+                    OpsShardReadinessOperatorEvidenceImportPreflightImportBlockerMatrixService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD,
-                        OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD,
+                    OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING,
-                        OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING,
+                    OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT,
-                        OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT,
+                    OpsShardReadinessOperatorEvidenceImportPreflightDigestBlueprintService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRouteProfileSummaryService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN,
-                        OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN,
+                    OpsShardReadinessOperatorEvidenceImportPreflightArchivePlanService.ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF,
-                        OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF,
+                    OpsShardReadinessOperatorEvidenceImportPreflightOperatorHandoffService
+                        .ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET,
-                        OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService.ENDPOINT
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET,
+                    OpsShardReadinessOperatorEvidenceImportPreflightCiBudgetService.ENDPOINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT,
-                        OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService.ENDPOINT
-                )
-        )).allSatisfy((route, endpoint) ->
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT,
+                    OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService.ENDPOINT)))
+        .allSatisfy(
+            (route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
-    }
+  }
 
-    @Test
-    void operatorEvidenceImportPreflightRoutesDelegateToSplitOwner() {
-        assertThat(Map.ofEntries(
+  @Test
+  void operatorEvidenceImportPreflightRoutesDelegateToSplitOwner() {
+    assertThat(
+            Map.ofEntries(
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_DIGEST_BLUEPRINT),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY
-                ),
+                    OpsShardReadinessRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ROUTE_PROFILE_SUMMARY),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_ARCHIVE_PLAN),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_OPERATOR_HANDOFF),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET
-                ),
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CI_BUDGET),
                 Map.entry(
-                        OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT,
-                        OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
-                                .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT
-                )
-        )).allSatisfy((legacy, split) -> assertThat(legacy).isEqualTo(split));
-    }
+                    OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT,
+                    OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+                        .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT)))
+        .allSatisfy((legacy, split) -> assertThat(legacy).isEqualTo(split));
+  }
 }

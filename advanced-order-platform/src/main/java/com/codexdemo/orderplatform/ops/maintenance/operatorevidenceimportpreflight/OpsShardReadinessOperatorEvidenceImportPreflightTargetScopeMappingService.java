@@ -1,5 +1,10 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetCatalogService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetSlotTemplateService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetTargetScopeRegistryService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetValidationRulesService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionLiveReadGateService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,8 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING;
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+              .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-import-preflight-target-scope-mapping.v1";
 

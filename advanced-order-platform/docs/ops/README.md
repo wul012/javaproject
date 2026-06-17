@@ -30,6 +30,7 @@ package.
 | `candidate-document-extraction-v1805.md` | ninth ops extraction | Which candidate document registry classes moved into the new candidatedocument subpackage while preserving routes and archives? |
 | `java-extraction-quality-closeout-v1806.md` | quality closeout | Which historical v1798 tag exception should maintainers avoid using as the current green baseline? |
 | `operator-evidence-value-draft-extraction-v1807.md` | tenth ops extraction | Which operator-evidence-value-draft registry classes moved into the new operatorevidencevaluedraft subpackage, and how was the cross-family endpoint coupling handled? |
+| `operator-evidence-import-preflight-extraction-v1808.md` | eleventh ops extraction | Which operator-evidence-import-preflight registry classes moved into the new operatorevidenceimportpreflight subpackage, and which upstream endpoint constants became public? |
 
 ## Boundary
 
@@ -131,3 +132,14 @@ apply the cross-family endpoint sub-recipe: seven `OperatorEvidenceImportPreflig
 endpoint constants (read outbound) and several value-draft endpoint constants
 (read inbound by the value-supply family) were made public, with imports added,
 so the coupling crosses the new package boundary without any route change.
+
+The eleventh J18 extraction is
+`operator-evidence-import-preflight-extraction-v1808.md`. It moves fifteen
+operator-evidence-import-preflight implementation files plus the family
+route-path class into the new
+`ops.maintenance.operatorevidenceimportpreflight` subpackage, leaves the two
+controllers and route aggregation in root, and lowers direct root `ops` Java
+files from 1,167 to 1,152. It completes the next step in the operator-evidence
+chain by publicizing the immutable upstream `ManualEvidenceWorksheet` and
+`RuntimeExecutionLiveReadGate` endpoint constants read by the moved services,
+without changing any route string or response shape.

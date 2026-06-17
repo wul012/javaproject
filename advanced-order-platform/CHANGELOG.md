@@ -4,6 +4,28 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1808 - Operator evidence import preflight registry package extraction
+
+- Moved the operator-evidence-import-preflight registry family - fifteen
+  non-controller implementation files plus the family route-path class
+  `OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths` - into the new
+  `ops.maintenance.operatorevidenceimportpreflight` subpackage, reducing direct
+  root `ops` Java files from 1,167 to 1,152. The two public `@RestController`
+  classes and the global `OpsShardReadinessRoutePaths` aggregator stay in root.
+- The family route-path class was made public with a public `BASE_PATH` and
+  public suffix constants; relocated services were repointed from the
+  package-private aggregator to the family route-path class. The root aggregator
+  now imports and delegates to the moved owner, keeping every endpoint string
+  byte-identical.
+- Continued the cross-family endpoint sub-recipe: the moved ImportPreflight
+  services import immutable `ManualEvidenceWorksheet` and
+  `RuntimeExecutionLiveReadGate` endpoint constants, so those upstream
+  `ENDPOINT` constants are now public. No route, response, write boundary,
+  credential boundary, deployment, rollback, or archive layout changed.
+- Added `docs/ops/operator-evidence-import-preflight-extraction-v1808.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1808Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1167 to 1152.
+
 ## v1806 - Java extraction quality closeout
 
 - Added `docs/ops/java-extraction-quality-closeout-v1806.md` to record the

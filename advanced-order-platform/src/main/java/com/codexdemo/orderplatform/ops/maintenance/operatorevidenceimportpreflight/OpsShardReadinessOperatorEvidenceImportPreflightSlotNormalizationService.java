@@ -1,5 +1,9 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetMissingValuePolicyService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetSlotTemplateService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetTargetScopeRegistryService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetValidationRulesService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,8 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION;
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+              .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-import-preflight-slot-normalization.v1";
 

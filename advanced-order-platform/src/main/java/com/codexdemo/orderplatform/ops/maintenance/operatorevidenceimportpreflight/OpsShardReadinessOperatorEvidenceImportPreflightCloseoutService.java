@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -8,8 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT;
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+              .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-import-preflight-closeout.v1";
 

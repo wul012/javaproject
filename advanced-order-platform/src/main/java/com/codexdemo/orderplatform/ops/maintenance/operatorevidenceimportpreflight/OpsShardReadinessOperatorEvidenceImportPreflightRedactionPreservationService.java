@@ -1,5 +1,8 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetMissingValuePolicyService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetOperatorHandoffService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetRedactionRulesService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION;
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+              .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-import-preflight-redaction-preservation.v1";
 
