@@ -4,6 +4,33 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1810 - Signed approval capture artifact preflight registry package extraction
+
+- Moved the operator-evidence-value-supply signed-approval
+  capture-artifact-preflight registry family - sixteen non-controller
+  implementation files - into the new
+  `ops.maintenance.signedapprovalcaptureartifactpreflight` subpackage, reducing
+  direct root `ops` Java files from 1,137 to 1,121. The two public
+  `@RestController` classes and the global `OpsShardReadinessRoutePaths`
+  aggregator stay in root.
+- The moved services were repointed from the package-private root aggregator to
+  the public family route owner
+  `OpsShardReadinessSignedApprovalCaptureArtifactPreflightRoutePaths`, which
+  already lived in `ops.maintenance.signedapproval` from the v1804 route-path
+  consolidation; v1810 only adds a public `BASE_PATH` to that owner. The root
+  aggregator still delegates to the same owner, keeping every endpoint string
+  byte-identical.
+- Applied the cross-family endpoint sub-recipe: the family `FragmentCatalog`
+  reads ten sibling `CapturePreflight` endpoint constants, which are now
+  publicized as immutable read-only strings and imported into the moved file;
+  the retained-root `ArtifactDraftReadiness` item catalogs read this family's
+  endpoint constants, which are likewise publicized. No route, response, write
+  boundary, credential boundary, deployment, rollback, or archive layout changed.
+- Added `docs/ops/signed-approval-capture-artifact-preflight-extraction-v1810.md`
+  plus `ReadabilityUpkeepOpsConsolidationExtractionV1810Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` and the mirrored
+  `EXPECTED_ROOT_OPS_MAIN_JAVA_FILES` from 1137 to 1121.
+
 ## v1809 - Manual evidence worksheet registry package extraction
 
 - Moved the manual-evidence-worksheet registry family - fifteen non-controller

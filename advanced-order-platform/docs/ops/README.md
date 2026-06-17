@@ -32,6 +32,7 @@ package.
 | `operator-evidence-value-draft-extraction-v1807.md` | tenth ops extraction | Which operator-evidence-value-draft registry classes moved into the new operatorevidencevaluedraft subpackage, and how was the cross-family endpoint coupling handled? |
 | `operator-evidence-import-preflight-extraction-v1808.md` | eleventh ops extraction | Which operator-evidence-import-preflight registry classes moved into the new operatorevidenceimportpreflight subpackage, and which upstream endpoint constants became public? |
 | `manual-evidence-worksheet-extraction-v1809.md` | twelfth ops extraction | Which manual-evidence-worksheet registry classes moved into the new manualevidenceworksheet subpackage, and which upstream RuntimeExecution endpoint constants became public? |
+| `signed-approval-capture-artifact-preflight-extraction-v1810.md` | thirteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-artifact-preflight registry classes moved into the new signedapprovalcaptureartifactpreflight subpackage, and which sibling CapturePreflight endpoint constants became public? |
 
 ## Boundary
 
@@ -153,3 +154,15 @@ direct root `ops` Java files from 1,152 to 1,137. It moves the upstream workshee
 source for `OperatorEvidenceImportPreflight` while keeping every worksheet route
 and response shape stable. RuntimeExecution endpoint constants read by the moved
 worksheet services are publicized as immutable read-only strings only.
+
+The thirteenth J20 extraction is
+`signed-approval-capture-artifact-preflight-extraction-v1810.md`. It moves sixteen
+operator-evidence-value-supply signed-approval capture-artifact-preflight
+implementation files into the new
+`ops.maintenance.signedapprovalcaptureartifactpreflight` subpackage, leaves the two
+controllers and route aggregation in root, and lowers direct root `ops` Java files
+from 1,137 to 1,121. The moved services repoint to the public
+`OpsShardReadinessSignedApprovalCaptureArtifactPreflightRoutePaths` owner that
+already lived in `ops.maintenance.signedapproval`. The only cross-family coupling
+is the family `FragmentCatalog`, which reads ten sibling `CapturePreflight`
+endpoint constants; those constants are publicized as immutable read-only strings.

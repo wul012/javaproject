@@ -5,32 +5,35 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightFailClosedLockService {
+public
+class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightFailClosedLockService {
 
-    static final String ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths
-                    .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_FAIL_CLOSED_LOCKS;
-    static final String PROFILE =
-            "java-shard-readiness-operator-evidence-value-supply-signed-approval-capture-preflight-locks.v1";
+  public static final String ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_FAIL_CLOSED_LOCKS;
+  static final String PROFILE =
+      "java-shard-readiness-operator-evidence-value-supply-signed-approval-capture-preflight-locks.v1";
 
-    @Transactional(readOnly = true)
-    public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse locks() {
-        return OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightSupport.response(
-                "Java v732",
-                ENDPOINT,
-                PROFILE,
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightInputCatalog.inputs(19, 24),
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightAttestationCatalog
-                        .attestations(19, 24),
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightPolicyCatalog.policies(15, 20),
-                List.of(
-                        "signed-approval-capture-preflight-raw-secret-signature-material-locked",
-                        "signed-approval-capture-preflight-approval-grant-not-emitted",
-                        "signed-approval-capture-preflight-zero-value-counts-held",
-                        "signed-approval-capture-preflight-no-write-route",
-                        "signed-approval-capture-preflight-sibling-non-mutation-held"
-                )
-        );
-    }
+  @Transactional(readOnly = true)
+  public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
+      locks() {
+    return OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightSupport
+        .response(
+            "Java v732",
+            ENDPOINT,
+            PROFILE,
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightInputCatalog
+                .inputs(19, 24),
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightAttestationCatalog
+                .attestations(19, 24),
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightPolicyCatalog
+                .policies(15, 20),
+            List.of(
+                "signed-approval-capture-preflight-raw-secret-signature-material-locked",
+                "signed-approval-capture-preflight-approval-grant-not-emitted",
+                "signed-approval-capture-preflight-zero-value-counts-held",
+                "signed-approval-capture-preflight-no-write-route",
+                "signed-approval-capture-preflight-sibling-non-mutation-held"));
+  }
 }
