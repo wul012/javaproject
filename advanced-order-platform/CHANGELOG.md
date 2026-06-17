@@ -4,6 +4,31 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1812 - Approval preflight registry package extraction
+
+- Moved the operator-evidence-value-supply approval-preflight registry family
+  into the new `ops.maintenance.approvalpreflight` subpackage: fifteen physical
+  implementation files moved, while the package-private policy catalog was
+  collocated with the item catalog to offset the new route owner. Direct root
+  `ops` Java files fall from 1105 to 1089 and total `ops` Java files stay at
+  1352.
+- Added the public
+  `OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths`
+  owner for the approval-preflight suffixes. The root
+  `OpsShardReadinessRoutePaths` aggregator delegates to that owner, so route
+  strings remain byte-identical while implementation ownership leaves root.
+- Applied the endpoint-only cross-family recipe: the moved `ItemCatalog` imports
+  seven upstream value-supply or adapter-preflight endpoint constants, now
+  public immutable strings, and the v1811
+  `SignedApprovalCapturePreflightInputCatalog` imports approval-preflight
+  endpoint constants from the new package. No route, response, write boundary,
+  credential boundary, deployment, rollback, or archive layout changed.
+- Added `docs/ops/approval-preflight-extraction-v1812.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1812Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES`, the mirrored
+  `EXPECTED_ROOT_OPS_MAIN_JAVA_FILES`, and the exact measured root-package
+  guard from 1105 to 1089.
+
 ## v1811 - Signed approval capture preflight registry package extraction
 
 - Moved the operator-evidence-value-supply signed-approval capture-preflight

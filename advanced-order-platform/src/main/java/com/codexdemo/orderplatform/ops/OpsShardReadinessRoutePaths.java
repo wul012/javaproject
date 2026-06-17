@@ -1,5 +1,6 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetRoutePaths;
@@ -382,29 +383,41 @@ final class OpsShardReadinessRoutePaths {
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT =
       "/operator-evidence-value-supply-adapter-preflight-closeout";
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG =
-      "/operator-evidence-value-supply-approval-preflight-catalog";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IDENTITY_SIGNATURE =
-      "/operator-evidence-value-supply-approval-preflight-identity-signature";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IDENTITY_SIGNATURE;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_TIMESTAMP_WINDOW =
-      "/operator-evidence-value-supply-approval-preflight-timestamp-window";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_TIMESTAMP_WINDOW;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_REDACTION_DIGEST =
-      "/operator-evidence-value-supply-approval-preflight-redaction-digest";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_REDACTION_DIGEST;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_PROVENANCE_BINDING =
-      "/operator-evidence-value-supply-approval-preflight-provenance-binding";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_PROVENANCE_BINDING;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_VALUE_REJECTION =
-      "/operator-evidence-value-supply-approval-preflight-value-rejection";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_VALUE_REJECTION;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ZERO_VALUE_LEDGER =
-      "/operator-evidence-value-supply-approval-preflight-zero-value-ledger";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ZERO_VALUE_LEDGER;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLEANUP_RECEIPT =
-      "/operator-evidence-value-supply-approval-preflight-cleanup-receipt";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLEANUP_RECEIPT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IMPORT_FIREWALL =
-      "/operator-evidence-value-supply-approval-preflight-import-firewall";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IMPORT_FIREWALL;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_DIGEST_BLUEPRINT =
-      "/operator-evidence-value-supply-approval-preflight-digest-blueprint";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_DIGEST_BLUEPRINT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ARCHIVE_PLAN =
-      "/operator-evidence-value-supply-approval-preflight-archive-plan";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ARCHIVE_PLAN;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLOSEOUT =
-      "/operator-evidence-value-supply-approval-preflight-closeout";
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CLOSEOUT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CATALOG =
       OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CATALOG;

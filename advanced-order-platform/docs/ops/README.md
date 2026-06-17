@@ -34,6 +34,7 @@ package.
 | `manual-evidence-worksheet-extraction-v1809.md` | twelfth ops extraction | Which manual-evidence-worksheet registry classes moved into the new manualevidenceworksheet subpackage, and which upstream RuntimeExecution endpoint constants became public? |
 | `signed-approval-capture-artifact-preflight-extraction-v1810.md` | thirteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-artifact-preflight registry classes moved into the new signedapprovalcaptureartifactpreflight subpackage, and which sibling CapturePreflight endpoint constants became public? |
 | `signed-approval-capture-preflight-extraction-v1811.md` | fourteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-preflight registry classes moved into the new signedapprovalcapturepreflight subpackage, and which upstream ApprovalPreflight endpoint constants became public? |
+| `approval-preflight-extraction-v1812.md` | fifteenth ops extraction | Which operator-evidence-value-supply approval-preflight registry classes moved into the new approvalpreflight subpackage, and which upstream value-supply endpoint constants became public? |
 
 ## Boundary
 
@@ -181,3 +182,16 @@ endpoint-only cross-family edges: `InputCatalog` reads eleven upstream
 `CaptureArtifactPreflightFragmentCatalog` reads ten sibling `CapturePreflight`
 service endpoints. Both edges are handled by public immutable endpoint strings
 and imports only; route strings and response shapes stay unchanged.
+
+The fifteenth J22 extraction is `approval-preflight-extraction-v1812.md`. It
+moves fifteen physical operator-evidence-value-supply approval-preflight
+implementation files into the new `ops.maintenance.approvalpreflight`
+subpackage, collocates the package-private policy catalog with the item catalog
+to avoid relaxing the total file-count ratchet, leaves the two controllers and
+public route aggregation in root, and lowers direct root `ops` Java files from
+1,105 to 1,089. The new
+`OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths` owner
+now holds the approval-preflight suffixes; the root aggregator delegates to it.
+The moved item catalog reads seven upstream value-supply or adapter-preflight
+endpoint constants as source evidence, and v1812 publicizes only those immutable
+endpoint strings.
