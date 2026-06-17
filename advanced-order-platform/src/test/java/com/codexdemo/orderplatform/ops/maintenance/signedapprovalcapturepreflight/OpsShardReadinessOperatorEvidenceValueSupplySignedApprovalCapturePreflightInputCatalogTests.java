@@ -1,4 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight;
+
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +21,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
             assertThat(input.status()).isEqualTo("passed");
             assertThat(input.inputRequirement()).isNotBlank();
             assertThat(input.blockedReason()).isNotBlank();
-            assertThat(input.sourceEndpoint()).startsWith(OpsShardReadinessRoutePaths.BASE_PATH);
+            assertThat(input.sourceEndpoint()).startsWith(OpsShardReadinessSignedApprovalCapturePreflightRoutePaths.BASE_PATH);
         });
         assertThat(inputs.get(0).code()).contains("REQUEST_ID");
         assertThat(inputs.get(24).code()).contains("CLOSEOUT_BOUNDARY");

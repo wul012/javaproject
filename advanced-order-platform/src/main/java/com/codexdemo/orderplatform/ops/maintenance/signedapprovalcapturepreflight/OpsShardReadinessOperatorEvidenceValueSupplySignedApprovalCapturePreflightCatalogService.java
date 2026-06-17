@@ -1,4 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight;
+
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -7,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightCatalogService {
 
-    static final String ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CATALOG;
+    public static final String ENDPOINT =
+            OpsShardReadinessSignedApprovalCapturePreflightRoutePaths.BASE_PATH
+                    + OpsShardReadinessSignedApprovalCapturePreflightRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CATALOG;
     static final String PROFILE =
             "java-shard-readiness-operator-evidence-value-supply-signed-approval-capture-preflight-catalog.v1";
 

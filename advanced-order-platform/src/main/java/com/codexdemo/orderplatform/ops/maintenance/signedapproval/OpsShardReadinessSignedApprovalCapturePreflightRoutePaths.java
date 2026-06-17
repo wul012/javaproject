@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops.maintenance.signedapproval;
 
 public final class OpsShardReadinessSignedApprovalCapturePreflightRoutePaths {
 
+  public static final String BASE_PATH = "/api/v1/ops/shard-readiness";
   public static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CATALOG =
           "/operator-evidence-value-supply-signed-approval-capture-preflight-catalog";

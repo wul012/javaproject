@@ -1,4 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight;
+
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -9,8 +11,8 @@ public
 class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightFailClosedLockService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths.BASE_PATH
+          + OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
               .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_FAIL_CLOSED_LOCKS;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-value-supply-signed-approval-capture-preflight-locks.v1";

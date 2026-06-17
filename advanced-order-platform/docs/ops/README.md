@@ -33,6 +33,7 @@ package.
 | `operator-evidence-import-preflight-extraction-v1808.md` | eleventh ops extraction | Which operator-evidence-import-preflight registry classes moved into the new operatorevidenceimportpreflight subpackage, and which upstream endpoint constants became public? |
 | `manual-evidence-worksheet-extraction-v1809.md` | twelfth ops extraction | Which manual-evidence-worksheet registry classes moved into the new manualevidenceworksheet subpackage, and which upstream RuntimeExecution endpoint constants became public? |
 | `signed-approval-capture-artifact-preflight-extraction-v1810.md` | thirteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-artifact-preflight registry classes moved into the new signedapprovalcaptureartifactpreflight subpackage, and which sibling CapturePreflight endpoint constants became public? |
+| `signed-approval-capture-preflight-extraction-v1811.md` | fourteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-preflight registry classes moved into the new signedapprovalcapturepreflight subpackage, and which upstream ApprovalPreflight endpoint constants became public? |
 
 ## Boundary
 
@@ -166,3 +167,17 @@ from 1,137 to 1,121. The moved services repoint to the public
 already lived in `ops.maintenance.signedapproval`. The only cross-family coupling
 is the family `FragmentCatalog`, which reads ten sibling `CapturePreflight`
 endpoint constants; those constants are publicized as immutable read-only strings.
+
+The fourteenth J21 extraction is
+`signed-approval-capture-preflight-extraction-v1811.md`. It moves sixteen
+operator-evidence-value-supply signed-approval capture-preflight implementation
+files into the new `ops.maintenance.signedapprovalcapturepreflight` subpackage,
+leaves the two controllers and public route aggregation in root, and lowers
+direct root `ops` Java files from 1,121 to 1,105. The moved services repoint to
+the public `OpsShardReadinessSignedApprovalCapturePreflightRoutePaths` owner
+that already lived in `ops.maintenance.signedapproval`. The family has two
+endpoint-only cross-family edges: `InputCatalog` reads eleven upstream
+`ApprovalPreflight` service endpoints, and the already-moved v1810
+`CaptureArtifactPreflightFragmentCatalog` reads ten sibling `CapturePreflight`
+service endpoints. Both edges are handled by public immutable endpoint strings
+and imports only; route strings and response shapes stay unchanged.

@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops.maintenance.signedapprovalcaptureartifac
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightCloseoutService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightCloseoutService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightArchivePlanService {
 
-    static final String ENDPOINT =
+    public static final String ENDPOINT =
             OpsShardReadinessRoutePaths.BASE_PATH
                     + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_ARCHIVE_PLAN;
     static final String PROFILE =
