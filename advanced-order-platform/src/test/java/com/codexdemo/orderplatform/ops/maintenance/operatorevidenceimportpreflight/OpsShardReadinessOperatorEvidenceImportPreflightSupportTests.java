@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportprefli
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessManualEvidenceWorksheetCloseoutService;
+import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetCloseoutService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

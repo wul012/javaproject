@@ -4,6 +4,29 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1809 - Manual evidence worksheet registry package extraction
+
+- Moved the manual-evidence-worksheet registry family - fifteen non-controller
+  implementation files plus the family route-path class
+  `OpsShardReadinessManualEvidenceWorksheetRoutePaths` - into the new
+  `ops.maintenance.manualevidenceworksheet` subpackage, reducing direct root
+  `ops` Java files from 1,152 to 1,137. The two public `@RestController`
+  classes and the global `OpsShardReadinessRoutePaths` aggregator stay in root.
+- The family route-path class was made public with a public `BASE_PATH` and
+  public suffix constants; relocated services were repointed from the
+  package-private aggregator to the family route-path class. The root aggregator
+  imports and delegates to the moved owner, keeping every endpoint string
+  byte-identical.
+- Continued the cross-family endpoint sub-recipe upstream of
+  `OperatorEvidenceImportPreflight`: downstream import-preflight services now
+  import worksheet endpoint constants from the new package, and the worksheet
+  services publicize only immutable `RuntimeExecution` endpoint strings they
+  already referenced. No route, response, write boundary, credential boundary,
+  deployment, rollback, or archive layout changed.
+- Added `docs/ops/manual-evidence-worksheet-extraction-v1809.md` plus
+  `ReadabilityUpkeepOpsConsolidationExtractionV1809Tests`, and lowered the
+  governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES` from 1152 to 1137.
+
 ## v1808 - Operator evidence import preflight registry package extraction
 
 - Moved the operator-evidence-import-preflight registry family - fifteen

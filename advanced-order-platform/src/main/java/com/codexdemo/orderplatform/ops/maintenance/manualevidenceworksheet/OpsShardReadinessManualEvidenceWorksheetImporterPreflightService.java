@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -7,8 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessManualEvidenceWorksheetImporterPreflightService {
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT;
+      OpsShardReadinessManualEvidenceWorksheetRoutePaths.BASE_PATH
+          + OpsShardReadinessManualEvidenceWorksheetRoutePaths
+              .MANUAL_EVIDENCE_WORKSHEET_IMPORTER_PREFLIGHT;
   static final String PROFILE =
       "java-shard-readiness-manual-evidence-worksheet-importer-preflight.v1";
 

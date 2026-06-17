@@ -10,26 +10,26 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1808Tests {
+class ReadabilityUpkeepOpsConsolidationExtractionV1809Tests {
 
   private static final Path DOCS_ROOT = Path.of("docs", "ops");
   private static final Path OPS_SOURCE_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
-  private static final Path IMPORT_PREFLIGHT_SOURCE_ROOT =
-      OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "operatorevidenceimportpreflight"));
+  private static final Path MANUAL_WORKSHEET_SOURCE_ROOT =
+      OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "manualevidenceworksheet"));
   private static final Path EXTRACTION_NOTE =
-      DOCS_ROOT.resolve("operator-evidence-import-preflight-extraction-v1808.md");
+      DOCS_ROOT.resolve("manual-evidence-worksheet-extraction-v1809.md");
   private static final List<String> SAMPLE_RELOCATED_FILES =
       List.of(
-          "OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths.java",
-          "OpsShardReadinessOperatorEvidenceImportPreflightCatalogService.java",
-          "OpsShardReadinessOperatorEvidenceImportPreflightResponse.java",
-          "OpsShardReadinessOperatorEvidenceImportPreflightSupport.java",
-          "OpsShardReadinessOperatorEvidenceImportPreflightCloseoutService.java");
+          "OpsShardReadinessManualEvidenceWorksheetRoutePaths.java",
+          "OpsShardReadinessManualEvidenceWorksheetCatalogService.java",
+          "OpsShardReadinessManualEvidenceWorksheetResponse.java",
+          "OpsShardReadinessManualEvidenceWorksheetSupport.java",
+          "OpsShardReadinessManualEvidenceWorksheetCloseoutService.java");
   private static final List<String> ROOT_RETAINED_CONTROLLERS =
       List.of(
-          "OpsShardReadinessOperatorEvidenceImportPreflightAssuranceController.java",
-          "OpsShardReadinessOperatorEvidenceImportPreflightFoundationController.java");
+          "OpsShardReadinessManualEvidenceWorksheetAssuranceController.java",
+          "OpsShardReadinessManualEvidenceWorksheetFoundationController.java");
 
   @Test
   void extractionNoteStaysDiscoverableFromOpsIndex() throws IOException {
@@ -40,27 +40,27 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1808Tests {
 
     assertThat(readme)
         .contains(
-            "operator-evidence-import-preflight-extraction-v1808.md",
-            "ops.maintenance.operatorevidenceimportpreflight",
-            "1,167 to 1,152");
+            "manual-evidence-worksheet-extraction-v1809.md",
+            "ops.maintenance.manualevidenceworksheet",
+            "1,152 to 1,137");
     assertThat(note)
         .contains(
-            "v1808",
+            "v1809",
             "contract-preserving",
             "Direct Java files in root `ops` package",
-            "1,152",
+            "1,137",
             "Do not rename or move archive roots",
-            "ManualEvidenceWorksheet",
-            "RuntimeExecutionLiveReadGate");
+            "OperatorEvidenceImportPreflight",
+            "RuntimeExecution");
   }
 
   @Test
   void relocatedImplementationFilesLiveInNarrowPackage() {
-    assertThat(Files.isDirectory(IMPORT_PREFLIGHT_SOURCE_ROOT)).isTrue();
+    assertThat(Files.isDirectory(MANUAL_WORKSHEET_SOURCE_ROOT)).isTrue();
 
     for (String fileName : SAMPLE_RELOCATED_FILES) {
-      assertThat(Files.isRegularFile(IMPORT_PREFLIGHT_SOURCE_ROOT.resolve(fileName)))
-          .as(fileName + " should live in the operator evidence import preflight package")
+      assertThat(Files.isRegularFile(MANUAL_WORKSHEET_SOURCE_ROOT.resolve(fileName)))
+          .as(fileName + " should live in the manual evidence worksheet package")
           .isTrue();
       assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(fileName)))
           .as(fileName + " should no longer be directly in the root ops package")
@@ -80,14 +80,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1808Tests {
   }
 
   @Test
-  void rootPackageRatchetDoesNotRegressAboveV1808Count() throws IOException {
+  void rootPackageRatchetMatchesMeasuredCountAfterExtraction() throws IOException {
     try (Stream<Path> paths = Files.list(OPS_SOURCE_ROOT)) {
       assertThat(
               paths
                   .filter(Files::isRegularFile)
                   .filter(path -> path.getFileName().toString().endsWith(".java"))
                   .count())
-          .isLessThanOrEqualTo(1152);
+          .isEqualTo(1137);
     }
   }
 

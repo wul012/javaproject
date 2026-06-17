@@ -31,6 +31,7 @@ package.
 | `java-extraction-quality-closeout-v1806.md` | quality closeout | Which historical v1798 tag exception should maintainers avoid using as the current green baseline? |
 | `operator-evidence-value-draft-extraction-v1807.md` | tenth ops extraction | Which operator-evidence-value-draft registry classes moved into the new operatorevidencevaluedraft subpackage, and how was the cross-family endpoint coupling handled? |
 | `operator-evidence-import-preflight-extraction-v1808.md` | eleventh ops extraction | Which operator-evidence-import-preflight registry classes moved into the new operatorevidenceimportpreflight subpackage, and which upstream endpoint constants became public? |
+| `manual-evidence-worksheet-extraction-v1809.md` | twelfth ops extraction | Which manual-evidence-worksheet registry classes moved into the new manualevidenceworksheet subpackage, and which upstream RuntimeExecution endpoint constants became public? |
 
 ## Boundary
 
@@ -143,3 +144,12 @@ files from 1,167 to 1,152. It completes the next step in the operator-evidence
 chain by publicizing the immutable upstream `ManualEvidenceWorksheet` and
 `RuntimeExecutionLiveReadGate` endpoint constants read by the moved services,
 without changing any route string or response shape.
+
+The twelfth J19 extraction is `manual-evidence-worksheet-extraction-v1809.md`.
+It moves fifteen manual-evidence-worksheet implementation files plus the family
+route-path class into the new `ops.maintenance.manualevidenceworksheet`
+subpackage, leaves the two controllers and route aggregation in root, and lowers
+direct root `ops` Java files from 1,152 to 1,137. It moves the upstream worksheet
+source for `OperatorEvidenceImportPreflight` while keeping every worksheet route
+and response shape stable. RuntimeExecution endpoint constants read by the moved
+worksheet services are publicized as immutable read-only strings only.

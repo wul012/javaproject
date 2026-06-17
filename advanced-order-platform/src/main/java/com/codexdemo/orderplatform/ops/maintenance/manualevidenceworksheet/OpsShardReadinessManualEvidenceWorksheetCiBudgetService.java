@@ -1,5 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessManualEvidenceWorksheetCiBudgetService {
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET;
+      OpsShardReadinessManualEvidenceWorksheetRoutePaths.BASE_PATH
+          + OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET;
   static final String PROFILE = "java-shard-readiness-manual-evidence-worksheet-ci-budget.v1";
 
   @Transactional(readOnly = true)
