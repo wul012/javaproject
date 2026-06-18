@@ -9,3 +9,8 @@
   `ops.maintenance.signedapprovalartifactdraftpreflight`，gate catalog 与 guard
   catalog 同文件保留包内内聚，两个 controller 和 root route 聚合器保留在根包，
   根包计数 1,073 -> 1,057，整棵 `ops` Java 文件数护栏继续保持 1,352。
+- ersion-1815-production-excellence-signed-approval-artifact-draft-readiness-lane-extraction.md:
+  J25 签批工件草稿就绪通道注册表迁出，15 个物理实现文件进入
+  ops.maintenance.signedapprovalartifactdraftreadinesslane，gate catalog 与 blocker catalog
+  同文件保留包内内聚，两个 controller 和 root route 聚合器保留在根包，根包计数 1,057 -> 1,041，整棵
+  ops Java 文件数护栏继续保持 1,352。

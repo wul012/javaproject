@@ -225,3 +225,15 @@ catalogs read the v1813 artifact-draft-readiness endpoint constants from the new
 readiness package, while retained-root `ArtifactDraftReadinessLane` and
 `SignedApprovalDraftProfileSection` readers import this family's public immutable
 endpoint strings.
+
+The eighteenth J25 extraction is
+`signed-approval-artifact-draft-readiness-lane-extraction-v1815.md`. It moves
+fifteen physical operator-evidence-value-supply signed-approval
+artifact-draft-readiness-lane implementation files into the new
+`ops.maintenance.signedapprovalartifactdraftreadinesslane` subpackage, collocates
+the package-private gate catalog with the blocker catalog to avoid relaxing the
+total file-count ratchet, leaves the two controllers and route aggregation in
+root, and lowers direct root `ops` Java files from 1,057 to 1,041. Its moved lane
+catalogs read the v1814 artifact-draft-preflight endpoint constants from the new
+preflight package, while retained-root `ReviewPackagePreflight` slot catalogs
+import this family's public immutable endpoint strings.

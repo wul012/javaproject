@@ -9,6 +9,7 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.Op
 import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive.OpsShardReadinessScreenshotExplanationArchiveRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftPreflightRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCaptureArtifactPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
@@ -579,31 +580,40 @@ final class OpsShardReadinessRoutePaths {
               .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CATALOG =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-catalog";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CATALOG;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_DIGEST_PINS =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-digest-pins";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_DIGEST_PINS;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_OPERATOR_REVIEW =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-operator-review";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_OPERATOR_REVIEW;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_SIGNATURE_REVIEW =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-signature-review";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_SIGNATURE_REVIEW;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_EVIDENCE_REVIEW =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-evidence-review";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_EVIDENCE_REVIEW;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_VALUE_REDACTION =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-value-redaction";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_VALUE_REDACTION;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_EMBARGO_LOCKS =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-embargo-locks";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_EMBARGO_LOCKS;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_MANUAL_PACKAGE_GATE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-manual-package-gate";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_MANUAL_PACKAGE_GATE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CLOSEOUT =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-readiness-lane-closeout";
+          OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_REVIEW_PACKAGE_PREFLIGHT_CATALOG =
           "/operator-evidence-value-supply-signed-approval-artifact-draft-review-package-preflight-catalog";

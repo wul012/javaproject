@@ -456,7 +456,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadinesslane.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1808,7 +1808,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadinesslane.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
