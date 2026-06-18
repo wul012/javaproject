@@ -22,3 +22,9 @@
   根包计数 1,105 -> 1,089，整棵 `ops` Java 文件数护栏不放宽；新增公开 route
   owner，迁出目录只读取七个上游不可变 endpoint 字符串，并把 v1811 下游对
   `ApprovalPreflight` 端点的导入改到新包。
+- `version-1813-production-excellence-signed-approval-artifact-draft-readiness-extraction.md`:
+  J23 签批工件草稿就绪注册表迁出，16 个非控制器实现文件进入
+  `ops.maintenance.signedapprovalartifactdraftreadiness`，两个 controller 和 root
+  route 聚合器保留在根包，根包计数 1,089 -> 1,073；服务改指 v1804 已外迁的公开
+  族路由常量类（仅补公开 BASE_PATH），出向读取的十个 `CaptureArtifactPreflight`
+  端点因 v1810 早已公开而无需再动，入向把本族端点放开供三个平行家族回读。

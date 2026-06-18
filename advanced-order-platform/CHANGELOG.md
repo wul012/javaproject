@@ -4,6 +4,36 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1813 - Signed approval artifact draft readiness registry package extraction
+
+- Moved the operator-evidence-value-supply signed-approval
+  artifact-draft-readiness registry family - sixteen non-controller
+  implementation files - into the new
+  `ops.maintenance.signedapprovalartifactdraftreadiness` subpackage, reducing
+  direct root `ops` Java files from 1,089 to 1,073. The two public
+  `@RestController` classes and the global `OpsShardReadinessRoutePaths`
+  aggregator stay in root.
+- The moved services were repointed from the package-private root aggregator to
+  the public family route owner
+  `OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths`, which already
+  lived in `ops.maintenance.signedapproval` from the v1804 route-path
+  consolidation; v1813 only adds a public `BASE_PATH` to that owner. The root
+  aggregator still delegates to the same owner, keeping every endpoint string
+  byte-identical.
+- Cross-family endpoint sub-recipe: the moved item catalogs read ten
+  `CaptureArtifactPreflight` endpoint constants already publicized in v1810 (no
+  new outbound change); this family's own service endpoint constants are
+  publicized as immutable read-only strings for three retained-root sibling
+  readers (`ArtifactDraftPreflight`, `ArtifactDraftReviewPackagePreflight`,
+  `SignedApprovalDraftProfileSection`). No route, response, write boundary,
+  credential boundary, deployment, rollback, or archive layout changed.
+- Added `docs/ops/signed-approval-artifact-draft-readiness-extraction-v1813.md`
+  plus `ReadabilityUpkeepOpsConsolidationExtractionV1813Tests`, relocated the two
+  `ArtifactDraftReadinessResponse` EI_EXPOSE spotbugs-exclude FQNs to the new
+  package, and lowered the governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES`, the
+  mirrored `EXPECTED_ROOT_OPS_MAIN_JAVA_FILES`, and the exact measured root guard
+  from 1089 to 1073.
+
 ## v1812 - Approval preflight registry package extraction
 
 - Moved the operator-evidence-value-supply approval-preflight registry family

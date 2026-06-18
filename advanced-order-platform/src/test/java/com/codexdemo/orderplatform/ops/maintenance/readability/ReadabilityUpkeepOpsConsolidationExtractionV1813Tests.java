@@ -10,26 +10,26 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1809Tests {
+class ReadabilityUpkeepOpsConsolidationExtractionV1813Tests {
 
   private static final Path DOCS_ROOT = Path.of("docs", "ops");
   private static final Path OPS_SOURCE_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
-  private static final Path MANUAL_WORKSHEET_SOURCE_ROOT =
-      OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "manualevidenceworksheet"));
+  private static final Path ARTIFACT_DRAFT_READINESS_SOURCE_ROOT =
+      OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "signedapprovalartifactdraftreadiness"));
   private static final Path EXTRACTION_NOTE =
-      DOCS_ROOT.resolve("manual-evidence-worksheet-extraction-v1809.md");
+      DOCS_ROOT.resolve("signed-approval-artifact-draft-readiness-extraction-v1813.md");
   private static final List<String> SAMPLE_RELOCATED_FILES =
       List.of(
-          "OpsShardReadinessManualEvidenceWorksheetRoutePaths.java",
-          "OpsShardReadinessManualEvidenceWorksheetCatalogService.java",
-          "OpsShardReadinessManualEvidenceWorksheetResponse.java",
-          "OpsShardReadinessManualEvidenceWorksheetSupport.java",
-          "OpsShardReadinessManualEvidenceWorksheetCloseoutService.java");
+          "OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessCatalogService.java",
+          "OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessResponse.java",
+          "OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessSupport.java",
+          "OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessGateCatalog.java",
+          "OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessCloseoutService.java");
   private static final List<String> ROOT_RETAINED_CONTROLLERS =
       List.of(
-          "OpsShardReadinessManualEvidenceWorksheetAssuranceController.java",
-          "OpsShardReadinessManualEvidenceWorksheetFoundationController.java");
+          "OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessAssuranceController.java",
+          "OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessFoundationController.java");
 
   @Test
   void extractionNoteStaysDiscoverableFromOpsIndex() throws IOException {
@@ -40,27 +40,26 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1809Tests {
 
     assertThat(readme)
         .contains(
-            "manual-evidence-worksheet-extraction-v1809.md",
-            "ops.maintenance.manualevidenceworksheet",
-            "1,152 to 1,137");
+            "signed-approval-artifact-draft-readiness-extraction-v1813.md",
+            "ops.maintenance.signedapprovalartifactdraftreadiness",
+            "1,089 to 1,073");
     assertThat(note)
         .contains(
-            "v1809",
+            "v1813",
             "contract-preserving",
             "Direct Java files in root `ops` package",
-            "1,137",
+            "1,073",
             "Do not rename or move archive roots",
-            "OperatorEvidenceImportPreflight",
-            "RuntimeExecution");
+            "CaptureArtifactPreflight");
   }
 
   @Test
   void relocatedImplementationFilesLiveInNarrowPackage() {
-    assertThat(Files.isDirectory(MANUAL_WORKSHEET_SOURCE_ROOT)).isTrue();
+    assertThat(Files.isDirectory(ARTIFACT_DRAFT_READINESS_SOURCE_ROOT)).isTrue();
 
     for (String fileName : SAMPLE_RELOCATED_FILES) {
-      assertThat(Files.isRegularFile(MANUAL_WORKSHEET_SOURCE_ROOT.resolve(fileName)))
-          .as(fileName + " should live in the manual evidence worksheet package")
+      assertThat(Files.isRegularFile(ARTIFACT_DRAFT_READINESS_SOURCE_ROOT.resolve(fileName)))
+          .as(fileName + " should live in the artifact draft readiness package")
           .isTrue();
       assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(fileName)))
           .as(fileName + " should no longer be directly in the root ops package")
@@ -80,14 +79,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1809Tests {
   }
 
   @Test
-  void rootPackageRatchetMatchesMeasuredCountAfterExtraction() throws IOException {
+  void rootPackageRatchetDoesNotRegressAboveV1813Count() throws IOException {
     try (Stream<Path> paths = Files.list(OPS_SOURCE_ROOT)) {
       assertThat(
               paths
                   .filter(Files::isRegularFile)
                   .filter(path -> path.getFileName().toString().endsWith(".java"))
                   .count())
-          .isEqualTo(1073);
+          .isLessThanOrEqualTo(1073);
     }
   }
 

@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadiness;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

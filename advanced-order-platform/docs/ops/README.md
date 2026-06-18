@@ -35,6 +35,7 @@ package.
 | `signed-approval-capture-artifact-preflight-extraction-v1810.md` | thirteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-artifact-preflight registry classes moved into the new signedapprovalcaptureartifactpreflight subpackage, and which sibling CapturePreflight endpoint constants became public? |
 | `signed-approval-capture-preflight-extraction-v1811.md` | fourteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-preflight registry classes moved into the new signedapprovalcapturepreflight subpackage, and which upstream ApprovalPreflight endpoint constants became public? |
 | `approval-preflight-extraction-v1812.md` | fifteenth ops extraction | Which operator-evidence-value-supply approval-preflight registry classes moved into the new approvalpreflight subpackage, and which upstream value-supply endpoint constants became public? |
+| `signed-approval-artifact-draft-readiness-extraction-v1813.md` | sixteenth ops extraction | Which operator-evidence-value-supply signed-approval artifact-draft-readiness registry classes moved into the new signedapprovalartifactdraftreadiness subpackage, and how were the inbound sibling readers and the already-public CaptureArtifactPreflight endpoints handled? |
 
 ## Boundary
 
@@ -195,3 +196,18 @@ now holds the approval-preflight suffixes; the root aggregator delegates to it.
 The moved item catalog reads seven upstream value-supply or adapter-preflight
 endpoint constants as source evidence, and v1812 publicizes only those immutable
 endpoint strings.
+
+The sixteenth J23 extraction is
+`signed-approval-artifact-draft-readiness-extraction-v1813.md`. It moves sixteen
+operator-evidence-value-supply signed-approval artifact-draft-readiness
+implementation files into the new
+`ops.maintenance.signedapprovalartifactdraftreadiness` subpackage, leaves the two
+controllers and route aggregation in root, and lowers direct root `ops` Java files
+from 1,089 to 1,073. The moved services repoint to the public
+`OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths` owner that
+already lived in `ops.maintenance.signedapproval`. Its item catalogs read ten
+`CaptureArtifactPreflight` endpoint constants already publicized in v1810, so no
+new outbound visibility change was needed; on the inbound side, this family's own
+endpoint constants are publicized for three sibling families (`ArtifactDraftPreflight`,
+`ArtifactDraftReviewPackagePreflight`, `SignedApprovalDraftProfileSection`) that
+read them from root.
