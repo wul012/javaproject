@@ -1,0 +1,39 @@
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftpreflight;
+
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftPreflightRoutePaths;
+import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public
+class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightArchivePlanService {
+
+  public static final String ENDPOINT =
+      OpsShardReadinessSignedApprovalArtifactDraftPreflightRoutePaths.BASE_PATH
+          + OpsShardReadinessSignedApprovalArtifactDraftPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_PREFLIGHT_ARCHIVE_PLAN;
+  static final String PROFILE =
+      "java-shard-readiness-operator-evidence-value-supply-signed-approval-artifact-draft-preflight-archive.v1";
+
+  @Transactional(readOnly = true)
+  public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightResponse
+      plan() {
+    return OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightSupport
+        .response(
+            "Java v803",
+            ENDPOINT,
+            PROFILE,
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightFieldCatalog
+                .fields(20, 25),
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightGuardCatalog
+                .guards(20, 25),
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightGateCatalog
+                .allGates(),
+            List.of(
+                "signed-approval-artifact-draft-preflight-archive-plan-metadata-only",
+                "signed-approval-artifact-draft-preflight-archive-plan-no-file-write",
+                "signed-approval-artifact-draft-preflight-archive-plan-no-process-start",
+                "signed-approval-artifact-draft-preflight-archive-plan-no-manual-draft"));
+  }
+}

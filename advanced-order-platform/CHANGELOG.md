@@ -4,6 +4,33 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1814 - Signed approval artifact draft preflight registry package extraction
+
+- Moved the operator-evidence-value-supply signed-approval
+  artifact-draft-preflight registry family into the new
+  `ops.maintenance.signedapprovalartifactdraftpreflight` subpackage: fifteen
+  physical implementation files moved, while the package-private gate catalog
+  was collocated with the guard catalog to offset the new route owner. Direct
+  root `ops` Java files fall from 1,073 to 1,057 and total `ops` Java files stay
+  at 1,352.
+- Added the public
+  `OpsShardReadinessSignedApprovalArtifactDraftPreflightRoutePaths` owner for
+  the artifact-draft-preflight suffixes. The root `OpsShardReadinessRoutePaths`
+  aggregator delegates to that owner, so route strings remain byte-identical
+  while implementation ownership leaves root.
+- Cross-family endpoint sub-recipe: the moved field catalogs keep reading
+  already-public v1813 `ArtifactDraftReadiness` endpoint constants, and retained
+  root readers (`ArtifactDraftReadinessLane`,
+  `SignedApprovalDraftProfileSection`) import this family's public immutable
+  endpoint strings. No route, response, write boundary, credential boundary,
+  deployment, rollback, or archive layout changed.
+- Added `docs/ops/signed-approval-artifact-draft-preflight-extraction-v1814.md`
+  plus `ReadabilityUpkeepOpsConsolidationExtractionV1814Tests`, relocated the
+  two `ArtifactDraftPreflightResponse` EI_EXPOSE spotbugs-exclude FQNs to the
+  new package, and lowered the governance ratchet `MAX_ROOT_OPS_MAIN_JAVA_FILES`,
+  the mirrored `EXPECTED_ROOT_OPS_MAIN_JAVA_FILES`, and the exact measured
+  root-package guard from 1073 to 1057.
+
 ## v1813 - Signed approval artifact draft readiness registry package extraction
 
 - Moved the operator-evidence-value-supply signed-approval

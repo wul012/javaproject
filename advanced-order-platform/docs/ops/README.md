@@ -36,6 +36,7 @@ package.
 | `signed-approval-capture-preflight-extraction-v1811.md` | fourteenth ops extraction | Which operator-evidence-value-supply signed-approval capture-preflight registry classes moved into the new signedapprovalcapturepreflight subpackage, and which upstream ApprovalPreflight endpoint constants became public? |
 | `approval-preflight-extraction-v1812.md` | fifteenth ops extraction | Which operator-evidence-value-supply approval-preflight registry classes moved into the new approvalpreflight subpackage, and which upstream value-supply endpoint constants became public? |
 | `signed-approval-artifact-draft-readiness-extraction-v1813.md` | sixteenth ops extraction | Which operator-evidence-value-supply signed-approval artifact-draft-readiness registry classes moved into the new signedapprovalartifactdraftreadiness subpackage, and how were the inbound sibling readers and the already-public CaptureArtifactPreflight endpoints handled? |
+| `signed-approval-artifact-draft-preflight-extraction-v1814.md` | seventeenth ops extraction | Which signed-approval artifact-draft-preflight classes moved into the new signedapprovalartifactdraftpreflight subpackage, and how were the ReadinessLane/ProfileSection inbound readers handled? |
 
 ## Boundary
 
@@ -211,3 +212,16 @@ new outbound visibility change was needed; on the inbound side, this family's ow
 endpoint constants are publicized for three sibling families (`ArtifactDraftPreflight`,
 `ArtifactDraftReviewPackagePreflight`, `SignedApprovalDraftProfileSection`) that
 read them from root.
+
+The seventeenth J24 extraction is
+`signed-approval-artifact-draft-preflight-extraction-v1814.md`. It moves fifteen
+physical operator-evidence-value-supply signed-approval artifact-draft-preflight
+implementation files into the new
+`ops.maintenance.signedapprovalartifactdraftpreflight` subpackage, collocates the
+package-private gate catalog with the guard catalog to avoid relaxing the total
+file-count ratchet, leaves the two controllers and route aggregation in root,
+and lowers direct root `ops` Java files from 1,073 to 1,057. Its moved field
+catalogs read the v1813 artifact-draft-readiness endpoint constants from the new
+readiness package, while retained-root `ArtifactDraftReadinessLane` and
+`SignedApprovalDraftProfileSection` readers import this family's public immutable
+endpoint strings.
