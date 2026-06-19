@@ -25,3 +25,8 @@
   `ops.maintenance.signedapprovalartifactdraftauthoringreadiness`，gate catalog 与
   blocker catalog 合并保留包内内聚，两个 controller 和 root route 聚合器继续留在根包；
   根包计数 1,025 -> 1,009，整棵 `ops` Java 文件数护栏继续保持 1,352。
+- `version-1818-production-excellence-signed-approval-artifact-draft-instruction-preflight-extraction.md`:
+  J28 签批草稿指令预检注册表迁出，15 个物理实现文件进入
+  `ops.maintenance.signedapprovalartifactdraftinstructionpreflight`，gate catalog 与 guard
+  catalog 合并保留包内内聚，两个 controller 和 root route 聚合器继续留在根包；
+  根包计数 1,009 -> 993，整体 `ops` Java 文件数护栏继续保持 1,352。

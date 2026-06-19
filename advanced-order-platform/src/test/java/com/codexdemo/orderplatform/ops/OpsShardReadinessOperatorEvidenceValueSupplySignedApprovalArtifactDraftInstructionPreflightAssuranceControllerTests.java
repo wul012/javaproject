@@ -2,73 +2,83 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCloseoutService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightDraftTextLockService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEmbargoInstructionService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEvidenceInstructionService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightValuePolicyInstructionService;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightAssuranceControllerTests {
 
-    @Test
-    void exposesEvidenceInstructionsThroughAssuranceController() {
-        var response = controller().evidenceInstructions();
+  @Test
+  void exposesEvidenceInstructionsThroughAssuranceController() {
+    var response = controller().evidenceInstructions();
 
-        assertThat(response.version()).isEqualTo("Java v900");
-        assertThat(response.endpoint()).isEqualTo(
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEvidenceInstructionService
-                        .ENDPOINT);
-        assertThat(response.readyForEvidenceImport()).isFalse();
-    }
+    assertThat(response.version()).isEqualTo("Java v900");
+    assertThat(response.endpoint())
+        .isEqualTo(
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEvidenceInstructionService
+                .ENDPOINT);
+    assertThat(response.readyForEvidenceImport()).isFalse();
+  }
 
-    @Test
-    void exposesValuePolicyInstructionsThroughAssuranceController() {
-        var response = controller().valuePolicyInstructions();
+  @Test
+  void exposesValuePolicyInstructionsThroughAssuranceController() {
+    var response = controller().valuePolicyInstructions();
 
-        assertThat(response.version()).isEqualTo("Java v901");
-        assertThat(response.endpoint()).isEqualTo(
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightValuePolicyInstructionService
-                        .ENDPOINT);
-        assertThat(response.readyForOperatorValueSubmission()).isFalse();
-    }
+    assertThat(response.version()).isEqualTo("Java v901");
+    assertThat(response.endpoint())
+        .isEqualTo(
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightValuePolicyInstructionService
+                .ENDPOINT);
+    assertThat(response.readyForOperatorValueSubmission()).isFalse();
+  }
 
-    @Test
-    void exposesEmbargoInstructionsThroughAssuranceController() {
-        var response = controller().embargoInstructions();
+  @Test
+  void exposesEmbargoInstructionsThroughAssuranceController() {
+    var response = controller().embargoInstructions();
 
-        assertThat(response.version()).isEqualTo("Java v902");
-        assertThat(response.endpoint()).isEqualTo(
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEmbargoInstructionService
-                        .ENDPOINT);
-        assertThat(response.siblingMutationAllowed()).isFalse();
-    }
+    assertThat(response.version()).isEqualTo("Java v902");
+    assertThat(response.endpoint())
+        .isEqualTo(
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEmbargoInstructionService
+                .ENDPOINT);
+    assertThat(response.siblingMutationAllowed()).isFalse();
+  }
 
-    @Test
-    void exposesDraftTextLockThroughAssuranceController() {
-        var response = controller().draftTextLock();
+  @Test
+  void exposesDraftTextLockThroughAssuranceController() {
+    var response = controller().draftTextLock();
 
-        assertThat(response.version()).isEqualTo("Java v903");
-        assertThat(response.endpoint()).isEqualTo(
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightDraftTextLockService
-                        .ENDPOINT);
-        assertThat(response.readyForSignedDraftText()).isFalse();
-    }
+    assertThat(response.version()).isEqualTo("Java v903");
+    assertThat(response.endpoint())
+        .isEqualTo(
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightDraftTextLockService
+                .ENDPOINT);
+    assertThat(response.readyForSignedDraftText()).isFalse();
+  }
 
-    @Test
-    void exposesCloseoutThroughAssuranceController() {
-        var response = controller().closeout();
+  @Test
+  void exposesCloseoutThroughAssuranceController() {
+    var response = controller().closeout();
 
-        assertThat(response.version()).isEqualTo("Java v904");
-        assertThat(response.endpoint()).isEqualTo(
-                OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCloseoutService
-                        .ENDPOINT);
-        assertThat(response.slotCount()).isEqualTo(25);
-    }
+    assertThat(response.version()).isEqualTo("Java v904");
+    assertThat(response.endpoint())
+        .isEqualTo(
+            OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCloseoutService
+                .ENDPOINT);
+    assertThat(response.slotCount()).isEqualTo(25);
+  }
 
-    private OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightAssuranceController
-    controller() {
-        return new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightAssuranceController(
-                new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEvidenceInstructionService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightValuePolicyInstructionService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEmbargoInstructionService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightDraftTextLockService(),
-                new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCloseoutService()
-        );
-    }
+  private
+  OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightAssuranceController
+      controller() {
+    return new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightAssuranceController(
+        new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEvidenceInstructionService(),
+        new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightValuePolicyInstructionService(),
+        new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEmbargoInstructionService(),
+        new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightDraftTextLockService(),
+        new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCloseoutService());
+  }
 }

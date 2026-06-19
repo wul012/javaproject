@@ -40,6 +40,7 @@ package.
 | `signed-approval-artifact-draft-readiness-lane-extraction-v1815.md` | eighteenth ops extraction | Which signed-approval artifact-draft-readiness-lane classes moved into the new signedapprovalartifactdraftreadinesslane subpackage, and how were the ReviewPackagePreflight inbound readers handled? |
 | `signed-approval-artifact-draft-review-package-preflight-extraction-v1816.md` | nineteenth ops extraction | Which signed-approval artifact-draft-review-package-preflight classes moved into the new signedapprovalartifactdraftreviewpackagepreflight subpackage, and how were the AuthoringReadiness/ProfileSection inbound readers handled? |
 | `signed-approval-artifact-draft-authoring-readiness-extraction-v1817.md` | twentieth ops extraction | Which signed-approval artifact-draft-authoring-readiness classes moved into the new ops.maintenance.signedapprovalartifactdraftauthoringreadiness subpackage, and how did root files fall from 1,025 to 1,009 while InstructionPreflight/ProfileSection readers stayed aligned? |
+| `signed-approval-artifact-draft-instruction-preflight-extraction-v1818.md` | twenty-first ops extraction | Which signed-approval artifact-draft-instruction-preflight classes moved into the new ops.maintenance.signedapprovalartifactdraftinstructionpreflight subpackage, and how did root files fall from 1,009 to 993 while TextPackageIntake/ProfileSection readers stayed aligned? |
 
 ## Boundary
 
