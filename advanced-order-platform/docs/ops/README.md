@@ -37,6 +37,8 @@ package.
 | `approval-preflight-extraction-v1812.md` | fifteenth ops extraction | Which operator-evidence-value-supply approval-preflight registry classes moved into the new approvalpreflight subpackage, and which upstream value-supply endpoint constants became public? |
 | `signed-approval-artifact-draft-readiness-extraction-v1813.md` | sixteenth ops extraction | Which operator-evidence-value-supply signed-approval artifact-draft-readiness registry classes moved into the new signedapprovalartifactdraftreadiness subpackage, and how were the inbound sibling readers and the already-public CaptureArtifactPreflight endpoints handled? |
 | `signed-approval-artifact-draft-preflight-extraction-v1814.md` | seventeenth ops extraction | Which signed-approval artifact-draft-preflight classes moved into the new signedapprovalartifactdraftpreflight subpackage, and how were the ReadinessLane/ProfileSection inbound readers handled? |
+| `signed-approval-artifact-draft-readiness-lane-extraction-v1815.md` | eighteenth ops extraction | Which signed-approval artifact-draft-readiness-lane classes moved into the new signedapprovalartifactdraftreadinesslane subpackage, and how were the ReviewPackagePreflight inbound readers handled? |
+| `signed-approval-artifact-draft-review-package-preflight-extraction-v1816.md` | nineteenth ops extraction | Which signed-approval artifact-draft-review-package-preflight classes moved into the new signedapprovalartifactdraftreviewpackagepreflight subpackage, and how were the AuthoringReadiness/ProfileSection inbound readers handled? |
 
 ## Boundary
 
@@ -237,3 +239,16 @@ root, and lowers direct root `ops` Java files from 1,057 to 1,041. Its moved lan
 catalogs read the v1814 artifact-draft-preflight endpoint constants from the new
 preflight package, while retained-root `ReviewPackagePreflight` slot catalogs
 import this family's public immutable endpoint strings.
+
+The nineteenth J26 extraction is
+`signed-approval-artifact-draft-review-package-preflight-extraction-v1816.md`.
+It moves fifteen physical operator-evidence-value-supply signed-approval
+artifact-draft-review-package-preflight implementation files into the new
+`ops.maintenance.signedapprovalartifactdraftreviewpackagepreflight` subpackage,
+collocates the package-private gate catalog with the guard catalog to avoid
+relaxing the total file-count ratchet, leaves the two controllers and route
+aggregation in root, and lowers direct root `ops` Java files from 1,041 to 1,025.
+Its moved slot catalogs read the v1815 artifact-draft-readiness-lane
+endpoint constants from the new readiness-lane package, while retained-root
+`AuthoringReadiness` and `SignedApprovalDraftProfileSection` readers import this
+family's public immutable endpoint strings.
