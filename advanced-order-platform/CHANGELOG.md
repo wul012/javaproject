@@ -4,6 +4,22 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1820 - Signed approval artifact draft text package review preflight registry package extraction
+
+- Moved the signed-approval artifact-draft-text-package-review-preflight family
+  into `ops.maintenance.signedapprovalartifactdrafttextpackagereviewpreflight`:
+  fifteen physical implementation files moved, while the package-private gate
+  catalog was collocated with the rejection-control catalog. Direct root `ops`
+  Java files fall from 977 to 961 and total `ops` Java files stay at 1,352.
+- Added the public
+  `OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths`
+  owner. Root route aggregation delegates to it, preserving all nine paths.
+- Moved services keep reading v1819 TextPackageIntake endpoints. Retained root
+  `TextPackageSubmissionPreflight` and ProfileSection readers import the new
+  public endpoint/response boundary. No route, response, write, credential,
+  deployment, rollback, or archive contract changed.
+- Added the v1820 extraction note, readability test, SpotBugs FQN relocation,
+  count-ratchet updates, progress evidence, and Chinese walkthrough.
 ## v1819 - Signed approval artifact draft text package intake registry package extraction
 
 - Moved the operator-evidence-value-supply signed-approval

@@ -15,6 +15,7 @@ import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadin
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftReviewPackagePreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCaptureArtifactPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.compliance.OpsShardReadinessCodeWalkthroughComplianceRoutePaths;
@@ -764,31 +765,40 @@ final class OpsShardReadinessRoutePaths {
               .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_ARCHIVE_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_CATALOG =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-catalog";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_CATALOG;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_IDENTITY_CRITERIA =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-identity-criteria";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_IDENTITY_CRITERIA;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_DIGEST_RECHECK =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-digest-recheck";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_DIGEST_RECHECK;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_SIGNATURE_ENVELOPE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-signature-envelope";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_SIGNATURE_ENVELOPE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_SOURCE_EVIDENCE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-source-evidence";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_SOURCE_EVIDENCE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_OPERATOR_VALUE_HANDLE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-operator-value-handle";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_OPERATOR_VALUE_HANDLE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_POLICY_REVIEW_STATE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-policy-review-state";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_POLICY_REVIEW_STATE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_EXECUTION_LOCK_CONTROLS =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-execution-lock-controls";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_EXECUTION_LOCK_CONTROLS;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_ARCHIVE_CLOSEOUT =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-review-preflight-archive-closeout";
+          OpsShardReadinessSignedApprovalArtifactDraftTextPackageReviewPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_REVIEW_PREFLIGHT_ARCHIVE_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_SUBMISSION_PREFLIGHT_CATALOG =
           "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-submission-preflight-catalog";

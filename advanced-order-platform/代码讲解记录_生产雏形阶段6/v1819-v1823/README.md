@@ -9,3 +9,7 @@
   `ops.maintenance.signedapprovalartifactdrafttextpackageintake`。15 个物理实现文件进入窄包，
   Gate 目录与 Guard 目录合并，两个 Controller 和根路由聚合器留在根包；根包直接 Java
   文件数由 993 降到 977，整体 `ops` Java 文件数继续保持 1,352。
+- `version-1820-production-excellence-signed-approval-artifact-draft-text-package-review-preflight-extraction.md`：
+  J30 将草稿文本包审查预检注册表迁入
+  `ops.maintenance.signedapprovalartifactdrafttextpackagereviewpreflight`，根包文件数由
+  977 降到 961；Gate 与 RejectionControl 合并，总 `ops` Java 文件数保持 1,352。
