@@ -13,3 +13,8 @@
   J30 将草稿文本包审查预检注册表迁入
   `ops.maintenance.signedapprovalartifactdrafttextpackagereviewpreflight`，根包文件数由
   977 降到 961；Gate 与 RejectionControl 合并，总 `ops` Java 文件数保持 1,352。
+- `version-1821-production-excellence-signed-approval-artifact-draft-text-package-submission-preflight-extraction.md`：
+  J31 将草稿文本包提交预检主流程与紧密耦合的 Closeout 整族迁入
+  `ops.maintenance.signedapprovalartifactdrafttextpackagesubmissionpreflight`。28 个物理实现文件
+  进入窄包，Gate 与 ComparisonControl 合并，两个 Controller 继续留根；根包文件数由
+  961 降到 932，总 `ops` Java 文件数保持 1,352。

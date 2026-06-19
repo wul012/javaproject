@@ -4,6 +4,24 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1821 - Signed approval artifact draft text package submission preflight extraction
+
+- Moved the primary submission-preflight and its Closeout family together into
+  `ops.maintenance.signedapprovalartifactdrafttextpackagesubmissionpreflight`.
+  Twenty-eight physical files move, the package-private gate catalog is
+  collocated with the comparison-control catalog, direct root `ops` Java files
+  fall from 961 to 932, and total `ops` Java files stay at 1,352.
+- Added a public route owner for five primary and six Closeout HTTP suffixes.
+  Root route aggregation delegates to it, preserving all route strings. Three
+  Closeout detail views remain catalog URI fragments rather than new routes.
+- Kept both controllers in root and repaired explicit public imports for
+  TextPackageComparisonPreflight, ComparedPackageEvidenceIntake, ProfileSection,
+  controller tests, route tests, and test support. No response component,
+  write, credential, deployment, rollback, or archive contract changed.
+- Added the v1821 extraction note, readability ratchet, four SpotBugs FQN
+  relocations for the primary/Closeout responses, progress evidence, and
+  Chinese walkthrough.
+
 ## v1820 - Signed approval artifact draft text package review preflight registry package extraction
 
 - Moved the signed-approval artifact-draft-text-package-review-preflight family
