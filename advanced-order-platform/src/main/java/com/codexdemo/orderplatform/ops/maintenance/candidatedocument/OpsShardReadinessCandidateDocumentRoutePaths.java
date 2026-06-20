@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.candidatedocument;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
+
 public final class OpsShardReadinessCandidateDocumentRoutePaths {
 
   public static final String BASE_PATH = "/api/v1/ops/shard-readiness";
@@ -24,7 +26,8 @@ public final class OpsShardReadinessCandidateDocumentRoutePaths {
   public static final String CANDIDATE_DOCUMENT_PROFILE_SECTION_REGISTRY =
       "/candidate-document-profile-section-registry";
   public static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY =
-      "/signed-approval-draft-profile-section-registry";
+      OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
+          .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY;
   public static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF =
       "/signed-approval-draft-profile-section-handoff";
   public static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =

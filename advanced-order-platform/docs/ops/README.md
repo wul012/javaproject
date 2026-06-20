@@ -47,6 +47,7 @@ package.
 | `signed-approval-artifact-draft-text-package-comparison-preflight-extraction-v1822.md` | twenty-fifth ops extraction | Which comparison-preflight classes moved into ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight, and how did root files fall from 932 to 919 while ComparisonAcceptancePrecheck, ComparedPackageEvidenceIntake, and ProfileSection readers stayed aligned? |
 | `signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-extraction-v1823.md` | twenty-sixth ops extraction | Which comparison-acceptance-precheck classes moved into ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonacceptanceprecheck, and how did root files fall from 919 to 911 while ComparedPackageEvidenceIntake and ProfileSection readers stayed aligned? |
 | `signed-approval-artifact-draft-text-package-compared-package-evidence-intake-extraction-v1824.md` | twenty-seventh ops extraction | Which compared-package-evidence-intake classes moved into ops.maintenance.signedapprovalartifactdrafttextpackagecomparedpackageevidenceintake, and how did root files fall from 911 to 897 while ComparedPackageReview and ProfileSection readers stayed aligned? |
+| `signed-approval-draft-profile-section-extraction-v1825.md` | twenty-eighth ops extraction | How is the 36-file ProfileSection cluster split across three versions, and how did the 11-file base layer move into ops.maintenance.signedapprovaldraftprofilesection while root files fell from 897 to 887? |
 
 ## Boundary
 

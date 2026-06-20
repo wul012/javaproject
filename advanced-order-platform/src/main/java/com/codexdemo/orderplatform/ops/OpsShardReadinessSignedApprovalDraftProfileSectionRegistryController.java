@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,16 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
 public class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryController {
 
-    private final OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService service;
+  private final OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService service;
 
-    public OpsShardReadinessSignedApprovalDraftProfileSectionRegistryController(
-            OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService service
-    ) {
-        this.service = service;
-    }
+  public OpsShardReadinessSignedApprovalDraftProfileSectionRegistryController(
+      OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService service) {
+    this.service = service;
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY)
-    public OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse registry() {
-        return service.registry();
-    }
+  @GetMapping(OpsShardReadinessRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY)
+  public OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse registry() {
+    return service.registry();
+  }
 }

@@ -1,5 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftauthoringreadiness.*;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightCatalogService;
@@ -14,8 +15,9 @@ public class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService {
 
   static final String RESPONSE_VERSION = "Java v1237";
   static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY;
+      OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths.BASE_PATH
+          + OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
+              .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY;
   static final String PROFILE =
       "java-shard-readiness-signed-approval-draft-profile-section-registry.v1";
 
@@ -76,7 +78,7 @@ public class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService {
         OpsShardReadinessSignedApprovalDraftProfileSectionRenderer.render(sections, fieldEntries),
         OpsShardReadinessSignedApprovalDraftProfileSectionRouteLockCatalog.routeFieldLocks(
             sections),
-        OpsShardReadinessSignedApprovalDraftProfileSectionGateCatalog.gates(),
+        OpsShardReadinessSignedApprovalDraftProfileSectionRegistrySupport.gates(),
         List.of(
             "signed-approval-draft-profile-section-registry-service-assembled-from-five-read-only-routes"));
   }

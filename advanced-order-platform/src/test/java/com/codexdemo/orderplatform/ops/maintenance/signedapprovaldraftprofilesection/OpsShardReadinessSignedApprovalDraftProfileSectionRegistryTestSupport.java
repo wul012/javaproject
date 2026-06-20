@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection;
 
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftauthoringreadiness.*;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCatalogService;
@@ -6,11 +6,11 @@ import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftpr
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadiness.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreviewpackagepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReviewPackagePreflightCatalogService;
 
-final class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSupport {
+public final class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSupport {
 
   private OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSupport() {}
 
-  static OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService service() {
+  public static OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService service() {
     return new OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService(
         new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftPreflightCatalogService(),
         new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessCatalogService(),
@@ -19,7 +19,7 @@ final class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSuppor
         new OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCatalogService());
   }
 
-  static OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse registry() {
+  public static OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse registry() {
     return service().registry();
   }
 }
