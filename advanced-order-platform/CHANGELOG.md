@@ -4,6 +4,22 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1826 - Signed approval draft text package profile section extraction
+
+- Continued the three-version ProfileSection split by moving the text-package
+  profile section implementation into
+  `ops.maintenance.signedapprovaldrafttextpackageprofilesection`.
+- Kept the Spring controller in root, folded the gate generator into registry
+  support, and added a public signed-approval route owner. Direct root `ops`
+  Java files fall from 887 to 874 while total `ops` Java files stay at 1,352.
+- Preserved the nine read-only source contracts and made the mixed boundary
+  explicit: six upstream text-package routes are already extracted while three
+  compared-evidence candidate sources still live in the root package. No route,
+  response, approval, runtime, write, deployment, rollback, or archive
+  contract changed.
+- Added the v1826 extraction note, readability ratchet, SpotBugs FQN
+  relocation, progress evidence, and Chinese walkthrough.
+
 ## v1825 - Signed approval draft profile section extraction
 
 - Started the three-version extraction of the 36-file ProfileSection cluster by

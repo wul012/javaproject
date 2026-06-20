@@ -23,6 +23,7 @@ import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadin
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCaptureArtifactPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.compliance.OpsShardReadinessCodeWalkthroughComplianceRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.depth.OpsShardReadinessCodeWalkthroughDepthRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualityaudit.OpsShardReadinessCodeWalkthroughQualityAuditRoutePaths;
@@ -993,7 +994,7 @@ final class OpsShardReadinessRoutePaths {
   static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF =
       OpsShardReadinessCandidateDocumentRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF;
   static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
-      OpsShardReadinessCandidateDocumentRoutePaths
+      OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths
           .SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;
   static final String MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY;

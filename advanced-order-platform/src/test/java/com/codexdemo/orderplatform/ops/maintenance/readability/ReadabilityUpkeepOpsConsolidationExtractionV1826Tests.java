@@ -10,27 +10,27 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1825Tests {
+class ReadabilityUpkeepOpsConsolidationExtractionV1826Tests {
 
   private static final Path DOCS_ROOT = Path.of("docs", "ops");
   private static final Path OPS_SOURCE_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
-  private static final Path PROFILE_SECTION_SOURCE_ROOT =
-      OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "signedapprovaldraftprofilesection"));
   private static final Path TEXT_PACKAGE_PROFILE_SECTION_SOURCE_ROOT =
       OPS_SOURCE_ROOT.resolve(
           Path.of("maintenance", "signedapprovaldrafttextpackageprofilesection"));
+  private static final Path SIGNED_APPROVAL_ROUTE_ROOT =
+      OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "signedapproval"));
   private static final Path EXTRACTION_NOTE =
-      DOCS_ROOT.resolve("signed-approval-draft-profile-section-extraction-v1825.md");
+      DOCS_ROOT.resolve("signed-approval-draft-text-package-profile-section-extraction-v1826.md");
   private static final List<String> SAMPLE_RELOCATED_FILES =
       List.of(
-          "OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService.java",
-          "OpsShardReadinessSignedApprovalDraftProfileSectionRegistryResponse.java",
-          "OpsShardReadinessSignedApprovalDraftProfileSectionRegistrySupport.java",
-          "OpsShardReadinessSignedApprovalDraftProfileSectionSourceCatalog.java",
-          "OpsShardReadinessSignedApprovalDraftProfileSectionRenderer.java");
+          "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryService.java",
+          "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryResponse.java",
+          "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistrySupport.java",
+          "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionSourceCatalog.java",
+          "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionSubmissionRenderer.java");
   private static final String ROOT_RETAINED_CONTROLLER =
-      "OpsShardReadinessSignedApprovalDraftProfileSectionRegistryController.java";
+      "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryController.java";
 
   @Test
   void extractionNoteStaysDiscoverableFromOpsIndex() throws IOException {
@@ -40,15 +40,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1825Tests {
 
     assertThat(readme)
         .contains(
-            "signed-approval-draft-profile-section-extraction-v1825.md",
-            "ops.maintenance.signedapprovaldraftprofilesection",
-            "897 to 887");
+            "signed-approval-draft-text-package-profile-section-extraction-v1826.md",
+            "ops.maintenance.signedapprovaldrafttextpackageprofilesection",
+            "887 to 874");
     assertThat(note)
         .contains(
-            "v1825",
-            "36 production files",
-            "first of three",
-            "Direct Java files in the root `ops` package fall from 897 to 887",
+            "v1826",
+            "second of three",
+            "Direct Java files in the root `ops` package fall from 887 to 874",
             "total `ops` Java file count stays at 1,352",
             "Do not rename or move archive roots",
             "ProfileSectionHandoff");
@@ -56,15 +55,16 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1825Tests {
 
   @Test
   void relocatedImplementationFilesLiveInNarrowPackage() {
-    assertThat(Files.isDirectory(PROFILE_SECTION_SOURCE_ROOT)).isTrue();
+    assertThat(Files.isDirectory(TEXT_PACKAGE_PROFILE_SECTION_SOURCE_ROOT)).isTrue();
     for (String fileName : SAMPLE_RELOCATED_FILES) {
-      assertThat(Files.isRegularFile(PROFILE_SECTION_SOURCE_ROOT.resolve(fileName))).isTrue();
+      assertThat(Files.isRegularFile(TEXT_PACKAGE_PROFILE_SECTION_SOURCE_ROOT.resolve(fileName)))
+          .isTrue();
       assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(fileName))).isFalse();
     }
     assertThat(
             Files.exists(
                 OPS_SOURCE_ROOT.resolve(
-                    "OpsShardReadinessSignedApprovalDraftProfileSectionGateCatalog.java")))
+                    "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionGateCatalog.java")))
         .isFalse();
   }
 
@@ -73,20 +73,15 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1825Tests {
     assertThat(Files.isRegularFile(OPS_SOURCE_ROOT.resolve(ROOT_RETAINED_CONTROLLER))).isTrue();
     assertThat(Files.isRegularFile(OPS_SOURCE_ROOT.resolve("OpsShardReadinessRoutePaths.java")))
         .isTrue();
+    assertThat(
+            Files.isRegularFile(
+                SIGNED_APPROVAL_ROUTE_ROOT.resolve(
+                    "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths.java")))
+        .isTrue();
   }
 
   @Test
-  void remainingProfileSectionLayersStayAvailableForNextVersions() {
-    assertThat(
-            Files.isRegularFile(
-                TEXT_PACKAGE_PROFILE_SECTION_SOURCE_ROOT.resolve(
-                    "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryService.java")))
-        .isTrue();
-    assertThat(
-            Files.exists(
-                OPS_SOURCE_ROOT.resolve(
-                    "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryService.java")))
-        .isFalse();
+  void remainingProfileSectionHandoffLayerStaysAvailableForNextVersion() {
     assertThat(
             Files.isRegularFile(
                 OPS_SOURCE_ROOT.resolve(
@@ -95,14 +90,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1825Tests {
   }
 
   @Test
-  void rootPackageRatchetDoesNotRegressAboveV1825Count() throws IOException {
+  void rootPackageRatchetDoesNotRegressAboveV1826Count() throws IOException {
     try (Stream<Path> paths = Files.list(OPS_SOURCE_ROOT)) {
       assertThat(
               paths
                   .filter(Files::isRegularFile)
                   .filter(path -> path.getFileName().toString().endsWith(".java"))
                   .count())
-          .isLessThanOrEqualTo(887);
+          .isLessThanOrEqualTo(874);
     }
   }
 

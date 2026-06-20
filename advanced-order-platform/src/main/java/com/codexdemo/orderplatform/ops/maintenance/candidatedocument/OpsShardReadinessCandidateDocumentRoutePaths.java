@@ -1,6 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.candidatedocument;
 
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths;
 
 public final class OpsShardReadinessCandidateDocumentRoutePaths {
 
@@ -31,7 +32,8 @@ public final class OpsShardReadinessCandidateDocumentRoutePaths {
   public static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF =
       "/signed-approval-draft-profile-section-handoff";
   public static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
-      "/signed-approval-draft-text-package-profile-section-registry";
+      OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths
+          .SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;
 
   private OpsShardReadinessCandidateDocumentRoutePaths() {}
 }

@@ -1,5 +1,9 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovaldrafttextpackageprofilesection;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateBlueprintCatalogService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateIntakePreflightCatalogService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceEvaluationPreflightCatalogService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackagecomparedpackageevidenceintake.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparedPackageEvidenceIntakeCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonacceptanceprecheck.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonAcceptancePrecheckCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightCatalogService;
@@ -15,8 +19,9 @@ public class OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegist
 
   static final String RESPONSE_VERSION = "Java v1287";
   static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;
+      OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths.BASE_PATH
+          + OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths
+              .SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;
   static final String PROFILE =
       "java-shard-readiness-signed-approval-draft-text-package-profile-section-registry.v1";
 
@@ -103,7 +108,7 @@ public class OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegist
             sections, fieldEntries),
         OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRouteLockCatalog
             .routeFieldLocks(sections),
-        OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionGateCatalog.gates(),
+        OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistrySupport.gates(),
         List.of(
             "signed-approval-draft-text-package-profile-section-registry-service-assembled-from-nine-read-only-routes",
             "signed-approval-draft-text-package-profile-section-registry-node-v1531-renderer-split-aligned"));
