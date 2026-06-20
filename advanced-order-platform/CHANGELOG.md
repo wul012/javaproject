@@ -4,6 +4,24 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1823 - Signed approval artifact draft text package comparison acceptance precheck extraction
+
+- Moved seven comparison-acceptance-precheck implementation files into
+  `ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonacceptanceprecheck`.
+  The guard catalog is collocated with the checkpoint catalog, direct root
+  `ops` Java files fall from 919 to 911, and total `ops` Java files stay at
+  1,352.
+- Added a public route owner for the four comparison-acceptance-precheck
+  suffixes. Root route aggregation delegates to it, preserving byte-identical
+  paths.
+- Kept the controller in root and repaired explicit public imports for
+  ComparedPackageEvidenceIntake, ProfileSection, controller tests, route tests,
+  and test support. No package acceptance, comparison execution, parsing,
+  approval, write, credential, deployment, rollback, or archive contract
+  changed.
+- Added the v1823 extraction note, readability ratchet, SpotBugs FQN
+  relocation, progress evidence, and Chinese walkthrough.
+
 ## v1822 - Signed approval artifact draft text package comparison preflight extraction
 
 - Moved twelve physical comparison-preflight implementation files into

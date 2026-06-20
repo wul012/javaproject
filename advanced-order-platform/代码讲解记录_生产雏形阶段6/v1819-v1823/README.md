@@ -23,3 +23,9 @@
   `ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight`。12 个物理实现文件
   进入窄包，Gate 与 AcceptanceControl 合并，Controller 留根；根包文件数由 932 降到
   919，总 `ops` Java 文件数保持 1,352。
+- `version-1823-production-excellence-signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-extraction.md`：
+  J33 将比较验收预检实现迁入
+  `ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonacceptanceprecheck`。
+  七个实现文件进入窄包，GuardCatalog 合并到 CheckpointCatalog，Controller
+  留在根包；根包直接 Java 文件数由 919 降到 911，总 `ops` Java 文件数保持
+  1,352。

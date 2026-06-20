@@ -258,3 +258,15 @@ Its moved slot catalogs read the v1815 artifact-draft-readiness-lane
 endpoint constants from the new readiness-lane package, while retained-root
 `AuthoringReadiness` and `SignedApprovalDraftProfileSection` readers import this
 family's public immutable endpoint strings.
+
+The twenty-sixth J33 extraction is
+`signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-extraction-v1823.md`.
+It moves seven comparison-acceptance-precheck implementation files into
+`ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonacceptanceprecheck`,
+collocates the package-private guard catalog with the checkpoint catalog, and
+leaves the public controller plus root route aggregation in root. Direct root
+`ops` Java files fall from 919 to 911 while total `ops` Java files stay at
+1,352. The new public route owner preserves four byte-identical paths. The
+moved checkpoint catalog consumes the five v1822 ComparisonPreflight endpoint
+constants; ComparedPackageEvidenceIntake and ProfileSection readers import the
+new public boundary.
