@@ -4,6 +4,23 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1822 - Signed approval artifact draft text package comparison preflight extraction
+
+- Moved twelve physical comparison-preflight implementation files into
+  `ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight`.
+  The gate catalog is collocated with the acceptance-control catalog, direct
+  root `ops` Java files fall from 932 to 919, and total `ops` Java files stay
+  at 1,352.
+- Added a public route owner for the five comparison-preflight suffixes. Root
+  route aggregation delegates to it, preserving byte-identical paths.
+- Kept the controller in root and repaired explicit public imports for
+  ComparisonAcceptancePrecheck, ComparedPackageEvidenceIntake, ProfileSection,
+  controller tests, route tests, and test support. No response component,
+  comparison execution, package acceptance, write, credential, deployment,
+  rollback, or archive contract changed.
+- Added the v1822 extraction note, readability ratchet, SpotBugs FQN
+  relocation, progress evidence, and Chinese walkthrough.
+
 ## v1821 - Signed approval artifact draft text package submission preflight extraction
 
 - Moved the primary submission-preflight and its Closeout family together into
