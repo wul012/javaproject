@@ -4,6 +4,24 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1824 - Signed approval artifact draft text package compared package evidence intake extraction
+
+- Moved thirteen compared-package-evidence-intake implementation and endpoint
+  reference files into
+  `ops.maintenance.signedapprovalartifactdrafttextpackagecomparedpackageevidenceintake`.
+  The guard catalog is collocated with the slot catalog, direct root `ops`
+  Java files fall from 911 to 897, and total `ops` Java files stay at 1,352.
+- Added a public route owner for the five compared-package-evidence-intake
+  suffixes. Root route aggregation delegates to it, preserving byte-identical
+  paths.
+- Kept the controller in root and repaired explicit public imports for
+  ComparedPackageReview, ProfileSection, controller tests, route tests, and
+  test support. No package acceptance, text parsing, detached-signature parsing,
+  approval, write, credential, deployment, rollback, runtime, or archive
+  contract changed.
+- Added the v1824 extraction note, readability ratchet, SpotBugs FQN
+  relocation, progress evidence, and Chinese walkthrough.
+
 ## v1823 - Signed approval artifact draft text package comparison acceptance precheck extraction
 
 - Moved seven comparison-acceptance-precheck implementation files into

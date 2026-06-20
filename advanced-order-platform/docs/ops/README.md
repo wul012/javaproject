@@ -45,6 +45,8 @@ package.
 | `signed-approval-artifact-draft-text-package-review-preflight-extraction-v1820.md` | twenty-third ops extraction | Which signed-approval artifact-draft-text-package-review-preflight classes moved into the new ops.maintenance.signedapprovalartifactdrafttextpackagereviewpreflight subpackage, and how did root files fall from 977 to 961 while TextPackageSubmissionPreflight/ProfileSection readers stayed aligned? |
 | `signed-approval-artifact-draft-text-package-submission-preflight-extraction-v1821.md` | twenty-fourth ops extraction | Why did primary SubmissionPreflight and Closeout move together into ops.maintenance.signedapprovalartifactdrafttextpackagesubmissionpreflight, and how did root files fall from 961 to 932 while ComparisonPreflight, evidence-intake, and ProfileSection readers stayed aligned? |
 | `signed-approval-artifact-draft-text-package-comparison-preflight-extraction-v1822.md` | twenty-fifth ops extraction | Which comparison-preflight classes moved into ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight, and how did root files fall from 932 to 919 while ComparisonAcceptancePrecheck, ComparedPackageEvidenceIntake, and ProfileSection readers stayed aligned? |
+| `signed-approval-artifact-draft-text-package-comparison-acceptance-precheck-extraction-v1823.md` | twenty-sixth ops extraction | Which comparison-acceptance-precheck classes moved into ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonacceptanceprecheck, and how did root files fall from 919 to 911 while ComparedPackageEvidenceIntake and ProfileSection readers stayed aligned? |
+| `signed-approval-artifact-draft-text-package-compared-package-evidence-intake-extraction-v1824.md` | twenty-seventh ops extraction | Which compared-package-evidence-intake classes moved into ops.maintenance.signedapprovalartifactdrafttextpackagecomparedpackageevidenceintake, and how did root files fall from 911 to 897 while ComparedPackageReview and ProfileSection readers stayed aligned? |
 
 ## Boundary
 
@@ -270,3 +272,14 @@ leaves the public controller plus root route aggregation in root. Direct root
 moved checkpoint catalog consumes the five v1822 ComparisonPreflight endpoint
 constants; ComparedPackageEvidenceIntake and ProfileSection readers import the
 new public boundary.
+
+The twenty-seventh J34 extraction is
+`signed-approval-artifact-draft-text-package-compared-package-evidence-intake-extraction-v1824.md`.
+It moves thirteen compared-package-evidence-intake implementation and endpoint
+reference files into
+`ops.maintenance.signedapprovalartifactdrafttextpackagecomparedpackageevidenceintake`,
+collocates the package-private guard catalog with the slot catalog, and leaves
+the public controller plus root route aggregation in root. Direct root `ops`
+Java files fall from 911 to 897 while total `ops` Java files stay at 1,352. The
+new public route owner preserves five byte-identical paths. ComparedPackageReview
+and ProfileSection readers import the new public endpoint/response boundary.
