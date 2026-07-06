@@ -4,6 +4,17 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1827 - Java final push step 0 reconciliation
+
+- Reconciled the Java final-push Step 0 facts: v1826 commit `dd3e1db0`, tag
+  `v1826-order-platform-production-excellence-ops-signed-approval-draft-text-package-profile-section-extraction`,
+  push, and GitHub Actions run `27874073004` are recorded as complete.
+- Promoted `docs/project-explanation/project-value-and-flow.md` from a floating
+  untracked explanation into a committed project artifact, with a local README
+  and documentation guard coverage.
+- Added the v1827 reconciliation note and progress evidence. No route, response,
+  write boundary, runtime profile, deployment, rollback, or archive path changed.
+
 ## v1826 - Signed approval draft text package profile section extraction
 
 - Continued the three-version ProfileSection split by moving the text-package

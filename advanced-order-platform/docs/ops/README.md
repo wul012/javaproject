@@ -49,6 +49,7 @@ package.
 | `signed-approval-artifact-draft-text-package-compared-package-evidence-intake-extraction-v1824.md` | twenty-seventh ops extraction | Which compared-package-evidence-intake classes moved into ops.maintenance.signedapprovalartifactdrafttextpackagecomparedpackageevidenceintake, and how did root files fall from 911 to 897 while ComparedPackageReview and ProfileSection readers stayed aligned? |
 | `signed-approval-draft-profile-section-extraction-v1825.md` | twenty-eighth ops extraction | How is the 36-file ProfileSection cluster split across three versions, and how did the 11-file base layer move into ops.maintenance.signedapprovaldraftprofilesection while root files fell from 897 to 887? |
 | `signed-approval-draft-text-package-profile-section-extraction-v1826.md` | twenty-ninth ops extraction | How did the text-package ProfileSection layer move into ops.maintenance.signedapprovaldrafttextpackageprofilesection while root files fell from 887 to 874 and the ProfileSectionHandoff layer stayed queued? |
+| `java-final-push-step0-reconciliation-v1827.md` | Java final-push reconciliation | Which v1826 closeout facts and project-explanation cleanup items were reconciled before the endgame census starts? |
 
 ## Boundary
 

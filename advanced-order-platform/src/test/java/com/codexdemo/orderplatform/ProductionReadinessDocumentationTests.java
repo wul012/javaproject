@@ -74,6 +74,21 @@ class ProductionReadinessDocumentationTests {
             "health,info,metrics");
   }
 
+  @Test
+  void projectExplanationStaysCommittedAndIndexed() throws Exception {
+    Path explanationRoot = ROOT.resolve(Path.of("docs", "project-explanation"));
+    Path readme = explanationRoot.resolve("README.md");
+    Path explanation = explanationRoot.resolve("project-value-and-flow.md");
+
+    assertThat(Files.isRegularFile(readme)).isTrue();
+    assertThat(Files.isRegularFile(explanation)).isTrue();
+
+    assertThat(Files.readString(readme, StandardCharsets.UTF_8))
+        .contains("project-value-and-flow.md", "value", "inputs", "outputs");
+    assertThat(Files.readString(explanation, StandardCharsets.UTF_8))
+        .contains("Advanced Order Platform", "订单", "输入", "输出", "Outbox", "失败事件", "Ops 只读证据");
+  }
+
   private static String read(String fileName) throws Exception {
     return Files.readString(ROOT.resolve(fileName), StandardCharsets.UTF_8);
   }
