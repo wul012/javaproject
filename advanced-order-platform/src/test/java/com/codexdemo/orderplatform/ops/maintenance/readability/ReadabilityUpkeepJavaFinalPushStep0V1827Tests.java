@@ -39,11 +39,15 @@ class ReadabilityUpkeepJavaFinalPushStep0V1827Tests {
 
     assertThat(progress)
         .contains(
-            "| J37 | v1827 | local gates passed; remote CI pending |",
+            "| J37 | v1827 | completed; remote CI passed |",
             "| J36 | v1826 | completed; remote CI passed |",
+            "GitHub Actions run `28791751229` passed",
             "GitHub Actions run `27874073004` passed",
             "docs/project-explanation/project-value-and-flow.md");
-    assertThat(progress).doesNotContain("| J36 | v1826 | local gates passed; remote CI pending |");
+    assertThat(progress)
+        .doesNotContain(
+            "| J37 | v1827 | local gates passed; remote CI pending |",
+            "| J36 | v1826 | local gates passed; remote CI pending |");
   }
 
   @Test

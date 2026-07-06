@@ -4,6 +4,17 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1828 - Ops extraction endgame census
+
+- Added the Java final-push Phase 1 endgame census for the remaining direct-root
+  `ops` package. The census fixes the current root count at 874, the final root
+  target at 105, and the remaining move/collapse backlog at 769 files.
+- Added `docs/ops/extraction-waivers.md` so non-controller root retention has a
+  narrow committed list instead of informal exceptions.
+- Added v1828 readability guard coverage for the census buckets and waiver list.
+  No route, response, write boundary, runtime profile, deployment, rollback, or
+  archive path changed.
+
 ## v1827 - Java final push step 0 reconciliation
 
 - Reconciled the Java final-push Step 0 facts: v1826 commit `dd3e1db0`, tag
