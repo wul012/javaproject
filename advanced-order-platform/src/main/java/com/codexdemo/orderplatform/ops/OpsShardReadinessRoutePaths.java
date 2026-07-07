@@ -6,6 +6,7 @@ import com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardRe
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive.OpsShardReadinessScreenshotExplanationArchiveRoutePaths;
@@ -348,29 +349,40 @@ final class OpsShardReadinessRoutePaths {
   static final String OPERATOR_EVIDENCE_VALUE_DRAFT_CLOSEOUT =
       OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CLOSEOUT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG =
-      "/operator-evidence-value-supply-catalog";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ENVELOPE_TEMPLATE =
-      "/operator-evidence-value-supply-envelope-template";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ENVELOPE_TEMPLATE;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_REDACTION_POLICY =
-      "/operator-evidence-value-supply-redaction-policy";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_REDACTION_POLICY;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_MISSING_VALUE_POLICY =
-      "/operator-evidence-value-supply-missing-value-policy";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_MISSING_VALUE_POLICY;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_PROVENANCE_REQUIREMENT =
-      "/operator-evidence-value-supply-provenance-requirement";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_PROVENANCE_REQUIREMENT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD =
-      "/operator-evidence-value-supply-source-evidence-guard";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX =
-      "/operator-evidence-value-supply-validation-matrix";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_SIDE_EFFECT_GATE =
-      "/operator-evidence-value-supply-side-effect-gate";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIDE_EFFECT_GATE;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST =
-      "/operator-evidence-value-supply-operator-review-checklist";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT =
-      "/operator-evidence-value-supply-digest-blueprint";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN =
-      "/operator-evidence-value-supply-archive-plan";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT =
-      "/operator-evidence-value-supply-closeout";
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG =
       OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG;

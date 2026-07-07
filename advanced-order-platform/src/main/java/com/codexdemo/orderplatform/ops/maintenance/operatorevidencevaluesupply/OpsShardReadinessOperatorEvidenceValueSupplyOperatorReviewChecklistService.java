@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -8,14 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST;
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-value-supply-operator-review-checklist.v1";
 
   @Transactional(readOnly = true)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse checklist() {
-    return OpsShardReadinessOperatorEvidenceValueSupplySupport.response(
+    return OpsShardReadinessOperatorEvidenceValueSupplySlotCatalog.response(
         "Java v652",
         ENDPOINT,
         PROFILE,

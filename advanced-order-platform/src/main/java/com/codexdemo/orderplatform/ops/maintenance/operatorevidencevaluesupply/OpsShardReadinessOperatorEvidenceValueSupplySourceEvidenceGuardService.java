@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -8,14 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessOperatorEvidenceValueSupplySourceEvidenceGuardService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD;
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-value-supply-source-evidence-guard.v1";
 
   @Transactional(readOnly = true)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse guard() {
-    return OpsShardReadinessOperatorEvidenceValueSupplySupport.response(
+    return OpsShardReadinessOperatorEvidenceValueSupplySlotCatalog.response(
         "Java v646",
         ENDPOINT,
         PROFILE,

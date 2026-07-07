@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,12 +11,12 @@ class OpsShardReadinessOperatorEvidenceValueSupplySupportTests {
   @Test
   void buildsDisabledValueSupplyEnvelopeWithoutAcceptingValues() {
     OpsShardReadinessOperatorEvidenceValueSupplyResponse response =
-        OpsShardReadinessOperatorEvidenceValueSupplySupport.response(
+        OpsShardReadinessOperatorEvidenceValueSupplySlotCatalog.response(
             "Java v634",
             "/api/v1/ops/shard-readiness/operator-evidence-value-supply-example",
             "java-operator-evidence-value-supply-example.v1",
             List.of(
-                OpsShardReadinessOperatorEvidenceValueSupplySupport.slot(
+                OpsShardReadinessOperatorEvidenceValueSupplySlotCatalog.slot(
                     "VALUE_SUPPLY_EXAMPLE",
                     "VALUE_DRAFT_EXAMPLE",
                     OpsShardReadinessOperatorEvidenceValueDraftCloseoutService.ENDPOINT,

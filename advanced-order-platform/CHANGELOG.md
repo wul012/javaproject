@@ -1,8 +1,22 @@
 # Changelog
 
-本项目的版本化证据以 git tag 为权威来源。Maven artifact 当前保持
-`0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
-每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
+鏈」鐩殑鐗堟湰鍖栬瘉鎹互 git tag 涓烘潈濞佹潵婧愩€侻aven artifact 褰撳墠淇濇寔
+`0.1.0-SNAPSHOT`锛屽洜涓烘湰浠撳簱浠嶅鍦ㄩ珮棰戝伐绋嬫紨杩涢樁娈碉紝灏氭湭鍒囨崲鍒拌涔夊寲鍒跺搧鍙戝竷銆?姣忎釜鍙拷婧増鏈繀椤绘湁瀵瑰簲 git tag銆佹彁浜ゃ€佹祴璇曡瘉鎹拰蹇呰鐨勪腑鏂囦唬鐮佽瑙ｃ€?
+## v1831 - Operator evidence value supply base extraction
+
+- Moved the `OperatorEvidenceValueSupply` base implementation into
+  `ops.maintenance.operatorevidencevaluesupply` while retaining the two Spring
+  controllers in the root `ops` package.
+- Added a public ValueSupply route owner and delegated the root route aggregator
+  to it without changing endpoint suffix bytes. The moved services compute
+  their immutable `ENDPOINT` constants from that owner.
+- Updated AdapterPreflight and ApprovalPreflight endpoint readers to import the
+  moved base services, relocated the SpotBugs base response FQN, and moved the
+  service/support tests with the package.
+- Tightened the live root census from 848 to 833 and the remaining movable
+  backlog from 743 to 728 while total `ops` Java files stay at 1,352.
+- Added the v1831 extraction note, census update, readability guard coverage,
+  progress evidence, and Chinese walkthrough.
 
 ## v1830 - Operator evidence value supply adapter preflight extraction
 
@@ -509,9 +523,9 @@
 
 ## v1805 - Candidate document registry package extraction
 
-- Moved the entire candidate-document registry family — 57 non-controller
+- Moved the entire candidate-document registry family 鈥?57 non-controller
   implementation files plus the family route-path class
-  `OpsShardReadinessCandidateDocumentRoutePaths` — into the new
+  `OpsShardReadinessCandidateDocumentRoutePaths` 鈥?into the new
   `ops.maintenance.candidatedocument` subpackage, reducing direct root `ops`
   Java files from 1,240 to 1,183 (the largest single reduction in the
   consolidation program). The eight public `@RestController` classes and the
@@ -534,9 +548,9 @@
 
 ## v1807 - Operator evidence value draft registry package extraction
 
-- Moved the operator-evidence-value-draft registry family — 16 non-controller
+- Moved the operator-evidence-value-draft registry family 鈥?16 non-controller
   implementation files plus the family route-path class
-  `OpsShardReadinessOperatorEvidenceValueDraftRoutePaths` — into the new
+  `OpsShardReadinessOperatorEvidenceValueDraftRoutePaths` 鈥?into the new
   `ops.maintenance.operatorevidencevaluedraft` subpackage, reducing direct root
   `ops` Java files from 1,183 to 1,167. The two public `@RestController` classes
   and the global `OpsShardReadinessRoutePaths` aggregator stay in root.
@@ -579,8 +593,8 @@
 ## v1803 - Sandbox connection registry package extraction
 
 - Moved twenty-six sandbox connection implementation files (two sibling registry
-  sub-clusters — the blocked-execution-context dossier and the precheck
-  upstream-receipt verification manifest — that share one route-path class) into
+  sub-clusters 鈥?the blocked-execution-context dossier and the precheck
+  upstream-receipt verification manifest 鈥?that share one route-path class) into
   `ops.maintenance.sandboxconnection`, reducing direct root `ops` Java files from
   1,269 to 1,243 while keeping the total ops file count stable. This is the
   second dependency-injected "evidence" registry family extracted and the largest
@@ -636,7 +650,7 @@
   `ops.maintenance.screenshotexplanationarchive`, reducing direct root `ops`
   Java files from 1,290 to 1,280 while keeping the total ops file count stable.
   This is the first extraction outside the CodeWalkthrough family.
-- Mirrored the v1797–v1800 recipe: made the screenshot explanation archive
+- Mirrored the v1797鈥搗1800 recipe: made the screenshot explanation archive
   route-path class public (with its own `BASE_PATH`), repointed the moved service
   to it, made `ENDPOINT` public, moved the package-local service/renderer/
   boundary/immutability/closeout/f-root-policy/test-support tests into the
@@ -657,7 +671,7 @@
   from 1,298 to 1,290 while keeping the total ops file count stable. This
   completes moving all four CodeWalkthrough registry families (compliance,
   quality gate, quality audit, depth) out of the root package.
-- Mirrored the v1797–v1799 recipe: made the depth route-path class public (with
+- Mirrored the v1797鈥搗1799 recipe: made the depth route-path class public (with
   its own `BASE_PATH`), repointed the moved service to it, made `ENDPOINT`
   public, moved the package-local service/renderer/boundary/test-support tests
   into the subpackage; the root controller and route-path tests construct the
@@ -728,63 +742,36 @@
 
 ## v1796 - Ops consolidation inventory baseline
 
-- 新增 `docs/ops/ops-consolidation-inventory-v1796.md`，记录 ops 包当前
-  1,352 个主源码文件、1,330 个根包直放文件、1,210 个 Readiness 命名文件。
-- 固化 route family、load-bearing archive 和 reduction candidate 清单，为后续
-  contract-preserving 拆分提供边界。
-- 新增文档守卫测试，确保 J6 盘点、历史归档不搬迁规则和 v1796 不搬类停线可发现。
-- 修正本地 Spotless ratchet 默认基准为 `javaproject/master`，与 Java canonical
-  remote 规范一致；GitHub Actions 仍按 workflow 显式参数选择 CI 基准。
-
+- 鏂板 `docs/ops/ops-consolidation-inventory-v1796.md`锛岃褰?ops 鍖呭綋鍓?  1,352 涓富婧愮爜鏂囦欢銆?,330 涓牴鍖呯洿鏀炬枃浠躲€?,210 涓?Readiness 鍛藉悕鏂囦欢銆?- 鍥哄寲 route family銆乴oad-bearing archive 鍜?reduction candidate 娓呭崟锛屼负鍚庣画
+  contract-preserving 鎷嗗垎鎻愪緵杈圭晫銆?- 鏂板鏂囨。瀹堝崼娴嬭瘯锛岀‘淇?J6 鐩樼偣銆佸巻鍙插綊妗ｄ笉鎼縼瑙勫垯鍜?v1796 涓嶆惉绫诲仠绾垮彲鍙戠幇銆?- 淇鏈湴 Spotless ratchet 榛樿鍩哄噯涓?`javaproject/master`锛屼笌 Java canonical
+  remote 瑙勮寖涓€鑷达紱GitHub Actions 浠嶆寜 workflow 鏄惧紡鍙傛暟閫夋嫨 CI 鍩哄噯銆?
 ## v1795 - Production readiness documentation discipline
 
-- 新增 `PRODUCTION_READINESS.md`，集中记录生产边界、运行 profile、消息、支付、
-  failed-event replay、release approval rehearsal、credential、SQL、部署和回滚限制。
-- 新增 changelog 版本策略，明确 git tag `vNNNN-*` 是当前权威版本号，pom 仍保持
-  `0.1.0-SNAPSHOT`。
-- 新增文档守卫测试，防止 CHANGELOG、PRODUCTION_READINESS 和 README 指针漂移。
-
+- 鏂板 `PRODUCTION_READINESS.md`锛岄泦涓褰曠敓浜ц竟鐣屻€佽繍琛?profile銆佹秷鎭€佹敮浠樸€?  failed-event replay銆乺elease approval rehearsal銆乧redential銆丼QL銆侀儴缃插拰鍥炴粴闄愬埗銆?- 鏂板 changelog 鐗堟湰绛栫暐锛屾槑纭?git tag `vNNNN-*` 鏄綋鍓嶆潈濞佺増鏈彿锛宲om 浠嶄繚鎸?  `0.1.0-SNAPSHOT`銆?- 鏂板鏂囨。瀹堝崼娴嬭瘯锛岄槻姝?CHANGELOG銆丳RODUCTION_READINESS 鍜?README 鎸囬拡婕傜Щ銆?
 ## v1794 - Production observability tracing
 
-- 增加 Micrometer Tracing Brave bridge、trace/span 日志 pattern 和异常处理器日志相关性。
-- 明确 actuator 只暴露 health、info、metrics，并补真实 HTTP trace/span 日志测试。
-
+- 澧炲姞 Micrometer Tracing Brave bridge銆乼race/span 鏃ュ織 pattern 鍜屽紓甯稿鐞嗗櫒鏃ュ織鐩稿叧鎬с€?- 鏄庣‘ actuator 鍙毚闇?health銆乮nfo銆乵etrics锛屽苟琛ョ湡瀹?HTTP trace/span 鏃ュ織娴嬭瘯銆?
 ## v1793 - Production profile and request validation hardening
 
-- 新增 `application-prod.yml`，关闭 H2 console 和 SQL debug 输出，启用 graceful shutdown。
-- compose 凭据改为环境变量覆盖，新增 `.env.example`。
-- 订单与 failed-event 写请求补充 Bean Validation 边界和 ProblemDetail 映射。
-
+- 鏂板 `application-prod.yml`锛屽叧闂?H2 console 鍜?SQL debug 杈撳嚭锛屽惎鐢?graceful shutdown銆?- compose 鍑嵁鏀逛负鐜鍙橀噺瑕嗙洊锛屾柊澧?`.env.example`銆?- 璁㈠崟涓?failed-event 鍐欒姹傝ˉ鍏?Bean Validation 杈圭晫鍜?ProblemDetail 鏄犲皠銆?
 ## v1792 - Coverage ratchet
 
-- 新增 JaCoCo 基线和 package-level coverage floors。
-- CI 上传 JaCoCo artifact，docker profile 不再代表覆盖率门。
-
+- 鏂板 JaCoCo 鍩虹嚎鍜?package-level coverage floors銆?- CI 涓婁紶 JaCoCo artifact锛宒ocker profile 涓嶅啀浠ｈ〃瑕嗙洊鐜囬棬銆?
 ## v1791 - Static analysis ratchets
 
-- 新增 Maven Enforcer、Spotless ratchet 和 SpotBugs baseline。
-- CI 开始阻断新增格式和静态分析问题。
-
+- 鏂板 Maven Enforcer銆丼potless ratchet 鍜?SpotBugs baseline銆?- CI 寮€濮嬮樆鏂柊澧炴牸寮忓拰闈欐€佸垎鏋愰棶棰樸€?
 ## v1790 - CI bootstrap
 
-- 新增 Maven wrapper。
-- Docker/Testcontainers 测试与默认 headless suite 分离。
-- GitHub Actions 工作流开始运行默认 verify 和 docker profile verify。
-
+- 鏂板 Maven wrapper銆?- Docker/Testcontainers 娴嬭瘯涓庨粯璁?headless suite 鍒嗙銆?- GitHub Actions 宸ヤ綔娴佸紑濮嬭繍琛岄粯璁?verify 鍜?docker profile verify銆?
 ## v1789 - Java ops governance consolidation roadmap
 
-- 新增 Java ops package 整合路线图和 ratchet 方向。
-- 明确不得移动 `a/` 到 `f/` 历史归档及 evidence JSON。
-
+- 鏂板 Java ops package 鏁村悎璺嚎鍥惧拰 ratchet 鏂瑰悜銆?- 鏄庣‘涓嶅緱绉诲姩 `a/` 鍒?`f/` 鍘嗗彶褰掓。鍙?evidence JSON銆?
 ## v1788 - Readability upkeep audit closeout
 
-- 完成 readability upkeep audit closeout 证据。
-- 记录 v1784-v1788 可读性保养周期结果。
-
+- 瀹屾垚 readability upkeep audit closeout 璇佹嵁銆?- 璁板綍 v1784-v1788 鍙鎬т繚鍏诲懆鏈熺粨鏋溿€?
 ## v1787 - Readability docs guard
 
-- 增加可读性文档守卫，确保维护地图、归档布局和讲解规则可追踪。
-
+- 澧炲姞鍙鎬ф枃妗ｅ畧鍗紝纭繚缁存姢鍦板浘銆佸綊妗ｅ竷灞€鍜岃瑙ｈ鍒欏彲杩借釜銆?
 ## v1786 - Readability audit registry
 
-- 增加 readability upkeep audit registry，让后期维护入口、边界和测试证据集中可查。
+- 澧炲姞 readability upkeep audit registry锛岃鍚庢湡缁存姢鍏ュ彛銆佽竟鐣屽拰娴嬭瘯璇佹嵁闆嗕腑鍙煡銆?
