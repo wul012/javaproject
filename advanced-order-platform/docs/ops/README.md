@@ -52,6 +52,7 @@ package.
 | `java-final-push-step0-reconciliation-v1827.md` | Java final-push reconciliation | Which v1826 closeout facts and project-explanation cleanup items were reconciled before the endgame census starts? |
 | `extraction-endgame-census-v1828.md` | Java final-push endgame census | Which remaining direct-root ops families make up the 874-file root package, and why is the final root target fixed at 105 with 769 files still to move? |
 | `signed-approval-draft-profile-section-handoff-extraction-v1829.md` | thirtieth ops extraction | How did the ProfileSection handoff layer move into ops.maintenance.signedapprovaldraftprofilesectionhandoff while root files fell from 874 to 864 and remaining movable root files fell to 759? |
+| `operator-evidence-value-supply-adapter-preflight-extraction-v1830.md` | thirty-first ops extraction | How did AdapterPreflight move into ops.maintenance.operatorevidencevaluesupplyadapterpreflight while root files fell from 864 to 848 and remaining movable root files fell to 743? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

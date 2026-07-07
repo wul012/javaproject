@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -8,8 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseoutService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT;
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths.BASE_PATH
+          + OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT;
   static final String PROFILE =
       "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-closeout.v1";
 
@@ -20,7 +21,7 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCloseou
         ENDPOINT,
         PROFILE,
         OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSlotCatalog.allSlots(),
-        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuleCatalog.allRules(),
+        OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSlotCatalog.allRules(),
         List.of(
             "value-supply-adapter-preflight-closeout-versions-v660-v684",
             "value-supply-adapter-preflight-closeout-support-carried-forward-v659",

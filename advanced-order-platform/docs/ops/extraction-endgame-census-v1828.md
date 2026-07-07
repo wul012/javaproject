@@ -6,12 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: after v1827, before any v1828 extraction.
+- Repository state: live after v1830, with the original v1828 baseline retained
+  in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **874**.
+- Current direct-root Java files: **848**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **769**.
+- Remaining direct-root non-controller files to move or collapse: **743**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -30,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-874 current root files - 105 final root files = 769 files still to move
+848 current root files - 105 final root files = 743 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -62,13 +63,13 @@ when names overlap, for example controllers inside a large family prefix.
 | ReleaseApprovalRehearsal shared hints/request/builders | 10 | Move with release-approval rehearsal support. |
 | ReleaseApprovalVerification hints | 6 | Move with release-approval verification support. |
 | ReleaseApproval shared support | 2 | Move into release-approval shared support; not root. |
-| OperatorEvidenceValueSupplyAdapterPreflight | 16 | Move before active value-supply router work. |
+| OperatorEvidenceValueSupplyAdapterPreflight | 0 | Moved in v1830. |
 | OperatorEvidenceValueSupply base | 15 | Move after adapter preflight so outbound reads are explicit. |
 | ComparedEvidenceCandidateBlueprint | 14 | Move as compared-evidence candidate blueprint. |
 | ComparedEvidenceCandidateIntakePreflight | 14 | Move as compared-evidence candidate intake preflight. |
 | ComparedEvidenceEvaluationPreflight | 14 | Move as compared-evidence evaluation preflight. |
 | ComparedPackageReview | 16 | Move after compared evidence packages expose endpoint boundaries. |
-| SignedApprovalDraftProfileSection | 10 | Finish the remaining ProfileSection cluster. |
+| SignedApprovalDraftProfileSection | 0 | Finished in v1829. |
 | V1Contract consumer/alignment snapshots | 42 | Move into a v1-contract package while preserving endpoint bytes. |
 | ReadOnlyEvidence catalog snapshots | 11 | Move after v1-contract endpoint pair ownership is clear. |
 | RuntimeExecutionApprovalInputTemplate | 4 | Move before runtime execution residuals. |
@@ -79,7 +80,8 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
 | Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
 
-The counted buckets sum to **874** and leave zero unassigned files.
+The counted buckets sum to **848** and leave zero unassigned files. The original
+v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
 
@@ -90,15 +92,14 @@ ratchet tightened, and Chinese walkthrough written before final verify.
 
 Recommended near-term order:
 
-1. Finish the remaining `SignedApprovalDraftProfileSection` family because it
-   is the tail of the v1825-v1826 ProfileSection cluster.
-2. Move the `OperatorEvidenceValueSupplyAdapterPreflight` and
-   `OperatorEvidenceValueSupply` base buckets before any active router work.
-3. Move the compared-evidence and compared-package buckets while their
+1. Move the `OperatorEvidenceValueSupply` base bucket now that
+   `OperatorEvidenceValueSupplyAdapterPreflight` is extracted and its outbound
+   reads are explicit.
+2. Move the compared-evidence and compared-package buckets while their
    endpoint dependencies are still easy to audit.
-4. Move the release-acceptance route-path split track as its own multi-version
+3. Move the release-acceptance route-path split track as its own multi-version
    effort.
-5. Leave the `RouteCleanup` web until route owner, endpoint reader, and
+4. Leave the `RouteCleanup` web until route owner, endpoint reader, and
    aggregation proof are explicit.
 
 Every five extraction batches after this census need a checkpoint review unless
@@ -124,6 +125,21 @@ Repository path: `scripts/ops-root-census.ps1`.
 Use that command from the `advanced-order-platform` project root to reproduce
 the same direct-root count, retained-root count, remaining movable count, bucket
 table, and unassigned-file check used by the Java final-push extraction series.
+
+## v1830 progress
+
+v1830 moves the `OperatorEvidenceValueSupplyAdapterPreflight` implementation
+bucket into `ops.maintenance.operatorevidencevaluesupplyadapterpreflight`. The
+two public AdapterPreflight controllers stay in root. The old standalone
+`RuleCatalog` is folded into the moved `SlotCatalog`, which offsets the new
+public AdapterPreflight route owner and keeps total `ops` Java files at
+**1,352**. The live direct-root count falls from **864 to 848**, while the final
+root target remains **105** and the remaining direct-root non-controller backlog
+falls from **759 to 743**.
+
+The next low-coupling bucket is `OperatorEvidenceValueSupply base` with 15
+direct-root files. It should move before any active value-supply router work so
+future write-routing discussions do not depend on root-package evidence helpers.
 
 ## Revision rule
 

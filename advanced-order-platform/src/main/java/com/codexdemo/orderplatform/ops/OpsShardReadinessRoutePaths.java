@@ -6,6 +6,7 @@ import com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardRe
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive.OpsShardReadinessScreenshotExplanationArchiveRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftAuthoringReadinessRoutePaths;
@@ -371,30 +372,42 @@ final class OpsShardReadinessRoutePaths {
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT =
       "/operator-evidence-value-supply-closeout";
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG =
-      "/operator-evidence-value-supply-adapter-preflight-catalog";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_COMPATIBILITY_MATRIX =
-      "/operator-evidence-value-supply-adapter-preflight-compatibility-matrix";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_COMPATIBILITY_MATRIX;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_REDACTION_BOUNDARY =
-      "/operator-evidence-value-supply-adapter-preflight-redaction-boundary";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_REDACTION_BOUNDARY;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PROVENANCE_BINDING =
-      "/operator-evidence-value-supply-adapter-preflight-provenance-binding";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PROVENANCE_BINDING;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_MISSING_VALUE_REJECTION =
-      "/operator-evidence-value-supply-adapter-preflight-missing-value-rejection";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_MISSING_VALUE_REJECTION;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_SOURCE_EVIDENCE_SNAPSHOT =
-      "/operator-evidence-value-supply-adapter-preflight-source-evidence-snapshot";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_SOURCE_EVIDENCE_SNAPSHOT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PAYLOAD_FIREWALL =
-      "/operator-evidence-value-supply-adapter-preflight-payload-firewall";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PAYLOAD_FIREWALL;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_RUNTIME_SUBMISSION_LOCK =
-      "/operator-evidence-value-supply-adapter-preflight-runtime-submission-lock";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_RUNTIME_SUBMISSION_LOCK;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_OPERATOR_REHEARSAL_CHECKLIST =
-          "/operator-evidence-value-supply-adapter-preflight-operator-rehearsal-checklist";
+          OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+              .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_OPERATOR_REHEARSAL_CHECKLIST;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_DIGEST_BLUEPRINT =
-      "/operator-evidence-value-supply-adapter-preflight-digest-blueprint";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_DIGEST_BLUEPRINT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_ARCHIVE_PLAN =
-      "/operator-evidence-value-supply-adapter-preflight-archive-plan";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_ARCHIVE_PLAN;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT =
-      "/operator-evidence-value-supply-adapter-preflight-closeout";
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT;
   static final String OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG =
       OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG;

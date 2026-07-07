@@ -1,0 +1,253 @@
+package com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
+class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationServiceTests {
+
+  @Test
+  void buildsCatalogWithAllSlotsAndRulesButNoAdapterImplementation() {
+    OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse catalog =
+        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService().catalog();
+
+    assertThat(catalog.version()).isEqualTo("Java v662");
+    assertThat(catalog.endpoint())
+        .isEqualTo(
+            "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-catalog");
+    assertThat(catalog.profile())
+        .isEqualTo(
+            "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-catalog.v1");
+    assertThat(catalog.sourcePlan()).isEqualTo("Node v986");
+    assertThat(catalog.sourceSupplyVersion()).isEqualTo("Java v658");
+    assertThat(catalog.readyForDisabledAdapterPreflight()).isTrue();
+    assertThat(catalog.readyForAdapterImplementation()).isFalse();
+    assertThat(catalog.readyForOperatorValueSubmission()).isFalse();
+    assertThat(catalog.readyForEvidenceImport()).isFalse();
+    assertThat(catalog.readyForRuntimePayload()).isFalse();
+    assertThat(catalog.readyForLiveExecution()).isFalse();
+    assertThat(catalog.readyForProductionExecution()).isFalse();
+    assertThat(catalog.slotCount()).isEqualTo(25);
+    assertThat(catalog.passedSlotCount()).isEqualTo(25);
+    assertThat(catalog.ruleCount()).isEqualTo(18);
+    assertThat(catalog.slots())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+        .startsWith("ADAPTER_PREFLIGHT_01_ENVELOPE_ID_COMPATIBILITY")
+        .endsWith("ADAPTER_PREFLIGHT_25_CLOSEOUT_LOCKS_HELD");
+    assertThat(catalog.rules())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+        .startsWith("ADAPTER_RULE_01_DISABLED_IMPLEMENTATION")
+        .endsWith("ADAPTER_RULE_18_CLOSEOUT_LOCK_SUMMARY_REQUIRED");
+    assertThat(catalog.checks())
+        .contains(
+            "value-supply-adapter-preflight-catalog-slot-count-25",
+            "value-supply-adapter-preflight-catalog-rule-count-18",
+            "value-supply-adapter-preflight-catalog-node-v986-approval-draft-boundary");
+    assertThat(catalog.status()).isEqualTo("passed");
+  }
+
+  @Test
+  void buildsCompatibilityMatrixWithMetadataOnlyAdapterChecks() {
+    OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse matrix =
+        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCompatibilityMatrixService()
+            .matrix();
+
+    assertThat(matrix.version()).isEqualTo("Java v664");
+    assertThat(matrix.endpoint())
+        .isEqualTo(
+            "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-compatibility-matrix");
+    assertThat(matrix.profile())
+        .isEqualTo(
+            "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-compatibility-matrix.v1");
+    assertThat(matrix.compatibilityState()).isEqualTo("metadata-only");
+    assertThat(matrix.readyForAdapterImplementation()).isFalse();
+    assertThat(matrix.readyForOperatorValueSubmission()).isFalse();
+    assertThat(matrix.slotCount()).isEqualTo(4);
+    assertThat(matrix.ruleCount()).isEqualTo(4);
+    assertThat(matrix.slots())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+        .containsExactly(
+            "ADAPTER_PREFLIGHT_01_ENVELOPE_ID_COMPATIBILITY",
+            "ADAPTER_PREFLIGHT_02_OPERATOR_REFERENCE_COMPATIBILITY",
+            "ADAPTER_PREFLIGHT_03_SOURCE_DRAFT_COMPATIBILITY",
+            "ADAPTER_PREFLIGHT_04_VALUE_KIND_COMPATIBILITY");
+    assertThat(matrix.rules())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+        .containsExactly(
+            "ADAPTER_RULE_01_DISABLED_IMPLEMENTATION",
+            "ADAPTER_RULE_02_METADATA_ONLY_COMPATIBILITY",
+            "ADAPTER_RULE_03_NO_OPERATOR_VALUE_BODY",
+            "ADAPTER_RULE_04_NO_APPROVAL_CAPTURE");
+    assertThat(matrix.checks())
+        .contains(
+            "value-supply-adapter-preflight-compatibility-metadata-only",
+            "value-supply-adapter-preflight-compatibility-no-value-body",
+            "value-supply-adapter-preflight-compatibility-no-approval-capture");
+    assertThat(matrix.status()).isEqualTo("passed");
+  }
+
+  @Test
+  void buildsRedactionBoundaryThatBlocksSecretCarryingAdapterInputs() {
+    OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse boundary =
+        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService()
+            .boundary();
+
+    assertThat(boundary.version()).isEqualTo("Java v666");
+    assertThat(boundary.endpoint())
+        .isEqualTo(
+            "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-redaction-boundary");
+    assertThat(boundary.profile())
+        .isEqualTo(
+            "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-redaction-boundary.v1");
+    assertThat(boundary.redactionState()).isEqualTo("required-before-adapter");
+    assertThat(boundary.readyForOperatorValueSubmission()).isFalse();
+    assertThat(boundary.slotCount()).isEqualTo(4);
+    assertThat(boundary.ruleCount()).isEqualTo(3);
+    assertThat(boundary.slots())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+        .containsExactly(
+            "ADAPTER_PREFLIGHT_05_REDACTION_CLASSIFICATION",
+            "ADAPTER_PREFLIGHT_06_CREDENTIAL_VALUE_BLOCK",
+            "ADAPTER_PREFLIGHT_07_RAW_ENDPOINT_BLOCK",
+            "ADAPTER_PREFLIGHT_08_SECRET_MATERIAL_BLOCK");
+    assertThat(boundary.rules())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+        .containsExactly(
+            "ADAPTER_RULE_05_NO_CREDENTIAL_VALUE",
+            "ADAPTER_RULE_06_NO_RAW_ENDPOINT",
+            "ADAPTER_RULE_07_NO_SECRET_MATERIAL");
+    assertThat(boundary.checks())
+        .contains(
+            "value-supply-adapter-preflight-redaction-credential-values-blocked",
+            "value-supply-adapter-preflight-redaction-raw-endpoints-blocked",
+            "value-supply-adapter-preflight-redaction-secret-material-blocked");
+    assertThat(boundary.status()).isEqualTo("passed");
+  }
+
+  @Test
+  void buildsProvenanceBindingBeforeAnyAdapterInputCanBeImported() {
+    OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse binding =
+        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService()
+            .binding();
+
+    assertThat(binding.version()).isEqualTo("Java v668");
+    assertThat(binding.endpoint())
+        .isEqualTo(
+            "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-provenance-binding");
+    assertThat(binding.profile())
+        .isEqualTo(
+            "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-provenance-binding.v1");
+    assertThat(binding.provenanceState()).isEqualTo("required-before-adapter");
+    assertThat(binding.readyForEvidenceImport()).isFalse();
+    assertThat(binding.slotCount()).isEqualTo(4);
+    assertThat(binding.ruleCount()).isEqualTo(3);
+    assertThat(binding.slots())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+        .containsExactly(
+            "ADAPTER_PREFLIGHT_13_PROVENANCE_SOURCE_ID",
+            "ADAPTER_PREFLIGHT_14_PROVENANCE_EVIDENCE_FILE",
+            "ADAPTER_PREFLIGHT_15_PROVENANCE_SNIPPET_ID",
+            "ADAPTER_PREFLIGHT_16_ENDPOINT_ALIAS_ONLY");
+    assertThat(binding.rules())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+        .containsExactly(
+            "ADAPTER_RULE_08_PROVENANCE_SOURCE_REQUIRED",
+            "ADAPTER_RULE_09_PROVENANCE_EVIDENCE_FILE_REQUIRED",
+            "ADAPTER_RULE_10_PROVENANCE_SNIPPET_REQUIRED");
+    assertThat(binding.checks())
+        .contains(
+            "value-supply-adapter-preflight-provenance-source-id-required",
+            "value-supply-adapter-preflight-provenance-evidence-file-required",
+            "value-supply-adapter-preflight-provenance-snippet-required",
+            "value-supply-adapter-preflight-provenance-endpoint-alias-only");
+    assertThat(binding.status()).isEqualTo("passed");
+  }
+
+  @Test
+  void buildsMissingValueRejectionWithoutDefaultsOrManualSubmission() {
+    OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse rejection =
+        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightMissingValueRejectionService()
+            .rejection();
+
+    assertThat(rejection.version()).isEqualTo("Java v670");
+    assertThat(rejection.endpoint())
+        .isEqualTo(
+            "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-missing-value-rejection");
+    assertThat(rejection.profile())
+        .isEqualTo(
+            "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-missing-value-rejection.v1");
+    assertThat(rejection.acceptedValueState()).isEqualTo("not-accepted");
+    assertThat(rejection.readyForOperatorValueSubmission()).isFalse();
+    assertThat(rejection.slotCount()).isEqualTo(4);
+    assertThat(rejection.ruleCount()).isEqualTo(2);
+    assertThat(rejection.slots())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+        .containsExactly(
+            "ADAPTER_PREFLIGHT_09_MISSING_VALUE_REJECTION",
+            "ADAPTER_PREFLIGHT_10_BLANK_VALUE_REJECTION",
+            "ADAPTER_PREFLIGHT_11_MANUAL_ENTRY_LOCK",
+            "ADAPTER_PREFLIGHT_12_REVIEWER_REQUIRED");
+    assertThat(rejection.rules())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+        .containsExactly(
+            "ADAPTER_RULE_11_MISSING_VALUES_REJECTED", "ADAPTER_RULE_12_BLANK_VALUES_REJECTED");
+    assertThat(rejection.checks())
+        .contains(
+            "value-supply-adapter-preflight-missing-values-rejected",
+            "value-supply-adapter-preflight-blank-values-rejected",
+            "value-supply-adapter-preflight-manual-entry-locked",
+            "value-supply-adapter-preflight-reviewer-required-before-adapter");
+    assertThat(rejection.status()).isEqualTo("passed");
+  }
+
+  @Test
+  void buildsSourceEvidenceSnapshotWithoutAutomaticSiblingImportOrRuntimePayload() {
+    OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse snapshot =
+        new OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSourceEvidenceSnapshotService()
+            .snapshot();
+
+    assertThat(snapshot.version()).isEqualTo("Java v672");
+    assertThat(snapshot.endpoint())
+        .isEqualTo(
+            "/api/v1/ops/shard-readiness/operator-evidence-value-supply-adapter-preflight-source-evidence-snapshot");
+    assertThat(snapshot.profile())
+        .isEqualTo(
+            "java-shard-readiness-operator-evidence-value-supply-adapter-preflight-source-evidence-snapshot.v1");
+    assertThat(snapshot.readyForEvidenceImport()).isFalse();
+    assertThat(snapshot.readyForRuntimePayload()).isFalse();
+    assertThat(snapshot.slotCount()).isEqualTo(4);
+    assertThat(snapshot.ruleCount()).isEqualTo(3);
+    assertThat(snapshot.slots())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterSlot::code)
+        .containsExactly(
+            "ADAPTER_PREFLIGHT_17_FRESH_SIBLING_REFERENCE",
+            "ADAPTER_PREFLIGHT_18_HISTORICAL_FALLBACK_MARKER",
+            "ADAPTER_PREFLIGHT_19_SYNTHETIC_EVIDENCE_BLOCK",
+            "ADAPTER_PREFLIGHT_20_RUNTIME_PAYLOAD_BLOCK");
+    assertThat(snapshot.rules())
+        .extracting(
+            OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse.AdapterRule::code)
+        .containsExactly(
+            "ADAPTER_RULE_13_NO_AUTOMATIC_SIBLING_IMPORT",
+            "ADAPTER_RULE_14_SYNTHETIC_EVIDENCE_BLOCKED",
+            "ADAPTER_RULE_15_RUNTIME_PAYLOAD_BLOCKED");
+    assertThat(snapshot.checks())
+        .contains(
+            "value-supply-adapter-preflight-source-evidence-fresh-sibling-read-only",
+            "value-supply-adapter-preflight-source-evidence-historical-fallback-explicit",
+            "value-supply-adapter-preflight-source-evidence-no-automatic-sibling-import",
+            "value-supply-adapter-preflight-source-evidence-runtime-payload-blocked");
+    assertThat(snapshot.status()).isEqualTo("passed");
+  }
+}

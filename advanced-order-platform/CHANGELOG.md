@@ -4,6 +4,21 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1830 - Operator evidence value supply adapter preflight extraction
+
+- Moved the `OperatorEvidenceValueSupplyAdapterPreflight` implementation into
+  `ops.maintenance.operatorevidencevaluesupplyadapterpreflight` while retaining
+  the two Spring controllers in the root `ops` package.
+- Added a public AdapterPreflight route owner and delegated the root route
+  aggregator to it without changing endpoint suffix bytes. The moved services
+  now compute their public immutable `ENDPOINT` constants from that owner.
+- Folded the old AdapterPreflight `RuleCatalog` into `SlotCatalog` to offset
+  the new route owner, keeping total `ops` Java files at 1,352 while direct root
+  files fall from 864 to 848 and remaining movable root files fall from 759 to
+  743.
+- Added the v1830 extraction note, census update, readability guard coverage,
+  SpotBugs FQN relocation, progress evidence, and Chinese walkthrough.
+
 ## v1829 - Signed approval draft profile section handoff extraction
 
 - Closed the third ProfileSection extraction by moving ten

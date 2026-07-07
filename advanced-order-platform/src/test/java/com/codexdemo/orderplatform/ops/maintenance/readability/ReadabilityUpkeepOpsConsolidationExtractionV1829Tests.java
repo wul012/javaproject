@@ -155,7 +155,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1829Tests {
                   .filter(Files::isRegularFile)
                   .filter(path -> path.getFileName().toString().endsWith(".java"))
                   .count())
-          .isEqualTo(864);
+          .isLessThanOrEqualTo(864);
     }
     try (Stream<Path> paths = Files.walk(OPS_SOURCE_ROOT)) {
       assertThat(
