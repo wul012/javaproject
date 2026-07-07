@@ -3,6 +3,7 @@ package com.codexdemo.orderplatform.ops;
 import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint.OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateintakepreflight.OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.credentialresolver.OpsShardReadinessCredentialResolverRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths;
@@ -986,20 +987,24 @@ final class OpsShardReadinessRoutePaths {
               .COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CATALOG =
-          OpsShardReadinessCandidateDocumentRoutePaths
-              .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CATALOG;
+          OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths
+              .COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CATALOG;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_SOURCE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-source";
+          OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths
+              .COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_SOURCE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_COMPARISON =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-comparison";
+          OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths
+              .COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_COMPARISON;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_POLICY =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-policy";
+          OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths
+              .COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_POLICY;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CLOSEOUT =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-closeout";
+          OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths
+              .COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_CANDIDATE_DOCUMENT_REQUEST_PACKAGE =
           OpsShardReadinessCandidateDocumentRoutePaths

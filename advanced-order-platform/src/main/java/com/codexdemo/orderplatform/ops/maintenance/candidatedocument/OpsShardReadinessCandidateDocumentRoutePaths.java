@@ -1,5 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.candidatedocument;
 
+import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateintakepreflight.OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths;
 
@@ -12,7 +13,8 @@ public final class OpsShardReadinessCandidateDocumentRoutePaths {
           "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-candidate-document-request-package";
   public static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CATALOG =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-candidate-intake-preflight-catalog";
+          OpsShardReadinessComparedEvidenceCandidateIntakePreflightRoutePaths
+              .COMPARED_EVIDENCE_CANDIDATE_INTAKE_PREFLIGHT_CATALOG;
   public static final String CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF =
       "/candidate-document-request-package-handoff";
   public static final String CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK =

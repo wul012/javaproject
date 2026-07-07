@@ -2,6 +2,24 @@
 
 鏈」鐩殑鐗堟湰鍖栬瘉鎹互 git tag 涓烘潈濞佹潵婧愩€侻aven artifact 褰撳墠淇濇寔
 `0.1.0-SNAPSHOT`锛屽洜涓烘湰浠撳簱浠嶅鍦ㄩ珮棰戝伐绋嬫紨杩涢樁娈碉紝灏氭湭鍒囨崲鍒拌涔夊寲鍒跺搧鍙戝竷銆?姣忎釜鍙拷婧増鏈繀椤绘湁瀵瑰簲 git tag銆佹彁浜ゃ€佹祴璇曡瘉鎹拰蹇呰鐨勪腑鏂囦唬鐮佽瑙ｃ€?
+## v1833 - Compared evidence candidate intake preflight extraction
+
+- Moved the `ComparedEvidenceCandidateIntakePreflight` implementation into
+  `ops.maintenance.comparedevidencecandidateintakepreflight` while retaining the
+  Spring controller in the root `ops` package.
+- Added a public candidate-intake-preflight route owner and delegated the root
+  route aggregator to it without changing endpoint suffix bytes. The historical
+  CandidateDocument catalog-suffix exposure now delegates to the same owner.
+- Folded the standalone GateCatalog into GuardCatalog to offset the new route
+  owner and keep total `ops` Java files at 1,352.
+- Updated ProfileSection readers to import the moved intake-preflight service
+  and response, kept candidate-blueprint endpoint reads explicit through the
+  v1832 route owner, and relocated the SpotBugs response FQN.
+- Tightened the live root census from 819 to 805 and the remaining movable
+  backlog from 714 to 700, then recorded the fifth-batch checkpoint.
+- Added the v1833 extraction note, census update, readability guard coverage,
+  progress evidence, and Chinese walkthrough.
+
 ## v1832 - Compared evidence candidate blueprint extraction
 
 - Moved the `ComparedEvidenceCandidateBlueprint` implementation into

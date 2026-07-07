@@ -296,7 +296,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateIntakePreflightResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateintakepreflight.OpsShardReadinessComparedEvidenceCandidateIntakePreflightResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1648,7 +1648,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceCandidateIntakePreflightResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateintakepreflight.OpsShardReadinessComparedEvidenceCandidateIntakePreflightResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />

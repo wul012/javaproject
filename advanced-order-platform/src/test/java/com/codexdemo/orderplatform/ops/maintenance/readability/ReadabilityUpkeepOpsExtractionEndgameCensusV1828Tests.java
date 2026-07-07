@@ -38,12 +38,13 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
     String census = read(CENSUS);
 
     assertThat(readme)
-        .contains("extraction-endgame-census-v1828.md", "874", "105", "769", "819", "714");
+        .contains(
+            "extraction-endgame-census-v1828.md", "874", "105", "769", "819", "714", "805", "700");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **819**",
+            "Current direct-root Java files: **805**",
             "Target final direct-root Java files: **105**",
-            "Remaining direct-root non-controller files to move or collapse: **714**",
+            "Remaining direct-root non-controller files to move or collapse: **700**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -74,7 +75,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(819);
+    assertThat(fileNames).hasSize(805);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -86,7 +87,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(105);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(714);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(700);
   }
 
   @Test
@@ -193,7 +194,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             matches("^OpsShardReadinessComparedEvidenceCandidateBlueprint")),
         new Bucket(
             "ComparedEvidenceCandidateIntakePreflight",
-            14,
+            0,
             matches("^OpsShardReadinessComparedEvidenceCandidateIntakePreflight")),
         new Bucket(
             "ComparedEvidenceEvaluationPreflight",
