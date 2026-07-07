@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1831, with the original v1828 baseline retained
+- Repository state: live after v1832, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **833**.
+- Current direct-root Java files: **819**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **728**.
+- Remaining direct-root non-controller files to move or collapse: **714**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-833 current root files - 105 final root files = 728 files still to move
+819 current root files - 105 final root files = 714 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -65,7 +65,7 @@ when names overlap, for example controllers inside a large family prefix.
 | ReleaseApproval shared support | 2 | Move into release-approval shared support; not root. |
 | OperatorEvidenceValueSupplyAdapterPreflight | 0 | Moved in v1830. |
 | OperatorEvidenceValueSupply base | 0 | Moved in v1831. |
-| ComparedEvidenceCandidateBlueprint | 14 | Move as compared-evidence candidate blueprint. |
+| ComparedEvidenceCandidateBlueprint | 0 | Moved in v1832. |
 | ComparedEvidenceCandidateIntakePreflight | 14 | Move as compared-evidence candidate intake preflight. |
 | ComparedEvidenceEvaluationPreflight | 14 | Move as compared-evidence evaluation preflight. |
 | ComparedPackageReview | 16 | Move after compared evidence packages expose endpoint boundaries. |
@@ -80,7 +80,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
 | Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
 
-The counted buckets sum to **833** and leave zero unassigned files. The original
+The counted buckets sum to **819** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -151,7 +151,23 @@ falls from **743 to 728**. Total `ops` Java files stay at **1,352** because this
 batch moves implementation ownership without adding a compensating root file.
 
 The next low-coupling buckets are the compared-evidence chain:
-`ComparedEvidenceCandidateBlueprint`, `ComparedEvidenceCandidateIntakePreflight`,
+`ComparedEvidenceCandidateIntakePreflight`,
+`ComparedEvidenceEvaluationPreflight`, and `ComparedPackageReview`.
+
+## v1832 progress
+
+v1832 moves the `ComparedEvidenceCandidateBlueprint` implementation bucket into
+`ops.maintenance.comparedevidencecandidateblueprint`. The public blueprint
+controller stays in root. The new route owner contains both the five suffix
+constants and the five full endpoint constants formerly carried by the old
+EndpointRefs helper, so total `ops` Java files stay at **1,352** instead of
+growing by one.
+
+The live direct-root count falls from **833 to 819**, while the final root
+target remains **105** and the remaining direct-root non-controller backlog
+falls from **728 to 714**. The `ComparedEvidenceCandidateBlueprint` bucket is
+now zero. The next compared-evidence chain buckets are
+`ComparedEvidenceCandidateIntakePreflight`,
 `ComparedEvidenceEvaluationPreflight`, and `ComparedPackageReview`.
 
 ## Revision rule
