@@ -20,6 +20,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1826Tests {
           Path.of("maintenance", "signedapprovaldrafttextpackageprofilesection"));
   private static final Path SIGNED_APPROVAL_ROUTE_ROOT =
       OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "signedapproval"));
+  private static final Path PROFILE_SECTION_HANDOFF_SOURCE_ROOT =
+      OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "signedapprovaldraftprofilesectionhandoff"));
   private static final Path EXTRACTION_NOTE =
       DOCS_ROOT.resolve("signed-approval-draft-text-package-profile-section-extraction-v1826.md");
   private static final List<String> SAMPLE_RELOCATED_FILES =
@@ -81,12 +83,17 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1826Tests {
   }
 
   @Test
-  void remainingProfileSectionHandoffLayerStaysAvailableForNextVersion() {
+  void remainingProfileSectionHandoffLayerWasClosedByFollowupExtraction() {
     assertThat(
             Files.isRegularFile(
-                OPS_SOURCE_ROOT.resolve(
+                PROFILE_SECTION_HANDOFF_SOURCE_ROOT.resolve(
                     "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService.java")))
         .isTrue();
+    assertThat(
+            Files.exists(
+                OPS_SOURCE_ROOT.resolve(
+                    "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService.java")))
+        .isFalse();
   }
 
   @Test
@@ -97,7 +104,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1826Tests {
                   .filter(Files::isRegularFile)
                   .filter(path -> path.getFileName().toString().endsWith(".java"))
                   .count())
-          .isLessThanOrEqualTo(874);
+          .isLessThanOrEqualTo(864);
     }
   }
 

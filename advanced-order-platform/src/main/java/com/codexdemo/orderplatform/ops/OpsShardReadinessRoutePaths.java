@@ -992,7 +992,8 @@ final class OpsShardReadinessRoutePaths {
       OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
           .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY;
   static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF =
-      OpsShardReadinessCandidateDocumentRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF;
+      OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
+          .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF;
   static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
       OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths
           .SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;

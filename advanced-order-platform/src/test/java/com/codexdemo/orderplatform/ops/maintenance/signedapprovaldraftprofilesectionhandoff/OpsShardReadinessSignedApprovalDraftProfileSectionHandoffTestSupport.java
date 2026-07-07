@@ -1,17 +1,17 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff;
 
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSupport;
 
-final class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport {
+public final class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport {
 
   private OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport() {}
 
-  static OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService service() {
+  public static OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService service() {
     return new OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService(
         OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSupport.service());
   }
 
-  static OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse handoff() {
+  public static OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse handoff() {
     return service().handoff();
   }
 }

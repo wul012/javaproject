@@ -37,7 +37,8 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
     String readme = read(DOCS_ROOT.resolve("README.md"));
     String census = read(CENSUS);
 
-    assertThat(readme).contains("extraction-endgame-census-v1828.md", "874", "105", "769");
+    assertThat(readme)
+        .contains("extraction-endgame-census-v1828.md", "874", "105", "769", "864", "759");
     assertThat(census)
         .contains(
             "Current direct-root Java files: **874**",
@@ -73,7 +74,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(874);
+    assertThat(fileNames).hasSize(864);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -85,7 +86,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(105);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(769);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(759);
   }
 
   @Test
@@ -201,7 +202,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         new Bucket("ComparedPackageReview", 16, matches("^OpsShardReadinessComparedPackageReview")),
         new Bucket(
             "SignedApprovalDraftProfileSection",
-            10,
+            0,
             matches("^OpsShardReadinessSignedApprovalDraftProfileSection")),
         new Bucket(
             "V1Contract consumer/alignment snapshots", 42, matches("^OpsShardReadinessV1Contract")),

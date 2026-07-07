@@ -1,5 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -10,8 +11,9 @@ public class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService {
 
   static final String RESPONSE_VERSION = "Java v1262";
   static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF;
+      OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths.BASE_PATH
+          + OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
+              .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF;
   static final String PROFILE =
       "java-shard-readiness-signed-approval-draft-profile-section-handoff.v1";
 

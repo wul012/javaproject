@@ -90,7 +90,10 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1825Tests {
     assertThat(
             Files.isRegularFile(
                 OPS_SOURCE_ROOT.resolve(
-                    "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService.java")))
+                    Path.of(
+                        "maintenance",
+                        "signedapprovaldraftprofilesectionhandoff",
+                        "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService.java"))))
         .isTrue();
   }
 
@@ -102,7 +105,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1825Tests {
                   .filter(Files::isRegularFile)
                   .filter(path -> path.getFileName().toString().endsWith(".java"))
                   .count())
-          .isLessThanOrEqualTo(887);
+          .isLessThanOrEqualTo(864);
     }
   }
 

@@ -104,6 +104,27 @@ Recommended near-term order:
 Every five extraction batches after this census need a checkpoint review unless
 the user explicitly changes the review cadence.
 
+## v1829 progress
+
+v1829 closes the remaining `SignedApprovalDraftProfileSection` handoff layer by
+moving ten non-controller files into
+`ops.maintenance.signedapprovaldraftprofilesectionhandoff`. The two public
+ProfileSection controllers stay in root. The live direct-root count falls from
+**874 to 864**, while the final root target remains **105** and the remaining
+direct-root non-controller backlog falls from **769 to 759**.
+
+The reviewer census command is now committed as:
+
+```powershell
+.\scripts\ops-root-census.ps1
+```
+
+Repository path: `scripts/ops-root-census.ps1`.
+
+Use that command from the `advanced-order-platform` project root to reproduce
+the same direct-root count, retained-root count, remaining movable count, bucket
+table, and unassigned-file check used by the Java final-push extraction series.
+
 ## Revision rule
 
 The final root target may only move downward. Raising the target above **105**

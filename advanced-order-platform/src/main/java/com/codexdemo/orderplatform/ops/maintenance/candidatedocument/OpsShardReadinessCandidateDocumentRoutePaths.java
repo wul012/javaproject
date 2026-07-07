@@ -30,7 +30,8 @@ public final class OpsShardReadinessCandidateDocumentRoutePaths {
       OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
           .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY;
   public static final String SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF =
-      "/signed-approval-draft-profile-section-handoff";
+      OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
+          .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF;
   public static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
       OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths
           .SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;

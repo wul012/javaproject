@@ -4,6 +4,22 @@
 `0.1.0-SNAPSHOT`，因为本仓库仍处在高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1829 - Signed approval draft profile section handoff extraction
+
+- Closed the third ProfileSection extraction by moving ten
+  `SignedApprovalDraftProfileSectionHandoff` implementation files into
+  `ops.maintenance.signedapprovaldraftprofilesectionhandoff`.
+- Kept the handoff and registry Spring controllers in root, moved the handoff
+  route suffix to the signed-approval ProfileSection route owner, and preserved
+  the byte-identical handoff HTTP path through root and candidate-document
+  delegation. Direct root `ops` Java files fall from 874 to 864 while total
+  `ops` Java files stay at 1,352.
+- Added `scripts/ops-root-census.ps1` so the final-push endgame census can be
+  reproduced with one command, then recorded v1829 progress as remaining
+  movable root files fall from 769 to 759.
+- Added the v1829 extraction note, readability guard coverage, SpotBugs FQN
+  relocation, progress evidence, and Chinese walkthrough.
+
 ## v1828 - Ops extraction endgame census
 
 - Added the Java final-push Phase 1 endgame census for the remaining direct-root

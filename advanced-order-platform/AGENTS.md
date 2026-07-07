@@ -1,23 +1,24 @@
 # advanced-order-platform Agent Notes
 
+## Current State (single source of truth)
+
+Update this table instead of appending relative-time rules below. Where an older section conflicts with this table, this table wins.
+
+| Item | Current |
+|---|---|
+| Active screenshot archive root | `f/v<start>-v<end>/<version>/images/` + `.../explanations/summary.md` (range segment first) |
+| Active walkthrough volume | newest `代码讲解记录_生产雏形阶段N/` sibling (currently `代码讲解记录_生产雏形阶段6/`) |
+| Active cross-project program | `D:\C\四项目理解统筹\AGENTS.md` → Current Active Program |
+| Progress ledger | `docs/production-excellence-progress.md` |
+| Session bootstrap | run `.\scripts\codex-bootstrap.ps1` at session start (git/tag/CI/pointers in one command) |
+| Frozen history (never move) | `a/`, `b/`, `c/`, `d/`, `d_runtime_screenshot_archive_next/`, older walkthrough volumes |
+
 ## Four-Project Research Rules
 
 For cross-project research, quality evaluation, and planning, use `[MODE: RESEARCH]`.
 Prefer read-only inspection, evidence-backed summaries, and clear separation between facts, judgments, and recommendations.
 
-Developer capability baseline across Node/Java/mini-kv/aiproj:
-
-| Dimension | Rating |
-|---|---|
-| Architecture design | A- |
-| Multi-language engineering | A |
-| Test engineering | B+ |
-| Output speed | S |
-| Refactoring and debt management | B |
-| Security and compliance awareness | A |
-| Engineering discipline and restraint | C+ |
-
-Core judgment: high-output, strong-design, multi-stack developer with good safety awareness; main growth area is knowing when to stop, refactor, and trade about 30% speed for restraint.
+The capability baseline table lives ONLY in `D:\C\四项目理解统筹\AGENTS.md` (single source of truth) — read it there instead of keeping a copy here. One-line summary: high-output, strong-design, multi-stack developer; the growth area is restraint.
 
 Evaluation rules:
 - Praise speed, architecture, multi-language execution, and safety awareness, but do not overstate production readiness.
@@ -42,8 +43,7 @@ When the user says to continue, advance, or push the project, treat it as Java w
 
 Before starting a new Java version:
 
-- Read the latest active Node plan under `D:\nodeproj\orderops-node\docs\plans2` first, then fall back to
-  `D:\nodeproj\orderops-node\docs\plans` only when `plans2` has no relevant active plan.
+- First check `D:\C\四项目理解统筹\AGENTS.md` → Current Active Program: if a program brief is active there, it takes precedence. Otherwise read the latest active Node plan under `D:\nodeproj\orderops-node\docs\plans2`, falling back to `docs\plans`.
 - If the user names a Node version such as `v282`, locate and read that Node plan directly in the Node
   repository instead of relying only on Java-side mentions of that version.
 - If the latest plan is reasonable and the current recommended step is Java, execute it.
@@ -74,13 +74,6 @@ Do not place new screenshot or explanation files directly under `d/`, directly u
 `d_runtime_screenshot_archive_next/`, or directly under `f/`. Use a version-range segment first,
 then the version folder.
 
-Use this shape:
-
-```text
-d/<version>/解释/说明.md
-d/<version>/图片/*.png
-```
-
 Keep the old `a/`, `b/`, and `c/` folders as historical archives for earlier versions. `c/` is closed after Java v115. Do not move old `a/<version>`, `b/<version>`, or `c/<version>` records unless the user explicitly asks.
 
 When finishing a version, the final report should mention the `d/<version>` archive path.
@@ -106,13 +99,7 @@ and record the fallback in the explanation.
 
 ## Code Explanation Folder
 
-For new Java code explanation notes after v115, use the new stage-specific sibling folder instead of the older crowded folders:
-
-```text
-代码讲解记录_生产雏形阶段_续/
-```
-
-Keep the existing explanation style and numbered Markdown naming pattern. `代码讲解记录_生产雏形阶段/` is closed after `118-version-115-credential-resolver-approval-required-boundary-echo-refinement.md`. Do not move older `代码讲解记录/` or `代码讲解记录_生产雏形阶段/` files unless the user explicitly asks.
+Write new code explanation notes to the active walkthrough volume in the Current State table (the newest `代码讲解记录_生产雏形阶段N/` sibling). Write the walkthrough BEFORE the version's final `mvnw verify`, so the walkthrough-compliance gate runs against the final text (lesson promoted from v1799). Keep the existing explanation style and numbered Markdown naming pattern. `代码讲解记录_生产雏形阶段/` is closed after `118-version-115-credential-resolver-approval-required-boundary-echo-refinement.md`. Do not move older `代码讲解记录/` or `代码讲解记录_生产雏形阶段/` files unless the user explicitly asks.
 
 ## Document Expansion Rule
 
@@ -123,6 +110,14 @@ sequence. For the current Java docs, this means historical runtime/screenshot ex
 in `d/`, the v1759-v1763 transition stays in `d_runtime_screenshot_archive_next/`, new
 screenshot/explanation work continues in `f/`, and code explanation notes continue in the active
 `代码讲解记录*` continuation folders.
+
+## Program Discipline (promoted 2026-07-06)
+
+- Remote verification policy: after push, confirm the CI run is queued/started with a quick `gh run list` (seconds), but do not block on `gh run watch` for intermediate versions of a multi-version batch. Check the previous version's run conclusion at the start of the next version; if it failed, fixing CI becomes the immediate next task. Block-watch only the final version of a batch or when the user asks.
+- Evidence economy: text evidence first (logs, JSON summaries, transcripts); screenshots only where a visual actually proves something or for closeout versions. Archive growth is budgeted.
+- Progress-ledger rows: at most ~3 lines per version; details live in `docs/ops/` extraction docs or archive files, the row keeps a pointer.
+- Lesson promotion: when the same deviation or workaround is recorded twice, promote it into this file as a rule instead of recording it a third time.
+- Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
 
 ## Docker Shutdown Fast Path
 
