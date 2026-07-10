@@ -1,17 +1,21 @@
 package com.codexdemo.orderplatform.ops;
 
-final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport {
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport;
 
-    private OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport() {
-    }
+final
+class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport {
 
-    static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService service() {
-        return new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService(
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport.service()
-        );
-    }
+  private
+  OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport() {}
 
-    static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse registry() {
-        return service().registry();
-    }
+  static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService
+      service() {
+    return new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService(
+        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport.service());
+  }
+
+  static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse
+      registry() {
+    return service().registry();
+  }
 }

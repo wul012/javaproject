@@ -1,17 +1,17 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment;
 
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport;
 
-final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport {
+public final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport {
 
   private OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport() {}
 
-  static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService service() {
+  public static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService service() {
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService(
         OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport.service());
   }
 
-  static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse registry() {
+  public static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse registry() {
     return service().registry();
   }
 }

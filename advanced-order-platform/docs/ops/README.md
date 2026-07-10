@@ -59,6 +59,7 @@ package.
 | `compared-package-review-extraction-v1838.md` | thirty-fifth ops extraction | How did ComparedPackageReview move into ops.maintenance.comparedpackagereview while root files fell from 805 to 789, remaining movable root files fell to 684, and EvaluationPreflight gained a public route boundary? |
 | `compared-evidence-evaluation-preflight-extraction-v1839.md` | thirty-sixth ops extraction | How did EvaluationPreflight consume the v1838 review boundary, move into ops.maintenance.comparedevidenceevaluationpreflight, and lower root files from 789 to 775 with 670 movable files left? |
 | `release-acceptance-route-path-split-base-closeout-extraction-v1840.md` | thirty-seventh ops extraction | How did the 24-file base/closeout layer and shared route owner move while root fell from 775 to 751, movable files fell to 646, and the remaining split bucket fell to 55? |
+| `release-acceptance-route-path-split-sustainment-extraction-v1841.md` | thirty-eighth ops extraction | How did the 19-file sustainment layer consume v1840 closeout, move into its own subpackage, lower root from 751 to 732, lower movable files from 646 to 627, and leave 36 split files? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary
