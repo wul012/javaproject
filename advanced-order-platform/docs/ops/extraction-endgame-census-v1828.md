@@ -10,9 +10,9 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **789**.
+- Current direct-root Java files: **775**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **684**.
+- Remaining direct-root non-controller files to move or collapse: **670**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-789 current root files - 105 final root files = 684 files still to move
+775 current root files - 105 final root files = 670 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -67,7 +67,7 @@ when names overlap, for example controllers inside a large family prefix.
 | OperatorEvidenceValueSupply base | 0 | Moved in v1831. |
 | ComparedEvidenceCandidateBlueprint | 0 | Moved in v1832. |
 | ComparedEvidenceCandidateIntakePreflight | 0 | Moved in v1833. |
-| ComparedEvidenceEvaluationPreflight | 14 | Move as compared-evidence evaluation preflight. |
+| ComparedEvidenceEvaluationPreflight | 0 | Moved in v1839. |
 | ComparedPackageReview | 0 | Moved in v1838. |
 | SignedApprovalDraftProfileSection | 0 | Finished in v1829. |
 | V1Contract consumer/alignment snapshots | 42 | Move into a v1-contract package while preserving endpoint bytes. |
@@ -205,6 +205,22 @@ target remains **105** and the remaining direct-root non-controller backlog
 falls from **700 to 684**. Total `ops` Java files remain at **1,352**, the
 `ComparedPackageReview` bucket is zero, and the census reports no unassigned
 files.
+
+## v1839 progress
+
+v1839 moves the fourteen non-controller
+`ComparedEvidenceEvaluationPreflight` implementation files into
+`ops.maintenance.comparedevidenceevaluationpreflight`; the public Spring
+controller remains in root. The former public `EndpointRefs` becomes the sole
+family RoutePaths owner without adding a file. CandidateBlueprint and
+ProfileSection readers import the moved endpoint, service, and response
+boundaries, while the moved rule catalogs consume the v1838
+ComparedPackageReview route owner.
+
+The live direct-root count falls from **789 to 775**, the final target remains
+**105**, and the remaining direct-root non-controller backlog falls from
+**684 to 670**. Total `ops` Java files remain at **1,352**, both compared-family
+buckets are zero, and the census reports no unassigned files.
 
 ## Revision rule
 

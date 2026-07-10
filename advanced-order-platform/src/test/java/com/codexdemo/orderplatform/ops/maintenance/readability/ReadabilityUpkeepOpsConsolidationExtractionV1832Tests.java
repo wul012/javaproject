@@ -204,11 +204,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1832Tests {
   }
 
   @Test
-  void outboundEvaluationPreflightEndpointRefsStayReadOnlyAndPublic() throws IOException {
-    String endpointRefs =
+  void outboundEvaluationPreflightRouteOwnerStaysReadOnlyAndPublic() throws IOException {
+    String routeOwner =
         read(
             OPS_SOURCE_ROOT.resolve(
-                "OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.java"));
+                Path.of(
+                    "maintenance",
+                    "comparedevidenceevaluationpreflight",
+                    "OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.java")));
     String comparisonSection =
         read(
             BLUEPRINT_PACKAGE_ROOT.resolve(
@@ -218,9 +221,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1832Tests {
             BLUEPRINT_PACKAGE_ROOT.resolve(
                 "OpsShardReadinessComparedEvidenceCandidateBlueprintCloseoutSectionCatalog.java"));
 
-    assertThat(endpointRefs)
+    assertThat(routeOwner)
         .contains(
-            "public final class OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs",
+            "public final class OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths",
             "public static final String CATALOG",
             "public static final String SOURCE_ARTIFACT",
             "public static final String IDENTITY_DIGEST",
@@ -228,12 +231,12 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1832Tests {
             "public static final String EXCLUSION_CLOSEOUT");
     assertThat(comparisonSection)
         .contains(
-            "com.codexdemo.orderplatform.ops."
-                + "OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs");
+            "com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight."
+                + "OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths");
     assertThat(closeoutSection)
         .contains(
-            "com.codexdemo.orderplatform.ops."
-                + "OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs");
+            "com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight."
+                + "OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths");
   }
 
   @Test

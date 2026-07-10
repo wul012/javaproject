@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs;
+import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths;
 import java.util.List;
 
 final class OpsShardReadinessComparedEvidenceCandidateBlueprintPolicySectionCatalog {
@@ -16,7 +16,7 @@ final class OpsShardReadinessComparedEvidenceCandidateBlueprintPolicySectionCata
             "policy",
             "policy assertion, execution lock",
             "policy lock reviewer",
-            OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.POLICY_RUNTIME,
+            OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.POLICY_RUNTIME,
             "block-missing-policy-execution-lock"),
         OpsShardReadinessComparedEvidenceCandidateBlueprintSupport.section(
             "approval-archive-separation",
@@ -24,7 +24,7 @@ final class OpsShardReadinessComparedEvidenceCandidateBlueprintPolicySectionCata
             "policy",
             "approval grant separation, archive reference",
             "policy lock reviewer",
-            OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.POLICY_RUNTIME,
+            OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.POLICY_RUNTIME,
             "block-missing-approval-archive-separation"));
   }
 }

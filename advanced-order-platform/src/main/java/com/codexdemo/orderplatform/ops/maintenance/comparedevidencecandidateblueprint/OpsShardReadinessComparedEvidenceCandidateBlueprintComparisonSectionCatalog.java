@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs;
+import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths;
 import java.util.List;
 
 final class OpsShardReadinessComparedEvidenceCandidateBlueprintComparisonSectionCatalog {
@@ -16,7 +16,7 @@ final class OpsShardReadinessComparedEvidenceCandidateBlueprintComparisonSection
             "comparison",
             "offline comparison result, mismatch summary",
             "manual comparison reviewer",
-            OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.CATALOG,
+            OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.CATALOG,
             "block-missing-offline-comparison-result"),
         OpsShardReadinessComparedEvidenceCandidateBlueprintSupport.section(
             "identity-digest-lineage",
@@ -24,7 +24,7 @@ final class OpsShardReadinessComparedEvidenceCandidateBlueprintComparisonSection
             "comparison",
             "identity binding, digest lineage",
             "identity digest reviewer",
-            OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.IDENTITY_DIGEST,
+            OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.IDENTITY_DIGEST,
             "block-missing-identity-digest-lineage"),
         OpsShardReadinessComparedEvidenceCandidateBlueprintSupport.section(
             "signature-envelope-metadata",
@@ -32,7 +32,7 @@ final class OpsShardReadinessComparedEvidenceCandidateBlueprintComparisonSection
             "comparison",
             "signature envelope metadata, detached signature observation",
             "identity digest reviewer",
-            OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.IDENTITY_DIGEST,
+            OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.IDENTITY_DIGEST,
             "block-missing-signature-envelope-metadata"));
   }
 }

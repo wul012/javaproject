@@ -39,12 +39,12 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
 
     assertThat(readme)
         .contains(
-            "extraction-endgame-census-v1828.md", "874", "105", "769", "805", "700", "789", "684");
+            "extraction-endgame-census-v1828.md", "874", "105", "769", "789", "684", "775", "670");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **789**",
+            "Current direct-root Java files: **775**",
             "Target final direct-root Java files: **105**",
-            "Remaining direct-root non-controller files to move or collapse: **684**",
+            "Remaining direct-root non-controller files to move or collapse: **670**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -75,7 +75,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(789);
+    assertThat(fileNames).hasSize(775);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -87,7 +87,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(105);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(684);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(670);
   }
 
   @Test
@@ -198,7 +198,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             matches("^OpsShardReadinessComparedEvidenceCandidateIntakePreflight")),
         new Bucket(
             "ComparedEvidenceEvaluationPreflight",
-            14,
+            0,
             matches("^OpsShardReadinessComparedEvidenceEvaluationPreflight")),
         new Bucket("ComparedPackageReview", 0, matches("^OpsShardReadinessComparedPackageReview")),
         new Bucket(

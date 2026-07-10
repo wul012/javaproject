@@ -57,6 +57,7 @@ package.
 | `compared-evidence-candidate-blueprint-extraction-v1832.md` | thirty-third ops extraction | How did ComparedEvidenceCandidateBlueprint move into ops.maintenance.comparedevidencecandidateblueprint while root files fell from 833 to 819 and remaining movable root files fell to 714? |
 | `compared-evidence-candidate-intake-preflight-extraction-v1833.md` | thirty-fourth ops extraction | How did ComparedEvidenceCandidateIntakePreflight move into ops.maintenance.comparedevidencecandidateintakepreflight while root files fell from 819 to 805 and remaining movable root files fell to 700? |
 | `compared-package-review-extraction-v1838.md` | thirty-fifth ops extraction | How did ComparedPackageReview move into ops.maintenance.comparedpackagereview while root files fell from 805 to 789, remaining movable root files fell to 684, and EvaluationPreflight gained a public route boundary? |
+| `compared-evidence-evaluation-preflight-extraction-v1839.md` | thirty-sixth ops extraction | How did EvaluationPreflight consume the v1838 review boundary, move into ops.maintenance.comparedevidenceevaluationpreflight, and lower root files from 789 to 775 with 670 movable files left? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

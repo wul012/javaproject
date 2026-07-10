@@ -1,5 +1,6 @@
 package com.codexdemo.orderplatform.ops;
 
+import static com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.*;
 import static com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShardReadinessComparedPackageReviewRoutePaths.*;
 
 import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths;
@@ -278,7 +279,6 @@ final class OpsShardReadinessRoutePaths {
       OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CI_BUDGET;
   static final String MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT =
       OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CLOSEOUT;
-
   static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG =
       OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
           .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG;
@@ -315,7 +315,6 @@ final class OpsShardReadinessRoutePaths {
   static final String OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT =
       OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
           .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CLOSEOUT;
-
   static final String OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG =
       OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG;
   static final String OPERATOR_EVIDENCE_VALUE_DRAFT_SLOT_TEMPLATE =
@@ -952,19 +951,19 @@ final class OpsShardReadinessRoutePaths {
           COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_CATALOG =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-catalog";
+          COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_CATALOG;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_SOURCE_ARTIFACT =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-source-artifact";
+          COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_SOURCE_ARTIFACT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_IDENTITY_DIGEST =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-identity-digest";
+          COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_IDENTITY_DIGEST;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_POLICY_RUNTIME =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-policy-runtime";
+          COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_POLICY_RUNTIME;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_EXCLUSION_CLOSEOUT =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-exclusion-closeout";
+          COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_EXCLUSION_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CATALOG =
           OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths

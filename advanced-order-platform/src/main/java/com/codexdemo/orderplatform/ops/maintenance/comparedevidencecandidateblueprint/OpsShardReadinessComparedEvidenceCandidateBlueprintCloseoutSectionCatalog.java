@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs;
+import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths;
 import java.util.List;
 
 final class OpsShardReadinessComparedEvidenceCandidateBlueprintCloseoutSectionCatalog {
@@ -16,7 +16,7 @@ final class OpsShardReadinessComparedEvidenceCandidateBlueprintCloseoutSectionCa
             "closeout",
             "secret exclusion, synthetic exclusion, runtime exclusion, sibling mutation exclusion",
             "archive closeout owner",
-            OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.EXCLUSION_CLOSEOUT,
+            OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.EXCLUSION_CLOSEOUT,
             "block-missing-exclusion-boundary"),
         OpsShardReadinessComparedEvidenceCandidateBlueprintSupport.section(
             "candidate-blueprint-closeout",
@@ -24,7 +24,7 @@ final class OpsShardReadinessComparedEvidenceCandidateBlueprintCloseoutSectionCa
             "closeout",
             "reviewer traceability, candidate blueprint closeout",
             "archive closeout owner",
-            OpsShardReadinessComparedEvidenceEvaluationPreflightEndpointRefs.EXCLUSION_CLOSEOUT,
+            OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.EXCLUSION_CLOSEOUT,
             "block-missing-candidate-blueprint-closeout"));
   }
 }
