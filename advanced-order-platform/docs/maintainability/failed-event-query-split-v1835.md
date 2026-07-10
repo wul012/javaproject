@@ -40,3 +40,5 @@
 第一次全量 verify 的 1682 个测试与 JaCoCo 全部通过，SpotBugs 随后发现搬出的排序表达式调用了未指定 Locale 的 `toLowerCase()`。本版没有加入排除项，而是改为 `Locale.ROOT`，使 `asc`/`desc` 输出不依赖运行机器默认地区；修复后重新执行完整 verify。
 
 修复后的最终全量 `mvnw verify` 在 10 分 58 秒内通过：1682 个测试，0 失败、0 错误、0 跳过；JaCoCo 全部覆盖率门达标；SpotBugs `BugInstance=0`、`Error=0`；Spotless 保持清洁。
+
+远端 GitHub Actions run `29063754021` 对实现提交 `db373a41` 独立复现成功：`Build and headless regression` 用时 16 分 59 秒，完成 Spotless ratchet、无 Docker 全量 verify、生产配置启动冒烟与 JaCoCo 报告上传；`Docker-tagged integration tests` 用时 2 分 7 秒并通过。本版由 tag `v1835-order-platform-production-excellence-failed-event-query-responsibility-split` 固定证据边界。
