@@ -9,3 +9,6 @@ largest files from silently growing again.
   and the first four-version optimization sequence.
 - `failed-event-query-split-v1835.md`: query orchestration, JPA specifications,
   page/sort validation, behavior evidence, and tightened budgets.
+- `failed-event-command-split-v1836.md`: transactional facade, dead-letter
+  recording, management, replay approval, replay execution, and tightened
+  command-side dependency boundaries.

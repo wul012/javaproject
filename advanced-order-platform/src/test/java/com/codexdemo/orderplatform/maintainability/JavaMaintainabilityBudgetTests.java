@@ -28,7 +28,7 @@ class JavaMaintainabilityBudgetTests {
     SourceMetrics metrics = measure(MAIN_ROOT);
 
     assertThat(metrics.maxLines()).isLessThanOrEqualTo(1530);
-    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(39);
+    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(38);
     assertThat(metrics.filesOver750Lines()).isLessThanOrEqualTo(4);
     assertThat(metrics.filesOver1000Lines()).isLessThanOrEqualTo(2);
   }
@@ -103,7 +103,21 @@ class JavaMaintainabilityBudgetTests {
     caps.put("src/main/java/com/codexdemo/orderplatform/ops/OpsEvidenceService.java", 1530L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/notification/FailedEventMessageService.java",
-        662L);
+        199L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventRecorder.java", 71L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventManagementService.java",
+        89L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventReplayApprovalService.java",
+        129L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventReplayService.java",
+        222L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventCommandSupport.java",
+        33L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/notification/FailedEventQueryService.java",
         310L);

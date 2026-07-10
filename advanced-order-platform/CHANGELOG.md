@@ -2,6 +2,20 @@
 
 鏈」鐩殑鐗堟湰鍖栬瘉鎹互 git tag 涓烘潈濞佹潵婧愩€侻aven artifact 褰撳墠淇濇寔
 `0.1.0-SNAPSHOT`锛屽洜涓烘湰浠撳簱浠嶅鍦ㄩ珮棰戝伐绋嬫紨杩涢樁娈碉紝灏氭湭鍒囨崲鍒拌涔夊寲鍒跺搧鍙戝竷銆?姣忎釜鍙拷婧増鏈繀椤绘湁瀵瑰簲 git tag銆佹彁浜ゃ€佹祴璇曡瘉鎹拰蹇呰鐨勪腑鏂囦唬鐮佽瑙ｃ€?
+## v1836 - Failed-event command responsibility split
+
+- Kept `FailedEventMessageService` as the only public transactional facade while
+  moving dead-letter recording, management, approval, and replay execution into
+  package-private components.
+- Replaced parallel replay strings with an immutable effective-event value and
+  kept RabbitMQ headers, attempt persistence, validation errors, and operator
+  authorization behavior unchanged.
+- Reduced the facade from 662 to 199 lines; the five new collaborators are 71,
+  89, 129, 222, and 33 lines, with no new public API.
+- Tightened the production count above 500 lines from 39 to 38 and added a
+  structural dependency gate preventing repository or messaging infrastructure
+  from leaking back into the facade.
+
 ## v1835 - Failed-event query responsibility split
 
 - Preserved `FailedEventMessageService` as the public transactional facade while
