@@ -2,6 +2,19 @@
 
 鏈」鐩殑鐗堟湰鍖栬瘉鎹互 git tag 涓烘潈濞佹潵婧愩€侻aven artifact 褰撳墠淇濇寔
 `0.1.0-SNAPSHOT`锛屽洜涓烘湰浠撳簱浠嶅鍦ㄩ珮棰戝伐绋嬫紨杩涢樁娈碉紝灏氭湭鍒囨崲鍒拌涔夊寲鍒跺搧鍙戝竷銆?姣忎釜鍙拷婧増鏈繀椤绘湁瀵瑰簲 git tag銆佹彁浜ゃ€佹祴璇曡瘉鎹拰蹇呰鐨勪腑鏂囦唬鐮佽瑙ｃ€?
+## v1835 - Failed-event query responsibility split
+
+- Preserved `FailedEventMessageService` as the public transactional facade while
+  moving query orchestration into a package-private collaborator.
+- Split JPA specifications and page/sort validation into focused helpers without
+  changing filters, defaults, stable tie-break sorting, CSV output, or errors.
+- Reduced the former 1,126-line service to 662 lines; the three new collaborators
+  are 310, 159, and 103 lines, with no replacement giant class.
+- Tightened production hotspot counts above 750/1,000 lines from 5/3 to 4/2 and
+  added direct behavior plus architecture regression tests.
+- Promoted the exact line-count rule after discovering that PowerShell
+  `Measure-Object -Line` omits blank lines.
+
 ## v1834 - Java maintainability hotspot budget
 
 - Added a reproducible production/test Java source census with Windows

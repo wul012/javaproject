@@ -29,8 +29,8 @@ class JavaMaintainabilityBudgetTests {
 
     assertThat(metrics.maxLines()).isLessThanOrEqualTo(1530);
     assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(39);
-    assertThat(metrics.filesOver750Lines()).isLessThanOrEqualTo(5);
-    assertThat(metrics.filesOver1000Lines()).isLessThanOrEqualTo(3);
+    assertThat(metrics.filesOver750Lines()).isLessThanOrEqualTo(4);
+    assertThat(metrics.filesOver1000Lines()).isLessThanOrEqualTo(2);
   }
 
   @Test
@@ -103,7 +103,16 @@ class JavaMaintainabilityBudgetTests {
     caps.put("src/main/java/com/codexdemo/orderplatform/ops/OpsEvidenceService.java", 1530L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/notification/FailedEventMessageService.java",
-        1126L);
+        662L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventQueryService.java",
+        310L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventSearchSpecifications.java",
+        159L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/notification/FailedEventSearchPageSupport.java",
+        103L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessRoutePaths.java", 1111L);
     caps.put(

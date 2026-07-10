@@ -7,3 +7,5 @@ largest files from silently growing again.
 
 - `java-maintainability-program-v1834.md`: baseline, ratchets, failure rules,
   and the first four-version optimization sequence.
+- `failed-event-query-split-v1835.md`: query orchestration, JPA specifications,
+  page/sort validation, behavior evidence, and tightened budgets.

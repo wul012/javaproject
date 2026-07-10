@@ -118,6 +118,7 @@ screenshot/explanation work continues in `f/`, and code explanation notes contin
 - Progress-ledger rows: at most ~3 lines per version; details live in `docs/ops/` extraction docs or archive files, the row keeps a pointer.
 - Lesson promotion: when the same deviation or workaround is recorded twice, promote it into this file as a rule instead of recording it a third time.
 - Ledger closes with the version: update the progress-ledger row to its final state (including CI run id) in the same session as commit/tag/push. A row left saying "pending" after the push is a closeout violation (recurred at v1826 and v1833; promoted 2026-07-07).
+- Java line-count ratchets must use `scripts/java-maintainability-census.ps1` or an explicit `StreamReader.ReadLine()` loop. Do not use `Measure-Object -Line`; it omits blank lines and produced two false caps during v1835.
 - Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
 
 ## Docker Shutdown Fast Path
