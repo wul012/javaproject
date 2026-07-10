@@ -2,6 +2,18 @@
 
 鏈」鐩殑鐗堟湰鍖栬瘉鎹互 git tag 涓烘潈濞佹潵婧愩€侻aven artifact 褰撳墠淇濇寔
 `0.1.0-SNAPSHOT`锛屽洜涓烘湰浠撳簱浠嶅鍦ㄩ珮棰戝伐绋嬫紨杩涢樁娈碉紝灏氭湭鍒囨崲鍒拌涔夊寲鍒跺搧鍙戝竷銆?姣忎釜鍙拷婧増鏈繀椤绘湁瀵瑰簲 git tag銆佹彁浜ゃ€佹祴璇曡瘉鎹拰蹇呰鐨勪腑鏂囦唬鐮佽瑙ｃ€?
+## v1834 - Java maintainability hotspot budget
+
+- Added a reproducible production/test Java source census with Windows
+  long-path support and structured JSON output.
+- Added shrink-only aggregate budgets plus named caps for the five highest-risk
+  production files, making future giant-file growth a test failure.
+- Published the behavior-preserving v1834-v1837 optimization sequence and its
+  explicit failure conditions; no runtime route, schema, message, or storage
+  behavior changed.
+- Closed the stale v1833 progress row with commit, tag, and green CI evidence,
+  and retained the promoted same-session ledger-closeout rule.
+
 ## v1833 - Compared evidence candidate intake preflight extraction
 
 - Moved the `ComparedEvidenceCandidateIntakePreflight` implementation into
