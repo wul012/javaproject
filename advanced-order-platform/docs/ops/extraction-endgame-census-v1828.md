@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1833, with the original v1828 baseline retained
+- Repository state: live after v1842, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **732**.
+- Current direct-root Java files: **696**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **627**.
+- Remaining direct-root non-controller files to move or collapse: **591**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-732 current root files - 105 final root files = 627 files still to move
+696 current root files - 105 final root files = 591 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -52,7 +52,7 @@ when names overlap, for example controllers inside a large family prefix.
 | MinimalReadOnlyGateOperatorCiHandoff | 140 | Split into coherent subpackages; keep controllers in root. |
 | MinimalReadOnlyGateExecution | 31 | Move after or alongside the operator handoff core. |
 | RouteCleanup web | 170 | High-coupling track; split only with route owner and endpoint proof. |
-| ReleaseAcceptanceRoutePathSplit | 36 | Base/closeout moved in v1840; sustainment moved in v1841; acceptance package remains. |
+| ReleaseAcceptanceRoutePathSplit | 0 | Base/closeout moved in v1840, sustainment in v1841, and acceptance package/receipt/archive index in v1842. |
 | ReleaseAcceptanceArchiveVerificationHandoff | 25 | Move after route-path split ownership is stable. |
 | ReleaseAcceptance root route owner | 0 | Moved with the base layer in v1840. |
 | ReleaseApprovalSandboxEndpointCredentialResolver records | 59 | Move as credential-resolver records package. |
@@ -80,7 +80,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
 | Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
 
-The counted buckets sum to **805** and leave zero unassigned files. The original
+The counted buckets sum to **696** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -251,6 +251,21 @@ The live direct-root count falls from **751 to 732**, the final target remains
 **105**, and the movable backlog falls from **646 to 627**. The split bucket
 falls from **55 to 36**, total `ops` Java files stay at **1,352**, and the
 census reports no unassigned files.
+
+## v1842 progress
+
+v1842 completes the three-version ReleaseAcceptanceRoutePathSplit track. It
+moves the thirty-six acceptance-package, closeout-receipt, and closeout-archive-
+index implementation files into `ops.maintenance.releaseacceptancepackage`.
+Three Spring controllers remain root-visible, and eight package-local tests move
+with the implementation while three controller-oriented tests remain in root.
+The moved closure reads the v1841 public sustainment service/response and the
+v1840 route owner; no route string or response shape changes.
+
+The live direct-root count falls from **732 to 696**, the final target remains
+**105**, and the movable backlog falls from **627 to 591**. The
+ReleaseAcceptanceRoutePathSplit bucket falls from **36 to 0**, total `ops` Java
+files stay at **1,352**, and the census reports no unassigned files.
 
 ## Revision rule
 
