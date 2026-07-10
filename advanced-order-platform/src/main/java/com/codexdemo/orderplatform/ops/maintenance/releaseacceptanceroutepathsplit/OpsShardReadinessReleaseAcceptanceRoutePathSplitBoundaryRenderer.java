@@ -1,0 +1,17 @@
+package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
+
+import java.util.List;
+
+final class OpsShardReadinessReleaseAcceptanceRoutePathSplitBoundaryRenderer {
+
+  private OpsShardReadinessReleaseAcceptanceRoutePathSplitBoundaryRenderer() {}
+
+  static OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.MarkdownSection render(
+      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard> guards) {
+    return OpsShardReadinessReleaseAcceptanceRoutePathSplitRendererSupport.section(
+        "Boundary Guards",
+        guards.stream()
+            .map(guard -> "- " + guard.boundary() + " locked=" + guard.locked())
+            .toList());
+  }
+}

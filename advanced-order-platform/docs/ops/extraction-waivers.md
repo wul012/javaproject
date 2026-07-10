@@ -22,6 +22,6 @@ appear here.
 in v1828. They are treated as the two-file `OpsEvidence static release support`
 bucket and must move under shared evidence support during Phase 1.
 
-`OpsShardReadinessReleaseAcceptanceRoutePaths.java` is also not a waiver. It is
-a family route owner and must move with the release-acceptance route-path split
-track.
+`OpsShardReadinessReleaseAcceptanceRoutePaths.java` is also not a waiver. It
+moved with the v1840 release-acceptance route-path split base layer and must not
+return to root.

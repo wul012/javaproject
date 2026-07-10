@@ -13,6 +13,7 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflig
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive.OpsShardReadinessScreenshotExplanationArchiveRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftAuthoringReadinessRoutePaths;
@@ -36,9 +37,9 @@ import com.codexdemo.orderplatform.ops.maintenance.walkthrough.depth.OpsShardRea
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualityaudit.OpsShardReadinessCodeWalkthroughQualityAuditRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualitygate.OpsShardReadinessCodeWalkthroughQualityGateRoutePaths;
 
-final class OpsShardReadinessRoutePaths {
+public final class OpsShardReadinessRoutePaths {
 
-  static final String BASE_PATH = "/api/v1/ops/shard-readiness";
+  public static final String BASE_PATH = "/api/v1/ops/shard-readiness";
 
   static final String READ_ONLY_EVIDENCE_CATALOG = "/read-only-evidence-catalog";
   static final String READ_ONLY_EVIDENCE_CATALOG_HANDOFF = "/read-only-evidence-catalog-handoff";
@@ -46,7 +47,6 @@ final class OpsShardReadinessRoutePaths {
       "/read-only-evidence-catalog-handoff-verification";
   static final String READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY =
       "/read-only-endpoint-registry-integrity";
-
   static final String EVIDENCE_INDEX = "/evidence-index";
   static final String EVIDENCE_VERIFICATION = "/evidence-verification";
   static final String EVIDENCE_HANDOFF = "/evidence-handoff";
@@ -1032,40 +1032,41 @@ final class OpsShardReadinessRoutePaths {
   static final String SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY =
       OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRoutePaths
           .SIGNED_APPROVAL_DRAFT_TEXT_PACKAGE_PROFILE_SECTION_REGISTRY;
-  static final String MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY =
+  public static final String MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY;
-  static final String MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY =
+  public static final String MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths
           .MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY;
-  static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_REGISTRY =
+  public static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths
           .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_REGISTRY;
-  static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_VERIFICATION_REGISTRY =
-      OpsShardReadinessReleaseAcceptanceRoutePaths
-          .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_VERIFICATION_REGISTRY;
-  static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_REGISTRY =
+  public static final String
+      MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_VERIFICATION_REGISTRY =
+          OpsShardReadinessReleaseAcceptanceRoutePaths
+              .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_VERIFICATION_REGISTRY;
+  public static final String MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths
           .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_REGISTRY;
-  static final String
+  public static final String
       MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_REGISTRY =
           OpsShardReadinessReleaseAcceptanceRoutePaths
               .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_REGISTRY;
-  static final String
+  public static final String
       MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_REGISTRY =
           OpsShardReadinessReleaseAcceptanceRoutePaths
               .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_REGISTRY;
-  static final String
+  public static final String
       MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_REGISTRY =
           OpsShardReadinessReleaseAcceptanceRoutePaths
               .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_REGISTRY;
-  static final String
+  public static final String
       MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_ARCHIVE_REGISTRY =
           OpsShardReadinessReleaseAcceptanceRoutePaths
               .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_ARCHIVE_REGISTRY;
-  static final String RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY =
+  public static final String RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths
           .RELEASE_ACCEPTANCE_ARCHIVE_VERIFICATION_HANDOFF_REGISTRY;
-  static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY =
+  public static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY;
   static final String RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_CLOSEOUT_REGISTRY =
       OpsShardReadinessReleaseAcceptanceRoutePaths

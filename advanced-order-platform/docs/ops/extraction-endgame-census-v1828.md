@@ -10,9 +10,9 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **775**.
+- Current direct-root Java files: **751**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **670**.
+- Remaining direct-root non-controller files to move or collapse: **646**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-775 current root files - 105 final root files = 670 files still to move
+751 current root files - 105 final root files = 646 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -52,9 +52,9 @@ when names overlap, for example controllers inside a large family prefix.
 | MinimalReadOnlyGateOperatorCiHandoff | 140 | Split into coherent subpackages; keep controllers in root. |
 | MinimalReadOnlyGateExecution | 31 | Move after or alongside the operator handoff core. |
 | RouteCleanup web | 170 | High-coupling track; split only with route owner and endpoint proof. |
-| ReleaseAcceptanceRoutePathSplit | 78 | Move as the release-acceptance route-path split track. |
+| ReleaseAcceptanceRoutePathSplit | 55 | Base and closeout moved in v1840; sustainment layers remain. |
 | ReleaseAcceptanceArchiveVerificationHandoff | 25 | Move after route-path split ownership is stable. |
-| ReleaseAcceptance root route owner | 1 | Move with the release-acceptance route owner; no root waiver. |
+| ReleaseAcceptance root route owner | 0 | Moved with the base layer in v1840. |
 | ReleaseApprovalSandboxEndpointCredentialResolver records | 59 | Move as credential-resolver records package. |
 | ReleaseApprovalManagedAuditSandboxEndpointCredentialResolver builders | 23 | Move with credential-resolver managed-audit builders. |
 | ReleaseApprovalManagedAuditSandboxConnection builders | 9 | Move with sandbox-connection managed-audit builders. |
@@ -221,6 +221,22 @@ The live direct-root count falls from **789 to 775**, the final target remains
 **105**, and the remaining direct-root non-controller backlog falls from
 **684 to 670**. Total `ops` Java files remain at **1,352**, both compared-family
 buckets are zero, and the census reports no unassigned files.
+
+## v1840 progress
+
+v1840 starts the three-version ReleaseAcceptanceRoutePathSplit track by moving
+the seventeen base implementation files, six closeout implementation files,
+and the shared release-acceptance route owner into
+`ops.maintenance.releaseacceptanceroutepathsplit`. The two Spring controllers
+stay root-visible. The moved route catalog compares the retained global route
+aggregator with the moved split owner through eleven explicitly public immutable
+constants; no broad service or write capability is exposed.
+
+The live direct-root count falls from **775 to 751**, the final target remains
+**105**, and the movable backlog falls from **670 to 646**. The
+ReleaseAcceptanceRoutePathSplit bucket falls from **78 to 55**, its separate
+root route-owner bucket reaches zero, total `ops` Java files stay at **1,352**,
+and the census reports no unassigned files.
 
 ## Revision rule
 
