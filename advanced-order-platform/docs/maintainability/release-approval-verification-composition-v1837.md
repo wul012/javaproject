@@ -56,3 +56,5 @@
 ## 当前证据
 
 生产编译通过；默认、header-backed、沙箱连接提示的精确回归通过；ContributionCatalog、参数结构门、维护预算、两组 Spring 集成、Spotless 和 SpotBugs 通过。第一次完整 verify 暴露的 root 文件数问题已通过零净增长合并解决，相关 23 个历史类全部重跑通过。修正后的完整 `mvnw verify` 用时 10 分 01 秒：1692 个测试，0 失败、0 错误、0 跳过；JaCoCo 全部覆盖率门达标；SpotBugs `BugInstance=0`、`Error=0`；BUILD SUCCESS。提交、tag、push 和远端 CI 尚待完成，因此不提前宣称版本完成。
+
+远端 GitHub Actions run `29069744872` 对实现提交 `c3574002` 独立复现成功：`Build and headless regression` 用时 17 分 42 秒，完成 Spotless ratchet、无 Docker 全量 verify、生产配置启动冒烟与 JaCoCo 报告上传；`Docker-tagged integration tests` 用时 1 分 54 秒并通过。本版由 tag `v1837-order-platform-production-excellence-release-approval-verification-composition-split` 固定证据边界。
