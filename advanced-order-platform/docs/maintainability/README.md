@@ -12,3 +12,6 @@ largest files from silently growing again.
 - `failed-event-command-split-v1836.md`: transactional facade, dead-letter
   recording, management, replay approval, replay execution, and tightened
   command-side dependency boundaries.
+- `release-approval-verification-composition-v1837.md`: one verification
+  context, one canonical receipt chain, isolated no-write proof evaluation,
+  digest parity, and parameter-count regression gates.

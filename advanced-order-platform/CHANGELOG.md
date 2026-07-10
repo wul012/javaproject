@@ -2,6 +2,18 @@
 
 鏈」鐩殑鐗堟湰鍖栬瘉鎹互 git tag 涓烘潈濞佹潵婧愩€侻aven artifact 褰撳墠淇濇寔
 `0.1.0-SNAPSHOT`锛屽洜涓烘湰浠撳簱浠嶅鍦ㄩ珮棰戝伐绋嬫紨杩涢樁娈碉紝灏氭湭鍒囨崲鍒拌涔夊寲鍒跺搧鍙戝竷銆?姣忎釜鍙拷婧増鏈繀椤绘湁瀵瑰簲 git tag銆佹彁浜ゃ€佹祴璇曡瘉鎹拰蹇呰鐨勪腑鏂囦唬鐮佽瑙ｃ€?
+## v1837 - Release-approval verification composition split
+
+- Replaced repeated 34-builder and multi-dozen receipt argument lists with a
+  package-private verification context carrying the canonical receipt chain.
+- Extracted no-ledger-write evaluation while preserving every response field,
+  warning-digest input, proof claim, Node verification action, and list order.
+- Reduced the verification hint, warning digest, and response files from
+  874/675/564 to 70/421/421 lines; consolidated verification support is 412
+  lines and keeps direct-root/total ops file counts unchanged.
+- Tightened production hotspot counts above 500/750 lines from 38/4 to 35/3
+  and added reflection plus source-structure gates against parameter fan-out.
+
 ## v1836 - Failed-event command responsibility split
 
 - Kept `FailedEventMessageService` as the only public transactional facade while

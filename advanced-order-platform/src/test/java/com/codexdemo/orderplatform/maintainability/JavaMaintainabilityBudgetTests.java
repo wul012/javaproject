@@ -28,8 +28,8 @@ class JavaMaintainabilityBudgetTests {
     SourceMetrics metrics = measure(MAIN_ROOT);
 
     assertThat(metrics.maxLines()).isLessThanOrEqualTo(1530);
-    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(38);
-    assertThat(metrics.filesOver750Lines()).isLessThanOrEqualTo(4);
+    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(35);
+    assertThat(metrics.filesOver750Lines()).isLessThanOrEqualTo(3);
     assertThat(metrics.filesOver1000Lines()).isLessThanOrEqualTo(2);
   }
 
@@ -131,7 +131,19 @@ class JavaMaintainabilityBudgetTests {
         "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessRoutePaths.java", 1111L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationHintBuilder.java",
-        874L);
+        70L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationWarningDigestBuilder.java",
+        421L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalRehearsalResponseBuilder.java",
+        421L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationSupport.java",
+        412L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationHintContributionCatalog.java",
+        382L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java",
         793L);

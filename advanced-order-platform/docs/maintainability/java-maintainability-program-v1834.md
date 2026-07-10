@@ -42,6 +42,10 @@
 
 失败事件命令侧继续按领域职责拆分。公开事务门面从 662 行降到 199 行，不再直接依赖 Repository、`RabbitTemplate`、Outbox 配置、摘要算法或数据库唯一键异常。死信记录、管理状态、重放审批、重放执行与共享命令校验分别由 71、89、129、222、33 行的包内协作者承担。生产源码超过 500 行的文件数从 39 收紧到 38，超过 750 行和 1000 行的预算继续保持 4、2，不允许回升。详细证据见 `failed-event-command-split-v1836.md`。
 
+## v1837 进展
+
+ReleaseApproval 验证组合不再把同一 `ReceiptChain` 拆成 34 个 builder 参数和几十个 receipt 参数往返传递。context 与提示构建器同文件，无账本写证明器与 contribution 同属 verification support 文件，避免 root ops 文件净增长；对应文件为 70、412 行。摘要构建器 675→421 行，响应构建器 564→421 行。生产源码超过 500 行从 38 收紧到 35，超过 750 行从 4 收紧到 3，超过 1000 行继续为 2。详细证据见 `release-approval-verification-composition-v1837.md`。
+
 ## 失败条件
 
 - 为让测试通过而提高任何预算，视为失败。
