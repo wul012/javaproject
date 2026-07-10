@@ -10,9 +10,9 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **805**.
+- Current direct-root Java files: **789**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **700**.
+- Remaining direct-root non-controller files to move or collapse: **684**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-805 current root files - 105 final root files = 700 files still to move
+789 current root files - 105 final root files = 684 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -68,7 +68,7 @@ when names overlap, for example controllers inside a large family prefix.
 | ComparedEvidenceCandidateBlueprint | 0 | Moved in v1832. |
 | ComparedEvidenceCandidateIntakePreflight | 0 | Moved in v1833. |
 | ComparedEvidenceEvaluationPreflight | 14 | Move as compared-evidence evaluation preflight. |
-| ComparedPackageReview | 16 | Move after compared evidence packages expose endpoint boundaries. |
+| ComparedPackageReview | 0 | Moved in v1838. |
 | SignedApprovalDraftProfileSection | 0 | Finished in v1829. |
 | V1Contract consumer/alignment snapshots | 42 | Move into a v1-contract package while preserving endpoint bytes. |
 | ReadOnlyEvidence catalog snapshots | 11 | Move after v1-contract endpoint pair ownership is clear. |
@@ -101,6 +101,13 @@ Recommended near-term order:
 
 Every five extraction batches after this census need a checkpoint review unless
 the user explicitly changes the review cadence.
+
+The v1834-v1837 maintainability program temporarily paused the extraction
+series after the v1833 checkpoint. The series resumes at v1838 with the
+dependency-safe order `ComparedPackageReview` then
+`ComparedEvidenceEvaluationPreflight`, followed by the three coherent
+`ReleaseAcceptanceRoutePathSplit` layers. The next Claude checkpoint is after
+v1842, the fifth resumed extraction batch.
 
 ## v1829 progress
 
@@ -182,6 +189,22 @@ old standalone GateCatalog is folded into the moved GuardCatalog, offsetting the
 new route owner. The `ComparedEvidenceCandidateIntakePreflight` bucket is now
 zero. The next compared-evidence chain buckets are
 `ComparedEvidenceEvaluationPreflight` and `ComparedPackageReview`.
+
+## v1838 progress
+
+v1838 moves the sixteen non-controller `ComparedPackageReview` implementation
+files into `ops.maintenance.comparedpackagereview`; the public Spring
+controller remains in root. The former `EndpointRefs` file becomes the single
+public family route owner, and the root route aggregator delegates its six
+unchanged suffixes to that owner. `ComparedEvidenceEvaluationPreflight` now
+imports the public review route owner, establishing the dependency-safe input
+for v1839.
+
+The live direct-root count falls from **805 to 789**, while the final root
+target remains **105** and the remaining direct-root non-controller backlog
+falls from **700 to 684**. Total `ops` Java files remain at **1,352**, the
+`ComparedPackageReview` bucket is zero, and the census reports no unassigned
+files.
 
 ## Revision rule
 

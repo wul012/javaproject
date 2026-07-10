@@ -7,12 +7,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 class JavaMaintainabilityWalkthroughTests {
 
-  private static final Path WALKTHROUGH_ROOT = Path.of("代码讲解记录_生产雏形阶段6", "v1834-v1837");
+  private static final Path WALKTHROUGH_ROOT = Path.of("代码讲解记录_生产雏形阶段6");
+  private static final Set<String> ENFORCED_RANGES = Set.of("v1834-v1837", "v1838-v1842");
 
   private static final List<String> REQUIRED_HEADINGS =
       List.of(
@@ -30,16 +32,20 @@ class JavaMaintainabilityWalkthroughTests {
   @Test
   void everyMaintainabilityVersionHasSubstantiveChineseWalkthroughEvidence() throws IOException {
     List<Path> walkthroughs;
-    try (Stream<Path> paths = Files.list(WALKTHROUGH_ROOT)) {
+    try (Stream<Path> paths = Files.walk(WALKTHROUGH_ROOT)) {
       walkthroughs =
           paths
               .filter(Files::isRegularFile)
               .filter(path -> path.getFileName().toString().endsWith(".md"))
+              .filter(
+                  path ->
+                      path.getParent() != null
+                          && ENFORCED_RANGES.contains(path.getParent().getFileName().toString()))
               .sorted()
               .toList();
     }
 
-    assertThat(walkthroughs).hasSizeGreaterThanOrEqualTo(3);
+    assertThat(walkthroughs).hasSizeGreaterThanOrEqualTo(5);
     for (Path walkthrough : walkthroughs) {
       String text = Files.readString(walkthrough, StandardCharsets.UTF_8);
       long hanCharacters =

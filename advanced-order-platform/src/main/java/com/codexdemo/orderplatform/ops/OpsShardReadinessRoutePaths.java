@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import static com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShardReadinessComparedPackageReviewRoutePaths.*;
+
 import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint.OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths;
@@ -116,7 +118,6 @@ final class OpsShardReadinessRoutePaths {
       "/prototype-consumer-gate-operator-signoff";
   static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CLOSEOUT =
       "/prototype-consumer-gate-closeout";
-
   static final String ROUTE_CLEANUP_EVIDENCE_CATALOG = "/route-cleanup-evidence-catalog";
   static final String ROUTE_CLEANUP_PHASE_SUMMARY = "/route-cleanup-phase-summary";
   static final String ROUTE_CLEANUP_BOUNDARY_MATRIX = "/route-cleanup-boundary-matrix";
@@ -249,7 +250,6 @@ final class OpsShardReadinessRoutePaths {
       "/route-cleanup-maintenance-operator-signoff";
   static final String ROUTE_CLEANUP_MAINTENANCE_EXTENDED_CLOSEOUT =
       "/route-cleanup-maintenance-extended-closeout";
-
   static final String MANUAL_EVIDENCE_WORKSHEET_CATALOG =
       OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG;
   static final String MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE =
@@ -934,22 +934,22 @@ final class OpsShardReadinessRoutePaths {
               .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_EVIDENCE_INTAKE_ASSURANCE_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_CATALOG =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-catalog";
+          COMPARED_PACKAGE_REVIEW_CATALOG;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_SOURCE_EVIDENCE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-source-evidence";
+          COMPARED_PACKAGE_REVIEW_SOURCE_EVIDENCE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_COMPARISON_OUTCOME =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-comparison-outcome";
+          COMPARED_PACKAGE_REVIEW_COMPARISON_OUTCOME;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_IDENTITY_DIGEST =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-identity-digest";
+          COMPARED_PACKAGE_REVIEW_IDENTITY_DIGEST;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_POLICY_ARCHIVE =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-policy-archive";
+          COMPARED_PACKAGE_REVIEW_POLICY_ARCHIVE;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT =
-          "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-package-review-handoff-closeout";
+          COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT;
   static final String
       OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_CATALOG =
           "/operator-evidence-value-supply-signed-approval-artifact-draft-text-package-compared-evidence-evaluation-preflight-catalog";
