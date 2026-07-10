@@ -46,3 +46,4 @@
 
 - 聚焦维护性与讲解门：9 个测试，0 失败、0 错误、0 跳过，Spotless 通过。
 - 全量 `mvnw verify`：1676 个测试，0 失败、0 错误、0 跳过；JaCoCo 全部覆盖率门达标；SpotBugs `BugInstance=0`、`Error=0`；耗时 12 分 26 秒。
+- 远端 GitHub Actions：run `29060123279` 成功，普通 verify、生产配置启动冒烟、JaCoCo 报告上传和 Docker-tagged 集成测试全部通过。
