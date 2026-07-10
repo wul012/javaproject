@@ -55,3 +55,5 @@
 ## 当前证据
 
 聚焦 Spring、结构与共享支持回归已经通过；维护预算、讲解质量门、Spotless 与 SpotBugs 也已通过。最终全量 `mvnw verify` 用时 9 分 35 秒：1689 个测试，0 失败、0 错误、0 跳过；JaCoCo 全部覆盖率门达标；SpotBugs `BugInstance=0`、`Error=0`；BUILD SUCCESS。提交、tag、push 和远端 CI 结果仍需在本版收口时补入，不提前自报完成。
+
+远端 GitHub Actions run `29066081716` 对实现提交 `446bddbe` 独立复现成功：`Build and headless regression` 用时 17 分 12 秒，完成 Spotless ratchet、无 Docker 全量 verify、生产配置启动冒烟和 JaCoCo 报告上传；`Docker-tagged integration tests` 用时 2 分 13 秒，真实 RabbitMQ 死信与重放回归通过。本版由 tag `v1836-order-platform-production-excellence-failed-event-command-responsibility-split` 固定证据边界。
