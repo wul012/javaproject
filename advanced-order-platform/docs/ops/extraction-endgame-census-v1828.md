@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1852, with the original v1828 baseline retained
+- Repository state: live after v1854, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **429**.
-- Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **324**.
+- Current direct-root Java files: **310**.
+- Target final direct-root Java files: **104**.
+- Remaining direct-root non-controller files to move or collapse: **206**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -25,13 +25,13 @@ The final direct-root `ops` package may contain only these categories:
 | --- | ---: | --- |
 | Public Spring controllers | 100 | Controllers stay in root so HTTP entry points remain obvious. |
 | Global route aggregator | 1 | `OpsShardReadinessRoutePaths.java` stays as the shared root aggregator. |
-| Shared core waivers | 4 | Listed in `extraction-waivers.md`; each requires a reviewer check. |
+| Shared core waivers | 3 | Listed in `extraction-waivers.md`; each requires a reviewer check. |
 
 This gives the v1828 end-state target:
 
 ```text
-100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-429 current root files - 105 final root files = 324 files still to move
+100 controllers + 1 route aggregator + 3 shared-core waivers = 104 final root files
+310 current root files - 104 final root files = 206 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -47,7 +47,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Bucket | Direct-root files now | End-state treatment |
 | --- | ---: | --- |
 | Keep-root controllers | 100 | Retain. |
-| Keep-root shared core and global route aggregator | 5 | Retain only the four waiver files plus `OpsShardReadinessRoutePaths.java`. |
+| Keep-root shared core and global route aggregator | 4 | Retain only the three waiver files plus `OpsShardReadinessRoutePaths.java`. |
 | OpsEvidence static release support | 2 | Move under a shared evidence package; not a root waiver. |
 | MinimalReadOnlyGateOperatorCiHandoff | 0 | Core/archive verification moved in v1844, ArchiveDigest in v1845, ConsumerPackage in v1846, VerificationDossier in v1847, ReleaseAcceptance base in v1848, and its Archive in v1849. |
 | MinimalReadOnlyGateExecution | 0 | Execution and archive-verification closure moved in v1843. |
@@ -55,14 +55,14 @@ when names overlap, for example controllers inside a large family prefix.
 | ReleaseAcceptanceRoutePathSplit | 0 | Base/closeout moved in v1840, sustainment in v1841, and acceptance package/receipt/archive index in v1842. |
 | ReleaseAcceptanceArchiveVerificationHandoff | 0 | Source archive boundary moved in v1849; the verification handoff moved in v1850. |
 | ReleaseAcceptance root route owner | 0 | Moved with the base layer in v1840. |
-| ReleaseApprovalSandboxEndpointCredentialResolver records | 59 | Move as credential-resolver records package. |
-| ReleaseApprovalManagedAuditSandboxEndpointCredentialResolver builders | 23 | Move with credential-resolver managed-audit builders. |
-| ReleaseApprovalManagedAuditSandboxConnection builders | 9 | Move with sandbox-connection managed-audit builders. |
-| ReleaseApprovalManagedAudit adapter/quality builders | 7 | Move with release-approval managed-audit support. |
-| ReleaseApprovalSandboxConnection records | 2 | Move with sandbox-connection records. |
-| ReleaseApprovalRehearsal shared hints/request/builders | 10 | Move with release-approval rehearsal support. |
-| ReleaseApprovalVerification hints | 6 | Move with release-approval verification support. |
-| ReleaseApproval shared support | 2 | Move into release-approval shared support; not root. |
+| ReleaseApprovalSandboxEndpointCredentialResolver records | 0 | Moved with the complete ReleaseApproval closure in v1854. |
+| ReleaseApprovalManagedAuditSandboxEndpointCredentialResolver builders | 0 | Moved with the complete ReleaseApproval closure in v1854. |
+| ReleaseApprovalManagedAuditSandboxConnection builders | 0 | Moved with the complete ReleaseApproval closure in v1854. |
+| ReleaseApprovalManagedAudit adapter/quality builders | 0 | Moved with the complete ReleaseApproval closure in v1854. |
+| ReleaseApprovalSandboxConnection records | 0 | Moved with the complete ReleaseApproval closure in v1854. |
+| ReleaseApprovalRehearsal shared hints/request/builders | 0 | Moved with the complete ReleaseApproval closure in v1854. |
+| ReleaseApprovalVerification hints | 0 | Moved with the complete ReleaseApproval closure in v1854. |
+| ReleaseApproval shared support | 0 | Moved with the complete ReleaseApproval closure in v1854. |
 | OperatorEvidenceValueSupplyAdapterPreflight | 0 | Moved in v1830. |
 | OperatorEvidenceValueSupply base | 0 | Moved in v1831. |
 | ComparedEvidenceCandidateBlueprint | 0 | Moved in v1832. |
@@ -80,7 +80,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
 | Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
 
-The counted buckets sum to **429** and leave zero unassigned files. The original
+The counted buckets sum to **310** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -450,9 +450,35 @@ movable backlog falls from **366 to 324**. The V1Contract bucket falls from
 **42 to 0**, total `ops` Java files stay at **1,352**, and the census reports no
 unassigned files.
 
+## v1854 progress
+
+v1854 moves the complete one-hundred-eighteen-file direct-root ReleaseApproval
+closure into `ops.maintenance.releaseapproval`. It also moves the sole remaining
+runtime consumer of `ContextHeaderField` as package-private
+`ReleaseApprovalContextHeaderField`, so that historical shared-root waiver is
+removed instead of being widened into a production API. The Spring-facing
+entry remains in `OpsOverviewController`, while `OpsEvidenceService` composes
+the public request, response, and response builder from the extracted package.
+
+The extraction replaces 316 root-service constant dependencies with two
+family-owned immutable catalogs: 89 Java ReleaseApproval contract fields and
+227 Node upstream evidence fields. Their source-size ratchets are 400 and 800
+lines respectively. One forwarding-only execution-denied builder is folded
+into its matching support as a nested adapter, offsetting the second catalog so
+total `ops` Java files stay at **1,352**. The shared rehearsal test support also
+moves with the family and remains the narrow fixture boundary for retained root
+tests.
+
+The live direct-root count falls from **429 to 310**. The final target tightens
+from **105 to 104** because the `ContextHeaderField` waiver is retired, and the
+movable backlog falls from **324 to 206**. All eight ReleaseApproval buckets
+fall from a combined **118 to 0**, the census reports zero unassigned files,
+and no route, response, evidence, fixture, side-effect, deployment, rollback,
+or archive byte changes.
+
 ## Revision rule
 
-The final root target may only move downward. Raising the target above **105**
+The final root target may only move downward. Raising the target above **104**
 requires a new entry in `extraction-waivers.md`, a reviewer-checkable reason,
 and a follow-up review. Raising the target without a waiver is a checkpoint
 failure.

@@ -121,6 +121,32 @@ screenshot/explanation work continues in `f/`, and code explanation notes contin
 - Java line-count ratchets must use `scripts/java-maintainability-census.ps1` or an explicit `StreamReader.ReadLine()` loop. Do not use `Measure-Object -Line`; it omits blank lines and produced two false caps during v1835.
 - Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
 
+## Elegance Gates (promoted 2026-07-11, program-end review)
+
+The post-capstone review judged this codebase fortified but not elegant — this repo has
+the program's worst names (a 793-line class with an eight-noun name) and its largest
+duplication family (the ops package). These gates buy elegance upstream. They apply to
+NEW and TOUCHED code only; existing violations enter a committed baseline that may only
+shrink. Each rule must become a committed mechanical check that fails verify/CI — extend
+`scripts/java-maintainability-census.ps1` with a name census in the next governance
+version; until then the rules bind as authoring rules enforced at review. Ratchets only
+tighten.
+
+- Name budget: no new identifier or filename over 40 characters. A name that wants more
+  nouns means a missing abstraction — extract and name the concept instead. Existing
+  over-budget names: baseline census, shrink-only; renames only where route strings,
+  SpotBugs FQNs, and frozen fixtures allow.
+- Rule of three: a third structurally-similar class in any family is a STOP condition —
+  build the shared engine/builder first, then land the third case as data/config.
+- Generation cap: a feature version adds at most 400 new source lines. Extraction
+  batches are moves, not new code — exempt from the cap, but any NEW identifier they
+  introduce (route owners, aggregators) obeys the name budget.
+- Family design note: before creating a new file family, write ≤10 lines in the
+  walkthrough naming the abstraction and the data-vs-behavior split — BEFORE
+  implementation, and before the final verify like the walkthrough rule.
+- Boy-scout rule: any touched file must leave within this section's name and size
+  budgets.
+
 ## Docker Shutdown Fast Path
 
 When Docker was started only for this Java project validation, close it quickly during cleanup.

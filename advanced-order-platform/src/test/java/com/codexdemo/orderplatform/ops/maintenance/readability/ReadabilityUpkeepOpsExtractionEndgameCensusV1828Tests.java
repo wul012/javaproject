@@ -25,7 +25,6 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
   private static final Path WAIVERS = DOCS_ROOT.resolve("extraction-waivers.md");
   private static final Set<String> SHARED_ROOT_KEEP =
       Set.of(
-          "ContextHeaderField.java",
           "OpsEvidenceResponse.java",
           "OpsEvidenceService.java",
           "OpsShardReadinessEvidenceEndpoints.java",
@@ -70,12 +69,14 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "471",
             "366",
             "429",
-            "324");
+            "324",
+            "310",
+            "206");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **429**",
-            "Target final direct-root Java files: **105**",
-            "Remaining direct-root non-controller files to move or collapse: **324**",
+            "Current direct-root Java files: **310**",
+            "Target final direct-root Java files: **104**",
+            "Remaining direct-root non-controller files to move or collapse: **206**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -106,7 +107,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(429);
+    assertThat(fileNames).hasSize(310);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -117,8 +118,8 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
     int retainedRoot =
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
-    assertThat(retainedRoot).isEqualTo(105);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(324);
+    assertThat(retainedRoot).isEqualTo(104);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(206);
   }
 
   @Test
@@ -128,17 +129,16 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
 
     assertThat(waivers)
         .contains(
-            "ContextHeaderField.java",
             "OpsEvidenceResponse.java",
             "OpsEvidenceService.java",
             "OpsShardReadinessEvidenceEndpoints.java",
             "Reviewer check",
             "Explicit non-waivers",
             "OpsEvidenceStaticReleaseArtifact.java",
-            "OpsShardReadinessReleaseAcceptanceRoutePaths.java");
+            "OpsShardReadinessReleaseAcceptanceRoutePaths.java")
+        .doesNotContain("| `ContextHeaderField.java` |");
     assertThat(SHARED_ROOT_KEEP)
         .containsExactlyInAnyOrder(
-            "ContextHeaderField.java",
             "OpsEvidenceResponse.java",
             "OpsEvidenceService.java",
             "OpsShardReadinessEvidenceEndpoints.java",
@@ -158,7 +158,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
     return List.of(
         new Bucket("keep-root controllers", 100, matches(".*Controller\\.java$")),
         new Bucket(
-            "keep-root shared core and global route aggregator", 5, SHARED_ROOT_KEEP::contains),
+            "keep-root shared core and global route aggregator", 4, SHARED_ROOT_KEEP::contains),
         new Bucket("OpsEvidence static release support", 2, matches("^OpsEvidenceStaticRelease")),
         new Bucket(
             "MinimalReadOnlyGateOperatorCiHandoff",
@@ -183,34 +183,35 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             matches("^OpsShardReadinessReleaseAcceptanceRoutePaths\\.java$")),
         new Bucket(
             "ReleaseApprovalSandboxEndpointCredentialResolver records",
-            59,
+            0,
             matches("^ReleaseApprovalSandboxEndpointCredentialResolver")),
         new Bucket(
             "ReleaseApprovalManagedAuditSandboxEndpointCredentialResolver builders",
-            23,
+            0,
             matches("^ReleaseApprovalManagedAuditSandboxEndpointCredentialResolver")),
         new Bucket(
             "ReleaseApprovalManagedAuditSandboxConnection builders",
-            9,
+            0,
             matches("^ReleaseApprovalManagedAuditSandboxConnection")),
         new Bucket(
             "ReleaseApprovalManagedAudit adapter/quality builders",
-            7,
+            0,
             matches("^ReleaseApprovalManagedAudit|^ReleaseApprovalOpsEvidenceServiceQualitySplit")),
         new Bucket(
             "ReleaseApprovalSandboxConnection records",
-            2,
+            0,
             matches(
                 "^ReleaseApprovalSandboxConnection|^ReleaseApprovalRehearsalSandboxConnection")),
         new Bucket(
             "ReleaseApprovalRehearsal shared hints/request/builders",
-            10,
+            0,
             matches("^ReleaseApprovalRehearsal")),
-        new Bucket("ReleaseApprovalVerification hints", 6, matches("^ReleaseApprovalVerification")),
+        new Bucket("ReleaseApprovalVerification hints", 0, matches("^ReleaseApprovalVerification")),
         new Bucket(
             "ReleaseApproval shared support",
-            2,
-            matches("^ReleaseApprovalDigestSupport|^ReleaseApprovalEchoMarkerSupport")),
+            0,
+            matches(
+                "^ReleaseApprovalContextHeaderField|^ReleaseApprovalContractConstants|^ReleaseApprovalDigestSupport|^ReleaseApprovalUpstreamContractConstants")),
         new Bucket(
             "OperatorEvidenceValueSupplyAdapterPreflight",
             0,

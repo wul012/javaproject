@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.sandboxconnection;
 
-import com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponse;
+import com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponse;
 import java.util.List;
 
 final class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSourceCatalog {

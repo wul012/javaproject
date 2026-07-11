@@ -56,7 +56,7 @@
   </Match>
   <Match>
     <Bug pattern="DM_CONVERT_CASE" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketCatalog" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketCatalog" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1020,359 +1020,359 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalHandoffVerificationMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalHandoffVerificationMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalRecordHandoffHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalRecordHandoffHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalArtifactRetentionHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalArtifactRetentionHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalAuditPersistenceHandoffHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalAuditPersistenceHandoffHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalCiEvidenceHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalCiEvidenceHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalEvidenceExportHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalEvidenceExportHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalFailureTaxonomy" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalFailureTaxonomy" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalInputHardeningDecisionEcho" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalInputHardeningDecisionEcho" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalLiveReadinessHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalLiveReadinessHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterBoundaryReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterBoundaryReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterImplementationGuardReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterImplementationGuardReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditExternalAdapterMigrationGuardReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditExternalAdapterMigrationGuardReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditProductionAdapterPrerequisiteReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditProductionAdapterPrerequisiteReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOperatorWindowHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalOperatorWindowHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOpsEvidenceServiceQualitySplitReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalOpsEvidenceServiceQualitySplitReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalRequestContext" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalRequestContext" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalSandboxQualityGateBoundary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalSandboxQualityGateBoundary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalVerificationHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalVerificationHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$ReleaseApprovalInputs" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$ReleaseApprovalInputs" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreconditionReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreconditionReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreflightEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreflightEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContractSourceNodeV325" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContractSourceNodeV325" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalApprovalPrerequisiteArtifactIntakePlan" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalApprovalPrerequisiteArtifactIntakePlan" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryUpstreamEchoVerificationSource" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryUpstreamEchoVerificationSource" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContractSourceNodeV316" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContractSourceNodeV316" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalSandboxEndpointCredentialResolverDecisionRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalSandboxEndpointCredentialResolverDecisionRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateBoundaryDecision" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateBoundaryDecision" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateInterfaceShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateInterfaceShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverPlanIntakeUpstreamEchoVerificationSource" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverPlanIntakeUpstreamEchoVerificationSource" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledPrecheckRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledPrecheckRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDryRunResponseShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDryRunResponseShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGate" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGate" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContractSourceNodeV319" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContractSourceNodeV319" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverExecutionDeniedEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverExecutionDeniedEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalSandboxEndpointCredentialResolverFakeShellArchiveEvidence" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalSandboxEndpointCredentialResolverFakeShellArchiveEvidence" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalHumanApprovalArtifactReviewPacket" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalHumanApprovalArtifactReviewPacket" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalHumanApprovalArtifactReviewPostEchoDecisionGate" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalHumanApprovalArtifactReviewPostEchoDecisionGate" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContractSourceNodeV322" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContractSourceNodeV322" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationBoundary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationBoundary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationPlan" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationPlan" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalRuntimeShellDecisionRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalRuntimeShellDecisionRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionContinuationOption" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionContinuationOption" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionPlanIntake" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionPlanIntake" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalRuntimeShellChainStopPrerequisiteDecisionRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalRuntimeShellChainStopPrerequisiteDecisionRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContractSourceNodeV312" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContractSourceNodeV312" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -2372,359 +2372,359 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalHandoffVerificationMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalHandoffVerificationMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalRecordHandoffHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalApprovalRecordHandoffHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalArtifactRetentionHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalArtifactRetentionHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalAuditPersistenceHandoffHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalAuditPersistenceHandoffHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalCiEvidenceHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalCiEvidenceHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalEvidenceExportHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalEvidenceExportHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalFailureTaxonomy" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalFailureTaxonomy" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalInputHardeningDecisionEcho" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalInputHardeningDecisionEcho" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalLiveReadinessHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalLiveReadinessHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterBoundaryReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterBoundaryReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterImplementationGuardReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditAdapterImplementationGuardReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditExternalAdapterMigrationGuardReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditExternalAdapterMigrationGuardReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditProductionAdapterPrerequisiteReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditProductionAdapterPrerequisiteReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalManagedAuditSandboxAdapterApprovalSchemaGuardReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOperatorWindowHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalOperatorWindowHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalOpsEvidenceServiceQualitySplitReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalOpsEvidenceServiceQualitySplitReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalRequestContext" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalRequestContext" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalSandboxQualityGateBoundary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalSandboxQualityGateBoundary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$RehearsalVerificationHint" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$RehearsalVerificationHint" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponseRecords$ReleaseApprovalInputs" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponseRecords$ReleaseApprovalInputs" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunCommandPackageEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionDryRunEnvelopeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorHandoffMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionOperatorWindowChecklistEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPrecheckPacketEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreconditionReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreconditionReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreflightEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalSandboxConnectionResponseRecords$RehearsalManagedAuditSandboxConnectionPreflightEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords$RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContractSourceNodeV325" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalAbortRollbackSemanticsContractSourceNodeV325" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalApprovalPrerequisiteArtifactIntakePlan" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalApprovalPrerequisiteArtifactIntakePlan" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalPrerequisiteArtifactIntakeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryUpstreamEchoVerificationSource" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryUpstreamEchoVerificationSource" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverApprovalRequiredImplementationReadinessEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredImplementationBoundaryReadiness" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContractSourceNodeV316" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalCredentialHandleApprovalContractSourceNodeV316" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalSandboxEndpointCredentialResolverDecisionRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords$RehearsalSandboxEndpointCredentialResolverDecisionRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverApprovalRequiredBoundaryExplanation" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateBoundaryDecision" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateBoundaryDecision" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateInterfaceShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledCandidateInterfaceShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledImplementationCandidate" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverPlanIntakeUpstreamEchoVerificationSource" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledImplementationCandidateEchoRecords$RehearsalSandboxEndpointCredentialResolverPlanIntakeUpstreamEchoVerificationSource" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledPrecheckRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledPrecheckRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDryRunResponseShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledPrecheckEchoRecords$RehearsalSandboxEndpointCredentialResolverDryRunResponseShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGate" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGateEchoRecords$RehearsalSandboxEndpointCredentialResolverDisabledRuntimeShellCandidateGate" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledRuntimeShellHandoffEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContractSourceNodeV319" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalEndpointHandleAllowlistApprovalContractSourceNodeV319" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverExecutionDeniedEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverExecutionDeniedEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverExecutionDeniedEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalSandboxEndpointCredentialResolverFakeShellArchiveEvidence" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverFakeShellArchiveEchoRecords$RehearsalSandboxEndpointCredentialResolverFakeShellArchiveEvidence" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalHumanApprovalArtifactReviewPacket" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalHumanApprovalArtifactReviewPacket" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalHumanApprovalArtifactReviewPostEchoDecisionGate" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalHumanApprovalArtifactReviewPostEchoDecisionGate" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverImplementationPlanEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverImplementationPlanEchoRecords$RehearsalSandboxEndpointCredentialResolverImplementationInterfaceBoundaryEcho" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContractSourceNodeV322" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoRecords$RehearsalNoNetworkSafetyFixtureContractSourceNodeV322" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationBoundary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationBoundary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationPlan" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverPreImplementationPlanIntakeEchoRecords$RehearsalSandboxEndpointCredentialResolverPreImplementationPlan" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverProductionReadinessBlockedDecisionEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalRuntimeShellDecisionRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellDecisionRecordEchoRecords$RehearsalRuntimeShellDecisionRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionContinuationOption" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionContinuationOption" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionPlanIntake" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellPostDecisionPlanIntakeEchoRecords$RehearsalRuntimeShellPostDecisionPlanIntake" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalRuntimeShellChainStopPrerequisiteDecisionRecord" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverRuntimeShellStopPrerequisiteDecisionEchoRecords$RehearsalRuntimeShellChainStopPrerequisiteDecisionRecord" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContractSourceNodeV312" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoRecords$RehearsalSignedHumanApprovalArtifactContractSourceNodeV312" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2744,7 +2744,7 @@
   </Match>
   <Match>
     <Bug pattern="URF_UNREAD_FIELD" />
-    <Class name="com.codexdemo.orderplatform.ops.ReleaseApprovalVerificationWarningDigestBuilder" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalVerificationWarningDigestBuilder" />
   </Match>
   <Match>
     <Bug pattern="VA_FORMAT_STRING_USES_NEWLINE" />

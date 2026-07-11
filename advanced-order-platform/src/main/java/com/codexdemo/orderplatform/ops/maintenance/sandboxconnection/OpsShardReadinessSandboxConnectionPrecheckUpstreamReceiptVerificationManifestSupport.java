@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.sandboxconnection;
 
-import com.codexdemo.orderplatform.ops.OpsEvidenceService;
+import com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalContractConstants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +101,7 @@ final class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificatio
                         .SourceReceipt
                     ::receiptVersion)
             .orElse("missing"),
-        OpsEvidenceService
+        ReleaseApprovalContractConstants
             .RELEASE_APPROVAL_REHEARSAL_MANAGED_AUDIT_SANDBOX_CONNECTION_PRECHECK_PACKET_ECHO_RECEIPT_SCHEMA_VERSION,
         endpoint,
         PROFILE,

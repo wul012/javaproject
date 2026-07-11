@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.credentialresolver;
 
-import com.codexdemo.orderplatform.ops.ReleaseApprovalRehearsalResponse;
+import com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponse;
 import java.util.List;
 
 final class OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveSourceCatalog {

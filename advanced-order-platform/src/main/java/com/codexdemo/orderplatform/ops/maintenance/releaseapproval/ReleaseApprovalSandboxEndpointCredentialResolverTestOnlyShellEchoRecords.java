@@ -1,0 +1,201 @@
+package com.codexdemo.orderplatform.ops.maintenance.releaseapproval;
+
+import java.util.List;
+
+public final class ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords {
+
+  private ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords() {}
+
+  public record RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker(
+      String markerVersion,
+      String sourceDisabledPrecheckEchoMarkerVersion,
+      String sourceDisabledPrecheckEchoMarkerSchemaVersion,
+      String consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractVersion,
+      String consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractProfile,
+      String consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractEndpoint,
+      String consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractMarkdownEndpoint,
+      String consumedByNodeSandboxEndpointCredentialResolverTestOnlyShellContractState,
+      String
+          sourceNodeSandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerificationVersion,
+      String
+          sourceNodeSandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerificationProfile,
+      String
+          sourceNodeSandboxEndpointCredentialResolverDisabledPrecheckUpstreamEchoVerificationState,
+      String nextNodeSandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerificationVersion,
+      String nextNodeSandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerificationProfile,
+      boolean nodeV265MayConsume,
+      String shellMode,
+      String sourceSpan,
+      RehearsalSandboxEndpointCredentialResolverTestOnlyShellSourceEcho sourceNodeV263,
+      RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract resolverShellContract,
+      RehearsalSandboxEndpointCredentialResolverTestOnlyShellSideEffectBoundary sideEffectBoundary,
+      boolean sourceNodeV263Echoed,
+      boolean requestShapeEchoed,
+      boolean responseShapeEchoed,
+      boolean failureMappingEchoed,
+      boolean guardConditionsEchoed,
+      boolean fakeResolverProbeEchoed,
+      boolean fakeResolverOnlyEchoed,
+      boolean handleOnlyRequestEchoed,
+      boolean sideEffectBoundaryEchoed,
+      boolean upstreamActionsStillDisabledEchoed,
+      boolean
+          readyForNodeV265SandboxEndpointCredentialResolverTestOnlyShellUpstreamEchoVerification,
+      boolean readyForManagedAuditSandboxAdapterConnection,
+      boolean readyForProductionAudit,
+      boolean readyForProductionWindow,
+      boolean nodeMayTreatAsProductionAuditRecord,
+      String markerDigest,
+      List<String> requestShapeFields,
+      List<String> responseShapeFields,
+      List<String> failureClassCodes,
+      List<String> guardConditionCodes,
+      List<String> nodeWarningCodes,
+      List<String> nodeRecommendationCodes,
+      List<String> nextRequiredEchoVersions,
+      List<String> markerWarnings,
+      List<String> nodeVerificationActions) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellSourceEcho(
+      String sourceVersion,
+      String profileVersion,
+      String verificationState,
+      String verificationMode,
+      String sourceSpan,
+      boolean readyForDisabledPrecheckUpstreamEchoVerification,
+      boolean sourceNodeV262Ready,
+      boolean javaV106EchoReady,
+      boolean miniKvV115NonParticipationReady,
+      boolean disabledPrecheckAligned,
+      boolean requiredEnvHandlesAligned,
+      boolean optInGatesAligned,
+      boolean failureTaxonomyAligned,
+      boolean dryRunResponseShapeAligned,
+      boolean inheritedNoGoConditionsAligned,
+      boolean sourceNodeV261Aligned,
+      boolean credentialBoundaryAligned,
+      boolean rawEndpointBoundaryAligned,
+      boolean connectionBoundaryAligned,
+      boolean writeBoundaryAligned,
+      boolean autoStartBoundaryAligned,
+      boolean upstreamActionsStillDisabled,
+      boolean credentialResolverExecutionAllowed,
+      boolean credentialValueRead,
+      boolean credentialValueLoaded,
+      boolean credentialValueStored,
+      boolean credentialValueIncluded,
+      boolean rawEndpointUrlParsed,
+      boolean rawEndpointUrlIncluded,
+      boolean externalRequestSent,
+      boolean secretProviderInstantiated,
+      boolean resolverClientInstantiated,
+      boolean connectsManagedAudit,
+      boolean schemaMigrationExecuted,
+      boolean automaticUpstreamStart,
+      int failureClassCount,
+      int requiredEnvHandleCount,
+      int optInGateCount,
+      int dryRunResponseFieldCount,
+      int inheritedNoGoConditionCount,
+      int checkCount,
+      int passedCheckCount,
+      int productionBlockerCount,
+      int warningCount,
+      int recommendationCount,
+      boolean readyForNodeV264CredentialResolverTestOnlyShellContract) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellContract(
+      String contractDigest,
+      String shellName,
+      String shellMode,
+      String resolverKind,
+      boolean realResolverImplemented,
+      boolean realSecretProviderAllowed,
+      boolean fakeResolverOnly,
+      boolean resolverClientMayBeInstantiatedForProduction,
+      boolean secretProviderMayBeInstantiated,
+      boolean credentialValueMayBeLoaded,
+      boolean rawEndpointUrlMayBeParsed,
+      boolean externalRequestMayBeSent,
+      int requestShapeFieldCount,
+      int responseShapeFieldCount,
+      int failureMappingCount,
+      int guardConditionCount,
+      RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape requestShape,
+      RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape responseShape,
+      List<RehearsalSandboxEndpointCredentialResolverTestOnlyShellFailureMapping> failureMapping,
+      List<RehearsalSandboxEndpointCredentialResolverTestOnlyShellGuardCondition> guardConditions,
+      RehearsalSandboxEndpointCredentialResolverTestOnlyShellProbe fakeResolverProbe) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellRequestShape(
+      List<String> fields,
+      boolean credentialHandleOnly,
+      boolean credentialValueAccepted,
+      boolean endpointHandleOnly,
+      boolean rawEndpointUrlAccepted,
+      boolean resolverPolicyHandleRequired,
+      boolean approvalMarkerRequired,
+      boolean payloadMayContainSecrets) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape(
+      List<String> fields,
+      boolean fakeResolverResponseOnly,
+      boolean resolverClientInstantiated,
+      boolean secretProviderInstantiated,
+      boolean credentialValueRead,
+      boolean credentialValueLoaded,
+      boolean rawEndpointUrlParsed,
+      boolean externalRequestSent,
+      boolean connectsManagedAudit,
+      boolean schemaMigrationExecuted,
+      boolean productionRecordWritten) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellFailureMapping(
+      String sourceFailureCode, String shellFailureCode, String mappedAction, boolean retryable) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellGuardCondition(
+      String code, boolean required, boolean value, String message) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellProbe(
+      String requestId,
+      String resolverKind,
+      boolean acceptedByFakeResolver,
+      String responseStatus,
+      String responseCode,
+      boolean resolverClientInstantiated,
+      boolean secretProviderInstantiated,
+      boolean credentialValueRead,
+      boolean credentialValueLoaded,
+      boolean rawEndpointUrlParsed,
+      boolean externalRequestSent,
+      boolean connectsManagedAudit,
+      boolean schemaMigrationExecuted,
+      boolean productionRecordWritten,
+      String probeDigest) {}
+
+  public record RehearsalSandboxEndpointCredentialResolverTestOnlyShellSideEffectBoundary(
+      boolean testOnlyShell,
+      boolean readOnlyContract,
+      boolean fakeResolverOnly,
+      boolean handleOnlyRequest,
+      boolean credentialResolverExecutionAllowed,
+      boolean readyForManagedAuditSandboxAdapterConnection,
+      boolean readyForProductionAudit,
+      boolean readyForProductionWindow,
+      boolean readyForProductionOperations,
+      boolean executionAllowed,
+      boolean connectsManagedAudit,
+      boolean readsManagedAuditCredential,
+      boolean storesManagedAuditCredential,
+      boolean credentialValueRead,
+      boolean credentialValueLoaded,
+      boolean credentialValueStored,
+      boolean credentialValueIncluded,
+      boolean rawEndpointUrlParsed,
+      boolean rawEndpointUrlIncluded,
+      boolean externalRequestSent,
+      boolean secretProviderInstantiated,
+      boolean resolverClientInstantiated,
+      boolean schemaMigrationExecuted,
+      boolean automaticUpstreamStart) {}
+}

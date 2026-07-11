@@ -7,7 +7,6 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $opsRoot = Join-Path $projectRoot 'src/main/java/com/codexdemo/orderplatform/ops'
 $sharedRootKeep = @(
-  'ContextHeaderField.java',
   'OpsEvidenceResponse.java',
   'OpsEvidenceService.java',
   'OpsShardReadinessEvidenceEndpoints.java',
@@ -31,7 +30,7 @@ $bucketRules = @(
   @{ Name = 'ReleaseApprovalSandboxConnection records'; Pattern = '^ReleaseApprovalSandboxConnection|^ReleaseApprovalRehearsalSandboxConnection' },
   @{ Name = 'ReleaseApprovalRehearsal shared hints/request/builders'; Pattern = '^ReleaseApprovalRehearsal' },
   @{ Name = 'ReleaseApprovalVerification hints'; Pattern = '^ReleaseApprovalVerification' },
-  @{ Name = 'ReleaseApproval shared support'; Pattern = '^ReleaseApprovalDigestSupport|^ReleaseApprovalEchoMarkerSupport' },
+  @{ Name = 'ReleaseApproval shared support'; Pattern = '^ReleaseApprovalContextHeaderField|^ReleaseApprovalContractConstants|^ReleaseApprovalDigestSupport|^ReleaseApprovalUpstreamContractConstants' },
   @{ Name = 'OperatorEvidenceValueSupplyAdapterPreflight'; Pattern = '^OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflight' },
   @{ Name = 'OperatorEvidenceValueSupply base'; Pattern = '^OpsShardReadinessOperatorEvidenceValueSupply' },
   @{ Name = 'ComparedEvidenceCandidateBlueprint'; Pattern = '^OpsShardReadinessComparedEvidenceCandidateBlueprint' },
@@ -81,7 +80,7 @@ $controllerCount = ($files | Where-Object { $_.Name -like '*Controller.java' }).
 $sharedCount = ($files | Where-Object { $sharedRootKeep -contains $_.Name }).Count
 $summary = [ordered]@{
   DirectRootJavaFiles = $files.Count
-  TargetFinalDirectRootJavaFiles = 105
+  TargetFinalDirectRootJavaFiles = 104
   RetainedDirectRootFiles = $controllerCount + $sharedCount
   RemainingDirectRootNonControllers = $files.Count - ($controllerCount + $sharedCount)
   UnassignedFiles = @($unassigned)

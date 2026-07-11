@@ -130,22 +130,22 @@ class JavaMaintainabilityBudgetTests {
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessRoutePaths.java", 1111L);
     caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationHintBuilder.java",
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalVerificationHintBuilder.java",
         70L);
     caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationWarningDigestBuilder.java",
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalVerificationWarningDigestBuilder.java",
         421L);
     caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalRehearsalResponseBuilder.java",
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalRehearsalResponseBuilder.java",
         421L);
     caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationSupport.java",
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalVerificationSupport.java",
         412L);
     caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalVerificationHintContributionCatalog.java",
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalVerificationHintContributionCatalog.java",
         382L);
     caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java",
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java",
         793L);
     return Map.copyOf(caps);
   }

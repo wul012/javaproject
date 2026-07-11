@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 
 import com.codexdemo.orderplatform.notification.FailedEventSummaryResponse;
 import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
+import com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalRequest;
 import com.codexdemo.orderplatform.order.IdempotencyStore;
 import com.codexdemo.orderplatform.order.IdempotencyStoreDescriptor;
 import com.codexdemo.orderplatform.outbox.OutboxPublisherProperties;
@@ -73,7 +74,7 @@ public final class OpsEvidenceServiceTestFixtures {
         environment);
   }
 
-  static ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {
+  public static ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {
     return new ReleaseApprovalRehearsalRequest(
         new ReleaseApprovalRehearsalRequest.Context(
             " rehearsal-v67-001 ", " release-operator@example.test ", " audit-correlation-v67 "),
@@ -112,7 +113,7 @@ public final class OpsEvidenceServiceTestFixtures {
             " approval-record-correlation-v210 "));
   }
 
-  static ReleaseApprovalRehearsalRequest headerBackedRehearsalRequest() {
+  public static ReleaseApprovalRehearsalRequest headerBackedRehearsalRequest() {
     return new ReleaseApprovalRehearsalRequest(
         new ReleaseApprovalRehearsalRequest.Context(
             "rehearsal-v67-001", "release-operator@example.test", "audit-correlation-v67"),

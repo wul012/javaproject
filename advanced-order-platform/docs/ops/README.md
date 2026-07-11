@@ -72,6 +72,7 @@ package.
 | `runtime-execution-evidence-extraction-v1851.md` | forty-eighth ops extraction | How did the complete 18-file RuntimeExecution evidence chain move into `ops.maintenance.runtimeexecution`, lower root from 500 to 482, lower movable files from 395 to 377, centralize test graph construction, and unlock ReadOnlyEvidence? |
 | `read-only-evidence-catalog-extraction-v1852.md` | forty-ninth ops extraction | How did the 11-file ReadOnlyEvidence closure move into `ops.maintenance.readonlyevidence`, lower root from 482 to 471, lower movable files from 377 to 366, keep snapshots private, and clear the catalog bucket? |
 | `v1-contract-consumer-alignment-extraction-v1853.md` | fiftieth ops extraction | How did the complete 42-file V1Contract closure move into `ops.maintenance.v1contract`, lower root from 471 to 429, lower movable files from 366 to 324, keep snapshots private, and preserve all eleven route bytes? |
+| `release-approval-closure-extraction-v1854.md` | fifty-first ops extraction | How did the complete 118-file ReleaseApproval closure plus its now-family-specific header helper move into `ops.maintenance.releaseapproval`, lower root from 429 to 310, lower movable files from 324 to 206, retire one root waiver, and replace reverse root-service constant dependencies with two bounded immutable catalogs? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

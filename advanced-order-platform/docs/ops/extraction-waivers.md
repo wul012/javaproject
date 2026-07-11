@@ -10,7 +10,6 @@ appear here.
 
 | File | Why it may remain in root | Reviewer check |
 | --- | --- | --- |
-| `ContextHeaderField.java` | Shared header normalization helper used across multiple readiness and sandbox-connection evidence paths. | `rg -l ContextHeaderField src/main/java src/test/java` should show multiple independent consumers before final closeout. |
 | `OpsEvidenceResponse.java` | Shared evidence response envelope for the root evidence service and extracted evidence families. | `rg -l OpsEvidenceResponse src/main/java src/test/java` should show use outside a single endpoint family. |
 | `OpsEvidenceService.java` | Cross-family evidence assembler consumed by the overview controller and extracted evidence subpackages. | `rg -l OpsEvidenceService src/main/java src/test/java` should remain broad; if it narrows to one family, move it. |
 | `OpsShardReadinessEvidenceEndpoints.java` | Shared endpoint-pair catalog used by v1-contract and read-only evidence snapshots. | `rg -l OpsShardReadinessEvidenceEndpoints src/main/java src/test/java` should show v1-contract plus read-only evidence consumers. |
@@ -25,3 +24,9 @@ bucket and must move under shared evidence support during Phase 1.
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is also not a waiver. It
 moved with the v1840 release-acceptance route-path split base layer and must not
 return to root.
+
+`ContextHeaderField.java` ceased to qualify as a shared-root waiver in v1854.
+Its runtime consumers had narrowed to the ReleaseApproval rehearsal family, so
+it moved as package-private `ReleaseApprovalContextHeaderField.java` with that
+family. Returning the generic helper to root or making it a production-public
+type would reopen a boundary that the v1854 extraction deliberately closed.
