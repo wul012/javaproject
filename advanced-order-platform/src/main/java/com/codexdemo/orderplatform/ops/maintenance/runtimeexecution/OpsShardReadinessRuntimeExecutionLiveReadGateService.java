@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.runtimeexecution;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessRuntimeExecutionLiveReadGateService {
   public static final String ENDPOINT =
       "/api/v1/ops/shard-readiness/runtime-execution-live-read-gate";
-  static final String FIXTURE_ENDPOINT =
+  public static final String FIXTURE_ENDPOINT =
       "/contracts/java-shard-readiness-runtime-execution-live-read-gate-v169.fixture.json";
-  static final String EVIDENCE_PATH =
+  public static final String EVIDENCE_PATH =
       "e/169/evidence/java-shard-readiness-runtime-execution-live-read-gate-v169.json";
 
   private final OpsShardReadinessRuntimeExecutionApprovalInputValueValidationService

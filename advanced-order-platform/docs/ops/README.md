@@ -69,6 +69,7 @@ package.
 | `operator-ci-release-acceptance-extraction-v1848.md` | forty-fifth ops extraction | How did the 25-file ReleaseAcceptance base move into path-safe `ops.maintenance.ciaccept`, lower root from 573 to 548, lower movable files from 468 to 443, and expose Archive through only Service/Response? |
 | `operator-ci-release-acceptance-archive-extraction-v1849.md` | forty-sixth ops extraction | How did the 23-file ReleaseAcceptanceArchive layer move into path-safe `ops.maintenance.ciarc`, lower root from 548 to 525, lower movable files from 443 to 420, and clear the Operator-CI root bucket? |
 | `release-acceptance-archive-verification-handoff-extraction-v1850.md` | forty-seventh ops extraction | How did the 25-file ArchiveVerificationHandoff move into `ops.maintenance.releasearchivehandoff`, lower root from 525 to 500, lower movable files from 420 to 395, and clear its independent census bucket? |
+| `runtime-execution-evidence-extraction-v1851.md` | forty-eighth ops extraction | How did the complete 18-file RuntimeExecution evidence chain move into `ops.maintenance.runtimeexecution`, lower root from 500 to 482, lower movable files from 395 to 377, centralize test graph construction, and unlock ReadOnlyEvidence? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

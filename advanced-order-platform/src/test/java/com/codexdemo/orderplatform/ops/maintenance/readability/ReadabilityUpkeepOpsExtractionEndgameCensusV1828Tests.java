@@ -64,12 +64,14 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "525",
             "420",
             "500",
-            "395");
+            "395",
+            "482",
+            "377");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **500**",
+            "Current direct-root Java files: **482**",
             "Target final direct-root Java files: **105**",
-            "Remaining direct-root non-controller files to move or collapse: **395**",
+            "Remaining direct-root non-controller files to move or collapse: **377**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -100,7 +102,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(500);
+    assertThat(fileNames).hasSize(482);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -112,7 +114,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(105);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(395);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(377);
   }
 
   @Test
@@ -238,11 +240,11 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             matches("^OpsShardReadinessReadOnlyEvidence|^OpsShardReadinessReadOnlyEndpoint")),
         new Bucket(
             "RuntimeExecutionApprovalInputTemplate",
-            4,
+            0,
             matches("^OpsShardReadinessRuntimeExecutionApprovalInputTemplate")),
         new Bucket(
             "RuntimeExecutionApproval/Input residuals",
-            14,
+            0,
             matches(
                 "^OpsShardReadinessRuntimeExecutionApproval|^OpsShardReadinessRuntimeExecutionArtifact|"
                     + "^OpsShardReadinessRuntimeExecutionLive|^OpsShardReadinessRuntimeExecutionPacket|"

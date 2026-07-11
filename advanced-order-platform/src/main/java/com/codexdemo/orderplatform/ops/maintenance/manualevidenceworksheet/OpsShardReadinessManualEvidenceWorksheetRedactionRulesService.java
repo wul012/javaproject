@@ -1,7 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
+import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

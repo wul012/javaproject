@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.runtimeexecution;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -9,9 +9,9 @@ public class OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibility
 
   public static final String ENDPOINT =
       "/api/v1/ops/shard-readiness/runtime-execution-approval-input-template-compatibility-intake";
-  static final String FIXTURE_ENDPOINT =
+  public static final String FIXTURE_ENDPOINT =
       "/contracts/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.fixture.json";
-  static final String EVIDENCE_PATH =
+  public static final String EVIDENCE_PATH =
       "e/167/evidence/java-shard-readiness-runtime-execution-approval-input-template-compatibility-intake-v167.json";
 
   private final OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityService

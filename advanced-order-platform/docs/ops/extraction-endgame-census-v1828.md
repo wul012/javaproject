@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1847, with the original v1828 baseline retained
+- Repository state: live after v1851, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **500**.
+- Current direct-root Java files: **482**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **395**.
+- Remaining direct-root non-controller files to move or collapse: **377**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-500 current root files - 105 final root files = 395 files still to move
+482 current root files - 105 final root files = 377 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -72,15 +72,15 @@ when names overlap, for example controllers inside a large family prefix.
 | SignedApprovalDraftProfileSection | 0 | Finished in v1829. |
 | V1Contract consumer/alignment snapshots | 42 | Move into a v1-contract package while preserving endpoint bytes. |
 | ReadOnlyEvidence catalog snapshots | 11 | Move after v1-contract endpoint pair ownership is clear. |
-| RuntimeExecutionApprovalInputTemplate | 4 | Move before runtime execution residuals. |
-| RuntimeExecutionApproval/Input residuals | 14 | Move as runtime-execution approval/input residuals. |
+| RuntimeExecutionApprovalInputTemplate | 0 | Moved with the complete runtime-execution evidence chain in v1851. |
+| RuntimeExecutionApproval/Input residuals | 0 | Moved as the complete runtime-execution evidence chain in v1851. |
 | ActiveShardPlanHandoff | 2 | Move as a small handoff package. |
 | OpsOverview mini-family | 2 | Move service/response; controller stays root. |
 | PrototypeConsumerGate | 4 | Move as prototype consumer gate. |
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
 | Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
 
-The counted buckets sum to **500** and leave zero unassigned files. The original
+The counted buckets sum to **482** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -392,6 +392,23 @@ The live direct-root count falls from **525 to 500**, the final target remains
 **105**, and the movable backlog falls from **420 to 395**. The independent
 ReleaseAcceptanceArchiveVerificationHandoff bucket falls from **25 to 0**, total
 `ops` Java files stay at **1,352**, and the census reports no unassigned files.
+
+## v1851 progress
+
+v1851 moves the complete eighteen-file RuntimeExecution evidence chain into
+`ops.maintenance.runtimeexecution`. The Spring controller remains root-visible,
+while nine package-local behavior tests move beside the implementation and a
+single public test support becomes the graph-construction owner used by both
+the moved tests and the retained root test factory. No route owner is added:
+the nine byte-identical endpoint literals, fixture paths, and evidence paths
+remain on their existing services and only become public immutable references
+for the still-root evidence catalogs.
+
+The live direct-root count falls from **500 to 482**, the final target remains
+**105**, and the movable backlog falls from **395 to 377**. The two
+RuntimeExecution census buckets fall from **4 + 14 to 0**, total `ops` Java
+files stay at **1,352**, and the census reports no unassigned files. This makes
+the eleven-file ReadOnlyEvidence chain the next dependency-safe extraction.
 
 ## Revision rule
 

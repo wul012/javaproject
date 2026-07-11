@@ -1,5 +1,7 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.runtimeexecution;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleResponse;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +11,9 @@ public class OpsShardReadinessRuntimeExecutionArtifactCandidateService {
 
   public static final String ENDPOINT =
       "/api/v1/ops/shard-readiness/runtime-execution-artifact-candidate";
-  static final String FIXTURE_ENDPOINT =
+  public static final String FIXTURE_ENDPOINT =
       "/contracts/java-shard-readiness-runtime-execution-artifact-candidate-v162.fixture.json";
-  static final String EVIDENCE_PATH =
+  public static final String EVIDENCE_PATH =
       "e/162/evidence/java-shard-readiness-runtime-execution-artifact-candidate-v162.json";
 
   private final OpsShardReadinessDeclaredOperatorLifecycleService declaredOperatorLifecycleService;

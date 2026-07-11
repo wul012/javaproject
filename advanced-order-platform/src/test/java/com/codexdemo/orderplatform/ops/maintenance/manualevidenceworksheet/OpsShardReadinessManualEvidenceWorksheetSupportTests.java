@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessRuntimeExecutionApprovalGateInputService;
+import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalGateInputService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
