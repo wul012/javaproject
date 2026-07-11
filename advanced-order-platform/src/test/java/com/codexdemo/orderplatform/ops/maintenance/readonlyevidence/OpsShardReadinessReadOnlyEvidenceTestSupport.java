@@ -1,11 +1,11 @@
 package com.codexdemo.orderplatform.ops.maintenance.readonlyevidence;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEchoService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceHandoffService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceIndexService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceVerificationService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessHardeningService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEchoService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceIndexService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceVerificationService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessHardeningService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionTestSupport;
 import java.util.List;
 

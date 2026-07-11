@@ -71,12 +71,14 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "429",
             "324",
             "310",
-            "206");
+            "206",
+            "290",
+            "186");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **310**",
+            "Current direct-root Java files: **290**",
             "Target final direct-root Java files: **104**",
-            "Remaining direct-root non-controller files to move or collapse: **206**",
+            "Remaining direct-root non-controller files to move or collapse: **186**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -107,7 +109,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(310);
+    assertThat(fileNames).hasSize(290);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -119,7 +121,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(104);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(206);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(186);
   }
 
   @Test
@@ -255,7 +257,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
                     + "^OpsShardReadinessRuntimeExecutionLive|^OpsShardReadinessRuntimeExecutionPacket|"
                     + "^OpsShardReadinessRuntimeExecutionPass")),
         new Bucket(
-            "ActiveShardPlanHandoff", 2, matches("^OpsShardReadinessActiveShardPlanHandoff")),
+            "ActiveShardPlanHandoff", 0, matches("^OpsShardReadinessActiveShardPlanHandoff")),
         new Bucket("OpsOverview mini-family", 2, matches("^OpsOverview")),
         new Bucket("PrototypeConsumerGate", 4, matches("^OpsShardReadinessPrototypeConsumerGate")),
         new Bucket(
@@ -264,7 +266,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             matches("^OpsShardReadinessPrototype")),
         new Bucket(
             "Readiness core simple endpoints",
-            18,
+            0,
             matches(
                 "^OpsShardReadiness(DeclaredOperatorLifecycle|Echo|EvidenceHandoff|EvidenceIndex|"
                     + "EvidenceVerification|Hardening|LiveReadGatePlan|OperatorServiceLifecycle|"

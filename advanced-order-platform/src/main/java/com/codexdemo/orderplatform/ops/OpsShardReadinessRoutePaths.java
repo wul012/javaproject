@@ -13,6 +13,7 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflig
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive.OpsShardReadinessScreenshotExplanationArchiveRoutePaths;
@@ -39,8 +40,7 @@ import com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualitygate.OpsSh
 
 public final class OpsShardReadinessRoutePaths {
 
-  public static final String BASE_PATH = "/api/v1/ops/shard-readiness";
-
+  public static final String BASE_PATH = OpsShardReadinessService.BASE_PATH;
   public static final String READ_ONLY_EVIDENCE_CATALOG = "/read-only-evidence-catalog";
   public static final String READ_ONLY_EVIDENCE_CATALOG_HANDOFF =
       "/read-only-evidence-catalog-handoff";
@@ -48,9 +48,9 @@ public final class OpsShardReadinessRoutePaths {
       "/read-only-evidence-catalog-handoff-verification";
   public static final String READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY =
       "/read-only-endpoint-registry-integrity";
-  static final String EVIDENCE_INDEX = "/evidence-index";
-  static final String EVIDENCE_VERIFICATION = "/evidence-verification";
-  static final String EVIDENCE_HANDOFF = "/evidence-handoff";
+  static final String EVIDENCE_INDEX = OpsShardReadinessService.EVIDENCE_INDEX_PATH;
+  static final String EVIDENCE_VERIFICATION = OpsShardReadinessService.EVIDENCE_VERIFICATION_PATH;
+  static final String EVIDENCE_HANDOFF = OpsShardReadinessService.EVIDENCE_HANDOFF_PATH;
   public static final String V1_CONTRACT_ALIGNMENT = "/v1-contract-alignment";
   public static final String V1_CONTRACT_ALIGNMENT_HANDOFF = "/v1-contract-alignment-handoff";
   public static final String V1_CONTRACT_EVIDENCE_PACKET = "/v1-contract-evidence-packet";

@@ -16,7 +16,7 @@ class ReadabilityUpkeepGovernanceConsolidationPlanTests {
   private static final Path OPS_SOURCE_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final int MAX_OPS_MAIN_JAVA_FILES = 1352;
-  private static final int MAX_ROOT_OPS_MAIN_JAVA_FILES = 310;
+  private static final int MAX_ROOT_OPS_MAIN_JAVA_FILES = 290;
   private static final int MAX_READINESS_MAIN_JAVA_FILES = 1210;
 
   @Test

@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops.maintenance.v1contract;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessResponse;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessResponse;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessV1ContractAlignmentSnapshotTests {

@@ -16,6 +16,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1852Tests {
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path PACKAGE_ROOT =
       OPS_ROOT.resolve(Path.of("maintenance", "readonlyevidence"));
+  private static final Path READINESS_CORE_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "readinesscore"));
   private static final Path TEST_ROOT =
       Path.of("src", "test", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path PACKAGE_TEST_ROOT =
@@ -178,7 +180,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1852Tests {
   @Test
   void immutableCoreEvidenceReferencesAreExplicitAcrossThePackageBoundary() throws IOException {
     for (String service : CORE_SERVICES) {
-      assertThat(read(OPS_ROOT.resolve(service + ".java")))
+      assertThat(read(READINESS_CORE_ROOT.resolve(service + ".java")))
           .as(service)
           .contains(
               "public static final String ENDPOINT",
@@ -197,7 +199,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1852Tests {
           .doesNotContain("com.codexdemo.orderplatform.ops." + response);
     }
     try (Stream<Path> files = Files.list(OPS_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(310);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(290);
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))

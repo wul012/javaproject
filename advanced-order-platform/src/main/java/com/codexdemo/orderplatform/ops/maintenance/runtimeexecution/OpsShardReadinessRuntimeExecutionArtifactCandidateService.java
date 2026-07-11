@@ -1,7 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.runtimeexecution;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleResponse;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessDeclaredOperatorLifecycleResponse;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessDeclaredOperatorLifecycleService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

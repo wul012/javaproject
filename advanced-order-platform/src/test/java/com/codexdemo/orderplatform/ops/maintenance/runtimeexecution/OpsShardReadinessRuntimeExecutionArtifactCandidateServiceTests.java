@@ -2,13 +2,13 @@ package com.codexdemo.orderplatform.ops.maintenance.runtimeexecution;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessActiveShardPlanHandoffService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceHandoffService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceIndexService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceVerificationService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessLiveReadGatePlanService;
-import com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorServiceLifecycleService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessActiveShardPlanHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessDeclaredOperatorLifecycleService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceIndexService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceVerificationService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessLiveReadGatePlanService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessOperatorServiceLifecycleService;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessRuntimeExecutionArtifactCandidateServiceTests {

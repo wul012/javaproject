@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1854, with the original v1828 baseline retained
+- Repository state: live after v1855, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **310**.
+- Current direct-root Java files: **290**.
 - Target final direct-root Java files: **104**.
-- Remaining direct-root non-controller files to move or collapse: **206**.
+- Remaining direct-root non-controller files to move or collapse: **186**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 3 shared-core waivers = 104 final root files
-310 current root files - 104 final root files = 206 files still to move
+290 current root files - 104 final root files = 186 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -74,13 +74,13 @@ when names overlap, for example controllers inside a large family prefix.
 | ReadOnlyEvidence catalog snapshots | 0 | Moved after RuntimeExecution in v1852; snapshots remain package-private behind test support. |
 | RuntimeExecutionApprovalInputTemplate | 0 | Moved with the complete runtime-execution evidence chain in v1851. |
 | RuntimeExecutionApproval/Input residuals | 0 | Moved as the complete runtime-execution evidence chain in v1851. |
-| ActiveShardPlanHandoff | 2 | Move as a small handoff package. |
+| ActiveShardPlanHandoff | 0 | Moved with the complete readiness core in v1855. |
 | OpsOverview mini-family | 2 | Move service/response; controller stays root. |
 | PrototypeConsumerGate | 4 | Move as prototype consumer gate. |
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
-| Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
+| Readiness core simple endpoints | 0 | Moved with ActiveShardPlanHandoff as one closed package in v1855. |
 
-The counted buckets sum to **310** and leave zero unassigned files. The original
+The counted buckets sum to **290** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -92,12 +92,12 @@ ratchet tightened, and Chinese walkthrough written before final verify.
 
 Recommended near-term order:
 
-1. Move the compared-evidence and compared-package buckets while their
-   endpoint dependencies are still easy to audit.
-2. Move the release-acceptance route-path split track as its own multi-version
-   effort.
-3. Leave the `RouteCleanup` web until route owner, endpoint reader, and
-   aggregation proof are explicit.
+1. Move the 12-file Prototype implementation closure after its readiness-core
+   dependency, while retaining its three controllers.
+2. Start the `RouteCleanup` web with a package-owned route table and a closed
+   evidence/maintenance dependency slice.
+3. Leave the two static-release and two OpsOverview support files for a later
+   coherent composition-support decision; do not create tiny filler versions.
 
 Every five extraction batches after this census need a checkpoint review unless
 the user explicitly changes the review cadence.
@@ -475,6 +475,25 @@ movable backlog falls from **324 to 206**. All eight ReleaseApproval buckets
 fall from a combined **118 to 0**, the census reports zero unassigned files,
 and no route, response, evidence, fixture, side-effect, deployment, rollback,
 or archive byte changes.
+
+## v1855 progress
+
+v1855 moves the ten-pair readiness core into
+`ops.maintenance.readinesscore`: the base readiness pair, eight named
+readiness endpoint pairs, and the ActiveShardPlanHandoff pair. Ten package
+behavior tests follow the implementation. Three Spring controllers, the
+global evidence endpoint registry, the global route aggregator, historical
+snapshot tests, and cross-family prototype tests remain at the composition
+root and import the public immutable boundary.
+
+The base readiness service now owns the base route and three evidence suffix
+constants. Evidence index, verification, and handoff compose those constants
+without importing the root aggregator; `OpsShardReadinessRoutePaths` delegates
+its existing fields back to the family owner. Route and fixture bytes remain
+unchanged. The live direct-root count falls from **310 to 290**, the movable
+backlog falls from **206 to 186**, both readiness buckets fall to **0**, total
+`ops` main Java stays at **1,352**, and the census reports zero unassigned
+files.
 
 ## Revision rule
 

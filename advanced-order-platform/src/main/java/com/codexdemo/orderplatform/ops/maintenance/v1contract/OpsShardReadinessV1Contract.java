@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.v1contract;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessResponse;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessResponse;
 import java.util.List;
 
 public final class OpsShardReadinessV1Contract {

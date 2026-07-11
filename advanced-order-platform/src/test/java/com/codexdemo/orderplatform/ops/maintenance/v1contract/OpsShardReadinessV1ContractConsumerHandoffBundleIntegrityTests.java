@@ -2,8 +2,8 @@ package com.codexdemo.orderplatform.ops.maintenance.v1contract;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessEchoService;
 import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceEndpointsTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEchoService;
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
 import org.junit.jupiter.api.Test;
