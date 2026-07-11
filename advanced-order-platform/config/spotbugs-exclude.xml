@@ -976,47 +976,47 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentHandoffResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentHandoffResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerEvidenceDigestResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerEvidenceDigestResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerHandoffBundleResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerHandoffBundleResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerProbePlanResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerProbePlanResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerVerificationChecklistResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerVerificationChecklistResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEndpointCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEndpointCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEvidencePacketResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEvidencePacketResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractHandoffManifestResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractHandoffManifestResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractOperatorChecklistResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractOperatorChecklistResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -2328,47 +2328,47 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentHandoffResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentHandoffResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractAlignmentResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerEvidenceDigestResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerEvidenceDigestResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerHandoffBundleResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerHandoffBundleResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerProbePlanResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerProbePlanResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerReadinessHandoffResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractConsumerVerificationChecklistResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerVerificationChecklistResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEndpointCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEndpointCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractEvidencePacketResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEvidencePacketResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractHandoffManifestResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractHandoffManifestResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessV1ContractOperatorChecklistResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractOperatorChecklistResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />

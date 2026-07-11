@@ -1,0 +1,95 @@
+package com.codexdemo.orderplatform.ops.maintenance.v1contract;
+
+import static com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.receipt;
+
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt;
+import java.util.List;
+
+final class OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffSeedReceipts {
+
+  private OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffSeedReceipts() {}
+
+  static List<Receipt> receipts() {
+    return List.of(
+        receipt(
+            226,
+            "snapshot freeze",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_SNAPSHOT_FREEZE_EVIDENCE_PATH),
+        receipt(
+            227,
+            "historical compatibility",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_HISTORICAL_COMPATIBILITY_EVIDENCE_PATH),
+        receipt(
+            228,
+            "integrity",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_INTEGRITY_EVIDENCE_PATH),
+        receipt(
+            229,
+            "route inventory",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_ROUTE_INVENTORY_EVIDENCE_PATH),
+        receipt(
+            230,
+            "evidence chain",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_EVIDENCE_CHAIN_EVIDENCE_PATH),
+        receipt(
+            231,
+            "ops evidence alignment",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_OPS_EVIDENCE_ALIGNMENT_EVIDENCE_PATH),
+        receipt(
+            232,
+            "controller mapping",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_CONTROLLER_MAPPING_EVIDENCE_PATH),
+        receipt(
+            233,
+            "fixture parity",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_FIXTURE_PARITY_EVIDENCE_PATH),
+        receipt(
+            234,
+            "boundary matrix",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_BOUNDARY_MATRIX_EVIDENCE_PATH),
+        receipt(
+            235,
+            "endpoint adjacency",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_ENDPOINT_ADJACENCY_EVIDENCE_PATH),
+        receipt(
+            236,
+            "receipt uniqueness",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_RECEIPT_UNIQUENESS_EVIDENCE_PATH),
+        receipt(
+            237,
+            "node consumer boundary",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_NODE_CONSUMER_BOUNDARY_EVIDENCE_PATH),
+        receipt(
+            238,
+            "artifact presence",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_ARTIFACT_PRESENCE_EVIDENCE_PATH),
+        receipt(
+            239,
+            "completion",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_COMPLETION_EVIDENCE_PATH),
+        receipt(
+            240,
+            "legacy registry alignment",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_LEGACY_REGISTRY_ALIGNMENT_EVIDENCE_PATH),
+        receipt(
+            241,
+            "post handoff catalog",
+            OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+                .CONSUMER_READINESS_HANDOFF_POST_HANDOFF_CATALOG_EVIDENCE_PATH));
+  }
+}

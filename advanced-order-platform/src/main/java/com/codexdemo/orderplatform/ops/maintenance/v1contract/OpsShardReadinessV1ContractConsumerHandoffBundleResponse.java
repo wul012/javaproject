@@ -1,0 +1,37 @@
+package com.codexdemo.orderplatform.ops.maintenance.v1contract;
+
+import java.util.List;
+
+public record OpsShardReadinessV1ContractConsumerHandoffBundleResponse(
+    String project,
+    String version,
+    String contractName,
+    boolean readOnly,
+    boolean executionAllowed,
+    boolean shardEnabled,
+    String handoffBundleEndpoint,
+    String handoffBundleFixtureEndpoint,
+    String endpointCatalogEndpoint,
+    String endpointCatalogFixtureEndpoint,
+    String endpointCatalogEvidencePath,
+    String endpointCatalogReceiptId,
+    int catalogedArtifactCount,
+    List<String> consumerReadTargets,
+    List<String> fixtureReadTargets,
+    List<String> requiredEvidence,
+    List<String> handoffEvidence,
+    List<String> blockedOperations,
+    boolean probesAreGetOnly,
+    boolean upstreamActionsAllowed,
+    boolean startsJavaService,
+    boolean startsMiniKvService,
+    boolean writeRoutingAllowed,
+    boolean activeShardRouterAllowed,
+    boolean credentialValueRead,
+    boolean rawEndpointParsed,
+    boolean managedAuditConnectionAllowed,
+    boolean deploymentOrRollbackAllowed,
+    boolean nodeMayStartOrStopJavaOrMiniKv,
+    String receiptId,
+    String evidencePath,
+    String status) {}

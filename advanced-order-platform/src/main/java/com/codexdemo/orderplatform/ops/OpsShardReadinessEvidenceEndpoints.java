@@ -13,6 +13,7 @@ import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardRead
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionLiveReadGateService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionPacketContributionService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEndpointPairs;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,9 @@ final class OpsShardReadinessEvidenceEndpoints {
     endpointPairs.add(
         endpointPair(
             OpsShardReadinessEchoService.ENDPOINT, OpsShardReadinessEchoService.FIXTURE_ENDPOINT));
-    endpointPairs.addAll(OpsShardReadinessV1ContractEndpointPairs.endpointPairs());
+    OpsShardReadinessV1ContractEndpointPairs.endpointPairs().stream()
+        .map(pair -> endpointPair(pair.liveEndpoint(), pair.fixtureEndpoint()))
+        .forEach(endpointPairs::add);
     endpointPairs.add(
         endpointPair(
             OpsShardReadinessReadOnlyEvidenceCatalogService.ENDPOINT,

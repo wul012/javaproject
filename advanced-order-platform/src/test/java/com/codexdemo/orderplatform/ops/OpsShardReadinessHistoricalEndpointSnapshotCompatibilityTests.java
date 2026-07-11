@@ -4,6 +4,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEndpointRegistryIntegrityService;
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerEvidenceDigestResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerEvidenceDigestService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerHandoffBundleResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerHandoffBundleService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerProbePlanResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerProbePlanService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerVerificationChecklistResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerVerificationChecklistService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEndpointCatalogResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEndpointCatalogService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEvidencePacketResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEvidencePacketService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractHandoffManifestResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractHandoffManifestService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractOperatorChecklistResponse;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractOperatorChecklistService;
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractTestSupport;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
@@ -75,9 +96,9 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
     assertThat(OpsShardReadinessReadOnlyEvidenceTestSupport.v184FixtureEndpoints())
         .doesNotContain(OpsShardReadinessV1ContractAlignmentService.FIXTURE_ENDPOINT);
 
-    assertThat(OpsShardReadinessV1ContractAlignmentSnapshot.v187SourceEndpoint())
+    assertThat(OpsShardReadinessV1ContractTestSupport.v187SourceEndpoint())
         .isEqualTo(OpsShardReadinessService.ENDPOINT);
-    assertThat(OpsShardReadinessV1ContractAlignmentSnapshot.v187MinimalFields()).hasSize(10);
+    assertThat(OpsShardReadinessV1ContractTestSupport.v187MinimalFields()).hasSize(10);
   }
 
   @Test
@@ -92,11 +113,9 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
     assertThat(OpsShardReadinessReadOnlyEvidenceTestSupport.v184FixtureEndpoints())
         .doesNotContain(OpsShardReadinessV1ContractAlignmentHandoffService.FIXTURE_ENDPOINT);
 
-    assertThat(OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190SourceAlignment().version())
+    assertThat(OpsShardReadinessV1ContractTestSupport.v190SourceAlignment().version())
         .isEqualTo("Java v187");
-    assertThat(
-            OpsShardReadinessV1ContractAlignmentHandoffSnapshot.v190HistoricalSnapshotsProtected())
-        .isTrue();
+    assertThat(OpsShardReadinessV1ContractTestSupport.v190HistoricalSnapshotsProtected()).isTrue();
   }
 
   @Test
@@ -112,17 +131,16 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
         .doesNotContain(OpsShardReadinessV1ContractEvidencePacketService.FIXTURE_ENDPOINT);
 
     OpsShardReadinessV1ContractEvidencePacketResponse packet =
-        OpsShardReadinessV1ContractEvidencePacketSnapshot.v193Packet();
+        OpsShardReadinessV1ContractTestSupport.v193Packet();
     assertThat(packet.version()).isEqualTo("Java v193");
     assertThat(packet.evidenceChain())
-        .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractEvidencePacketSnapshot.v193EvidenceChain());
+        .containsExactlyElementsOf(OpsShardReadinessV1ContractTestSupport.v193EvidenceChain());
     assertThat(packet.nodeConsumableEndpoints())
         .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractEvidencePacketSnapshot.v193NodeConsumableEndpoints());
+            OpsShardReadinessV1ContractTestSupport.v193NodeConsumableEndpoints());
     assertThat(packet.nodeConsumableFixtureEndpoints())
         .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractEvidencePacketSnapshot.v193NodeConsumableFixtureEndpoints());
+            OpsShardReadinessV1ContractTestSupport.v193NodeConsumableFixtureEndpoints());
   }
 
   @Test
@@ -138,18 +156,17 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
         .doesNotContain(OpsShardReadinessV1ContractOperatorChecklistService.FIXTURE_ENDPOINT);
 
     OpsShardReadinessV1ContractOperatorChecklistResponse checklist =
-        OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196Checklist();
+        OpsShardReadinessV1ContractTestSupport.v196Checklist();
     OpsShardReadinessV1ContractEvidencePacketResponse packet =
-        OpsShardReadinessV1ContractEvidencePacketSnapshot.v193Packet();
+        OpsShardReadinessV1ContractTestSupport.v193Packet();
     assertThat(checklist.version()).isEqualTo("Java v196");
     assertThat(checklist.packetEndpoint()).isEqualTo(packet.packetEndpoint());
     assertThat(checklist.requiredReadOnlyEvidence())
         .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196RequiredReadOnlyEvidence(
-                packet));
+            OpsShardReadinessV1ContractTestSupport.v196RequiredReadOnlyEvidence(packet));
     assertThat(checklist.operatorChecklistItems())
         .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196OperatorChecklistItems());
+            OpsShardReadinessV1ContractTestSupport.v196OperatorChecklistItems());
   }
 
   @Test
@@ -165,17 +182,17 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
         .doesNotContain(OpsShardReadinessV1ContractHandoffManifestService.FIXTURE_ENDPOINT);
 
     OpsShardReadinessV1ContractHandoffManifestResponse manifest =
-        OpsShardReadinessV1ContractHandoffManifestSnapshot.v199Manifest();
+        OpsShardReadinessV1ContractTestSupport.v199Manifest();
     OpsShardReadinessV1ContractOperatorChecklistResponse checklist =
-        OpsShardReadinessV1ContractOperatorChecklistSnapshot.v196Checklist();
+        OpsShardReadinessV1ContractTestSupport.v196Checklist();
     assertThat(manifest.version()).isEqualTo("Java v199");
     assertThat(manifest.checklistEndpoint()).isEqualTo(checklist.checklistEndpoint());
     assertThat(manifest.prerequisiteEvidence())
         .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractHandoffManifestSnapshot.v199PrerequisiteEvidence(checklist));
+            OpsShardReadinessV1ContractTestSupport.v199PrerequisiteEvidence(checklist));
     assertThat(manifest.consumerReadTargets())
         .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractHandoffManifestSnapshot.v199ConsumerReadTargets(checklist));
+            OpsShardReadinessV1ContractTestSupport.v199ConsumerReadTargets(checklist));
   }
 
   @Test
@@ -191,17 +208,16 @@ class OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests {
         .doesNotContain(OpsShardReadinessV1ContractConsumerProbePlanService.FIXTURE_ENDPOINT);
 
     OpsShardReadinessV1ContractConsumerProbePlanResponse probePlan =
-        OpsShardReadinessV1ContractConsumerProbePlanSnapshot.v202ProbePlan();
+        OpsShardReadinessV1ContractTestSupport.v202ProbePlan();
     OpsShardReadinessV1ContractHandoffManifestResponse manifest =
-        OpsShardReadinessV1ContractHandoffManifestSnapshot.v199Manifest();
+        OpsShardReadinessV1ContractTestSupport.v199Manifest();
     assertThat(probePlan.version()).isEqualTo("Java v202");
     assertThat(probePlan.manifestEndpoint()).isEqualTo(manifest.manifestEndpoint());
     assertThat(probePlan.readTargets())
         .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractConsumerProbePlanSnapshot.v202ReadTargets(manifest));
+            OpsShardReadinessV1ContractTestSupport.v202ReadTargets(manifest));
     assertThat(probePlan.stopConditions())
-        .containsExactlyElementsOf(
-            OpsShardReadinessV1ContractConsumerProbePlanSnapshot.v202StopConditions());
+        .containsExactlyElementsOf(OpsShardReadinessV1ContractTestSupport.v202StopConditions());
   }
 
   @Test

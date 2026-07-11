@@ -1,5 +1,6 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1Contract;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,198 +12,194 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessPrototypeHandoffService {
 
-    static final String CATALOG_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG;
-    static final String ENDPOINT_INVENTORY_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY;
-    static final String BOUNDARY_MATRIX_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX;
-    static final String CONSUMER_VERIFICATION_CHECKLIST_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths
-                            .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST;
-    static final String READ_WINDOW_CHECKLIST_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST;
-    static final String DIGEST_MANIFEST_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST;
-    static final String CI_MANIFEST_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST;
-    static final String ARCHIVE_MANIFEST_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST;
-    static final String OPERATOR_SIGNOFF_PACKET_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths
-                            .SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET;
-    static final String CLOSEOUT_ENDPOINT =
-            OpsShardReadinessRoutePaths.BASE_PATH
-                    + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT;
+  static final String CATALOG_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG;
+  static final String ENDPOINT_INVENTORY_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY;
+  static final String BOUNDARY_MATRIX_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX;
+  static final String CONSUMER_VERIFICATION_CHECKLIST_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths
+              .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST;
+  static final String READ_WINDOW_CHECKLIST_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST;
+  static final String DIGEST_MANIFEST_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST;
+  static final String CI_MANIFEST_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST;
+  static final String ARCHIVE_MANIFEST_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST;
+  static final String OPERATOR_SIGNOFF_PACKET_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET;
+  static final String CLOSEOUT_ENDPOINT =
+      OpsShardReadinessRoutePaths.BASE_PATH
+          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT;
 
-    private static final String PROJECT = "advanced-order-platform";
+  private static final String PROJECT = "advanced-order-platform";
 
-    private static final String CATALOG_PROFILE = "java-shard-readiness-prototype-handoff-catalog.v1";
+  private static final String CATALOG_PROFILE = "java-shard-readiness-prototype-handoff-catalog.v1";
 
-    private final OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService;
+  private final OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService;
 
-    public OpsShardReadinessPrototypeHandoffService(
-            OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService
-    ) {
-        this.prototypeEvidenceService = prototypeEvidenceService;
+  public OpsShardReadinessPrototypeHandoffService(
+      OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService) {
+    this.prototypeEvidenceService = prototypeEvidenceService;
+  }
+
+  @Transactional(readOnly = true)
+  public OpsShardReadinessPrototypeHandoffCatalogResponse catalog() {
+    OpsShardReadinessPrototypeCatalogResponse sourceCatalog = prototypeEvidenceService.catalog();
+    OpsShardReadinessPrototypeEvidenceResponse sourceCloseout = prototypeEvidenceService.closeout();
+    List<OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry> entries =
+        OpsShardReadinessPrototypeHandoffEvidenceCatalog.entries();
+    return new OpsShardReadinessPrototypeHandoffCatalogResponse(
+        PROJECT,
+        entries.getLast().version(),
+        true,
+        false,
+        CATALOG_ENDPOINT,
+        CATALOG_PROFILE,
+        sourceCloseout.version(),
+        sourceCloseout.endpoint(),
+        OpsShardReadinessV1Contract.CONTRACT_NAME,
+        entries.size(),
+        entries,
+        forbiddenOperations(),
+        catalogStatus(sourceCatalog, sourceCloseout, entries));
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse endpointInventory() {
+    return evidence("handoff-endpoint-inventory");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse boundaryMatrix() {
+    return evidence("handoff-boundary-matrix");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse consumerVerificationChecklist() {
+    return evidence("handoff-consumer-verification-checklist");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse readWindowChecklist() {
+    return evidence("handoff-read-window-checklist");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse digestManifest() {
+    return evidence("handoff-digest-manifest");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse ciManifest() {
+    return evidence("handoff-ci-manifest");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse archiveManifest() {
+    return evidence("handoff-archive-manifest");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse operatorSignoffPacket() {
+    return evidence("handoff-operator-signoff-packet");
+  }
+
+  public OpsShardReadinessPrototypeHandoffEvidenceResponse closeout() {
+    return evidence("handoff-closeout");
+  }
+
+  OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {
+    OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry entry =
+        OpsShardReadinessPrototypeHandoffEvidenceCatalog.entryFor(key);
+    OpsShardReadinessPrototypeCatalogResponse sourceCatalog = prototypeEvidenceService.catalog();
+    OpsShardReadinessPrototypeEvidenceResponse sourceCloseout = prototypeEvidenceService.closeout();
+    List<String> evidenceRefs =
+        List.of(
+            "prototype-catalog:" + sourceCatalog.endpoint(),
+            "prototype-closeout:" + sourceCloseout.endpoint(),
+            "prototype-closeout-evidence:" + sourceCloseout.evidencePath());
+    return new OpsShardReadinessPrototypeHandoffEvidenceResponse(
+        PROJECT,
+        entry.version(),
+        true,
+        false,
+        entry.endpoint(),
+        entry.profile(),
+        entry.key(),
+        entry.phase(),
+        entry.nodePlanVersion(),
+        sourceCatalog.version(),
+        sourceCloseout.version(),
+        OpsShardReadinessV1Contract.CONTRACT_NAME,
+        evidenceRefs.size(),
+        evidenceRefs,
+        entry.checks(),
+        forbiddenOperations(),
+        digest(entry, sourceCatalog, sourceCloseout),
+        entry.evidencePath(),
+        evidenceStatus(sourceCatalog, sourceCloseout));
+  }
+
+  private List<String> forbiddenOperations() {
+    return List.of(
+        "write-routing",
+        "active-shard-router",
+        "credential-value-read",
+        "raw-endpoint-parse",
+        "managed-audit-connection",
+        "deployment-or-rollback",
+        "node-start-or-stop-java-or-mini-kv");
+  }
+
+  private String catalogStatus(
+      OpsShardReadinessPrototypeCatalogResponse sourceCatalog,
+      OpsShardReadinessPrototypeEvidenceResponse sourceCloseout,
+      List<OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry> entries) {
+    boolean passed =
+        "passed".equals(sourceCatalog.status())
+            && "passed".equals(sourceCloseout.status())
+            && !entries.isEmpty()
+            && entries.stream().allMatch(entry -> !entry.checks().isEmpty());
+    return passed ? "passed" : "blocked";
+  }
+
+  private String evidenceStatus(
+      OpsShardReadinessPrototypeCatalogResponse sourceCatalog,
+      OpsShardReadinessPrototypeEvidenceResponse sourceCloseout) {
+    boolean passed =
+        "passed".equals(sourceCatalog.status())
+            && sourceCatalog.readOnly()
+            && !sourceCatalog.executionAllowed()
+            && "passed".equals(sourceCloseout.status())
+            && sourceCloseout.readOnly()
+            && !sourceCloseout.executionAllowed();
+    return passed ? "passed" : "blocked";
+  }
+
+  private String digest(
+      OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry entry,
+      OpsShardReadinessPrototypeCatalogResponse sourceCatalog,
+      OpsShardReadinessPrototypeEvidenceResponse sourceCloseout) {
+    String material =
+        String.join(
+            "|",
+            entry.version(),
+            entry.key(),
+            entry.profile(),
+            sourceCatalog.version(),
+            sourceCloseout.version(),
+            sourceCloseout.digestValue(),
+            entry.evidencePath());
+    try {
+      MessageDigest digest = MessageDigest.getInstance("SHA-256");
+      return HexFormat.of().formatHex(digest.digest(material.getBytes(StandardCharsets.UTF_8)));
+    } catch (NoSuchAlgorithmException ex) {
+      throw new IllegalStateException("SHA-256 digest is not available", ex);
     }
-
-    @Transactional(readOnly = true)
-    public OpsShardReadinessPrototypeHandoffCatalogResponse catalog() {
-        OpsShardReadinessPrototypeCatalogResponse sourceCatalog = prototypeEvidenceService.catalog();
-        OpsShardReadinessPrototypeEvidenceResponse sourceCloseout = prototypeEvidenceService.closeout();
-        List<OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry> entries =
-                OpsShardReadinessPrototypeHandoffEvidenceCatalog.entries();
-        return new OpsShardReadinessPrototypeHandoffCatalogResponse(
-                PROJECT,
-                entries.getLast().version(),
-                true,
-                false,
-                CATALOG_ENDPOINT,
-                CATALOG_PROFILE,
-                sourceCloseout.version(),
-                sourceCloseout.endpoint(),
-                OpsShardReadinessV1Contract.CONTRACT_NAME,
-                entries.size(),
-                entries,
-                forbiddenOperations(),
-                catalogStatus(sourceCatalog, sourceCloseout, entries)
-        );
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse endpointInventory() {
-        return evidence("handoff-endpoint-inventory");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse boundaryMatrix() {
-        return evidence("handoff-boundary-matrix");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse consumerVerificationChecklist() {
-        return evidence("handoff-consumer-verification-checklist");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse readWindowChecklist() {
-        return evidence("handoff-read-window-checklist");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse digestManifest() {
-        return evidence("handoff-digest-manifest");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse ciManifest() {
-        return evidence("handoff-ci-manifest");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse archiveManifest() {
-        return evidence("handoff-archive-manifest");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse operatorSignoffPacket() {
-        return evidence("handoff-operator-signoff-packet");
-    }
-
-    public OpsShardReadinessPrototypeHandoffEvidenceResponse closeout() {
-        return evidence("handoff-closeout");
-    }
-
-    OpsShardReadinessPrototypeHandoffEvidenceResponse evidence(String key) {
-        OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry entry =
-                OpsShardReadinessPrototypeHandoffEvidenceCatalog.entryFor(key);
-        OpsShardReadinessPrototypeCatalogResponse sourceCatalog = prototypeEvidenceService.catalog();
-        OpsShardReadinessPrototypeEvidenceResponse sourceCloseout = prototypeEvidenceService.closeout();
-        List<String> evidenceRefs = List.of(
-                "prototype-catalog:" + sourceCatalog.endpoint(),
-                "prototype-closeout:" + sourceCloseout.endpoint(),
-                "prototype-closeout-evidence:" + sourceCloseout.evidencePath()
-        );
-        return new OpsShardReadinessPrototypeHandoffEvidenceResponse(
-                PROJECT,
-                entry.version(),
-                true,
-                false,
-                entry.endpoint(),
-                entry.profile(),
-                entry.key(),
-                entry.phase(),
-                entry.nodePlanVersion(),
-                sourceCatalog.version(),
-                sourceCloseout.version(),
-                OpsShardReadinessV1Contract.CONTRACT_NAME,
-                evidenceRefs.size(),
-                evidenceRefs,
-                entry.checks(),
-                forbiddenOperations(),
-                digest(entry, sourceCatalog, sourceCloseout),
-                entry.evidencePath(),
-                evidenceStatus(sourceCatalog, sourceCloseout)
-        );
-    }
-
-    private List<String> forbiddenOperations() {
-        return List.of(
-                "write-routing",
-                "active-shard-router",
-                "credential-value-read",
-                "raw-endpoint-parse",
-                "managed-audit-connection",
-                "deployment-or-rollback",
-                "node-start-or-stop-java-or-mini-kv"
-        );
-    }
-
-    private String catalogStatus(
-            OpsShardReadinessPrototypeCatalogResponse sourceCatalog,
-            OpsShardReadinessPrototypeEvidenceResponse sourceCloseout,
-            List<OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry> entries
-    ) {
-        boolean passed = "passed".equals(sourceCatalog.status())
-                && "passed".equals(sourceCloseout.status())
-                && !entries.isEmpty()
-                && entries.stream().allMatch(entry -> !entry.checks().isEmpty());
-        return passed ? "passed" : "blocked";
-    }
-
-    private String evidenceStatus(
-            OpsShardReadinessPrototypeCatalogResponse sourceCatalog,
-            OpsShardReadinessPrototypeEvidenceResponse sourceCloseout
-    ) {
-        boolean passed = "passed".equals(sourceCatalog.status())
-                && sourceCatalog.readOnly()
-                && !sourceCatalog.executionAllowed()
-                && "passed".equals(sourceCloseout.status())
-                && sourceCloseout.readOnly()
-                && !sourceCloseout.executionAllowed();
-        return passed ? "passed" : "blocked";
-    }
-
-    private String digest(
-            OpsShardReadinessPrototypeHandoffEvidenceCatalog.Entry entry,
-            OpsShardReadinessPrototypeCatalogResponse sourceCatalog,
-            OpsShardReadinessPrototypeEvidenceResponse sourceCloseout
-    ) {
-        String material = String.join("|",
-                entry.version(),
-                entry.key(),
-                entry.profile(),
-                sourceCatalog.version(),
-                sourceCloseout.version(),
-                sourceCloseout.digestValue(),
-                entry.evidencePath());
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            return HexFormat.of().formatHex(digest.digest(material.getBytes(StandardCharsets.UTF_8)));
-        } catch (NoSuchAlgorithmException ex) {
-            throw new IllegalStateException("SHA-256 digest is not available", ex);
-        }
-    }
+  }
 }

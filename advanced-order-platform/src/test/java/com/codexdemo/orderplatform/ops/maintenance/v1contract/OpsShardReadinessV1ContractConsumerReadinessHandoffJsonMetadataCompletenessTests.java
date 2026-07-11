@@ -1,0 +1,47 @@
+package com.codexdemo.orderplatform.ops.maintenance.v1contract;
+
+import static com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffArchiveTestSupport.evidenceJson;
+import static com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.assertEvidencePath;
+import static com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerReadinessHandoffCatalogTestSupport.receipts;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+class OpsShardReadinessV1ContractConsumerReadinessHandoffJsonMetadataCompletenessTests {
+
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+  private static final List<String> REQUIRED_FIELDS =
+      List.of(
+          "receiptId", "version", "status", "scope", "summary", "guards", "validation", "boundary");
+
+  @Test
+  void keepsEveryCatalogEvidenceJsonWithCoreMetadataFields() throws IOException {
+    for (OpsShardReadinessV1ContractConsumerReadinessHandoffPostHandoffEvidenceCatalog.Receipt
+        receipt : receipts()) {
+      JsonNode evidence = OBJECT_MAPPER.readTree(evidenceJson(receipt).toFile());
+
+      assertThat(REQUIRED_FIELDS)
+          .as(receipt.evidencePath())
+          .allSatisfy(field -> assertThat(evidence.hasNonNull(field)).as(field).isTrue());
+      assertThat(evidence.path("receiptId").asText())
+          .as(receipt.evidencePath())
+          .contains("v" + receipt.version());
+      assertThat(evidence.path("version").asText())
+          .as(receipt.evidencePath())
+          .isEqualTo("Java v" + receipt.version());
+    }
+  }
+
+  @Test
+  void keepsJsonMetadataCompletenessPathVersionedToV268() {
+    assertEvidencePath(
+        OpsShardReadinessV1ContractConsumerReadinessHandoffEvidencePaths
+            .CONSUMER_READINESS_HANDOFF_JSON_METADATA_COMPLETENESS_EVIDENCE_PATH,
+        268,
+        "json-metadata-completeness");
+  }
+}

@@ -71,6 +71,7 @@ package.
 | `release-acceptance-archive-verification-handoff-extraction-v1850.md` | forty-seventh ops extraction | How did the 25-file ArchiveVerificationHandoff move into `ops.maintenance.releasearchivehandoff`, lower root from 525 to 500, lower movable files from 420 to 395, and clear its independent census bucket? |
 | `runtime-execution-evidence-extraction-v1851.md` | forty-eighth ops extraction | How did the complete 18-file RuntimeExecution evidence chain move into `ops.maintenance.runtimeexecution`, lower root from 500 to 482, lower movable files from 395 to 377, centralize test graph construction, and unlock ReadOnlyEvidence? |
 | `read-only-evidence-catalog-extraction-v1852.md` | forty-ninth ops extraction | How did the 11-file ReadOnlyEvidence closure move into `ops.maintenance.readonlyevidence`, lower root from 482 to 471, lower movable files from 377 to 366, keep snapshots private, and clear the catalog bucket? |
+| `v1-contract-consumer-alignment-extraction-v1853.md` | fiftieth ops extraction | How did the complete 42-file V1Contract closure move into `ops.maintenance.v1contract`, lower root from 471 to 429, lower movable files from 366 to 324, keep snapshots private, and preserve all eleven route bytes? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary
