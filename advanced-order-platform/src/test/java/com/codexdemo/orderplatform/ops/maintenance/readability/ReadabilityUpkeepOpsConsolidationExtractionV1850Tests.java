@@ -10,66 +10,66 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
+class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
 
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
-  private static final Path PACKAGE_ROOT = OPS_ROOT.resolve(Path.of("maintenance", "ciaccept"));
-  private static final Path ARCHIVE_PACKAGE_ROOT =
-      OPS_ROOT.resolve(Path.of("maintenance", "ciarc"));
+  private static final Path PACKAGE_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "releasearchivehandoff"));
   private static final Path TEST_ROOT =
       Path.of("src", "test", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path PACKAGE_TEST_ROOT =
-      TEST_ROOT.resolve(Path.of("maintenance", "ciaccept"));
+      TEST_ROOT.resolve(Path.of("maintenance", "releasearchivehandoff"));
+  private static final Path ROUTE_SPLIT_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "releaseacceptanceroutepathsplit"));
   private static final Path DOC =
-      Path.of("docs", "ops", "operator-ci-release-acceptance-extraction-v1848.md");
+      Path.of("docs", "ops", "release-acceptance-archive-verification-handoff-extraction-v1850.md");
   private static final Path WALKTHROUGH =
       Path.of(
           "代码讲解记录_生产雏形阶段6",
           "v1848-v1852",
-          "version-1848-production-excellence-operator-ci-release-acceptance-extraction.md");
-  private static final String PACKAGE_IMPORT = "ops.maintenance.ciaccept";
+          "version-1850-production-excellence-release-acceptance-archive-verification-handoff-extraction.md");
+  private static final String PACKAGE_IMPORT = "ops.maintenance.releasearchivehandoff";
   private static final String PREFIX =
-      "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptance";
+      "OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoff";
   private static final List<String> MOVED_FILES =
       List.of(
-          PREFIX + "BoundaryControlCatalog.java",
+          PREFIX + "ArtifactCatalog.java",
+          PREFIX + "ArtifactRenderer.java",
+          PREFIX + "BoundaryCatalog.java",
           PREFIX + "BoundaryRenderer.java",
-          PREFIX + "CiReplayCatalog.java",
-          PREFIX + "CiReplayRenderer.java",
+          PREFIX + "CiCatalog.java",
+          PREFIX + "CiRenderer.java",
           PREFIX + "CloseoutCatalog.java",
           PREFIX + "CloseoutRenderer.java",
-          PREFIX + "EvidenceChainCatalog.java",
-          PREFIX + "EvidenceChainRenderer.java",
-          PREFIX + "ReadinessCatalog.java",
-          PREFIX + "ReadinessRenderer.java",
-          PREFIX + "RegistryRenderer.java",
-          PREFIX + "RegistryResponse.java",
-          PREFIX + "RegistryService.java",
-          PREFIX + "RegistrySupport.java",
+          PREFIX + "OperatorCatalog.java",
+          PREFIX + "OperatorRenderer.java",
+          PREFIX + "Renderer.java",
           PREFIX + "RendererSupport.java",
-          PREFIX + "ReplayDecisionCatalog.java",
-          PREFIX + "ReplayDecisionRenderer.java",
-          PREFIX + "RetentionPolicyCatalog.java",
+          PREFIX + "RequirementCatalog.java",
+          PREFIX + "RequirementRenderer.java",
+          PREFIX + "Response.java",
+          PREFIX + "RetentionCatalog.java",
           PREFIX + "RetentionRenderer.java",
+          PREFIX + "RouteCatalog.java",
+          PREFIX + "RouteRenderer.java",
           PREFIX + "ScorecardCatalog.java",
           PREFIX + "ScorecardRenderer.java",
-          PREFIX + "SignoffLaneCatalog.java",
-          PREFIX + "SignoffRenderer.java",
-          PREFIX + "SourceDossierCatalog.java",
-          PREFIX + "SourceRenderer.java");
+          PREFIX + "Service.java",
+          PREFIX + "SourceCatalog.java",
+          PREFIX + "SourceRenderer.java",
+          PREFIX + "Support.java");
   private static final List<String> MOVED_TEST_FILES =
       List.of(
-          PREFIX + "RegistryCiBoundaryTests.java",
-          PREFIX + "RegistryCloseoutScorecardTests.java",
-          PREFIX + "RegistryEvidenceSignoffTests.java",
-          PREFIX + "RegistryImmutabilityTests.java",
-          PREFIX + "RegistryRetentionReplayTests.java",
-          PREFIX + "RegistrySourceReadinessTests.java",
-          PREFIX + "RegistryTestSupport.java");
+          PREFIX + "ArtifactRouteOperatorTests.java",
+          PREFIX + "CiBoundaryTests.java",
+          PREFIX + "ImmutabilityTests.java",
+          PREFIX + "RetentionCloseoutScorecardTests.java",
+          PREFIX + "SourceRequirementTests.java",
+          PREFIX + "TestSupport.java");
 
   @Test
-  void releaseAcceptanceImplementationMovesWhileControllerStaysRootVisible() throws IOException {
+  void handoffImplementationMovesWhileControllerStaysRootVisible() throws IOException {
     assertThat(MOVED_FILES).hasSize(25);
     for (String file : MOVED_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
@@ -78,52 +78,55 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
     try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(25);
     }
-    Path controller = OPS_ROOT.resolve(PREFIX + "RegistryController.java");
+    Path controller = OPS_ROOT.resolve(PREFIX + "Controller.java");
     assertThat(Files.isRegularFile(controller)).isTrue();
     assertThat(read(controller)).contains(PACKAGE_IMPORT);
   }
 
   @Test
   void packageTestsMoveWhileControllerMarkdownTestStaysRoot() throws IOException {
-    assertThat(MOVED_TEST_FILES).hasSize(7);
+    assertThat(MOVED_TEST_FILES).hasSize(6);
     for (String file : MOVED_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(7);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(6);
     }
-    Path controllerTest = TEST_ROOT.resolve(PREFIX + "RegistryControllerMarkdownTests.java");
+    Path controllerTest = TEST_ROOT.resolve(PREFIX + "ControllerMarkdownTests.java");
     assertThat(Files.isRegularFile(controllerTest)).isTrue();
     assertThat(read(controllerTest)).contains(PACKAGE_IMPORT);
   }
 
   @Test
-  void pathBudgetUpstreamAndRouteOwnershipRemainExplicit() throws IOException {
-    String service = read(PACKAGE_ROOT.resolve(PREFIX + "RegistryService.java"));
+  void upstreamAndRouteOwnershipRemainExplicit() throws IOException {
+    String service = read(PACKAGE_ROOT.resolve(PREFIX + "Service.java"));
     assertThat(service)
-        .contains(
-            "ops.maintenance.operatorcidossier", "OpsShardReadinessReleaseAcceptanceRoutePaths")
+        .contains("ops.maintenance.ciarc", "OpsShardReadinessReleaseAcceptanceRoutePaths")
         .doesNotContain("OpsShardReadinessRoutePaths.BASE_PATH");
-    assertThat(PACKAGE_ROOT.toString()).contains("ciaccept");
   }
 
   @Test
-  void archiveImportsOnlyThePublicReleaseAcceptanceBoundary() throws IOException {
-    String response = PREFIX + "RegistryResponse";
-    for (Path file : archiveSourceFiles()) {
-      String source = read(file);
-      if (source.contains(response)) {
-        assertThat(source).as(file.toString()).contains(PACKAGE_IMPORT + "." + response);
-      }
+  void routePathSplitImportsOnlyThePublicHandoffBoundary() throws IOException {
+    String response = PREFIX + "Response";
+    assertThat(
+            read(
+                ROUTE_SPLIT_ROOT.resolve(
+                    "OpsShardReadinessReleaseAcceptanceRoutePathSplitService.java")))
+        .contains(PACKAGE_IMPORT + "." + PREFIX + "Service");
+    for (String file :
+        List.of(
+            "OpsShardReadinessReleaseAcceptanceRoutePathSplitSourceCatalog.java",
+            "OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport.java")) {
+      assertThat(read(ROUTE_SPLIT_ROOT.resolve(file)))
+          .as(file)
+          .contains(PACKAGE_IMPORT + "." + response);
     }
-    assertThat(read(ARCHIVE_PACKAGE_ROOT.resolve(PREFIX + "ArchiveRegistryService.java")))
-        .contains(PACKAGE_IMPORT + "." + PREFIX + "RegistryService");
   }
 
   @Test
   void spotbugsAndShrinkOnlyRatchetsFollowTheMove() throws IOException {
-    String response = PREFIX + "RegistryResponse";
+    String response = PREFIX + "Response";
     String spotbugs = read(Path.of("config", "spotbugs-exclude.xml"));
     assertThat(spotbugs)
         .contains(PACKAGE_IMPORT + "." + response)
@@ -142,15 +145,15 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
     assertThat(read(DOC))
         .contains(
             "Requirement Evidence Matrix",
-            "Direct root 573 -> 548",
-            "movable 468 -> 443",
-            "Operator-CI bucket 48 -> 23",
-            "339/347",
-            "247/255",
-            "ciaccept");
+            "Direct root 525 -> 500",
+            "movable 420 -> 395",
+            "Handoff bucket 25 -> 0",
+            "222/234",
+            "200/212",
+            "releasearchivehandoff");
     assertThat(read(WALKTHROUGH))
         .contains(
-            "version-1848",
+            "version-1850",
             "禁止硬凑",
             "本项目",
             "## 实际工作量说明",
@@ -163,16 +166,6 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
             "## 阻断与安全边界",
             "## 测试覆盖",
             "## 一句话总结");
-  }
-
-  private List<Path> archiveSourceFiles() throws IOException {
-    try (Stream<Path> files = Files.list(ARCHIVE_PACKAGE_ROOT)) {
-      return files
-          .filter(Files::isRegularFile)
-          .filter(this::isJava)
-          .filter(path -> path.getFileName().toString().startsWith(PREFIX + "Archive"))
-          .toList();
-    }
   }
 
   private boolean isJava(Path path) {

@@ -18,7 +18,7 @@ class ReadabilityUpkeepOpsConsolidationQualityCloseoutV1806Tests {
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path CLOSEOUT_NOTE =
       DOCS_ROOT.resolve("java-extraction-quality-closeout-v1806.md");
-  private static final int EXPECTED_ROOT_OPS_MAIN_JAVA_FILES = 525;
+  private static final int EXPECTED_ROOT_OPS_MAIN_JAVA_FILES = 500;
 
   @Test
   void closeoutNoteRecordsCurrentGreenBaselineAndHistoricalException() throws IOException {

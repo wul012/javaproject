@@ -15,6 +15,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1849Tests {
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path PACKAGE_ROOT = OPS_ROOT.resolve(Path.of("maintenance", "ciarc"));
+  private static final Path HANDOFF_PACKAGE_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "releasearchivehandoff"));
   private static final Path TEST_ROOT =
       Path.of("src", "test", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path PACKAGE_TEST_ROOT = TEST_ROOT.resolve(Path.of("maintenance", "ciarc"));
@@ -112,7 +114,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1849Tests {
     }
     assertThat(
             read(
-                OPS_ROOT.resolve(
+                HANDOFF_PACKAGE_ROOT.resolve(
                     "OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService.java")))
         .contains(PACKAGE_IMPORT + "." + PREFIX + "RegistryService");
   }
@@ -125,7 +127,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1849Tests {
         .contains(PACKAGE_IMPORT + "." + response)
         .doesNotContain("com.codexdemo.orderplatform.ops." + response);
     try (Stream<Path> files = Files.list(OPS_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(525);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(500);
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
@@ -162,7 +164,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1849Tests {
   }
 
   private List<Path> handoffSourceFiles() throws IOException {
-    try (Stream<Path> files = Files.list(OPS_ROOT)) {
+    try (Stream<Path> files = Files.list(HANDOFF_PACKAGE_ROOT)) {
       return files
           .filter(Files::isRegularFile)
           .filter(this::isJava)

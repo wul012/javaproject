@@ -10,9 +10,9 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **525**.
+- Current direct-root Java files: **500**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **420**.
+- Remaining direct-root non-controller files to move or collapse: **395**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-525 current root files - 105 final root files = 420 files still to move
+500 current root files - 105 final root files = 395 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -53,7 +53,7 @@ when names overlap, for example controllers inside a large family prefix.
 | MinimalReadOnlyGateExecution | 0 | Execution and archive-verification closure moved in v1843. |
 | RouteCleanup web | 170 | High-coupling track; split only with route owner and endpoint proof. |
 | ReleaseAcceptanceRoutePathSplit | 0 | Base/closeout moved in v1840, sustainment in v1841, and acceptance package/receipt/archive index in v1842. |
-| ReleaseAcceptanceArchiveVerificationHandoff | 25 | Move after route-path split ownership is stable. |
+| ReleaseAcceptanceArchiveVerificationHandoff | 0 | Source archive boundary moved in v1849; the verification handoff moved in v1850. |
 | ReleaseAcceptance root route owner | 0 | Moved with the base layer in v1840. |
 | ReleaseApprovalSandboxEndpointCredentialResolver records | 59 | Move as credential-resolver records package. |
 | ReleaseApprovalManagedAuditSandboxEndpointCredentialResolver builders | 23 | Move with credential-resolver managed-audit builders. |
@@ -80,7 +80,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
 | Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
 
-The counted buckets sum to **525** and leave zero unassigned files. The original
+The counted buckets sum to **500** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -377,6 +377,20 @@ ArchiveVerificationHandoff imports only the v1849 public service/response.
 The live direct-root count falls from **548 to 525**, the final target remains
 **105**, and the movable backlog falls from **443 to 420**. The
 MinimalReadOnlyGateOperatorCiHandoff bucket falls from **23 to 0**, total
+`ops` Java files stay at **1,352**, and the census reports no unassigned files.
+
+## v1850 progress
+
+v1850 moves the twenty-five ReleaseAcceptanceArchiveVerificationHandoff
+implementation files into `ops.maintenance.releasearchivehandoff`. The Spring
+controller and controller-oriented Markdown test remain root-visible, while six
+package-local tests follow the implementation. The moved handoff consumes only
+the public v1849 Archive service/response and v1840 route owner; the already
+extracted RoutePathSplit layer imports only the public handoff service/response.
+
+The live direct-root count falls from **525 to 500**, the final target remains
+**105**, and the movable backlog falls from **420 to 395**. The independent
+ReleaseAcceptanceArchiveVerificationHandoff bucket falls from **25 to 0**, total
 `ops` Java files stay at **1,352**, and the census reports no unassigned files.
 
 ## Revision rule

@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

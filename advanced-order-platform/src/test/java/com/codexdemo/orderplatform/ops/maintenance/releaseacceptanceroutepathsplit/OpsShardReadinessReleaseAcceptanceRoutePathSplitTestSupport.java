@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport;
 
 public final class OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport {
 
