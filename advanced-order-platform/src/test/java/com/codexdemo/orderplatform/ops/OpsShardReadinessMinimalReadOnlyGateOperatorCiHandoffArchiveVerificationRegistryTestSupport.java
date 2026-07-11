@@ -1,28 +1,29 @@
 package com.codexdemo.orderplatform.ops;
 
-final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport {
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService;
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService;
 
-    private OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport() {
-    }
+final
+class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport {
 
-    static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService
-            sourceHandoffService() {
-        return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService(
-                new OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService(
-                        new OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService()
-                )
-        );
-    }
+  private
+  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport() {}
 
-    static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService
-            service() {
-        return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService(
-                sourceHandoffService()
-        );
-    }
+  static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService
+      sourceHandoffService() {
+    return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService(
+        new OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService(
+            new OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService()));
+  }
 
-    static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
-            registry() {
-        return service().registry();
-    }
+  static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService
+      service() {
+    return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService(
+        sourceHandoffService());
+  }
+
+  static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
+      registry() {
+    return service().registry();
+  }
 }

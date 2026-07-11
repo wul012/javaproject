@@ -61,6 +61,7 @@ package.
 | `release-acceptance-route-path-split-base-closeout-extraction-v1840.md` | thirty-seventh ops extraction | How did the 24-file base/closeout layer and shared route owner move while root fell from 775 to 751, movable files fell to 646, and the remaining split bucket fell to 55? |
 | `release-acceptance-route-path-split-sustainment-extraction-v1841.md` | thirty-eighth ops extraction | How did the 19-file sustainment layer consume v1840 closeout, move into its own subpackage, lower root from 751 to 732, lower movable files from 646 to 627, and leave 36 split files? |
 | `release-acceptance-package-extraction-v1842.md` | thirty-ninth ops extraction | How did the 36-file acceptance-package, closeout-receipt, and archive-index closure move into `ops.maintenance.releaseacceptancepackage`, lower root from 732 to 696, lower movable files from 627 to 591, and finish the split bucket at zero? |
+| `minimal-read-only-gate-execution-extraction-v1843.md` | fortieth ops extraction | How did the 31-file execution and archive-verification closure move into `ops.maintenance.minimalreadonlygateexecution`, lower root from 696 to 665, lower movable files from 591 to 560, and unlock the Operator-CI chain? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

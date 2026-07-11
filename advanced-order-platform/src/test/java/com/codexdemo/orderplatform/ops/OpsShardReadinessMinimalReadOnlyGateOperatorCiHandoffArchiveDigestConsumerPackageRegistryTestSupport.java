@@ -1,32 +1,33 @@
 package com.codexdemo.orderplatform.ops;
 
-final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport {
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService;
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService;
 
-    private OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport() {
-    }
+final
+class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport {
 
-    static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryService
-            sourceDigestService() {
-        return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryService(
-                new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService(
-                        new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService(
-                                new OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService(
-                                        new OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService()
-                                )
-                        )
-                )
-        );
-    }
+  private
+  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport() {}
 
-    static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryService
-            service() {
-        return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryService(
-                sourceDigestService()
-        );
-    }
+  static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryService
+      sourceDigestService() {
+    return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryService(
+        new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService(
+            new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService(
+                new OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService(
+                    new OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService()))));
+  }
 
-    static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse
-            registry() {
-        return service().registry();
-    }
+  static
+  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryService
+      service() {
+    return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryService(
+        sourceDigestService());
+  }
+
+  static
+  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse
+      registry() {
+    return service().registry();
+  }
 }
