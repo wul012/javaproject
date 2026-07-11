@@ -1,68 +1,71 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeCatalogResponse;
+import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceResponse;
+import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceService;
+import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceService.PrototypeRoutes;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(PrototypeRoutes.BASE_PATH)
 public class OpsShardReadinessPrototypeController {
 
-    private final OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService;
+  private final OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService;
 
-    public OpsShardReadinessPrototypeController(
-            OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService
-    ) {
-        this.prototypeEvidenceService = prototypeEvidenceService;
-    }
+  public OpsShardReadinessPrototypeController(
+      OpsShardReadinessPrototypeEvidenceService prototypeEvidenceService) {
+    this.prototypeEvidenceService = prototypeEvidenceService;
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CATALOG)
-    public OpsShardReadinessPrototypeCatalogResponse catalog() {
-        return prototypeEvidenceService.catalog();
-    }
+  @GetMapping(PrototypeRoutes.CATALOG)
+  public OpsShardReadinessPrototypeCatalogResponse catalog() {
+    return prototypeEvidenceService.catalog();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO)
-    public OpsShardReadinessPrototypeEvidenceResponse fixtureEcho() {
-        return prototypeEvidenceService.fixtureEcho();
-    }
+  @GetMapping(PrototypeRoutes.FIXTURE_ECHO)
+  public OpsShardReadinessPrototypeEvidenceResponse fixtureEcho() {
+    return prototypeEvidenceService.fixtureEcho();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT)
-    public OpsShardReadinessPrototypeEvidenceResponse fieldAlignment() {
-        return prototypeEvidenceService.fieldAlignment();
-    }
+  @GetMapping(PrototypeRoutes.FIELD_ALIGNMENT)
+  public OpsShardReadinessPrototypeEvidenceResponse fieldAlignment() {
+    return prototypeEvidenceService.fieldAlignment();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE)
-    public OpsShardReadinessPrototypeEvidenceResponse readOnlyIntegrationBridge() {
-        return prototypeEvidenceService.readOnlyIntegrationBridge();
-    }
+  @GetMapping(PrototypeRoutes.READ_ONLY_BRIDGE)
+  public OpsShardReadinessPrototypeEvidenceResponse readOnlyIntegrationBridge() {
+    return prototypeEvidenceService.readOnlyIntegrationBridge();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE)
-    public OpsShardReadinessPrototypeEvidenceResponse routeCleanupBridge() {
-        return prototypeEvidenceService.routeCleanupBridge();
-    }
+  @GetMapping(PrototypeRoutes.CLEANUP_BRIDGE)
+  public OpsShardReadinessPrototypeEvidenceResponse routeCleanupBridge() {
+    return prototypeEvidenceService.routeCleanupBridge();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF)
-    public OpsShardReadinessPrototypeEvidenceResponse readWindowHandoff() {
-        return prototypeEvidenceService.readWindowHandoff();
-    }
+  @GetMapping(PrototypeRoutes.READ_WINDOW_HANDOFF)
+  public OpsShardReadinessPrototypeEvidenceResponse readWindowHandoff() {
+    return prototypeEvidenceService.readWindowHandoff();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET)
-    public OpsShardReadinessPrototypeEvidenceResponse consumerGatePacket() {
-        return prototypeEvidenceService.consumerGatePacket();
-    }
+  @GetMapping(PrototypeRoutes.CONSUMER_GATE_PACKET)
+  public OpsShardReadinessPrototypeEvidenceResponse consumerGatePacket() {
+    return prototypeEvidenceService.consumerGatePacket();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_OPERATOR_CI_HANDOFF)
-    public OpsShardReadinessPrototypeEvidenceResponse operatorCiHandoff() {
-        return prototypeEvidenceService.operatorCiHandoff();
-    }
+  @GetMapping(PrototypeRoutes.OPERATOR_CI_HANDOFF)
+  public OpsShardReadinessPrototypeEvidenceResponse operatorCiHandoff() {
+    return prototypeEvidenceService.operatorCiHandoff();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST)
-    public OpsShardReadinessPrototypeEvidenceResponse auditDigest() {
-        return prototypeEvidenceService.auditDigest();
-    }
+  @GetMapping(PrototypeRoutes.AUDIT_DIGEST)
+  public OpsShardReadinessPrototypeEvidenceResponse auditDigest() {
+    return prototypeEvidenceService.auditDigest();
+  }
 
-    @GetMapping(OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CLOSEOUT)
-    public OpsShardReadinessPrototypeEvidenceResponse closeout() {
-        return prototypeEvidenceService.closeout();
-    }
+  @GetMapping(PrototypeRoutes.CLOSEOUT)
+  public OpsShardReadinessPrototypeEvidenceResponse closeout() {
+    return prototypeEvidenceService.closeout();
+  }
 }

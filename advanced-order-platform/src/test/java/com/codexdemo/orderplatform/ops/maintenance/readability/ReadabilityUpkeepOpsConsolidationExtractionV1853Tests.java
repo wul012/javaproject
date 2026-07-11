@@ -170,7 +170,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1853Tests {
             "OpsShardReadinessPrototypeConsumerGateService.java",
             "OpsShardReadinessPrototypeEvidenceService.java",
             "OpsShardReadinessPrototypeHandoffService.java")) {
-      assertThat(read(OPS_ROOT.resolve(consumer))).as(consumer).contains(PACKAGE_IMPORT);
+      Path path = OPS_ROOT.resolve(Path.of("maintenance", "prototype", consumer));
+      assertThat(read(path)).as(consumer).contains(PACKAGE_IMPORT);
     }
 
     String spotbugs = read(Path.of("config", "spotbugs-exclude.xml"));
@@ -192,7 +193,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1853Tests {
 
   @Test
   void shrinkOnlyCensusAndVersionEvidenceCloseTheBatch() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(290);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(278);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
           .hasSizeLessThanOrEqualTo(1352);

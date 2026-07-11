@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceService.PrototypeRoutes;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceIndexService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceVerificationService;
@@ -20,6 +21,7 @@ import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEvidencePacketService;
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractHandoffManifestService;
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractOperatorChecklistService;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -83,111 +85,6 @@ class OpsShardReadinessRoutePathsTests {
                 Map.entry(
                     OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_READINESS_HANDOFF,
                     OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CATALOG,
-                    OpsShardReadinessPrototypeEvidenceService.CATALOG_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO,
-                    OpsShardReadinessPrototypeEvidenceService.FIXTURE_ECHO_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT,
-                    OpsShardReadinessPrototypeEvidenceService.FIELD_ALIGNMENT_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE,
-                    OpsShardReadinessPrototypeEvidenceService
-                        .READ_ONLY_INTEGRATION_BRIDGE_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE,
-                    OpsShardReadinessPrototypeEvidenceService.ROUTE_CLEANUP_BRIDGE_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF,
-                    OpsShardReadinessPrototypeEvidenceService.READ_WINDOW_HANDOFF_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET,
-                    OpsShardReadinessPrototypeEvidenceService.CONSUMER_GATE_PACKET_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_OPERATOR_CI_HANDOFF,
-                    OpsShardReadinessPrototypeEvidenceService.OPERATOR_CI_HANDOFF_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST,
-                    OpsShardReadinessPrototypeEvidenceService.AUDIT_DIGEST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CLOSEOUT,
-                    OpsShardReadinessPrototypeEvidenceService.CLOSEOUT_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG,
-                    OpsShardReadinessPrototypeHandoffService.CATALOG_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY,
-                    OpsShardReadinessPrototypeHandoffService.ENDPOINT_INVENTORY_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX,
-                    OpsShardReadinessPrototypeHandoffService.BOUNDARY_MATRIX_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST,
-                    OpsShardReadinessPrototypeHandoffService
-                        .CONSUMER_VERIFICATION_CHECKLIST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST,
-                    OpsShardReadinessPrototypeHandoffService.READ_WINDOW_CHECKLIST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST,
-                    OpsShardReadinessPrototypeHandoffService.DIGEST_MANIFEST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST,
-                    OpsShardReadinessPrototypeHandoffService.CI_MANIFEST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST,
-                    OpsShardReadinessPrototypeHandoffService.ARCHIVE_MANIFEST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET,
-                    OpsShardReadinessPrototypeHandoffService.OPERATOR_SIGNOFF_PACKET_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT,
-                    OpsShardReadinessPrototypeHandoffService.CLOSEOUT_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG,
-                    OpsShardReadinessPrototypeConsumerGateService.CATALOG_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY,
-                    OpsShardReadinessPrototypeConsumerGateService.SOURCE_INVENTORY_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST,
-                    OpsShardReadinessPrototypeConsumerGateService.MINIMAL_FIELD_CHECKLIST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW,
-                    OpsShardReadinessPrototypeConsumerGateService.ROUTE_TOPOLOGY_PREVIEW_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX,
-                    OpsShardReadinessPrototypeConsumerGateService.BOUNDARY_MATRIX_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE,
-                    OpsShardReadinessPrototypeConsumerGateService.DIGEST_ACCEPTANCE_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CI_BATCH_PLAN,
-                    OpsShardReadinessPrototypeConsumerGateService.CI_BATCH_PLAN_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ARCHIVE_MANIFEST,
-                    OpsShardReadinessPrototypeConsumerGateService.ARCHIVE_MANIFEST_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_OPERATOR_SIGNOFF,
-                    OpsShardReadinessPrototypeConsumerGateService.OPERATOR_SIGNOFF_ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CLOSEOUT,
-                    OpsShardReadinessPrototypeConsumerGateService.CLOSEOUT_ENDPOINT),
                 Map.entry(
                     OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
                     OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT),
@@ -347,5 +244,73 @@ class OpsShardReadinessRoutePathsTests {
         .allSatisfy(
             (route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+  }
+
+  @Test
+  void prototypeRoutesKeepTheirFamilyOwnedBytes() {
+    assertThat(PrototypeRoutes.BASE_PATH).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH);
+    assertThat(
+            List.of(
+                PrototypeRoutes.CATALOG,
+                PrototypeRoutes.FIXTURE_ECHO,
+                PrototypeRoutes.FIELD_ALIGNMENT,
+                PrototypeRoutes.READ_ONLY_BRIDGE,
+                PrototypeRoutes.CLEANUP_BRIDGE,
+                PrototypeRoutes.READ_WINDOW_HANDOFF,
+                PrototypeRoutes.CONSUMER_GATE_PACKET,
+                PrototypeRoutes.OPERATOR_CI_HANDOFF,
+                PrototypeRoutes.AUDIT_DIGEST,
+                PrototypeRoutes.CLOSEOUT,
+                PrototypeRoutes.HANDOFF_CATALOG,
+                PrototypeRoutes.HANDOFF_ENDPOINT_INVENTORY,
+                PrototypeRoutes.HANDOFF_BOUNDARY_MATRIX,
+                PrototypeRoutes.HANDOFF_CONSUMER_CHECKLIST,
+                PrototypeRoutes.HANDOFF_READ_WINDOW_CHECKLIST,
+                PrototypeRoutes.HANDOFF_DIGEST_MANIFEST,
+                PrototypeRoutes.HANDOFF_CI_MANIFEST,
+                PrototypeRoutes.HANDOFF_ARCHIVE_MANIFEST,
+                PrototypeRoutes.HANDOFF_OPERATOR_SIGNOFF,
+                PrototypeRoutes.HANDOFF_CLOSEOUT,
+                PrototypeRoutes.CONSUMER_CATALOG,
+                PrototypeRoutes.CONSUMER_SOURCE_INVENTORY,
+                PrototypeRoutes.CONSUMER_FIELD_CHECKLIST,
+                PrototypeRoutes.CONSUMER_ROUTE_PREVIEW,
+                PrototypeRoutes.CONSUMER_BOUNDARY_MATRIX,
+                PrototypeRoutes.CONSUMER_DIGEST_ACCEPTANCE,
+                PrototypeRoutes.CONSUMER_CI_PLAN,
+                PrototypeRoutes.CONSUMER_ARCHIVE_MANIFEST,
+                PrototypeRoutes.CONSUMER_OPERATOR_SIGNOFF,
+                PrototypeRoutes.CONSUMER_CLOSEOUT))
+        .containsExactly(
+            "/prototype-catalog",
+            "/prototype-fixture-echo",
+            "/prototype-field-alignment",
+            "/prototype-read-only-integration-bridge",
+            "/prototype-route-cleanup-bridge",
+            "/prototype-read-window-handoff",
+            "/prototype-consumer-gate-packet",
+            "/prototype-operator-ci-handoff",
+            "/prototype-audit-digest",
+            "/prototype-closeout",
+            "/prototype-handoff-catalog",
+            "/prototype-handoff-endpoint-inventory",
+            "/prototype-handoff-boundary-matrix",
+            "/prototype-handoff-consumer-verification-checklist",
+            "/prototype-handoff-read-window-checklist",
+            "/prototype-handoff-digest-manifest",
+            "/prototype-handoff-ci-manifest",
+            "/prototype-handoff-archive-manifest",
+            "/prototype-handoff-operator-signoff-packet",
+            "/prototype-handoff-closeout",
+            "/prototype-consumer-gate-catalog",
+            "/prototype-consumer-gate-source-inventory",
+            "/prototype-consumer-gate-minimal-field-checklist",
+            "/prototype-consumer-gate-route-topology-preview",
+            "/prototype-consumer-gate-boundary-matrix",
+            "/prototype-consumer-gate-digest-acceptance",
+            "/prototype-consumer-gate-ci-batch-plan",
+            "/prototype-consumer-gate-archive-manifest",
+            "/prototype-consumer-gate-operator-signoff",
+            "/prototype-consumer-gate-closeout");
   }
 }

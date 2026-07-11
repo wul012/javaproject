@@ -67,11 +67,16 @@ class OpsExtractionV1855Tests {
     for (String rootTest :
         List.of(
             "OpsShardReadinessHistoricalEndpointSnapshotCompatibilityTests.java",
-            "OpsShardReadinessRoutePathsTests.java",
+            "OpsShardReadinessRoutePathsTests.java")) {
+      assertThat(read(TEST_ROOT.resolve(rootTest))).as(rootTest).contains(PACKAGE_IMPORT);
+    }
+    for (String packageTest :
+        List.of(
             "OpsShardReadinessPrototypeConsumerGateServiceTests.java",
             "OpsShardReadinessPrototypeEvidenceServiceTests.java",
             "OpsShardReadinessPrototypeHandoffServiceTests.java")) {
-      assertThat(read(TEST_ROOT.resolve(rootTest))).as(rootTest).contains(PACKAGE_IMPORT);
+      Path path = TEST_ROOT.resolve(Path.of("maintenance", "prototype", packageTest));
+      assertThat(read(path)).as(packageTest).contains(PACKAGE_IMPORT);
     }
   }
 
@@ -132,7 +137,7 @@ class OpsExtractionV1855Tests {
 
   @Test
   void censusAndTotalFileRatchetsOnlyTighten() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(290);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(278);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
           .hasSizeLessThanOrEqualTo(1352);
@@ -141,8 +146,8 @@ class OpsExtractionV1855Tests {
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **290**",
-            "Remaining direct-root non-controller files to move or collapse: **186**",
+            "Current direct-root Java files: **278**",
+            "Remaining direct-root non-controller files to move or collapse: **174**",
             "310 to 290",
             "206 to 186");
   }
@@ -195,7 +200,8 @@ class OpsExtractionV1855Tests {
         OPS_ROOT.resolve("OpsShardReadinessEvidenceController.java"),
         OPS_ROOT.resolve("OpsShardReadinessEvidenceEndpoints.java"),
         OPS_ROOT.resolve("OpsShardReadinessLifecyclePlanController.java"),
-        OPS_ROOT.resolve("OpsShardReadinessPrototypeEvidenceService.java"),
+        OPS_ROOT.resolve(
+            Path.of("maintenance", "prototype", "OpsShardReadinessPrototypeEvidenceService.java")),
         OPS_ROOT.resolve(
             Path.of(
                 "maintenance",

@@ -66,59 +66,6 @@ public final class OpsShardReadinessRoutePaths {
       "/v1-contract-consumer-evidence-digest";
   public static final String V1_CONTRACT_CONSUMER_READINESS_HANDOFF =
       "/v1-contract-consumer-readiness-handoff";
-  static final String SHARD_READINESS_PROTOTYPE_CATALOG = "/prototype-catalog";
-  static final String SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO = "/prototype-fixture-echo";
-  static final String SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT = "/prototype-field-alignment";
-  static final String SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE =
-      "/prototype-read-only-integration-bridge";
-  static final String SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE =
-      "/prototype-route-cleanup-bridge";
-  static final String SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF =
-      "/prototype-read-window-handoff";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET =
-      "/prototype-consumer-gate-packet";
-  static final String SHARD_READINESS_PROTOTYPE_OPERATOR_CI_HANDOFF =
-      "/prototype-operator-ci-handoff";
-  static final String SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST = "/prototype-audit-digest";
-  static final String SHARD_READINESS_PROTOTYPE_CLOSEOUT = "/prototype-closeout";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG = "/prototype-handoff-catalog";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY =
-      "/prototype-handoff-endpoint-inventory";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX =
-      "/prototype-handoff-boundary-matrix";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST =
-      "/prototype-handoff-consumer-verification-checklist";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST =
-      "/prototype-handoff-read-window-checklist";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST =
-      "/prototype-handoff-digest-manifest";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST =
-      "/prototype-handoff-ci-manifest";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST =
-      "/prototype-handoff-archive-manifest";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET =
-      "/prototype-handoff-operator-signoff-packet";
-  static final String SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT = "/prototype-handoff-closeout";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CATALOG =
-      "/prototype-consumer-gate-catalog";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_SOURCE_INVENTORY =
-      "/prototype-consumer-gate-source-inventory";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_MINIMAL_FIELD_CHECKLIST =
-      "/prototype-consumer-gate-minimal-field-checklist";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ROUTE_TOPOLOGY_PREVIEW =
-      "/prototype-consumer-gate-route-topology-preview";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_BOUNDARY_MATRIX =
-      "/prototype-consumer-gate-boundary-matrix";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_DIGEST_ACCEPTANCE =
-      "/prototype-consumer-gate-digest-acceptance";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CI_BATCH_PLAN =
-      "/prototype-consumer-gate-ci-batch-plan";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_ARCHIVE_MANIFEST =
-      "/prototype-consumer-gate-archive-manifest";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_OPERATOR_SIGNOFF =
-      "/prototype-consumer-gate-operator-signoff";
-  static final String SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_CLOSEOUT =
-      "/prototype-consumer-gate-closeout";
   static final String ROUTE_CLEANUP_EVIDENCE_CATALOG = "/route-cleanup-evidence-catalog";
   static final String ROUTE_CLEANUP_PHASE_SUMMARY = "/route-cleanup-phase-summary";
   static final String ROUTE_CLEANUP_BOUNDARY_MATRIX = "/route-cleanup-boundary-matrix";

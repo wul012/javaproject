@@ -1,7 +1,8 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.prototype;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPostCompletionServiceFixtures;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEchoService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceIndexService;

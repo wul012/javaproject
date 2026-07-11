@@ -1,5 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.prototype;
 
+import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceService.PrototypeRoutes;
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1Contract;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -13,36 +14,25 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessPrototypeHandoffService {
 
   static final String CATALOG_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CATALOG;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_CATALOG;
   static final String ENDPOINT_INVENTORY_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ENDPOINT_INVENTORY;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_ENDPOINT_INVENTORY;
   static final String BOUNDARY_MATRIX_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_BOUNDARY_MATRIX;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_BOUNDARY_MATRIX;
   static final String CONSUMER_VERIFICATION_CHECKLIST_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths
-              .SHARD_READINESS_PROTOTYPE_HANDOFF_CONSUMER_VERIFICATION_CHECKLIST;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_CONSUMER_CHECKLIST;
   static final String READ_WINDOW_CHECKLIST_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_READ_WINDOW_CHECKLIST;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_READ_WINDOW_CHECKLIST;
   static final String DIGEST_MANIFEST_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_DIGEST_MANIFEST;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_DIGEST_MANIFEST;
   static final String CI_MANIFEST_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CI_MANIFEST;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_CI_MANIFEST;
   static final String ARCHIVE_MANIFEST_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_ARCHIVE_MANIFEST;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_ARCHIVE_MANIFEST;
   static final String OPERATOR_SIGNOFF_PACKET_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_OPERATOR_SIGNOFF_PACKET;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_OPERATOR_SIGNOFF;
   static final String CLOSEOUT_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_HANDOFF_CLOSEOUT;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.HANDOFF_CLOSEOUT;
 
   private static final String PROJECT = "advanced-order-platform";
 

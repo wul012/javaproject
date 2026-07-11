@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1855, with the original v1828 baseline retained
+- Repository state: live after v1856, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **290**.
+- Current direct-root Java files: **278**.
 - Target final direct-root Java files: **104**.
-- Remaining direct-root non-controller files to move or collapse: **186**.
+- Remaining direct-root non-controller files to move or collapse: **174**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 3 shared-core waivers = 104 final root files
-290 current root files - 104 final root files = 186 files still to move
+278 current root files - 104 final root files = 174 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -76,11 +76,11 @@ when names overlap, for example controllers inside a large family prefix.
 | RuntimeExecutionApproval/Input residuals | 0 | Moved as the complete runtime-execution evidence chain in v1851. |
 | ActiveShardPlanHandoff | 0 | Moved with the complete readiness core in v1855. |
 | OpsOverview mini-family | 2 | Move service/response; controller stays root. |
-| PrototypeConsumerGate | 4 | Move as prototype consumer gate. |
-| Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
+| PrototypeConsumerGate | 0 | Moved with the complete Prototype closure in v1856. |
+| Prototype catalog/evidence/handoff residuals | 0 | Moved with the complete Prototype closure in v1856. |
 | Readiness core simple endpoints | 0 | Moved with ActiveShardPlanHandoff as one closed package in v1855. |
 
-The counted buckets sum to **290** and leave zero unassigned files. The original
+The counted buckets sum to **278** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -92,10 +92,10 @@ ratchet tightened, and Chinese walkthrough written before final verify.
 
 Recommended near-term order:
 
-1. Move the 12-file Prototype implementation closure after its readiness-core
-   dependency, while retaining its three controllers.
-2. Start the `RouteCleanup` web with a package-owned route table and a closed
+1. Start the `RouteCleanup` web with a package-owned route table and a closed
    evidence/maintenance dependency slice.
+2. Continue the `RouteCleanup` web in dependency-closed slices; never move a
+   caller before the boundary it consumes is public and stable.
 3. Leave the two static-release and two OpsOverview support files for a later
    coherent composition-support decision; do not create tiny filler versions.
 
@@ -494,6 +494,29 @@ unchanged. The live direct-root count falls from **310 to 290**, the movable
 backlog falls from **206 to 186**, both readiness buckets fall to **0**, total
 `ops` main Java stays at **1,352**, and the census reports zero unassigned
 files.
+
+## v1856 progress
+
+v1856 moves the complete twelve-file Prototype implementation closure into
+`ops.maintenance.prototype`. Three service behavior tests follow the
+implementation, while three Spring controllers and their controller-split
+tests remain at the composition root. The two Prototype census buckets fall
+from **4 + 8 to 0** without deleting any production capability.
+
+The family now owns all thirty byte-identical route suffixes in the nested
+`PrototypeRoutes` data owner. The global route aggregator no longer repeats
+those constants, and retained controllers import the family owner directly.
+The root RouteCleanup post-completion closeout service implements the narrow
+`CloseoutSource` port and maps its existing response to a four-field immutable
+snapshot, so Prototype no longer imports the wide root service or response.
+Only catalog and field-alignment endpoints remain public for their two verified
+RouteCleanup readers.
+
+The live direct-root count falls from **290 to 278**, the movable backlog falls
+from **186 to 174**, total `ops` main Java stays at **1,352**, and the census
+reports zero unassigned files. Route strings, response components, digest
+materials, fixture/evidence bytes, write and credential boundaries,
+deployment, rollback, and archive paths remain unchanged.
 
 ## Revision rule
 

@@ -508,27 +508,27 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeConsumerGateCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeConsumerGateEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeHandoffCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeHandoffEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1860,27 +1860,27 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeConsumerGateCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeConsumerGateEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeConsumerGateEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffCatalogResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeHandoffCatalogResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessPrototypeHandoffEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeHandoffEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />

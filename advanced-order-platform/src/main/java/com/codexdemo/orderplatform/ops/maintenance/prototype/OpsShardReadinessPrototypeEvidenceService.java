@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.prototype;
 
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEchoResponse;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEchoService;
@@ -16,36 +16,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessPrototypeEvidenceService {
 
-  static final String CATALOG_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CATALOG;
+  public static final String CATALOG_ENDPOINT = PrototypeRoutes.BASE_PATH + PrototypeRoutes.CATALOG;
   static final String FIXTURE_ECHO_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIXTURE_ECHO;
-  static final String FIELD_ALIGNMENT_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_FIELD_ALIGNMENT;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.FIXTURE_ECHO;
+  public static final String FIELD_ALIGNMENT_ENDPOINT =
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.FIELD_ALIGNMENT;
   static final String READ_ONLY_INTEGRATION_BRIDGE_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_ONLY_INTEGRATION_BRIDGE;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.READ_ONLY_BRIDGE;
   static final String ROUTE_CLEANUP_BRIDGE_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_ROUTE_CLEANUP_BRIDGE;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.CLEANUP_BRIDGE;
   static final String READ_WINDOW_HANDOFF_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_READ_WINDOW_HANDOFF;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.READ_WINDOW_HANDOFF;
   static final String CONSUMER_GATE_PACKET_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CONSUMER_GATE_PACKET;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.CONSUMER_GATE_PACKET;
   static final String OPERATOR_CI_HANDOFF_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_OPERATOR_CI_HANDOFF;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.OPERATOR_CI_HANDOFF;
   static final String AUDIT_DIGEST_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_AUDIT_DIGEST;
-  static final String CLOSEOUT_ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.SHARD_READINESS_PROTOTYPE_CLOSEOUT;
+      PrototypeRoutes.BASE_PATH + PrototypeRoutes.AUDIT_DIGEST;
+  static final String CLOSEOUT_ENDPOINT = PrototypeRoutes.BASE_PATH + PrototypeRoutes.CLOSEOUT;
 
   private static final String PROJECT = "advanced-order-platform";
 
@@ -55,16 +43,15 @@ public class OpsShardReadinessPrototypeEvidenceService {
 
   private final OpsShardReadinessEchoService echoService;
 
-  private final OpsShardReadinessRouteCleanupPostCompletionCloseoutService
-      routeCleanupCloseoutService;
+  private final CloseoutSource closeoutSource;
 
   public OpsShardReadinessPrototypeEvidenceService(
       OpsShardReadinessService readinessService,
       OpsShardReadinessEchoService echoService,
-      OpsShardReadinessRouteCleanupPostCompletionCloseoutService routeCleanupCloseoutService) {
+      CloseoutSource closeoutSource) {
     this.readinessService = readinessService;
     this.echoService = echoService;
-    this.routeCleanupCloseoutService = routeCleanupCloseoutService;
+    this.closeoutSource = closeoutSource;
   }
 
   @Transactional(readOnly = true)
@@ -136,8 +123,7 @@ public class OpsShardReadinessPrototypeEvidenceService {
         OpsShardReadinessPrototypeEvidenceCatalog.entryFor(key);
     OpsShardReadinessResponse readiness = readinessService.readiness();
     OpsShardReadinessEchoResponse echo = echoService.echo();
-    OpsShardReadinessRouteCleanupPostCompletionCloseoutResponse closeout =
-        routeCleanupCloseoutService.closeout();
+    CloseoutSnapshot closeout = closeoutSource.snapshot();
     List<String> evidenceRefs =
         List.of(
             "root-readiness:" + readiness.evidencePath(),
@@ -185,7 +171,7 @@ public class OpsShardReadinessPrototypeEvidenceService {
   private String evidenceStatus(
       OpsShardReadinessResponse readiness,
       OpsShardReadinessEchoResponse echo,
-      OpsShardReadinessRouteCleanupPostCompletionCloseoutResponse closeout) {
+      CloseoutSnapshot closeout) {
     boolean passed =
         OpsShardReadinessV1Contract.alignsWithReadOnlyContract(readiness)
             && "passed".equals(echo.status())
@@ -199,7 +185,7 @@ public class OpsShardReadinessPrototypeEvidenceService {
       OpsShardReadinessPrototypeEvidenceCatalog.Entry entry,
       OpsShardReadinessResponse readiness,
       OpsShardReadinessEchoResponse echo,
-      OpsShardReadinessRouteCleanupPostCompletionCloseoutResponse closeout) {
+      CloseoutSnapshot closeout) {
     String material =
         String.join(
             "|",
@@ -216,5 +202,63 @@ public class OpsShardReadinessPrototypeEvidenceService {
     } catch (NoSuchAlgorithmException ex) {
       throw new IllegalStateException("SHA-256 digest is not available", ex);
     }
+  }
+
+  public interface CloseoutSource {
+
+    CloseoutSnapshot snapshot();
+  }
+
+  public record CloseoutSnapshot(
+      String version,
+      boolean executionAllowed,
+      String postCompletionCloseoutEndpoint,
+      String status) {}
+
+  public static final class PrototypeRoutes {
+
+    public static final String BASE_PATH = OpsShardReadinessService.BASE_PATH;
+    public static final String CATALOG = "/prototype-catalog";
+    public static final String FIXTURE_ECHO = "/prototype-fixture-echo";
+    public static final String FIELD_ALIGNMENT = "/prototype-field-alignment";
+    public static final String READ_ONLY_BRIDGE = "/prototype-read-only-integration-bridge";
+    public static final String CLEANUP_BRIDGE = "/prototype-route-cleanup-bridge";
+    public static final String READ_WINDOW_HANDOFF = "/prototype-read-window-handoff";
+    public static final String CONSUMER_GATE_PACKET = "/prototype-consumer-gate-packet";
+    public static final String OPERATOR_CI_HANDOFF = "/prototype-operator-ci-handoff";
+    public static final String AUDIT_DIGEST = "/prototype-audit-digest";
+    public static final String CLOSEOUT = "/prototype-closeout";
+    public static final String HANDOFF_CATALOG = "/prototype-handoff-catalog";
+    public static final String HANDOFF_ENDPOINT_INVENTORY = "/prototype-handoff-endpoint-inventory";
+    public static final String HANDOFF_BOUNDARY_MATRIX = "/prototype-handoff-boundary-matrix";
+    public static final String HANDOFF_CONSUMER_CHECKLIST =
+        "/prototype-handoff-consumer-verification-checklist";
+    public static final String HANDOFF_READ_WINDOW_CHECKLIST =
+        "/prototype-handoff-read-window-checklist";
+    public static final String HANDOFF_DIGEST_MANIFEST = "/prototype-handoff-digest-manifest";
+    public static final String HANDOFF_CI_MANIFEST = "/prototype-handoff-ci-manifest";
+    public static final String HANDOFF_ARCHIVE_MANIFEST = "/prototype-handoff-archive-manifest";
+    public static final String HANDOFF_OPERATOR_SIGNOFF =
+        "/prototype-handoff-operator-signoff-packet";
+    public static final String HANDOFF_CLOSEOUT = "/prototype-handoff-closeout";
+    public static final String CONSUMER_CATALOG = "/prototype-consumer-gate-catalog";
+    public static final String CONSUMER_SOURCE_INVENTORY =
+        "/prototype-consumer-gate-source-inventory";
+    public static final String CONSUMER_FIELD_CHECKLIST =
+        "/prototype-consumer-gate-minimal-field-checklist";
+    public static final String CONSUMER_ROUTE_PREVIEW =
+        "/prototype-consumer-gate-route-topology-preview";
+    public static final String CONSUMER_BOUNDARY_MATRIX =
+        "/prototype-consumer-gate-boundary-matrix";
+    public static final String CONSUMER_DIGEST_ACCEPTANCE =
+        "/prototype-consumer-gate-digest-acceptance";
+    public static final String CONSUMER_CI_PLAN = "/prototype-consumer-gate-ci-batch-plan";
+    public static final String CONSUMER_ARCHIVE_MANIFEST =
+        "/prototype-consumer-gate-archive-manifest";
+    public static final String CONSUMER_OPERATOR_SIGNOFF =
+        "/prototype-consumer-gate-operator-signoff";
+    public static final String CONSUMER_CLOSEOUT = "/prototype-consumer-gate-closeout";
+
+    private PrototypeRoutes() {}
   }
 }

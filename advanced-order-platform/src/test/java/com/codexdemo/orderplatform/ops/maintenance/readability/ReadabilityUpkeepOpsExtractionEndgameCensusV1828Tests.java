@@ -73,12 +73,14 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "310",
             "206",
             "290",
-            "186");
+            "186",
+            "278",
+            "174");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **290**",
+            "Current direct-root Java files: **278**",
             "Target final direct-root Java files: **104**",
-            "Remaining direct-root non-controller files to move or collapse: **186**",
+            "Remaining direct-root non-controller files to move or collapse: **174**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -109,7 +111,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(290);
+    assertThat(fileNames).hasSize(278);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -121,7 +123,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(104);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(186);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(174);
   }
 
   @Test
@@ -259,10 +261,10 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         new Bucket(
             "ActiveShardPlanHandoff", 0, matches("^OpsShardReadinessActiveShardPlanHandoff")),
         new Bucket("OpsOverview mini-family", 2, matches("^OpsOverview")),
-        new Bucket("PrototypeConsumerGate", 4, matches("^OpsShardReadinessPrototypeConsumerGate")),
+        new Bucket("PrototypeConsumerGate", 0, matches("^OpsShardReadinessPrototypeConsumerGate")),
         new Bucket(
             "Prototype catalog/evidence/handoff residuals",
-            8,
+            0,
             matches("^OpsShardReadinessPrototype")),
         new Bucket(
             "Readiness core simple endpoints",
