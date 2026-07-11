@@ -1,35 +1,40 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage;
 
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse;
 import java.util.List;
 
 final
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryLockCatalog {
+class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceCatalog {
 
   private
-  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryLockCatalog() {}
+  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceCatalog() {}
 
   static List<
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse
-              .BoundaryLock>
-      locks(
+              .ConsumerAudience>
+      audiences(
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
               source) {
-    return source.boundaryLocks().stream()
+    return source.consumerPackets().stream()
         .map(
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryLockCatalog
-                ::lock)
+            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceCatalog
+                ::audience)
         .toList();
   }
 
   private static
   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse
-          .BoundaryLock
-      lock(
+          .ConsumerAudience
+      audience(
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
-                  .BoundaryLock
+                  .ConsumerPacket
               source) {
     return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse
-        .BoundaryLock(source.code(), source.lockedBehavior(), source.locked(), source.reason());
+        .ConsumerAudience(
+        source.packet(),
+        source.owner(),
+        source.packet(),
+        source.ready(),
+        source.ready() ? "passed" : "blocked");
   }
 }
