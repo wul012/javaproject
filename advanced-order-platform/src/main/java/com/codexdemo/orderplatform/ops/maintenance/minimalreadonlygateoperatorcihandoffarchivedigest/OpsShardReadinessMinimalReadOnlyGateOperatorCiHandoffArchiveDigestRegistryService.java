@@ -1,6 +1,7 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest;
 
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,8 +10,8 @@ public class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestR
 
   static final String RESPONSE_VERSION = "Java v1402";
   static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths
+      OpsShardReadinessReleaseAcceptanceRoutePaths.BASE_PATH
+          + OpsShardReadinessReleaseAcceptanceRoutePaths
               .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_REGISTRY;
   static final String PROFILE =
       "java-shard-readiness-minimal-read-only-gate-operator-ci-handoff-archive-digest-registry.v1";

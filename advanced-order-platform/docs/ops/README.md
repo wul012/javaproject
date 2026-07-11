@@ -63,6 +63,7 @@ package.
 | `release-acceptance-package-extraction-v1842.md` | thirty-ninth ops extraction | How did the 36-file acceptance-package, closeout-receipt, and archive-index closure move into `ops.maintenance.releaseacceptancepackage`, lower root from 732 to 696, lower movable files from 627 to 591, and finish the split bucket at zero? |
 | `minimal-read-only-gate-execution-extraction-v1843.md` | fortieth ops extraction | How did the 31-file execution and archive-verification closure move into `ops.maintenance.minimalreadonlygateexecution`, lower root from 696 to 665, lower movable files from 591 to 560, and unlock the Operator-CI chain? |
 | `minimal-read-only-gate-operator-ci-handoff-core-extraction-v1844.md` | forty-first ops extraction | How did the 27-file Operator-CI core and archive-verification closure move into `ops.maintenance.minimalreadonlygateoperatorcihandoff`, lower root from 665 to 638, lower movable files from 560 to 533, and leave ArchiveDigest as the next explicit consumer? |
+| `minimal-read-only-gate-operator-ci-handoff-archive-digest-extraction-v1845.md` | forty-second ops extraction | How did the 17-file ArchiveDigest layer move into `ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest`, lower root from 638 to 621, lower movable files from 533 to 516, and make ConsumerPackage the next explicit consumer? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary
