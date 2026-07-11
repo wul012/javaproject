@@ -67,6 +67,7 @@ package.
 | `minimal-read-only-gate-operator-ci-consumer-package-extraction-v1846.md` | forty-third ops extraction | How did the 23-file ConsumerPackage layer move into the path-safe `ops.maintenance.minimalreadonlygateoperatorciconsumerpackage`, lower root from 621 to 598, lower movable files from 516 to 493, and make VerificationDossier the next explicit consumer? |
 | `operator-ci-verification-dossier-extraction-v1847.md` | forty-fourth ops extraction | How did the 25-file VerificationDossier layer move into path-safe `ops.maintenance.operatorcidossier`, lower root from 598 to 573, lower movable files from 493 to 468, and expose ReleaseAcceptance as the next explicit consumer? |
 | `operator-ci-release-acceptance-extraction-v1848.md` | forty-fifth ops extraction | How did the 25-file ReleaseAcceptance base move into path-safe `ops.maintenance.ciaccept`, lower root from 573 to 548, lower movable files from 468 to 443, and expose Archive through only Service/Response? |
+| `operator-ci-release-acceptance-archive-extraction-v1849.md` | forty-sixth ops extraction | How did the 23-file ReleaseAcceptanceArchive layer move into path-safe `ops.maintenance.ciarc`, lower root from 548 to 525, lower movable files from 443 to 420, and clear the Operator-CI root bucket? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

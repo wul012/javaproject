@@ -1,41 +1,40 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.ciarc;
 
 import com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse;
 import java.util.List;
 
 final
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveCiAttestationCatalog {
+class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRetentionWindowCatalog {
 
   private
-  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveCiAttestationCatalog() {}
+  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRetentionWindowCatalog() {}
 
   static List<
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse
-              .CiAttestationEntry>
-      attestations(
+              .RetentionWindowEntry>
+      windows(
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse
               source) {
-    return source.ciReplayLanes().stream()
+    return source.retentionPolicies().stream()
         .map(
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveCiAttestationCatalog
-                ::attestation)
+            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRetentionWindowCatalog
+                ::window)
         .toList();
   }
 
   private static
   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse
-          .CiAttestationEntry
-      attestation(
+          .RetentionWindowEntry
+      window(
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse
-                  .CiReplayLane
+                  .RetentionPolicy
               source) {
     return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse
-        .CiAttestationEntry(
-        source.order(),
-        source.batch(),
-        source.commandFamily(),
-        source.readOnly(),
-        source.sourcePassed(),
+        .RetentionWindowEntry(
+        source.name(),
+        source.sourceEvidence(),
+        source.retentionWindow(),
+        source.ready(),
         source.status());
   }
 }
