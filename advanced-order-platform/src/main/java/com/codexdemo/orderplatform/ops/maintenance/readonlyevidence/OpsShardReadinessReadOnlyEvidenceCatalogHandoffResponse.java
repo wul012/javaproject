@@ -1,0 +1,36 @@
+package com.codexdemo.orderplatform.ops.maintenance.readonlyevidence;
+
+import java.util.List;
+
+public record OpsShardReadinessReadOnlyEvidenceCatalogHandoffResponse(
+    String project,
+    String version,
+    boolean readOnly,
+    boolean executionAllowed,
+    boolean shardEnabled,
+    String sourceCatalogVersion,
+    String sourceCatalogReceiptId,
+    String sourceCatalogEndpoint,
+    String sourceCatalogFixtureEndpoint,
+    String sourceCatalogEvidencePath,
+    int sourceCatalogLiveEndpointCount,
+    int sourceCatalogFixtureEndpointCount,
+    boolean sourceCatalogFrozen,
+    boolean readyForBatchNodeConsumption,
+    boolean nodeMayStartOrStopJavaOrMiniKv,
+    boolean writeRoutingAllowed,
+    boolean activeShardRouterAllowed,
+    boolean credentialValueRead,
+    boolean rawEndpointParsed,
+    boolean managedAuditConnectionAllowed,
+    boolean deploymentAllowed,
+    boolean rollbackAllowed,
+    String handoffProfile,
+    String receiptId,
+    String nextNodeConsumerHint,
+    List<String> handoffArtifacts,
+    List<String> consumerRules,
+    List<String> failClosedChecks,
+    List<String> blockedOperations,
+    String evidencePath,
+    String status) {}

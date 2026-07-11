@@ -66,12 +66,14 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "500",
             "395",
             "482",
-            "377");
+            "377",
+            "471",
+            "366");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **482**",
+            "Current direct-root Java files: **471**",
             "Target final direct-root Java files: **105**",
-            "Remaining direct-root non-controller files to move or collapse: **377**",
+            "Remaining direct-root non-controller files to move or collapse: **366**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -102,7 +104,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(482);
+    assertThat(fileNames).hasSize(471);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -114,7 +116,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(105);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(377);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(366);
   }
 
   @Test
@@ -236,7 +238,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "V1Contract consumer/alignment snapshots", 42, matches("^OpsShardReadinessV1Contract")),
         new Bucket(
             "ReadOnlyEvidence catalog snapshots",
-            11,
+            0,
             matches("^OpsShardReadinessReadOnlyEvidence|^OpsShardReadinessReadOnlyEndpoint")),
         new Bucket(
             "RuntimeExecutionApprovalInputTemplate",

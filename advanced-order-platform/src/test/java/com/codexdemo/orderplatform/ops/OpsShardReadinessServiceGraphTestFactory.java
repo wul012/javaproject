@@ -1,5 +1,9 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService;
+import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogService;
+import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceTestSupport;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionTestSupport;
 
@@ -8,34 +12,17 @@ final class OpsShardReadinessServiceGraphTestFactory {
   private OpsShardReadinessServiceGraphTestFactory() {}
 
   static OpsShardReadinessReadOnlyEvidenceCatalogService readOnlyEvidenceCatalogService() {
-    OpsShardReadinessEvidenceIndexService indexService =
-        new OpsShardReadinessEvidenceIndexService();
-    OpsShardReadinessEvidenceVerificationService verificationService =
-        new OpsShardReadinessEvidenceVerificationService(indexService);
-    OpsShardReadinessEvidenceHandoffService handoffService =
-        new OpsShardReadinessEvidenceHandoffService(indexService, verificationService);
-    OpsShardReadinessEchoService echoService =
-        new OpsShardReadinessEchoService(
-            new OpsShardReadinessService(),
-            new OpsShardReadinessHardeningService(),
-            indexService,
-            handoffService);
-    return new OpsShardReadinessReadOnlyEvidenceCatalogService(
-        echoService, OpsShardReadinessRuntimeExecutionTestSupport.passEvidenceCloseoutService());
+    return OpsShardReadinessReadOnlyEvidenceTestSupport.catalogService();
   }
 
   static OpsShardReadinessReadOnlyEvidenceCatalogHandoffService
       readOnlyEvidenceCatalogHandoffService() {
-    return new OpsShardReadinessReadOnlyEvidenceCatalogHandoffService(
-        readOnlyEvidenceCatalogService());
+    return OpsShardReadinessReadOnlyEvidenceTestSupport.handoffService();
   }
 
   static OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService
       readOnlyEvidenceCatalogHandoffVerificationService() {
-    OpsShardReadinessReadOnlyEvidenceCatalogService catalogService =
-        readOnlyEvidenceCatalogService();
-    return new OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService(
-        catalogService, new OpsShardReadinessReadOnlyEvidenceCatalogHandoffService(catalogService));
+    return OpsShardReadinessReadOnlyEvidenceTestSupport.handoffVerificationService();
   }
 
   static OpsShardReadinessRuntimeExecutionPassEvidenceCloseoutService

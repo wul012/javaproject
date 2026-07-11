@@ -1,5 +1,17 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.readonlyevidence;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessActiveShardPlanHandoffService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEchoResponse;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEchoService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceHandoffService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceIndexService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceVerificationService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessHardeningService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessLiveReadGatePlanService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorServiceLifecycleService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessRoutePaths;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalGateInputService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService;
@@ -17,12 +29,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessReadOnlyEvidenceCatalogService {
 
-  static final String ENDPOINT =
+  public static final String ENDPOINT =
       OpsShardReadinessRoutePaths.BASE_PATH
           + OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG;
-  static final String FIXTURE_ENDPOINT =
+  public static final String FIXTURE_ENDPOINT =
       "/contracts/java-shard-readiness-read-only-evidence-catalog-v175.fixture.json";
-  static final String EVIDENCE_PATH =
+  public static final String EVIDENCE_PATH =
       "e/175/evidence/java-shard-readiness-read-only-evidence-catalog-v175.json";
 
   private final OpsShardReadinessEchoService echoService;

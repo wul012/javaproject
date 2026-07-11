@@ -106,7 +106,12 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1851Tests {
     }
 
     String snapshot =
-        read(OPS_ROOT.resolve("OpsShardReadinessReadOnlyEvidenceCatalogSnapshot.java"));
+        read(
+            OPS_ROOT.resolve(
+                Path.of(
+                    "maintenance",
+                    "readonlyevidence",
+                    "OpsShardReadinessReadOnlyEvidenceCatalogSnapshot.java")));
     assertThat(snapshot)
         .contains(PACKAGE_IMPORT, PREFIX + "ArtifactCandidateService.FIXTURE_ENDPOINT")
         .doesNotContain(
@@ -123,7 +128,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1851Tests {
           .doesNotContain("com.codexdemo.orderplatform.ops." + response);
     }
     try (Stream<Path> files = Files.list(OPS_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(482);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(471);
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))

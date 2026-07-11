@@ -1,5 +1,15 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.readonlyevidence;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessActiveShardPlanHandoffService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessDeclaredOperatorLifecycleService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEchoService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceHandoffService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceIndexService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceVerificationService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessHardeningService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessLiveReadGatePlanService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessOperatorServiceLifecycleService;
+import com.codexdemo.orderplatform.ops.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalGateInputService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalInputContractHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.runtimeexecution.OpsShardReadinessRuntimeExecutionApprovalInputTemplateCompatibilityIntakeService;
@@ -15,7 +25,7 @@ final class OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot {
 
   private OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot() {}
 
-  static List<OpsShardReadinessEvidenceEndpoints.EndpointPair> v184EndpointPairs() {
+  static List<EndpointPair> v184EndpointPairs() {
     return List.of(
         endpointPair(OpsShardReadinessService.ENDPOINT, OpsShardReadinessService.FIXTURE_ENDPOINT),
         endpointPair(
@@ -89,19 +99,16 @@ final class OpsShardReadinessReadOnlyEndpointRegistryIntegritySnapshot {
   }
 
   static List<String> v184LiveEndpoints() {
-    return v184EndpointPairs().stream()
-        .map(OpsShardReadinessEvidenceEndpoints.EndpointPair::liveEndpoint)
-        .toList();
+    return v184EndpointPairs().stream().map(EndpointPair::liveEndpoint).toList();
   }
 
   static List<String> v184FixtureEndpoints() {
-    return v184EndpointPairs().stream()
-        .map(OpsShardReadinessEvidenceEndpoints.EndpointPair::fixtureEndpoint)
-        .toList();
+    return v184EndpointPairs().stream().map(EndpointPair::fixtureEndpoint).toList();
   }
 
-  private static OpsShardReadinessEvidenceEndpoints.EndpointPair endpointPair(
-      String liveEndpoint, String fixtureEndpoint) {
-    return new OpsShardReadinessEvidenceEndpoints.EndpointPair(liveEndpoint, fixtureEndpoint);
+  private static EndpointPair endpointPair(String liveEndpoint, String fixtureEndpoint) {
+    return new EndpointPair(liveEndpoint, fixtureEndpoint);
   }
+
+  record EndpointPair(String liveEndpoint, String fixtureEndpoint) {}
 }

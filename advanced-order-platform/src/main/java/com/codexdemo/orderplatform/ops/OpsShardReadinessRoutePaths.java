@@ -41,16 +41,16 @@ public final class OpsShardReadinessRoutePaths {
 
   public static final String BASE_PATH = "/api/v1/ops/shard-readiness";
 
-  static final String READ_ONLY_EVIDENCE_CATALOG = "/read-only-evidence-catalog";
-  static final String READ_ONLY_EVIDENCE_CATALOG_HANDOFF = "/read-only-evidence-catalog-handoff";
-  static final String READ_ONLY_EVIDENCE_CATALOG_HANDOFF_VERIFICATION =
+  public static final String READ_ONLY_EVIDENCE_CATALOG = "/read-only-evidence-catalog";
+  public static final String READ_ONLY_EVIDENCE_CATALOG_HANDOFF =
+      "/read-only-evidence-catalog-handoff";
+  public static final String READ_ONLY_EVIDENCE_CATALOG_HANDOFF_VERIFICATION =
       "/read-only-evidence-catalog-handoff-verification";
-  static final String READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY =
+  public static final String READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY =
       "/read-only-endpoint-registry-integrity";
   static final String EVIDENCE_INDEX = "/evidence-index";
   static final String EVIDENCE_VERIFICATION = "/evidence-verification";
   static final String EVIDENCE_HANDOFF = "/evidence-handoff";
-
   static final String V1_CONTRACT_ALIGNMENT = "/v1-contract-alignment";
   static final String V1_CONTRACT_ALIGNMENT_HANDOFF = "/v1-contract-alignment-handoff";
   static final String V1_CONTRACT_EVIDENCE_PACKET = "/v1-contract-evidence-packet";
