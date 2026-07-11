@@ -50,12 +50,14 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "696",
             "591",
             "665",
-            "560");
+            "560",
+            "638",
+            "533");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **665**",
+            "Current direct-root Java files: **638**",
             "Target final direct-root Java files: **105**",
-            "Remaining direct-root non-controller files to move or collapse: **560**",
+            "Remaining direct-root non-controller files to move or collapse: **533**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -86,7 +88,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(665);
+    assertThat(fileNames).hasSize(638);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -98,7 +100,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(105);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(560);
+    assertThat(fileNames.size() - retainedRoot).isEqualTo(533);
   }
 
   @Test
@@ -142,7 +144,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         new Bucket("OpsEvidence static release support", 2, matches("^OpsEvidenceStaticRelease")),
         new Bucket(
             "MinimalReadOnlyGateOperatorCiHandoff",
-            140,
+            113,
             matches("^OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoff")),
         new Bucket(
             "MinimalReadOnlyGateExecution",
