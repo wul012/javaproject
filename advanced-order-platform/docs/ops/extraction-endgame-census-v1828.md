@@ -10,9 +10,9 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **573**.
+- Current direct-root Java files: **548**.
 - Target final direct-root Java files: **105**.
-- Remaining direct-root non-controller files to move or collapse: **468**.
+- Remaining direct-root non-controller files to move or collapse: **443**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 4 shared-core waivers = 105 final root files
-573 current root files - 105 final root files = 468 files still to move
+548 current root files - 105 final root files = 443 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -49,7 +49,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Keep-root controllers | 100 | Retain. |
 | Keep-root shared core and global route aggregator | 5 | Retain only the four waiver files plus `OpsShardReadinessRoutePaths.java`. |
 | OpsEvidence static release support | 2 | Move under a shared evidence package; not a root waiver. |
-| MinimalReadOnlyGateOperatorCiHandoff | 48 | Core/archive verification moved in v1844, ArchiveDigest in v1845, ConsumerPackage in v1846, and VerificationDossier in v1847; continue with acceptance/archive slices. |
+| MinimalReadOnlyGateOperatorCiHandoff | 23 | Core/archive verification moved in v1844, ArchiveDigest in v1845, ConsumerPackage in v1846, VerificationDossier in v1847, and ReleaseAcceptance base in v1848; continue with the archive slice. |
 | MinimalReadOnlyGateExecution | 0 | Execution and archive-verification closure moved in v1843. |
 | RouteCleanup web | 170 | High-coupling track; split only with route owner and endpoint proof. |
 | ReleaseAcceptanceRoutePathSplit | 0 | Base/closeout moved in v1840, sustainment in v1841, and acceptance package/receipt/archive index in v1842. |
@@ -80,7 +80,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 8 | Move as prototype residuals. |
 | Readiness core simple endpoints | 18 | Move as small readiness-core endpoint packages. |
 
-The counted buckets sum to **573** and leave zero unassigned files. The original
+The counted buckets sum to **548** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -349,6 +349,20 @@ service/response.
 The live direct-root count falls from **598 to 573**, the final target remains
 **105**, and the movable backlog falls from **493 to 468**. The
 MinimalReadOnlyGateOperatorCiHandoff bucket falls from **73 to 48**, total
+`ops` Java files stay at **1,352**, and the census reports no unassigned files.
+
+## v1848 progress
+
+v1848 moves the twenty-five ReleaseAcceptance base implementation files into
+the path-safe `ops.maintenance.ciaccept` package. The Spring controller and its
+controller-oriented Markdown test remain root-visible, while seven package-local
+tests follow the implementation. The moved layer consumes only the public v1847
+VerificationDossier service/response and the v1840 route owner; the still-root
+ReleaseAcceptanceArchive layer imports only the v1848 public service/response.
+
+The live direct-root count falls from **573 to 548**, the final target remains
+**105**, and the movable backlog falls from **468 to 443**. The
+MinimalReadOnlyGateOperatorCiHandoff bucket falls from **48 to 23**, total
 `ops` Java files stay at **1,352**, and the census reports no unassigned files.
 
 ## Revision rule

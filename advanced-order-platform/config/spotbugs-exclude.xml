@@ -392,11 +392,11 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse$MarkdownSection" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse$MarkdownSection" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1744,11 +1744,11 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse$MarkdownSection" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse$MarkdownSection" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />

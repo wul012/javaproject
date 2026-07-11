@@ -1,28 +1,32 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveOperatorPackCatalog {
+final
+class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveOperatorPackCatalog {
 
-    private OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveOperatorPackCatalog() {
-    }
+  private
+  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveOperatorPackCatalog() {}
 
-    static List<OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse
-            .OperatorPackEntry> packs(
-                    OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse
-                            source
-            ) {
-        AtomicInteger order = new AtomicInteger(1);
-        return source.signoffLanes().stream()
-                .map(lane -> new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse
-                        .OperatorPackEntry(
-                                order.getAndIncrement(),
-                                lane.owner(),
-                                lane.evidence(),
-                                lane.ready(),
-                                lane.status()
-                        ))
-                .toList();
-    }
+  static List<
+          OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse
+              .OperatorPackEntry>
+      packs(
+          OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse
+              source) {
+    AtomicInteger order = new AtomicInteger(1);
+    return source.signoffLanes().stream()
+        .map(
+            lane ->
+                new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryResponse
+                    .OperatorPackEntry(
+                    order.getAndIncrement(),
+                    lane.owner(),
+                    lane.evidence(),
+                    lane.ready(),
+                    lane.status()))
+        .toList();
+  }
 }

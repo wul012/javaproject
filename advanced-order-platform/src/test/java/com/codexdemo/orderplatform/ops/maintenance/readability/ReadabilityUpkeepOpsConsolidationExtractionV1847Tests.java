@@ -16,6 +16,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1847Tests {
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path PACKAGE_ROOT =
       OPS_ROOT.resolve(Path.of("maintenance", "operatorcidossier"));
+  private static final Path RELEASE_ACCEPTANCE_PACKAGE_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "ciaccept"));
   private static final Path TEST_ROOT =
       Path.of("src", "test", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final Path PACKAGE_TEST_ROOT =
@@ -133,7 +135,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1847Tests {
             "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceScorecardCatalog.java",
             "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceSignoffLaneCatalog.java",
             "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceSourceDossierCatalog.java")) {
-      assertThat(read(OPS_ROOT.resolve(file))).as(file).contains(PACKAGE_IMPORT);
+      assertThat(read(RELEASE_ACCEPTANCE_PACKAGE_ROOT.resolve(file)))
+          .as(file)
+          .contains(PACKAGE_IMPORT);
     }
   }
 
@@ -146,7 +150,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1847Tests {
         .contains(PACKAGE_IMPORT + "." + response)
         .doesNotContain("com.codexdemo.orderplatform.ops." + response);
     try (Stream<Path> files = Files.list(OPS_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(573);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(548);
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
