@@ -24,7 +24,7 @@ response 和 response builder；路由、响应字段、证据字符串、fixtur
 | 测试边界归位 | `ReleaseApprovalRehearsalTestSupport` 随家族移动；28 个根测试显式导入它 | test compile 和 `forwardingBuilderAndSharedTestFixtureStayNarrow` | compile passed |
 | 拆除测试热点 | 1,340/995 行的两个单方法 overview 按证据阶段拆成 7 个测试文件 | maintainability 门保持 854 / 8 / 2 / 0 原上限 | implemented |
 | 静态分析路径同步 | 180 个 SpotBugs ReleaseApproval FQN 指向新包；6 个 maintainability 路径只改路径不放宽上限 | v1854 guard 对新旧路径作正反断言 | implemented |
-| 最终质量门 | Spotless、聚焦测试、完整 `mvnw verify`、实现 CI、closeout CI | 本文件不预写结果；结果在 closeout 后回填进度账本 | pending |
+| 最终质量门 | Spotless、聚焦测试、完整 `mvnw verify`、实现 CI、closeout CI | 本地 1,799 tests、JaCoCo 2,228 classes、SpotBugs 0；实现 run `29155544134` 已绿，closeout run 由标签提交触发 | complete |
 
 ## Ownership design
 
