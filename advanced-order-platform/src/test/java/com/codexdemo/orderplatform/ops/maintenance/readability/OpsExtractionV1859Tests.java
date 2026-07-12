@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.readability;
 
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsBoundaryTestSupport.boundaryCensus;
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsBoundaryTestSupport.externalReaders;
 import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.allJavaFiles;
 import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.count;
 import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.hanCount;
@@ -15,12 +17,8 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
 class OpsExtractionV1859Tests {
@@ -138,9 +136,10 @@ class OpsExtractionV1859Tests {
         Class.forName(PACKAGE_NAME + ".OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogSeeds");
     assertThat(Modifier.isPublic(seeds.getModifiers())).isFalse();
 
-    BoundaryCensus census = boundaryCensus();
-    assertThat(census.sourceCount()).isEqualTo(13);
-    assertThat(census.edgeCount()).isEqualTo(37);
+    OpsBoundaryTestSupport.BoundaryCensus census =
+        boundaryCensus(OPS_ROOT, PACKAGE_ROOT, mainFiles());
+    assertThat(census.sourceCount()).isEqualTo(8);
+    assertThat(census.edgeCount()).isEqualTo(19);
     assertThat(census.targetNames()).hasSize(11);
   }
 
@@ -156,7 +155,7 @@ class OpsExtractionV1859Tests {
       assertThat(Modifier.isFinal(endpoint.getModifiers())).as(service).isTrue();
       assertThat(Modifier.isPublic(profile.getModifiers())).as(service).isFalse();
 
-      assertThat(productionReaders(service + ".ENDPOINT"))
+      assertThat(externalReaders(OPS_ROOT, PACKAGE_ROOT, service + ".ENDPOINT"))
           .as(service)
           .extracting(path -> path.getFileName().toString())
           .containsExactlyElementsOf(
@@ -170,7 +169,9 @@ class OpsExtractionV1859Tests {
       assertThat(Modifier.isPublic(type.getDeclaredField("ENDPOINT").getModifiers()))
           .as(service)
           .isFalse();
-      assertThat(productionReaders(service + ".ENDPOINT")).as(service).isEmpty();
+      assertThat(externalReaders(OPS_ROOT, PACKAGE_ROOT, service + ".ENDPOINT"))
+          .as(service)
+          .isEmpty();
     }
   }
 
@@ -185,15 +186,15 @@ class OpsExtractionV1859Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(219);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(209);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
 
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **219**",
-            "Remaining direct-root non-controller files to move or collapse: **115**",
-            "RouteCleanup web | 111",
+            "Current direct-root Java files: **209**",
+            "Remaining direct-root non-controller files to move or collapse: **105**",
+            "RouteCleanup web | 101",
             "231 to 219",
             "127 to 115",
             "## v1859 progress");
@@ -227,51 +228,6 @@ class OpsExtractionV1859Tests {
     assertThat(hanCount(walkthrough)).isGreaterThanOrEqualTo(3000);
     assertThat(hanCount(walkthrough) * 2).isGreaterThanOrEqualTo(letterCount(walkthrough));
     assertThat(walkthrough).contains("禁止硬凑", "本项目");
-  }
-
-  private BoundaryCensus boundaryCensus() throws IOException {
-    Set<String> candidateTypes = new TreeSet<>();
-    for (String file : mainFiles()) {
-      candidateTypes.add(file.substring(0, file.length() - ".java".length()));
-    }
-
-    Set<Path> sources = new HashSet<>();
-    Set<String> targets = new TreeSet<>();
-    int edges = 0;
-    for (Path path : allJavaFiles(OPS_ROOT)) {
-      if (path.startsWith(PACKAGE_ROOT)) {
-        continue;
-      }
-      String source = read(path);
-      for (String target : candidateTypes) {
-        if (containsType(source, target)) {
-          sources.add(path);
-          targets.add(target);
-          edges++;
-        }
-      }
-    }
-    return new BoundaryCensus(sources.size(), edges, targets);
-  }
-
-  private List<Path> productionReaders(String needle) throws IOException {
-    return allJavaFiles(OPS_ROOT).stream()
-        .filter(path -> !path.startsWith(PACKAGE_ROOT))
-        .filter(path -> contains(path, needle))
-        .sorted()
-        .toList();
-  }
-
-  private boolean contains(Path path, String needle) {
-    try {
-      return read(path).contains(needle);
-    } catch (IOException exception) {
-      throw new IllegalStateException(exception);
-    }
-  }
-
-  private boolean containsType(String source, String typeName) {
-    return Pattern.compile("\\b" + Pattern.quote(typeName) + "\\b").matcher(source).find();
   }
 
   private List<String> mainFiles() {
@@ -324,6 +280,4 @@ class OpsExtractionV1859Tests {
         "OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService",
         "OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService");
   }
-
-  private record BoundaryCensus(int sourceCount, int edgeCount, Set<String> targetNames) {}
 }

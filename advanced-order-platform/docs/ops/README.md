@@ -78,6 +78,7 @@ package.
 | `route-cleanup-read-only-gate-extraction-v1857.md` | fifty-fourth ops extraction | How did the first compiler-closed RouteCleanup slice move 29 production files and 11 owned tests into `ops.maintenance.routecleanup`, lower root from 278 to 249, lower movable files from 174 to 145, preserve ten route bytes, and mechanically bound 47 remaining consumers? |
 | `route-cleanup-maintenance-core-extraction-v1858.md` | fifty-fifth ops extraction | How did the nine-pair maintenance core move into `ops.maintenance.routecleanup`, lower root from 249 to 231, lower movable files from 145 to 127, transfer nine route suffixes, and replace copied version-test mechanics with a shared test engine? |
 | `route-cleanup-upkeep-core-extraction-v1859.md` | fifty-sixth ops extraction | How did the twelve-file Upkeep core move into `ops.maintenance.routecleanup`, lower root from 231 to 219, lower movable files from 127 to 115, transfer five route suffixes, and repay nine temporary public endpoint fields? |
+| `route-cleanup-upkeep-assurance-extraction-v1860.md` | fifty-seventh ops extraction | How did the ten-file Upkeep assurance chain move into `ops.maintenance.routecleanup`, lower root from 219 to 209, transfer five route suffixes, narrow two measured public endpoints, and consolidate boundary scanning in the shared test engine? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary
