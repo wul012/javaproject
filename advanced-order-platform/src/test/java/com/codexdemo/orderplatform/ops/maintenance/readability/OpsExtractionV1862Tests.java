@@ -116,54 +116,21 @@ class OpsExtractionV1862Tests {
   void keepsMeasuredProductionBoundary() throws IOException {
     OpsBoundaryTestSupport.BoundaryCensus census =
         boundaryCensus(OPS_ROOT, PACKAGE_ROOT, mainFiles());
-    assertThat(census.sourceCount()).isEqualTo(6);
-    assertThat(census.edgeCount()).isEqualTo(20);
+    assertThat(census.sourceCount()).isEqualTo(1);
+    assertThat(census.edgeCount()).isEqualTo(12);
     assertThat(census.targetNames())
         .containsExactlyInAnyOrderElementsOf(mainFiles().stream().map(this::typeName).toList());
   }
 
   @Test
   void exposesOnlyMeasuredEndpoints() throws ReflectiveOperationException, IOException {
-    Map<Class<?>, List<String>> publicEndpoints =
-        Map.of(
-            OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService.class,
-                List.of(
-                    "OpsShardReadinessRouteCleanupMaintenanceRuntimeBoundaryChecklistService.java"),
-            OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService.class,
-                List.of("OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService.java"),
-            OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService.class,
-                List.of(
-                    "OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService.java",
-                    "OpsShardReadinessRouteCleanupMaintenanceGateHandoffService.java"),
-            OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService.class,
-                List.of("OpsShardReadinessRouteCleanupMaintenanceGateHandoffService.java"),
-            OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService.class,
-                List.of(
-                    "OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService.java",
-                    "OpsShardReadinessRouteCleanupMaintenanceContractFreezeService.java",
-                    "OpsShardReadinessRouteCleanupMaintenanceGateHandoffService.java"));
-
-    for (Map.Entry<Class<?>, List<String>> endpoint : publicEndpoints.entrySet()) {
-      var field = endpoint.getKey().getDeclaredField("ENDPOINT");
-      assertThat(Modifier.isPublic(field.getModifiers())).as(endpoint.getKey().getName()).isTrue();
-      assertThat(
-              externalReaders(
-                  OPS_ROOT, PACKAGE_ROOT, endpoint.getKey().getSimpleName() + ".ENDPOINT"))
-          .extracting(path -> path.getFileName().toString())
-          .containsExactlyInAnyOrderElementsOf(endpoint.getValue());
-    }
-
-    var privateEndpoint =
-        OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService.class
-            .getDeclaredField("ENDPOINT");
-    assertThat(Modifier.isPublic(privateEndpoint.getModifiers())).isFalse();
-    assertThat(
-            externalReaders(
-                OPS_ROOT,
-                PACKAGE_ROOT,
-                "OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService.ENDPOINT"))
-        .isEmpty();
     for (Class<?> service : serviceTypes()) {
+      assertThat(Modifier.isPublic(service.getDeclaredField("ENDPOINT").getModifiers()))
+          .as(service.getName())
+          .isFalse();
+      assertThat(externalReaders(OPS_ROOT, PACKAGE_ROOT, service.getSimpleName() + ".ENDPOINT"))
+          .as(service.getName())
+          .isEmpty();
       assertThat(Modifier.isPublic(service.getDeclaredField("PROFILE").getModifiers()))
           .as(service.getName())
           .isFalse();
@@ -208,13 +175,13 @@ class OpsExtractionV1862Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(187);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(174);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
     assertThat(read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md")))
         .contains(
-            "Current direct-root Java files: **187**",
-            "Remaining direct-root non-controller files to move or collapse: **83**",
-            "RouteCleanup web | 79",
+            "Current direct-root Java files: **174**",
+            "Remaining direct-root non-controller files to move or collapse: **70**",
+            "RouteCleanup web | 66",
             "199 to 187",
             "95 to 83",
             "## v1862 progress");

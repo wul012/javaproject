@@ -70,6 +70,27 @@ public final class RouteCleanupRoutes {
       "/route-cleanup-maintenance-operations-scorecard";
   public static final String MAINTENANCE_SUSTAINMENT_CLOSEOUT =
       "/route-cleanup-maintenance-sustainment-closeout";
+  public static final String MAINTENANCE_CONTRACT_FREEZE =
+      "/route-cleanup-maintenance-contract-freeze";
+  public static final String MAINTENANCE_GATE_HANDOFF = "/route-cleanup-maintenance-gate-handoff";
+  public static final String MAINTENANCE_SHARD_FIELD_MAP =
+      "/route-cleanup-maintenance-shard-field-map";
+  public static final String MAINTENANCE_READ_WINDOW_EVIDENCE =
+      "/route-cleanup-maintenance-read-window-evidence";
+  public static final String MAINTENANCE_RUNTIME_BOUNDARY_CHECKLIST =
+      "/route-cleanup-maintenance-runtime-boundary-checklist";
+  public static final String MAINTENANCE_CONSUMER_GATE_PACKET =
+      "/route-cleanup-maintenance-consumer-gate-packet";
+  public static final String MAINTENANCE_ARCHIVE_VERIFIER_SUMMARY =
+      "/route-cleanup-maintenance-archive-verifier-summary";
+  public static final String MAINTENANCE_CI_BUDGET_LEDGER =
+      "/route-cleanup-maintenance-ci-budget-ledger";
+  public static final String MAINTENANCE_ROUTE_INVENTORY_DIGEST =
+      "/route-cleanup-maintenance-route-inventory-digest";
+  public static final String MAINTENANCE_OPERATOR_SIGNOFF =
+      "/route-cleanup-maintenance-operator-signoff";
+  public static final String MAINTENANCE_EXTENDED_CLOSEOUT =
+      "/route-cleanup-maintenance-extended-closeout";
 
   private RouteCleanupRoutes() {}
 }

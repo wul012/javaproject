@@ -138,8 +138,8 @@ class OpsExtractionV1859Tests {
 
     OpsBoundaryTestSupport.BoundaryCensus census =
         boundaryCensus(OPS_ROOT, PACKAGE_ROOT, mainFiles());
-    assertThat(census.sourceCount()).isEqualTo(2);
-    assertThat(census.edgeCount()).isEqualTo(11);
+    assertThat(census.sourceCount()).isEqualTo(1);
+    assertThat(census.edgeCount()).isEqualTo(10);
     assertThat(census.targetNames()).hasSize(10);
   }
 
@@ -149,19 +149,14 @@ class OpsExtractionV1859Tests {
       Class<?> type = Class.forName(PACKAGE_NAME + "." + service);
       var endpoint = type.getDeclaredField("ENDPOINT");
       var profile = type.getDeclaredField("PROFILE");
-      boolean failClosed = service.endsWith("FailClosedPolicyService");
-      assertThat(Modifier.isPublic(endpoint.getModifiers())).as(service).isEqualTo(failClosed);
+      assertThat(Modifier.isPublic(endpoint.getModifiers())).as(service).isFalse();
       assertThat(Modifier.isStatic(endpoint.getModifiers())).as(service).isTrue();
       assertThat(Modifier.isFinal(endpoint.getModifiers())).as(service).isTrue();
       assertThat(Modifier.isPublic(profile.getModifiers())).as(service).isFalse();
 
       assertThat(externalReaders(OPS_ROOT, PACKAGE_ROOT, service + ".ENDPOINT"))
           .as(service)
-          .extracting(path -> path.getFileName().toString())
-          .containsExactlyElementsOf(
-              failClosed
-                  ? List.of("OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService.java")
-                  : List.of());
+          .isEmpty();
     }
 
     for (String service : v1858ServiceNames()) {
@@ -186,15 +181,15 @@ class OpsExtractionV1859Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(187);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(174);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
 
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **187**",
-            "Remaining direct-root non-controller files to move or collapse: **83**",
-            "RouteCleanup web | 79",
+            "Current direct-root Java files: **174**",
+            "Remaining direct-root non-controller files to move or collapse: **70**",
+            "RouteCleanup web | 66",
             "231 to 219",
             "127 to 115",
             "## v1859 progress");

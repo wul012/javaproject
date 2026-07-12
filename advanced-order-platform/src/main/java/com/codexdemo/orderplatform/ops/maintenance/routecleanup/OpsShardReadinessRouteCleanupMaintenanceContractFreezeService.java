@@ -1,8 +1,6 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
 import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPrototypeEvidenceService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessRouteCleanupMaintenanceContractFreezeService {
 
   static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE;
+      RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_CONTRACT_FREEZE;
   static final String PROFILE = "java-shard-readiness-route-cleanup-maintenance-contract-freeze.v1";
 
   @Transactional(readOnly = true)

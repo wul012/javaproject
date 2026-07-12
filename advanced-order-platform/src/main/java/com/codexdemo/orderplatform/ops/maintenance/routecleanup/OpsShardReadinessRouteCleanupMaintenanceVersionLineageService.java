@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceVersionLineageService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_VERSION_LINEAGE;
   static final String PROFILE = "java-shard-readiness-route-cleanup-maintenance-version-lineage.v1";
 

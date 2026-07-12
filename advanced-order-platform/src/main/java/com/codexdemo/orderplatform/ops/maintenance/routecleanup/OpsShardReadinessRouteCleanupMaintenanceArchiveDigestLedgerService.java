@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_ARCHIVE_DIGEST_LEDGER;
   static final String PROFILE =
       "java-shard-readiness-route-cleanup-maintenance-archive-digest-ledger.v1";

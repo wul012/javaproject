@@ -147,15 +147,15 @@ class OpsExtractionV1858Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(187);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(174);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
 
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **187**",
-            "Remaining direct-root non-controller files to move or collapse: **83**",
-            "RouteCleanup web | 79",
+            "Current direct-root Java files: **174**",
+            "Remaining direct-root non-controller files to move or collapse: **70**",
+            "RouteCleanup web | 66",
             "249 to 231",
             "145 to 127",
             "## v1858 progress");

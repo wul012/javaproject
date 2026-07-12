@@ -107,28 +107,6 @@ public final class OpsShardReadinessRoutePaths {
       "/route-cleanup-completion-audit-digest";
   static final String ROUTE_CLEANUP_POST_COMPLETION_CLOSEOUT =
       "/route-cleanup-post-completion-closeout";
-  static final String ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE =
-      "/route-cleanup-maintenance-contract-freeze";
-  static final String ROUTE_CLEANUP_MAINTENANCE_GATE_HANDOFF =
-      "/route-cleanup-maintenance-gate-handoff";
-  static final String ROUTE_CLEANUP_MAINTENANCE_SHARD_FIELD_MAP =
-      "/route-cleanup-maintenance-shard-field-map";
-  static final String ROUTE_CLEANUP_MAINTENANCE_READ_WINDOW_EVIDENCE =
-      "/route-cleanup-maintenance-read-window-evidence";
-  static final String ROUTE_CLEANUP_MAINTENANCE_RUNTIME_BOUNDARY_CHECKLIST =
-      "/route-cleanup-maintenance-runtime-boundary-checklist";
-  static final String ROUTE_CLEANUP_MAINTENANCE_CONSUMER_GATE_PACKET =
-      "/route-cleanup-maintenance-consumer-gate-packet";
-  static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_VERIFIER_SUMMARY =
-      "/route-cleanup-maintenance-archive-verifier-summary";
-  static final String ROUTE_CLEANUP_MAINTENANCE_CI_BUDGET_LEDGER =
-      "/route-cleanup-maintenance-ci-budget-ledger";
-  static final String ROUTE_CLEANUP_MAINTENANCE_ROUTE_INVENTORY_DIGEST =
-      "/route-cleanup-maintenance-route-inventory-digest";
-  static final String ROUTE_CLEANUP_MAINTENANCE_OPERATOR_SIGNOFF =
-      "/route-cleanup-maintenance-operator-signoff";
-  static final String ROUTE_CLEANUP_MAINTENANCE_EXTENDED_CLOSEOUT =
-      "/route-cleanup-maintenance-extended-closeout";
   static final String MANUAL_EVIDENCE_WORKSHEET_CATALOG =
       OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG;
   static final String MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE =

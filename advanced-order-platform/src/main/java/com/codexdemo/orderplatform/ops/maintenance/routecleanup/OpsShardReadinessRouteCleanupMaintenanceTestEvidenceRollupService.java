@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_TEST_EVIDENCE_ROLLUP;
   static final String PROFILE =
       "java-shard-readiness-route-cleanup-maintenance-test-evidence-rollup.v1";

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_FAIL_CLOSED_POLICY;
   static final String PROFILE =
       "java-shard-readiness-route-cleanup-maintenance-fail-closed-policy.v1";

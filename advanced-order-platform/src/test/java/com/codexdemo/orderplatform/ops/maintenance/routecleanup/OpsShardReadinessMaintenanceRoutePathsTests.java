@@ -1,4 +1,4 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,42 +12,41 @@ class OpsShardReadinessMaintenanceRoutePathsTests {
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE,
+                    RouteCleanupRoutes.MAINTENANCE_CONTRACT_FREEZE,
                     OpsShardReadinessRouteCleanupMaintenanceContractFreezeService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_GATE_HANDOFF,
+                    RouteCleanupRoutes.MAINTENANCE_GATE_HANDOFF,
                     OpsShardReadinessRouteCleanupMaintenanceGateHandoffService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SHARD_FIELD_MAP,
+                    RouteCleanupRoutes.MAINTENANCE_SHARD_FIELD_MAP,
                     OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_READ_WINDOW_EVIDENCE,
+                    RouteCleanupRoutes.MAINTENANCE_READ_WINDOW_EVIDENCE,
                     OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .ROUTE_CLEANUP_MAINTENANCE_RUNTIME_BOUNDARY_CHECKLIST,
+                    RouteCleanupRoutes.MAINTENANCE_RUNTIME_BOUNDARY_CHECKLIST,
                     OpsShardReadinessRouteCleanupMaintenanceRuntimeBoundaryChecklistService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONSUMER_GATE_PACKET,
+                    RouteCleanupRoutes.MAINTENANCE_CONSUMER_GATE_PACKET,
                     OpsShardReadinessRouteCleanupMaintenanceConsumerGatePacketService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_VERIFIER_SUMMARY,
+                    RouteCleanupRoutes.MAINTENANCE_ARCHIVE_VERIFIER_SUMMARY,
                     OpsShardReadinessRouteCleanupMaintenanceArchiveVerifierSummaryService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CI_BUDGET_LEDGER,
+                    RouteCleanupRoutes.MAINTENANCE_CI_BUDGET_LEDGER,
                     OpsShardReadinessRouteCleanupMaintenanceCiBudgetLedgerService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ROUTE_INVENTORY_DIGEST,
+                    RouteCleanupRoutes.MAINTENANCE_ROUTE_INVENTORY_DIGEST,
                     OpsShardReadinessRouteCleanupMaintenanceRouteInventoryDigestService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATOR_SIGNOFF,
+                    RouteCleanupRoutes.MAINTENANCE_OPERATOR_SIGNOFF,
                     OpsShardReadinessRouteCleanupMaintenanceOperatorSignoffService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_EXTENDED_CLOSEOUT,
+                    RouteCleanupRoutes.MAINTENANCE_EXTENDED_CLOSEOUT,
                     OpsShardReadinessRouteCleanupMaintenanceExtendedCloseoutService.ENDPOINT)))
         .allSatisfy(
             (route, endpoint) ->
-                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+                assertThat(endpoint).isEqualTo(RouteCleanupRoutes.BASE_PATH + route));
   }
 }
