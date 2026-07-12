@@ -1,7 +1,6 @@
 # RouteCleanup Post-Completion Closeout v1865
 
-Status: local verification passed; evidence is accepted only after remote CI
-also passes.
+Status: completed; local verification and remote CI passed.
 
 ## Design Note
 
@@ -16,14 +15,14 @@ also passes.
 
 | Requirement | Implementation | Mechanical evidence | State |
 | --- | --- | --- | --- |
-| Close the remaining family | Move 22 service/response pairs and 22 owned service tests into `ops.maintenance.routecleanup` | exact file-set guard and production/test compilation | local passed; remote CI pending |
-| Preserve HTTP behavior | Keep Assurance, Completion, Governance, and PostCompletion controllers in root | exact 4-source / 44-edge / 44-target boundary and integration regression | local passed; remote CI pending |
-| Preserve route bytes | Move the final 22 suffixes from the global route table to `RouteCleanupRoutes` | exact route map, global absence, and 84-entry manifest | local passed; remote CI pending |
-| Remove reverse ownership | Make EndpointManifest read only the family route owner | source-direction guard and compilation | local passed; remote CI pending |
-| Repay visibility debt | Return every RouteCleanup `ENDPOINT` and `PROFILE` field to package visibility | reflection plus external-reader census | local passed; remote CI pending |
-| Preserve static-analysis policy | Relocate all 44 SpotBugs response mirrors without adding exclusions | exact old/new FQN counts and SpotBugs zero-findings gate | local passed; remote CI pending |
-| Tighten the endgame | Root 152 -> 108; movable 48 -> 4; RouteCleanup 44 -> 0 | committed census script and shrink-only ratchets | local passed; remote CI pending |
-| Explain the change | Chinese-majority walkthrough with exactly 10 headings and at least 3,000 Han characters | v1865 walkthrough guard | local passed; remote CI pending |
+| Close the remaining family | Move 22 service/response pairs and 22 owned service tests into `ops.maintenance.routecleanup` | exact file-set guard and production/test compilation | passed |
+| Preserve HTTP behavior | Keep Assurance, Completion, Governance, and PostCompletion controllers in root | exact 4-source / 44-edge / 44-target boundary and integration regression | passed |
+| Preserve route bytes | Move the final 22 suffixes from the global route table to `RouteCleanupRoutes` | exact route map, global absence, and 84-entry manifest | passed |
+| Remove reverse ownership | Make EndpointManifest read only the family route owner | source-direction guard and compilation | passed |
+| Repay visibility debt | Return every RouteCleanup `ENDPOINT` and `PROFILE` field to package visibility | reflection plus external-reader census | passed |
+| Preserve static-analysis policy | Relocate all 44 SpotBugs response mirrors without adding exclusions | exact old/new FQN counts and SpotBugs zero-findings gate | passed |
+| Tighten the endgame | Root 152 -> 108; movable 48 -> 4; RouteCleanup 44 -> 0 | committed census script and shrink-only ratchets | passed |
+| Explain the change | Chinese-majority walkthrough with exactly 10 headings and at least 3,000 Han characters | v1865 walkthrough guard | passed |
 
 ## Scope
 
@@ -57,6 +56,9 @@ sibling package intentionally reuse that immutable test graph.
   zero errors, and zero skips. JaCoCo analyzed 2,228 classes and measured 32,852
   covered versus 611 missed lines (98.17%); SpotBugs analyzed 2,316 classes with
   zero findings.
+- Implementation commit `a464949e` passed GitHub Actions run `29195300042`:
+  Docker-tagged integration tests completed in 2:08 and the headless job,
+  including prod-profile smoke and JaCoCo upload, completed in 18:58.
 
 ## Failure Conditions
 
