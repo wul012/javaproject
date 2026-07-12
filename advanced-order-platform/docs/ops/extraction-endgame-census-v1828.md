@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1859, with the original v1828 baseline retained
+- Repository state: live after v1861, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **209**.
+- Current direct-root Java files: **199**.
 - Target final direct-root Java files: **104**.
-- Remaining direct-root non-controller files to move or collapse: **105**.
+- Remaining direct-root non-controller files to move or collapse: **95**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 3 shared-core waivers = 104 final root files
-219 current root files - 104 final root files = 115 files still to move
+199 current root files - 104 final root files = 95 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -51,7 +51,7 @@ when names overlap, for example controllers inside a large family prefix.
 | OpsEvidence static release support | 2 | Move under a shared evidence package; not a root waiver. |
 | MinimalReadOnlyGateOperatorCiHandoff | 0 | Core/archive verification moved in v1844, ArchiveDigest in v1845, ConsumerPackage in v1846, VerificationDossier in v1847, ReleaseAcceptance base in v1848, and its Archive in v1849. |
 | MinimalReadOnlyGateExecution | 0 | Execution and archive-verification closure moved in v1843. |
-| RouteCleanup web | 101 | The read-only gate moved in v1857, the maintenance core in v1858, the Upkeep core in v1859, and the Upkeep assurance chain in v1860; continue only through compiler-closed slices with measured inbound readers. |
+| RouteCleanup web | 91 | The read-only gate moved in v1857, maintenance and Upkeep layers moved in v1858-v1860, and the sustainment core moved in v1861; continue only through compiler-closed slices with measured inbound readers. |
 | ReleaseAcceptanceRoutePathSplit | 0 | Base/closeout moved in v1840, sustainment in v1841, and acceptance package/receipt/archive index in v1842. |
 | ReleaseAcceptanceArchiveVerificationHandoff | 0 | Source archive boundary moved in v1849; the verification handoff moved in v1850. |
 | ReleaseAcceptance root route owner | 0 | Moved with the base layer in v1840. |
@@ -620,6 +620,31 @@ Total `ops` main Java remains **1,352**, the retained-root target remains
 **104**, and the reproducible census reports zero unassigned files. No route,
 response, profile, evidence, fixture, digest, side-effect, deployment,
 rollback, or archive byte changes.
+
+## v1861 progress
+
+v1861 moves the exact ten-file sustainment-core closure behind the RouteCleanup
+maintenance sustainment controller into `ops.maintenance.routecleanup`. Five
+service/response pairs cover release checklist, read-only remediation preview,
+freshness window, ownership register, and risk ledger. Five owned behavior
+tests follow their implementation while the Spring controller remains the root
+HTTP adapter.
+
+Five byte-identical suffixes move to `RouteCleanupRoutes`. The immediate package
+boundary contains five production readers, nineteen source-to-type edges, and
+all ten moved types. Only RiskLedger ENDPOINT remains public for the measured
+ContractFreeze, ReadWindowEvidence, and RuntimeBoundaryChecklist readers; the
+other ENDPOINT and all PROFILE fields remain package-private. Ten SpotBugs
+mirrors follow their response FQNs without adding a waiver. Moving consumers
+beside the v1859/v1860 dependencies also tightens those historical live-boundary
+guards to 4/13/11 and 3/12/10 respectively.
+
+The live direct-root count falls from **209 to 199**, the movable backlog falls
+from **105 to 95**, and the RouteCleanup bucket falls from **101 to 91**. Total
+`ops` main Java remains **1,352**, the retained-root target remains **104**, and
+the reproducible census reports zero unassigned files. No route, response,
+profile, evidence, fixture, digest, side-effect, deployment, rollback, or
+archive byte changes.
 
 ## Revision rule
 

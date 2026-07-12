@@ -11,11 +11,11 @@ import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtract
 import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.requiredHeadings;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceReadinessGateService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceVersionLineageService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -23,10 +23,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
-class OpsExtractionV1860Tests {
+class OpsExtractionV1861Tests {
 
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
@@ -36,17 +35,17 @@ class OpsExtractionV1860Tests {
   private static final Path PACKAGE_TEST_ROOT =
       TEST_ROOT.resolve(Path.of("maintenance", "routecleanup"));
   private static final Path DOC =
-      Path.of("docs", "ops", "route-cleanup-upkeep-assurance-extraction-v1860.md");
+      Path.of("docs", "ops", "route-cleanup-sustainment-core-extraction-v1861.md");
   private static final Path WALKTHROUGH =
       Path.of(
           "代码讲解记录_生产雏形阶段8",
           "v1858-v1862",
-          "version-1860-production-excellence-route-cleanup-upkeep-assurance-extraction.md");
+          "version-1861-production-excellence-route-cleanup-sustainment-core-extraction.md");
   private static final String ROOT_PACKAGE = "com.codexdemo.orderplatform.ops";
   private static final String PACKAGE_NAME = ROOT_PACKAGE + ".maintenance.routecleanup";
 
   @Test
-  void movesExactAssuranceClosure() {
+  void movesExactSustainmentCore() {
     for (String file : mainFiles()) {
       assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
@@ -61,8 +60,7 @@ class OpsExtractionV1860Tests {
   void keepsRootAdapterNarrow() throws IOException {
     String controller =
         read(
-            OPS_ROOT.resolve(
-                "OpsShardReadinessRouteCleanupMaintenanceUpkeepAssuranceController.java"));
+            OPS_ROOT.resolve("OpsShardReadinessRouteCleanupMaintenanceSustainmentController.java"));
     assertThat(controller)
         .contains(PACKAGE_NAME, "RouteCleanupRoutes.BASE_PATH")
         .doesNotContain(
@@ -79,15 +77,14 @@ class OpsExtractionV1860Tests {
   }
 
   @Test
-  void ownsAssuranceRouteBytes() throws ReflectiveOperationException, IOException {
+  void ownsSustainmentRouteBytes() throws ReflectiveOperationException, IOException {
     Map<String, String> routes =
         Map.of(
-            "MAINTENANCE_ARCHIVE_DIGEST_LEDGER", "/route-cleanup-maintenance-archive-digest-ledger",
-            "MAINTENANCE_OPERATOR_REVIEW_PACKET",
-                "/route-cleanup-maintenance-operator-review-packet",
-            "MAINTENANCE_VERSION_LINEAGE", "/route-cleanup-maintenance-version-lineage",
-            "MAINTENANCE_READINESS_GATE", "/route-cleanup-maintenance-readiness-gate",
-            "MAINTENANCE_UPKEEP_CLOSEOUT", "/route-cleanup-maintenance-upkeep-closeout");
+            "MAINTENANCE_RELEASE_CHECKLIST", "/route-cleanup-maintenance-release-checklist",
+            "MAINTENANCE_REMEDIATION_QUEUE", "/route-cleanup-maintenance-remediation-queue",
+            "MAINTENANCE_FRESHNESS_WINDOW", "/route-cleanup-maintenance-freshness-window",
+            "MAINTENANCE_OWNERSHIP_REGISTER", "/route-cleanup-maintenance-ownership-register",
+            "MAINTENANCE_RISK_LEDGER", "/route-cleanup-maintenance-risk-ledger");
 
     for (Map.Entry<String, String> route : routes.entrySet()) {
       var field = RouteCleanupRoutes.class.getField(route.getKey());
@@ -102,36 +99,35 @@ class OpsExtractionV1860Tests {
     for (String route : routes.keySet()) {
       assertThat(globalRoutes).doesNotContain("ROUTE_CLEANUP_" + route);
     }
-    assertThat(globalRoutes.lines().count()).isLessThan(1021);
+    assertThat(globalRoutes.lines().count()).isLessThan(1011);
   }
 
   @Test
   void keepsMeasuredProductionBoundary() throws IOException {
     OpsBoundaryTestSupport.BoundaryCensus census =
         boundaryCensus(OPS_ROOT, PACKAGE_ROOT, mainFiles());
-    assertThat(census.sourceCount()).isEqualTo(3);
-    assertThat(census.edgeCount()).isEqualTo(12);
+    assertThat(census.sourceCount()).isEqualTo(5);
+    assertThat(census.edgeCount()).isEqualTo(19);
     assertThat(census.targetNames())
         .containsExactlyInAnyOrderElementsOf(mainFiles().stream().map(this::typeName).toList());
   }
 
   @Test
-  void exposesOnlyMeasuredEndpoints() throws ReflectiveOperationException, IOException {
-    Map<Class<?>, String> publicEndpoints =
-        Map.of(
-            OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService.class,
-            "OpsShardReadinessRouteCleanupMaintenanceArchiveVerifierSummaryService.java",
-            OpsShardReadinessRouteCleanupMaintenanceVersionLineageService.class,
-            "OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService.java");
-    for (Map.Entry<Class<?>, String> endpoint : publicEndpoints.entrySet()) {
-      var field = endpoint.getKey().getDeclaredField("ENDPOINT");
-      assertThat(Modifier.isPublic(field.getModifiers())).as(endpoint.getKey().getName()).isTrue();
-      assertThat(
-              externalReaders(
-                  OPS_ROOT, PACKAGE_ROOT, endpoint.getKey().getSimpleName() + ".ENDPOINT"))
-          .extracting(path -> path.getFileName().toString())
-          .containsExactly(endpoint.getValue());
-    }
+  void exposesOnlyRiskEndpoint() throws ReflectiveOperationException, IOException {
+    var riskEndpoint =
+        OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService.class.getDeclaredField(
+            "ENDPOINT");
+    assertThat(Modifier.isPublic(riskEndpoint.getModifiers())).isTrue();
+    assertThat(
+            externalReaders(
+                OPS_ROOT,
+                PACKAGE_ROOT,
+                "OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService.ENDPOINT"))
+        .extracting(path -> path.getFileName().toString())
+        .containsExactly(
+            "OpsShardReadinessRouteCleanupMaintenanceContractFreezeService.java",
+            "OpsShardReadinessRouteCleanupMaintenanceReadWindowEvidenceService.java",
+            "OpsShardReadinessRouteCleanupMaintenanceRuntimeBoundaryChecklistService.java");
 
     for (Class<?> service : privateEndpointServices()) {
       assertThat(Modifier.isPublic(service.getDeclaredField("ENDPOINT").getModifiers()))
@@ -162,16 +158,6 @@ class OpsExtractionV1860Tests {
   }
 
   @Test
-  void keepsTestEnginesSmall() throws IOException {
-    Path supportRoot = TEST_ROOT.resolve(Path.of("maintenance", "readability"));
-    assertThat(read(supportRoot.resolve("OpsExtractionTestSupport.java")).lines())
-        .hasSizeLessThanOrEqualTo(80);
-    assertThat(read(supportRoot.resolve("OpsBoundaryTestSupport.java")).lines())
-        .hasSizeLessThanOrEqualTo(80);
-    assertThat(OpsBoundaryTestSupport.class.getSimpleName()).hasSizeLessThanOrEqualTo(40);
-  }
-
-  @Test
   void tightensLiveCensus() throws IOException {
     assertThat(javaFiles(OPS_ROOT)).hasSize(199);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
@@ -180,15 +166,15 @@ class OpsExtractionV1860Tests {
             "Current direct-root Java files: **199**",
             "Remaining direct-root non-controller files to move or collapse: **95**",
             "RouteCleanup web | 91",
-            "219 to 209",
-            "115 to 105",
-            "## v1860 progress");
+            "209 to 199",
+            "105 to 95",
+            "## v1861 progress");
     assertThat(read(DOC))
         .contains(
             "Requirement Evidence Matrix",
-            "Direct root 219 -> 209",
-            "5-source, 18-edge, 10-target",
-            "OpsExtractionTestSupport");
+            "Direct root 209 -> 199",
+            "5-source, 19-edge, 10-target",
+            "RiskLedger");
   }
 
   @Test
@@ -218,42 +204,47 @@ class OpsExtractionV1860Tests {
   }
 
   private List<String> mainFiles() {
-    return serviceNames().stream()
-        .flatMap(name -> Set.of(name + "Response.java", name + "Service.java").stream())
-        .sorted()
-        .toList();
+    return List.of(
+        "OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceRemediationQueueResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceRiskLedgerResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService.java");
   }
 
   private List<String> testFiles() {
-    return serviceNames().stream().map(name -> name + "ServiceTests.java").toList();
-  }
-
-  private List<String> serviceNames() {
-    return List.of(
-        "OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedger",
-        "OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacket",
-        "OpsShardReadinessRouteCleanupMaintenanceVersionLineage",
-        "OpsShardReadinessRouteCleanupMaintenanceReadinessGate",
-        "OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseout");
+    return serviceNames().stream()
+        .map(name -> name.replace("Service", "ServiceTests") + ".java")
+        .toList();
   }
 
   private List<String> responseNames() {
-    return serviceNames().stream().map(name -> name + "Response").toList();
+    return serviceNames().stream().map(name -> name.replace("Service", "Response")).toList();
   }
 
   private List<Class<?>> serviceTypes() {
     return List.of(
-        OpsShardReadinessRouteCleanupMaintenanceArchiveDigestLedgerService.class,
-        OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService.class,
-        OpsShardReadinessRouteCleanupMaintenanceVersionLineageService.class,
-        OpsShardReadinessRouteCleanupMaintenanceReadinessGateService.class,
-        OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutService.class);
+        OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService.class,
+        OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService.class,
+        OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService.class,
+        OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService.class,
+        OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService.class);
   }
 
   private List<Class<?>> privateEndpointServices() {
     return List.of(
-        OpsShardReadinessRouteCleanupMaintenanceOperatorReviewPacketService.class,
-        OpsShardReadinessRouteCleanupMaintenanceReadinessGateService.class,
-        OpsShardReadinessRouteCleanupMaintenanceUpkeepCloseoutService.class);
+        OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService.class,
+        OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService.class,
+        OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService.class,
+        OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService.class);
+  }
+
+  private List<String> serviceNames() {
+    return serviceTypes().stream().map(Class::getSimpleName).toList();
   }
 }

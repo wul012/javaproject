@@ -49,6 +49,15 @@ public final class RouteCleanupRoutes {
       "/route-cleanup-maintenance-readiness-gate";
   public static final String MAINTENANCE_UPKEEP_CLOSEOUT =
       "/route-cleanup-maintenance-upkeep-closeout";
+  public static final String MAINTENANCE_RELEASE_CHECKLIST =
+      "/route-cleanup-maintenance-release-checklist";
+  public static final String MAINTENANCE_REMEDIATION_QUEUE =
+      "/route-cleanup-maintenance-remediation-queue";
+  public static final String MAINTENANCE_FRESHNESS_WINDOW =
+      "/route-cleanup-maintenance-freshness-window";
+  public static final String MAINTENANCE_OWNERSHIP_REGISTER =
+      "/route-cleanup-maintenance-ownership-register";
+  public static final String MAINTENANCE_RISK_LEDGER = "/route-cleanup-maintenance-risk-ledger";
 
   private RouteCleanupRoutes() {}
 }

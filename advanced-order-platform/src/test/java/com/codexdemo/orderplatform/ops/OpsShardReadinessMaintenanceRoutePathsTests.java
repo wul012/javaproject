@@ -12,21 +12,6 @@ class OpsShardReadinessMaintenanceRoutePathsTests {
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RELEASE_CHECKLIST,
-                    OpsShardReadinessRouteCleanupMaintenanceReleaseChecklistService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_REMEDIATION_QUEUE,
-                    OpsShardReadinessRouteCleanupMaintenanceRemediationQueueService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_FRESHNESS_WINDOW,
-                    OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OWNERSHIP_REGISTER,
-                    OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_RISK_LEDGER,
-                    OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService.ENDPOINT),
-                Map.entry(
                     OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST,
                     OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService
                         .ENDPOINT),
