@@ -13,6 +13,17 @@ public final class RouteCleanupRoutes {
   public static final String RELEASE_HANDOFF = "/route-cleanup-release-handoff";
   public static final String OPERATOR_RUNBOOK = "/route-cleanup-operator-runbook";
   public static final String READ_ONLY_GATE = "/route-cleanup-read-only-gate";
+  public static final String SUITE_CLOSEOUT = "/route-cleanup-suite-closeout";
+  public static final String ARCHIVE_VERIFICATION = "/route-cleanup-archive-verification";
+  public static final String CONSUMER_PACKET = "/route-cleanup-consumer-packet";
+  public static final String CI_EVIDENCE = "/route-cleanup-ci-evidence";
+  public static final String ENDPOINT_MANIFEST = "/route-cleanup-endpoint-manifest";
+  public static final String REGRESSION_GUARD = "/route-cleanup-regression-guard";
+  public static final String HANDOFF_BUNDLE = "/route-cleanup-handoff-bundle";
+  public static final String CONTINUITY_REPORT = "/route-cleanup-continuity-report";
+  public static final String CONSUMER_CHECKLIST = "/route-cleanup-consumer-checklist";
+  public static final String FINAL_DIGEST = "/route-cleanup-final-digest";
+  public static final String EXTENDED_CLOSEOUT = "/route-cleanup-extended-closeout";
   public static final String MAINTENANCE_SEGMENT_CATALOG =
       "/route-cleanup-maintenance-segment-catalog";
   public static final String MAINTENANCE_CONTINUITY = "/route-cleanup-maintenance-continuity";

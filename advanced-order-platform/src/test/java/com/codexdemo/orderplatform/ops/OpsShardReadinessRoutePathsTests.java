@@ -126,39 +126,6 @@ class OpsShardReadinessRoutePathsTests {
                     RouteCleanupRoutes.READ_ONLY_GATE,
                     OpsShardReadinessRouteCleanupReadOnlyGateService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_SUITE_CLOSEOUT,
-                    OpsShardReadinessRouteCleanupSuiteCloseoutService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_VERIFICATION,
-                    OpsShardReadinessRouteCleanupArchiveVerificationService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_PACKET,
-                    OpsShardReadinessRouteCleanupConsumerPacketService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CI_EVIDENCE,
-                    OpsShardReadinessRouteCleanupCiEvidenceService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ENDPOINT_MANIFEST,
-                    OpsShardReadinessRouteCleanupEndpointManifestService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REGRESSION_GUARD,
-                    OpsShardReadinessRouteCleanupRegressionGuardService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_BUNDLE,
-                    OpsShardReadinessRouteCleanupHandoffBundleService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONTINUITY_REPORT,
-                    OpsShardReadinessRouteCleanupContinuityReportService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_CHECKLIST,
-                    OpsShardReadinessRouteCleanupConsumerChecklistService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_DIGEST,
-                    OpsShardReadinessRouteCleanupFinalDigestService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EXTENDED_CLOSEOUT,
-                    OpsShardReadinessRouteCleanupExtendedCloseoutService.ENDPOINT),
-                Map.entry(
                     OpsShardReadinessRoutePaths.ROUTE_CLEANUP_AUDIT_TRAIL,
                     OpsShardReadinessRouteCleanupAuditTrailService.ENDPOINT),
                 Map.entry(

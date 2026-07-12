@@ -87,7 +87,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1809Tests {
                   .filter(Files::isRegularFile)
                   .filter(path -> path.getFileName().toString().endsWith(".java"))
                   .count())
-          .isEqualTo(174);
+          .isEqualTo(152);
     }
   }
 

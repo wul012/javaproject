@@ -2,10 +2,14 @@ package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupBoundaryMatrixResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupBoundaryMatrixService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupCiEvidenceResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupCiEvidenceService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupRegressionGuardResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupRegressionGuardService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,12 +61,12 @@ public class OpsShardReadinessRouteCleanupGovernanceController {
     return readOnlyGateService.gate();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CI_EVIDENCE)
+  @GetMapping(RouteCleanupRoutes.CI_EVIDENCE)
   public OpsShardReadinessRouteCleanupCiEvidenceResponse ciEvidence() {
     return ciEvidenceService.evidence();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_REGRESSION_GUARD)
+  @GetMapping(RouteCleanupRoutes.REGRESSION_GUARD)
   public OpsShardReadinessRouteCleanupRegressionGuardResponse regressionGuard() {
     return regressionGuardService.guard();
   }

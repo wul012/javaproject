@@ -1,7 +1,13 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupContinuityReportResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupContinuityReportService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupDigestResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupDigestService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEndpointManifestResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEndpointManifestService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupFinalDigestResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupFinalDigestService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse;
@@ -57,17 +63,17 @@ public class OpsShardReadinessRouteCleanupSummaryController {
     return sourcePlanAlignmentService.alignment();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ENDPOINT_MANIFEST)
+  @GetMapping(RouteCleanupRoutes.ENDPOINT_MANIFEST)
   public OpsShardReadinessRouteCleanupEndpointManifestResponse endpointManifest() {
     return endpointManifestService.manifest();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONTINUITY_REPORT)
+  @GetMapping(RouteCleanupRoutes.CONTINUITY_REPORT)
   public OpsShardReadinessRouteCleanupContinuityReportResponse continuityReport() {
     return continuityReportService.report();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_FINAL_DIGEST)
+  @GetMapping(RouteCleanupRoutes.FINAL_DIGEST)
   public OpsShardReadinessRouteCleanupFinalDigestResponse finalDigest() {
     return finalDigestService.digest();
   }

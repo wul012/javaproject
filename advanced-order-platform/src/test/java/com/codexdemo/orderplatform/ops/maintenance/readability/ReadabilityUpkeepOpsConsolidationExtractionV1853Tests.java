@@ -193,7 +193,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1853Tests {
 
   @Test
   void shrinkOnlyCensusAndVersionEvidenceCloseTheBatch() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(174);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(152);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
           .hasSizeLessThanOrEqualTo(1352);

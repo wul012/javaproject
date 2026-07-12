@@ -66,17 +66,6 @@ public final class OpsShardReadinessRoutePaths {
       "/v1-contract-consumer-evidence-digest";
   public static final String V1_CONTRACT_CONSUMER_READINESS_HANDOFF =
       "/v1-contract-consumer-readiness-handoff";
-  static final String ROUTE_CLEANUP_SUITE_CLOSEOUT = "/route-cleanup-suite-closeout";
-  static final String ROUTE_CLEANUP_ARCHIVE_VERIFICATION = "/route-cleanup-archive-verification";
-  static final String ROUTE_CLEANUP_CONSUMER_PACKET = "/route-cleanup-consumer-packet";
-  static final String ROUTE_CLEANUP_CI_EVIDENCE = "/route-cleanup-ci-evidence";
-  static final String ROUTE_CLEANUP_ENDPOINT_MANIFEST = "/route-cleanup-endpoint-manifest";
-  static final String ROUTE_CLEANUP_REGRESSION_GUARD = "/route-cleanup-regression-guard";
-  static final String ROUTE_CLEANUP_HANDOFF_BUNDLE = "/route-cleanup-handoff-bundle";
-  static final String ROUTE_CLEANUP_CONTINUITY_REPORT = "/route-cleanup-continuity-report";
-  static final String ROUTE_CLEANUP_CONSUMER_CHECKLIST = "/route-cleanup-consumer-checklist";
-  static final String ROUTE_CLEANUP_FINAL_DIGEST = "/route-cleanup-final-digest";
-  static final String ROUTE_CLEANUP_EXTENDED_CLOSEOUT = "/route-cleanup-extended-closeout";
   static final String ROUTE_CLEANUP_AUDIT_TRAIL = "/route-cleanup-audit-trail";
   static final String ROUTE_CLEANUP_ACCEPTANCE_RECEIPT = "/route-cleanup-acceptance-receipt";
   static final String ROUTE_CLEANUP_EVIDENCE_REGISTER = "/route-cleanup-evidence-register";

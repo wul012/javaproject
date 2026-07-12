@@ -8,6 +8,48 @@ import org.junit.jupiter.api.Test;
 class OpsShardReadinessMaintenanceRoutePathsTests {
 
   @Test
+  void handoffEndpointsUseSharedRouteConstants() {
+    assertThat(
+            Map.ofEntries(
+                Map.entry(
+                    RouteCleanupRoutes.SUITE_CLOSEOUT,
+                    OpsShardReadinessRouteCleanupSuiteCloseoutService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.ARCHIVE_VERIFICATION,
+                    OpsShardReadinessRouteCleanupArchiveVerificationService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.CONSUMER_PACKET,
+                    OpsShardReadinessRouteCleanupConsumerPacketService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.CI_EVIDENCE,
+                    OpsShardReadinessRouteCleanupCiEvidenceService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.ENDPOINT_MANIFEST,
+                    OpsShardReadinessRouteCleanupEndpointManifestService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.REGRESSION_GUARD,
+                    OpsShardReadinessRouteCleanupRegressionGuardService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.HANDOFF_BUNDLE,
+                    OpsShardReadinessRouteCleanupHandoffBundleService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.CONTINUITY_REPORT,
+                    OpsShardReadinessRouteCleanupContinuityReportService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.CONSUMER_CHECKLIST,
+                    OpsShardReadinessRouteCleanupConsumerChecklistService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.FINAL_DIGEST,
+                    OpsShardReadinessRouteCleanupFinalDigestService.ENDPOINT),
+                Map.entry(
+                    RouteCleanupRoutes.EXTENDED_CLOSEOUT,
+                    OpsShardReadinessRouteCleanupExtendedCloseoutService.ENDPOINT)))
+        .allSatisfy(
+            (route, endpoint) ->
+                assertThat(endpoint).isEqualTo(RouteCleanupRoutes.BASE_PATH + route));
+  }
+
+  @Test
   void maintenanceUpkeepEndpointsUseSharedRouteConstants() {
     assertThat(
             Map.ofEntries(

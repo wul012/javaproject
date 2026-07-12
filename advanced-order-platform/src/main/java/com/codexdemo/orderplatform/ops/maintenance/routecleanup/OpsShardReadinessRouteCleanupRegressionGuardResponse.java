@@ -1,0 +1,17 @@
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
+
+import java.util.List;
+
+public record OpsShardReadinessRouteCleanupRegressionGuardResponse(
+    String project,
+    String version,
+    boolean readOnly,
+    boolean executionAllowed,
+    String guardEndpoint,
+    String guardProfile,
+    int guardCount,
+    List<GuardCheck> guards,
+    String status) {
+
+  public record GuardCheck(String name, boolean passed, String evidence, String status) {}
+}

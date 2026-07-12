@@ -2,10 +2,22 @@ package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchivePlanResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchivePlanService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchiveVerificationResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchiveVerificationService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupConsumerChecklistResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupConsumerChecklistService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupConsumerPacketResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupConsumerPacketService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupExtendedCloseoutResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupExtendedCloseoutService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffBundleResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffBundleService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffChecklistResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffChecklistService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReleaseHandoffResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReleaseHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSuiteCloseoutResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSuiteCloseoutService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,32 +81,32 @@ public class OpsShardReadinessRouteCleanupHandoffController {
     return releaseHandoffService.handoff();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_SUITE_CLOSEOUT)
+  @GetMapping(RouteCleanupRoutes.SUITE_CLOSEOUT)
   public OpsShardReadinessRouteCleanupSuiteCloseoutResponse suiteCloseout() {
     return suiteCloseoutService.closeout();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_VERIFICATION)
+  @GetMapping(RouteCleanupRoutes.ARCHIVE_VERIFICATION)
   public OpsShardReadinessRouteCleanupArchiveVerificationResponse archiveVerification() {
     return archiveVerificationService.verification();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_PACKET)
+  @GetMapping(RouteCleanupRoutes.CONSUMER_PACKET)
   public OpsShardReadinessRouteCleanupConsumerPacketResponse consumerPacket() {
     return consumerPacketService.packet();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_BUNDLE)
+  @GetMapping(RouteCleanupRoutes.HANDOFF_BUNDLE)
   public OpsShardReadinessRouteCleanupHandoffBundleResponse handoffBundle() {
     return handoffBundleService.bundle();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_CONSUMER_CHECKLIST)
+  @GetMapping(RouteCleanupRoutes.CONSUMER_CHECKLIST)
   public OpsShardReadinessRouteCleanupConsumerChecklistResponse consumerChecklist() {
     return consumerChecklistService.checklist();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EXTENDED_CLOSEOUT)
+  @GetMapping(RouteCleanupRoutes.EXTENDED_CLOSEOUT)
   public OpsShardReadinessRouteCleanupExtendedCloseoutResponse extendedCloseout() {
     return extendedCloseoutService.closeout();
   }
