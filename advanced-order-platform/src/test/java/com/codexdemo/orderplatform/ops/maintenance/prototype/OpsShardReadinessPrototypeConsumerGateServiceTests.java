@@ -2,13 +2,13 @@ package com.codexdemo.orderplatform.ops.maintenance.prototype;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPostCompletionServiceFixtures;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEchoService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceIndexService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceVerificationService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessHardeningService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPostCompletionServiceFixtures;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessPrototypeConsumerGateServiceTests {

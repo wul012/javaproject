@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupExtendedCloseoutService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.EXTENDED_CLOSEOUT;
 
   static final String PROFILE = "java-shard-readiness-route-cleanup-extended-closeout.v1";

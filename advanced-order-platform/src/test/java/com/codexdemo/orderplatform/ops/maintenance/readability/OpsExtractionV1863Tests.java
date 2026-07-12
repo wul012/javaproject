@@ -59,12 +59,12 @@ class OpsExtractionV1863Tests {
             Files.exists(
                 OPS_ROOT.resolve(
                     "OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService.java")))
-        .isTrue();
+        .isFalse();
     assertThat(
             Files.exists(
                 PACKAGE_ROOT.resolve(
                     "OpsShardReadinessRouteCleanupMaintenanceBoundaryReportService.java")))
-        .isFalse();
+        .isTrue();
   }
 
   @Test
@@ -158,13 +158,13 @@ class OpsExtractionV1863Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(152);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(108);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
     assertThat(read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md")))
         .contains(
-            "Current direct-root Java files: **152**",
-            "Remaining direct-root non-controller files to move or collapse: **48**",
-            "RouteCleanup web | 44",
+            "Current direct-root Java files: **108**",
+            "Remaining direct-root non-controller files to move or collapse: **4**",
+            "RouteCleanup web | 0",
             "187 to 174",
             "83 to 70",
             "## v1863 progress");

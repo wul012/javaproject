@@ -185,7 +185,7 @@ class OpsExtractionV1854Tests {
         .contains("com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApproval")
         .doesNotContain("com.codexdemo.orderplatform.ops.ReleaseApproval");
 
-    assertThat(javaFiles(OPS_ROOT)).hasSize(152);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(108);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
           .hasSizeLessThanOrEqualTo(1352);

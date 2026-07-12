@@ -6,6 +6,8 @@ import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadines
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupCiEvidenceService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPolicyGuardResponse;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPolicyGuardService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateResponse;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupRegressionGuardResponse;
@@ -71,7 +73,7 @@ public class OpsShardReadinessRouteCleanupGovernanceController {
     return regressionGuardService.guard();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POLICY_GUARD)
+  @GetMapping(RouteCleanupRoutes.POLICY_GUARD)
   public OpsShardReadinessRouteCleanupPolicyGuardResponse policyGuard() {
     return policyGuardService.guard();
   }

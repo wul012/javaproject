@@ -7,8 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupReadOnlyGateService {
 
-  public static final String ENDPOINT =
-      RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.READ_ONLY_GATE;
+  static final String ENDPOINT = RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.READ_ONLY_GATE;
 
   static final String PROFILE = "java-shard-readiness-route-cleanup-read-only-gate.v1";
 

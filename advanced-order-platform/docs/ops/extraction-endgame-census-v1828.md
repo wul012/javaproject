@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1864, with the original v1828 baseline retained
+- Repository state: live after v1865, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **152**.
+- Current direct-root Java files: **108**.
 - Target final direct-root Java files: **104**.
-- Remaining direct-root non-controller files to move or collapse: **48**.
+- Remaining direct-root non-controller files to move or collapse: **4**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 3 shared-core waivers = 104 final root files
-152 current root files - 104 final root files = 48 files still to move
+108 current root files - 104 final root files = 4 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -51,7 +51,7 @@ when names overlap, for example controllers inside a large family prefix.
 | OpsEvidence static release support | 2 | Move under a shared evidence package; not a root waiver. |
 | MinimalReadOnlyGateOperatorCiHandoff | 0 | Core/archive verification moved in v1844, ArchiveDigest in v1845, ConsumerPackage in v1846, VerificationDossier in v1847, ReleaseAcceptance base in v1848, and its Archive in v1849. |
 | MinimalReadOnlyGateExecution | 0 | Execution and archive-verification closure moved in v1843. |
-| RouteCleanup web | 44 | The read-only gate moved in v1857, maintenance and Upkeep layers moved in v1858-v1860, sustainment moved in v1861-v1862, the pure maintenance review residue closed in v1863, and the complete handoff graph moved in v1864; the remaining post-completion graph is one closed successor. |
+| RouteCleanup web | 0 | The read-only gate moved in v1857, maintenance and Upkeep layers moved in v1858-v1860, sustainment moved in v1861-v1862, review residue closed in v1863, the handoff graph moved in v1864, and the post-completion graph closed the family in v1865. |
 | ReleaseAcceptanceRoutePathSplit | 0 | Base/closeout moved in v1840, sustainment in v1841, and acceptance package/receipt/archive index in v1842. |
 | ReleaseAcceptanceArchiveVerificationHandoff | 0 | Source archive boundary moved in v1849; the verification handoff moved in v1850. |
 | ReleaseAcceptance root route owner | 0 | Moved with the base layer in v1840. |
@@ -80,7 +80,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 0 | Moved with the complete Prototype closure in v1856. |
 | Readiness core simple endpoints | 0 | Moved with ActiveShardPlanHandoff as one closed package in v1855. |
 
-The counted buckets sum to **152** and leave zero unassigned files. The original
+The counted buckets sum to **108** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -726,6 +726,31 @@ from **70 to 48**, and the RouteCleanup bucket falls from **66 to 44**. Total
 the reproducible census reports zero unassigned files. No route, response,
 manifest entry, digest input, evidence, fixture, side effect, deployment,
 rollback, or archive byte changes.
+
+## v1865 progress
+
+v1865 moves the complete forty-four-type RouteCleanup post-completion graph
+into `ops.maintenance.routecleanup`. Twenty-two service/response pairs and all
+twenty-two owned behavior tests follow the implementation. Two shared test
+fixtures move beside them; the post-completion fixture keeps one public factory
+only for three measured Prototype tests in a sibling package. Assurance,
+Completion, Governance, and PostCompletion remain the four root HTTP adapters.
+
+The final twenty-two byte-identical suffixes move into `RouteCleanupRoutes`, so
+the family owner now contains all 84 manifest routes and the global aggregator
+contains no `ROUTE_CLEANUP_*` fields. EndpointManifest no longer reflects over
+two owners: it reads the single family owner and preserves the same prefixed
+manifest names and route bytes. Four root controllers form exactly 44 type
+edges into all 44 moved types. With every implementation reader now collocated,
+all RouteCleanup ENDPOINT and PROFILE fields return to package visibility.
+
+The live direct-root count falls from **152 to 108**, the movable backlog falls
+from **48 to 4**, and the RouteCleanup bucket falls from **44 to 0**. Total
+`ops` main Java remains **1,352**, the retained-root target remains **104**, and
+the reproducible census reports zero unassigned files. The only remaining
+movable root files are the two OpsOverview types and two static release-support
+types. No route, response, manifest entry, digest input, evidence, fixture,
+write boundary, deployment, rollback, or archive byte changes.
 
 ## Revision rule
 

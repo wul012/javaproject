@@ -8,7 +8,6 @@ import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtract
 import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.requiredHeadings;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceAnalyzer;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -128,15 +127,18 @@ class OpsExtractionV1857Tests {
 
   @Test
   void keepsBoundaryApiMeasured() throws ReflectiveOperationException, IOException {
-    Class<?> analyzer = OpsShardReadinessRouteCleanupEvidenceAnalyzer.class;
-    assertThat(Modifier.isPublic(analyzer.getModifiers())).isTrue();
+    Class<?> analyzer =
+        Class.forName(PACKAGE_NAME + ".OpsShardReadinessRouteCleanupEvidenceAnalyzer");
+    assertThat(Modifier.isPublic(analyzer.getModifiers())).isFalse();
     assertThat(Modifier.isFinal(analyzer.getModifiers())).isTrue();
     assertThat(analyzer.getDeclaredMethods())
-        .filteredOn(method -> Modifier.isPublic(method.getModifiers()))
+        .filteredOn(method -> !method.isSynthetic())
+        .allSatisfy(method -> assertThat(Modifier.isPublic(method.getModifiers())).isFalse())
         .extracting(method -> method.getName())
         .containsExactlyInAnyOrder(
             "entries",
             "segments",
+            "segment",
             "latestJavaVersion",
             "latestJavaVersionLabel",
             "versionsAreContinuous",
@@ -149,7 +151,7 @@ class OpsExtractionV1857Tests {
         .satisfies(
             type -> {
               assertThat(type.isRecord()).isTrue();
-              assertThat(Modifier.isPublic(type.getModifiers())).isTrue();
+              assertThat(Modifier.isPublic(type.getModifiers())).isFalse();
             });
 
     for (String service : serviceNames()) {
@@ -157,18 +159,17 @@ class OpsExtractionV1857Tests {
         continue;
       }
       var endpoint = Class.forName(PACKAGE_NAME + "." + service).getDeclaredField("ENDPOINT");
-      assertThat(Modifier.isPublic(endpoint.getModifiers())).as(service).isTrue();
+      assertThat(Modifier.isPublic(endpoint.getModifiers())).as(service).isFalse();
       assertThat(Modifier.isStatic(endpoint.getModifiers())).as(service).isTrue();
       assertThat(Modifier.isFinal(endpoint.getModifiers())).as(service).isTrue();
     }
-    assertThat(publicCatalogs())
-        .containsExactly("OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog");
+    assertThat(publicCatalogs()).isEmpty();
 
     BoundaryCensus census = boundaryCensus();
-    assertThat(census.sourceCount()).isEqualTo(26);
-    assertThat(census.edgeCount()).isEqualTo(44);
-    assertThat(census.targetNames()).hasSize(21);
-    assertThat(census.analyzerReaders()).isEqualTo(22);
+    assertThat(census.sourceCount()).isEqualTo(4);
+    assertThat(census.edgeCount()).isEqualTo(20);
+    assertThat(census.targetNames()).hasSize(20);
+    assertThat(census.analyzerReaders()).isZero();
   }
 
   @Test
@@ -186,7 +187,7 @@ class OpsExtractionV1857Tests {
 
   @Test
   void tightensCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(152);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(108);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(OpsExtractionTestSupport::isJava))
           .hasSizeLessThanOrEqualTo(1352);
@@ -195,9 +196,9 @@ class OpsExtractionV1857Tests {
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **152**",
-            "Remaining direct-root non-controller files to move or collapse: **48**",
-            "RouteCleanup web | 44",
+            "Current direct-root Java files: **108**",
+            "Remaining direct-root non-controller files to move or collapse: **4**",
+            "RouteCleanup web | 0",
             "278 to 249",
             "174 to 145",
             "## v1857 progress");

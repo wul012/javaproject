@@ -66,36 +66,6 @@ public final class OpsShardReadinessRoutePaths {
       "/v1-contract-consumer-evidence-digest";
   public static final String V1_CONTRACT_CONSUMER_READINESS_HANDOFF =
       "/v1-contract-consumer-readiness-handoff";
-  static final String ROUTE_CLEANUP_AUDIT_TRAIL = "/route-cleanup-audit-trail";
-  static final String ROUTE_CLEANUP_ACCEPTANCE_RECEIPT = "/route-cleanup-acceptance-receipt";
-  static final String ROUTE_CLEANUP_EVIDENCE_REGISTER = "/route-cleanup-evidence-register";
-  static final String ROUTE_CLEANUP_OPERATIONAL_SNAPSHOT = "/route-cleanup-operational-snapshot";
-  static final String ROUTE_CLEANUP_POLICY_GUARD = "/route-cleanup-policy-guard";
-  static final String ROUTE_CLEANUP_REVIEWER_PACKET = "/route-cleanup-reviewer-packet";
-  static final String ROUTE_CLEANUP_TRANSITION_BRIEF = "/route-cleanup-transition-brief";
-  static final String ROUTE_CLEANUP_FINAL_VERIFICATION = "/route-cleanup-final-verification";
-  static final String ROUTE_CLEANUP_FINAL_ARCHIVE_PLAN = "/route-cleanup-final-archive-plan";
-  static final String ROUTE_CLEANUP_THIRD_RUN_CLOSEOUT = "/route-cleanup-third-run-closeout";
-  static final String ROUTE_CLEANUP_COMPLETION_INDEX = "/route-cleanup-completion-index";
-  static final String ROUTE_CLEANUP_COMPLETION_CERTIFICATE =
-      "/route-cleanup-completion-certificate";
-  static final String ROUTE_CLEANUP_POST_PUSH_CLOSEOUT = "/route-cleanup-post-push-closeout";
-  static final String ROUTE_CLEANUP_CI_RUN_ATTESTATION = "/route-cleanup-ci-run-attestation";
-  static final String ROUTE_CLEANUP_TAG_MANIFEST = "/route-cleanup-tag-manifest";
-  static final String ROUTE_CLEANUP_RELEASE_EVIDENCE_BUNDLE =
-      "/route-cleanup-release-evidence-bundle";
-  static final String ROUTE_CLEANUP_CONSUMER_SIGNOFF_PACKET =
-      "/route-cleanup-consumer-signoff-packet";
-  static final String ROUTE_CLEANUP_ARCHIVE_HANDOFF_RECEIPT =
-      "/route-cleanup-archive-handoff-receipt";
-  static final String ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_REPORT =
-      "/route-cleanup-maintenance-boundary-report";
-  static final String ROUTE_CLEANUP_FIXTURE_COVERAGE_INDEX =
-      "/route-cleanup-fixture-coverage-index";
-  static final String ROUTE_CLEANUP_COMPLETION_AUDIT_DIGEST =
-      "/route-cleanup-completion-audit-digest";
-  static final String ROUTE_CLEANUP_POST_COMPLETION_CLOSEOUT =
-      "/route-cleanup-post-completion-closeout";
   static final String MANUAL_EVIDENCE_WORKSHEET_CATALOG =
       OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG;
   static final String MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE =

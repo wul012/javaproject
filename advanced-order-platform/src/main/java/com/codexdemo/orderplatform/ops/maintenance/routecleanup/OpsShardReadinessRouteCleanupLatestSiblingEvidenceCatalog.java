@@ -3,11 +3,11 @@ package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceResponse.Entry;
 import java.util.List;
 
-public final class OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog {
+final class OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog {
 
   private OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog() {}
 
-  public static List<Entry> entries() {
+  static List<Entry> entries() {
     return List.of(
         OpsShardReadinessRouteCleanupEvidenceCatalog.entry(
             306,

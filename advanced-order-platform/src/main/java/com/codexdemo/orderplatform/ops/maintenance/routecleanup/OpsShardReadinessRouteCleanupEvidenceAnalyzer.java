@@ -3,15 +3,15 @@ package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
+final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
 
   private OpsShardReadinessRouteCleanupEvidenceAnalyzer() {}
 
-  public static List<OpsShardReadinessRouteCleanupEvidenceResponse.Entry> entries() {
+  static List<OpsShardReadinessRouteCleanupEvidenceResponse.Entry> entries() {
     return OpsShardReadinessRouteCleanupEvidenceCatalog.entries();
   }
 
-  public static List<Segment> segments() {
+  static List<Segment> segments() {
     return List.of(
         segment(
             "latest-sibling", OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog.entries()),
@@ -29,15 +29,15 @@ public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
             OpsShardReadinessRouteCleanupPostCompletionEvidenceCatalog.entries()));
   }
 
-  public static int latestJavaVersion() {
+  static int latestJavaVersion() {
     return entries().getLast().javaVersion();
   }
 
-  public static String latestJavaVersionLabel() {
+  static String latestJavaVersionLabel() {
     return "Java v" + latestJavaVersion();
   }
 
-  public static boolean versionsAreContinuous() {
+  static boolean versionsAreContinuous() {
     List<Integer> versions =
         entries().stream()
             .map(OpsShardReadinessRouteCleanupEvidenceResponse.Entry::javaVersion)
@@ -46,7 +46,7 @@ public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
         IntStream.rangeClosed(versions.getFirst(), versions.getLast()).boxed().toList());
   }
 
-  public static boolean allEntriesKeepReadOnlyBoundary() {
+  static boolean allEntriesKeepReadOnlyBoundary() {
     return entries().stream()
         .allMatch(
             entry ->
@@ -60,7 +60,7 @@ public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
                     && !entry.writeRoutingChanged());
   }
 
-  public static List<String> forbiddenOperations() {
+  static List<String> forbiddenOperations() {
     return List.of(
         "write-routing",
         "active-shard-router",
@@ -71,7 +71,7 @@ public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
         "node-start-or-stop-java-or-mini-kv");
   }
 
-  public static String segmentFor(OpsShardReadinessRouteCleanupEvidenceResponse.Entry entry) {
+  static String segmentFor(OpsShardReadinessRouteCleanupEvidenceResponse.Entry entry) {
     String phase = entry.phase();
     if (phase.startsWith("handoff-suite")) {
       return "handoff-suite";
@@ -94,7 +94,7 @@ public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
     return "contract-freeze";
   }
 
-  public static String boundaryStatus() {
+  static String boundaryStatus() {
     return versionsAreContinuous() && allEntriesKeepReadOnlyBoundary() ? "passed" : "blocked";
   }
 
@@ -114,7 +114,7 @@ public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
         entries.stream().allMatch(entry -> "passed".equals(entry.status())) ? "passed" : "blocked");
   }
 
-  public record Segment(
+  record Segment(
       String name,
       int firstJavaVersion,
       int lastJavaVersion,
@@ -124,7 +124,7 @@ public final class OpsShardReadinessRouteCleanupEvidenceAnalyzer {
       List<String> sourceNodePlans,
       String status) {
 
-    public Segment {
+    Segment {
       sourceNodePlans = List.copyOf(sourceNodePlans);
     }
 

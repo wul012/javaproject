@@ -1,6 +1,5 @@
 package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
-import com.codexdemo.orderplatform.ops.OpsShardReadinessRoutePaths;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -13,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupEndpointManifestService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.ENDPOINT_MANIFEST;
 
   static final String PROFILE = "java-shard-readiness-route-cleanup-endpoint-manifest.v1";
@@ -38,30 +37,17 @@ public class OpsShardReadinessRouteCleanupEndpointManifestService {
   }
 
   private Stream<Field> routeFields() {
-    Stream<Field> rootRoutes =
-        Arrays.stream(OpsShardReadinessRoutePaths.class.getDeclaredFields())
-            .filter(this::isRootRoute);
-    Stream<Field> familyRoutes =
-        Arrays.stream(RouteCleanupRoutes.class.getDeclaredFields()).filter(this::isFamilyRoute);
-    return Stream.concat(rootRoutes, familyRoutes);
+    return Arrays.stream(RouteCleanupRoutes.class.getDeclaredFields()).filter(this::isRoute);
   }
 
-  private boolean isRootRoute(Field field) {
-    return Modifier.isStatic(field.getModifiers())
-        && field.getType().equals(String.class)
-        && field.getName().startsWith("ROUTE_CLEANUP_");
-  }
-
-  private boolean isFamilyRoute(Field field) {
+  private boolean isRoute(Field field) {
     return Modifier.isStatic(field.getModifiers())
         && field.getType().equals(String.class)
         && !field.getName().equals("BASE_PATH");
   }
 
   private String manifestName(Field field) {
-    return field.getDeclaringClass().equals(RouteCleanupRoutes.class)
-        ? "ROUTE_CLEANUP_" + field.getName()
-        : field.getName();
+    return "ROUTE_CLEANUP_" + field.getName();
   }
 
   private OpsShardReadinessRouteCleanupEndpointManifestResponse.EndpointEntry endpointEntry(

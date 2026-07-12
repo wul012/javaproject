@@ -102,6 +102,29 @@ public final class RouteCleanupRoutes {
       "/route-cleanup-maintenance-operator-signoff";
   public static final String MAINTENANCE_EXTENDED_CLOSEOUT =
       "/route-cleanup-maintenance-extended-closeout";
+  public static final String AUDIT_TRAIL = "/route-cleanup-audit-trail";
+  public static final String ACCEPTANCE_RECEIPT = "/route-cleanup-acceptance-receipt";
+  public static final String EVIDENCE_REGISTER = "/route-cleanup-evidence-register";
+  public static final String OPERATIONAL_SNAPSHOT = "/route-cleanup-operational-snapshot";
+  public static final String POLICY_GUARD = "/route-cleanup-policy-guard";
+  public static final String REVIEWER_PACKET = "/route-cleanup-reviewer-packet";
+  public static final String TRANSITION_BRIEF = "/route-cleanup-transition-brief";
+  public static final String FINAL_VERIFICATION = "/route-cleanup-final-verification";
+  public static final String FINAL_ARCHIVE_PLAN = "/route-cleanup-final-archive-plan";
+  public static final String THIRD_RUN_CLOSEOUT = "/route-cleanup-third-run-closeout";
+  public static final String COMPLETION_INDEX = "/route-cleanup-completion-index";
+  public static final String COMPLETION_CERTIFICATE = "/route-cleanup-completion-certificate";
+  public static final String POST_PUSH_CLOSEOUT = "/route-cleanup-post-push-closeout";
+  public static final String CI_RUN_ATTESTATION = "/route-cleanup-ci-run-attestation";
+  public static final String TAG_MANIFEST = "/route-cleanup-tag-manifest";
+  public static final String RELEASE_EVIDENCE_BUNDLE = "/route-cleanup-release-evidence-bundle";
+  public static final String CONSUMER_SIGNOFF_PACKET = "/route-cleanup-consumer-signoff-packet";
+  public static final String ARCHIVE_HANDOFF_RECEIPT = "/route-cleanup-archive-handoff-receipt";
+  public static final String MAINTENANCE_BOUNDARY_REPORT =
+      "/route-cleanup-maintenance-boundary-report";
+  public static final String FIXTURE_COVERAGE_INDEX = "/route-cleanup-fixture-coverage-index";
+  public static final String COMPLETION_AUDIT_DIGEST = "/route-cleanup-completion-audit-digest";
+  public static final String POST_COMPLETION_CLOSEOUT = "/route-cleanup-post-completion-closeout";
 
   private RouteCleanupRoutes() {}
 }

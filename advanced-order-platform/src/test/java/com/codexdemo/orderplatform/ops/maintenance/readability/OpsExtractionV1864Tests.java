@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -92,8 +91,8 @@ class OpsExtractionV1864Tests {
   void keepsMeasuredBoundary() throws IOException {
     OpsBoundaryTestSupport.BoundaryCensus census =
         boundaryCensus(OPS_ROOT, PACKAGE_ROOT, mainFiles());
-    assertThat(census.sourceCount()).isEqualTo(10);
-    assertThat(census.edgeCount()).isEqualTo(38);
+    assertThat(census.sourceCount()).isEqualTo(3);
+    assertThat(census.edgeCount()).isEqualTo(22);
     assertThat(census.targetNames()).containsExactlyInAnyOrderElementsOf(targetNames());
   }
 
@@ -136,13 +135,13 @@ class OpsExtractionV1864Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(152);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(108);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
     assertThat(read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md")))
         .contains(
-            "Current direct-root Java files: **152**",
-            "Remaining direct-root non-controller files to move or collapse: **48**",
-            "RouteCleanup web | 44",
+            "Current direct-root Java files: **108**",
+            "Remaining direct-root non-controller files to move or collapse: **4**",
+            "RouteCleanup web | 0",
             "174 to 152",
             "70 to 48",
             "## v1864 progress");
@@ -193,17 +192,7 @@ class OpsExtractionV1864Tests {
   }
 
   private Map<String, String> publicEndpointReaders() {
-    Map<String, String> readers = new LinkedHashMap<>();
-    readers.put(
-        "OpsShardReadinessRouteCleanupCiEvidenceService",
-        "OpsShardReadinessRouteCleanupPostPushCloseoutService.java");
-    readers.put(
-        "OpsShardReadinessRouteCleanupEndpointManifestService",
-        "OpsShardReadinessRouteCleanupFinalArchivePlanService.java");
-    readers.put(
-        "OpsShardReadinessRouteCleanupExtendedCloseoutService",
-        "OpsShardReadinessRouteCleanupAcceptanceReceiptService.java");
-    return Map.copyOf(readers);
+    return Map.of();
   }
 
   private Set<String> targetNames() {

@@ -7,8 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupCiEvidenceService {
 
-  public static final String ENDPOINT =
-      RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.CI_EVIDENCE;
+  static final String ENDPOINT = RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.CI_EVIDENCE;
 
   static final String PROFILE = "java-shard-readiness-route-cleanup-ci-evidence.v1";
 
