@@ -80,6 +80,7 @@ package.
 | `route-cleanup-upkeep-core-extraction-v1859.md` | fifty-sixth ops extraction | How did the twelve-file Upkeep core move into `ops.maintenance.routecleanup`, lower root from 231 to 219, lower movable files from 127 to 115, transfer five route suffixes, and repay nine temporary public endpoint fields? |
 | `route-cleanup-upkeep-assurance-extraction-v1860.md` | fifty-seventh ops extraction | How did the ten-file Upkeep assurance chain move into `ops.maintenance.routecleanup`, lower root from 219 to 209, transfer five route suffixes, narrow two measured public endpoints, and consolidate boundary scanning in the shared test engine? |
 | `route-cleanup-sustainment-core-extraction-v1861.md` | fifty-eighth ops extraction | How did the ten-file sustainment core move into `ops.maintenance.routecleanup`, lower root from 209 to 199, preserve a measured 5/19/10 boundary, and expose only the RiskLedger endpoint required by three retained readers? |
+| `route-cleanup-sustainment-evidence-extraction-v1862.md` | fifty-ninth ops extraction | How did the twelve-file sustainment evidence pipeline move into `ops.maintenance.routecleanup`, lower root from 199 to 187, preserve a measured 6/20/12 boundary, and repay the UpkeepCatalog public surface? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

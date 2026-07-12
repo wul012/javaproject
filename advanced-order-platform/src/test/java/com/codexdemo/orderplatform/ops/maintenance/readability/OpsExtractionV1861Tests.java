@@ -106,8 +106,8 @@ class OpsExtractionV1861Tests {
   void keepsMeasuredProductionBoundary() throws IOException {
     OpsBoundaryTestSupport.BoundaryCensus census =
         boundaryCensus(OPS_ROOT, PACKAGE_ROOT, mainFiles());
-    assertThat(census.sourceCount()).isEqualTo(5);
-    assertThat(census.edgeCount()).isEqualTo(19);
+    assertThat(census.sourceCount()).isEqualTo(4);
+    assertThat(census.edgeCount()).isEqualTo(13);
     assertThat(census.targetNames())
         .containsExactlyInAnyOrderElementsOf(mainFiles().stream().map(this::typeName).toList());
   }
@@ -159,13 +159,13 @@ class OpsExtractionV1861Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(199);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(187);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
     assertThat(read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md")))
         .contains(
-            "Current direct-root Java files: **199**",
-            "Remaining direct-root non-controller files to move or collapse: **95**",
-            "RouteCleanup web | 91",
+            "Current direct-root Java files: **187**",
+            "Remaining direct-root non-controller files to move or collapse: **83**",
+            "RouteCleanup web | 79",
             "209 to 199",
             "105 to 95",
             "## v1861 progress");

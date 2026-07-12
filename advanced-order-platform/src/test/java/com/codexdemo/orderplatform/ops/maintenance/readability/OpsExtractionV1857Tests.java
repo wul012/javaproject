@@ -165,10 +165,10 @@ class OpsExtractionV1857Tests {
         .containsExactly("OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog");
 
     BoundaryCensus census = boundaryCensus();
-    assertThat(census.sourceCount()).isEqualTo(38);
-    assertThat(census.edgeCount()).isEqualTo(76);
+    assertThat(census.sourceCount()).isEqualTo(37);
+    assertThat(census.edgeCount()).isEqualTo(75);
     assertThat(census.targetNames()).hasSize(21);
-    assertThat(census.analyzerReaders()).isEqualTo(34);
+    assertThat(census.analyzerReaders()).isEqualTo(33);
   }
 
   @Test
@@ -186,7 +186,7 @@ class OpsExtractionV1857Tests {
 
   @Test
   void tightensCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(199);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(187);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(OpsExtractionTestSupport::isJava))
           .hasSizeLessThanOrEqualTo(1352);
@@ -195,9 +195,9 @@ class OpsExtractionV1857Tests {
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **199**",
-            "Remaining direct-root non-controller files to move or collapse: **95**",
-            "RouteCleanup web | 91",
+            "Current direct-root Java files: **187**",
+            "Remaining direct-root non-controller files to move or collapse: **83**",
+            "RouteCleanup web | 79",
             "278 to 249",
             "174 to 145",
             "## v1857 progress");

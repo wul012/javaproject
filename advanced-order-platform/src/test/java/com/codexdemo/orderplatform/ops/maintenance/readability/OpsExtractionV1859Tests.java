@@ -11,7 +11,6 @@ import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtract
 import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.requiredHeadings;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -110,8 +109,9 @@ class OpsExtractionV1859Tests {
 
   @Test
   void exposesMeasuredCatalogBoundary() throws ReflectiveOperationException, IOException {
-    Class<?> catalog = OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog.class;
-    assertThat(Modifier.isPublic(catalog.getModifiers())).isTrue();
+    Class<?> catalog =
+        Class.forName(PACKAGE_NAME + ".OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog");
+    assertThat(Modifier.isPublic(catalog.getModifiers())).isFalse();
     assertThat(Modifier.isFinal(catalog.getModifiers())).isTrue();
     assertThat(catalog.getDeclaredMethods())
         .filteredOn(method -> !method.isSynthetic())
@@ -121,7 +121,7 @@ class OpsExtractionV1859Tests {
         .filteredOn(method -> !method.isSynthetic())
         .allSatisfy(
             method -> {
-              assertThat(Modifier.isPublic(method.getModifiers())).isTrue();
+              assertThat(Modifier.isPublic(method.getModifiers())).isFalse();
               assertThat(Modifier.isStatic(method.getModifiers())).isTrue();
             });
     assertThat(catalog.getDeclaredClasses())
@@ -129,7 +129,7 @@ class OpsExtractionV1859Tests {
         .satisfies(
             item -> {
               assertThat(item.isRecord()).isTrue();
-              assertThat(Modifier.isPublic(item.getModifiers())).isTrue();
+              assertThat(Modifier.isPublic(item.getModifiers())).isFalse();
             });
 
     Class<?> seeds =
@@ -138,9 +138,9 @@ class OpsExtractionV1859Tests {
 
     OpsBoundaryTestSupport.BoundaryCensus census =
         boundaryCensus(OPS_ROOT, PACKAGE_ROOT, mainFiles());
-    assertThat(census.sourceCount()).isEqualTo(4);
-    assertThat(census.edgeCount()).isEqualTo(13);
-    assertThat(census.targetNames()).hasSize(11);
+    assertThat(census.sourceCount()).isEqualTo(2);
+    assertThat(census.edgeCount()).isEqualTo(11);
+    assertThat(census.targetNames()).hasSize(10);
   }
 
   @Test
@@ -186,15 +186,15 @@ class OpsExtractionV1859Tests {
 
   @Test
   void tightensLiveCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(199);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(187);
     assertThat(allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1352);
 
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **199**",
-            "Remaining direct-root non-controller files to move or collapse: **95**",
-            "RouteCleanup web | 91",
+            "Current direct-root Java files: **187**",
+            "Remaining direct-root non-controller files to move or collapse: **83**",
+            "RouteCleanup web | 79",
             "231 to 219",
             "127 to 115",
             "## v1859 progress");

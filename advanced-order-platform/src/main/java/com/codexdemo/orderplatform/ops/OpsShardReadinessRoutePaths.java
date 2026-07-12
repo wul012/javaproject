@@ -107,18 +107,6 @@ public final class OpsShardReadinessRoutePaths {
       "/route-cleanup-completion-audit-digest";
   static final String ROUTE_CLEANUP_POST_COMPLETION_CLOSEOUT =
       "/route-cleanup-post-completion-closeout";
-  static final String ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST =
-      "/route-cleanup-maintenance-handoff-acceptance-digest";
-  static final String ROUTE_CLEANUP_MAINTENANCE_DEPENDENCY_BOUNDARY_MAP =
-      "/route-cleanup-maintenance-dependency-boundary-map";
-  static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR =
-      "/route-cleanup-maintenance-archive-retention-calendar";
-  static final String ROUTE_CLEANUP_MAINTENANCE_TEST_EVIDENCE_ROLLUP =
-      "/route-cleanup-maintenance-test-evidence-rollup";
-  static final String ROUTE_CLEANUP_MAINTENANCE_OPERATIONS_SCORECARD =
-      "/route-cleanup-maintenance-operations-scorecard";
-  static final String ROUTE_CLEANUP_MAINTENANCE_SUSTAINMENT_CLOSEOUT =
-      "/route-cleanup-maintenance-sustainment-closeout";
   static final String ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE =
       "/route-cleanup-maintenance-contract-freeze";
   static final String ROUTE_CLEANUP_MAINTENANCE_GATE_HANDOFF =

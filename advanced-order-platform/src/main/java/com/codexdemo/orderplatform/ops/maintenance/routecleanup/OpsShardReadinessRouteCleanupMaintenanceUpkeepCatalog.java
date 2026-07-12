@@ -2,23 +2,23 @@ package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
 import java.util.List;
 
-public final class OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog {
+final class OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog {
 
   private OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog() {}
 
-  public static List<Item> items() {
+  static List<Item> items() {
     return OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogSeeds.items();
   }
 
-  public static int firstServiceVersion() {
+  static int firstServiceVersion() {
     return items().getFirst().serviceVersion();
   }
 
-  public static int latestRouteVersion() {
+  static int latestRouteVersion() {
     return items().getLast().routeVersion();
   }
 
-  public record Item(
+  record Item(
       String name,
       int serviceVersion,
       int routeVersion,

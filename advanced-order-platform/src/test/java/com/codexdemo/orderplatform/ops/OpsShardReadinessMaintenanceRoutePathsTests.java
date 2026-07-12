@@ -12,27 +12,6 @@ class OpsShardReadinessMaintenanceRoutePathsTests {
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_ACCEPTANCE_DIGEST,
-                    OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestService
-                        .ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_DEPENDENCY_BOUNDARY_MAP,
-                    OpsShardReadinessRouteCleanupMaintenanceDependencyBoundaryMapService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths
-                        .ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR,
-                    OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService
-                        .ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_TEST_EVIDENCE_ROLLUP,
-                    OpsShardReadinessRouteCleanupMaintenanceTestEvidenceRollupService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_OPERATIONS_SCORECARD,
-                    OpsShardReadinessRouteCleanupMaintenanceOperationsScorecardService.ENDPOINT),
-                Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SUSTAINMENT_CLOSEOUT,
-                    OpsShardReadinessRouteCleanupMaintenanceSustainmentCloseoutService.ENDPOINT),
-                Map.entry(
                     OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_CONTRACT_FREEZE,
                     OpsShardReadinessRouteCleanupMaintenanceContractFreezeService.ENDPOINT),
                 Map.entry(

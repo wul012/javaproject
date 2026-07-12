@@ -1,6 +1,5 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,9 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceArchiveRetentionCalendarService {
 
-  static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_RETENTION_CALENDAR;
+  public static final String ENDPOINT =
+      RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_ARCHIVE_RETENTION_CALENDAR;
   static final String PROFILE =
       "java-shard-readiness-route-cleanup-maintenance-archive-retention-calendar.v1";
   private static final int RETENTION_DAYS = 365;

@@ -1,10 +1,7 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceFreshnessWindowService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceOwnershipRegisterService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceRiskLedgerService;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessRouteCleanupMaintenanceHandoffAcceptanceDigestServiceTests {
