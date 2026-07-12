@@ -2,69 +2,73 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchivePlanService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupBoundaryMatrixService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupDigestService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceAnalyzer;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffChecklistService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReleaseHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSourcePlanAlignmentService;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessRouteCleanupHandoffBundleServiceTests {
 
-    @Test
-    void buildsBundleFromConsumerPacketCiEvidenceAndRegressionGuard() {
-        OpsShardReadinessRouteCleanupHandoffBundleResponse bundle =
-                new OpsShardReadinessRouteCleanupHandoffBundleService(
-                        new OpsShardReadinessRouteCleanupConsumerPacketService(
-                                new OpsShardReadinessRouteCleanupReadOnlyGateService(
-                                        releaseHandoffService(),
-                                        new OpsShardReadinessRouteCleanupOperatorRunbookService()
-                                ),
-                                new OpsShardReadinessRouteCleanupArchiveVerificationService(
-                                        new OpsShardReadinessRouteCleanupArchivePlanService(),
-                                        suiteCloseoutService()
-                                )
-                        ),
-                        new OpsShardReadinessRouteCleanupCiEvidenceService(),
-                        new OpsShardReadinessRouteCleanupRegressionGuardService(
-                                new OpsShardReadinessRouteCleanupEndpointManifestService(),
-                                new OpsShardReadinessRouteCleanupCiEvidenceService()
-                        )
-                ).bundle();
-
-        assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersion()).isGreaterThanOrEqualTo(356);
-        assertThat(bundle.project()).isEqualTo("advanced-order-platform");
-        assertThat(bundle.version()).isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
-        assertThat(bundle.readOnly()).isTrue();
-        assertThat(bundle.executionAllowed()).isFalse();
-        assertThat(bundle.bundleEndpoint())
-                .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-handoff-bundle");
-        assertThat(bundle.bundleProfile()).isEqualTo("java-shard-readiness-route-cleanup-handoff-bundle.v1");
-        assertThat(bundle.componentCount()).isEqualTo(3);
-        assertThat(bundle.components())
-                .extracting(OpsShardReadinessRouteCleanupHandoffBundleResponse.BundleComponent::name)
-                .containsExactly("consumer-packet", "ci-evidence", "regression-guard");
-        assertThat(bundle.components())
-                .allSatisfy(component -> assertThat(component.status()).isEqualTo("passed"));
-        assertThat(bundle.decision()).isEqualTo("bundle-ready-for-read-only-consumer");
-        assertThat(bundle.status()).isEqualTo("passed");
-    }
-
-    private OpsShardReadinessRouteCleanupSuiteCloseoutService suiteCloseoutService() {
-        return new OpsShardReadinessRouteCleanupSuiteCloseoutService(
-                releaseHandoffService(),
-                new OpsShardReadinessRouteCleanupReadOnlyGateService(
+  @Test
+  void buildsBundleFromConsumerPacketCiEvidenceAndRegressionGuard() {
+    OpsShardReadinessRouteCleanupHandoffBundleResponse bundle =
+        new OpsShardReadinessRouteCleanupHandoffBundleService(
+                new OpsShardReadinessRouteCleanupConsumerPacketService(
+                    new OpsShardReadinessRouteCleanupReadOnlyGateService(
                         releaseHandoffService(),
-                        new OpsShardReadinessRouteCleanupOperatorRunbookService()
-                ),
-                new OpsShardReadinessRouteCleanupDigestService()
-        );
-    }
+                        new OpsShardReadinessRouteCleanupOperatorRunbookService()),
+                    new OpsShardReadinessRouteCleanupArchiveVerificationService(
+                        new OpsShardReadinessRouteCleanupArchivePlanService(),
+                        suiteCloseoutService())),
+                new OpsShardReadinessRouteCleanupCiEvidenceService(),
+                new OpsShardReadinessRouteCleanupRegressionGuardService(
+                    new OpsShardReadinessRouteCleanupEndpointManifestService(),
+                    new OpsShardReadinessRouteCleanupCiEvidenceService()))
+            .bundle();
 
-    private OpsShardReadinessRouteCleanupReleaseHandoffService releaseHandoffService() {
-        return new OpsShardReadinessRouteCleanupReleaseHandoffService(
-                new OpsShardReadinessRouteCleanupHandoffChecklistService(
-                        new OpsShardReadinessRouteCleanupPhaseSummaryService(),
-                        new OpsShardReadinessRouteCleanupBoundaryMatrixService()
-                ),
-                new OpsShardReadinessRouteCleanupArchivePlanService(),
-                new OpsShardReadinessRouteCleanupDigestService(),
-                new OpsShardReadinessRouteCleanupSourcePlanAlignmentService()
-        );
-    }
+    assertThat(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersion())
+        .isGreaterThanOrEqualTo(356);
+    assertThat(bundle.project()).isEqualTo("advanced-order-platform");
+    assertThat(bundle.version())
+        .isEqualTo(OpsShardReadinessRouteCleanupEvidenceAnalyzer.latestJavaVersionLabel());
+    assertThat(bundle.readOnly()).isTrue();
+    assertThat(bundle.executionAllowed()).isFalse();
+    assertThat(bundle.bundleEndpoint())
+        .isEqualTo("/api/v1/ops/shard-readiness/route-cleanup-handoff-bundle");
+    assertThat(bundle.bundleProfile())
+        .isEqualTo("java-shard-readiness-route-cleanup-handoff-bundle.v1");
+    assertThat(bundle.componentCount()).isEqualTo(3);
+    assertThat(bundle.components())
+        .extracting(OpsShardReadinessRouteCleanupHandoffBundleResponse.BundleComponent::name)
+        .containsExactly("consumer-packet", "ci-evidence", "regression-guard");
+    assertThat(bundle.components())
+        .allSatisfy(component -> assertThat(component.status()).isEqualTo("passed"));
+    assertThat(bundle.decision()).isEqualTo("bundle-ready-for-read-only-consumer");
+    assertThat(bundle.status()).isEqualTo("passed");
+  }
+
+  private OpsShardReadinessRouteCleanupSuiteCloseoutService suiteCloseoutService() {
+    return new OpsShardReadinessRouteCleanupSuiteCloseoutService(
+        releaseHandoffService(),
+        new OpsShardReadinessRouteCleanupReadOnlyGateService(
+            releaseHandoffService(), new OpsShardReadinessRouteCleanupOperatorRunbookService()),
+        new OpsShardReadinessRouteCleanupDigestService());
+  }
+
+  private OpsShardReadinessRouteCleanupReleaseHandoffService releaseHandoffService() {
+    return new OpsShardReadinessRouteCleanupReleaseHandoffService(
+        new OpsShardReadinessRouteCleanupHandoffChecklistService(
+            new OpsShardReadinessRouteCleanupPhaseSummaryService(),
+            new OpsShardReadinessRouteCleanupBoundaryMatrixService()),
+        new OpsShardReadinessRouteCleanupArchivePlanService(),
+        new OpsShardReadinessRouteCleanupDigestService(),
+        new OpsShardReadinessRouteCleanupSourcePlanAlignmentService());
+  }
 }

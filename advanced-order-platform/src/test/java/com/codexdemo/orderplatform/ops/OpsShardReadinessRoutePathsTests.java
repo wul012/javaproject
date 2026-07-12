@@ -10,6 +10,17 @@ import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardRead
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService;
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchivePlanService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupBoundaryMatrixService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupDigestService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffChecklistService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReleaseHandoffService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSourcePlanAlignmentService;
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractAlignmentService;
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractConsumerEvidenceDigestService;
@@ -86,34 +97,33 @@ class OpsShardReadinessRoutePathsTests {
                     OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_READINESS_HANDOFF,
                     OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_EVIDENCE_CATALOG,
+                    RouteCleanupRoutes.EVIDENCE_CATALOG,
                     OpsShardReadinessRouteCleanupEvidenceService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_PHASE_SUMMARY,
+                    RouteCleanupRoutes.PHASE_SUMMARY,
                     OpsShardReadinessRouteCleanupPhaseSummaryService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_BOUNDARY_MATRIX,
+                    RouteCleanupRoutes.BOUNDARY_MATRIX,
                     OpsShardReadinessRouteCleanupBoundaryMatrixService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_HANDOFF_CHECKLIST,
+                    RouteCleanupRoutes.HANDOFF_CHECKLIST,
                     OpsShardReadinessRouteCleanupHandoffChecklistService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_ARCHIVE_PLAN,
+                    RouteCleanupRoutes.ARCHIVE_PLAN,
                     OpsShardReadinessRouteCleanupArchivePlanService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_DIGEST,
-                    OpsShardReadinessRouteCleanupDigestService.ENDPOINT),
+                    RouteCleanupRoutes.DIGEST, OpsShardReadinessRouteCleanupDigestService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_SOURCE_PLAN_ALIGNMENT,
+                    RouteCleanupRoutes.SOURCE_PLAN_ALIGNMENT,
                     OpsShardReadinessRouteCleanupSourcePlanAlignmentService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_RELEASE_HANDOFF,
+                    RouteCleanupRoutes.RELEASE_HANDOFF,
                     OpsShardReadinessRouteCleanupReleaseHandoffService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_OPERATOR_RUNBOOK,
+                    RouteCleanupRoutes.OPERATOR_RUNBOOK,
                     OpsShardReadinessRouteCleanupOperatorRunbookService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.ROUTE_CLEANUP_READ_ONLY_GATE,
+                    RouteCleanupRoutes.READ_ONLY_GATE,
                     OpsShardReadinessRouteCleanupReadOnlyGateService.ENDPOINT),
                 Map.entry(
                     OpsShardReadinessRoutePaths.ROUTE_CLEANUP_SUITE_CLOSEOUT,

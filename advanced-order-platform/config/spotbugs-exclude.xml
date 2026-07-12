@@ -608,7 +608,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchivePlanResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchivePlanResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -620,7 +620,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupBoundaryMatrixResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupBoundaryMatrixResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -656,7 +656,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupDigestResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupDigestResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -668,7 +668,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -696,7 +696,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupHandoffChecklistResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffChecklistResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -836,15 +836,15 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupOperatorRunbookResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse$PhaseSummary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryResponse$PhaseSummary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -860,7 +860,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReadOnlyGateResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -872,7 +872,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReleaseHandoffResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReleaseHandoffResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -880,7 +880,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1960,7 +1960,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupArchivePlanResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupArchivePlanResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -1972,7 +1972,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupBoundaryMatrixResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupBoundaryMatrixResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2008,7 +2008,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupDigestResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupDigestResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2020,7 +2020,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupEvidenceResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2048,7 +2048,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupHandoffChecklistResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffChecklistResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2188,15 +2188,15 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupOperatorRunbookResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupPhaseSummaryResponse$PhaseSummary" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryResponse$PhaseSummary" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2212,7 +2212,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReadOnlyGateResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2224,7 +2224,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupReleaseHandoffResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReleaseHandoffResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2232,7 +2232,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse" />
+    <Class name="com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />

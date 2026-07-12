@@ -66,16 +66,6 @@ public final class OpsShardReadinessRoutePaths {
       "/v1-contract-consumer-evidence-digest";
   public static final String V1_CONTRACT_CONSUMER_READINESS_HANDOFF =
       "/v1-contract-consumer-readiness-handoff";
-  static final String ROUTE_CLEANUP_EVIDENCE_CATALOG = "/route-cleanup-evidence-catalog";
-  static final String ROUTE_CLEANUP_PHASE_SUMMARY = "/route-cleanup-phase-summary";
-  static final String ROUTE_CLEANUP_BOUNDARY_MATRIX = "/route-cleanup-boundary-matrix";
-  static final String ROUTE_CLEANUP_HANDOFF_CHECKLIST = "/route-cleanup-handoff-checklist";
-  static final String ROUTE_CLEANUP_ARCHIVE_PLAN = "/route-cleanup-archive-plan";
-  static final String ROUTE_CLEANUP_DIGEST = "/route-cleanup-digest";
-  static final String ROUTE_CLEANUP_SOURCE_PLAN_ALIGNMENT = "/route-cleanup-source-plan-alignment";
-  static final String ROUTE_CLEANUP_RELEASE_HANDOFF = "/route-cleanup-release-handoff";
-  static final String ROUTE_CLEANUP_OPERATOR_RUNBOOK = "/route-cleanup-operator-runbook";
-  static final String ROUTE_CLEANUP_READ_ONLY_GATE = "/route-cleanup-read-only-gate";
   static final String ROUTE_CLEANUP_SUITE_CLOSEOUT = "/route-cleanup-suite-closeout";
   static final String ROUTE_CLEANUP_ARCHIVE_VERIFICATION = "/route-cleanup-archive-verification";
   static final String ROUTE_CLEANUP_CONSUMER_PACKET = "/route-cleanup-consumer-packet";
