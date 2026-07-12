@@ -9,16 +9,21 @@ import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtract
 import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.requiredHeadings;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
-class OpsExtractionV1858Tests {
+class OpsExtractionV1859Tests {
 
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
@@ -28,17 +33,17 @@ class OpsExtractionV1858Tests {
   private static final Path PACKAGE_TEST_ROOT =
       TEST_ROOT.resolve(Path.of("maintenance", "routecleanup"));
   private static final Path DOC =
-      Path.of("docs", "ops", "route-cleanup-maintenance-core-extraction-v1858.md");
+      Path.of("docs", "ops", "route-cleanup-upkeep-core-extraction-v1859.md");
   private static final Path WALKTHROUGH =
       Path.of(
           "代码讲解记录_生产雏形阶段8",
           "v1858-v1862",
-          "version-1858-production-excellence-route-cleanup-maintenance-core-extraction.md");
+          "version-1859-production-excellence-route-cleanup-upkeep-core-extraction.md");
   private static final String ROOT_PACKAGE = "com.codexdemo.orderplatform.ops";
   private static final String PACKAGE_NAME = ROOT_PACKAGE + ".maintenance.routecleanup";
 
   @Test
-  void movesMaintenanceClosure() throws IOException {
+  void movesUpkeepClosure() throws IOException {
     assertThat(javaFiles(PACKAGE_ROOT))
         .extracting(path -> path.getFileName().toString())
         .containsAll(mainFiles());
@@ -55,20 +60,14 @@ class OpsExtractionV1858Tests {
   }
 
   @Test
-  void keepsRootAdaptersNarrow() throws IOException {
+  void keepsControllerAsRootAdapter() throws IOException {
     String controller =
-        read(OPS_ROOT.resolve("OpsShardReadinessRouteCleanupMaintenanceController.java"));
+        read(OPS_ROOT.resolve("OpsShardReadinessRouteCleanupMaintenanceUpkeepController.java"));
     assertThat(controller)
         .contains(PACKAGE_NAME, "RouteCleanupRoutes.BASE_PATH")
         .doesNotContain(
             "OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_",
             "OpsShardReadinessRoutePaths.BASE_PATH");
-
-    String seeds =
-        read(
-            PACKAGE_ROOT.resolve(
-                "OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogSeeds.java"));
-    assertThat(seeds).contains(PACKAGE_NAME);
 
     for (String file : mainFiles()) {
       assertThat(read(PACKAGE_ROOT.resolve(file)))
@@ -80,25 +79,19 @@ class OpsExtractionV1858Tests {
   }
 
   @Test
-  void ownsMaintenanceRouteBytes() throws ReflectiveOperationException, IOException {
+  void ownsUpkeepRouteBytes() throws ReflectiveOperationException, IOException {
     Map<String, String> routes =
-        Map.ofEntries(
-            Map.entry("MAINTENANCE_SEGMENT_CATALOG", "/route-cleanup-maintenance-segment-catalog"),
-            Map.entry("MAINTENANCE_CONTINUITY", "/route-cleanup-maintenance-continuity"),
-            Map.entry(
-                "MAINTENANCE_LATEST_SIBLING_REPORT",
-                "/route-cleanup-maintenance-latest-sibling-report"),
-            Map.entry(
-                "MAINTENANCE_HANDOFF_PAIR_AUDIT", "/route-cleanup-maintenance-handoff-pair-audit"),
-            Map.entry("MAINTENANCE_BOUNDARY_DRIFT", "/route-cleanup-maintenance-boundary-drift"),
-            Map.entry(
-                "MAINTENANCE_SOURCE_PLAN_ALIGNMENT",
-                "/route-cleanup-maintenance-source-plan-alignment"),
-            Map.entry(
-                "MAINTENANCE_TEST_BUDGET_PLAN", "/route-cleanup-maintenance-test-budget-plan"),
-            Map.entry(
-                "MAINTENANCE_ARCHIVE_MANIFEST", "/route-cleanup-maintenance-archive-manifest"),
-            Map.entry("MAINTENANCE_CLOSEOUT", "/route-cleanup-maintenance-closeout"));
+        Map.of(
+            "MAINTENANCE_UPKEEP_CATALOG",
+            "/route-cleanup-maintenance-upkeep-catalog",
+            "MAINTENANCE_CONSUMER_HANDOFF_MATRIX",
+            "/route-cleanup-maintenance-consumer-handoff-matrix",
+            "MAINTENANCE_CI_EXPECTATION_MANIFEST",
+            "/route-cleanup-maintenance-ci-expectation-manifest",
+            "MAINTENANCE_ROUTE_TOPOLOGY_INDEX",
+            "/route-cleanup-maintenance-route-topology-index",
+            "MAINTENANCE_FAIL_CLOSED_POLICY",
+            "/route-cleanup-maintenance-fail-closed-policy");
 
     for (Map.Entry<String, String> route : routes.entrySet()) {
       var field = RouteCleanupRoutes.class.getDeclaredField(route.getKey());
@@ -114,20 +107,69 @@ class OpsExtractionV1858Tests {
       assertThat(globalRoutes).doesNotContain("ROUTE_CLEANUP_" + route);
     }
     assertThat(Files.readAllLines(OPS_ROOT.resolve("OpsShardReadinessRoutePaths.java")))
-        .hasSizeLessThan(1048);
+        .hasSizeLessThan(1031);
   }
 
   @Test
-  void limitsPublicBoundary() throws ReflectiveOperationException, IOException {
+  void exposesMeasuredCatalogBoundary() throws ReflectiveOperationException, IOException {
+    Class<?> catalog = OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog.class;
+    assertThat(Modifier.isPublic(catalog.getModifiers())).isTrue();
+    assertThat(Modifier.isFinal(catalog.getModifiers())).isTrue();
+    assertThat(catalog.getDeclaredMethods())
+        .filteredOn(method -> !method.isSynthetic())
+        .extracting(method -> method.getName())
+        .containsExactlyInAnyOrder("items", "firstServiceVersion", "latestRouteVersion");
+    assertThat(catalog.getDeclaredMethods())
+        .filteredOn(method -> !method.isSynthetic())
+        .allSatisfy(
+            method -> {
+              assertThat(Modifier.isPublic(method.getModifiers())).isTrue();
+              assertThat(Modifier.isStatic(method.getModifiers())).isTrue();
+            });
+    assertThat(catalog.getDeclaredClasses())
+        .singleElement()
+        .satisfies(
+            item -> {
+              assertThat(item.isRecord()).isTrue();
+              assertThat(Modifier.isPublic(item.getModifiers())).isTrue();
+            });
+
+    Class<?> seeds =
+        Class.forName(PACKAGE_NAME + ".OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogSeeds");
+    assertThat(Modifier.isPublic(seeds.getModifiers())).isFalse();
+
+    BoundaryCensus census = boundaryCensus();
+    assertThat(census.sourceCount()).isEqualTo(13);
+    assertThat(census.edgeCount()).isEqualTo(37);
+    assertThat(census.targetNames()).hasSize(11);
+  }
+
+  @Test
+  void narrowsEndpointVisibility() throws ReflectiveOperationException, IOException {
     for (String service : serviceNames()) {
       Class<?> type = Class.forName(PACKAGE_NAME + "." + service);
       var endpoint = type.getDeclaredField("ENDPOINT");
       var profile = type.getDeclaredField("PROFILE");
-      assertThat(Modifier.isPublic(endpoint.getModifiers())).as(service).isFalse();
+      boolean failClosed = service.endsWith("FailClosedPolicyService");
+      assertThat(Modifier.isPublic(endpoint.getModifiers())).as(service).isEqualTo(failClosed);
       assertThat(Modifier.isStatic(endpoint.getModifiers())).as(service).isTrue();
       assertThat(Modifier.isFinal(endpoint.getModifiers())).as(service).isTrue();
       assertThat(Modifier.isPublic(profile.getModifiers())).as(service).isFalse();
 
+      assertThat(productionReaders(service + ".ENDPOINT"))
+          .as(service)
+          .extracting(path -> path.getFileName().toString())
+          .containsExactlyElementsOf(
+              failClosed
+                  ? List.of("OpsShardReadinessRouteCleanupMaintenanceShardFieldMapService.java")
+                  : List.of());
+    }
+
+    for (String service : v1858ServiceNames()) {
+      Class<?> type = Class.forName(PACKAGE_NAME + "." + service);
+      assertThat(Modifier.isPublic(type.getDeclaredField("ENDPOINT").getModifiers()))
+          .as(service)
+          .isFalse();
       assertThat(productionReaders(service + ".ENDPOINT")).as(service).isEmpty();
     }
   }
@@ -135,14 +177,10 @@ class OpsExtractionV1858Tests {
   @Test
   void relocatesSpotbugsMirrors() throws IOException {
     String spotbugs = read(Path.of("config", "spotbugs-exclude.xml"));
-    int moved = 0;
     for (String response : responseNames()) {
-      int expected = response.endsWith("SegmentCatalogResponse") ? 4 : 2;
-      moved += expected;
-      assertThat(count(spotbugs, PACKAGE_NAME + "." + response)).as(response).isEqualTo(expected);
+      assertThat(count(spotbugs, PACKAGE_NAME + "." + response)).as(response).isEqualTo(2);
       assertThat(spotbugs).doesNotContain(ROOT_PACKAGE + "." + response);
     }
-    assertThat(moved).isEqualTo(20);
   }
 
   @Test
@@ -156,27 +194,9 @@ class OpsExtractionV1858Tests {
             "Current direct-root Java files: **219**",
             "Remaining direct-root non-controller files to move or collapse: **115**",
             "RouteCleanup web | 111",
-            "249 to 231",
-            "145 to 127",
-            "## v1858 progress");
-  }
-
-  @Test
-  void usesSharedTestEngine() throws IOException {
-    Path support =
-        TEST_ROOT.resolve(Path.of("maintenance", "readability", "OpsExtractionTestSupport.java"));
-    Path prior =
-        TEST_ROOT.resolve(Path.of("maintenance", "readability", "OpsExtractionV1857Tests.java"));
-    assertThat(OpsExtractionTestSupport.class.getSimpleName()).hasSizeLessThanOrEqualTo(40);
-    assertThat(Files.readAllLines(support)).hasSizeLessThanOrEqualTo(80);
-    assertThat(Files.readAllLines(prior)).hasSizeLessThanOrEqualTo(380);
-    assertThat(read(prior))
-        .contains("OpsExtractionTestSupport")
-        .doesNotContain(
-            "private String read(",
-            "private List<Path> javaFiles(",
-            "private int hanCount(",
-            "private List<String> requiredHeadings(");
+            "231 to 219",
+            "127 to 115",
+            "## v1859 progress");
   }
 
   @Test
@@ -186,10 +206,10 @@ class OpsExtractionV1858Tests {
     assertThat(read(DOC))
         .contains(
             "Requirement Evidence Matrix",
-            "Direct root 249 -> 231",
-            "movable 145 -> 127",
-            "RouteCleanup 141 -> 123",
-            "No new production type");
+            "Direct root 231 -> 219",
+            "movable 127 -> 115",
+            "RouteCleanup 123 -> 111",
+            "Repay temporary visibility");
 
     String walkthrough = read(WALKTHROUGH);
     assertThat(requiredHeadings(walkthrough))
@@ -209,6 +229,31 @@ class OpsExtractionV1858Tests {
     assertThat(walkthrough).contains("禁止硬凑", "本项目");
   }
 
+  private BoundaryCensus boundaryCensus() throws IOException {
+    Set<String> candidateTypes = new TreeSet<>();
+    for (String file : mainFiles()) {
+      candidateTypes.add(file.substring(0, file.length() - ".java".length()));
+    }
+
+    Set<Path> sources = new HashSet<>();
+    Set<String> targets = new TreeSet<>();
+    int edges = 0;
+    for (Path path : allJavaFiles(OPS_ROOT)) {
+      if (path.startsWith(PACKAGE_ROOT)) {
+        continue;
+      }
+      String source = read(path);
+      for (String target : candidateTypes) {
+        if (containsType(source, target)) {
+          sources.add(path);
+          targets.add(target);
+          edges++;
+        }
+      }
+    }
+    return new BoundaryCensus(sources.size(), edges, targets);
+  }
+
   private List<Path> productionReaders(String needle) throws IOException {
     return allJavaFiles(OPS_ROOT).stream()
         .filter(path -> !path.startsWith(PACKAGE_ROOT))
@@ -225,26 +270,24 @@ class OpsExtractionV1858Tests {
     }
   }
 
+  private boolean containsType(String source, String typeName) {
+    return Pattern.compile("\\b" + Pattern.quote(typeName) + "\\b").matcher(source).find();
+  }
+
   private List<String> mainFiles() {
     return List.of(
-        "OpsShardReadinessRouteCleanupMaintenanceArchiveManifestResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceCloseoutResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceCloseoutService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceContinuityResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceContinuityService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceLatestSiblingResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService.java",
-        "OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanResponse.java",
-        "OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService.java");
+        "OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService.java",
+        "OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalog.java",
+        "OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogResponse.java",
+        "OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogSeeds.java",
+        "OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService.java");
   }
 
   private List<String> testFiles() {
@@ -252,6 +295,24 @@ class OpsExtractionV1858Tests {
   }
 
   private List<String> serviceNames() {
+    return List.of(
+        "OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestService",
+        "OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixService",
+        "OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyService",
+        "OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexService",
+        "OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogService");
+  }
+
+  private List<String> responseNames() {
+    return List.of(
+        "OpsShardReadinessRouteCleanupMaintenanceCiExpectationManifestResponse",
+        "OpsShardReadinessRouteCleanupMaintenanceConsumerHandoffMatrixResponse",
+        "OpsShardReadinessRouteCleanupMaintenanceFailClosedPolicyResponse",
+        "OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexResponse",
+        "OpsShardReadinessRouteCleanupMaintenanceUpkeepCatalogResponse");
+  }
+
+  private List<String> v1858ServiceNames() {
     return List.of(
         "OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService",
         "OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService",
@@ -264,16 +325,5 @@ class OpsExtractionV1858Tests {
         "OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService");
   }
 
-  private List<String> responseNames() {
-    return List.of(
-        "OpsShardReadinessRouteCleanupMaintenanceArchiveManifestResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceCloseoutResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceContinuityResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceLatestSiblingResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentResponse",
-        "OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanResponse");
-  }
+  private record BoundaryCensus(int sourceCount, int edgeCount, Set<String> targetNames) {}
 }

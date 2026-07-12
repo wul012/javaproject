@@ -15,15 +15,6 @@ import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadines
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupDigestService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupHandoffChecklistService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceCloseoutService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceContinuityService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupOperatorRunbookService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupPhaseSummaryService;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupReadOnlyGateService;
@@ -232,34 +223,7 @@ class OpsShardReadinessRoutePathsTests {
                     OpsShardReadinessRouteCleanupCompletionAuditDigestService.ENDPOINT),
                 Map.entry(
                     OpsShardReadinessRoutePaths.ROUTE_CLEANUP_POST_COMPLETION_CLOSEOUT,
-                    OpsShardReadinessRouteCleanupPostCompletionCloseoutService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_SEGMENT_CATALOG,
-                    OpsShardReadinessRouteCleanupMaintenanceSegmentCatalogService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_CONTINUITY,
-                    OpsShardReadinessRouteCleanupMaintenanceContinuityService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_LATEST_SIBLING_REPORT,
-                    OpsShardReadinessRouteCleanupMaintenanceLatestSiblingService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_HANDOFF_PAIR_AUDIT,
-                    OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_BOUNDARY_DRIFT,
-                    OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_SOURCE_PLAN_ALIGNMENT,
-                    OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_TEST_BUDGET_PLAN,
-                    OpsShardReadinessRouteCleanupMaintenanceTestBudgetPlanService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_ARCHIVE_MANIFEST,
-                    OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService.ENDPOINT),
-                Map.entry(
-                    RouteCleanupRoutes.MAINTENANCE_CLOSEOUT,
-                    OpsShardReadinessRouteCleanupMaintenanceCloseoutService.ENDPOINT)))
+                    OpsShardReadinessRouteCleanupPostCompletionCloseoutService.ENDPOINT)))
         .allSatisfy(
             (route, endpoint) ->
                 assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));

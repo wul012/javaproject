@@ -29,6 +29,16 @@ public final class RouteCleanupRoutes {
   public static final String MAINTENANCE_ARCHIVE_MANIFEST =
       "/route-cleanup-maintenance-archive-manifest";
   public static final String MAINTENANCE_CLOSEOUT = "/route-cleanup-maintenance-closeout";
+  public static final String MAINTENANCE_UPKEEP_CATALOG =
+      "/route-cleanup-maintenance-upkeep-catalog";
+  public static final String MAINTENANCE_CONSUMER_HANDOFF_MATRIX =
+      "/route-cleanup-maintenance-consumer-handoff-matrix";
+  public static final String MAINTENANCE_CI_EXPECTATION_MANIFEST =
+      "/route-cleanup-maintenance-ci-expectation-manifest";
+  public static final String MAINTENANCE_ROUTE_TOPOLOGY_INDEX =
+      "/route-cleanup-maintenance-route-topology-index";
+  public static final String MAINTENANCE_FAIL_CLOSED_POLICY =
+      "/route-cleanup-maintenance-fail-closed-policy";
 
   private RouteCleanupRoutes() {}
 }

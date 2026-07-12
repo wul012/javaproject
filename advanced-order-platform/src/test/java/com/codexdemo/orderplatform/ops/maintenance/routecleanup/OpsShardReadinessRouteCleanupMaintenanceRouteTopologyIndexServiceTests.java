@@ -1,8 +1,7 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupMaintenanceContinuityService;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessRouteCleanupMaintenanceRouteTopologyIndexServiceTests {

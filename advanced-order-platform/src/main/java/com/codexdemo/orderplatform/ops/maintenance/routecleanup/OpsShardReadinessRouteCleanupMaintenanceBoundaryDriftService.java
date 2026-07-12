@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceBoundaryDriftService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_BOUNDARY_DRIFT;
   static final String PROFILE = "java-shard-readiness-route-cleanup-maintenance-boundary-drift.v1";
 

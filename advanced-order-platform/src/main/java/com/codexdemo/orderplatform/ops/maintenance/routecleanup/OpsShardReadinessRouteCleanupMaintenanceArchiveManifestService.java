@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceArchiveManifestService {
 
-  public static final String ENDPOINT =
+  static final String ENDPOINT =
       RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_ARCHIVE_MANIFEST;
   static final String PROFILE =
       "java-shard-readiness-route-cleanup-maintenance-archive-manifest.v1";

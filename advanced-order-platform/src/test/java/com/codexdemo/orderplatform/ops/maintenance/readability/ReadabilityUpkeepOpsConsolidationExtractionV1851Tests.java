@@ -128,7 +128,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1851Tests {
           .doesNotContain("com.codexdemo.orderplatform.ops." + response);
     }
     try (Stream<Path> files = Files.list(OPS_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(231);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(219);
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
