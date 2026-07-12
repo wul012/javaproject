@@ -1,7 +1,5 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceAnalyzer;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceResponse;
 import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
@@ -10,9 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceHandoffPairAuditService {
 
-  static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_HANDOFF_PAIR_AUDIT;
+  public static final String ENDPOINT =
+      RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_HANDOFF_PAIR_AUDIT;
   static final String PROFILE =
       "java-shard-readiness-route-cleanup-maintenance-handoff-pair-audit.v1";
 

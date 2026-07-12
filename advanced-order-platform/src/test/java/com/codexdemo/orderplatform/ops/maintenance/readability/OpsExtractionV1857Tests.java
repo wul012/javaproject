@@ -1,12 +1,17 @@
 package com.codexdemo.orderplatform.ops.maintenance.readability;
 
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.count;
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.hanCount;
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.javaFiles;
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.letterCount;
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.read;
+import static com.codexdemo.orderplatform.ops.maintenance.readability.OpsExtractionTestSupport.requiredHeadings;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceAnalyzer;
 import com.codexdemo.orderplatform.ops.maintenance.routecleanup.RouteCleanupRoutes;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
@@ -41,10 +46,10 @@ class OpsExtractionV1857Tests {
   void movesExactClosureAndOwnedTests() throws IOException {
     assertThat(javaFiles(PACKAGE_ROOT))
         .extracting(path -> path.getFileName().toString())
-        .containsExactlyInAnyOrderElementsOf(mainFiles());
+        .containsAll(mainFiles());
     assertThat(javaFiles(PACKAGE_TEST_ROOT))
         .extracting(path -> path.getFileName().toString())
-        .containsExactlyInAnyOrderElementsOf(testFiles());
+        .containsAll(testFiles());
 
     for (String name : mainFiles()) {
       assertThat(Files.exists(OPS_ROOT.resolve(name))).as(name).isFalse();
@@ -97,7 +102,8 @@ class OpsExtractionV1857Tests {
             Map.entry("OPERATOR_RUNBOOK", "/route-cleanup-operator-runbook"),
             Map.entry("READ_ONLY_GATE", "/route-cleanup-read-only-gate"));
 
-    assertThat(RouteCleanupRoutes.class.getDeclaredFields()).hasSize(routes.size());
+    assertThat(RouteCleanupRoutes.class.getDeclaredFields())
+        .hasSizeGreaterThanOrEqualTo(routes.size());
     for (Map.Entry<String, String> route : routes.entrySet()) {
       var field = RouteCleanupRoutes.class.getDeclaredField(route.getKey());
       assertThat(field.get(null)).isEqualTo(route.getValue());
@@ -159,10 +165,10 @@ class OpsExtractionV1857Tests {
         .containsExactly("OpsShardReadinessRouteCleanupLatestSiblingEvidenceCatalog");
 
     BoundaryCensus census = boundaryCensus();
-    assertThat(census.sourceCount()).isEqualTo(47);
-    assertThat(census.edgeCount()).isEqualTo(92);
-    assertThat(census.targetNames()).hasSize(22);
-    assertThat(census.analyzerReaders()).isEqualTo(42);
+    assertThat(census.sourceCount()).isEqualTo(40);
+    assertThat(census.edgeCount()).isEqualTo(79);
+    assertThat(census.targetNames()).hasSize(21);
+    assertThat(census.analyzerReaders()).isEqualTo(36);
   }
 
   @Test
@@ -180,18 +186,18 @@ class OpsExtractionV1857Tests {
 
   @Test
   void tightensCensus() throws IOException {
-    assertThat(javaFiles(OPS_ROOT)).hasSize(249);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(231);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+      assertThat(files.filter(Files::isRegularFile).filter(OpsExtractionTestSupport::isJava))
           .hasSizeLessThanOrEqualTo(1352);
     }
 
     String census = read(Path.of("docs", "ops", "extraction-endgame-census-v1828.md"));
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **249**",
-            "Remaining direct-root non-controller files to move or collapse: **145**",
-            "RouteCleanup web | 141",
+            "Current direct-root Java files: **231**",
+            "Remaining direct-root non-controller files to move or collapse: **127**",
+            "RouteCleanup web | 123",
             "278 to 249",
             "174 to 145",
             "## v1857 progress");
@@ -332,7 +338,7 @@ class OpsExtractionV1857Tests {
       productionFiles =
           files
               .filter(Files::isRegularFile)
-              .filter(this::isJava)
+              .filter(OpsExtractionTestSupport::isJava)
               .filter(path -> !path.startsWith(PACKAGE_ROOT))
               .toList();
     }
@@ -354,47 +360,6 @@ class OpsExtractionV1857Tests {
 
   private boolean containsType(String source, String typeName) {
     return Pattern.compile("\\b" + Pattern.quote(typeName) + "\\b").matcher(source).find();
-  }
-
-  private List<String> requiredHeadings(String source) {
-    return source
-        .lines()
-        .filter(line -> line.startsWith("## "))
-        .map(line -> line.substring(3).trim())
-        .toList();
-  }
-
-  private int hanCount(String source) {
-    return (int)
-        source.codePoints().filter(codePoint -> codePoint >= 0x4E00 && codePoint <= 0x9FFF).count();
-  }
-
-  private int letterCount(String source) {
-    return (int) source.codePoints().filter(Character::isLetter).count();
-  }
-
-  private int count(String source, String needle) {
-    int matches = 0;
-    int index = 0;
-    while ((index = source.indexOf(needle, index)) >= 0) {
-      matches++;
-      index += needle.length();
-    }
-    return matches;
-  }
-
-  private List<Path> javaFiles(Path directory) throws IOException {
-    try (Stream<Path> files = Files.list(directory)) {
-      return files.filter(Files::isRegularFile).filter(this::isJava).toList();
-    }
-  }
-
-  private boolean isJava(Path path) {
-    return path.getFileName().toString().endsWith(".java");
-  }
-
-  private String read(Path path) throws IOException {
-    return Files.readString(path, StandardCharsets.UTF_8);
   }
 
   private record BoundaryCensus(

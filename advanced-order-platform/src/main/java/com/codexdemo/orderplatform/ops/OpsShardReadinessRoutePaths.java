@@ -107,23 +107,6 @@ public final class OpsShardReadinessRoutePaths {
       "/route-cleanup-completion-audit-digest";
   static final String ROUTE_CLEANUP_POST_COMPLETION_CLOSEOUT =
       "/route-cleanup-post-completion-closeout";
-  static final String ROUTE_CLEANUP_MAINTENANCE_SEGMENT_CATALOG =
-      "/route-cleanup-maintenance-segment-catalog";
-  static final String ROUTE_CLEANUP_MAINTENANCE_CONTINUITY =
-      "/route-cleanup-maintenance-continuity";
-  static final String ROUTE_CLEANUP_MAINTENANCE_LATEST_SIBLING_REPORT =
-      "/route-cleanup-maintenance-latest-sibling-report";
-  static final String ROUTE_CLEANUP_MAINTENANCE_HANDOFF_PAIR_AUDIT =
-      "/route-cleanup-maintenance-handoff-pair-audit";
-  static final String ROUTE_CLEANUP_MAINTENANCE_BOUNDARY_DRIFT =
-      "/route-cleanup-maintenance-boundary-drift";
-  static final String ROUTE_CLEANUP_MAINTENANCE_SOURCE_PLAN_ALIGNMENT =
-      "/route-cleanup-maintenance-source-plan-alignment";
-  static final String ROUTE_CLEANUP_MAINTENANCE_TEST_BUDGET_PLAN =
-      "/route-cleanup-maintenance-test-budget-plan";
-  static final String ROUTE_CLEANUP_MAINTENANCE_ARCHIVE_MANIFEST =
-      "/route-cleanup-maintenance-archive-manifest";
-  static final String ROUTE_CLEANUP_MAINTENANCE_CLOSEOUT = "/route-cleanup-maintenance-closeout";
   static final String ROUTE_CLEANUP_MAINTENANCE_UPKEEP_CATALOG =
       "/route-cleanup-maintenance-upkeep-catalog";
   static final String ROUTE_CLEANUP_MAINTENANCE_CONSUMER_HANDOFF_MATRIX =

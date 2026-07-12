@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1857, with the original v1828 baseline retained
+- Repository state: live after v1858, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **249**.
+- Current direct-root Java files: **231**.
 - Target final direct-root Java files: **104**.
-- Remaining direct-root non-controller files to move or collapse: **145**.
+- Remaining direct-root non-controller files to move or collapse: **127**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 3 shared-core waivers = 104 final root files
-249 current root files - 104 final root files = 145 files still to move
+231 current root files - 104 final root files = 127 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -51,7 +51,7 @@ when names overlap, for example controllers inside a large family prefix.
 | OpsEvidence static release support | 2 | Move under a shared evidence package; not a root waiver. |
 | MinimalReadOnlyGateOperatorCiHandoff | 0 | Core/archive verification moved in v1844, ArchiveDigest in v1845, ConsumerPackage in v1846, VerificationDossier in v1847, ReleaseAcceptance base in v1848, and its Archive in v1849. |
 | MinimalReadOnlyGateExecution | 0 | Execution and archive-verification closure moved in v1843. |
-| RouteCleanup web | 141 | The first closed read-only gate slice moved in v1857; continue only through compiler-closed slices with measured inbound readers. |
+| RouteCleanup web | 123 | The read-only gate moved in v1857 and the nine-pair maintenance core moved in v1858; continue only through compiler-closed slices with measured inbound readers. |
 | ReleaseAcceptanceRoutePathSplit | 0 | Base/closeout moved in v1840, sustainment in v1841, and acceptance package/receipt/archive index in v1842. |
 | ReleaseAcceptanceArchiveVerificationHandoff | 0 | Source archive boundary moved in v1849; the verification handoff moved in v1850. |
 | ReleaseAcceptance root route owner | 0 | Moved with the base layer in v1840. |
@@ -80,7 +80,7 @@ when names overlap, for example controllers inside a large family prefix.
 | Prototype catalog/evidence/handoff residuals | 0 | Moved with the complete Prototype closure in v1856. |
 | Readiness core simple endpoints | 0 | Moved with ActiveShardPlanHandoff as one closed package in v1855. |
 
-The counted buckets sum to **249** and leave zero unassigned files. The original
+The counted buckets sum to **231** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -542,6 +542,32 @@ Total `ops` main Java remains **1,352**, the retained-root target remains
 **104**, and the reproducible census reports zero unassigned files. No route
 string, response component, digest material, fixture/evidence byte, write or
 credential boundary, deployment, rollback, or archive path changes.
+
+## v1858 progress
+
+v1858 moves the exact eighteen-file implementation closure behind the
+RouteCleanup maintenance controller into the existing
+`ops.maintenance.routecleanup` package. The nine service/response pairs cover
+segment catalog, continuity, latest-sibling reporting, handoff-pair audit,
+boundary drift, source-plan alignment, test-budget planning, archive manifest,
+and closeout. Nine owned behavior tests follow the implementation. The Spring
+controller and maintenance upkeep catalog remain in root as composition
+adapters.
+
+The family route owner receives nine byte-identical suffixes and the global
+route table deletes the duplicate fields. Only the nine immutable ENDPOINT
+constants required by the retained upkeep catalog are public; PROFILE remains
+package-private. All twenty existing SpotBugs response mirrors move to the new
+FQNs without adding a waiver. Repeated version-guard filesystem and walkthrough
+mechanics move into the sixty-line `OpsExtractionTestSupport`, while each
+version keeps its own inventories and thresholds.
+
+The live direct-root count falls from **249 to 231**, the movable backlog falls
+from **145 to 127**, and the RouteCleanup bucket falls from **141 to 123**.
+Total `ops` main Java remains **1,352**, the retained-root target remains
+**104**, and the reproducible census reports zero unassigned files. No route,
+response, profile, evidence, fixture, digest, side-effect, deployment,
+rollback, or archive byte changes.
 
 ## Revision rule
 

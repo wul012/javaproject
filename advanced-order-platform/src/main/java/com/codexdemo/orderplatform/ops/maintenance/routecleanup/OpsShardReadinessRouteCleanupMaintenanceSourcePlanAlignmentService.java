@@ -1,8 +1,5 @@
-package com.codexdemo.orderplatform.ops;
+package com.codexdemo.orderplatform.ops.maintenance.routecleanup;
 
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupEvidenceAnalyzer;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSourcePlanAlignmentResponse;
-import com.codexdemo.orderplatform.ops.maintenance.routecleanup.OpsShardReadinessRouteCleanupSourcePlanAlignmentService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OpsShardReadinessRouteCleanupMaintenanceSourcePlanAlignmentService {
 
-  static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_SOURCE_PLAN_ALIGNMENT;
+  public static final String ENDPOINT =
+      RouteCleanupRoutes.BASE_PATH + RouteCleanupRoutes.MAINTENANCE_SOURCE_PLAN_ALIGNMENT;
   static final String PROFILE =
       "java-shard-readiness-route-cleanup-maintenance-source-plan-alignment.v1";
 
