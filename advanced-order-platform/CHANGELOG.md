@@ -4,6 +4,15 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1868 - README evidence exhibition
+
+- Adds the repository-root GitHub landing page with a bilingual project summary,
+  mechanically sourced badges, a system-and-authority diagram, and direct evidence links.
+- Keeps the project README as the deep technical guide while adding the same CI badge and
+  one self-verification block for the three committed censuses plus full Maven verification.
+- Adds a README consistency gate, reconciles the completed v1867 closeout run and tag,
+  and preserves the exact maturity and no-execution boundary language.
+
 ## v1867 - Java production-excellence Phase 2 closeout candidate
 
 - Repoints 735 route reads in 160 files to their actual leaf owners and removes 239

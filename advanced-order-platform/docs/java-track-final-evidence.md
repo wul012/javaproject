@@ -16,23 +16,23 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | implementation run `29221687479` green; closeout run pending |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | implementation `29221687479` and closeout `29222696374` green |
 | E2 Static analysis | Spotless ratchet and SpotBugs check in `pom.xml`; 686-entry shrink-only exclusion baseline | Maven verify plus `JavaEleganceGateTests.spotbugsBaselineOnlyShrinks` | local verify green; SpotBugs 0/0 |
 | E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | local verify green; 2229 classes |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | tag and remote pending |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | tag and canonical remote verified; external review pending |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, name census | extraction, maintainability, and elegance ratchets | local focused gate green |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | repaired local and implementation CI green: 1678 files / 19819450 raw bytes |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1868-authorized exact set: 1679 files / 19834662 raw bytes |
 
 ## Final Censuses
 
 - Ops direct root: 104 files; retained: 104; remaining movable: 0; unassigned: 0.
 - Ops total production Java files: 1,352; no extraction family remains in root.
 - Production Java: 1,483 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
-- Test Java: 882 files; maximum 699 lines; over 500: 8;
+- Test Java: 883 files; maximum 699 lines; over 500: 8;
   over 750/1000: 0/0.
 - Long-name shrink-only baseline: production stems/uses/unique 1297/21169/2857;
   tests 795/10226/3834. New and touched names remain within 40 characters.
@@ -40,6 +40,8 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
   v1867 repointed 735 reads in 160 files to leaf owners and removed 239 pure forwarding
   aliases without changing route bytes or the root-versus-leaf compatibility response.
 - SpotBugs exclusions: at most 686 `<Match>` blocks and shrink-only.
+- Archive retention: v1868's external README brief authorizes exactly one new walkthrough;
+  the current exact set is 1,679 files / 19,834,662 raw bytes.
 
 ## Active Waivers
 
@@ -77,7 +79,10 @@ CRLF and Linux LF. The repair canonicalizes line endings for text hash input onl
 has a dedicated LF/CRLF equivalence test. Repair Actions run `29221687479` passed:
 Docker-tagged integration tests in 2:21 and headless regression in 18:54, including
 Spotless, the full wrapper verify, every raised coverage floor, SpotBugs, the production
-profile smoke test, and JaCoCo upload. Only the final closeout workflow remains pending.
+profile smoke test, and JaCoCo upload. Closeout Actions run `29222696374` then passed
+Docker-tagged integration tests in 2:05 and headless regression in 18:38 for commit
+`952e4ab9`, which is the peeled target of the canonical v1867 tag. External review
+remains the only ungranted Java-track state.
 
 ## External Review Request
 

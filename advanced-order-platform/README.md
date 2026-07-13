@@ -1,10 +1,29 @@
 # Advanced Order Platform
 
+[![Maven CI](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml)
+![Tests](https://img.shields.io/badge/tests-1915%2B-brightgreen)
+![SpotBugs](https://img.shields.io/badge/SpotBugs-0-brightgreen)
+![Max file](https://img.shields.io/badge/max_file-738_lines-blue)
+
 一个面向高级 Java 练手的订单交易平台雏形。当前采用模块化单体架构，重点训练 Spring Boot 业务建模、事务编排、库存一致性、审计流水、Outbox 和数据库工程化。
 
 ## 当前成熟度与边界
 
 截至 v1867 候选，本仓库达到 `single-project validation + verified read-only cross-project integration (env-gated, single machine, no execution authority)`。这表示 Java 单仓的构建、测试、覆盖率、静态分析与生产 profile 冒烟均有机械门，且外部评审已经用真实 Java jar、mini-kv CLI 和 aiproj 制品复现只读跨项目链路；它不表示生产部署、真实支付、密钥读取、SQL、回滚或 managed audit connection 获得授权。完整边界见 `PRODUCTION_READINESS.md`，版本证据见 `CHANGELOG.md`，Java 最终轨道仍需外部评审确认。
+
+## 自助验证
+
+以下命令均从本目录运行；三个 census 默认只读，完整验证同时执行覆盖率、静态分析与文档契约门：
+
+```powershell
+.\scripts\ops-root-census.ps1 -Json
+.\scripts\java-maintainability-census.ps1 -Json
+.\scripts\archive-retention-census.ps1 -Json
+.\mvnw.cmd -B verify
+```
+
+结果口径与当前候选证据见 [`docs/java-track-final-evidence.md`](docs/java-track-final-evidence.md)，
+版本进度与远端运行号见 [`docs/production-excellence-progress.md`](docs/production-excellence-progress.md)。
 
 ## 当前能力
 

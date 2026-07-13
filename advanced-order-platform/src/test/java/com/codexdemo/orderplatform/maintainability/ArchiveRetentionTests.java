@@ -27,8 +27,8 @@ class ArchiveRetentionTests {
   private static final List<String> FIXED_ROOTS =
       List.of("a", "b", "c", "d", "d_runtime_screenshot_archive_next", "e", "f");
   private static final Set<String> TEXT_EXTS = Set.of(".md", ".json", ".html");
-  private static final int FILE_CAP = 1678;
-  private static final long BYTE_CAP = 19_819_450L;
+  private static final int FILE_CAP = 1679;
+  private static final long BYTE_CAP = 19_834_662L;
 
   @Test
   void manifestMatchesArchiveBytes() throws Exception {
@@ -85,7 +85,9 @@ class ArchiveRetentionTests {
             "SHA-256",
             "文件数和原始总字节数是只减不增的上限",
             "不移动、不重命名、不压缩、不删除历史文件",
-            "Node 已固定的绝对路径");
+            "Node 已固定的绝对路径",
+            "v1868-readme-exhibition.md",
+            "1,679 files / 19,834,662 raw bytes");
     assertThat(script)
         .contains(
             "$walkthroughPrefix",
