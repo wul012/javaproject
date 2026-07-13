@@ -22,10 +22,10 @@ Status: design fixed before implementation. External review remains required.
 | Preserve evidence tests | Keep every existing assertion and the named `OpsEvidenceServiceTests` entry | focused old/new contract runs plus manifest command guard | focused gate green |
 | Enforce the name budget | Count long file stems and lexical Java identifiers | script census plus shrink-only JUnit baseline | local gate green |
 | Close archive retention | Index binary bytes and canonical cross-platform text with SHA-256 | exact manifest, count/raw-byte caps, and hash test | repaired local verify green |
-| Refresh CI actions | Use current official action majors and reject the deprecated v4 set | workflow structure test and real Actions run | local gate green; remote pending |
+| Refresh CI actions | Use current official action majors and reject the deprecated v4 set | workflow structure test and real Actions run | implementation run `29221687479` green; closeout pending |
 | Tighten coverage floors | Raise floors whose observed baseline exceeds the old floor by over two points | POM assertions and full JaCoCo check | full local verify green |
-| Close E1-E10 evidence | Refresh readiness, changelog, coverage, waivers, and final evidence | `JavaTrackCloseoutTests` | full local verify green; remote pending |
-| Explain without padding | Chinese-majority walkthrough with ten standard headings and at least 3,000 Han | global walkthrough gate | frozen at 4,289 Han and ten headings |
+| Close E1-E10 evidence | Refresh readiness, changelog, coverage, waivers, and final evidence | `JavaTrackCloseoutTests` | full local and implementation CI green; closeout pending |
+| Explain without padding | Chinese-majority walkthrough with ten standard headings and at least 3,000 Han | global walkthrough gate | frozen at 4,619 Han and ten headings |
 
 ## Scope
 
@@ -77,10 +77,15 @@ The final repaired local `mvnw -B verify` passed in 547.5 seconds: 1,915 tests, 
 failures/errors/skips; JaCoCo analyzed 2,229 classes and met every raised floor;
 SpotBugs reported zero bugs and zero errors. The root census is 104/104/0 with
 zero unassigned files. Archive retention is 1,678 files / 19,819,450 raw bytes.
-Remote implementation and closeout CI remain required before external review.
+Closeout CI remains required before external review.
 
 Initial implementation run `29220274738` passed Docker in 2:18 but failed headless
 because raw text hashes differed between Windows CRLF and Linux LF checkouts. The repair
 canonicalizes CRLF to LF for `.md/.json/.html` hash input only, keeps PNG raw-byte hashes,
 and adds a direct cross-platform line-ending test. The full local verify above was rerun
 after the walkthrough and manifest were regenerated.
+
+Repair commit `b91dc2e7` passed Actions run `29221687479`: Docker-tagged integration
+tests completed in 2:21 and the headless job completed in 18:54. Spotless, the full
+wrapper verify, every raised JaCoCo floor, SpotBugs, the production-profile smoke test,
+and JaCoCo upload were all green.
