@@ -37,5 +37,9 @@ ten standard headings. Current censuses report root 104/104/0 with zero unassign
 production maximum 738 lines with zero files over 750/1000, and an exact archive set of
 1,679 files / 19,834,662 raw bytes. Full `mvnw -B verify` passed 1,918 tests with zero
 failures/errors/skips in 15:40; JaCoCo analyzed 2,229 classes and met every floor,
-SpotBugs reported zero bugs/errors, and the packaged jar was produced. Remote CI remains
+SpotBugs reported zero bugs/errors, and the packaged jar was produced. Implementation
+commit `36aebe05` passed GitHub Actions run `29227654360`: Docker-tagged integration
+tests completed in 2:02 and the headless regression completed in 13:55; Spotless, full
+verify, production smoke, and JaCoCo artifact publication were green. GitHub's repository
+API resolves the landing page to root `README.md`. The closeout tag and its CI remain
 pending.
