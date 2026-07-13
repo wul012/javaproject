@@ -1,8 +1,8 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseapproval;
 
-import static com.codexdemo.orderplatform.ops.OpsEvidenceStaticReleaseArtifact.RELEASE_OPERATOR_SIGNOFF_FIXTURE;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceStaticReleaseArtifact.ROLLBACK_APPROVAL_RECORD_FIXTURE;
-import static com.codexdemo.orderplatform.ops.OpsEvidenceStaticReleaseArtifact.ROLLBACK_APPROVER_EVIDENCE_FIXTURE;
+import static com.codexdemo.orderplatform.ops.maintenance.evidencecore.StaticReleaseCatalog.Artifact.RELEASE_OPERATOR_SIGNOFF_FIXTURE;
+import static com.codexdemo.orderplatform.ops.maintenance.evidencecore.StaticReleaseCatalog.Artifact.ROLLBACK_APPROVAL_RECORD_FIXTURE;
+import static com.codexdemo.orderplatform.ops.maintenance.evidencecore.StaticReleaseCatalog.Artifact.ROLLBACK_APPROVER_EVIDENCE_FIXTURE;
 
 import com.codexdemo.orderplatform.ops.OpsEvidenceResponse;
 import java.util.ArrayList;

@@ -6,13 +6,13 @@ brief. It converts the remaining direct-root `ops` package from an open-ended
 
 ## Scope
 
-- Repository state: live after v1865, with the original v1828 baseline retained
+- Repository state: live after v1866, with the original v1828 baseline retained
   in the progress notes below.
 - Counted directory:
   `src/main/java/com/codexdemo/orderplatform/ops/*.java`.
-- Current direct-root Java files: **108**.
+- Current direct-root Java files: **104**.
 - Target final direct-root Java files: **104**.
-- Remaining direct-root non-controller files to move or collapse: **4**.
+- Remaining direct-root non-controller files to move or collapse: **0**.
 - Total `ops` Java files are not loosened by this census. Route strings,
   response bytes, write boundaries, credentials, deployment, rollback, and
   archive paths are unchanged.
@@ -31,7 +31,7 @@ This gives the v1828 end-state target:
 
 ```text
 100 controllers + 1 route aggregator + 3 shared-core waivers = 104 final root files
-108 current root files - 104 final root files = 4 files still to move
+104 current root files - 104 final root files = 0 files still to move
 ```
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
@@ -48,7 +48,7 @@ when names overlap, for example controllers inside a large family prefix.
 | --- | ---: | --- |
 | Keep-root controllers | 100 | Retain. |
 | Keep-root shared core and global route aggregator | 4 | Retain only the three waiver files plus `OpsShardReadinessRoutePaths.java`. |
-| OpsEvidence static release support | 2 | Move under a shared evidence package; not a root waiver. |
+| OpsEvidence static release support | 0 | Moved and split into `StaticReleaseCatalog` and `StaticReleaseSections` in v1866; not a root waiver. |
 | MinimalReadOnlyGateOperatorCiHandoff | 0 | Core/archive verification moved in v1844, ArchiveDigest in v1845, ConsumerPackage in v1846, VerificationDossier in v1847, ReleaseAcceptance base in v1848, and its Archive in v1849. |
 | MinimalReadOnlyGateExecution | 0 | Execution and archive-verification closure moved in v1843. |
 | RouteCleanup web | 0 | The read-only gate moved in v1857, maintenance and Upkeep layers moved in v1858-v1860, sustainment moved in v1861-v1862, review residue closed in v1863, the handoff graph moved in v1864, and the post-completion graph closed the family in v1865. |
@@ -75,12 +75,12 @@ when names overlap, for example controllers inside a large family prefix.
 | RuntimeExecutionApprovalInputTemplate | 0 | Moved with the complete runtime-execution evidence chain in v1851. |
 | RuntimeExecutionApproval/Input residuals | 0 | Moved as the complete runtime-execution evidence chain in v1851. |
 | ActiveShardPlanHandoff | 0 | Moved with the complete readiness core in v1855. |
-| OpsOverview mini-family | 2 | Move service/response; controller stays root. |
+| OpsOverview mini-family | 0 | Service/response moved together in v1866; controller stays root. |
 | PrototypeConsumerGate | 0 | Moved with the complete Prototype closure in v1856. |
 | Prototype catalog/evidence/handoff residuals | 0 | Moved with the complete Prototype closure in v1856. |
 | Readiness core simple endpoints | 0 | Moved with ActiveShardPlanHandoff as one closed package in v1855. |
 
-The counted buckets sum to **108** and leave zero unassigned files. The original
+The counted buckets sum to **104** and leave zero unassigned files. The original
 v1828 baseline was **874**, with **769** files still to move.
 
 ## Batch order guidance
@@ -751,6 +751,23 @@ the reproducible census reports zero unassigned files. The only remaining
 movable root files are the two OpsOverview types and two static release-support
 types. No route, response, manifest entry, digest input, evidence, fixture,
 write boundary, deployment, rollback, or archive byte changes.
+
+## v1866 progress
+
+v1866 closes the Phase 1 root extraction contract. `OpsOverviewService`,
+`OpsOverviewResponse`, and their owned unit test move together into
+`ops.maintenance.overview`; the root `OpsOverviewController` remains the HTTP
+composition boundary. The two static release-support files move into
+`ops.maintenance.evidencecore` and become a 225-line public catalog plus a
+476-line package-private section builder. The former artifact enum is nested
+inside the catalog, so the split keeps total `ops` main Java at **1,352**.
+
+The live direct-root count falls from **108 to 104**, both remaining family
+buckets reach zero, the movable backlog reaches **0**, and the reproducible
+census reports zero unassigned files. The exact retained set is 100 controllers,
+one global route aggregator, and the three reviewer-checkable shared-core
+waivers. No route, endpoint, response component, list ordering, evidence byte,
+write boundary, deployment, rollback, credential, or archive path changes.
 
 ## Revision rule
 

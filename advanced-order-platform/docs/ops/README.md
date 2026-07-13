@@ -84,6 +84,7 @@ package.
 | `routecleanup-residue-v1863.md` | sixtieth ops extraction | How did the thirteen-file maintenance review residue close inside `ops.maintenance.routecleanup`, lower root from 187 to 174, preserve a measured 2/13/12 boundary, and repay nine temporary public endpoints? |
 | `routecleanup-handoff-v1864.md` | sixty-first ops extraction | How did the twenty-two-file handoff graph move into `ops.maintenance.routecleanup`, lower root from 174 to 152, preserve an exact 10/38/22 boundary and 84-entry manifest, and expose only three measured endpoints? |
 | `routecleanup-closeout-v1865.md` | sixty-second ops extraction | How did the complete forty-four-type post-completion graph close RouteCleanup, lower root from 152 to 108, consolidate all 84 routes under one owner, and repay every temporary endpoint visibility exception? |
+| `ops-root-endgame-v1866.md` | sixty-third and final Phase 1 extraction | How did the last four movable root types reach the 104-file target while splitting the static-release hotspot into 207/451-line responsibilities? |
 | `extraction-waivers.md` | Java final-push waiver list | Which non-controller root files may remain after extraction, and what reviewer check keeps each waiver honest? |
 
 ## Boundary

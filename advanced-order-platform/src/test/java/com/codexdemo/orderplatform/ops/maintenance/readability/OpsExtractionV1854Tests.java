@@ -138,15 +138,13 @@ class OpsExtractionV1854Tests {
   }
 
   @Test
-  void staticReleaseFixtureDependencyRemainsAnImmutablePublicBoundary() throws IOException {
-    String artifact = read(OPS_ROOT.resolve("OpsEvidenceStaticReleaseArtifact.java"));
+  void staticReleaseArtifactsStayImmutable() throws IOException {
+    String artifact =
+        read(OPS_ROOT.resolve(Path.of("maintenance", "evidencecore", "StaticReleaseCatalog.java")));
     assertThat(artifact)
-        .contains(
-            "public enum OpsEvidenceStaticReleaseArtifact",
-            "public String version()",
-            "public String endpoint()");
+        .contains("public enum Artifact", "public String version()", "public String endpoint()");
     assertThat(read(PACKAGE_ROOT.resolve("ReleaseApprovalRehearsalResponseBuilder.java")))
-        .contains("OpsEvidenceStaticReleaseArtifact");
+        .contains("StaticReleaseCatalog.Artifact");
   }
 
   @Test
@@ -185,7 +183,7 @@ class OpsExtractionV1854Tests {
         .contains("com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApproval")
         .doesNotContain("com.codexdemo.orderplatform.ops.ReleaseApproval");
 
-    assertThat(javaFiles(OPS_ROOT)).hasSize(108);
+    assertThat(javaFiles(OPS_ROOT)).hasSize(104);
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
           .hasSizeLessThanOrEqualTo(1352);

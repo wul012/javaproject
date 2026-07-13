@@ -16,10 +16,11 @@ appear here.
 
 ## Explicit non-waivers
 
-`OpsEvidenceStaticReleaseArtifact.java` and
-`OpsEvidenceStaticReleaseDispatchTable.java` are deliberately not root waivers
-in v1828. They are treated as the two-file `OpsEvidence static release support`
-bucket and must move under shared evidence support during Phase 1.
+`StaticReleaseCatalog.java` and `StaticReleaseSections.java` are not root
+waivers. v1866 moved the former static-release pair into
+`ops.maintenance.evidencecore` and split dispatch from section construction
+without increasing the total production file count. Returning either type to
+root would reopen the completed Phase 1 census.
 
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is also not a waiver. It
 moved with the v1840 release-acceptance route-path split base layer and must not

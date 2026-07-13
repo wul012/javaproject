@@ -86,9 +86,9 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "105");
     assertThat(census)
         .contains(
-            "Current direct-root Java files: **108**",
+            "Current direct-root Java files: **104**",
             "Target final direct-root Java files: **104**",
-            "Remaining direct-root non-controller files to move or collapse: **4**",
+            "Remaining direct-root non-controller files to move or collapse: **0**",
             "MinimalReadOnlyGateOperatorCiHandoff",
             "RouteCleanup web",
             "ReleaseAcceptanceRoutePathSplit",
@@ -119,7 +119,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
       }
     }
 
-    assertThat(fileNames).hasSize(108);
+    assertThat(fileNames).hasSize(104);
     assertThat(unassigned).isEmpty();
     for (Bucket bucket : buckets()) {
       assertThat(assigned.getOrDefault(bucket.name(), List.of()))
@@ -131,7 +131,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         assigned.get("keep-root controllers").size()
             + assigned.get("keep-root shared core and global route aggregator").size();
     assertThat(retainedRoot).isEqualTo(104);
-    assertThat(fileNames.size() - retainedRoot).isEqualTo(4);
+    assertThat(fileNames.size() - retainedRoot).isZero();
   }
 
   @Test
@@ -146,7 +146,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
             "OpsShardReadinessEvidenceEndpoints.java",
             "Reviewer check",
             "Explicit non-waivers",
-            "OpsEvidenceStaticReleaseArtifact.java",
+            "StaticReleaseCatalog.java",
             "OpsShardReadinessReleaseAcceptanceRoutePaths.java")
         .doesNotContain("| `ContextHeaderField.java` |");
     assertThat(SHARED_ROOT_KEEP)
@@ -171,7 +171,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
         new Bucket("keep-root controllers", 100, matches(".*Controller\\.java$")),
         new Bucket(
             "keep-root shared core and global route aggregator", 4, SHARED_ROOT_KEEP::contains),
-        new Bucket("OpsEvidence static release support", 2, matches("^OpsEvidenceStaticRelease")),
+        new Bucket("OpsEvidence static release support", 0, matches("^OpsEvidenceStaticRelease")),
         new Bucket(
             "MinimalReadOnlyGateOperatorCiHandoff",
             0,
@@ -268,7 +268,7 @@ class ReadabilityUpkeepOpsExtractionEndgameCensusV1828Tests {
                     + "^OpsShardReadinessRuntimeExecutionPass")),
         new Bucket(
             "ActiveShardPlanHandoff", 0, matches("^OpsShardReadinessActiveShardPlanHandoff")),
-        new Bucket("OpsOverview mini-family", 2, matches("^OpsOverview")),
+        new Bucket("OpsOverview mini-family", 0, matches("^OpsOverview")),
         new Bucket("PrototypeConsumerGate", 0, matches("^OpsShardReadinessPrototypeConsumerGate")),
         new Bucket(
             "Prototype catalog/evidence/handoff residuals",

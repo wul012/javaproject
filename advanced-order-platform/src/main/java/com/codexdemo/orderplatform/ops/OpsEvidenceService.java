@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.notification.FailedEventSummaryResponse;
 import com.codexdemo.orderplatform.notification.FailedEventSummaryService;
+import com.codexdemo.orderplatform.ops.maintenance.evidencecore.StaticReleaseCatalog;
 import com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalContractConstants;
 import com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalRequest;
 import com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalRehearsalResponse;
@@ -184,8 +185,7 @@ public class OpsEvidenceService {
     List<String> outboxBlockers = outboxBlockers();
     List<String> executionBlockers = executionBlockers(failedEventSummary);
     List<String> blockers = blockers(outboxBlockers, executionBlockers);
-    OpsEvidenceStaticReleaseDispatchTable.StaticReleaseEvidence staticReleaseEvidence =
-        OpsEvidenceStaticReleaseDispatchTable.build();
+    StaticReleaseCatalog.StaticReleaseEvidence staticReleaseEvidence = StaticReleaseCatalog.build();
 
     return new OpsEvidenceResponse(
         sampledAt,
@@ -243,8 +243,7 @@ public class OpsEvidenceService {
     additionalProbeEndpoints.add(
         ReleaseApprovalContractConstants.RELEASE_APPROVAL_REHEARSAL_ENDPOINT);
     additionalProbeEndpoints.addAll(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints());
-    additionalProbeEndpoints.addAll(
-        OpsEvidenceStaticReleaseDispatchTable.staticContractEndpoints(false));
+    additionalProbeEndpoints.addAll(StaticReleaseCatalog.staticContractEndpoints(false));
 
     return new OpsEvidenceResponse.HealthProbe(
         "/actuator/health",
@@ -265,8 +264,7 @@ public class OpsEvidenceService {
     allowedProbeEndpoints.add(
         "GET " + ReleaseApprovalContractConstants.RELEASE_APPROVAL_REHEARSAL_ENDPOINT);
     allowedProbeEndpoints.addAll(OpsShardReadinessEvidenceEndpoints.fixtureProbeEndpoints());
-    allowedProbeEndpoints.addAll(
-        OpsEvidenceStaticReleaseDispatchTable.staticContractProbeEndpoints(false));
+    allowedProbeEndpoints.addAll(StaticReleaseCatalog.staticContractProbeEndpoints(false));
 
     return new OpsEvidenceResponse.ReadOnlyWindow(
         "java-read-only-window.v1",
@@ -426,7 +424,7 @@ public class OpsEvidenceService {
     endpoints.addAll(OpsShardReadinessEvidenceEndpoints.liveEndpoints());
     endpoints.add(ReleaseApprovalContractConstants.RELEASE_APPROVAL_REHEARSAL_ENDPOINT);
     endpoints.addAll(OpsShardReadinessEvidenceEndpoints.fixtureEndpoints());
-    endpoints.addAll(OpsEvidenceStaticReleaseDispatchTable.staticContractEndpoints(true));
+    endpoints.addAll(StaticReleaseCatalog.staticContractEndpoints(true));
     endpoints.addAll(
         List.of(
             "/api/v1/failed-events/summary",
