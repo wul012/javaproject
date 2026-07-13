@@ -9,8 +9,11 @@ Java 的历史证据目录是跨项目只读依赖，不是可以随意整理的
 - `scripts/archive-retention-census.ps1` 是唯一 census 口径，默认只读。
 - 显式传入 `-WriteManifest` 才会重建 `docs/archive-retention-manifest.txt`。
 - manifest 每行记录仓库相对路径与 SHA-256，按 ordinal 路径排序。
+- `.md`、`.json`、`.html` 在计算摘要前只将 CRLF 规范为 LF，使 Windows 与 Linux
+  checkout 得到同一内容摘要；`.png` 等二进制文件仍按原始字节计算。
 - `ArchiveRetentionTests` 要求实际文件集合与 manifest 完全相等，并重算每个摘要。
-- 文件数和总字节数是只减不增的上限；缺失、篡改或未索引新增都会使构建失败。
+- 文件数和原始总字节数是只减不增的上限；缺失、正文篡改或未索引新增都会使构建失败。
+  文本换行规范化不是内容豁免，除 CRLF/LF 外的任何字节变化都会改变摘要。
 
 ## Boundary
 

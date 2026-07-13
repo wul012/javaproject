@@ -2,8 +2,8 @@ package com.codexdemo.orderplatform.maintainability;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,8 +14,10 @@ import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class ArchiveRetentionTests {
 
@@ -24,8 +26,9 @@ class ArchiveRetentionTests {
       ROOT.resolve(Path.of("docs", "archive-retention-manifest.txt"));
   private static final List<String> FIXED_ROOTS =
       List.of("a", "b", "c", "d", "d_runtime_screenshot_archive_next", "e", "f");
+  private static final Set<String> TEXT_EXTS = Set.of(".md", ".json", ".html");
   private static final int FILE_CAP = 1678;
-  private static final long BYTE_CAP = 19_819_092L;
+  private static final long BYTE_CAP = 19_819_450L;
 
   @Test
   void manifestMatchesArchiveBytes() throws Exception {
@@ -54,6 +57,24 @@ class ArchiveRetentionTests {
   }
 
   @Test
+  void textHashIgnoresLineEnding(@TempDir Path temp) throws Exception {
+    Path lfText = temp.resolve("lf.md");
+    Path crlfText = temp.resolve("crlf.md");
+    Path lfBinary = temp.resolve("lf.png");
+    Path crlfBinary = temp.resolve("crlf.png");
+    byte[] lf = "first\nsecond\n".getBytes(StandardCharsets.UTF_8);
+    byte[] crlf = "first\r\nsecond\r\n".getBytes(StandardCharsets.UTF_8);
+
+    Files.write(lfText, lf);
+    Files.write(crlfText, crlf);
+    Files.write(lfBinary, lf);
+    Files.write(crlfBinary, crlf);
+
+    assertThat(sha256(lfText)).isEqualTo(sha256(crlfText));
+    assertThat(sha256(lfBinary)).isNotEqualTo(sha256(crlfBinary));
+  }
+
+  @Test
   void policyKeepsBoundaries() throws IOException {
     String policy = read(ROOT.resolve(Path.of("docs", "archive-retention-policy.md")));
     String script = read(ROOT.resolve(Path.of("scripts", "archive-retention-census.ps1")));
@@ -62,11 +83,16 @@ class ArchiveRetentionTests {
         .contains(
             "-WriteManifest",
             "SHA-256",
-            "文件数和总字节数是只减不增的上限",
+            "文件数和原始总字节数是只减不增的上限",
             "不移动、不重命名、不压缩、不删除历史文件",
             "Node 已固定的绝对路径");
     assertThat(script)
-        .contains("$walkthroughPrefix", "[BitConverter]::ToString", "[StringComparer]::Ordinal");
+        .contains(
+            "$walkthroughPrefix",
+            "$textExtensions",
+            "Get-CanonicalBytes",
+            "[BitConverter]::ToString",
+            "[StringComparer]::Ordinal");
   }
 
   private static Map<String, String> manifest() throws IOException {
@@ -105,13 +131,29 @@ class ArchiveRetentionTests {
 
   private static String sha256(Path file) throws IOException, NoSuchAlgorithmException {
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    try (InputStream input = Files.newInputStream(file)) {
-      byte[] buffer = new byte[16 * 1024];
-      for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
-        digest.update(buffer, 0, read);
+    byte[] source = Files.readAllBytes(file);
+    byte[] canonical = isText(file) ? canonicalText(source) : source;
+    return HexFormat.of().formatHex(digest.digest(canonical));
+  }
+
+  private static boolean isText(Path file) {
+    String name = file.getFileName().toString();
+    int separator = name.lastIndexOf('.');
+    String extension = separator < 0 ? "" : name.substring(separator).toLowerCase();
+    return TEXT_EXTS.contains(extension);
+  }
+
+  private static byte[] canonicalText(byte[] source) {
+    ByteArrayOutputStream target = new ByteArrayOutputStream(source.length);
+    for (int index = 0; index < source.length; index++) {
+      if (source[index] == '\r' && index + 1 < source.length && source[index + 1] == '\n') {
+        target.write('\n');
+        index++;
+      } else {
+        target.write(source[index]);
       }
     }
-    return HexFormat.of().formatHex(digest.digest());
+    return target.toByteArray();
   }
 
   private static String relative(Path file) {

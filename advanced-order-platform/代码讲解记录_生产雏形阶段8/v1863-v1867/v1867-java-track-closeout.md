@@ -40,7 +40,7 @@ Java evidence 会引用 Node、mini-kv 和静态 contract 的版本、endpoint �
 
 上游配置继续遵守保守默认值。prod profile 关闭 H2 console、SQL 显示与格式化；RabbitMQ transport 和通知消费者需要显式启用；CI 冒烟关闭短生命周期不需要的 Outbox publisher。release rehearsal 中出现的 credential handle、endpoint handle、rollback path 和 timeout budget 都是审核字段或回显值，不会触发 resolver、网络连接或 SQL。`credential value` 仍被明确列入禁止读取和禁止输出的边界。
 
-归档也是一种上游契约。Node 中存在指向 Java 历史路径和 digest 的固定引用，所以 v1867 的 archive retention 不是“整理旧文件”，而是冻结当前文件集合。`archive-retention-census.ps1` 扫描 `a`、`b`、`c`、`d`、过渡截图根、`e`、`f` 以及全部代码讲解续写目录，使用长路径安全的流式 SHA-256，只有显式 `-WriteManifest` 才写清单。默认运行只读，不会在普通验证中重排历史文件。
+归档也是一种上游契约。Node 中存在指向 Java 历史路径和 digest 的固定引用，所以 v1867 的 archive retention 不是“整理旧文件”，而是冻结当前文件集合。`archive-retention-census.ps1` 扫描 `a`、`b`、`c`、`d`、过渡截图根、`e`、`f` 以及全部代码讲解续写目录，使用长路径安全的 SHA-256，只有显式 `-WriteManifest` 才写清单。第一次远端实现 CI 发现 Windows working tree 的文本通常是 CRLF，而 Linux checkout 是 LF，原字节摘要会把同一 Git 内容误报为篡改。修复后 `.md`、`.json`、`.html` 只在摘要输入中把 CRLF 规范为 LF，PNG 等二进制仍按原字节；路径集合、正文变化、文件数和原始总字节上限继续严格检查。默认 census 只读，不会在普通验证中重排历史文件。
 
 ## 服务层核心流程
 

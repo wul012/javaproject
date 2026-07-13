@@ -25,7 +25,7 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local docs gate pending |
 | E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | tag and remote pending |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, name census | extraction, maintainability, and elegance ratchets | local focused gate green |
-| E10 Archive retention | exact SHA-256 manifest, count/byte ceilings, frozen archive policy | `ArchiveRetentionTests` and `archive-retention-census.ps1` | local gate green: 1678 files / 19819092 bytes |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | repaired local verify green: 1678 files / 19819450 raw bytes |
 
 ## Final Censuses
 
@@ -67,9 +67,14 @@ After those run ids are recorded, the closeout commit and tag
 `v1867-order-platform-production-excellence-java-track-phase2-closeout` must also reach
 the canonical `javaproject` remote and its closeout workflow must be green.
 
-Final local result: `mvnw -B verify` passed in 584.7 seconds with 1,914 tests,
+Final repaired local result: `mvnw -B verify` passed in 547.5 seconds with 1,915 tests,
 zero failures/errors/skips, 2,229 JaCoCo classes and every raised floor met.
 SpotBugs reported `BugInstance=0` and `Error=0`; the packaged jar was produced.
+
+Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
+headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
+CRLF and Linux LF. The repair canonicalizes line endings for text hash input only and
+has a dedicated LF/CRLF equivalence test; implementation retry CI is pending.
 
 ## External Review Request
 
