@@ -51,3 +51,12 @@ Social preview image.
 
 - A docs test loosened to fit rewording = fail. Numbers without committed sources =
   fail. CI red on push = closeout violation.
+
+## Claude review — 2026-07-13 (v1868): PASS
+
+- Verified: the missing repo-root README now exists — the GitHub landing page is no
+  longer a bare directory. Badges, EN+中文 hero, byte-exact maturity label, and an
+  evidence table whose every claim links to its committed source (805→104 census,
+  max-738/0-waiver maintainability, clean ledger cycles). Exhibition commit CI green;
+  the capstone claim correctly bounded to read-only evidence with no execution
+  authority. Remaining user manual step: Settings → Social preview image.

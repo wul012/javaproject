@@ -1,7 +1,8 @@
 # README Exhibition v1868
 
-Status: implementation candidate. This maintenance version changes discoverability and
-evidence presentation only; it does not add runtime capability or production authority.
+Status: completed maintenance version; external review passed. This version changes
+discoverability and evidence presentation only; it does not add runtime capability or
+production authority.
 
 ## Requirement Evidence Matrix
 
@@ -41,5 +42,10 @@ SpotBugs reported zero bugs/errors, and the packaged jar was produced. Implement
 commit `36aebe05` passed GitHub Actions run `29227654360`: Docker-tagged integration
 tests completed in 2:02 and the headless regression completed in 13:55; Spotless, full
 verify, production smoke, and JaCoCo artifact publication were green. GitHub's repository
-API resolves the landing page to root `README.md`. The closeout tag and its CI remain
-pending.
+API resolves the landing page to root `README.md`. Closeout commit `5dee80ba` and the
+annotated tag `v1868-order-platform-readme-evidence-exhibition` are reachable on the
+canonical remote. Closeout Actions run `29228591628` passed Docker-tagged integration
+tests in 1:51 and the headless regression in 19:11, including production-profile smoke
+and JaCoCo artifact publication. Claude's external review is recorded as `PASS` in the
+authorized brief. Only the manual GitHub social-preview setting remains outside the
+repository.
