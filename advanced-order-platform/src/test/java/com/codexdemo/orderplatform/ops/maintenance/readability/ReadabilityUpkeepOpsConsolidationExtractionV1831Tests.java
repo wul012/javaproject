@@ -115,10 +115,10 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1831Tests {
             "OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT",
             "\"/operator-evidence-value-supply-closeout\"");
     assertThat(rootAggregator)
-        .contains(
+        .doesNotContain(
             "OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths",
-            ".OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG",
-            ".OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT");
+            "OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG",
+            "OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT");
     assertThat(service)
         .contains(
             "OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths.BASE_PATH",

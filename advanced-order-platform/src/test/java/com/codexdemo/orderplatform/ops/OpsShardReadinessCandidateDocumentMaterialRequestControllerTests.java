@@ -7,6 +7,7 @@ import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardRea
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentMaterialRequestResponse;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentMaterialRequestService;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRequestPackageService;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentSubmissionPrecheckService;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ class OpsShardReadinessCandidateDocumentMaterialRequestControllerTests {
 
   @Test
   void materialRequestRouteExposesReadOnlyRequestPackage() {
-    assertThat(OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_REQUEST)
+    assertThat(OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_MATERIAL_REQUEST)
         .isEqualTo("/candidate-document-material-request");
 
     var controller = new OpsShardReadinessCandidateDocumentMaterialRequestController(service());

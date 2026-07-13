@@ -6,6 +6,7 @@ import com.codexdemo.orderplatform.ops.maintenance.prototype.OpsShardReadinessPr
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceIndexService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceVerificationService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEndpointRegistryIntegrityService;
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.readonlyevidence.OpsShardReadinessReadOnlyEvidenceCatalogHandoffVerificationService;
@@ -44,13 +45,13 @@ class OpsShardReadinessRoutePathsTests {
                     OpsShardReadinessRoutePaths.READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY,
                     OpsShardReadinessReadOnlyEndpointRegistryIntegrityService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.EVIDENCE_INDEX,
+                    OpsShardReadinessService.EVIDENCE_INDEX_PATH,
                     OpsShardReadinessEvidenceIndexService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.EVIDENCE_VERIFICATION,
+                    OpsShardReadinessService.EVIDENCE_VERIFICATION_PATH,
                     OpsShardReadinessEvidenceVerificationService.ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths.EVIDENCE_HANDOFF,
+                    OpsShardReadinessService.EVIDENCE_HANDOFF_PATH,
                     OpsShardReadinessEvidenceHandoffService.ENDPOINT),
                 Map.entry(
                     OpsShardReadinessRoutePaths.V1_CONTRACT_ALIGNMENT,
@@ -87,12 +88,12 @@ class OpsShardReadinessRoutePathsTests {
                     OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT)))
         .allSatisfy(
             (route, endpoint) ->
-                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+                assertThat(endpoint).isEqualTo(OpsShardReadinessService.BASE_PATH + route));
   }
 
   @Test
   void prototypeRoutesKeepTheirFamilyOwnedBytes() {
-    assertThat(PrototypeRoutes.BASE_PATH).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH);
+    assertThat(PrototypeRoutes.BASE_PATH).isEqualTo(OpsShardReadinessService.BASE_PATH);
     assertThat(
             List.of(
                 PrototypeRoutes.CATALOG,

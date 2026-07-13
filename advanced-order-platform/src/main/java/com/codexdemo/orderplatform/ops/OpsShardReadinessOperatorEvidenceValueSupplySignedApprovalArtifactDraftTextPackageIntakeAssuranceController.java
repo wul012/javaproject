@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackageintake.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeArchiveCloseoutService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackageintake.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeExecutionLockService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackageintake.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeOperatorValueHandleService;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public
 class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeAssuranceController {
 
@@ -51,7 +53,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_SOURCE_EVIDENCE)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeResponse
@@ -60,7 +62,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_OPERATOR_VALUE_HANDLE)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeResponse
@@ -69,7 +71,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_POLICY_REVIEW_STATE)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeResponse
@@ -78,7 +80,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_EXECUTION_LOCK)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeResponse
@@ -87,7 +89,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_ARCHIVE_CLOSEOUT)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeResponse

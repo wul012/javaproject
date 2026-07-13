@@ -115,10 +115,10 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1832Tests {
             "public static final String CATALOG",
             "public static final String CLOSEOUT");
     assertThat(rootAggregator)
-        .contains(
+        .doesNotContain(
             "OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths",
-            ".COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CATALOG",
-            ".COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CLOSEOUT");
+            "COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CATALOG",
+            "COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CLOSEOUT");
     assertThat(sourceService)
         .contains(
             "public static final String ENDPOINT",

@@ -5,13 +5,15 @@ import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpre
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightIdentityDigestService;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightPolicyRuntimeService;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightResponse;
+import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidenceevaluationpreflight.OpsShardReadinessComparedEvidenceEvaluationPreflightSourceArtifactService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessComparedEvidenceEvaluationPreflightController {
 
   private final OpsShardReadinessComparedEvidenceEvaluationPreflightCatalogService catalogService;
@@ -41,36 +43,36 @@ public class OpsShardReadinessComparedEvidenceEvaluationPreflightController {
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_CATALOG)
+      OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths
+          .COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_CATALOG)
   public OpsShardReadinessComparedEvidenceEvaluationPreflightResponse catalog() {
     return catalogService.catalog();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_SOURCE_ARTIFACT)
+      OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths
+          .COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_SOURCE_ARTIFACT)
   public OpsShardReadinessComparedEvidenceEvaluationPreflightResponse sourceArtifact() {
     return sourceArtifactService.sourceArtifact();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_IDENTITY_DIGEST)
+      OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths
+          .COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_IDENTITY_DIGEST)
   public OpsShardReadinessComparedEvidenceEvaluationPreflightResponse identityDigest() {
     return identityDigestService.identityDigest();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_POLICY_RUNTIME)
+      OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths
+          .COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_POLICY_RUNTIME)
   public OpsShardReadinessComparedEvidenceEvaluationPreflightResponse policyRuntime() {
     return policyRuntimeService.policyRuntime();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_EXCLUSION_CLOSEOUT)
+      OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths
+          .COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_EXCLUSION_CLOSEOUT)
   public OpsShardReadinessComparedEvidenceEvaluationPreflightResponse exclusionCloseout() {
     return exclusionCloseoutService.exclusionCloseout();
   }

@@ -1,12 +1,14 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftAuthoringReadinessRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftauthoringreadiness.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public
 class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAuthoringReadinessFoundationController {
 
@@ -40,7 +42,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAut
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftAuthoringReadinessRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_CATALOG)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAuthoringReadinessResponse
@@ -49,7 +51,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAut
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftAuthoringReadinessRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_DIGEST_PINS)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAuthoringReadinessResponse
@@ -58,7 +60,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAut
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftAuthoringReadinessRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_OPERATOR_REQUIREMENTS)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAuthoringReadinessResponse
@@ -67,7 +69,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAut
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftAuthoringReadinessRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_AUTHORING_READINESS_SIGNATURE_REQUIREMENTS)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftAuthoringReadinessResponse

@@ -2,12 +2,14 @@ package com.codexdemo.orderplatform.ops;
 
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryController {
 
   private final OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService service;
@@ -17,7 +19,8 @@ public class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryController {
     this.service = service;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY)
+  @GetMapping(
+      OpsShardReadinessReleaseAcceptanceRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY)
   public OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse registry() {
     return service.registry();
   }

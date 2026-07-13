@@ -7,7 +7,7 @@ Update this table instead of appending relative-time rules below. Where an older
 | Item | Current |
 |---|---|
 | Active screenshot archive root | `f/v<start>-v<end>/<version>/images/` + `.../explanations/summary.md` (range segment first) |
-| Active walkthrough volume | newest `代码讲解记录_生产雏形阶段N/` sibling (currently `代码讲解记录_生产雏形阶段6/`) |
+| Active walkthrough volume | newest `代码讲解记录_生产雏形阶段N/` sibling (currently `代码讲解记录_生产雏形阶段8/`) |
 | Active cross-project program | `D:\C\四项目理解统筹\AGENTS.md` → Current Active Program |
 | Progress ledger | `docs/production-excellence-progress.md` |
 | Session bootstrap | run `.\scripts\codex-bootstrap.ps1` at session start (git/tag/CI/pointers in one command) |

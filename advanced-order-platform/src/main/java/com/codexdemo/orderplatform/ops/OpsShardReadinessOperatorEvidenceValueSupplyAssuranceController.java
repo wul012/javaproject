@@ -5,14 +5,16 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.O
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyDigestBlueprintService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyOperatorReviewChecklistService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyResponse;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplySideEffectGateService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
 
   private final OpsShardReadinessOperatorEvidenceValueSupplyValidationMatrixService
@@ -42,32 +44,44 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAssuranceController {
     this.closeoutService = closeoutService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_VALIDATION_MATRIX)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse validationMatrix() {
     return validationMatrixService.matrix();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SIDE_EFFECT_GATE)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIDE_EFFECT_GATE)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse sideEffectGate() {
     return sideEffectGateService.gate();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_OPERATOR_REVIEW_CHECKLIST)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse operatorReviewChecklist() {
     return operatorReviewChecklistService.checklist();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_DIGEST_BLUEPRINT)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse digestBlueprint() {
     return digestBlueprintService.blueprint();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ARCHIVE_PLAN)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse archivePlan() {
     return archivePlanService.plan();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_CLOSEOUT)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse closeout() {
     return closeoutService.closeout();
   }

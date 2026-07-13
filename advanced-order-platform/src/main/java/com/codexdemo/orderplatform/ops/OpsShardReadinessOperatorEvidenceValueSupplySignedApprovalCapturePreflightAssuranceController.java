@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightChannelSignaturePolicyService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightCloseoutService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightFailClosedLockService;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public
 class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightAssuranceController {
 
@@ -58,7 +60,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CHANNEL_SIGNATURE)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       channelSignature() {
@@ -66,7 +68,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_STATEMENT_JUSTIFICATION)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       statementJustification() {
@@ -74,7 +76,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_SOURCE_EVIDENCE)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       sourceEvidence() {
@@ -82,7 +84,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_REDACTION_PROVENANCE)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       redactionProvenance() {
@@ -90,7 +92,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_FAIL_CLOSED_LOCKS)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       failClosedLocks() {
@@ -98,7 +100,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CLOSEOUT)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       closeout() {

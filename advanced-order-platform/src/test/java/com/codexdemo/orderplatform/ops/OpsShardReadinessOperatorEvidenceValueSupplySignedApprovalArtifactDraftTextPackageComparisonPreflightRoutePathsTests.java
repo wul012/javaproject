@@ -2,6 +2,8 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftTextPackageComparisonPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightDigestSignatureService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackagecomparisonpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightEvidenceValuePolicyService;
@@ -16,28 +18,28 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
   void comparisonPreflightEndpointsUseSharedRouteConstants() {
     assertThat(
             Map.of(
-                OpsShardReadinessRoutePaths
+                OpsShardReadinessSignedApprovalArtifactDraftTextPackageComparisonPreflightRoutePaths
                     .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_PREFLIGHT_CATALOG,
                 OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightCatalogService
                     .ENDPOINT,
-                OpsShardReadinessRoutePaths
+                OpsShardReadinessSignedApprovalArtifactDraftTextPackageComparisonPreflightRoutePaths
                     .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_PREFLIGHT_IDENTITY_REQUEST,
                 OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightIdentityRequestService
                     .ENDPOINT,
-                OpsShardReadinessRoutePaths
+                OpsShardReadinessSignedApprovalArtifactDraftTextPackageComparisonPreflightRoutePaths
                     .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_PREFLIGHT_DIGEST_SIGNATURE,
                 OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightDigestSignatureService
                     .ENDPOINT,
-                OpsShardReadinessRoutePaths
+                OpsShardReadinessSignedApprovalArtifactDraftTextPackageComparisonPreflightRoutePaths
                     .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_PREFLIGHT_EVIDENCE_VALUE_POLICY,
                 OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightEvidenceValuePolicyService
                     .ENDPOINT,
-                OpsShardReadinessRoutePaths
+                OpsShardReadinessSignedApprovalArtifactDraftTextPackageComparisonPreflightRoutePaths
                     .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARISON_PREFLIGHT_EXECUTION_CLOSEOUT,
                 OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageComparisonPreflightExecutionCloseoutService
                     .ENDPOINT))
         .allSatisfy(
             (routePath, endpoint) ->
-                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + routePath));
+                assertThat(endpoint).isEqualTo(OpsShardReadinessService.BASE_PATH + routePath));
   }
 }

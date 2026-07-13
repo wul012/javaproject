@@ -3,6 +3,7 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryControllerTests {
@@ -10,7 +11,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryCo
   @Test
   void registryRouteExposesArchiveVerificationEvidence() {
     assertThat(
-            OpsShardReadinessRoutePaths
+            OpsShardReadinessReleaseAcceptanceRoutePaths
                 .MINIMAL_READ_ONLY_GATE_EXECUTION_ARCHIVE_VERIFICATION_REGISTRY)
         .isEqualTo("/minimal-read-only-gate-execution-archive-verification-registry");
 

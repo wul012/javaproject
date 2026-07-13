@@ -32,7 +32,7 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierController
             OpsShardReadinessSandboxConnectionRoutePaths
                 .SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER)
         .isEqualTo(
-            OpsShardReadinessRoutePaths
+            OpsShardReadinessSandboxConnectionRoutePaths
                 .SANDBOX_CONNECTION_BLOCKED_EXECUTION_CONTEXT_NORMALIZATION_DOSSIER);
 
     var response =

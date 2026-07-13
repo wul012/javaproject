@@ -74,7 +74,10 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog {
 
   private static OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry entry(
       String symbol, String stablePath, String splitPath) {
-    boolean matched = stablePath.equals(splitPath);
+    boolean matched =
+        OpsShardReadinessRoutePaths.BASE_PATH.equals(
+                OpsShardReadinessReleaseAcceptanceRoutePaths.BASE_PATH)
+            && stablePath.equals(splitPath);
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry(
         symbol,
         splitPath,

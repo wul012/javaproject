@@ -3,13 +3,16 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessCandidateDocumentProfileSectionRegistryControllerTests {
 
   @Test
   void registryRouteExposesReadOnlyProfileSectionRegistry() {
-    assertThat(OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_PROFILE_SECTION_REGISTRY)
+    assertThat(
+            OpsShardReadinessCandidateDocumentRoutePaths
+                .CANDIDATE_DOCUMENT_PROFILE_SECTION_REGISTRY)
         .isEqualTo("/candidate-document-profile-section-registry");
 
     var response =

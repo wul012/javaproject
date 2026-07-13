@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadinesslane.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadinesslane.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneDigestPinService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadinesslane.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneOperatorReviewService;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public
 class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneFoundationController {
 
@@ -44,7 +46,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftRea
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_CATALOG)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse
@@ -53,7 +55,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftRea
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_DIGEST_PINS)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse
@@ -62,7 +64,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftRea
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_OPERATOR_REVIEW)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse
@@ -71,7 +73,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftRea
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalArtifactDraftReadinessLaneRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_LANE_SIGNATURE_REVIEW)
   public
   OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessLaneResponse

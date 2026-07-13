@@ -5,14 +5,16 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflig
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightMissingValueGuardService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRedactionPreservationService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightResponse;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightSlotNormalizationService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidenceimportpreflight.OpsShardReadinessOperatorEvidenceImportPreflightTargetScopeMappingService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationController {
 
   private final OpsShardReadinessOperatorEvidenceImportPreflightCatalogService catalogService;
@@ -47,32 +49,44 @@ public class OpsShardReadinessOperatorEvidenceImportPreflightFoundationControlle
     this.targetScopeMappingService = targetScopeMappingService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+          .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_CATALOG)
   public OpsShardReadinessOperatorEvidenceImportPreflightResponse catalog() {
     return catalogService.catalog();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+          .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_SLOT_NORMALIZATION)
   public OpsShardReadinessOperatorEvidenceImportPreflightResponse slotNormalization() {
     return slotNormalizationService.normalization();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+          .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_IMPORT_BLOCKER_MATRIX)
   public OpsShardReadinessOperatorEvidenceImportPreflightResponse importBlockerMatrix() {
     return importBlockerMatrixService.matrix();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+          .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_REDACTION_PRESERVATION)
   public OpsShardReadinessOperatorEvidenceImportPreflightResponse redactionPreservation() {
     return redactionPreservationService.preservation();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+          .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_MISSING_VALUE_GUARD)
   public OpsShardReadinessOperatorEvidenceImportPreflightResponse missingValueGuard() {
     return missingValueGuardService.guard();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceImportPreflightRoutePaths
+          .OPERATOR_EVIDENCE_IMPORT_PREFLIGHT_TARGET_SCOPE_MAPPING)
   public OpsShardReadinessOperatorEvidenceImportPreflightResponse targetScopeMapping() {
     return targetScopeMappingService.mapping();
   }

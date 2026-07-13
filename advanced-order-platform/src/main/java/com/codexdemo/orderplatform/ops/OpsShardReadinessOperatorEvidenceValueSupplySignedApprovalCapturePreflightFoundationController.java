@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalCapturePreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightOperatorInputMirrorService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalcapturepreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public
 class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightFoundationController {
 
@@ -51,7 +53,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_CATALOG)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       catalog() {
@@ -59,7 +61,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_TEMPLATE_DIGEST)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       templateDigest() {
@@ -67,7 +69,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_REVIEW_DIGEST)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       reviewDigest() {
@@ -75,7 +77,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_OPERATOR_INPUT)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       operatorInput() {
@@ -83,7 +85,7 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflight
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessSignedApprovalCapturePreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_CAPTURE_PREFLIGHT_TIMING_WINDOW)
   public OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalCapturePreflightResponse
       timingWindow() {

@@ -33,7 +33,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
             OpsShardReadinessSandboxConnectionRoutePaths
                 .SANDBOX_CONNECTION_PRECHECK_UPSTREAM_RECEIPT_VERIFICATION_MANIFEST)
         .isEqualTo(
-            OpsShardReadinessRoutePaths
+            OpsShardReadinessSandboxConnectionRoutePaths
                 .SANDBOX_CONNECTION_PRECHECK_UPSTREAM_RECEIPT_VERIFICATION_MANIFEST);
 
     var response =

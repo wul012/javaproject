@@ -1,7 +1,29 @@
 # Changelog
 
-鏈」鐩殑鐗堟湰鍖栬瘉鎹互 git tag 涓烘潈濞佹潵婧愩€侻aven artifact 褰撳墠淇濇寔
-`0.1.0-SNAPSHOT`锛屽洜涓烘湰浠撳簱浠嶅鍦ㄩ珮棰戝伐绋嬫紨杩涢樁娈碉紝灏氭湭鍒囨崲鍒拌涔夊寲鍒跺搧鍙戝竷銆?姣忎釜鍙拷婧増鏈繀椤绘湁瀵瑰簲 git tag銆佹彁浜ゃ€佹祴璇曡瘉鎹拰蹇呰鐨勪腑鏂囦唬鐮佽瑙ｃ€?
+本项目的版本化证据以 git tag 为权威来源。Maven artifact 当前保持
+`0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
+每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
+
+## v1867 - Java production-excellence Phase 2 closeout candidate
+
+- Repoints 735 route reads in 160 files to their actual leaf owners and removes 239
+  pure forwarding aliases. The root keeps 15 owned literals plus 12 compatibility
+  aliases used by the ReleaseAcceptance root-versus-leaf route proof.
+- Splits the last two oversized test classes around shared scenario fixtures while
+  preserving every response, digest, list-order, and no-write assertion.
+- Adds shrink-only elegance, source-size, SpotBugs, archive-retention, workflow,
+  coverage, and E1-E10 mechanical gates; refreshes the honest production boundary.
+- Upgrades official GitHub actions to checkout v7, setup-java v5, and upload-artifact
+  v7. This is a local/CI candidate until external Java-track review grants final status.
+
+## v1866 - Ops root extraction endgame closure
+
+- Reached the binding Phase 1 end state: 104 direct-root files, 100 controllers,
+  four retained shared roots, zero movable files, and zero unassigned files.
+- Moved the final overview/static-release support inward and split the static release
+  table into exact 225/476-line responsibilities without changing public contracts.
+- Passed 1,901 tests, all JaCoCo floors, SpotBugs zero, both GitHub Actions jobs, and
+  fixed the end state with the v1866 closeout tag.
 ## v1837 - Release-approval verification composition split
 
 - Replaced repeated 34-builder and multi-dozen receipt argument lists with a

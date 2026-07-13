@@ -14,7 +14,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
             OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE)
         .isEqualTo(
-            OpsShardReadinessRoutePaths
+            OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE);
 
     var response =

@@ -9,6 +9,7 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.Op
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftSourceMappingRegistryService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftValueBoundaryService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessOperatorEvidenceValueDraftFoundationServiceTests {
@@ -192,7 +193,7 @@ class OpsShardReadinessOperatorEvidenceValueDraftFoundationServiceTests {
             "VALUE_DRAFT_21_READ_MODEL_SCOPE");
     assertThat(registry.slots())
         .extracting(OpsShardReadinessOperatorEvidenceValueDraftResponse.DraftSlot::sourceEndpoint)
-        .allMatch(endpoint -> endpoint.startsWith(OpsShardReadinessRoutePaths.BASE_PATH));
+        .allMatch(endpoint -> endpoint.startsWith(OpsShardReadinessService.BASE_PATH));
     assertThat(registry.checks())
         .contains(
             "value-draft-source-mapping-slice-18-21",

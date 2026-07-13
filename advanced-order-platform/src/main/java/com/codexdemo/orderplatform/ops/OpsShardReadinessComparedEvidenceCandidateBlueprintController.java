@@ -5,13 +5,15 @@ import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblue
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint.OpsShardReadinessComparedEvidenceCandidateBlueprintComparisonService;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint.OpsShardReadinessComparedEvidenceCandidateBlueprintPolicyService;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint.OpsShardReadinessComparedEvidenceCandidateBlueprintResponse;
+import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint.OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.comparedevidencecandidateblueprint.OpsShardReadinessComparedEvidenceCandidateBlueprintSourceService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessComparedEvidenceCandidateBlueprintController {
 
   private final OpsShardReadinessComparedEvidenceCandidateBlueprintCatalogService catalogService;
@@ -35,36 +37,36 @@ public class OpsShardReadinessComparedEvidenceCandidateBlueprintController {
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CATALOG)
+      OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths
+          .COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CATALOG)
   public OpsShardReadinessComparedEvidenceCandidateBlueprintResponse catalog() {
     return catalogService.catalog();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_SOURCE)
+      OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths
+          .COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_SOURCE)
   public OpsShardReadinessComparedEvidenceCandidateBlueprintResponse source() {
     return sourceService.source();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_COMPARISON)
+      OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths
+          .COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_COMPARISON)
   public OpsShardReadinessComparedEvidenceCandidateBlueprintResponse comparison() {
     return comparisonService.comparison();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_POLICY)
+      OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths
+          .COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_POLICY)
   public OpsShardReadinessComparedEvidenceCandidateBlueprintResponse policy() {
     return policyService.policy();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CLOSEOUT)
+      OpsShardReadinessComparedEvidenceCandidateBlueprintRoutePaths
+          .COMPARED_EVIDENCE_CANDIDATE_BLUEPRINT_CLOSEOUT)
   public OpsShardReadinessComparedEvidenceCandidateBlueprintResponse closeout() {
     return closeoutService.closeout();
   }

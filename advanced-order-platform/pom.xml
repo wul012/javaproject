@@ -27,17 +27,17 @@
         <google-java-format.version>1.35.0</google-java-format.version>
         <jacocoArgLine></jacocoArgLine>
         <jacoco.skip>false</jacoco.skip>
-        <jacoco.bundle.line.minimum>0.96</jacoco.bundle.line.minimum>
-        <jacoco.root.line.minimum>0.85</jacoco.root.line.minimum>
-        <jacoco.catalog.line.minimum>0.64</jacoco.catalog.line.minimum>
-        <jacoco.common.line.minimum>0.61</jacoco.common.line.minimum>
-        <jacoco.inventory.line.minimum>0.89</jacoco.inventory.line.minimum>
-        <jacoco.notification.line.minimum>0.77</jacoco.notification.line.minimum>
-        <jacoco.ops.line.minimum>0.97</jacoco.ops.line.minimum>
+        <jacoco.bundle.line.minimum>0.97</jacoco.bundle.line.minimum>
+        <jacoco.root.line.minimum>0.86</jacoco.root.line.minimum>
+        <jacoco.catalog.line.minimum>0.65</jacoco.catalog.line.minimum>
+        <jacoco.common.line.minimum>0.62</jacoco.common.line.minimum>
+        <jacoco.inventory.line.minimum>0.90</jacoco.inventory.line.minimum>
+        <jacoco.notification.line.minimum>0.78</jacoco.notification.line.minimum>
+        <jacoco.ops.line.minimum>0.98</jacoco.ops.line.minimum>
         <jacoco.readability.line.minimum>0.98</jacoco.readability.line.minimum>
-        <jacoco.order.line.minimum>0.87</jacoco.order.line.minimum>
-        <jacoco.outbox.line.minimum>0.69</jacoco.outbox.line.minimum>
-        <jacoco.payment.line.minimum>0.90</jacoco.payment.line.minimum>
+        <jacoco.order.line.minimum>0.88</jacoco.order.line.minimum>
+        <jacoco.outbox.line.minimum>0.70</jacoco.outbox.line.minimum>
+        <jacoco.payment.line.minimum>0.91</jacoco.payment.line.minimum>
         <test.jvm.argLine></test.jvm.argLine>
         <spotless.ratchetFrom>javaproject/master</spotless.ratchetFrom>
         <surefire.excludedGroups>docker</surefire.excludedGroups>

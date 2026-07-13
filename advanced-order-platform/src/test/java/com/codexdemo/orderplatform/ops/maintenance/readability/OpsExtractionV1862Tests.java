@@ -71,7 +71,7 @@ class OpsExtractionV1862Tests {
         .contains(PACKAGE_NAME, "RouteCleanupRoutes.BASE_PATH")
         .doesNotContain(
             "OpsShardReadinessRoutePaths.ROUTE_CLEANUP_MAINTENANCE_",
-            "OpsShardReadinessRoutePaths.BASE_PATH");
+            "OpsShardReadinessService.BASE_PATH");
 
     for (String file : mainFiles()) {
       assertThat(read(PACKAGE_ROOT.resolve(file)))

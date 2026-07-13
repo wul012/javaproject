@@ -39,7 +39,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
             OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE_CLOSEOUT_ARCHIVE_INDEX)
         .isEqualTo(
-            OpsShardReadinessRoutePaths
+            OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_ACCEPTANCE_PACKAGE_CLOSEOUT_ARCHIVE_INDEX);
 
     var response =

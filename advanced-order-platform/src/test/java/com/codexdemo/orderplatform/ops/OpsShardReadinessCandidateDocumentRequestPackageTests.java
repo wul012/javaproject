@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRequestPackageResponse;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRequestPackageService;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessCandidateDocumentRequestPackageTests {
@@ -41,7 +42,7 @@ class OpsShardReadinessCandidateDocumentRequestPackageTests {
             new OpsShardReadinessCandidateDocumentRequestPackageService());
 
     assertThat(
-            OpsShardReadinessRoutePaths
+            OpsShardReadinessCandidateDocumentRoutePaths
                 .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_CANDIDATE_DOCUMENT_REQUEST_PACKAGE)
         .endsWith("candidate-document-request-package");
     assertThat(controller.packageCatalog().readOnly()).isTrue();

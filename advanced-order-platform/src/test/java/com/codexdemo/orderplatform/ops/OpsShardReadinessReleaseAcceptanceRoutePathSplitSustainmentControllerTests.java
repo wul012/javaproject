@@ -14,7 +14,8 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentControllerTests
             OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_REGISTRY)
         .isEqualTo(
-            OpsShardReadinessRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_REGISTRY);
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_REGISTRY);
 
     var response =
         new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentController(

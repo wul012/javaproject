@@ -1,9 +1,11 @@
 # Production Readiness
 
 本文件集中说明当前 Java 订单平台的生产就绪边界。它不是部署授权书，也不是回滚执行计划。
-截至 v1795，本项目处于“单项目验证 + 跨项目契约对齐”状态：CI、覆盖率、静态分析、
-prod profile smoke、只读 evidence 和运行诊断能力已经增强，但真实生产部署、真实密钥、
-真实支付网关、真实回滚执行和 managed audit 连接仍然关闭。
+截至 v1867 候选，本项目处于 `single-project validation + verified read-only cross-project integration (env-gated, single machine, no execution authority)` 状态。
+该标签来自已由外部评审复现的 C1-C4 只读 capstone，不是生产授权。CI、覆盖率、静态分析、
+prod profile smoke、只读 evidence 和运行诊断都有机械门，但真实生产部署、真实密钥、
+真实支付网关、真实回滚执行和 managed audit 连接仍然关闭。Java 轨道的最终状态仍需
+外部评审授予，本文件只陈述候选事实。
 
 ## Version Policy
 
@@ -75,9 +77,23 @@ digest 和 readiness 规则重新校验。
 - credential resolver 相关内容保持 echo、preflight、fake shell 或 disabled implementation 边界。
 - Node 可以消费 Java evidence，但 Java evidence 不授权 Node 执行部署、回滚、SQL、secret 或 managed audit connection。
 
+## Threat Model
+
+| 威胁 | 默认控制 | 仍需外部系统承担的责任 |
+| --- | --- | --- |
+| 伪造操作员触发重放 | 动作级角色矩阵、申请与审批职责分离、digest/readiness 复核 | 生产身份认证、令牌签发与组织权限治理 |
+| credential 或 raw endpoint 泄漏 | 只回显 handle、字段名和阻断状态；禁止读取 credential value | 生产 secret manager、轮换、审计与吊销 |
+| 证据接口被误当执行授权 | evidence/rehearsal 保持只读，明确 `execution_allowed=false` | 控制面必须独立审批，不得把文档或 receipt 当执行令牌 |
+| 消息重复或部分失败 | Outbox、消费幂等、失败事件落库和审批重放 | RabbitMQ 集群可用性、容量、灾备和生产告警 |
+| 数据库变更或回滚误执行 | Flyway 正向迁移；rollback SQL 仅为 review/handoff 材料 | DBA 审批、备份恢复演练、真实 rollback 执行 |
+| 单机只读联调被夸大 | 成熟度标签明确 env-gated、single machine、no execution authority | 多节点、容灾、性能、真实依赖和生产变更验证 |
+
+本威胁模型只覆盖仓库内可机械验证的控制。它不声称网络隔离、WAF、KMS、主机加固、
+数据库高可用、消息集群 SLA 或值班响应已经由本仓库实现。
+
 ## Explicitly Not Production Authorized
 
-以下能力截至 v1795 仍然关闭或不存在：
+以下能力截至 v1867 候选仍然关闭或不存在：
 
 - 真实支付网关
 - 生产 secret manager 读取

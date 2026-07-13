@@ -30,8 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessReadOnlyEvidenceCatalogService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
-          + OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG;
+      OpsShardReadinessService.BASE_PATH + OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG;
   public static final String FIXTURE_ENDPOINT =
       "/contracts/java-shard-readiness-read-only-evidence-catalog-v175.fixture.json";
   public static final String EVIDENCE_PATH =

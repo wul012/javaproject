@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackageintake.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeArchiveCloseoutService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdrafttextpackageintake.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeCatalogService;
@@ -22,53 +23,53 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_CATALOG,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeCatalogService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_IDENTITY_CORRELATION,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeIdentityCorrelationService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_DIGEST_BINDING,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeDigestBindingService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_SIGNATURE_ENVELOPE,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeSignatureEnvelopeService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_SOURCE_EVIDENCE,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeSourceEvidenceService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_OPERATOR_VALUE_HANDLE,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeOperatorValueHandleService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_POLICY_REVIEW_STATE,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakePolicyReviewStateService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_EXECUTION_LOCK,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeExecutionLockService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_ARCHIVE_CLOSEOUT,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTextPackageIntakeArchiveCloseoutService
                         .ENDPOINT)))
         .allSatisfy(
             (routePath, endpoint) ->
-                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + routePath));
+                assertThat(endpoint).isEqualTo(OpsShardReadinessService.BASE_PATH + routePath));
   }
 
   @Test
@@ -76,47 +77,47 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftTex
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_CATALOG,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_CATALOG),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_IDENTITY_CORRELATION,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_IDENTITY_CORRELATION),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_DIGEST_BINDING,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_DIGEST_BINDING),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_SIGNATURE_ENVELOPE,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_SIGNATURE_ENVELOPE),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_SOURCE_EVIDENCE,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_SOURCE_EVIDENCE),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_OPERATOR_VALUE_HANDLE,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_OPERATOR_VALUE_HANDLE),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_POLICY_REVIEW_STATE,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_POLICY_REVIEW_STATE),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_EXECUTION_LOCK,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_EXECUTION_LOCK),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_ARCHIVE_CLOSEOUT,
                     OpsShardReadinessSignedApprovalArtifactDraftTextPackageIntakeRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_INTAKE_ARCHIVE_CLOSEOUT)))

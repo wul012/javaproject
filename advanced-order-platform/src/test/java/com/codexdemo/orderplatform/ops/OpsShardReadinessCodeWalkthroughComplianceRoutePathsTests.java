@@ -14,7 +14,9 @@ class OpsShardReadinessCodeWalkthroughComplianceRoutePathsTests {
             OpsShardReadinessCodeWalkthroughComplianceRoutePaths
                 .CODE_WALKTHROUGH_COMPLIANCE_REGISTRY)
         .isEqualTo("/code-walkthrough-compliance-registry");
-    assertThat(OpsShardReadinessRoutePaths.CODE_WALKTHROUGH_COMPLIANCE_REGISTRY)
+    assertThat(
+            OpsShardReadinessCodeWalkthroughComplianceRoutePaths
+                .CODE_WALKTHROUGH_COMPLIANCE_REGISTRY)
         .isEqualTo(
             OpsShardReadinessCodeWalkthroughComplianceRoutePaths
                 .CODE_WALKTHROUGH_COMPLIANCE_REGISTRY);

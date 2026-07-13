@@ -5,13 +5,15 @@ import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardRea
 import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightProvenanceBindingService;
 import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRedactionDigestService;
 import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse;
+import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.approvalpreflight.OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightTimestampWindowService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFoundationController {
 
   private final OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightCatalogService
@@ -44,34 +46,36 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightFounda
     this.provenanceBindingService = provenanceBindingService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_CATALOG)
   public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse catalog() {
     return catalogService.catalog();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_IDENTITY_SIGNATURE)
   public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse identitySignature() {
     return identitySignatureService.signature();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_TIMESTAMP_WINDOW)
   public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse timestampWindow() {
     return timestampWindowService.window();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_REDACTION_DIGEST)
   public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse redactionDigest() {
     return redactionDigestService.digest();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_APPROVAL_PREFLIGHT_PROVENANCE_BINDING)
   public OpsShardReadinessOperatorEvidenceValueSupplyApprovalPreflightResponse provenanceBinding() {
     return provenanceBindingService.binding();

@@ -14,7 +14,8 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutControllerTests {
             OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_CLOSEOUT_REGISTRY)
         .isEqualTo(
-            OpsShardReadinessRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_CLOSEOUT_REGISTRY);
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_CLOSEOUT_REGISTRY);
 
     var response =
         new OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutController(

@@ -68,7 +68,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1839Tests {
             "public static final String CATALOG",
             "public static final String EXCLUSION_CLOSEOUT");
     assertThat(root)
-        .contains(
+        .doesNotContain(
             "OpsShardReadinessComparedEvidenceEvaluationPreflightRoutePaths.*",
             "COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_SOURCE_ARTIFACT",
             "COMPARED_EVIDENCE_EVALUATION_PREFLIGHT_POLICY_RUNTIME");

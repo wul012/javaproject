@@ -6,13 +6,15 @@ import com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShar
 import com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShardReadinessComparedPackageReviewIdentityDigestService;
 import com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShardReadinessComparedPackageReviewPolicyArchiveService;
 import com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShardReadinessComparedPackageReviewResponse;
+import com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShardReadinessComparedPackageReviewRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.comparedpackagereview.OpsShardReadinessComparedPackageReviewSourceEvidenceService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessComparedPackageReviewController {
 
   private final OpsShardReadinessComparedPackageReviewCatalogService catalogService;
@@ -38,44 +40,37 @@ public class OpsShardReadinessComparedPackageReviewController {
     this.handoffCloseoutService = handoffCloseoutService;
   }
 
-  @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_CATALOG)
+  @GetMapping(OpsShardReadinessComparedPackageReviewRoutePaths.COMPARED_PACKAGE_REVIEW_CATALOG)
   public OpsShardReadinessComparedPackageReviewResponse catalog() {
     return catalogService.catalog();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_SOURCE_EVIDENCE)
+      OpsShardReadinessComparedPackageReviewRoutePaths.COMPARED_PACKAGE_REVIEW_SOURCE_EVIDENCE)
   public OpsShardReadinessComparedPackageReviewResponse sourceEvidence() {
     return sourceEvidenceService.sourceEvidence();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_COMPARISON_OUTCOME)
+      OpsShardReadinessComparedPackageReviewRoutePaths.COMPARED_PACKAGE_REVIEW_COMPARISON_OUTCOME)
   public OpsShardReadinessComparedPackageReviewResponse comparisonOutcome() {
     return comparisonOutcomeService.comparisonOutcome();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_IDENTITY_DIGEST)
+      OpsShardReadinessComparedPackageReviewRoutePaths.COMPARED_PACKAGE_REVIEW_IDENTITY_DIGEST)
   public OpsShardReadinessComparedPackageReviewResponse identityDigest() {
     return identityDigestService.identityDigest();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_POLICY_ARCHIVE)
+      OpsShardReadinessComparedPackageReviewRoutePaths.COMPARED_PACKAGE_REVIEW_POLICY_ARCHIVE)
   public OpsShardReadinessComparedPackageReviewResponse policyArchive() {
     return policyArchiveService.policyArchive();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
-          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_TEXT_PACKAGE_COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT)
+      OpsShardReadinessComparedPackageReviewRoutePaths.COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT)
   public OpsShardReadinessComparedPackageReviewResponse handoffCloseout() {
     return handoffCloseoutService.handoffCloseout();
   }

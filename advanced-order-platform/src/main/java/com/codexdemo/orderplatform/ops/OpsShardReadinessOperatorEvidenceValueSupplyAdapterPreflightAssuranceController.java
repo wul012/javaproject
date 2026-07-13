@@ -6,13 +6,15 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyad
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightOperatorRehearsalChecklistService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRuntimeSubmissionLockService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuranceController {
 
   private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightPayloadFirewallService
@@ -51,13 +53,14 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PAYLOAD_FIREWALL)
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PAYLOAD_FIREWALL)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse payloadFirewall() {
     return payloadFirewallService.firewall();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_RUNTIME_SUBMISSION_LOCK)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse
       runtimeSubmissionLock() {
@@ -65,7 +68,7 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_OPERATOR_REHEARSAL_CHECKLIST)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse
       operatorRehearsalChecklist() {
@@ -73,18 +76,22 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightAssuran
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_DIGEST_BLUEPRINT)
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_DIGEST_BLUEPRINT)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse digestBlueprint() {
     return digestBlueprintService.blueprint();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_ARCHIVE_PLAN)
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_ARCHIVE_PLAN)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse archivePlan() {
     return archivePlanService.plan();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse closeout() {
     return closeoutService.closeout();
   }

@@ -4,15 +4,17 @@ import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsSh
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetMissingValuePolicyService;
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetRedactionRulesService;
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetResponse;
+import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetSlotTemplateService;
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetTargetScopeRegistryService;
 import com.codexdemo.orderplatform.ops.maintenance.manualevidenceworksheet.OpsShardReadinessManualEvidenceWorksheetValidationRulesService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessManualEvidenceWorksheetFoundationController {
 
   private final OpsShardReadinessManualEvidenceWorksheetCatalogService catalogService;
@@ -41,32 +43,39 @@ public class OpsShardReadinessManualEvidenceWorksheetFoundationController {
     this.targetScopeRegistryService = targetScopeRegistryService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG)
+  @GetMapping(OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_CATALOG)
   public OpsShardReadinessManualEvidenceWorksheetResponse catalog() {
     return catalogService.catalog();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE)
+  @GetMapping(
+      OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_SLOT_TEMPLATE)
   public OpsShardReadinessManualEvidenceWorksheetResponse slotTemplate() {
     return slotTemplateService.template();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES)
+  @GetMapping(
+      OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_VALIDATION_RULES)
   public OpsShardReadinessManualEvidenceWorksheetResponse validationRules() {
     return validationRulesService.rules();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES)
+  @GetMapping(
+      OpsShardReadinessManualEvidenceWorksheetRoutePaths.MANUAL_EVIDENCE_WORKSHEET_REDACTION_RULES)
   public OpsShardReadinessManualEvidenceWorksheetResponse redactionRules() {
     return redactionRulesService.rules();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY)
+  @GetMapping(
+      OpsShardReadinessManualEvidenceWorksheetRoutePaths
+          .MANUAL_EVIDENCE_WORKSHEET_MISSING_VALUE_POLICY)
   public OpsShardReadinessManualEvidenceWorksheetResponse missingValuePolicy() {
     return missingValuePolicyService.policy();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.MANUAL_EVIDENCE_WORKSHEET_TARGET_SCOPE_REGISTRY)
+  @GetMapping(
+      OpsShardReadinessManualEvidenceWorksheetRoutePaths
+          .MANUAL_EVIDENCE_WORKSHEET_TARGET_SCOPE_REGISTRY)
   public OpsShardReadinessManualEvidenceWorksheetResponse targetScopeRegistry() {
     return targetScopeRegistryService.registry();
   }

@@ -34,6 +34,16 @@ This gives the v1828 end-state target:
 104 current root files - 104 final root files = 0 files still to move
 ```
 
+## v1867 Phase 2 confirmation
+
+The committed census still reports direct root **104**, retained root **104**,
+remaining non-controllers **0**, and unassigned files **0**. Phase 2 does not reopen
+extraction. It removes 239 pure forwarding fields from the retained global route owner by
+repointing 735 reads in 160 files to leaf owners. The route owner now contains 15
+root-owned literals plus 12 ReleaseAcceptance compatibility aliases. Those aliases remain
+because the route catalog mechanically compares the stable root surface with the leaf
+owner; all 27 fields are required to retain at least one reader.
+
 `OpsShardReadinessReleaseAcceptanceRoutePaths.java` is not a retained root
 aggregator. It is the release-acceptance family route owner and must leave root
 with the release-acceptance route-path split track.

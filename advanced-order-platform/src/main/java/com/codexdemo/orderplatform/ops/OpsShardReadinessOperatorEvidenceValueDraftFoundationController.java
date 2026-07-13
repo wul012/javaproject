@@ -3,16 +3,18 @@ package com.codexdemo.orderplatform.ops;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftInstructionSetService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftResponse;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftSafetyGateMatrixService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftSlotTemplateService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftSourceMappingRegistryService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftValueBoundaryService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceValueDraftFoundationController {
 
   private final OpsShardReadinessOperatorEvidenceValueDraftCatalogService catalogService;
@@ -42,32 +44,43 @@ public class OpsShardReadinessOperatorEvidenceValueDraftFoundationController {
     this.sourceMappingRegistryService = sourceMappingRegistryService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CATALOG)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse catalog() {
     return catalogService.catalog();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SLOT_TEMPLATE)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_SLOT_TEMPLATE)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse slotTemplate() {
     return slotTemplateService.template();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_VALUE_BOUNDARY)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_VALUE_BOUNDARY)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse valueBoundary() {
     return valueBoundaryService.boundary();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_INSTRUCTION_SET)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_INSTRUCTION_SET)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse instructionSet() {
     return instructionSetService.instructions();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SAFETY_GATE_MATRIX)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_SAFETY_GATE_MATRIX)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse safetyGateMatrix() {
     return safetyGateMatrixService.matrix();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_SOURCE_MAPPING_REGISTRY)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_SOURCE_MAPPING_REGISTRY)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse sourceMappingRegistry() {
     return sourceMappingRegistryService.registry();
   }

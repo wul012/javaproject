@@ -40,7 +40,7 @@
 
 第一层是编译与反射结构门。编译器确认 context 的十个分量、ReceiptChain accessor 与嵌套类型全部匹配；反射确认提示、摘要和证明入口都只有一个 context 参数，摘要构造器只有一个 chain 参数。源码结构门进一步禁止主提示构建器出现具体 credential-resolver 阶段名，禁止响应构建器重新逐项读取 builder。
 
-第二层是精确内容回归。`OpsEvidenceServiceReleaseApprovalRehearsalVerificationHintOverviewTests` 对 schemaFields、warningDigestInputs、proofClaims 和 nodeVerificationActions 的长列表进行顺序断言；header-backed 变体覆盖不同输入；ContributionCatalog 测试确认 34 个贡献的首项、末项和过滤规则。第三层是真实 Spring 集成，验证只读证据 HTTP 聚合仍可启动 Flyway、JPA 和 Web 上下文并输出完整响应。
+第二层是精确内容回归。v1867 将原巨型测试按职责拆为 `RehearsalHintDigestTests` 与 `RehearsalHintContractTests`：前者锁定 schemaFields、warningDigestInputs、proofClaims 和 nodeVerificationActions 的长列表顺序，后者覆盖 header-backed 变体与贡献目录的 34 个贡献、首项、末项和过滤规则。第三层是真实 Spring 集成，验证只读证据 HTTP 聚合仍可启动 Flyway、JPA 和 Web 上下文并输出完整响应。
 
 第四层是维护预算、Spotless、SpotBugs、完整 Maven verify、JaCoCo 与远端 CI。第一次完整 verify 运行了 1692 个测试，其中 23 个历史 readability/census 测试因两个新增 root 文件而失败；业务、响应和编译没有错误。本版没有把 root 上限 805 改成 807，而是把 context 合入提示文件、把 evaluator 与 contribution 合成 support 文件。随后 `ops-root-census.ps1 -Json` 恢复 direct-root 805、remaining 700、unassigned 0，全部 23 个受影响历史类与新门聚焦重跑通过。最终完整 verify 仍需重新执行。
 

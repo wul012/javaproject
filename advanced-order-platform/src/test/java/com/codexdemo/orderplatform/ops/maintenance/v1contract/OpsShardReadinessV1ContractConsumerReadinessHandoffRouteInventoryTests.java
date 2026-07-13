@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.OpsShardReadinessEvidenceEndpointsTestSupport;
 import com.codexdemo.orderplatform.ops.OpsShardReadinessRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessV1ContractConsumerReadinessHandoffRouteInventoryTests {
@@ -29,7 +30,7 @@ class OpsShardReadinessV1ContractConsumerReadinessHandoffRouteInventoryTests {
         .isEqualTo("/v1-contract-consumer-readiness-handoff");
     assertThat(OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT)
         .isEqualTo(
-            OpsShardReadinessRoutePaths.BASE_PATH
+            OpsShardReadinessService.BASE_PATH
                 + OpsShardReadinessRoutePaths.V1_CONTRACT_CONSUMER_READINESS_HANDOFF);
     assertThat(OpsShardReadinessEvidenceEndpointsTestSupport.liveProbeEndpoints())
         .contains("GET " + OpsShardReadinessV1ContractConsumerReadinessHandoffService.ENDPOINT);

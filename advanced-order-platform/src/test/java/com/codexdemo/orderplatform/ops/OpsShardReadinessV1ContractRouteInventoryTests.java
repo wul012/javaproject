@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.v1contract.OpsShardReadinessV1ContractEndpointPairs;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +16,7 @@ class OpsShardReadinessV1ContractRouteInventoryTests {
     List<String> controllerRoutes = controllerRoutes();
     List<String> endpointPairRoutes =
         OpsShardReadinessV1ContractEndpointPairs.liveEndpoints().stream()
-            .map(endpoint -> endpoint.substring(OpsShardReadinessRoutePaths.BASE_PATH.length()))
+            .map(endpoint -> endpoint.substring(OpsShardReadinessService.BASE_PATH.length()))
             .toList();
 
     assertThat(controllerRoutes)
@@ -49,7 +50,7 @@ class OpsShardReadinessV1ContractRouteInventoryTests {
         .allSatisfy(route -> assertThat(route).startsWith("/v1-contract-"))
         .doesNotContain(
             OpsShardReadinessRoutePaths.READ_ONLY_EVIDENCE_CATALOG,
-            OpsShardReadinessRoutePaths.EVIDENCE_INDEX);
+            OpsShardReadinessService.EVIDENCE_INDEX_PATH);
   }
 
   private static List<String> controllerRoutes() {

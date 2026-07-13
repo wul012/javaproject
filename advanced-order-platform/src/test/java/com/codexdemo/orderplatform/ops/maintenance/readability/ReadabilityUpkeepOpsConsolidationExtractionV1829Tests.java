@@ -126,9 +126,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1829Tests {
             "OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths",
             ".SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF");
     assertThat(rootAggregator)
-        .contains(
+        .doesNotContain(
             "OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths",
-            ".SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF");
+            "SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF");
     assertThat(service)
         .contains(
             "OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths.BASE_PATH",

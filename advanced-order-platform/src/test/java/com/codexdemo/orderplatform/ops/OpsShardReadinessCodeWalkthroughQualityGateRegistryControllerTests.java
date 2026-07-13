@@ -3,13 +3,16 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualitygate.OpsShardReadinessCodeWalkthroughQualityGateRegistryService;
+import com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualitygate.OpsShardReadinessCodeWalkthroughQualityGateRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessCodeWalkthroughQualityGateRegistryControllerTests {
 
   @Test
   void registryRouteExposesQualityGateEvidence() {
-    assertThat(OpsShardReadinessRoutePaths.CODE_WALKTHROUGH_QUALITY_GATE_REGISTRY)
+    assertThat(
+            OpsShardReadinessCodeWalkthroughQualityGateRoutePaths
+                .CODE_WALKTHROUGH_QUALITY_GATE_REGISTRY)
         .isEqualTo("/code-walkthrough-quality-gate-registry");
 
     var response =

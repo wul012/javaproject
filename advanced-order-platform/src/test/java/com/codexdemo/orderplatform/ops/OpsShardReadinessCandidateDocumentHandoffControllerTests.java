@@ -5,13 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentHandoffResponse;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRequestPackageService;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessCandidateDocumentHandoffControllerTests {
 
   @Test
   void handoffRouteUsesShortReadOnlyEndpoint() {
-    assertThat(OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF)
+    assertThat(
+            OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_REQUEST_PACKAGE_HANDOFF)
         .isEqualTo("/candidate-document-request-package-handoff");
 
     var controller = new OpsShardReadinessCandidateDocumentHandoffController(service());

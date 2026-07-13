@@ -3,13 +3,16 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive.OpsShardReadinessScreenshotExplanationArchiveRegistryService;
+import com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive.OpsShardReadinessScreenshotExplanationArchiveRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessScreenshotExplanationArchiveRegistryControllerTests {
 
   @Test
   void registryRouteExposesScreenshotExplanationArchivePolicy() {
-    assertThat(OpsShardReadinessRoutePaths.SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY)
+    assertThat(
+            OpsShardReadinessScreenshotExplanationArchiveRoutePaths
+                .SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY)
         .isEqualTo("/screenshot-explanation-archive-registry");
 
     var response =

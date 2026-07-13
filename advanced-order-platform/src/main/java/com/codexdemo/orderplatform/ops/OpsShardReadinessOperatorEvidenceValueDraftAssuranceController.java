@@ -6,13 +6,15 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.Op
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftDigestBlueprintService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftOperatorHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftResponse;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluedraft.OpsShardReadinessOperatorEvidenceValueDraftRouteProfileSummaryService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
 
   private final OpsShardReadinessOperatorEvidenceValueDraftBlockedReasonLedgerService
@@ -43,32 +45,43 @@ public class OpsShardReadinessOperatorEvidenceValueDraftAssuranceController {
     this.closeoutService = closeoutService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_BLOCKED_REASON_LEDGER)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse blockedReasonLedger() {
     return blockedReasonLedgerService.ledger();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_DIGEST_BLUEPRINT)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse digestBlueprint() {
     return digestBlueprintService.blueprint();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_ROUTE_PROFILE_SUMMARY)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_ROUTE_PROFILE_SUMMARY)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse routeProfileSummary() {
     return routeProfileSummaryService.summary();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_ARCHIVE_PLAN)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_ARCHIVE_PLAN)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse archivePlan() {
     return archivePlanService.plan();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_OPERATOR_HANDOFF)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_DRAFT_OPERATOR_HANDOFF)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse operatorHandoff() {
     return operatorHandoffService.handoff();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CLOSEOUT)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueDraftRoutePaths.OPERATOR_EVIDENCE_VALUE_DRAFT_CLOSEOUT)
   public OpsShardReadinessOperatorEvidenceValueDraftResponse closeout() {
     return closeoutService.closeout();
   }

@@ -34,7 +34,8 @@ class OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveServi
             OpsShardReadinessCredentialResolverRoutePaths
                 .CREDENTIAL_RESOLVER_DISABLED_FAKE_HARNESS_EVIDENCE_ARCHIVE)
         .isEqualTo(
-            OpsShardReadinessRoutePaths.CREDENTIAL_RESOLVER_DISABLED_FAKE_HARNESS_EVIDENCE_ARCHIVE);
+            OpsShardReadinessCredentialResolverRoutePaths
+                .CREDENTIAL_RESOLVER_DISABLED_FAKE_HARNESS_EVIDENCE_ARCHIVE);
 
     var response =
         new OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveController(

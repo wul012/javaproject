@@ -99,7 +99,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1849Tests {
     String service = read(PACKAGE_ROOT.resolve(PREFIX + "RegistryService.java"));
     assertThat(service)
         .contains("ops.maintenance.ciaccept", "OpsShardReadinessReleaseAcceptanceRoutePaths")
-        .doesNotContain("OpsShardReadinessRoutePaths.BASE_PATH");
+        .doesNotContain("OpsShardReadinessService.BASE_PATH");
     assertThat(PACKAGE_ROOT.toString()).contains("ciarc");
   }
 

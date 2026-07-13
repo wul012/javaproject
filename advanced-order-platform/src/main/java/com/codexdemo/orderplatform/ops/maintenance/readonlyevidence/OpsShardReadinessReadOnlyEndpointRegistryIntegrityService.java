@@ -1,6 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.readonlyevidence;
 
 import com.codexdemo.orderplatform.ops.OpsShardReadinessRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import java.util.HashSet;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OpsShardReadinessReadOnlyEndpointRegistryIntegrityService {
 
   public static final String ENDPOINT =
-      OpsShardReadinessRoutePaths.BASE_PATH
+      OpsShardReadinessService.BASE_PATH
           + OpsShardReadinessRoutePaths.READ_ONLY_ENDPOINT_REGISTRY_INTEGRITY;
   public static final String FIXTURE_ENDPOINT =
       "/contracts/java-shard-readiness-read-only-endpoint-registry-integrity-v184.fixture.json";

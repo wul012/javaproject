@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff.OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,9 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffControllerTests {
 
   @Test
   void handoffRouteExposesReadOnlySignedApprovalDraftProfileSectionHandoff() {
-    assertThat(OpsShardReadinessRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF)
+    assertThat(
+            OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
+                .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_HANDOFF)
         .isEqualTo("/signed-approval-draft-profile-section-handoff");
 
     var response =

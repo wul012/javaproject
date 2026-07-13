@@ -70,7 +70,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1838Tests {
             "public static final String CATALOG",
             "public static final String HANDOFF_CLOSEOUT");
     assertThat(root)
-        .contains(
+        .doesNotContain(
             "OpsShardReadinessComparedPackageReviewRoutePaths.*",
             "COMPARED_PACKAGE_REVIEW_CATALOG",
             "COMPARED_PACKAGE_REVIEW_HANDOFF_CLOSEOUT");

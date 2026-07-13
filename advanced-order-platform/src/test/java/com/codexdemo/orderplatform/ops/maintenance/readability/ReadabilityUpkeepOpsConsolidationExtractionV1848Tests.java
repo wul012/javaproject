@@ -104,7 +104,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
     assertThat(service)
         .contains(
             "ops.maintenance.operatorcidossier", "OpsShardReadinessReleaseAcceptanceRoutePaths")
-        .doesNotContain("OpsShardReadinessRoutePaths.BASE_PATH");
+        .doesNotContain("OpsShardReadinessService.BASE_PATH");
     assertThat(PACKAGE_ROOT.toString()).contains("ciaccept");
   }
 

@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCatalogService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftinstructionpreflight.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCloseoutService;
@@ -22,104 +23,104 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftIns
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CATALOG,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCatalogService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DIGEST_INSTRUCTIONS,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightDigestInstructionService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_OPERATOR_INSTRUCTIONS,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightOperatorInstructionService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_SIGNATURE_INSTRUCTIONS,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightSignatureInstructionService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EVIDENCE_INSTRUCTIONS,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEvidenceInstructionService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_VALUE_POLICY_INSTRUCTIONS,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightValuePolicyInstructionService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EMBARGO_INSTRUCTIONS,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightEmbargoInstructionService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DRAFT_TEXT_LOCK,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightDraftTextLockService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CLOSEOUT,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftInstructionPreflightCloseoutService
                         .ENDPOINT)))
         .allSatisfy(
             (route, endpoint) ->
-                assertThat(endpoint).isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route));
+                assertThat(endpoint).isEqualTo(OpsShardReadinessService.BASE_PATH + route));
   }
 
   @Test
   void signedApprovalArtifactDraftInstructionPreflightRoutesDelegateToSplitOwner() {
-    assertThat(OpsShardReadinessRoutePaths.BASE_PATH)
+    assertThat(OpsShardReadinessService.BASE_PATH)
         .isEqualTo(
             OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths.BASE_PATH);
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CATALOG,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CATALOG),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DIGEST_INSTRUCTIONS,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DIGEST_INSTRUCTIONS),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_OPERATOR_INSTRUCTIONS,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_OPERATOR_INSTRUCTIONS),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_SIGNATURE_INSTRUCTIONS,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_SIGNATURE_INSTRUCTIONS),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EVIDENCE_INSTRUCTIONS,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EVIDENCE_INSTRUCTIONS),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_VALUE_POLICY_INSTRUCTIONS,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_VALUE_POLICY_INSTRUCTIONS),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EMBARGO_INSTRUCTIONS,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_EMBARGO_INSTRUCTIONS),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DRAFT_TEXT_LOCK,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_DRAFT_TEXT_LOCK),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CLOSEOUT,
                     OpsShardReadinessSignedApprovalArtifactDraftInstructionPreflightRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_INSTRUCTION_PREFLIGHT_CLOSEOUT)))

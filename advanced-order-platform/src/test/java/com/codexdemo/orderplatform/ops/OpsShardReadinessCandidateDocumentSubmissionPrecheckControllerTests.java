@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentHandoffService;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRequestPackageService;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentSubmissionPrecheckResponse;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentSubmissionPrecheckService;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ class OpsShardReadinessCandidateDocumentSubmissionPrecheckControllerTests {
 
   @Test
   void precheckRouteExposesReadOnlyRouteEvidence() {
-    assertThat(OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK)
+    assertThat(OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_SUBMISSION_PRECHECK)
         .isEqualTo("/candidate-document-submission-precheck");
 
     var controller = new OpsShardReadinessCandidateDocumentSubmissionPrecheckController(service());

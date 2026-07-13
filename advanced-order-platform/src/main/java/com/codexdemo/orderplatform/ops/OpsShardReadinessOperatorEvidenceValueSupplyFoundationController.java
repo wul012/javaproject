@@ -6,13 +6,15 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.O
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyProvenanceRequirementService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyRedactionPolicyService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyResponse;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupply.OpsShardReadinessOperatorEvidenceValueSupplySourceEvidenceGuardService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceValueSupplyFoundationController {
 
   private final OpsShardReadinessOperatorEvidenceValueSupplyCatalogService catalogService;
@@ -45,32 +47,43 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyFoundationController {
     this.sourceEvidenceGuardService = sourceEvidenceGuardService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_CATALOG)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse catalog() {
     return catalogService.catalog();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ENVELOPE_TEMPLATE)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ENVELOPE_TEMPLATE)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse envelopeTemplate() {
     return envelopeTemplateService.template();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_REDACTION_POLICY)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_REDACTION_POLICY)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse redactionPolicy() {
     return redactionPolicyService.policy();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_MISSING_VALUE_POLICY)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_MISSING_VALUE_POLICY)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse missingValuePolicy() {
     return missingValuePolicyService.policy();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_PROVENANCE_REQUIREMENT)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_PROVENANCE_REQUIREMENT)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse provenanceRequirement() {
     return provenanceRequirementService.requirement();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_SOURCE_EVIDENCE_GUARD)
   public OpsShardReadinessOperatorEvidenceValueSupplyResponse sourceEvidenceGuard() {
     return sourceEvidenceGuardService.guard();
   }

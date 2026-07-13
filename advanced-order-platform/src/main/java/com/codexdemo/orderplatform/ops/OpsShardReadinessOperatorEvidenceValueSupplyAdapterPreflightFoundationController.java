@@ -6,13 +6,15 @@ import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyad
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightProvenanceBindingService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRedactionBoundaryService;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse;
+import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.operatorevidencevaluesupplyadapterpreflight.OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightSourceEvidenceSnapshotService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundationController {
 
   private final OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightCatalogService
@@ -51,13 +53,15 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
     this.sourceEvidenceSnapshotService = sourceEvidenceSnapshotService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG)
+  @GetMapping(
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
+          .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse catalog() {
     return catalogService.catalog();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_COMPATIBILITY_MATRIX)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse
       compatibilityMatrix() {
@@ -65,21 +69,21 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_REDACTION_BOUNDARY)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse redactionBoundary() {
     return redactionBoundaryService.boundary();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_PROVENANCE_BINDING)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse provenanceBinding() {
     return provenanceBindingService.binding();
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_MISSING_VALUE_REJECTION)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse
       missingValueRejection() {
@@ -87,7 +91,7 @@ public class OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightFoundat
   }
 
   @GetMapping(
-      OpsShardReadinessRoutePaths
+      OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths
           .OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_SOURCE_EVIDENCE_SNAPSHOT)
   public OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightResponse
       sourceEvidenceSnapshot() {

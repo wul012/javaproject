@@ -1,0 +1,20 @@
+# Archive Retention Policy
+
+Java 的历史证据目录是跨项目只读依赖，不是可以随意整理的临时输出。
+`a/`、`b/`、`c/`、`d/`、`d_runtime_screenshot_archive_next/`、`e/`、
+`f/` 与所有 `代码讲解记录*` 目录中的现有文件，在 v1867 进入精确保留集合。
+
+## Mechanical Contract
+
+- `scripts/archive-retention-census.ps1` 是唯一 census 口径，默认只读。
+- 显式传入 `-WriteManifest` 才会重建 `docs/archive-retention-manifest.txt`。
+- manifest 每行记录仓库相对路径与 SHA-256，按 ordinal 路径排序。
+- `ArchiveRetentionTests` 要求实际文件集合与 manifest 完全相等，并重算每个摘要。
+- 文件数和总字节数是只减不增的上限；缺失、篡改或未索引新增都会使构建失败。
+
+## Boundary
+
+本策略不移动、不重命名、不压缩、不删除历史文件，也不修改 Node 已固定的绝对路径。
+它不读取 credential value，不启动 Java、Node 或 mini-kv，不连接网络服务，不执行部署、
+回滚或 SQL。若未来确有新的归档需求，必须先由新的外部计划明确调整保留策略；不得在普通
+功能提交中静默放宽计数或摘要门。

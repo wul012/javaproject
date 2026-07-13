@@ -27,19 +27,19 @@ class JavaMaintainabilityBudgetTests {
   void productionSourceHotspotBudgetCanOnlyTighten() throws IOException {
     SourceMetrics metrics = measure(MAIN_ROOT);
 
-    assertThat(metrics.maxLines()).isLessThanOrEqualTo(1530);
-    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(35);
-    assertThat(metrics.filesOver750Lines()).isLessThanOrEqualTo(3);
-    assertThat(metrics.filesOver1000Lines()).isLessThanOrEqualTo(2);
+    assertThat(metrics.maxLines()).isLessThanOrEqualTo(738);
+    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(32);
+    assertThat(metrics.filesOver750Lines()).isZero();
+    assertThat(metrics.filesOver1000Lines()).isZero();
   }
 
   @Test
   void testSourceHotspotBudgetCanOnlyTighten() throws IOException {
     SourceMetrics metrics = measure(TEST_ROOT);
 
-    assertThat(metrics.maxLines()).isLessThanOrEqualTo(854);
+    assertThat(metrics.maxLines()).isLessThanOrEqualTo(699);
     assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(8);
-    assertThat(metrics.filesOver750Lines()).isLessThanOrEqualTo(2);
+    assertThat(metrics.filesOver750Lines()).isZero();
     assertThat(metrics.filesOver1000Lines()).isZero();
   }
 
@@ -100,7 +100,7 @@ class JavaMaintainabilityBudgetTests {
 
   private static Map<String, Long> priorityHotspotLineCaps() {
     Map<String, Long> caps = new LinkedHashMap<>();
-    caps.put("src/main/java/com/codexdemo/orderplatform/ops/OpsEvidenceService.java", 1530L);
+    caps.put("src/main/java/com/codexdemo/orderplatform/ops/OpsEvidenceService.java", 439L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/notification/FailedEventMessageService.java",
         199L);
@@ -127,8 +127,7 @@ class JavaMaintainabilityBudgetTests {
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/notification/FailedEventSearchPageSupport.java",
         103L);
-    caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessRoutePaths.java", 1111L);
+    caps.put("src/main/java/com/codexdemo/orderplatform/ops/OpsShardReadinessRoutePaths.java", 69L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalVerificationHintBuilder.java",
         70L);
@@ -146,7 +145,7 @@ class JavaMaintainabilityBudgetTests {
         382L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java",
-        793L);
+        726L);
     return Map.copyOf(caps);
   }
 

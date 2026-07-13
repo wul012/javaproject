@@ -110,10 +110,10 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1830Tests {
             "OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT",
             "\"/operator-evidence-value-supply-adapter-preflight-closeout\"");
     assertThat(rootAggregator)
-        .contains(
+        .doesNotContain(
             "OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths",
-            ".OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG",
-            ".OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT");
+            "OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CATALOG",
+            "OPERATOR_EVIDENCE_VALUE_SUPPLY_ADAPTER_PREFLIGHT_CLOSEOUT");
     assertThat(service)
         .contains(
             "OpsShardReadinessOperatorEvidenceValueSupplyAdapterPreflightRoutePaths.BASE_PATH",

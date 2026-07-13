@@ -172,7 +172,7 @@ class OpsExtractionV1854Tests {
             "ops/maintenance/releaseapproval/ReleaseApprovalVerificationHintContributionCatalog.java\",",
             "382L",
             "ops/maintenance/releaseapproval/ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java\",",
-            "793L")
+            "726L")
         .doesNotContain("ops/ReleaseApprovalVerificationHintBuilder.java\"");
   }
 

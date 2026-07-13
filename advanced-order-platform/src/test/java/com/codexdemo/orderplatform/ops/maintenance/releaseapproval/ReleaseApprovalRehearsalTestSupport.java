@@ -20,6 +20,10 @@ public abstract class ReleaseApprovalRehearsalTestSupport {
         failedEventSummaryService, outboxRepository, idempotencyStore);
   }
 
+  protected ReleaseApprovalRehearsalResponse defaultRehearsal() {
+    return readOnlyFixtureService().releaseApprovalRehearsal();
+  }
+
   protected ReleaseApprovalRehearsalRequest paddedHeaderBackedRehearsalRequest() {
     return OpsEvidenceServiceTestFixtures.paddedHeaderBackedRehearsalRequest();
   }

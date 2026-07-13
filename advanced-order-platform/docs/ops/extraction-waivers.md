@@ -1,10 +1,15 @@
 # Java ops extraction waivers
 
 This file is the committed waiver list required by the Java final-push brief.
-Controllers and the global `OpsShardReadinessRoutePaths.java` aggregator are
-policy-retained root files and do not need per-file waivers. Every other
+Controllers are policy-retained root files and do not need per-file waivers. Every other
 non-controller file that remains in the final direct-root `ops` package must
 appear here.
+
+## Retained route owner
+
+| File | Why it may remain in root | Reviewer check |
+| --- | --- | --- |
+| `OpsShardReadinessRoutePaths.java` | Owns 15 genuinely global route literals plus 12 ReleaseAcceptance compatibility aliases. Those aliases are retained because the route catalog compares the stable root surface with the leaf owner; v1867 removed the other 239 pure forwarders. | `JavaEleganceGateTests.rootRouteAliasesNeedReaders` requires exactly 27 fields and a qualified reader for each; the source-size cap is 69 lines. `ReadabilityUpkeepOpsConsolidationExtractionV1840Tests` keeps the root-versus-leaf comparison real. |
 
 ## Active root waivers
 

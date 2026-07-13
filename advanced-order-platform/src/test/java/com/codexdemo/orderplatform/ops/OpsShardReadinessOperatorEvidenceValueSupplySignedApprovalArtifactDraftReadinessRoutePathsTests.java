@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadiness.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessArchivePlanService;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovalartifactdraftreadiness.OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessCatalogService;
@@ -22,54 +23,54 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftRea
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CATALOG,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessCatalogService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_DIGEST_CHAIN,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessDigestChainService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_OPERATOR_WINDOW,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessOperatorWindowService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_SIGNATURE_STATEMENT,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessSignatureStatementService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_EVIDENCE_SOURCE,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessEvidenceSourceService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_REDACTION_PROVENANCE,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessRedactionProvenanceService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_FAIL_CLOSED_LOCKS,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessFailClosedLockService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_ARCHIVE_PLAN,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessArchivePlanService
                         .ENDPOINT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT,
                     OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftReadinessCloseoutService
                         .ENDPOINT)))
         .allSatisfy(
             (route, endpoint) ->
                 assertThat(endpoint)
-                    .isEqualTo(OpsShardReadinessRoutePaths.BASE_PATH + route)
+                    .isEqualTo(OpsShardReadinessService.BASE_PATH + route)
                     .contains("signed-approval-artifact-draft-readiness"));
   }
 
@@ -78,47 +79,47 @@ class OpsShardReadinessOperatorEvidenceValueSupplySignedApprovalArtifactDraftRea
     assertThat(
             Map.ofEntries(
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CATALOG,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CATALOG),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_DIGEST_CHAIN,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_DIGEST_CHAIN),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_OPERATOR_WINDOW,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_OPERATOR_WINDOW),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_SIGNATURE_STATEMENT,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_SIGNATURE_STATEMENT),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_EVIDENCE_SOURCE,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_EVIDENCE_SOURCE),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_REDACTION_PROVENANCE,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_REDACTION_PROVENANCE),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_FAIL_CLOSED_LOCKS,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_FAIL_CLOSED_LOCKS),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_ARCHIVE_PLAN,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_ARCHIVE_PLAN),
                 Map.entry(
-                    OpsShardReadinessRoutePaths
+                    OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT,
                     OpsShardReadinessSignedApprovalArtifactDraftReadinessRoutePaths
                         .OPERATOR_EVIDENCE_VALUE_SUPPLY_SIGNED_APPROVAL_ARTIFACT_DRAFT_READINESS_CLOSEOUT)))

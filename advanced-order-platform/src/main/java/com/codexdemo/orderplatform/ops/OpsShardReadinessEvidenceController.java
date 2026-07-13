@@ -6,12 +6,13 @@ import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadine
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceIndexService;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceVerificationResponse;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessEvidenceVerificationService;
+import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(OpsShardReadinessRoutePaths.BASE_PATH)
+@RequestMapping(OpsShardReadinessService.BASE_PATH)
 public class OpsShardReadinessEvidenceController {
 
   private final OpsShardReadinessEvidenceIndexService evidenceIndexService;
@@ -29,17 +30,17 @@ public class OpsShardReadinessEvidenceController {
     this.evidenceHandoffService = evidenceHandoffService;
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.EVIDENCE_INDEX)
+  @GetMapping(OpsShardReadinessService.EVIDENCE_INDEX_PATH)
   public OpsShardReadinessEvidenceIndexResponse evidenceIndex() {
     return evidenceIndexService.evidenceIndex();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.EVIDENCE_VERIFICATION)
+  @GetMapping(OpsShardReadinessService.EVIDENCE_VERIFICATION_PATH)
   public OpsShardReadinessEvidenceVerificationResponse evidenceVerification() {
     return evidenceVerificationService.verification();
   }
 
-  @GetMapping(OpsShardReadinessRoutePaths.EVIDENCE_HANDOFF)
+  @GetMapping(OpsShardReadinessService.EVIDENCE_HANDOFF_PATH)
   public OpsShardReadinessEvidenceHandoffResponse evidenceHandoff() {
     return evidenceHandoffService.handoff();
   }

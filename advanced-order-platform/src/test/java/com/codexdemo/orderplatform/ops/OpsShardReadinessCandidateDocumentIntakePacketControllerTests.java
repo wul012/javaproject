@@ -6,6 +6,7 @@ import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardRea
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentIntakePacketResponse;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentIntakePacketService;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRequestPackageService;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentSubmissionPrecheckService;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class OpsShardReadinessCandidateDocumentIntakePacketControllerTests {
 
   @Test
   void intakePacketRouteExposesReadOnlyPacket() {
-    assertThat(OpsShardReadinessRoutePaths.CANDIDATE_DOCUMENT_INTAKE_PACKET)
+    assertThat(OpsShardReadinessCandidateDocumentRoutePaths.CANDIDATE_DOCUMENT_INTAKE_PACKET)
         .isEqualTo("/candidate-document-intake-packet");
 
     var controller = new OpsShardReadinessCandidateDocumentIntakePacketController(service());

@@ -4,13 +4,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryControllerMarkdownTests {
 
   @Test
   void registryRouteExposesOperatorCiHandoffEvidence() {
-    assertThat(OpsShardReadinessRoutePaths.MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_REGISTRY)
+    assertThat(
+            OpsShardReadinessReleaseAcceptanceRoutePaths
+                .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_REGISTRY)
         .isEqualTo("/minimal-read-only-gate-operator-ci-handoff-registry");
 
     var response =

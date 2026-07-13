@@ -9,6 +9,8 @@ package.
 
 | Map | Scope | Primary question |
 | --- | --- | --- |
+| `ops-root-endgame-v1866.md` | Phase 1 structural closeout | How did direct-root ops reach 104 files with zero movable or unassigned residue? |
+| `java-track-closeout-v1867.md` | Phase 2 final-review candidate | Which mechanical gates close E1-E10 without granting production or final-review authority? |
 | `shard-readiness-map.md` | shard readiness and read-only evidence | Which endpoints prove readiness without opening write routing? |
 | `walkthrough-registry-map.md` | code walkthrough quality and depth | Which registries govern code explanation quality? |
 | `archive-layout-map.md` | screenshot/explanation and archive layout | Which docs/tests stop archive sprawl? |

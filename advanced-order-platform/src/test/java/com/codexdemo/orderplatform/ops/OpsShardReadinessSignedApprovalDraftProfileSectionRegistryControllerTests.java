@@ -2,6 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSupport;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,9 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryControllerTests 
 
   @Test
   void registryRouteExposesReadOnlySignedApprovalDraftProfileSectionRegistry() {
-    assertThat(OpsShardReadinessRoutePaths.SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY)
+    assertThat(
+            OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths
+                .SIGNED_APPROVAL_DRAFT_PROFILE_SECTION_REGISTRY)
         .isEqualTo("/signed-approval-draft-profile-section-registry");
 
     var response =

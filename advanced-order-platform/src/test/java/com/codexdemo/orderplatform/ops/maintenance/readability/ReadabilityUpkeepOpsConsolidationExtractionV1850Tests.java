@@ -103,7 +103,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
     String service = read(PACKAGE_ROOT.resolve(PREFIX + "Service.java"));
     assertThat(service)
         .contains("ops.maintenance.ciarc", "OpsShardReadinessReleaseAcceptanceRoutePaths")
-        .doesNotContain("OpsShardReadinessRoutePaths.BASE_PATH");
+        .doesNotContain("OpsShardReadinessService.BASE_PATH");
   }
 
   @Test

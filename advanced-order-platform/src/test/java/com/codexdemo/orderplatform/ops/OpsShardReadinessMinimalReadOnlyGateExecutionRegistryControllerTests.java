@@ -3,13 +3,15 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryControllerTests {
 
   @Test
   void registryRouteExposesMinimalReadOnlyGateExecutionEvidence() {
-    assertThat(OpsShardReadinessRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY)
+    assertThat(
+            OpsShardReadinessReleaseAcceptanceRoutePaths.MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY)
         .isEqualTo("/minimal-read-only-gate-execution-registry");
 
     var response =

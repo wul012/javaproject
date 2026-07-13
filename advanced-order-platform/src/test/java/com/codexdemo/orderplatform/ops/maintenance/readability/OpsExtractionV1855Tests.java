@@ -99,12 +99,11 @@ class OpsExtractionV1855Tests {
     }
 
     assertThat(read(OPS_ROOT.resolve("OpsShardReadinessRoutePaths.java")))
-        .contains(
-            "import " + ROOT_PACKAGE + ".maintenance.readinesscore.OpsShardReadinessService;",
-            "BASE_PATH = OpsShardReadinessService.BASE_PATH",
-            "EVIDENCE_INDEX = OpsShardReadinessService.EVIDENCE_INDEX_PATH",
-            "OpsShardReadinessService.EVIDENCE_VERIFICATION_PATH",
-            "EVIDENCE_HANDOFF = OpsShardReadinessService.EVIDENCE_HANDOFF_PATH");
+        .doesNotContain(
+            ROOT_PACKAGE + ".maintenance.readinesscore.OpsShardReadinessService",
+            "EVIDENCE_INDEX =",
+            "EVIDENCE_VERIFICATION =",
+            "EVIDENCE_HANDOFF =");
   }
 
   @Test

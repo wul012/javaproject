@@ -14,7 +14,9 @@ class OpsShardReadinessScreenshotExplanationArchiveRoutePathsTests {
             OpsShardReadinessScreenshotExplanationArchiveRoutePaths
                 .SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY)
         .isEqualTo("/screenshot-explanation-archive-registry");
-    assertThat(OpsShardReadinessRoutePaths.SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY)
+    assertThat(
+            OpsShardReadinessScreenshotExplanationArchiveRoutePaths
+                .SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY)
         .isEqualTo(
             OpsShardReadinessScreenshotExplanationArchiveRoutePaths
                 .SCREENSHOT_EXPLANATION_ARCHIVE_REGISTRY);
