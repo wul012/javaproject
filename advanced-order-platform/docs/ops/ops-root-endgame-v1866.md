@@ -1,7 +1,7 @@
 # Ops Root Endgame v1866
 
-Status: local verification passed; remote CI pending. Evidence is accepted only
-after both remote Actions runs pass.
+Status: implementation CI passed; tagged closeout pending. The implementation
+run is `29215460666`; evidence is final only after closeout Actions also pass.
 
 ## Design Note
 
@@ -16,15 +16,15 @@ after both remote Actions runs pass.
 
 | Requirement | Implementation | Mechanical evidence | State |
 | --- | --- | --- | --- |
-| Reach the census target | Move the final four root implementation types | exact root census 108 -> 104 and remaining 4 -> 0 | local passed; remote pending |
-| Keep overview behavior | Move service/response/test together; retain root controller | focused unit and integration tests | local passed; remote pending |
-| Split the static hotspot | Replace the 645-line dispatch table with catalog/sections responsibilities | exact file set and <=500-line caps | local passed; remote pending |
-| Preserve release contracts | Keep all 12 versions/endpoints and response sections byte-identical | existing evidence contract suite plus catalog guard | local passed; remote pending |
-| Preserve package direction | Root composition imports the extracted packages; extracted code does not import root controllers | compile and source-direction guard | local passed; remote pending |
-| Preserve SpotBugs policy | Relocate exactly two accepted overview response mirrors | old/new FQN count and full SpotBugs gate | local passed; remote pending |
-| Close all waivers | Leave exactly 100 controllers plus four policy-retained shared files | waiver-list and exact retained-set checks | local passed; remote pending |
-| Preserve the root coverage floor | Exercise every retained RouteCleanup controller delegation through one data-driven contract test | exact invocation count plus JaCoCo package floor | local passed; remote pending |
-| Explain the change | Chinese-majority walkthrough, exactly 10 headings, at least 3,000 Han characters | v1866 walkthrough guard | local passed; remote pending |
+| Reach the census target | Move the final four root implementation types | exact root census 108 -> 104 and remaining 4 -> 0 | complete; run 29215460666 |
+| Keep overview behavior | Move service/response/test together; retain root controller | focused unit and integration tests | complete; run 29215460666 |
+| Split the static hotspot | Replace the 645-line dispatch table with catalog/sections responsibilities | exact file set and <=500-line caps | complete; run 29215460666 |
+| Preserve release contracts | Keep all 12 versions/endpoints and response sections byte-identical | existing evidence contract suite plus catalog guard | complete; run 29215460666 |
+| Preserve package direction | Root composition imports the extracted packages; extracted code does not import root controllers | compile and source-direction guard | complete; run 29215460666 |
+| Preserve SpotBugs policy | Relocate exactly two accepted overview response mirrors | old/new FQN count and full SpotBugs gate | complete; run 29215460666 |
+| Close all waivers | Leave exactly 100 controllers plus four policy-retained shared files | waiver-list and exact retained-set checks | complete; run 29215460666 |
+| Preserve the root coverage floor | Exercise every retained RouteCleanup controller delegation through one data-driven contract test | exact invocation count plus JaCoCo package floor | complete; run 29215460666 |
+| Explain the change | Chinese-majority walkthrough, exactly 10 headings, at least 3,000 Han characters | v1866 walkthrough guard | complete; run 29215460666 |
 
 ## Scope
 
@@ -78,6 +78,9 @@ changed.
 - The corrected walkthrough then preceded a final complete rerun. It passed all
   1,901 tests, every JaCoCo floor, and SpotBugs with zero findings in 10:24.
   This is the accepted local verification result for v1866.
+- Implementation commit `1165de44` passed GitHub Actions run `29215460666`:
+  Docker-tagged integration tests completed in 2:04 and the headless regression,
+  prod-profile smoke, and JaCoCo artifact job completed in 15:59.
 
 ## Failure Conditions
 
