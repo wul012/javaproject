@@ -51,3 +51,10 @@ JaCoCo 插件分析 2,230 个类并通过全部覆盖率阈值，SpotBugs 为 0 
 可执行 jar 正常生成。此前 v1870 证据曾用正则统计 `jacoco.xml` 的 `<class>` 标签并误记为
 2,319；本轮确认该标签数不是插件报告的 bundle class 口径，已把活文档统一纠正为 Maven
 日志中的 2,230。已发布的 v1870 tag 保持不可变，纠偏由本版 deviation 明示承接。
+
+## 远端验证记录
+
+实现提交 `e3e1f019` 的 GitHub Actions 运行 `29692730030` 全部成功：Docker-tagged
+integration tests 用时 1:59，Build and headless regression 用时 19:24；后者包含完整
+wrapper verify、生产 profile 启动冒烟与 JaCoCo 上传。该运行只验证 canonical remote 上的
+实现提交，不以本地工作区结果替代。外部评审状态仍保持未自授。
