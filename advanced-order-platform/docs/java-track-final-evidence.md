@@ -17,22 +17,22 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
 | E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | implementation `29221687479` and closeout `29222696374` green |
-| E2 Static analysis | Spotless and SpotBugs checks; 682 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1871 full local verify green; SpotBugs 0/0 |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | current local verify green; 2230 classes |
+| E2 Static analysis | Spotless and SpotBugs checks; 676 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1872 full local verify green; SpotBugs 0/0 |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | current local verify green; 2231 classes |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
 | E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | tag and canonical remote verified; external review pending |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus changed-file gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1870 full local verify green |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1870-authorized exact set: 1681 files / 19864889 raw bytes |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1872-authorized exact set: 1683 files / 19891423 raw bytes |
 
 ## Final Censuses
 
 - Ops direct root: 104 files; retained: 104; remaining movable: 0; unassigned: 0.
 - Ops total production Java files: 1,352; no extraction family remains in root.
-- Production Java: 1,483 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
-- Test Java: 887 files; maximum 699 lines; over 500: 8;
+- Production Java: 1,484 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
+- Test Java: 889 files; maximum 699 lines; over 500: 8;
   over 750/1000: 0/0.
 - Long-name shrink-only baseline: production stems/uses/unique 1297/21167/2856;
   tests 795/10225/3833. New and touched names remain within 40 characters.
@@ -42,10 +42,10 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 - Root route owner: 15 owned literals plus 12 ReleaseAcceptance compatibility aliases.
   v1867 repointed 735 reads in 160 files to leaf owners and removed 239 pure forwarding
   aliases without changing route bytes or the root-versus-leaf compatibility response.
-- SpotBugs exclusions: 682 exact pattern/class identities; only deletion is allowed, and
+- SpotBugs exclusions: 676 exact pattern/class identities; only deletion is allowed, and
   every retained class must load from the compiled classpath.
-- Archive retention: v1871's user-authorized optimization adds exactly one walkthrough;
-  the current exact set is 1,682 files / 19,878,770 raw bytes.
+- Archive retention: v1872's user-authorized optimization adds exactly one walkthrough;
+  the current exact set is 1,683 files / 19,891,423 raw bytes.
 
 ## Active Waivers
 
@@ -84,6 +84,10 @@ produced the executable jar. SpotBugs then reported zero `BugInstance` findings.
 
 Current v1871 local result: `mvnw -B verify` passed 1,929 tests in 12:40 with zero
 failures, errors, or skips. JaCoCo analyzed 2,230 classes and met every floor; SpotBugs
+reported `BugInstance=0` and `Error=0`, and the executable jar was produced.
+
+Current v1872 local result: `mvnw -B verify` passed 1,931 tests in 11:57 with zero
+failures, errors, or skips. JaCoCo analyzed 2,231 classes and met every floor; SpotBugs
 reported `BugInstance=0` and `Error=0`, and the executable jar was produced.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed

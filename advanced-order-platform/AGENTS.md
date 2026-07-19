@@ -142,6 +142,11 @@ compares exact pattern/class identities with the Git prior version, rejects dupl
 unloadable classes, and permits only deletion. Never replace it with an aggregate count or
 add a second baseline that can be changed in the same commit.
 
+Since v1872, public DTO records with mutable `List` components must establish ownership in
+their compact constructor and expose only immutable snapshots. Use the shared
+`ImmutableLists` helper when null must remain available to Bean Validation; do not replace
+null with an empty list or use `List.copyOf` where null elements are part of validation input.
+
 - Name budget: no new identifier or filename over 40 characters. A name that wants more
   nouns means a missing abstraction — extract and name the concept instead. Existing
   over-budget names: baseline census, shrink-only; renames only where route strings,

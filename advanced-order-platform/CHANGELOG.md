@@ -4,6 +4,15 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1872 - Immutable DTO collection boundaries
+
+- Gives `PagedResponse`, `CreateOrderRequest`, and `OrderResponse` owned immutable list
+  snapshots without changing their record components, JSON shape, or validation annotations.
+- Centralizes null-preserving defensive copies in `ImmutableLists` and verifies input-alias
+  isolation plus unmodifiable access through one generic test scenario.
+- Removes six real `EI_EXPOSE_REP`/`EI_EXPOSE_REP2` waivers after SpotBugs returns 0/0,
+  shrinking the exact waiver set from 682 to 676.
+
 ## v1871 - Exact SpotBugs waiver identities
 
 - Replaces the aggregate-only 686-entry cap with secure XML parsing and Git-aware

@@ -4,7 +4,8 @@
   Ratchet pool: shrink, never grow. Remove Match entries when fixing legacy findings;
   do not add entries for new findings unless a follow-up review explicitly accepts the debt.
   Source findings: 2602 BugInstance entries collapsed into 686 class-pattern matches.
-  v1871 removed four stale identities; the exact current set is 682 and may only shrink.
+  v1871 removed four stale identities; v1872 repaired six DTO aliases. The exact current
+  set is 676 and may only shrink.
 -->
 <FindBugsFilter>
   <Match>
@@ -58,10 +59,6 @@
   <Match>
     <Bug pattern="DM_CONVERT_CASE" />
     <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPacketCatalog" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.common.PagedResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1366,18 +1363,6 @@
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
     <Class name="com.codexdemo.orderplatform.ops.maintenance.releaseapproval.ReleaseApprovalSandboxEndpointCredentialResolverTestOnlyShellEchoRecords$RehearsalSandboxEndpointCredentialResolverTestOnlyShellResponseShape" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.order.CreateOrderRequest" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.order.OrderResponse" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.common.PagedResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
@@ -2713,15 +2698,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.order.CreateOrderRequest" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP2" />
     <Class name="com.codexdemo.orderplatform.order.OrderExpirationScheduler" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.order.OrderResponse" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
