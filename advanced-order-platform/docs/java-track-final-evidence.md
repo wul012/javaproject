@@ -88,7 +88,9 @@ reported `BugInstance=0` and `Error=0`, and the executable jar was produced.
 
 Current v1872 local result: `mvnw -B verify` passed 1,931 tests in 11:57 with zero
 failures, errors, or skips. JaCoCo analyzed 2,231 classes and met every floor; SpotBugs
-reported `BugInstance=0` and `Error=0`, and the executable jar was produced.
+reported `BugInstance=0` and `Error=0`, and the executable jar was produced. Implementation
+Actions run `29693892214` passed Docker-tagged integration tests in 2:01 and headless
+regression in 19:07 for commit `790b8abb`.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

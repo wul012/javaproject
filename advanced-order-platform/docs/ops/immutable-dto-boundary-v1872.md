@@ -52,3 +52,10 @@ null 列表、含 null 元素、构造输入别名隔离、访问器不可修改
 按 Maven 插件权威输出分析 2,231 个类并满足全部覆盖率下限，SpotBugs 保持
 `BugInstance=0`、`Error=0`，Spotless、Spring Boot 重打包和可执行 jar 产出均通过。
 远端 headless 与 Docker-tagged CI 必须在提交后独立通过，外部评审仍不由本文自授。
+
+## 远端验证记录
+
+实现提交 `790b8abb` 的 GitHub Actions 运行 `29693892214` 全部成功：Docker-tagged
+integration tests 用时 2:01，Build and headless regression 用时 19:07。headless 作业
+包含 Spotless ratchet、完整 wrapper verify、生产 profile 启动冒烟与 JaCoCo 上传；验证对象
+与本地实现提交 SHA 一致。closeout 提交仍须单独通过同一工作流后才能完成本版封存。
