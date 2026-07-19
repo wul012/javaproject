@@ -1,5 +1,6 @@
 param(
   [switch]$Json,
+  [switch]$WriteNameBaseline,
   [ValidateRange(1, 100)]
   [int]$Top = 20
 )
@@ -118,9 +119,44 @@ function Get-SourceSummary {
   }
 }
 
+$mainRows = @(Get-JavaFileRows -Root $mainRoot)
+$testRows = @(Get-JavaFileRows -Root $testRoot)
+
+function Write-NameBaseline {
+  param([Parameter(Mandatory = $true)][object[]]$Rows)
+
+  $entries = [System.Collections.Generic.HashSet[string]]::new(
+    [System.StringComparer]::Ordinal
+  )
+  foreach ($row in $Rows) {
+    if ($row.LongFileStem) {
+      [void]$entries.Add("F`t$($row.Path)")
+    }
+    foreach ($identifier in $row.LongIdentifiers) {
+      [void]$entries.Add("I`t$identifier")
+    }
+  }
+
+  $ordered = @($entries)
+  [Array]::Sort($ordered, [System.StringComparer]::Ordinal)
+  $header = @(
+    '# Java long-name baseline seeded by v1869. Entries may only be removed.',
+    '# F = long Java file path; I = long lexical identifier.'
+  )
+  $target = Join-Path $projectRoot 'config/java-name-baseline.txt'
+  $encoding = [System.Text.UTF8Encoding]::new($false)
+  [System.IO.File]::WriteAllLines($target, @($header + $ordered), $encoding)
+  return $target
+}
+
+if ($WriteNameBaseline) {
+  $target = Write-NameBaseline -Rows @($mainRows + $testRows)
+  "wrote $target"
+}
+
 $summary = [ordered]@{
-  Production = Get-SourceSummary -Rows (Get-JavaFileRows -Root $mainRoot) -Scope 'production'
-  Tests = Get-SourceSummary -Rows (Get-JavaFileRows -Root $testRoot) -Scope 'tests'
+  Production = Get-SourceSummary -Rows $mainRows -Scope 'production'
+  Tests = Get-SourceSummary -Rows $testRows -Scope 'tests'
 }
 
 if ($Json) {

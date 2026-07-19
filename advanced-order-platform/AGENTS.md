@@ -127,10 +127,11 @@ The post-capstone review judged this codebase fortified but not elegant — this
 the program's worst names (a 793-line class with an eight-noun name) and its largest
 duplication family (the ops package). These gates buy elegance upstream. They apply to
 NEW and TOUCHED code only; existing violations enter a committed baseline that may only
-shrink. Each rule must become a committed mechanical check that fails verify/CI — extend
-`scripts/java-maintainability-census.ps1` with a name census in the next governance
-version; until then the rules bind as authoring rules enforced at review. Ratchets only
-tighten.
+shrink. Each rule must remain a committed mechanical check that fails verify/CI. Since
+v1869, `config/java-name-baseline.txt`, `JavaEleganceGateTests`, and
+`JavaChangeGateTests` enforce the exact long-name set, changed-file cleanliness, the
+production-source growth cap, and bounded family design notes. Ratchets only tighten;
+baseline entries may only be removed.
 
 - Name budget: no new identifier or filename over 40 characters. A name that wants more
   nouns means a missing abstraction — extract and name the concept instead. Existing

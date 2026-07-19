@@ -4,6 +4,16 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1869 - Diff-aware elegance gates
+
+- Replaces aggregate-only long-name protection with an exact, reproducible baseline of
+  legacy file paths and lexical identifiers; every later baseline may only shrink.
+- Adds one Git change model for dirty local trees and clean CI commits, enforcing short
+  names on changed Java, a 400-line production growth cap, and design notes for new
+  three-file families.
+- Proves the gate with a temporary 56-character filename that fails mechanically, while
+  leaving production code, routes, fixtures, schemas, and runtime authority unchanged.
+
 ## v1868 - README evidence exhibition
 
 - Adds the repository-root GitHub landing page with a bilingual project summary,

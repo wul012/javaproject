@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ class JavaEleganceGateTests {
 
   private static final Path MAIN_ROOT = Path.of("src", "main", "java");
   private static final Path TEST_ROOT = Path.of("src", "test", "java");
+  private static final Path NAME_BASELINE = Path.of("config", "java-name-baseline.txt");
   private static final Path ROUTE_OWNER =
       MAIN_ROOT.resolve(
           Path.of("com", "codexdemo", "orderplatform", "ops", "OpsShardReadinessRoutePaths.java"));
@@ -28,6 +30,28 @@ class JavaEleganceGateTests {
   void longNameBaselinesOnlyShrink() throws IOException {
     assertWithin(metrics(MAIN_ROOT), new NameMetrics(1297, 21169, 2857));
     assertWithin(metrics(TEST_ROOT), new NameMetrics(795, 10226, 3834));
+  }
+
+  @Test
+  void exactNameBaselineMatchesSource() throws IOException {
+    NameBaseline expected = readBaseline(Files.readString(NAME_BASELINE, StandardCharsets.UTF_8));
+    NameBaseline actual = currentBaseline();
+
+    assertThat(actual.longFiles()).containsExactlyInAnyOrderElementsOf(expected.longFiles());
+    assertThat(actual.longNames()).containsExactlyInAnyOrderElementsOf(expected.longNames());
+  }
+
+  @Test
+  void exactNameBaselineOnlyShrinks() throws IOException {
+    var prior = GitChangeSet.priorFile(NAME_BASELINE);
+    if (prior.isEmpty()) {
+      return;
+    }
+    NameBaseline before = readBaseline(prior.orElseThrow());
+    NameBaseline after = readBaseline(Files.readString(NAME_BASELINE, StandardCharsets.UTF_8));
+
+    assertThat(after.longFiles()).isSubsetOf(before.longFiles());
+    assertThat(after.longNames()).isSubsetOf(before.longNames());
   }
 
   @Test
@@ -88,9 +112,44 @@ class JavaEleganceGateTests {
     assertThat(actual.longIdentifierNames()).isLessThanOrEqualTo(baseline.longIdentifierNames());
   }
 
+  private static NameBaseline currentBaseline() throws IOException {
+    Set<String> files = new HashSet<>();
+    Set<String> names = new HashSet<>();
+    for (Path root : List.of(MAIN_ROOT, TEST_ROOT)) {
+      for (Path source : JavaSourceNames.files(root)) {
+        if (JavaSourceNames.stem(source).length() > JavaSourceNames.NAME_BUDGET) {
+          files.add(source.toString().replace('\\', '/'));
+        }
+        names.addAll(JavaSourceNames.longIdentifiers(source));
+      }
+    }
+    return new NameBaseline(Set.copyOf(files), Set.copyOf(names));
+  }
+
+  private static NameBaseline readBaseline(String text) {
+    Set<String> files = new HashSet<>();
+    Set<String> names = new HashSet<>();
+    Arrays.stream(text.split("\\R"))
+        .filter(line -> !line.isBlank() && !line.startsWith("#"))
+        .forEach(
+            line -> {
+              String[] parts = line.split("\\t", 2);
+              assertThat(parts).as(line).hasSize(2);
+              if (parts[0].equals("F")) {
+                assertThat(files.add(parts[1])).as(parts[1]).isTrue();
+              } else {
+                assertThat(parts[0]).as(line).isEqualTo("I");
+                assertThat(names.add(parts[1])).as(parts[1]).isTrue();
+              }
+            });
+    return new NameBaseline(Set.copyOf(files), Set.copyOf(names));
+  }
+
   private static int count(String value, String token) {
     return (value.length() - value.replace(token, "").length()) / token.length();
   }
 
   private record NameMetrics(long longStems, long longIdentifierUses, long longIdentifierNames) {}
+
+  private record NameBaseline(Set<String> longFiles, Set<String> longNames) {}
 }
