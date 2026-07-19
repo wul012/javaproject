@@ -40,4 +40,6 @@
 2026-07-19 22:17:51 延续到 22:32:13，随后在 22:32:28 产出可执行 jar，在 22:32:38
 产出覆盖 2,319 个类的 JaCoCo 报告，并在 22:33:54 产出 0 个 `BugInstance` 的 SpotBugs
 报告。由此确认修复后的本地全量门完整通过；提交后的 canonical CI 仍必须独立复验。
-外部评审结论不在本文件中自授。
+实现提交 `5d241b90` 的 canonical Actions `29691378022` 随后双绿：Docker-tagged job
+用时 1:54，headless job 用时 18:58；后者包含 Spotless、完整 wrapper verify、生产 profile
+启动冒烟与 JaCoCo 上传。外部评审结论不在本文件中自授。
