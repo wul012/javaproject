@@ -59,3 +59,8 @@ null 列表、含 null 元素、构造输入别名隔离、访问器不可修改
 integration tests 用时 2:01，Build and headless regression 用时 19:07。headless 作业
 包含 Spotless ratchet、完整 wrapper verify、生产 profile 启动冒烟与 JaCoCo 上传；验证对象
 与本地实现提交 SHA 一致。closeout 提交仍须单独通过同一工作流后才能完成本版封存。
+
+closeout 提交 `45c0215c` 的 Actions 运行 `29694632205` 随后全部成功：Docker-tagged
+integration tests 用时 2:12，Build and headless regression 用时 19:26。本段 receipt
+只记录已发生的外部结果；canonical tag 仅在承载本段的 receipt 提交自身通过 CI 后创建，
+不再为该最终 receipt 递归追加新的运行号。
