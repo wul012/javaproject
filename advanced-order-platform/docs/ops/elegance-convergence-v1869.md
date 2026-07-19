@@ -1,6 +1,6 @@
 # v1869 Elegance Gate Convergence
 
-Status: implementation verified locally; remote CI pending. This maintenance version changes quality enforcement
+Status: implementation and remote CI verified. This maintenance version changes quality enforcement
 only; it does not change runtime behavior, routes, schemas, fixtures, or authority.
 
 ## Family design
@@ -20,7 +20,7 @@ only; it does not change runtime behavior, routes, schemas, fixtures, or authori
 | Enforce the boy-scout rule | Inspect staged, unstaged, and committed Java changes | every changed Java source must meet the 40-character budget | focused gate and negative experiment passed |
 | Enforce the generation cap | Count added/deleted production lines from Git numstat | additions <= 400, or a deletion-backed refactor is net non-growing | focused gate passed |
 | Enforce family design notes | Detect three or more added Java files in one package | a changed Markdown file must carry a bounded `Family design` section | focused gate passed |
-| Preserve current behavior | No production source or contract changes | focused gates, full Maven verify, and remote CI | local verify passed |
+| Preserve current behavior | No production source or contract changes | focused gates, full Maven verify, and remote CI | passed |
 
 ## Failure Conditions
 
@@ -43,4 +43,6 @@ remains the final local condition.
 Full `mvnw -B verify` passed 1,924 tests with zero failures, errors, or skips in
 11:12. JaCoCo analyzed 2,229 classes and met every package floor; SpotBugs reported
 zero unsuppressed bugs/errors, Spotless passed, and the executable jar was produced.
-Remote implementation CI remains pending.
+Implementation commit `bfdbede5` passed GitHub Actions run `29684058289`: the Docker-tagged
+job completed in 2:24, while the headless job completed in 19:05 after the wrapper verify,
+production-profile boot smoke, and JaCoCo upload all succeeded.
