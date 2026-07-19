@@ -1,23 +1,39 @@
 package com.codexdemo.orderplatform.common;
 
-import org.springframework.http.HttpStatus;
+public final class BusinessException extends RuntimeException {
 
-public class BusinessException extends RuntimeException {
+  public enum Kind {
+    INVALID_INPUT,
+    CONFLICT,
+    NOT_FOUND
+  }
 
-    private final HttpStatus status;
-    private final String code;
+  private final Kind kind;
+  private final String code;
 
-    public BusinessException(HttpStatus status, String code, String message) {
-        super(message);
-        this.status = status;
-        this.code = code;
-    }
+  private BusinessException(Kind kind, String code, String message) {
+    super(message);
+    this.kind = kind;
+    this.code = code;
+  }
 
-    public HttpStatus getStatus() {
-        return status;
-    }
+  public static BusinessException invalidInput(String code, String message) {
+    return new BusinessException(Kind.INVALID_INPUT, code, message);
+  }
 
-    public String getCode() {
-        return code;
-    }
+  public static BusinessException conflict(String code, String message) {
+    return new BusinessException(Kind.CONFLICT, code, message);
+  }
+
+  public static BusinessException notFound(String code, String message) {
+    return new BusinessException(Kind.NOT_FOUND, code, message);
+  }
+
+  public Kind getKind() {
+    return kind;
+  }
+
+  public String getCode() {
+    return code;
+  }
 }

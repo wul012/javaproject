@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -22,225 +22,232 @@ import org.springframework.util.StringUtils;
 @Service
 public class OrderApplicationService {
 
-    private final OrderRepository orderRepository;
-    private final IdempotencyStore idempotencyStore;
-    private final ProductRepository productRepository;
-    private final InventoryService inventoryService;
-    private final OutboxRepository outboxRepository;
-    private final OrderStatusHistoryRepository orderStatusHistoryRepository;
-    private final PaymentService paymentService;
+  private static final int EXPIRY_BATCH_SIZE = 50;
 
-    public OrderApplicationService(
-            OrderRepository orderRepository,
-            IdempotencyStore idempotencyStore,
-            ProductRepository productRepository,
-            InventoryService inventoryService,
-            OutboxRepository outboxRepository,
-            OrderStatusHistoryRepository orderStatusHistoryRepository,
-            PaymentService paymentService
-    ) {
-        this.orderRepository = orderRepository;
-        this.idempotencyStore = idempotencyStore;
-        this.productRepository = productRepository;
-        this.inventoryService = inventoryService;
-        this.outboxRepository = outboxRepository;
-        this.orderStatusHistoryRepository = orderStatusHistoryRepository;
-        this.paymentService = paymentService;
+  private final OrderRepository orderRepository;
+  private final IdempotencyStore idempotencyStore;
+  private final ProductRepository productRepository;
+  private final InventoryService inventoryService;
+  private final OutboxRepository outboxRepository;
+  private final OrderStatusHistoryRepository orderStatusHistoryRepository;
+  private final PaymentService paymentService;
+
+  public OrderApplicationService(
+      OrderRepository orderRepository,
+      IdempotencyStore idempotencyStore,
+      ProductRepository productRepository,
+      InventoryService inventoryService,
+      OutboxRepository outboxRepository,
+      OrderStatusHistoryRepository orderStatusHistoryRepository,
+      PaymentService paymentService) {
+    this.orderRepository = orderRepository;
+    this.idempotencyStore = idempotencyStore;
+    this.productRepository = productRepository;
+    this.inventoryService = inventoryService;
+    this.outboxRepository = outboxRepository;
+    this.orderStatusHistoryRepository = orderStatusHistoryRepository;
+    this.paymentService = paymentService;
+  }
+
+  @Transactional
+  public CreateOrderResult createOrder(String idempotencyKey, CreateOrderRequest request) {
+    requireIdempotencyKey(idempotencyKey);
+    String requestFingerprint = OrderIdempotencyFingerprint.create(request);
+
+    return idempotencyStore
+        .findByKey(idempotencyKey)
+        .map(existing -> replayExistingOrder(existing, requestFingerprint))
+        .orElseGet(() -> placeNewOrder(idempotencyKey, request, requestFingerprint));
+  }
+
+  @Transactional(readOnly = true)
+  public OrderResponse getOrder(Long orderId) {
+    return OrderResponse.from(findOrder(orderId));
+  }
+
+  @Transactional(readOnly = true)
+  public List<OrderStatusHistoryResponse> getOrderHistory(Long orderId) {
+    findOrder(orderId);
+    return orderStatusHistoryRepository.findByOrderIdOrderByChangedAtAscIdAsc(orderId).stream()
+        .map(OrderStatusHistoryResponse::from)
+        .toList();
+  }
+
+  @Transactional(readOnly = true)
+  public List<PaymentTransactionResponse> getOrderPayments(Long orderId) {
+    findOrder(orderId);
+    return paymentService.listOrderPayments(orderId).stream()
+        .map(PaymentTransactionResponse::from)
+        .toList();
+  }
+
+  @Transactional
+  public OrderResponse pay(Long orderId) {
+    SalesOrder order = findOrder(orderId);
+    OrderStatus fromStatus = order.getStatus();
+    if (fromStatus == OrderStatus.PAID) {
+      return OrderResponse.from(order);
     }
 
-    @Transactional
-    public CreateOrderResult createOrder(String idempotencyKey, CreateOrderRequest request) {
-        requireIdempotencyKey(idempotencyKey);
-        String requestFingerprint = OrderIdempotencyFingerprint.create(request);
+    order.markPaid();
+    inventoryService.commitReserved(order.quantitiesByProductId());
+    paymentService.recordSucceededPayment(order);
+    outboxRepository.save(OutboxEvent.orderPaid(order));
+    recordHistory(order, fromStatus, "ORDER_PAID");
+    return OrderResponse.from(order);
+  }
 
-        return idempotencyStore.findByKey(idempotencyKey)
-                .map(existing -> replayExistingOrder(existing, requestFingerprint))
-                .orElseGet(() -> placeNewOrder(idempotencyKey, request, requestFingerprint));
+  @Transactional
+  public OrderResponse refund(Long orderId) {
+    SalesOrder order = findOrder(orderId);
+    OrderStatus fromStatus = order.getStatus();
+    if (order.refund()) {
+      inventoryService.returnCommitted(order.quantitiesByProductId());
+      paymentService.recordRefundedPayment(order);
+      outboxRepository.save(OutboxEvent.orderRefunded(order));
+      recordHistory(order, fromStatus, "ORDER_REFUNDED");
     }
+    return OrderResponse.from(order);
+  }
 
-    @Transactional(readOnly = true)
-    public OrderResponse getOrder(Long orderId) {
-        return OrderResponse.from(findOrder(orderId));
+  @Transactional
+  public OrderResponse cancel(Long orderId) {
+    SalesOrder order = findOrder(orderId);
+    OrderStatus fromStatus = order.getStatus();
+    if (order.cancel()) {
+      inventoryService.releaseReserved(order.quantitiesByProductId());
+      outboxRepository.save(OutboxEvent.orderCancelled(order));
+      recordHistory(order, fromStatus, "ORDER_CANCELLED");
     }
+    return OrderResponse.from(order);
+  }
 
-    @Transactional(readOnly = true)
-    public List<OrderStatusHistoryResponse> getOrderHistory(Long orderId) {
-        findOrder(orderId);
-        return orderStatusHistoryRepository.findByOrderIdOrderByChangedAtAscIdAsc(orderId).stream()
-                .map(OrderStatusHistoryResponse::from)
-                .toList();
+  @Transactional
+  public OrderResponse ship(Long orderId) {
+    SalesOrder order = findOrder(orderId);
+    OrderStatus fromStatus = order.getStatus();
+    if (order.ship()) {
+      outboxRepository.save(OutboxEvent.orderShipped(order));
+      recordHistory(order, fromStatus, "ORDER_SHIPPED");
     }
+    return OrderResponse.from(order);
+  }
 
-    @Transactional(readOnly = true)
-    public List<PaymentTransactionResponse> getOrderPayments(Long orderId) {
-        findOrder(orderId);
-        return paymentService.listOrderPayments(orderId).stream()
-                .map(PaymentTransactionResponse::from)
-                .toList();
+  @Transactional
+  public OrderResponse complete(Long orderId) {
+    SalesOrder order = findOrder(orderId);
+    OrderStatus fromStatus = order.getStatus();
+    if (order.complete()) {
+      outboxRepository.save(OutboxEvent.orderCompleted(order));
+      recordHistory(order, fromStatus, "ORDER_COMPLETED");
     }
+    return OrderResponse.from(order);
+  }
 
-    @Transactional
-    public OrderResponse pay(Long orderId) {
-        SalesOrder order = findOrder(orderId);
-        OrderStatus fromStatus = order.getStatus();
-        if (fromStatus == OrderStatus.PAID) {
-            return OrderResponse.from(order);
-        }
-
-        order.markPaid();
-        inventoryService.commitReserved(order.quantitiesByProductId());
-        paymentService.recordSucceededPayment(order);
-        outboxRepository.save(OutboxEvent.orderPaid(order));
-        recordHistory(order, fromStatus, "ORDER_PAID");
-        return OrderResponse.from(order);
+  @Transactional
+  public int expireCreatedOrdersBefore(Instant createdBefore) {
+    int expired = 0;
+    Instant expiredAt = Instant.now();
+    for (SalesOrder order :
+        orderRepository.findExpiryBatch(
+            OrderStatus.CREATED, createdBefore, PageRequest.ofSize(EXPIRY_BATCH_SIZE))) {
+      OrderStatus fromStatus = order.getStatus();
+      if (order.expire(expiredAt)) {
+        inventoryService.releaseReserved(order.quantitiesByProductId());
+        outboxRepository.save(OutboxEvent.orderExpired(order));
+        recordHistory(order, fromStatus, "ORDER_EXPIRED");
+        expired++;
+      }
     }
+    return expired;
+  }
 
-    @Transactional
-    public OrderResponse refund(Long orderId) {
-        SalesOrder order = findOrder(orderId);
-        OrderStatus fromStatus = order.getStatus();
-        if (order.refund()) {
-            inventoryService.returnCommitted(order.quantitiesByProductId());
-            paymentService.recordRefundedPayment(order);
-            outboxRepository.save(OutboxEvent.orderRefunded(order));
-            recordHistory(order, fromStatus, "ORDER_REFUNDED");
-        }
-        return OrderResponse.from(order);
+  private CreateOrderResult replayExistingOrder(
+      IdempotencyStoreEntry existing, String requestFingerprint) {
+    String existingFingerprint = existing.requestFingerprint();
+    if (StringUtils.hasText(existingFingerprint)
+        && !existingFingerprint.equals(requestFingerprint)) {
+      throw BusinessException.conflict(
+          "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
+          "Idempotency-Key was already used for a different create order request");
     }
+    return new CreateOrderResult(OrderResponse.from(existing.order()), true);
+  }
 
-    @Transactional
-    public OrderResponse cancel(Long orderId) {
-        SalesOrder order = findOrder(orderId);
-        OrderStatus fromStatus = order.getStatus();
-        if (order.cancel()) {
-            inventoryService.releaseReserved(order.quantitiesByProductId());
-            outboxRepository.save(OutboxEvent.orderCancelled(order));
-            recordHistory(order, fromStatus, "ORDER_CANCELLED");
-        }
-        return OrderResponse.from(order);
-    }
+  private CreateOrderResult placeNewOrder(
+      String idempotencyKey, CreateOrderRequest request, String requestFingerprint) {
+    Map<Long, Integer> quantities = aggregateQuantities(request);
+    Map<Long, Product> products = loadProducts(quantities);
+    inventoryService.reserve(quantities);
 
-    @Transactional
-    public OrderResponse ship(Long orderId) {
-        SalesOrder order = findOrder(orderId);
-        OrderStatus fromStatus = order.getStatus();
-        if (order.ship()) {
-            outboxRepository.save(OutboxEvent.orderShipped(order));
-            recordHistory(order, fromStatus, "ORDER_SHIPPED");
-        }
-        return OrderResponse.from(order);
-    }
-
-    @Transactional
-    public OrderResponse complete(Long orderId) {
-        SalesOrder order = findOrder(orderId);
-        OrderStatus fromStatus = order.getStatus();
-        if (order.complete()) {
-            outboxRepository.save(OutboxEvent.orderCompleted(order));
-            recordHistory(order, fromStatus, "ORDER_COMPLETED");
-        }
-        return OrderResponse.from(order);
-    }
-
-    @Transactional
-    public int expireCreatedOrdersBefore(Instant createdBefore) {
-        List<SalesOrder> orders = orderRepository.findTop50ByStatusAndCreatedAtBeforeOrderByCreatedAtAsc(
-                OrderStatus.CREATED,
-                createdBefore
-        );
-
-        int expired = 0;
-        Instant expiredAt = Instant.now();
-        for (SalesOrder order : orders) {
-            OrderStatus fromStatus = order.getStatus();
-            if (order.expire(expiredAt)) {
-                inventoryService.releaseReserved(order.quantitiesByProductId());
-                outboxRepository.save(OutboxEvent.orderExpired(order));
-                recordHistory(order, fromStatus, "ORDER_EXPIRED");
-                expired++;
-            }
-        }
-        return expired;
-    }
-
-    private CreateOrderResult replayExistingOrder(IdempotencyStoreEntry existing, String requestFingerprint) {
-        String existingFingerprint = existing.requestFingerprint();
-        if (StringUtils.hasText(existingFingerprint) && !existingFingerprint.equals(requestFingerprint)) {
-            throw new BusinessException(HttpStatus.CONFLICT, "IDEMPOTENCY_KEY_REUSED_WITH_DIFFERENT_REQUEST",
-                    "Idempotency-Key was already used for a different create order request");
-        }
-        return new CreateOrderResult(OrderResponse.from(existing.order()), true);
-    }
-
-    private CreateOrderResult placeNewOrder(
-            String idempotencyKey,
-            CreateOrderRequest request,
-            String requestFingerprint
-    ) {
-        Map<Long, Integer> quantities = aggregateQuantities(request);
-        Map<Long, Product> products = loadProducts(quantities);
-        inventoryService.reserve(quantities);
-
-        List<OrderLineDraft> drafts = quantities.entrySet().stream()
-                .map(entry -> {
-                    Product product = products.get(entry.getKey());
-                    return new OrderLineDraft(product.getId(), product.getName(), product.getPrice(), entry.getValue());
+    List<OrderLineDraft> drafts =
+        quantities.entrySet().stream()
+            .map(
+                entry -> {
+                  Product product = products.get(entry.getKey());
+                  return new OrderLineDraft(
+                      product.getId(), product.getName(), product.getPrice(), entry.getValue());
                 })
-                .toList();
+            .toList();
 
-        SalesOrder order = SalesOrder.place(request.customerId(), idempotencyKey, requestFingerprint, drafts);
-        SalesOrder saved = idempotencyStore.saveNewOrder(order);
-        outboxRepository.save(OutboxEvent.orderCreated(saved));
-        recordHistory(saved, null, "ORDER_CREATED");
-        return new CreateOrderResult(OrderResponse.from(saved), false);
+    SalesOrder order =
+        SalesOrder.place(request.customerId(), idempotencyKey, requestFingerprint, drafts);
+    SalesOrder saved = idempotencyStore.saveNewOrder(order);
+    outboxRepository.save(OutboxEvent.orderCreated(saved));
+    recordHistory(saved, null, "ORDER_CREATED");
+    return new CreateOrderResult(OrderResponse.from(saved), false);
+  }
+
+  private void recordHistory(SalesOrder order, OrderStatus fromStatus, String action) {
+    orderStatusHistoryRepository.save(
+        OrderStatusHistory.record(order.getId(), fromStatus, order.getStatus(), action));
+  }
+
+  private Map<Long, Integer> aggregateQuantities(CreateOrderRequest request) {
+    return request.items().stream()
+        .collect(
+            Collectors.toMap(
+                CreateOrderLineRequest::productId,
+                CreateOrderLineRequest::quantity,
+                Integer::sum,
+                LinkedHashMap::new));
+  }
+
+  private Map<Long, Product> loadProducts(Map<Long, Integer> quantities) {
+    Map<Long, Product> products =
+        productRepository.findAllById(quantities.keySet()).stream()
+            .filter(Product::isActive)
+            .collect(Collectors.toMap(Product::getId, Function.identity()));
+
+    quantities.keySet().stream()
+        .filter(productId -> !products.containsKey(productId))
+        .findFirst()
+        .ifPresent(
+            productId -> {
+              throw BusinessException.notFound(
+                  "PRODUCT_NOT_FOUND", "Product " + productId + " was not found");
+            });
+
+    return products;
+  }
+
+  private SalesOrder findOrder(Long orderId) {
+    return orderRepository
+        .findById(orderId)
+        .orElseThrow(
+            () ->
+                BusinessException.notFound(
+                    "ORDER_NOT_FOUND", "Order " + orderId + " was not found"));
+  }
+
+  private void requireIdempotencyKey(String idempotencyKey) {
+    if (!StringUtils.hasText(idempotencyKey)) {
+      throw BusinessException.invalidInput(
+          "IDEMPOTENCY_KEY_REQUIRED", "Idempotency-Key header is required");
     }
-
-    private void recordHistory(SalesOrder order, OrderStatus fromStatus, String action) {
-        orderStatusHistoryRepository.save(
-                OrderStatusHistory.record(order.getId(), fromStatus, order.getStatus(), action)
-        );
+    if (idempotencyKey.length() > 120) {
+      throw BusinessException.invalidInput(
+          "IDEMPOTENCY_KEY_TOO_LONG", "Idempotency-Key must not be longer than 120 characters");
     }
-
-    private Map<Long, Integer> aggregateQuantities(CreateOrderRequest request) {
-        return request.items().stream()
-                .collect(Collectors.toMap(
-                        CreateOrderLineRequest::productId,
-                        CreateOrderLineRequest::quantity,
-                        Integer::sum,
-                        LinkedHashMap::new
-                ));
-    }
-
-    private Map<Long, Product> loadProducts(Map<Long, Integer> quantities) {
-        Map<Long, Product> products = productRepository.findAllById(quantities.keySet()).stream()
-                .filter(Product::isActive)
-                .collect(Collectors.toMap(Product::getId, Function.identity()));
-
-        quantities.keySet().stream()
-                .filter(productId -> !products.containsKey(productId))
-                .findFirst()
-                .ifPresent(productId -> {
-                    throw new BusinessException(HttpStatus.NOT_FOUND, "PRODUCT_NOT_FOUND",
-                            "Product " + productId + " was not found");
-                });
-
-        return products;
-    }
-
-    private SalesOrder findOrder(Long orderId) {
-        return orderRepository.findById(orderId)
-                .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "ORDER_NOT_FOUND",
-                        "Order " + orderId + " was not found"));
-    }
-
-    private void requireIdempotencyKey(String idempotencyKey) {
-        if (!StringUtils.hasText(idempotencyKey)) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, "IDEMPOTENCY_KEY_REQUIRED",
-                    "Idempotency-Key header is required");
-        }
-        if (idempotencyKey.length() > 120) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, "IDEMPOTENCY_KEY_TOO_LONG",
-                    "Idempotency-Key must not be longer than 120 characters");
-        }
-    }
+  }
 }

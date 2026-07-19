@@ -18,24 +18,24 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 | --- | --- | --- | --- |
 | E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | implementation `29221687479` and closeout `29222696374` green |
 | E2 Static analysis | Spotless ratchet and SpotBugs check in `pom.xml`; 686-entry shrink-only exclusion baseline | Maven verify plus `JavaEleganceGateTests.spotbugsBaselineOnlyShrinks` | local verify green; SpotBugs 0/0 |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | local verify green; 2229 classes |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | current local verify green; 2319 classes |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
 | E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | tag and canonical remote verified; external review pending |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus changed-file gate | extraction, maintainability, and elegance ratchets | v1869 focused gate green |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1869-authorized exact set: 1680 files / 19849915 raw bytes |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus changed-file gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1870 full local verify green |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1870-authorized exact set: 1681 files / 19864889 raw bytes |
 
 ## Final Censuses
 
 - Ops direct root: 104 files; retained: 104; remaining movable: 0; unassigned: 0.
 - Ops total production Java files: 1,352; no extraction family remains in root.
 - Production Java: 1,483 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
-- Test Java: 886 files; maximum 699 lines; over 500: 8;
+- Test Java: 887 files; maximum 699 lines; over 500: 8;
   over 750/1000: 0/0.
-- Long-name shrink-only baseline: production stems/uses/unique 1297/21169/2857;
-  tests 795/10226/3834. New and touched names remain within 40 characters.
+- Long-name shrink-only baseline: production stems/uses/unique 1297/21167/2856;
+  tests 795/10225/3833. New and touched names remain within 40 characters.
 - Exact long-name identities are frozen in `config/java-name-baseline.txt`; v1869 adds
   Git-aware tests that reject new names, dirty-tree blind spots, oversized feature-source
   growth, and undocumented three-file families.
@@ -43,8 +43,8 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
   v1867 repointed 735 reads in 160 files to leaf owners and removed 239 pure forwarding
   aliases without changing route bytes or the root-versus-leaf compatibility response.
 - SpotBugs exclusions: at most 686 `<Match>` blocks and shrink-only.
-- Archive retention: v1869's user-authorized optimization adds exactly one walkthrough;
-  the current exact set is 1,680 files / 19,849,915 raw bytes.
+- Archive retention: v1870's user-authorized optimization adds exactly one walkthrough;
+  the current exact set is 1,681 files / 19,864,889 raw bytes.
 
 ## Active Waivers
 
@@ -75,6 +75,11 @@ the canonical `javaproject` remote and its closeout workflow must be green.
 Final repaired local result: `mvnw -B verify` passed in 547.5 seconds with 1,915 tests,
 zero failures/errors/skips, 2,229 JaCoCo classes and every raised floor met.
 SpotBugs reported `BugInstance=0` and `Error=0`; the packaged jar was produced.
+
+Current v1870 local result: the repaired `mvnw -B verify` run wrote 829 current
+Surefire reports covering 1,926 tests with zero failures, errors, or skips. The
+JaCoCo report covers 2,319 classes and every configured floor passed before the build
+produced the executable jar. SpotBugs then reported zero `BugInstance` findings.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

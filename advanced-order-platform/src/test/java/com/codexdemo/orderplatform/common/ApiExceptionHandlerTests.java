@@ -27,7 +27,27 @@ class ApiExceptionHandlerTests {
   }
 
   @Test
-  void mapsConstraintViolationsToValidationProblemDetails(CapturedOutput output) {
+  void mapsBusinessFailures(CapturedOutput output) {
+    MDC.put("traceId", "trace-v1870");
+    MDC.put("spanId", "span-v1870");
+
+    assertProblem(BusinessException.invalidInput("INVALID_INPUT", "invalid"), 400);
+    assertProblem(BusinessException.conflict("CONFLICT", "conflict"), 409);
+    assertProblem(BusinessException.notFound("NOT_FOUND", "missing"), 404);
+
+    assertThat(output)
+        .contains("code=INVALID_INPUT")
+        .contains("status=400")
+        .contains("code=CONFLICT")
+        .contains("status=409")
+        .contains("code=NOT_FOUND")
+        .contains("status=404")
+        .contains("traceId=trace-v1870")
+        .contains("spanId=span-v1870");
+  }
+
+  @Test
+  void mapsConstraintViolations(CapturedOutput output) {
     MDC.put("traceId", "trace-j4-validation");
     MDC.put("spanId", "span-j4-validation");
     ConstraintViolationException exception =
@@ -43,6 +63,15 @@ class ApiExceptionHandlerTests {
         .contains("constraint validation failed")
         .contains("traceId=trace-j4-validation")
         .contains("spanId=span-j4-validation");
+  }
+
+  private void assertProblem(BusinessException exception, int expectedStatus) {
+    ProblemDetail detail = handler.handleBusinessException(exception);
+
+    assertThat(detail.getStatus()).isEqualTo(expectedStatus);
+    assertThat(detail.getTitle()).isEqualTo(exception.getCode());
+    assertThat(detail.getDetail()).isEqualTo(exception.getMessage());
+    assertThat(detail.getType().toString()).endsWith("/" + exception.getCode());
   }
 
   private record SampleRequest(@NotBlank String value) {}

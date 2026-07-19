@@ -4,6 +4,16 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1870 - Framework-independent business errors
+
+- Moves HTTP status selection out of business exceptions, order entities, and inventory
+  services; the Web exception handler now owns one exhaustive business-kind mapping.
+- Replaces a long derived-query name with an explicit locked, ordered, 50-row expiry
+  query while preserving the existing database behavior.
+- Collapses repeated inventory iteration, quantity guards, inventory lookup failures, and
+  order state transitions; the production diff is net shrinking after Spotless normalization.
+- Adds a source-scanning HTTP boundary test and shrinks the exact long-name baseline.
+
 ## v1869 - Diff-aware elegance gates
 
 - Replaces aggregate-only long-name protection with an exact, reproducible baseline of

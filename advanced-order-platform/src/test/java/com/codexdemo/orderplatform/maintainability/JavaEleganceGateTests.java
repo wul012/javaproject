@@ -28,8 +28,8 @@ class JavaEleganceGateTests {
 
   @Test
   void longNameBaselinesOnlyShrink() throws IOException {
-    assertWithin(metrics(MAIN_ROOT), new NameMetrics(1297, 21169, 2857));
-    assertWithin(metrics(TEST_ROOT), new NameMetrics(795, 10226, 3834));
+    assertWithin(metrics(MAIN_ROOT), new NameMetrics(1297, 21167, 2856));
+    assertWithin(metrics(TEST_ROOT), new NameMetrics(795, 10225, 3833));
   }
 
   @Test

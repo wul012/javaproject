@@ -133,6 +133,10 @@ v1869, `config/java-name-baseline.txt`, `JavaEleganceGateTests`, and
 production-source growth cap, and bounded family design notes. Ratchets only tighten;
 baseline entries may only be removed.
 
+Since v1870, `HttpBoundaryTests` mechanically reserves Spring HTTP imports for Controller
+adapters in the order/inventory slices and for the common exception handler. Business
+exceptions, entities, repositories, and services carry business failure kinds instead.
+
 - Name budget: no new identifier or filename over 40 characters. A name that wants more
   nouns means a missing abstraction — extract and name the concept instead. Existing
   over-budget names: baseline census, shrink-only; renames only where route strings,

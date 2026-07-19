@@ -20,17 +20,25 @@ public class ApiExceptionHandler {
   @ExceptionHandler(BusinessException.class)
   public ProblemDetail handleBusinessException(BusinessException exception) {
     RequestLogCorrelation.Correlation correlation = RequestLogCorrelation.current();
+    HttpStatus status = statusFor(exception.getKind());
     log.warn(
         "business exception handled code={} status={} traceId={} spanId={}",
         exception.getCode(),
-        exception.getStatus().value(),
+        status.value(),
         correlation.traceId(),
         correlation.spanId());
-    ProblemDetail detail =
-        ProblemDetail.forStatusAndDetail(exception.getStatus(), exception.getMessage());
+    ProblemDetail detail = ProblemDetail.forStatusAndDetail(status, exception.getMessage());
     detail.setType(URI.create("https://advanced-order-platform/errors/" + exception.getCode()));
     detail.setTitle(exception.getCode());
     return detail;
+  }
+
+  private static HttpStatus statusFor(BusinessException.Kind kind) {
+    return switch (kind) {
+      case INVALID_INPUT -> HttpStatus.BAD_REQUEST;
+      case CONFLICT -> HttpStatus.CONFLICT;
+      case NOT_FOUND -> HttpStatus.NOT_FOUND;
+    };
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)

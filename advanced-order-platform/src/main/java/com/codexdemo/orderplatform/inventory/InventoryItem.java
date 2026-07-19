@@ -8,97 +8,97 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
-import org.springframework.http.HttpStatus;
 
 @Entity
 @Table(name = "inventory_items")
 public class InventoryItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false, unique = true)
-    private Long productId;
+  @Column(nullable = false, unique = true)
+  private Long productId;
 
-    @Column(nullable = false)
-    private int available;
+  @Column(nullable = false)
+  private int available;
 
-    @Column(nullable = false)
-    private int reserved;
+  @Column(nullable = false)
+  private int reserved;
 
-    @Version
-    private long version;
+  @Version private long version;
 
-    protected InventoryItem() {
+  protected InventoryItem() {}
+
+  private InventoryItem(Long productId, int available) {
+    this.productId = productId;
+    this.available = available;
+  }
+
+  public static InventoryItem create(Long productId, int available) {
+    return new InventoryItem(productId, available);
+  }
+
+  public void reserve(int quantity) {
+    requirePositive(quantity);
+    if (available < quantity) {
+      throw BusinessException.conflict(
+          "INSUFFICIENT_STOCK",
+          "Product " + productId + " has only " + available + " units available");
     }
+    available -= quantity;
+    reserved += quantity;
+  }
 
-    private InventoryItem(Long productId, int available) {
-        this.productId = productId;
-        this.available = available;
-        this.reserved = 0;
-    }
+  public void commitReserved(int quantity) {
+    requireReserved(quantity, "commit");
+    reserved -= quantity;
+  }
 
-    public static InventoryItem create(Long productId, int available) {
-        return new InventoryItem(productId, available);
-    }
+  public void returnCommitted(int quantity) {
+    requirePositive(quantity);
+    available += quantity;
+  }
 
-    public void reserve(int quantity) {
-        if (quantity <= 0) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, "INVALID_QUANTITY", "Quantity must be greater than zero");
-        }
-        if (available < quantity) {
-            throw new BusinessException(HttpStatus.CONFLICT, "INSUFFICIENT_STOCK",
-                    "Product " + productId + " has only " + available + " units available");
-        }
-        available -= quantity;
-        reserved += quantity;
-    }
+  public void releaseReserved(int quantity) {
+    requirePositive(quantity);
+    requireReserved(quantity, "release");
+    reserved -= quantity;
+    available += quantity;
+  }
 
-    public void commitReserved(int quantity) {
-        if (reserved < quantity) {
-            throw new BusinessException(HttpStatus.CONFLICT, "RESERVATION_MISMATCH",
-                    "Product " + productId + " reservation is lower than requested commit quantity");
-        }
-        reserved -= quantity;
+  private void requirePositive(int quantity) {
+    if (quantity <= 0) {
+      throw BusinessException.invalidInput(
+          "INVALID_QUANTITY", "Quantity must be greater than zero");
     }
+  }
 
-    public void returnCommitted(int quantity) {
-        if (quantity <= 0) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, "INVALID_QUANTITY", "Quantity must be greater than zero");
-        }
-        available += quantity;
+  private void requireReserved(int quantity, String action) {
+    if (reserved < quantity) {
+      throw BusinessException.conflict(
+          "RESERVATION_MISMATCH",
+          "Product " + productId + " reservation is lower than requested " + action + " quantity");
     }
+  }
 
-    public void releaseReserved(int quantity) {
-        if (quantity <= 0) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, "INVALID_QUANTITY", "Quantity must be greater than zero");
-        }
-        if (reserved < quantity) {
-            throw new BusinessException(HttpStatus.CONFLICT, "RESERVATION_MISMATCH",
-                    "Product " + productId + " reservation is lower than requested release quantity");
-        }
-        reserved -= quantity;
-        available += quantity;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getProductId() {
+    return productId;
+  }
 
-    public Long getProductId() {
-        return productId;
-    }
+  public int getAvailable() {
+    return available;
+  }
 
-    public int getAvailable() {
-        return available;
-    }
+  public int getReserved() {
+    return reserved;
+  }
 
-    public int getReserved() {
-        return reserved;
-    }
-
-    public long getVersion() {
-        return version;
-    }
+  public long getVersion() {
+    return version;
+  }
 }
