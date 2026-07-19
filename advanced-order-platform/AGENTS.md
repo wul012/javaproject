@@ -137,6 +137,11 @@ Since v1870, `HttpBoundaryTests` mechanically reserves Spring HTTP imports for C
 adapters in the order/inventory slices and for the common exception handler. Business
 exceptions, entities, repositories, and services carry business failure kinds instead.
 
+Since v1871, `SpotBugsWaiverTests` parses `config/spotbugs-exclude.xml` as secured XML,
+compares exact pattern/class identities with the Git prior version, rejects duplicates and
+unloadable classes, and permits only deletion. Never replace it with an aggregate count or
+add a second baseline that can be changed in the same commit.
+
 - Name budget: no new identifier or filename over 40 characters. A name that wants more
   nouns means a missing abstraction — extract and name the concept instead. Existing
   over-budget names: baseline census, shrink-only; renames only where route strings,

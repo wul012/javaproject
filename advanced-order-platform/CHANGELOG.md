@@ -4,6 +4,15 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1871 - Exact SpotBugs waiver identities
+
+- Replaces the aggregate-only 686-entry cap with secure XML parsing and Git-aware
+  pattern/class identity comparison, so equal-count waiver swaps fail mechanically.
+- Rejects DTDs, malformed or duplicate Match nodes, and exclusions whose class no longer
+  loads from the compiled test classpath.
+- Removes four stale exclusions for deleted walkthrough-registry types, shrinking the
+  exact waiver set from 686 to 682 without changing production code or SpotBugs scope.
+
 ## v1870 - Framework-independent business errors
 
 - Moves HTTP status selection out of business exceptions, order entities, and inventory

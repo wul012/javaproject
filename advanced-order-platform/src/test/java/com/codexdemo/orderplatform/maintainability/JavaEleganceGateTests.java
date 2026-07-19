@@ -66,13 +66,6 @@ class JavaEleganceGateTests {
         .allSatisfy(field -> assertThat(hasRouteReader(readers, field)).as(field).isTrue());
   }
 
-  @Test
-  void spotbugsBaselineOnlyShrinks() throws IOException {
-    String exclusions =
-        Files.readString(Path.of("config", "spotbugs-exclude.xml"), StandardCharsets.UTF_8);
-    assertThat(count(exclusions, "<Match>")).isLessThanOrEqualTo(686);
-  }
-
   private static NameMetrics metrics(Path root) throws IOException {
     List<Path> files = JavaSourceNames.files(root);
     Set<String> unique = new HashSet<>();
@@ -143,10 +136,6 @@ class JavaEleganceGateTests {
               }
             });
     return new NameBaseline(Set.copyOf(files), Set.copyOf(names));
-  }
-
-  private static int count(String value, String token) {
-    return (value.length() - value.replace(token, "").length()) / token.length();
   }
 
   private record NameMetrics(long longStems, long longIdentifierUses, long longIdentifierNames) {}

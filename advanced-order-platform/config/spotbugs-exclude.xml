@@ -4,6 +4,7 @@
   Ratchet pool: shrink, never grow. Remove Match entries when fixing legacy findings;
   do not add entries for new findings unless a follow-up review explicitly accepts the debt.
   Source findings: 2602 BugInstance entries collapsed into 686 class-pattern matches.
+  v1871 removed four stale identities; the exact current set is 682 and may only shrink.
 -->
 <FindBugsFilter>
   <Match>
@@ -257,14 +258,6 @@
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
     <Class name="com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentSubmissionPrecheckResponse" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse$MarkdownSection" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP" />
@@ -1609,14 +1602,6 @@
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
     <Class name="com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentSubmissionPrecheckResponse" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse" />
-  </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP2" />
-    <Class name="com.codexdemo.orderplatform.ops.OpsShardReadinessCodeWalkthroughComplianceRegistryResponse$MarkdownSection" />
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />

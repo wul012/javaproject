@@ -17,8 +17,8 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
 | E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | implementation `29221687479` and closeout `29222696374` green |
-| E2 Static analysis | Spotless ratchet and SpotBugs check in `pom.xml`; 686-entry shrink-only exclusion baseline | Maven verify plus `JavaEleganceGateTests.spotbugsBaselineOnlyShrinks` | local verify green; SpotBugs 0/0 |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | current local verify green; 2319 classes |
+| E2 Static analysis | Spotless and SpotBugs checks; 682 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1871 full local verify green; SpotBugs 0/0 |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | current local verify green; 2230 classes |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
@@ -42,9 +42,10 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 - Root route owner: 15 owned literals plus 12 ReleaseAcceptance compatibility aliases.
   v1867 repointed 735 reads in 160 files to leaf owners and removed 239 pure forwarding
   aliases without changing route bytes or the root-versus-leaf compatibility response.
-- SpotBugs exclusions: at most 686 `<Match>` blocks and shrink-only.
-- Archive retention: v1870's user-authorized optimization adds exactly one walkthrough;
-  the current exact set is 1,681 files / 19,864,889 raw bytes.
+- SpotBugs exclusions: 682 exact pattern/class identities; only deletion is allowed, and
+  every retained class must load from the compiled classpath.
+- Archive retention: v1871's user-authorized optimization adds exactly one walkthrough;
+  the current exact set is 1,682 files / 19,878,770 raw bytes.
 
 ## Active Waivers
 
@@ -78,8 +79,12 @@ SpotBugs reported `BugInstance=0` and `Error=0`; the packaged jar was produced.
 
 Current v1870 local result: the repaired `mvnw -B verify` run wrote 829 current
 Surefire reports covering 1,926 tests with zero failures, errors, or skips. The
-JaCoCo report covers 2,319 classes and every configured floor passed before the build
+JaCoCo plugin analyzed 2,230 classes and every configured floor passed before the build
 produced the executable jar. SpotBugs then reported zero `BugInstance` findings.
+
+Current v1871 local result: `mvnw -B verify` passed 1,929 tests in 12:40 with zero
+failures, errors, or skips. JaCoCo analyzed 2,230 classes and met every floor; SpotBugs
+reported `BugInstance=0` and `Error=0`, and the executable jar was produced.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

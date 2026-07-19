@@ -38,7 +38,7 @@
 讲解与归档聚焦门 10/10 通过。审批恢复后重新执行完整 `mvnw -B verify`，本轮新写入的
 829 份 Surefire 报告合计 1,926 项测试，失败、错误、跳过均为 0；报告时间从
 2026-07-19 22:17:51 延续到 22:32:13，随后在 22:32:28 产出可执行 jar，在 22:32:38
-产出覆盖 2,319 个类的 JaCoCo 报告，并在 22:33:54 产出 0 个 `BugInstance` 的 SpotBugs
+产出由 JaCoCo 插件分析 2,230 个类的报告，并在 22:33:54 产出 0 个 `BugInstance` 的 SpotBugs
 报告。由此确认修复后的本地全量门完整通过；提交后的 canonical CI 仍必须独立复验。
 实现提交 `5d241b90` 的 canonical Actions `29691378022` 随后双绿：Docker-tagged job
 用时 1:54，headless job 用时 18:58；后者包含 Spotless、完整 wrapper verify、生产 profile
