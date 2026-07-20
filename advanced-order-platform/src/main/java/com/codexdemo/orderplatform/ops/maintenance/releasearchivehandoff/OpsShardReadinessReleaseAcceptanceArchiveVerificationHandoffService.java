@@ -77,7 +77,7 @@ public class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService
         retentionGuards,
         closeoutHandoffs,
         scorecard,
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffRenderer.render(
+        ReportRenderer.render(
             sourceArchiveSnapshots,
             verificationRequirements,
             artifactCrossChecks,

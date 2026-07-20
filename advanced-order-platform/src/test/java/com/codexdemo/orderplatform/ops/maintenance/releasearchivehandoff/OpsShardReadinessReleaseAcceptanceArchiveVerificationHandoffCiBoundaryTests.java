@@ -8,8 +8,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffCiBoundaryTest
 
   @Test
   void preservesReadOnlyCiProofOrder() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.ciProofCount()).isEqualTo(5);
     assertThat(response.passedCiProofCount()).isEqualTo(5);
@@ -29,8 +28,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffCiBoundaryTest
 
   @Test
   void keepsBoundaryGuardsLockedForArchiveVerification() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.boundaryGuardCount()).isEqualTo(8);
     assertThat(response.lockedBoundaryGuardCount()).isEqualTo(8);

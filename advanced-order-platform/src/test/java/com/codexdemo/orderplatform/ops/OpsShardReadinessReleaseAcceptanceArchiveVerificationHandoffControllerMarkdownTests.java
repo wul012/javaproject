@@ -3,8 +3,8 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff.HandoffTestData;
 import com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse;
-import com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffControllerMarkdownTests {
@@ -24,7 +24,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffControllerMark
 
     var response =
         new OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffController(
-                OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.service())
+                HandoffTestData.service())
             .registry();
 
     assertThat(response.version()).isEqualTo("Java v1547");
@@ -37,8 +37,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffControllerMark
 
   @Test
   void rendersStableArchiveVerificationHandoffMarkdownAndChecks() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.markdownSectionCount()).isEqualTo(10);
     assertThat(response.markdownSections())

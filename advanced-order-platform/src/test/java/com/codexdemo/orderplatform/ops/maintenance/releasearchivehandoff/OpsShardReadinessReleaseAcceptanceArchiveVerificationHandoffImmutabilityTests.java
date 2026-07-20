@@ -9,8 +9,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffImmutabilityTe
 
   @Test
   void responseCollectionsAreImmutableCopies() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThatThrownBy(() -> response.checks().add("late-mutation"))
         .isInstanceOf(UnsupportedOperationException.class);

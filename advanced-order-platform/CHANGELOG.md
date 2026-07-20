@@ -4,6 +4,23 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1878 - Release-archive handoff renderer convergence
+
+- Reuses `MarkdownSections.counted` and one 230-line typed `ReportRenderer`, deleting
+  ten section renderers, their aggregate renderer, and the support shell.
+- Freezes all ten headings and 67 content lines with an oracle that passed against the
+  legacy implementation before deletion and then passed unchanged after replacement.
+- Replaces the long test factory with `HandoffTestData`; the upstream archive registry
+  and downstream route-path-split continue through the same public service boundaries.
+- Shrinks the family `25 -> 14`, ops Java `1304 -> 1293`, renderers `77 -> 67`,
+  renderer lines `4376 -> 4211`, and long renderer filenames `70 -> 59` without
+  changing routes, response records, Catalog data, transactions, or authority.
+- Core behavior, downstream, historical structure, elegance, change, and census gates
+  pass 68/68; the walkthrough has 4,541 Han characters and ten standard headings.
+- Full `mvnw -B verify` passes 1,949 tests in 9:16 with zero failures, errors, or
+  skips; JaCoCo analyzes 2,172 classes with every floor met, SpotBugs reports 0/0,
+  and the executable jar is packaged. Remote Actions, closeout, and tag remain gates.
+
 ## v1877 - Archive-registry renderer convergence
 
 - Reuses `MarkdownSections.counted` and one 203-line typed `ReportRenderer`, deleting

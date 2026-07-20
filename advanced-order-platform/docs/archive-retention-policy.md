@@ -108,3 +108,12 @@ verification dossier 的十段输入、无计数映射引擎、逐行 oracle、�
 与结构 ratchet；没有移动、重写或删除任何历史归档。重建后的精确集合为
 `1,688 files / 19,983,220 raw bytes`。本次上调严格等于这一份 15,362 字节讲解的增量，
 不是后续版本的预留预算。
+
+## Authorized v1878 Extension
+
+用户于 2026-07-20 继续授权 Java coding brilliant and elegant 九分计划。v1878 只新增
+`代码讲解记录_生产雏形阶段9/v1878-v1882/v1878-release-archive-handoff-renderer-engine.md`，
+用于解释 release-archive handoff 的十组输入、十节 67 行旧实现 oracle、上下游依赖、
+mini-kv 零执行边界与只减不增的结构门；没有移动、改写或删除任何历史归档。重建后的
+精确集合为 `1,689 files / 20,003,703 raw bytes`。本次上调严格等于这一份 20,483 字节
+讲解的增量，不是后续版本的预留预算。

@@ -8,8 +8,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffSourceRequirem
 
   @Test
   void buildsArchiveVerificationHandoffFromArchiveRegistry() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1547");
@@ -33,8 +32,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffSourceRequirem
 
   @Test
   void keepsArchiveVerificationHandoffStrictlyReadOnly() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -47,8 +45,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffSourceRequirem
 
   @Test
   void carriesSourceSnapshotAndVerificationRequirements() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.sourceArchiveSnapshotCount()).isEqualTo(1);
     assertThat(response.sourceArchiveSnapshots())

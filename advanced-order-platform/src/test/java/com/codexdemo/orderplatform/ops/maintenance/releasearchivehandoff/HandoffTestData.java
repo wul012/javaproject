@@ -2,9 +2,9 @@ package com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff;
 
 import com.codexdemo.orderplatform.ops.maintenance.ciarc.ArchiveTestData;
 
-public final class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport {
+public final class HandoffTestData {
 
-  private OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport() {}
+  private HandoffTestData() {}
 
   public static OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService service() {
     return new OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService(

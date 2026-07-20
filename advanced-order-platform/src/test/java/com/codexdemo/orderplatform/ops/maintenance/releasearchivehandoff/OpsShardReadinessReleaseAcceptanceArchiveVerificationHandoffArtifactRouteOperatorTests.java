@@ -8,8 +8,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffArtifactRouteO
 
   @Test
   void carriesArtifactCrossChecksFromArchiveManifest() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.artifactCrossCheckCount()).isEqualTo(7);
     assertThat(response.passedArtifactCrossCheckCount()).isEqualTo(7);
@@ -29,8 +28,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffArtifactRouteO
 
   @Test
   void preservesRouteHandoffReceivers() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.routeHandoffCount()).isEqualTo(4);
     assertThat(response.readyRouteHandoffCount()).isEqualTo(4);
@@ -47,8 +45,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffArtifactRouteO
 
   @Test
   void createsOperatorInstructionsForNodeV368ArchiveVerification() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.operatorInstructionCount()).isEqualTo(4);
     assertThat(response.readyOperatorInstructionCount()).isEqualTo(4);

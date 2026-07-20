@@ -32,51 +32,60 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
   private static final String PACKAGE_IMPORT = "ops.maintenance.releasearchivehandoff";
   private static final String PREFIX =
       "OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoff";
-  private static final List<String> MOVED_FILES =
+  private static final List<String> CURRENT_FILES =
       List.of(
           PREFIX + "ArtifactCatalog.java",
-          PREFIX + "ArtifactRenderer.java",
           PREFIX + "BoundaryCatalog.java",
-          PREFIX + "BoundaryRenderer.java",
           PREFIX + "CiCatalog.java",
-          PREFIX + "CiRenderer.java",
           PREFIX + "CloseoutCatalog.java",
-          PREFIX + "CloseoutRenderer.java",
           PREFIX + "OperatorCatalog.java",
+          PREFIX + "RequirementCatalog.java",
+          PREFIX + "Response.java",
+          PREFIX + "RetentionCatalog.java",
+          PREFIX + "RouteCatalog.java",
+          PREFIX + "ScorecardCatalog.java",
+          PREFIX + "Service.java",
+          PREFIX + "SourceCatalog.java",
+          PREFIX + "Support.java",
+          "ReportRenderer.java");
+  private static final List<String> REMOVED_RENDERER_FILES =
+      List.of(
+          PREFIX + "ArtifactRenderer.java",
+          PREFIX + "BoundaryRenderer.java",
+          PREFIX + "CiRenderer.java",
+          PREFIX + "CloseoutRenderer.java",
           PREFIX + "OperatorRenderer.java",
           PREFIX + "Renderer.java",
           PREFIX + "RendererSupport.java",
-          PREFIX + "RequirementCatalog.java",
           PREFIX + "RequirementRenderer.java",
-          PREFIX + "Response.java",
-          PREFIX + "RetentionCatalog.java",
           PREFIX + "RetentionRenderer.java",
-          PREFIX + "RouteCatalog.java",
           PREFIX + "RouteRenderer.java",
-          PREFIX + "ScorecardCatalog.java",
           PREFIX + "ScorecardRenderer.java",
-          PREFIX + "Service.java",
-          PREFIX + "SourceCatalog.java",
-          PREFIX + "SourceRenderer.java",
-          PREFIX + "Support.java");
-  private static final List<String> MOVED_TEST_FILES =
+          PREFIX + "SourceRenderer.java");
+  private static final List<String> REQUIRED_TEST_FILES =
       List.of(
+          "HandoffMarkdownTests.java",
+          "HandoffTestData.java",
           PREFIX + "ArtifactRouteOperatorTests.java",
           PREFIX + "CiBoundaryTests.java",
           PREFIX + "ImmutabilityTests.java",
           PREFIX + "RetentionCloseoutScorecardTests.java",
-          PREFIX + "SourceRequirementTests.java",
-          PREFIX + "TestSupport.java");
+          PREFIX + "SourceRequirementTests.java");
 
   @Test
   void handoffImplementationMovesWhileControllerStaysRootVisible() throws IOException {
-    assertThat(MOVED_FILES).hasSize(25);
-    for (String file : MOVED_FILES) {
+    assertThat(CURRENT_FILES).hasSize(14);
+    for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
     }
+    for (String file : REMOVED_RENDERER_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
+      assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
+    }
     try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(25);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(14);
     }
     Path controller = OPS_ROOT.resolve(PREFIX + "Controller.java");
     assertThat(Files.isRegularFile(controller)).isTrue();
@@ -85,13 +94,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
 
   @Test
   void packageTestsMoveWhileControllerMarkdownTestStaysRoot() throws IOException {
-    assertThat(MOVED_TEST_FILES).hasSize(6);
-    for (String file : MOVED_TEST_FILES) {
+    assertThat(REQUIRED_TEST_FILES).hasSize(7);
+    for (String file : REQUIRED_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(6);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(7);
     }
     Path controllerTest = TEST_ROOT.resolve(PREFIX + "ControllerMarkdownTests.java");
     assertThat(Files.isRegularFile(controllerTest)).isTrue();
@@ -136,7 +146,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(1352);
+          .hasSizeLessThanOrEqualTo(1293);
     }
   }
 

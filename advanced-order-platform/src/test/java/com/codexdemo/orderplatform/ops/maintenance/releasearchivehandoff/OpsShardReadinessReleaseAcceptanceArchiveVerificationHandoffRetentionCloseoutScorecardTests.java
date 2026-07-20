@@ -8,8 +8,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffRetentionClose
 
   @Test
   void carriesRetentionGuardsAndCloseoutHandoffs() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.retentionGuardCount()).isEqualTo(5);
     assertThat(response.readyRetentionGuardCount()).isEqualTo(5);
@@ -41,8 +40,7 @@ class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffRetentionClose
 
   @Test
   void scorecardRequiresEveryArchiveVerificationHandoffPartToPass() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.scorecardEntryCount()).isEqualTo(9);
     assertThat(response.passedScorecardEntryCount()).isEqualTo(9);
