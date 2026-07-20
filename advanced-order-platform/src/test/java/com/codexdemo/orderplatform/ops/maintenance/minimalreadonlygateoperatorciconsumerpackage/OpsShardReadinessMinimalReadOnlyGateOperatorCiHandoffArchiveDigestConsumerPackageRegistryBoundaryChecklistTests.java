@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesBoundaryLocksAcceptanceAndChecklist() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport
-            .registry();
+    var response = ConsumerPackageTestData.registry();
 
     assertThat(response.acceptanceCriterionCount()).isEqualTo(5);
     assertThat(response.passedAcceptanceCriterionCount()).isEqualTo(5);
@@ -28,9 +26,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void scorecardRequiresEveryConsumerPackagePartToPass() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport
-            .registry();
+    var response = ConsumerPackageTestData.registry();
 
     assertThat(response.scorecardEntryCount()).isEqualTo(8);
     assertThat(response.passedScorecardEntryCount()).isEqualTo(8);

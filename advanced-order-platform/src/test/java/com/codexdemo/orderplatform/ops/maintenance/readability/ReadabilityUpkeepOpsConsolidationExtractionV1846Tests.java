@@ -30,47 +30,56 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1846Tests {
           "version-1846-production-excellence-minimal-read-only-gate-operator-ci-consumer-package-extraction.md");
   private static final String PACKAGE_IMPORT =
       "ops.maintenance.minimalreadonlygateoperatorciconsumerpackage";
-  private static final List<String> MOVED_FILES =
+  private static final List<String> CURRENT_FILES =
       List.of(
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAcceptanceCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAcceptanceRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryLockCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageChecklistCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageChecklistRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageCiMatrixCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageCiMatrixRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageManifestCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageManifestRenderer.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryService.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistrySupport.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRendererSupport.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageScorecardCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageScorecardRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSectionCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSectionRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSourceDigestCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSourceRenderer.java");
-  private static final List<String> MOVED_TEST_FILES =
+          "ReportRenderer.java");
+  private static final List<String> REMOVED_RENDERER_FILES =
       List.of(
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAcceptanceRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageChecklistRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageCiMatrixRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageManifestRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRendererSupport.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageScorecardRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSectionRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSourceRenderer.java");
+  private static final List<String> REQUIRED_TEST_FILES =
+      List.of(
+          "ConsumerPackageMarkdownTests.java",
+          "ConsumerPackageTestData.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryBoundaryChecklistTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryCatalogTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistrySourceTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport.java");
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistrySourceTests.java");
 
   @Test
   void consumerPackageMovesWhileControllerStaysRootVisible() throws IOException {
-    assertThat(MOVED_FILES).hasSize(23);
-    for (String file : MOVED_FILES) {
+    assertThat(CURRENT_FILES).hasSize(13);
+    for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
     }
+    for (String file : REMOVED_RENDERER_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
+      assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
+    }
     try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(23);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(13);
     }
     Path controller =
         OPS_ROOT.resolve(
@@ -81,13 +90,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1846Tests {
 
   @Test
   void packageTestsMoveWhileControllerMarkdownAggregateStaysRoot() throws IOException {
-    assertThat(MOVED_TEST_FILES).hasSize(4);
-    for (String file : MOVED_TEST_FILES) {
+    assertThat(REQUIRED_TEST_FILES).hasSize(5);
+    for (String file : REQUIRED_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(4);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(5);
     }
     Path controllerTest =
         TEST_ROOT.resolve(
@@ -147,7 +157,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1846Tests {
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(1352);
+          .hasSizeLessThanOrEqualTo(1336);
     }
   }
 

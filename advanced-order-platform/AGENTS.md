@@ -148,8 +148,10 @@ their compact constructor and expose only immutable snapshots. Use the shared
 null with an empty list or use `List.copyOf` where null elements are part of validation input.
 
 Since v1873, counted Markdown section families use the shared `MarkdownSections` engine
-and one short family `ReportRenderer`; a third renderer with the same count/map/create
-shape is forbidden. `JavaChangeGateTests` checks only live additions for short filenames,
+and one short family `ReportRenderer`; v1874 proves the second real family reuse and
+deletes ten more one-shot renderers. Any touched counted-section family must converge on
+this engine, and a parallel count/map/create algorithm is forbidden. `JavaChangeGateTests`
+checks only live additions for short filenames,
 while `JavaEleganceGateTests` rejects new long-name identities and any aggregate increase.
 Deleted legacy paths are debt removal, not live source to parse. Do not collapse these
 layered checks back into a whole-file lexical ban that blocks staged legacy migration.

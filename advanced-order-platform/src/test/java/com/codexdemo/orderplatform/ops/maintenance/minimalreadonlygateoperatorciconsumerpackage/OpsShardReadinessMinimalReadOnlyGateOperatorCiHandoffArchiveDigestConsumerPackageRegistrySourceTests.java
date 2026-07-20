@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void buildsConsumerPackageFromArchiveDigestRegistry() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport
-            .registry();
+    var response = ConsumerPackageTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1432");
@@ -34,9 +32,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void keepsConsumerPackageStrictlyReadOnly() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport
-            .registry();
+    var response = ConsumerPackageTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();

@@ -75,16 +75,15 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
             locks,
             checklist,
             scorecard,
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryRenderer
-                .render(
-                    sourceDigests,
-                    manifest,
-                    audiences,
-                    sections,
-                    criteria,
-                    ciMatrix,
-                    locks,
-                    checklist,
-                    scorecard));
+            ReportRenderer.render(
+                sourceDigests,
+                manifest,
+                audiences,
+                sections,
+                criteria,
+                ciMatrix,
+                locks,
+                checklist,
+                scorecard));
   }
 }

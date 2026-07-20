@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $opsRoot = Join-Path $projectRoot 'src/main/java/com/codexdemo/orderplatform/ops'
 $digestRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorcihandoffarchivedigest'
+$consumerRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorciconsumerpackage'
 
 function Get-LineCount {
   param([Parameter(Mandatory = $true)][string]$Path)
@@ -39,6 +40,7 @@ $rows = @(
 
 $renderers = @($rows | Where-Object Renderer)
 $digestFiles = @(& rg --files $digestRoot -g '*.java')
+$consumerFiles = @(& rg --files $consumerRoot -g '*.java')
 $summary = [ordered]@{
   OpsJavaFiles = $rows.Count
   RendererFiles = $renderers.Count
@@ -49,6 +51,7 @@ $summary = [ordered]@{
   FilesOver500Lines = @($rows | Where-Object { $_.Lines -gt 500 }).Count
   MaxLines = ($rows | Measure-Object Lines -Maximum).Maximum
   ArchiveDigestJavaFiles = $digestFiles.Count
+  ConsumerPackageJavaFiles = $consumerFiles.Count
   Hotspots = @(
     $rows |
       Sort-Object -Property @{ Expression = 'Lines'; Descending = $true }, Path |

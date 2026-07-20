@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesManifestAudiencesAndSections() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport
-            .registry();
+    var response = ConsumerPackageTestData.registry();
 
     assertThat(response.sourceDigestSnapshotCount()).isEqualTo(1);
     assertThat(response.manifestEntryCount()).isEqualTo(5);
@@ -34,9 +32,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesFocusedGroupedBuildSmokeCiMatrix() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport
-            .registry();
+    var response = ConsumerPackageTestData.registry();
 
     assertThat(response.ciMatrixEntryCount()).isEqualTo(5);
     assertThat(response.readOnlyCiMatrixEntryCount()).isEqualTo(5);

@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.operatorcidossier;
 
-import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.ConsumerPackageTestData;
 
 public final
 class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport {
@@ -12,8 +12,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryService
       service() {
     return new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryService(
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryTestSupport
-            .service());
+        ConsumerPackageTestData.service());
   }
 
   public static

@@ -4,6 +4,18 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1874 - Consumer-package renderer convergence
+
+- Replaces ten one-shot consumer-package renderers and their support shell with one
+  176-line typed `ReportRenderer` backed by the shared `MarkdownSections` engine.
+- Freezes all nine headings and every emitted Markdown line with an oracle that passed
+  against the legacy implementation before deletion.
+- Shrinks the family from 23 to 13 production files, ops Java `1346 -> 1336`, renderer
+  files `115 -> 106`, renderer lines `5236 -> 5032`, and long renderer filenames
+  `112 -> 102`, without changing routes, response records, catalog data, or authority.
+- Replaces the legacy long-named test support with short typed test data and tightens
+  family, global census, long-name, walkthrough, and archive gates to the new state.
+
 ## v1873 - Declarative Markdown renderer engine
 
 - Replaces seven one-shot archive-digest renderers and one support shell with a shared
