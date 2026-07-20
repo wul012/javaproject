@@ -17,10 +17,6 @@ final class GitChangeSet {
 
   private GitChangeSet() {}
 
-  static Set<Path> changedJavaFiles() throws IOException {
-    return changedFiles(JAVA_ROOTS, ".java");
-  }
-
   static Set<Path> addedJavaFiles() throws IOException {
     return addedFiles(JAVA_ROOTS, ".java");
   }
@@ -52,11 +48,14 @@ final class GitChangeSet {
     Set<Path> working =
         paths(gitWithRoots(List.of("diff", "--name-only", "HEAD", "--"), roots), suffix);
     working.addAll(untracked(roots, suffix));
+    working.removeIf(path -> !Files.isRegularFile(path));
     if (!working.isEmpty()) {
       return working;
     }
-    return paths(
-        gitWithRoots(List.of("diff", "--name-only", "HEAD^", "HEAD", "--"), roots), suffix);
+    Set<Path> committed =
+        paths(gitWithRoots(List.of("diff", "--name-only", "HEAD^", "HEAD", "--"), roots), suffix);
+    committed.removeIf(path -> !Files.isRegularFile(path));
+    return committed;
   }
 
   private static Set<Path> addedFiles(List<String> roots, String suffix) throws IOException {

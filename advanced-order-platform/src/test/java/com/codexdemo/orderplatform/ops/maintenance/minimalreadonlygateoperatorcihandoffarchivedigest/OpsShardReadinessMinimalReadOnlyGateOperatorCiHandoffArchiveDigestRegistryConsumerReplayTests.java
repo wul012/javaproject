@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistry
 
   @Test
   void preparesOperatorAndCiConsumerPackets() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryTestSupport
-            .registry();
+    var response = ArchiveDigestTestData.registry();
 
     assertThat(response.consumerPacketCount()).isEqualTo(4);
     assertThat(response.readyConsumerPacketCount()).isEqualTo(4);
@@ -36,9 +34,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistry
 
   @Test
   void replayInstructionsAreReadOnlyAndSourcePassed() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryTestSupport
-            .registry();
+    var response = ArchiveDigestTestData.registry();
 
     assertThat(response.replayInstructions())
         .allSatisfy(

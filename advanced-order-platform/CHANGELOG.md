@@ -4,6 +4,19 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1873 - Declarative Markdown renderer engine
+
+- Replaces seven one-shot archive-digest renderers and one support shell with a shared
+  immutable `MarkdownSections` algorithm plus one short, typed `ReportRenderer`.
+- Freezes every existing Markdown heading and line against the old implementation,
+  tightens the v1845 structural gate, and adds a reproducible ops elegance census.
+- Shrinks ops Java `1352 -> 1346`, renderers `121 -> 115`, renderer lines
+  `5355 -> 5236`, and production long-name uses `21167 -> 21124` without changing
+  routes, response records, catalog data, or runtime authority.
+- Splits change-gate responsibilities so deleted debt is not scanned as live source:
+  new filenames stay short, exact long-name identities cannot grow, and aggregate
+  occurrences can only shrink.
+
 ## v1872 - Immutable DTO collection boundaries
 
 - Gives `PagedResponse`, `CreateOrderRequest`, and `OrderResponse` owned immutable list

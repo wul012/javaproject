@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistry
 
   @Test
   void aggregateChecksRemainStableAndBoundaryFocused() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryTestSupport
-            .registry();
+    var response = ArchiveDigestTestData.registry();
 
     assertThat(response.checks()).hasSize(22);
     assertThat(response.boundaryLockCount()).isEqualTo(8);

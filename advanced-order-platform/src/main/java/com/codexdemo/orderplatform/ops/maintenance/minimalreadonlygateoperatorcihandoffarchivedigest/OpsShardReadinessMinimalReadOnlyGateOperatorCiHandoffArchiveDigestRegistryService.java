@@ -61,13 +61,12 @@ public class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestR
             replayInstructions,
             boundaryLocks,
             scorecard,
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryRenderer
-                .render(
-                    sourceArchives,
-                    digestSections,
-                    consumerPackets,
-                    replayInstructions,
-                    boundaryLocks,
-                    scorecard));
+            ReportRenderer.render(
+                sourceArchives,
+                digestSections,
+                consumerPackets,
+                replayInstructions,
+                boundaryLocks,
+                scorecard));
   }
 }

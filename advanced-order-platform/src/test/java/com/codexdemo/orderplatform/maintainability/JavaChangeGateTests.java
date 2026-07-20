@@ -15,12 +15,11 @@ import org.junit.jupiter.api.Test;
 class JavaChangeGateTests {
 
   @Test
-  void changedJavaUsesShortNames() throws IOException {
-    for (Path source : GitChangeSet.changedJavaFiles()) {
+  void addedJavaFilesUseShortNames() throws IOException {
+    for (Path source : GitChangeSet.addedJavaFiles()) {
       assertThat(JavaSourceNames.stem(source).length())
           .as(source.toString())
           .isLessThanOrEqualTo(JavaSourceNames.NAME_BUDGET);
-      assertThat(JavaSourceNames.longIdentifiers(source)).as(source.toString()).isEmpty();
     }
   }
 

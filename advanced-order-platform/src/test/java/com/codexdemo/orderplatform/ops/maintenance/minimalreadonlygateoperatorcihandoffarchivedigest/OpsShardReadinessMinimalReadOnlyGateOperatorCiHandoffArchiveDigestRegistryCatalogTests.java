@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistry
 
   @Test
   void carriesSourceArchiveSnapshotAndDigestSections() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryTestSupport
-            .registry();
+    var response = ArchiveDigestTestData.registry();
 
     assertThat(response.sourceArchiveSnapshotCount()).isEqualTo(1);
     assertThat(response.sourceArchiveSnapshots())
@@ -37,9 +35,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistry
 
   @Test
   void exposesFocusedGroupedBuildSmokeReplayOrder() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryTestSupport
-            .registry();
+    var response = ArchiveDigestTestData.registry();
 
     assertThat(response.replayInstructionCount()).isEqualTo(5);
     assertThat(response.readOnlyReplayInstructionCount()).isEqualTo(5);

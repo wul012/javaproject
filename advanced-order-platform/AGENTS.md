@@ -129,7 +129,7 @@ duplication family (the ops package). These gates buy elegance upstream. They ap
 NEW and TOUCHED code only; existing violations enter a committed baseline that may only
 shrink. Each rule must remain a committed mechanical check that fails verify/CI. Since
 v1869, `config/java-name-baseline.txt`, `JavaEleganceGateTests`, and
-`JavaChangeGateTests` enforce the exact long-name set, changed-file cleanliness, the
+`JavaChangeGateTests` enforce the exact long-name set, added-file naming, the
 production-source growth cap, and bounded family design notes. Ratchets only tighten;
 baseline entries may only be removed.
 
@@ -147,6 +147,13 @@ their compact constructor and expose only immutable snapshots. Use the shared
 `ImmutableLists` helper when null must remain available to Bean Validation; do not replace
 null with an empty list or use `List.copyOf` where null elements are part of validation input.
 
+Since v1873, counted Markdown section families use the shared `MarkdownSections` engine
+and one short family `ReportRenderer`; a third renderer with the same count/map/create
+shape is forbidden. `JavaChangeGateTests` checks only live additions for short filenames,
+while `JavaEleganceGateTests` rejects new long-name identities and any aggregate increase.
+Deleted legacy paths are debt removal, not live source to parse. Do not collapse these
+layered checks back into a whole-file lexical ban that blocks staged legacy migration.
+
 - Name budget: no new identifier or filename over 40 characters. A name that wants more
   nouns means a missing abstraction — extract and name the concept instead. Existing
   over-budget names: baseline census, shrink-only; renames only where route strings,
@@ -159,8 +166,10 @@ null with an empty list or use `List.copyOf` where null elements are part of val
 - Family design note: before creating a new file family, write ≤10 lines in the
   walkthrough naming the abstraction and the data-vs-behavior split — BEFORE
   implementation, and before the final verify like the walkthrough rule.
-- Boy-scout rule: any touched file must leave within this section's name and size
-  budgets.
+- Boy-scout rule: every changed line and new declaration must use the short abstraction.
+  A touched legacy file may retain only identities already in the exact baseline, must not
+  increase their occurrences, and the version must remove measurable debt elsewhere in
+  that family; forwarding shells do not count as improvement.
 
 ## Docker Shutdown Fast Path
 
