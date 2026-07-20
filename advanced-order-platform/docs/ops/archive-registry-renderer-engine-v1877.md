@@ -49,6 +49,12 @@ oracle 期望来迁就新实现。中文讲解为 3,281 汉字/10 个标准标�
 0；JaCoCo 分析 2,183 个类且所有覆盖门满足，SpotBugs 为 0 bugs / 0 errors，并完成
 可执行 jar 打包。
 
+实现提交 `b4a84326` 的 canonical Actions run `29746619649` 全绿：Docker-tagged job
+在 2:03 完成，headless job 在 19:06 完成，并包含 Spotless ratchet、wrapper verify、
+prod-profile boot smoke 与 JaCoCo 报告上传。确定性收口 tag 为
+`v1877-order-platform-archive-registry-renderer-engine`；只有本证据更新自己的 Actions
+通过且该 annotated tag 存在时，v1877 才机械完成，不以文档自述替代远端事实。
+
 ## 明确不做
 
 - 不修改 Markdown 标题、顺序、计数字段、分隔符、布尔标签或状态文本。
