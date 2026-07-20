@@ -19,6 +19,9 @@
   skips, 2,193 JaCoCo classes with every floor met, SpotBugs 0/0, and a packaged jar.
 - Implementation commit `52e4c7c9` passes canonical Actions run `29739016977`:
   Docker-tagged tests in 2:06 and headless regression in 18:15.
+- Closeout commit `e82edaa7` passes run `29740214540`: Docker in 2:09 and headless
+  in 14:08. The annotated canonical tag is
+  `v1876-order-platform-release-acceptance-renderer-engine`.
 
 ## v1875 - Verification-dossier renderer convergence
 

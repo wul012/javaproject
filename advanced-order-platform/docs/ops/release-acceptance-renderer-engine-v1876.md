@@ -50,6 +50,8 @@ SpotBugs 为 0/0，可执行 jar 已生成，总耗时 20:39。
 实现提交 `52e4c7c9` 随后通过 canonical Actions run `29739016977`：Docker-tagged
 job 用时 2:06，headless job 用时 18:15；后者包含 wrapper 全量 verify、生产配置
 启动 smoke 与 JaCoCo 报告上传。远端没有暴露本地未覆盖的格式、路径或环境差异。
+closeout 提交 `e82edaa7` 也通过 run `29740214540`：Docker 2:09、headless 14:08。
+本版以 annotated tag `v1876-order-platform-release-acceptance-renderer-engine` 固定。
 
 ## 明确不做
 
