@@ -4,6 +4,23 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1877 - Archive-registry renderer convergence
+
+- Reuses `MarkdownSections.counted` and one 203-line typed `ReportRenderer`, deleting
+  nine archive section renderers, their aggregate renderer, and the support shell.
+- Freezes all nine headings and 57 content lines with an oracle that passed against the
+  legacy implementation before deletion and then passed unchanged after replacement.
+- Replaces the long test factory with `ArchiveTestData`; the upstream release-acceptance
+  service and downstream archive-handoff service keep the same public boundaries.
+- Shrinks the family `23 -> 13`, ops Java `1314 -> 1304`, renderers `86 -> 77`,
+  renderer lines `4586 -> 4376`, and long renderer filenames `80 -> 70` without
+  changing routes, responses, Catalog data, transactions, or authority.
+- Core behavior, downstream, historical structure, elegance, and change gates pass
+  65/65; the walkthrough has 3,281 Han characters and exactly ten standard headings.
+- Full `mvnw -B verify` passes 1,947 tests in 17:10 with zero failures, errors,
+  or skips; JaCoCo analyzes 2,183 classes with every floor met, SpotBugs reports
+  0 bugs / 0 errors, and the executable jar is packaged.
+
 ## v1876 - Release-acceptance renderer convergence
 
 - Reuses `MarkdownSections.mapped` and one 208-line typed `ReportRenderer`, deleting

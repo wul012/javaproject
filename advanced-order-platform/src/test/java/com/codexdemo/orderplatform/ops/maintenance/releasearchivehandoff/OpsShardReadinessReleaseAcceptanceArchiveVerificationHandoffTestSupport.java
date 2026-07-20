@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff;
 
-import com.codexdemo.orderplatform.ops.maintenance.ciarc.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.ciarc.ArchiveTestData;
 
 public final class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffTestSupport {
 
@@ -8,8 +8,7 @@ public final class OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffT
 
   public static OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService service() {
     return new OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffService(
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryTestSupport
-            .service());
+        ArchiveTestData.service());
   }
 
   public static OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse registry() {

@@ -99,3 +99,12 @@ verification dossier 的十段输入、无计数映射引擎、逐行 oracle、�
 共享无计数映射与结构 ratchet；没有移动、重写或删除任何历史归档。重建后的精确集合为
 `1,687 files / 19,967,858 raw bytes`。本次上调严格等于这一份 15,526 字节讲解的增量，
 不是后续版本的预留预算。
+
+## Authorized v1877 Extension
+
+用户于 2026-07-20 授权持续推进 Java coding brilliant and elegant 九分计划。v1877
+只新增 `代码讲解记录_生产雏形阶段9/v1873-v1877/v1877-archive-registry-renderer-engine.md`，
+用于解释 archive-registry 九段输入、57 行旧实现 oracle、上下游只读边界、共享计数映射
+与结构 ratchet；没有移动、重写或删除任何历史归档。重建后的精确集合为
+`1,688 files / 19,983,220 raw bytes`。本次上调严格等于这一份 15,362 字节讲解的增量，
+不是后续版本的预留预算。

@@ -12,6 +12,7 @@ $digestRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorcihando
 $consumerRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorciconsumerpackage'
 $dossierRoot = Join-Path $opsRoot 'maintenance/operatorcidossier'
 $releaseAcceptanceRoot = Join-Path $opsRoot 'maintenance/ciaccept'
+$archiveRegistryRoot = Join-Path $opsRoot 'maintenance/ciarc'
 
 function Get-LineCount {
   param([Parameter(Mandatory = $true)][string]$Path)
@@ -45,6 +46,7 @@ $digestFiles = @(& rg --files $digestRoot -g '*.java')
 $consumerFiles = @(& rg --files $consumerRoot -g '*.java')
 $dossierFiles = @(& rg --files $dossierRoot -g '*.java')
 $releaseAcceptanceFiles = @(& rg --files $releaseAcceptanceRoot -g '*.java')
+$archiveRegistryFiles = @(& rg --files $archiveRegistryRoot -g '*.java')
 $summary = [ordered]@{
   OpsJavaFiles = $rows.Count
   RendererFiles = $renderers.Count
@@ -58,6 +60,7 @@ $summary = [ordered]@{
   ConsumerPackageJavaFiles = $consumerFiles.Count
   DossierJavaFiles = $dossierFiles.Count
   ReleaseAcceptanceJavaFiles = $releaseAcceptanceFiles.Count
+  ArchiveRegistryJavaFiles = $archiveRegistryFiles.Count
   Hotspots = @(
     $rows |
       Sort-Object -Property @{ Expression = 'Lines'; Descending = $true }, Path |

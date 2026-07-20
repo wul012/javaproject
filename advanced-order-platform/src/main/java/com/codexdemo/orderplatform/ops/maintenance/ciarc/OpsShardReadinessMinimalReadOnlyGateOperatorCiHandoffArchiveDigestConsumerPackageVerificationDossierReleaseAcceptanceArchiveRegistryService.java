@@ -83,16 +83,15 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
             retentionWindows,
             closeoutLedger,
             scorecard,
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryRenderer
-                .render(
-                    sourceArchiveSnapshots,
-                    artifactManifest,
-                    routePackages,
-                    operatorPacks,
-                    ciAttestations,
-                    boundarySeals,
-                    retentionWindows,
-                    closeoutLedger,
-                    scorecard));
+            ReportRenderer.render(
+                sourceArchiveSnapshots,
+                artifactManifest,
+                routePackages,
+                operatorPacks,
+                ciAttestations,
+                boundarySeals,
+                retentionWindows,
+                closeoutLedger,
+                scorecard));
   }
 }

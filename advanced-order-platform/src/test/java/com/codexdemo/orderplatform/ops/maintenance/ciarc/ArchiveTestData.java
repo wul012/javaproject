@@ -2,11 +2,9 @@ package com.codexdemo.orderplatform.ops.maintenance.ciarc;
 
 import com.codexdemo.orderplatform.ops.maintenance.ciaccept.ReleaseAcceptanceTestData;
 
-public final
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryTestSupport {
+public final class ArchiveTestData {
 
-  private
-  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryTestSupport() {}
+  private ArchiveTestData() {}
 
   public static
   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceArchiveRegistryService
