@@ -47,6 +47,10 @@ Catalog 数据或 oracle 期望来换取通过。中文讲解为 3,124 汉字/10
 1,945 个测试，失败/错误/跳过均为零；JaCoCo 分析 2,193 个类并满足全部覆盖率门，
 SpotBugs 为 0/0，可执行 jar 已生成，总耗时 20:39。
 
+实现提交 `52e4c7c9` 随后通过 canonical Actions run `29739016977`：Docker-tagged
+job 用时 2:06，headless job 用时 18:15；后者包含 wrapper 全量 verify、生产配置
+启动 smoke 与 JaCoCo 报告上传。远端没有暴露本地未覆盖的格式、路径或环境差异。
+
 ## 明确不做
 
 - 不修改 Markdown 标题、顺序、字段标签、分隔符或状态文本，不增加计数首行。
