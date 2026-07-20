@@ -74,16 +74,15 @@ public class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptan
             runtimeBoundaries,
             nextChangeRules,
             scorecard,
-            OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRenderer
-                .render(
-                    sourceSnapshots,
-                    lineage,
-                    decisions,
-                    archiveItems,
-                    reviewItems,
-                    ciEvidence,
-                    runtimeBoundaries,
-                    nextChangeRules,
-                    scorecard));
+            ReportRenderer.render(
+                sourceSnapshots,
+                lineage,
+                decisions,
+                archiveItems,
+                reviewItems,
+                ciEvidence,
+                runtimeBoundaries,
+                nextChangeRules,
+                scorecard));
   }
 }

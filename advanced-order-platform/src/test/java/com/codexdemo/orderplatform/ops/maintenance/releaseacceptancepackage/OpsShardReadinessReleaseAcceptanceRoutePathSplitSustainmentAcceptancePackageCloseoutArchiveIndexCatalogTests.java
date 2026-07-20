@@ -8,9 +8,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void archiveIndexConsumesCloseoutReceiptAndPinsLatestNodePlan() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport
-            .index();
+    var response = ArchiveIndexTestData.index();
 
     assertThat(response.version()).isEqualTo("Java v1652");
     assertThat(response.sourcePlan()).isEqualTo("Node v1937");
@@ -31,9 +29,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void archiveIndexEvidenceIsReady() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport
-            .index();
+    var response = ArchiveIndexTestData.index();
 
     assertThat(response.criteriaEchoes())
         .allSatisfy(echo -> assertThat(echo.status()).isEqualTo("accepted"));

@@ -36,9 +36,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
     var criteria =
         OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptCriteriaCatalog
             .criteria(source);
-    var markdownLines =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptRenderer
-            .render(criteria);
+    var markdownLines = ReceiptRenderer.render(criteria);
     boolean accepted =
         "passed".equals(source.status())
             && "Java v1634".equals(source.version())

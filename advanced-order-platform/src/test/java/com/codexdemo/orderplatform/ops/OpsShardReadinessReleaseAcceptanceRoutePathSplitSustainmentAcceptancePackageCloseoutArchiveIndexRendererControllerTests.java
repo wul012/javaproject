@@ -2,8 +2,8 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.ArchiveIndexTestData;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexResponse;
-import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +11,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void markdownDescribesArchiveIndexSections() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport
-            .index();
+    var response = ArchiveIndexTestData.index();
 
     assertThat(response.markdownSections())
         .extracting(
@@ -44,8 +42,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
     var response =
         new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexController(
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport
-                    .service())
+                ArchiveIndexTestData.service())
             .index();
 
     assertThat(response.endpoint())

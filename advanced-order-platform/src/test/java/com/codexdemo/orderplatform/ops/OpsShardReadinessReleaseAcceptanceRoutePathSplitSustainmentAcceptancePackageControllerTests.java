@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.PackageTestData;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
     var response =
         new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageController(
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport
-                    .service())
+                PackageTestData.service())
             .registry();
 
     assertThat(response.endpoint())

@@ -8,9 +8,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void acceptancePackageCollectionsAreImmutable() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport
-            .registry();
+    var response = PackageTestData.registry();
 
     assertThatThrownBy(() -> response.sourceSnapshots().clear())
         .isInstanceOf(UnsupportedOperationException.class);

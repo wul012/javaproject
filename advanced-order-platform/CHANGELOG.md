@@ -4,6 +4,26 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1879 - Acceptance-package renderer convergence
+
+- Replaces twelve long-named acceptance-package renderers and one support shell with
+  three output-owned types: `ReportRenderer`, `ReceiptRenderer`, and
+  `ArchiveIndexRenderer`.
+- Freezes the legacy output before replacement and preserves it unchanged: the main
+  report has nine sections / 47 lines, the receipt has seven lines, and the archive
+  index has five sections / 22 lines.
+- Replaces three long test-support names with `PackageTestData`, `ReceiptTestData`, and
+  `ArchiveIndexTestData`, while retaining the real three-service construction chain.
+- Shrinks the family `36 -> 26`, ops Java `1293 -> 1283`, renderers `67 -> 58`,
+  renderer lines `4211 -> 3973`, and long renderer filenames `59 -> 47` without
+  changing routes, response records, Catalog data, transactions, or authority.
+- Behavior, controller, historical structure, elegance, change, and census gates pass
+  71/71. The walkthrough has 4,430 Han characters and exactly ten standard headings.
+- Full `mvnw -B verify` passes 1,953 tests in 14:02 with zero failures, errors, or
+  skips; JaCoCo analyzes 2,162 classes with every floor met, SpotBugs reports 0/0,
+  and the executable jar is packaged. Remote implementation and closeout CI remain
+  required before tagging.
+
 ## v1878 - Release-archive handoff renderer convergence
 
 - Reuses `MarkdownSections.counted` and one 230-line typed `ReportRenderer`, deleting
@@ -22,7 +42,9 @@
   and the executable jar is packaged.
 - Implementation commit `57ba6fd2` passes canonical Actions run `29753510453`:
   Docker-tagged verification in 1:59 and headless wrapper verify in 17:42, followed
-  by the production-profile smoke and JaCoCo upload. Closeout and tag remain gates.
+  by the production-profile smoke and JaCoCo upload. Closeout commit `fd3c0cc1`
+  passes run `29755253175` (Docker 2:27, headless 17:48); annotated tag
+  `v1878-order-platform-archive-handoff-renderer-engine` is canonical.
 
 ## v1877 - Archive-registry renderer convergence
 

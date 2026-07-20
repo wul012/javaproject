@@ -8,9 +8,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void markdownAndChecksDescribeAcceptancePackage() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport
-            .registry();
+    var response = PackageTestData.registry();
 
     assertThat(response.markdownSections())
         .extracting(
@@ -41,9 +39,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void nextChangeRendererKeepsLandingZonesVisible() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport
-            .registry();
+    var response = PackageTestData.registry();
 
     assertThat(response.nextChangeRules())
         .extracting(

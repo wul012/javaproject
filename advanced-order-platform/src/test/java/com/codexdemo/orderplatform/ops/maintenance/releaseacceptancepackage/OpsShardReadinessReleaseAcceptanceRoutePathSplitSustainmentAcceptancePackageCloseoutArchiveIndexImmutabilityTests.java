@@ -8,9 +8,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void archiveIndexCollectionsAreImmutable() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport
-            .index();
+    var response = ArchiveIndexTestData.index();
 
     assertThatThrownBy(() -> response.sourceSnapshots().clear())
         .isInstanceOf(UnsupportedOperationException.class);

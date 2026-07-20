@@ -117,3 +117,12 @@ verification dossier 的十段输入、无计数映射引擎、逐行 oracle、�
 mini-kv 零执行边界与只减不增的结构门；没有移动、改写或删除任何历史归档。重建后的
 精确集合为 `1,689 files / 20,003,703 raw bytes`。本次上调严格等于这一份 20,483 字节
 讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1879 Extension
+
+用户于 2026-07-20 继续授权 Java coding brilliant and elegant 九分计划。v1879 只新增
+`代码讲解记录_生产雏形阶段9/v1878-v1882/v1879-release-acceptance-package-renderers.md`，
+用于解释 release acceptance package 的三阶段输入输出、九节 47 行主报告、7 行收据、
+五节 22 行归档索引、改前改后精确 oracle 与只减不增的结构门；没有移动、改写或删除任何
+历史归档。重建后的精确集合为 `1,690 files / 20,025,298 raw bytes`。本次上调严格等于
+这一份 21,595 字节讲解的增量，不是后续版本的预留预算。

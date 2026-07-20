@@ -1,17 +1,14 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage;
 
-public final
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport {
+public final class ReceiptTestData {
 
-  private
-  OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport() {}
+  private ReceiptTestData() {}
 
   public static
   OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptService
       service() {
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptService(
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport
-            .service());
+        PackageTestData.service());
   }
 
   public static

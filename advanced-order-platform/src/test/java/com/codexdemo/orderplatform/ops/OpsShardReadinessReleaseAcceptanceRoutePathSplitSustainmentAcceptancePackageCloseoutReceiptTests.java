@@ -3,7 +3,7 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.ReceiptTestData;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +11,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void receiptClosesOutAcceptancePackage() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport
-            .receipt();
+    var response = ReceiptTestData.receipt();
 
     assertThat(response.version()).isEqualTo("Java v1637");
     assertThat(response.sourcePlan()).isEqualTo("Node v1903");
@@ -40,8 +38,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
     var response =
         new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptController(
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport
-                    .service())
+                ReceiptTestData.service())
             .receipt();
 
     assertThat(response.endpoint())
@@ -54,9 +51,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void receiptCollectionsAreImmutable() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport
-            .receipt();
+    var response = ReceiptTestData.receipt();
 
     assertThatThrownBy(() -> response.acceptedCriteria().clear())
         .isInstanceOf(UnsupportedOperationException.class);

@@ -46,8 +46,8 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
         OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexHandoffCatalog
             .notes(source);
     var markdownSections =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexRenderer
-            .render(sourceSnapshots, criteriaEchoes, archiveItems, verificationGates, handoffNotes);
+        ArchiveIndexRenderer.render(
+            sourceSnapshots, criteriaEchoes, archiveItems, verificationGates, handoffNotes);
     return OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexSupport
         .response(
             RESPONSE_VERSION,

@@ -27,54 +27,60 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
           "代码讲解记录_生产雏形阶段6",
           "v1838-v1842",
           "version-1842-production-excellence-release-acceptance-package-extraction.md");
-  private static final List<String> MOVED_FILES =
+  private static final List<String> CURRENT_FILES =
       List.of(
+          "ArchiveIndexRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageArchiveCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageArchiveRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCiCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCiRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexCriteriaCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexHandoffCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexItemCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexResponse.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexService.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexSourceCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexSupport.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexVerificationCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptCriteriaCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptResponse.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptService.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageDecisionCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageDecisionRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageLineageCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageLineageRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageNextChangeCatalog.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageReviewCatalog.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRuntimeBoundaryCatalog.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageScorecardCatalog.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceCatalog.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSupport.java",
+          "ReceiptRenderer.java",
+          "ReportRenderer.java");
+  private static final List<String> REMOVED_RENDERER_FILES =
+      List.of(
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageArchiveRenderer.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCiRenderer.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexRenderer.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptRenderer.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageDecisionRenderer.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageLineageRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageNextChangeRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRenderer.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRendererSupport.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageReviewCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageReviewRenderer.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRuntimeBoundaryCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRuntimeBoundaryRenderer.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageScorecardCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageScorecardRenderer.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceRenderer.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSupport.java");
-  private static final List<String> MOVED_TEST_FILES =
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceRenderer.java");
+  private static final List<String> CURRENT_TEST_FILES =
       List.of(
+          "ArchiveIndexTestData.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCatalogTests.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexCatalogTests.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexImmutabilityTests.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageImmutabilityTests.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRendererTests.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport.java");
+          "PackageMarkdownTests.java",
+          "PackageTestData.java",
+          "ReceiptTestData.java");
   private static final List<String> RETAINED_CONTROLLERS =
       List.of(
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageController.java",
@@ -82,11 +88,19 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexController.java");
 
   @Test
-  void implementationClosureMovesWhileControllersStayRootVisible() {
-    assertThat(MOVED_FILES).hasSize(36);
-    for (String file : MOVED_FILES) {
+  void extractedImplementationCanOnlyShrink() throws IOException {
+    assertThat(CURRENT_FILES).hasSize(26);
+    for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
+    }
+    assertThat(REMOVED_RENDERER_FILES).hasSize(13);
+    for (String file : REMOVED_RENDERER_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
+    }
+    try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(26);
     }
     for (String controller : RETAINED_CONTROLLERS) {
       assertThat(Files.isRegularFile(OPS_ROOT.resolve(controller))).as(controller).isTrue();
@@ -94,12 +108,28 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
   }
 
   @Test
-  void packageTestsMoveWhileControllerOrientedTestsStayRoot() {
-    assertThat(MOVED_TEST_FILES).hasSize(8);
-    for (String file : MOVED_TEST_FILES) {
+  void packageTestsUseShortFactories() throws IOException {
+    assertThat(CURRENT_TEST_FILES).hasSize(9);
+    for (String file : CURRENT_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
+    try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(9);
+    }
+    assertThat(
+            PACKAGE_TEST_ROOT.resolve(
+                "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport.java"))
+        .doesNotExist();
+    assertThat(
+            PACKAGE_TEST_ROOT.resolve(
+                "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptTestSupport.java"))
+        .doesNotExist();
+    assertThat(
+            PACKAGE_TEST_ROOT.resolve(
+                "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport.java"))
+        .doesNotExist();
     assertThat(
             Files.isRegularFile(
                 TEST_ROOT.resolve(
@@ -183,7 +213,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(
               files.filter(Files::isRegularFile).filter(path -> path.toString().endsWith(".java")))
-          .hasSizeLessThanOrEqualTo(1352);
+          .hasSizeLessThanOrEqualTo(1283);
     }
   }
 
@@ -215,5 +245,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
 
   private static String read(Path path) throws IOException {
     return Files.readString(path, StandardCharsets.UTF_8);
+  }
+
+  private boolean isJava(Path path) {
+    return path.toString().endsWith(".java");
   }
 }

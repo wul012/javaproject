@@ -8,9 +8,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void acceptancePackageConsumesSustainmentAndPinsLatestNodePlan() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport
-            .registry();
+    var response = PackageTestData.registry();
 
     assertThat(response.version()).isEqualTo("Java v1634");
     assertThat(response.sourcePlan()).isEqualTo("Node v1903");
@@ -35,9 +33,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePacka
 
   @Test
   void acceptancePackageEvidenceIsReady() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageTestSupport
-            .registry();
+    var response = PackageTestData.registry();
 
     assertThat(response.lineage())
         .extracting(
