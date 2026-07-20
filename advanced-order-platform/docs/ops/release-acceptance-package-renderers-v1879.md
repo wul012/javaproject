@@ -38,6 +38,7 @@
 - 测试源码：898 个 Java 文件；长文件 stem 786，长标识符出现 10116 次，唯一长标识符 3822 个。
 - 超过 500 行的生产文件仍为 32 个，最大 738 行；这一版本没有把渲染问题转移成新的热点文件。
 - 完整 `mvnw -B verify` 运行 14:02，1953 个测试零失败、零错误、零跳过；JaCoCo 分析 2162 个类且全部 floor 达标，SpotBugs 为 0 bugs / 0 errors，可执行 jar 已生成。
+- 实现提交 `b5366eb1` 的 canonical Actions run `29759922474` 通过：Docker-tagged job 1:51，headless job 19:15，并完成生产 profile smoke 与 JaCoCo report 上传。
 
 ## 非目标与安全边界
 
