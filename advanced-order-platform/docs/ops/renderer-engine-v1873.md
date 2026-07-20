@@ -32,7 +32,9 @@
   `1684 files / 19908542 raw bytes`。修复历史 pin 后的完整 `verify` 先以 `1938`
   个测试在 `13:52` 通过；随后将长名 aggregate 收紧到本版精确值，最终完整复验通过
   `1939` 个测试、零失败/错误/跳过，JaCoCo `2225` classes / 全部 floor，SpotBugs
-  `0/0`，并成功产出 jar；canonical CI 待执行。
+  `0/0`，并成功产出 jar。实现提交 `ccd1ca8a` 的 canonical Actions run
+  `29723306983` 全绿：Docker `2:09`，headless `18:35`，包含 prod profile smoke
+  与 JaCoCo 上传。
 
 ## 明确不做
 

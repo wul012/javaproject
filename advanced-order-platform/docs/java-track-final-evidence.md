@@ -103,8 +103,10 @@ only the stale v1866 exact-total pin after legitimate deletion; its `<=1346` rep
 18/18. The full rerun then passed all 1,938 tests in 13:52. After tightening the exact
 long-name aggregate to the v1873 census, the final complete rerun passed 1,939 tests with
 zero failures, errors, or skips. JaCoCo analyzed 2,225 classes and met every floor; SpotBugs reported
-`BugInstance=0` and `Error=0`, and the executable jar was produced. Canonical Actions
-remain pending until the implementation commit is pushed.
+`BugInstance=0` and `Error=0`, and the executable jar was produced. Implementation
+commit `ccd1ca8a` then passed canonical Actions run `29723306983`: Docker-tagged tests
+in 2:09 and headless regression in 18:35, including the production-profile smoke and
+JaCoCo upload.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
