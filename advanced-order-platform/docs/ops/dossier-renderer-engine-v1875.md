@@ -44,7 +44,8 @@ dossier 行为测试、根 controller aggregate 与 engine 测试合计通过 `1
 结构、全局 census、下游 release-acceptance、归档、讲解与 closeout 门后通过 `79/79`。
 中文讲解完成后执行的最终 `mvnw -B verify` 在 17:50 内通过 `1943/1943`，失败、错误、
 跳过均为 0；JaCoCo 分析 2204 个类且所有覆盖率阈值满足，SpotBugs 为 0/0，可执行 jar
-完成重打包。
+完成重打包。实现提交 `93f7d6b8` 随后通过 canonical Actions run `29733600319`：Docker
+测试 2:13，headless 回归 19:06，并包含生产配置启动检查与 JaCoCo 报告上传。
 
 ## 明确不做
 
