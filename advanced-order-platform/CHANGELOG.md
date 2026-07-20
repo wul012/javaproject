@@ -19,7 +19,10 @@
   pass 68/68; the walkthrough has 4,541 Han characters and ten standard headings.
 - Full `mvnw -B verify` passes 1,949 tests in 9:16 with zero failures, errors, or
   skips; JaCoCo analyzes 2,172 classes with every floor met, SpotBugs reports 0/0,
-  and the executable jar is packaged. Remote Actions, closeout, and tag remain gates.
+  and the executable jar is packaged.
+- Implementation commit `57ba6fd2` passes canonical Actions run `29753510453`:
+  Docker-tagged verification in 1:59 and headless wrapper verify in 17:42, followed
+  by the production-profile smoke and JaCoCo upload. Closeout and tag remain gates.
 
 ## v1877 - Archive-registry renderer convergence
 

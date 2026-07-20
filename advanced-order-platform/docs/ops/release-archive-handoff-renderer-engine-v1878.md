@@ -46,7 +46,10 @@ change 与 census 聚焦门通过 `68/68`，零失败、零错误、零跳过。
 恰好十个标准标题；归档集合为 1,689 文件/20,003,703 原始字节。完整 Maven verify、
 执行 1,949 项测试，零失败、零错误、零跳过；JaCoCo 分析 2,172 个类且所有 floor 满足，
 SpotBugs 0 bugs / 0 errors，可执行 jar 完成打包，总时长 9:16。canonical Actions、
-closeout 与 annotated tag 仍待后续机械闭环。
+closeout 与 annotated tag 仍待后续机械闭环。实现提交 `57ba6fd2` 的 canonical Actions
+run `29753510453` 已通过：Docker-tagged Maven 验证用时 1:59，headless wrapper verify
+用时 17:42，随后 production-profile boot smoke 与 JaCoCo 上传均成功。annotated tag
+只能在本 closeout 更新自己的 Actions 通过后创建。
 
 ## 明确不做
 
