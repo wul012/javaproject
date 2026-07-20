@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesRetentionPoliciesForReleaseEvidence() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.retentionPolicyCount()).isEqualTo(5);
     assertThat(response.readyRetentionPolicyCount()).isEqualTo(5);
@@ -29,9 +27,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesReplayDecisionsWithRuntimeClosed() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.replayDecisionCount()).isEqualTo(5);
     assertThat(response.passedReplayDecisionCount()).isEqualTo(5);

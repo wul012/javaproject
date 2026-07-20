@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesProvenanceEvidenceIntoReleaseTargets() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.evidenceChainEntryCount()).isEqualTo(6);
     assertThat(response.passedEvidenceChainEntryCount()).isEqualTo(6);
@@ -25,9 +23,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesExpectedSignoffLanes() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.signoffLaneCount()).isEqualTo(4);
     assertThat(response.readySignoffLaneCount()).isEqualTo(4);

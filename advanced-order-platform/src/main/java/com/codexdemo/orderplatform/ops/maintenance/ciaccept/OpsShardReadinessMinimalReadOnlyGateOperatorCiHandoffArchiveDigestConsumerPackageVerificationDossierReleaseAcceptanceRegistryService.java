@@ -88,17 +88,16 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
             replayDecisions,
             closeoutCheckpoints,
             scorecard,
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryRenderer
-                .render(
-                    sourceDossiers,
-                    readinessGates,
-                    evidenceChain,
-                    signoffLanes,
-                    ciReplayLanes,
-                    boundaryControls,
-                    retentionPolicies,
-                    replayDecisions,
-                    closeoutCheckpoints,
-                    scorecard));
+            ReportRenderer.render(
+                sourceDossiers,
+                readinessGates,
+                evidenceChain,
+                signoffLanes,
+                ciReplayLanes,
+                boundaryControls,
+                retentionPolicies,
+                replayDecisions,
+                closeoutCheckpoints,
+                scorecard));
   }
 }

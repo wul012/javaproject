@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void responseCollectionsAreImmutableCopies() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThatThrownBy(() -> response.checks().add("late-mutation"))
         .isInstanceOf(UnsupportedOperationException.class);

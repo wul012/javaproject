@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void buildsReleaseAcceptanceFromVerificationDossier() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1502");
@@ -32,9 +30,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void keepsReleaseAcceptanceStrictlyReadOnly() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -47,9 +43,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesSourceSnapshotAndReadinessGates() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.sourceDossierSnapshotCount()).isEqualTo(1);
     assertThat(response.readinessGateCount()).isEqualTo(6);

@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesCloseoutCheckpointsForOperatorCiRelease() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.closeoutCheckpointCount()).isEqualTo(6);
     assertThat(response.readyCloseoutCheckpointCount()).isEqualTo(6);
@@ -30,9 +28,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void scorecardRequiresEveryReleaseAcceptancePartToPass() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.scorecardEntryCount()).isEqualTo(10);
     assertThat(response.passedScorecardEntryCount()).isEqualTo(10);

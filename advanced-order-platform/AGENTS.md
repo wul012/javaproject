@@ -161,6 +161,11 @@ but no count prefix. Use `counted` only when the existing output already carries
 line. Never add or remove count lines merely to make families share the same method; the
 pre-change exact Markdown oracle decides which semantic operation is correct.
 
+Since v1876, a renderer-family convergence is incomplete unless the exact oracle passes
+against the legacy implementation before deletion and the direct downstream service
+consumer suite passes after replacement. Keep the family renderer package-private and
+typed; never expose it or replace response records with string-keyed maps for convenience.
+
 - Name budget: no new identifier or filename over 40 characters. A name that wants more
   nouns means a missing abstraction — extract and name the concept instead. Existing
   over-budget names: baseline census, shrink-only; renames only where route strings,

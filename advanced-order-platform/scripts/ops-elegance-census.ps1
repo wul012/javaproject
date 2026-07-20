@@ -11,6 +11,7 @@ $opsRoot = Join-Path $projectRoot 'src/main/java/com/codexdemo/orderplatform/ops
 $digestRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorcihandoffarchivedigest'
 $consumerRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorciconsumerpackage'
 $dossierRoot = Join-Path $opsRoot 'maintenance/operatorcidossier'
+$releaseAcceptanceRoot = Join-Path $opsRoot 'maintenance/ciaccept'
 
 function Get-LineCount {
   param([Parameter(Mandatory = $true)][string]$Path)
@@ -43,6 +44,7 @@ $renderers = @($rows | Where-Object Renderer)
 $digestFiles = @(& rg --files $digestRoot -g '*.java')
 $consumerFiles = @(& rg --files $consumerRoot -g '*.java')
 $dossierFiles = @(& rg --files $dossierRoot -g '*.java')
+$releaseAcceptanceFiles = @(& rg --files $releaseAcceptanceRoot -g '*.java')
 $summary = [ordered]@{
   OpsJavaFiles = $rows.Count
   RendererFiles = $renderers.Count
@@ -55,6 +57,7 @@ $summary = [ordered]@{
   ArchiveDigestJavaFiles = $digestFiles.Count
   ConsumerPackageJavaFiles = $consumerFiles.Count
   DossierJavaFiles = $dossierFiles.Count
+  ReleaseAcceptanceJavaFiles = $releaseAcceptanceFiles.Count
   Hotspots = @(
     $rows |
       Sort-Object -Property @{ Expression = 'Lines'; Descending = $true }, Path |

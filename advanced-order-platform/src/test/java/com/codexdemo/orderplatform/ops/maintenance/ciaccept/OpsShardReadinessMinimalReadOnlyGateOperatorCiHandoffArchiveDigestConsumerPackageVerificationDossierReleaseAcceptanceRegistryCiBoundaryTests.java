@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void preservesReadOnlyCiReplayLaneOrder() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.ciReplayLaneCount()).isEqualTo(5);
     assertThat(response.readOnlyCiReplayLaneCount()).isEqualTo(5);
@@ -24,9 +22,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesBoundaryControlsWithoutOpeningRuntime() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.boundaryControlCount()).isEqualTo(8);
     assertThat(response.lockedBoundaryControlCount()).isEqualTo(8);

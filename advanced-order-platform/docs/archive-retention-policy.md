@@ -90,3 +90,12 @@ verification dossier 的十段输入、无计数映射引擎、逐行 oracle、�
 没有移动、重写或删除任何历史归档。重建后的精确集合为
 `1,686 files / 19,952,332 raw bytes`。本次上调严格等于这一份 22,405 字节讲解的增量，
 不是后续版本的预留预算。
+
+## Authorized v1876 Extension
+
+用户于 2026-07-20 继续授权 Java 三分优雅度提升计划。v1876 只新增
+`代码讲解记录_生产雏形阶段9/v1873-v1877/v1876-release-acceptance-renderer-engine.md`，
+用于解释 release-acceptance 十段输入、56 行旧实现 oracle、上下游 service 边界、
+共享无计数映射与结构 ratchet；没有移动、重写或删除任何历史归档。重建后的精确集合为
+`1,687 files / 19,967,858 raw bytes`。本次上调严格等于这一份 15,526 字节讲解的增量，
+不是后续版本的预留预算。

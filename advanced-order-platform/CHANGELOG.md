@@ -4,6 +4,20 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1876 - Release-acceptance renderer convergence
+
+- Reuses `MarkdownSections.mapped` and one 208-line typed `ReportRenderer`, deleting
+  eleven release-acceptance renderers plus their support shell.
+- Freezes all ten headings and 56 content lines with an oracle that passed against the
+  legacy implementation before deletion and then passed unchanged after replacement.
+- Replaces the long test factory with `ReleaseAcceptanceTestData` and keeps the upstream
+  dossier service plus downstream archive service on the same public boundaries.
+- Shrinks the family `25 -> 14`, ops Java `1325 -> 1314`, renderers `96 -> 86`,
+  renderer lines `4809 -> 4586`, and long renderer filenames `91 -> 80` without
+  changing routes, responses, Catalog data, transactions, or authority.
+- Full `mvnw -B verify` passes 1,945 tests in 20:39 with zero failures, errors, or
+  skips, 2,193 JaCoCo classes with every floor met, SpotBugs 0/0, and a packaged jar.
+
 ## v1875 - Verification-dossier renderer convergence
 
 - Extends the shared engine with `MarkdownSections.mapped` for sections that must not

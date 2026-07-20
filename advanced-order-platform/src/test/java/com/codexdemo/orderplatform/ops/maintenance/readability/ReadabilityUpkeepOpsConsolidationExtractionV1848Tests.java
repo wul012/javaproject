@@ -31,52 +31,61 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
   private static final String PACKAGE_IMPORT = "ops.maintenance.ciaccept";
   private static final String PREFIX =
       "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptance";
-  private static final List<String> MOVED_FILES =
+  private static final List<String> CURRENT_FILES =
       List.of(
           PREFIX + "BoundaryControlCatalog.java",
-          PREFIX + "BoundaryRenderer.java",
           PREFIX + "CiReplayCatalog.java",
-          PREFIX + "CiReplayRenderer.java",
           PREFIX + "CloseoutCatalog.java",
-          PREFIX + "CloseoutRenderer.java",
           PREFIX + "EvidenceChainCatalog.java",
-          PREFIX + "EvidenceChainRenderer.java",
           PREFIX + "ReadinessCatalog.java",
-          PREFIX + "ReadinessRenderer.java",
-          PREFIX + "RegistryRenderer.java",
           PREFIX + "RegistryResponse.java",
           PREFIX + "RegistryService.java",
           PREFIX + "RegistrySupport.java",
-          PREFIX + "RendererSupport.java",
           PREFIX + "ReplayDecisionCatalog.java",
-          PREFIX + "ReplayDecisionRenderer.java",
           PREFIX + "RetentionPolicyCatalog.java",
-          PREFIX + "RetentionRenderer.java",
           PREFIX + "ScorecardCatalog.java",
-          PREFIX + "ScorecardRenderer.java",
           PREFIX + "SignoffLaneCatalog.java",
-          PREFIX + "SignoffRenderer.java",
           PREFIX + "SourceDossierCatalog.java",
-          PREFIX + "SourceRenderer.java");
-  private static final List<String> MOVED_TEST_FILES =
+          "ReportRenderer.java");
+  private static final List<String> REMOVED_RENDERER_FILES =
       List.of(
+          PREFIX + "BoundaryRenderer.java",
+          PREFIX + "CiReplayRenderer.java",
+          PREFIX + "CloseoutRenderer.java",
+          PREFIX + "EvidenceChainRenderer.java",
+          PREFIX + "ReadinessRenderer.java",
+          PREFIX + "RegistryRenderer.java",
+          PREFIX + "RendererSupport.java",
+          PREFIX + "ReplayDecisionRenderer.java",
+          PREFIX + "RetentionRenderer.java",
+          PREFIX + "ScorecardRenderer.java",
+          PREFIX + "SignoffRenderer.java",
+          PREFIX + "SourceRenderer.java");
+  private static final List<String> REQUIRED_TEST_FILES =
+      List.of(
+          "ReleaseAcceptanceMarkdownTests.java",
+          "ReleaseAcceptanceTestData.java",
           PREFIX + "RegistryCiBoundaryTests.java",
           PREFIX + "RegistryCloseoutScorecardTests.java",
           PREFIX + "RegistryEvidenceSignoffTests.java",
           PREFIX + "RegistryImmutabilityTests.java",
           PREFIX + "RegistryRetentionReplayTests.java",
-          PREFIX + "RegistrySourceReadinessTests.java",
-          PREFIX + "RegistryTestSupport.java");
+          PREFIX + "RegistrySourceReadinessTests.java");
 
   @Test
   void releaseAcceptanceImplementationMovesWhileControllerStaysRootVisible() throws IOException {
-    assertThat(MOVED_FILES).hasSize(25);
-    for (String file : MOVED_FILES) {
+    assertThat(CURRENT_FILES).hasSize(14);
+    for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
     }
+    for (String file : REMOVED_RENDERER_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
+      assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
+    }
     try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(25);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(14);
     }
     Path controller = OPS_ROOT.resolve(PREFIX + "RegistryController.java");
     assertThat(Files.isRegularFile(controller)).isTrue();
@@ -85,13 +94,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
 
   @Test
   void packageTestsMoveWhileControllerMarkdownTestStaysRoot() throws IOException {
-    assertThat(MOVED_TEST_FILES).hasSize(7);
-    for (String file : MOVED_TEST_FILES) {
+    assertThat(REQUIRED_TEST_FILES).hasSize(8);
+    for (String file : REQUIRED_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(7);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(8);
     }
     Path controllerTest = TEST_ROOT.resolve(PREFIX + "RegistryControllerMarkdownTests.java");
     assertThat(Files.isRegularFile(controllerTest)).isTrue();
@@ -133,7 +143,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1848Tests {
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(1352);
+          .hasSizeLessThanOrEqualTo(1314);
     }
   }
 

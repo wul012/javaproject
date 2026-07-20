@@ -3,7 +3,7 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryResponse;
-import com.codexdemo.orderplatform.ops.maintenance.ciaccept.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.ciaccept.ReleaseAcceptanceTestData;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
     var response =
         new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryController(
-                OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-                    .service())
+                ReleaseAcceptanceTestData.service())
             .registry();
 
     assertThat(response.version()).isEqualTo("Java v1502");
@@ -30,9 +29,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void rendersStableReleaseAcceptanceMarkdownSectionsAndChecks() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseAcceptanceRegistryTestSupport
-            .registry();
+    var response = ReleaseAcceptanceTestData.registry();
 
     assertThat(response.markdownSectionCount()).isEqualTo(10);
     assertThat(response.markdownSections())
