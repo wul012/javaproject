@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesReleaseChecklistFromConsumerPackageHandoffChecklist() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.releaseChecklistCount()).isEqualTo(5);
     assertThat(response.readyReleaseChecklistCount()).isEqualTo(5);
@@ -29,9 +27,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesHandoffReceiptsForExpectedConsumers() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.handoffReceiptCount()).isEqualTo(4);
     assertThat(response.readyHandoffReceiptCount()).isEqualTo(4);

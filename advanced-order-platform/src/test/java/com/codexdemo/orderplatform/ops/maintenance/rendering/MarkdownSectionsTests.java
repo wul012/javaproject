@@ -33,5 +33,18 @@ class MarkdownSectionsTests {
     assertThat(section).isEqualTo(new Section("Empty", List.of("item-count=0")));
   }
 
+  @Test
+  void mapsImmutableSnapshotWithoutCountLine() {
+    var entries = new ArrayList<>(List.of("alpha", "beta"));
+
+    Section section =
+        MarkdownSections.mapped("Entries", entries, String::toUpperCase, Section::new);
+    entries.add("gamma");
+
+    assertThat(section).isEqualTo(new Section("Entries", List.of("ALPHA", "BETA")));
+    assertThatThrownBy(() -> section.lines().add("DELTA"))
+        .isInstanceOf(UnsupportedOperationException.class);
+  }
+
   private record Section(String heading, List<String> lines) {}
 }

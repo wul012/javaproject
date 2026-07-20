@@ -4,6 +4,20 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1875 - Verification-dossier renderer convergence
+
+- Extends the shared engine with `MarkdownSections.mapped` for sections that must not
+  receive a count prefix, preserving the dossier's existing format exactly.
+- Replaces eleven dossier renderers and one support shell with one 206-line typed
+  `ReportRenderer`; a pre-change oracle freezes all ten sections and 51 content lines.
+- Shrinks the family `25 -> 14`, ops Java `1336 -> 1325`, renderers `106 -> 96`,
+  renderer lines `5032 -> 4809`, and long renderer filenames `102 -> 91` without
+  changing routes, response records, catalog data, transactions, or authority.
+- Renames the legacy test factory to `DossierTestData` and tightens historical,
+  global census, long-name, walkthrough, and archive gates to the new state.
+- Full `mvnw -B verify` passes 1,943 tests, all JaCoCo floors, SpotBugs 0/0,
+  and executable-jar packaging after the Chinese walkthrough is complete.
+
 ## v1874 - Consumer-package renderer convergence
 
 - Replaces ten one-shot consumer-package renderers and their support shell with one

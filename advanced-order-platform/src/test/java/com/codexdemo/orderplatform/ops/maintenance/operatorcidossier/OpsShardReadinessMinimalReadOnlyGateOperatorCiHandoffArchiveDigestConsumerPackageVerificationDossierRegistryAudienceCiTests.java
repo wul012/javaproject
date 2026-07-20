@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesAudienceRoutesForAllConsumerPackets() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.audienceRouteCount()).isEqualTo(4);
     assertThat(response.readyAudienceRouteCount()).isEqualTo(4);
@@ -25,9 +23,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void preservesFocusedGroupedBuildSmokeCiLaneOrder() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.ciLaneCount()).isEqualTo(5);
     assertThat(response.readOnlyCiLaneCount()).isEqualTo(5);

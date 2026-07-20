@@ -26,4 +26,16 @@ public final class MarkdownSections {
             .toList();
     return sectionFactory.apply(heading, lines);
   }
+
+  public static <T, S> S mapped(
+      String heading,
+      List<T> entries,
+      Function<? super T, String> lineMapper,
+      BiFunction<String, List<String>, S> sectionFactory) {
+    Objects.requireNonNull(heading, "heading");
+    Objects.requireNonNull(entries, "entries");
+    Objects.requireNonNull(lineMapper, "lineMapper");
+    Objects.requireNonNull(sectionFactory, "sectionFactory");
+    return sectionFactory.apply(heading, entries.stream().map(lineMapper).toList());
+  }
 }

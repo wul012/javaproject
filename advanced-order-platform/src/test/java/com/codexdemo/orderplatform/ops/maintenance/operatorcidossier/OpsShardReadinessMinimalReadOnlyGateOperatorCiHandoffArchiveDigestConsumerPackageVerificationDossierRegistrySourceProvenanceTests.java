@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void buildsVerificationDossierFromConsumerPackageRegistry() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1467");
@@ -35,9 +33,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void keepsDossierStrictlyReadOnly() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -50,9 +46,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesRequiredProvenanceFields() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.sourcePackageSnapshotCount()).isEqualTo(1);
     assertThat(response.provenanceEntryCount()).isEqualTo(6);

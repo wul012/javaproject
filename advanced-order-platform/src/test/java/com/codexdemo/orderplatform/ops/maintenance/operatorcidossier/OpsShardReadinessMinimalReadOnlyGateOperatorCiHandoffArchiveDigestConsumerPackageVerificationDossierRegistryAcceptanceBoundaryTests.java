@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesAcceptanceGatesWithVerificationArtifacts() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.acceptanceGateCount()).isEqualTo(5);
     assertThat(response.passedAcceptanceGateCount()).isEqualTo(5);
@@ -25,9 +23,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void carriesBoundaryAuditsWithoutOpeningRuntimePaths() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.boundaryAuditCount()).isEqualTo(8);
     assertThat(response.lockedBoundaryAuditCount()).isEqualTo(8);

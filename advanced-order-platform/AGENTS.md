@@ -156,6 +156,11 @@ while `JavaEleganceGateTests` rejects new long-name identities and any aggregate
 Deleted legacy paths are debt removal, not live source to parse. Do not collapse these
 layered checks back into a whole-file lexical ban that blocks staged legacy migration.
 
+Since v1875, use `MarkdownSections.mapped` when the frozen section has mapped entry lines
+but no count prefix. Use `counted` only when the existing output already carries a count
+line. Never add or remove count lines merely to make families share the same method; the
+pre-change exact Markdown oracle decides which semantic operation is correct.
+
 - Name budget: no new identifier or filename over 40 characters. A name that wants more
   nouns means a missing abstraction — extract and name the concept instead. Existing
   over-budget names: baseline census, shrink-only; renames only where route strings,

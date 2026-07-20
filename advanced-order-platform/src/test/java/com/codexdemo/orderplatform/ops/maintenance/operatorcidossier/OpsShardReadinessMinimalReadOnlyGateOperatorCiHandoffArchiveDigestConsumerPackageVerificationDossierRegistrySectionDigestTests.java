@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
 
   @Test
   void mirrorsConsumerPackageMarkdownIntoSectionDigests() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport
-            .registry();
+    var response = DossierTestData.registry();
 
     assertThat(response.sectionDigestCount()).isEqualTo(9);
     assertThat(response.passedSectionDigestCount()).isEqualTo(9);

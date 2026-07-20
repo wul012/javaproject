@@ -89,17 +89,16 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
             releaseChecklist,
             handoffReceipts,
             scorecard,
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryRenderer
-                .render(
-                    sourcePackages,
-                    provenance,
-                    sectionDigests,
-                    audienceRoutes,
-                    ciLanes,
-                    acceptanceGates,
-                    boundaryAudits,
-                    releaseChecklist,
-                    handoffReceipts,
-                    scorecard));
+            ReportRenderer.render(
+                sourcePackages,
+                provenance,
+                sectionDigests,
+                audienceRoutes,
+                ciLanes,
+                acceptanceGates,
+                boundaryAudits,
+                releaseChecklist,
+                handoffReceipts,
+                scorecard));
   }
 }

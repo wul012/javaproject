@@ -2,11 +2,9 @@ package com.codexdemo.orderplatform.ops.maintenance.operatorcidossier;
 
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.ConsumerPackageTestData;
 
-public final
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport {
+public final class DossierTestData {
 
-  private
-  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryTestSupport() {}
+  private DossierTestData() {}
 
   public static
   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryService
