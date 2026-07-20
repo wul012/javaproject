@@ -116,7 +116,9 @@ elegance/change/archive/walkthrough/closeout selection passed 47/47. The complet
 JaCoCo analyzed 2,215 classes and met every floor; SpotBugs reported `BugInstance=0` and
 `Error=0`, and the executable jar was produced. The census records 1,336 ops files,
 106 renderers / 5,032 lines / 102 long renderer filenames, and exact long-name aggregates
-1278/21063/2837 for production plus 793/10206/3831 for tests. Canonical Actions remain pending.
+1278/21063/2837 for production plus 793/10206/3831 for tests. Implementation commit
+`912820c1` passed canonical Actions run `29727976943`: Docker-tagged tests in 2:27 and
+headless regression in 18:26, including the production-profile smoke and JaCoCo upload.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

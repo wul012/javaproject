@@ -48,7 +48,8 @@ oracle、三个家族行为测试、controller aggregate、v1846/v1866 结构门
 `25/25` 通过。加入优雅 census、长名、变更、归档、讲解与 track closeout 门后，扩大聚焦集
 通过 `47/47`。最终 `mvnw -B verify` 在 16 分 20 秒内通过 1,940 个当前测试，失败、错误、
 跳过均为 0；JaCoCo 分析 2,215 个类且全部 floor 满足，SpotBugs 为 0/0，并生成可执行 jar。
-canonical CI、closeout 和 tag 仍需在提交后闭环。
+实现提交 `912820c1` 的 canonical Actions run `29727976943` 也已通过：Docker 作业 2:27，
+headless 作业 18:26，包含 prod profile smoke 与 JaCoCo 上传。closeout 和 tag 仍需闭环。
 
 ## 明确不做
 
