@@ -41,7 +41,8 @@
 - 相关行为、冻结输出、结构、变更和优雅门合计 `56/56` 通过；全量 release gate 通过 `1,998` 个测试，
   耗时 `15:25`，JaCoCo 分析 `2,121` 类且全部阈值满足，SpotBugs `0/0`，jar 为 `68,017,026` 字节。
 - 中文讲解为 `3,060` 个 Han、严格十个标准章节；授权归档为 `1,698` 个文件、`20,160,868` 原始字节。
-- 远端 implementation/closeout CI 与 annotated tag 在发布边界补齐。
+- Implementation commit `a1bae7a4` 的 Actions run `29833966170` 全绿：Docker `1:58`，
+  headless `18:57`，包含 prod smoke 与 JaCoCo 上传；closeout CI 与 annotated tag 后置完成。
 
 ## Failure Conditions
 

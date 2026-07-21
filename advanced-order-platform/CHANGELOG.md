@@ -32,8 +32,10 @@
   becomes exactly 1,698 files / 20,160,868 raw bytes.
 - Final `scripts/verify-release.ps1` pins v1886 commit `b5c8df42` and passes all
   1,998 tests in 15:25. JaCoCo analyzes 2,121 classes with every floor met, SpotBugs
-  reports 0/0, and the 68,017,026-byte executable jar is packaged. Implementation and
-  closeout Actions plus the annotated tag remain binding before v1887 can become canonical.
+  reports 0/0, and the 68,017,026-byte executable jar is packaged.
+- Implementation commit `a1bae7a4` passes Actions run `29833966170`: Docker-tagged
+  integration tests in 1:58 and headless regression in 18:57, including the production
+  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
 
 ## v1886 - Renderer long-name debt closeout
 
