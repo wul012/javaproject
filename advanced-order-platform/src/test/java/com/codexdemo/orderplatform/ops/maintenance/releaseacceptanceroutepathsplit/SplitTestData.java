@@ -2,9 +2,9 @@ package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsp
 
 import com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff.HandoffTestData;
 
-public final class OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport {
+public final class SplitTestData {
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport() {}
+  private SplitTestData() {}
 
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitService service() {
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitService(HandoffTestData.service());

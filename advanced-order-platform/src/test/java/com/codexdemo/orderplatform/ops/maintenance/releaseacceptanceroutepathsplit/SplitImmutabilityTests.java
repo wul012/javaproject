@@ -4,11 +4,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitImmutabilityTests {
+class SplitImmutabilityTests {
 
   @Test
   void responseCollectionsAreImmutable() {
-    var response = OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport.registry();
+    var response = SplitTestData.registry();
 
     assertThatThrownBy(() -> response.routePaths().clear())
         .isInstanceOf(UnsupportedOperationException.class);
@@ -19,6 +19,8 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitImmutabilityTests {
     assertThatThrownBy(() -> response.consumerHandoffs().clear())
         .isInstanceOf(UnsupportedOperationException.class);
     assertThatThrownBy(() -> response.checks().clear())
+        .isInstanceOf(UnsupportedOperationException.class);
+    assertThatThrownBy(() -> response.markdownSections().getFirst().lines().clear())
         .isInstanceOf(UnsupportedOperationException.class);
   }
 }

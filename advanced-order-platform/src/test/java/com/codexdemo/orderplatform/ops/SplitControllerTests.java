@@ -2,16 +2,15 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.SplitTestData;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitControllerTests {
+class SplitControllerTests {
 
   @Test
   void controllerExposesRoutePathSplitRegistry() {
     var response =
-        new OpsShardReadinessReleaseAcceptanceRoutePathSplitController(
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport.service())
+        new OpsShardReadinessReleaseAcceptanceRoutePathSplitController(SplitTestData.service())
             .registry();
 
     assertThat(response.endpoint())

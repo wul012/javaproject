@@ -153,3 +153,12 @@ sustainment 七节三十八行报告、改前改后精确 oracle、真实 closeo
 依赖方向、测试职责收敛、无效 route 断言修复和 shrink-only 结构门；没有移动、改写或删除
 任何历史归档。重建后的精确集合为 `1,693 files / 20,076,290 raw bytes`。本次上调严格等于
 这一份 17,087 字节讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1883 Extension
+
+用户于 2026-07-21 继续授权 Java coding brilliant and elegant 九分计划。v1883 只新增
+`代码讲解记录_生产雏形阶段9/v1883-v1887/v1883-route-split-internals.md`，用于解释
+Route Split 五个公共兼容边界、主报告六节四十三行、closeout 三节十五行、改前改后精确
+oracle、内部短命名、下游 sustainment 方向与固定 tag 发布门；没有移动、改写或删除任何
+历史归档。重建后的精确集合为 `1,694 files / 20,092,216 raw bytes`。本次上调严格等于
+这一份 15,926 字节讲解的增量，不是后续版本的预留预算。

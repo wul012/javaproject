@@ -119,6 +119,7 @@ screenshot/explanation work continues in `f/`, and code explanation notes contin
 - Lesson promotion: when the same deviation or workaround is recorded twice, promote it into this file as a rule instead of recording it a third time.
 - Ledger closes with the version: update the progress-ledger row to its final state (including CI run id) in the same session as commit/tag/push. A row left saying "pending" after the push is a closeout violation (recurred at v1826 and v1833; promoted 2026-07-07).
 - Java line-count ratchets must use `scripts/java-maintainability-census.ps1` or an explicit `StreamReader.ReadLine()` loop. Do not use `Measure-Object -Line`; it omits blank lines and produced two false caps during v1835.
+- Release verification must run `scripts/verify-release.ps1`. The script resolves the previous canonical `v*-order-platform-*` tag, peels it to a commit SHA, and gives that fixed SHA to Spotless before `mvnw verify`. Never use the moving `javaproject/master` ref as the release ratchet base; v1882 proved that a post-push remote ref can hide current changes.
 - Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
 
 ## Elegance Gates (promoted 2026-07-11, program-end review)

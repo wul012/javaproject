@@ -103,8 +103,29 @@ class JavaTrackCloseoutTests {
     assertThat(ROOT.resolve(Path.of("scripts", "ops-root-census.ps1"))).isRegularFile();
     assertThat(ROOT.resolve(Path.of("scripts", "java-maintainability-census.ps1"))).isRegularFile();
     assertThat(ROOT.resolve(Path.of("scripts", "archive-retention-census.ps1"))).isRegularFile();
+    assertThat(ROOT.resolve(Path.of("scripts", "verify-release.ps1"))).isRegularFile();
     assertThat(ROOT.resolve(Path.of("docs", "ops", "extraction-waivers.md"))).isRegularFile();
     assertThat(ROOT.resolve(Path.of("docs", "archive-retention-policy.md"))).isRegularFile();
+  }
+
+  @Test
+  void releaseVerifyPinsCanonicalTag() throws IOException {
+    String script = read(ROOT.resolve(Path.of("scripts", "verify-release.ps1")));
+    String rules = read(ROOT.resolve("AGENTS.md"));
+
+    assertThat(script)
+        .contains(
+            "git describe --tags --abbrev=0 --match 'v*-order-platform-*'",
+            "git rev-list -n 1 $tag",
+            "-Dspotless.ratchetFrom={1}",
+            "-f $maven, $base",
+            "$env:ComSpec /d /c $spotlessCommand",
+            "$env:ComSpec /d /c $verifyCommand",
+            "$spotlessExit = $LASTEXITCODE",
+            "$verifyExit = $LASTEXITCODE")
+        .doesNotContain("javaproject/master");
+    assertThat(rules)
+        .contains("scripts/verify-release.ps1", "fixed SHA", "moving `javaproject/master`");
   }
 
   private static String read(Path path) throws IOException {

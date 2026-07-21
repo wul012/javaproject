@@ -161,7 +161,7 @@ class SustainmentStructureTests {
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(1258);
+          .hasSizeLessThanOrEqualTo(1251);
     }
   }
 

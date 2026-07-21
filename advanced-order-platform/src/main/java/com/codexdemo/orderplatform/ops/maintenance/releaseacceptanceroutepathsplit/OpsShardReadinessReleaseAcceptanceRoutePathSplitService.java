@@ -23,18 +23,15 @@ public class OpsShardReadinessReleaseAcceptanceRoutePathSplitService {
   @Transactional(readOnly = true)
   public OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse registry() {
     var source = sourceService.registry();
-    var sourceSnapshots =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSourceCatalog.snapshots(source);
-    var routePaths = OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog.routes();
-    var compatibilityChecks =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityCatalog.checks(routePaths);
-    var boundaryGuards = OpsShardReadinessReleaseAcceptanceRoutePathSplitBoundaryCatalog.guards();
-    var consumerHandoffs =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitConsumerCatalog.handoffs();
+    var sourceSnapshots = SourceCatalog.snapshots(source);
+    var routePaths = RouteCatalog.routes();
+    var compatibilityChecks = CompatibilityCatalog.checks(routePaths);
+    var boundaryGuards = BoundaryCatalog.guards();
+    var consumerHandoffs = ConsumerCatalog.handoffs();
     var scorecard =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitScorecardCatalog.scorecard(
+        ScorecardCatalog.scorecard(
             sourceSnapshots, routePaths, compatibilityChecks, boundaryGuards, consumerHandoffs);
-    return OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport.response(
+    return RegistryAssembler.response(
         RESPONSE_VERSION,
         ENDPOINT,
         source,
@@ -44,7 +41,7 @@ public class OpsShardReadinessReleaseAcceptanceRoutePathSplitService {
         boundaryGuards,
         consumerHandoffs,
         scorecard,
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitRenderer.render(
+        ReportRenderer.render(
             sourceSnapshots,
             routePaths,
             compatibilityChecks,

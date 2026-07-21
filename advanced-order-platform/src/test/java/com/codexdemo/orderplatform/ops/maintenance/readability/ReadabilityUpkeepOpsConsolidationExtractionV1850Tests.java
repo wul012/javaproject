@@ -124,10 +124,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
                 ROUTE_SPLIT_ROOT.resolve(
                     "OpsShardReadinessReleaseAcceptanceRoutePathSplitService.java")))
         .contains(PACKAGE_IMPORT + "." + PREFIX + "Service");
-    for (String file :
-        List.of(
-            "OpsShardReadinessReleaseAcceptanceRoutePathSplitSourceCatalog.java",
-            "OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport.java")) {
+    for (String file : List.of("SourceCatalog.java", "RegistryAssembler.java")) {
       assertThat(read(ROUTE_SPLIT_ROOT.resolve(file)))
           .as(file)
           .contains(PACKAGE_IMPORT + "." + response);
@@ -146,7 +143,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(1258);
+          .hasSizeLessThanOrEqualTo(1251);
     }
   }
 

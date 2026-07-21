@@ -1,12 +1,13 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard;
 import java.util.List;
 
-final class OpsShardReadinessReleaseAcceptanceRoutePathSplitBoundaryCatalog {
+final class BoundaryCatalog {
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitBoundaryCatalog() {}
+  private BoundaryCatalog() {}
 
-  static List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard> guards() {
+  static List<BoundaryGuard> guards() {
     return List.of(
         guard("write-routing", "route constants only; no command path is created"),
         guard(
@@ -22,9 +23,7 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitBoundaryCatalog {
             "Node v1846 parallel work does not authorize Java or mini-kv startup"));
   }
 
-  private static OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard guard(
-      String boundary, String evidence) {
-    return new OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard(
-        boundary, true, evidence);
+  private static BoundaryGuard guard(String boundary, String evidence) {
+    return new BoundaryGuard(boundary, true, evidence);
   }
 }

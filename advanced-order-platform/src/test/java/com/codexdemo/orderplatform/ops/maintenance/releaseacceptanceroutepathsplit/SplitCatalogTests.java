@@ -4,11 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitCatalogTests {
+class SplitCatalogTests {
 
   @Test
   void registryReturnsSplitCatalogAndSourceSnapshot() {
-    var response = OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport.registry();
+    var response = SplitTestData.registry();
 
     assertThat(response.version()).isEqualTo("Java v1570");
     assertThat(response.sourcePlan()).isEqualTo("Node v1846");
@@ -25,7 +25,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitCatalogTests {
 
   @Test
   void scorecardAndBoundaryGuardsRemainPassedAndLocked() {
-    var response = OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport.registry();
+    var response = SplitTestData.registry();
 
     assertThat(response.boundaryGuards()).allSatisfy(guard -> assertThat(guard.locked()).isTrue());
     assertThat(response.consumerHandoffs())

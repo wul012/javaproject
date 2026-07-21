@@ -1,9 +1,12 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.BoundaryAssertion;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.CloseoutItem;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.MarkdownSection;
 import java.util.ArrayList;
 import java.util.List;
 
-final class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutSupport {
+final class CloseoutAssembler {
 
   static final String PROJECT = "advanced-order-platform";
   static final String SOURCE_PLAN = "Node v1846";
@@ -14,37 +17,23 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutSupport {
   static final int EXPECTED_BOUNDARY_ASSERTION_COUNT = 7;
   static final int EXPECTED_MARKDOWN_SECTION_COUNT = 3;
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutSupport() {}
+  private CloseoutAssembler() {}
 
   static OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse response(
       String version,
       String endpoint,
       OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse source,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.CloseoutItem>
-          closeoutItems,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.BoundaryAssertion>
-          boundaryAssertions,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.MarkdownSection>
-          markdownSections) {
+      List<CloseoutItem> closeoutItems,
+      List<BoundaryAssertion> boundaryAssertions,
+      List<MarkdownSection> markdownSections) {
     var closeoutCopy = List.copyOf(closeoutItems);
     var boundaryCopy = List.copyOf(boundaryAssertions);
     var markdownCopy = List.copyOf(markdownSections);
     int passedCloseoutCount =
-        (int)
-            closeoutCopy.stream()
-                .filter(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.CloseoutItem
-                        ::passed)
-                .count();
+        Math.toIntExact(closeoutCopy.stream().filter(CloseoutItem::passed).count());
     int lockedBoundaryCount =
-        (int)
-            boundaryCopy.stream()
-                .filter(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse
-                            .BoundaryAssertion
-                        ::locked)
-                .count();
-    List<String> checks = new ArrayList<>();
+        Math.toIntExact(boundaryCopy.stream().filter(BoundaryAssertion::locked).count());
+    List<String> checks = new ArrayList<>(15);
     checks.add("release-acceptance-route-path-split-closeout-source-plan-" + SOURCE_PLAN);
     checks.add(
         "release-acceptance-route-path-split-closeout-node-parallel-plan-" + NODE_PARALLEL_PLAN);
@@ -97,12 +86,9 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutSupport {
 
   private static String status(
       OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse source,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.CloseoutItem>
-          closeoutItems,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.BoundaryAssertion>
-          boundaryAssertions,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.MarkdownSection>
-          markdownSections) {
+      List<CloseoutItem> closeoutItems,
+      List<BoundaryAssertion> boundaryAssertions,
+      List<MarkdownSection> markdownSections) {
     boolean countsMatch =
         closeoutItems.size() == EXPECTED_CLOSEOUT_ITEM_COUNT
             && boundaryAssertions.size() == EXPECTED_BOUNDARY_ASSERTION_COUNT
@@ -112,15 +98,8 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutSupport {
             && source.routePathCount() == 11
             && source.compatibilityCheckCount() == 11;
     boolean allPassed =
-        closeoutItems.stream()
-                .allMatch(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse.CloseoutItem
-                        ::passed)
-            && boundaryAssertions.stream()
-                .allMatch(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse
-                            .BoundaryAssertion
-                        ::locked);
+        closeoutItems.stream().allMatch(CloseoutItem::passed)
+            && boundaryAssertions.stream().allMatch(BoundaryAssertion::locked);
     return countsMatch && sourcePassed && allPassed ? "passed" : "blocked";
   }
 }

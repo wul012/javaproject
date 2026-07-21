@@ -1,12 +1,12 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
-public final class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport {
+public final class CloseoutTestData {
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport() {}
+  private CloseoutTestData() {}
 
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutService service() {
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutService(
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitTestSupport.service());
+        SplitTestData.service());
   }
 
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse closeout() {

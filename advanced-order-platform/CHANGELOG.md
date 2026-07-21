@@ -4,6 +4,34 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1883 - Route Split internal model convergence
+
+- Preserves all five public Route Split compatibility types, route values, response
+  fields, transactions, profiles, and downstream service boundaries.
+- Replaces nineteen long package-private implementation shells with twelve short
+  domain owners and deletes seven forwarding-only section renderers; the family
+  shrinks `24 -> 17` files.
+- Freezes the old implementation before replacement and preserves it exactly:
+  the registry report remains six sections / 43 lines and closeout remains three
+  sections / 15 lines. The same focused set passes 19/19 before and after.
+- Repairs three ineffective route assertions so the stable barrel is compared with
+  the narrow owner and the closeout suffix is pinned independently of its endpoint.
+- Shrinks ops Java `1258 -> 1251`, renderers `38 -> 32`, renderer lines
+  `3521 -> 3448`, and long renderer filenames `22 -> 14`.
+- Production long-name metrics improve to `1169 / 20376 / 2728`; test metrics improve
+  to `764 / 9999 / 3783`. The exact baseline has 66 removals and no additions.
+- Adds `scripts/verify-release.ps1`: release Spotless now compares with the peeled
+  commit of the previous canonical tag instead of a moving remote branch. Native
+  stderr is merged at the command boundary and Maven success is judged by exit code.
+- The expanded behavior, history, structure, elegance, walkthrough, archive, and
+  closeout selection passes 119/119 after correcting one file-list sort assumption.
+- The walkthrough has 3,492 Han characters and exactly ten standard headings; the
+  exact archive set is 1,694 files / 20,092,216 raw bytes.
+- Final `scripts/verify-release.ps1` pins v1882 closeout commit `5ebe1c06` and passes
+  1,968 tests in 8:29 with zero failures/errors/skips. JaCoCo analyzes 2,130 classes
+  with every floor met, SpotBugs reports 0/0, and the executable jar is packaged.
+  Implementation/closeout Actions and the annotated tag remain binding gates.
+
 ## v1882 - Release-acceptance sustainment renderer convergence
 
 - Freezes the real legacy sustainment output before replacement and preserves it
@@ -36,7 +64,8 @@
 - Canonical implementation run `29799705965` passes Docker-tagged verification in
   2:03 and headless regression in 19:50, including Spotless against the v1881 peeled
   commit, full wrapper verify, production-profile smoke, and JaCoCo upload. Closeout
-  Actions and the annotated tag remain pending.
+  commit `5ebe1c06` passes run `29800790309`: Docker in 1:54 and headless in 18:12.
+  Annotated tag `v1882-order-platform-sustainment-renderer` is canonical.
 
 ## v1881 - Minimal read-only gate execution renderer convergence
 

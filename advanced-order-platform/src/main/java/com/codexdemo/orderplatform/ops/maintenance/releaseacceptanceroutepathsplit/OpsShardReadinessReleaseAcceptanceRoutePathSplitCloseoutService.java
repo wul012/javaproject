@@ -22,17 +22,14 @@ public class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutService {
   @Transactional(readOnly = true)
   public OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutResponse closeout() {
     var source = sourceService.registry();
-    var closeoutItems =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutItemCatalog.items(source);
-    var boundaryAssertions =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutBoundaryCatalog.assertions(source);
-    return OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutSupport.response(
+    var closeoutItems = CloseoutItemCatalog.items(source);
+    var boundaryAssertions = CloseoutBoundaryCatalog.assertions(source);
+    return CloseoutAssembler.response(
         RESPONSE_VERSION,
         ENDPOINT,
         source,
         closeoutItems,
         boundaryAssertions,
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutRenderer.render(
-            closeoutItems, boundaryAssertions));
+        CloseoutRenderer.render(closeoutItems, boundaryAssertions));
   }
 }

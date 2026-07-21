@@ -4,11 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutCatalogTests {
+class CloseoutCatalogTests {
 
   @Test
   void closeoutConsumesSplitRegistryAndKeepsParallelPlanReadOnly() {
-    var response = OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport.closeout();
+    var response = CloseoutTestData.closeout();
 
     assertThat(response.version()).isEqualTo("Java v1579");
     assertThat(response.sourceSplitVersion()).isEqualTo("Java v1570");
@@ -25,7 +25,7 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutCatalogTests {
 
   @Test
   void closeoutItemsAndBoundariesRemainPassed() {
-    var response = OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport.closeout();
+    var response = CloseoutTestData.closeout();
 
     assertThat(response.closeoutItems()).allSatisfy(item -> assertThat(item.passed()).isTrue());
     assertThat(response.closeoutItems())

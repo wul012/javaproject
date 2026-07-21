@@ -1,10 +1,17 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.CompatibilityCheck;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ConsumerHandoff;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.MarkdownSection;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ScorecardEntry;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.SourceSnapshot;
 import com.codexdemo.orderplatform.ops.maintenance.releasearchivehandoff.OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport {
+final class RegistryAssembler {
 
   static final String PROJECT = "advanced-order-platform";
   static final String SOURCE_PLAN = "Node v1846";
@@ -19,22 +26,19 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport {
   static final int EXPECTED_SCORECARD_ENTRY_COUNT = 8;
   static final int EXPECTED_MARKDOWN_SECTION_COUNT = 6;
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport() {}
+  private RegistryAssembler() {}
 
   static OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse response(
       String version,
       String endpoint,
       OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse source,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.SourceSnapshot> sourceSnapshots,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry> routePaths,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.CompatibilityCheck>
-          compatibilityChecks,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard> boundaryGuards,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ConsumerHandoff>
-          consumerHandoffs,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ScorecardEntry> scorecard,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.MarkdownSection>
-          markdownSections) {
+      List<SourceSnapshot> sourceSnapshots,
+      List<RoutePathEntry> routePaths,
+      List<CompatibilityCheck> compatibilityChecks,
+      List<BoundaryGuard> boundaryGuards,
+      List<ConsumerHandoff> consumerHandoffs,
+      List<ScorecardEntry> scorecard,
+      List<MarkdownSection> markdownSections) {
     var sourceCopy = List.copyOf(sourceSnapshots);
     var routeCopy = List.copyOf(routePaths);
     var compatibilityCopy = List.copyOf(compatibilityChecks);
@@ -44,33 +48,15 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport {
     var markdownCopy = List.copyOf(markdownSections);
 
     int compatibleRouteCount =
-        (int)
-            routeCopy.stream()
-                .filter(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry
-                        ::legacyCompatible)
-                .count();
+        Math.toIntExact(routeCopy.stream().filter(RoutePathEntry::legacyCompatible).count());
     int matchedCompatibilityCount =
-        (int)
-            compatibilityCopy.stream()
-                .filter(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.CompatibilityCheck
-                        ::matched)
-                .count();
+        Math.toIntExact(compatibilityCopy.stream().filter(CompatibilityCheck::matched).count());
     int lockedBoundaryCount =
-        (int)
-            boundaryCopy.stream()
-                .filter(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard::locked)
-                .count();
+        Math.toIntExact(boundaryCopy.stream().filter(BoundaryGuard::locked).count());
     int passedScorecardCount =
-        (int)
-            scorecardCopy.stream()
-                .filter(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ScorecardEntry::passed)
-                .count();
+        Math.toIntExact(scorecardCopy.stream().filter(ScorecardEntry::passed).count());
 
-    List<String> checks = new ArrayList<>();
+    List<String> checks = new ArrayList<>(24);
     checks.add("release-acceptance-route-path-split-source-plan-" + SOURCE_PLAN);
     checks.add("release-acceptance-route-path-split-node-split-plan-" + NODE_SPLIT_PLAN);
     checks.add("release-acceptance-route-path-split-source-handoff-version-" + source.version());
@@ -143,16 +129,13 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport {
 
   private static String status(
       OpsShardReadinessReleaseAcceptanceArchiveVerificationHandoffResponse source,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.SourceSnapshot> sourceSnapshots,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry> routePaths,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.CompatibilityCheck>
-          compatibilityChecks,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard> boundaryGuards,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ConsumerHandoff>
-          consumerHandoffs,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ScorecardEntry> scorecard,
-      List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.MarkdownSection>
-          markdownSections) {
+      List<SourceSnapshot> sourceSnapshots,
+      List<RoutePathEntry> routePaths,
+      List<CompatibilityCheck> compatibilityChecks,
+      List<BoundaryGuard> boundaryGuards,
+      List<ConsumerHandoff> consumerHandoffs,
+      List<ScorecardEntry> scorecard,
+      List<MarkdownSection> markdownSections) {
     boolean countsMatch =
         sourceSnapshots.size() == EXPECTED_SOURCE_SNAPSHOT_COUNT
             && routePaths.size() == EXPECTED_ROUTE_PATH_COUNT
@@ -163,22 +146,11 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSupport {
             && markdownSections.size() == EXPECTED_MARKDOWN_SECTION_COUNT;
     boolean allPassed =
         "passed".equals(source.status())
-            && routePaths.stream()
-                .allMatch(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry
-                        ::legacyCompatible)
-            && compatibilityChecks.stream()
-                .allMatch(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.CompatibilityCheck
-                        ::matched)
-            && boundaryGuards.stream()
-                .allMatch(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.BoundaryGuard::locked)
+            && routePaths.stream().allMatch(RoutePathEntry::legacyCompatible)
+            && compatibilityChecks.stream().allMatch(CompatibilityCheck::matched)
+            && boundaryGuards.stream().allMatch(BoundaryGuard::locked)
             && consumerHandoffs.stream().allMatch(handoff -> "passed".equals(handoff.status()))
-            && scorecard.stream()
-                .allMatch(
-                    OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ScorecardEntry
-                        ::passed);
+            && scorecard.stream().allMatch(ScorecardEntry::passed);
     return countsMatch && allPassed ? "passed" : "blocked";
   }
 }

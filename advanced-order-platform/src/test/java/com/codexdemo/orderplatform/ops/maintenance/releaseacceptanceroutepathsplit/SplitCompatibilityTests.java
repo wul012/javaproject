@@ -2,10 +2,11 @@ package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsp
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.OpsShardReadinessRoutePaths;
 import com.codexdemo.orderplatform.ops.maintenance.readinesscore.OpsShardReadinessService;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityTests {
+class SplitCompatibilityTests {
 
   @Test
   void stableBarrelKeepsReleaseAcceptanceRouteValues() {
@@ -14,22 +15,20 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityTests {
     assertThat(
             OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY)
-        .isEqualTo(
-            OpsShardReadinessReleaseAcceptanceRoutePaths
-                .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY);
+        .isEqualTo(OpsShardReadinessRoutePaths.RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY);
     assertThat(
             OpsShardReadinessReleaseAcceptanceRoutePaths
                 .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_ARCHIVE_REGISTRY)
         .isEqualTo(
-            OpsShardReadinessReleaseAcceptanceRoutePaths
+            OpsShardReadinessRoutePaths
                 .MINIMAL_READ_ONLY_GATE_OPERATOR_CI_HANDOFF_ARCHIVE_DIGEST_CONSUMER_PACKAGE_VERIFICATION_DOSSIER_RELEASE_ACCEPTANCE_ARCHIVE_REGISTRY);
   }
 
   @Test
   void routeCatalogMapsStableAndSplitEntrypointsOneForOne() {
-    var routes = OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog.routes();
-    var compatibilityChecks =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitCompatibilityCatalog.checks(routes);
+    var response = SplitTestData.registry();
+    var routes = response.routePaths();
+    var compatibilityChecks = response.compatibilityChecks();
 
     assertThat(routes).hasSize(11);
     assertThat(routes)

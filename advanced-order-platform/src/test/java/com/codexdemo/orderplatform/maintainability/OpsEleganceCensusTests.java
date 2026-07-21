@@ -32,6 +32,8 @@ class OpsEleganceCensusTests {
       OPS_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateoperatorcihandoff"));
   private static final Path EXECUTION_ROOT =
       OPS_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateexecution"));
+  private static final Path ROUTE_SPLIT_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "releaseacceptanceroutepathsplit"));
   private static final Path SUSTAINMENT_ROOT =
       OPS_ROOT.resolve(Path.of("maintenance", "releaseacceptanceroutepathsplit", "sustainment"));
 
@@ -39,10 +41,10 @@ class OpsEleganceCensusTests {
   void rendererDebtCanOnlyShrink() throws IOException {
     List<Path> renderers = javaFiles(OPS_ROOT).stream().filter(this::isRenderer).toList();
 
-    assertThat(renderers).hasSizeLessThanOrEqualTo(38);
+    assertThat(renderers).hasSizeLessThanOrEqualTo(32);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_521);
-    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(22);
+        .isLessThanOrEqualTo(3_451);
+    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(14);
   }
 
   @Test
@@ -170,10 +172,24 @@ class OpsEleganceCensusTests {
   }
 
   @Test
+  void routeSplitKeepsTwoOutputRenderers() throws IOException {
+    List<Path> files =
+        javaFiles(ROUTE_SPLIT_ROOT).stream()
+            .filter(path -> !path.startsWith(SUSTAINMENT_ROOT))
+            .toList();
+    List<Path> renderers = files.stream().filter(this::isRenderer).toList();
+
+    assertThat(files).hasSizeLessThanOrEqualTo(17);
+    assertThat(renderers)
+        .extracting(path -> path.getFileName().toString())
+        .containsExactlyInAnyOrder("CloseoutRenderer.java", "ReportRenderer.java");
+  }
+
+  @Test
   void censusAndRoadmapStayReproducible() throws IOException {
     Path script = Path.of("scripts", "ops-elegance-census.ps1");
     Path roadmap = Path.of("docs", "ops", "elegance-three-point-roadmap.md");
-    Path version = Path.of("docs", "ops", "release-sustainment-renderer-v1882.md");
+    Path version = Path.of("docs", "ops", "route-split-internals-v1883.md");
 
     assertThat(script).isRegularFile();
     assertThat(read(script))
@@ -190,9 +206,12 @@ class OpsEleganceCensusTests {
             "AcceptancePackageJavaFiles",
             "HandoffJavaFiles",
             "ExecutionJavaFiles",
+            "RouteSplitJavaFiles",
             "SustainmentJavaFiles");
     assertThat(read(roadmap)).contains("ops-elegance-census.ps1", "DONE 与失败条件", "<= 650", "<= 30");
-    assertThat(read(version)).contains("需求证据矩阵", "失败条件", "19 -> 11", "45 -> 38", "3616 -> 3521");
+    assertThat(read(version))
+        .contains(
+            "Requirement Evidence Matrix", "Failure Conditions", "24 -> 17", "38 -> 32", "3448");
   }
 
   private List<Path> javaFiles(Path root) throws IOException {

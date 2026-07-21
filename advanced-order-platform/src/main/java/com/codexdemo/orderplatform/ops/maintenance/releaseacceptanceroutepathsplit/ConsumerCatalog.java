@@ -1,12 +1,13 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ConsumerHandoff;
 import java.util.List;
 
-final class OpsShardReadinessReleaseAcceptanceRoutePathSplitConsumerCatalog {
+final class ConsumerCatalog {
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitConsumerCatalog() {}
+  private ConsumerCatalog() {}
 
-  static List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ConsumerHandoff> handoffs() {
+  static List<ConsumerHandoff> handoffs() {
     return List.of(
         handoff(
             "release-acceptance-archive-verification-handoff-service",
@@ -30,9 +31,7 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitConsumerCatalog {
             "no fresh Node or mini-kv evidence is required by the split"));
   }
 
-  private static OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ConsumerHandoff handoff(
-      String consumer, String importRule, String expectation) {
-    return new OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.ConsumerHandoff(
-        consumer, importRule, expectation, "passed");
+  private static ConsumerHandoff handoff(String consumer, String importRule, String expectation) {
+    return new ConsumerHandoff(consumer, importRule, expectation, "passed");
   }
 }

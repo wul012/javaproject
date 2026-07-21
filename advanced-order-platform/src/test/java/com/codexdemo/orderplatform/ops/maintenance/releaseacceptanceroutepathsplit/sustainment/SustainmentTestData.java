@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment;
 
-import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.CloseoutTestData;
 
 public final class SustainmentTestData {
 
@@ -8,7 +8,7 @@ public final class SustainmentTestData {
 
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService service() {
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService(
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport.service());
+        CloseoutTestData.service());
   }
 
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse registry() {

@@ -1,13 +1,14 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit;
 
 import com.codexdemo.orderplatform.ops.OpsShardReadinessRoutePaths;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry;
 import java.util.List;
 
-final class OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog {
+final class RouteCatalog {
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog() {}
+  private RouteCatalog() {}
 
-  static List<OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry> routes() {
+  static List<RoutePathEntry> routes() {
     return List.of(
         entry(
             "MINIMAL_READ_ONLY_GATE_EXECUTION_REGISTRY",
@@ -72,13 +73,12 @@ final class OpsShardReadinessReleaseAcceptanceRoutePathSplitRouteCatalog {
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_REGISTRY));
   }
 
-  private static OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry entry(
-      String symbol, String stablePath, String splitPath) {
+  private static RoutePathEntry entry(String symbol, String stablePath, String splitPath) {
     boolean matched =
         OpsShardReadinessRoutePaths.BASE_PATH.equals(
                 OpsShardReadinessReleaseAcceptanceRoutePaths.BASE_PATH)
             && stablePath.equals(splitPath);
-    return new OpsShardReadinessReleaseAcceptanceRoutePathSplitResponse.RoutePathEntry(
+    return new RoutePathEntry(
         symbol,
         splitPath,
         stablePath,

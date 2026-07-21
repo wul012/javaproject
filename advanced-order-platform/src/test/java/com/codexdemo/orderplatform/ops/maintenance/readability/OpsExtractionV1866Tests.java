@@ -29,7 +29,7 @@ class OpsExtractionV1866Tests {
   @Test
   void movesFinalRootFamilies() throws IOException {
     assertThat(OpsExtractionTestSupport.javaFiles(OPS_ROOT)).hasSize(104);
-    assertThat(OpsExtractionTestSupport.allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1258);
+    assertThat(OpsExtractionTestSupport.allJavaFiles(OPS_ROOT)).hasSizeLessThanOrEqualTo(1251);
 
     assertThat(rootNames())
         .doesNotContain(
