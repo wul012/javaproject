@@ -22,8 +22,11 @@
   the exact archive set is 1,691 files / 20,041,344 raw bytes.
 - Full `mvnw -B verify` passes 1,956 tests in 10:26 with zero failures, errors,
   or skips; JaCoCo analyzes 2,153 classes with every floor met, SpotBugs reports
-  0/0, and the executable jar is packaged. Implementation Actions, closeout Actions,
-  and annotated tag remain binding completion gates.
+  0/0, and the executable jar is packaged.
+- Implementation commit `179e6609` passes canonical Actions run `29792136907`:
+  Docker-tagged verification in 2:09 and headless regression in 19:17, including
+  the production-profile smoke and JaCoCo upload. Closeout CI remains required
+  before tagging.
 
 ## v1879 - Acceptance-package renderer convergence
 

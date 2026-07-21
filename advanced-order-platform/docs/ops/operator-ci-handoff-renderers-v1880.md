@@ -67,3 +67,7 @@ archive-digest 消费失败；包内出现第三个 renderer、任一旧 rendere
 生产文件；全局 ops、renderer、行数、长名 baseline 被放宽；通过改测试期望、fixture、
 SpotBugs 豁免或边界标志制造绿色；Spotless、JaCoCo、SpotBugs、jar packaging、实现 CI、
 closeout CI 或 annotated tag 的任一闭环缺失。
+
+实现提交 `179e6609` 已通过 canonical Actions run `29792136907`：Docker-tagged
+verification 用时 2:09，headless regression 用时 19:17，并完成 production-profile
+smoke 与 JaCoCo upload。closeout Actions 与 annotated tag 仍是版本完成的绑定门。
