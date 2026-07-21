@@ -29,8 +29,10 @@
   preserved and tightened: the short adapter must exist and the long renderer must not.
 - Final `scripts/verify-release.ps1` pins v1883 commit `4b4193b0` and passes 1,976 tests
   in 11:46. JaCoCo analyzes 2,131 classes with every floor met, SpotBugs reports 0/0,
-  and the executable jar is packaged. Implementation/closeout CI and the annotated tag
-  remain binding completion gates.
+  and the executable jar is packaged.
+- Implementation commit `512d4804` passes Actions run `29815077843`: Docker-tagged
+  integration tests in 2:21 and headless regression in 20:30, including the production
+  smoke and JaCoCo upload. Closeout CI and the annotated tag remain binding gates.
 
 ## v1883 - Route Split internal model convergence
 

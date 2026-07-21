@@ -16,14 +16,14 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1883 repair closeout run 29810094538 green: Docker 2:12, headless 20:11; v1884 pending |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1884 implementation run 29815077843 green: Docker 2:21, headless 20:30 |
 | E2 Static analysis | Spotless and SpotBugs checks; 676 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1884 local SpotBugs 0 bugs / 0 errors |
 | E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1884 local verify analyzed 2131 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1883 tag canonical; v1884 implementation/closeout/tag pending |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1884 implementation `512d4804` and run green; closeout/tag pending |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1884 expanded 181/181; full 1976/1976; ops 1249; renderers 30/3372 lines/9 long names |
 | E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1884-authorized exact set: 1695 files / 20107763 raw bytes |
 
@@ -302,7 +302,9 @@ v1825/v1826 renderer-presence assumptions after all 1,976 tests execute; the rep
 their extraction purpose, requires the current short adapter, and explicitly rejects the
 old long implementation. Repair-focused tests pass 47/47. Final `verify-release.ps1` pins
 v1883 commit `4b4193b0` and passes 1,976 tests in 11:46, JaCoCo 2,131/all floors,
-SpotBugs 0/0, and jar packaging. Both Actions runs and the annotated tag remain binding.
+SpotBugs 0/0, and jar packaging. Implementation commit `512d4804` passes Actions run
+`29815077843`: Docker-tagged tests in 2:21 and headless regression in 20:30, including
+production smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
