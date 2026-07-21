@@ -4,6 +4,31 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1882 - Release-acceptance sustainment renderer convergence
+
+- Freezes the real legacy sustainment output before replacement and preserves it
+  exactly: seven Markdown sections / 38 lines, 30 checks, and five ordered CI gates.
+- Replaces one aggregate renderer, seven section renderers, and one support shell with
+  one 118-line package-private `ReportRenderer` backed by `MarkdownSections.mapped`.
+- Replaces six long test/factory/structure names with short responsibility names while
+  retaining the real v1840 closeout graph and downstream acceptance-package coverage.
+- Repairs a tautological route assertion so the root Controller test now pins the exact
+  route suffix and final endpoint.
+- Shrinks the family `19 -> 11`, ops Java `1266 -> 1258`, renderers `45 -> 38`,
+  renderer lines `3616 -> 3521`, and long renderer filenames `30 -> 22`.
+- Production long-name metrics improve to `1188 / 20495 / 2747`; test metrics improve
+  to `776 / 10039 / 3801`. The exact baseline has 35 removals and no additions.
+- Targeted behavior, Controller, downstream, and structure gates pass 27/27; the
+  naming, change, v1866, current-structure, and exact-output set passes 28/28.
+- The expanded history, elegance, change, walkthrough, archive, closeout, and README
+  evidence selection passes 111/111.
+- The walkthrough has 3,391 Han characters and exactly ten standard headings; the
+  exact archive set is 1,693 files / 20,076,290 raw bytes.
+- Full `mvnw -B verify` passes 1,963 tests in 12:10 with zero failures, errors,
+  or skips; JaCoCo analyzes 2,137 classes with every floor met, SpotBugs reports
+  0 bugs / 0 errors, and the executable jar is packaged. Implementation/closeout
+  Actions and the annotated tag remain binding completion gates.
+
 ## v1881 - Minimal read-only gate execution renderer convergence
 
 - Adds `MarkdownSections.groupedCounted`, preserving group encounter order, item order,

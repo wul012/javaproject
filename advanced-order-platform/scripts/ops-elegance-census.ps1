@@ -17,6 +17,7 @@ $archiveHandoffRoot = Join-Path $opsRoot 'maintenance/releasearchivehandoff'
 $acceptancePackageRoot = Join-Path $opsRoot 'maintenance/releaseacceptancepackage'
 $handoffRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorcihandoff'
 $executionRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateexecution'
+$sustainmentRoot = Join-Path $opsRoot 'maintenance/releaseacceptanceroutepathsplit/sustainment'
 
 function Get-LineCount {
   param([Parameter(Mandatory = $true)][string]$Path)
@@ -55,6 +56,7 @@ $archiveHandoffFiles = @(& rg --files $archiveHandoffRoot -g '*.java')
 $acceptancePackageFiles = @(& rg --files $acceptancePackageRoot -g '*.java')
 $handoffFiles = @(& rg --files $handoffRoot -g '*.java')
 $executionFiles = @(& rg --files $executionRoot -g '*.java')
+$sustainmentFiles = @(& rg --files $sustainmentRoot -g '*.java')
 $summary = [ordered]@{
   OpsJavaFiles = $rows.Count
   RendererFiles = $renderers.Count
@@ -73,6 +75,7 @@ $summary = [ordered]@{
   AcceptancePackageJavaFiles = $acceptancePackageFiles.Count
   HandoffJavaFiles = $handoffFiles.Count
   ExecutionJavaFiles = $executionFiles.Count
+  SustainmentJavaFiles = $sustainmentFiles.Count
   Hotspots = @(
     $rows |
       Sort-Object -Property @{ Expression = 'Lines'; Descending = $true }, Path |

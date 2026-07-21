@@ -2,14 +2,14 @@ package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsp
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse.OwnershipRule;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentCatalogTests {
+class SustainmentCatalogTests {
 
   @Test
-  void sustainmentRegistryConsumesCloseoutAndPinsLatestParallelPlan() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport.registry();
+  void registryPinsCloseoutAndParallelPlan() {
+    var response = SustainmentTestData.registry();
 
     assertThat(response.version()).isEqualTo("Java v1604");
     assertThat(response.sourcePlan()).isEqualTo("Node v1878");
@@ -30,15 +30,12 @@ class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentCatalogTests {
   }
 
   @Test
-  void sustainmentRulesAndGuardsRemainClosed() {
-    var response =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport.registry();
+  void rulesAndGuardsRemainClosed() {
+    var response = SustainmentTestData.registry();
 
     assertThat(response.ownershipRules()).allSatisfy(rule -> assertThat(rule.enforced()).isTrue());
     assertThat(response.ownershipRules())
-        .extracting(
-            OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse.OwnershipRule
-                ::component)
+        .extracting(OwnershipRule::component)
         .contains(
             "stable-route-delegate", "catalog-ownership", "renderer-ownership", "test-ownership");
     assertThat(response.driftGuards()).allSatisfy(guard -> assertThat(guard.locked()).isTrue());

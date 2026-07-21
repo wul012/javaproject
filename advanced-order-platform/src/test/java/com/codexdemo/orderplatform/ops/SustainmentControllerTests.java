@@ -3,23 +3,21 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
-import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment.SustainmentTestData;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentControllerTests {
+class SustainmentControllerTests {
 
   @Test
-  void controllerExposesSustainmentRoute() {
+  void exposesStableSustainmentRoute() {
     assertThat(
             OpsShardReadinessReleaseAcceptanceRoutePaths
                 .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_REGISTRY)
-        .isEqualTo(
-            OpsShardReadinessReleaseAcceptanceRoutePaths
-                .RELEASE_ACCEPTANCE_ROUTE_PATH_SPLIT_SUSTAINMENT_REGISTRY);
+        .isEqualTo("/release-acceptance-route-path-split-sustainment-registry");
 
     var response =
         new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentController(
-                OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport.service())
+                SustainmentTestData.service())
             .registry();
 
     assertThat(response.endpoint())

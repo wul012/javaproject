@@ -55,7 +55,7 @@ public class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService 
         ciGates,
         consumerHandoffs,
         scorecard,
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentRenderer.render(
+        ReportRenderer.render(
             sourceSnapshots,
             ownershipRules,
             driftGuards,

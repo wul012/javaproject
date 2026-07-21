@@ -1,6 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage;
 
-import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment.OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.sustainment.SustainmentTestData;
 
 public final class PackageTestData {
 
@@ -9,7 +9,7 @@ public final class PackageTestData {
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService
       service() {
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService(
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport.service());
+        SustainmentTestData.service());
   }
 
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse

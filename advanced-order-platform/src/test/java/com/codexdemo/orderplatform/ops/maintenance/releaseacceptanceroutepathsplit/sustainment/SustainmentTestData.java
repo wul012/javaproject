@@ -2,9 +2,9 @@ package com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsp
 
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePathSplitCloseoutTestSupport;
 
-public final class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport {
+public final class SustainmentTestData {
 
-  private OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentTestSupport() {}
+  private SustainmentTestData() {}
 
   public static OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService service() {
     return new OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService(

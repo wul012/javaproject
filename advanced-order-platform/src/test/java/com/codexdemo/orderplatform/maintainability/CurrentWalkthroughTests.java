@@ -19,7 +19,7 @@ class CurrentWalkthroughTests {
           Path.of("代码讲解记录_生产雏形阶段9", "v1873-v1877"),
           Path.of("代码讲解记录_生产雏形阶段9", "v1878-v1882"));
   private static final Path LATEST =
-      ROOTS.get(2).resolve("v1881-minimal-read-only-gate-execution-renderers.md");
+      ROOTS.get(2).resolve("v1882-release-sustainment-renderer.md");
   private static final List<String> STANDARD_HEADINGS =
       List.of(
           "## 入口路由",
