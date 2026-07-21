@@ -9,8 +9,7 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierImmutabili
 
   @Test
   void verificationAndDownstreamGatesPassWithoutOpeningRuntime() {
-    var response =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierTestSupport.dossier();
+    var response = DossierTestData.dossier();
 
     assertThat(response.downstreamIntakeGates())
         .allSatisfy(gate -> assertThat(gate.ready()).isTrue());
@@ -22,8 +21,7 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierImmutabili
 
   @Test
   void dossierListsAreImmutable() {
-    var response =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierTestSupport.dossier();
+    var response = DossierTestData.dossier();
 
     assertThatThrownBy(() -> response.checks().add("mutate"))
         .isInstanceOf(UnsupportedOperationException.class);

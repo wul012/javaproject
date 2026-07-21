@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffModuleCatalogTest
 
   @Test
   void moduleCatalogPublishesHandoffModulesAfterRegistryModules() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.modules())
         .extracting(
@@ -24,7 +24,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffModuleCatalogTest
 
   @Test
   void moduleCatalogStaysPassedAndSized() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.moduleCount()).isEqualTo(8);
     assertThat(response.modules())

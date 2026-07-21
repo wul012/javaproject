@@ -9,9 +9,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void codeHealthVerificationAndHandoffStayReady() {
-    var response =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest();
+    var response = ManifestTestData.manifest();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -22,9 +20,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void listsAndRenderedLinesAreImmutable() {
-    var response =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest();
+    var response = ManifestTestData.manifest();
 
     assertThatThrownBy(() -> response.checks().add("mutated"))
         .isInstanceOf(UnsupportedOperationException.class);

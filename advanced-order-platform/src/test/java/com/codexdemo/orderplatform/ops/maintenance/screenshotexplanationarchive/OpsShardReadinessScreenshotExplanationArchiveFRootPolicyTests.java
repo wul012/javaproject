@@ -8,7 +8,7 @@ class OpsShardReadinessScreenshotExplanationArchiveFRootPolicyTests {
 
   @Test
   void keepsNewScreenshotExplanationWorkUnderFRoot() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.nextRoot()).isEqualTo("f");
     assertThat(response.currentArchiveAssessments())
@@ -34,7 +34,7 @@ class OpsShardReadinessScreenshotExplanationArchiveFRootPolicyTests {
 
   @Test
   void keepsTransitionRootClosedForNewSegments() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.currentArchiveAssessments())
         .anySatisfy(

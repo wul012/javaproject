@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffBoundaryFlagsTest
 
   @Test
   void handoffFlagsDoNotOpenMutableOrRuntimeBehavior() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.draftArtifactMaterializationAllowed()).isFalse();
     assertThat(response.signedApprovalCaptureAllowed()).isFalse();
@@ -21,7 +21,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffBoundaryFlagsTest
 
   @Test
   void checksExposeZeroMutableArtifactCounts() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.checks())
         .contains(

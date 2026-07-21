@@ -3,7 +3,7 @@ package com.codexdemo.orderplatform.ops;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.codexdemo.orderplatform.ops.maintenance.signedapproval.OpsShardReadinessSignedApprovalDraftProfileSectionRoutePaths;
-import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff.OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff.HandoffTestData;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffControllerTests {
@@ -17,7 +17,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffControllerTests {
 
     var response =
         new OpsShardReadinessSignedApprovalDraftProfileSectionHandoffController(
-                OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.service())
+                HandoffTestData.service())
             .handoff();
 
     assertThat(response.endpoint())

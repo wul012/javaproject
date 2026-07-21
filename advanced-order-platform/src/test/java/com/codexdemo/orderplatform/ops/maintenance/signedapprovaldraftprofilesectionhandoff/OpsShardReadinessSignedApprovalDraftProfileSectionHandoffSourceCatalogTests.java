@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffSourceCatalogTest
 
   @Test
   void sourceCatalogPinsTheRegistryAsSingleSource() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.sources()).hasSize(1);
     assertThat(response.sources().getFirst().code())
@@ -19,7 +19,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffSourceCatalogTest
 
   @Test
   void sourceCatalogKeepsRegistryEndpointAndProfileVisible() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.sourceRegistryEndpoint())
         .isEqualTo("/api/v1/ops/shard-readiness/signed-approval-draft-profile-section-registry");

@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRouteContractTest
 
   @Test
   void routeContractsTransferFiveLockedFieldsForEachSection() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.routeContracts()).hasSize(5);
     assertThat(response.routeContracts())
@@ -21,7 +21,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRouteContractTest
 
   @Test
   void routeContractsRemainReadOnlyForDownstreamConsumers() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.routeContracts())
         .allSatisfy(

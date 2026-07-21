@@ -8,7 +8,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryServiceTests {
 
   @Test
   void buildsScreenshotExplanationArchiveSegmentationRegistry() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1773");
@@ -32,7 +32,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryServiceTests {
 
   @Test
   void namesTheCurrentAndNextScreenshotArchiveRoots() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.currentArchiveAssessments())
         .extracting(

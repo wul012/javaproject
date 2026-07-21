@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffServiceTests {
 
   @Test
   void buildsReadOnlyHandoffFromSignedApprovalDraftRegistry() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1262");
@@ -29,7 +29,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffServiceTests {
 
   @Test
   void preservesTransferredRegistryCounts() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.transferredSectionCount()).isEqualTo(5);
     assertThat(response.transferredRouteFieldLockCount()).isEqualTo(5);

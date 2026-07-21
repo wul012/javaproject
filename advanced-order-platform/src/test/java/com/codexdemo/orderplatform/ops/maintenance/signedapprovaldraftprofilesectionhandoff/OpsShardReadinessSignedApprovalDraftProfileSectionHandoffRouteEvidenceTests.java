@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRouteEvidenceTest
 
   @Test
   void endpointProfileAndHandoffStateMatchPublishedRoute() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.endpoint())
         .isEqualTo(OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService.ENDPOINT);
@@ -20,7 +20,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRouteEvidenceTest
 
   @Test
   void checksNameTheRegistryOnlyAssemblyBoundary() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.checks())
         .contains("signed-approval-draft-profile-section-handoff-consumes-v1237-registry-only");

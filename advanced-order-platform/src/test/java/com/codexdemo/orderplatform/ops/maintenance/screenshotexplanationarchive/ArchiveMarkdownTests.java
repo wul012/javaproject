@@ -2,13 +2,14 @@ package com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.rendering.MarkdownOracle;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessScreenshotExplanationArchiveRegistryRendererTests {
+class ArchiveMarkdownTests {
 
   @Test
   void rendersStableMarkdownSectionsForArchiveSegmentation() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.markdownSections())
         .extracting(
@@ -30,5 +31,16 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryRendererTests {
         .anySatisfy(line -> assertThat(line).contains("no-screenshot-capture", "allowed=false"));
     assertThat(response.markdownSections().get(4).lines())
         .anySatisfy(line -> assertThat(line).contains("archive-doc-tests"));
+    assertThat(response.markdownSections())
+        .extracting(section -> section.lines().size())
+        .containsExactly(4, 6, 7, 9, 6);
+    assertThat(
+            MarkdownOracle.sha256(
+                response.markdownSections(),
+                OpsShardReadinessScreenshotExplanationArchiveRegistryResponse.MarkdownSection
+                    ::heading,
+                OpsShardReadinessScreenshotExplanationArchiveRegistryResponse.MarkdownSection
+                    ::lines))
+        .isEqualTo("205b7c2d1d84604b31f35a1ec6d3993c9e702a99ed122dbc58edf287f16a58f8");
   }
 }

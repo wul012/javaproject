@@ -8,8 +8,7 @@ class OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveCatal
 
   @Test
   void archivePinsNodeOwnerPlanAndFrozenSiblingEvidence() {
-    var response =
-        OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveTestSupport.archive();
+    var response = ArchiveTestData.archive();
 
     assertThat(response.version()).isEqualTo("Java v1667");
     assertThat(response.sourcePlan()).isEqualTo("Node v1967");
@@ -35,8 +34,7 @@ class OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveCatal
 
   @Test
   void archiveEchoesImplementationPlanFakeHarnessBoundary() {
-    var response =
-        OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveTestSupport.archive();
+    var response = ArchiveTestData.archive();
 
     assertThat(response.sourceReceipts())
         .singleElement()

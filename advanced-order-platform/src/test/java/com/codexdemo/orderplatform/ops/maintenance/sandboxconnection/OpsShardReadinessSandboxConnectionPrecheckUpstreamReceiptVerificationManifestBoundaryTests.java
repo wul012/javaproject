@@ -8,9 +8,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void precheckFieldsEchoTheSevenValueFreeInputs() {
-    var response =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest();
+    var response = ManifestTestData.manifest();
 
     assertThat(response.precheckFields())
         .extracting(
@@ -35,9 +33,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void boundaryGuardsKeepAllRuntimeActionsClosed() {
-    var response =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest();
+    var response = ManifestTestData.manifest();
 
     assertThat(response.boundaryGuards())
         .extracting(

@@ -59,7 +59,7 @@ public class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSer
     var handoffNotes =
         OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierHandoffCatalog.notes();
     var markdownSections =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierRenderer.render(
+        DossierRenderer.render(
             sourceReceipts,
             contextFields,
             preconditionEvidence,

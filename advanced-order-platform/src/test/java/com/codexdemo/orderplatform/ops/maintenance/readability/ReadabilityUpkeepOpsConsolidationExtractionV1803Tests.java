@@ -18,6 +18,10 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1803Tests {
       OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "sandboxconnection"));
   private static final Path EXTRACTION_NOTE =
       DOCS_ROOT.resolve("sandbox-connection-extraction-v1803.md");
+  private static final String RETIRED_DOSSIER_RENDERER =
+      "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierRenderer.java";
+  private static final String RETIRED_MANIFEST_RENDERER =
+      "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestRenderer.java";
   private static final List<String> EXTRACTED_IMPLEMENTATION_FILES =
       List.of(
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierBoundaryCatalog.java",
@@ -26,7 +30,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1803Tests {
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierExecutionGuardCatalog.java",
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierHandoffCatalog.java",
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierPreconditionEvidenceCatalog.java",
-          "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierRenderer.java",
+          "DossierRenderer.java",
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse.java",
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService.java",
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSourceCatalog.java",
@@ -38,7 +42,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1803Tests {
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestFieldCatalog.java",
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestHandoffCatalog.java",
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestReferenceCatalog.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestRenderer.java",
+          "ManifestRenderer.java",
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse.java",
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestService.java",
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSourceCatalog.java",
@@ -82,6 +86,12 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1803Tests {
           .as(fileName + " should no longer be directly in the root ops package")
           .isFalse();
     }
+    assertThat(Files.exists(SANDBOX_CONNECTION_SOURCE_ROOT.resolve(RETIRED_DOSSIER_RENDERER)))
+        .isFalse();
+    assertThat(Files.exists(SANDBOX_CONNECTION_SOURCE_ROOT.resolve(RETIRED_MANIFEST_RENDERER)))
+        .isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_DOSSIER_RENDERER))).isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_MANIFEST_RENDERER))).isFalse();
   }
 
   @Test

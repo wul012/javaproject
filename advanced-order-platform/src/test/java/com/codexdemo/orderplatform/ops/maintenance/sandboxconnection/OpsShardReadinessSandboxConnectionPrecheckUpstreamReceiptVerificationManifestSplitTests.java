@@ -8,9 +8,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void splitModulesCoverTheNodeV1983ThroughV1994Refactor() {
-    var response =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest();
+    var response = ManifestTestData.manifest();
 
     assertThat(response.splitModules())
         .extracting(
@@ -31,9 +29,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void evidenceReferencesStayFrozenAndPointAtJavaV99AndMiniKvV108() {
-    var response =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest();
+    var response = ManifestTestData.manifest();
 
     assertThat(response.evidenceReferences())
         .extracting(

@@ -8,8 +8,7 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSourceTest
 
   @Test
   void dossierPinsLatestNodePlanAndFrozenJavaContextEvidence() {
-    var response =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierTestSupport.dossier();
+    var response = DossierTestData.dossier();
 
     assertThat(response.version()).isEqualTo("Java v1687");
     assertThat(response.sourcePlan()).isEqualTo("Node v1982");
@@ -38,8 +37,7 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSourceTest
 
   @Test
   void sourceReceiptKeepsBlockedExecutionAndPreconditionIntakeSeparate() {
-    var response =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierTestSupport.dossier();
+    var response = DossierTestData.dossier();
 
     assertThat(response.sourceReceipts())
         .singleElement()

@@ -1,20 +1,18 @@
 package com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff;
 
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff.OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse.RenderedHandoff;
+import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesectionhandoff.OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse.SectionHandoff;
 import java.util.List;
 
-final class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRenderer {
+final class HandoffRenderer {
 
-  private OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRenderer() {}
+  private HandoffRenderer() {}
 
-  static List<OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse.RenderedHandoff>
-      render(
-          List<OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse.SectionHandoff>
-              handoffs) {
+  static List<RenderedHandoff> render(List<SectionHandoff> handoffs) {
     return handoffs.stream()
         .map(
             handoff ->
-                new OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse
-                    .RenderedHandoff(
+                new RenderedHandoff(
                     handoff.order(),
                     handoff.sectionCode(),
                     "### " + handoff.heading(),
@@ -23,8 +21,7 @@ final class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRenderer {
         .toList();
   }
 
-  private static String markdownBody(
-      OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse.SectionHandoff handoff) {
+  private static String markdownBody(SectionHandoff handoff) {
     return String.join(
         "\n",
         "- java-version: " + handoff.javaVersion(),

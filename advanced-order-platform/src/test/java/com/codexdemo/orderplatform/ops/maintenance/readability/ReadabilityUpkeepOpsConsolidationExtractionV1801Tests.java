@@ -18,12 +18,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1801Tests {
       OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "screenshotexplanationarchive"));
   private static final Path EXTRACTION_NOTE =
       DOCS_ROOT.resolve("screenshot-explanation-archive-extraction-v1801.md");
+  private static final String RETIRED_RENDERER =
+      "OpsShardReadinessScreenshotExplanationArchiveRegistryRenderer.java";
   private static final List<String> EXTRACTED_IMPLEMENTATION_FILES =
       List.of(
           "OpsShardReadinessScreenshotExplanationArchiveBoundaryCatalog.java",
           "OpsShardReadinessScreenshotExplanationArchiveCurrentCatalog.java",
           "OpsShardReadinessScreenshotExplanationArchiveNamingRuleCatalog.java",
-          "OpsShardReadinessScreenshotExplanationArchiveRegistryRenderer.java",
+          "ReportRenderer.java",
           "OpsShardReadinessScreenshotExplanationArchiveRegistryResponse.java",
           "OpsShardReadinessScreenshotExplanationArchiveRegistryService.java",
           "OpsShardReadinessScreenshotExplanationArchiveRegistrySupport.java",
@@ -65,6 +67,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1801Tests {
           .as(fileName + " should no longer be directly in the root ops package")
           .isFalse();
     }
+    assertThat(Files.exists(SCREENSHOT_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
   }
 
   @Test

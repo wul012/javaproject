@@ -180,3 +180,12 @@ oracle、内部短命名、下游 sustainment 方向与固定 tag 发布门；�
 完整 UTF-8 摘要、领域映射与 shrink-only 结构门；没有移动、改写或删除任何历史归档。
 重建后的精确集合为 `1,696 files / 20,125,898 raw bytes`。本次上调严格等于这一份
 18,135 字节讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1886 Extension
+
+用户于 2026-07-21 继续授权 Java coding brilliant and elegant 九分计划。v1886 只新增
+`代码讲解记录_生产雏形阶段9/v1883-v1887/v1886-renderer-closeout.md`，用于解释五类只读
+证据报告的三十三个输出块、二百零二行正文、五组完整摘要、共享 `mapped/counted` 机制、
+Handoff 的局部映射、历史提取边界和 shrink-only 命名门；没有移动、改写或删除任何历史归档。
+重建后的精确集合为 `1,697 files / 20,146,559 raw bytes`。本次上调严格等于这一份
+20,661 字节讲解的增量，不是后续版本的预留预算。

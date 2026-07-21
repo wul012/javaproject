@@ -1,6 +1,6 @@
 # Java Track Final Evidence Candidate
 
-Status: v1885 local candidate. External Java-track review is required before
+Status: v1886 local candidate. External Java-track review is required before
 the word final may describe the track. This file records reproducible evidence; it does
 not authorize production execution.
 
@@ -16,28 +16,28 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1885 implementation run 29822027690 green: Docker 2:13, headless 20:12 |
-| E2 Static analysis | Spotless and SpotBugs checks; 676 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1885 local SpotBugs 0 bugs / 0 errors |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1885 local verify analyzed 2131 classes/all floors |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1885 implementation and closeout runs green; v1886 CI pending |
+| E2 Static analysis | Spotless and SpotBugs checks; 676 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1886 local SpotBugs 0 bugs / 0 errors |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1886 local verify analyzed 2131 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1885 implementation `311c5c91` and run green; closeout/tag pending |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1885 focused 66/66; full 1981/1981; ops 1249; renderers 30/3289 lines/5 long names |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1885-authorized exact set: 1696 files / 20125898 raw bytes |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1885 closeout `acab0cdc` and canonical tag pushed; v1886 pending |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1886 focused 53/53; full 1990/1990; ops 1249; renderers 30/3246 lines/0 long names |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1886-authorized exact set: 1697 files / 20146559 raw bytes |
 
 ## Final Censuses
 
 - Ops direct root: 104 files; retained: 104; remaining movable: 0; unassigned: 0.
 - Ops total production Java files: 1,249; no extraction family remains in root.
 - Production Java: 1,381 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
-- Test Java: 904 files; maximum 699 lines; over 500: 8;
+- Test Java: 907 files; maximum 699 lines; over 500: 8;
   over 750/1000: 0/0.
-- Long-name shrink-only baseline: production stems/uses/unique 1159/20277/2718;
-  tests 754/9970/3773. New declarations and filenames remain within 40 characters;
+- Long-name shrink-only baseline: production stems/uses/unique 1154/20240/2713;
+  tests 746/9916/3763. New declarations and filenames remain within 40 characters;
   baseline identities and aggregate occurrences only shrink during staged migration.
-- Renderer census: 30 files / 3,289 lines / 5 long filenames, down from
+- Renderer census: 30 files / 3,246 lines / 0 long filenames, down from
   121 / 5,355 / 119 at the v1872 start of the three-point elegance program.
 - Exact long-name identities are frozen in `config/java-name-baseline.txt`; v1869 adds
   Git-aware tests that reject new names, dirty-tree blind spots, oversized feature-source
@@ -47,8 +47,8 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
   aliases without changing route bytes or the root-versus-leaf compatibility response.
 - SpotBugs exclusions: 676 exact pattern/class identities; only deletion is allowed, and
   every retained class must load from the compiled classpath.
-- Archive retention: v1885's user-authorized optimization adds exactly one walkthrough;
-  the current exact set is 1,696 files / 20,125,898 raw bytes.
+- Archive retention: v1886's user-authorized optimization adds exactly one walkthrough;
+  the current exact set is 1,697 files / 20,146,559 raw bytes.
 
 ## Active Waivers
 
@@ -329,7 +329,29 @@ then passes all 1,981 tests in 9:11 with zero failures/errors/skips. JaCoCo anal
 2,131 classes and meets every floor; SpotBugs reports 0/0; the executable jar is
 68,027,947 bytes. Implementation commit `311c5c91` passes Actions run `29822027690`:
 Docker-tagged tests in 2:13 and headless regression in 20:12, including production smoke
-and JaCoCo upload. Closeout Actions and the annotated v1885 tag remain binding.
+and JaCoCo upload. Closeout commit `acab0cdc` passes Actions run `29823485427`: Docker
+in 2:14 and headless in 19:08. Annotated tag
+`v1885-order-platform-walkthrough-report-renderers` peels to that commit locally and on
+`javaproject`, making v1885 the canonical predecessor.
+
+Current v1886 candidate: five reports first pass the same exact oracle on v1885,
+freezing 33 output blocks, 202 body lines, every heading, every per-block line count, and
+five canonical full-report UTF-8 SHA-256 values. Four short output owners then reuse
+`MarkdownSections.mapped/counted`; the profile Handoff keeps its direct one-to-one
+mapping because it has no section-list policy to share. The same five oracles pass
+unchanged after replacement. Public routes, Response records, controllers, catalogs,
+fixtures, and read-only transactions are unchanged. Renderer count remains 30 while
+lines tighten from 3,289 to 3,246 and long filenames reach zero. Production name
+aggregates are 1154/20240/2713 and test aggregates are 746/9916/3763; the exact baseline
+has 28 removals and no additions. Five test-data owners now carry short role names, the
+duplicate Handoff markdown test is merged, and four historical extraction gates require
+the current short owner while explicitly rejecting each retired long name. Formatted
+exact-output, history, structure, elegance, and baseline gates pass 53/53. Walkthrough,
+and archive evidence are complete at 5,079 Han / 10 headings and exactly 1,697 files /
+20,146,559 raw bytes. Full local verification then passes all 1,990 tests in 9:07 with
+zero failures/errors/skips. JaCoCo analyzes 2,131 classes and meets every floor;
+SpotBugs reports 0/0; the executable jar is 68,026,314 bytes. Implementation CI,
+closeout CI, and the annotated v1886 tag remain binding.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

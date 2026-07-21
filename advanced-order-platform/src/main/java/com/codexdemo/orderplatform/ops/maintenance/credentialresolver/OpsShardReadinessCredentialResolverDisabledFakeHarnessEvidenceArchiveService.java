@@ -52,7 +52,7 @@ public class OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchi
     var handoffNotes =
         OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveHandoffCatalog.notes();
     var markdownSections =
-        OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveRenderer.render(
+        ArchiveRenderer.render(
             sourceReceipts,
             javaRequirements,
             miniKvRequirements,

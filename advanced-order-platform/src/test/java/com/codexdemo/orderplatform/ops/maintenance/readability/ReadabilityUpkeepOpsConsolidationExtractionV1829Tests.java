@@ -26,12 +26,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1829Tests {
           "代码讲解记录_生产雏形阶段6",
           "v1829-v1833",
           "version-1829-production-excellence-signed-approval-draft-profile-section-handoff-extraction.md");
+  private static final String RETIRED_RENDERER =
+      "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRenderer.java";
   private static final List<String> RELOCATED_FILES =
       List.of(
           "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffBoundaryCatalog.java",
           "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffGateCatalog.java",
           "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffModuleCatalog.java",
-          "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRenderer.java",
+          "HandoffRenderer.java",
           "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffResponse.java",
           "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRouteContractCatalog.java",
           "OpsShardReadinessSignedApprovalDraftProfileSectionHandoffSectionCatalog.java",
@@ -72,6 +74,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1829Tests {
           .isTrue();
       assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(fileName))).isFalse();
     }
+    assertThat(Files.exists(PROFILE_SECTION_HANDOFF_SOURCE_ROOT.resolve(RETIRED_RENDERER)))
+        .isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
   }
 
   @Test

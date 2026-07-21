@@ -8,7 +8,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryBoundaryTests {
 
   @Test
   void keepsArchiveSegmentationRuntimeFreeAndReadOnly() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -24,7 +24,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryBoundaryTests {
 
   @Test
   void emitsChecksForNoRootDumpingAndNoRuntimeSideEffects() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.checks())
         .contains(

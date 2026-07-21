@@ -8,7 +8,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryImmutabilityTests {
 
   @Test
   void exposesImmutableResponseLists() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThatThrownBy(() -> response.currentArchiveAssessments().clear())
         .isInstanceOf(UnsupportedOperationException.class);

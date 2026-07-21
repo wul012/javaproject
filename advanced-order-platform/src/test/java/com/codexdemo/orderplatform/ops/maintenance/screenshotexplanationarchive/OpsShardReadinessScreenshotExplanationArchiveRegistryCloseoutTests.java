@@ -8,7 +8,7 @@ class OpsShardReadinessScreenshotExplanationArchiveRegistryCloseoutTests {
 
   @Test
   void closesOutSegmentationWithCurrentAndNextArchiveRoots() {
-    var response = OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport.registry();
+    var response = ScreenshotTestData.registry();
 
     assertThat(response.checks())
         .contains(

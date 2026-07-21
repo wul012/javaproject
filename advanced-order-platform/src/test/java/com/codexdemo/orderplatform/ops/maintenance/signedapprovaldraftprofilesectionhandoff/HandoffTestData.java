@@ -2,9 +2,9 @@ package com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilese
 
 import com.codexdemo.orderplatform.ops.maintenance.signedapprovaldraftprofilesection.OpsShardReadinessSignedApprovalDraftProfileSectionRegistryTestSupport;
 
-public final class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport {
+public final class HandoffTestData {
 
-  private OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport() {}
+  private HandoffTestData() {}
 
   public static OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService service() {
     return new OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService(

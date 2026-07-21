@@ -19,11 +19,13 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1802Tests {
   private static final Path EXTRACTION_NOTE =
       DOCS_ROOT.resolve(
           "credential-resolver-disabled-fake-harness-evidence-archive-extraction-v1802.md");
+  private static final String RETIRED_RENDERER =
+      "OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveRenderer.java";
   private static final List<String> EXTRACTED_IMPLEMENTATION_FILES =
       List.of(
           "OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveBoundaryCatalog.java",
           "OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveHandoffCatalog.java",
-          "OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveRenderer.java",
+          "ArchiveRenderer.java",
           "OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveRequirementCatalog.java",
           "OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveResponse.java",
           "OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveRuntimeGuardCatalog.java",
@@ -67,6 +69,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1802Tests {
           .as(fileName + " should no longer be directly in the root ops package")
           .isFalse();
     }
+    assertThat(Files.exists(CREDENTIAL_RESOLVER_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
   }
 
   @Test

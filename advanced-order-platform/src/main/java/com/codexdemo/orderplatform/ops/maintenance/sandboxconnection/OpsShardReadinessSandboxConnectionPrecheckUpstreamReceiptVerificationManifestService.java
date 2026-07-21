@@ -55,16 +55,15 @@ public class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificati
         OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestHandoffCatalog
             .notes();
     var markdownSections =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestRenderer
-            .render(
-                sourceReceipts,
-                splitModules,
-                evidenceReferences,
-                precheckFields,
-                boundaryGuards,
-                codeHealthGates,
-                verificationGates,
-                handoffNotes);
+        ManifestRenderer.render(
+            sourceReceipts,
+            splitModules,
+            evidenceReferences,
+            precheckFields,
+            boundaryGuards,
+            codeHealthGates,
+            verificationGates,
+            handoffNotes);
     return OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSupport
         .response(
             RESPONSE_VERSION,

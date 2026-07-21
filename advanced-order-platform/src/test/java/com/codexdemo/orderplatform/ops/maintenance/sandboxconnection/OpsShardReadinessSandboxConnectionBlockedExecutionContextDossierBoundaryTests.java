@@ -8,8 +8,7 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierBoundaryTe
 
   @Test
   void preconditionEvidenceAndBoundariesStayClosed() {
-    var response =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierTestSupport.dossier();
+    var response = DossierTestData.dossier();
 
     assertThat(response.preconditionEvidence())
         .extracting(
@@ -39,8 +38,7 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierBoundaryTe
 
   @Test
   void executionGuardsProveNoRuntimeExecution() {
-    var response =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierTestSupport.dossier();
+    var response = DossierTestData.dossier();
 
     assertThat(response.executionGuards())
         .extracting(

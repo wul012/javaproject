@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffBoundaryDecisionT
 
   @Test
   void boundaryDecisionsBlockMutableAndRuntimeSurfaces() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.boundaryDecisions())
         .extracting(
@@ -32,7 +32,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffBoundaryDecisionT
 
   @Test
   void boundaryDecisionCountMatchesSupportGate() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.boundaryDecisionCount()).isEqualTo(7);
     assertThat(response.checks())

@@ -1,8 +1,8 @@
 package com.codexdemo.orderplatform.ops.maintenance.screenshotexplanationarchive;
 
-final class OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport {
+final class ScreenshotTestData {
 
-  private OpsShardReadinessScreenshotExplanationArchiveRegistryTestSupport() {}
+  private ScreenshotTestData() {}
 
   static OpsShardReadinessScreenshotExplanationArchiveRegistryService service() {
     return new OpsShardReadinessScreenshotExplanationArchiveRegistryService();

@@ -5,23 +5,19 @@ import com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures;
 import com.codexdemo.orderplatform.order.IdempotencyStore;
 import com.codexdemo.orderplatform.outbox.OutboxRepository;
 
-final
-class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport {
+final class DossierTestData {
 
-  private
-  OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport() {}
+  private DossierTestData() {}
 
-  static OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestService
-      service() {
-    return new OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestService(
+  static OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService service() {
+    return new OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierService(
         OpsEvidenceServiceTestFixtures.readOnlyFixtureService(
             org.mockito.Mockito.mock(FailedEventSummaryService.class),
             org.mockito.Mockito.mock(OutboxRepository.class),
             org.mockito.Mockito.mock(IdempotencyStore.class)));
   }
 
-  static OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse
-      manifest() {
-    return service().manifest();
+  static OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse dossier() {
+    return service().dossier();
   }
 }

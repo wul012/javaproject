@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffAggregateTests {
 
   @Test
   void aggregateCountsMatchPublishedLists() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.moduleCount()).isEqualTo(response.modules().size());
     assertThat(response.sourceCount()).isEqualTo(response.sources().size());
@@ -21,7 +21,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffAggregateTests {
 
   @Test
   void transferredCountsMirrorRouteContractsAndSections() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.transferredSectionCount()).isEqualTo(response.sectionHandoffs().size());
     assertThat(response.transferredRouteFieldLockCount())

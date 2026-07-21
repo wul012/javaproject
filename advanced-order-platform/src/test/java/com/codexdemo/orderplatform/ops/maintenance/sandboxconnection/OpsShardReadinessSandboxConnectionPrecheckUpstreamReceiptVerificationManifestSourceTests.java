@@ -8,9 +8,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void manifestPinsNodePlanAndFrozenJavaPrecheckEvidence() {
-    var response =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest();
+    var response = ManifestTestData.manifest();
 
     assertThat(response.version()).isEqualTo("Java v1707");
     assertThat(response.sourcePlan()).isEqualTo("Node v2002");
@@ -35,11 +33,7 @@ class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManif
 
   @Test
   void sourceReceiptRetainsNodeV245ToV246ContractWithoutProductionUse() {
-    var source =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestTestSupport
-            .manifest()
-            .sourceReceipts()
-            .getFirst();
+    var source = ManifestTestData.manifest().sourceReceipts().getFirst();
 
     assertThat(source.receiptName())
         .isEqualTo("managedAuditSandboxConnectionPrecheckPacketEchoReceipt");

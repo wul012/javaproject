@@ -32,7 +32,7 @@ public class OpsShardReadinessScreenshotExplanationArchiveRegistryService {
         namingRules,
         boundaryRules,
         verificationSteps,
-        OpsShardReadinessScreenshotExplanationArchiveRegistryRenderer.render(
+        ReportRenderer.render(
             currentArchives, segmentPlans, namingRules, boundaryRules, verificationSteps));
   }
 }

@@ -4,6 +4,32 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1886 - Renderer long-name debt closeout
+
+- Freezes five complete reports against the v1885 implementation: 33 output blocks,
+  202 body lines, every heading, every per-block line count, and five canonical full
+  UTF-8 SHA-256 values. The unchanged oracle set passes after replacement.
+- Replaces the final five long owners with `ArchiveRenderer`, `DossierRenderer`,
+  `ManifestRenderer`, `ReportRenderer`, and `HandoffRenderer` while retaining public
+  routes, Response records, controllers, catalogs, fixtures, and read-only transactions.
+- Reuses `MarkdownSections.mapped/counted` for four section reports. Handoff keeps its
+  smaller direct mapping because forcing it through a section abstraction would erase
+  rather than clarify its one-to-one domain model.
+- Keeps renderer count at 30, tightens renderer lines `3289 -> 3246`, and reaches the
+  renderer naming target `5 -> 0` long filenames.
+- Tightens production name metrics to `1154 / 20240 / 2713` and test metrics to
+  `746 / 9916 / 3763`; the exact baseline records 28 removals and no additions.
+- Renames five test-data owners, merges duplicate Handoff markdown responsibility, and
+  upgrades v1801/v1802/v1803/v1829 history gates to require current owners and reject
+  retired names in both narrow packages and the root.
+- Formatted exact-output, behavior, history, structure, elegance, and baseline gates pass
+  53/53. Adds a 5,079-Han walkthrough with exactly ten standard headings; the authorized
+  archive becomes exactly 1,697 files / 20,146,559 raw bytes.
+- Final `scripts/verify-release.ps1` pins v1885 commit `acab0cdc` and passes all
+  1,990 tests in 9:07. JaCoCo analyzes 2,131 classes with every floor met, SpotBugs
+  reports 0/0, and the 68,026,314-byte executable jar is packaged. CI and the annotated
+  tag remain binding before closeout.
+
 ## v1885 - Code Walkthrough report renderer convergence
 
 - Freezes all four existing reports before replacement: Compliance has six sections /
@@ -34,7 +60,9 @@
   SpotBugs reports 0/0, and the 68,027,947-byte executable jar is packaged.
 - Implementation commit `311c5c91` passes Actions run `29822027690`: Docker-tagged
   integration tests in 2:13 and headless regression in 20:12, including the production
-  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
+  profile smoke and JaCoCo upload. Closeout `acab0cdc` passes run `29823485427`: Docker
+  2:14 and headless 19:08. Annotated tag
+  `v1885-order-platform-walkthrough-report-renderers` is canonical.
 
 ## v1884 - Profile Section shared rendering engine
 

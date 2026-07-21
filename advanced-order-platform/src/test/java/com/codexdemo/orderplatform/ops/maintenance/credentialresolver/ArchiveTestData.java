@@ -5,9 +5,9 @@ import com.codexdemo.orderplatform.ops.OpsEvidenceServiceTestFixtures;
 import com.codexdemo.orderplatform.order.IdempotencyStore;
 import com.codexdemo.orderplatform.outbox.OutboxRepository;
 
-final class OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveTestSupport {
+final class ArchiveTestData {
 
-  private OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveTestSupport() {}
+  private ArchiveTestData() {}
 
   static OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveService service() {
     return new OpsShardReadinessCredentialResolverDisabledFakeHarnessEvidenceArchiveService(

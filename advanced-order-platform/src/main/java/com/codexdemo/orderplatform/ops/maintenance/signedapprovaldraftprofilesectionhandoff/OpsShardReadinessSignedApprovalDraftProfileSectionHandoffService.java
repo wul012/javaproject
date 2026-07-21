@@ -41,7 +41,7 @@ public class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffService {
         OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRouteContractCatalog
             .routeContracts(registry.routeFieldLocks()),
         OpsShardReadinessSignedApprovalDraftProfileSectionHandoffBoundaryCatalog.decisions(),
-        OpsShardReadinessSignedApprovalDraftProfileSectionHandoffRenderer.render(sectionHandoffs),
+        HandoffRenderer.render(sectionHandoffs),
         OpsShardReadinessSignedApprovalDraftProfileSectionHandoffGateCatalog.gates(),
         List.of("signed-approval-draft-profile-section-handoff-consumes-v1237-registry-only"));
   }

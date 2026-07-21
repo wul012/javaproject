@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffGateCatalogTests 
 
   @Test
   void gateCatalogPublishesNoRuntimeGateFloor() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.gateCount()).isEqualTo(52);
     assertThat(response.gates())
@@ -21,7 +21,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffGateCatalogTests 
 
   @Test
   void checksRecordFailClosedGateCounts() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.checks())
         .contains(

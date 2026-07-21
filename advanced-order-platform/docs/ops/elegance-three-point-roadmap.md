@@ -105,6 +105,24 @@ Controller、Service 事务与 Catalog 数据不变；同一组四项 exact orac
 大文件目标仍未完成，因此仍不自称九分。下一步处理剩余五个长 renderer，继续遵守旧输出
 先冻结、共享机制与领域政策分离、每刀总复杂度实际下降的要求，然后进入 Catalog engine。
 
+## v1886 检查点
+
+最后五份长名 Renderer 先在 v1885 实现上冻结完整输出：总计三十三个输出块、二百零二行
+正文、逐块行数以及五个全文 UTF-8 SHA-256。Credential archive、Sandbox dossier、
+Sandbox manifest、Screenshot archive 分别由短职责 owner 复用 `MarkdownSections.mapped`
+或 `counted`；Profile handoff 因为是五条一对一领域记录，保留直接映射，不为表面统一引入
+错误抽象。同一组 oracle 在新实现上原样通过。
+
+Renderer 仍为 30 个，总行数从 3,289 收紧到 3,246，超长 Renderer 文件名从 5 精确归零。
+生产长 stem / 长标识符使用 / 唯一值收紧到 1,154 / 20,240 / 2,713，测试收紧到
+746 / 9,916 / 3,763；exact baseline 删除 28 项、新增 0 项。v1801、v1802、v1803、
+v1829 的历史门同时升级为“当前短 owner 必须存在、退休长名在窄包与根包都不存在”。
+
+这一版完成的是 Renderer 专项，不代表整体代码已经达到九分。ops<=650、生产长 stem<=550、
+长标识符使用<=9000 与大文件目标仍未完成。下一阶段进入 Catalog engine：先按输出协议、
+依赖方向和领域概念做 census，再选至少三个真实重复 case 建立数据化共享机制；禁止把大量
+常量机械塞进万能 Catalog，也禁止仅靠改名制造进度。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

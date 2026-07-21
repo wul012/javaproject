@@ -8,7 +8,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffSectionCatalogTes
 
   @Test
   void handoffSectionsKeepSignedApprovalDraftOrder() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.sectionHandoffs())
         .extracting(
@@ -24,7 +24,7 @@ class OpsShardReadinessSignedApprovalDraftProfileSectionHandoffSectionCatalogTes
 
   @Test
   void handoffSectionsDeclareMetadataOnlyConsumerBoundary() {
-    var response = OpsShardReadinessSignedApprovalDraftProfileSectionHandoffTestSupport.handoff();
+    var response = HandoffTestData.handoff();
 
     assertThat(response.sectionHandoffs())
         .allSatisfy(
