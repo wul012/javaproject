@@ -16,15 +16,15 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1882 closeout run 29800790309 green; v1883 local release gate green/remote pending |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1883 implementation run 29807996922 green: Docker 2:02, headless 19:46 |
 | E2 Static analysis | Spotless and SpotBugs checks; 676 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1883 local SpotBugs 0 bugs / 0 errors |
 | E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1883 local verify analyzed 2130 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1882 tag canonical; v1883 implementation/closeout/tag pending |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1883 expanded 119/119, censuses, and local full verify green |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1883 implementation `b5cae273` and run green; closeout/tag pending |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1883 expanded 119/119, full local verify, and implementation CI green |
 | E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1883-authorized exact set: 1694 files / 20092216 raw bytes |
 
 ## Final Censuses
@@ -277,8 +277,10 @@ the v1882 tag to peeled commit `5ebe1c06`, runs exact Spotless, safely preserves
 stderr while judging Maven by exit code, and completes full verification: 1,968 tests in
 8:29, JaCoCo 2,130/all floors, SpotBugs 0/0, and jar packaging. The first final run
 correctly rejected a non-canonical `Family design` note; the corrected gate passes 3/3
-before the successful full rerun. v1883 implementation/
-closeout Actions and the annotated tag remain binding gates.
+before the successful full rerun. Implementation commit `b5cae273` passes Actions run
+`29807996922`: Docker-tagged tests in 2:02 and headless regression in 19:46, including
+prod smoke and JaCoCo upload. v1883 closeout Actions and the annotated tag remain binding
+gates.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

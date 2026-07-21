@@ -40,6 +40,7 @@
 - 最终 `scripts/verify-release.ps1` 解析 tag `v1882-order-platform-sustainment-renderer`，固定基准 commit `5ebe1c06bb6ac279091046a8a982de6dfe382c93`。
 - 第一次最终 verify 如实发现设计短注使用了错误的标题大小写和中文标签；没有修改门，改为协议要求的七行 `Family design` 后，定向门 3/3 通过。
 - 完整 Maven verify 随后在 8:29 内通过 1,968 项测试，零失败、零错误、零跳过；JaCoCo 分析 2,130 个类且全部 floor 达标，SpotBugs 为 0 bugs / 0 errors，jar 成功生成。
+- 实现提交 `b5cae273` 的 Actions run `29807996922` 独立通过：Docker-tagged 2:02，headless 19:46，prod profile smoke 与 JaCoCo 上传均成功。
 
 ## Failure Conditions
 

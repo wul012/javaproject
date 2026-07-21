@@ -30,7 +30,9 @@
 - Final `scripts/verify-release.ps1` pins v1882 closeout commit `5ebe1c06` and passes
   1,968 tests in 8:29 with zero failures/errors/skips. JaCoCo analyzes 2,130 classes
   with every floor met, SpotBugs reports 0/0, and the executable jar is packaged.
-  Implementation/closeout Actions and the annotated tag remain binding gates.
+- Implementation commit `b5cae273` passes Actions run `29807996922`: Docker-tagged
+  tests in 2:02 and headless regression in 19:46, including prod smoke and JaCoCo
+  upload. Closeout Actions and the annotated tag remain binding gates.
 
 ## v1882 - Release-acceptance sustainment renderer convergence
 
