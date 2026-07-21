@@ -41,6 +41,8 @@
 - 第一次最终 verify 如实发现设计短注使用了错误的标题大小写和中文标签；没有修改门，改为协议要求的七行 `Family design` 后，定向门 3/3 通过。
 - 完整 Maven verify 随后在 8:29 内通过 1,968 项测试，零失败、零错误、零跳过；JaCoCo 分析 2,130 个类且全部 floor 达标，SpotBugs 为 0 bugs / 0 errors，jar 成功生成。
 - 实现提交 `b5cae273` 的 Actions run `29807996922` 独立通过：Docker-tagged 2:02，headless 19:46，prod profile smoke 与 JaCoCo 上传均成功。
+- 打 tag 前的只读复核发现 renderer 总行数实测已到 3,448，但机械上限仍停在 3,451；没有放宽 census 或改输出，而是取消尚未完成的首个 closeout run，将上限收紧到实测值后重跑发布门。
+- 被取消的 run 为 `29809261863`；收紧后的 repair 发布门在 8:49 内再次通过 1,968 项测试、JaCoCo 2,130/all floors、SpotBugs 0/0 与 jar 打包。
 
 ## Failure Conditions
 

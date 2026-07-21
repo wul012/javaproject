@@ -43,7 +43,7 @@ class OpsEleganceCensusTests {
 
     assertThat(renderers).hasSizeLessThanOrEqualTo(32);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_451);
+        .isLessThanOrEqualTo(3_448);
     assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(14);
   }
 

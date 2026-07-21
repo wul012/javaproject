@@ -24,7 +24,7 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
 | E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1883 implementation `b5cae273` and run green; closeout/tag pending |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1883 expanded 119/119, full local verify, and implementation CI green |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1883 expanded 119/119, renderer-line cap 3448, full local verify, and implementation CI green |
 | E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1883-authorized exact set: 1694 files / 20092216 raw bytes |
 
 ## Final Censuses
@@ -280,7 +280,10 @@ correctly rejected a non-canonical `Family design` note; the corrected gate pass
 before the successful full rerun. Implementation commit `b5cae273` passes Actions run
 `29807996922`: Docker-tagged tests in 2:02 and headless regression in 19:46, including
 prod smoke and JaCoCo upload. v1883 closeout Actions and the annotated tag remain binding
-gates.
+gates. A pre-tag audit then catches the renderer-line ratchet still at 3,451 despite the
+3,448 census; run `29809261863` is canceled before it can become closeout evidence. The
+cap is tightened and the repair release gate passes all 1,968 tests in 8:49, JaCoCo
+2,130/all floors, SpotBugs 0/0, and jar packaging before the final closeout run.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

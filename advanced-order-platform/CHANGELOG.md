@@ -33,6 +33,10 @@
 - Implementation commit `b5cae273` passes Actions run `29807996922`: Docker-tagged
   tests in 2:02 and headless regression in 19:46, including prod smoke and JaCoCo
   upload. Closeout Actions and the annotated tag remain binding gates.
+- A pre-tag closeout audit catches the renderer-line ratchet still at 3,451 after the
+  final census reached 3,448; the cap is tightened to the measured value before tagging.
+  The repair release gate repeats all 1,968 tests in 8:49, with JaCoCo 2,130/all
+  floors, SpotBugs 0/0, and jar packaging green.
 
 ## v1882 - Release-acceptance sustainment renderer convergence
 
