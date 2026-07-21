@@ -4,16 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArchiveReferenceTests {
+class PrecheckArchiveReferenceTests {
 
   @Test
   void archiveHandlesAreUniqueAndCheckpointAddressable() {
     var sourcePrecheck =
         OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffTestSupport
             .sourcePrecheck();
-    var archiveHandles =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArchiveCatalog
-            .archiveHandles(sourcePrecheck);
+    var archiveHandles = PrecheckHandoffCatalog.from(sourcePrecheck).archiveHandles();
 
     assertThat(archiveHandles)
         .extracting(

@@ -38,6 +38,16 @@ class OpsEleganceCensusTests {
       OPS_ROOT.resolve(Path.of("maintenance", "releaseacceptanceroutepathsplit", "sustainment"));
 
   @Test
+  void opsAndCatalogDebtCanOnlyShrink() throws IOException {
+    List<Path> files = javaFiles(OPS_ROOT);
+
+    assertThat(files).hasSizeLessThanOrEqualTo(1_237);
+    assertThat(files)
+        .filteredOn(path -> stem(path).endsWith("Catalog"))
+        .hasSizeLessThanOrEqualTo(320);
+  }
+
+  @Test
   void rendererDebtCanOnlyShrink() throws IOException {
     List<Path> renderers = javaFiles(OPS_ROOT).stream().filter(this::isRenderer).toList();
 
@@ -197,6 +207,7 @@ class OpsEleganceCensusTests {
             "RendererFiles",
             "RendererLines",
             "LongRendererFileNames",
+            "CatalogFiles",
             "ArchiveDigestJavaFiles",
             "ConsumerPackageJavaFiles",
             "DossierJavaFiles",

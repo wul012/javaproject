@@ -4,14 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffSourceCatalogTests {
+class PrecheckHandoffCatalogTests {
 
   @Test
   void sourceLineagePinsNodePlanAndJavaPrecheck() {
     var sourcePrecheck = sourcePrecheckService().materialSubmissionPrecheck();
-    var lineage =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffSourceCatalog
-            .sourceLineage(sourcePrecheck);
+    var evidence = PrecheckHandoffCatalog.from(sourcePrecheck);
+    var lineage = evidence.sourceLineage();
 
     assertThat(lineage)
         .extracting(
@@ -41,16 +40,15 @@ class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffSourceC
 
   @Test
   void moduleCatalogStaysShortAndOrdered() {
-    assertThat(
-            OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffModuleCatalog
-                .modules())
+    var sourcePrecheck = sourcePrecheckService().materialSubmissionPrecheck();
+    var modules = PrecheckHandoffCatalog.from(sourcePrecheck).modules();
+
+    assertThat(modules)
         .extracting(
             OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffResponse.ModuleEntry
                 ::order)
         .containsExactly(214, 215, 216, 217, 218);
-    assertThat(
-            OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffModuleCatalog
-                .modules())
+    assertThat(modules)
         .extracting(
             OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffResponse.ModuleEntry
                 ::code)

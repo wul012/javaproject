@@ -4,14 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArchivePolicyTests {
+class PrecheckArchivePolicyTests {
 
   @Test
   void archiveHandlesMapOneToOneToSourceCheckpoints() {
     var sourcePrecheck = sourcePrecheckService().materialSubmissionPrecheck();
-    var archiveHandles =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArchiveCatalog
-            .archiveHandles(sourcePrecheck);
+    var archiveHandles = PrecheckHandoffCatalog.from(sourcePrecheck).archiveHandles();
 
     assertThat(archiveHandles).hasSize(10);
     assertThat(archiveHandles)
@@ -37,9 +35,7 @@ class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArchive
   @Test
   void policyLocksMapOneToOneToSourceValidators() {
     var sourcePrecheck = sourcePrecheckService().materialSubmissionPrecheck();
-    var policyLocks =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffPolicyCatalog
-            .policyLocks(sourcePrecheck);
+    var policyLocks = PrecheckHandoffCatalog.from(sourcePrecheck).policyLocks();
 
     assertThat(policyLocks).hasSize(10);
     assertThat(policyLocks)

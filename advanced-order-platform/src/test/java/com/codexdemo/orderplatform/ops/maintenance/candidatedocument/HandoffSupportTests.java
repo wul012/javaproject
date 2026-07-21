@@ -5,12 +5,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentHandoffSupportTests {
+class HandoffSupportTests {
 
   @Test
   void marksIncompleteHandoffAsBlocked() {
     var sourcePackage =
         new OpsShardReadinessCandidateDocumentRequestPackageService().packageCatalog();
+    var evidence = HandoffCatalog.from(sourcePackage);
 
     var response =
         OpsShardReadinessCandidateDocumentHandoffSupport.response(
@@ -18,13 +19,13 @@ class OpsShardReadinessCandidateDocumentHandoffSupportTests {
             OpsShardReadinessCandidateDocumentHandoffService.ENDPOINT,
             OpsShardReadinessCandidateDocumentHandoffService.PROFILE,
             sourcePackage,
-            OpsShardReadinessCandidateDocumentHandoffSourceCatalog.sourceLineage(sourcePackage),
+            evidence.sourceLineage(),
             List.of(),
-            OpsShardReadinessCandidateDocumentHandoffArtifactCatalog.artifactHandles(sourcePackage),
-            OpsShardReadinessCandidateDocumentHandoffPolicyCatalog.policyLocks(sourcePackage),
-            OpsShardReadinessCandidateDocumentHandoffArchiveCatalog.archiveEntries(),
-            OpsShardReadinessCandidateDocumentHandoffConsumerCatalog.consumerRules(),
-            OpsShardReadinessCandidateDocumentHandoffGateCatalog.gates(),
+            evidence.artifactHandles(),
+            evidence.policyLocks(),
+            evidence.archiveEntries(),
+            evidence.consumerRules(),
+            evidence.gates(),
             List.of("candidate-document-handoff-negative-coverage"));
 
     assertThat(response.status()).isEqualTo("blocked");

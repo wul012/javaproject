@@ -4,15 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffSourceReferenceTests {
+class PrecheckSourceReferenceTests {
 
   @Test
   void sourceLineageReferencesRemainHumanAuditable() {
-    var lineage =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffSourceCatalog
-            .sourceLineage(
-                OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffTestSupport
-                    .sourcePrecheck());
+    var sourcePrecheck =
+        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffTestSupport
+            .sourcePrecheck();
+    var lineage = PrecheckHandoffCatalog.from(sourcePrecheck).sourceLineage();
 
     assertThat(lineage.get(0).reference())
         .endsWith(

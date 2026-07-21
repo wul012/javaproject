@@ -4,16 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArtifactReferenceTests {
+class PrecheckArtifactReferenceTests {
 
   @Test
   void artifactReferencesPreserveSourceArchiveBoundary() {
     var sourcePrecheck =
         OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffTestSupport
             .sourcePrecheck();
-    var references =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArtifactCatalog
-            .artifactReferences(sourcePrecheck);
+    var references = PrecheckHandoffCatalog.from(sourcePrecheck).artifactReferences();
 
     assertThat(references)
         .allSatisfy(

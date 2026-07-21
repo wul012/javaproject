@@ -26,23 +26,19 @@ public class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoff
   @Transactional(readOnly = true)
   public OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffResponse handoff() {
     var sourcePrecheck = sourcePrecheckService.materialSubmissionPrecheck();
+    var evidence = PrecheckHandoffCatalog.from(sourcePrecheck);
     return OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffSupport.response(
         RESPONSE_VERSION,
         ENDPOINT,
         PROFILE,
         sourcePrecheck,
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffSourceCatalog
-            .sourceLineage(sourcePrecheck),
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffModuleCatalog.modules(),
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArchiveCatalog
-            .archiveHandles(sourcePrecheck),
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffPolicyCatalog
-            .policyLocks(sourcePrecheck),
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArtifactCatalog
-            .artifactReferences(sourcePrecheck),
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffConsumerCatalog
-            .consumerRules(sourcePrecheck),
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffGateCatalog.gates(),
+        evidence.sourceLineage(),
+        evidence.modules(),
+        evidence.archiveHandles(),
+        evidence.policyLocks(),
+        evidence.artifactReferences(),
+        evidence.consumerRules(),
+        evidence.gates(),
         List.of(
             "candidate-document-material-submission-precheck-handoff-service-assembled-from-java-v1162"));
   }

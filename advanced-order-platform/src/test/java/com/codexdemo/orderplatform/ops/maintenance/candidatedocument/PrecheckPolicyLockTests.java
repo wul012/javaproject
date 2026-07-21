@@ -4,16 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffPolicyLockReferenceTests {
+class PrecheckPolicyLockTests {
 
   @Test
   void policyLocksPreserveValidatorRejectionCodes() {
     var sourcePrecheck =
         OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffTestSupport
             .sourcePrecheck();
-    var policyLocks =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffPolicyCatalog
-            .policyLocks(sourcePrecheck);
+    var policyLocks = PrecheckHandoffCatalog.from(sourcePrecheck).policyLocks();
 
     assertThat(policyLocks)
         .extracting(

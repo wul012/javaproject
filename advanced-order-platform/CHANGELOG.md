@@ -4,6 +4,37 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1887 - Candidate handoff Catalog convergence
+
+- Freezes both complete handoff responses on the v1886 implementation with sorted-property
+  canonical JSON. Request handoff keeps `6/5/15/15/8/10/25/20` and SHA-256
+  `3c988b...13c2`; material-precheck handoff keeps `6/5/10/10/8/10/42/26` and
+  SHA-256 `914738...1cf5`. The same two assertions pass unchanged after replacement.
+- Replaces fourteen single-list Catalog owners with two package-local bundles:
+  `HandoffCatalog` and `PrecheckHandoffCatalog`. Each service now performs one
+  `from(source)` assembly and passes one typed immutable `Evidence` to the unchanged
+  Support response builder.
+- Keeps public routes, Response records, controllers, source fixtures, status/check rules,
+  and read-only transaction boundaries byte-for-byte or behaviorally unchanged.
+- Renames nine touched test owners to short role names while preserving every semantic
+  assertion; no test expectation or frozen digest is relaxed.
+- Adds a five-test structure gate requiring exactly two handoff Catalog owners, absence of
+  all fourteen retired files, one assembly call per service, seven defensive list copies,
+  and a 300-line ceiling per owner. Actual sizes are 235 and 182 lines.
+- Deletes the retired Artifact Catalog's locale-sensitive SpotBugs waiver and uses
+  `Locale.ROOT` for stable ASCII slug normalization; the exact waiver set shrinks
+  `676 -> 675` without changing either frozen response.
+- Tightens ops Java `1249 -> 1237` and Catalogs `332 -> 320`. Production name metrics
+  reach `1140 / 20178 / 2699`; tests reach `737 / 9898 / 3741`; the exact baseline has
+  46 removals and no additions. The focused behavior/oracle/structure/elegance/change
+  selection passes 56/56.
+- Adds a 3,060-Han walkthrough with exactly ten standard headings; the authorized archive
+  becomes exactly 1,698 files / 20,160,868 raw bytes.
+- Final `scripts/verify-release.ps1` pins v1886 commit `b5c8df42` and passes all
+  1,998 tests in 15:25. JaCoCo analyzes 2,121 classes with every floor met, SpotBugs
+  reports 0/0, and the 68,017,026-byte executable jar is packaged. Implementation and
+  closeout Actions plus the annotated tag remain binding before v1887 can become canonical.
+
 ## v1886 - Renderer long-name debt closeout
 
 - Freezes five complete reports against the v1885 implementation: 33 output blocks,
@@ -30,7 +61,9 @@
   reports 0/0, and the 68,026,314-byte executable jar is packaged.
 - Implementation commit `cfbafc52` passes Actions run `29827360947`: Docker-tagged
   integration tests in 2:14 and headless regression in 19:11, including the production
-  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
+  profile smoke and JaCoCo upload. Closeout `b5c8df42` passes run `29828862484`: Docker
+  2:18 and headless 19:43. Annotated tag `v1886-order-platform-renderer-debt-closeout`
+  peels to that closeout locally and on `javaproject`.
 
 ## v1885 - Code Walkthrough report renderer convergence
 

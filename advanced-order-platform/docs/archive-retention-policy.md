@@ -189,3 +189,12 @@ oracle、内部短命名、下游 sustainment 方向与固定 tag 发布门；�
 Handoff 的局部映射、历史提取边界和 shrink-only 命名门；没有移动、改写或删除任何历史归档。
 重建后的精确集合为 `1,697 files / 20,146,559 raw bytes`。本次上调严格等于这一份
 20,661 字节讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1887 Extension
+
+用户于 2026-07-21 继续授权 Java coding brilliant and elegant 九分计划。v1887 只新增
+`代码讲解记录_生产雏形阶段9/v1883-v1887/v1887-candidate-handoff-catalogs.md`，用于解释
+两条 CandidateDocument handoff 的输入输出、十四个 Catalog 到两个不可变领域 bundle 的
+收敛、两份完整响应摘要、只读安全边界和 shrink-only 结构门；没有移动、改写或删除任何
+历史归档。重建后的精确集合为 `1,698 files / 20,160,868 raw bytes`。本次上调严格等于
+这一份 14,309 字节讲解的增量，不是后续版本的预留预算。

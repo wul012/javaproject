@@ -4,16 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffConsumerRuleCoverageTests {
+class PrecheckConsumerRuleTests {
 
   @Test
   void consumerRulesCoverEveryCheckpointWithoutGrantingSubmission() {
     var sourcePrecheck =
         OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffTestSupport
             .sourcePrecheck();
-    var consumerRules =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffConsumerCatalog
-            .consumerRules(sourcePrecheck);
+    var consumerRules = PrecheckHandoffCatalog.from(sourcePrecheck).consumerRules();
 
     assertThat(consumerRules)
         .extracting(

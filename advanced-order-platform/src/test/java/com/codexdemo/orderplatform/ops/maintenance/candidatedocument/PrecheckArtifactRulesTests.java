@@ -4,14 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArtifactConsumerGateTests {
+class PrecheckArtifactRulesTests {
 
   @Test
   void artifactReferencesMirrorSourceArtifactsIntoHandoffArchive() {
     var sourcePrecheck = sourcePrecheckService().materialSubmissionPrecheck();
-    var references =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArtifactCatalog
-            .artifactReferences(sourcePrecheck);
+    var references = PrecheckHandoffCatalog.from(sourcePrecheck).artifactReferences();
 
     assertThat(references).hasSize(8);
     assertThat(references)
@@ -35,9 +33,8 @@ class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArtifac
 
   @Test
   void consumerRulesAllowOnlyArchiveReads() {
-    var rules =
-        OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffConsumerCatalog
-            .consumerRules(sourcePrecheckService().materialSubmissionPrecheck());
+    var sourcePrecheck = sourcePrecheckService().materialSubmissionPrecheck();
+    var rules = PrecheckHandoffCatalog.from(sourcePrecheck).consumerRules();
 
     assertThat(rules).hasSize(10);
     assertThat(rules)
@@ -54,13 +51,14 @@ class OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffArtifac
 
   @Test
   void handoffGatesAddOneCloseoutGateAfterSourcePrecheck() {
-    assertThat(
-            OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffGateCatalog.gates())
+    var sourcePrecheck = sourcePrecheckService().materialSubmissionPrecheck();
+    var gates = PrecheckHandoffCatalog.from(sourcePrecheck).gates();
+
+    assertThat(gates)
         .hasSize(42)
         .first()
         .isEqualTo("candidate-document-material-submission-precheck-handoff-no-material-gate-1");
-    assertThat(
-            OpsShardReadinessCandidateDocumentMaterialSubmissionPrecheckHandoffGateCatalog.gates())
+    assertThat(gates)
         .last()
         .isEqualTo("candidate-document-material-submission-precheck-handoff-no-material-gate-42");
   }

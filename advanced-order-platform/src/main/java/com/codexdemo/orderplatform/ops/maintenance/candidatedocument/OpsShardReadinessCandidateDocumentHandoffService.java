@@ -24,18 +24,19 @@ public class OpsShardReadinessCandidateDocumentHandoffService {
   @Transactional(readOnly = true)
   public OpsShardReadinessCandidateDocumentHandoffResponse handoff() {
     var sourcePackage = sourcePackageService.packageCatalog();
+    var evidence = HandoffCatalog.from(sourcePackage);
     return OpsShardReadinessCandidateDocumentHandoffSupport.response(
         RESPONSE_VERSION,
         ENDPOINT,
         PROFILE,
         sourcePackage,
-        OpsShardReadinessCandidateDocumentHandoffSourceCatalog.sourceLineage(sourcePackage),
-        OpsShardReadinessCandidateDocumentHandoffModuleCatalog.modules(),
-        OpsShardReadinessCandidateDocumentHandoffArtifactCatalog.artifactHandles(sourcePackage),
-        OpsShardReadinessCandidateDocumentHandoffPolicyCatalog.policyLocks(sourcePackage),
-        OpsShardReadinessCandidateDocumentHandoffArchiveCatalog.archiveEntries(),
-        OpsShardReadinessCandidateDocumentHandoffConsumerCatalog.consumerRules(),
-        OpsShardReadinessCandidateDocumentHandoffGateCatalog.gates(),
+        evidence.sourceLineage(),
+        evidence.modules(),
+        evidence.artifactHandles(),
+        evidence.policyLocks(),
+        evidence.archiveEntries(),
+        evidence.consumerRules(),
+        evidence.gates(),
         List.of("candidate-document-handoff-service-assembled-from-request-package"));
   }
 }
