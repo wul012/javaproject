@@ -30,7 +30,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1826Tests {
           "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryResponse.java",
           "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistrySupport.java",
           "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionSourceCatalog.java",
-          "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionSubmissionRenderer.java");
+          "ProfileRenderer.java");
   private static final String ROOT_RETAINED_CONTROLLER =
       "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistryController.java";
 
@@ -67,6 +67,11 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1826Tests {
             Files.exists(
                 OPS_SOURCE_ROOT.resolve(
                     "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionGateCatalog.java")))
+        .isFalse();
+    assertThat(
+            Files.exists(
+                TEXT_PACKAGE_PROFILE_SECTION_SOURCE_ROOT.resolve(
+                    "OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionSubmissionRenderer.java")))
         .isFalse();
   }
 

@@ -76,6 +76,21 @@ Renderer 数量距离 <=30 只差两个，但超长 Renderer、ops、生产长 s
 typed section engine，再让第三个 case 数据化，不能为了跨过 Renderer 数量门而机械合并文件。
 同时进入 Catalog engine 前，继续要求每个改动家族先有旧实现精确 oracle 和直接下游回归。
 
+## v1884 检查点
+
+三个 Profile Section 家族先在旧实现冻结 5 + 5 + 9 个完整 `RenderedSection`，再用一个
+领域中立的不可变 `ProfileSections` 索引引擎和三个包内短适配器替换五个长 renderer 与
+三份重复字段聚合算法。公共 Response、路由、controller 和只读事务边界不变；Text Package
+特有的 group 白名单和 order 排序保留在本地适配器。新旧实现使用同一组六项 exact oracle，
+十九个完整输出原样通过。
+
+当前 ops 为 1,249，Renderer 首次达到阶段目标 30 个，总行数 3,372，超长 Renderer 文件名
+降到 9。生产长 stem / 长标识符使用为 1,163 / 20,334，测试为 758 / 9,995；exact baseline
+删除 24 项、新增 0 项。Renderer 数量目标达成不等于整体九分：超长 Renderer=0、ops<=650、
+生产长 stem<=550、长标识符使用<=9000 和大文件目标均未完成。下一阶段先清完剩余九个长
+Renderer，再进入 Catalog engine；每一刀继续要求旧输出 oracle、窄共享抽象与领域政策留在
+适配器，禁止把重复代码简单搬进万能类。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

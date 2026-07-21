@@ -162,3 +162,12 @@ Route Split 五个公共兼容边界、主报告六节四十三行、closeout �
 oracle、内部短命名、下游 sustainment 方向与固定 tag 发布门；没有移动、改写或删除任何
 历史归档。重建后的精确集合为 `1,694 files / 20,092,216 raw bytes`。本次上调严格等于
 这一份 15,926 字节讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1884 Extension
+
+用户于 2026-07-21 继续授权 Java coding brilliant and elegant 九分计划。v1884 只新增
+`代码讲解记录_生产雏形阶段9/v1883-v1887/v1884-profile-section-rendering-engine.md`，
+用于解释三个 Profile Section 只读入口、十九个完整输出、共享不可变字段索引、领域适配器、
+改前改后精确 oracle 与 shrink-only 结构门；没有移动、改写或删除任何历史归档。重建后的
+精确集合为 `1,695 files / 20,107,763 raw bytes`。本次上调严格等于这一份 15,547 字节
+讲解的增量，不是后续版本的预留预算。

@@ -4,6 +4,34 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1884 - Profile Section shared rendering engine
+
+- Freezes nineteen complete rendered-section records against the v1883 implementation:
+  five Candidate Document sections, five Signed Approval Draft sections, and nine Draft
+  Text Package sections. The same six exact-output tests pass unchanged after replacement.
+- Adds the domain-neutral immutable `ProfileSections` engine, which indexes fields once
+  by section code and preserves section/field order without depending on public response
+  models or approval-domain policy.
+- Keeps one package-private `ProfileRenderer` adapter in each family. Text Package retains
+  its `submission` / `compared-evidence` allowlist and order sort locally; public response,
+  route, controller, transaction, and status contracts remain unchanged.
+- Deletes the two one-group Text Package renderers and their support shell. Ops Java shrinks
+  `1251 -> 1249`; renderers reach `32 -> 30`, renderer lines `3448 -> 3372`, and long
+  renderer filenames `14 -> 9`.
+- Tightens production name metrics to `1163 / 20334 / 2722` and test metrics to
+  `758 / 9995 / 3778`; the exact baseline records 24 removals and no additions.
+- Adds three engine boundary tests and five source-structure checks. The expanded behavior,
+  history, elegance, and staged-change selection passes 181/181.
+- Adds a 3,551-Han walkthrough with exactly ten standard headings. The authorized archive
+  set becomes exactly 1,695 files / 20,107,763 raw bytes.
+- The first full run reaches all 1,976 tests and exposes two stale v1825/v1826 historical
+  assertions that still required deleted renderer names. Their extraction intent is
+  preserved and tightened: the short adapter must exist and the long renderer must not.
+- Final `scripts/verify-release.ps1` pins v1883 commit `4b4193b0` and passes 1,976 tests
+  in 11:46. JaCoCo analyzes 2,131 classes with every floor met, SpotBugs reports 0/0,
+  and the executable jar is packaged. Implementation/closeout CI and the annotated tag
+  remain binding completion gates.
+
 ## v1883 - Route Split internal model convergence
 
 - Preserves all five public Route Split compatibility types, route values, response
@@ -37,6 +65,9 @@
   final census reached 3,448; the cap is tightened to the measured value before tagging.
   The repair release gate repeats all 1,968 tests in 8:49, with JaCoCo 2,130/all
   floors, SpotBugs 0/0, and jar packaging green.
+- Repair closeout commit `4b4193b0` passes Actions run `29810094538`: Docker in 2:12 and
+  headless in 20:11. Annotated tag `v1883-order-platform-route-split-internals` peels to
+  that commit and is canonical.
 
 ## v1882 - Release-acceptance sustainment renderer convergence
 

@@ -19,6 +19,11 @@ $handoffRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorcihand
 $executionRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateexecution'
 $routeSplitRoot = Join-Path $opsRoot 'maintenance/releaseacceptanceroutepathsplit'
 $sustainmentRoot = Join-Path $opsRoot 'maintenance/releaseacceptanceroutepathsplit/sustainment'
+$profileRoots = @(
+  (Join-Path $opsRoot 'maintenance/candidatedocument'),
+  (Join-Path $opsRoot 'maintenance/signedapprovaldraftprofilesection'),
+  (Join-Path $opsRoot 'maintenance/signedapprovaldrafttextpackageprofilesection')
+)
 
 function Get-LineCount {
   param([Parameter(Mandatory = $true)][string]$Path)
@@ -59,6 +64,11 @@ $handoffFiles = @(& rg --files $handoffRoot -g '*.java')
 $executionFiles = @(& rg --files $executionRoot -g '*.java')
 $routeSplitFiles = @(Get-ChildItem -LiteralPath $routeSplitRoot -File -Filter '*.java')
 $sustainmentFiles = @(& rg --files $sustainmentRoot -g '*.java')
+$profileRendererFiles = @(
+  foreach ($profileRoot in $profileRoots) {
+    Get-ChildItem -LiteralPath $profileRoot -File -Filter 'ProfileRenderer.java'
+  }
+)
 $summary = [ordered]@{
   OpsJavaFiles = $rows.Count
   RendererFiles = $renderers.Count
@@ -79,6 +89,7 @@ $summary = [ordered]@{
   ExecutionJavaFiles = $executionFiles.Count
   RouteSplitJavaFiles = $routeSplitFiles.Count
   SustainmentJavaFiles = $sustainmentFiles.Count
+  ProfileRendererFiles = $profileRendererFiles.Count
   Hotspots = @(
     $rows |
       Sort-Object -Property @{ Expression = 'Lines'; Descending = $true }, Path |

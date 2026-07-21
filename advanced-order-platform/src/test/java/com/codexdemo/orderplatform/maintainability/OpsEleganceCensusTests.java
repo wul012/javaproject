@@ -41,10 +41,10 @@ class OpsEleganceCensusTests {
   void rendererDebtCanOnlyShrink() throws IOException {
     List<Path> renderers = javaFiles(OPS_ROOT).stream().filter(this::isRenderer).toList();
 
-    assertThat(renderers).hasSizeLessThanOrEqualTo(32);
+    assertThat(renderers).hasSizeLessThanOrEqualTo(30);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_448);
-    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(14);
+        .isLessThanOrEqualTo(3_372);
+    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(9);
   }
 
   @Test
@@ -189,7 +189,7 @@ class OpsEleganceCensusTests {
   void censusAndRoadmapStayReproducible() throws IOException {
     Path script = Path.of("scripts", "ops-elegance-census.ps1");
     Path roadmap = Path.of("docs", "ops", "elegance-three-point-roadmap.md");
-    Path version = Path.of("docs", "ops", "route-split-internals-v1883.md");
+    Path version = Path.of("docs", "ops", "profile-section-rendering-engine-v1884.md");
 
     assertThat(script).isRegularFile();
     assertThat(read(script))
@@ -207,11 +207,12 @@ class OpsEleganceCensusTests {
             "HandoffJavaFiles",
             "ExecutionJavaFiles",
             "RouteSplitJavaFiles",
-            "SustainmentJavaFiles");
+            "SustainmentJavaFiles",
+            "ProfileRendererFiles");
     assertThat(read(roadmap)).contains("ops-elegance-census.ps1", "DONE 与失败条件", "<= 650", "<= 30");
     assertThat(read(version))
         .contains(
-            "Requirement Evidence Matrix", "Failure Conditions", "24 -> 17", "38 -> 32", "3448");
+            "Requirement Evidence Matrix", "Failure Conditions", "5 + 5 + 9", "32 -> 30", "3,372");
   }
 
   private List<Path> javaFiles(Path root) throws IOException {

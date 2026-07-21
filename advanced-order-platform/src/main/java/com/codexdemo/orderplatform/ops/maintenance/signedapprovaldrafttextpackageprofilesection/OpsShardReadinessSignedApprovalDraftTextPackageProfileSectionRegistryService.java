@@ -104,8 +104,7 @@ public class OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegist
         sources,
         sections,
         fieldEntries,
-        OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRenderer.render(
-            sections, fieldEntries),
+        ProfileRenderer.render(sections, fieldEntries),
         OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRouteLockCatalog
             .routeFieldLocks(sections),
         OpsShardReadinessSignedApprovalDraftTextPackageProfileSectionRegistrySupport.gates(),

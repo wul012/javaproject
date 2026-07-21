@@ -57,7 +57,7 @@ public class OpsShardReadinessCandidateDocumentProfileSectionRegistryService {
         sources,
         sections,
         fieldEntries,
-        OpsShardReadinessCandidateDocumentProfileSectionRenderer.render(sections, fieldEntries),
+        ProfileRenderer.render(sections, fieldEntries),
         OpsShardReadinessCandidateDocumentProfileSectionRouteLockCatalog.routeFieldLocks(sections),
         OpsShardReadinessCandidateDocumentProfileSectionGateCatalog.gates(),
         List.of(

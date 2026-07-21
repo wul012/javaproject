@@ -75,7 +75,7 @@ public class OpsShardReadinessSignedApprovalDraftProfileSectionRegistryService {
         sources,
         sections,
         fieldEntries,
-        OpsShardReadinessSignedApprovalDraftProfileSectionRenderer.render(sections, fieldEntries),
+        ProfileRenderer.render(sections, fieldEntries),
         OpsShardReadinessSignedApprovalDraftProfileSectionRouteLockCatalog.routeFieldLocks(
             sections),
         OpsShardReadinessSignedApprovalDraftProfileSectionRegistrySupport.gates(),
