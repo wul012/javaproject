@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void buildsArchiveVerificationFromOperatorCiHandoffRegistry() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1377");
@@ -36,9 +34,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void keepsArchiveVerificationStrictlyReadOnly() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();

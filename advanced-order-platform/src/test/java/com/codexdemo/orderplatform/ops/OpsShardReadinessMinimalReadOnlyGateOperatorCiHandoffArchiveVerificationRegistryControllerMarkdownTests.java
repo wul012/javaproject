@@ -2,8 +2,8 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.ArchiveTestData;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse;
-import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +18,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
     var response =
         new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryController(
-                OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-                    .service())
+                ArchiveTestData.service())
             .registry();
 
     assertThat(response.endpoint())
@@ -33,9 +32,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void rendersStableArchiveVerificationMarkdownSections() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.markdownSectionCount()).isEqualTo(6);
     assertThat(response.markdownSections())

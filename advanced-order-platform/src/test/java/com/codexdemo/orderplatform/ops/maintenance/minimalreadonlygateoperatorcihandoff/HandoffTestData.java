@@ -3,9 +3,9 @@ package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorc
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService;
 
-public final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport {
+public final class HandoffTestData {
 
-  private OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport() {}
+  private HandoffTestData() {}
 
   public static OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService
       sourceArchiveService() {

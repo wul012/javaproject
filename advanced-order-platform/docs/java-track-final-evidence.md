@@ -16,28 +16,28 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1879 implementation run 29759922474 green; closeout pending |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1879 implementation 29759922474 and closeout 29761487591 green; v1880 pending |
 | E2 Static analysis | Spotless and SpotBugs checks; 676 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1879 SpotBugs 0 bugs / 0 errors |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1879 verified 2162 classes/all floors |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1880 verified 2153 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1879 implementation b5366eb1 green; closeout/tag pending |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1879 full verify and censuses green |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1879-authorized exact set: 1690 files / 20025298 raw bytes |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1879 closeout 5205246d/tag canonical; v1880 pending |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1880 full verify and censuses green |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1880-authorized exact set: 1691 files / 20041344 raw bytes |
 
 ## Final Censuses
 
 - Ops direct root: 104 files; retained: 104; remaining movable: 0; unassigned: 0.
-- Ops total production Java files: 1,283; no extraction family remains in root.
-- Production Java: 1,415 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
-- Test Java: 898 files; maximum 699 lines; over 500: 8;
+- Ops total production Java files: 1,274; no extraction family remains in root.
+- Production Java: 1,406 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
+- Test Java: 899 files; maximum 699 lines; over 500: 8;
   over 750/1000: 0/0.
-- Long-name shrink-only baseline: production stems/uses/unique 1218/20696/2777;
-  tests 786/10116/3822. New declarations and filenames remain within 40 characters;
+- Long-name shrink-only baseline: production stems/uses/unique 1207/20627/2766;
+  tests 784/10091/3818. New declarations and filenames remain within 40 characters;
   baseline identities and aggregate occurrences only shrink during staged migration.
-- Renderer census: 58 files / 3,973 lines / 47 long filenames, down from
+- Renderer census: 51 files / 3,816 lines / 38 long filenames, down from
   121 / 5,355 / 119 at the v1872 start of the three-point elegance program.
 - Exact long-name identities are frozen in `config/java-name-baseline.txt`; v1869 adds
   Git-aware tests that reject new names, dirty-tree blind spots, oversized feature-source
@@ -47,8 +47,8 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
   aliases without changing route bytes or the root-versus-leaf compatibility response.
 - SpotBugs exclusions: 676 exact pattern/class identities; only deletion is allowed, and
   every retained class must load from the compiled classpath.
-- Archive retention: v1879's user-authorized optimization adds exactly one walkthrough;
-  the current exact set is 1,690 files / 20,025,298 raw bytes.
+- Archive retention: v1880's user-authorized optimization adds exactly one walkthrough;
+  the current exact set is 1,691 files / 20,041,344 raw bytes.
 
 ## Active Waivers
 
@@ -207,7 +207,20 @@ Maven verification passes 1,953 tests in 14:02 with zero failures/errors/skips; 
 analyzes 2,162 classes with every floor met, SpotBugs reports 0/0, and the executable
 jar is packaged. Implementation commit `b5366eb1` passes canonical Actions run
 `29759922474`: Docker-tagged verification completes in 1:51 and headless regression
-in 19:15, including the production-profile smoke and JaCoCo upload. Closeout Actions
+in 19:15, including the production-profile smoke and JaCoCo upload. Closeout commit
+`5205246d` passes run `29761487591`: Docker in 2:03 and headless in 19:22. Annotated
+tag `v1879-order-platform-acceptance-package-renderers` is canonical.
+
+Current v1880 candidate: the exact handoff and archive Markdown oracles passed 2/2
+against the old implementation before deletion and again unchanged after convergence,
+freezing five sections / 33 lines and six sections / 36 lines. Core behavior, direct
+consumer, v1844/v1866 structure, exact-name, change, and census gates pass 87/87. The
+census records 1,274 ops files, 51 renderers / 3,816 lines / 38 long renderer filenames,
+with production long-name aggregates 1207/20627/2766 and test script aggregates
+784/10091/3818. The 3,273-Han walkthrough and exact 1,691-file archive set were complete
+before final verify. Full Maven verification passes 1,956 tests in 10:26 with zero
+failures/errors/skips; JaCoCo analyzes 2,153 classes with every floor met, SpotBugs
+reports 0/0, and the executable jar is packaged. Remote implementation/closeout evidence
 and the annotated tag remain binding gates.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed

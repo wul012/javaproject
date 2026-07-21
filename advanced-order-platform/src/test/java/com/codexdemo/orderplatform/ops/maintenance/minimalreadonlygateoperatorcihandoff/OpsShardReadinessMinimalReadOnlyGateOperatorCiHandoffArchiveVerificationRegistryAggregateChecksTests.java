@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void aggregateChecksRemainStableAndBoundaryFocused() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.checks()).hasSize(21);
     assertThat(response.checks())

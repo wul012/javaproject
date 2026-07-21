@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void archivesSourceHandoffArtifacts() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.sourceHandoffSnapshotCount()).isEqualTo(1);
     assertThat(response.sourceHandoffSnapshots())
@@ -37,9 +35,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void archivesOperatorLanesAndCiBatchesInSourceOrder() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.operatorLaneVerificationCount()).isEqualTo(4);
     assertThat(response.passedOperatorLaneVerificationCount()).isEqualTo(4);

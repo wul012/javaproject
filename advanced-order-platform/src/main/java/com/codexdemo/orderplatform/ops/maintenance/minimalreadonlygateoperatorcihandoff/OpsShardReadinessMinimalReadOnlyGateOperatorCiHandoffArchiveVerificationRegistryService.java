@@ -58,7 +58,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
             ciBatches,
             boundaries,
             scorecard,
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryRenderer
-                .render(sourceHandoffs, artifacts, lanes, ciBatches, boundaries, scorecard));
+            ArchiveRenderer.render(
+                sourceHandoffs, artifacts, lanes, ciBatches, boundaries, scorecard));
   }
 }

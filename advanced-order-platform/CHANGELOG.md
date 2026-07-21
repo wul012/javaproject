@@ -4,6 +4,27 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1880 - Operator CI handoff renderer convergence
+
+- Replaces nine long-named handoff/archive renderers and two support shells with
+  `HandoffRenderer` and `ArchiveRenderer`, both backed by
+  `MarkdownSections.counted`.
+- Freezes the real legacy service output before replacement and preserves it exactly:
+  the handoff report has five sections / 33 lines and the archive report has six
+  sections / 36 lines.
+- Replaces two long test-support names with `HandoffTestData` and `ArchiveTestData`;
+  the archive factory now reuses the handoff factory instead of duplicating its graph.
+- Shrinks the family `27 -> 18`, ops Java `1283 -> 1274`, renderers `58 -> 51`,
+  renderer lines `3973 -> 3816`, and long renderer filenames `47 -> 38` without
+  changing routes, response records, Catalog data, transactions, or authority.
+- Core behavior, consumer, historical structure, exact-name, change, and census gates
+  pass 87/87. The walkthrough has 3,273 Han characters and exactly ten headings;
+  the exact archive set is 1,691 files / 20,041,344 raw bytes.
+- Full `mvnw -B verify` passes 1,956 tests in 10:26 with zero failures, errors,
+  or skips; JaCoCo analyzes 2,153 classes with every floor met, SpotBugs reports
+  0/0, and the executable jar is packaged. Implementation Actions, closeout Actions,
+  and annotated tag remain binding completion gates.
+
 ## v1879 - Acceptance-package renderer convergence
 
 - Replaces twelve long-named acceptance-package renderers and one support shell with
@@ -24,8 +45,9 @@
   and the executable jar is packaged.
 - Implementation commit `b5366eb1` passes canonical Actions run `29759922474`:
   Docker-tagged verification in 1:51 and headless regression in 19:15, including
-  the production-profile smoke and JaCoCo upload. Closeout CI remains required
-  before tagging.
+  the production-profile smoke and JaCoCo upload. Closeout commit `5205246d`
+  passes run `29761487591` (Docker 2:03, headless 19:22); annotated tag
+  `v1879-order-platform-acceptance-package-renderers` is canonical.
 
 ## v1878 - Release-archive handoff renderer convergence
 

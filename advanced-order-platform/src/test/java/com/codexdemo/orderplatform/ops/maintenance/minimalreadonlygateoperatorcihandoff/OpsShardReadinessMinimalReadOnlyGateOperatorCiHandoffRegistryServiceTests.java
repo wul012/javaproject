@@ -8,8 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServiceTests 
 
   @Test
   void buildsOperatorCiHandoffFromArchiveVerificationRegistry() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1352");
@@ -32,8 +31,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServiceTests 
 
   @Test
   void keepsOperatorHandoffStrictlyReadOnly() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -47,8 +45,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServiceTests 
 
   @Test
   void carriesFocusedGroupedBuildSmokeOrder() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.sourceArchiveSnapshotCount())
         .isEqualTo(
@@ -72,8 +69,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServiceTests 
 
   @Test
   void verifiesBoundaryLocksAndScorecard() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.boundaryLockCount()).isEqualTo(8);
     assertThat(response.boundaryLocks()).allSatisfy(lock -> assertThat(lock.locked()).isTrue());

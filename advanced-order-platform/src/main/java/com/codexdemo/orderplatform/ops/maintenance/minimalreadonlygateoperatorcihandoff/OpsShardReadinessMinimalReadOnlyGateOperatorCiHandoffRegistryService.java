@@ -49,8 +49,7 @@ public class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServic
         ciBatches,
         boundaryLocks,
         scorecard,
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryRenderer.render(
-            sourceArchives, lanes, ciBatches, boundaryLocks, scorecard));
+        HandoffRenderer.render(sourceArchives, lanes, ciBatches, boundaryLocks, scorecard));
   }
 
   private List<OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.ScorecardEntry>

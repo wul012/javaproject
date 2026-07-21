@@ -29,74 +29,94 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
           "version-1844-production-excellence-minimal-read-only-gate-operator-ci-handoff-core-extraction.md");
   private static final String PACKAGE_IMPORT =
       "ops.maintenance.minimalreadonlygateoperatorcihandoff";
-  private static final List<String> MOVED_FILES =
+  private static final List<String> CURRENT_FILES =
       List.of(
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveArtifactRenderer.java",
+          "ArchiveRenderer.java",
+          "HandoffRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveArtifactVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveBoundaryRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveBoundaryVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveCiBatchRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveCiBatchVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveLaneRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveLaneVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveRendererSupport.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveScorecardCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveScorecardRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveSourceHandoffCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveSourceRenderer.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySupport.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffBatchCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffBoundaryLockCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffLaneCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffLaneRenderer.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistrySupport.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRendererSupport.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffSourceArchiveCatalog.java");
-  private static final List<String> MOVED_TEST_FILES =
+  private static final List<String> REMOVED_RENDERER_FILES =
       List.of(
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveArtifactRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveBoundaryRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveCiBatchRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveLaneRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveRendererSupport.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveScorecardRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveSourceRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffLaneRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryRenderer.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRendererSupport.java");
+  private static final List<String> CURRENT_TEST_FILES =
+      List.of(
+          "ArchiveTestData.java",
+          "HandoffMarkdownTests.java",
+          "HandoffTestData.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryAggregateChecksTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryBoundaryScorecardTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryCatalogTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySourceTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServiceTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.java");
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServiceTests.java");
+  private static final List<String> RETAINED_CONTROLLERS =
+      List.of(
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryController.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryController.java");
 
   @Test
-  void operatorCiCoreMovesWhileControllersStayRootVisible() throws IOException {
-    assertThat(MOVED_FILES).hasSize(27);
-    for (String file : MOVED_FILES) {
+  void extractedImplementationCanOnlyShrink() throws IOException {
+    assertThat(CURRENT_FILES).hasSize(18);
+    for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
     }
-    try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(27);
+    assertThat(REMOVED_RENDERER_FILES).hasSize(11);
+    for (String file : REMOVED_RENDERER_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
     }
-    for (String controller :
-        List.of(
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryController.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryController.java")) {
+    try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(18);
+    }
+    for (String controller : RETAINED_CONTROLLERS) {
       assertThat(Files.isRegularFile(OPS_ROOT.resolve(controller))).as(controller).isTrue();
       assertThat(read(OPS_ROOT.resolve(controller))).contains(PACKAGE_IMPORT);
     }
   }
 
   @Test
-  void packageTestsMoveWhileControllerMarkdownTestsStayRoot() throws IOException {
-    assertThat(MOVED_TEST_FILES).hasSize(7);
-    for (String file : MOVED_TEST_FILES) {
+  void packageTestsUseShortFactories() throws IOException {
+    assertThat(CURRENT_TEST_FILES).hasSize(8);
+    for (String file : CURRENT_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
-      assertThat(files.filter(Files::isRegularFile).filter(this::isJava)).hasSize(7);
+      assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
+          .hasSizeLessThanOrEqualTo(8);
     }
+    assertThat(
+            PACKAGE_TEST_ROOT.resolve(
+                "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.java"))
+        .doesNotExist();
+    assertThat(
+            PACKAGE_TEST_ROOT.resolve(
+                "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport.java"))
+        .doesNotExist();
     for (String test :
         List.of(
             "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryControllerMarkdownTests.java",
@@ -177,7 +197,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(1352);
+          .hasSizeLessThanOrEqualTo(1274);
     }
   }
 

@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void archivesBoundaryLocksWithoutOpeningRuntimeActions() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.boundaryVerificationCount()).isEqualTo(8);
     assertThat(response.lockedBoundaryVerificationCount()).isEqualTo(8);
@@ -37,9 +35,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
 
   @Test
   void scorecardRequiresEveryArchiveVerificationToPass() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.scorecardEntryCount()).isEqualTo(6);
     assertThat(response.passedScorecardEntryCount()).isEqualTo(6);

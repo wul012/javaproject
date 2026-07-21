@@ -2,8 +2,8 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.HandoffTestData;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse;
-import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryControllerMar
 
     var response =
         new OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryController(
-                OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.service())
+                HandoffTestData.service())
             .registry();
 
     assertThat(response.endpoint())
@@ -32,8 +32,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryControllerMar
 
   @Test
   void rendersStableOperatorCiHandoffMarkdownSections() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.markdownSections())
         .extracting(
@@ -50,8 +49,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryControllerMar
 
   @Test
   void aggregateChecksRemainStableAndBoundaryFocused() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryTestSupport.registry();
+    var response = HandoffTestData.registry();
 
     assertThat(response.checks()).hasSize(15);
     assertThat(response.checks())
