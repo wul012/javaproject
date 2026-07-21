@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughComplianceRegistryImmutabilityTests {
 
   @Test
   void exposesImmutableResponseLists() {
-    var response = OpsShardReadinessCodeWalkthroughComplianceRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThatThrownBy(() -> response.versions().clear())
         .isInstanceOf(UnsupportedOperationException.class);

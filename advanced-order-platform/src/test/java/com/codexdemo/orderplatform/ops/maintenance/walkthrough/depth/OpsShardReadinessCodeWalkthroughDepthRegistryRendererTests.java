@@ -1,5 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.walkthrough.depth;
 
+import static com.codexdemo.orderplatform.ops.maintenance.rendering.MarkdownOracle.sha256;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ class OpsShardReadinessCodeWalkthroughDepthRegistryRendererTests {
 
   @Test
   void rendersStableMarkdownSectionsForDepthRegistry() {
-    var response = OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.markdownSections())
         .extracting(OpsShardReadinessCodeWalkthroughDepthRegistryResponse.MarkdownSection::heading)
@@ -18,6 +19,15 @@ class OpsShardReadinessCodeWalkthroughDepthRegistryRendererTests {
             "Evidence Rules",
             "Boundary Rules",
             "Verification Steps");
+    assertThat(response.markdownSections())
+        .extracting(section -> section.lines().size())
+        .containsExactly(5, 4, 5, 8, 5);
+    assertThat(
+            sha256(
+                response.markdownSections(),
+                OpsShardReadinessCodeWalkthroughDepthRegistryResponse.MarkdownSection::heading,
+                OpsShardReadinessCodeWalkthroughDepthRegistryResponse.MarkdownSection::lines))
+        .isEqualTo("bb1cec38b1735d4eb45c1cc8f144896b8837487e1e5f199cd2432195e8a651c6");
     assertThat(response.markdownSections().get(0).lines())
         .anySatisfy(
             line ->

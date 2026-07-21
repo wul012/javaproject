@@ -29,7 +29,7 @@ public class OpsShardReadinessCodeWalkthroughDepthRegistryService {
         evidenceRules,
         boundaryRules,
         verificationSteps,
-        OpsShardReadinessCodeWalkthroughDepthRegistryRenderer.render(
+        ReportRenderer.render(
             depthRules, languageRules, evidenceRules, boundaryRules, verificationSteps));
   }
 }

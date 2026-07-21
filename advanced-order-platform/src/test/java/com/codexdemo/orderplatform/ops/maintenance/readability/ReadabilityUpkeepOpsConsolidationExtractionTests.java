@@ -18,12 +18,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionTests {
       OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "walkthrough", "compliance"));
   private static final Path EXTRACTION_NOTE =
       DOCS_ROOT.resolve("code-walkthrough-compliance-extraction-v1797.md");
+  private static final String RETIRED_RENDERER =
+      "OpsShardReadinessCodeWalkthroughComplianceRegistryRenderer.java";
   private static final List<String> EXTRACTED_IMPLEMENTATION_FILES =
       List.of(
           "OpsShardReadinessCodeWalkthroughComplianceArchiveRangeCatalog.java",
           "OpsShardReadinessCodeWalkthroughComplianceBoundaryRuleCatalog.java",
           "OpsShardReadinessCodeWalkthroughComplianceDocumentationRuleCatalog.java",
-          "OpsShardReadinessCodeWalkthroughComplianceRegistryRenderer.java",
+          "ReportRenderer.java",
           "OpsShardReadinessCodeWalkthroughComplianceRegistryResponse.java",
           "OpsShardReadinessCodeWalkthroughComplianceRegistryService.java",
           "OpsShardReadinessCodeWalkthroughComplianceRegistrySupport.java",
@@ -66,6 +68,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionTests {
           .as(fileName + " should no longer be directly in the root ops package")
           .isFalse();
     }
+    assertThat(Files.exists(WALKTHROUGH_COMPLIANCE_SOURCE_ROOT.resolve(RETIRED_RENDERER)))
+        .isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
   }
 
   @Test

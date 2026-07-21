@@ -36,7 +36,7 @@ public class OpsShardReadinessCodeWalkthroughComplianceRegistryService {
         documentationRules,
         boundaryRules,
         testCoverages,
-        OpsShardReadinessCodeWalkthroughComplianceRegistryRenderer.render(
+        ReportRenderer.render(
             versions,
             requiredHeadings,
             archiveRanges,

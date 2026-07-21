@@ -1,8 +1,8 @@
 package com.codexdemo.orderplatform.ops.maintenance.walkthrough.compliance;
 
-final class OpsShardReadinessCodeWalkthroughComplianceRegistryTestSupport {
+final class WalkthroughTestData {
 
-  private OpsShardReadinessCodeWalkthroughComplianceRegistryTestSupport() {}
+  private WalkthroughTestData() {}
 
   static OpsShardReadinessCodeWalkthroughComplianceRegistryService service() {
     return new OpsShardReadinessCodeWalkthroughComplianceRegistryService();

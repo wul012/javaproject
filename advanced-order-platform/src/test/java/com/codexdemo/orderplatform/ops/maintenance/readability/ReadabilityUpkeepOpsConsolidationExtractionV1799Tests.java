@@ -18,11 +18,13 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1799Tests {
       OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "walkthrough", "qualityaudit"));
   private static final Path EXTRACTION_NOTE =
       DOCS_ROOT.resolve("quality-audit-registry-extraction-v1799.md");
+  private static final String RETIRED_RENDERER =
+      "OpsShardReadinessCodeWalkthroughQualityAuditRegistryRenderer.java";
   private static final List<String> EXTRACTED_IMPLEMENTATION_FILES =
       List.of(
           "OpsShardReadinessCodeWalkthroughQualityAuditBatchCatalog.java",
           "OpsShardReadinessCodeWalkthroughQualityAuditBoundaryCatalog.java",
-          "OpsShardReadinessCodeWalkthroughQualityAuditRegistryRenderer.java",
+          "ReportRenderer.java",
           "OpsShardReadinessCodeWalkthroughQualityAuditRegistryResponse.java",
           "OpsShardReadinessCodeWalkthroughQualityAuditRegistryService.java",
           "OpsShardReadinessCodeWalkthroughQualityAuditRegistrySupport.java",
@@ -66,6 +68,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1799Tests {
           .as(fileName + " should no longer be directly in the root ops package")
           .isFalse();
     }
+    assertThat(Files.exists(QUALITY_AUDIT_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
   }
 
   @Test

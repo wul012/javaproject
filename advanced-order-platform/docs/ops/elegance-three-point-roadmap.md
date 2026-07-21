@@ -91,6 +91,20 @@ typed section engine，再让第三个 case 数据化，不能为了跨过 Rende
 Renderer，再进入 Catalog engine；每一刀继续要求旧输出 oracle、窄共享抽象与领域政策留在
 适配器，禁止把重复代码简单搬进万能类。
 
+## v1885 检查点
+
+四份 Code Walkthrough 报告先在旧实现上冻结全部二十二个 heading、一百六十八行正文、逐节
+行数和全文 UTF-8 SHA-256，再由四个包内短 `ReportRenderer` 复用既有
+`MarkdownSections.counted/mapped`。领域 record 和行格式仍归本包所有，公共 Response、路由、
+Controller、Service 事务与 Catalog 数据不变；同一组四项 exact oracle 在替换后原样通过。
+
+四个目标 renderer 从 541 行降到 458 行。当前 ops 仍为 1,249，Renderer 保持 30 个但总行数
+从 3,372 收紧到 3,289，超长 Renderer 文件名从 9 降到 5。生产长 stem / 长标识符使用为
+1,159 / 20,277，测试为 754 / 9,970；exact baseline 删除 16 项、新增 0 项。Renderer 数量
+目标虽然保持达成，超长 Renderer=0、ops<=650、生产长 stem<=550、长标识符使用<=9000 与
+大文件目标仍未完成，因此仍不自称九分。下一步处理剩余五个长 renderer，继续遵守旧输出
+先冻结、共享机制与领域政策分离、每刀总复杂度实际下降的要求，然后进入 Catalog engine。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

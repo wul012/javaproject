@@ -1,5 +1,6 @@
 package com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualitygate;
 
+import static com.codexdemo.orderplatform.ops.maintenance.rendering.MarkdownOracle.sha256;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ class OpsShardReadinessCodeWalkthroughQualityGateRegistryRendererTests {
 
   @Test
   void rendersStableMarkdownSectionsForQualityReview() {
-    var response = OpsShardReadinessCodeWalkthroughQualityGateRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.markdownSections())
         .extracting(
@@ -19,6 +20,16 @@ class OpsShardReadinessCodeWalkthroughQualityGateRegistryRendererTests {
             "Evidence Anchors",
             "Review Checklist",
             "Runtime Boundary Rules");
+    assertThat(response.markdownSections())
+        .extracting(section -> section.lines().size())
+        .containsExactly(7, 9, 7, 7, 9);
+    assertThat(
+            sha256(
+                response.markdownSections(),
+                OpsShardReadinessCodeWalkthroughQualityGateRegistryResponse.MarkdownSection
+                    ::heading,
+                OpsShardReadinessCodeWalkthroughQualityGateRegistryResponse.MarkdownSection::lines))
+        .isEqualTo("16bc3cc314c3b7a091444cf0ad5d220dfdbb2366d3bcecd9cd82b98661a6658d");
     assertThat(response.markdownSections().get(0).lines().get(0)).isEqualTo("version-rule-count=6");
     assertThat(response.markdownSections().get(0).lines())
         .anySatisfy(line -> assertThat(line).contains("no-micro-version-by-default"));

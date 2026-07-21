@@ -19,6 +19,7 @@ $handoffRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorcihand
 $executionRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateexecution'
 $routeSplitRoot = Join-Path $opsRoot 'maintenance/releaseacceptanceroutepathsplit'
 $sustainmentRoot = Join-Path $opsRoot 'maintenance/releaseacceptanceroutepathsplit/sustainment'
+$walkthroughRoot = Join-Path $opsRoot 'maintenance/walkthrough'
 $profileRoots = @(
   (Join-Path $opsRoot 'maintenance/candidatedocument'),
   (Join-Path $opsRoot 'maintenance/signedapprovaldraftprofilesection'),
@@ -69,6 +70,7 @@ $profileRendererFiles = @(
     Get-ChildItem -LiteralPath $profileRoot -File -Filter 'ProfileRenderer.java'
   }
 )
+$walkthroughRendererFiles = @(& rg --files $walkthroughRoot -g 'ReportRenderer.java')
 $summary = [ordered]@{
   OpsJavaFiles = $rows.Count
   RendererFiles = $renderers.Count
@@ -90,6 +92,7 @@ $summary = [ordered]@{
   RouteSplitJavaFiles = $routeSplitFiles.Count
   SustainmentJavaFiles = $sustainmentFiles.Count
   ProfileRendererFiles = $profileRendererFiles.Count
+  WalkthroughRendererFiles = $walkthroughRendererFiles.Count
   Hotspots = @(
     $rows |
       Sort-Object -Property @{ Expression = 'Lines'; Descending = $true }, Path |

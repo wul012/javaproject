@@ -33,7 +33,7 @@ public class OpsShardReadinessCodeWalkthroughQualityGateRegistryService {
         evidenceAnchors,
         reviewChecklists,
         boundaryRules,
-        OpsShardReadinessCodeWalkthroughQualityGateRegistryRenderer.render(
+        ReportRenderer.render(
             versionRules, explanationRubrics, evidenceAnchors, reviewChecklists, boundaryRules));
   }
 }

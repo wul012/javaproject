@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughQualityAuditRegistryServiceTests {
 
   @Test
   void buildsQualityAuditRegistryForRecentMediumGranularityBatch() {
-    var response = OpsShardReadinessCodeWalkthroughQualityAuditRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1758");
@@ -37,7 +37,7 @@ class OpsShardReadinessCodeWalkthroughQualityAuditRegistryServiceTests {
 
   @Test
   void auditsEveryQualityGateVersionAsMediumGranularity() {
-    var response = OpsShardReadinessCodeWalkthroughQualityAuditRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.versionAudits())
         .extracting(

@@ -171,3 +171,12 @@ oracle、内部短命名、下游 sustainment 方向与固定 tag 发布门；�
 改前改后精确 oracle 与 shrink-only 结构门；没有移动、改写或删除任何历史归档。重建后的
 精确集合为 `1,695 files / 20,107,763 raw bytes`。本次上调严格等于这一份 15,547 字节
 讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1885 Extension
+
+用户于 2026-07-21 继续授权 Java coding brilliant and elegant 九分计划。v1885 只新增
+`代码讲解记录_生产雏形阶段9/v1883-v1887/v1885-code-walkthrough-renderers.md`，用于解释
+四份 Code Walkthrough 报告的二十二节一百六十八行输入输出、共享 `counted/mapped` 机制、
+完整 UTF-8 摘要、领域映射与 shrink-only 结构门；没有移动、改写或删除任何历史归档。
+重建后的精确集合为 `1,696 files / 20,125,898 raw bytes`。本次上调严格等于这一份
+18,135 字节讲解的增量，不是后续版本的预留预算。

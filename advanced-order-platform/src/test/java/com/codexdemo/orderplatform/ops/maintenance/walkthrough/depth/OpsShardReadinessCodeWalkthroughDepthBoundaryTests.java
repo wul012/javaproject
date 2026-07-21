@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughDepthBoundaryTests {
 
   @Test
   void keepsDepthRegistryRuntimeFreeAndReadOnly() {
-    var response = OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -22,7 +22,7 @@ class OpsShardReadinessCodeWalkthroughDepthBoundaryTests {
 
   @Test
   void namesAllForbiddenRuntimeActions() {
-    var response = OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.boundaryRules())
         .extracting(OpsShardReadinessCodeWalkthroughDepthRegistryResponse.BoundaryRule::code)

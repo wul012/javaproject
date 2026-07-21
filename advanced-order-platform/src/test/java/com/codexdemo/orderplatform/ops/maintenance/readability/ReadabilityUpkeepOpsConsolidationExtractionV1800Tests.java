@@ -18,10 +18,12 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1800Tests {
       OPS_SOURCE_ROOT.resolve(Path.of("maintenance", "walkthrough", "depth"));
   private static final Path EXTRACTION_NOTE =
       DOCS_ROOT.resolve("depth-registry-extraction-v1800.md");
+  private static final String RETIRED_RENDERER =
+      "OpsShardReadinessCodeWalkthroughDepthRegistryRenderer.java";
   private static final List<String> EXTRACTED_IMPLEMENTATION_FILES =
       List.of(
           "OpsShardReadinessCodeWalkthroughDepthBoundaryCatalog.java",
-          "OpsShardReadinessCodeWalkthroughDepthRegistryRenderer.java",
+          "ReportRenderer.java",
           "OpsShardReadinessCodeWalkthroughDepthRegistryResponse.java",
           "OpsShardReadinessCodeWalkthroughDepthRegistryService.java",
           "OpsShardReadinessCodeWalkthroughDepthRegistrySupport.java",
@@ -63,6 +65,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1800Tests {
           .as(fileName + " should no longer be directly in the root ops package")
           .isFalse();
     }
+    assertThat(Files.exists(DEPTH_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
+    assertThat(Files.exists(OPS_SOURCE_ROOT.resolve(RETIRED_RENDERER))).isFalse();
   }
 
   @Test

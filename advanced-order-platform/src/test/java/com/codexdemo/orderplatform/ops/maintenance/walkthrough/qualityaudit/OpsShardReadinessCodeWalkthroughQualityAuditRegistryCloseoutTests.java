@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughQualityAuditRegistryCloseoutTests {
 
   @Test
   void closesOutAuditWithBothBatchesAndRequiredVerificationSteps() {
-    var response = OpsShardReadinessCodeWalkthroughQualityAuditRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.batchAssessments())
         .extracting(

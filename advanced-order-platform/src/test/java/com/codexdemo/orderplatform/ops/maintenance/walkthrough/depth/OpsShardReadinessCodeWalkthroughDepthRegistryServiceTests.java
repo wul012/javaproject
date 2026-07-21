@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughDepthRegistryServiceTests {
 
   @Test
   void buildsChineseLongformDepthRegistry() {
-    var response = OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1778");
@@ -34,7 +34,7 @@ class OpsShardReadinessCodeWalkthroughDepthRegistryServiceTests {
 
   @Test
   void emitsDepthChecksForFutureWalkthroughs() {
-    var response = OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.checks())
         .contains(

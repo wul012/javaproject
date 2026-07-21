@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughQualityGateRegistryServiceTests {
 
   @Test
   void buildsQualityGateRegistryForLargerVersionGranularity() {
-    var response = OpsShardReadinessCodeWalkthroughQualityGateRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1753");
@@ -31,7 +31,7 @@ class OpsShardReadinessCodeWalkthroughQualityGateRegistryServiceTests {
 
   @Test
   void namesTheNewGranularityRulesAndRubricSections() {
-    var response = OpsShardReadinessCodeWalkthroughQualityGateRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.versionRules())
         .extracting(OpsShardReadinessCodeWalkthroughQualityGateRegistryResponse.VersionRule::code)

@@ -1,8 +1,8 @@
 package com.codexdemo.orderplatform.ops.maintenance.walkthrough.depth;
 
-final class OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport {
+final class WalkthroughTestData {
 
-  private OpsShardReadinessCodeWalkthroughDepthRegistryTestSupport() {}
+  private WalkthroughTestData() {}
 
   static OpsShardReadinessCodeWalkthroughDepthRegistryService service() {
     return new OpsShardReadinessCodeWalkthroughDepthRegistryService();

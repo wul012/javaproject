@@ -43,8 +43,8 @@ class OpsEleganceCensusTests {
 
     assertThat(renderers).hasSizeLessThanOrEqualTo(30);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_372);
-    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(9);
+        .isLessThanOrEqualTo(3_289);
+    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(5);
   }
 
   @Test
@@ -189,7 +189,7 @@ class OpsEleganceCensusTests {
   void censusAndRoadmapStayReproducible() throws IOException {
     Path script = Path.of("scripts", "ops-elegance-census.ps1");
     Path roadmap = Path.of("docs", "ops", "elegance-three-point-roadmap.md");
-    Path version = Path.of("docs", "ops", "profile-section-rendering-engine-v1884.md");
+    Path version = Path.of("docs", "ops", "code-walkthrough-renderers-v1885.md");
 
     assertThat(script).isRegularFile();
     assertThat(read(script))
@@ -208,11 +208,18 @@ class OpsEleganceCensusTests {
             "ExecutionJavaFiles",
             "RouteSplitJavaFiles",
             "SustainmentJavaFiles",
-            "ProfileRendererFiles");
+            "ProfileRendererFiles",
+            "WalkthroughRendererFiles");
     assertThat(read(roadmap)).contains("ops-elegance-census.ps1", "DONE 与失败条件", "<= 650", "<= 30");
     assertThat(read(version))
         .contains(
-            "Requirement Evidence Matrix", "Failure Conditions", "5 + 5 + 9", "32 -> 30", "3,372");
+            "Requirement Evidence Matrix",
+            "Failure Conditions",
+            "22 sections",
+            "168 lines",
+            "30 -> 30",
+            "3,289",
+            "9 -> 5");
   }
 
   private List<Path> javaFiles(Path root) throws IOException {

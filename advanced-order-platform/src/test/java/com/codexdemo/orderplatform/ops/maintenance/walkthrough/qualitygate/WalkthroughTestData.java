@@ -1,8 +1,8 @@
 package com.codexdemo.orderplatform.ops.maintenance.walkthrough.qualitygate;
 
-final class OpsShardReadinessCodeWalkthroughQualityGateRegistryTestSupport {
+final class WalkthroughTestData {
 
-  private OpsShardReadinessCodeWalkthroughQualityGateRegistryTestSupport() {}
+  private WalkthroughTestData() {}
 
   static OpsShardReadinessCodeWalkthroughQualityGateRegistryService service() {
     return new OpsShardReadinessCodeWalkthroughQualityGateRegistryService();

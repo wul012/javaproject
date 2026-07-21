@@ -35,7 +35,7 @@ public class OpsShardReadinessCodeWalkthroughQualityAuditRegistryService {
         reviewFindings,
         boundaryAudits,
         verificationSteps,
-        OpsShardReadinessCodeWalkthroughQualityAuditRegistryRenderer.render(
+        ReportRenderer.render(
             batchAssessments,
             versionAudits,
             rubricScores,

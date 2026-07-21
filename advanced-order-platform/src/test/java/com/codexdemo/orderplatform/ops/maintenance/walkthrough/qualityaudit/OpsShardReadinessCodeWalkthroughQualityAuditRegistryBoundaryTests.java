@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughQualityAuditRegistryBoundaryTests {
 
   @Test
   void keepsQualityAuditRuntimeFreeAndReadOnly() {
-    var response = OpsShardReadinessCodeWalkthroughQualityAuditRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -24,7 +24,7 @@ class OpsShardReadinessCodeWalkthroughQualityAuditRegistryBoundaryTests {
 
   @Test
   void emitsAuditChecksForBoundaryAndQualityResults() {
-    var response = OpsShardReadinessCodeWalkthroughQualityAuditRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.checks())
         .contains(

@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughQualityGateRegistryBoundaryTests {
 
   @Test
   void keepsQualityGateRuntimeFreeAndReadOnly() {
-    var response = OpsShardReadinessCodeWalkthroughQualityGateRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -24,7 +24,7 @@ class OpsShardReadinessCodeWalkthroughQualityGateRegistryBoundaryTests {
 
   @Test
   void emitsQualityGateChecksForForbiddenActions() {
-    var response = OpsShardReadinessCodeWalkthroughQualityGateRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.checks())
         .contains(

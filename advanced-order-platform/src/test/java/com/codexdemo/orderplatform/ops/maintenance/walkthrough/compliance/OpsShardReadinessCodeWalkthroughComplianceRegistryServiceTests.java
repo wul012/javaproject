@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughComplianceRegistryServiceTests {
 
   @Test
   void buildsCodeWalkthroughComplianceRegistryForNewStandardBatch() {
-    var response = OpsShardReadinessCodeWalkthroughComplianceRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1747");
@@ -30,7 +30,7 @@ class OpsShardReadinessCodeWalkthroughComplianceRegistryServiceTests {
 
   @Test
   void keepsVersionRangeAndRequiredHeadingsStable() {
-    var response = OpsShardReadinessCodeWalkthroughComplianceRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.versions())
         .extracting(

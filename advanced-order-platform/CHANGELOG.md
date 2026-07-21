@@ -4,6 +4,36 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1885 - Code Walkthrough report renderer convergence
+
+- Freezes all four existing reports before replacement: Compliance has six sections /
+  63 content lines, Depth five / 27, Quality Gate five / 39, and Quality Audit six /
+  39. The unchanged four-oracle set passes against both implementations.
+- Reuses the established `MarkdownSections.counted/mapped` engine. Four package-local
+  `ReportRenderer` adapters retain domain headings and line formats; no route, Response,
+  controller, service transaction, or Catalog record changes.
+- Pins every heading, per-section line count, and a canonical full-report UTF-8 SHA-256.
+  Any character, order, count-prefix, or line-boundary drift now blocks the version.
+- The four target renderers shrink `541 -> 458` lines. Global renderer count stays 30,
+  renderer lines tighten `3372 -> 3289`, and long renderer filenames fall `9 -> 5`.
+- Renames four pure test factories to `WalkthroughTestData` while retaining historical
+  test identities that are themselves emitted as compliance evidence.
+- Tightens production name metrics to `1159 / 20277 / 2718` and test metrics to
+  `754 / 9970 / 3773`; the exact baseline records 16 removals and no additions.
+- Focused behavior, exact-output, structure, elegance, and staged-change gates pass
+  66/66 after final formatting.
+- The first full run executes all 1,981 tests and exposes four v1797-v1800 extraction
+  checks that still required retired renderer filenames. Their package-boundary purpose
+  is preserved and tightened: current `ReportRenderer.java` is required in each narrow
+  package and every retired long filename is forbidden there and at root. Repair-focused
+  history, oracle, structure, and elegance gates pass 41/41.
+- Adds a 4,102-Han walkthrough with exactly ten standard headings. The authorized
+  archive set becomes exactly 1,696 files / 20,125,898 raw bytes.
+- Final `scripts/verify-release.ps1` pins v1884 commit `9d3ff03d` and passes all
+  1,981 tests in 9:11. JaCoCo analyzes 2,131 classes with every floor met,
+  SpotBugs reports 0/0, and the 68,027,947-byte executable jar is packaged.
+- Implementation/closeout Actions and the annotated tag remain binding completion gates.
+
 ## v1884 - Profile Section shared rendering engine
 
 - Freezes nineteen complete rendered-section records against the v1883 implementation:
@@ -32,7 +62,10 @@
   and the executable jar is packaged.
 - Implementation commit `512d4804` passes Actions run `29815077843`: Docker-tagged
   integration tests in 2:21 and headless regression in 20:30, including the production
-  smoke and JaCoCo upload. Closeout CI and the annotated tag remain binding gates.
+  smoke and JaCoCo upload. Closeout `9d3ff03d` passes run `29816576937`: Docker in
+  2:13 and headless in 19:34. Annotated tag
+  `v1884-order-platform-profile-section-rendering-engine` peels to that commit locally
+  and on `javaproject`.
 
 ## v1883 - Route Split internal model convergence
 

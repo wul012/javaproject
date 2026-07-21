@@ -8,7 +8,7 @@ class OpsShardReadinessCodeWalkthroughComplianceRegistryBoundaryTests {
 
   @Test
   void keepsRuntimeAndSecretBoundariesClosed() {
-    var response = OpsShardReadinessCodeWalkthroughComplianceRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();
@@ -31,7 +31,7 @@ class OpsShardReadinessCodeWalkthroughComplianceRegistryBoundaryTests {
 
   @Test
   void emitsBoundaryChecksForOperatorScan() {
-    var response = OpsShardReadinessCodeWalkthroughComplianceRegistryTestSupport.registry();
+    var response = WalkthroughTestData.registry();
 
     assertThat(response.checks())
         .contains(
