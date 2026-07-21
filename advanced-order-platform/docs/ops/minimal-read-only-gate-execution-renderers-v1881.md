@@ -70,6 +70,9 @@ renderer 和一个 support；archive verification 又有一个聚合 renderer、
 - 扩展行为、Controller、下游、历史结构、优雅、变更、讲解、归档与 closeout 门通过 179/179。
 - 完整 `mvnw -B verify` 在 9:25 内通过 1960 项测试；JaCoCo 分析 2145 个类并满足全部
   floor，SpotBugs 为 0 bugs / 0 errors，executable jar 已打包。
+- 实现提交 `7ec4f2ba` 的 canonical Actions run `29795818326` 双绿：Docker-tagged
+  verification 为 2:06，headless regression 为 19:28，并包含 production-profile smoke
+  与 JaCoCo upload；closeout CI 与 annotated tag 仍是本版最后两道机械完成门。
 
 所有数值都来自 `scripts/ops-elegance-census.ps1` 与
 `scripts/java-maintainability-census.ps1`，不是手工估算。`OpsEleganceCensusTests` 新增

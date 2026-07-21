@@ -25,8 +25,11 @@
   change, walkthrough, archive, and closeout selection passes 179/179.
 - Full `mvnw -B verify` passes 1,960 tests in 9:25 with zero failures, errors,
   or skips; JaCoCo analyzes 2,145 classes with every floor met, SpotBugs reports
-  0/0, and the executable jar is packaged. Implementation Actions, closeout Actions,
-  and annotated tag remain binding completion gates.
+  0/0, and the executable jar is packaged.
+- Implementation commit `7ec4f2ba` passes canonical Actions run `29795818326`:
+  Docker-tagged verification in 2:06 and headless regression in 19:28, including
+  the production-profile smoke and JaCoCo upload. Closeout Actions and the annotated
+  tag remain binding completion gates.
 
 ## v1880 - Operator CI handoff renderer convergence
 
