@@ -21,7 +21,7 @@
 | 测试职责与命名同步收敛 | 六个长测试/工厂/结构名改成短职责名 | Java change/elegance gate；名称 baseline 新增 0、删除 35 | 已满足 |
 | 路由断言能够真实失败 | 根 Controller 测试断言精确 suffix 与最终 endpoint | `SustainmentControllerTests` | 已满足 |
 | 收益只能继续缩小 | 全局、family、renderer、行数和名称 ratchet 全部下调 | 两个 census 脚本与 Maven 结构门 | 已满足 |
-| 发布证据完整 | 讲解、归档、全量 verify、两轮 CI、annotated tag | 本文与进度账本 | 讲解、精确归档与本地全量 verify 完成；远端验证中 |
+| 发布证据完整 | 讲解、归档、全量 verify、两轮 CI、annotated tag | 本文与进度账本 | 实现 CI 已绿；closeout CI 与 tag 待完成 |
 
 ## 实现结果
 
@@ -77,6 +77,19 @@ v1847 至 v1850、v1866 和当前结构门的全局 cap 同步收紧到 1258。�
 通过 1,963 个测试，失败、错误和跳过均为 0。JaCoCo 分析 2,137 个类并满足全部覆盖率下限；
 SpotBugs 报告 0 个 bug、0 个 error；Spring Boot 可执行 jar 完成重打包。实现提交、closeout
 提交的两轮远端 Actions 与 annotated tag 仍是发布完成条件，不能由本地绿色替代。
+
+## 实现 CI
+
+初始实现提交 `4ced994e` 的 Actions run `29799487464` 中，Docker job 成功，headless 在
+Spotless ratchet 提前失败。原因不是行为或覆盖率，而是三个手工修改测试文件混入不同换行符，
+其中 `CurrentWalkthroughTests` 还缺少一次 Google Java Format 折行。普通本地命令默认比较
+已经移动到当前提交的 `javaproject/master`，因而未覆盖本版差异；使用上一 canonical tag
+v1881 的 peeled commit `f0db6641` 后可精确复现。
+
+修复提交 `d525524b` 只落下一处格式折行，另两文件的行尾归一化不会形成 Git 内容差异。
+同一 prior-SHA Spotless 门与 30/30 发布门在本地通过。canonical run `29799705965` 随后
+通过：Docker-tagged verification 2:03，headless 19:50；后者包含精确 Spotless、完整 wrapper
+verify、生产 profile smoke 与 JaCoCo 上传。该结果关闭实现 CI，但不能替代 closeout 自身 CI。
 
 ## 非目标与安全边界
 

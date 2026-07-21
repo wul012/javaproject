@@ -28,6 +28,15 @@
   or skips; JaCoCo analyzes 2,137 classes with every floor met, SpotBugs reports
   0 bugs / 0 errors, and the executable jar is packaged. Implementation/closeout
   Actions and the annotated tag remain binding completion gates.
+- Initial implementation commit `4ced994e` produced successful Docker evidence in
+  Actions run `29799487464`, but headless stopped at the exact prior-commit Spotless
+  ratchet because three edited test files contained mixed line endings and one pending
+  Google Java Format fold. Repair commit `d525524b` normalizes that fold; the exact
+  local ratchet and 30/30 release gates pass.
+- Canonical implementation run `29799705965` passes Docker-tagged verification in
+  2:03 and headless regression in 19:50, including Spotless against the v1881 peeled
+  commit, full wrapper verify, production-profile smoke, and JaCoCo upload. Closeout
+  Actions and the annotated tag remain pending.
 
 ## v1881 - Minimal read-only gate execution renderer convergence
 
