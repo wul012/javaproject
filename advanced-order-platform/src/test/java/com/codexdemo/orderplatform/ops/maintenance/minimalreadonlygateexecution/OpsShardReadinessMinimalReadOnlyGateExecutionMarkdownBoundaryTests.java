@@ -8,7 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionMarkdownBoundaryTests {
 
   @Test
   void aggregateChecksRemainStableAndBoundaryFocused() {
-    var response = OpsShardReadinessMinimalReadOnlyGateExecutionRegistryTestSupport.registry();
+    var response = ExecutionTestData.registry();
 
     assertThat(response.checks()).hasSize(20);
     assertThat(response.checks())

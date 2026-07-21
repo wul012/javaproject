@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveArtifactReadTargetTest
 
   @Test
   void snapshotsSourceRegistryAndVerifiesArchiveArtifacts() {
-    var sourceRegistry =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .sourceRegistry();
+    var sourceRegistry = ArchiveTestData.sourceRegistry();
     var snapshots =
         OpsShardReadinessMinimalReadOnlyGateExecutionArchiveSourceRegistrySnapshotCatalog.snapshots(
             sourceRegistry);
@@ -45,9 +43,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveArtifactReadTargetTest
 
   @Test
   void verifiesReadTargetsFromSourceRegistryWithoutRawEndpointValues() {
-    var sourceRegistry =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .sourceRegistry();
+    var sourceRegistry = ArchiveTestData.sourceRegistry();
     var readTargets =
         OpsShardReadinessMinimalReadOnlyGateExecutionReadTargetVerificationCatalog
             .readTargetVerifications(sourceRegistry);

@@ -8,7 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionRendererTests {
 
   @Test
   void rendersStableMarkdownSectionsForOperatorArchive() {
-    var response = OpsShardReadinessMinimalReadOnlyGateExecutionRegistryTestSupport.registry();
+    var response = ExecutionTestData.registry();
 
     assertThat(response.markdownSections())
         .extracting(

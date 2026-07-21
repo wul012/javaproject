@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveScoreRendererTests {
 
   @Test
   void verifiesCiHandoffAndScorecardCounts() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.ciBatchVerificationCount())
         .isEqualTo(
@@ -34,9 +32,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveScoreRendererTests {
 
   @Test
   void rendersStableArchiveVerificationMarkdownSections() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.markdownSections())
         .extracting(

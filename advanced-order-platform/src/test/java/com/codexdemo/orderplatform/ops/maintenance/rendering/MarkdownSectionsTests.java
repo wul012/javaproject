@@ -46,5 +46,31 @@ class MarkdownSectionsTests {
         .isInstanceOf(UnsupportedOperationException.class);
   }
 
+  @Test
+  void groupsEntriesInEncounterOrder() {
+    var entries =
+        new ArrayList<>(
+            List.of(
+                new GroupedEntry("beta", "B1"),
+                new GroupedEntry("alpha", "A1"),
+                new GroupedEntry("beta", "B2")));
+
+    Section section =
+        MarkdownSections.groupedCounted(
+            "Grouped",
+            "entry-count",
+            entries,
+            GroupedEntry::group,
+            GroupedEntry::value,
+            Section::new);
+    entries.add(new GroupedEntry("alpha", "A2"));
+
+    assertThat(section.lines()).containsExactly("entry-count=3", "beta: B1; B2", "alpha: A1");
+    assertThatThrownBy(() -> section.lines().add("gamma: G1"))
+        .isInstanceOf(UnsupportedOperationException.class);
+  }
+
   private record Section(String heading, List<String> lines) {}
+
+  private record GroupedEntry(String group, String value) {}
 }

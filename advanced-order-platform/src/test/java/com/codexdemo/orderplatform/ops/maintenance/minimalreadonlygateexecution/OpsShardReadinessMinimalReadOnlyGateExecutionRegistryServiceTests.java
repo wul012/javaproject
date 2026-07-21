@@ -8,7 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryServiceTests {
 
   @Test
   void buildsNodeV367ReadOnlyGateExecutionRegistry() {
-    var response = OpsShardReadinessMinimalReadOnlyGateExecutionRegistryTestSupport.registry();
+    var response = ExecutionTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1312");
@@ -30,7 +30,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryServiceTests {
 
   @Test
   void keepsExecutionAndRuntimeBoundariesClosed() {
-    var response = OpsShardReadinessMinimalReadOnlyGateExecutionRegistryTestSupport.registry();
+    var response = ExecutionTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();

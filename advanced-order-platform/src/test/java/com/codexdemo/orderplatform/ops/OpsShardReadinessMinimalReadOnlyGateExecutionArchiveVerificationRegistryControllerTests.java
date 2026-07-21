@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution.ArchiveTestData;
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +17,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryCo
 
     var response =
         new OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryController(
-                OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-                    .service())
+                ArchiveTestData.service())
             .registry();
 
     assertThat(response.endpoint())

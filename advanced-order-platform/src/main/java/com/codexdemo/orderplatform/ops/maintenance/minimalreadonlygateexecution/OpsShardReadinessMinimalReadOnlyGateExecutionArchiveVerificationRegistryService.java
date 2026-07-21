@@ -63,7 +63,7 @@ public class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationReg
         ciBatchVerifications,
         operatorHandoffVerifications,
         scorecard,
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryRenderer.render(
+        ArchiveRenderer.render(
             sourceRegistrySnapshots,
             artifactVerifications,
             readTargetVerifications,

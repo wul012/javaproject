@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistrySe
 
   @Test
   void buildsArchiveVerificationRegistryFromJavaV1312SourceRegistry() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1337");
@@ -32,9 +30,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistrySe
 
   @Test
   void carriesReadOnlyBoundaryFlagsForward() {
-    var response =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .registry();
+    var response = ArchiveTestData.registry();
 
     assertThat(response.readOnly()).isTrue();
     assertThat(response.executionAllowed()).isFalse();

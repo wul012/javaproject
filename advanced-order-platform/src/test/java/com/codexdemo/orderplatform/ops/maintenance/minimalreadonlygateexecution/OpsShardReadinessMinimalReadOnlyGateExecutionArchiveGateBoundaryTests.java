@@ -8,9 +8,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveGateBoundaryTests {
 
   @Test
   void verifiesTwentyGateChecksFromSourceRegistry() {
-    var sourceRegistry =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .sourceRegistry();
+    var sourceRegistry = ArchiveTestData.sourceRegistry();
     var gateChecks =
         OpsShardReadinessMinimalReadOnlyGateExecutionGateCheckVerificationCatalog
             .gateCheckVerifications(sourceRegistry);
@@ -36,9 +34,7 @@ class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveGateBoundaryTests {
 
   @Test
   void verifiesBoundaryDenialsRemainClosed() {
-    var sourceRegistry =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport
-            .sourceRegistry();
+    var sourceRegistry = ArchiveTestData.sourceRegistry();
     var boundaries =
         OpsShardReadinessMinimalReadOnlyGateExecutionBoundaryVerificationCatalog
             .boundaryVerifications(sourceRegistry);

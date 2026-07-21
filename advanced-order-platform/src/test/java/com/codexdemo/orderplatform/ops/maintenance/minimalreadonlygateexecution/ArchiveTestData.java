@@ -1,18 +1,17 @@
 package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution;
 
-public final
-class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport {
+public final class ArchiveTestData {
 
-  private OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport() {}
+  private ArchiveTestData() {}
 
   public static OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse sourceRegistry() {
-    return new OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService().registry();
+    return ExecutionTestData.registry();
   }
 
   public static OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService
       service() {
     return new OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService(
-        new OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService());
+        ExecutionTestData.service());
   }
 
   public static OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse

@@ -135,3 +135,12 @@ operator CI handoff 的五节三十三行主报告、六节三十六行归档报
 共享计数引擎、上下游只读边界和 shrink-only 结构门；没有移动、改写或删除任何历史归档。
 重建后的精确集合为 `1,691 files / 20,041,344 raw bytes`。本次上调严格等于这一份
 16,046 字节讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1881 Extension
+
+用户于 2026-07-21 继续授权 Java coding brilliant and elegant 九分计划。v1881 只新增
+`代码讲解记录_生产雏形阶段9/v1878-v1882/v1881-minimal-read-only-gate-execution-renderers.md`，
+用于解释 execution 六节四十行、archive verification 六节四十一行、共享有序分组引擎、
+改前改后精确 oracle、Java/mini-kv 只读边界和 shrink-only 结构门；没有移动、改写或删除
+任何历史归档。重建后的精确集合为 `1,692 files / 20,059,203 raw bytes`。本次上调严格等于
+这一份 17,859 字节讲解的增量，不是后续版本的预留预算。

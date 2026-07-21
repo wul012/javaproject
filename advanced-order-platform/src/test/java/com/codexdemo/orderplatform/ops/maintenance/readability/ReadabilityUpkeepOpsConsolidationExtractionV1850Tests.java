@@ -146,7 +146,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1850Tests {
     }
     try (Stream<Path> files = Files.walk(OPS_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(1274);
+          .hasSizeLessThanOrEqualTo(1266);
     }
   }
 

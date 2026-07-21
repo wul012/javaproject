@@ -4,6 +4,30 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1881 - Minimal read-only gate execution renderer convergence
+
+- Adds `MarkdownSections.groupedCounted`, preserving group encounter order, item order,
+  count prefixes, and immutable output with a dedicated engine test.
+- Freezes the real legacy service output before replacement and preserves it exactly:
+  the execution report has six sections / 40 lines and archive verification has six
+  sections / 41 lines.
+- Replaces eight long renderers and two support shells with package-private
+  `ExecutionRenderer` and `ArchiveRenderer`; services, responses, routes, catalogs,
+  transactions, and downstream operator-CI dependencies stay unchanged.
+- Replaces two long test supports with `ExecutionTestData` and `ArchiveTestData`; the
+  archive factory reuses the execution service graph.
+- Shrinks the family `31 -> 23`, ops Java `1274 -> 1266`, renderers `51 -> 45`,
+  renderer lines `3816 -> 3616`, and long renderer filenames `38 -> 30`.
+- Production long-name metrics improve to `1197 / 20544 / 2756`; the exact baseline
+  has no additions. The walkthrough has 3,418 Han characters and ten standard
+  headings; the exact archive set is 1,692 files / 20,059,203 raw bytes.
+- The expanded behavior, controller, downstream, historical structure, elegance,
+  change, walkthrough, archive, and closeout selection passes 179/179.
+- Full `mvnw -B verify` passes 1,960 tests in 9:25 with zero failures, errors,
+  or skips; JaCoCo analyzes 2,145 classes with every floor met, SpotBugs reports
+  0/0, and the executable jar is packaged. Implementation Actions, closeout Actions,
+  and annotated tag remain binding completion gates.
+
 ## v1880 - Operator CI handoff renderer convergence
 
 - Replaces nine long-named handoff/archive renderers and two support shells with
@@ -25,8 +49,9 @@
   0/0, and the executable jar is packaged.
 - Implementation commit `179e6609` passes canonical Actions run `29792136907`:
   Docker-tagged verification in 2:09 and headless regression in 19:17, including
-  the production-profile smoke and JaCoCo upload. Closeout CI remains required
-  before tagging.
+  the production-profile smoke and JaCoCo upload. Closeout commit `d9fc4c84` passes
+  run `29793217972`: Docker in 2:21 and headless in 18:56. Annotated tag
+  `v1880-order-platform-operator-ci-handoff-renderers` is canonical.
 
 ## v1879 - Acceptance-package renderer convergence
 

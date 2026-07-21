@@ -42,6 +42,15 @@ v1872 tag、本地 `master` 与 `javaproject/master` 同指 `07505752`，最终 
 5. 收尾：重跑 exact census、完整 verify、远端 CI 和跨项目只读 capstone；请求外部评审，
    不自授“提高三分”结论。
 
+## v1881 检查点
+
+Renderer engine 已连续覆盖八个真实输出家族。当前 ops 为 1,266，Renderer 为 45 个、
+3,616 行、30 个超长文件名；生产长 stem / 长标识符使用为 1,197 / 20,544。相对 v1872
+起点，Renderer 已减少 76 个、1,739 行，超长 Renderer 名减少 89 个，但尚未达到
+Renderer <=30、超长 Renderer=0、ops<=650 和全局长名目标，因此不能把阶段或九分目标写成
+完成。下一步继续处理剩余高收益 Renderer 家族，再进入 Catalog engine；每个家族仍须先冻结
+完整输出，且不能用合并成大文件代替抽象收敛。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

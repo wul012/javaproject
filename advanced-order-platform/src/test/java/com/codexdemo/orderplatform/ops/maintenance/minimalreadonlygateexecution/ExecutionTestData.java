@@ -1,8 +1,8 @@
 package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateexecution;
 
-public final class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryTestSupport {
+public final class ExecutionTestData {
 
-  private OpsShardReadinessMinimalReadOnlyGateExecutionRegistryTestSupport() {}
+  private ExecutionTestData() {}
 
   public static OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService service() {
     return new OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService();

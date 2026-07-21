@@ -30,15 +30,17 @@ class OpsEleganceCensusTests {
       OPS_ROOT.resolve(Path.of("maintenance", "releaseacceptancepackage"));
   private static final Path HANDOFF_ROOT =
       OPS_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateoperatorcihandoff"));
+  private static final Path EXECUTION_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateexecution"));
 
   @Test
   void rendererDebtCanOnlyShrink() throws IOException {
     List<Path> renderers = javaFiles(OPS_ROOT).stream().filter(this::isRenderer).toList();
 
-    assertThat(renderers).hasSizeLessThanOrEqualTo(51);
+    assertThat(renderers).hasSizeLessThanOrEqualTo(45);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_816);
-    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(38);
+        .isLessThanOrEqualTo(3_616);
+    assertThat(renderers.stream().filter(this::hasLongStem)).hasSizeLessThanOrEqualTo(30);
   }
 
   @Test
@@ -144,10 +146,21 @@ class OpsEleganceCensusTests {
   }
 
   @Test
+  void executionKeepsTwoOutputRenderers() throws IOException {
+    List<Path> files = javaFiles(EXECUTION_ROOT);
+    List<Path> renderers = files.stream().filter(this::isRenderer).toList();
+
+    assertThat(files).hasSizeLessThanOrEqualTo(23);
+    assertThat(renderers)
+        .extracting(path -> path.getFileName().toString())
+        .containsExactlyInAnyOrder("ArchiveRenderer.java", "ExecutionRenderer.java");
+  }
+
+  @Test
   void censusAndRoadmapStayReproducible() throws IOException {
     Path script = Path.of("scripts", "ops-elegance-census.ps1");
     Path roadmap = Path.of("docs", "ops", "elegance-three-point-roadmap.md");
-    Path version = Path.of("docs", "ops", "operator-ci-handoff-renderers-v1880.md");
+    Path version = Path.of("docs", "ops", "minimal-read-only-gate-execution-renderers-v1881.md");
 
     assertThat(script).isRegularFile();
     assertThat(read(script))
@@ -162,9 +175,10 @@ class OpsEleganceCensusTests {
             "ArchiveRegistryJavaFiles",
             "ArchiveHandoffJavaFiles",
             "AcceptancePackageJavaFiles",
-            "HandoffJavaFiles");
+            "HandoffJavaFiles",
+            "ExecutionJavaFiles");
     assertThat(read(roadmap)).contains("ops-elegance-census.ps1", "DONE 与失败条件", "<= 650", "<= 30");
-    assertThat(read(version)).contains("需求证据矩阵", "失败条件", "58 -> 51", "3973 -> 3816");
+    assertThat(read(version)).contains("需求证据矩阵", "失败条件", "51 -> 45", "3816 -> 3616");
   }
 
   private List<Path> javaFiles(Path root) throws IOException {

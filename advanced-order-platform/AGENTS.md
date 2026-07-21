@@ -7,7 +7,7 @@ Update this table instead of appending relative-time rules below. Where an older
 | Item | Current |
 |---|---|
 | Active screenshot archive root | `f/v<start>-v<end>/<version>/images/` + `.../explanations/summary.md` (range segment first) |
-| Active walkthrough volume | newest `代码讲解记录_生产雏形阶段N/` sibling (currently `代码讲解记录_生产雏形阶段8/`) |
+| Active walkthrough volume | newest `代码讲解记录_生产雏形阶段N/` sibling (currently `代码讲解记录_生产雏形阶段9/`) |
 | Active cross-project program | `D:\C\四项目理解统筹\AGENTS.md` → Current Active Program |
 | Progress ledger | `docs/production-excellence-progress.md` |
 | Session bootstrap | run `.\scripts\codex-bootstrap.ps1` at session start (git/tag/CI/pointers in one command) |
@@ -182,6 +182,14 @@ typed; never expose it or replace response records with string-keyed maps for co
   A touched legacy file may retain only identities already in the exact baseline, must not
   increase their occurrences, and the version must remove measurable debt elsewhere in
   that family; forwarding shells do not count as improvement.
+
+## Windows Long-Path Rule
+
+Do not traverse the full Java tree with `Get-ChildItem -Recurse` and then pass ordinary
+paths to .NET file APIs; legacy source names can exceed the Windows path limit. Use `rg`
+to enumerate only the matching files, or use the repository's long-path-safe census
+scripts, which prefix absolute paths with `\\?\`. A result produced after path-read errors
+is invalid evidence even when the command continues and prints partial output.
 
 ## Docker Shutdown Fast Path
 

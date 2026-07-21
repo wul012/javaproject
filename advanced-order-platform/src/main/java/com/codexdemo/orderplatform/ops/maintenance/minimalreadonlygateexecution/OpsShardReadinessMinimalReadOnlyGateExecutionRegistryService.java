@@ -37,7 +37,7 @@ public class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService {
         ciBatches,
         archiveRequirements,
         operatorHandoffs,
-        OpsShardReadinessMinimalReadOnlyGateExecutionRegistryRenderer.render(
+        ExecutionRenderer.render(
             readTargets,
             gateChecks,
             boundaryRules,
