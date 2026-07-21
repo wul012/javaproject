@@ -32,6 +32,7 @@
 - 测试长 stem / 长标识符出现 / 唯一长标识符收紧到 754 / 9,970 / 3,773。
 - 四个 `WalkthroughTestData` 替代长 TestSupport；测试文件增加两个机械门，但名称债务仍净下降。
 - 最终 `verify-release.ps1` 通过 1,981 项测试、JaCoCo 2,131 个类全部门槛、SpotBugs 0/0 与 jar 打包。
+- 实现提交 `311c5c91` 的 Actions run `29822027690` 通过 Docker 2:13 与 headless 20:12。
 
 ## Failure Conditions
 

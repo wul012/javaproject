@@ -32,7 +32,9 @@
 - Final `scripts/verify-release.ps1` pins v1884 commit `9d3ff03d` and passes all
   1,981 tests in 9:11. JaCoCo analyzes 2,131 classes with every floor met,
   SpotBugs reports 0/0, and the 68,027,947-byte executable jar is packaged.
-- Implementation/closeout Actions and the annotated tag remain binding completion gates.
+- Implementation commit `311c5c91` passes Actions run `29822027690`: Docker-tagged
+  integration tests in 2:13 and headless regression in 20:12, including the production
+  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
 
 ## v1884 - Profile Section shared rendering engine
 
