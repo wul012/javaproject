@@ -27,8 +27,10 @@
   archive becomes exactly 1,697 files / 20,146,559 raw bytes.
 - Final `scripts/verify-release.ps1` pins v1885 commit `acab0cdc` and passes all
   1,990 tests in 9:07. JaCoCo analyzes 2,131 classes with every floor met, SpotBugs
-  reports 0/0, and the 68,026,314-byte executable jar is packaged. CI and the annotated
-  tag remain binding before closeout.
+  reports 0/0, and the 68,026,314-byte executable jar is packaged.
+- Implementation commit `cfbafc52` passes Actions run `29827360947`: Docker-tagged
+  integration tests in 2:14 and headless regression in 19:11, including the production
+  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
 
 ## v1885 - Code Walkthrough report renderer convergence
 
