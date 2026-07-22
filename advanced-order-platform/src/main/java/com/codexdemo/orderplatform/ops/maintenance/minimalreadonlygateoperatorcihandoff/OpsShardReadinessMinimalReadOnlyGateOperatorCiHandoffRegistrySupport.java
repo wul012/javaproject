@@ -25,25 +25,14 @@ final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistrySupport
       String profile,
       OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
           sourceArchive,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse
-                  .SourceArchiveSnapshot>
-          sourceArchiveSnapshots,
-      List<OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.OperatorLane>
-          operatorLanes,
-      List<OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.CiBatchPlan>
-          ciBatches,
-      List<OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.BoundaryLock>
-          boundaryLocks,
-      List<OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.ScorecardEntry>
-          scorecard,
+      HandoffCatalog.Evidence evidence,
       List<OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.MarkdownSection>
           markdownSections) {
-    var sourceArchiveSnapshotCopy = List.copyOf(sourceArchiveSnapshots);
-    var operatorLaneCopy = List.copyOf(operatorLanes);
-    var ciBatchCopy = List.copyOf(ciBatches);
-    var boundaryLockCopy = List.copyOf(boundaryLocks);
-    var scorecardCopy = List.copyOf(scorecard);
+    var sourceArchiveSnapshotCopy = evidence.sourceArchiveSnapshots();
+    var operatorLaneCopy = evidence.operatorLanes();
+    var ciBatchCopy = evidence.ciBatches();
+    var boundaryLockCopy = evidence.boundaryLocks();
+    var scorecardCopy = evidence.scorecard();
     var markdownSectionCopy = List.copyOf(markdownSections);
     int readyOperatorLaneCount =
         (int)

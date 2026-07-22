@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
+class HandoffExtractionTests {
 
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
@@ -32,6 +32,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
   private static final List<String> CURRENT_FILES =
       List.of(
           "ArchiveRenderer.java",
+          "HandoffCatalog.java",
           "HandoffRenderer.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveArtifactVerificationCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveBoundaryVerificationCatalog.java",
@@ -42,12 +43,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySupport.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistrySupport.java");
+  private static final List<String> RETIRED_CATALOG_FILES =
+      List.of(
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffBatchCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffBoundaryLockCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffLaneCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistrySupport.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffSourceArchiveCatalog.java");
   private static final List<String> REMOVED_RENDERER_FILES =
       List.of(
@@ -65,13 +68,15 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
   private static final List<String> CURRENT_TEST_FILES =
       List.of(
           "ArchiveTestData.java",
+          "HandoffCatalogTests.java",
           "HandoffMarkdownTests.java",
+          "HandoffRegistryServiceTests.java",
+          "HandoffResponseOracleTests.java",
           "HandoffTestData.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryAggregateChecksTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryBoundaryScorecardTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryCatalogTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySourceTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryServiceTests.java");
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySourceTests.java");
   private static final List<String> RETAINED_CONTROLLERS =
       List.of(
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryController.java",
@@ -79,7 +84,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
 
   @Test
   void extractedImplementationCanOnlyShrink() throws IOException {
-    assertThat(CURRENT_FILES).hasSize(18);
+    assertThat(CURRENT_FILES).hasSize(15);
     for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
@@ -88,9 +93,12 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
     for (String file : REMOVED_RENDERER_FILES) {
       assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
     }
+    for (String file : RETIRED_CATALOG_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
+    }
     try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(18);
+          .hasSizeLessThanOrEqualTo(15);
     }
     for (String controller : RETAINED_CONTROLLERS) {
       assertThat(Files.isRegularFile(OPS_ROOT.resolve(controller))).as(controller).isTrue();
@@ -99,15 +107,15 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
   }
 
   @Test
-  void packageTestsUseShortFactories() throws IOException {
-    assertThat(CURRENT_TEST_FILES).hasSize(8);
+  void packageTestsUseCurrentOwners() throws IOException {
+    assertThat(CURRENT_TEST_FILES).hasSize(10);
     for (String file : CURRENT_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(8);
+          .hasSizeLessThanOrEqualTo(10);
     }
     assertThat(
             PACKAGE_TEST_ROOT.resolve(
@@ -132,6 +140,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
         read(
             PACKAGE_ROOT.resolve(
                 "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService.java"));
+    String catalog = read(PACKAGE_ROOT.resolve("HandoffCatalog.java"));
     String archive =
         read(
             PACKAGE_ROOT.resolve(
@@ -140,11 +149,38 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
         .contains(
             "ops.maintenance.minimalreadonlygateexecution",
             "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService",
-            "OpsShardReadinessReleaseAcceptanceRoutePaths");
+            "OpsShardReadinessReleaseAcceptanceRoutePaths",
+            "HandoffCatalog.evidence(sourceArchive)");
+    assertThat(catalog)
+        .contains(
+            "ops.maintenance.minimalreadonlygateexecution",
+            "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse");
     assertThat(archive)
         .contains(
             "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService",
             "OpsShardReadinessReleaseAcceptanceRoutePaths");
+  }
+
+  @Test
+  void baseCatalogConvergenceStaysTyped() throws IOException {
+    String catalog = read(PACKAGE_ROOT.resolve("HandoffCatalog.java"));
+    String service =
+        read(
+            PACKAGE_ROOT.resolve(
+                "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService.java"));
+    String renderer = read(PACKAGE_ROOT.resolve("HandoffRenderer.java"));
+    String support =
+        read(
+            PACKAGE_ROOT.resolve(
+                "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistrySupport.java"));
+
+    assertThat(Files.readAllLines(PACKAGE_ROOT.resolve("HandoffCatalog.java")))
+        .hasSizeLessThan(200);
+    assertThat(count(catalog, "List.copyOf(")).isEqualTo(5);
+    assertThat(count(service, "HandoffCatalog.evidence(")).isEqualTo(1);
+    assertThat(catalog).contains("record Evidence(");
+    assertThat(renderer).contains("render(HandoffCatalog.Evidence evidence)");
+    assertThat(support).contains("HandoffCatalog.Evidence evidence");
   }
 
   @Test
@@ -233,5 +269,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1844Tests {
 
   private static String read(Path path) throws IOException {
     return Files.readString(path, StandardCharsets.UTF_8);
+  }
+
+  private static int count(String source, String token) {
+    return (source.length() - source.replace(token, "").length()) / token.length();
   }
 }

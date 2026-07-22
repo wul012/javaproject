@@ -1,6 +1,6 @@
 # Java Track Final Evidence Candidate
 
-Status: v1890 implementation candidate; v1889 release lifecycle is complete. External Java-track review is required before
+Status: v1891 local candidate; v1890 release lifecycle is complete. External Java-track review is required before
 the word final may describe the track. This file records reproducible evidence; it does
 not authorize production execution.
 
@@ -16,16 +16,16 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1890 implementation run `29888181626` green; closeout run pending |
-| E2 Static analysis | Spotless and SpotBugs checks; 675 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1890 Spotless pins v1889 `99e1afd2`; SpotBugs 0/0 |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1890 analyzed 2102 classes/all floors |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1890 implementation/closeout runs green; v1891 remote lifecycle pending |
+| E2 Static analysis | Spotless and SpotBugs checks; 675 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1891 Spotless pins v1890 `9069d54e`; SpotBugs 0/0 |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1891 analyzed 2100 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | boundaries unchanged; full gate green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | v1888 full docs gate green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1890 implementation `d79bd028` and run `29888181626` green; closeout and canonical tag pending |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1890 expanded 66/66 and full 2009/2009; ops 1213; Catalogs 296; production/test name metrics 1111/20032/2670 and 716/9846/3697 |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1890 exact set 1701 files / 20209891 raw bytes; full gate green |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1890 implementation `d79bd028`, closeout `9069d54e`, both runs green, canonical tag pushed; v1891 pending |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1891 expanded 77/77 and full 2015/2015; ops 1210; Catalogs 293; production/test name metrics 1107/20002/2666 and 714/9844/3695 |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1891 exact set 1702 files / 20228272 raw bytes; full gate green |
 
 ## Final Censuses
 
@@ -438,7 +438,7 @@ run `29884385641`: Docker 2:19 and headless 19:14. Annotated tag
 `v1889-order-platform-execution-registry-catalog` peels to `99e1afd2` locally and on
 `javaproject`.
 
-Current v1890 candidate: the complete MinimalReadOnlyGateExecution Archive Registry first
+Released v1890: the complete MinimalReadOnlyGateExecution Archive Registry first
 passes its canonical JSON oracle on the v1889 implementation. The collection vector is
 `1/6/5/20/10/4/5/7/6/20` and the full sorted-property UTF-8 SHA-256 is
 `d5e75e352cee97a6f2c30111e0af57bb39af770b31cd420a018994b003e05859`.
@@ -457,7 +457,26 @@ pins v1889 `99e1afd2` and passes 2,009 tests in 10:33. JaCoCo analyzes 2,102 cla
 meets every floor; SpotBugs reports 0/0; the executable jar is 67,998,687 bytes.
 Implementation commit `d79bd028` passes canonical Actions run `29888181626`: Docker-tagged
 verification completes in 2:02 and headless regression in 19:23, including an 18:43 wrapper
-verify, production-profile smoke, and successful JaCoCo upload. Closeout CI and tag remain pending.
+verify, production-profile smoke, and successful JaCoCo upload. Closeout `9069d54e` passes run
+`29889326585` (Docker 1:45, headless 19:49, wrapper verify 19:00). The annotated tag
+`v1890-order-platform-archive-registry-catalog` peels to the closeout locally and remotely.
+
+Current v1891 candidate: the complete MinimalReadOnlyGateOperatorCiHandoff Registry first
+passes its canonical JSON oracle on the released v1890 implementation. The collection vector is
+`1/4/5/8/5/5/15` and the full sorted-property UTF-8 SHA-256 is
+`4fc6dc6069cff5bc40ee0934bc1ed9133ff50bcfe7c3c5940429e83cf4287ab0`. Four one-list
+Catalog owners plus the service-local scorecard projection become one 181-line package-local
+`HandoffCatalog`; its typed Evidence owns five immutable snapshots. Service assembles once while
+Renderer and Support retain display and status/check responsibilities. Public route, Response,
+Controller, ordering, Markdown, checks, and read-only transaction stay unchanged. Production
+Java reaches 1,342 files, ops 1,210, Catalogs 293, the package 15, and tests 906.
+Production/test name metrics reach `1107/20002/2666` and `714/9844/3695`; the exact baseline
+has 12 removals and no additions. Upstream/current/downstream behavior, structure, change, and
+elegance gates pass 77/77. The walkthrough has 3,692 Han and ten standard headings; the exact
+archive is 1,702 files / 20,228,272 raw bytes. Remote implementation CI, closeout, and tag remain
+pending and are required before this candidate becomes a released version. The local release gate
+pins v1890 `9069d54e` and passes 2,015 tests in 8:34. JaCoCo analyzes 2,100 classes and meets
+every floor; SpotBugs reports 0/0; the executable jar is 67,997,219 bytes.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

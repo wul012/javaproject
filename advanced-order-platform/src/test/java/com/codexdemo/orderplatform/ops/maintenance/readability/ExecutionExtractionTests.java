@@ -215,12 +215,17 @@ class ExecutionExtractionTests {
   void keepsOperatorCiBoundary() throws IOException {
     Path operatorCiRoot =
         OPS_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateoperatorcihandoff"));
+    assertThat(
+            read(
+                operatorCiRoot.resolve(
+                    "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService.java")))
+        .contains("ops.maintenance.minimalreadonlygateexecution")
+        .contains(
+            "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService");
     for (String file :
         List.of(
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryService.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffLaneCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistrySupport.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffSourceArchiveCatalog.java")) {
+            "HandoffCatalog.java",
+            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistrySupport.java")) {
       assertThat(read(operatorCiRoot.resolve(file)))
           .as(file)
           .contains("ops.maintenance.minimalreadonlygateexecution")

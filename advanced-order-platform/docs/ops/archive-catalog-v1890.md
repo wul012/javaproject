@@ -64,7 +64,8 @@
 - 第一次完整门运行 2,009 个测试，仅设计说明标题/标签未命中 `JavaChangeGateTests` 的精确协议；不改测试，改为 `Family design` 与三项标准标签后，修复选择 11/11 通过。
 - `scripts/verify-release.ps1` 固定 predecessor tag `v1889-order-platform-execution-registry-catalog` 与 commit `99e1afd2`；第二次完整运行通过 2,009/2,009，Maven 10:33，JaCoCo 2,102 类/全部阈值，SpotBugs 0/0，jar 67,998,687 字节。
 - Implementation commit `d79bd028` 通过 canonical Actions run `29888181626`：Docker-tagged job 2:02，headless job 19:23，其中 wrapper verify 18:43、prod-profile smoke 0:12，JaCoCo artifact 上传成功。
-- Closeout GitHub Actions 与 annotated tag 仍须在 docs-only closeout 提交后读取真实远端结果，不以本地自述代替。
+- Closeout `9069d54e` 通过 canonical Actions run `29889326585`：Docker 1:45、headless 19:49，其中 wrapper verify 19:00、prod-profile smoke 0:13，JaCoCo artifact 上传成功。
+- Annotated tag `v1890-order-platform-archive-registry-catalog` 在本地和 `javaproject` 均 peel 到 closeout `9069d54e`，发布链闭合。
 
 ## Failure Conditions
 

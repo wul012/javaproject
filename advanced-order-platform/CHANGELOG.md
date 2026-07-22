@@ -4,6 +4,27 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1891 - Operator CI handoff Catalog convergence
+
+- 在 v1890 已发布实现上冻结完整 handoff registry：集合向量 `1/4/5/8/5/5/15`，
+  sorted-property UTF-8 SHA-256 为
+  `4fc6dc6069cff5bc40ee0934bc1ed9133ff50bcfe7c3c5940429e83cf4287ab0`。
+- 删除四个单列表 Catalog，把 service 内 scorecard 投影一并移入 181 行包内
+  `HandoffCatalog`；其 `Evidence` 对五组列表建立不可变快照，service 只装配一次。
+- renderer 与 Support 改为接收同一 typed evidence，继续分别拥有 Markdown 与
+  status/checks。公开 route、Response、Controller、顺序和 read-only transaction 不变。
+- 新增 Catalog 语义/所有权测试和完整响应 oracle；原 service 测试与 v1844 结构 owner
+  收短为当前职责名，并用精确 15/10 文件清单、200 行、五次 copy、一次 assembly 守卫。
+- 生产 Java `1345 -> 1342`，ops `1213 -> 1210`，Catalog `296 -> 293`，当前包
+  `18 -> 15`，测试 `904 -> 906`。生产名称指标达到 `1107/20002/2666`，测试达到
+  `714/9844/3695`；精确 baseline 删除 12 项、新增 0 项。
+- 上游、当前家族、下游 archive/digest、结构、change 与 elegance 选择 77/77 通过；
+  新增 3,692-Han、十章节中文讲解，授权归档为 1,702 files / 20,228,272 raw bytes。
+- 第一次 docs 联合门仅发现讲解章节顺序不符合标准；不改测试、不删内容，移动章节并重建
+  manifest 后同一选择 97/97 通过。最终 `scripts/verify-release.ps1` 固定 v1890 closeout
+  `9069d54e`，通过 2,015/2,015，Maven 8:34，JaCoCo 2,100 类/全部阈值，SpotBugs
+  0/0，jar 67,997,219 字节。Implementation/closeout CI 与 annotated tag 仍是完成门。
+
 ## v1890 - Archive registry Catalog convergence
 
 - 在 v1889 已发布实现上先冻结完整 archive registry：集合向量
@@ -24,7 +45,9 @@
   2,009/2,009，Maven 10:33，JaCoCo 2,102 类/全部阈值，SpotBugs 0/0，jar
   67,998,687 字节。Implementation commit `d79bd028` 通过 canonical Actions run
   `29888181626`：Docker 2:02、headless 19:23，其中 wrapper verify 18:43，prod smoke
-  与 JaCoCo artifact 上传均成功。Closeout CI 与 annotated tag 仍是发布完成门。
+  与 JaCoCo artifact 上传均成功。Closeout `9069d54e` 通过 run `29889326585`：Docker
+  1:45、headless 19:49，其中 wrapper verify 19:00。Annotated tag
+  `v1890-order-platform-archive-registry-catalog` 在本地与 `javaproject` 均 peel 到 closeout。
 
 ## v1889 - Execution registry Catalog convergence
 

@@ -13,14 +13,13 @@ final class HandoffRenderer {
 
   private HandoffRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceArchiveSnapshot> archives,
-      List<OperatorLane> lanes,
-      List<CiBatchPlan> batches,
-      List<BoundaryLock> locks,
-      List<ScorecardEntry> scorecard) {
+  static List<MarkdownSection> render(HandoffCatalog.Evidence evidence) {
     return List.of(
-        source(archives), lanes(lanes), batches(batches), boundaries(locks), scorecard(scorecard));
+        source(evidence.sourceArchiveSnapshots()),
+        lanes(evidence.operatorLanes()),
+        batches(evidence.ciBatches()),
+        boundaries(evidence.boundaryLocks()),
+        scorecard(evidence.scorecard()));
   }
 
   private static MarkdownSection source(List<SourceArchiveSnapshot> entries) {

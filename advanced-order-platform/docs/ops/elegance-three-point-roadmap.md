@@ -217,8 +217,32 @@ headings，归档精确为 1,701 files/20,209,891 bytes。整体九分目标仍�
 完整 release gate 固定 v1889 commit `99e1afd2`，通过 2,009 个测试（10:33）、JaCoCo
 2,102 类/all floors、SpotBugs 0/0，并打包 67,998,687-byte jar。Implementation commit
 `d79bd028` 的 canonical Actions run `29888181626` 通过 Docker 2:02 与 headless 19:23，
-其中 wrapper verify 18:43，prod smoke 与 JaCoCo 上传成功。Closeout CI 与 canonical tag
-尚未执行，不能提前记为完成。
+其中 wrapper verify 18:43，prod smoke 与 JaCoCo 上传成功。Closeout `9069d54e` 的 run
+`29889326585` 通过 Docker 1:45 与 headless 19:49，其中 wrapper verify 19:00；tag
+`v1890-order-platform-archive-registry-catalog` 在本地和 canonical remote 均 peel 到 closeout。
+
+## v1891 检查点
+
+MinimalReadOnlyGateOperatorCiHandoff 基础 Registry 原由四个长名 Catalog 分别生成 source、
+lane、batch 和 boundary，scorecard 则留在 service 私有方法中；service、renderer 与 Support
+都需要知道五个列表。v1891 先在 v1890 已发布实现上冻结完整响应：集合向量
+`1/4/5/8/5/5/15`，sorted-property UTF-8 JSON SHA-256 为
+`4fc6dc6069cff5bc40ee0934bc1ed9133ff50bcfe7c3c5940429e83cf4287ab0`。随后四个 owner
+与 scorecard 投影收敛为一个 181 行 `HandoffCatalog`；类型化 `Evidence` 复制五组列表，
+service 每次只生成一次，renderer 与 Support 只通过该聚合值读取并继续保持职责分离。
+
+生产 Java `1,345 -> 1,342`，ops `1,213 -> 1,210`，Catalog `296 -> 293`，当前 package
+`18 -> 15`，测试 Java `904 -> 906`。新增测试补齐完整响应和所有权空白，而非复制旧断言。
+生产名称收紧到 `1,107/20,002/2,666`，测试收紧到 `714/9,844/3,695`，exact baseline
+删除 12 项、新增 0 项。初版测试曾使长标识符使用次数反弹到 9,851，版本未接受该结果；
+改用短聚合 API 和类型推断后降到 9,844，说明优雅门在生成时生效。
+
+上游 execution、当前 handoff、下游 archive/digest、结构、change 与 elegance 选择 77/77
+通过。讲解 3,692 Han/10 headings，归档精确为 1,702 files/20,228,272 bytes。整体九分目标
+仍以路线图 DONE 条件与外部复核为准。第一次 docs 联合门仅暴露讲解章节顺序协议；不改测试、
+不删内容，移动章节后同一选择 97/97 通过。完整 release gate 固定 v1890 closeout
+`9069d54e`，通过 2,015 个测试（8:34）、JaCoCo 2,100 类/all floors、SpotBugs 0/0，并打包
+67,997,219-byte jar。Implementation/closeout CI 和 canonical tag 尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 
