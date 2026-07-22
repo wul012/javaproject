@@ -22,7 +22,9 @@
 - 第一次完整门运行 2,009 个测试，仅精确设计说明协议失败；按标准标签修复且 11/11
   通过后，第二次 `scripts/verify-release.ps1` 固定 v1889 commit `99e1afd2` 并通过
   2,009/2,009，Maven 10:33，JaCoCo 2,102 类/全部阈值，SpotBugs 0/0，jar
-  67,998,687 字节。Implementation/closeout CI 与 annotated tag 仍待真实执行。
+  67,998,687 字节。Implementation commit `d79bd028` 通过 canonical Actions run
+  `29888181626`：Docker 2:02、headless 19:23，其中 wrapper verify 18:43，prod smoke
+  与 JaCoCo artifact 上传均成功。Closeout CI 与 annotated tag 仍是发布完成门。
 
 ## v1889 - Execution registry Catalog convergence
 

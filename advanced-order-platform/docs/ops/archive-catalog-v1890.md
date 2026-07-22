@@ -22,7 +22,7 @@
 | 数据、渲染、汇总职责分离 | Catalog / Renderer / Support | 结构源码断言 | 已覆盖 |
 | 不制造新巨型文件 | `ArchiveCatalog` | line-count gate | 183 / 200 行 |
 | 长命名债只减不增 | 三个 archive 测试短名 + exact baseline | Git-aware elegance gates | 删除 29 项，新增 0 项 |
-| 只读运行契约不变 | 原 Service / Response / Controller | service、controller、oracle suites | 待最终 verify 汇总 |
+| 只读运行契约不变 | 原 Service / Response / Controller | service、controller、oracle suites | 完整 release gate 与实现 CI 均通过 |
 
 ## Scope
 
@@ -63,7 +63,8 @@
 - 重构后 archive 行为、结构、优雅、文档与归档扩大选择：23 份报告、66/66 通过。
 - 第一次完整门运行 2,009 个测试，仅设计说明标题/标签未命中 `JavaChangeGateTests` 的精确协议；不改测试，改为 `Family design` 与三项标准标签后，修复选择 11/11 通过。
 - `scripts/verify-release.ps1` 固定 predecessor tag `v1889-order-platform-execution-registry-catalog` 与 commit `99e1afd2`；第二次完整运行通过 2,009/2,009，Maven 10:33，JaCoCo 2,102 类/全部阈值，SpotBugs 0/0，jar 67,998,687 字节。
-- Implementation / closeout GitHub Actions 与 annotated tag：必须读取真实远端结果后填写，不以本地自述代替。
+- Implementation commit `d79bd028` 通过 canonical Actions run `29888181626`：Docker-tagged job 2:02，headless job 19:23，其中 wrapper verify 18:43、prod-profile smoke 0:12，JaCoCo artifact 上传成功。
+- Closeout GitHub Actions 与 annotated tag 仍须在 docs-only closeout 提交后读取真实远端结果，不以本地自述代替。
 
 ## Failure Conditions
 

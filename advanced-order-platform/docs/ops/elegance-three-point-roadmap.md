@@ -215,8 +215,10 @@ renderer 与 Support 通过同一聚合值读取但继续分别拥有展示和�
 headings，归档精确为 1,701 files/20,209,891 bytes。整体九分目标仍以路线图 DONE 条件和外部
 复核为准。第一次完整门仅暴露设计说明的精确标签协议，按标准标签修复后 11/11 通过；第二次
 完整 release gate 固定 v1889 commit `99e1afd2`，通过 2,009 个测试（10:33）、JaCoCo
-2,102 类/all floors、SpotBugs 0/0，并打包 67,998,687-byte jar。远端双 CI、closeout 与
-canonical tag 尚未执行，不能提前记为完成。
+2,102 类/all floors、SpotBugs 0/0，并打包 67,998,687-byte jar。Implementation commit
+`d79bd028` 的 canonical Actions run `29888181626` 通过 Docker 2:02 与 headless 19:23，
+其中 wrapper verify 18:43，prod smoke 与 JaCoCo 上传成功。Closeout CI 与 canonical tag
+尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 
