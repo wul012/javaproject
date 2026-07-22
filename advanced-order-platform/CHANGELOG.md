@@ -4,6 +4,26 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1890 - Archive registry Catalog convergence
+
+- 在 v1889 已发布实现上先冻结完整 archive registry：集合向量
+  `1/6/5/20/10/4/5/7/6/20`，sorted-property UTF-8 SHA-256 为
+  `d5e75e352cee97a6f2c30111e0af57bb39af770b31cd420a018994b003e05859`。
+- 删除八个单列表 archive Catalog，新增一个 183 行包内 `ArchiveCatalog`；其类型化
+  `Evidence` 对八组列表执行不可变快照，service 每次请求只装配一次。
+- renderer 与 Support 继续分别拥有 Markdown 和状态/checks，只把八参数扇出替换为一个
+  evidence 聚合值。公开 route、Response、Controller、顺序和只读事务保持不变。
+- 两份旧 Catalog 测试合并为 `ArchiveCatalogTests`，新增完整响应 oracle，并把三个被触及的
+  archive 测试收短为当前职责名。不可变性测试覆盖全部八组列表。
+- 生产 Java `1352 -> 1345`，ops `1220 -> 1213`，Catalog `303 -> 296`，execution 包
+  `17 -> 10`，测试 Java 保持 904。生产名称指标达到 `1111/20032/2670`，测试达到
+  `716/9846/3697`；精确 baseline 删除 29 项、新增 0 项。
+- 新增 3,273-Han、十章节中文讲解；授权归档精确为 1,701 files / 20,209,891 raw bytes。
+- 第一次完整门运行 2,009 个测试，仅精确设计说明协议失败；按标准标签修复且 11/11
+  通过后，第二次 `scripts/verify-release.ps1` 固定 v1889 commit `99e1afd2` 并通过
+  2,009/2,009，Maven 10:33，JaCoCo 2,102 类/全部阈值，SpotBugs 0/0，jar
+  67,998,687 字节。Implementation/closeout CI 与 annotated tag 仍待真实执行。
+
 ## v1889 - Execution registry Catalog convergence
 
 - Freezes the complete minimal-read-only gate execution Registry on the v1888
@@ -29,7 +49,9 @@
   0/0, and the 68,005,806-byte executable jar is packaged.
 - Implementation commit `dc73b52c` passes Actions run `29883341547`: Docker-tagged
   integration tests in 2:04 and headless regression in 19:10, including production smoke
-  and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
+  and JaCoCo upload. Closeout `99e1afd2` passes run `29884385641`: Docker 2:19 and
+  headless 19:14. Annotated tag `v1889-order-platform-execution-registry-catalog` peels
+  to the closeout locally and on `javaproject`.
 
 ## v1888 - Candidate core Catalog convergence
 

@@ -17,48 +17,43 @@ final class ArchiveRenderer {
 
   private ArchiveRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceRegistrySnapshot> sourceSnapshots,
-      List<ArtifactVerification> artifacts,
-      List<ReadTargetVerification> readTargets,
-      List<GateCheckVerification> gateChecks,
-      List<BoundaryVerification> boundaries,
-      List<CiBatchVerification> ciBatches,
-      List<OperatorHandoffVerification> handoffs,
-      List<ScorecardEntry> scorecard) {
+  static List<MarkdownSection> render(ArchiveCatalog.Evidence evidence) {
     return List.of(
         MarkdownSections.counted(
             "Source Registry",
             "source-registry-count",
-            sourceSnapshots,
+            evidence.sourceRegistrySnapshots(),
             ArchiveRenderer::sourceLine,
             MarkdownSection::new),
         MarkdownSections.counted(
             "Archive Artifacts",
             "artifact-verification-count",
-            artifacts,
+            evidence.artifactVerifications(),
             ArchiveRenderer::artifactLine,
             MarkdownSection::new),
         MarkdownSections.counted(
             "Read Target Verification",
             "read-target-verification-count",
-            readTargets,
+            evidence.readTargetVerifications(),
             ArchiveRenderer::readTargetLine,
             MarkdownSection::new),
         MarkdownSections.groupedCounted(
             "Gate Check Verification",
             "gate-check-verification-count",
-            gateChecks,
+            evidence.gateCheckVerifications(),
             GateCheckVerification::group,
             check -> check.code() + "=" + check.status(),
             MarkdownSection::new),
         MarkdownSections.counted(
             "Boundary Verification",
             "boundary-verification-count",
-            boundaries,
+            evidence.boundaryVerifications(),
             ArchiveRenderer::boundaryLine,
             MarkdownSection::new),
-        scorecardSection(ciBatches, handoffs, scorecard));
+        scorecardSection(
+            evidence.ciBatchVerifications(),
+            evidence.operatorHandoffVerifications(),
+            evidence.scorecard()));
   }
 
   private static String sourceLine(SourceRegistrySnapshot snapshot) {

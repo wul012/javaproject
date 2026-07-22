@@ -192,7 +192,31 @@ UTF-8 JSON SHA-256 为
 2,007 个测试（7:23）、JaCoCo 2,108 类/all floors、SpotBugs 0/0，并打包 68,005,806-byte
 jar。Implementation commit `dc73b52c` 的 run `29883341547` 通过 Docker 2:04 与 headless
 19:10，包含 prod smoke 和 JaCoCo 上传。整体九分目标仍以路线图 DONE 条件和外部复核为准；
-本版 closeout CI 与 canonical tag 尚未执行，不能提前记为完成。
+Closeout `99e1afd2` 的 run `29884385641` 通过 Docker 2:19 与 headless 19:14；tag
+`v1889-order-platform-execution-registry-catalog` 在本地和 canonical remote 均 peel 到该
+closeout，v1889 发布链已闭合。
+
+## v1890 检查点
+
+MinimalReadOnlyGateExecution Archive Registry 的八组投影原由八个长名 Catalog 分散生成，
+service 随后把八个列表分别传给 renderer 和 Support。v1890 先在 v1889 实现上冻结完整响应：
+集合向量 `1/6/5/20/10/4/5/7/6/20`，sorted-property UTF-8 JSON SHA-256 为
+`d5e75e352cee97a6f2c30111e0af57bb39af770b31cd420a018994b003e05859`。随后八个 owner
+收敛为一个 183 行 `ArchiveCatalog`；类型化 `Evidence` 复制八组列表，service 只生成一次，
+renderer 与 Support 通过同一聚合值读取但继续分别拥有展示和状态职责。
+
+生产 Java `1,352 -> 1,345`，ops `1,220 -> 1,213`，Catalog `303 -> 296`，execution package
+`17 -> 10`，测试 Java 保持 904。生产名称收紧到 `1,111/20,032/2,670`，测试收紧到
+`716/9,846/3,697`，exact baseline 删除 29 项、新增 0 项；renderer 数量保持 30，总行数
+`3,246 -> 3,241`。两个旧 Catalog 测试收敛为一个当前 owner，三个被触及的 archive 测试改为
+短职责名，结构门要求八次复制、一次装配、200 行上限和八个退休文件永久缺席。
+
+旧实现和新实现通过同一完整 oracle；初始行为、结构、优雅联合门已绿。讲解 3,273 Han/10
+headings，归档精确为 1,701 files/20,209,891 bytes。整体九分目标仍以路线图 DONE 条件和外部
+复核为准。第一次完整门仅暴露设计说明的精确标签协议，按标准标签修复后 11/11 通过；第二次
+完整 release gate 固定 v1889 commit `99e1afd2`，通过 2,009 个测试（10:33）、JaCoCo
+2,102 类/all floors、SpotBugs 0/0，并打包 67,998,687-byte jar。远端双 CI、closeout 与
+canonical tag 尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 

@@ -216,3 +216,13 @@ MinimalReadOnlyGateExecution 基础 Registry 的七组数据、七个 Catalog �
 owner 的收敛、完整响应摘要、Java/mini-kv 只读边界和 shrink-only 结构门；没有移动、改写
 或删除任何历史归档。重建后的精确集合为 `1,700 files / 20,194,403 raw bytes`。本次上调
 严格等于这一份 15,068 字节讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1890 Extension
+
+用户于 2026-07-22 继续授权 Java coding brilliant and elegant 九分计划。v1890 只新增
+`代码讲解记录_生产雏形阶段9/v1888-v1892/v1890-archive-registry-catalog.md`，用于解释
+MinimalReadOnlyGateExecution archive registry 的八组投影、八个 Catalog 到一个不可变
+`ArchiveCatalog.Evidence` 的收敛、完整响应摘要、Java/mini-kv 只读边界和 shrink-only
+结构门；没有移动、改写或删除任何历史归档。重建后的精确集合为
+`1,701 files / 20,209,891 raw bytes`。本次上调严格等于这一份 15,488 字节讲解的增量，
+不是后续版本的预留预算。

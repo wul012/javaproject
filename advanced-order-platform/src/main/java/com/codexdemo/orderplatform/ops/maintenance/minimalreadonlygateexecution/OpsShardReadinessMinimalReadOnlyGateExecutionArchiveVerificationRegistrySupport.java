@@ -25,50 +25,19 @@ final class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegi
       String endpoint,
       String profile,
       OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse sourceRegistry,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .SourceRegistrySnapshot>
-          sourceRegistrySnapshots,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .ArtifactVerification>
-          artifactVerifications,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .ReadTargetVerification>
-          readTargetVerifications,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .GateCheckVerification>
-          gateCheckVerifications,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .BoundaryVerification>
-          boundaryVerifications,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .CiBatchVerification>
-          ciBatchVerifications,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .OperatorHandoffVerification>
-          operatorHandoffVerifications,
-      List<
-              OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
-                  .ScorecardEntry>
-          scorecard,
+      ArchiveCatalog.Evidence evidence,
       List<
               OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
                   .MarkdownSection>
           markdownSections) {
-    var sourceRegistrySnapshotCopy = List.copyOf(sourceRegistrySnapshots);
-    var artifactVerificationCopy = List.copyOf(artifactVerifications);
-    var readTargetVerificationCopy = List.copyOf(readTargetVerifications);
-    var gateCheckVerificationCopy = List.copyOf(gateCheckVerifications);
-    var boundaryVerificationCopy = List.copyOf(boundaryVerifications);
-    var ciBatchVerificationCopy = List.copyOf(ciBatchVerifications);
-    var operatorHandoffVerificationCopy = List.copyOf(operatorHandoffVerifications);
-    var scorecardCopy = List.copyOf(scorecard);
+    var sourceRegistrySnapshotCopy = evidence.sourceRegistrySnapshots();
+    var artifactVerificationCopy = evidence.artifactVerifications();
+    var readTargetVerificationCopy = evidence.readTargetVerifications();
+    var gateCheckVerificationCopy = evidence.gateCheckVerifications();
+    var boundaryVerificationCopy = evidence.boundaryVerifications();
+    var ciBatchVerificationCopy = evidence.ciBatchVerifications();
+    var operatorHandoffVerificationCopy = evidence.operatorHandoffVerifications();
+    var scorecardCopy = evidence.scorecard();
     var markdownSectionCopy = List.copyOf(markdownSections);
     int passedArtifactVerificationCount = countStatus(artifactVerificationCopy);
     int passedReadTargetVerificationCount = countStatus(readTargetVerificationCopy);

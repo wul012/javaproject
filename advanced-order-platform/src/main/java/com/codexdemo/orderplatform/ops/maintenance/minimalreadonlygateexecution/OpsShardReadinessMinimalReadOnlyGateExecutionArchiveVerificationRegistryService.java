@@ -26,51 +26,13 @@ public class OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationReg
   public OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse
       registry() {
     var sourceRegistry = sourceRegistryService.registry();
-    var sourceRegistrySnapshots =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveSourceRegistrySnapshotCatalog.snapshots(
-            sourceRegistry);
-    var artifactVerifications =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArtifactVerificationCatalog
-            .artifactVerifications(sourceRegistry);
-    var readTargetVerifications =
-        OpsShardReadinessMinimalReadOnlyGateExecutionReadTargetVerificationCatalog
-            .readTargetVerifications(sourceRegistry);
-    var gateCheckVerifications =
-        OpsShardReadinessMinimalReadOnlyGateExecutionGateCheckVerificationCatalog
-            .gateCheckVerifications(sourceRegistry);
-    var boundaryVerifications =
-        OpsShardReadinessMinimalReadOnlyGateExecutionBoundaryVerificationCatalog
-            .boundaryVerifications(sourceRegistry);
-    var ciBatchVerifications =
-        OpsShardReadinessMinimalReadOnlyGateExecutionCiBatchVerificationCatalog
-            .ciBatchVerifications(sourceRegistry);
-    var operatorHandoffVerifications =
-        OpsShardReadinessMinimalReadOnlyGateExecutionOperatorHandoffVerificationCatalog
-            .operatorHandoffVerifications(sourceRegistry);
-    var scorecard =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveScorecardCatalog.scorecard(
-            sourceRegistry);
+    var evidence = ArchiveCatalog.evidence(sourceRegistry);
     return OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistrySupport.response(
         RESPONSE_VERSION,
         ENDPOINT,
         PROFILE,
         sourceRegistry,
-        sourceRegistrySnapshots,
-        artifactVerifications,
-        readTargetVerifications,
-        gateCheckVerifications,
-        boundaryVerifications,
-        ciBatchVerifications,
-        operatorHandoffVerifications,
-        scorecard,
-        ArchiveRenderer.render(
-            sourceRegistrySnapshots,
-            artifactVerifications,
-            readTargetVerifications,
-            gateCheckVerifications,
-            boundaryVerifications,
-            ciBatchVerifications,
-            operatorHandoffVerifications,
-            scorecard));
+        evidence,
+        ArchiveRenderer.render(evidence));
   }
 }
