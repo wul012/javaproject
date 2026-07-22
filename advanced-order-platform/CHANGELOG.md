@@ -26,8 +26,10 @@
   becomes exactly 1,700 files / 20,194,403 raw bytes.
 - Final `scripts/verify-release.ps1` pins v1888 commit `15ad48bd` and passes all 2,007
   tests in 7:23. JaCoCo analyzes 2,108 classes with every floor met, SpotBugs reports
-  0/0, and the 68,005,806-byte executable jar is packaged. Both remote completion stages
-  remain binding before v1889 is complete.
+  0/0, and the 68,005,806-byte executable jar is packaged.
+- Implementation commit `dc73b52c` passes Actions run `29883341547`: Docker-tagged
+  integration tests in 2:04 and headless regression in 19:10, including production smoke
+  and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
 
 ## v1888 - Candidate core Catalog convergence
 

@@ -190,8 +190,9 @@ UTF-8 JSON SHA-256 为
 选择通过 70/70。讲解 3,247 Han/10 headings，归档精确为
 1,700 files/20,194,403 bytes。完整 release gate 固定 v1888 commit `15ad48bd`，通过
 2,007 个测试（7:23）、JaCoCo 2,108 类/all floors、SpotBugs 0/0，并打包 68,005,806-byte
-jar。整体九分目标仍以路线图 DONE 条件和外部复核为准；本版双 CI 与 canonical tag 尚未执行，
-不能提前记为完成。
+jar。Implementation commit `dc73b52c` 的 run `29883341547` 通过 Docker 2:04 与 headless
+19:10，包含 prod smoke 和 JaCoCo 上传。整体九分目标仍以路线图 DONE 条件和外部复核为准；
+本版 closeout CI 与 canonical tag 尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 

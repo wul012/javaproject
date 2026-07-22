@@ -65,8 +65,9 @@ Response 的字段、嵌套 record、route、profile、状态算法和二十条 
   1,700 files / 20,194,403 raw bytes，manifest 已按 canonical text hash 重建。
 - 完整 `scripts/verify-release.ps1` 固定 v1888 commit `15ad48bd`，通过 2,007 个测试，
   Maven 耗时 7:23；JaCoCo 分析 2,108 类且全部阈值满足，SpotBugs 0/0，jar 为
-  68,005,806 字节。Implementation push/CI、closeout push/CI 与 annotated tag 仍是
-  本版完成前的绑定门。
+  68,005,806 字节。Implementation commit `dc73b52c` 的 Actions run `29883341547`
+  全绿：Docker 2:04、headless 19:10，包含 prod smoke 与 JaCoCo 上传。Closeout CI 与
+  annotated tag 仍是本版完成前的绑定门。
 
 ## Failure Conditions
 

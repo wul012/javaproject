@@ -1,6 +1,6 @@
 # Java Track Final Evidence Candidate
 
-Status: v1889 local candidate. External Java-track review is required before
+Status: v1889 implementation-CI candidate. External Java-track review is required before
 the word final may describe the track. This file records reproducible evidence; it does
 not authorize production execution.
 
@@ -16,14 +16,14 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1888 runs 29879782402 and 29880876879 green |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1889 run 29883341547 green: Docker 2:04, headless 19:10 |
 | E2 Static analysis | Spotless and SpotBugs checks; 675 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1889 Spotless fixed to v1888 commit `15ad48bd`; SpotBugs 0 bugs / 0 errors |
 | E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1889 analyzed 2108 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | boundaries unchanged; full gate green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | v1888 full docs gate green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1888 implementation `abb82a98`, closeout `15ad48bd`, both runs green; canonical tag pushed |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1889 implementation `dc73b52c` and run green; closeout/tag pending |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1889 core 39/39, expanded 70/70, full 2007/2007; ops 1220; Catalogs 303; production/test name metrics 1119/20072/2678 and 721/9856/3710 |
 | E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1889 exact set 1700 files / 20194403 raw bytes; full gate green |
 
@@ -430,7 +430,10 @@ ten-heading walkthrough expands the exact archive to 1,700 files / 20,194,403 ra
 Full release verification pins v1888 commit `15ad48bd` and passes all 2,007 tests in 7:23
 with zero failures, errors, or skips. JaCoCo analyzes 2,108 classes and meets every floor;
 SpotBugs reports 0/0; the executable jar is 68,005,806 bytes. The remote implementation/
-closeout lifecycle remains pending.
+closeout lifecycle remains pending. Implementation commit `dc73b52c` passes canonical
+Actions run `29883341547`: Docker-tagged tests in 2:04 and headless regression in 19:10,
+including production-profile boot smoke and JaCoCo upload; closeout CI and tag remain
+pending.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
