@@ -166,7 +166,9 @@ baseline 删除 58 项、新增 0 项。三份完整响应在替换前后保持�
 优雅与变更门通过 51/51。讲解 3,742 Han/10 headings，归档 1,699 files/20,179,335 bytes。
 整体 ops<=650、生产长 stem<=550、长标识符使用<=9000 与大文件目标仍未完成，所以仍不自称九分；
 最终 release gate 通过 2,005 个测试，JaCoCo 分析 2,113 类并满足全部阈值，SpotBugs 0/0，
-jar 为 68,010,007 字节；远端双 CI 与 tag 继续按发布纪律后置完成。
+jar 为 68,010,007 字节。Implementation commit `abb82a98` 的 Actions run `29879782402`
+通过 Docker 1:42 与 headless 19:31，包含 prod smoke 和 JaCoCo 上传；closeout CI 与 tag
+继续按发布纪律后置完成。
 
 ## DONE 与失败条件
 

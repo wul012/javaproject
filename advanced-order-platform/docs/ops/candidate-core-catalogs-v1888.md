@@ -52,7 +52,9 @@
 - 中文讲解 3,742 Han/10 headings；授权归档 1,699 files / 20,179,335 raw bytes。
 - 最终 `scripts/verify-release.ps1` 固定 v1887 commit `de64a97a`，通过 2,005 个测试，
   Maven 耗时 13:18；JaCoCo 分析 2,113 类且全部阈值满足，SpotBugs 0/0，jar 为
-  68,010,007 字节。双 CI、closeout commit 与 annotated tag 待后置执行。
+  68,010,007 字节。Implementation commit `abb82a98` 的 Actions run `29879782402`
+  全绿：Docker 1:42，headless 19:31，包含 prod smoke 与 JaCoCo 上传。closeout CI 与
+  annotated tag 待后置执行。
 
 ## Failure Conditions
 

@@ -30,8 +30,10 @@
   20,179,335 raw bytes.
 - Final `scripts/verify-release.ps1` pins v1887 commit `de64a97a` and passes all
   2,005 tests in 13:18. JaCoCo analyzes 2,113 classes with every floor met, SpotBugs
-  reports 0/0, and the 68,010,007-byte executable jar is packaged. CI boundaries and
-  the annotated tag remain binding.
+  reports 0/0, and the 68,010,007-byte executable jar is packaged.
+- Implementation commit `abb82a98` passes Actions run `29879782402`: Docker-tagged
+  integration tests in 1:42 and headless regression in 19:31, including the production
+  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
 
 ## v1887 - Candidate handoff Catalog convergence
 
