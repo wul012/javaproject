@@ -198,3 +198,12 @@ Handoff 的局部映射、历史提取边界和 shrink-only 命名门；没有�
 收敛、两份完整响应摘要、只读安全边界和 shrink-only 结构门；没有移动、改写或删除任何
 历史归档。重建后的精确集合为 `1,698 files / 20,160,868 raw bytes`。本次上调严格等于
 这一份 14,309 字节讲解的增量，不是后续版本的预留预算。
+
+## Authorized v1888 Extension
+
+用户于 2026-07-22 继续授权 Java coding brilliant and elegant 九分计划。v1888 只新增
+`代码讲解记录_生产雏形阶段9/v1888-v1892/v1888-candidate-core-catalogs.md`，用于解释
+CandidateDocument submission、intake 与 profile 三条只读链的输入输出、十四个 Catalog 到
+三个不可变领域 bundle 的收敛、三份完整响应摘要、渲染分界和 shrink-only 结构门；没有移动、
+改写或删除任何历史归档。重建后的精确集合为 `1,699 files / 20,179,335 raw bytes`。本次
+上调严格等于这一份 18,467 字节讲解的增量，不是后续版本的预留预算。

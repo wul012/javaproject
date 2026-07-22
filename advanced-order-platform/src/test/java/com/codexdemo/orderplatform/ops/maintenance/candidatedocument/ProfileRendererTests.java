@@ -8,7 +8,7 @@ class ProfileRendererTests {
 
   @Test
   void rendererPreservesHeadingEndpointProfileAndBoundaryLines() {
-    var response = OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport.registry();
+    var response = ProfileTestData.registry();
 
     assertThat(response.renderedSections()).hasSize(5);
     assertThat(response.renderedSections())

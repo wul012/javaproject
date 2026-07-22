@@ -1,6 +1,6 @@
 # Java Track Final Evidence Candidate
 
-Status: v1887 local candidate. External Java-track review is required before
+Status: v1888 locally verified candidate. External Java-track review is required before
 the word final may describe the track. This file records reproducible evidence; it does
 not authorize production execution.
 
@@ -16,30 +16,30 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1887 implementation run 29833966170 green: Docker 1:58, headless 18:57 |
-| E2 Static analysis | Spotless and SpotBugs checks; 675 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1887 local SpotBugs 0 bugs / 0 errors; one retired waiver removed |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1887 local verify analyzed 2121 classes/all floors |
-| E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | local full verify green |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1887 canonical runs green; v1888 release verify and CI pending |
+| E2 Static analysis | Spotless and SpotBugs checks; 675 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1888 Spotless fixed to v1887 commit; SpotBugs 0 bugs / 0 errors |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1888 analyzed 2113 classes/all floors |
+| E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | boundaries unchanged; full gate green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
-| E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | local full verify green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1887 implementation `a1bae7a4` and run green; closeout/tag pending |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1887 focused 56/56; full 1998/1998; ops 1237; Catalogs 320; renderers 30/3246 lines/0 long names |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1887-authorized exact set: 1698 files / 20160868 raw bytes |
+| E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | v1888 full docs gate green |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1888 implementation, closeout, CI, and canonical tag pending |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1888 focused 51/51; full 2005/2005; ops 1226; Catalogs 309; production/test name metrics 1126/20107/2685 and 725/9866/3719 |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1888 exact set 1699 files / 20179335 raw bytes; full gate green |
 
 ## Final Censuses
 
 - Ops direct root: 104 files; retained: 104; remaining movable: 0; unassigned: 0.
-- Ops total production Java files: 1,237; no extraction family remains in root.
-- Production Java: 1,369 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
-- Test Java: 909 files; maximum 699 lines; over 500: 8;
+- Ops total production Java files: 1,226; no extraction family remains in root.
+- Production Java: 1,358 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
+- Test Java: 905 files; maximum 699 lines; over 500: 8;
   over 750/1000: 0/0.
-- Long-name shrink-only baseline: production stems/uses/unique 1140/20178/2699;
-  tests 737/9898/3741. New declarations and filenames remain within 40 characters;
+- Long-name shrink-only baseline: production stems/uses/unique 1126/20107/2685;
+  tests 725/9866/3719. New declarations and filenames remain within 40 characters;
   baseline identities and aggregate occurrences only shrink during staged migration.
-- Catalog census: 320 files, down from 332 at v1886; CandidateDocument request and
-  material-precheck handoff now use two immutable package-local bundles instead of
-  fourteen single-list owners.
+- Catalog census: 309 files, down from 332 at v1886. CandidateDocument request and
+  material-precheck handoff use two immutable bundles; submission, intake, and profile
+  now use three more bundles instead of a further fourteen single-list owners.
 - Renderer census: 30 files / 3,246 lines / 0 long filenames, down from
   121 / 5,355 / 119 at the v1872 start of the three-point elegance program.
 - Exact long-name identities are frozen in `config/java-name-baseline.txt`; v1869 adds
@@ -50,8 +50,8 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
   aliases without changing route bytes or the root-versus-leaf compatibility response.
 - SpotBugs exclusions: 675 exact pattern/class identities; only deletion is allowed, and
   every retained class must load from the compiled classpath.
-- Archive retention: v1887's user-authorized optimization adds exactly one walkthrough;
-  the current exact set is 1,698 files / 20,160,868 raw bytes.
+- Archive retention: v1888's user-authorized optimization adds exactly one walkthrough;
+  the current exact set is 1,699 files / 20,179,335 raw bytes.
 
 ## Active Waivers
 
@@ -379,10 +379,35 @@ rules, and read-only transactions are unchanged. The walkthrough is 3,060 Han wi
 standard headings; its authorized archive set is exactly 1,698 files / 20,160,868 raw
 bytes. Full local verification passes all 1,998 tests in 15:25 with zero failures,
 errors, or skips. JaCoCo analyzes 2,121 classes and meets every floor; SpotBugs reports
-0/0; the executable jar is 68,017,026 bytes. Two CI boundaries and the annotated v1887
-tag remain binding. Implementation commit `a1bae7a4` passes Actions run `29833966170`:
-Docker-tagged tests in 1:58 and headless regression in 18:57, including production smoke
-and JaCoCo upload; closeout CI and tag remain pending.
+0/0; the executable jar is 68,017,026 bytes. Implementation commit `a1bae7a4` passes
+Actions run `29833966170`: Docker-tagged tests in 1:58 and headless regression in 18:57,
+including production smoke and JaCoCo upload. Closeout commit `de64a97a` passes run
+`29835681926`: Docker in 2:06 and headless in 19:05. Annotated tag
+`v1887-order-platform-candidate-handoff-catalogs` peels to `de64a97a` locally and on
+`javaproject`.
+
+Current v1888 candidate: submission precheck, intake packet, and profile registry first
+pass a three-response canonical JSON oracle on the v1887 implementation. Frozen collection
+vectors are `25/25/8/40/19`, `5/5/10/10/8/35/23`, and `5/5/5/25/5/5/43/21`; their
+sorted-property UTF-8 SHA-256 values are `920742a06cdbe7f0502abeb4c4b38d2f772088677aabdc5a2eb594f2bc0ce0fa`,
+`cb0b888fcc190b1272834cabf7c1bb414471d486da55212cc562cdd6af4c4e95`, and
+`d3cbe7af21f604737121aa8a5e4d9e05f5dd9ed3e1c7013ec2757b8d60dbc660`.
+Fourteen single-responsibility Catalogs are then replaced by `SubmissionCatalog`,
+`IntakeCatalog`, and `ProfileCatalog`. Each service makes one `from(...)` call; the typed
+Evidence records defensively copy 4/6/6 lists. The unchanged Supports remain the sole
+response/status/check assemblers, and `ProfileRenderer` remains outside the data Catalog.
+The same oracle passes 3/3 after replacement. Related behavior, structure, elegance, and
+staged-change gates pass 51/51. Ops files tighten from 1,237 to 1,226, Catalogs from 320
+to 309, and test files from 909 to 905. Production name aggregates are 1126/20107/2685;
+test aggregates are 725/9866/3719; the exact baseline has 58 removals and no additions.
+The three owners are 131, 190, and 197 lines, all below their 300-line gate. Public routes,
+Response records, controllers, source services, Support status rules, read-only transactions,
+and renderer output remain unchanged. The walkthrough is 3,742 Han with ten standard
+headings; its authorized archive set is exactly 1,699 files / 20,179,335 raw bytes. Full
+release verification passes all 2,005 tests in 13:18 with zero failures, errors, or skips.
+JaCoCo analyzes 2,113 classes and meets every floor; SpotBugs reports 0/0; the executable
+jar is 68,010,007 bytes. Implementation and closeout CI and the annotated v1888 tag remain
+binding.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

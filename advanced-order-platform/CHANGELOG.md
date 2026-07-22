@@ -4,6 +4,35 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1888 - Candidate core Catalog convergence
+
+- Freezes submission precheck, intake packet, and profile registry against the v1887
+  implementation before deletion. Their complete collection vectors remain
+  `25/25/8/40/19`, `5/5/10/10/8/35/23`, and `5/5/5/25/5/5/43/21`; sorted-property
+  canonical JSON SHA-256 values remain `920742...e0fa`, `cb0b88...4e95`, and
+  `d3cbe7...c660` after replacement.
+- Replaces fourteen single-responsibility Catalog owners with three package-local bundles:
+  `SubmissionCatalog`, `IntakeCatalog`, and `ProfileCatalog`. Each service performs one
+  typed `from(...)` assembly; each `Evidence` owns immutable list snapshots.
+- Keeps public routes, Response records, controllers, source services, Support status/check
+  rules, `ProfileRenderer`, and read-only transaction boundaries unchanged.
+- Consolidates seven Profile Catalog-shaped test shells into one semantic owner and shortens
+  five touched test responsibilities without dropping their assertions.
+- Adds a five-test structure gate requiring all fourteen retired production files to stay
+  absent, one assembly call per service, exact `4/6/6` defensive copies, a 300-line ceiling,
+  and Profile rendering outside the data Catalog. Actual owner sizes are 131/190/197 lines.
+- Tightens ops Java `1237 -> 1226`, Catalogs `320 -> 309`, and test Java `909 -> 905`.
+  Production name metrics reach `1126/20107/2685`; tests reach `725/9866/3719`; the exact
+  baseline has 58 removals and no additions. Focused behavior/oracle/structure/elegance/
+  change gates pass 51/51.
+- Adds a 3,742-Han walkthrough with exactly ten standard headings in the new
+  `v1888-v1892` segment. The authorized archive becomes exactly 1,699 files /
+  20,179,335 raw bytes.
+- Final `scripts/verify-release.ps1` pins v1887 commit `de64a97a` and passes all
+  2,005 tests in 13:18. JaCoCo analyzes 2,113 classes with every floor met, SpotBugs
+  reports 0/0, and the 68,010,007-byte executable jar is packaged. CI boundaries and
+  the annotated tag remain binding.
+
 ## v1887 - Candidate handoff Catalog convergence
 
 - Freezes both complete handoff responses on the v1886 implementation with sorted-property
@@ -35,7 +64,10 @@
   reports 0/0, and the 68,017,026-byte executable jar is packaged.
 - Implementation commit `a1bae7a4` passes Actions run `29833966170`: Docker-tagged
   integration tests in 1:58 and headless regression in 18:57, including the production
-  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
+  profile smoke and JaCoCo upload. Closeout commit `de64a97a` passes run `29835681926`:
+  Docker in 2:06 and headless in 19:05. Annotated tag
+  `v1887-order-platform-candidate-handoff-catalogs` peels to that commit locally and on
+  `javaproject`.
 
 ## v1886 - Renderer long-name debt closeout
 

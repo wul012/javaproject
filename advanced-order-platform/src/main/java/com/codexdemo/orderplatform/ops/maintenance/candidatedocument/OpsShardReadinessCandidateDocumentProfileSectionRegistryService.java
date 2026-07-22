@@ -39,27 +39,24 @@ public class OpsShardReadinessCandidateDocumentProfileSectionRegistryService {
 
   @Transactional(readOnly = true)
   public OpsShardReadinessCandidateDocumentProfileSectionRegistryResponse registry() {
-    var sources =
-        OpsShardReadinessCandidateDocumentProfileSectionSourceCatalog.sources(
+    var evidence =
+        ProfileCatalog.from(
             requestPackageService.packageCatalog(),
             submissionPrecheckService.precheck(),
             intakePacketService.intakePacket(),
             materialRequestService.materialRequest(),
             materialSubmissionPrecheckService.materialSubmissionPrecheck());
-    var sections = OpsShardReadinessCandidateDocumentProfileSectionCatalog.sections(sources);
-    var fieldEntries =
-        OpsShardReadinessCandidateDocumentProfileSectionFieldCatalog.fieldEntries(sections);
     return OpsShardReadinessCandidateDocumentProfileSectionRegistrySupport.response(
         RESPONSE_VERSION,
         ENDPOINT,
         PROFILE,
-        OpsShardReadinessCandidateDocumentProfileSectionModuleCatalog.modules(),
-        sources,
-        sections,
-        fieldEntries,
-        ProfileRenderer.render(sections, fieldEntries),
-        OpsShardReadinessCandidateDocumentProfileSectionRouteLockCatalog.routeFieldLocks(sections),
-        OpsShardReadinessCandidateDocumentProfileSectionGateCatalog.gates(),
+        evidence.modules(),
+        evidence.sources(),
+        evidence.sections(),
+        evidence.fieldEntries(),
+        ProfileRenderer.render(evidence.sections(), evidence.fieldEntries()),
+        evidence.routeFieldLocks(),
+        evidence.gates(),
         List.of(
             "candidate-document-profile-section-registry-service-assembled-from-five-read-only-routes"));
   }

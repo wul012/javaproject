@@ -9,7 +9,7 @@ class ProfileMarkdownTests {
 
   @Test
   void renderedMarkdownKeepsCandidateDocumentSectionOrderStable() {
-    var response = OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport.registry();
+    var response = ProfileTestData.registry();
 
     assertThat(response.renderedSections())
         .containsExactly(
@@ -62,7 +62,7 @@ class ProfileMarkdownTests {
 
   @Test
   void renderedMarkdownKeepsRouteFacingFieldsVisible() {
-    var response = OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport.registry();
+    var response = ProfileTestData.registry();
 
     assertThat(response.renderedSections())
         .allSatisfy(

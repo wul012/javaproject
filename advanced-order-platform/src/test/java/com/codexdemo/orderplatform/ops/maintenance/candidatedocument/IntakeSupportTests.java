@@ -5,11 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentIntakePacketSupportTests {
+class IntakeSupportTests {
 
   @Test
   void marksIncompleteIntakePacketAsBlocked() {
     var sourcePrecheck = sourcePrecheck();
+    var evidence = IntakeCatalog.from(sourcePrecheck);
 
     var response =
         OpsShardReadinessCandidateDocumentIntakePacketSupport.response(
@@ -17,13 +18,12 @@ class OpsShardReadinessCandidateDocumentIntakePacketSupportTests {
             OpsShardReadinessCandidateDocumentIntakePacketService.ENDPOINT,
             OpsShardReadinessCandidateDocumentIntakePacketService.PROFILE,
             sourcePrecheck,
-            OpsShardReadinessCandidateDocumentIntakePacketSourceCatalog.sourceLineage(
-                sourcePrecheck),
-            OpsShardReadinessCandidateDocumentIntakePacketModuleCatalog.modules(),
+            evidence.sourceLineage(),
+            evidence.modules(),
             List.of(),
             List.of(),
-            OpsShardReadinessCandidateDocumentIntakePacketArtifactCatalog.artifacts(),
-            OpsShardReadinessCandidateDocumentIntakePacketArtifactCatalog.gates(),
+            evidence.artifacts(),
+            evidence.gates(),
             List.of("candidate-document-intake-packet-negative-coverage"));
 
     assertThat(response.status()).isEqualTo("blocked");

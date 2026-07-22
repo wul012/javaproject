@@ -1,8 +1,8 @@
 package com.codexdemo.orderplatform.ops.maintenance.candidatedocument;
 
-public final class OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport {
+public final class ProfileTestData {
 
-  private OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport() {}
+  private ProfileTestData() {}
 
   public static OpsShardReadinessCandidateDocumentProfileSectionRegistryService service() {
     var requestPackageService = new OpsShardReadinessCandidateDocumentRequestPackageService();

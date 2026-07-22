@@ -18,8 +18,9 @@ class CurrentWalkthroughTests {
           Path.of("代码讲解记录_生产雏形阶段8", "v1868-v1872"),
           Path.of("代码讲解记录_生产雏形阶段9", "v1873-v1877"),
           Path.of("代码讲解记录_生产雏形阶段9", "v1878-v1882"),
-          Path.of("代码讲解记录_生产雏形阶段9", "v1883-v1887"));
-  private static final Path LATEST = ROOTS.get(3).resolve("v1887-candidate-handoff-catalogs.md");
+          Path.of("代码讲解记录_生产雏形阶段9", "v1883-v1887"),
+          Path.of("代码讲解记录_生产雏形阶段9", "v1888-v1892"));
+  private static final Path LATEST = ROOTS.get(4).resolve("v1888-candidate-core-catalogs.md");
   private static final List<String> STANDARD_HEADINGS =
       List.of(
           "## 入口路由",

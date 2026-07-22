@@ -2,7 +2,7 @@ package com.codexdemo.orderplatform.ops;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport;
+import com.codexdemo.orderplatform.ops.maintenance.candidatedocument.ProfileTestData;
 import org.junit.jupiter.api.Test;
 
 class OpsShardReadinessCandidateDocumentProfileSectionRouteEvidenceTests {
@@ -11,7 +11,7 @@ class OpsShardReadinessCandidateDocumentProfileSectionRouteEvidenceTests {
   void routeCarriesRendererSplitEvidenceWithoutRuntimeBehavior() {
     var response =
         new OpsShardReadinessCandidateDocumentProfileSectionRegistryController(
-                OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport.service())
+                ProfileTestData.service())
             .registry();
 
     assertThat(response.checks())

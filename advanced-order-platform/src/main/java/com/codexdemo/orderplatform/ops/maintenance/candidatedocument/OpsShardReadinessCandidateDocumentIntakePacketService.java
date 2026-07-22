@@ -23,18 +23,18 @@ public class OpsShardReadinessCandidateDocumentIntakePacketService {
   @Transactional(readOnly = true)
   public OpsShardReadinessCandidateDocumentIntakePacketResponse intakePacket() {
     var sourcePrecheck = sourcePrecheckService.precheck();
-    var slots = OpsShardReadinessCandidateDocumentIntakePacketSlotCatalog.slots(sourcePrecheck);
+    var evidence = IntakeCatalog.from(sourcePrecheck);
     return OpsShardReadinessCandidateDocumentIntakePacketSupport.response(
         RESPONSE_VERSION,
         ENDPOINT,
         PROFILE,
         sourcePrecheck,
-        OpsShardReadinessCandidateDocumentIntakePacketSourceCatalog.sourceLineage(sourcePrecheck),
-        OpsShardReadinessCandidateDocumentIntakePacketModuleCatalog.modules(),
-        slots,
-        OpsShardReadinessCandidateDocumentIntakePacketGuardCatalog.guards(slots),
-        OpsShardReadinessCandidateDocumentIntakePacketArtifactCatalog.artifacts(),
-        OpsShardReadinessCandidateDocumentIntakePacketArtifactCatalog.gates(),
+        evidence.sourceLineage(),
+        evidence.modules(),
+        evidence.slots(),
+        evidence.guards(),
+        evidence.artifacts(),
+        evidence.gates(),
         List.of("candidate-document-intake-packet-service-assembled-from-submission-precheck"));
   }
 }

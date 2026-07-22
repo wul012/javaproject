@@ -27,19 +27,17 @@ public class OpsShardReadinessCandidateDocumentSubmissionPrecheckService {
   public OpsShardReadinessCandidateDocumentSubmissionPrecheckResponse precheck() {
     var requestPackage = requestPackageService.packageCatalog();
     var handoff = handoffService.handoff();
-    var checkpoints =
-        OpsShardReadinessCandidateDocumentSubmissionCheckpointCatalog.checkpoints(
-            requestPackage, handoff);
+    var evidence = SubmissionCatalog.from(requestPackage, handoff);
     return OpsShardReadinessCandidateDocumentSubmissionPrecheckSupport.response(
         RESPONSE_VERSION,
         ENDPOINT,
         PROFILE,
         requestPackage,
         handoff,
-        checkpoints,
-        OpsShardReadinessCandidateDocumentSubmissionValidatorCatalog.validators(checkpoints),
-        OpsShardReadinessCandidateDocumentSubmissionArtifactCatalog.artifacts(),
-        OpsShardReadinessCandidateDocumentSubmissionArtifactCatalog.gates(),
+        evidence.checkpoints(),
+        evidence.validators(),
+        evidence.artifacts(),
+        evidence.gates(),
         List.of(
             "candidate-document-submission-precheck-service-assembled-from-request-package-and-handoff"));
   }

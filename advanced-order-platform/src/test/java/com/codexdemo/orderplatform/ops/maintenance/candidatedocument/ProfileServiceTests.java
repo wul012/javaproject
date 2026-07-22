@@ -4,11 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessCandidateDocumentProfileSectionRegistryServiceTests {
+class ProfileServiceTests {
 
   @Test
   void buildsReadOnlyProfileSectionRegistryFromFiveRoutes() {
-    var response = OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport.registry();
+    var response = ProfileTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
     assertThat(response.version()).isEqualTo("Java v1212");
@@ -30,7 +30,7 @@ class OpsShardReadinessCandidateDocumentProfileSectionRegistryServiceTests {
 
   @Test
   void keepsRendererSplitRuntimeAndMutationPathsClosed() {
-    var response = OpsShardReadinessCandidateDocumentProfileSectionRegistryTestSupport.registry();
+    var response = ProfileTestData.registry();
 
     assertThat(response.realDocumentCount()).isZero();
     assertThat(response.syntheticDocumentCount()).isZero();

@@ -146,6 +146,28 @@ CandidateDocument 的两条 handoff 链原先各用七个单列表 Catalog，把
 本检查点的最终 release gate 通过 1,998 个测试，JaCoCo 分析 2,121 类并满足全部阈值，
 SpotBugs 为 0/0，打包 jar 为 68,017,026 字节；远端双 CI 与 tag 仍按发布纪律后置完成。
 
+## v1888 检查点
+
+CandidateDocument submission、intake 与 profile 三个核心响应原先分别依赖 3、5、6 个单职责
+Catalog。v1888 先在旧实现上冻结三份完整规范 JSON、集合向量与 SHA-256，再用
+`SubmissionCatalog`、`IntakeCatalog`、`ProfileCatalog` 三个包内 owner 收拢一次响应所需的数据。
+三个 Service 各调用一次 `from(...)`；三个 `Evidence` 精确复制 4/6/6 组列表；Support 仍拥有状态
+和 checks，`ProfileRenderer` 仍单独拥有 Markdown 行为。
+
+本版没有建立跨 Response 万能映射器。共享停在“一个响应一个不可变 bundle”的生命周期边界，
+checkpoint、slot、field、route lock 与 gate 的具体政策仍留在各领域。三个 owner 为 131、190、
+197 行，结构门把它们锁在 300 行内，并要求旧十四个文件永久缺失、三个 Service 各只有一次组装、
+Profile Catalog 不得吸收 renderer。原七个 Profile Catalog 测试壳合并为一个当前语义 owner，五个
+被触及测试职责改成短名，所有原断言保留。
+
+本版把 ops `1,237 -> 1,226`、Catalog `320 -> 309`、测试 Java `909 -> 905`；生产长
+stem/使用/唯一值收紧为 `1,126/20,107/2,685`，测试收紧为 `725/9,866/3,719`，exact
+baseline 删除 58 项、新增 0 项。三份完整响应在替换前后保持相同向量和摘要，相关行为、结构、
+优雅与变更门通过 51/51。讲解 3,742 Han/10 headings，归档 1,699 files/20,179,335 bytes。
+整体 ops<=650、生产长 stem<=550、长标识符使用<=9000 与大文件目标仍未完成，所以仍不自称九分；
+最终 release gate 通过 2,005 个测试，JaCoCo 分析 2,113 类并满足全部阈值，SpotBugs 0/0，
+jar 为 68,010,007 字节；远端双 CI 与 tag 继续按发布纪律后置完成。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。
