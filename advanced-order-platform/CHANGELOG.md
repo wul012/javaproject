@@ -4,6 +4,31 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1889 - Execution registry Catalog convergence
+
+- Freezes the complete minimal-read-only gate execution Registry on the v1888
+  implementation before deletion: collection vector `5/5/20/10/4/6/5/6/20` and
+  sorted-property UTF-8 SHA-256
+  `8f33da2c1ed32695ef245c69cbf4a90d4b5b62324bb98e13c115ebec26df0b36`.
+- Replaces seven one-list Catalog owners with one package-local `RegistryCatalog`. Its
+  typed `Evidence` owns all seven list snapshots; the Service calls `evidence()` once.
+- Keeps public route, Response, Controller, Support status/check logic, `ExecutionRenderer`,
+  list order, and read-only transaction unchanged. The same full oracle passes after replacement.
+- Consolidates three long Catalog-shaped test shells into `RegistryCatalogTests`, proves
+  snapshot ownership behavior, and renames the touched v1843 structure owner to
+  `ExecutionExtractionTests` instead of retaining a long forwarding shell.
+- Tightens production Java `1358 -> 1352`, ops `1226 -> 1220`, Catalogs `309 -> 303`,
+  execution package `23 -> 17`, and tests `905 -> 904`. Production name metrics reach
+  `1119/20072/2678`; tests reach `721/9856/3710`; exact baseline removals are 23 with
+  no additions. The new owner is 284 lines; core gates pass 39/39 and the expanded
+  execution/archive/controller/docs selection passes 70/70.
+- Adds a 3,247-Han walkthrough with exactly ten standard headings. The authorized archive
+  becomes exactly 1,700 files / 20,194,403 raw bytes.
+- Final `scripts/verify-release.ps1` pins v1888 commit `15ad48bd` and passes all 2,007
+  tests in 7:23. JaCoCo analyzes 2,108 classes with every floor met, SpotBugs reports
+  0/0, and the 68,005,806-byte executable jar is packaged. Both remote completion stages
+  remain binding before v1889 is complete.
+
 ## v1888 - Candidate core Catalog convergence
 
 - Freezes submission precheck, intake packet, and profile registry against the v1887
@@ -33,7 +58,10 @@
   reports 0/0, and the 68,010,007-byte executable jar is packaged.
 - Implementation commit `abb82a98` passes Actions run `29879782402`: Docker-tagged
   integration tests in 1:42 and headless regression in 19:31, including the production
-  profile smoke and JaCoCo upload. Closeout Actions and the annotated tag remain binding.
+  profile smoke and JaCoCo upload. Closeout `15ad48bd` passes run `29880876879`: Docker
+  2:09 and headless 18:37. Annotated tag
+  `v1888-order-platform-candidate-core-catalogs` peels to that closeout locally and on
+  `javaproject`.
 
 ## v1887 - Candidate handoff Catalog convergence
 

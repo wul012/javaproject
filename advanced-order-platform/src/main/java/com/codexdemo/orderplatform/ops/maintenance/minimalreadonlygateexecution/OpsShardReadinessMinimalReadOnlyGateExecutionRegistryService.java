@@ -15,34 +15,24 @@ public class OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService {
 
   @Transactional(readOnly = true)
   public OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse registry() {
-    var sourcePlans = OpsShardReadinessMinimalReadOnlyGateExecutionSourcePlanCatalog.sourcePlans();
-    var readTargets = OpsShardReadinessMinimalReadOnlyGateExecutionReadTargetCatalog.readTargets();
-    var gateChecks = OpsShardReadinessMinimalReadOnlyGateExecutionGateCheckCatalog.gateChecks();
-    var boundaryRules =
-        OpsShardReadinessMinimalReadOnlyGateExecutionBoundaryPolicyCatalog.boundaryRules();
-    var ciBatches = OpsShardReadinessMinimalReadOnlyGateExecutionCiBatchCatalog.ciBatches();
-    var archiveRequirements =
-        OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationCatalog
-            .archiveRequirements();
-    var operatorHandoffs =
-        OpsShardReadinessMinimalReadOnlyGateExecutionOperatorHandoffCatalog.operatorHandoffs();
+    var evidence = RegistryCatalog.evidence();
     return OpsShardReadinessMinimalReadOnlyGateExecutionRegistrySupport.response(
         RESPONSE_VERSION,
         ENDPOINT,
         PROFILE,
-        sourcePlans,
-        readTargets,
-        gateChecks,
-        boundaryRules,
-        ciBatches,
-        archiveRequirements,
-        operatorHandoffs,
+        evidence.sourcePlans(),
+        evidence.readTargets(),
+        evidence.gateChecks(),
+        evidence.boundaryRules(),
+        evidence.ciBatches(),
+        evidence.archiveRequirements(),
+        evidence.operatorHandoffs(),
         ExecutionRenderer.render(
-            readTargets,
-            gateChecks,
-            boundaryRules,
-            ciBatches,
-            archiveRequirements,
-            operatorHandoffs));
+            evidence.readTargets(),
+            evidence.gateChecks(),
+            evidence.boundaryRules(),
+            evidence.ciBatches(),
+            evidence.archiveRequirements(),
+            evidence.operatorHandoffs()));
   }
 }

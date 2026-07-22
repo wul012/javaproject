@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
+class ExecutionExtractionTests {
 
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
@@ -22,6 +22,8 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
       TEST_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateexecution"));
   private static final Path DOC =
       Path.of("docs", "ops", "minimal-read-only-gate-execution-extraction-v1843.md");
+  private static final Path CURRENT_DOC =
+      Path.of("docs", "ops", "execution-registry-catalog-v1889.md");
   private static final Path WALKTHROUGH =
       Path.of(
           "代码讲解记录_生产雏形阶段6",
@@ -31,26 +33,29 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
       List.of(
           "ArchiveRenderer.java",
           "ExecutionRenderer.java",
+          "RegistryCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveScorecardCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveSourceRegistrySnapshotCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryResponse.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryService.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistrySupport.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArtifactVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionBoundaryPolicyCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionBoundaryVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionCiBatchCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionCiBatchVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionGateCheckCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionGateCheckVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionOperatorHandoffCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionOperatorHandoffVerificationCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionReadTargetCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionReadTargetVerificationCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionRegistryResponse.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionRegistrySupport.java",
+          "OpsShardReadinessMinimalReadOnlyGateExecutionRegistrySupport.java");
+  private static final List<String> RETIRED_CATALOG_FILES =
+      List.of(
+          "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationCatalog.java",
+          "OpsShardReadinessMinimalReadOnlyGateExecutionBoundaryPolicyCatalog.java",
+          "OpsShardReadinessMinimalReadOnlyGateExecutionCiBatchCatalog.java",
+          "OpsShardReadinessMinimalReadOnlyGateExecutionGateCheckCatalog.java",
+          "OpsShardReadinessMinimalReadOnlyGateExecutionOperatorHandoffCatalog.java",
+          "OpsShardReadinessMinimalReadOnlyGateExecutionReadTargetCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionSourcePlanCatalog.java");
   private static final List<String> REMOVED_RENDERER_FILES =
       List.of(
@@ -74,12 +79,11 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveMarkdownBoundaryTests.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveScoreRendererTests.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryServiceTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionGateBoundaryCatalogTests.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionMarkdownBoundaryTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionReadTargetCatalogTests.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionRegistryServiceTests.java",
           "OpsShardReadinessMinimalReadOnlyGateExecutionRendererTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateExecutionSourcePlanCatalogTests.java");
+          "RegistryCatalogTests.java",
+          "RegistryResponseOracleTests.java");
   private static final List<String> REMOVED_TEST_SUPPORT_FILES =
       List.of(
           "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryTestSupport.java",
@@ -87,13 +91,15 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
 
   @Test
   void keepsCurrentExecutionClosure() {
-    assertThat(CURRENT_FILES).hasSize(23);
+    assertThat(CURRENT_FILES).hasSize(17);
     CURRENT_FILES.forEach(
         file -> {
           assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
           assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
         });
     REMOVED_RENDERER_FILES.forEach(
+        file -> assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse());
+    RETIRED_CATALOG_FILES.forEach(
         file -> assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse());
     assertThat(
             Files.isRegularFile(
@@ -109,7 +115,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
 
   @Test
   void keepsCurrentTestClosure() {
-    assertThat(CURRENT_TEST_FILES).hasSize(14);
+    assertThat(CURRENT_TEST_FILES).hasSize(13);
     CURRENT_TEST_FILES.forEach(
         file -> {
           assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
@@ -127,6 +133,28 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
                 TEST_ROOT.resolve(
                     "OpsShardReadinessMinimalReadOnlyGateExecutionArchiveVerificationRegistryControllerTests.java")))
         .isTrue();
+  }
+
+  @Test
+  void keepsRegistryCatalogConverged() throws IOException {
+    String catalog = read(PACKAGE_ROOT.resolve("RegistryCatalog.java"));
+    String service =
+        read(
+            PACKAGE_ROOT.resolve(
+                "OpsShardReadinessMinimalReadOnlyGateExecutionRegistryService.java"));
+
+    assertThat(catalog.lines().count()).isLessThanOrEqualTo(300);
+    assertThat(catalog).contains("record Evidence(").doesNotContain("ExecutionRenderer");
+    assertThat(occurrences(catalog, "List.copyOf(")).isEqualTo(7);
+    assertThat(service)
+        .contains("var evidence = RegistryCatalog.evidence();", "ExecutionRenderer.render(");
+    assertThat(occurrences(service, "RegistryCatalog.evidence()")).isEqualTo(1);
+    assertThat(read(CURRENT_DOC))
+        .contains(
+            "7 -> 1",
+            "5/5/20/10/4/6/5/6/20",
+            "8f33da2c1ed32695ef245c69cbf4a90d4b5b62324bb98e13c115ebec26df0b36",
+            "## Failure Conditions");
   }
 
   @Test
@@ -216,5 +244,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1843Tests {
 
   private static String read(Path path) throws IOException {
     return Files.readString(path, StandardCharsets.UTF_8);
+  }
+
+  private static int occurrences(String source, String token) {
+    return (source.length() - source.replace(token, "").length()) / token.length();
   }
 }

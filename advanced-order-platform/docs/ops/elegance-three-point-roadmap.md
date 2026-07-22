@@ -167,8 +167,31 @@ baseline 删除 58 项、新增 0 项。三份完整响应在替换前后保持�
 整体 ops<=650、生产长 stem<=550、长标识符使用<=9000 与大文件目标仍未完成，所以仍不自称九分；
 最终 release gate 通过 2,005 个测试，JaCoCo 分析 2,113 类并满足全部阈值，SpotBugs 0/0，
 jar 为 68,010,007 字节。Implementation commit `abb82a98` 的 Actions run `29879782402`
-通过 Docker 1:42 与 headless 19:31，包含 prod smoke 和 JaCoCo 上传；closeout CI 与 tag
-继续按发布纪律后置完成。
+通过 Docker 1:42 与 headless 19:31，包含 prod smoke 和 JaCoCo 上传。Closeout
+`15ad48bd` 的 run `29880876879` 通过 Docker 2:09 与 headless 18:37；tag
+`v1888-order-platform-candidate-core-catalogs` 在本地和 canonical remote 均 peel 到该
+closeout。
+
+## v1889 检查点
+
+MinimalReadOnlyGateExecution 基础 Registry 的七组静态证据原由七个长名 Catalog 分散提供。
+本版先在 v1888 实现上冻结完整响应：集合向量 `5/5/20/10/4/6/5/6/20`，sorted-property
+UTF-8 JSON SHA-256 为
+`8f33da2c1ed32695ef245c69cbf4a90d4b5b62324bb98e13c115ebec26df0b36`。随后七个 owner
+收敛为一个 284 行 `RegistryCatalog`；类型化 `Evidence` 接管七组不可变快照，Service 只装配
+一次，Support、Renderer、公共 route/Response/Controller 与只读事务不变。同一完整 oracle
+在替换后继续通过。
+
+生产 Java `1,358 -> 1,352`，ops `1,226 -> 1,220`，Catalog `309 -> 303`，execution package
+`23 -> 17`，测试 Java `905 -> 904`。生产名称收紧到 `1,119/20,072/2,678`，测试收紧到
+`721/9,856/3,710`，exact baseline 删除 23 项、新增 0 项。三个长名 Catalog 测试合成一个
+短语义 owner，被触碰的 v1843 历史门也改为短名且新增当前收敛约束。相关行为、oracle、结构、
+不可变性、优雅和 staged-change 核心门通过 39/39，扩展 execution/archive/controller/docs
+选择通过 70/70。讲解 3,247 Han/10 headings，归档精确为
+1,700 files/20,194,403 bytes。完整 release gate 固定 v1888 commit `15ad48bd`，通过
+2,007 个测试（7:23）、JaCoCo 2,108 类/all floors、SpotBugs 0/0，并打包 68,005,806-byte
+jar。整体九分目标仍以路线图 DONE 条件和外部复核为准；本版双 CI 与 canonical tag 尚未执行，
+不能提前记为完成。
 
 ## DONE 与失败条件
 

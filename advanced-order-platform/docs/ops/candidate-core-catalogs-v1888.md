@@ -53,8 +53,10 @@
 - 最终 `scripts/verify-release.ps1` 固定 v1887 commit `de64a97a`，通过 2,005 个测试，
   Maven 耗时 13:18；JaCoCo 分析 2,113 类且全部阈值满足，SpotBugs 0/0，jar 为
   68,010,007 字节。Implementation commit `abb82a98` 的 Actions run `29879782402`
-  全绿：Docker 1:42，headless 19:31，包含 prod smoke 与 JaCoCo 上传。closeout CI 与
-  annotated tag 待后置执行。
+  全绿：Docker 1:42，headless 19:31，包含 prod smoke 与 JaCoCo 上传。Closeout
+  `15ad48bd` 的 run `29880876879` 同样全绿：Docker 2:09、headless 18:37。Annotated
+  tag `v1888-order-platform-candidate-core-catalogs` 在本地和 `javaproject` 均 peel 到
+  `15ad48bd`。
 
 ## Failure Conditions
 
