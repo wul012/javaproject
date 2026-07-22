@@ -242,7 +242,9 @@ service 每次只生成一次，renderer 与 Support 只通过该聚合值读取
 仍以路线图 DONE 条件与外部复核为准。第一次 docs 联合门仅暴露讲解章节顺序协议；不改测试、
 不删内容，移动章节后同一选择 97/97 通过。完整 release gate 固定 v1890 closeout
 `9069d54e`，通过 2,015 个测试（8:34）、JaCoCo 2,100 类/all floors、SpotBugs 0/0，并打包
-67,997,219-byte jar。Implementation/closeout CI 和 canonical tag 尚未执行，不能提前记为完成。
+67,997,219-byte jar。Implementation `be7bd5c1` 的 canonical Actions run `29892031685`
+通过 Docker 2:19 与 headless 19:26，其中 wrapper verify 18:38、prod smoke 0:12、JaCoCo
+上传 0:05。Closeout CI 和 canonical tag 尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 

@@ -23,7 +23,9 @@
 - 第一次 docs 联合门仅发现讲解章节顺序不符合标准；不改测试、不删内容，移动章节并重建
   manifest 后同一选择 97/97 通过。最终 `scripts/verify-release.ps1` 固定 v1890 closeout
   `9069d54e`，通过 2,015/2,015，Maven 8:34，JaCoCo 2,100 类/全部阈值，SpotBugs
-  0/0，jar 67,997,219 字节。Implementation/closeout CI 与 annotated tag 仍是完成门。
+  0/0，jar 67,997,219 字节。Implementation `be7bd5c1` 通过 canonical Actions run
+  `29892031685`：Docker 2:19、headless 19:26，其中 wrapper verify 18:38、prod smoke
+  0:12、JaCoCo 上传 0:05。Closeout CI 与 annotated tag 仍是完成门。
 
 ## v1890 - Archive registry Catalog convergence
 
