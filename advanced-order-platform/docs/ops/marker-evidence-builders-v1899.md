@@ -22,7 +22,7 @@
 | Tighten maintainability | global maximum and over-500 budgets decrease | reproducible census and exact caps | implemented |
 | Tighten naming | three long files/types and long receipt-chain accessors retire | aggregate and exact name baselines | implemented |
 | Preserve archives | add one Chinese walkthrough without moving history | exact manifest, count and raw-byte cap | implemented |
-| Close the release chain | implementation, closeout, annotated tag and receipt each receive canonical CI | local release gate plus GitHub runs | pending final lifecycle |
+| Close the release chain | implementation, closeout, annotated tag and receipt each receive canonical CI | local release gate plus GitHub runs | implementation CI green; closeout pending |
 
 ## Baseline And Scope
 
@@ -112,7 +112,11 @@ After this design record and Chinese walkthrough existed, `scripts/verify-releas
 `v1898-order-platform-acceptance-package-catalog` to closeout
 `78cac4e90557b599692608a40dce183e94c42424` and passed 2,038 tests in 9:21. JaCoCo
 analyzed 2,059 classes and met every floor, SpotBugs reported 0 bugs / 0 errors, the production
-smoke passed, and the packaged jar is 67,940,843 bytes. Canonical remote CI remains pending.
+smoke passed, and the packaged jar is 67,940,843 bytes. Implementation
+`f1980b416c9e3258eda033c7da55e9fa05e67525` passes canonical run `30019562919`:
+Docker completes in 2:02 with a 1:52 wrapper verify; headless completes in 19:07 with an
+18:22 wrapper verify, 0:12 production smoke, and 0:03 JaCoCo upload. Closeout CI, annotated
+tag, and post-tag receipt remain pending.
 
 ## Failure Conditions
 

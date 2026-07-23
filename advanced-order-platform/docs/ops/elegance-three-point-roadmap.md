@@ -477,8 +477,10 @@ Support，并由同一完整 oracle 守住输出。`releaseapproval` 因而保�
 elegance、walkthrough 和 archive 聚焦门通过。讲解 3,803 Han/十章节，归档精确为
 1,710 files/20,374,361 bytes。完整 release gate 以 v1898 closeout `78cac4e9` 为基准，
 9:21 内通过 2,038 项测试、JaCoCo 2,059 类全部阈值、SpotBugs 0/0、生产 smoke 和
-67,940,843 字节 jar。implementation/closeout CI、canonical tag 与 post-tag receipt 仍待
-真实执行；本检查点不把 pending 状态写成完成，也不等于外部已授予九分。
+67,940,843 字节 jar。Implementation `f1980b41` 的 run `30019562919` 已通过：
+Docker 2:02、wrapper 1:52；headless 19:07、wrapper 18:22、prod smoke 0:12、
+JaCoCo 上传 0:03。Closeout CI、canonical tag 与 post-tag receipt 仍待真实执行；
+本检查点不把 pending 状态写成完成，也不等于外部已授予九分。
 
 ## DONE 与失败条件
 

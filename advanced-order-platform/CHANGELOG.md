@@ -22,7 +22,10 @@
   聚焦门已通过；讲解 3,803 Han/十章节，授权归档为
   1,710 files / 20,374,361 raw bytes。完整 release gate 以 v1898 closeout
   `78cac4e9` 为前序基准，9:21 内通过 2,038 项测试，JaCoCo 2,059 类满足全部阈值，
-  SpotBugs 0/0，并生成 67,940,843 字节 jar；远端生命周期仍待执行。
+  SpotBugs 0/0，并生成 67,940,843 字节 jar。Implementation `f1980b41` 的 canonical
+  run `30019562919` 通过：Docker 2:02、wrapper 1:52；headless 19:07、wrapper
+  18:22、prod smoke 0:12、JaCoCo 上传 0:03。Closeout CI、canonical tag 与
+  post-tag receipt 尚待收口。
 
 ## v1898 - Release acceptance package Catalog convergence
 
