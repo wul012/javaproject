@@ -61,6 +61,9 @@ $dossierFiles = @(& rg --files $dossierRoot -g '*.java')
 $sandboxDossierFiles = @(
   Get-ChildItem -LiteralPath $sandboxRoot -File -Filter '*Dossier*.java'
 )
+$sandboxManifestFiles = @(
+  Get-ChildItem -LiteralPath $sandboxRoot -File -Filter '*Manifest*.java'
+)
 $releaseAcceptanceFiles = @(& rg --files $releaseAcceptanceRoot -g '*.java')
 $archiveRegistryFiles = @(& rg --files $archiveRegistryRoot -g '*.java')
 $archiveHandoffFiles = @(& rg --files $archiveHandoffRoot -g '*.java')
@@ -88,6 +91,7 @@ $summary = [ordered]@{
   ConsumerPackageJavaFiles = $consumerFiles.Count
   DossierJavaFiles = $dossierFiles.Count
   SandboxDossierJavaFiles = $sandboxDossierFiles.Count
+  SandboxManifestJavaFiles = $sandboxManifestFiles.Count
   ReleaseAcceptanceJavaFiles = $releaseAcceptanceFiles.Count
   ArchiveRegistryJavaFiles = $archiveRegistryFiles.Count
   ArchiveHandoffJavaFiles = $archiveHandoffFiles.Count

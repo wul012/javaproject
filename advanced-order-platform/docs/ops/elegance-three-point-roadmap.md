@@ -386,6 +386,32 @@ deployment、managed-audit connection 和 service startup 的阻断政策，不�
 `v1896-order-platform-sandbox-dossier-catalog` 在本地与 canonical remote 均 peel 到完整
 closeout，v1896 发布链已闭合；这仍不等于外部已授予九分。
 
+## v1897 检查点
+
+Sandbox precheck upstream receipt verification manifest 原由八个 Catalog 分别生成 source、
+split module、reference、field、boundary、code-health、verification 与 handoff，Service 再把
+八个列表展开给 renderer 和 351 行长名 Support。v1897 先在 released v1896 上冻结完整
+response：数量向量 `1/12/5/7/17/6/10/4/8/22`，sorted-property UTF-8 JSON SHA-256 为
+`03541a7ae5e46684151a3829458dde56453a4acc5ff1f397ad343892fc7656e2`。随后八个 owner
+收敛为一个 397 行 `ManifestCatalog`；typed `Evidence` 复制八组顶层列表，Service 只装配
+一次，71 行 `ManifestRenderer` 与 182 行 `ManifestSupport` 读取同一快照。
+
+Catalog 的十七个 boundary guard 与十个 verification gate 编码 credential、SQL、deployment、
+rollback、managed-audit connection、service startup、mini-kv write 与 production window 的
+关闭政策，不是纯常量袋。第一稿经 Spotless 后为 406 行，未放宽 400 行预设门；提取唯一
+boundary evidence 前缀后降为 397。Renderer 初稿使全局行数反弹到 3,209，随后由八个调用者
+共享 typed section adapter，降到 3,185。家族生产文件 `12 -> 5`、总行数
+`1,124 -> 768`，净删 7 文件与 356 行。
+
+生产 Java `1,308 -> 1,301`，ops `1,176 -> 1,169`，Catalog `258 -> 251`，测试
+`907 -> 908`，Readiness `975 -> 966`，renderer 保持 30 个且总行数 `3,203 -> 3,185`。
+生产名称收紧到 `1,054/19,458/2,613`，测试收紧到 `685/9,768/3,646`；exact baseline
+删除 28 项、新增 0 项。完整 response oracle、行为和结构 focused gate 已通过；讲解
+4,520 Han/十章节，归档精确为 1,708 files/20,338,223 bytes。完整 release gate 固定
+v1896 closeout `a0be0c78`，通过 2,030 项测试（12:23）、JaCoCo 2,066 类/all floors、
+SpotBugs 0/0，并打包 67,950,901-byte jar。远端发布生命周期尚未执行完成，不能提前写成
+发布通过，更不等于外部已授予九分。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。
@@ -398,6 +424,7 @@ closeout，v1896 发布链已闭合；这仍不等于外部已授予九分。
 
 ## 对抗性自审
 
-最强质疑是“把很多小文件塞进一个大文件只是换一种难看”。因此每个组合器必须低于 300 行，
+最强质疑是“把很多小文件塞进一个大文件只是换一种难看”。因此纯参数组合器必须低于 300 行；
+确实编码阻断政策的单一领域 owner 必须先声明边界并受低于 400 行的机械门约束。两类改动都要
 通过短名、类型导入和声明式 section mapping 降低总行数与长标识符次数；只降低文件数而不降低
 总复杂度的版本不算有效进展。

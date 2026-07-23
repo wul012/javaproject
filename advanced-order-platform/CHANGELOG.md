@@ -4,6 +4,27 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1897 - Sandbox upstream receipt manifest Catalog convergence
+
+- 在 released v1896 上先冻结完整 manifest response：数量向量
+  `1/12/5/7/17/6/10/4/8/22`，sorted-property UTF-8 SHA-256 为
+  `03541a7ae5e46684151a3829458dde56453a4acc5ff1f397ad343892fc7656e2`。
+- 删除八个单列表 Catalog 和 351 行旧 Support，以 397 行 `ManifestCatalog`、不可变 typed
+  `Evidence` 与 182 行 `ManifestSupport` 收敛投影和判定；Service 恰好装配一次，Renderer 与
+  Support 不再接收展开列表。
+- Renderer 由八次 typed `section` 调用共享展示适配器，家族从 89 行降到 71 行；五个触及的
+  长测试 owner 改为短职责名，原断言保留，新增完整 response oracle。
+- 公开 Controller、Response、route、profile、列表顺序、八段 Markdown、二十二条 checks、
+  只读事务和 Java/mini-kv 执行禁止边界保持不变。
+- Manifest 生产包 `12 -> 5`、总行数 `1,124 -> 768`；生产 Java `1,308 -> 1,301`、ops
+  `1,176 -> 1,169`、Catalog `258 -> 251`、测试 `907 -> 908`、Readiness `975 -> 966`，
+  renderer 行数 `3,203 -> 3,185`。
+- 生产/测试名称指标达到 `1054/19458/2613` 与 `685/9768/3646`，exact baseline 删除
+  28 项、新增 0 项。讲解 4,520 Han/十章节，授权归档为
+  1,708 files / 20,338,223 raw bytes。完整本地 release gate 固定 v1896
+  `a0be0c78`，通过 2,030 项测试（12:23）、JaCoCo 2,066 类/all floors、SpotBugs 0/0，
+  并打包 67,950,901-byte jar；implementation CI、closeout、tag 与 receipt 尚待完成。
+
 ## v1896 - Sandbox blocked-execution dossier Catalog convergence
 
 - 在 released v1895 上先冻结完整 sandbox blocked-execution dossier response：数量向量

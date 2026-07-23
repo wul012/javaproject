@@ -12,47 +12,29 @@ import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardRea
 import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse.SplitModule;
 import com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse.VerificationGate;
 import java.util.List;
+import java.util.function.Function;
 
 final class ManifestRenderer {
 
   private ManifestRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceReceipt> sourceReceipts,
-      List<SplitModule> splitModules,
-      List<EvidenceReference> evidenceReferences,
-      List<PrecheckField> precheckFields,
-      List<BoundaryGuard> boundaryGuards,
-      List<CodeHealthGate> codeHealthGates,
-      List<VerificationGate> verificationGates,
-      List<HandoffNote> handoffNotes) {
+  static List<MarkdownSection> render(ManifestCatalog.Evidence evidence) {
     return List.of(
-        mapped(
-            "Source Receipt", sourceReceipts, ManifestRenderer::sourceLine, MarkdownSection::new),
-        mapped("Split Modules", splitModules, ManifestRenderer::moduleLine, MarkdownSection::new),
-        mapped(
-            "Evidence References",
-            evidenceReferences,
-            ManifestRenderer::referenceLine,
-            MarkdownSection::new),
-        mapped(
-            "Precheck Fields", precheckFields, ManifestRenderer::fieldLine, MarkdownSection::new),
-        mapped(
-            "Boundary Guards",
-            boundaryGuards,
-            ManifestRenderer::boundaryLine,
-            MarkdownSection::new),
-        mapped(
-            "Code Health Gates",
-            codeHealthGates,
-            ManifestRenderer::healthLine,
-            MarkdownSection::new),
-        mapped(
-            "Verification Gates",
-            verificationGates,
-            ManifestRenderer::verificationLine,
-            MarkdownSection::new),
-        mapped("Handoff Notes", handoffNotes, ManifestRenderer::handoffLine, MarkdownSection::new));
+        section("Source Receipt", evidence.sourceReceipts(), ManifestRenderer::sourceLine),
+        section("Split Modules", evidence.splitModules(), ManifestRenderer::moduleLine),
+        section(
+            "Evidence References", evidence.evidenceReferences(), ManifestRenderer::referenceLine),
+        section("Precheck Fields", evidence.precheckFields(), ManifestRenderer::fieldLine),
+        section("Boundary Guards", evidence.boundaryGuards(), ManifestRenderer::boundaryLine),
+        section("Code Health Gates", evidence.codeHealthGates(), ManifestRenderer::healthLine),
+        section(
+            "Verification Gates", evidence.verificationGates(), ManifestRenderer::verificationLine),
+        section("Handoff Notes", evidence.handoffNotes(), ManifestRenderer::handoffLine));
+  }
+
+  private static <T> MarkdownSection section(
+      String heading, List<T> items, Function<T, String> line) {
+    return mapped(heading, items, line, MarkdownSection::new);
   }
 
   private static String sourceLine(SourceReceipt source) {

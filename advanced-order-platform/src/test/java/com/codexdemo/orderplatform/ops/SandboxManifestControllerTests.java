@@ -11,7 +11,7 @@ import com.codexdemo.orderplatform.outbox.OutboxRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestControllerTests {
+class SandboxManifestControllerTests {
 
   private static
   OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestService service() {

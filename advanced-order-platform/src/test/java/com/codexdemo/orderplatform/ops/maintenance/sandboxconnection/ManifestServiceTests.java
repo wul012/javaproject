@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestImmutabilityTests {
+class ManifestServiceTests {
 
   @Test
   void codeHealthVerificationAndHandoffStayReady() {

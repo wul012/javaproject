@@ -24,58 +24,8 @@ public class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificati
   public OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse
       manifest() {
     var rehearsal = opsEvidenceService.releaseApprovalRehearsal();
-    var sourceReceipts =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSourceCatalog
-            .receipts(rehearsal);
-    var splitModules =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSplitCatalog
-            .modules();
-    var evidenceReferences =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestReferenceCatalog
-            .references(rehearsal);
-    var precheckFields =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestFieldCatalog
-            .fields(rehearsal);
-    var boundaryGuards =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestBoundaryCatalog
-            .guards(rehearsal);
-    var codeHealthGates =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestCodeHealthCatalog
-            .gates();
-    var verificationGates =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestVerificationCatalog
-            .gates(
-                sourceReceipts,
-                splitModules,
-                evidenceReferences,
-                precheckFields,
-                boundaryGuards,
-                codeHealthGates);
-    var handoffNotes =
-        OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestHandoffCatalog
-            .notes();
-    var markdownSections =
-        ManifestRenderer.render(
-            sourceReceipts,
-            splitModules,
-            evidenceReferences,
-            precheckFields,
-            boundaryGuards,
-            codeHealthGates,
-            verificationGates,
-            handoffNotes);
-    return OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSupport
-        .response(
-            RESPONSE_VERSION,
-            ENDPOINT,
-            sourceReceipts,
-            splitModules,
-            evidenceReferences,
-            precheckFields,
-            boundaryGuards,
-            codeHealthGates,
-            verificationGates,
-            handoffNotes,
-            markdownSections);
+    var evidence = ManifestCatalog.evidence(rehearsal);
+    var markdownSections = ManifestRenderer.render(evidence);
+    return ManifestSupport.response(RESPONSE_VERSION, ENDPOINT, evidence, markdownSections);
   }
 }

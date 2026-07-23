@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSplitTests {
+class ManifestEvidenceTests {
 
   @Test
   void splitModulesCoverTheNodeV1983ThroughV1994Refactor() {

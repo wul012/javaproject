@@ -30,18 +30,11 @@ class SandboxExtractionTests {
 
   private static final List<String> MANIFEST_FILES =
       List.of(
+          "ManifestCatalog.java",
           "ManifestRenderer.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestBoundaryCatalog.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestCodeHealthCatalog.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestFieldCatalog.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestHandoffCatalog.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestReferenceCatalog.java",
+          "ManifestSupport.java",
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestResponse.java",
           "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestService.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSourceCatalog.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSplitCatalog.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSupport.java",
-          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestVerificationCatalog.java",
           "OpsShardReadinessSandboxConnectionRoutePaths.java");
 
   private static final List<String> RETIRED_DOSSIER_FILES =
@@ -57,6 +50,18 @@ class SandboxExtractionTests {
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierVerificationCatalog.java",
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierWarningCatalog.java",
           "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierRenderer.java");
+
+  private static final List<String> RETIRED_MANIFEST_FILES =
+      List.of(
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestBoundaryCatalog.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestCodeHealthCatalog.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestFieldCatalog.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestHandoffCatalog.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestReferenceCatalog.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSourceCatalog.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSplitCatalog.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestSupport.java",
+          "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestVerificationCatalog.java");
 
   @Test
   void extractionNoteStaysDiscoverable() throws IOException {
@@ -118,6 +123,41 @@ class SandboxExtractionTests {
                 PACKAGE_ROOT.resolve(
                     "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestRenderer.java")))
         .isFalse();
+  }
+
+  @Test
+  void manifestUsesOneTypedSnapshot() throws IOException {
+    String catalog = read(PACKAGE_ROOT.resolve("ManifestCatalog.java"));
+    String renderer = read(PACKAGE_ROOT.resolve("ManifestRenderer.java"));
+    String service =
+        read(
+            PACKAGE_ROOT.resolve(
+                "OpsShardReadinessSandboxConnectionPrecheckUpstreamReceiptVerificationManifestService.java"));
+    String support = read(PACKAGE_ROOT.resolve("ManifestSupport.java"));
+
+    assertThat(catalog.lines().count()).isLessThan(400);
+    assertThat(occurrences(catalog, "List.copyOf(")).isEqualTo(10);
+    for (String field :
+        List.of(
+            "sourceReceipts",
+            "splitModules",
+            "evidenceReferences",
+            "precheckFields",
+            "boundaryGuards",
+            "codeHealthGates",
+            "verificationGates",
+            "handoffNotes")) {
+      assertThat(catalog).contains(field + " = List.copyOf(" + field + ")");
+    }
+    assertThat(occurrences(service, "ManifestCatalog.evidence(rehearsal)")).isEqualTo(1);
+    assertThat(renderer).contains("render(ManifestCatalog.Evidence evidence)");
+    assertThat(support).contains("ManifestCatalog.Evidence evidence");
+    assertThat(catalog).doesNotContain("ManifestSupport", "ManifestRenderer");
+
+    for (String retired : RETIRED_MANIFEST_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(retired))).as(retired).isFalse();
+      assertThat(Files.exists(OPS_ROOT.resolve(retired))).as(retired).isFalse();
+    }
   }
 
   @Test
