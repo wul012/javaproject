@@ -532,6 +532,23 @@ production-profile smoke, and 0:05 JaCoCo upload. Annotated tag
 `v1893-order-platform-handoff-archive-digest-catalog` peels to
 `9518c20313054471e1065231e602d1be572ecea0` locally and remotely.
 
+Current v1894 candidate: the complete MinimalReadOnlyGateOperatorCiHandoff Archive Digest
+Consumer Package first passes its canonical JSON oracle on released v1893. The collection vector
+is `1/5/4/5/5/5/8/5/8/9/28` and the full sorted-property UTF-8 SHA-256 is
+`1ae92cfe8926ecb9ae772c8eec70dd8cddfbc1b0654e11685ef6304249803c60`. Nine one-list
+Catalog owners become one 262-line package-local `PackageCatalog`; its typed Evidence owns nine
+immutable snapshots. Service assembles once while Renderer and the renamed 203-line
+`PackageSupport` retain display and status/check responsibilities. Expected evidence shape belongs
+to Catalog, and a structure gate rejects any reverse Catalog-to-Support dependency. Public route,
+Response, Controller, ordering, Markdown, 28 checks, and read-only transaction stay unchanged.
+Production Java reaches 1,324 files, ops 1,192, Catalogs 275, the package 5, and tests reach 907.
+Production/test name metrics reach `1084/19785/2643` and `701/9807/3672`; the exact baseline has
+31 removals and no additions. Focused gates pass 47/47. The walkthrough has 4,317 Han and ten
+standard headings; the exact archive is 1,705 files / 20,282,267 raw bytes. Full release verification
+pins v1893 `9518c203` and passes 2,023 tests in 10:32. JaCoCo analyzes 2,085 classes and meets every
+floor; SpotBugs reports 0/0; the executable jar is 67,976,640 bytes. Canonical implementation and
+closeout CI, and the annotated v1894 tag remain pending.
+
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
 CRLF and Linux LF. The repair canonicalizes line endings for text hash input only and

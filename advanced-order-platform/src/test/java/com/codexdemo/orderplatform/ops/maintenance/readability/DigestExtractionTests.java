@@ -166,21 +166,20 @@ class DigestExtractionTests {
   void consumerPackageImportsTheMovedDigestBoundary() throws IOException {
     Path consumerPackageRoot =
         OPS_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateoperatorciconsumerpackage"));
-    for (String file :
-        List.of(
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAcceptanceCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryLockCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageChecklistCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageCiMatrixCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageManifestCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryService.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistrySupport.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageScorecardCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSectionCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSourceDigestCatalog.java")) {
-      assertThat(read(consumerPackageRoot.resolve(file))).as(file).contains(PACKAGE_IMPORT);
+    for (String file : List.of("PackageCatalog.java", "PackageSupport.java")) {
+      assertThat(read(consumerPackageRoot.resolve(file)))
+          .as(file)
+          .contains(
+              PACKAGE_IMPORT,
+              "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse");
     }
+    assertThat(
+            read(
+                consumerPackageRoot.resolve(
+                    "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryService.java")))
+        .contains(
+            PACKAGE_IMPORT,
+            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryService");
   }
 
   @Test

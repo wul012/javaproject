@@ -4,6 +4,23 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1894 - Operator CI consumer package Catalog convergence
+
+- 在 released v1893 上先冻结完整 consumer package response：数量向量
+  `1/5/4/5/5/5/8/5/8/9/28`，sorted-property UTF-8 SHA-256 为
+  `1ae92cfe8926ecb9ae772c8eec70dd8cddfbc1b0654e11685ef6304249803c60`。
+- 删除九个同形 Catalog，以 262 行 `PackageCatalog` 和 typed immutable `Evidence` 统一九组
+  投影；service 恰好装配一次，Renderer 与 203 行 `PackageSupport` 分别保留展示与判定职责。
+- 三个旧长名测试 owner 与历史结构 owner 改为六个短职责测试；生产包 `13 -> 5`，测试包
+  `5 -> 6`，完整响应、Markdown、checks、route 与只读安全边界不变。
+- 生产 Java `1332 -> 1324`，ops `1200 -> 1192`，Catalog `283 -> 275`，测试
+  `906 -> 907`；生产/测试名称指标达到 `1084/19785/2643` 与 `701/9807/3672`，exact
+  baseline 删除 31 项、新增 0 项，renderer 行数 `3228 -> 3219`。
+- focused gate 47/47 通过；讲解为 4,317 Han/十章节，授权归档为
+  1,705 files / 20,282,267 raw bytes。完整 release 固定 v1893 closeout `9518c203`，通过
+  2,023/2,023，Maven 10:32，JaCoCo 2,085 类/全部阈值，SpotBugs 0/0，jar
+  67,976,640 字节；canonical CI 与 tag 证据待本版收口后补入。
+
 ## v1893 - Operator CI handoff archive digest Catalog convergence
 
 - 在 v1892 已发布实现上先冻结完整 handoff archive digest registry：集合向量

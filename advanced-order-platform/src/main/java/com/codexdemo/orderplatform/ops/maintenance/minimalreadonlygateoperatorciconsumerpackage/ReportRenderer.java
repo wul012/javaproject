@@ -17,26 +17,17 @@ final class ReportRenderer {
 
   private ReportRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceDigestSnapshot> sources,
-      List<ManifestEntry> manifest,
-      List<ConsumerAudience> audiences,
-      List<PackageSection> sections,
-      List<AcceptanceCriterion> criteria,
-      List<CiMatrixEntry> ciMatrix,
-      List<BoundaryLock> locks,
-      List<HandoffChecklistItem> checklist,
-      List<ScorecardEntry> scorecard) {
+  static List<MarkdownSection> render(PackageCatalog.Evidence evidence) {
     return List.of(
-        sources(sources),
-        manifest(manifest),
-        audiences(audiences),
-        sections(sections),
-        acceptance(criteria),
-        ciMatrix(ciMatrix),
-        locks(locks),
-        checklist(checklist),
-        scorecard(scorecard));
+        sources(evidence.sourceDigests()),
+        manifest(evidence.manifest()),
+        audiences(evidence.audiences()),
+        sections(evidence.sections()),
+        acceptance(evidence.criteria()),
+        ciMatrix(evidence.ciMatrix()),
+        locks(evidence.locks()),
+        checklist(evidence.checklist()),
+        scorecard(evidence.scorecard()));
   }
 
   private static MarkdownSection sources(List<SourceDigestSnapshot> entries) {

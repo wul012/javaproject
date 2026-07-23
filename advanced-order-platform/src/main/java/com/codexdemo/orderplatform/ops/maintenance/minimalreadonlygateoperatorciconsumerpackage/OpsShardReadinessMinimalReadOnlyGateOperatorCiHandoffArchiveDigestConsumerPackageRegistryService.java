@@ -32,58 +32,13 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse
       registry() {
     var sourceDigest = sourceDigestService.registry();
-    var sourceDigests =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSourceDigestCatalog
-            .snapshots(sourceDigest);
-    var manifest =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageManifestCatalog
-            .manifest(sourceDigest);
-    var audiences =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAudienceCatalog
-            .audiences(sourceDigest);
-    var sections =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageSectionCatalog
-            .sections(sourceDigest);
-    var criteria =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageAcceptanceCatalog
-            .criteria(sourceDigest);
-    var ciMatrix =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageCiMatrixCatalog
-            .matrix(sourceDigest);
-    var locks =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageBoundaryLockCatalog
-            .locks(sourceDigest);
-    var checklist =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageChecklistCatalog
-            .checklist(sourceDigest);
-    var scorecard =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageScorecardCatalog
-            .scorecard(
-                sourceDigest, manifest, audiences, sections, criteria, ciMatrix, locks, checklist);
-    return OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistrySupport
-        .response(
-            RESPONSE_VERSION,
-            ENDPOINT,
-            PROFILE,
-            sourceDigest,
-            sourceDigests,
-            manifest,
-            audiences,
-            sections,
-            criteria,
-            ciMatrix,
-            locks,
-            checklist,
-            scorecard,
-            ReportRenderer.render(
-                sourceDigests,
-                manifest,
-                audiences,
-                sections,
-                criteria,
-                ciMatrix,
-                locks,
-                checklist,
-                scorecard));
+    var evidence = PackageCatalog.evidence(sourceDigest);
+    return PackageSupport.response(
+        RESPONSE_VERSION,
+        ENDPOINT,
+        PROFILE,
+        sourceDigest,
+        evidence,
+        ReportRenderer.render(evidence));
   }
 }

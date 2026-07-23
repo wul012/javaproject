@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistrySourceTests {
+class PackageRegistryServiceTests {
 
   @Test
-  void buildsConsumerPackageFromArchiveDigestRegistry() {
+  void buildsFromArchiveDigestRegistry() {
     var response = ConsumerPackageTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
@@ -31,7 +31,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
   }
 
   @Test
-  void keepsConsumerPackageStrictlyReadOnly() {
+  void remainsStrictlyReadOnly() {
     var response = ConsumerPackageTestData.registry();
 
     assertThat(response.readOnly()).isTrue();

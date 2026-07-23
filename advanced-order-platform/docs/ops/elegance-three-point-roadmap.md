@@ -304,6 +304,26 @@ floors、SpotBugs 0/0，并打包 67,986,621-byte jar。Canonical implementation
 `v1893-order-platform-handoff-archive-digest-catalog` 在本地与 canonical remote 均 peel 到
 完整 closeout，v1893 发布链已闭合。
 
+## v1894 检查点
+
+MinimalReadOnlyGateOperatorCiHandoff Archive Digest Consumer Package 原由九个长名 Catalog
+分别生成 source、manifest、audience、section、acceptance、CI、lock、checklist 与 scorecard，
+service 再把九个列表同时传给 renderer 和 Support。v1894 先在 released v1893 上冻结完整响应：
+数量向量 `1/5/4/5/5/5/8/5/8/9/28`，sorted-property UTF-8 JSON SHA-256 为
+`1ae92cfe8926ecb9ae772c8eec70dd8cddfbc1b0654e11685ef6304249803c60`。随后九个 owner
+收敛为一个 262 行 `PackageCatalog`；typed `Evidence` 复制九组列表，service 只生成一次，
+renderer 与 203 行 `PackageSupport` 读取同一聚合值并继续分别拥有展示和状态职责。
+
+生产 Java `1,332 -> 1,324`，ops `1,200 -> 1,192`，Catalog `283 -> 275`，当前 package
+`13 -> 5`，测试 Java `906 -> 907`。生产名称收紧到 `1,084/19,785/2,643`，测试收紧到
+`701/9,807/3,672`，exact baseline 删除 31 项、新增 0 项；renderer 总行数
+`3,228 -> 3,219`。结构门要求九次复制、一次装配、300 行上限、五个生产 owner、六个测试
+owner 以及所有退休文件永久缺席。讲解 4,317 Han/10 headings，归档精确为
+1,705 files/20,282,267 bytes。Focused gate 47/47 通过；完整 release gate 固定 v1893
+`9518c203`，通过 2,023 个测试（10:32）、JaCoCo 2,085 类/all floors、SpotBugs 0/0，并打包
+67,976,640-byte jar。Canonical implementation/closeout CI 与 tag 仍待完成，因此当前只登记为
+candidate。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。
