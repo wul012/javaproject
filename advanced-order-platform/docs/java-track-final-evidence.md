@@ -461,7 +461,7 @@ verify, production-profile smoke, and successful JaCoCo upload. Closeout `9069d5
 `29889326585` (Docker 1:45, headless 19:49, wrapper verify 19:00). The annotated tag
 `v1890-order-platform-archive-registry-catalog` peels to the closeout locally and remotely.
 
-Current v1891 candidate: the complete MinimalReadOnlyGateOperatorCiHandoff Registry first
+Released v1891: the complete MinimalReadOnlyGateOperatorCiHandoff Registry first
 passes its canonical JSON oracle on the released v1890 implementation. The collection vector is
 `1/4/5/8/5/5/15` and the full sorted-property UTF-8 SHA-256 is
 `4fc6dc6069cff5bc40ee0934bc1ed9133ff50bcfe7c3c5940429e83cf4287ab0`. Four one-list
@@ -473,13 +473,32 @@ Java reaches 1,342 files, ops 1,210, Catalogs 293, the package 15, and tests 906
 Production/test name metrics reach `1107/20002/2666` and `714/9844/3695`; the exact baseline
 has 12 removals and no additions. Upstream/current/downstream behavior, structure, change, and
 elegance gates pass 77/77. The walkthrough has 3,692 Han and ten standard headings; the exact
-archive is 1,702 files / 20,228,272 raw bytes. Remote implementation CI, closeout, and tag remain
-pending and are required before this candidate becomes a released version. The local release gate
-pins v1890 `9069d54e` and passes 2,015 tests in 8:34. JaCoCo analyzes 2,100 classes and meets
+archive is 1,702 files / 20,228,272 raw bytes. The local release gate pins v1890 `9069d54e`
+and passes 2,015 tests in 8:34. JaCoCo analyzes 2,100 classes and meets
 every floor; SpotBugs reports 0/0; the executable jar is 67,997,219 bytes.
 Implementation commit `be7bd5c1` passes canonical Actions run `29892031685`: Docker-tagged
 verification completes in 2:19 and headless regression in 19:26, including an 18:38 wrapper
-verify, 0:12 production-profile smoke, and 0:05 JaCoCo upload. Closeout CI and tag remain pending.
+verify, 0:12 production-profile smoke, and 0:05 JaCoCo upload. Closeout `cf0b1d87`
+passes run `29893092335`: Docker 2:13 and headless 19:38, including an 18:51 wrapper verify,
+0:13 production-profile smoke, and 0:04 JaCoCo upload. Annotated tag
+`v1891-order-platform-handoff-registry-catalog` peels to `cf0b1d87` locally and remotely.
+
+Current v1892 candidate: the complete MinimalReadOnlyGateOperatorCiHandoff Archive Registry
+first passes its canonical JSON oracle on released v1891. The collection vector is
+`1/6/4/5/8/6/6/21` and the full sorted-property UTF-8 SHA-256 is
+`1b9fd78f3ac4d3905d027f2c5b3d04c15a768b0b17b45497d583606ead7a5321`. Six one-list
+Catalog owners become one 200-line package-local `ArchiveCatalog`; its typed Evidence owns six
+immutable snapshots. Service assembles once while Renderer and Support retain display and
+status/check responsibilities. Public route, Response, Controller, ordering, Markdown, checks,
+and read-only transaction stay unchanged. Production Java reaches 1,337 files, ops 1,205,
+Catalogs 288, the package 10, and tests remain 906. Production/test name metrics reach
+`1101/19956/2660` and `710/9829/3687`; the exact baseline has 24 removals and no additions.
+Upstream/current/downstream behavior, structure, archive, change, and elegance gates pass 82/82.
+The walkthrough has 3,391 Han and ten standard headings; the exact archive is
+1,703 files / 20,244,957 raw bytes. The local release gate pins v1891 `cf0b1d87` and passes
+2,017 tests in 9:52. JaCoCo analyzes 2,096 classes and meets every floor; SpotBugs reports
+0/0; the executable jar is 67,992,034 bytes. Implementation/closeout CI and the annotated tag
+remain pending and binding.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

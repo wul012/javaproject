@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryAggregateChecksTests {
+class ArchiveChecksTests {
 
   @Test
-  void aggregateChecksRemainStableAndBoundaryFocused() {
+  void checksRemainStableAndBoundaryFocused() {
     var response = ArchiveTestData.registry();
 
     assertThat(response.checks()).hasSize(21);

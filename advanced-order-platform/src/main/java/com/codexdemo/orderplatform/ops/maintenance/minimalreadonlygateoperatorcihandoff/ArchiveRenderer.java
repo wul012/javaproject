@@ -14,20 +14,14 @@ final class ArchiveRenderer {
 
   private ArchiveRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceHandoffSnapshot> sources,
-      List<ArtifactVerification> artifacts,
-      List<OperatorLaneVerification> lanes,
-      List<CiBatchVerification> batches,
-      List<BoundaryVerification> boundaries,
-      List<ScorecardEntry> scorecard) {
+  static List<MarkdownSection> render(ArchiveCatalog.Evidence evidence) {
     return List.of(
-        sources(sources),
-        artifacts(artifacts),
-        lanes(lanes),
-        batches(batches),
-        boundaries(boundaries),
-        scorecard(scorecard));
+        sources(evidence.sourceHandoffSnapshots()),
+        artifacts(evidence.artifactVerifications()),
+        lanes(evidence.operatorLaneVerifications()),
+        batches(evidence.ciBatchVerifications()),
+        boundaries(evidence.boundaryVerifications()),
+        scorecard(evidence.scorecard()));
   }
 
   private static MarkdownSection sources(List<SourceHandoffSnapshot> entries) {

@@ -29,40 +29,17 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
           String endpoint,
           String profile,
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffRegistryResponse sourceHandoff,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
-                      .SourceHandoffSnapshot>
-              sourceHandoffs,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
-                      .ArtifactVerification>
-              artifacts,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
-                      .OperatorLaneVerification>
-              lanes,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
-                      .CiBatchVerification>
-              ciBatches,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
-                      .BoundaryVerification>
-              boundaries,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
-                      .ScorecardEntry>
-              scorecard,
+          ArchiveCatalog.Evidence evidence,
           List<
                   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
                       .MarkdownSection>
               markdownSections) {
-    var sourceHandoffCopy = List.copyOf(sourceHandoffs);
-    var artifactCopy = List.copyOf(artifacts);
-    var laneCopy = List.copyOf(lanes);
-    var ciBatchCopy = List.copyOf(ciBatches);
-    var boundaryCopy = List.copyOf(boundaries);
-    var scorecardCopy = List.copyOf(scorecard);
+    var sourceHandoffCopy = evidence.sourceHandoffSnapshots();
+    var artifactCopy = evidence.artifactVerifications();
+    var laneCopy = evidence.operatorLaneVerifications();
+    var ciBatchCopy = evidence.ciBatchVerifications();
+    var boundaryCopy = evidence.boundaryVerifications();
+    var scorecardCopy = evidence.scorecard();
     var markdownSectionCopy = List.copyOf(markdownSections);
     int passedArtifactCount = countArtifactStatus(artifactCopy);
     int passedLaneCount = countLaneStatus(laneCopy);

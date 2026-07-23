@@ -4,6 +4,26 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1892 - Operator CI handoff archive Catalog convergence
+
+- 在 v1891 已发布实现上先冻结完整 handoff archive registry：集合向量
+  `1/6/4/5/8/6/6/21`，sorted-property UTF-8 SHA-256 为
+  `1b9fd78f3ac4d3905d027f2c5b3d04c15a768b0b17b45497d583606ead7a5321`。
+- 删除六个单列表 Catalog，新增一个 200 行包内 `ArchiveCatalog`；typed `Evidence` 对六组
+  列表建立不可变快照，service 每次只装配一次。
+- renderer 与 Support 改收同一 evidence，并继续分别拥有 Markdown 与 status/checks。
+  公开 route、Response、Controller、顺序、只读事务和 Java/mini-kv 禁止边界不变。
+- 四个长测试 owner 收敛为 `ArchiveCatalogTests`、`ArchiveRegistryServiceTests`、
+  `ArchiveChecksTests` 与完整 response oracle；所有权测试覆盖六组列表。
+- 生产 Java `1342 -> 1337`，ops `1210 -> 1205`，Catalog `293 -> 288`，当前包
+  `15 -> 10`，测试保持 906。生产名称指标达到 `1101/19956/2660`，测试达到
+  `710/9829/3687`；exact baseline 删除 24 项、新增 0 项。
+- 扩大行为、上下游、结构、归档和优雅选择 82/82 通过；新增 3,391-Han、十章节中文讲解，
+  授权归档为 1,703 files / 20,244,957 raw bytes。
+- 完整 release gate 固定 v1891 closeout `cf0b1d87`，通过 2,017/2,017，Maven 9:52，
+  JaCoCo 2,096 类/全部阈值，SpotBugs 0/0，jar 67,992,034 字节。Implementation/closeout
+  CI 与 annotated tag 仍是完成门，未通过前本版本保持 candidate 状态。
+
 ## v1891 - Operator CI handoff Catalog convergence
 
 - 在 v1890 已发布实现上冻结完整 handoff registry：集合向量 `1/4/5/8/5/5/15`，
@@ -25,7 +45,10 @@
   `9069d54e`，通过 2,015/2,015，Maven 8:34，JaCoCo 2,100 类/全部阈值，SpotBugs
   0/0，jar 67,997,219 字节。Implementation `be7bd5c1` 通过 canonical Actions run
   `29892031685`：Docker 2:19、headless 19:26，其中 wrapper verify 18:38、prod smoke
-  0:12、JaCoCo 上传 0:05。Closeout CI 与 annotated tag 仍是完成门。
+  0:12、JaCoCo 上传 0:05。Closeout `cf0b1d87` 通过 run `29893092335`：Docker 2:13、
+  headless 19:38，其中 wrapper verify 18:51、prod smoke 0:13、JaCoCo 上传 0:04。
+  Annotated tag `v1891-order-platform-handoff-registry-catalog` 在本地与 `javaproject` 均
+  peel 到 `cf0b1d87`。
 
 ## v1890 - Archive registry Catalog convergence
 

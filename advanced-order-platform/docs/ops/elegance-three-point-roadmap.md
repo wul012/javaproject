@@ -244,7 +244,32 @@ service 每次只生成一次，renderer 与 Support 只通过该聚合值读取
 `9069d54e`，通过 2,015 个测试（8:34）、JaCoCo 2,100 类/all floors、SpotBugs 0/0，并打包
 67,997,219-byte jar。Implementation `be7bd5c1` 的 canonical Actions run `29892031685`
 通过 Docker 2:19 与 headless 19:26，其中 wrapper verify 18:38、prod smoke 0:12、JaCoCo
-上传 0:05。Closeout CI 和 canonical tag 尚未执行，不能提前记为完成。
+上传 0:05。Closeout `cf0b1d87` 的 canonical run `29893092335` 通过 Docker 2:13 与
+headless 19:38，其中 wrapper verify 18:51、prod smoke 0:13、JaCoCo 上传 0:04；tag
+`v1891-order-platform-handoff-registry-catalog` 在本地和 canonical remote 均 peel 到
+`cf0b1d87`，v1891 发布链已闭合。
+
+## v1892 检查点
+
+MinimalReadOnlyGateOperatorCiHandoff Archive Registry 原由六个长名 Catalog 分别生成 source、
+artifact、lane、batch、boundary 与 scorecard，service 再把六个列表分别传给 renderer 和
+Support。v1892 先在 released v1891 上冻结完整响应：集合向量 `1/6/4/5/8/6/6/21`，
+sorted-property UTF-8 JSON SHA-256 为
+`1b9fd78f3ac4d3905d027f2c5b3d04c15a768b0b17b45497d583606ead7a5321`。随后六个 owner
+收敛为一个 200 行 `ArchiveCatalog`；typed `Evidence` 复制六组列表，service 只生成一次，
+renderer 与 Support 读取同一聚合值并继续分别拥有展示和状态职责。
+
+生产 Java `1,342 -> 1,337`，ops `1,210 -> 1,205`，Catalog `293 -> 288`，当前 package
+`15 -> 10`，测试 Java 保持 906。生产名称收紧到 `1,101/19,956/2,660`，测试收紧到
+`710/9,829/3,687`，exact baseline 删除 24 项、新增 0 项；renderer 总行数
+`3,241 -> 3,234`。四个长测试 owner 收敛为四个短职责 owner，结构门要求六次复制、一次
+装配、260 行上限以及所有退休文件永久缺席。
+
+上游 handoff、当前 archive、下游 digest、结构、archive、change 与 elegance 选择 82/82
+通过；文档联合选择 50/50。讲解 3,391 Han/10 headings，归档精确为
+1,703 files/20,244,957 bytes。完整 release gate 固定 v1891 `cf0b1d87`，通过 2,017 个
+测试（9:52）、JaCoCo 2,096 类/all floors、SpotBugs 0/0，并打包 67,992,034-byte jar。
+Implementation/closeout CI 与 canonical tag 尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 

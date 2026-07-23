@@ -65,7 +65,11 @@ service 仍先调用 `sourceArchiveService.registry()` 获取 execution archive 
 - 第一次 docs 联合门运行 97 个测试，仅发现“实际工作量说明”章节顺序不符合标准；不改测试、不删内容，移动完整章节并重建 manifest 后，同一联合门 31 份报告、97/97 通过。
 - 最终 `scripts/verify-release.ps1` 固定 predecessor tag `v1890-order-platform-archive-registry-catalog` 与 commit `9069d54e`；完整运行通过 2,015/2,015，Maven 8:34，JaCoCo 2,100 类/全部阈值，SpotBugs 0/0，jar 67,997,219 字节。
 - Implementation commit `be7bd5c1` 通过 canonical Actions run `29892031685`：Docker-tagged job 2:19，headless job 19:26，其中 wrapper verify 18:38、prod-profile smoke 0:12、JaCoCo artifact 上传 0:05。
-- Closeout commit/CI 与 annotated tag 仍须读取真实结果后补记，当前不得提前宣称完成。
+- Closeout `cf0b1d87` 通过 canonical Actions run `29893092335`：Docker-tagged job
+  2:13，headless job 19:38，其中 wrapper verify 18:51、prod-profile smoke 0:13、
+  JaCoCo artifact 上传 0:04。Annotated tag
+  `v1891-order-platform-handoff-registry-catalog` 已推送，本地与 `javaproject` 的 peeled SHA
+  均为 `cf0b1d87c00979001c275041c9fa493ff4c208fb`，发布链闭合。
 
 ## Failure Conditions
 

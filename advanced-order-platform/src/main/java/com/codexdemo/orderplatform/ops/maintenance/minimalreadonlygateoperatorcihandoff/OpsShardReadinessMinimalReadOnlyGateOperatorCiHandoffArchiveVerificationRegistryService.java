@@ -28,37 +28,14 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRe
   public OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
       registry() {
     var sourceHandoff = sourceHandoffService.registry();
-    var sourceHandoffs =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveSourceHandoffCatalog.snapshots(
-            sourceHandoff);
-    var artifacts =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveArtifactVerificationCatalog
-            .artifactVerifications(sourceHandoff);
-    var lanes =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveLaneVerificationCatalog
-            .laneVerifications(sourceHandoff);
-    var ciBatches =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveCiBatchVerificationCatalog
-            .ciBatchVerifications(sourceHandoff);
-    var boundaries =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveBoundaryVerificationCatalog
-            .boundaryVerifications(sourceHandoff);
-    var scorecard =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveScorecardCatalog.scorecard(
-            sourceHandoff, artifacts, lanes, ciBatches, boundaries);
+    var evidence = ArchiveCatalog.evidence(sourceHandoff);
     return OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySupport
         .response(
             RESPONSE_VERSION,
             ENDPOINT,
             PROFILE,
             sourceHandoff,
-            sourceHandoffs,
-            artifacts,
-            lanes,
-            ciBatches,
-            boundaries,
-            scorecard,
-            ArchiveRenderer.render(
-                sourceHandoffs, artifacts, lanes, ciBatches, boundaries, scorecard));
+            evidence,
+            ArchiveRenderer.render(evidence));
   }
 }
