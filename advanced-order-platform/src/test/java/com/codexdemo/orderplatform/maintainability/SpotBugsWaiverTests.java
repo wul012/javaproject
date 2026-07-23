@@ -46,7 +46,7 @@ class SpotBugsWaiverTests {
   void filterIsStrictAndUnique() throws Exception {
     assertThat(readWaivers(Files.readString(FILTER, StandardCharsets.UTF_8)))
         .isNotEmpty()
-        .hasSizeLessThanOrEqualTo(682);
+        .hasSizeLessThanOrEqualTo(674);
   }
 
   @Test

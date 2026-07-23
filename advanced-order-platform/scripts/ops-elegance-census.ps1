@@ -11,6 +11,7 @@ $opsRoot = Join-Path $projectRoot 'src/main/java/com/codexdemo/orderplatform/ops
 $digestRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorcihandoffarchivedigest'
 $consumerRoot = Join-Path $opsRoot 'maintenance/minimalreadonlygateoperatorciconsumerpackage'
 $dossierRoot = Join-Path $opsRoot 'maintenance/operatorcidossier'
+$sandboxRoot = Join-Path $opsRoot 'maintenance/sandboxconnection'
 $releaseAcceptanceRoot = Join-Path $opsRoot 'maintenance/ciaccept'
 $archiveRegistryRoot = Join-Path $opsRoot 'maintenance/ciarc'
 $archiveHandoffRoot = Join-Path $opsRoot 'maintenance/releasearchivehandoff'
@@ -57,6 +58,9 @@ $renderers = @($rows | Where-Object Renderer)
 $digestFiles = @(& rg --files $digestRoot -g '*.java')
 $consumerFiles = @(& rg --files $consumerRoot -g '*.java')
 $dossierFiles = @(& rg --files $dossierRoot -g '*.java')
+$sandboxDossierFiles = @(
+  Get-ChildItem -LiteralPath $sandboxRoot -File -Filter '*Dossier*.java'
+)
 $releaseAcceptanceFiles = @(& rg --files $releaseAcceptanceRoot -g '*.java')
 $archiveRegistryFiles = @(& rg --files $archiveRegistryRoot -g '*.java')
 $archiveHandoffFiles = @(& rg --files $archiveHandoffRoot -g '*.java')
@@ -83,6 +87,7 @@ $summary = [ordered]@{
   ArchiveDigestJavaFiles = $digestFiles.Count
   ConsumerPackageJavaFiles = $consumerFiles.Count
   DossierJavaFiles = $dossierFiles.Count
+  SandboxDossierJavaFiles = $sandboxDossierFiles.Count
   ReleaseAcceptanceJavaFiles = $releaseAcceptanceFiles.Count
   ArchiveRegistryJavaFiles = $archiveRegistryFiles.Count
   ArchiveHandoffJavaFiles = $archiveHandoffFiles.Count

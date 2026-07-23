@@ -130,10 +130,7 @@ class OpsExtractionV1854Tests {
     assertThat(
             read(
                 OPS_ROOT.resolve(
-                    Path.of(
-                        "maintenance",
-                        "sandboxconnection",
-                        "OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierBoundaryCatalog.java"))))
+                    Path.of("maintenance", "sandboxconnection", "DossierCatalog.java"))))
         .contains(PACKAGE_IMPORT);
   }
 

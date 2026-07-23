@@ -5,7 +5,8 @@
   do not add entries for new findings unless a follow-up review explicitly accepts the debt.
   Source findings: 2602 BugInstance entries collapsed into 686 class-pattern matches.
   v1871 removed four stale identities; v1872 repaired six DTO aliases. The exact current
-  v1887 removed one retired Catalog identity. The exact current set is 675 and may only shrink.
+  v1887 removed one retired Catalog identity; v1896 removed another stale Catalog identity.
+  The exact current set is 674 and may only shrink.
 -->
 <FindBugsFilter>
   <Match>
@@ -47,10 +48,6 @@
   <Match>
     <Bug pattern="DM_CONVERT_CASE" />
     <Class name="com.codexdemo.orderplatform.notification.FailedEventReplayProperties" />
-  </Match>
-  <Match>
-    <Bug pattern="DM_CONVERT_CASE" />
-    <Class name="com.codexdemo.orderplatform.ops.maintenance.sandboxconnection.OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierPreconditionEvidenceCatalog" />
   </Match>
   <Match>
     <Bug pattern="DM_CONVERT_CASE" />

@@ -23,66 +23,8 @@ public class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSer
   @Transactional(readOnly = true)
   public OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierResponse dossier() {
     var rehearsal = opsEvidenceService.releaseApprovalRehearsal();
-    var receipt = rehearsal.managedAuditSandboxConnectionPreconditionReceipt();
-    var sourceReceipts =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSourceCatalog.receipts(
-            rehearsal);
-    var contextFields =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierContextCatalog.fields(
-            rehearsal);
-    var normalizationRules =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierContextCatalog.rules();
-    var preconditionEvidence =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierPreconditionEvidenceCatalog
-            .evidence(rehearsal);
-    var boundarySnapshots =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierBoundaryCatalog.boundaries(
-            receipt);
-    var executionGuards =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierExecutionGuardCatalog
-            .guards(receipt);
-    var warningEchoes =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierWarningCatalog.warnings(
-            rehearsal);
-    var downstreamIntakeGates =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierDownstreamIntakeCatalog
-            .gates(rehearsal);
-    var verificationGates =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierVerificationCatalog.gates(
-            sourceReceipts,
-            contextFields,
-            preconditionEvidence,
-            boundarySnapshots,
-            executionGuards,
-            warningEchoes,
-            downstreamIntakeGates);
-    var handoffNotes =
-        OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierHandoffCatalog.notes();
-    var markdownSections =
-        DossierRenderer.render(
-            sourceReceipts,
-            contextFields,
-            preconditionEvidence,
-            boundarySnapshots,
-            executionGuards,
-            warningEchoes,
-            downstreamIntakeGates,
-            verificationGates,
-            handoffNotes);
-    return OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSupport.response(
-        RESPONSE_VERSION,
-        ENDPOINT,
-        rehearsal,
-        sourceReceipts,
-        contextFields,
-        normalizationRules,
-        preconditionEvidence,
-        boundarySnapshots,
-        executionGuards,
-        warningEchoes,
-        downstreamIntakeGates,
-        verificationGates,
-        handoffNotes,
-        markdownSections);
+    var evidence = DossierCatalog.evidence(rehearsal);
+    return DossierSupport.response(
+        RESPONSE_VERSION, ENDPOINT, rehearsal, evidence, DossierRenderer.render(evidence));
   }
 }

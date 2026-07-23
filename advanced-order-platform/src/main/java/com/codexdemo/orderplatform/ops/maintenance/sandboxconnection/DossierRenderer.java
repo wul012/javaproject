@@ -18,40 +18,34 @@ final class DossierRenderer {
 
   private DossierRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceReceipt> sourceReceipts,
-      List<ContextField> contextFields,
-      List<PreconditionEvidence> preconditionEvidence,
-      List<BoundarySnapshot> boundarySnapshots,
-      List<ExecutionGuard> executionGuards,
-      List<WarningEcho> warningEchoes,
-      List<DownstreamIntakeGate> downstreamIntakeGates,
-      List<VerificationGate> verificationGates,
-      List<HandoffNote> handoffNotes) {
+  static List<MarkdownSection> render(DossierCatalog.Evidence evidence) {
+    var sources = evidence.sourceReceipts();
+    var contexts = evidence.contextFields();
+    var preconditions = evidence.preconditionEvidence();
+    var boundaries = evidence.boundarySnapshots();
+    var guards = evidence.executionGuards();
+    var warnings = evidence.warningEchoes();
+    var intake = evidence.downstreamIntakeGates();
+    var verification = evidence.verificationGates();
+    var handoffs = evidence.handoffNotes();
     return List.of(
-        mapped("Source Receipt", sourceReceipts, DossierRenderer::sourceLine, MarkdownSection::new),
-        mapped("Context Fields", contextFields, DossierRenderer::fieldLine, MarkdownSection::new),
+        mapped("Source Receipt", sources, DossierRenderer::sourceLine, MarkdownSection::new),
+        mapped("Context Fields", contexts, DossierRenderer::fieldLine, MarkdownSection::new),
         mapped(
             "Precondition Evidence",
-            preconditionEvidence,
+            preconditions,
             DossierRenderer::evidenceLine,
             MarkdownSection::new),
-        mapped(
-            "Boundaries", boundarySnapshots, DossierRenderer::boundaryLine, MarkdownSection::new),
-        mapped(
-            "Execution Guards", executionGuards, DossierRenderer::guardLine, MarkdownSection::new),
-        mapped("Warnings", warningEchoes, DossierRenderer::warningLine, MarkdownSection::new),
-        mapped(
-            "Downstream Intake",
-            downstreamIntakeGates,
-            DossierRenderer::intakeLine,
-            MarkdownSection::new),
+        mapped("Boundaries", boundaries, DossierRenderer::boundaryLine, MarkdownSection::new),
+        mapped("Execution Guards", guards, DossierRenderer::guardLine, MarkdownSection::new),
+        mapped("Warnings", warnings, DossierRenderer::warningLine, MarkdownSection::new),
+        mapped("Downstream Intake", intake, DossierRenderer::intakeLine, MarkdownSection::new),
         mapped(
             "Verification Gates",
-            verificationGates,
+            verification,
             DossierRenderer::verificationLine,
             MarkdownSection::new),
-        mapped("Handoff Notes", handoffNotes, DossierRenderer::handoffLine, MarkdownSection::new));
+        mapped("Handoff Notes", handoffs, DossierRenderer::handoffLine, MarkdownSection::new));
   }
 
   private static String sourceLine(SourceReceipt source) {

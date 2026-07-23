@@ -2,9 +2,11 @@ package com.codexdemo.orderplatform.ops.maintenance.sandboxconnection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Locale;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.ResourceLock;
 
-class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSourceTests {
+class DossierCatalogTests {
 
   @Test
   void dossierPinsLatestNodePlanAndFrozenJavaContextEvidence() {
@@ -59,5 +61,17 @@ class OpsShardReadinessSandboxConnectionBlockedExecutionContextDossierSourceTest
         .containsExactly("requestId", "operatorIdentity", "auditCorrelationId");
     assertThat(response.contextFields())
         .allSatisfy(field -> assertThat(field.normalized()).isTrue());
+  }
+
+  @Test
+  @ResourceLock("default-locale")
+  void evidenceIdsUseLocaleNeutralCaseFolding() {
+    Locale previous = Locale.getDefault();
+    try {
+      Locale.setDefault(Locale.forLanguageTag("tr-TR"));
+      assertThat(DossierCatalog.evidenceId("INPUT ID: supplied")).isEqualTo("input-id");
+    } finally {
+      Locale.setDefault(previous);
+    }
   }
 }

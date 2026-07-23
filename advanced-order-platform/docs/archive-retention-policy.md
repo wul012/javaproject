@@ -276,3 +276,13 @@ family 的 `EvidenceCounts` 共享算法、完整响应摘要、Java/mini-kv 只
 结构门；没有移动、改写或删除任何历史归档。重建后的精确集合为
 `1,706 files / 20,300,596 raw bytes`。本次上调严格等于这一份 18,329 字节讲解的增量，
 不是后续版本的预留预算。
+
+## Authorized v1896 Extension
+
+用户于 2026-07-23 继续授权 Java coding brilliant and elegant 九分计划。v1896 只新增
+`代码讲解记录_生产雏形阶段9/v1893-v1897/v1896-sandbox-dossier-catalog.md`，用于解释
+sandbox blocked-execution dossier 的十组证据投影、九个 Catalog 到一个不可变
+`DossierCatalog.Evidence` 的收敛、完整响应 oracle、Java/mini-kv 只读边界和 shrink-only
+结构门；没有移动、改写或删除任何历史归档。重建后的精确集合为
+`1,707 files / 20,316,569 raw bytes`。本次上调严格等于这一份 15,973 字节讲解的增量，
+不是后续版本的预留预算。

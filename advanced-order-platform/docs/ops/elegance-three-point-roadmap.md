@@ -357,6 +357,31 @@ wrapper 分别为 1:57 与 18:36，prod smoke 0:10，JaCoCo 上传 0:03。Tag
 `v1895-order-platform-dossier-catalog` 在本地与 canonical remote 均 peel 到完整
 closeout，v1895 发布链已闭合。
 
+## v1896 检查点
+
+Sandbox blocked-execution dossier 原由九个 Catalog 分别生成 source、context、normalization、
+precondition、boundary、guard、warning、intake、verification 与 handoff，service 再把这些
+列表展开给 renderer 和 328 行长名 Support。v1896 先在 released v1895 上冻结完整 response：
+数量向量 `1/3/5/6/5/12/4/5/10/4/9/21`，sorted-property UTF-8 JSON SHA-256 为
+`f4ff835d241fd99fd1113f926f542c6954ab22f409ff43ef78b6e34f4413fad2`。随后九个 owner
+收敛为一个 `DossierCatalog`；typed `Evidence` 复制十组列表，service 只生成一次，renderer
+与 173 行 `DossierSupport` 读取同一聚合值。
+
+本家族的 boundary 与 execution guard 实际编码 owner、credential、schema、rollback、SQL、
+deployment、managed-audit connection 和 service startup 的阻断政策，不是可用通用 mapper
+替代的纯参数组合器。因而没有为追求表面行数新建第二个生命周期 Catalog；单一领域 owner
+为 374 行并受 `<400` 机械门约束，Catalog-to-Support 反向依赖被禁止。家族生产文件
+`13 -> 5`，总行数 `1,039 -> 740`，净删 299 行。
+
+生产 Java `1,316 -> 1,308`，ops `1,184 -> 1,176`，Catalog `266 -> 258`，测试
+`906 -> 907`，Readiness `985 -> 975`，renderer 总行数 `3,209 -> 3,203`。生产名称收紧到
+`1,063/19,545/2,622`，测试收紧到 `690/9,773/3,651`；exact baseline 删除 28 项、新增
+0 项。聚焦行为、完整 oracle、历史结构和 elegance 选择 52/52 通过；讲解 3,097 Han/十章节，
+归档精确为 1,707 files/20,316,569 bytes。完整 release gate 固定 v1895 `931bde5a`，通过
+2,027 项测试（12:46）、JaCoCo 2,072 类/all floors、SpotBugs 0/0，并打包
+67,957,758-byte jar。Canonical 发布生命周期仍待执行，本检查点不把本地门写成远端完成，
+更不自称达到九分。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

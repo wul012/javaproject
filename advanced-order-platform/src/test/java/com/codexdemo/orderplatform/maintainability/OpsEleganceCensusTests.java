@@ -20,6 +20,8 @@ class OpsEleganceCensusTests {
       OPS_ROOT.resolve(Path.of("maintenance", "minimalreadonlygateoperatorciconsumerpackage"));
   private static final Path DOSSIER_ROOT =
       OPS_ROOT.resolve(Path.of("maintenance", "operatorcidossier"));
+  private static final Path SANDBOX_ROOT =
+      OPS_ROOT.resolve(Path.of("maintenance", "sandboxconnection"));
   private static final Path RELEASE_ACCEPTANCE_ROOT =
       OPS_ROOT.resolve(Path.of("maintenance", "ciaccept"));
   private static final Path ARCHIVE_REGISTRY_ROOT =
@@ -41,10 +43,10 @@ class OpsEleganceCensusTests {
   void opsAndCatalogDebtCanOnlyShrink() throws IOException {
     List<Path> files = javaFiles(OPS_ROOT);
 
-    assertThat(files).hasSizeLessThanOrEqualTo(1_184);
+    assertThat(files).hasSizeLessThanOrEqualTo(1_176);
     assertThat(files)
         .filteredOn(path -> stem(path).endsWith("Catalog"))
-        .hasSizeLessThanOrEqualTo(266);
+        .hasSizeLessThanOrEqualTo(258);
   }
 
   @Test
@@ -53,7 +55,7 @@ class OpsEleganceCensusTests {
 
     assertThat(renderers).hasSizeLessThanOrEqualTo(30);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_209);
+        .isLessThanOrEqualTo(3_203);
     assertThat(renderers.stream().filter(this::hasLongStem)).isEmpty();
   }
 
@@ -101,6 +103,18 @@ class OpsEleganceCensusTests {
     assertThat(renderers)
         .extracting(path -> path.getFileName().toString())
         .containsExactly("ReportRenderer.java");
+  }
+
+  @Test
+  void sandboxDossierKeepsFiveOwners() throws IOException {
+    List<Path> files =
+        javaFiles(SANDBOX_ROOT).stream().filter(path -> stem(path).contains("Dossier")).toList();
+    List<Path> renderers = files.stream().filter(this::isRenderer).toList();
+
+    assertThat(files).hasSizeLessThanOrEqualTo(5);
+    assertThat(renderers)
+        .extracting(path -> path.getFileName().toString())
+        .containsExactly("DossierRenderer.java");
   }
 
   @Test
@@ -211,6 +225,7 @@ class OpsEleganceCensusTests {
             "ArchiveDigestJavaFiles",
             "ConsumerPackageJavaFiles",
             "DossierJavaFiles",
+            "SandboxDossierJavaFiles",
             "ReleaseAcceptanceJavaFiles",
             "ArchiveRegistryJavaFiles",
             "ArchiveHandoffJavaFiles",

@@ -4,6 +4,29 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1896 - Sandbox blocked-execution dossier Catalog convergence
+
+- 在 released v1895 上先冻结完整 sandbox blocked-execution dossier response：数量向量
+  `1/3/5/6/5/12/4/5/10/4/9/21`，sorted-property UTF-8 SHA-256 为
+  `f4ff835d241fd99fd1113f926f542c6954ab22f409ff43ef78b6e34f4413fad2`。
+- 删除九个同生命周期 Catalog 和 328 行旧 Support，以 374 行 `DossierCatalog`、不可变 typed
+  `Evidence` 与 173 行 `DossierSupport` 收敛投影和判定；service 恰好装配一次，renderer 与
+  Support 不再接收展开列表。
+- 三个旧长名测试 owner 与 v1803 历史结构 owner 收短；完整 response oracle 成为唯一测试净
+  增量。公开 Controller、Response、route、profile、列表顺序、九段 Markdown、二十一条 checks、
+  只读事务和 Java/mini-kv 执行禁止边界保持不变。
+- Dossier 生产包 `13 -> 5`、总行数 `1,039 -> 740`；生产 Java `1,316 -> 1,308`、ops
+  `1,184 -> 1,176`、Catalog `266 -> 258`、测试 `906 -> 907`、Readiness `985 -> 975`，
+  renderer 行数 `3,209 -> 3,203`。
+- 生产/测试名称指标达到 `1063/19545/2622` 与 `690/9773/3651`，exact baseline 删除
+  28 项、新增 0 项。聚焦行为、oracle、历史结构和 elegance 选择 52/52 通过；讲解
+  3,097 Han/十章节，授权归档为 1,707 files / 20,316,569 raw bytes。首次完整门发现并删除
+  一个引用退休 Catalog 的 SpotBugs waiver；删去 waiver 后实扫暴露默认 locale case-folding，
+  以 `Locale.ROOT` 和土耳其 locale 回归修复根因，精确集合 `675 -> 674`。完整 release gate、
+  固定 v1895 `931bde5a`，通过 2,027/2,027，Maven 12:46，JaCoCo 2,072 类/全部阈值，
+  SpotBugs 0/0，jar 67,957,758 字节。Canonical implementation/closeout CI、annotated tag
+  与 post-tag receipt 待真实执行后回填。
+
 ## v1895 - Operator CI verification dossier Catalog convergence
 
 - 在 released v1894 上先冻结完整 dossier response：数量向量
