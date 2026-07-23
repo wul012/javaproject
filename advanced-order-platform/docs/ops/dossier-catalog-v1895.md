@@ -124,8 +124,11 @@ inventory，并额外要求它 public、final、少于 20 行；针对性门随�
 Maven verify 在 15:15 内通过 2,023/2,023，零失败、错误或跳过；JaCoCo 分析 2,079 类并满足
 全部 floor；SpotBugs 0/0；可执行 jar 为 67,966,474 字节。
 
-Implementation CI、closeout CI、annotated tag 与本地/远端 peeled SHA 仍属于发布闭环的后续
-证据；在这些步骤完成前，本节不把 v1895 自述为 canonical release。
+Implementation commit `f9cc62d99fe4637e8d1dfcf9161c63ed4b0143f1` 通过 canonical
+Actions run `29983843663`：Docker-tagged job 2:03，其中 wrapper verify 1:52；headless
+job 18:18，其中 wrapper verify 17:36、production-profile smoke 0:10、JaCoCo artifact
+上传 0:03。Closeout CI、annotated tag 与本地/远端 peeled SHA 仍属于发布闭环的
+后续证据；在这些步骤完成前，本节不把 v1895 自述为 canonical release。
 
 ## Failure Conditions
 

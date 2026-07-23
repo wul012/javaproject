@@ -1,6 +1,6 @@
 # Java Track Final Evidence Candidate
 
-Status: v1895 local candidate; v1894 release lifecycle is complete. External Java-track review is required before
+Status: v1895 implementation CI is green; closeout CI and tag are pending. External Java-track review is required before
 the word final may describe the track. This file records reproducible evidence; it does
 not authorize production execution.
 
@@ -16,14 +16,14 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1895 local full gate green; Actions pending |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1895 local full gate and implementation run `29983843663` green; closeout pending |
 | E2 Static analysis | Spotless and SpotBugs checks; 675 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1895 Spotless pins v1894 `105271fb`; SpotBugs 0/0 |
 | E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1895 analyzed 2,079 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | boundaries unchanged; full gate green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | v1888 full docs gate green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1894 canonical tag is complete; v1895 implementation/closeout/tag pending |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1895 implementation `f9cc62d9` is green; closeout/tag pending |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1895 full 2023/2023; ops 1,184; Catalogs 266; production/test name metrics 1073/19646/2632 and 694/9780/3655 |
 | E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1895 exact set 1,706 files / 20,300,596 raw bytes; full gate green |
 
@@ -575,9 +575,12 @@ exact archive is 1,706 files / 20,300,596 raw bytes. The first full local releas
 stale v1866 two-file evidencecore inventory; the strengthened gate
 then requires three explicit owners and constrains `EvidenceCounts` to public/final/below 20 lines.
 The clean rerun pins v1894 `105271fb`, passes 2,023 tests in 15:15, analyzes 2,079 JaCoCo classes
-with every floor met, reports SpotBugs 0/0, and packages a 67,966,474-byte jar. Both canonical CI
-phases and the annotated tag remain pending, so this paragraph deliberately uses candidate rather
-than release.
+with every floor met, reports SpotBugs 0/0, and packages a 67,966,474-byte jar. Implementation
+commit `f9cc62d99fe4637e8d1dfcf9161c63ed4b0143f1` passes canonical run `29983843663`:
+Docker-tagged verification completes in 2:03 with a 1:52 wrapper verify; headless regression
+completes in 18:18 with a 17:36 wrapper verify, 0:10 production profile smoke, and 0:03 JaCoCo
+upload. Closeout CI and the annotated tag remain pending, so this paragraph deliberately uses
+candidate rather than release.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

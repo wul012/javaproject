@@ -20,7 +20,9 @@
   46 项、新增 0 项。讲解 3,676 Han/十章节，授权归档为
   1,706 files / 20,300,596 raw bytes。首次完整门发现并升级 v1866 evidencecore inventory；
   修复后完整 release 固定 v1894 `105271fb`，通过 2,023/2,023，Maven 15:15，JaCoCo
-  2,079 类/全部阈值，SpotBugs 0/0，jar 67,966,474 字节。Canonical CI 尚待闭环。
+  2,079 类/全部阈值，SpotBugs 0/0，jar 67,966,474 字节。Implementation `f9cc62d9`
+  通过 canonical run `29983843663`：Docker 2:03，wrapper 1:52；headless 18:18，wrapper
+  17:36、prod smoke 0:10、JaCoCo 上传 0:03。Closeout CI 与 tag 尚待闭环。
 
 ## v1894 - Operator CI consumer package Catalog convergence
 

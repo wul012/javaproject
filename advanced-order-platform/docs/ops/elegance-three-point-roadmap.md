@@ -349,8 +349,10 @@ helper，Dossier 不再复制第五份。12 行 `EvidenceCounts` 成为六个调
 shared-count、behavior、structure、change 与 elegance focused gates 已通过。第一次完整门暴露
 v1866 evidencecore 两文件 inventory，修复将其收紧为三个明确 owner，并要求共享工具 public、
 final、少于 20 行。完整重跑固定 v1894 `105271fb`，通过 2,023 项测试（15:15）、JaCoCo
-2,079 类/all floors、SpotBugs 0/0，并打包 67,966,474-byte jar。Implementation/closeout
-canonical CI 和 tag 尚待闭环，本检查点不提前自授 release 完成。
+2,079 类/all floors、SpotBugs 0/0，并打包 67,966,474-byte jar。Implementation
+`f9cc62d9` 的 canonical run `29983843663` 通过 Docker 2:03 与 headless 18:18，其中
+wrapper 分别为 1:52 与 17:36，prod smoke 0:10，JaCoCo 上传 0:03。Closeout CI 和 tag
+尚待闭环，本检查点不提前自授 release 完成。
 
 ## DONE 与失败条件
 
