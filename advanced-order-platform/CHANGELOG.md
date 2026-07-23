@@ -24,8 +24,11 @@
   `78cac4e9` 为前序基准，9:21 内通过 2,038 项测试，JaCoCo 2,059 类满足全部阈值，
   SpotBugs 0/0，并生成 67,940,843 字节 jar。Implementation `f1980b41` 的 canonical
   run `30019562919` 通过：Docker 2:02、wrapper 1:52；headless 19:07、wrapper
-  18:22、prod smoke 0:12、JaCoCo 上传 0:03。Closeout CI、canonical tag 与
-  post-tag receipt 尚待收口。
+  18:22、prod smoke 0:12、JaCoCo 上传 0:03。Closeout `7c171c6c` 通过 run
+  `30021301566`：Docker 1:56、wrapper 1:46；headless 16:16、wrapper 15:31、
+  prod smoke 0:11、JaCoCo 上传 0:03。Tag
+  `v1899-order-platform-marker-evidence-builders` 在本地与 `javaproject` 均 peel 到
+  `7c171c6c`。
 
 ## v1898 - Release acceptance package Catalog convergence
 

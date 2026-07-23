@@ -479,8 +479,10 @@ elegance、walkthrough 和 archive 聚焦门通过。讲解 3,803 Han/十章节�
 9:21 内通过 2,038 项测试、JaCoCo 2,059 类全部阈值、SpotBugs 0/0、生产 smoke 和
 67,940,843 字节 jar。Implementation `f1980b41` 的 run `30019562919` 已通过：
 Docker 2:02、wrapper 1:52；headless 19:07、wrapper 18:22、prod smoke 0:12、
-JaCoCo 上传 0:03。Closeout CI、canonical tag 与 post-tag receipt 仍待真实执行；
-本检查点不把 pending 状态写成完成，也不等于外部已授予九分。
+JaCoCo 上传 0:03。Closeout `7c171c6c` 的 run `30021301566` 通过 Docker 1:56 与
+headless 16:16，其中 wrapper 分别为 1:46 与 15:31，prod smoke 0:11、JaCoCo 上传
+0:03。Tag `v1899-order-platform-marker-evidence-builders` 在本地与 canonical remote
+均 peel 到完整 closeout，v1899 发布链已闭合；这仍不等于外部已授予九分。
 
 ## DONE 与失败条件
 

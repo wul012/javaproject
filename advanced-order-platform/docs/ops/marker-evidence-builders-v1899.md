@@ -22,7 +22,7 @@
 | Tighten maintainability | global maximum and over-500 budgets decrease | reproducible census and exact caps | implemented |
 | Tighten naming | three long files/types and long receipt-chain accessors retire | aggregate and exact name baselines | implemented |
 | Preserve archives | add one Chinese walkthrough without moving history | exact manifest, count and raw-byte cap | implemented |
-| Close the release chain | implementation, closeout, annotated tag and receipt each receive canonical CI | local release gate plus GitHub runs | implementation CI green; closeout pending |
+| Close the release chain | implementation, closeout, annotated tag and receipt each receive canonical CI | local release gate plus GitHub runs | release chain closed; receipt CI pending |
 
 ## Baseline And Scope
 
@@ -115,8 +115,12 @@ analyzed 2,059 classes and met every floor, SpotBugs reported 0 bugs / 0 errors,
 smoke passed, and the packaged jar is 67,940,843 bytes. Implementation
 `f1980b416c9e3258eda033c7da55e9fa05e67525` passes canonical run `30019562919`:
 Docker completes in 2:02 with a 1:52 wrapper verify; headless completes in 19:07 with an
-18:22 wrapper verify, 0:12 production smoke, and 0:03 JaCoCo upload. Closeout CI, annotated
-tag, and post-tag receipt remain pending.
+18:22 wrapper verify, 0:12 production smoke, and 0:03 JaCoCo upload. Closeout
+`7c171c6ccae2b7b037a7224cc98a6a2537aad416` passes run `30021301566`: Docker
+completes in 1:56 with a 1:46 wrapper verify; headless completes in 16:16 with a 15:31
+wrapper verify, 0:11 production smoke, and 0:03 JaCoCo upload. Annotated tag
+`v1899-order-platform-marker-evidence-builders` peels to that closeout locally and on
+`javaproject`. This pure-document receipt still requires its own canonical CI.
 
 ## Failure Conditions
 
