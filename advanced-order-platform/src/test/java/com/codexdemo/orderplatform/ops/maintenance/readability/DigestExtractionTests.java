@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1845Tests {
+class DigestExtractionTests {
 
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
@@ -35,16 +35,21 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1845Tests {
       "ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest";
   private static final List<String> CURRENT_FILES =
       List.of(
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestBoundaryLockCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPacketCatalog.java",
+          "DigestCatalog.java",
+          "DigestSupport.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryService.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySupport.java",
+          "ReportRenderer.java");
+  private static final String RETIRED_SUPPORT_FILE =
+      "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySupport.java";
+  private static final List<String> RETIRED_CATALOG_FILES =
+      List.of(
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestBoundaryLockCatalog.java",
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPacketCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestReplayInstructionCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestScorecardCatalog.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestSectionCatalog.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestSourceArchiveCatalog.java",
-          "ReportRenderer.java");
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestSourceArchiveCatalog.java");
   private static final List<String> REMOVED_RENDERER_FILES =
       List.of(
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestBoundaryLockRenderer.java",
@@ -58,15 +63,21 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1845Tests {
   private static final List<String> REQUIRED_TEST_FILES =
       List.of(
           "ArchiveDigestMarkdownTests.java",
+          "ArchiveDigestTestData.java",
+          "DigestCatalogTests.java",
+          "DigestChecksTests.java",
+          "DigestRegistryServiceTests.java",
+          "DigestResponseOracleTests.java");
+  private static final List<String> RETIRED_TEST_FILES =
+      List.of(
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryAggregateChecksTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryCatalogTests.java",
           "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryConsumerReplayTests.java",
-          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySourceTests.java",
-          "ArchiveDigestTestData.java");
+          "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySourceTests.java");
 
   @Test
   void archiveDigestMovesWhileControllerStaysRootVisible() throws IOException {
-    assertThat(CURRENT_FILES).hasSize(10);
+    assertThat(CURRENT_FILES).hasSize(5);
     for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
@@ -75,9 +86,13 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1845Tests {
       assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
     }
+    for (String file : RETIRED_CATALOG_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
+    }
+    assertThat(Files.exists(PACKAGE_ROOT.resolve(RETIRED_SUPPORT_FILE))).isFalse();
     try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(10);
+          .hasSizeLessThanOrEqualTo(5);
     }
     Path controller =
         OPS_ROOT.resolve(
@@ -93,9 +108,12 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1845Tests {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
+    for (String file : RETIRED_TEST_FILES) {
+      assertThat(Files.exists(PACKAGE_TEST_ROOT.resolve(file))).as(file).isFalse();
+    }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeGreaterThanOrEqualTo(6);
+          .hasSizeLessThanOrEqualTo(6);
     }
     Path controllerTest =
         TEST_ROOT.resolve(
@@ -114,7 +132,34 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1845Tests {
         .contains(
             "ops.maintenance.minimalreadonlygateoperatorcihandoff",
             "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryService",
-            "OpsShardReadinessReleaseAcceptanceRoutePaths");
+            "OpsShardReadinessReleaseAcceptanceRoutePaths",
+            "DigestCatalog.evidence(sourceArchive)");
+  }
+
+  @Test
+  void digestCatalogConvergenceStaysTyped() throws IOException {
+    String catalog = read(PACKAGE_ROOT.resolve("DigestCatalog.java"));
+    String service =
+        read(
+            PACKAGE_ROOT.resolve(
+                "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryService.java"));
+    String renderer = read(PACKAGE_ROOT.resolve("ReportRenderer.java"));
+    String support = read(PACKAGE_ROOT.resolve("DigestSupport.java"));
+
+    assertThat(Files.readAllLines(PACKAGE_ROOT.resolve("DigestCatalog.java"))).hasSizeLessThan(260);
+    assertThat(count(catalog, "List.copyOf(")).isEqualTo(6);
+    assertThat(count(service, "DigestCatalog.evidence(")).isEqualTo(1);
+    assertThat(catalog).contains("record Evidence(").doesNotContain("RegistrySupport");
+    assertThat(renderer).contains("render(DigestCatalog.Evidence evidence)");
+    assertThat(support)
+        .contains(
+            "DigestCatalog.Evidence evidence",
+            "DigestCatalog.SOURCE_COUNT",
+            "DigestCatalog.DIGEST_COUNT",
+            "DigestCatalog.PACKET_COUNT",
+            "DigestCatalog.REPLAY_COUNT",
+            "DigestCatalog.LOCK_COUNT",
+            "DigestCatalog.SCORECARD_COUNT");
   }
 
   @Test
@@ -188,5 +233,9 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1845Tests {
 
   private static String read(Path path) throws IOException {
     return Files.readString(path, StandardCharsets.UTF_8);
+  }
+
+  private static int count(String source, String token) {
+    return (source.length() - source.replace(token, "").length()) / token.length();
   }
 }

@@ -4,7 +4,7 @@ import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorci
 import java.util.ArrayList;
 import java.util.List;
 
-final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySupport {
+final class DigestSupport {
 
   static final String PROJECT = "advanced-order-platform";
   static final String SOURCE_PLAN = "Node v367";
@@ -12,15 +12,9 @@ final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRe
   static final String OPERATOR_HANDOFF_PLAN = "Node v369";
   static final String DIGEST_STATE =
       "minimal-read-only-gate-operator-ci-handoff-archive-digest-ready";
-  static final int EXPECTED_SOURCE_ARCHIVE_SNAPSHOT_COUNT = 1;
-  static final int EXPECTED_DIGEST_SECTION_COUNT = 6;
-  static final int EXPECTED_CONSUMER_PACKET_COUNT = 4;
-  static final int EXPECTED_REPLAY_INSTRUCTION_COUNT = 5;
-  static final int EXPECTED_BOUNDARY_LOCK_COUNT = 8;
-  static final int EXPECTED_SCORECARD_ENTRY_COUNT = 6;
   static final int EXPECTED_MARKDOWN_SECTION_COUNT = 6;
 
-  private OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySupport() {}
+  private DigestSupport() {}
 
   static OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
       response(
@@ -29,40 +23,17 @@ final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRe
           String profile,
           OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse
               sourceArchive,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
-                      .SourceArchiveSnapshot>
-              sourceArchives,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
-                      .DigestSection>
-              digestSections,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
-                      .ConsumerPacket>
-              consumerPackets,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
-                      .ReplayInstruction>
-              replayInstructions,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
-                      .BoundaryLock>
-              boundaryLocks,
-          List<
-                  OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
-                      .ScorecardEntry>
-              scorecard,
+          DigestCatalog.Evidence evidence,
           List<
                   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
                       .MarkdownSection>
               markdownSections) {
-    var sourceArchiveCopy = List.copyOf(sourceArchives);
-    var digestSectionCopy = List.copyOf(digestSections);
-    var consumerPacketCopy = List.copyOf(consumerPackets);
-    var replayInstructionCopy = List.copyOf(replayInstructions);
-    var boundaryLockCopy = List.copyOf(boundaryLocks);
-    var scorecardCopy = List.copyOf(scorecard);
+    var sourceArchiveCopy = evidence.sourceArchiveSnapshots();
+    var digestSectionCopy = evidence.digestSections();
+    var consumerPacketCopy = evidence.consumerPackets();
+    var replayInstructionCopy = evidence.replayInstructions();
+    var boundaryLockCopy = evidence.boundaryLocks();
+    var scorecardCopy = evidence.scorecard();
     var markdownSectionCopy = List.copyOf(markdownSections);
     int passedDigestSectionCount = countDigestSections(digestSectionCopy);
     int readyConsumerPacketCount = countReadyConsumerPackets(consumerPacketCopy);
@@ -137,16 +108,16 @@ final class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRe
 
     String status =
         "passed".equals(sourceArchive.status())
-                && sourceArchiveCopy.size() == EXPECTED_SOURCE_ARCHIVE_SNAPSHOT_COUNT
-                && digestSectionCopy.size() == EXPECTED_DIGEST_SECTION_COUNT
+                && sourceArchiveCopy.size() == DigestCatalog.SOURCE_COUNT
+                && digestSectionCopy.size() == DigestCatalog.DIGEST_COUNT
                 && passedDigestSectionCount == digestSectionCopy.size()
-                && consumerPacketCopy.size() == EXPECTED_CONSUMER_PACKET_COUNT
+                && consumerPacketCopy.size() == DigestCatalog.PACKET_COUNT
                 && readyConsumerPacketCount == consumerPacketCopy.size()
-                && replayInstructionCopy.size() == EXPECTED_REPLAY_INSTRUCTION_COUNT
+                && replayInstructionCopy.size() == DigestCatalog.REPLAY_COUNT
                 && readOnlyReplayInstructionCount == replayInstructionCopy.size()
-                && boundaryLockCopy.size() == EXPECTED_BOUNDARY_LOCK_COUNT
+                && boundaryLockCopy.size() == DigestCatalog.LOCK_COUNT
                 && lockedBoundaryCount == boundaryLockCopy.size()
-                && scorecardCopy.size() == EXPECTED_SCORECARD_ENTRY_COUNT
+                && scorecardCopy.size() == DigestCatalog.SCORECARD_COUNT
                 && passedScorecardCount == scorecardCopy.size()
                 && markdownSectionCopy.size() == EXPECTED_MARKDOWN_SECTION_COUNT
             ? "passed"

@@ -483,7 +483,7 @@ passes run `29893092335`: Docker 2:13 and headless 19:38, including an 18:51 wra
 0:13 production-profile smoke, and 0:04 JaCoCo upload. Annotated tag
 `v1891-order-platform-handoff-registry-catalog` peels to `cf0b1d87` locally and remotely.
 
-Current v1892 candidate: the complete MinimalReadOnlyGateOperatorCiHandoff Archive Registry
+Released v1892: the complete MinimalReadOnlyGateOperatorCiHandoff Archive Registry
 first passes its canonical JSON oracle on released v1891. The collection vector is
 `1/6/4/5/8/6/6/21` and the full sorted-property UTF-8 SHA-256 is
 `1b9fd78f3ac4d3905d027f2c5b3d04c15a768b0b17b45497d583606ead7a5321`. Six one-list
@@ -500,7 +500,31 @@ The walkthrough has 3,391 Han and ten standard headings; the exact archive is
 0/0; the executable jar is 67,992,034 bytes. Implementation commit `3d36a36b` passes canonical
 Actions run `29970248402`: Docker-tagged verification completes in 2:24 and headless regression
 in 18:11, including a 17:34 wrapper verify, 0:10 production-profile smoke, and 0:03 JaCoCo
-upload. Closeout CI and the annotated tag remain pending and binding.
+upload.
+
+Closeout commit `fb49fd6e` passes canonical Actions run `29971202000`: Docker-tagged
+verification completes in 2:13 and headless regression in 12:54, including a 12:20 wrapper
+verify, 0:08 production-profile smoke, and 0:03 JaCoCo upload. Annotated tag
+`v1892-order-platform-handoff-archive-catalog` peels to
+`fb49fd6e1daa1b39d6cf93674d839d1e18bc022b` locally and remotely.
+
+Current v1893 candidate: the complete MinimalReadOnlyGateOperatorCiHandoff Archive Digest
+Registry first passes its canonical JSON oracle on released v1892. The collection vector is
+`1/6/4/5/8/6/6/22` and the full sorted-property UTF-8 SHA-256 is
+`2c0d238ec99c234a1c679eb4b7de2d37174c0a088f31b61d6d516949a5581ba4`. Six one-list
+Catalog owners become one 220-line package-local `DigestCatalog`; its typed Evidence owns six
+immutable snapshots. Service assembles once while Renderer and the renamed 211-line
+`DigestSupport` retain display and status/check responsibilities. Expected evidence shape now
+belongs to Catalog, and a structure gate rejects any reverse Catalog-to-Support dependency.
+Public route, Response, Controller, ordering, Markdown, checks, and read-only transaction stay
+unchanged. Production Java reaches 1,332 files, ops 1,200, Catalogs 283, the package 5, and
+tests remain 906. Production/test name metrics reach `1094/19898/2653` and
+`705/9816/3679`; the exact baseline has 27 removals and no additions. Focused behavior,
+oracle, structure, and elegance gates pass 41/41. The walkthrough has 3,401 Han and ten
+standard headings; the exact archive is 1,704 files / 20,261,596 raw bytes. Full release
+verification pins v1892 `fb49fd6e` and passes 2,019 tests in 8:25. JaCoCo analyzes 2,092
+classes and meets every floor; SpotBugs reports 0/0; the executable jar is 67,986,621 bytes.
+Canonical implementation and closeout Actions, and the annotated tag remain pending and binding.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

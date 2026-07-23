@@ -89,8 +89,11 @@ Implementation commit `3d36a36b` 通过 canonical Actions run `29970248402`：Do
 job 2:24，其中 wrapper verify 2:06；headless job 18:11，其中 wrapper verify 17:34、
 prod-profile smoke 0:10、JaCoCo artifact 上传 0:03。
 
-Closeout commit、closeout Actions 和 annotated tag 仍是约束性完成门。它们在实际通过前不得
-记录为成功，也不得提前把 v1892 标记为 released。
+Closeout commit `fb49fd6e` 通过 canonical Actions run `29971202000`：Docker-tagged job
+2:13，其中 wrapper verify 1:56；headless job 12:54，其中 wrapper verify 12:20、
+prod-profile smoke 0:08、JaCoCo artifact 上传 0:03。Annotated tag
+`v1892-order-platform-handoff-archive-catalog` 在本地与 `javaproject` 均 peel 到完整 closeout
+`fb49fd6e1daa1b39d6cf93674d839d1e18bc022b`，v1892 发布链已经闭合。
 
 ## Failure Conditions
 

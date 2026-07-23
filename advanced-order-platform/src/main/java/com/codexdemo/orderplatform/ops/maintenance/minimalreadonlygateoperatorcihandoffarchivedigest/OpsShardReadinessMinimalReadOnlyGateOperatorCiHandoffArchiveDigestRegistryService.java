@@ -30,43 +30,13 @@ public class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestR
   public OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse
       registry() {
     var sourceArchive = sourceArchiveService.registry();
-    var sourceArchives =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestSourceArchiveCatalog
-            .snapshots(sourceArchive);
-    var digestSections =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestSectionCatalog
-            .digestSections(sourceArchive);
-    var consumerPackets =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPacketCatalog
-            .packets(sourceArchive);
-    var replayInstructions =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestReplayInstructionCatalog
-            .replayInstructions(sourceArchive);
-    var boundaryLocks =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestBoundaryLockCatalog.locks(
-            sourceArchive);
-    var scorecard =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestScorecardCatalog
-            .scorecard(
-                sourceArchive, digestSections, consumerPackets, replayInstructions, boundaryLocks);
-    return OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySupport
-        .response(
-            RESPONSE_VERSION,
-            ENDPOINT,
-            PROFILE,
-            sourceArchive,
-            sourceArchives,
-            digestSections,
-            consumerPackets,
-            replayInstructions,
-            boundaryLocks,
-            scorecard,
-            ReportRenderer.render(
-                sourceArchives,
-                digestSections,
-                consumerPackets,
-                replayInstructions,
-                boundaryLocks,
-                scorecard));
+    var evidence = DigestCatalog.evidence(sourceArchive);
+    return DigestSupport.response(
+        RESPONSE_VERSION,
+        ENDPOINT,
+        PROFILE,
+        sourceArchive,
+        evidence,
+        ReportRenderer.render(evidence));
   }
 }

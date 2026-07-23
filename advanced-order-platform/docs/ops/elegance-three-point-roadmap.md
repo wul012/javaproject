@@ -270,8 +270,34 @@ renderer 与 Support 读取同一聚合值并继续分别拥有展示和状态�
 1,703 files/20,244,957 bytes。完整 release gate 固定 v1891 `cf0b1d87`，通过 2,017 个
 测试（9:52）、JaCoCo 2,096 类/all floors、SpotBugs 0/0，并打包 67,992,034-byte jar。
 Implementation `3d36a36b` 的 canonical run `29970248402` 通过 Docker 2:24 与 headless
-18:11，其中 wrapper verify 17:34、prod smoke 0:10、JaCoCo 上传 0:03。Closeout CI 与
-canonical tag 尚未执行，不能提前记为完成。
+18:11，其中 wrapper verify 17:34、prod smoke 0:10、JaCoCo 上传 0:03。Closeout
+`fb49fd6e` 的 canonical run `29971202000` 通过 Docker 2:13 与 headless 12:54，其中
+wrapper verify 12:20、prod smoke 0:08、JaCoCo 上传 0:03。Tag
+`v1892-order-platform-handoff-archive-catalog` 在本地与 canonical remote 均 peel 到完整
+closeout，v1892 发布链已闭合。
+
+## v1893 检查点
+
+MinimalReadOnlyGateOperatorCiHandoff Archive Digest Registry 原由六个长名 Catalog 分别
+生成 source、digest、packet、replay、boundary 与 scorecard，service 再把六个列表传给
+renderer 和 Support。v1893 先在 released v1892 上冻结完整响应：集合向量
+`1/6/4/5/8/6/6/22`，sorted-property UTF-8 JSON SHA-256 为
+`2c0d238ec99c234a1c679eb4b7de2d37174c0a088f31b61d6d516949a5581ba4`。随后六个 owner
+收敛为一个 220 行 `DigestCatalog`；typed `Evidence` 复制六组列表，service 只生成一次，
+renderer 与 `DigestSupport` 读取同一聚合值并继续分别拥有展示和状态职责。
+
+本版同时处理聚合后的依赖方向：六个 expected count 由 `DigestCatalog` 拥有，Support 只读，
+Catalog 不再反向依赖 Support；原 240 行长名 package-private Support 收短为 211 行
+`DigestSupport`，结构门禁止旧 owner 和依赖环回归。生产 Java `1,337 -> 1,332`，ops
+`1,205 -> 1,200`，Catalog `288 -> 283`，当前 package `10 -> 5`，测试 Java 保持 906。
+生产名称收紧到 `1,094/19,898/2,653`，测试收紧到 `705/9,816/3,679`，exact baseline
+删除 27 项、新增 0 项；renderer 总行数 `3,234 -> 3,228`。
+
+聚焦 behavior、oracle、structure 与 elegance 选择 41/41 通过。讲解 3,401 Han/10 headings，
+并开启新的 `v1893-v1897` 续写目录；归档精确为 1,704 files/20,261,596 bytes。完整 release
+gate 固定 v1892 closeout `fb49fd6e`，通过 2,019 个测试（8:25）、JaCoCo 2,092 类/all
+floors、SpotBugs 0/0，并打包 67,986,621-byte jar。Canonical implementation/closeout CI
+和 tag 尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 

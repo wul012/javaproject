@@ -4,6 +4,25 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1893 - Operator CI handoff archive digest Catalog convergence
+
+- 在 v1892 已发布实现上先冻结完整 handoff archive digest registry：集合向量
+  `1/6/4/5/8/6/6/22`，sorted-property UTF-8 SHA-256 为
+  `2c0d238ec99c234a1c679eb4b7de2d37174c0a088f31b61d6d516949a5581ba4`。
+- 删除六个单列表 Catalog，新增 220 行包内 `DigestCatalog`；typed `Evidence` 对六组列表
+  建立不可变快照，service 每次只装配一次。
+- 把证据形状常量归还 Catalog，依赖变为 `Service/Renderer/DigestSupport -> DigestCatalog`；
+  原 240 行长名 package-private Support 收短为 211 行 `DigestSupport`，禁止旧 owner 回归。
+- 四个长测试 owner 收敛为 `DigestCatalogTests`、`DigestRegistryServiceTests`、
+  `DigestChecksTests` 与完整 response oracle；行为覆盖、测试文件总数和公开契约不减。
+- 生产 Java `1337 -> 1332`，ops `1205 -> 1200`，Catalog `288 -> 283`，当前包
+  `10 -> 5`，测试保持 906。生产名称指标达到 `1094/19898/2653`，测试达到
+  `705/9816/3679`；exact baseline 删除 27 项、新增 0 项，renderer 行数 `3234 -> 3228`。
+- 聚焦 behavior/oracle/structure/elegance 选择 41/41 通过；新增 3,401-Han、十章节中文讲解，
+  授权归档为 1,704 files / 20,261,596 raw bytes。完整 release 固定 v1892 closeout
+  `fb49fd6e`，通过 2,019/2,019，Maven 8:25，JaCoCo 2,092 类/全部阈值，SpotBugs 0/0，
+  jar 67,986,621 字节；canonical implementation/closeout CI 与 tag 仍是完成门。
+
 ## v1892 - Operator CI handoff archive Catalog convergence
 
 - 在 v1891 已发布实现上先冻结完整 handoff archive registry：集合向量
@@ -23,7 +42,10 @@
 - 完整 release gate 固定 v1891 closeout `cf0b1d87`，通过 2,017/2,017，Maven 9:52，
   JaCoCo 2,096 类/全部阈值，SpotBugs 0/0，jar 67,992,034 字节。Implementation
   `3d36a36b` 通过 run `29970248402`：Docker 2:24、headless 18:11，其中 wrapper verify
-  17:34、prod smoke 0:10、JaCoCo 上传 0:03。Closeout CI 与 annotated tag 仍是完成门。
+  17:34、prod smoke 0:10、JaCoCo 上传 0:03。Closeout `fb49fd6e` 通过 run
+  `29971202000`：Docker 2:13、headless 12:54，其中 wrapper verify 12:20、prod smoke
+  0:08、JaCoCo 上传 0:03。Tag `v1892-order-platform-handoff-archive-catalog` 在本地与
+  `javaproject` 均 peel 到完整 closeout。
 
 ## v1891 - Operator CI handoff Catalog convergence
 

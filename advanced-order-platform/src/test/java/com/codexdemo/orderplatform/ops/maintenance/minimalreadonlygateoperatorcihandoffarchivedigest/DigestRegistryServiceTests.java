@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySourceTests {
+class DigestRegistryServiceTests {
 
   @Test
   void buildsArchiveDigestFromArchiveVerificationRegistry() {
@@ -33,7 +33,7 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistry
   }
 
   @Test
-  void keepsArchiveDigestStrictlyReadOnly() {
+  void keepsArchiveDigestReadOnly() {
     var response = ArchiveDigestTestData.registry();
 
     assertThat(response.readOnly()).isTrue();

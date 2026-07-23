@@ -246,3 +246,13 @@ MinimalReadOnlyGateOperatorCiHandoff archive registry 的六组投影、六个 C
 shrink-only 结构门；没有移动、改写或删除任何历史归档。重建后的精确集合为
 `1,703 files / 20,244,957 raw bytes`。本次上调严格等于这一份 16,685 字节讲解的增量，
 不是后续版本的预留预算。
+
+## Authorized v1893 Extension
+
+用户于 2026-07-23 继续授权 Java coding brilliant and elegant 九分计划。v1893 只新增
+`代码讲解记录_生产雏形阶段9/v1893-v1897/v1893-handoff-archive-digest-catalog.md`，用于解释
+MinimalReadOnlyGateOperatorCiHandoff archive digest registry 的六组投影、六个 Catalog
+到一个不可变 `DigestCatalog.Evidence` 的收敛、Support 单向依赖、完整响应摘要、Java/mini-kv
+只读边界和 shrink-only 结构门；没有移动、改写或删除任何历史归档。重建后的精确集合为
+`1,704 files / 20,261,596 raw bytes`。本次上调严格等于这一份 16,639 字节讲解的增量，
+不是后续版本的预留预算。

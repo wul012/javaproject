@@ -14,20 +14,14 @@ final class ReportRenderer {
 
   private ReportRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceArchiveSnapshot> sources,
-      List<DigestSection> digests,
-      List<ConsumerPacket> packets,
-      List<ReplayInstruction> instructions,
-      List<BoundaryLock> locks,
-      List<ScorecardEntry> scorecard) {
+  static List<MarkdownSection> render(DigestCatalog.Evidence evidence) {
     return List.of(
-        sources(sources),
-        digests(digests),
-        packets(packets),
-        instructions(instructions),
-        locks(locks),
-        scorecard(scorecard));
+        sources(evidence.sourceArchiveSnapshots()),
+        digests(evidence.digestSections()),
+        packets(evidence.consumerPackets()),
+        instructions(evidence.replayInstructions()),
+        locks(evidence.boundaryLocks()),
+        scorecard(evidence.scorecard()));
   }
 
   private static MarkdownSection sources(List<SourceArchiveSnapshot> entries) {

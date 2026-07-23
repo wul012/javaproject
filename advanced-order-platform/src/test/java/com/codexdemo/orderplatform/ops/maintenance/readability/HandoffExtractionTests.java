@@ -221,22 +221,10 @@ class HandoffExtractionTests {
     Path archiveDigestRoot =
         OPS_ROOT.resolve(
             Path.of("maintenance", "minimalreadonlygateoperatorcihandoffarchivedigest"));
-    List<String> responseConsumers =
-        List.of(
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestBoundaryLockCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPacketCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistrySupport.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestReplayInstructionCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestScorecardCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestSectionCatalog.java",
-            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestSourceArchiveCatalog.java");
-    for (String file : responseConsumers) {
-      assertThat(read(archiveDigestRoot.resolve(file)))
-          .as(file)
-          .contains(PACKAGE_IMPORT)
-          .contains(
-              "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse");
-    }
+    assertThat(read(archiveDigestRoot.resolve("DigestCatalog.java")))
+        .contains(PACKAGE_IMPORT)
+        .contains(
+            "OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse");
     assertThat(
             read(
                 archiveDigestRoot.resolve(

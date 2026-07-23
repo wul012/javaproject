@@ -41,10 +41,10 @@ class OpsEleganceCensusTests {
   void opsAndCatalogDebtCanOnlyShrink() throws IOException {
     List<Path> files = javaFiles(OPS_ROOT);
 
-    assertThat(files).hasSizeLessThanOrEqualTo(1_205);
+    assertThat(files).hasSizeLessThanOrEqualTo(1_200);
     assertThat(files)
         .filteredOn(path -> stem(path).endsWith("Catalog"))
-        .hasSizeLessThanOrEqualTo(288);
+        .hasSizeLessThanOrEqualTo(283);
   }
 
   @Test
@@ -53,7 +53,7 @@ class OpsEleganceCensusTests {
 
     assertThat(renderers).hasSizeLessThanOrEqualTo(30);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_234);
+        .isLessThanOrEqualTo(3_228);
     assertThat(renderers.stream().filter(this::hasLongStem)).isEmpty();
   }
 
@@ -62,7 +62,7 @@ class OpsEleganceCensusTests {
     List<Path> files = javaFiles(DIGEST_ROOT);
     List<Path> renderers = files.stream().filter(this::isRenderer).toList();
 
-    assertThat(files).hasSizeLessThanOrEqualTo(10);
+    assertThat(files).hasSizeLessThanOrEqualTo(5);
     assertThat(renderers)
         .extracting(path -> path.getFileName().toString())
         .containsExactly("ReportRenderer.java");

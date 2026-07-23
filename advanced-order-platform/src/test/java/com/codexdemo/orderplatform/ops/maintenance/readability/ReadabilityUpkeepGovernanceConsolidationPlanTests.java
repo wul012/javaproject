@@ -17,7 +17,7 @@ class ReadabilityUpkeepGovernanceConsolidationPlanTests {
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
   private static final int MAX_OPS_MAIN_JAVA_FILES = 1352;
   private static final int MAX_ROOT_OPS_MAIN_JAVA_FILES = 104;
-  private static final int MAX_READINESS_MAIN_JAVA_FILES = 1205;
+  private static final int MAX_READINESS_MAIN_JAVA_FILES = 1200;
 
   @Test
   void keepsJavaOpsConsolidationPlanDiscoverable() throws IOException {
