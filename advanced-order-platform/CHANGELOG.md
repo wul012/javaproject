@@ -23,7 +23,10 @@
   `fb49fd6e`，通过 2,019/2,019，Maven 8:25，JaCoCo 2,092 类/全部阈值，SpotBugs 0/0，
   jar 67,986,621 字节。Implementation `52c6b02d` 通过 run `29973533854`：Docker 2:17、
   headless 19:14，其中 wrapper verify 18:29、prod smoke 0:13、JaCoCo 上传 0:04；
-  closeout CI 与 tag 仍是完成门。
+  closeout `9518c203` 通过 run `29974482084`：Docker 2:08、headless 19:48，其中 wrapper
+  verify 18:59、prod smoke 0:12、JaCoCo 上传 0:05。Tag
+  `v1893-order-platform-handoff-archive-digest-catalog` 在本地与 `javaproject` 均 peel 到
+  `9518c203`。
 
 ## v1892 - Operator CI handoff archive Catalog convergence
 

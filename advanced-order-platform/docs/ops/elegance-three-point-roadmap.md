@@ -298,8 +298,11 @@ Catalog 不再反向依赖 Support；原 240 行长名 package-private Support �
 gate 固定 v1892 closeout `fb49fd6e`，通过 2,019 个测试（8:25）、JaCoCo 2,092 类/all
 floors、SpotBugs 0/0，并打包 67,986,621-byte jar。Canonical implementation/closeout CI
 中，implementation `52c6b02d` 的 run `29973533854` 已通过 Docker 2:17 与 headless
-19:14，其中 wrapper verify 18:29、prod smoke 0:13、JaCoCo 上传 0:04。Closeout CI 和 tag
-尚未执行，不能提前记为完成。
+19:14，其中 wrapper verify 18:29、prod smoke 0:13、JaCoCo 上传 0:04。Closeout
+`9518c203` 的 run `29974482084` 通过 Docker 2:08 与 headless 19:48，其中 wrapper verify
+18:59、prod smoke 0:12、JaCoCo 上传 0:05。Tag
+`v1893-order-platform-handoff-archive-digest-catalog` 在本地与 canonical remote 均 peel 到
+完整 closeout，v1893 发布链已闭合。
 
 ## DONE 与失败条件
 

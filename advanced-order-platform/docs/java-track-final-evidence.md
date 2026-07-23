@@ -526,8 +526,11 @@ verification pins v1892 `fb49fd6e` and passes 2,019 tests in 8:25. JaCoCo analyz
 classes and meets every floor; SpotBugs reports 0/0; the executable jar is 67,986,621 bytes.
 Implementation commit `52c6b02d` passes canonical Actions run `29973533854`: Docker-tagged
 verification completes in 2:17 and headless regression in 19:14, including an 18:29 wrapper
-verify, 0:13 production-profile smoke, and 0:04 JaCoCo upload. Closeout Actions and the
-annotated tag remain pending and binding.
+verify, 0:13 production-profile smoke, and 0:04 JaCoCo upload. Closeout `9518c203` passes run
+`29974482084`: Docker 2:08 and headless 19:48, including an 18:59 wrapper verify, 0:12
+production-profile smoke, and 0:05 JaCoCo upload. Annotated tag
+`v1893-order-platform-handoff-archive-digest-catalog` peels to
+`9518c20313054471e1065231e602d1be572ecea0` locally and remotely.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
