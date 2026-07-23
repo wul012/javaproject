@@ -137,10 +137,7 @@ class SustainmentStructureTests {
         .contains(
             "ops.maintenance.releaseacceptanceroutepathsplit.sustainment."
                 + "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentService");
-    assertThat(
-            read(
-                ACCEPTANCE_ROOT.resolve(
-                    "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceCatalog.java")))
+    assertThat(read(ACCEPTANCE_ROOT.resolve("PackageCatalog.java")))
         .contains(
             "ops.maintenance.releaseacceptanceroutepathsplit.sustainment."
                 + "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentResponse");

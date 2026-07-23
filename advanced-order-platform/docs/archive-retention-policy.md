@@ -296,3 +296,13 @@ sandbox 上游回执校验 manifest 的八组证据投影、八个单列表 Cata
 结构门；没有移动、改写或删除任何历史归档。重建后的精确集合为
 `1,708 files / 20,338,223 raw bytes`。本次上调严格等于这一份 21,654 字节讲解的增量，
 不是后续版本的预留预算。
+
+## Authorized v1898 Extension
+
+用户于 2026-07-23 继续授权 Java coding brilliant and elegant 九分计划。v1898 只新增
+`代码讲解记录_生产雏形阶段9/v1898-v1902/v1898-acceptance-package-catalog.md`，用于解释
+release acceptance package 的九组证据投影、九个单列表 Catalog 到一个不可变
+`PackageCatalog.Evidence` 的收敛、完整响应 oracle、Java/mini-kv 只读边界和 shrink-only
+结构门；没有移动、改写或删除任何历史归档。重建后的精确集合为
+`1,709 files / 20,354,150 raw bytes`。本次上调严格等于这一份 15,927 字节讲解的增量，
+不是后续版本的预留预算。

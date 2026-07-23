@@ -6,7 +6,7 @@ import com.codexdemo.orderplatform.ops.maintenance.releaseacceptancepackage.Pack
 import com.codexdemo.orderplatform.ops.maintenance.releaseacceptanceroutepathsplit.OpsShardReadinessReleaseAcceptanceRoutePaths;
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageControllerTests {
+class AcceptancePackageControllerTests {
 
   @Test
   void controllerExposesAcceptancePackageRoute() {

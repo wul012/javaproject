@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
+class AcceptancePackageHistoryTests {
 
   private static final Path OPS_ROOT =
       Path.of("src", "main", "java", "com", "codexdemo", "orderplatform", "ops");
@@ -30,8 +30,6 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
   private static final List<String> CURRENT_FILES =
       List.of(
           "ArchiveIndexRenderer.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageArchiveCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCiCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexCriteriaCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexHandoffCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexItemCatalog.java",
@@ -43,18 +41,24 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptCriteriaCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptResponse.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptService.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService.java",
+          "PackageCatalog.java",
+          "PackageSupport.java",
+          "ReceiptRenderer.java",
+          "ReportRenderer.java");
+  private static final List<String> RETIRED_MAIN_FILES =
+      List.of(
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageArchiveCatalog.java",
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCiCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageDecisionCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageLineageCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageNextChangeCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageReviewCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRuntimeBoundaryCatalog.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageScorecardCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceCatalog.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSupport.java",
-          "ReceiptRenderer.java",
-          "ReportRenderer.java");
+          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSupport.java");
   private static final List<String> REMOVED_RENDERER_FILES =
       List.of(
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageArchiveRenderer.java",
@@ -73,12 +77,13 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
   private static final List<String> CURRENT_TEST_FILES =
       List.of(
           "ArchiveIndexTestData.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCatalogTests.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexCatalogTests.java",
           "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexImmutabilityTests.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageImmutabilityTests.java",
-          "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRendererTests.java",
+          "PackageCatalogTests.java",
           "PackageMarkdownTests.java",
+          "PackageRendererTests.java",
+          "PackageResponseOracleTests.java",
+          "PackageServiceTests.java",
           "PackageTestData.java",
           "ReceiptTestData.java");
   private static final List<String> RETAINED_CONTROLLERS =
@@ -89,10 +94,13 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
 
   @Test
   void extractedImplementationCanOnlyShrink() throws IOException {
-    assertThat(CURRENT_FILES).hasSize(26);
+    assertThat(CURRENT_FILES).hasSize(18);
     for (String file : CURRENT_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(OPS_ROOT.resolve(file))).as(file).isFalse();
+    }
+    for (String file : RETIRED_MAIN_FILES) {
+      assertThat(Files.exists(PACKAGE_ROOT.resolve(file))).as(file).isFalse();
     }
     assertThat(REMOVED_RENDERER_FILES).hasSize(13);
     for (String file : REMOVED_RENDERER_FILES) {
@@ -100,7 +108,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
     }
     try (Stream<Path> files = Files.list(PACKAGE_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(26);
+          .hasSizeLessThanOrEqualTo(18);
     }
     for (String controller : RETAINED_CONTROLLERS) {
       assertThat(Files.isRegularFile(OPS_ROOT.resolve(controller))).as(controller).isTrue();
@@ -109,14 +117,14 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
 
   @Test
   void packageTestsUseShortFactories() throws IOException {
-    assertThat(CURRENT_TEST_FILES).hasSize(9);
+    assertThat(CURRENT_TEST_FILES).hasSize(10);
     for (String file : CURRENT_TEST_FILES) {
       assertThat(Files.isRegularFile(PACKAGE_TEST_ROOT.resolve(file))).as(file).isTrue();
       assertThat(Files.exists(TEST_ROOT.resolve(file))).as(file).isFalse();
     }
     try (Stream<Path> files = Files.list(PACKAGE_TEST_ROOT)) {
       assertThat(files.filter(Files::isRegularFile).filter(this::isJava))
-          .hasSizeLessThanOrEqualTo(9);
+          .hasSizeLessThanOrEqualTo(10);
     }
     assertThat(
             PACKAGE_TEST_ROOT.resolve(
@@ -130,11 +138,12 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
             PACKAGE_TEST_ROOT.resolve(
                 "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutArchiveIndexTestSupport.java"))
         .doesNotExist();
-    assertThat(
-            Files.isRegularFile(
-                TEST_ROOT.resolve(
-                    "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageControllerTests.java")))
+    assertThat(Files.isRegularFile(TEST_ROOT.resolve("AcceptancePackageControllerTests.java")))
         .isTrue();
+    assertThat(
+            TEST_ROOT.resolve(
+                "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageControllerTests.java"))
+        .doesNotExist();
     assertThat(
             Files.isRegularFile(
                 TEST_ROOT.resolve(
@@ -153,10 +162,7 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
         read(
             PACKAGE_ROOT.resolve(
                 "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService.java"));
-    String source =
-        read(
-            PACKAGE_ROOT.resolve(
-                "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceCatalog.java"));
+    String source = read(PACKAGE_ROOT.resolve("PackageCatalog.java"));
     String receipt =
         read(
             PACKAGE_ROOT.resolve(
@@ -180,6 +186,33 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
     assertThat(archive)
         .contains(
             "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCloseoutReceiptService");
+  }
+
+  @Test
+  void typedSnapshotOwnsMainPackageEvidence() throws IOException {
+    String catalog = read(PACKAGE_ROOT.resolve("PackageCatalog.java"));
+    String support = read(PACKAGE_ROOT.resolve("PackageSupport.java"));
+    String renderer = read(PACKAGE_ROOT.resolve("ReportRenderer.java"));
+    String service =
+        read(
+            PACKAGE_ROOT.resolve(
+                "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService.java"));
+
+    assertThat(catalog)
+        .contains("record Evidence(", "static Evidence evidence(")
+        .doesNotContain("PackageSupport", "ReportRenderer");
+    assertThat(occurrences(catalog, "= List.copyOf(")).isEqualTo(9);
+    assertThat(occurrences(service, "PackageCatalog.evidence(source)")).isEqualTo(1);
+    assertThat(renderer).contains("render(PackageCatalog.Evidence evidence)");
+    assertThat(support).contains("PackageCatalog.Evidence evidence");
+    assertThat(lineCount(PACKAGE_ROOT.resolve("PackageCatalog.java"))).isLessThanOrEqualTo(330);
+    assertThat(lineCount(PACKAGE_ROOT.resolve("PackageSupport.java"))).isLessThanOrEqualTo(219);
+    assertThat(lineCount(PACKAGE_ROOT.resolve("ReportRenderer.java"))).isLessThanOrEqualTo(130);
+    assertThat(
+            lineCount(
+                PACKAGE_ROOT.resolve(
+                    "OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageService.java")))
+        .isLessThanOrEqualTo(32);
   }
 
   @Test
@@ -245,6 +278,16 @@ class ReadabilityUpkeepOpsConsolidationExtractionV1842Tests {
 
   private static String read(Path path) throws IOException {
     return Files.readString(path, StandardCharsets.UTF_8);
+  }
+
+  private static long lineCount(Path path) throws IOException {
+    try (Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8)) {
+      return lines.count();
+    }
+  }
+
+  private static int occurrences(String text, String token) {
+    return (text.length() - text.replace(token, "").length()) / token.length();
   }
 
   private boolean isJava(Path path) {

@@ -43,10 +43,10 @@ class OpsEleganceCensusTests {
   void opsAndCatalogDebtCanOnlyShrink() throws IOException {
     List<Path> files = javaFiles(OPS_ROOT);
 
-    assertThat(files).hasSizeLessThanOrEqualTo(1_169);
+    assertThat(files).hasSizeLessThanOrEqualTo(1_161);
     assertThat(files)
         .filteredOn(path -> stem(path).endsWith("Catalog"))
-        .hasSizeLessThanOrEqualTo(251);
+        .hasSizeLessThanOrEqualTo(243);
   }
 
   @Test
@@ -55,7 +55,7 @@ class OpsEleganceCensusTests {
 
     assertThat(renderers).hasSizeLessThanOrEqualTo(30);
     assertThat(renderers.stream().mapToLong(this::lineCountUnchecked).sum())
-        .isLessThanOrEqualTo(3_185);
+        .isLessThanOrEqualTo(3_176);
     assertThat(renderers.stream().filter(this::hasLongStem)).isEmpty();
   }
 
@@ -167,7 +167,7 @@ class OpsEleganceCensusTests {
     List<Path> files = javaFiles(ACCEPTANCE_PACKAGE_ROOT);
     List<Path> renderers = files.stream().filter(this::isRenderer).toList();
 
-    assertThat(files).hasSizeLessThanOrEqualTo(26);
+    assertThat(files).hasSizeLessThanOrEqualTo(18);
     assertThat(renderers)
         .extracting(path -> path.getFileName().toString())
         .containsExactlyInAnyOrder(

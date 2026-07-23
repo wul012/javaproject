@@ -416,6 +416,34 @@ Docker 2:13 与 headless 17:56，其中 wrapper 分别为 1:56 与 17:22，prod 
 JaCoCo 上传 0:03。Tag `v1897-order-platform-sandbox-manifest-catalog` 在本地与 canonical
 remote 均 peel 到完整 closeout，v1897 发布链已闭合；这仍不等于外部已授予九分。
 
+## v1898 检查点
+
+ReleaseAcceptance RoutePathSplit sustainment acceptance package 的主响应原由九个单列表
+Catalog 分别投影 source、runtime、review、decision、CI、lineage、next change、archive 与
+scorecard，Service 再把九个列表展开给 Renderer 和 420 行长名 Support。v1898 先在 released
+v1897 上冻结完整 response：数量向量 `1/3/6/5/5/5/7/6/9/9/40`，sorted-property UTF-8
+JSON SHA-256 为
+`2679ebdc83c27789a17d52d8d255f96ebda0cb081e9f37295b9953613ecca51a`。随后九个 owner
+收敛为 330 行 `PackageCatalog`；typed `Evidence` 对九组列表逐一执行防御性复制，Service
+只装配一次，130 行 Renderer 与 219 行 `PackageSupport` 读取同一快照。
+
+本版没有把独立 closeout receipt 和 closeout archive index 子族塞进主聚合。所谓 focused
+catalogs 指九个领域片段在一个响应生命周期中保持明确字段边界，而不是继续为每个列表创建一个
+文件；Catalog 不依赖 Support/Renderer，展示与状态判定仍由各自 owner 负责。主族生产文件
+`13 -> 5`、总行数 `1,167 -> 773`，净删 8 文件与 394 行；Service `88 -> 32`，Renderer
+`139 -> 130`。
+
+生产 Java `1,301 -> 1,293`，ops `1,169 -> 1,161`，Catalog `251 -> 243`，测试
+`908 -> 909`，Readiness `966 -> 956`，renderer 保持 30 个且总行数
+`3,185 -> 3,176`。生产名称收紧到 `1,044/19,346/2,603`，测试收紧到
+`680/9,763/3,641`；exact baseline 删除 30 项、新增 0 项。旧实现和新实现通过同一完整
+response oracle，行为、历史结构、elegance、名称和可读性聚焦门已通过。讲解 3,177 Han/十章节，
+归档精确为 1,709 files/20,354,150 bytes。首次完整门在 2,032 项测试末端发现设计说明的
+三项英文标签协议；不改门禁，把既有三行中文标签改为标准标签后，change/elegance/history
+选择 30/30 通过。干净完整重跑固定 v1897 `fd803c13`，通过 2,032 项测试（9:22）、
+JaCoCo 2,059 类/all floors、SpotBugs 0/0，并打包 67,941,575-byte jar。远端 CI、
+closeout 与 tag 尚待收口，因此本检查点仍不等于外部已授予九分。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

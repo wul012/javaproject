@@ -4,6 +4,28 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1898 - Release acceptance package Catalog convergence
+
+- 在 released v1897 上先冻结完整 sustainment acceptance package response：数量向量
+  `1/3/6/5/5/5/7/6/9/9/40`，sorted-property UTF-8 SHA-256 为
+  `2679ebdc83c27789a17d52d8d255f96ebda0cb081e9f37295b9953613ecca51a`。
+- 删除九个单列表 Catalog 和 420 行旧 Support，以 330 行 `PackageCatalog`、不可变 typed
+  `Evidence` 与 219 行 `PackageSupport` 收敛投影和判定；Service 恰好装配一次，Renderer 与
+  Support 不再接收九个展开列表。
+- 主族生产文件 `13 -> 5`、总行数 `1,167 -> 773`，Service `88 -> 32`，Renderer
+  `139 -> 130`；公开 Controller、Response、route、profile、九段 Markdown、四十条 checks、
+  列表顺序和只读边界保持不变，独立 closeout receipt 与 closeout archive index 子族未改动。
+- 生产 Java `1,301 -> 1,293`、ops `1,169 -> 1,161`、Catalog `251 -> 243`、测试
+  `908 -> 909`、Readiness `966 -> 956`，renderer 保持 30 个且总行数
+  `3,185 -> 3,176`。
+- 生产/测试名称指标收紧到 `1044/19346/2603` 与 `680/9763/3641`，exact baseline 删除
+  30 项、新增 0 项。完整旧/新 response oracle、行为、历史结构、优雅和命名聚焦门已通过；
+  讲解 3,177 Han/十章节，授权归档为 1,709 files / 20,354,150 raw bytes。首次完整门在
+  2,032 项测试末端发现设计说明使用中文标签而未满足机械英文标签协议；不改测试，以三项标准
+  标签修复后 30/30 聚焦门通过。干净完整重跑固定 v1897 `fd803c13`，通过
+  2,032/2,032（9:22）、JaCoCo 2,059 类/全部阈值、SpotBugs 0/0，并打包
+  67,941,575-byte jar。提交、远端 CI 与 canonical tag 尚待本版本收口。
+
 ## v1897 - Sandbox upstream receipt manifest Catalog convergence
 
 - 在 released v1896 上先冻结完整 manifest response：数量向量

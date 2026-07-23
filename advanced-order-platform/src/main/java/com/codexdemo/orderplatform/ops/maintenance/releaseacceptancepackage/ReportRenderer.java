@@ -17,26 +17,17 @@ final class ReportRenderer {
 
   private ReportRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourceSnapshot> snapshots,
-      List<VersionLineage> lineage,
-      List<DecisionRecord> decisions,
-      List<ArchiveItem> archiveItems,
-      List<ReviewItem> reviewItems,
-      List<CiEvidence> ciEvidence,
-      List<RuntimeBoundary> runtimeBoundaries,
-      List<NextChangeRule> nextChangeRules,
-      List<ScorecardEntry> scorecard) {
+  static List<MarkdownSection> render(PackageCatalog.Evidence evidence) {
     return List.of(
-        source(snapshots),
-        lineage(lineage),
-        decisions(decisions),
-        archive(archiveItems),
-        review(reviewItems),
-        ci(ciEvidence),
-        boundaries(runtimeBoundaries),
-        nextChanges(nextChangeRules),
-        scorecard(scorecard));
+        source(evidence.sourceSnapshots()),
+        lineage(evidence.lineage()),
+        decisions(evidence.decisions()),
+        archive(evidence.archiveItems()),
+        review(evidence.reviewItems()),
+        ci(evidence.ciEvidence()),
+        boundaries(evidence.runtimeBoundaries()),
+        nextChanges(evidence.nextChangeRules()),
+        scorecard(evidence.scorecard()));
   }
 
   private static MarkdownSection source(List<SourceSnapshot> entries) {

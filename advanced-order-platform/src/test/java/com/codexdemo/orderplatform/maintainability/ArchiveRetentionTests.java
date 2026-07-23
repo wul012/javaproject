@@ -27,8 +27,8 @@ class ArchiveRetentionTests {
   private static final List<String> FIXED_ROOTS =
       List.of("a", "b", "c", "d", "d_runtime_screenshot_archive_next", "e", "f");
   private static final Set<String> TEXT_EXTS = Set.of(".md", ".json", ".html");
-  private static final int FILE_CAP = 1708;
-  private static final long BYTE_CAP = 20_338_223L;
+  private static final int FILE_CAP = 1709;
+  private static final long BYTE_CAP = 20_354_150L;
 
   @Test
   void manifestMatchesArchiveBytes() throws Exception {
@@ -116,7 +116,8 @@ class ArchiveRetentionTests {
             "v1895-dossier-catalog.md",
             "v1896-sandbox-dossier-catalog.md",
             "v1897-sandbox-manifest-catalog.md",
-            "1,708 files / 20,338,223 raw bytes");
+            "v1898-acceptance-package-catalog.md",
+            "1,709 files / 20,354,150 raw bytes");
     assertThat(script)
         .contains(
             "$walkthroughPrefix",

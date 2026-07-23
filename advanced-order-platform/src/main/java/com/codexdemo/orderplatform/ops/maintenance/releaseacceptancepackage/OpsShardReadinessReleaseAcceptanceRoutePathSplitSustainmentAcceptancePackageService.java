@@ -25,64 +25,8 @@ public class OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptan
   public OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageResponse
       registry() {
     var source = sourceService.registry();
-    var sourceSnapshots =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSourceCatalog
-            .snapshots(source);
-    var lineage =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageLineageCatalog
-            .lineage(source);
-    var decisions =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageDecisionCatalog
-            .decisions(source);
-    var archiveItems =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageArchiveCatalog
-            .items(source);
-    var reviewItems =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageReviewCatalog
-            .items(source);
-    var ciEvidence =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageCiCatalog
-            .evidence(source);
-    var runtimeBoundaries =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageRuntimeBoundaryCatalog
-            .boundaries(source);
-    var nextChangeRules =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageNextChangeCatalog
-            .rules(source);
-    var scorecard =
-        OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageScorecardCatalog
-            .scorecard(
-                sourceSnapshots,
-                lineage,
-                decisions,
-                archiveItems,
-                reviewItems,
-                ciEvidence,
-                runtimeBoundaries,
-                nextChangeRules);
-    return OpsShardReadinessReleaseAcceptanceRoutePathSplitSustainmentAcceptancePackageSupport
-        .response(
-            RESPONSE_VERSION,
-            ENDPOINT,
-            source,
-            sourceSnapshots,
-            lineage,
-            decisions,
-            archiveItems,
-            reviewItems,
-            ciEvidence,
-            runtimeBoundaries,
-            nextChangeRules,
-            scorecard,
-            ReportRenderer.render(
-                sourceSnapshots,
-                lineage,
-                decisions,
-                archiveItems,
-                reviewItems,
-                ciEvidence,
-                runtimeBoundaries,
-                nextChangeRules,
-                scorecard));
+    var evidence = PackageCatalog.evidence(source);
+    return PackageSupport.response(
+        RESPONSE_VERSION, ENDPOINT, source, evidence, ReportRenderer.render(evidence));
   }
 }

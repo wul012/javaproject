@@ -1,8 +1,8 @@
 # Java Track Final Evidence Candidate
 
-Status: v1897 release lifecycle is complete. External Java-track review is required before the
-word final may describe the track. This file records reproducible evidence; it does not authorize
-production execution.
+Status: v1898 implementation candidate; the release lifecycle is open.
+External Java-track review is required before the word final may describe the track. This file
+records reproducible evidence; it does not authorize production execution.
 
 ## Maturity Boundary
 
@@ -16,32 +16,33 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1897 local gate plus implementation `30001832600` and closeout `30003161206` green |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1898 full local gate is green; implementation and closeout CI are pending |
 | E2 Static analysis | Spotless and SpotBugs checks; 674 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | stale retired-class waiver removed; Locale root cause fixed; SpotBugs 0/0 |
-| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1897 JaCoCo analyzes 2,066 classes and meets all floors |
+| E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1898 JaCoCo analyzes 2,059 classes and meets all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | boundaries unchanged; full gate green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | v1888 full docs gate green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1897 tag peels to green closeout `fd803c13` locally and remotely |
-| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1897 focused gates: ops 1,169; Catalogs 251; production/test name metrics 1054/19458/2613 and 685/9768/3646 |
-| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1897 exact candidate set 1,708 files / 20,338,223 raw bytes; full gate green |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1898 local release gate passed; implementation, closeout, tag, and receipt are pending |
+| E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1898 focused gates: ops 1,161; Catalogs 243; production/test name metrics 1044/19346/2603 and 680/9763/3641 |
+| E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1898 exact candidate set 1,709 files / 20,354,150 raw bytes; full gate green |
 
 ## Final Censuses
 
 - Ops direct root: 104 files; retained: 104; remaining movable: 0; unassigned: 0.
-- Ops total production Java files: 1,169; no extraction family remains in root.
-- Production Java: 1,301 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
-- Test Java: 908 files; maximum 699 lines; over 500: 8;
+- Ops total production Java files: 1,161; no extraction family remains in root.
+- Production Java: 1,293 files; maximum 738 lines; over 500: 32; over 750/1000: 0/0.
+- Test Java: 909 files; maximum 699 lines; over 500: 8;
   over 750/1000: 0/0.
-- Long-name shrink-only baseline: production stems/uses/unique 1054/19458/2613;
-  tests 685/9768/3646. New declarations and filenames remain within 40 characters;
+- Long-name shrink-only baseline: production stems/uses/unique 1044/19346/2603;
+  tests 680/9763/3641. New declarations and filenames remain within 40 characters;
   baseline identities and aggregate occurrences only shrink during staged migration.
-- Catalog census: 251 files, down from 332 at v1886. CandidateDocument request and
+- Catalog census: 243 files, down from 332 at v1886. CandidateDocument request and
   material-precheck handoff use two immutable bundles; submission, intake, and profile
   now use three more bundles instead of a further fourteen single-list owners. Execution
-  base and archive registries replace another fifteen single-list owners with two bundles.
-- Renderer census: 30 files / 3,185 lines / 0 long filenames, down from
+  base and archive registries replace another fifteen single-list owners with two bundles;
+  the release-acceptance sustainment package replaces a further nine with one typed snapshot.
+- Renderer census: 30 files / 3,176 lines / 0 long filenames, down from
   121 / 5,355 / 119 at the v1872 start of the three-point elegance program.
 - Exact long-name identities are frozen in `config/java-name-baseline.txt`; v1869 adds
   Git-aware tests that reject new names, dirty-tree blind spots, oversized feature-source
@@ -52,7 +53,7 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 - SpotBugs exclusions: 674 exact pattern/class identities; only deletion is allowed, and
   every retained class must load from the compiled classpath.
 - Archive retention: every authorized optimization adds exactly its named walkthrough;
-  the current exact candidate set is 1,708 files / 20,338,223 raw bytes.
+  the current exact candidate set is 1,709 files / 20,354,150 raw bytes.
 
 ## Active Waivers
 
@@ -643,6 +644,31 @@ verification completes in 2:13 with a 1:56 wrapper verify; headless regression c
 17:56 with a 17:22 wrapper verify, 0:10 production-profile smoke, and 0:03 JaCoCo upload.
 Annotated tag `v1897-order-platform-sandbox-manifest-catalog` peels to the closeout locally
 and remotely.
+
+Current v1898 candidate: the complete ReleaseAcceptance RoutePathSplit sustainment acceptance
+package first passes its canonical JSON oracle on released v1897. The collection vector is
+`1/3/6/5/5/5/7/6/9/9/40` and the full sorted-property UTF-8 SHA-256 is
+`2679ebdc83c27789a17d52d8d255f96ebda0cb081e9f37295b9953613ecca51a`. Nine one-list
+Catalog owners and the 420-line long-name Support become one 330-line `PackageCatalog`, one
+immutable typed Evidence, and one 219-line `PackageSupport`. Service assembles once while the
+130-line Renderer and Support read the same snapshot. Public route, Response, Controller,
+ordering, nine Markdown sections, 40 checks, and read-only transaction remain unchanged. The
+independent closeout receipt and closeout archive-index subfamilies are outside this cut.
+
+The main family contracts from 13 to 5 production files and from 1,167 to 773 lines. Production
+Java reaches 1,293 files, ops 1,161, Catalogs 243, and tests 909. Production/test name metrics
+reach `1044/19346/2603` and `680/9763/3641`; the exact baseline has 30 removals and no
+additions. Readiness reaches 956 and renderer lines 3,176. Focused complete-oracle, behavior,
+history, structure, elegance, name, and readability gates pass. The walkthrough has 3,177 Han
+and ten standard headings; the exact archive candidate is 1,709 files / 20,354,150 raw bytes.
+The first full gate reaches all 2,032 tests and exposes only the exact three-label design-note
+protocol. The existing design note receives the required `Abstraction`, `Data boundary`, and
+`Behavior boundary` labels without changing its content or the test; the 30/30 repair selection
+passes. The clean full rerun pins v1897 closeout
+`fd803c13889e90b948c313207713252413bf09fb`, passes 2,032 tests in 9:22, analyzes 2,059
+JaCoCo classes with every floor met, reports SpotBugs 0/0, and packages a 67,941,575-byte jar.
+Implementation and closeout Actions, the annotated tag, and the post-tag receipt remain pending;
+v1897 is still the latest closed release boundary.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
