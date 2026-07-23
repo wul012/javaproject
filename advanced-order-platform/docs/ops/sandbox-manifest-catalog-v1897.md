@@ -89,8 +89,11 @@ oracle、structure、名称、ops、归档、讲解与文档约束可以同时�
 `scripts/verify-release.ps1` 固定前序 tag `v1896-order-platform-sandbox-dossier-catalog`
 的 peeled SHA `a0be0c7808ab7684093126c60c7792a54dd69114`，在 12:23 内通过 2,030 项测试，
 JaCoCo 分析 2,066 类并满足全部阈值，SpotBugs 为 0 bug / 0 error，产出
-67,950,901-byte jar。implementation CI、closeout CI、annotated tag、post-tag receipt 与
-第三次 CI 尚未完成，不能提前写成发布通过。
+67,950,901-byte jar。Implementation commit
+`010e4e43488017971f297d55933ea38bac8f1c34` 的 canonical Actions run
+`30001832600` 通过：Docker job 2:06、wrapper verify 1:51；headless job 18:16、
+wrapper verify 17:33、production-profile smoke 0:11、JaCoCo upload 0:03。
+closeout CI、annotated tag、post-tag receipt 与第三次 CI 尚未完成，不能提前写成发布通过。
 
 ## Failure Conditions
 

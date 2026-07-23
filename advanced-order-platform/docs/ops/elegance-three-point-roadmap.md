@@ -409,8 +409,10 @@ boundary evidence 前缀后降为 397。Renderer 初稿使全局行数反弹到 
 删除 28 项、新增 0 项。完整 response oracle、行为和结构 focused gate 已通过；讲解
 4,520 Han/十章节，归档精确为 1,708 files/20,338,223 bytes。完整 release gate 固定
 v1896 closeout `a0be0c78`，通过 2,030 项测试（12:23）、JaCoCo 2,066 类/all floors、
-SpotBugs 0/0，并打包 67,950,901-byte jar。远端发布生命周期尚未执行完成，不能提前写成
-发布通过，更不等于外部已授予九分。
+SpotBugs 0/0，并打包 67,950,901-byte jar。Implementation `010e4e43` 的 canonical run
+`30001832600` 通过 Docker 2:06 与 headless 18:16，其中 wrapper 分别为 1:51 与 17:33，
+prod smoke 0:11、JaCoCo 上传 0:03。Closeout、tag 与 receipt 尚未完成，不能提前写成发布
+通过，更不等于外部已授予九分。
 
 ## DONE 与失败条件
 

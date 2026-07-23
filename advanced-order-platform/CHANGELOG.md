@@ -23,7 +23,9 @@
   28 项、新增 0 项。讲解 4,520 Han/十章节，授权归档为
   1,708 files / 20,338,223 raw bytes。完整本地 release gate 固定 v1896
   `a0be0c78`，通过 2,030 项测试（12:23）、JaCoCo 2,066 类/all floors、SpotBugs 0/0，
-  并打包 67,950,901-byte jar；implementation CI、closeout、tag 与 receipt 尚待完成。
+  并打包 67,950,901-byte jar。Implementation `010e4e43` 的 canonical run
+  `30001832600` 通过 Docker 2:06 与 headless 18:16，其中 wrapper 分别为 1:51 与 17:33，
+  prod smoke 0:11、JaCoCo 上传 0:03；closeout、tag 与 receipt 尚待完成。
 
 ## v1896 - Sandbox blocked-execution dossier Catalog convergence
 
