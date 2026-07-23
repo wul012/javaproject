@@ -4,6 +4,26 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1899 - Release approval marker builder boundaries
+
+- 在 released v1898 上先冻结完整 rehearsal response。排除两个调用时钟字段后，默认请求
+  SHA-256 为 `48dc64dd2385de0ad0b98f114be157c98b19012abcfde8384ff6e237248b8550`，
+  完整 header 请求为 `c64e2fac8194ab2f70ef5bbd603a9a92dd0ea1a9ae75459f386c7fa6373258cc`。
+- 将 738/726/590 行的三个 package-private marker builder 改为三对短 builder/rules owner，
+  并以 26 行不可变 `MarkerEvidence` 统一 warning input、boundary input、proof claim 和 Node
+  action 的传递；领域 boundary projection 与 fail-closed predicate 保持强类型。
+- 退役末端四个只转调 Support 的 58 行 receipt wrapper；构建链、贡献目录、warning digest 和
+  no-write 证明直接消费原有强类型 Support，完整响应摘要保持不变。由此 `releaseapproval`
+  文件数保持 119，总行数 `38,879 -> 38,570`；生产 Java 保持 1,293，ops 保持 1,161，
+  测试 `909 -> 912`。Catalog 243、Service 375、Renderer `30/3,176/0 long names` 均不变。
+- 全局最大生产文件 `738 -> 658`，超过 500 行文件 `32 -> 29`；生产/测试名称指标收紧到
+  `1037/19155/2589` 与 `680/9755/3633`，exact baseline 删除 22 项、新增 0 项。完整
+  oracle、共享快照、结构、历史、warning digest、优雅、讲解和归档
+  聚焦门已通过；讲解 3,803 Han/十章节，授权归档为
+  1,710 files / 20,374,361 raw bytes。完整 release gate 以 v1898 closeout
+  `78cac4e9` 为前序基准，9:21 内通过 2,038 项测试，JaCoCo 2,059 类满足全部阈值，
+  SpotBugs 0/0，并生成 67,940,843 字节 jar；远端生命周期仍待执行。
+
 ## v1898 - Release acceptance package Catalog convergence
 
 - 在 released v1897 上先冻结完整 sustainment acceptance package response：数量向量

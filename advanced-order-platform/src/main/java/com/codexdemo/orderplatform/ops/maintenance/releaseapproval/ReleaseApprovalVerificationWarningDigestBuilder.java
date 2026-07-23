@@ -19,9 +19,9 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             receiptChain.sandboxConnectionPrecheckPacketEchoReceiptBuilder(),
             receiptChain.sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder(),
             receiptChain.sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder(),
-            receiptChain.sandboxEndpointHandlePreflightEchoMarkerBuilder(),
-            receiptChain.sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder(),
-            receiptChain.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder(),
+            receiptChain.endpointPreflightBuilder(),
+            receiptChain.decisionMarkerBuilder(),
+            receiptChain.disabledPrecheckBuilder(),
             receiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder(),
             receiptChain.sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder(),
             receiptChain
@@ -51,15 +51,7 @@ final class ReleaseApprovalVerificationWarningDigestBuilder {
             receiptChain
                 .sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder(),
             receiptChain
-                .sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder(),
-            receiptChain
-                .sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder(),
-            receiptChain
-                .sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder(),
-            receiptChain
-                .sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder(),
-            receiptChain
-                .sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder());
+                .sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder());
   }
 
   String build(ReleaseApprovalVerificationHintContext context) {

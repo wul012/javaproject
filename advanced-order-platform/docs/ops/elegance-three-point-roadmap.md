@@ -449,6 +449,37 @@ Docker 1:50、wrapper 1:34；headless 19:35、wrapper 18:44、prod smoke 0:11、
 `v1898-order-platform-acceptance-package-catalog` 在本地与 canonical remote 均 peel 到
 完整 closeout，v1898 发布链已闭合；这仍不等于外部已授予九分。
 
+## v1899 检查点
+
+Release approval rehearsal 的 endpoint-preflight、resolver-decision 与 disabled-precheck 三个
+package-private builder 原为 590、738、726 行单体。v1899 先在 released v1898 上冻结完整
+公开响应：排除两个请求时钟字段后，默认请求 SHA-256 为
+`48dc64dd2385de0ad0b98f114be157c98b19012abcfde8384ff6e237248b8550`，完整 header
+请求为 `c64e2fac8194ab2f70ef5bbd603a9a92dd0ea1a9ae75459f386c7fa6373258cc`。
+旧实现连续两次通过后才开始结构替换。
+
+三个内部类型改为三对短 builder/rules owner；26 行 `MarkerEvidence` 只统一 warning input、
+boundary input、proof claim、Node action 与 warning line 的不可变传递。领域 boundary
+projection、source acceptance、typed subrecord 构造和 fail-closed predicate 仍归对应 rules，
+没有用 map、反射或万能 callback 隐藏领域含义。公开 route、Request/Response FQN、嵌套 record、
+JSON、marker digest、列表顺序和执行权限均不变。
+
+拆分没有借口扩大文件总量：同一 receipt chain 末端四个 58 行 wrapper 只做 Support 转调，
+没有状态或规则，现由构建、贡献、warning digest 与 no-write 消费者直接调用原有强类型
+Support，并由同一完整 oracle 守住输出。`releaseapproval` 因而保持 119 个生产文件，总行数
+`38,879 -> 38,570`。生产 Java 保持 1,293，ops 保持 1,161，测试 `909 -> 912`；Catalog
+243、Service 375、Renderer `30/3,176/0 long names` 保持不变。全局最大生产文件
+`738 -> 658`，超过 500 行文件 `32 -> 29`。生产名称收紧到
+`1,037/19,155/2,589`，测试收紧到 `680/9,755/3,633`；exact baseline 删除 22 项、
+新增 0 项。
+
+完整 response oracle、共享快照、结构、v1854 历史、warning digest、maintainability、
+elegance、walkthrough 和 archive 聚焦门通过。讲解 3,803 Han/十章节，归档精确为
+1,710 files/20,374,361 bytes。完整 release gate 以 v1898 closeout `78cac4e9` 为基准，
+9:21 内通过 2,038 项测试、JaCoCo 2,059 类全部阈值、SpotBugs 0/0、生产 smoke 和
+67,940,843 字节 jar。implementation/closeout CI、canonical tag 与 post-tag receipt 仍待
+真实执行；本检查点不把 pending 状态写成完成，也不等于外部已授予九分。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

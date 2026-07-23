@@ -134,28 +134,21 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
         managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker =
             sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder.build(
                 managedAuditSandboxConnectionDisabledAdapterClientPrecheckEchoReceipt);
-    ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
-        sandboxEndpointHandlePreflightEchoMarkerBuilder =
-            new ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder();
+    EndpointPreflightBuilder endpointPreflightBuilder = new EndpointPreflightBuilder();
     ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords
             .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
         managedAuditSandboxEndpointHandlePreflightEchoMarker =
-            sandboxEndpointHandlePreflightEchoMarkerBuilder.build(
+            endpointPreflightBuilder.build(
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker);
-    ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder =
-            new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder();
+    DecisionMarkerBuilder decisionMarkerBuilder = new DecisionMarkerBuilder();
     ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords
             .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
         managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker =
-            sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder.build(
-                managedAuditSandboxEndpointHandlePreflightEchoMarker);
-    ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder =
-            new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder();
+            decisionMarkerBuilder.build(managedAuditSandboxEndpointHandlePreflightEchoMarker);
+    DisabledPrecheckBuilder disabledPrecheckBuilder = new DisabledPrecheckBuilder();
     RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
         managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker =
-            sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.build(
+            disabledPrecheckBuilder.build(
                 managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker);
     ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
         sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder =
@@ -286,36 +279,26 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
             sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
                 .build(
                     managedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceipt);
-    ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
-        sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder =
-            new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder();
     RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt
         managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt =
-            sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
                 .build(
                     managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt);
-    ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
-        sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder =
-            new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder();
     RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt
         managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt =
-            sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
                 .build(
                     managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt);
-    ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
-        sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder =
-            new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder();
     RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
         managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt =
-            sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder.build(
-                managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt);
-    ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
-        sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder =
-            new ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder();
+            ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
+                .build(
+                    managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt);
     RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
         managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt =
-            sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder.build(
-                managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt);
+            ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
+                .build(
+                    managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt);
 
     return new ReceiptChain(
         approvalHandoffVerificationMarker,
@@ -345,11 +328,11 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
         managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker,
         sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
         managedAuditSandboxEndpointHandlePreflightEchoMarker,
-        sandboxEndpointHandlePreflightEchoMarkerBuilder,
+        endpointPreflightBuilder,
         managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
-        sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
+        decisionMarkerBuilder,
         managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
-        sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
+        disabledPrecheckBuilder,
         managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
         sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder,
         managedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceipt,
@@ -385,13 +368,9 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
         managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt,
         sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder,
         managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt,
-        sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder,
         managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
-        sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
         managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
-        sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
-        managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
-        sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder);
+        managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt);
   }
 
   record ReceiptChain(
@@ -462,17 +441,14 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
       ReleaseApprovalSandboxConnectionAdapterPreflightEchoRecords
               .RehearsalManagedAuditSandboxEndpointHandlePreflightEchoMarker
           managedAuditSandboxEndpointHandlePreflightEchoMarker,
-      ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
-          sandboxEndpointHandlePreflightEchoMarkerBuilder,
+      EndpointPreflightBuilder endpointPreflightBuilder,
       ReleaseApprovalSandboxEndpointCredentialResolverDecisionEchoRecords
               .RehearsalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarker
           managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-          sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
+      DecisionMarkerBuilder decisionMarkerBuilder,
       RehearsalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker
           managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-          sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
+      DisabledPrecheckBuilder disabledPrecheckBuilder,
       RehearsalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker
           managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker,
       ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
@@ -543,18 +519,10 @@ final class ReleaseApprovalRehearsalManagedAuditReceiptChainBuilder {
           sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder,
       RehearsalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt
           managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder,
       RehearsalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt
           managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
       RehearsalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt
           managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
       RehearsalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt
-          managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder) {}
+          managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt) {}
 }

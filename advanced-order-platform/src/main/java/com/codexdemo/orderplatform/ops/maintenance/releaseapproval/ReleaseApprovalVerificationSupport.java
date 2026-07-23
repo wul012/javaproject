@@ -156,12 +156,9 @@ final class ReleaseApprovalNoLedgerWriteProofEvaluator {
         receiptChain.sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder();
     var sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder =
         receiptChain.sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder();
-    var sandboxEndpointHandlePreflightEchoMarkerBuilder =
-        receiptChain.sandboxEndpointHandlePreflightEchoMarkerBuilder();
-    var sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder =
-        receiptChain.sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder();
-    var sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder =
-        receiptChain.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder();
+    var endpointPreflightBuilder = receiptChain.endpointPreflightBuilder();
+    var decisionMarkerBuilder = receiptChain.decisionMarkerBuilder();
+    var disabledPrecheckBuilder = receiptChain.disabledPrecheckBuilder();
     var sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder =
         receiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder();
     var sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder =
@@ -210,18 +207,6 @@ final class ReleaseApprovalNoLedgerWriteProofEvaluator {
     var sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder =
         receiptChain
             .sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder();
     return !requestContext.approvalLedgerWritten()
         && ciEvidenceHint.noLedgerWriteProved()
         && artifactRetentionHint.javaRetentionFixtureReadOnly()
@@ -334,15 +319,12 @@ final class ReleaseApprovalNoLedgerWriteProofEvaluator {
         && sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
             .noCredentialConnectionWriteOrAutoStartProved(
                 managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker)
-        && sandboxEndpointHandlePreflightEchoMarkerBuilder
-            .noCredentialConnectionWriteOrAutoStartProved(
-                managedAuditSandboxEndpointHandlePreflightEchoMarker)
-        && sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-            .noCredentialConnectionWriteOrAutoStartProved(
-                managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker)
-        && sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-            .noCredentialConnectionWriteOrAutoStartProved(
-                managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker)
+        && endpointPreflightBuilder.noCredentialConnectionWriteOrAutoStartProved(
+            managedAuditSandboxEndpointHandlePreflightEchoMarker)
+        && decisionMarkerBuilder.noCredentialConnectionWriteOrAutoStartProved(
+            managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker)
+        && disabledPrecheckBuilder.noCredentialConnectionWriteOrAutoStartProved(
+            managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker)
         && sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
             .noCredentialConnectionWriteOrAutoStartProved(
                 managedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarker)
@@ -394,16 +376,16 @@ final class ReleaseApprovalNoLedgerWriteProofEvaluator {
         && sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
             .noCredentialConnectionWriteOrAutoStartProved(
                 managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt)
-        && sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+        && ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
             .noCredentialConnectionWriteOrAutoStartProved(
                 managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt)
-        && sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
+        && ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
             .noCredentialConnectionWriteOrAutoStartProved(
                 managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt)
-        && sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+        && ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
             .noCredentialConnectionWriteOrAutoStartProved(
                 managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt)
-        && sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+        && ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
             .noCredentialConnectionWriteOrAutoStartProved(
                 managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt)
         && !executionBoundaries.nodeMayCreateApprovalDecision()

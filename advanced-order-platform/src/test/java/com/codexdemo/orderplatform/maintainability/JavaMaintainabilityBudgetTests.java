@@ -27,8 +27,8 @@ class JavaMaintainabilityBudgetTests {
   void productionSourceHotspotBudgetCanOnlyTighten() throws IOException {
     SourceMetrics metrics = measure(MAIN_ROOT);
 
-    assertThat(metrics.maxLines()).isLessThanOrEqualTo(738);
-    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(32);
+    assertThat(metrics.maxLines()).isLessThanOrEqualTo(658);
+    assertThat(metrics.filesOver500Lines()).isLessThanOrEqualTo(29);
     assertThat(metrics.filesOver750Lines()).isZero();
     assertThat(metrics.filesOver1000Lines()).isZero();
   }
@@ -142,10 +142,28 @@ class JavaMaintainabilityBudgetTests {
         412L);
     caps.put(
         "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalVerificationHintContributionCatalog.java",
-        382L);
+        370L);
     caps.put(
-        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java",
-        726L);
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/DecisionMarkerBuilder.java",
+        276L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/DecisionMarkerRules.java",
+        460L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/DisabledPrecheckBuilder.java",
+        237L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/DisabledPrecheckRules.java",
+        489L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/EndpointPreflightBuilder.java",
+        291L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/EndpointPreflightRules.java",
+        299L);
+    caps.put(
+        "src/main/java/com/codexdemo/orderplatform/ops/maintenance/releaseapproval/MarkerEvidence.java",
+        26L);
     return Map.copyOf(caps);
   }
 

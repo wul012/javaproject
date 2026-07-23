@@ -29,17 +29,31 @@ class OpsExtractionV1854Tests {
           "version-1854-production-excellence-release-approval-closure-extraction.md");
   private static final String FAMILY_PREFIX = "ReleaseApproval";
   private static final String PACKAGE_IMPORT = "ops.maintenance.releaseapproval";
+  private static final List<String> SHORT_OWNERS =
+      List.of(
+          "DecisionMarkerBuilder.java",
+          "DecisionMarkerRules.java",
+          "DisabledPrecheckBuilder.java",
+          "DisabledPrecheckRules.java",
+          "EndpointPreflightBuilder.java",
+          "EndpointPreflightRules.java",
+          "MarkerEvidence.java");
+  private static final List<String> SHORT_TESTS =
+      List.of(
+          "MarkerBuilderArchitectureTests.java",
+          "MarkerEvidenceTests.java",
+          "RehearsalResponseOracleTests.java");
 
   @Test
   void completeReleaseApprovalClosureMovesOutOfDirectRoot() throws IOException {
     assertThat(javaFiles(PACKAGE_ROOT)).hasSize(119);
-    assertThat(javaFiles(PACKAGE_ROOT))
-        .allMatch(path -> path.getFileName().toString().startsWith(FAMILY_PREFIX));
+    assertThat(shortNames(javaFiles(PACKAGE_ROOT)))
+        .containsExactlyInAnyOrderElementsOf(SHORT_OWNERS);
     assertThat(javaFiles(OPS_ROOT).stream().filter(this::isReleaseApprovalFile)).isEmpty();
 
-    assertThat(javaFiles(PACKAGE_TEST_ROOT)).hasSize(6);
-    assertThat(javaFiles(PACKAGE_TEST_ROOT))
-        .allMatch(path -> path.getFileName().toString().startsWith(FAMILY_PREFIX));
+    assertThat(javaFiles(PACKAGE_TEST_ROOT)).hasSize(9);
+    assertThat(shortNames(javaFiles(PACKAGE_TEST_ROOT)))
+        .containsExactlyInAnyOrderElementsOf(SHORT_TESTS);
     assertThat(javaFiles(TEST_ROOT).stream().filter(this::isReleaseApprovalFile)).isEmpty();
   }
 
@@ -60,7 +74,8 @@ class OpsExtractionV1854Tests {
             "ReleaseApprovalDigestSupport.java",
             "ReleaseApprovalVerificationHintBuilder.java",
             "ReleaseApprovalVerificationWarningDigestBuilder.java",
-            "ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java")) {
+            "DisabledPrecheckBuilder.java",
+            "MarkerEvidence.java")) {
       assertThat(read(PACKAGE_ROOT.resolve(internalBuilder)))
           .as(internalBuilder)
           .doesNotContain("public final class", "public record");
@@ -145,7 +160,7 @@ class OpsExtractionV1854Tests {
   }
 
   @Test
-  void namedHotspotBudgetsMovePathsWithoutChangingCaps() throws IOException {
+  void namedHotspotsTrackCurrentOwners() throws IOException {
     String budgets =
         read(
             Path.of(
@@ -167,9 +182,15 @@ class OpsExtractionV1854Tests {
             "ops/maintenance/releaseapproval/ReleaseApprovalVerificationSupport.java\",",
             "412L",
             "ops/maintenance/releaseapproval/ReleaseApprovalVerificationHintContributionCatalog.java\",",
-            "382L",
-            "ops/maintenance/releaseapproval/ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder.java\",",
-            "726L")
+            "370L",
+            "ops/maintenance/releaseapproval/DecisionMarkerRules.java\",",
+            "460L",
+            "ops/maintenance/releaseapproval/DisabledPrecheckRules.java\",",
+            "489L",
+            "ops/maintenance/releaseapproval/EndpointPreflightRules.java\",",
+            "299L",
+            "ops/maintenance/releaseapproval/MarkerEvidence.java\",",
+            "26L")
         .doesNotContain("ops/ReleaseApprovalVerificationHintBuilder.java\"");
   }
 
@@ -222,6 +243,13 @@ class OpsExtractionV1854Tests {
 
   private boolean isReleaseApprovalFile(Path path) {
     return path.getFileName().toString().startsWith(FAMILY_PREFIX);
+  }
+
+  private List<String> shortNames(List<Path> paths) {
+    return paths.stream()
+        .map(path -> path.getFileName().toString())
+        .filter(name -> !name.startsWith(FAMILY_PREFIX))
+        .toList();
   }
 
   private boolean isJava(Path path) {

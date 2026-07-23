@@ -3,7 +3,7 @@
 [![Maven CI](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml)
 ![Tests](https://img.shields.io/badge/tests-1915%2B-brightgreen)
 ![SpotBugs](https://img.shields.io/badge/SpotBugs-0-brightgreen)
-![Max file](https://img.shields.io/badge/max_file-738_lines-blue)
+![Max file](https://img.shields.io/badge/max_file-658_lines-blue)
 
 一个面向高级 Java 练手的订单交易平台雏形。当前采用模块化单体架构，重点训练 Spring Boot 业务建模、事务编排、库存一致性、审计流水、Outbox 和数据库工程化。
 

@@ -3,7 +3,7 @@
 [![Maven CI](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml)
 ![Tests](https://img.shields.io/badge/tests-1915%2B-brightgreen)
 ![SpotBugs](https://img.shields.io/badge/SpotBugs-0-brightgreen)
-![Max file](https://img.shields.io/badge/max_file-738_lines-blue)
+![Max file](https://img.shields.io/badge/max_file-658_lines-blue)
 
 Advanced Order Platform is a production-minded Java 21 and Spring Boot order system
 with idempotent ordering, inventory consistency, simulated payments, a transactional
@@ -25,7 +25,7 @@ Java 证据，不授权真实支付、密钥读取、SQL、部署、回滚或 ma
 | --- | --- |
 | Full verification runs Spotless, JaCoCo package floors, shrink-only SpotBugs, production-profile smoke, and isolated Testcontainers jobs | [`maven-ci.yml`](.github/workflows/maven-ci.yml), [`pom.xml`](advanced-order-platform/pom.xml), [`JavaTrackCloseoutTests`](advanced-order-platform/src/test/java/com/codexdemo/orderplatform/maintainability/JavaTrackCloseoutTests.java) |
 | The preregistered direct-root extraction moved from **805 → 104**, with 104 retained and 0 movable or unassigned files | [`ops-root-census.ps1`](advanced-order-platform/scripts/ops-root-census.ps1), [progress ledger](advanced-order-platform/docs/production-excellence-progress.md), [final evidence](advanced-order-platform/docs/java-track-final-evidence.md) |
-| Production Java is capped at **738 lines**; files **>750 / >1000 = 0 / 0**; there are no source-size waivers | [`java-maintainability-census.ps1`](advanced-order-platform/scripts/java-maintainability-census.ps1), [`JavaMaintainabilityBudgetTests`](advanced-order-platform/src/test/java/com/codexdemo/orderplatform/maintainability/JavaMaintainabilityBudgetTests.java) |
+| Production Java is capped at **658 lines**; files **>750 / >1000 = 0 / 0**; there are no source-size waivers | [`java-maintainability-census.ps1`](advanced-order-platform/scripts/java-maintainability-census.ps1), [`JavaMaintainabilityBudgetTests`](advanced-order-platform/src/test/java/com/codexdemo/orderplatform/maintainability/JavaMaintainabilityBudgetTests.java) |
 | Four consecutive clean ledger cycles record local verify, immutable commit, and green remote CI evidence | [production-excellence ledger](advanced-order-platform/docs/production-excellence-progress.md) |
 
 ## Architecture and authority

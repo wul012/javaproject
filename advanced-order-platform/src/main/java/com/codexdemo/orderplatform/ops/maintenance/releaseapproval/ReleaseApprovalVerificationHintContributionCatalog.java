@@ -29,12 +29,9 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
         receiptChain.sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder();
     var sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder =
         receiptChain.sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder();
-    var sandboxEndpointHandlePreflightEchoMarkerBuilder =
-        receiptChain.sandboxEndpointHandlePreflightEchoMarkerBuilder();
-    var sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder =
-        receiptChain.sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder();
-    var sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder =
-        receiptChain.sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder();
+    var endpointPreflightBuilder = receiptChain.endpointPreflightBuilder();
+    var decisionMarkerBuilder = receiptChain.decisionMarkerBuilder();
+    var disabledPrecheckBuilder = receiptChain.disabledPrecheckBuilder();
     var sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder =
         receiptChain.sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder();
     var sandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder =
@@ -83,18 +80,6 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
     var sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder =
         receiptChain
             .sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder();
-    var sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder =
-        receiptChain
-            .sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder();
     return List.of(
         contribution(
             sandboxAdapterApprovalSchemaGuardReceiptBuilder::warningDigestWarningInputNames,
@@ -161,26 +146,9 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
                 ::warningDigestBoundaryInputNames,
             sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder::proofClaims,
             sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder::nodeVerificationActions),
-        contribution(
-            sandboxEndpointHandlePreflightEchoMarkerBuilder::warningDigestWarningInputNames,
-            sandboxEndpointHandlePreflightEchoMarkerBuilder::warningDigestBoundaryInputNames,
-            sandboxEndpointHandlePreflightEchoMarkerBuilder::proofClaims,
-            sandboxEndpointHandlePreflightEchoMarkerBuilder::nodeVerificationActions),
-        contribution(
-            sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-                ::warningDigestWarningInputNames,
-            sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-                ::warningDigestBoundaryInputNames,
-            sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder::proofClaims,
-            sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder::nodeVerificationActions),
-        contribution(
-            sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                ::warningDigestWarningInputNames,
-            sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                ::warningDigestBoundaryInputNames,
-            sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder::proofClaims,
-            sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-                ::nodeVerificationActions),
+        contribution(endpointPreflightBuilder.evidence()),
+        contribution(decisionMarkerBuilder.evidence()),
+        contribution(disabledPrecheckBuilder.evidence()),
         contribution(
             sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
                 ::warningDigestWarningInputNames,
@@ -331,40 +299,40 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
             sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
                 ::nodeVerificationActions),
         contribution(
-            sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
                 ::warningDigestWarningInputNames,
-            sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
                 ::warningDigestBoundaryInputNames,
-            sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
                 ::proofClaims,
-            sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
                 ::nodeVerificationActions),
         contribution(
-            sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
                 ::warningDigestWarningInputNames,
-            sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
                 ::warningDigestBoundaryInputNames,
-            sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
                 ::proofClaims,
-            sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
                 ::nodeVerificationActions),
         contribution(
-            sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
                 ::warningDigestWarningInputNames,
-            sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
                 ::warningDigestBoundaryInputNames,
-            sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
                 ::proofClaims,
-            sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
                 ::nodeVerificationActions),
         contribution(
-            sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
                 ::warningDigestWarningInputNames,
-            sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
                 ::warningDigestBoundaryInputNames,
-            sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
                 ::proofClaims,
-            sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
+            ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
                 ::nodeVerificationActions));
   }
 
@@ -378,5 +346,13 @@ final class ReleaseApprovalVerificationHintContributionCatalog {
         warningDigestBoundaryInputNames,
         proofClaims,
         nodeVerificationActions);
+  }
+
+  private static ReleaseApprovalVerificationHintContribution contribution(MarkerEvidence evidence) {
+    return contribution(
+        evidence::warningInputNames,
+        evidence::boundaryInputNames,
+        evidence::proofClaims,
+        evidence::nodeActions);
   }
 }

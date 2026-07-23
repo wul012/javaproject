@@ -83,17 +83,17 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                 receipts.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker()));
     lines.addAll(
         builders
-            .sandboxEndpointHandlePreflightEchoMarkerBuilder()
+            .endpointPreflightBuilder()
             .warningDigestWarningLines(
                 receipts.managedAuditSandboxEndpointHandlePreflightEchoMarker()));
     lines.addAll(
         builders
-            .sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder()
+            .decisionMarkerBuilder()
             .warningDigestWarningLines(
                 receipts.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker()));
     lines.addAll(
         builders
-            .sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder()
+            .disabledPrecheckBuilder()
             .warningDigestWarningLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker()));
@@ -199,26 +199,22 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
             .warningDigestWarningLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
             .warningDigestWarningLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
             .warningDigestWarningLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
             .warningDigestWarningLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt()));
@@ -279,17 +275,17 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                 receipts.managedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarker()));
     lines.addAll(
         builders
-            .sandboxEndpointHandlePreflightEchoMarkerBuilder()
+            .endpointPreflightBuilder()
             .warningDigestBoundaryLines(
                 receipts.managedAuditSandboxEndpointHandlePreflightEchoMarker()));
     lines.addAll(
         builders
-            .sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder()
+            .decisionMarkerBuilder()
             .warningDigestBoundaryLines(
                 receipts.managedAuditSandboxEndpointCredentialResolverDecisionEchoMarker()));
     lines.addAll(
         builders
-            .sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder()
+            .disabledPrecheckBuilder()
             .warningDigestBoundaryLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarker()));
@@ -395,26 +391,22 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoSupport
             .warningDigestBoundaryLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoSupport
             .warningDigestBoundaryLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoSupport
             .warningDigestBoundaryLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceipt()));
     lines.addAll(
-        builders
-            .sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder()
+        ReleaseApprovalSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoSupport
             .warningDigestBoundaryLines(
                 receipts
                     .managedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceipt()));
@@ -442,12 +434,9 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
           sandboxConnectionDisabledAdapterClientPrecheckEchoReceiptBuilder,
       ReleaseApprovalManagedAuditSandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder
           sandboxConnectionFakeTransportDryRunPacketEchoMarkerBuilder,
-      ReleaseApprovalManagedAuditSandboxEndpointHandlePreflightEchoMarkerBuilder
-          sandboxEndpointHandlePreflightEchoMarkerBuilder,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDecisionEchoMarkerBuilder
-          sandboxEndpointCredentialResolverDecisionEchoMarkerBuilder,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder
-          sandboxEndpointCredentialResolverDisabledPrecheckEchoMarkerBuilder,
+      EndpointPreflightBuilder endpointPreflightBuilder,
+      DecisionMarkerBuilder decisionMarkerBuilder,
+      DisabledPrecheckBuilder disabledPrecheckBuilder,
       ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder
           sandboxEndpointCredentialResolverTestOnlyShellEchoMarkerBuilder,
       ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverFakeShellArchiveEchoReceiptBuilder
@@ -481,15 +470,7 @@ final class ReleaseApprovalVerificationWarningDigestLineCatalog {
       ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder
           sandboxEndpointCredentialResolverHumanApprovalArtifactReviewPostEchoDecisionGateEchoReceiptBuilder,
       ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverCredentialHandleApprovalContractEchoReceiptBuilder,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverEndpointHandleAllowlistApprovalContractEchoReceiptBuilder,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverNoNetworkSafetyFixtureContractEchoReceiptBuilder,
-      ReleaseApprovalManagedAuditSandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder
-          sandboxEndpointCredentialResolverAbortRollbackSemanticsContractEchoReceiptBuilder) {}
+          sandboxEndpointCredentialResolverSignedHumanApprovalArtifactContractEchoReceiptBuilder) {}
 
   record Receipts(
       ReleaseApprovalRehearsalResponseRecords

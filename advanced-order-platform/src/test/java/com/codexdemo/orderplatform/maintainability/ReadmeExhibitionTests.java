@@ -27,7 +27,7 @@ class ReadmeExhibitionTests {
             "actions/workflows/maven-ci.yml/badge.svg",
             "tests-1915%2B",
             "SpotBugs-0",
-            "max_file-738_lines",
+            "max_file-658_lines",
             MATURITY,
             "approval-gated failed-event replay",
             "flowchart LR",
@@ -62,10 +62,10 @@ class ReadmeExhibitionTests {
     SourceStats stats = sourceStats();
 
     assertThat(directRootFiles()).isEqualTo(104);
-    assertThat(stats).isEqualTo(new SourceStats(738, 0, 0));
-    assertThat(landing).contains("805 → 104", "738 lines", ">750 / >1000 = 0 / 0");
+    assertThat(stats).isEqualTo(new SourceStats(658, 0, 0));
+    assertThat(landing).contains("805 → 104", "658 lines", ">750 / >1000 = 0 / 0");
     assertThat(evidence)
-        .contains("1,915 tests", "maximum 738 lines", "SpotBugs reported `BugInstance=0`");
+        .contains("1,915 tests", "maximum 658 lines", "SpotBugs reported `BugInstance=0`");
     assertThat(ledger)
         .contains(
             "819 -> 805",
