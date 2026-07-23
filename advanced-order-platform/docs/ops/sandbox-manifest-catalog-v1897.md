@@ -93,7 +93,12 @@ JaCoCo 分析 2,066 类并满足全部阈值，SpotBugs 为 0 bug / 0 error，�
 `010e4e43488017971f297d55933ea38bac8f1c34` 的 canonical Actions run
 `30001832600` 通过：Docker job 2:06、wrapper verify 1:51；headless job 18:16、
 wrapper verify 17:33、production-profile smoke 0:11、JaCoCo upload 0:03。
-closeout CI、annotated tag、post-tag receipt 与第三次 CI 尚未完成，不能提前写成发布通过。
+Closeout `fd803c13889e90b948c313207713252413bf09fb` 通过 run `30003161206`：
+Docker job 2:13、wrapper verify 1:56；headless job 17:56、wrapper verify 17:22、
+production-profile smoke 0:10、JaCoCo upload 0:03。Annotated tag
+`v1897-order-platform-sandbox-manifest-catalog` 已推送并在本地与 `javaproject` 均 peel 到该
+closeout。Post-tag receipt 由当前纯文档提交承载，其 canonical CI 必须独立成功，不能用前两条
+run 代替。
 
 ## Failure Conditions
 

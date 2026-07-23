@@ -411,8 +411,10 @@ boundary evidence 前缀后降为 397。Renderer 初稿使全局行数反弹到 
 v1896 closeout `a0be0c78`，通过 2,030 项测试（12:23）、JaCoCo 2,066 类/all floors、
 SpotBugs 0/0，并打包 67,950,901-byte jar。Implementation `010e4e43` 的 canonical run
 `30001832600` 通过 Docker 2:06 与 headless 18:16，其中 wrapper 分别为 1:51 与 17:33，
-prod smoke 0:11、JaCoCo 上传 0:03。Closeout、tag 与 receipt 尚未完成，不能提前写成发布
-通过，更不等于外部已授予九分。
+prod smoke 0:11、JaCoCo 上传 0:03。Closeout `fd803c13` 的 run `30003161206` 通过
+Docker 2:13 与 headless 17:56，其中 wrapper 分别为 1:56 与 17:22，prod smoke 0:10、
+JaCoCo 上传 0:03。Tag `v1897-order-platform-sandbox-manifest-catalog` 在本地与 canonical
+remote 均 peel 到完整 closeout，v1897 发布链已闭合；这仍不等于外部已授予九分。
 
 ## DONE 与失败条件
 

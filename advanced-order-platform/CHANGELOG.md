@@ -25,7 +25,10 @@
   `a0be0c78`，通过 2,030 项测试（12:23）、JaCoCo 2,066 类/all floors、SpotBugs 0/0，
   并打包 67,950,901-byte jar。Implementation `010e4e43` 的 canonical run
   `30001832600` 通过 Docker 2:06 与 headless 18:16，其中 wrapper 分别为 1:51 与 17:33，
-  prod smoke 0:11、JaCoCo 上传 0:03；closeout、tag 与 receipt 尚待完成。
+  prod smoke 0:11、JaCoCo 上传 0:03。Closeout `fd803c13` 通过 run `30003161206`：
+  Docker 2:13、wrapper 1:56；headless 17:56、wrapper 17:22、prod smoke 0:10、
+  JaCoCo 上传 0:03。Tag `v1897-order-platform-sandbox-manifest-catalog` 在本地与
+  `javaproject` 均 peel 到 `fd803c13`。
 
 ## v1896 - Sandbox blocked-execution dossier Catalog convergence
 
