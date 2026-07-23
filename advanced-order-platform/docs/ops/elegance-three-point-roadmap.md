@@ -269,7 +269,9 @@ renderer 与 Support 读取同一聚合值并继续分别拥有展示和状态�
 通过；文档联合选择 50/50。讲解 3,391 Han/10 headings，归档精确为
 1,703 files/20,244,957 bytes。完整 release gate 固定 v1891 `cf0b1d87`，通过 2,017 个
 测试（9:52）、JaCoCo 2,096 类/all floors、SpotBugs 0/0，并打包 67,992,034-byte jar。
-Implementation/closeout CI 与 canonical tag 尚未执行，不能提前记为完成。
+Implementation `3d36a36b` 的 canonical run `29970248402` 通过 Docker 2:24 与 headless
+18:11，其中 wrapper verify 17:34、prod smoke 0:10、JaCoCo 上传 0:03。Closeout CI 与
+canonical tag 尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 

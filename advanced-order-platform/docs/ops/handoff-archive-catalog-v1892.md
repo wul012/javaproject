@@ -85,8 +85,12 @@ service 从六个 Catalog 调用与一次 scorecard 协调收敛为一次 eviden
 修复；Maven verify 通过 2,017/2,017，零失败、错误或跳过，耗时 9:52；JaCoCo 分析
 2,096 类并满足全部 floor；SpotBugs 0/0；可执行 jar 为 67,992,034 字节。
 
-Implementation commit、canonical Actions、closeout commit、closeout Actions 和 annotated tag
-仍是约束性完成门。它们在实际通过前不得记录为成功，也不得提前把 v1892 标记为 released。
+Implementation commit `3d36a36b` 通过 canonical Actions run `29970248402`：Docker-tagged
+job 2:24，其中 wrapper verify 2:06；headless job 18:11，其中 wrapper verify 17:34、
+prod-profile smoke 0:10、JaCoCo artifact 上传 0:03。
+
+Closeout commit、closeout Actions 和 annotated tag 仍是约束性完成门。它们在实际通过前不得
+记录为成功，也不得提前把 v1892 标记为 released。
 
 ## Failure Conditions
 

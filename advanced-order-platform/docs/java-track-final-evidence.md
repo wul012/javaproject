@@ -497,8 +497,10 @@ Upstream/current/downstream behavior, structure, archive, change, and elegance g
 The walkthrough has 3,391 Han and ten standard headings; the exact archive is
 1,703 files / 20,244,957 raw bytes. The local release gate pins v1891 `cf0b1d87` and passes
 2,017 tests in 9:52. JaCoCo analyzes 2,096 classes and meets every floor; SpotBugs reports
-0/0; the executable jar is 67,992,034 bytes. Implementation/closeout CI and the annotated tag
-remain pending and binding.
+0/0; the executable jar is 67,992,034 bytes. Implementation commit `3d36a36b` passes canonical
+Actions run `29970248402`: Docker-tagged verification completes in 2:24 and headless regression
+in 18:11, including a 17:34 wrapper verify, 0:10 production-profile smoke, and 0:03 JaCoCo
+upload. Closeout CI and the annotated tag remain pending and binding.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

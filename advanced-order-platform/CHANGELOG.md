@@ -21,8 +21,9 @@
 - 扩大行为、上下游、结构、归档和优雅选择 82/82 通过；新增 3,391-Han、十章节中文讲解，
   授权归档为 1,703 files / 20,244,957 raw bytes。
 - 完整 release gate 固定 v1891 closeout `cf0b1d87`，通过 2,017/2,017，Maven 9:52，
-  JaCoCo 2,096 类/全部阈值，SpotBugs 0/0，jar 67,992,034 字节。Implementation/closeout
-  CI 与 annotated tag 仍是完成门，未通过前本版本保持 candidate 状态。
+  JaCoCo 2,096 类/全部阈值，SpotBugs 0/0，jar 67,992,034 字节。Implementation
+  `3d36a36b` 通过 run `29970248402`：Docker 2:24、headless 18:11，其中 wrapper verify
+  17:34、prod smoke 0:10、JaCoCo 上传 0:03。Closeout CI 与 annotated tag 仍是完成门。
 
 ## v1891 - Operator CI handoff Catalog convergence
 
