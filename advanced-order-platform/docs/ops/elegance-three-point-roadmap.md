@@ -351,8 +351,11 @@ v1866 evidencecore 两文件 inventory，修复将其收紧为三个明确 owner
 final、少于 20 行。完整重跑固定 v1894 `105271fb`，通过 2,023 项测试（15:15）、JaCoCo
 2,079 类/all floors、SpotBugs 0/0，并打包 67,966,474-byte jar。Implementation
 `f9cc62d9` 的 canonical run `29983843663` 通过 Docker 2:03 与 headless 18:18，其中
-wrapper 分别为 1:52 与 17:36，prod smoke 0:10，JaCoCo 上传 0:03。Closeout CI 和 tag
-尚待闭环，本检查点不提前自授 release 完成。
+wrapper 分别为 1:52 与 17:36，prod smoke 0:10，JaCoCo 上传 0:03。Closeout
+`931bde5a` 的 canonical run `29984974406` 通过 Docker 2:08 与 headless 19:10，其中
+wrapper 分别为 1:57 与 18:36，prod smoke 0:10，JaCoCo 上传 0:03。Tag
+`v1895-order-platform-dossier-catalog` 在本地与 canonical remote 均 peel 到完整
+closeout，v1895 发布链已闭合。
 
 ## DONE 与失败条件
 

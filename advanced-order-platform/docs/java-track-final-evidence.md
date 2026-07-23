@@ -1,6 +1,6 @@
 # Java Track Final Evidence Candidate
 
-Status: v1895 implementation CI is green; closeout CI and tag are pending. External Java-track review is required before
+Status: v1895 release lifecycle is complete. External Java-track review is required before
 the word final may describe the track. This file records reproducible evidence; it does
 not authorize production execution.
 
@@ -16,14 +16,14 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1895 local full gate and implementation run `29983843663` green; closeout pending |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1895 local full gate plus implementation `29983843663` and closeout `29984974406` green |
 | E2 Static analysis | Spotless and SpotBugs checks; 675 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | v1895 Spotless pins v1894 `105271fb`; SpotBugs 0/0 |
 | E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1895 analyzed 2,079 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | boundaries unchanged; full gate green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | v1888 full docs gate green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1895 implementation `f9cc62d9` is green; closeout/tag pending |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1895 tag peels to green closeout `931bde5a` locally and remotely |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1895 full 2023/2023; ops 1,184; Catalogs 266; production/test name metrics 1073/19646/2632 and 694/9780/3655 |
 | E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1895 exact set 1,706 files / 20,300,596 raw bytes; full gate green |
 
@@ -556,7 +556,7 @@ completes in 18:02 with a 17:18 wrapper verify, 0:10 production profile smoke, a
 upload. Annotated tag `v1894-order-platform-consumer-package-catalog` peels to
 `105271fb2a0b7e714e61f2e2a71d6ce5ab3376fe` locally and remotely.
 
-Current v1895 candidate: the complete verification dossier first passes its canonical JSON
+Current v1895 release: the complete verification dossier first passes its canonical JSON
 oracle on released v1894. The collection vector is `1/6/9/4/5/5/8/5/4/10/10/34` and the full
 sorted-property UTF-8 SHA-256 is
 `f9ee01616f66f941914558105fbf7fe2652deb82891058fde433a06dcaf92a92`. Ten one-list Catalog
@@ -579,8 +579,11 @@ with every floor met, reports SpotBugs 0/0, and packages a 67,966,474-byte jar. 
 commit `f9cc62d99fe4637e8d1dfcf9161c63ed4b0143f1` passes canonical run `29983843663`:
 Docker-tagged verification completes in 2:03 with a 1:52 wrapper verify; headless regression
 completes in 18:18 with a 17:36 wrapper verify, 0:10 production profile smoke, and 0:03 JaCoCo
-upload. Closeout CI and the annotated tag remain pending, so this paragraph deliberately uses
-candidate rather than release.
+upload. Closeout commit `931bde5a9204e26cc8d1e400b5cdf9b8aea66da7` passes run
+`29984974406`: Docker-tagged verification completes in 2:08 with a 1:57 wrapper verify;
+headless regression completes in 19:10 with an 18:36 wrapper verify, 0:10 production profile
+smoke, and 0:03 JaCoCo upload. Annotated tag `v1895-order-platform-dossier-catalog` peels to
+the closeout commit locally and on `javaproject`.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

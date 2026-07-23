@@ -22,7 +22,10 @@
   修复后完整 release 固定 v1894 `105271fb`，通过 2,023/2,023，Maven 15:15，JaCoCo
   2,079 类/全部阈值，SpotBugs 0/0，jar 67,966,474 字节。Implementation `f9cc62d9`
   通过 canonical run `29983843663`：Docker 2:03，wrapper 1:52；headless 18:18，wrapper
-  17:36、prod smoke 0:10、JaCoCo 上传 0:03。Closeout CI 与 tag 尚待闭环。
+  17:36、prod smoke 0:10、JaCoCo 上传 0:03。Closeout `931bde5a` 通过 run
+  `29984974406`：Docker 2:08，wrapper 1:57；headless 19:10，wrapper 18:36、prod smoke
+  0:10、JaCoCo 上传 0:03。Tag `v1895-order-platform-dossier-catalog` 在本地与
+  `javaproject` 均 peel 到 `931bde5a`。
 
 ## v1894 - Operator CI consumer package Catalog convergence
 

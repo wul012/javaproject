@@ -127,8 +127,11 @@ Maven verify 在 15:15 内通过 2,023/2,023，零失败、错误或跳过；JaC
 Implementation commit `f9cc62d99fe4637e8d1dfcf9161c63ed4b0143f1` 通过 canonical
 Actions run `29983843663`：Docker-tagged job 2:03，其中 wrapper verify 1:52；headless
 job 18:18，其中 wrapper verify 17:36、production-profile smoke 0:10、JaCoCo artifact
-上传 0:03。Closeout CI、annotated tag 与本地/远端 peeled SHA 仍属于发布闭环的
-后续证据；在这些步骤完成前，本节不把 v1895 自述为 canonical release。
+上传 0:03。Closeout commit `931bde5a9204e26cc8d1e400b5cdf9b8aea66da7` 通过 run
+`29984974406`：Docker-tagged job 2:08，其中 wrapper verify 1:57；headless job 19:10，
+其中 wrapper verify 18:36、production-profile smoke 0:10、JaCoCo artifact 上传 0:03。
+Annotated tag `v1895-order-platform-dossier-catalog` 在本地与 `javaproject` 均 peel
+到该完整 closeout，v1895 发布链已经闭合。
 
 ## Failure Conditions
 
