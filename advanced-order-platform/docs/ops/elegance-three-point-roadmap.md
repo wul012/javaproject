@@ -328,6 +328,30 @@ owner 以及所有退休文件永久缺席。讲解 4,317 Han/10 headings，归�
 `v1894-order-platform-consumer-package-catalog` 在本地与 canonical remote 均 peel 到完整
 closeout，v1894 发布链已闭合。
 
+## v1895 检查点
+
+Verification Dossier 原由十个 Catalog 分别生成 source、provenance、digest、audience、CI、
+gate、audit、checklist、receipt 与 scorecard，service 再把十个列表展开传给 renderer 和 394 行
+长名 Support。v1895 先在 released v1894 上冻结完整 response：数量向量
+`1/6/9/4/5/5/8/5/4/10/10/34`，sorted-property UTF-8 JSON SHA-256 为
+`f9ee01616f66f941914558105fbf7fe2652deb82891058fde433a06dcaf92a92`。随后十个 owner
+收敛为 299 行 `DossierCatalog`；typed `Evidence` 复制十组列表，service 只生成一次，renderer
+与 226 行 `DossierSupport` 读取同一聚合值。
+
+本版同时执行第三次规则：archive、digest 与 package family 已有四份相同 predicate-count
+helper，Dossier 不再复制第五份。12 行 `EvidenceCounts` 成为六个调用者的唯一算法 owner，
+业务谓词继续留在调用点。生产 Java `1,324 -> 1,316`，ops `1,192 -> 1,184`，Catalog
+`275 -> 266`，Dossier `14 -> 5`，测试 Java `907 -> 906`。生产名称收紧到
+`1,073/19,646/2,632`，测试收紧到 `694/9,780/3,655`，exact baseline 删除 46 项、新增
+0 项；Readiness `996 -> 985`，renderer 行数 `3,219 -> 3,209`。
+
+讲解 3,676 Han/10 headings，归档精确为 1,706 files/20,300,596 bytes。完整 response、
+shared-count、behavior、structure、change 与 elegance focused gates 已通过。第一次完整门暴露
+v1866 evidencecore 两文件 inventory，修复将其收紧为三个明确 owner，并要求共享工具 public、
+final、少于 20 行。完整重跑固定 v1894 `105271fb`，通过 2,023 项测试（15:15）、JaCoCo
+2,079 类/all floors、SpotBugs 0/0，并打包 67,966,474-byte jar。Implementation/closeout
+canonical CI 和 tag 尚待闭环，本检查点不提前自授 release 完成。
+
 ## DONE 与失败条件
 
 - 每版都有变更前后 census、行为测试、完整 `mvnw -B verify`、提交、tag、push 和绿色 CI。

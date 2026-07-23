@@ -18,28 +18,18 @@ final class ReportRenderer {
 
   private ReportRenderer() {}
 
-  static List<MarkdownSection> render(
-      List<SourcePackageSnapshot> sourcePackages,
-      List<ProvenanceEntry> provenance,
-      List<SectionDigest> sectionDigests,
-      List<AudienceRoute> audienceRoutes,
-      List<CiLane> ciLanes,
-      List<AcceptanceGate> acceptanceGates,
-      List<BoundaryAudit> boundaryAudits,
-      List<ReleaseChecklistItem> releaseChecklist,
-      List<HandoffReceipt> handoffReceipts,
-      List<ScorecardEntry> scorecard) {
+  static List<MarkdownSection> render(DossierCatalog.Evidence evidence) {
     return List.of(
-        sourcePackages(sourcePackages),
-        provenance(provenance),
-        sectionDigests(sectionDigests),
-        audienceRoutes(audienceRoutes),
-        ciLanes(ciLanes),
-        acceptanceGates(acceptanceGates),
-        boundaryAudits(boundaryAudits),
-        releaseChecklist(releaseChecklist),
-        handoffReceipts(handoffReceipts),
-        scorecard(scorecard));
+        sourcePackages(evidence.sourcePackages()),
+        provenance(evidence.provenance()),
+        sectionDigests(evidence.sectionDigests()),
+        audienceRoutes(evidence.audienceRoutes()),
+        ciLanes(evidence.ciLanes()),
+        acceptanceGates(evidence.acceptanceGates()),
+        boundaryAudits(evidence.boundaryAudits()),
+        releaseChecklist(evidence.releaseChecklist()),
+        handoffReceipts(evidence.handoffReceipts()),
+        scorecard(evidence.scorecard()));
   }
 
   private static MarkdownSection sourcePackages(List<SourcePackageSnapshot> entries) {

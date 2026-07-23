@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage;
 
+import static com.codexdemo.orderplatform.ops.maintenance.evidencecore.EvidenceCounts.matching;
+
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse.AcceptanceCriterion;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse.BoundaryLock;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse.CiMatrixEntry;
@@ -11,7 +13,6 @@ import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorci
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse.SourceDigestSnapshot;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse;
 import java.util.List;
-import java.util.function.Predicate;
 
 final class PackageCatalog {
 
@@ -218,19 +219,21 @@ final class PackageCatalog {
     return List.of(
         score("source-digest-status", 1, "passed".equals(source.status()) ? 1 : 0),
         score(
-            "manifest", MANIFEST_COUNT, passed(manifest, entry -> "passed".equals(entry.status()))),
-        score("consumer-audiences", AUDIENCE_COUNT, passed(audiences, ConsumerAudience::ready)),
-        score("package-sections", SECTION_COUNT, passed(sections, PackageSection::ready)),
+            "manifest",
+            MANIFEST_COUNT,
+            matching(manifest, entry -> "passed".equals(entry.status()))),
+        score("consumer-audiences", AUDIENCE_COUNT, matching(audiences, ConsumerAudience::ready)),
+        score("package-sections", SECTION_COUNT, matching(sections, PackageSection::ready)),
         score(
-            "acceptance-criteria", ACCEPTANCE_COUNT, passed(criteria, AcceptanceCriterion::passed)),
-        score("ci-matrix", CI_COUNT, passed(ciMatrix, CiMatrixEntry::readOnly)),
-        score("boundary-locks", LOCK_COUNT, passed(locks, BoundaryLock::locked)),
+            "acceptance-criteria",
+            ACCEPTANCE_COUNT,
+            matching(criteria, AcceptanceCriterion::passed)),
+        score("ci-matrix", CI_COUNT, matching(ciMatrix, CiMatrixEntry::readOnly)),
+        score("boundary-locks", LOCK_COUNT, matching(locks, BoundaryLock::locked)),
         score(
-            "handoff-checklist", CHECKLIST_COUNT, passed(checklist, HandoffChecklistItem::ready)));
-  }
-
-  private static <T> int passed(List<T> entries, Predicate<T> predicate) {
-    return (int) entries.stream().filter(predicate).count();
+            "handoff-checklist",
+            CHECKLIST_COUNT,
+            matching(checklist, HandoffChecklistItem::ready)));
   }
 
   private static ScorecardEntry score(String name, int expected, int actual) {

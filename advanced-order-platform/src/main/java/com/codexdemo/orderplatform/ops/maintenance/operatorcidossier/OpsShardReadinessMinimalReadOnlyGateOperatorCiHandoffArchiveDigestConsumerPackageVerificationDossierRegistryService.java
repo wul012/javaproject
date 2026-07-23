@@ -33,72 +33,8 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
   OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryResponse
       registry() {
     var source = sourceConsumerPackageService.registry();
-    var sourcePackages =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierSourcePackageCatalog
-            .snapshots(source);
-    var provenance =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierProvenanceCatalog
-            .provenance(source);
-    var sectionDigests =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierSectionDigestCatalog
-            .digests(source);
-    var audienceRoutes =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierAudienceRouteCatalog
-            .routes(source);
-    var ciLanes =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierCiLaneCatalog
-            .lanes(source);
-    var acceptanceGates =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierAcceptanceGateCatalog
-            .gates(source);
-    var boundaryAudits =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierBoundaryAuditCatalog
-            .audits(source);
-    var releaseChecklist =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierReleaseChecklistCatalog
-            .checklist(source);
-    var handoffReceipts =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierHandoffReceiptCatalog
-            .receipts(source);
-    var scorecard =
-        OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierScorecardCatalog
-            .scorecard(
-                source,
-                sourcePackages,
-                provenance,
-                sectionDigests,
-                audienceRoutes,
-                ciLanes,
-                acceptanceGates,
-                boundaryAudits,
-                releaseChecklist,
-                handoffReceipts);
-    return OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistrySupport
-        .response(
-            RESPONSE_VERSION,
-            ENDPOINT,
-            PROFILE,
-            source,
-            sourcePackages,
-            provenance,
-            sectionDigests,
-            audienceRoutes,
-            ciLanes,
-            acceptanceGates,
-            boundaryAudits,
-            releaseChecklist,
-            handoffReceipts,
-            scorecard,
-            ReportRenderer.render(
-                sourcePackages,
-                provenance,
-                sectionDigests,
-                audienceRoutes,
-                ciLanes,
-                acceptanceGates,
-                boundaryAudits,
-                releaseChecklist,
-                handoffReceipts,
-                scorecard));
+    var evidence = DossierCatalog.evidence(source);
+    return DossierSupport.response(
+        RESPONSE_VERSION, ENDPOINT, PROFILE, source, evidence, ReportRenderer.render(evidence));
   }
 }

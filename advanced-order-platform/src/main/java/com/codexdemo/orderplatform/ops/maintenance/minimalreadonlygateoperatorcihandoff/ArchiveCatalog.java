@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff;
 
+import static com.codexdemo.orderplatform.ops.maintenance.evidencecore.EvidenceCounts.matching;
+
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse.ArtifactVerification;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse.BoundaryVerification;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse.CiBatchVerification;
@@ -7,7 +9,6 @@ import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorci
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse.ScorecardEntry;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse.SourceHandoffSnapshot;
 import java.util.List;
-import java.util.function.Predicate;
 
 final class ArchiveCatalog {
 
@@ -151,30 +152,26 @@ final class ArchiveCatalog {
             "artifact-verifications",
             OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySupport
                 .EXPECTED_ARTIFACT_VERIFICATION_COUNT,
-            passedCount(artifacts, entry -> "passed".equals(entry.status()))),
+            matching(artifacts, entry -> "passed".equals(entry.status()))),
         score(
             "operator-lane-verifications",
             OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySupport
                 .EXPECTED_OPERATOR_LANE_VERIFICATION_COUNT,
-            passedCount(lanes, entry -> "passed".equals(entry.status()))),
+            matching(lanes, entry -> "passed".equals(entry.status()))),
         score(
             "ci-batch-verifications",
             OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySupport
                 .EXPECTED_CI_BATCH_VERIFICATION_COUNT,
-            passedCount(batches, entry -> "passed".equals(entry.status()))),
+            matching(batches, entry -> "passed".equals(entry.status()))),
         score(
             "boundary-lock-verifications",
             OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistrySupport
                 .EXPECTED_BOUNDARY_VERIFICATION_COUNT,
-            passedCount(boundaries, BoundaryVerification::locked)),
+            matching(boundaries, BoundaryVerification::locked)),
         score(
             "source-handoff-scorecard",
             source.scorecardEntryCount(),
             source.passedScorecardEntryCount()));
-  }
-
-  private static <T> int passedCount(List<T> entries, Predicate<T> passed) {
-    return (int) entries.stream().filter(passed).count();
   }
 
   private static ScorecardEntry score(String name, int expected, int actual) {

@@ -1,5 +1,7 @@
 package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest;
 
+import static com.codexdemo.orderplatform.ops.maintenance.evidencecore.EvidenceCounts.matching;
+
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoff.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveVerificationRegistryResponse;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse.BoundaryLock;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse.ConsumerPacket;
@@ -8,7 +10,6 @@ import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorci
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse.ScorecardEntry;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse.SourceArchiveSnapshot;
 import java.util.List;
-import java.util.function.Predicate;
 
 final class DigestCatalog {
 
@@ -180,21 +181,17 @@ final class DigestCatalog {
         score(
             "digest-sections",
             DIGEST_COUNT,
-            passedCount(digests, entry -> "passed".equals(entry.status()))),
-        score("consumer-packets", PACKET_COUNT, passedCount(packets, ConsumerPacket::ready)),
+            matching(digests, entry -> "passed".equals(entry.status()))),
+        score("consumer-packets", PACKET_COUNT, matching(packets, ConsumerPacket::ready)),
         score(
             "read-only-replay-instructions",
             REPLAY_COUNT,
-            passedCount(instructions, ReplayInstruction::readOnly)),
-        score("boundary-locks", LOCK_COUNT, passedCount(locks, BoundaryLock::locked)),
+            matching(instructions, ReplayInstruction::readOnly)),
+        score("boundary-locks", LOCK_COUNT, matching(locks, BoundaryLock::locked)),
         score(
             "source-archive-scorecard",
             source.scorecardEntryCount(),
             source.passedScorecardEntryCount()));
-  }
-
-  private static <T> int passedCount(List<T> entries, Predicate<T> passed) {
-    return (int) entries.stream().filter(passed).count();
   }
 
   private static ScorecardEntry score(String name, int expected, int actual) {

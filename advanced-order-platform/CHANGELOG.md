@@ -4,6 +4,24 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1895 - Operator CI verification dossier Catalog convergence
+
+- 在 released v1894 上先冻结完整 dossier response：数量向量
+  `1/6/9/4/5/5/8/5/4/10/10/34`，sorted-property UTF-8 SHA-256 为
+  `f9ee01616f66f941914558105fbf7fe2652deb82891058fde433a06dcaf92a92`。
+- 删除十个同生命周期 Catalog 和 394 行旧 Support，以 299 行 `DossierCatalog`、不可变
+  typed `Evidence` 与 226 行 `DossierSupport` 收敛投影和判定；service 恰好装配一次。
+- 新增 12 行 `EvidenceCounts`，替换 archive、digest、package 与 dossier 六个调用者的重复
+  predicate-count helper；领域谓词仍保留在调用点，结构门禁止本地副本复活。
+- Dossier 生产包 `14 -> 5`、测试包 `8 -> 6`；生产 Java `1324 -> 1316`、ops
+  `1192 -> 1184`、Catalog `275 -> 266`、测试 `907 -> 906`、Readiness `996 -> 985`，
+  renderer 行数 `3219 -> 3209`。
+- 生产/测试名称指标达到 `1073/19646/2632` 与 `694/9780/3655`，exact baseline 删除
+  46 项、新增 0 项。讲解 3,676 Han/十章节，授权归档为
+  1,706 files / 20,300,596 raw bytes。首次完整门发现并升级 v1866 evidencecore inventory；
+  修复后完整 release 固定 v1894 `105271fb`，通过 2,023/2,023，Maven 15:15，JaCoCo
+  2,079 类/全部阈值，SpotBugs 0/0，jar 67,966,474 字节。Canonical CI 尚待闭环。
+
 ## v1894 - Operator CI consumer package Catalog convergence
 
 - 在 released v1893 上先冻结完整 consumer package response：数量向量

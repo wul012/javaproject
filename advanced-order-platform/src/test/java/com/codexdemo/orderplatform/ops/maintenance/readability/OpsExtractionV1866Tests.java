@@ -3,6 +3,7 @@ package com.codexdemo.orderplatform.ops.maintenance.readability;
 import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.codexdemo.orderplatform.ops.maintenance.evidencecore.EvidenceCounts;
 import com.codexdemo.orderplatform.ops.maintenance.evidencecore.StaticReleaseCatalog;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -40,7 +41,8 @@ class OpsExtractionV1866Tests {
     assertThat(fileNames(OVERVIEW_ROOT))
         .containsExactlyInAnyOrder("OpsOverviewResponse.java", "OpsOverviewService.java");
     assertThat(fileNames(EVIDENCE_ROOT))
-        .containsExactlyInAnyOrder("StaticReleaseCatalog.java", "StaticReleaseSections.java");
+        .containsExactlyInAnyOrder(
+            "EvidenceCounts.java", "StaticReleaseCatalog.java", "StaticReleaseSections.java");
   }
 
   @Test
@@ -112,14 +114,18 @@ class OpsExtractionV1866Tests {
   void keepsSplitSmallAndPrivate() throws Exception {
     Path catalog = EVIDENCE_ROOT.resolve("StaticReleaseCatalog.java");
     Path sections = EVIDENCE_ROOT.resolve("StaticReleaseSections.java");
+    Path counts = EVIDENCE_ROOT.resolve("EvidenceCounts.java");
     Class<?> sectionType =
         Class.forName(
             "com.codexdemo.orderplatform.ops.maintenance.evidencecore.StaticReleaseSections");
 
     assertThat(OpsExtractionTestSupport.read(catalog).lines()).hasSizeLessThanOrEqualTo(250);
     assertThat(OpsExtractionTestSupport.read(sections).lines()).hasSizeLessThanOrEqualTo(500);
+    assertThat(OpsExtractionTestSupport.read(counts).lines()).hasSizeLessThanOrEqualTo(20);
     assertThat(Modifier.isPublic(StaticReleaseCatalog.class.getModifiers())).isTrue();
     assertThat(Modifier.isFinal(StaticReleaseCatalog.class.getModifiers())).isTrue();
+    assertThat(Modifier.isPublic(EvidenceCounts.class.getModifiers())).isTrue();
+    assertThat(Modifier.isFinal(EvidenceCounts.class.getModifiers())).isTrue();
     assertThat(Modifier.isPublic(sectionType.getModifiers())).isFalse();
     assertThat(fileNames(EVIDENCE_ROOT))
         .allSatisfy(name -> assertThat(stem(name)).hasSizeLessThanOrEqualTo(40));

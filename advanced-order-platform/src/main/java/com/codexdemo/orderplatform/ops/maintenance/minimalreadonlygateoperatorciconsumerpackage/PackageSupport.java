@@ -1,10 +1,11 @@
 package com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage;
 
+import static com.codexdemo.orderplatform.ops.maintenance.evidencecore.EvidenceCounts.matching;
+
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorciconsumerpackage.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageRegistryResponse.MarkdownSection;
 import com.codexdemo.orderplatform.ops.maintenance.minimalreadonlygateoperatorcihandoffarchivedigest.OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestRegistryResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 final class PackageSupport {
 
@@ -38,14 +39,14 @@ final class PackageSupport {
     var handoffChecklistCopy = evidence.checklist();
     var scorecardCopy = evidence.scorecard();
     var markdownSectionCopy = List.copyOf(markdownSections);
-    int passedManifestCount = count(manifestCopy, entry -> "passed".equals(entry.status()));
-    int readyAudienceCount = count(audienceCopy, entry -> entry.ready());
-    int readyPackageSectionCount = count(packageSectionCopy, entry -> entry.ready());
-    int passedAcceptanceCount = count(acceptanceCopy, entry -> entry.passed());
-    int readOnlyCiMatrixCount = count(ciMatrixCopy, entry -> entry.readOnly());
-    int lockedBoundaryCount = count(boundaryLockCopy, entry -> entry.locked());
-    int readyChecklistCount = count(handoffChecklistCopy, entry -> entry.ready());
-    int passedScorecardCount = count(scorecardCopy, entry -> "passed".equals(entry.status()));
+    int passedManifestCount = matching(manifestCopy, entry -> "passed".equals(entry.status()));
+    int readyAudienceCount = matching(audienceCopy, entry -> entry.ready());
+    int readyPackageSectionCount = matching(packageSectionCopy, entry -> entry.ready());
+    int passedAcceptanceCount = matching(acceptanceCopy, entry -> entry.passed());
+    int readOnlyCiMatrixCount = matching(ciMatrixCopy, entry -> entry.readOnly());
+    int lockedBoundaryCount = matching(boundaryLockCopy, entry -> entry.locked());
+    int readyChecklistCount = matching(handoffChecklistCopy, entry -> entry.ready());
+    int passedScorecardCount = matching(scorecardCopy, entry -> "passed".equals(entry.status()));
 
     List<String> checks = new ArrayList<>();
     checks.add(
@@ -195,9 +196,5 @@ final class PackageSupport {
         markdownSectionCopy,
         List.copyOf(checks),
         status);
-  }
-
-  private static <T> int count(List<T> entries, Predicate<T> predicate) {
-    return (int) entries.stream().filter(predicate).count();
   }
 }

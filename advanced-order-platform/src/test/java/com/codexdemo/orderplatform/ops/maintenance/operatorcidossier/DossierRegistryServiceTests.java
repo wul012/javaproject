@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistrySourceProvenanceTests {
+class DossierRegistryServiceTests {
 
   @Test
-  void buildsVerificationDossierFromConsumerPackageRegistry() {
+  void buildsDossierFromConsumerPackage() {
     var response = DossierTestData.registry();
 
     assertThat(response.project()).isEqualTo("advanced-order-platform");
@@ -45,17 +45,14 @@ class OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumer
   }
 
   @Test
-  void carriesRequiredProvenanceFields() {
+  void carriesRequiredProvenance() {
     var response = DossierTestData.registry();
 
     assertThat(response.sourcePackageSnapshotCount()).isEqualTo(1);
     assertThat(response.provenanceEntryCount()).isEqualTo(6);
     assertThat(response.passedProvenanceEntryCount()).isEqualTo(6);
     assertThat(response.provenance())
-        .extracting(
-            OpsShardReadinessMinimalReadOnlyGateOperatorCiHandoffArchiveDigestConsumerPackageVerificationDossierRegistryResponse
-                    .ProvenanceEntry
-                ::name)
+        .extracting(entry -> entry.name())
         .containsExactly(
             "source-consumer-package-version",
             "source-consumer-package-endpoint",
