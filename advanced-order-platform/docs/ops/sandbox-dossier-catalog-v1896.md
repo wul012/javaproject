@@ -107,8 +107,8 @@ immutability、Markdown 与 response oracle 选择通过；扩大到上游/当�
 与 elegance 的选择共通过 52/52。第一轮结构门发现 warning 列表在局部和 `Evidence` 边界被
 重复 `List.copyOf`，修复生产实现只保留 boundary copy，没有把测试期望从 10 放宽到 11。
 
-Spotless 已执行，walkthrough 合规门已通过。Canonical implementation CI、closeout CI、
-annotated tag 与 post-tag receipt 尚未运行；这些结果必须由真实远端 run 与 peeled SHA 回填，
+Spotless 已执行，walkthrough 合规门已通过。Closeout CI、annotated tag 与 post-tag receipt
+尚未运行；这些结果必须由真实远端 run 与 peeled SHA 回填，
 不能用当前本地门代替。
 
 第一次完整 release gate 执行 2,026 项测试，唯一失败是 SpotBugs filter 仍引用已退休的
@@ -127,6 +127,12 @@ JVM locale。针对性行为与 SpotBugs 实扫均通过。
 Maven verify 在 12:46 内通过 2,027/2,027，零失败、错误或跳过；JaCoCo 分析 2,072 类并满足
 全部 floor；SpotBugs 0/0；可执行 jar 为 67,957,758 字节。本地完整门由此闭合，远端发布
 生命周期仍保持开放。
+
+Implementation commit `131dced936b218b860b674928833cf9d95107a84` 通过 canonical Actions
+run `29993583800`。Docker-tagged job 2:17，其中 wrapper verify 2:00；headless job 14:06，
+其中 wrapper verify 13:27、production-profile smoke 0:09、JaCoCo artifact 上传 0:03。
+Closeout commit、closeout CI、annotated tag 与 post-tag receipt 尚未执行，v1896 仍不是完整
+canonical release。
 
 ## Failure Conditions
 

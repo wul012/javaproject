@@ -22,10 +22,11 @@
   28 项、新增 0 项。聚焦行为、oracle、历史结构和 elegance 选择 52/52 通过；讲解
   3,097 Han/十章节，授权归档为 1,707 files / 20,316,569 raw bytes。首次完整门发现并删除
   一个引用退休 Catalog 的 SpotBugs waiver；删去 waiver 后实扫暴露默认 locale case-folding，
-  以 `Locale.ROOT` 和土耳其 locale 回归修复根因，精确集合 `675 -> 674`。完整 release gate、
+  以 `Locale.ROOT` 和土耳其 locale 回归修复根因，精确集合 `675 -> 674`。完整 release gate
   固定 v1895 `931bde5a`，通过 2,027/2,027，Maven 12:46，JaCoCo 2,072 类/全部阈值，
-  SpotBugs 0/0，jar 67,957,758 字节。Canonical implementation/closeout CI、annotated tag
-  与 post-tag receipt 待真实执行后回填。
+  SpotBugs 0/0，jar 67,957,758 字节。Implementation `131dced9` 通过 canonical run
+  `29993583800`：Docker 2:17、wrapper 2:00；headless 14:06、wrapper 13:27、prod smoke
+  0:09、JaCoCo 上传 0:03。Closeout CI、annotated tag 与 post-tag receipt 仍待执行。
 
 ## v1895 - Operator CI verification dossier Catalog convergence
 
