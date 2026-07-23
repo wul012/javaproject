@@ -546,8 +546,11 @@ Production/test name metrics reach `1084/19785/2643` and `701/9807/3672`; the ex
 31 removals and no additions. Focused gates pass 47/47. The walkthrough has 4,317 Han and ten
 standard headings; the exact archive is 1,705 files / 20,282,267 raw bytes. Full release verification
 pins v1893 `9518c203` and passes 2,023 tests in 10:32. JaCoCo analyzes 2,085 classes and meets every
-floor; SpotBugs reports 0/0; the executable jar is 67,976,640 bytes. Canonical implementation and
-closeout CI, and the annotated v1894 tag remain pending.
+floor; SpotBugs reports 0/0; the executable jar is 67,976,640 bytes. Implementation commit
+`f6c75927` passes
+canonical Actions run `29978023171`: Docker-tagged verification completes in 2:24 with a 2:06
+wrapper verify; headless regression completes in 18:10 with a 17:23 wrapper verify, 0:11 production
+profile smoke, and 0:03 JaCoCo upload. Closeout CI and the annotated v1894 tag remain pending.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

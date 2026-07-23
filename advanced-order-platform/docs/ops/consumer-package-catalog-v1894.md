@@ -93,8 +93,11 @@ focused behavior/oracle/structure/elegance 相关选择通过 47/47，零失败�
 修复；Maven verify 通过 2,023/2,023，零失败、错误或跳过，耗时 10:32；JaCoCo 分析
 2,085 类并满足全部 floor；SpotBugs 0/0；可执行 jar 为 67,976,640 字节。
 
-canonical implementation CI、closeout CI、annotated tag 与本地/远端 peeled SHA 将在本版
-收口时补入；在这些远端证据完成前，本文件仍只声明候选实现，不提前声明发布完成。
+Implementation commit `f6c75927692a48f437808b709d705a51a18ccee6` 通过 canonical
+Actions run `29978023171`：Docker-tagged job 2:24，其中 wrapper verify 2:06；headless
+job 18:10，其中 wrapper verify 17:23、production-profile smoke 0:11、JaCoCo artifact
+上传 0:03。Closeout CI、annotated tag 与本地/远端 peeled SHA 将在下一步补入；在这些
+远端证据完成前，本文件仍只声明候选实现，不提前声明发布完成。
 
 ## Failure Conditions
 

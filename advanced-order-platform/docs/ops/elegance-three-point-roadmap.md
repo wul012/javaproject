@@ -321,8 +321,9 @@ renderer 与 203 行 `PackageSupport` 读取同一聚合值并继续分别拥有
 owner 以及所有退休文件永久缺席。讲解 4,317 Han/10 headings，归档精确为
 1,705 files/20,282,267 bytes。Focused gate 47/47 通过；完整 release gate 固定 v1893
 `9518c203`，通过 2,023 个测试（10:32）、JaCoCo 2,085 类/all floors、SpotBugs 0/0，并打包
-67,976,640-byte jar。Canonical implementation/closeout CI 与 tag 仍待完成，因此当前只登记为
-candidate。
+67,976,640-byte jar。Implementation `f6c75927` 的 canonical run `29978023171` 通过 Docker
+2:24 与 headless 18:10，其中 wrapper 分别为 2:06 与 17:23，prod smoke 0:11，JaCoCo 上传
+0:03。Closeout CI 与 tag 仍待完成，因此当前只登记为 candidate。
 
 ## DONE 与失败条件
 
