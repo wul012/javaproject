@@ -21,7 +21,10 @@
   2,023/2,023，Maven 10:32，JaCoCo 2,085 类/全部阈值，SpotBugs 0/0，jar
   67,976,640 字节。Implementation `f6c75927` 通过 run `29978023171`：Docker 2:24，
   wrapper 2:06；headless 18:10，wrapper 17:23、prod smoke 0:11、JaCoCo 上传 0:03。
-  Closeout CI 与 tag 证据待本版收口后补入。
+  Closeout `105271fb` 通过 run `29978927253`：Docker 2:14，wrapper 1:58；headless
+  18:02，wrapper 17:18、prod smoke 0:10、JaCoCo 上传 0:03。Tag
+  `v1894-order-platform-consumer-package-catalog` 在本地与 `javaproject` 均 peel 到
+  `105271fb`。
 
 ## v1893 - Operator CI handoff archive digest Catalog convergence
 

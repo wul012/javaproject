@@ -323,7 +323,10 @@ owner 以及所有退休文件永久缺席。讲解 4,317 Han/10 headings，归�
 `9518c203`，通过 2,023 个测试（10:32）、JaCoCo 2,085 类/all floors、SpotBugs 0/0，并打包
 67,976,640-byte jar。Implementation `f6c75927` 的 canonical run `29978023171` 通过 Docker
 2:24 与 headless 18:10，其中 wrapper 分别为 2:06 与 17:23，prod smoke 0:11，JaCoCo 上传
-0:03。Closeout CI 与 tag 仍待完成，因此当前只登记为 candidate。
+0:03。Closeout `105271fb` 的 canonical run `29978927253` 通过 Docker 2:14 与 headless
+18:02，其中 wrapper 分别为 1:58 与 17:18，prod smoke 0:10，JaCoCo 上传 0:03。Tag
+`v1894-order-platform-consumer-package-catalog` 在本地与 canonical remote 均 peel 到完整
+closeout，v1894 发布链已闭合。
 
 ## DONE 与失败条件
 

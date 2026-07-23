@@ -96,8 +96,11 @@ focused behavior/oracle/structure/elegance 相关选择通过 47/47，零失败�
 Implementation commit `f6c75927692a48f437808b709d705a51a18ccee6` 通过 canonical
 Actions run `29978023171`：Docker-tagged job 2:24，其中 wrapper verify 2:06；headless
 job 18:10，其中 wrapper verify 17:23、production-profile smoke 0:11、JaCoCo artifact
-上传 0:03。Closeout CI、annotated tag 与本地/远端 peeled SHA 将在下一步补入；在这些
-远端证据完成前，本文件仍只声明候选实现，不提前声明发布完成。
+上传 0:03。Closeout commit `105271fb2a0b7e714e61f2e2a71d6ce5ab3376fe` 通过 run
+`29978927253`：Docker-tagged job 2:14，其中 wrapper verify 1:58；headless job 18:02，
+其中 wrapper verify 17:18、production-profile smoke 0:10、JaCoCo artifact 上传 0:03。
+Annotated tag `v1894-order-platform-consumer-package-catalog` 在本地与 `javaproject` 均 peel
+到该完整 closeout，v1894 发布链已经闭合。
 
 ## Failure Conditions
 

@@ -532,7 +532,7 @@ production-profile smoke, and 0:05 JaCoCo upload. Annotated tag
 `v1893-order-platform-handoff-archive-digest-catalog` peels to
 `9518c20313054471e1065231e602d1be572ecea0` locally and remotely.
 
-Current v1894 candidate: the complete MinimalReadOnlyGateOperatorCiHandoff Archive Digest
+Current v1894 release: the complete MinimalReadOnlyGateOperatorCiHandoff Archive Digest
 Consumer Package first passes its canonical JSON oracle on released v1893. The collection vector
 is `1/5/4/5/5/5/8/5/8/9/28` and the full sorted-property UTF-8 SHA-256 is
 `1ae92cfe8926ecb9ae772c8eec70dd8cddfbc1b0654e11685ef6304249803c60`. Nine one-list
@@ -550,7 +550,11 @@ floor; SpotBugs reports 0/0; the executable jar is 67,976,640 bytes. Implementat
 `f6c75927` passes
 canonical Actions run `29978023171`: Docker-tagged verification completes in 2:24 with a 2:06
 wrapper verify; headless regression completes in 18:10 with a 17:23 wrapper verify, 0:11 production
-profile smoke, and 0:03 JaCoCo upload. Closeout CI and the annotated v1894 tag remain pending.
+profile smoke, and 0:03 JaCoCo upload. Closeout commit `105271fb` passes run `29978927253`:
+Docker-tagged verification completes in 2:14 with a 1:58 wrapper verify; headless regression
+completes in 18:02 with a 17:18 wrapper verify, 0:10 production profile smoke, and 0:03 JaCoCo
+upload. Annotated tag `v1894-order-platform-consumer-package-catalog` peels to
+`105271fb2a0b7e714e61f2e2a71d6ce5ab3376fe` locally and remotely.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows
