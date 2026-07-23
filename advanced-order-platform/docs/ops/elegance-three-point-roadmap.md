@@ -442,7 +442,9 @@ response oracle，行为、历史结构、elegance、名称和可读性聚焦门
 三项英文标签协议；不改门禁，把既有三行中文标签改为标准标签后，change/elegance/history
 选择 30/30 通过。干净完整重跑固定 v1897 `fd803c13`，通过 2,032 项测试（9:22）、
 JaCoCo 2,059 类/all floors、SpotBugs 0/0，并打包 67,941,575-byte jar。远端 CI、
-closeout 与 tag 尚待收口，因此本检查点仍不等于外部已授予九分。
+closeout 与 tag 尚待收口。Implementation `7b213139` 的 run `30009767088` 已通过：
+Docker 1:50、wrapper 1:34；headless 19:35、wrapper 18:44、prod smoke 0:11、JaCoCo
+上传 0:04。Closeout CI 与 tag 仍待收口，因此本检查点仍不等于外部已授予九分。
 
 ## DONE 与失败条件
 

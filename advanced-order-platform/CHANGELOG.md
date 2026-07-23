@@ -24,7 +24,9 @@
   2,032 项测试末端发现设计说明使用中文标签而未满足机械英文标签协议；不改测试，以三项标准
   标签修复后 30/30 聚焦门通过。干净完整重跑固定 v1897 `fd803c13`，通过
   2,032/2,032（9:22）、JaCoCo 2,059 类/全部阈值、SpotBugs 0/0，并打包
-  67,941,575-byte jar。提交、远端 CI 与 canonical tag 尚待本版本收口。
+  67,941,575-byte jar。Implementation `7b213139` 的 canonical run `30009767088`
+  通过：Docker 1:50、wrapper 1:34；headless 19:35、wrapper 18:44、prod smoke 0:11、
+  JaCoCo 上传 0:04。Closeout CI、canonical tag 与 post-tag receipt 尚待收口。
 
 ## v1897 - Sandbox upstream receipt manifest Catalog convergence
 
