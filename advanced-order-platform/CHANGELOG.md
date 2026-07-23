@@ -26,7 +26,10 @@
   固定 v1895 `931bde5a`，通过 2,027/2,027，Maven 12:46，JaCoCo 2,072 类/全部阈值，
   SpotBugs 0/0，jar 67,957,758 字节。Implementation `131dced9` 通过 canonical run
   `29993583800`：Docker 2:17、wrapper 2:00；headless 14:06、wrapper 13:27、prod smoke
-  0:09、JaCoCo 上传 0:03。Closeout CI、annotated tag 与 post-tag receipt 仍待执行。
+  0:09、JaCoCo 上传 0:03。Closeout `a0be0c78` 通过 run `29994867773`：Docker 1:58、
+  wrapper 1:45；headless 19:29、wrapper 18:46、prod smoke 0:12、JaCoCo 上传 0:05。
+  Tag `v1896-order-platform-sandbox-dossier-catalog` 在本地与 `javaproject` 均 peel 到
+  `a0be0c78`。
 
 ## v1895 - Operator CI verification dossier Catalog convergence
 

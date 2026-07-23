@@ -1,9 +1,8 @@
 # Java Track Final Evidence Candidate
 
-Status: v1895 release lifecycle is complete; v1896 is an implementation-CI-green candidate whose
-canonical closeout CI, tag, and receipt lifecycle are still open.
-External Java-track review is required before the word final may describe the track. This file
-records reproducible evidence; it does not authorize production execution.
+Status: v1896 release lifecycle is complete. External Java-track review is required before the
+word final may describe the track. This file records reproducible evidence; it does not authorize
+production execution.
 
 ## Maturity Boundary
 
@@ -17,14 +16,14 @@ deployment, rollback, rollback SQL, and unauthenticated failed-event replay.
 
 | Gate | Implementation evidence | Mechanical failure surface | Candidate state |
 | --- | --- | --- | --- |
-| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1896 local gate plus implementation run `29993583800` green; closeout CI pending |
+| E1 Build & CI | Parent `.github/workflows/maven-ci.yml`; Maven wrapper; headless and optional Docker jobs | `JavaTrackCloseoutTests.workflowUsesCurrentActions`; real Actions runs | v1896 local gate plus implementation `29993583800` and closeout `29994867773` green |
 | E2 Static analysis | Spotless and SpotBugs checks; 674 exact pattern/class identities with secure Git-prior ratchet | Maven verify plus `SpotBugsWaiverTests` | stale retired-class waiver removed; Locale root cause fixed; SpotBugs 0/0 |
 | E3 Coverage | JaCoCo global and ten package rules; v1867 floors raised in `pom.xml` | `JavaTrackCloseoutTests.coverageFloorsStayRaised`; JaCoCo check | v1896 analyzed 2,072 classes/all floors |
 | E4 Security & config | Safe prod profile and threat model in `PRODUCTION_READINESS.md` | existing profile/config tests plus `JavaTrackCloseoutTests.securityBoundaryStaysExplicit` | boundaries unchanged; full gate green |
 | E5 Observability | health/info/metrics, tracing, correlated exception logs | `ActuatorHealthIntegrationTests`, `ApiExceptionTraceIntegrationTests`, `ObservabilityConfigurationTests` | existing suite evidence |
 | E6 Error handling | graceful shutdown, finite shutdown timeout, typed API errors and guarded replay | prod smoke, exception tests, failed-event approval/readiness tests | existing suite evidence |
 | E7 Docs honesty | README and production boundary use the authorized exact maturity label and list non-authorized capabilities | `ProductionReadinessDocumentationTests` and closeout docs gate | v1888 full docs gate green |
-| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1895 tag peels to green closeout `931bde5a`; v1896 implementation `131dced9` is green and closeout remains open |
+| E8 Release discipline | `CHANGELOG.md`, git-tag policy, progress ledger, implementation/closeout commits | `JavaTrackCloseoutTests.docsAndReleaseStayHonest`; external git/CI check | v1896 tag peels to green closeout `a0be0c78` locally and remotely |
 | E9 Code health | root 104/104/0, no Java file above 750 lines, route owner 27 fields/69 lines, exact name baseline plus staged change gate | extraction, maintainability, elegance, and HTTP-boundary ratchets | v1896 full 2027/2027; ops 1,176; Catalogs 258; production/test name metrics 1063/19545/2622 and 690/9773/3651 |
 | E10 Archive retention | exact SHA-256 manifest, count/raw-byte ceilings, frozen archive policy; CRLF is canonicalized to LF for text only | `ArchiveRetentionTests` and `archive-retention-census.ps1` | v1896 exact set 1,707 files / 20,316,569 raw bytes; full gate green |
 
@@ -608,12 +607,14 @@ locale regression fixes the root cause; the exact waiver set tightens from 675 t
 adding an exception. A clean full release rerun was therefore required.
 The clean release rerun pins v1895 `931bde5a`, passes 2,027 tests in 12:46, analyzes 2,072
 JaCoCo classes with every floor met, reports SpotBugs 0/0, and packages a 67,957,758-byte jar.
-Canonical closeout run, annotated tag, and post-tag receipt remain open and
-must be recorded from real executions before v1896 is called released.
 Implementation `131dced936b218b860b674928833cf9d95107a84` passes canonical run
 `29993583800`: Docker-tagged verification completes in 2:17 with a 2:00 wrapper verify;
 headless regression completes in 14:06 with a 13:27 wrapper verify, 0:09 production-profile
-smoke, and 0:03 JaCoCo upload. Closeout CI, annotated tag, and receipt remain open.
+smoke, and 0:03 JaCoCo upload. Closeout `a0be0c7808ab7684093126c60c7792a54dd69114`
+passes run `29994867773`: Docker-tagged verification completes in 1:58 with a 1:45 wrapper
+verify; headless regression completes in 19:29 with an 18:46 wrapper verify, 0:12 production-
+profile smoke, and 0:05 JaCoCo upload. Annotated tag
+`v1896-order-platform-sandbox-dossier-catalog` peels to the closeout locally and remotely.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

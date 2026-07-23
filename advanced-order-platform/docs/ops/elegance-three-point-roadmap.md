@@ -381,8 +381,10 @@ deployment、managed-audit connection 和 service startup 的阻断政策，不�
 2,027 项测试（12:46）、JaCoCo 2,072 类/all floors、SpotBugs 0/0，并打包
 67,957,758-byte jar。Implementation `131dced9` 的 canonical run `29993583800` 通过 Docker
 2:17 与 headless 14:06，其中 wrapper 分别为 2:00 与 13:27，prod smoke 0:09，JaCoCo
-上传 0:03。Closeout CI、tag 与 receipt 仍待执行，本检查点不把 implementation green 写成
-完整远端完成，更不自称达到九分。
+上传 0:03。Closeout `a0be0c78` 的 run `29994867773` 通过 Docker 1:58 与 headless 19:29，
+其中 wrapper 分别为 1:45 与 18:46，prod smoke 0:12，JaCoCo 上传 0:05。Tag
+`v1896-order-platform-sandbox-dossier-catalog` 在本地与 canonical remote 均 peel 到完整
+closeout，v1896 发布链已闭合；这仍不等于外部已授予九分。
 
 ## DONE 与失败条件
 

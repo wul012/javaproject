@@ -20,7 +20,7 @@
 | 消除列表参数爆炸 | `Evidence` 成为 service、renderer、support 的唯一集合边界 | assembly-count 与 typed-signature 结构测试 | 恰好装配 1 次 |
 | 保持阻断语义 | 安全证据与 response 判定分属 `DossierCatalog` / `DossierSupport` | boundary、checks、status、不可变与 controller 测试 | 聚焦门已通过 |
 | 降低命名与维护成本 | 新增/修改 owner 使用短语义名，退休历史长名实现与测试 | 精确 name baseline 及 production/test elegance census | 新增 0、删除 28 |
-| 发布可复现 | 中文讲解先于最终 verify，实现/closeout/tag/receipt 分层 | 窄门、全量 release gate、两条 canonical CI 与 peeled SHA | 本地完整门待运行 |
+| 发布可复现 | 中文讲解先于最终 verify，实现/closeout/tag/receipt 分层 | 窄门、全量 release gate、两条 canonical CI 与 peeled SHA | tag 与 closeout 已闭合 |
 
 ## 基线与失败条件
 
@@ -107,9 +107,9 @@ immutability、Markdown 与 response oracle 选择通过；扩大到上游/当�
 与 elegance 的选择共通过 52/52。第一轮结构门发现 warning 列表在局部和 `Evidence` 边界被
 重复 `List.copyOf`，修复生产实现只保留 boundary copy，没有把测试期望从 10 放宽到 11。
 
-Spotless 已执行，walkthrough 合规门已通过。Closeout CI、annotated tag 与 post-tag receipt
-尚未运行；这些结果必须由真实远端 run 与 peeled SHA 回填，
-不能用当前本地门代替。
+Spotless、walkthrough 合规、本地完整门、implementation CI 与 closeout CI 均已通过；
+annotated tag 已推送并完成本地/远端 peeled SHA 核验。Post-tag receipt 由当前纯文档提交承载，
+其 canonical CI 必须独立成功，不能用前两条 run 代替。
 
 第一次完整 release gate 执行 2,026 项测试，唯一失败是 SpotBugs filter 仍引用已退休的
 `PreconditionEvidenceCatalog`。修复删除该失效 `DM_CONVERT_CASE` waiver，把精确集合
@@ -131,8 +131,10 @@ Maven verify 在 12:46 内通过 2,027/2,027，零失败、错误或跳过；JaC
 Implementation commit `131dced936b218b860b674928833cf9d95107a84` 通过 canonical Actions
 run `29993583800`。Docker-tagged job 2:17，其中 wrapper verify 2:00；headless job 14:06，
 其中 wrapper verify 13:27、production-profile smoke 0:09、JaCoCo artifact 上传 0:03。
-Closeout commit、closeout CI、annotated tag 与 post-tag receipt 尚未执行，v1896 仍不是完整
-canonical release。
+Closeout commit `a0be0c7808ab7684093126c60c7792a54dd69114` 通过 run `29994867773`：
+Docker-tagged job 1:58，其中 wrapper verify 1:45；headless job 19:29，其中 wrapper verify
+18:46、production-profile smoke 0:12、JaCoCo artifact 上传 0:05。Annotated tag
+`v1896-order-platform-sandbox-dossier-catalog` 在本地与 `javaproject` 均 peel 到该 closeout。
 
 ## Failure Conditions
 
