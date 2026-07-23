@@ -524,7 +524,10 @@ oracle, structure, and elegance gates pass 41/41. The walkthrough has 3,401 Han 
 standard headings; the exact archive is 1,704 files / 20,261,596 raw bytes. Full release
 verification pins v1892 `fb49fd6e` and passes 2,019 tests in 8:25. JaCoCo analyzes 2,092
 classes and meets every floor; SpotBugs reports 0/0; the executable jar is 67,986,621 bytes.
-Canonical implementation and closeout Actions, and the annotated tag remain pending and binding.
+Implementation commit `52c6b02d` passes canonical Actions run `29973533854`: Docker-tagged
+verification completes in 2:17 and headless regression in 19:14, including an 18:29 wrapper
+verify, 0:13 production-profile smoke, and 0:04 JaCoCo upload. Closeout Actions and the
+annotated tag remain pending and binding.
 
 Initial implementation Actions run `29220274738` passed Docker in 2:18 and failed
 headless at `ArchiveRetentionTests` because raw text hashes differed between Windows

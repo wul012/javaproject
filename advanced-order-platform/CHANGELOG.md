@@ -21,7 +21,9 @@
 - 聚焦 behavior/oracle/structure/elegance 选择 41/41 通过；新增 3,401-Han、十章节中文讲解，
   授权归档为 1,704 files / 20,261,596 raw bytes。完整 release 固定 v1892 closeout
   `fb49fd6e`，通过 2,019/2,019，Maven 8:25，JaCoCo 2,092 类/全部阈值，SpotBugs 0/0，
-  jar 67,986,621 字节；canonical implementation/closeout CI 与 tag 仍是完成门。
+  jar 67,986,621 字节。Implementation `52c6b02d` 通过 run `29973533854`：Docker 2:17、
+  headless 19:14，其中 wrapper verify 18:29、prod smoke 0:13、JaCoCo 上传 0:04；
+  closeout CI 与 tag 仍是完成门。
 
 ## v1892 - Operator CI handoff archive Catalog convergence
 

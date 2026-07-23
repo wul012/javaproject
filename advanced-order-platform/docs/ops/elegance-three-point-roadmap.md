@@ -297,7 +297,9 @@ Catalog 不再反向依赖 Support；原 240 行长名 package-private Support �
 并开启新的 `v1893-v1897` 续写目录；归档精确为 1,704 files/20,261,596 bytes。完整 release
 gate 固定 v1892 closeout `fb49fd6e`，通过 2,019 个测试（8:25）、JaCoCo 2,092 类/all
 floors、SpotBugs 0/0，并打包 67,986,621-byte jar。Canonical implementation/closeout CI
-和 tag 尚未执行，不能提前记为完成。
+中，implementation `52c6b02d` 的 run `29973533854` 已通过 Docker 2:17 与 headless
+19:14，其中 wrapper verify 18:29、prod smoke 0:13、JaCoCo 上传 0:04。Closeout CI 和 tag
+尚未执行，不能提前记为完成。
 
 ## DONE 与失败条件
 

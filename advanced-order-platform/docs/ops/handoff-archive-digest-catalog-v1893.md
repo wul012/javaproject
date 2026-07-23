@@ -86,8 +86,12 @@ checks 和最终 passed/blocked。六个 expected count 归 `DigestCatalog` 所�
 修复；Maven verify 通过 2,019/2,019，零失败、错误或跳过，耗时 8:25；JaCoCo 分析
 2,092 类并满足全部 floor；SpotBugs 0/0；可执行 jar 为 67,986,621 字节。
 
-Canonical implementation Actions、closeout Actions 与 annotated tag 尚未执行。它们仍是
-约束性完成门；在实际通过前，v1893 只能记录为 candidate，不得写成 released。
+Implementation commit `52c6b02d` 通过 canonical Actions run `29973533854`：Docker-tagged
+job 2:17，其中 wrapper verify 2:00；headless job 19:14，其中 wrapper verify 18:29、
+prod-profile smoke 0:13、JaCoCo artifact 上传 0:04。
+
+Closeout Actions 与 annotated tag 尚未执行。它们仍是约束性完成门；在实际通过前，v1893
+只能记录为 candidate，不得写成 released。
 
 ## Failure Conditions
 
