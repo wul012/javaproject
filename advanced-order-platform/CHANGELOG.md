@@ -26,7 +26,10 @@
   2,032/2,032（9:22）、JaCoCo 2,059 类/全部阈值、SpotBugs 0/0，并打包
   67,941,575-byte jar。Implementation `7b213139` 的 canonical run `30009767088`
   通过：Docker 1:50、wrapper 1:34；headless 19:35、wrapper 18:44、prod smoke 0:11、
-  JaCoCo 上传 0:04。Closeout CI、canonical tag 与 post-tag receipt 尚待收口。
+  JaCoCo 上传 0:04。Closeout `78cac4e9` 通过 run `30011387234`：Docker 2:16、
+  wrapper 1:58；headless 14:50、wrapper 14:10、prod smoke 0:09、JaCoCo 上传 0:03。
+  Tag `v1898-order-platform-acceptance-package-catalog` 在本地与 `javaproject` 均 peel 到
+  `78cac4e9`。
 
 ## v1897 - Sandbox upstream receipt manifest Catalog convergence
 

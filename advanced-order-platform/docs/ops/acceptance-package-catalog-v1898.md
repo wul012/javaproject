@@ -21,7 +21,7 @@
 | 保持 fail-closed | `PackageSupport` 保留 40 条 checks 和 status | catalog/service/renderer/controller/oracle 测试 | 已通过 |
 | 不误伤子家族 | receipt 与 archive-index 文件、测试、路由不变 | package 精确 inventory 与既有 closeout 测试 | 已通过 |
 | 真实降低复杂度 | 短 owner、共享 helper、历史测试改名 | 全局文件、行数、名称和 exact baseline census | ratchet 已收紧 |
-| 可复现发布 | 十章中文讲解先于完整 verify，三层提交与 tag 分离 | release gate、两条 canonical CI、peeled SHA | implementation CI 通过；closeout 待收口 |
+| 可复现发布 | 十章中文讲解先于完整 verify，三层提交与 tag 分离 | release gate、两条 canonical CI、peeled SHA | 发布链闭合；receipt CI 待验证 |
 
 ## Baseline and scope
 
@@ -87,10 +87,14 @@ exact name baseline 和全局 elegance 联合门均已通过。首次完整门�
 Family design 使用中文标签而没有满足机械英文标签协议；不改测试，把同三行改为
 `Abstraction`、`Data boundary`、`Behavior boundary` 后，30/30 修复选择通过。干净
 `scripts/verify-release.ps1` 固定 v1897 closeout `fd803c13`，通过 2,032 项测试（9:22）、
-JaCoCo 2,059 类/all floors、SpotBugs 0/0，并打包 67,941,575-byte jar。Closeout CI、
-annotated tag、post-tag receipt 与第三次 CI 尚未完成。Implementation
+JaCoCo 2,059 类/all floors、SpotBugs 0/0，并打包 67,941,575-byte jar。Post-tag receipt
+CI 尚未完成。Implementation
 `7b213139` 的 canonical run `30009767088` 已通过：Docker 1:50、wrapper 1:34；
-headless 19:35、wrapper 18:44、prod smoke 0:11、JaCoCo 上传 0:04。
+headless 19:35、wrapper 18:44、prod smoke 0:11、JaCoCo 上传 0:04。Closeout
+`78cac4e9` 通过 run `30011387234`：Docker 2:16、wrapper 1:58；headless 14:50、
+wrapper 14:10、prod smoke 0:09、JaCoCo 上传 0:03。Annotated tag
+`v1898-order-platform-acceptance-package-catalog` 已推送并在本地与 `javaproject` 均 peel 到
+该 closeout。Post-tag receipt 由当前纯文档提交承载，其 canonical CI 必须独立成功。
 
 ## Failure Conditions
 
