@@ -23,7 +23,7 @@ canonical CI `30022883877` 已成功；最近标签为
 `v1899-order-platform-marker-evidence-builders`。工作开始前没有用户未提交变更。
 本次只优化 Java 下单事务，不启动跨仓功能计划，不修改其它项目、Maven 版本、接口结构、
 历史标签或测试基线。继续使用 `vNNNN-order-platform-*` 标签，本版标签为
-`v1900-order-platform-create-ordering`。
+`v1900-order-platform-create-ordering`。实现提交为 `6d5bbc0e076194f4b9e0b41ec0f17da4c33853b1`。
 
 ## 中文代码讲解
 
@@ -66,9 +66,9 @@ Outbox、历史及支付没有交互；正常创建依次插入、预占、写�
 | 单项目单版本 | 仅 Java 下单事务及两份测试 | Git diff 范围与生产源码增量 | 已核对 |
 | 唯一键失败前不碰库存 | 现有 service 调整一次调用顺序 | 3 个顺序测试，旧代码 3 失败 | 通过 |
 | 库存失败保持事务原子性 | 保留原事务边界 | 2 个 H2 回滚及重试场景 | 通过 |
-| 不降低质量门 | 所有既有测试、fixture、阈值保持原样 | 全量 release gate | 初次通过；发布前 clean 重跑 |
-| 不改版本模式 | 保留 Maven 与 canonical tag 模式 | pom 无差异、标签 peel 核验 | 待发布核验 |
-| 提交推送 | 一个代码提交及必要发布记录 | 远端 master/tag SHA 与 CI | 尚未推送 |
+| 不降低质量门 | 所有既有测试、fixture、阈值保持原样 | 全量 release gate | clean 重跑通过，2,043 项测试 |
+| 不改版本模式 | 保留 Maven 与 canonical tag 模式 | pom 无差异、标签 peel 核验 | 通过 |
+| 提交推送 | 一个代码提交及必要发布记录 | 远端 master/tag SHA 与 CI | 通过 |
 
 ## Deviations
 
@@ -100,8 +100,15 @@ Reproduce from `D:\javaproj\advanced-order-platform`:
 
 Expected release output: `Tests run: 2043, Failures: 0, Errors: 0, Skipped: 0`,
 `All coverage checks have been met.`, `BugInstance size is 0`, `Error size is 0`,
-`BUILD SUCCESS`. The release script must pin v1899 to
-`7c171c6ccae2b7b037a7224cc98a6a2537aad416` before the new tag is created.
+`BUILD SUCCESS`. The local clean run completed in 11:35. GitHub Actions run
+`34023429770` also passed: headless job `101460079012` in 18m31s and Docker job
+`101460079132` in 2m16s. Implementation `6d5bbc0e076194f4b9e0b41ec0f17da4c33853b1` was pushed to `master`;
+tag `v1900-order-platform-create-ordering` peels to the same commit. The release script pinned
+v1899 to `7c171c6ccae2b7b037a7224cc98a6a2537aad416`.
+
+发布结果记录作为同一 v1900 的纯文档提交，不移动已验证的标签，不改动已通过 CI 的源码
+和测试。推送使用单次 `git -c http.sslBackend=openssl push`，保留证书验证，未修改
+全局 Git 配置。实现 CI、标签及此发布记录应分别按其提交 SHA 核验，不能互相冒充。
 
 ## Failure conditions
 

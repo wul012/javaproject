@@ -14,6 +14,8 @@
   重放而不新增副作用。
 - focused 28 tests 与最终 `mvnw verify` 2,043 tests 均通过；JaCoCo 全部阈值通过，
   SpotBugs 0/0，Spotless clean。
+- 实现提交 `6d5bbc0e` 已推送，标签 `v1900-order-platform-create-ordering` 已推送并指向同一
+  提交；GitHub Actions run `34023429770` 通过（headless 18:31、Docker 2:16）。
 
 ## v1899 - Release approval marker builder boundaries
 
