@@ -4,6 +4,17 @@
 `0.1.0-SNAPSHOT`，因为仓库仍处于高频工程演进阶段，尚未切换到语义化制品发布。
 每个可追溯版本必须有对应 git tag、提交、测试证据和必要的中文代码讲解。
 
+## v1900 - Order create side-effect ordering
+
+- 在 v1899 上只调整 `OrderApplicationService` 的新订单事务顺序：先通过现有
+  `IdempotencyStore.saveNewOrder` flush 新订单，再预占库存；不改变 Maven
+  `0.1.0-SNAPSHOT`、HTTP 路由、响应、数据库 schema 或事件契约。
+- 新增 3 个顺序边界单元测试与 2 个真实 H2 回滚场景（失败发生在第一个库存项前/后），
+  证明订单、订单行、库存流水、Outbox 和状态历史会一起回滚；恢复库存后同键请求可创建并
+  重放而不新增副作用。
+- focused 28 tests 与最终 `mvnw verify` 2,043 tests 均通过；JaCoCo 全部阈值通过，
+  SpotBugs 0/0，Spotless clean。
+
 ## v1899 - Release approval marker builder boundaries
 
 - 在 released v1898 上先冻结完整 rehearsal response。排除两个调用时钟字段后，默认请求

@@ -178,8 +178,6 @@ public class OrderApplicationService {
       String idempotencyKey, CreateOrderRequest request, String requestFingerprint) {
     Map<Long, Integer> quantities = aggregateQuantities(request);
     Map<Long, Product> products = loadProducts(quantities);
-    inventoryService.reserve(quantities);
-
     List<OrderLineDraft> drafts =
         quantities.entrySet().stream()
             .map(
@@ -193,6 +191,7 @@ public class OrderApplicationService {
     SalesOrder order =
         SalesOrder.place(request.customerId(), idempotencyKey, requestFingerprint, drafts);
     SalesOrder saved = idempotencyStore.saveNewOrder(order);
+    inventoryService.reserve(quantities);
     outboxRepository.save(OutboxEvent.orderCreated(saved));
     recordHistory(saved, null, "ORDER_CREATED");
     return new CreateOrderResult(OrderResponse.from(saved), false);
