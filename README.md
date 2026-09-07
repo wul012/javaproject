@@ -1,5 +1,65 @@
 # Advanced Order Platform
 
+**Java 订单后端**：围绕订单、库存和消息一致性构建的 Spring Boot 工程原型。
+
+![Order Platform — JAVA BACKEND](docs/assets/project-banner.svg)
+
+[![CI](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml)
+**Java 21 · Spring Boot · JPA · PostgreSQL · RabbitMQ**
+
+A modular order backend with idempotency, inventory transactions and event delivery.
+
+[快速开始](#快速开始) · [代码入口](#代码入口) · [验证与范围](#验证与范围) · [完整历史](#engineering-history)
+
+## 核心能力
+
+- **交易流程** — 下单、模拟支付、退款、取消、发货与完成；库存预占、扣减和回补纳入事务。
+- **一致性机制** — 幂等键与请求指纹、库存锁、Transactional Outbox、消息去重和重试。
+- **失败处理** — 失败事件查询与审批后重放（approval-gated failed-event replay），以及只读运维证据。
+
+## 快速开始
+
+需要 JDK 21；Maven Wrapper 固定工具版本。默认使用 H2，启动后访问 [健康检查](http://127.0.0.1:8080/actuator/health)。PostgreSQL / RabbitMQ 配置见[完整说明](advanced-order-platform/README.md)。
+
+```powershell
+cd advanced-order-platform
+.\mvnw.cmd spring-boot:run
+```
+
+## 代码入口
+
+[业务入口](advanced-order-platform/src/main/java/com/codexdemo/orderplatform/order/OrderApplicationService.java) · [测试目录](advanced-order-platform/src/test/java/com/codexdemo/orderplatform) · [运行与配置](advanced-order-platform/README.md)
+
+## 验证与范围
+
+[v1900 验证记录](advanced-order-platform/docs/ops/order-create-ordering-v1900.md)：2,043 项本地测试通过；这是该版本的结果，不是本次重跑业务测试。
+
+支付为模拟流程。只读 readiness / evidence 不代表部署、回滚、SQL 或密钥访问授权；完整范围见[运行边界](advanced-order-platform/PRODUCTION_READINESS.md)。
+
+<details>
+<summary>展开更多验证 / 实验命令</summary>
+
+```powershell
+cd advanced-order-platform
+.\mvnw.cmd -B verify
+```
+
+</details>
+
+## 关联项目
+
+四个独立工程，各自可读、可运行；不是把四种语言放进一个目录的演示。
+
+[OrderOps Console](https://github.com/wul012/nodeproj) · [mini-kv](https://github.com/wul012/mini_kv) · [MiniGPT Lab](https://github.com/wul012/aiproj)
+
+<a id="engineering-history"></a>
+<details>
+<summary>历史证据与完整维护手册（点击展开）</summary>
+
+以下保留原始文档。版本号、测试数量和研究结论沿用其原始时点，不是本次门面整理的实测结果。
+
+# Advanced Order Platform
+
 [![Maven CI](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/wul012/javaproject/actions/workflows/maven-ci.yml)
 ![Tests](https://img.shields.io/badge/tests-1915%2B-brightgreen)
 ![SpotBugs](https://img.shields.io/badge/SpotBugs-0-brightgreen)
@@ -71,3 +131,5 @@ The full project docs live in [`advanced-order-platform/`](advanced-order-platfo
 Start with the [Java-track evidence](advanced-order-platform/docs/java-track-final-evidence.md),
 [progress ledger](advanced-order-platform/docs/production-excellence-progress.md), and
 [README exhibition brief](advanced-order-platform/docs/readme-exhibition-brief.md).
+
+</details>
