@@ -46,11 +46,11 @@ cd advanced-order-platform
 
 </details>
 
-## 关联项目
+## 三项目协作
 
-四个独立工程，各自可读、可运行；不是把四种语言放进一个目录的演示。
+Java 提供订单业务，Node 提供运维预检与只读诊断，mini-kv 是存储基础设施实验。三者各有独立运行入口。
 
-[OrderOps Console](https://github.com/wul012/nodeproj) · [mini-kv](https://github.com/wul012/mini_kv) · [MiniGPT Lab](https://github.com/wul012/aiproj)
+[Node 运维控制台](https://github.com/wul012/nodeproj) · [mini-kv 存储实验](https://github.com/wul012/mini_kv)
 
 <a id="engineering-history"></a>
 <details>
